@@ -25,76 +25,57 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class Intervals : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AllOf is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AllOf is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllOf = ");
-			instance.AllOf.FormatCode(sb);
+			__init.Property("AllOf");
+			AllOf.FormatCode(writer);
 		}
 
-		if (instance.AnyOf is not null)
+		if (AnyOf is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AnyOf = ");
-			instance.AnyOf.FormatCode(sb);
+			__init.Property("AnyOf");
+			AnyOf.FormatCode(writer);
 		}
 
-		if (instance.Fuzzy is not null)
+		if (Fuzzy is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fuzzy = ");
-			instance.Fuzzy.FormatCode(sb);
+			__init.Property("Fuzzy");
+			Fuzzy.FormatCode(writer);
 		}
 
-		if (instance.Match is not null)
+		if (Match is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Match = ");
-			instance.Match.FormatCode(sb);
+			__init.Property("Match");
+			Match.FormatCode(writer);
 		}
 
-		if (instance.Prefix is not null)
+		if (Prefix is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Prefix = ");
-			instance.Prefix.FormatCode(sb);
+			__init.Property("Prefix");
+			Prefix.FormatCode(writer);
 		}
 
-		if (instance.Range is not null)
+		if (Range is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Range = ");
-			instance.Range.FormatCode(sb);
+			__init.Property("Range");
+			Range.FormatCode(writer);
 		}
 
-		if (instance.Regexp is not null)
+		if (Regexp is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Regexp = ");
-			instance.Regexp.FormatCode(sb);
+			__init.Property("Regexp");
+			Regexp.FormatCode(writer);
 		}
 
-		if (instance.Wildcard is not null)
+		if (Wildcard is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Wildcard = ");
-			instance.Wildcard.FormatCode(sb);
+			__init.Property("Wildcard");
+			Wildcard.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

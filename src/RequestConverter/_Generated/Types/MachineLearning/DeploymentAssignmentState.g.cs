@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public static class DeploymentAssignmentStateCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState.Failed:
-				sb.Append("DeploymentAssignmentState.Failed");
+				writer.Write("DeploymentAssignmentState.Failed");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState.Started:
-				sb.Append("DeploymentAssignmentState.Started");
+				writer.Write("DeploymentAssignmentState.Started");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState.Starting:
-				sb.Append("DeploymentAssignmentState.Starting");
+				writer.Write("DeploymentAssignmentState.Starting");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState.Stopping:
-				sb.Append("DeploymentAssignmentState.Stopping");
+				writer.Write("DeploymentAssignmentState.Stopping");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

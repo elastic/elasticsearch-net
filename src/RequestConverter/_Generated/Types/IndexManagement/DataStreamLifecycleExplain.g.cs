@@ -25,86 +25,61 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class DataStreamLifecycleExplain : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Error is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Error is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Error = ");
-			sb.Append("\"");
-			sb.Append(instance.Error);
-			sb.Append("\"");
+			__init.Property("Error");
+			writer.WriteString(Error);
 		}
 
-		if (instance.GenerationTime is not null)
+		if (GenerationTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GenerationTime = ");
-			instance.GenerationTime.FormatCode(sb);
+			__init.Property("GenerationTime");
+			GenerationTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			sb.Append("\"");
-			sb.Append(instance.Index);
-			sb.Append("\"");
+			__init.Property("Index");
+			writer.WriteString(Index);
 		}
 
-		if (instance.IndexCreationDateMillis is not null)
+		if (IndexCreationDateMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexCreationDateMillis = ");
-			sb.Append(instance.IndexCreationDateMillis.Value);
+			__init.Property("IndexCreationDateMillis");
+			writer.WriteValue(IndexCreationDateMillis.Value);
 		}
 
-		if (instance.Lifecycle is not null)
+		if (Lifecycle is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Lifecycle = ");
-			instance.Lifecycle.FormatCode(sb);
+			__init.Property("Lifecycle");
+			Lifecycle.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ManagedByLifecycle = ");
-			sb.Append(instance.ManagedByLifecycle ? "true" : "false");
+			__init.Property("ManagedByLifecycle");
+			writer.WriteValue(ManagedByLifecycle);
 		}
 
-		if (instance.RolloverDateMillis is not null)
+		if (RolloverDateMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RolloverDateMillis = ");
-			sb.Append(instance.RolloverDateMillis.Value);
+			__init.Property("RolloverDateMillis");
+			writer.WriteValue(RolloverDateMillis.Value);
 		}
 
-		if (instance.TimeSinceIndexCreation is not null)
+		if (TimeSinceIndexCreation is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeSinceIndexCreation = ");
-			instance.TimeSinceIndexCreation.FormatCode(sb);
+			__init.Property("TimeSinceIndexCreation");
+			TimeSinceIndexCreation.FormatCode(writer);
 		}
 
-		if (instance.TimeSinceRollover is not null)
+		if (TimeSinceRollover is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeSinceRollover = ");
-			instance.TimeSinceRollover.FormatCode(sb);
+			__init.Property("TimeSinceRollover");
+			TimeSinceRollover.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

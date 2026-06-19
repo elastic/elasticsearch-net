@@ -25,105 +25,76 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class MemoryStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AdjustedTotalInBytes is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AdjustedTotalInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AdjustedTotalInBytes = ");
-			sb.Append(instance.AdjustedTotalInBytes.Value);
-			sb.Append("L");
+			__init.Property("AdjustedTotalInBytes");
+			writer.WriteValue(AdjustedTotalInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.FreeInBytes is not null)
+		if (FreeInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FreeInBytes = ");
-			sb.Append(instance.FreeInBytes.Value);
-			sb.Append("L");
+			__init.Property("FreeInBytes");
+			writer.WriteValue(FreeInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Resident is not null)
+		if (Resident is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Resident = ");
-			sb.Append("\"");
-			sb.Append(instance.Resident);
-			sb.Append("\"");
+			__init.Property("Resident");
+			writer.WriteString(Resident);
 		}
 
-		if (instance.ResidentInBytes is not null)
+		if (ResidentInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ResidentInBytes = ");
-			sb.Append(instance.ResidentInBytes.Value);
-			sb.Append("L");
+			__init.Property("ResidentInBytes");
+			writer.WriteValue(ResidentInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Share is not null)
+		if (Share is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Share = ");
-			sb.Append("\"");
-			sb.Append(instance.Share);
-			sb.Append("\"");
+			__init.Property("Share");
+			writer.WriteString(Share);
 		}
 
-		if (instance.ShareInBytes is not null)
+		if (ShareInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShareInBytes = ");
-			sb.Append(instance.ShareInBytes.Value);
-			sb.Append("L");
+			__init.Property("ShareInBytes");
+			writer.WriteValue(ShareInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.TotalInBytes is not null)
+		if (TotalInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalInBytes = ");
-			sb.Append(instance.TotalInBytes.Value);
-			sb.Append("L");
+			__init.Property("TotalInBytes");
+			writer.WriteValue(TotalInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.TotalVirtual is not null)
+		if (TotalVirtual is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalVirtual = ");
-			sb.Append("\"");
-			sb.Append(instance.TotalVirtual);
-			sb.Append("\"");
+			__init.Property("TotalVirtual");
+			writer.WriteString(TotalVirtual);
 		}
 
-		if (instance.TotalVirtualInBytes is not null)
+		if (TotalVirtualInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalVirtualInBytes = ");
-			sb.Append(instance.TotalVirtualInBytes.Value);
-			sb.Append("L");
+			__init.Property("TotalVirtualInBytes");
+			writer.WriteValue(TotalVirtualInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.UsedInBytes is not null)
+		if (UsedInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UsedInBytes = ");
-			sb.Append(instance.UsedInBytes.Value);
-			sb.Append("L");
+			__init.Property("UsedInBytes");
+			writer.WriteValue(UsedInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

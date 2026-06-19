@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class TaskTypeNvidiaCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.TaskTypeNvidia instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.TaskTypeNvidia instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeNvidia.ChatCompletion:
-				sb.Append("TaskTypeNvidia.ChatCompletion");
+				writer.Write("TaskTypeNvidia.ChatCompletion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeNvidia.Completion:
-				sb.Append("TaskTypeNvidia.Completion");
+				writer.Write("TaskTypeNvidia.Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeNvidia.Rerank:
-				sb.Append("TaskTypeNvidia.Rerank");
+				writer.Write("TaskTypeNvidia.Rerank");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeNvidia.TextEmbedding:
-				sb.Append("TaskTypeNvidia.TextEmbedding");
+				writer.Write("TaskTypeNvidia.TextEmbedding");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

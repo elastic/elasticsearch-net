@@ -25,71 +25,50 @@ namespace Elastic.Clients.Elasticsearch.Rollup;
 
 public partial class DateHistogramGrouping : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CalendarInterval is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CalendarInterval is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CalendarInterval = ");
-			instance.CalendarInterval.FormatCode(sb);
+			__init.Property("CalendarInterval");
+			CalendarInterval.FormatCode(writer);
 		}
 
-		if (instance.Delay is not null)
+		if (Delay is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Delay = ");
-			instance.Delay.FormatCode(sb);
+			__init.Property("Delay");
+			Delay.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.FixedInterval is not null)
+		if (FixedInterval is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FixedInterval = ");
-			instance.FixedInterval.FormatCode(sb);
+			__init.Property("FixedInterval");
+			FixedInterval.FormatCode(writer);
 		}
 
-		if (instance.Format is not null)
+		if (Format is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Format = ");
-			sb.Append("\"");
-			sb.Append(instance.Format);
-			sb.Append("\"");
+			__init.Property("Format");
+			writer.WriteString(Format);
 		}
 
-		if (instance.Interval is not null)
+		if (Interval is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Interval = ");
-			instance.Interval.FormatCode(sb);
+			__init.Property("Interval");
+			Interval.FormatCode(writer);
 		}
 
-		if (instance.TimeZone is not null)
+		if (TimeZone is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeZone = ");
-			sb.Append("\"");
-			sb.Append(instance.TimeZone);
-			sb.Append("\"");
+			__init.Property("TimeZone");
+			writer.WriteString(TimeZone);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

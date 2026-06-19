@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class FieldSortNumericTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.FieldSortNumericType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.FieldSortNumericType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.FieldSortNumericType.Date:
-				sb.Append("FieldSortNumericType.Date");
+				writer.Write("FieldSortNumericType.Date");
 				break;
 			case Elastic.Clients.Elasticsearch.FieldSortNumericType.DateNanos:
-				sb.Append("FieldSortNumericType.DateNanos");
+				writer.Write("FieldSortNumericType.DateNanos");
 				break;
 			case Elastic.Clients.Elasticsearch.FieldSortNumericType.Double:
-				sb.Append("FieldSortNumericType.Double");
+				writer.Write("FieldSortNumericType.Double");
 				break;
 			case Elastic.Clients.Elasticsearch.FieldSortNumericType.Long:
-				sb.Append("FieldSortNumericType.Long");
+				writer.Write("FieldSortNumericType.Long");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

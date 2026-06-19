@@ -25,62 +25,39 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
 public partial class DiagnosisAffectedResources : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.FeatureStates is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (FeatureStates is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FeatureStates = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.FeatureStates, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("FeatureStates");
+			writer.WriteInlineList(FeatureStates, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Indices is not null)
+		if (Indices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indices = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Indices, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Indices");
+			writer.WriteInlineList(Indices, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Nodes is not null)
+		if (Nodes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Nodes = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Nodes, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Nodes");
+			writer.WriteInlineList(Nodes, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.SlmPolicies is not null)
+		if (SlmPolicies is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SlmPolicies = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.SlmPolicies, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("SlmPolicies");
+			writer.WriteInlineList(SlmPolicies, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.SnapshotRepositories is not null)
+		if (SnapshotRepositories is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SnapshotRepositories = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.SnapshotRepositories, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("SnapshotRepositories");
+			writer.WriteInlineList(SnapshotRepositories, (w, item) => { w.WriteString(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public static class UserAgentPropertyCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Device:
-				sb.Append("UserAgentProperty.Device");
+				writer.Write("UserAgentProperty.Device");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Name:
-				sb.Append("UserAgentProperty.Name");
+				writer.Write("UserAgentProperty.Name");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Original:
-				sb.Append("UserAgentProperty.Original");
+				writer.Write("UserAgentProperty.Original");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Os:
-				sb.Append("UserAgentProperty.Os");
+				writer.Write("UserAgentProperty.Os");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Version:
-				sb.Append("UserAgentProperty.Version");
+				writer.Write("UserAgentProperty.Version");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

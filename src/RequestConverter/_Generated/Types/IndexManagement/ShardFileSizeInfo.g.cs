@@ -25,65 +25,48 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class ShardFileSizeInfo : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AverageSizeInBytes is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AverageSizeInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AverageSizeInBytes = ");
-			sb.Append(instance.AverageSizeInBytes.Value);
-			sb.Append("L");
+			__init.Property("AverageSizeInBytes");
+			writer.WriteValue(AverageSizeInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Count is not null)
+		if (Count is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count.Value);
-			sb.Append("L");
+			__init.Property("Count");
+			writer.WriteValue(Count.Value);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
-		if (instance.MaxSizeInBytes is not null)
+		if (MaxSizeInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxSizeInBytes = ");
-			sb.Append(instance.MaxSizeInBytes.Value);
-			sb.Append("L");
+			__init.Property("MaxSizeInBytes");
+			writer.WriteValue(MaxSizeInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.MinSizeInBytes is not null)
+		if (MinSizeInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinSizeInBytes = ");
-			sb.Append(instance.MinSizeInBytes.Value);
-			sb.Append("L");
+			__init.Property("MinSizeInBytes");
+			writer.WriteValue(MinSizeInBytes.Value);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SizeInBytes = ");
-			sb.Append(instance.SizeInBytes);
-			sb.Append("L");
+			__init.Property("SizeInBytes");
+			writer.WriteValue(SizeInBytes);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

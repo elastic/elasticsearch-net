@@ -25,61 +25,44 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class RepositoryStatsCurrentCounts : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ActiveDeletions = ");
-			sb.Append(instance.ActiveDeletions);
+			__init.Property("ActiveDeletions");
+			writer.WriteValue(ActiveDeletions);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Clones = ");
-			sb.Append(instance.Clones);
+			__init.Property("Clones");
+			writer.WriteValue(Clones);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Deletions = ");
-			sb.Append(instance.Deletions);
+			__init.Property("Deletions");
+			writer.WriteValue(Deletions);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Finalizations = ");
-			sb.Append(instance.Finalizations);
+			__init.Property("Finalizations");
+			writer.WriteValue(Finalizations);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Shards = ");
-			instance.Shards.FormatCode(sb);
+			__init.Property("Shards");
+			Shards.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SnapshotDeletions = ");
-			sb.Append(instance.SnapshotDeletions);
+			__init.Property("SnapshotDeletions");
+			writer.WriteValue(SnapshotDeletions);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Snapshots = ");
-			sb.Append(instance.Snapshots);
+			__init.Property("Snapshots");
+			writer.WriteValue(Snapshots);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

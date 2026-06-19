@@ -25,27 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class StepChange : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ChangePoint = ");
-			sb.Append(instance.ChangePoint);
+			__init.Property("ChangePoint");
+			writer.WriteValue(ChangePoint);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PValue = ");
-			sb.Append(instance.PValue);
-			sb.Append("d");
+			__init.Property("PValue");
+			writer.WriteValue(PValue);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

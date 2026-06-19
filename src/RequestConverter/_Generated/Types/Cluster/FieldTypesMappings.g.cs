@@ -25,73 +25,52 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class FieldTypesMappings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FieldTypes = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.FieldTypes, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("FieldTypes");
+			writer.WriteInlineList(FieldTypes, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RuntimeFieldTypes = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.RuntimeFieldTypes, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("RuntimeFieldTypes");
+			writer.WriteInlineList(RuntimeFieldTypes, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SourceModes = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.SourceModes, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append(v); }, sb);
+			__init.Property("SourceModes");
+			writer.Write("new() ");
+			writer.WriteInlineList(SourceModes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.TotalDeduplicatedFieldCount is not null)
+		if (TotalDeduplicatedFieldCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalDeduplicatedFieldCount = ");
-			sb.Append(instance.TotalDeduplicatedFieldCount.Value);
-			sb.Append("L");
+			__init.Property("TotalDeduplicatedFieldCount");
+			writer.WriteValue(TotalDeduplicatedFieldCount.Value);
+			writer.Write("L");
 		}
 
-		if (instance.TotalDeduplicatedMappingSize is not null)
+		if (TotalDeduplicatedMappingSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalDeduplicatedMappingSize = ");
-			instance.TotalDeduplicatedMappingSize.FormatCode(sb);
+			__init.Property("TotalDeduplicatedMappingSize");
+			TotalDeduplicatedMappingSize.FormatCode(writer);
 		}
 
-		if (instance.TotalDeduplicatedMappingSizeInBytes is not null)
+		if (TotalDeduplicatedMappingSizeInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalDeduplicatedMappingSizeInBytes = ");
-			sb.Append(instance.TotalDeduplicatedMappingSizeInBytes.Value);
-			sb.Append("L");
+			__init.Property("TotalDeduplicatedMappingSizeInBytes");
+			writer.WriteValue(TotalDeduplicatedMappingSizeInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.TotalFieldCount is not null)
+		if (TotalFieldCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalFieldCount = ");
-			sb.Append(instance.TotalFieldCount.Value);
-			sb.Append("L");
+			__init.Property("TotalFieldCount");
+			writer.WriteValue(TotalFieldCount.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

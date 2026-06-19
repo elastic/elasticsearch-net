@@ -25,20 +25,15 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataframeEvaluationValue : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Value = ");
-			sb.Append(instance.Value);
-			sb.Append("d");
+			__init.Property("Value");
+			writer.WriteValue(Value);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

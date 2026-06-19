@@ -25,90 +25,63 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class CommonTermsQuery : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Analyzer is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Analyzer is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Analyzer = ");
-			sb.Append("\"");
-			sb.Append(instance.Analyzer);
-			sb.Append("\"");
+			__init.Property("Analyzer");
+			writer.WriteString(Analyzer);
 		}
 
-		if (instance.Boost is not null)
+		if (Boost is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Boost = ");
-			sb.Append(instance.Boost.Value);
-			sb.Append("f");
+			__init.Property("Boost");
+			writer.WriteValue(Boost.Value);
+			writer.Write("f");
 		}
 
-		if (instance.CutoffFrequency is not null)
+		if (CutoffFrequency is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CutoffFrequency = ");
-			sb.Append(instance.CutoffFrequency.Value);
-			sb.Append("d");
+			__init.Property("CutoffFrequency");
+			writer.WriteValue(CutoffFrequency.Value);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.HighFreqOperator is not null)
+		if (HighFreqOperator is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HighFreqOperator = ");
-			Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(instance.HighFreqOperator.Value, sb);
+			__init.Property("HighFreqOperator");
+			Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(HighFreqOperator.Value, writer);
 		}
 
-		if (instance.LowFreqOperator is not null)
+		if (LowFreqOperator is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LowFreqOperator = ");
-			Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(instance.LowFreqOperator.Value, sb);
+			__init.Property("LowFreqOperator");
+			Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(LowFreqOperator.Value, writer);
 		}
 
-		if (instance.MinimumShouldMatch is not null)
+		if (MinimumShouldMatch is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinimumShouldMatch = ");
-			instance.MinimumShouldMatch.FormatCode(sb);
+			__init.Property("MinimumShouldMatch");
+			MinimumShouldMatch.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			sb.Append("\"");
-			sb.Append(instance.Query);
-			sb.Append("\"");
+			__init.Property("Query");
+			writer.WriteString(Query);
 		}
 
-		if (instance.QueryName is not null)
+		if (QueryName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryName = ");
-			sb.Append("\"");
-			sb.Append(instance.QueryName);
-			sb.Append("\"");
+			__init.Property("QueryName");
+			writer.WriteString(QueryName);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,20 +25,27 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class QueryVectorBuilder : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.TextEmbedding is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Embedding is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TextEmbedding = ");
-			instance.TextEmbedding.FormatCode(sb);
+			__init.Property("Embedding");
+			Embedding.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		if (Lookup is not null)
+		{
+			__init.Property("Lookup");
+			Lookup.FormatCode(writer);
+		}
+
+		if (TextEmbedding is not null)
+		{
+			__init.Property("TextEmbedding");
+			TextEmbedding.FormatCode(writer);
+		}
+
+		__init.Dispose();
 	}
 }

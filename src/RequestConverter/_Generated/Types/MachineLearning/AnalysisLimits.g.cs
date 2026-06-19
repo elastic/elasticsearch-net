@@ -25,29 +25,22 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class AnalysisLimits : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CategorizationExamplesLimit is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CategorizationExamplesLimit is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CategorizationExamplesLimit = ");
-			sb.Append(instance.CategorizationExamplesLimit.Value);
-			sb.Append("L");
+			__init.Property("CategorizationExamplesLimit");
+			writer.WriteValue(CategorizationExamplesLimit.Value);
+			writer.Write("L");
 		}
 
-		if (instance.ModelMemoryLimit is not null)
+		if (ModelMemoryLimit is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelMemoryLimit = ");
-			instance.ModelMemoryLimit.FormatCode(sb);
+			__init.Property("ModelMemoryLimit");
+			ModelMemoryLimit.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

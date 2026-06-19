@@ -25,44 +25,33 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class XpackUsageQuery : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Count is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Count is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count.Value);
+			__init.Property("Count");
+			writer.WriteValue(Count.Value);
 		}
 
-		if (instance.Failed is not null)
+		if (Failed is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Failed = ");
-			sb.Append(instance.Failed.Value);
+			__init.Property("Failed");
+			writer.WriteValue(Failed.Value);
 		}
 
-		if (instance.Paging is not null)
+		if (Paging is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Paging = ");
-			sb.Append(instance.Paging.Value);
+			__init.Property("Paging");
+			writer.WriteValue(Paging.Value);
 		}
 
-		if (instance.Total is not null)
+		if (Total is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			sb.Append(instance.Total.Value);
+			__init.Property("Total");
+			writer.WriteValue(Total.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

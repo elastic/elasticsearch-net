@@ -25,61 +25,44 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class DiskUsage : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FreeBytes = ");
-			sb.Append(instance.FreeBytes);
-			sb.Append("L");
+			__init.Property("FreeBytes");
+			writer.WriteValue(FreeBytes);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FreeDiskPercent = ");
-			sb.Append(instance.FreeDiskPercent);
-			sb.Append("d");
+			__init.Property("FreeDiskPercent");
+			writer.WriteValue(FreeDiskPercent);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Path = ");
-			sb.Append("\"");
-			sb.Append(instance.Path);
-			sb.Append("\"");
+			__init.Property("Path");
+			writer.WriteString(Path);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalBytes = ");
-			sb.Append(instance.TotalBytes);
-			sb.Append("L");
+			__init.Property("TotalBytes");
+			writer.WriteValue(TotalBytes);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UsedBytes = ");
-			sb.Append(instance.UsedBytes);
-			sb.Append("L");
+			__init.Property("UsedBytes");
+			writer.WriteValue(UsedBytes);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UsedDiskPercent = ");
-			sb.Append(instance.UsedDiskPercent);
-			sb.Append("d");
+			__init.Property("UsedDiskPercent");
+			writer.WriteValue(UsedDiskPercent);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

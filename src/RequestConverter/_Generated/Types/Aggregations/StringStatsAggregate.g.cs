@@ -25,98 +25,69 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class StringStatsAggregate : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AvgLength = ");
-			sb.Append(instance.AvgLength.Value);
-			sb.Append("d");
+			__init.Property("AvgLength");
+			writer.WriteValue(AvgLength.Value);
+			writer.Write("d");
 		}
 
-		if (instance.AvgLengthAsString is not null)
+		if (AvgLengthAsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AvgLengthAsString = ");
-			sb.Append("\"");
-			sb.Append(instance.AvgLengthAsString);
-			sb.Append("\"");
+			__init.Property("AvgLengthAsString");
+			writer.WriteString(AvgLengthAsString);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count);
-			sb.Append("L");
+			__init.Property("Count");
+			writer.WriteValue(Count);
+			writer.Write("L");
 		}
 
-		if (instance.Distribution is not null)
+		if (Distribution is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Distribution = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Distribution, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append(v); sb.Append("d"); }, sb);
+			__init.Property("Distribution");
+			writer.Write("new() ");
+			writer.WriteInlineList(Distribution, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Entropy = ");
-			sb.Append(instance.Entropy.Value);
-			sb.Append("d");
+			__init.Property("Entropy");
+			writer.WriteValue(Entropy.Value);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxLength = ");
-			sb.Append(instance.MaxLength.Value);
+			__init.Property("MaxLength");
+			writer.WriteValue(MaxLength.Value);
 		}
 
-		if (instance.MaxLengthAsString is not null)
+		if (MaxLengthAsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxLengthAsString = ");
-			sb.Append("\"");
-			sb.Append(instance.MaxLengthAsString);
-			sb.Append("\"");
+			__init.Property("MaxLengthAsString");
+			writer.WriteString(MaxLengthAsString);
 		}
 
-		if (instance.Meta is not null)
+		if (Meta is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Meta = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Meta, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Meta");
+			writer.Write("new() ");
+			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinLength = ");
-			sb.Append(instance.MinLength.Value);
+			__init.Property("MinLength");
+			writer.WriteValue(MinLength.Value);
 		}
 
-		if (instance.MinLengthAsString is not null)
+		if (MinLengthAsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinLengthAsString = ");
-			sb.Append("\"");
-			sb.Append(instance.MinLengthAsString);
-			sb.Append("\"");
+			__init.Property("MinLengthAsString");
+			writer.WriteString(MinLengthAsString);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

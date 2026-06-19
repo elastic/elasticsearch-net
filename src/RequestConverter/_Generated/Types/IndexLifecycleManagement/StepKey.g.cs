@@ -25,41 +25,26 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
 public partial class StepKey : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Action is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Action is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Action = ");
-			sb.Append("\"");
-			sb.Append(instance.Action);
-			sb.Append("\"");
+			__init.Property("Action");
+			writer.WriteString(Action);
 		}
 
-		if (instance.Name is not null)
+		if (Name is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Phase = ");
-			sb.Append("\"");
-			sb.Append(instance.Phase);
-			sb.Append("\"");
+			__init.Property("Phase");
+			writer.WriteString(Phase);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

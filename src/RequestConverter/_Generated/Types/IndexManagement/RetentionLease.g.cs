@@ -25,19 +25,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class RetentionLease : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Period = ");
-			instance.Period.FormatCode(sb);
+			__init.Property("Period");
+			Period.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

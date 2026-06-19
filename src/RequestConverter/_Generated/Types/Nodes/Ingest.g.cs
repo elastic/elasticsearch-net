@@ -25,29 +25,22 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class Ingest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Pipelines is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Pipelines is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Pipelines = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Pipelines, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Pipelines");
+			writer.Write("new() ");
+			writer.WriteInlineList(Pipelines, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Total is not null)
+		if (Total is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			instance.Total.FormatCode(sb);
+			__init.Property("Total");
+			Total.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

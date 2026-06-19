@@ -25,61 +25,42 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class ClusterDetails : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Failures is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Failures is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Failures = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Failures, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Failures");
+			writer.WriteInlineList(Failures, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indices = ");
-			sb.Append("\"");
-			sb.Append(instance.Indices);
-			sb.Append("\"");
+			__init.Property("Indices");
+			writer.WriteString(Indices);
 		}
 
-		if (instance.Shards is not null)
+		if (Shards is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Shards = ");
-			instance.Shards.FormatCode(sb);
+			__init.Property("Shards");
+			Shards.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Status = ");
-			Elastic.Clients.Elasticsearch.ClusterSearchStatusCodeFormatter.FormatCode(instance.Status, sb);
+			__init.Property("Status");
+			Elastic.Clients.Elasticsearch.ClusterSearchStatusCodeFormatter.FormatCode(Status, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimedOut = ");
-			sb.Append(instance.TimedOut ? "true" : "false");
+			__init.Property("TimedOut");
+			writer.WriteValue(TimedOut);
 		}
 
-		if (instance.Took is not null)
+		if (Took is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Took = ");
-			sb.Append(instance.Took.Value);
+			__init.Property("Took");
+			writer.WriteValue(Took.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

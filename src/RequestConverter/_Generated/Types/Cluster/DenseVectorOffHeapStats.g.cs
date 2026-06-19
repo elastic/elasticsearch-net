@@ -25,133 +25,100 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class DenseVectorOffHeapStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Fielddata is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Fielddata is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fielddata = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Fielddata, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("new()"); RequestConverter.CodeFormatter.FormatCode(v, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append(v); sb.Append("L"); }, sb); }, sb);
+			__init.Property("Fielddata");
+			writer.Write("new() ");
+			writer.WriteInlineList(Fielddata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.Write("new() "); w.WriteInlineList(kvp.Value, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }, "{ ", " }", ", "); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.TotalCenifSize is not null)
+		if (TotalCenifSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalCenifSize = ");
-			instance.TotalCenifSize.FormatCode(sb);
+			__init.Property("TotalCenifSize");
+			TotalCenifSize.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalCenifSizeBytes = ");
-			sb.Append(instance.TotalCenifSizeBytes);
-			sb.Append("L");
+			__init.Property("TotalCenifSizeBytes");
+			writer.WriteValue(TotalCenifSizeBytes);
+			writer.Write("L");
 		}
 
-		if (instance.TotalClivfSize is not null)
+		if (TotalClivfSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalClivfSize = ");
-			instance.TotalClivfSize.FormatCode(sb);
+			__init.Property("TotalClivfSize");
+			TotalClivfSize.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalClivfSizeBytes = ");
-			sb.Append(instance.TotalClivfSizeBytes);
-			sb.Append("L");
+			__init.Property("TotalClivfSizeBytes");
+			writer.WriteValue(TotalClivfSizeBytes);
+			writer.Write("L");
 		}
 
-		if (instance.TotalSize is not null)
+		if (TotalSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalSize = ");
-			instance.TotalSize.FormatCode(sb);
+			__init.Property("TotalSize");
+			TotalSize.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalSizeBytes = ");
-			sb.Append(instance.TotalSizeBytes);
-			sb.Append("L");
+			__init.Property("TotalSizeBytes");
+			writer.WriteValue(TotalSizeBytes);
+			writer.Write("L");
 		}
 
-		if (instance.TotalVebSize is not null)
+		if (TotalVebSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalVebSize = ");
-			instance.TotalVebSize.FormatCode(sb);
+			__init.Property("TotalVebSize");
+			TotalVebSize.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalVebSizeBytes = ");
-			sb.Append(instance.TotalVebSizeBytes);
-			sb.Append("L");
+			__init.Property("TotalVebSizeBytes");
+			writer.WriteValue(TotalVebSizeBytes);
+			writer.Write("L");
 		}
 
-		if (instance.TotalVecSize is not null)
+		if (TotalVecSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalVecSize = ");
-			instance.TotalVecSize.FormatCode(sb);
+			__init.Property("TotalVecSize");
+			TotalVecSize.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalVecSizeBytes = ");
-			sb.Append(instance.TotalVecSizeBytes);
-			sb.Append("L");
+			__init.Property("TotalVecSizeBytes");
+			writer.WriteValue(TotalVecSizeBytes);
+			writer.Write("L");
 		}
 
-		if (instance.TotalVeqSize is not null)
+		if (TotalVeqSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalVeqSize = ");
-			instance.TotalVeqSize.FormatCode(sb);
+			__init.Property("TotalVeqSize");
+			TotalVeqSize.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalVeqSizeBytes = ");
-			sb.Append(instance.TotalVeqSizeBytes);
-			sb.Append("L");
+			__init.Property("TotalVeqSizeBytes");
+			writer.WriteValue(TotalVeqSizeBytes);
+			writer.Write("L");
 		}
 
-		if (instance.TotalVexSize is not null)
+		if (TotalVexSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalVexSize = ");
-			instance.TotalVexSize.FormatCode(sb);
+			__init.Property("TotalVexSize");
+			TotalVexSize.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalVexSizeBytes = ");
-			sb.Append(instance.TotalVexSizeBytes);
-			sb.Append("L");
+			__init.Property("TotalVexSizeBytes");
+			writer.WriteValue(TotalVexSizeBytes);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,183 +25,130 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class ModelSizeStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AssignmentMemoryBasis is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AssignmentMemoryBasis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AssignmentMemoryBasis = ");
-			sb.Append("\"");
-			sb.Append(instance.AssignmentMemoryBasis);
-			sb.Append("\"");
+			__init.Property("AssignmentMemoryBasis");
+			writer.WriteString(AssignmentMemoryBasis);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BucketAllocationFailuresCount = ");
-			sb.Append(instance.BucketAllocationFailuresCount);
-			sb.Append("L");
+			__init.Property("BucketAllocationFailuresCount");
+			writer.WriteValue(BucketAllocationFailuresCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CategorizationStatus = ");
-			Elastic.Clients.Elasticsearch.MachineLearning.CategorizationStatusCodeFormatter.FormatCode(instance.CategorizationStatus, sb);
+			__init.Property("CategorizationStatus");
+			Elastic.Clients.Elasticsearch.MachineLearning.CategorizationStatusCodeFormatter.FormatCode(CategorizationStatus, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CategorizedDocCount = ");
-			sb.Append(instance.CategorizedDocCount);
+			__init.Property("CategorizedDocCount");
+			writer.WriteValue(CategorizedDocCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DeadCategoryCount = ");
-			sb.Append(instance.DeadCategoryCount);
+			__init.Property("DeadCategoryCount");
+			writer.WriteValue(DeadCategoryCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FailedCategoryCount = ");
-			sb.Append(instance.FailedCategoryCount);
+			__init.Property("FailedCategoryCount");
+			writer.WriteValue(FailedCategoryCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FrequentCategoryCount = ");
-			sb.Append(instance.FrequentCategoryCount);
+			__init.Property("FrequentCategoryCount");
+			writer.WriteValue(FrequentCategoryCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JobId = ");
-			sb.Append("\"");
-			sb.Append(instance.JobId);
-			sb.Append("\"");
+			__init.Property("JobId");
+			writer.WriteString(JobId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LogTime = ");
-			sb.Append(instance.LogTime);
+			__init.Property("LogTime");
+			writer.WriteValue(LogTime);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MemoryStatus = ");
-			Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatusCodeFormatter.FormatCode(instance.MemoryStatus, sb);
+			__init.Property("MemoryStatus");
+			Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatusCodeFormatter.FormatCode(MemoryStatus, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelBytes = ");
-			instance.ModelBytes.FormatCode(sb);
+			__init.Property("ModelBytes");
+			ModelBytes.FormatCode(writer);
 		}
 
-		if (instance.ModelBytesExceeded is not null)
+		if (ModelBytesExceeded is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelBytesExceeded = ");
-			instance.ModelBytesExceeded.FormatCode(sb);
+			__init.Property("ModelBytesExceeded");
+			ModelBytesExceeded.FormatCode(writer);
 		}
 
-		if (instance.ModelBytesMemoryLimit is not null)
+		if (ModelBytesMemoryLimit is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelBytesMemoryLimit = ");
-			instance.ModelBytesMemoryLimit.FormatCode(sb);
+			__init.Property("ModelBytesMemoryLimit");
+			ModelBytesMemoryLimit.FormatCode(writer);
 		}
 
-		if (instance.OutputMemoryAllocatorBytes is not null)
+		if (OutputMemoryAllocatorBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OutputMemoryAllocatorBytes = ");
-			instance.OutputMemoryAllocatorBytes.FormatCode(sb);
+			__init.Property("OutputMemoryAllocatorBytes");
+			OutputMemoryAllocatorBytes.FormatCode(writer);
 		}
 
-		if (instance.PeakModelBytes is not null)
+		if (PeakModelBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PeakModelBytes = ");
-			instance.PeakModelBytes.FormatCode(sb);
+			__init.Property("PeakModelBytes");
+			PeakModelBytes.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RareCategoryCount = ");
-			sb.Append(instance.RareCategoryCount);
+			__init.Property("RareCategoryCount");
+			writer.WriteValue(RareCategoryCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ResultType = ");
-			sb.Append("\"");
-			sb.Append(instance.ResultType);
-			sb.Append("\"");
+			__init.Property("ResultType");
+			writer.WriteString(ResultType);
 		}
 
-		if (instance.Timestamp is not null)
+		if (Timestamp is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timestamp = ");
-			sb.Append(instance.Timestamp.Value);
-			sb.Append("L");
+			__init.Property("Timestamp");
+			writer.WriteValue(Timestamp.Value);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalByFieldCount = ");
-			sb.Append(instance.TotalByFieldCount);
-			sb.Append("L");
+			__init.Property("TotalByFieldCount");
+			writer.WriteValue(TotalByFieldCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalCategoryCount = ");
-			sb.Append(instance.TotalCategoryCount);
+			__init.Property("TotalCategoryCount");
+			writer.WriteValue(TotalCategoryCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalOverFieldCount = ");
-			sb.Append(instance.TotalOverFieldCount);
-			sb.Append("L");
+			__init.Property("TotalOverFieldCount");
+			writer.WriteValue(TotalOverFieldCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalPartitionFieldCount = ");
-			sb.Append(instance.TotalPartitionFieldCount);
-			sb.Append("L");
+			__init.Property("TotalPartitionFieldCount");
+			writer.WriteValue(TotalPartitionFieldCount);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

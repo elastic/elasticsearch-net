@@ -25,38 +25,27 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class UpdateAliasesRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.MasterTimeout is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (MasterTimeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MasterTimeout = ");
-			instance.MasterTimeout.FormatCode(sb);
+			__init.Property("MasterTimeout");
+			MasterTimeout.FormatCode(writer);
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (instance.Actions is not null)
+		if (Actions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Actions = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Actions, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Actions");
+			writer.WriteInlineList(Actions, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

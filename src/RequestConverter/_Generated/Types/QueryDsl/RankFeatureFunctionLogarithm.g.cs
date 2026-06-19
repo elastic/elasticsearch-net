@@ -25,20 +25,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class RankFeatureFunctionLogarithm : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ScalingFactor = ");
-			sb.Append(instance.ScalingFactor);
-			sb.Append("f");
+			__init.Property("ScalingFactor");
+			writer.WriteValue(ScalingFactor);
+			writer.Write("f");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

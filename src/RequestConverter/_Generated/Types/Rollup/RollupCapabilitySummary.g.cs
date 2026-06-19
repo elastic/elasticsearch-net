@@ -25,47 +25,30 @@ namespace Elastic.Clients.Elasticsearch.Rollup;
 
 public partial class RollupCapabilitySummary : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fields = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Fields, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("["); RequestConverter.CodeFormatter.FormatCode(v, (item, sb) => { item.FormatCode(sb); }, sb); sb.Append("]"); }, sb);
+			__init.Property("Fields");
+			writer.Write("new() ");
+			writer.WriteInlineList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { item.FormatCode(w); }); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexPattern = ");
-			sb.Append("\"");
-			sb.Append(instance.IndexPattern);
-			sb.Append("\"");
+			__init.Property("IndexPattern");
+			writer.WriteString(IndexPattern);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JobId = ");
-			sb.Append("\"");
-			sb.Append(instance.JobId);
-			sb.Append("\"");
+			__init.Property("JobId");
+			writer.WriteString(JobId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RollupIndex = ");
-			sb.Append("\"");
-			sb.Append(instance.RollupIndex);
-			sb.Append("\"");
+			__init.Property("RollupIndex");
+			writer.WriteString(RollupIndex);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

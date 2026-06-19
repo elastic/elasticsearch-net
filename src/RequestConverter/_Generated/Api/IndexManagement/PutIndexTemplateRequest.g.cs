@@ -25,132 +25,95 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class PutIndexTemplateRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			instance.Name.FormatCode(sb);
+			__init.Property("Name");
+			Name.FormatCode(writer);
 		}
 
-		if (instance.Cause is not null)
+		if (Cause is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Cause = ");
-			sb.Append("\"");
-			sb.Append(instance.Cause);
-			sb.Append("\"");
+			__init.Property("Cause");
+			writer.WriteString(Cause);
 		}
 
-		if (instance.Create is not null)
+		if (Create is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Create = ");
-			sb.Append(instance.Create.Value ? "true" : "false");
+			__init.Property("Create");
+			writer.WriteValue(Create.Value);
 		}
 
-		if (instance.MasterTimeout is not null)
+		if (MasterTimeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MasterTimeout = ");
-			instance.MasterTimeout.FormatCode(sb);
+			__init.Property("MasterTimeout");
+			MasterTimeout.FormatCode(writer);
 		}
 
-		if (instance.AllowAutoCreate is not null)
+		if (AllowAutoCreate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowAutoCreate = ");
-			sb.Append(instance.AllowAutoCreate.Value ? "true" : "false");
+			__init.Property("AllowAutoCreate");
+			writer.WriteValue(AllowAutoCreate.Value);
 		}
 
-		if (instance.ComposedOf is not null)
+		if (ComposedOf is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ComposedOf = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.ComposedOf, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("ComposedOf");
+			writer.WriteInlineList(ComposedOf, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.DataStream is not null)
+		if (DataStream is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DataStream = ");
-			instance.DataStream.FormatCode(sb);
+			__init.Property("DataStream");
+			DataStream.FormatCode(writer);
 		}
 
-		if (instance.Deprecated is not null)
+		if (Deprecated is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Deprecated = ");
-			sb.Append(instance.Deprecated.Value ? "true" : "false");
+			__init.Property("Deprecated");
+			writer.WriteValue(Deprecated.Value);
 		}
 
-		if (instance.IgnoreMissingComponentTemplates is not null)
+		if (IgnoreMissingComponentTemplates is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreMissingComponentTemplates = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.IgnoreMissingComponentTemplates, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("IgnoreMissingComponentTemplates");
+			writer.WriteInlineList(IgnoreMissingComponentTemplates, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.IndexPatterns is not null)
+		if (IndexPatterns is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexPatterns = ");
-			instance.IndexPatterns.FormatCode(sb);
+			__init.Property("IndexPatterns");
+			IndexPatterns.FormatCode(writer);
 		}
 
-		if (instance.Meta is not null)
+		if (Meta is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Meta = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Meta, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Meta");
+			writer.Write("new() ");
+			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Priority is not null)
+		if (Priority is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Priority = ");
-			sb.Append(instance.Priority.Value);
-			sb.Append("L");
+			__init.Property("Priority");
+			writer.WriteValue(Priority.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Template is not null)
+		if (Template is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Template = ");
-			instance.Template.FormatCode(sb);
+			__init.Property("Template");
+			Template.FormatCode(writer);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append(instance.Version.Value);
-			sb.Append("L");
+			__init.Property("Version");
+			writer.WriteValue(Version.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

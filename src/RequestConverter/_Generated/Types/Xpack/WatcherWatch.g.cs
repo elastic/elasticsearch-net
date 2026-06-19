@@ -25,45 +25,34 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class WatcherWatch : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Action is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Action is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Action = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Action, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Action");
+			writer.Write("new() ");
+			writer.WriteInlineList(Action, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Condition is not null)
+		if (Condition is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Condition = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Condition, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Condition");
+			writer.Write("new() ");
+			writer.WriteInlineList(Condition, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Input = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Input, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Input");
+			writer.Write("new() ");
+			writer.WriteInlineList(Input, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Trigger = ");
-			instance.Trigger.FormatCode(sb);
+			__init.Property("Trigger");
+			Trigger.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

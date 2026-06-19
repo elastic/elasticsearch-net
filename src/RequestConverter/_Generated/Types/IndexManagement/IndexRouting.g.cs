@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class IndexRouting : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Allocation is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Allocation is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Allocation = ");
-			instance.Allocation.FormatCode(sb);
+			__init.Property("Allocation");
+			Allocation.FormatCode(writer);
 		}
 
-		if (instance.Rebalance is not null)
+		if (Rebalance is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Rebalance = ");
-			instance.Rebalance.FormatCode(sb);
+			__init.Property("Rebalance");
+			Rebalance.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

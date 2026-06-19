@@ -25,25 +25,22 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class ByteSize : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		if (instance.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 		{
-			sb.Append("new ByteSize(");
-			sb.Append(instance.Value1);
-			sb.Append("L");
-			sb.Append(")");
+			writer.Write("new ByteSize(");
+			writer.WriteValue(Value1);
+			writer.Write("L");
+			writer.Write(")");
 			return;
 		}
 
-		if (instance.Tag == Elastic.Clients.Elasticsearch.UnionTag.T2)
+		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T2)
 		{
-			sb.Append("new ByteSize(");
-			sb.Append("\"");
-			sb.Append(instance.Value2);
-			sb.Append("\"");
-			sb.Append(")");
+			writer.Write("new ByteSize(");
+			writer.WriteString(Value2);
+			writer.Write(")");
 			return;
 		}
 	}

@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public static class RangeRelationCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation.Contains:
-				sb.Append("RangeRelation.Contains");
+				writer.Write("RangeRelation.Contains");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation.Intersects:
-				sb.Append("RangeRelation.Intersects");
+				writer.Write("RangeRelation.Intersects");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation.Within:
-				sb.Append("RangeRelation.Within");
+				writer.Write("RangeRelation.Within");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

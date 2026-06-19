@@ -25,54 +25,54 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class NodeRoleCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.NodeRole instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.NodeRole instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.NodeRole.Client:
-				sb.Append("NodeRole.Client");
+				writer.Write("NodeRole.Client");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeRole.CoordinatingOnly:
-				sb.Append("NodeRole.CoordinatingOnly");
+				writer.Write("NodeRole.CoordinatingOnly");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeRole.Data:
-				sb.Append("NodeRole.Data");
+				writer.Write("NodeRole.Data");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeRole.DataCold:
-				sb.Append("NodeRole.DataCold");
+				writer.Write("NodeRole.DataCold");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeRole.DataContent:
-				sb.Append("NodeRole.DataContent");
+				writer.Write("NodeRole.DataContent");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeRole.DataFrozen:
-				sb.Append("NodeRole.DataFrozen");
+				writer.Write("NodeRole.DataFrozen");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeRole.DataHot:
-				sb.Append("NodeRole.DataHot");
+				writer.Write("NodeRole.DataHot");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeRole.DataWarm:
-				sb.Append("NodeRole.DataWarm");
+				writer.Write("NodeRole.DataWarm");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeRole.Ingest:
-				sb.Append("NodeRole.Ingest");
+				writer.Write("NodeRole.Ingest");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeRole.Master:
-				sb.Append("NodeRole.Master");
+				writer.Write("NodeRole.Master");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeRole.Ml:
-				sb.Append("NodeRole.Ml");
+				writer.Write("NodeRole.Ml");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeRole.RemoteClusterClient:
-				sb.Append("NodeRole.RemoteClusterClient");
+				writer.Write("NodeRole.RemoteClusterClient");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeRole.Transform:
-				sb.Append("NodeRole.Transform");
+				writer.Write("NodeRole.Transform");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeRole.VotingOnly:
-				sb.Append("NodeRole.VotingOnly");
+				writer.Write("NodeRole.VotingOnly");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public static class StringDistanceCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.Search.StringDistance instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.Search.StringDistance instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.Search.StringDistance.DamerauLevenshtein:
-				sb.Append("StringDistance.DamerauLevenshtein");
+				writer.Write("StringDistance.DamerauLevenshtein");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Internal:
-				sb.Append("StringDistance.Internal");
+				writer.Write("StringDistance.Internal");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.StringDistance.JaroWinkler:
-				sb.Append("StringDistance.JaroWinkler");
+				writer.Write("StringDistance.JaroWinkler");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Levenshtein:
-				sb.Append("StringDistance.Levenshtein");
+				writer.Write("StringDistance.Levenshtein");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Ngram:
-				sb.Append("StringDistance.Ngram");
+				writer.Write("StringDistance.Ngram");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -25,40 +25,29 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class ConfusionMatrixThreshold : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FalseNegative = ");
-			sb.Append(instance.FalseNegative);
+			__init.Property("FalseNegative");
+			writer.WriteValue(FalseNegative);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FalsePositive = ");
-			sb.Append(instance.FalsePositive);
+			__init.Property("FalsePositive");
+			writer.WriteValue(FalsePositive);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TrueNegative = ");
-			sb.Append(instance.TrueNegative);
+			__init.Property("TrueNegative");
+			writer.WriteValue(TrueNegative);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TruePositive = ");
-			sb.Append(instance.TruePositive);
+			__init.Property("TruePositive");
+			writer.WriteValue(TruePositive);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

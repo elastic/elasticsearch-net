@@ -25,159 +25,112 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class TrainedModelDeploymentStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AdaptiveAllocations is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AdaptiveAllocations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AdaptiveAllocations = ");
-			instance.AdaptiveAllocations.FormatCode(sb);
+			__init.Property("AdaptiveAllocations");
+			AdaptiveAllocations.FormatCode(writer);
 		}
 
-		if (instance.AllocationStatus is not null)
+		if (AllocationStatus is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllocationStatus = ");
-			instance.AllocationStatus.FormatCode(sb);
+			__init.Property("AllocationStatus");
+			AllocationStatus.FormatCode(writer);
 		}
 
-		if (instance.CacheSize is not null)
+		if (CacheSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CacheSize = ");
-			instance.CacheSize.FormatCode(sb);
+			__init.Property("CacheSize");
+			CacheSize.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DeploymentId = ");
-			sb.Append("\"");
-			sb.Append(instance.DeploymentId);
-			sb.Append("\"");
+			__init.Property("DeploymentId");
+			writer.WriteString(DeploymentId);
 		}
 
-		if (instance.ErrorCount is not null)
+		if (ErrorCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ErrorCount = ");
-			sb.Append(instance.ErrorCount.Value);
+			__init.Property("ErrorCount");
+			writer.WriteValue(ErrorCount.Value);
 		}
 
-		if (instance.InferenceCount is not null)
+		if (InferenceCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InferenceCount = ");
-			sb.Append(instance.InferenceCount.Value);
+			__init.Property("InferenceCount");
+			writer.WriteValue(InferenceCount.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelId = ");
-			sb.Append("\"");
-			sb.Append(instance.ModelId);
-			sb.Append("\"");
+			__init.Property("ModelId");
+			writer.WriteString(ModelId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Nodes = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Nodes, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Nodes");
+			writer.WriteInlineList(Nodes, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.NumberOfAllocations is not null)
+		if (NumberOfAllocations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumberOfAllocations = ");
-			sb.Append(instance.NumberOfAllocations.Value);
+			__init.Property("NumberOfAllocations");
+			writer.WriteValue(NumberOfAllocations.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PeakThroughputPerMinute = ");
-			sb.Append(instance.PeakThroughputPerMinute);
-			sb.Append("L");
+			__init.Property("PeakThroughputPerMinute");
+			writer.WriteValue(PeakThroughputPerMinute);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Priority = ");
-			Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriorityCodeFormatter.FormatCode(instance.Priority, sb);
+			__init.Property("Priority");
+			Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriorityCodeFormatter.FormatCode(Priority, writer);
 		}
 
-		if (instance.QueueCapacity is not null)
+		if (QueueCapacity is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueueCapacity = ");
-			sb.Append(instance.QueueCapacity.Value);
+			__init.Property("QueueCapacity");
+			writer.WriteValue(QueueCapacity.Value);
 		}
 
-		if (instance.Reason is not null)
+		if (Reason is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Reason = ");
-			sb.Append("\"");
-			sb.Append(instance.Reason);
-			sb.Append("\"");
+			__init.Property("Reason");
+			writer.WriteString(Reason);
 		}
 
-		if (instance.RejectedExecutionCount is not null)
+		if (RejectedExecutionCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RejectedExecutionCount = ");
-			sb.Append(instance.RejectedExecutionCount.Value);
+			__init.Property("RejectedExecutionCount");
+			writer.WriteValue(RejectedExecutionCount.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StartTime = ");
-			sb.Append(instance.StartTime);
+			__init.Property("StartTime");
+			writer.WriteValue(StartTime);
 		}
 
-		if (instance.State is not null)
+		if (State is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("State = ");
-			Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentStateCodeFormatter.FormatCode(instance.State.Value, sb);
+			__init.Property("State");
+			Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentStateCodeFormatter.FormatCode(State.Value, writer);
 		}
 
-		if (instance.ThreadsPerAllocation is not null)
+		if (ThreadsPerAllocation is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ThreadsPerAllocation = ");
-			sb.Append(instance.ThreadsPerAllocation.Value);
+			__init.Property("ThreadsPerAllocation");
+			writer.WriteValue(ThreadsPerAllocation.Value);
 		}
 
-		if (instance.TimeoutCount is not null)
+		if (TimeoutCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeoutCount = ");
-			sb.Append(instance.TimeoutCount.Value);
+			__init.Property("TimeoutCount");
+			writer.WriteValue(TimeoutCount.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

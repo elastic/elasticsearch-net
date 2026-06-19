@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public static class CombinedFieldsOperatorCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator.And:
-				sb.Append("CombinedFieldsOperator.And");
+				writer.Write("CombinedFieldsOperator.And");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator.Or:
-				sb.Append("CombinedFieldsOperator.Or");
+				writer.Write("CombinedFieldsOperator.Or");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -25,56 +25,39 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class SpanNearQuery : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Boost is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Boost is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Boost = ");
-			sb.Append(instance.Boost.Value);
-			sb.Append("f");
+			__init.Property("Boost");
+			writer.WriteValue(Boost.Value);
+			writer.Write("f");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Clauses = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Clauses, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Clauses");
+			writer.WriteInlineList(Clauses, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.InOrder is not null)
+		if (InOrder is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InOrder = ");
-			sb.Append(instance.InOrder.Value ? "true" : "false");
+			__init.Property("InOrder");
+			writer.WriteValue(InOrder.Value);
 		}
 
-		if (instance.QueryName is not null)
+		if (QueryName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryName = ");
-			sb.Append("\"");
-			sb.Append(instance.QueryName);
-			sb.Append("\"");
+			__init.Property("QueryName");
+			writer.WriteString(QueryName);
 		}
 
-		if (instance.Slop is not null)
+		if (Slop is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Slop = ");
-			sb.Append(instance.Slop.Value);
+			__init.Property("Slop");
+			writer.WriteValue(Slop.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

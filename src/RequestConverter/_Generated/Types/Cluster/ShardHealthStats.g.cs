@@ -25,61 +25,44 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class ShardHealthStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ActiveShards = ");
-			sb.Append(instance.ActiveShards);
+			__init.Property("ActiveShards");
+			writer.WriteValue(ActiveShards);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InitializingShards = ");
-			sb.Append(instance.InitializingShards);
+			__init.Property("InitializingShards");
+			writer.WriteValue(InitializingShards);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PrimaryActive = ");
-			sb.Append(instance.PrimaryActive ? "true" : "false");
+			__init.Property("PrimaryActive");
+			writer.WriteValue(PrimaryActive);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RelocatingShards = ");
-			sb.Append(instance.RelocatingShards);
+			__init.Property("RelocatingShards");
+			writer.WriteValue(RelocatingShards);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Status = ");
-			Elastic.Clients.Elasticsearch.HealthStatusCodeFormatter.FormatCode(instance.Status, sb);
+			__init.Property("Status");
+			Elastic.Clients.Elasticsearch.HealthStatusCodeFormatter.FormatCode(Status, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UnassignedPrimaryShards = ");
-			sb.Append(instance.UnassignedPrimaryShards);
+			__init.Property("UnassignedPrimaryShards");
+			writer.WriteValue(UnassignedPrimaryShards);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UnassignedShards = ");
-			sb.Append(instance.UnassignedShards);
+			__init.Property("UnassignedShards");
+			writer.WriteValue(UnassignedShards);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

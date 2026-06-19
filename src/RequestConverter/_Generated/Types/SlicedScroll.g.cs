@@ -25,34 +25,25 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class SlicedScroll : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Field is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Field is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			instance.Id.FormatCode(sb);
+			__init.Property("Id");
+			Id.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Max = ");
-			sb.Append(instance.Max);
+			__init.Property("Max");
+			writer.WriteValue(Max);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

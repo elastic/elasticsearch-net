@@ -25,89 +25,56 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DiscoveryNodeContent : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Attributes = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Attributes, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("\""); sb.Append(v); sb.Append("\""); }, sb);
+			__init.Property("Attributes");
+			writer.Write("new() ");
+			writer.WriteInlineList(Attributes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EphemeralId = ");
-			sb.Append("\"");
-			sb.Append(instance.EphemeralId);
-			sb.Append("\"");
+			__init.Property("EphemeralId");
+			writer.WriteString(EphemeralId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExternalId = ");
-			sb.Append("\"");
-			sb.Append(instance.ExternalId);
-			sb.Append("\"");
+			__init.Property("ExternalId");
+			writer.WriteString(ExternalId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxIndexVersion = ");
-			sb.Append(instance.MaxIndexVersion);
+			__init.Property("MaxIndexVersion");
+			writer.WriteValue(MaxIndexVersion);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinIndexVersion = ");
-			sb.Append(instance.MinIndexVersion);
+			__init.Property("MinIndexVersion");
+			writer.WriteValue(MinIndexVersion);
 		}
 
-		if (instance.Name is not null)
+		if (Name is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Roles = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Roles, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Roles");
+			writer.WriteInlineList(Roles, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TransportAddress = ");
-			sb.Append("\"");
-			sb.Append(instance.TransportAddress);
-			sb.Append("\"");
+			__init.Property("TransportAddress");
+			writer.WriteString(TransportAddress);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

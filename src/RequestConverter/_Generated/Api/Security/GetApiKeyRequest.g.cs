@@ -25,76 +25,57 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class GetApiKeyRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ActiveOnly is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ActiveOnly is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ActiveOnly = ");
-			sb.Append(instance.ActiveOnly.Value ? "true" : "false");
+			__init.Property("ActiveOnly");
+			writer.WriteValue(ActiveOnly.Value);
 		}
 
-		if (instance.Id is not null)
+		if (Id is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			instance.Id.FormatCode(sb);
+			__init.Property("Id");
+			Id.FormatCode(writer);
 		}
 
-		if (instance.Name is not null)
+		if (Name is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			instance.Name.FormatCode(sb);
+			__init.Property("Name");
+			Name.FormatCode(writer);
 		}
 
-		if (instance.Owner is not null)
+		if (Owner is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Owner = ");
-			sb.Append(instance.Owner.Value ? "true" : "false");
+			__init.Property("Owner");
+			writer.WriteValue(Owner.Value);
 		}
 
-		if (instance.RealmName is not null)
+		if (RealmName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RealmName = ");
-			instance.RealmName.FormatCode(sb);
+			__init.Property("RealmName");
+			RealmName.FormatCode(writer);
 		}
 
-		if (instance.Username is not null)
+		if (Username is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Username = ");
-			instance.Username.FormatCode(sb);
+			__init.Property("Username");
+			Username.FormatCode(writer);
 		}
 
-		if (instance.WithLimitedBy is not null)
+		if (WithLimitedBy is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WithLimitedBy = ");
-			sb.Append(instance.WithLimitedBy.Value ? "true" : "false");
+			__init.Property("WithLimitedBy");
+			writer.WriteValue(WithLimitedBy.Value);
 		}
 
-		if (instance.WithProfileUid is not null)
+		if (WithProfileUid is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WithProfileUid = ");
-			sb.Append(instance.WithProfileUid.Value ? "true" : "false");
+			__init.Property("WithProfileUid");
+			writer.WriteValue(WithProfileUid.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

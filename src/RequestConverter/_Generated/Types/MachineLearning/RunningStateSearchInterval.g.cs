@@ -25,42 +25,31 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class RunningStateSearchInterval : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.End is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (End is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("End = ");
-			instance.End.FormatCode(sb);
+			__init.Property("End");
+			End.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EndMs = ");
-			sb.Append(instance.EndMs);
+			__init.Property("EndMs");
+			writer.WriteValue(EndMs);
 		}
 
-		if (instance.Start is not null)
+		if (Start is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Start = ");
-			instance.Start.FormatCode(sb);
+			__init.Property("Start");
+			Start.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StartMs = ");
-			sb.Append(instance.StartMs);
+			__init.Property("StartMs");
+			writer.WriteValue(StartMs);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

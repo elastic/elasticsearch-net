@@ -25,272 +25,195 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
 public partial class ShardStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BytesRead = ");
-			sb.Append(instance.BytesRead);
-			sb.Append("L");
+			__init.Property("BytesRead");
+			writer.WriteValue(BytesRead);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FailedReadRequests = ");
-			sb.Append(instance.FailedReadRequests);
-			sb.Append("L");
+			__init.Property("FailedReadRequests");
+			writer.WriteValue(FailedReadRequests);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FailedWriteRequests = ");
-			sb.Append(instance.FailedWriteRequests);
-			sb.Append("L");
+			__init.Property("FailedWriteRequests");
+			writer.WriteValue(FailedWriteRequests);
+			writer.Write("L");
 		}
 
-		if (instance.FatalException is not null)
+		if (FatalException is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FatalException = ");
-			instance.FatalException.FormatCode(sb);
+			__init.Property("FatalException");
+			FatalException.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FollowerAliasesVersion = ");
-			sb.Append(instance.FollowerAliasesVersion);
-			sb.Append("L");
+			__init.Property("FollowerAliasesVersion");
+			writer.WriteValue(FollowerAliasesVersion);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FollowerGlobalCheckpoint = ");
-			sb.Append(instance.FollowerGlobalCheckpoint);
-			sb.Append("L");
+			__init.Property("FollowerGlobalCheckpoint");
+			writer.WriteValue(FollowerGlobalCheckpoint);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FollowerIndex = ");
-			sb.Append("\"");
-			sb.Append(instance.FollowerIndex);
-			sb.Append("\"");
+			__init.Property("FollowerIndex");
+			writer.WriteString(FollowerIndex);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FollowerMappingVersion = ");
-			sb.Append(instance.FollowerMappingVersion);
-			sb.Append("L");
+			__init.Property("FollowerMappingVersion");
+			writer.WriteValue(FollowerMappingVersion);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FollowerMaxSeqNo = ");
-			sb.Append(instance.FollowerMaxSeqNo);
-			sb.Append("L");
+			__init.Property("FollowerMaxSeqNo");
+			writer.WriteValue(FollowerMaxSeqNo);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FollowerSettingsVersion = ");
-			sb.Append(instance.FollowerSettingsVersion);
-			sb.Append("L");
+			__init.Property("FollowerSettingsVersion");
+			writer.WriteValue(FollowerSettingsVersion);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LastRequestedSeqNo = ");
-			sb.Append(instance.LastRequestedSeqNo);
-			sb.Append("L");
+			__init.Property("LastRequestedSeqNo");
+			writer.WriteValue(LastRequestedSeqNo);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LeaderGlobalCheckpoint = ");
-			sb.Append(instance.LeaderGlobalCheckpoint);
-			sb.Append("L");
+			__init.Property("LeaderGlobalCheckpoint");
+			writer.WriteValue(LeaderGlobalCheckpoint);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LeaderIndex = ");
-			sb.Append("\"");
-			sb.Append(instance.LeaderIndex);
-			sb.Append("\"");
+			__init.Property("LeaderIndex");
+			writer.WriteString(LeaderIndex);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LeaderMaxSeqNo = ");
-			sb.Append(instance.LeaderMaxSeqNo);
-			sb.Append("L");
+			__init.Property("LeaderMaxSeqNo");
+			writer.WriteValue(LeaderMaxSeqNo);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OperationsRead = ");
-			sb.Append(instance.OperationsRead);
-			sb.Append("L");
+			__init.Property("OperationsRead");
+			writer.WriteValue(OperationsRead);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OperationsWritten = ");
-			sb.Append(instance.OperationsWritten);
-			sb.Append("L");
+			__init.Property("OperationsWritten");
+			writer.WriteValue(OperationsWritten);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OutstandingReadRequests = ");
-			sb.Append(instance.OutstandingReadRequests);
+			__init.Property("OutstandingReadRequests");
+			writer.WriteValue(OutstandingReadRequests);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OutstandingWriteRequests = ");
-			sb.Append(instance.OutstandingWriteRequests);
+			__init.Property("OutstandingWriteRequests");
+			writer.WriteValue(OutstandingWriteRequests);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReadExceptions = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.ReadExceptions, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("ReadExceptions");
+			writer.WriteInlineList(ReadExceptions, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RemoteCluster = ");
-			sb.Append("\"");
-			sb.Append(instance.RemoteCluster);
-			sb.Append("\"");
+			__init.Property("RemoteCluster");
+			writer.WriteString(RemoteCluster);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShardId = ");
-			sb.Append(instance.ShardId);
+			__init.Property("ShardId");
+			writer.WriteValue(ShardId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SuccessfulReadRequests = ");
-			sb.Append(instance.SuccessfulReadRequests);
-			sb.Append("L");
+			__init.Property("SuccessfulReadRequests");
+			writer.WriteValue(SuccessfulReadRequests);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SuccessfulWriteRequests = ");
-			sb.Append(instance.SuccessfulWriteRequests);
-			sb.Append("L");
+			__init.Property("SuccessfulWriteRequests");
+			writer.WriteValue(SuccessfulWriteRequests);
+			writer.Write("L");
 		}
 
-		if (instance.TimeSinceLastRead is not null)
+		if (TimeSinceLastRead is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeSinceLastRead = ");
-			instance.TimeSinceLastRead.FormatCode(sb);
+			__init.Property("TimeSinceLastRead");
+			TimeSinceLastRead.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeSinceLastReadMillis = ");
-			sb.Append(instance.TimeSinceLastReadMillis);
+			__init.Property("TimeSinceLastReadMillis");
+			writer.WriteValue(TimeSinceLastReadMillis);
 		}
 
-		if (instance.TotalReadRemoteExecTime is not null)
+		if (TotalReadRemoteExecTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalReadRemoteExecTime = ");
-			instance.TotalReadRemoteExecTime.FormatCode(sb);
+			__init.Property("TotalReadRemoteExecTime");
+			TotalReadRemoteExecTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalReadRemoteExecTimeMillis = ");
-			sb.Append(instance.TotalReadRemoteExecTimeMillis);
+			__init.Property("TotalReadRemoteExecTimeMillis");
+			writer.WriteValue(TotalReadRemoteExecTimeMillis);
 		}
 
-		if (instance.TotalReadTime is not null)
+		if (TotalReadTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalReadTime = ");
-			instance.TotalReadTime.FormatCode(sb);
+			__init.Property("TotalReadTime");
+			TotalReadTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalReadTimeMillis = ");
-			sb.Append(instance.TotalReadTimeMillis);
+			__init.Property("TotalReadTimeMillis");
+			writer.WriteValue(TotalReadTimeMillis);
 		}
 
-		if (instance.TotalWriteTime is not null)
+		if (TotalWriteTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalWriteTime = ");
-			instance.TotalWriteTime.FormatCode(sb);
+			__init.Property("TotalWriteTime");
+			TotalWriteTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalWriteTimeMillis = ");
-			sb.Append(instance.TotalWriteTimeMillis);
+			__init.Property("TotalWriteTimeMillis");
+			writer.WriteValue(TotalWriteTimeMillis);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WriteBufferOperationCount = ");
-			sb.Append(instance.WriteBufferOperationCount);
-			sb.Append("L");
+			__init.Property("WriteBufferOperationCount");
+			writer.WriteValue(WriteBufferOperationCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WriteBufferSizeInBytes = ");
-			instance.WriteBufferSizeInBytes.FormatCode(sb);
+			__init.Property("WriteBufferSizeInBytes");
+			WriteBufferSizeInBytes.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

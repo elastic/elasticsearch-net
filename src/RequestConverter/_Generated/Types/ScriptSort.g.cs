@@ -25,51 +25,38 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class ScriptSort : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Mode is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Mode is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mode = ");
-			Elastic.Clients.Elasticsearch.SortModeCodeFormatter.FormatCode(instance.Mode.Value, sb);
+			__init.Property("Mode");
+			Elastic.Clients.Elasticsearch.SortModeCodeFormatter.FormatCode(Mode.Value, writer);
 		}
 
-		if (instance.Nested is not null)
+		if (Nested is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Nested = ");
-			instance.Nested.FormatCode(sb);
+			__init.Property("Nested");
+			Nested.FormatCode(writer);
 		}
 
-		if (instance.Order is not null)
+		if (Order is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Order = ");
-			Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(instance.Order.Value, sb);
+			__init.Property("Order");
+			Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Script = ");
-			instance.Script.FormatCode(sb);
+			__init.Property("Script");
+			Script.FormatCode(writer);
 		}
 
-		if (instance.Type is not null)
+		if (Type is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			Elastic.Clients.Elasticsearch.ScriptSortTypeCodeFormatter.FormatCode(instance.Type.Value, sb);
+			__init.Property("Type");
+			Elastic.Clients.Elasticsearch.ScriptSortTypeCodeFormatter.FormatCode(Type.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

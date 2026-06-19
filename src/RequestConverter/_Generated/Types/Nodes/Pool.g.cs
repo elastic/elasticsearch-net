@@ -25,48 +25,37 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class Pool : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.MaxInBytes is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (MaxInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxInBytes = ");
-			sb.Append(instance.MaxInBytes.Value);
-			sb.Append("L");
+			__init.Property("MaxInBytes");
+			writer.WriteValue(MaxInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.PeakMaxInBytes is not null)
+		if (PeakMaxInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PeakMaxInBytes = ");
-			sb.Append(instance.PeakMaxInBytes.Value);
-			sb.Append("L");
+			__init.Property("PeakMaxInBytes");
+			writer.WriteValue(PeakMaxInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.PeakUsedInBytes is not null)
+		if (PeakUsedInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PeakUsedInBytes = ");
-			sb.Append(instance.PeakUsedInBytes.Value);
-			sb.Append("L");
+			__init.Property("PeakUsedInBytes");
+			writer.WriteValue(PeakUsedInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.UsedInBytes is not null)
+		if (UsedInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UsedInBytes = ");
-			sb.Append(instance.UsedInBytes.Value);
-			sb.Append("L");
+			__init.Property("UsedInBytes");
+			writer.WriteValue(UsedInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

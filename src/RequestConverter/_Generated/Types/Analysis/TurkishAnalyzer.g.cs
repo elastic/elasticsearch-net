@@ -25,40 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class TurkishAnalyzer : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.StemExclusion is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (StemExclusion is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StemExclusion = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.StemExclusion, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("StemExclusion");
+			writer.WriteInlineList(StemExclusion, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Stopwords is not null)
+		if (Stopwords is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Stopwords = ");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(instance.Stopwords, sb);
+			__init.Property("Stopwords");
+			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(Stopwords, writer);
 		}
 
-		if (instance.StopwordsPath is not null)
+		if (StopwordsPath is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StopwordsPath = ");
-			sb.Append("\"");
-			sb.Append(instance.StopwordsPath);
-			sb.Append("\"");
+			__init.Property("StopwordsPath");
+			writer.WriteString(StopwordsPath);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

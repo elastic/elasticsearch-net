@@ -25,108 +25,77 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public partial class Pipeline : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CreatedDate is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CreatedDate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CreatedDate = ");
-			sb.Append(instance.CreatedDate.Value);
+			__init.Property("CreatedDate");
+			writer.WriteValue(CreatedDate.Value);
 		}
 
-		if (instance.CreatedDateMillis is not null)
+		if (CreatedDateMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CreatedDateMillis = ");
-			sb.Append(instance.CreatedDateMillis.Value);
+			__init.Property("CreatedDateMillis");
+			writer.WriteValue(CreatedDateMillis.Value);
 		}
 
-		if (instance.Deprecated is not null)
+		if (Deprecated is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Deprecated = ");
-			sb.Append(instance.Deprecated.Value ? "true" : "false");
+			__init.Property("Deprecated");
+			writer.WriteValue(Deprecated.Value);
 		}
 
-		if (instance.Description is not null)
+		if (Description is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
-		if (instance.FieldAccessPattern is not null)
+		if (FieldAccessPattern is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FieldAccessPattern = ");
-			Elastic.Clients.Elasticsearch.Ingest.FieldAccessPatternCodeFormatter.FormatCode(instance.FieldAccessPattern.Value, sb);
+			__init.Property("FieldAccessPattern");
+			Elastic.Clients.Elasticsearch.Ingest.FieldAccessPatternCodeFormatter.FormatCode(FieldAccessPattern.Value, writer);
 		}
 
-		if (instance.Meta is not null)
+		if (Meta is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Meta = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Meta, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Meta");
+			writer.Write("new() ");
+			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.ModifiedDate is not null)
+		if (ModifiedDate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModifiedDate = ");
-			sb.Append(instance.ModifiedDate.Value);
+			__init.Property("ModifiedDate");
+			writer.WriteValue(ModifiedDate.Value);
 		}
 
-		if (instance.ModifiedDateMillis is not null)
+		if (ModifiedDateMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModifiedDateMillis = ");
-			sb.Append(instance.ModifiedDateMillis.Value);
+			__init.Property("ModifiedDateMillis");
+			writer.WriteValue(ModifiedDateMillis.Value);
 		}
 
-		if (instance.OnFailure is not null)
+		if (OnFailure is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OnFailure = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.OnFailure, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("OnFailure");
+			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Processors is not null)
+		if (Processors is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Processors = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Processors, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Processors");
+			writer.WriteInlineList(Processors, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append(instance.Version.Value);
-			sb.Append("L");
+			__init.Property("Version");
+			writer.WriteValue(Version.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

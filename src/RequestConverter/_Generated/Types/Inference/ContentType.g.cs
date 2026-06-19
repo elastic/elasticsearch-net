@@ -21,39 +21,26 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
 
-namespace Elastic.Clients.Elasticsearch.IndexManagement;
+namespace Elastic.Clients.Elasticsearch.Inference;
 
-public partial class DeleteSampleConfigurationRequest : RequestConverter.ICodeFormattable
+public static class ContentTypeCodeFormatter
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.ContentType instance, RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		switch (instance)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			instance.Index.FormatCode(sb);
+			case Elastic.Clients.Elasticsearch.Inference.ContentType.File:
+				writer.Write("ContentType.File");
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.ContentType.ImageUrl:
+				writer.Write("ContentType.ImageUrl");
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.ContentType.Text:
+				writer.Write("ContentType.Text");
+				break;
+			default:
+				writer.Write(instance.ToString());
+				break;
 		}
-
-		if (instance.MasterTimeout is not null)
-		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MasterTimeout = ");
-			instance.MasterTimeout.FormatCode(sb);
-		}
-
-		if (instance.Timeout is not null)
-		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
-		}
-
-		if (hasProps)
-			sb.Append(" }");
 	}
 }

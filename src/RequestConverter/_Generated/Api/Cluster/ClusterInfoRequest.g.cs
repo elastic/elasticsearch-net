@@ -25,21 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class ClusterInfoRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Target = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Target, (item, sb) => { Elastic.Clients.Elasticsearch.ClusterInfoTargetCodeFormatter.FormatCode(item, sb); }, sb);
-			sb.Append("]");
+			__init.Property("Target");
+			writer.WriteInlineList(Target, (w, item) => { Elastic.Clients.Elasticsearch.ClusterInfoTargetCodeFormatter.FormatCode(item, w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

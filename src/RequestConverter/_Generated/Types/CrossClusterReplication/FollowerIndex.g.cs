@@ -25,54 +25,35 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
 public partial class FollowerIndex : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FollowerIndexValue = ");
-			sb.Append("\"");
-			sb.Append(instance.FollowerIndexValue);
-			sb.Append("\"");
+			__init.Property("FollowerIndexValue");
+			writer.WriteString(FollowerIndexValue);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LeaderIndex = ");
-			sb.Append("\"");
-			sb.Append(instance.LeaderIndex);
-			sb.Append("\"");
+			__init.Property("LeaderIndex");
+			writer.WriteString(LeaderIndex);
 		}
 
-		if (instance.Parameters is not null)
+		if (Parameters is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Parameters = ");
-			instance.Parameters.FormatCode(sb);
+			__init.Property("Parameters");
+			Parameters.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RemoteCluster = ");
-			sb.Append("\"");
-			sb.Append(instance.RemoteCluster);
-			sb.Append("\"");
+			__init.Property("RemoteCluster");
+			writer.WriteString(RemoteCluster);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Status = ");
-			Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatusCodeFormatter.FormatCode(instance.Status, sb);
+			__init.Property("Status");
+			Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatusCodeFormatter.FormatCode(Status, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

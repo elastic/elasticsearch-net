@@ -25,165 +25,118 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class SearchTemplateRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Indices is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Indices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indices = ");
-			instance.Indices.FormatCode(sb);
+			__init.Property("Indices");
+			Indices.FormatCode(writer);
 		}
 
-		if (instance.AllowNoIndices is not null)
+		if (AllowNoIndices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowNoIndices = ");
-			sb.Append(instance.AllowNoIndices.Value ? "true" : "false");
+			__init.Property("AllowNoIndices");
+			writer.WriteValue(AllowNoIndices.Value);
 		}
 
-		if (instance.CcsMinimizeRoundtrips is not null)
+		if (CcsMinimizeRoundtrips is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CcsMinimizeRoundtrips = ");
-			sb.Append(instance.CcsMinimizeRoundtrips.Value ? "true" : "false");
+			__init.Property("CcsMinimizeRoundtrips");
+			writer.WriteValue(CcsMinimizeRoundtrips.Value);
 		}
 
-		if (instance.ExpandWildcards is not null)
+		if (ExpandWildcards is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExpandWildcards = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.ExpandWildcards, (item, sb) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, sb); }, sb);
-			sb.Append("]");
+			__init.Property("ExpandWildcards");
+			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
 		}
 #pragma warning disable CS0618
-		if (instance.IgnoreThrottled is not null)
+		if (IgnoreThrottled is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreThrottled = ");
-			sb.Append(instance.IgnoreThrottled.Value ? "true" : "false");
+			__init.Property("IgnoreThrottled");
+			writer.WriteValue(IgnoreThrottled.Value);
 		}
 #pragma warning restore CS0618
-		if (instance.IgnoreUnavailable is not null)
+		if (IgnoreUnavailable is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreUnavailable = ");
-			sb.Append(instance.IgnoreUnavailable.Value ? "true" : "false");
+			__init.Property("IgnoreUnavailable");
+			writer.WriteValue(IgnoreUnavailable.Value);
 		}
 
-		if (instance.Preference is not null)
+		if (Preference is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Preference = ");
-			sb.Append("\"");
-			sb.Append(instance.Preference);
-			sb.Append("\"");
+			__init.Property("Preference");
+			writer.WriteString(Preference);
 		}
 
-		if (instance.RestTotalHitsAsInt is not null)
+		if (RestTotalHitsAsInt is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RestTotalHitsAsInt = ");
-			sb.Append(instance.RestTotalHitsAsInt.Value ? "true" : "false");
+			__init.Property("RestTotalHitsAsInt");
+			writer.WriteValue(RestTotalHitsAsInt.Value);
 		}
 
-		if (instance.Routing is not null)
+		if (Routing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Routing = ");
-			instance.Routing.FormatCode(sb);
+			__init.Property("Routing");
+			Routing.FormatCode(writer);
 		}
 
-		if (instance.Scroll is not null)
+		if (Scroll is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Scroll = ");
-			instance.Scroll.FormatCode(sb);
+			__init.Property("Scroll");
+			Scroll.FormatCode(writer);
 		}
 
-		if (instance.SearchType is not null)
+		if (SearchType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SearchType = ");
-			Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(instance.SearchType.Value, sb);
+			__init.Property("SearchType");
+			Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(SearchType.Value, writer);
 		}
 
-		if (instance.TypedKeys is not null)
+		if (TypedKeys is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TypedKeys = ");
-			sb.Append(instance.TypedKeys.Value ? "true" : "false");
+			__init.Property("TypedKeys");
+			writer.WriteValue(TypedKeys.Value);
 		}
 
-		if (instance.Explain is not null)
+		if (Explain is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Explain = ");
-			sb.Append(instance.Explain.Value ? "true" : "false");
+			__init.Property("Explain");
+			writer.WriteValue(Explain.Value);
 		}
 
-		if (instance.Id is not null)
+		if (Id is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			instance.Id.FormatCode(sb);
+			__init.Property("Id");
+			Id.FormatCode(writer);
 		}
 
-		if (instance.Params is not null)
+		if (Params is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Params = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Params, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Params");
+			writer.Write("new() ");
+			writer.WriteInlineList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Profile is not null)
+		if (Profile is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Profile = ");
-			sb.Append(instance.Profile.Value ? "true" : "false");
+			__init.Property("Profile");
+			writer.WriteValue(Profile.Value);
 		}
 
-		if (instance.ProjectRouting is not null)
+		if (ProjectRouting is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ProjectRouting = ");
-			sb.Append("\"");
-			sb.Append(instance.ProjectRouting);
-			sb.Append("\"");
+			__init.Property("ProjectRouting");
+			writer.WriteString(ProjectRouting);
 		}
 
-		if (instance.Source is not null)
+		if (Source is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Source = ");
-			sb.Append("\"");
-			sb.Append(instance.Source);
-			sb.Append("\"");
+			__init.Property("Source");
+			writer.WriteString(Source);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

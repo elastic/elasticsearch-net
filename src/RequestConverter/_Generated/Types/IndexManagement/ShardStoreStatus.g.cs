@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public static class ShardStoreStatusCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.All:
-				sb.Append("ShardStoreStatus.All");
+				writer.Write("ShardStoreStatus.All");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.Green:
-				sb.Append("ShardStoreStatus.Green");
+				writer.Write("ShardStoreStatus.Green");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.Red:
-				sb.Append("ShardStoreStatus.Red");
+				writer.Write("ShardStoreStatus.Red");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.Yellow:
-				sb.Append("ShardStoreStatus.Yellow");
+				writer.Write("ShardStoreStatus.Yellow");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

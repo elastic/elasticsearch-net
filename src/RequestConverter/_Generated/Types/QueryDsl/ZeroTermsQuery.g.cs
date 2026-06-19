@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public static class ZeroTermsQueryCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery.All:
-				sb.Append("ZeroTermsQuery.All");
+				writer.Write("ZeroTermsQuery.All");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery.None:
-				sb.Append("ZeroTermsQuery.None");
+				writer.Write("ZeroTermsQuery.None");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -25,56 +25,35 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class AzureAiStudioServiceSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ApiKey = ");
-			sb.Append("\"");
-			sb.Append(instance.ApiKey);
-			sb.Append("\"");
+			__init.Property("ApiKey");
+			writer.WriteString(ApiKey);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EndpointType = ");
-			sb.Append("\"");
-			sb.Append(instance.EndpointType);
-			sb.Append("\"");
+			__init.Property("EndpointType");
+			writer.WriteString(EndpointType);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Provider = ");
-			sb.Append("\"");
-			sb.Append(instance.Provider);
-			sb.Append("\"");
+			__init.Property("Provider");
+			writer.WriteString(Provider);
 		}
 
-		if (instance.RateLimit is not null)
+		if (RateLimit is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RateLimit = ");
-			instance.RateLimit.FormatCode(sb);
+			__init.Property("RateLimit");
+			RateLimit.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Target = ");
-			sb.Append("\"");
-			sb.Append(instance.Target);
-			sb.Append("\"");
+			__init.Property("Target");
+			writer.WriteString(Target);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

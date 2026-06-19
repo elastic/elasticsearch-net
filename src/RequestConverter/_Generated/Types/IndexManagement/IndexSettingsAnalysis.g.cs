@@ -25,52 +25,39 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class IndexSettingsAnalysis : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Analyzers is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Analyzers is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Analyzers = ");
-			instance.Analyzers.FormatCode(sb);
+			__init.Property("Analyzers");
+			Analyzers.FormatCode(writer);
 		}
 
-		if (instance.CharFilters is not null)
+		if (CharFilters is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CharFilters = ");
-			instance.CharFilters.FormatCode(sb);
+			__init.Property("CharFilters");
+			CharFilters.FormatCode(writer);
 		}
 
-		if (instance.Normalizers is not null)
+		if (Normalizers is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Normalizers = ");
-			instance.Normalizers.FormatCode(sb);
+			__init.Property("Normalizers");
+			Normalizers.FormatCode(writer);
 		}
 
-		if (instance.TokenFilters is not null)
+		if (TokenFilters is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TokenFilters = ");
-			instance.TokenFilters.FormatCode(sb);
+			__init.Property("TokenFilters");
+			TokenFilters.FormatCode(writer);
 		}
 
-		if (instance.Tokenizers is not null)
+		if (Tokenizers is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Tokenizers = ");
-			instance.Tokenizers.FormatCode(sb);
+			__init.Property("Tokenizers");
+			Tokenizers.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

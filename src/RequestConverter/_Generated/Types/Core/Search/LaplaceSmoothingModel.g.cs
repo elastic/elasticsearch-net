@@ -25,20 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class LaplaceSmoothingModel : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Alpha = ");
-			sb.Append(instance.Alpha);
-			sb.Append("d");
+			__init.Property("Alpha");
+			writer.WriteValue(Alpha);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

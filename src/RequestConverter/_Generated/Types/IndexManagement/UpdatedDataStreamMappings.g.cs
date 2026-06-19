@@ -25,54 +25,37 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class UpdatedDataStreamMappings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AppliedToDataStream = ");
-			sb.Append(instance.AppliedToDataStream ? "true" : "false");
+			__init.Property("AppliedToDataStream");
+			writer.WriteValue(AppliedToDataStream);
 		}
 
-		if (instance.EffectiveMappings is not null)
+		if (EffectiveMappings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EffectiveMappings = ");
-			instance.EffectiveMappings.FormatCode(sb);
+			__init.Property("EffectiveMappings");
+			EffectiveMappings.FormatCode(writer);
 		}
 
-		if (instance.Error is not null)
+		if (Error is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Error = ");
-			sb.Append("\"");
-			sb.Append(instance.Error);
-			sb.Append("\"");
+			__init.Property("Error");
+			writer.WriteString(Error);
 		}
 
-		if (instance.Mappings is not null)
+		if (Mappings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mappings = ");
-			instance.Mappings.FormatCode(sb);
+			__init.Property("Mappings");
+			Mappings.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

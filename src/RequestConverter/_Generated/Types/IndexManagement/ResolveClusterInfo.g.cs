@@ -25,52 +25,37 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class ResolveClusterInfo : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Connected = ");
-			sb.Append(instance.Connected ? "true" : "false");
+			__init.Property("Connected");
+			writer.WriteValue(Connected);
 		}
 
-		if (instance.Error is not null)
+		if (Error is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Error = ");
-			sb.Append("\"");
-			sb.Append(instance.Error);
-			sb.Append("\"");
+			__init.Property("Error");
+			writer.WriteString(Error);
 		}
 
-		if (instance.MatchingIndices is not null)
+		if (MatchingIndices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MatchingIndices = ");
-			sb.Append(instance.MatchingIndices.Value ? "true" : "false");
+			__init.Property("MatchingIndices");
+			writer.WriteValue(MatchingIndices.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SkipUnavailable = ");
-			sb.Append(instance.SkipUnavailable ? "true" : "false");
+			__init.Property("SkipUnavailable");
+			writer.WriteValue(SkipUnavailable);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			instance.Version.FormatCode(sb);
+			__init.Property("Version");
+			Version.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

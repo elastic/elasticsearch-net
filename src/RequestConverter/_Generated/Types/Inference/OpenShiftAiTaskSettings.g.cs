@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class OpenShiftAiTaskSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ReturnDocuments is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ReturnDocuments is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReturnDocuments = ");
-			sb.Append(instance.ReturnDocuments.Value ? "true" : "false");
+			__init.Property("ReturnDocuments");
+			writer.WriteValue(ReturnDocuments.Value);
 		}
 
-		if (instance.TopN is not null)
+		if (TopN is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TopN = ");
-			sb.Append(instance.TopN.Value);
+			__init.Property("TopN");
+			writer.WriteValue(TopN.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

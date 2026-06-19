@@ -25,33 +25,33 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class DFRBasicModelCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.DFRBasicModel instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.DFRBasicModel instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.DFRBasicModel.Be:
-				sb.Append("DFRBasicModel.Be");
+				writer.Write("DFRBasicModel.Be");
 				break;
 			case Elastic.Clients.Elasticsearch.DFRBasicModel.D:
-				sb.Append("DFRBasicModel.D");
+				writer.Write("DFRBasicModel.D");
 				break;
 			case Elastic.Clients.Elasticsearch.DFRBasicModel.G:
-				sb.Append("DFRBasicModel.G");
+				writer.Write("DFRBasicModel.G");
 				break;
 			case Elastic.Clients.Elasticsearch.DFRBasicModel.If:
-				sb.Append("DFRBasicModel.If");
+				writer.Write("DFRBasicModel.If");
 				break;
 			case Elastic.Clients.Elasticsearch.DFRBasicModel.In:
-				sb.Append("DFRBasicModel.In");
+				writer.Write("DFRBasicModel.In");
 				break;
 			case Elastic.Clients.Elasticsearch.DFRBasicModel.Ine:
-				sb.Append("DFRBasicModel.Ine");
+				writer.Write("DFRBasicModel.Ine");
 				break;
 			case Elastic.Clients.Elasticsearch.DFRBasicModel.P:
-				sb.Append("DFRBasicModel.P");
+				writer.Write("DFRBasicModel.P");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

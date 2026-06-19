@@ -25,137 +25,94 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class TermSuggester : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Analyzer is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Analyzer is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Analyzer = ");
-			sb.Append("\"");
-			sb.Append(instance.Analyzer);
-			sb.Append("\"");
+			__init.Property("Analyzer");
+			writer.WriteString(Analyzer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.LowercaseTerms is not null)
+		if (LowercaseTerms is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LowercaseTerms = ");
-			sb.Append(instance.LowercaseTerms.Value ? "true" : "false");
+			__init.Property("LowercaseTerms");
+			writer.WriteValue(LowercaseTerms.Value);
 		}
 
-		if (instance.MaxEdits is not null)
+		if (MaxEdits is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxEdits = ");
-			sb.Append(instance.MaxEdits.Value);
+			__init.Property("MaxEdits");
+			writer.WriteValue(MaxEdits.Value);
 		}
 
-		if (instance.MaxInspections is not null)
+		if (MaxInspections is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxInspections = ");
-			sb.Append(instance.MaxInspections.Value);
+			__init.Property("MaxInspections");
+			writer.WriteValue(MaxInspections.Value);
 		}
 
-		if (instance.MaxTermFreq is not null)
+		if (MaxTermFreq is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxTermFreq = ");
-			sb.Append(instance.MaxTermFreq.Value);
-			sb.Append("f");
+			__init.Property("MaxTermFreq");
+			writer.WriteValue(MaxTermFreq.Value);
+			writer.Write("f");
 		}
 
-		if (instance.MinDocFreq is not null)
+		if (MinDocFreq is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinDocFreq = ");
-			sb.Append(instance.MinDocFreq.Value);
-			sb.Append("f");
+			__init.Property("MinDocFreq");
+			writer.WriteValue(MinDocFreq.Value);
+			writer.Write("f");
 		}
 
-		if (instance.MinWordLength is not null)
+		if (MinWordLength is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinWordLength = ");
-			sb.Append(instance.MinWordLength.Value);
+			__init.Property("MinWordLength");
+			writer.WriteValue(MinWordLength.Value);
 		}
 
-		if (instance.PrefixLength is not null)
+		if (PrefixLength is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PrefixLength = ");
-			sb.Append(instance.PrefixLength.Value);
+			__init.Property("PrefixLength");
+			writer.WriteValue(PrefixLength.Value);
 		}
 
-		if (instance.ShardSize is not null)
+		if (ShardSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShardSize = ");
-			sb.Append(instance.ShardSize.Value);
+			__init.Property("ShardSize");
+			writer.WriteValue(ShardSize.Value);
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append(instance.Size.Value);
+			__init.Property("Size");
+			writer.WriteValue(Size.Value);
 		}
 
-		if (instance.Sort is not null)
+		if (Sort is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sort = ");
-			Elastic.Clients.Elasticsearch.Core.Search.SuggestSortCodeFormatter.FormatCode(instance.Sort.Value, sb);
+			__init.Property("Sort");
+			Elastic.Clients.Elasticsearch.Core.Search.SuggestSortCodeFormatter.FormatCode(Sort.Value, writer);
 		}
 
-		if (instance.StringDistance is not null)
+		if (StringDistance is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StringDistance = ");
-			Elastic.Clients.Elasticsearch.Core.Search.StringDistanceCodeFormatter.FormatCode(instance.StringDistance.Value, sb);
+			__init.Property("StringDistance");
+			Elastic.Clients.Elasticsearch.Core.Search.StringDistanceCodeFormatter.FormatCode(StringDistance.Value, writer);
 		}
 
-		if (instance.SuggestMode is not null)
+		if (SuggestMode is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SuggestMode = ");
-			Elastic.Clients.Elasticsearch.SuggestModeCodeFormatter.FormatCode(instance.SuggestMode.Value, sb);
+			__init.Property("SuggestMode");
+			Elastic.Clients.Elasticsearch.SuggestModeCodeFormatter.FormatCode(SuggestMode.Value, writer);
 		}
 
-		if (instance.Text is not null)
-		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Text = ");
-			sb.Append("\"");
-			sb.Append(instance.Text);
-			sb.Append("\"");
-		}
-
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

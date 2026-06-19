@@ -25,35 +25,26 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class AdaptiveAllocationsSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Enabled = ");
-			sb.Append(instance.Enabled ? "true" : "false");
+			__init.Property("Enabled");
+			writer.WriteValue(Enabled);
 		}
 
-		if (instance.MaxNumberOfAllocations is not null)
+		if (MaxNumberOfAllocations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxNumberOfAllocations = ");
-			sb.Append(instance.MaxNumberOfAllocations.Value);
+			__init.Property("MaxNumberOfAllocations");
+			writer.WriteValue(MaxNumberOfAllocations.Value);
 		}
 
-		if (instance.MinNumberOfAllocations is not null)
+		if (MinNumberOfAllocations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinNumberOfAllocations = ");
-			sb.Append(instance.MinNumberOfAllocations.Value);
+			__init.Property("MinNumberOfAllocations");
+			writer.WriteValue(MinNumberOfAllocations.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

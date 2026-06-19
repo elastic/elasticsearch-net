@@ -25,21 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class NodeInfoIngest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Processors = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Processors, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Processors");
+			writer.WriteInlineList(Processors, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

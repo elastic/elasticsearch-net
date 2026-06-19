@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public static class IcuCollationStrengthCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Identical:
-				sb.Append("IcuCollationStrength.Identical");
+				writer.Write("IcuCollationStrength.Identical");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Primary:
-				sb.Append("IcuCollationStrength.Primary");
+				writer.Write("IcuCollationStrength.Primary");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Quaternary:
-				sb.Append("IcuCollationStrength.Quaternary");
+				writer.Write("IcuCollationStrength.Quaternary");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Secondary:
-				sb.Append("IcuCollationStrength.Secondary");
+				writer.Write("IcuCollationStrength.Secondary");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Tertiary:
-				sb.Append("IcuCollationStrength.Tertiary");
+				writer.Write("IcuCollationStrength.Tertiary");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

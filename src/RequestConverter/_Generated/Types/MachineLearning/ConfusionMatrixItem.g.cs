@@ -25,44 +25,29 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class ConfusionMatrixItem : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ActualClass = ");
-			sb.Append("\"");
-			sb.Append(instance.ActualClass);
-			sb.Append("\"");
+			__init.Property("ActualClass");
+			writer.WriteString(ActualClass);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ActualClassDocCount = ");
-			sb.Append(instance.ActualClassDocCount);
+			__init.Property("ActualClassDocCount");
+			writer.WriteValue(ActualClassDocCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OtherPredictedClassDocCount = ");
-			sb.Append(instance.OtherPredictedClassDocCount);
+			__init.Property("OtherPredictedClassDocCount");
+			writer.WriteValue(OtherPredictedClassDocCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PredictedClasses = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.PredictedClasses, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("PredictedClasses");
+			writer.WriteInlineList(PredictedClasses, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

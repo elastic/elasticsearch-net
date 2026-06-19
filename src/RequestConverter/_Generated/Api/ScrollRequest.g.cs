@@ -25,35 +25,26 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class ScrollRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.RestTotalHitsAsInt is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (RestTotalHitsAsInt is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RestTotalHitsAsInt = ");
-			sb.Append(instance.RestTotalHitsAsInt.Value ? "true" : "false");
+			__init.Property("RestTotalHitsAsInt");
+			writer.WriteValue(RestTotalHitsAsInt.Value);
 		}
 
-		if (instance.Scroll is not null)
+		if (Scroll is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Scroll = ");
-			instance.Scroll.FormatCode(sb);
+			__init.Property("Scroll");
+			Scroll.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ScrollId = ");
-			instance.ScrollId.FormatCode(sb);
+			__init.Property("ScrollId");
+			ScrollId.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

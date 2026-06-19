@@ -25,35 +25,26 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public partial class Document : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Id is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Id is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			instance.Id.FormatCode(sb);
+			__init.Property("Id");
+			Id.FormatCode(writer);
 		}
 
-		if (instance.Index is not null)
+		if (Index is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			instance.Index.FormatCode(sb);
+			__init.Property("Index");
+			Index.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Source = ");
-			RequestConverter.CodeFormatter.FormatCode(instance.Source, sb);
+			__init.Property("Source");
+			writer.WriteValue(Source);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

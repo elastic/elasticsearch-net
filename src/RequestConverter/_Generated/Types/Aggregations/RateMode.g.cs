@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public static class RateModeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Aggregations.RateMode instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Aggregations.RateMode instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Aggregations.RateMode.Sum:
-				sb.Append("RateMode.Sum");
+				writer.Write("RateMode.Sum");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.RateMode.ValueCount:
-				sb.Append("RateMode.ValueCount");
+				writer.Write("RateMode.ValueCount");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

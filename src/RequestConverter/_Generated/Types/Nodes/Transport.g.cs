@@ -25,105 +25,74 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class Transport : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.InboundHandlingTimeHistogram is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (InboundHandlingTimeHistogram is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InboundHandlingTimeHistogram = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.InboundHandlingTimeHistogram, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("InboundHandlingTimeHistogram");
+			writer.WriteInlineList(InboundHandlingTimeHistogram, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.OutboundHandlingTimeHistogram is not null)
+		if (OutboundHandlingTimeHistogram is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OutboundHandlingTimeHistogram = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.OutboundHandlingTimeHistogram, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("OutboundHandlingTimeHistogram");
+			writer.WriteInlineList(OutboundHandlingTimeHistogram, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.RxCount is not null)
+		if (RxCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RxCount = ");
-			sb.Append(instance.RxCount.Value);
-			sb.Append("L");
+			__init.Property("RxCount");
+			writer.WriteValue(RxCount.Value);
+			writer.Write("L");
 		}
 
-		if (instance.RxSize is not null)
+		if (RxSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RxSize = ");
-			sb.Append("\"");
-			sb.Append(instance.RxSize);
-			sb.Append("\"");
+			__init.Property("RxSize");
+			writer.WriteString(RxSize);
 		}
 
-		if (instance.RxSizeInBytes is not null)
+		if (RxSizeInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RxSizeInBytes = ");
-			sb.Append(instance.RxSizeInBytes.Value);
-			sb.Append("L");
+			__init.Property("RxSizeInBytes");
+			writer.WriteValue(RxSizeInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.ServerOpen is not null)
+		if (ServerOpen is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ServerOpen = ");
-			sb.Append(instance.ServerOpen.Value);
+			__init.Property("ServerOpen");
+			writer.WriteValue(ServerOpen.Value);
 		}
 
-		if (instance.TotalOutboundConnections is not null)
+		if (TotalOutboundConnections is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalOutboundConnections = ");
-			sb.Append(instance.TotalOutboundConnections.Value);
-			sb.Append("L");
+			__init.Property("TotalOutboundConnections");
+			writer.WriteValue(TotalOutboundConnections.Value);
+			writer.Write("L");
 		}
 
-		if (instance.TxCount is not null)
+		if (TxCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TxCount = ");
-			sb.Append(instance.TxCount.Value);
-			sb.Append("L");
+			__init.Property("TxCount");
+			writer.WriteValue(TxCount.Value);
+			writer.Write("L");
 		}
 
-		if (instance.TxSize is not null)
+		if (TxSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TxSize = ");
-			sb.Append("\"");
-			sb.Append(instance.TxSize);
-			sb.Append("\"");
+			__init.Property("TxSize");
+			writer.WriteString(TxSize);
 		}
 
-		if (instance.TxSizeInBytes is not null)
+		if (TxSizeInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TxSizeInBytes = ");
-			sb.Append(instance.TxSizeInBytes.Value);
-			sb.Append("L");
+			__init.Property("TxSizeInBytes");
+			writer.WriteValue(TxSizeInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,20 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class ThinkingConfig : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ThinkingBudget is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ThinkingBudget is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ThinkingBudget = ");
-			sb.Append(instance.ThinkingBudget.Value);
+			__init.Property("ThinkingBudget");
+			writer.WriteValue(ThinkingBudget.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

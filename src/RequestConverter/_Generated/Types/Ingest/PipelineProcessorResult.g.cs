@@ -25,74 +25,51 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public partial class PipelineProcessorResult : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Description is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Description is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
-		if (instance.Doc is not null)
+		if (Doc is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Doc = ");
-			instance.Doc.FormatCode(sb);
+			__init.Property("Doc");
+			Doc.FormatCode(writer);
 		}
 
-		if (instance.Error is not null)
+		if (Error is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Error = ");
-			instance.Error.FormatCode(sb);
+			__init.Property("Error");
+			Error.FormatCode(writer);
 		}
 
-		if (instance.IgnoredError is not null)
+		if (IgnoredError is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoredError = ");
-			instance.IgnoredError.FormatCode(sb);
+			__init.Property("IgnoredError");
+			IgnoredError.FormatCode(writer);
 		}
 
-		if (instance.ProcessorType is not null)
+		if (ProcessorType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ProcessorType = ");
-			sb.Append("\"");
-			sb.Append(instance.ProcessorType);
-			sb.Append("\"");
+			__init.Property("ProcessorType");
+			writer.WriteString(ProcessorType);
 		}
 
-		if (instance.Status is not null)
+		if (Status is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Status = ");
-			Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptionsCodeFormatter.FormatCode(instance.Status.Value, sb);
+			__init.Property("Status");
+			Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptionsCodeFormatter.FormatCode(Status.Value, writer);
 		}
 
-		if (instance.Tag is not null)
+		if (Tag is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Tag = ");
-			sb.Append("\"");
-			sb.Append(instance.Tag);
-			sb.Append("\"");
+			__init.Property("Tag");
+			writer.WriteString(Tag);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,20 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class RealmCache : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append(instance.Size);
-			sb.Append("L");
+			__init.Property("Size");
+			writer.WriteValue(Size);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

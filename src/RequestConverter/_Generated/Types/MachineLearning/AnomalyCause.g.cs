@@ -25,158 +25,99 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class AnomalyCause : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Actual is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Actual is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Actual = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Actual, (item, sb) => { sb.Append(item); sb.Append("d"); }, sb);
-			sb.Append("]");
+			__init.Property("Actual");
+			writer.WriteInlineList(Actual, (w, item) => { w.WriteValue(item); w.Write("d"); });
 		}
 
-		if (instance.ByFieldName is not null)
+		if (ByFieldName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ByFieldName = ");
-			sb.Append("\"");
-			sb.Append(instance.ByFieldName);
-			sb.Append("\"");
+			__init.Property("ByFieldName");
+			writer.WriteString(ByFieldName);
 		}
 
-		if (instance.ByFieldValue is not null)
+		if (ByFieldValue is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ByFieldValue = ");
-			sb.Append("\"");
-			sb.Append(instance.ByFieldValue);
-			sb.Append("\"");
+			__init.Property("ByFieldValue");
+			writer.WriteString(ByFieldValue);
 		}
 
-		if (instance.CorrelatedByFieldValue is not null)
+		if (CorrelatedByFieldValue is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CorrelatedByFieldValue = ");
-			sb.Append("\"");
-			sb.Append(instance.CorrelatedByFieldValue);
-			sb.Append("\"");
+			__init.Property("CorrelatedByFieldValue");
+			writer.WriteString(CorrelatedByFieldValue);
 		}
 
-		if (instance.FieldName is not null)
+		if (FieldName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FieldName = ");
-			sb.Append("\"");
-			sb.Append(instance.FieldName);
-			sb.Append("\"");
+			__init.Property("FieldName");
+			writer.WriteString(FieldName);
 		}
 
-		if (instance.Function is not null)
+		if (Function is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Function = ");
-			sb.Append("\"");
-			sb.Append(instance.Function);
-			sb.Append("\"");
+			__init.Property("Function");
+			writer.WriteString(Function);
 		}
 
-		if (instance.FunctionDescription is not null)
+		if (FunctionDescription is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FunctionDescription = ");
-			sb.Append("\"");
-			sb.Append(instance.FunctionDescription);
-			sb.Append("\"");
+			__init.Property("FunctionDescription");
+			writer.WriteString(FunctionDescription);
 		}
 
-		if (instance.GeoResults is not null)
+		if (GeoResults is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GeoResults = ");
-			instance.GeoResults.FormatCode(sb);
+			__init.Property("GeoResults");
+			GeoResults.FormatCode(writer);
 		}
 
-		if (instance.Influencers is not null)
+		if (Influencers is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Influencers = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Influencers, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Influencers");
+			writer.WriteInlineList(Influencers, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.OverFieldName is not null)
+		if (OverFieldName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OverFieldName = ");
-			sb.Append("\"");
-			sb.Append(instance.OverFieldName);
-			sb.Append("\"");
+			__init.Property("OverFieldName");
+			writer.WriteString(OverFieldName);
 		}
 
-		if (instance.OverFieldValue is not null)
+		if (OverFieldValue is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OverFieldValue = ");
-			sb.Append("\"");
-			sb.Append(instance.OverFieldValue);
-			sb.Append("\"");
+			__init.Property("OverFieldValue");
+			writer.WriteString(OverFieldValue);
 		}
 
-		if (instance.PartitionFieldName is not null)
+		if (PartitionFieldName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PartitionFieldName = ");
-			sb.Append("\"");
-			sb.Append(instance.PartitionFieldName);
-			sb.Append("\"");
+			__init.Property("PartitionFieldName");
+			writer.WriteString(PartitionFieldName);
 		}
 
-		if (instance.PartitionFieldValue is not null)
+		if (PartitionFieldValue is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PartitionFieldValue = ");
-			sb.Append("\"");
-			sb.Append(instance.PartitionFieldValue);
-			sb.Append("\"");
+			__init.Property("PartitionFieldValue");
+			writer.WriteString(PartitionFieldValue);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Probability = ");
-			sb.Append(instance.Probability);
-			sb.Append("d");
+			__init.Property("Probability");
+			writer.WriteValue(Probability);
+			writer.Write("d");
 		}
 
-		if (instance.Typical is not null)
+		if (Typical is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Typical = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Typical, (item, sb) => { sb.Append(item); sb.Append("d"); }, sb);
-			sb.Append("]");
+			__init.Property("Typical");
+			writer.WriteInlineList(Typical, (w, item) => { w.WriteValue(item); w.Write("d"); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,36 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class LinearInterpolationSmoothingModel : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BigramLambda = ");
-			sb.Append(instance.BigramLambda);
-			sb.Append("d");
+			__init.Property("BigramLambda");
+			writer.WriteValue(BigramLambda);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TrigramLambda = ");
-			sb.Append(instance.TrigramLambda);
-			sb.Append("d");
+			__init.Property("TrigramLambda");
+			writer.WriteValue(TrigramLambda);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UnigramLambda = ");
-			sb.Append(instance.UnigramLambda);
-			sb.Append("d");
+			__init.Property("UnigramLambda");
+			writer.WriteValue(UnigramLambda);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

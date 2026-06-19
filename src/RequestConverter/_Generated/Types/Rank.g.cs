@@ -25,20 +25,15 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class Rank : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Rrf is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Rrf is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Rrf = ");
-			instance.Rrf.FormatCode(sb);
+			__init.Property("Rrf");
+			Rrf.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

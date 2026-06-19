@@ -25,22 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class NodeInfoSettingsNetwork : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Host is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Host is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Host = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Host, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Host");
+			writer.WriteInlineList(Host, (w, item) => { w.WriteString(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

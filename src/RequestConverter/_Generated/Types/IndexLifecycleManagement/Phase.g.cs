@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
 public partial class Phase : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Actions is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Actions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Actions = ");
-			instance.Actions.FormatCode(sb);
+			__init.Property("Actions");
+			Actions.FormatCode(writer);
 		}
 
-		if (instance.MinAge is not null)
+		if (MinAge is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinAge = ");
-			instance.MinAge.FormatCode(sb);
+			__init.Property("MinAge");
+			MinAge.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

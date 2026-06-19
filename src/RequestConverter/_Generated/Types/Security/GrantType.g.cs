@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public static class GrantTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Security.GrantType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Security.GrantType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Security.GrantType.AccessToken:
-				sb.Append("GrantType.AccessToken");
+				writer.Write("GrantType.AccessToken");
 				break;
 			case Elastic.Clients.Elasticsearch.Security.GrantType.Password:
-				sb.Append("GrantType.Password");
+				writer.Write("GrantType.Password");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

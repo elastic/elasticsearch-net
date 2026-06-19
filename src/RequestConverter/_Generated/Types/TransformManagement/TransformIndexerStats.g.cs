@@ -25,145 +25,108 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
 public partial class TransformIndexerStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.DeleteTimeInMs is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (DeleteTimeInMs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DeleteTimeInMs = ");
-			sb.Append(instance.DeleteTimeInMs.Value);
+			__init.Property("DeleteTimeInMs");
+			writer.WriteValue(DeleteTimeInMs.Value);
 		}
 
-		if (instance.DocumentsDeleted is not null)
+		if (DocumentsDeleted is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocumentsDeleted = ");
-			sb.Append(instance.DocumentsDeleted.Value);
-			sb.Append("L");
+			__init.Property("DocumentsDeleted");
+			writer.WriteValue(DocumentsDeleted.Value);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocumentsIndexed = ");
-			sb.Append(instance.DocumentsIndexed);
-			sb.Append("L");
+			__init.Property("DocumentsIndexed");
+			writer.WriteValue(DocumentsIndexed);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocumentsProcessed = ");
-			sb.Append(instance.DocumentsProcessed);
-			sb.Append("L");
+			__init.Property("DocumentsProcessed");
+			writer.WriteValue(DocumentsProcessed);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExponentialAvgCheckpointDurationMs = ");
-			sb.Append(instance.ExponentialAvgCheckpointDurationMs);
+			__init.Property("ExponentialAvgCheckpointDurationMs");
+			writer.WriteValue(ExponentialAvgCheckpointDurationMs);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExponentialAvgDocumentsIndexed = ");
-			sb.Append(instance.ExponentialAvgDocumentsIndexed);
-			sb.Append("d");
+			__init.Property("ExponentialAvgDocumentsIndexed");
+			writer.WriteValue(ExponentialAvgDocumentsIndexed);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExponentialAvgDocumentsProcessed = ");
-			sb.Append(instance.ExponentialAvgDocumentsProcessed);
-			sb.Append("d");
+			__init.Property("ExponentialAvgDocumentsProcessed");
+			writer.WriteValue(ExponentialAvgDocumentsProcessed);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexFailures = ");
-			sb.Append(instance.IndexFailures);
-			sb.Append("L");
+			__init.Property("IndexFailures");
+			writer.WriteValue(IndexFailures);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexTimeInMs = ");
-			sb.Append(instance.IndexTimeInMs);
+			__init.Property("IndexTimeInMs");
+			writer.WriteValue(IndexTimeInMs);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexTotal = ");
-			sb.Append(instance.IndexTotal);
-			sb.Append("L");
+			__init.Property("IndexTotal");
+			writer.WriteValue(IndexTotal);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PagesProcessed = ");
-			sb.Append(instance.PagesProcessed);
-			sb.Append("L");
+			__init.Property("PagesProcessed");
+			writer.WriteValue(PagesProcessed);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ProcessingTimeInMs = ");
-			sb.Append(instance.ProcessingTimeInMs);
+			__init.Property("ProcessingTimeInMs");
+			writer.WriteValue(ProcessingTimeInMs);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ProcessingTotal = ");
-			sb.Append(instance.ProcessingTotal);
-			sb.Append("L");
+			__init.Property("ProcessingTotal");
+			writer.WriteValue(ProcessingTotal);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SearchFailures = ");
-			sb.Append(instance.SearchFailures);
-			sb.Append("L");
+			__init.Property("SearchFailures");
+			writer.WriteValue(SearchFailures);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SearchTimeInMs = ");
-			sb.Append(instance.SearchTimeInMs);
+			__init.Property("SearchTimeInMs");
+			writer.WriteValue(SearchTimeInMs);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SearchTotal = ");
-			sb.Append(instance.SearchTotal);
-			sb.Append("L");
+			__init.Property("SearchTotal");
+			writer.WriteValue(SearchTotal);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TriggerCount = ");
-			sb.Append(instance.TriggerCount);
-			sb.Append("L");
+			__init.Property("TriggerCount");
+			writer.WriteValue(TriggerCount);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

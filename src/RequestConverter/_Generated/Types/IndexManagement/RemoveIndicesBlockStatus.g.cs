@@ -25,37 +25,26 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class RemoveIndicesBlockStatus : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Exception is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Exception is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Exception = ");
-			instance.Exception.FormatCode(sb);
+			__init.Property("Exception");
+			Exception.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
-		if (instance.Unblocked is not null)
+		if (Unblocked is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Unblocked = ");
-			sb.Append(instance.Unblocked.Value ? "true" : "false");
+			__init.Property("Unblocked");
+			writer.WriteValue(Unblocked.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

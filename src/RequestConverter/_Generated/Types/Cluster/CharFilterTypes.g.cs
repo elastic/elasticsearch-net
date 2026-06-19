@@ -25,92 +25,61 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class CharFilterTypes : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AnalyzerTypes = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.AnalyzerTypes, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("AnalyzerTypes");
+			writer.WriteInlineList(AnalyzerTypes, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BuiltInAnalyzers = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.BuiltInAnalyzers, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("BuiltInAnalyzers");
+			writer.WriteInlineList(BuiltInAnalyzers, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BuiltInCharFilters = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.BuiltInCharFilters, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("BuiltInCharFilters");
+			writer.WriteInlineList(BuiltInCharFilters, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BuiltInFilters = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.BuiltInFilters, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("BuiltInFilters");
+			writer.WriteInlineList(BuiltInFilters, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BuiltInTokenizers = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.BuiltInTokenizers, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("BuiltInTokenizers");
+			writer.WriteInlineList(BuiltInTokenizers, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CharFilterTypes2 = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.CharFilterTypes2, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("CharFilterTypes2");
+			writer.WriteInlineList(CharFilterTypes2, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FilterTypes = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.FilterTypes, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("FilterTypes");
+			writer.WriteInlineList(FilterTypes, (w, item) => { item.FormatCode(w); });
+		}
+
+		if (MultipleSynonymGraphFilters is not null)
+		{
+			__init.Property("MultipleSynonymGraphFilters");
+			MultipleSynonymGraphFilters.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Synonyms = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Synonyms, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Synonyms");
+			writer.Write("new() ");
+			writer.WriteInlineList(Synonyms, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TokenizerTypes = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.TokenizerTypes, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("TokenizerTypes");
+			writer.WriteInlineList(TokenizerTypes, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,35 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class RuntimeFieldTypes : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Available = ");
-			sb.Append(instance.Available ? "true" : "false");
+			__init.Property("Available");
+			writer.WriteValue(Available);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Enabled = ");
-			sb.Append(instance.Enabled ? "true" : "false");
+			__init.Property("Enabled");
+			writer.WriteValue(Enabled);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FieldTypes = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.FieldTypes, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("FieldTypes");
+			writer.WriteInlineList(FieldTypes, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

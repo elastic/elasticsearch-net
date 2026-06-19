@@ -25,62 +25,45 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class DataTiers : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Available = ");
-			sb.Append(instance.Available ? "true" : "false");
+			__init.Property("Available");
+			writer.WriteValue(Available);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DataCold = ");
-			instance.DataCold.FormatCode(sb);
+			__init.Property("DataCold");
+			DataCold.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DataContent = ");
-			instance.DataContent.FormatCode(sb);
+			__init.Property("DataContent");
+			DataContent.FormatCode(writer);
 		}
 
-		if (instance.DataFrozen is not null)
+		if (DataFrozen is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DataFrozen = ");
-			instance.DataFrozen.FormatCode(sb);
+			__init.Property("DataFrozen");
+			DataFrozen.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DataHot = ");
-			instance.DataHot.FormatCode(sb);
+			__init.Property("DataHot");
+			DataHot.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DataWarm = ");
-			instance.DataWarm.FormatCode(sb);
+			__init.Property("DataWarm");
+			DataWarm.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Enabled = ");
-			sb.Append(instance.Enabled ? "true" : "false");
+			__init.Property("Enabled");
+			writer.WriteValue(Enabled);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

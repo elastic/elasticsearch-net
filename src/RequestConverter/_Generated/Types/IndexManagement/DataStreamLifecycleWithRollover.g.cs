@@ -25,54 +25,57 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class DataStreamLifecycleWithRollover : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.DataRetention is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (DataRetention is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DataRetention = ");
-			instance.DataRetention.FormatCode(sb);
+			__init.Property("DataRetention");
+			DataRetention.FormatCode(writer);
 		}
 
-		if (instance.Downsampling is not null)
+		if (Downsampling is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Downsampling = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Downsampling, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Downsampling");
+			writer.WriteInlineList(Downsampling, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.DownsamplingMethod is not null)
+		if (DownsamplingMethod is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DownsamplingMethod = ");
-			Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethodCodeFormatter.FormatCode(instance.DownsamplingMethod.Value, sb);
+			__init.Property("DownsamplingMethod");
+			Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethodCodeFormatter.FormatCode(DownsamplingMethod.Value, writer);
 		}
 
-		if (instance.Enabled is not null)
+		if (EffectiveRetention is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Enabled = ");
-			sb.Append(instance.Enabled.Value ? "true" : "false");
+			__init.Property("EffectiveRetention");
+			EffectiveRetention.FormatCode(writer);
 		}
 
-		if (instance.Rollover is not null)
+		if (Enabled is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Rollover = ");
-			instance.Rollover.FormatCode(sb);
+			__init.Property("Enabled");
+			writer.WriteValue(Enabled.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		if (FrozenAfter is not null)
+		{
+			__init.Property("FrozenAfter");
+			FrozenAfter.FormatCode(writer);
+		}
+
+		if (RetentionDeterminedBy is not null)
+		{
+			__init.Property("RetentionDeterminedBy");
+			Elastic.Clients.Elasticsearch.IndexManagement.RetentionSourceCodeFormatter.FormatCode(RetentionDeterminedBy.Value, writer);
+		}
+
+		if (Rollover is not null)
+		{
+			__init.Property("Rollover");
+			Rollover.FormatCode(writer);
+		}
+
+		__init.Dispose();
 	}
 }

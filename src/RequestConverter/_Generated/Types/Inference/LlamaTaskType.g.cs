@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class LlamaTaskTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.LlamaTaskType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.LlamaTaskType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.LlamaTaskType.ChatCompletion:
-				sb.Append("LlamaTaskType.ChatCompletion");
+				writer.Write("LlamaTaskType.ChatCompletion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.LlamaTaskType.Completion:
-				sb.Append("LlamaTaskType.Completion");
+				writer.Write("LlamaTaskType.Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.LlamaTaskType.TextEmbedding:
-				sb.Append("LlamaTaskType.TextEmbedding");
+				writer.Write("LlamaTaskType.TextEmbedding");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

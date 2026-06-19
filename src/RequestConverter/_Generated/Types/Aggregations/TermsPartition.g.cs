@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class TermsPartition : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumPartitions = ");
-			sb.Append(instance.NumPartitions);
-			sb.Append("L");
+			__init.Property("NumPartitions");
+			writer.WriteValue(NumPartitions);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Partition = ");
-			sb.Append(instance.Partition);
-			sb.Append("L");
+			__init.Property("Partition");
+			writer.WriteValue(Partition);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

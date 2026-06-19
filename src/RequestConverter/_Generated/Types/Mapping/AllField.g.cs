@@ -25,88 +25,59 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public partial class AllField : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Analyzer = ");
-			sb.Append("\"");
-			sb.Append(instance.Analyzer);
-			sb.Append("\"");
+			__init.Property("Analyzer");
+			writer.WriteString(Analyzer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Enabled = ");
-			sb.Append(instance.Enabled ? "true" : "false");
+			__init.Property("Enabled");
+			writer.WriteValue(Enabled);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OmitNorms = ");
-			sb.Append(instance.OmitNorms ? "true" : "false");
+			__init.Property("OmitNorms");
+			writer.WriteValue(OmitNorms);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SearchAnalyzer = ");
-			sb.Append("\"");
-			sb.Append(instance.SearchAnalyzer);
-			sb.Append("\"");
+			__init.Property("SearchAnalyzer");
+			writer.WriteString(SearchAnalyzer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Similarity = ");
-			sb.Append("\"");
-			sb.Append(instance.Similarity);
-			sb.Append("\"");
+			__init.Property("Similarity");
+			writer.WriteString(Similarity);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Store = ");
-			sb.Append(instance.Store ? "true" : "false");
+			__init.Property("Store");
+			writer.WriteValue(Store);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StoreTermVectorOffsets = ");
-			sb.Append(instance.StoreTermVectorOffsets ? "true" : "false");
+			__init.Property("StoreTermVectorOffsets");
+			writer.WriteValue(StoreTermVectorOffsets);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StoreTermVectorPayloads = ");
-			sb.Append(instance.StoreTermVectorPayloads ? "true" : "false");
+			__init.Property("StoreTermVectorPayloads");
+			writer.WriteValue(StoreTermVectorPayloads);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StoreTermVectorPositions = ");
-			sb.Append(instance.StoreTermVectorPositions ? "true" : "false");
+			__init.Property("StoreTermVectorPositions");
+			writer.WriteValue(StoreTermVectorPositions);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StoreTermVectors = ");
-			sb.Append(instance.StoreTermVectors ? "true" : "false");
+			__init.Property("StoreTermVectors");
+			writer.WriteValue(StoreTermVectors);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

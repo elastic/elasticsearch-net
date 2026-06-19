@@ -25,43 +25,32 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class CohereTaskSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InputType = ");
-			Elastic.Clients.Elasticsearch.Inference.CohereInputTypeCodeFormatter.FormatCode(instance.InputType, sb);
+			__init.Property("InputType");
+			Elastic.Clients.Elasticsearch.Inference.CohereInputTypeCodeFormatter.FormatCode(InputType, writer);
 		}
 
-		if (instance.ReturnDocuments is not null)
+		if (ReturnDocuments is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReturnDocuments = ");
-			sb.Append(instance.ReturnDocuments.Value ? "true" : "false");
+			__init.Property("ReturnDocuments");
+			writer.WriteValue(ReturnDocuments.Value);
 		}
 
-		if (instance.TopN is not null)
+		if (TopN is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TopN = ");
-			sb.Append(instance.TopN.Value);
+			__init.Property("TopN");
+			writer.WriteValue(TopN.Value);
 		}
 
-		if (instance.Truncate is not null)
+		if (Truncate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Truncate = ");
-			Elastic.Clients.Elasticsearch.Inference.CohereTruncateTypeCodeFormatter.FormatCode(instance.Truncate.Value, sb);
+			__init.Property("Truncate");
+			Elastic.Clients.Elasticsearch.Inference.CohereTruncateTypeCodeFormatter.FormatCode(Truncate.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,19 +25,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class ScriptScoreFunction : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Script = ");
-			instance.Script.FormatCode(sb);
+			__init.Property("Script");
+			Script.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

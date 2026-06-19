@@ -25,29 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class DisableUserProfileRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Uid = ");
-			sb.Append("\"");
-			sb.Append(instance.Uid);
-			sb.Append("\"");
+			__init.Property("Uid");
+			writer.WriteString(Uid);
 		}
 
-		if (instance.Refresh is not null)
+		if (Refresh is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Refresh = ");
-			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(instance.Refresh.Value, sb);
+			__init.Property("Refresh");
+			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

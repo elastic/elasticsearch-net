@@ -25,87 +25,64 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class MemMlStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AnomalyDetectors is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AnomalyDetectors is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AnomalyDetectors = ");
-			instance.AnomalyDetectors.FormatCode(sb);
+			__init.Property("AnomalyDetectors");
+			AnomalyDetectors.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AnomalyDetectorsInBytes = ");
-			sb.Append(instance.AnomalyDetectorsInBytes);
+			__init.Property("AnomalyDetectorsInBytes");
+			writer.WriteValue(AnomalyDetectorsInBytes);
 		}
 
-		if (instance.DataFrameAnalytics is not null)
+		if (DataFrameAnalytics is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DataFrameAnalytics = ");
-			instance.DataFrameAnalytics.FormatCode(sb);
+			__init.Property("DataFrameAnalytics");
+			DataFrameAnalytics.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DataFrameAnalyticsInBytes = ");
-			sb.Append(instance.DataFrameAnalyticsInBytes);
+			__init.Property("DataFrameAnalyticsInBytes");
+			writer.WriteValue(DataFrameAnalyticsInBytes);
 		}
 
-		if (instance.Max is not null)
+		if (Max is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Max = ");
-			instance.Max.FormatCode(sb);
+			__init.Property("Max");
+			Max.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxInBytes = ");
-			sb.Append(instance.MaxInBytes);
+			__init.Property("MaxInBytes");
+			writer.WriteValue(MaxInBytes);
 		}
 
-		if (instance.NativeCodeOverhead is not null)
+		if (NativeCodeOverhead is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NativeCodeOverhead = ");
-			instance.NativeCodeOverhead.FormatCode(sb);
+			__init.Property("NativeCodeOverhead");
+			NativeCodeOverhead.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NativeCodeOverheadInBytes = ");
-			sb.Append(instance.NativeCodeOverheadInBytes);
+			__init.Property("NativeCodeOverheadInBytes");
+			writer.WriteValue(NativeCodeOverheadInBytes);
 		}
 
-		if (instance.NativeInference is not null)
+		if (NativeInference is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NativeInference = ");
-			instance.NativeInference.FormatCode(sb);
+			__init.Property("NativeInference");
+			NativeInference.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NativeInferenceInBytes = ");
-			sb.Append(instance.NativeInferenceInBytes);
+			__init.Property("NativeInferenceInBytes");
+			writer.WriteValue(NativeInferenceInBytes);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

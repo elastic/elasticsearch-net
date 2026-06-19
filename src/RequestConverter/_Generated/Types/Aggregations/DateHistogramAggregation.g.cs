@@ -25,131 +25,94 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class DateHistogramAggregation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CalendarInterval is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CalendarInterval is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CalendarInterval = ");
-			Elastic.Clients.Elasticsearch.Aggregations.CalendarIntervalCodeFormatter.FormatCode(instance.CalendarInterval.Value, sb);
+			__init.Property("CalendarInterval");
+			Elastic.Clients.Elasticsearch.Aggregations.CalendarIntervalCodeFormatter.FormatCode(CalendarInterval.Value, writer);
 		}
 
-		if (instance.ExtendedBounds is not null)
+		if (ExtendedBounds is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExtendedBounds = ");
-			instance.ExtendedBounds.FormatCode(sb);
+			__init.Property("ExtendedBounds");
+			ExtendedBounds.FormatCode(writer);
 		}
 
-		if (instance.Field is not null)
+		if (Field is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.FixedInterval is not null)
+		if (FixedInterval is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FixedInterval = ");
-			instance.FixedInterval.FormatCode(sb);
+			__init.Property("FixedInterval");
+			FixedInterval.FormatCode(writer);
 		}
 
-		if (instance.Format is not null)
+		if (Format is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Format = ");
-			sb.Append("\"");
-			sb.Append(instance.Format);
-			sb.Append("\"");
+			__init.Property("Format");
+			writer.WriteString(Format);
 		}
 
-		if (instance.HardBounds is not null)
+		if (HardBounds is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HardBounds = ");
-			instance.HardBounds.FormatCode(sb);
+			__init.Property("HardBounds");
+			HardBounds.FormatCode(writer);
 		}
 #pragma warning disable CS0618
-		if (instance.Interval is not null)
+		if (Interval is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Interval = ");
-			instance.Interval.FormatCode(sb);
+			__init.Property("Interval");
+			Interval.FormatCode(writer);
 		}
 #pragma warning restore CS0618
-		if (instance.MinDocCount is not null)
+		if (MinDocCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinDocCount = ");
-			sb.Append(instance.MinDocCount.Value);
+			__init.Property("MinDocCount");
+			writer.WriteValue(MinDocCount.Value);
 		}
 
-		if (instance.Missing is not null)
+		if (Missing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Missing = ");
-			sb.Append(instance.Missing.Value);
+			__init.Property("Missing");
+			writer.WriteValue(Missing.Value);
 		}
 
-		if (instance.Offset is not null)
+		if (Offset is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Offset = ");
-			instance.Offset.FormatCode(sb);
+			__init.Property("Offset");
+			Offset.FormatCode(writer);
 		}
 
-		if (instance.Order is not null)
+		if (Order is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Order = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Order, (item, sb) => { sb.Append("new("); item.Key.FormatCode(sb); sb.Append(", "); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(item.Value, sb); sb.Append(")"); }, sb);
-			sb.Append("]");
+			__init.Property("Order");
+			writer.WriteInlineList(Order, (w, item) => { w.Write("new("); item.Key.FormatCode(w); w.Write(", "); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(item.Value, w); w.Write(")"); });
 		}
 
-		if (instance.Params is not null)
+		if (Params is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Params = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Params, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Params");
+			writer.Write("new() ");
+			writer.WriteInlineList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Script is not null)
+		if (Script is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Script = ");
-			instance.Script.FormatCode(sb);
+			__init.Property("Script");
+			Script.FormatCode(writer);
 		}
 
-		if (instance.TimeZone is not null)
+		if (TimeZone is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeZone = ");
-			sb.Append("\"");
-			sb.Append(instance.TimeZone);
-			sb.Append("\"");
+			__init.Property("TimeZone");
+			writer.WriteString(TimeZone);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

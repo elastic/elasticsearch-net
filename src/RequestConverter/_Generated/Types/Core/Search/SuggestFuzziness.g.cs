@@ -25,52 +25,39 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class SuggestFuzziness : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Fuzziness is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Fuzziness is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fuzziness = ");
-			instance.Fuzziness.FormatCode(sb);
+			__init.Property("Fuzziness");
+			Fuzziness.FormatCode(writer);
 		}
 
-		if (instance.MinLength is not null)
+		if (MinLength is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinLength = ");
-			sb.Append(instance.MinLength.Value);
+			__init.Property("MinLength");
+			writer.WriteValue(MinLength.Value);
 		}
 
-		if (instance.PrefixLength is not null)
+		if (PrefixLength is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PrefixLength = ");
-			sb.Append(instance.PrefixLength.Value);
+			__init.Property("PrefixLength");
+			writer.WriteValue(PrefixLength.Value);
 		}
 
-		if (instance.Transpositions is not null)
+		if (Transpositions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Transpositions = ");
-			sb.Append(instance.Transpositions.Value ? "true" : "false");
+			__init.Property("Transpositions");
+			writer.WriteValue(Transpositions.Value);
 		}
 
-		if (instance.UnicodeAware is not null)
+		if (UnicodeAware is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UnicodeAware = ");
-			sb.Append(instance.UnicodeAware.Value ? "true" : "false");
+			__init.Property("UnicodeAware");
+			writer.WriteValue(UnicodeAware.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,29 +25,20 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class DownsampleConfig : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FixedInterval = ");
-			sb.Append("\"");
-			sb.Append(instance.FixedInterval);
-			sb.Append("\"");
+			__init.Property("FixedInterval");
+			writer.WriteString(FixedInterval);
 		}
 
-		if (instance.SamplingMethod is not null)
+		if (SamplingMethod is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SamplingMethod = ");
-			Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethodCodeFormatter.FormatCode(instance.SamplingMethod.Value, sb);
+			__init.Property("SamplingMethod");
+			Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethodCodeFormatter.FormatCode(SamplingMethod.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,67 +25,44 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class NodeReloadResult : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.KeystoreDigest is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (KeystoreDigest is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("KeystoreDigest = ");
-			sb.Append("\"");
-			sb.Append(instance.KeystoreDigest);
-			sb.Append("\"");
+			__init.Property("KeystoreDigest");
+			writer.WriteString(KeystoreDigest);
 		}
 
-		if (instance.KeystoreLastModifiedTime is not null)
+		if (KeystoreLastModifiedTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("KeystoreLastModifiedTime = ");
-			sb.Append(instance.KeystoreLastModifiedTime.Value);
+			__init.Property("KeystoreLastModifiedTime");
+			writer.WriteValue(KeystoreLastModifiedTime.Value);
 		}
 
-		if (instance.KeystorePath is not null)
+		if (KeystorePath is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("KeystorePath = ");
-			sb.Append("\"");
-			sb.Append(instance.KeystorePath);
-			sb.Append("\"");
+			__init.Property("KeystorePath");
+			writer.WriteString(KeystorePath);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
-		if (instance.ReloadException is not null)
+		if (ReloadException is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReloadException = ");
-			instance.ReloadException.FormatCode(sb);
+			__init.Property("ReloadException");
+			ReloadException.FormatCode(writer);
 		}
 
-		if (instance.SecureSettingNames is not null)
+		if (SecureSettingNames is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SecureSettingNames = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.SecureSettingNames, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("SecureSettingNames");
+			writer.WriteInlineList(SecureSettingNames, (w, item) => { w.WriteString(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

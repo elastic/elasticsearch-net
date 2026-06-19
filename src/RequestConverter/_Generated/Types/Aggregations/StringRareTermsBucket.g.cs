@@ -25,37 +25,26 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class StringRareTermsBucket : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Aggregations is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Aggregations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Aggregations = ");
-			instance.Aggregations.FormatCode(sb);
+			__init.Property("Aggregations");
+			Aggregations.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocCount = ");
-			sb.Append(instance.DocCount);
-			sb.Append("L");
+			__init.Property("DocCount");
+			writer.WriteValue(DocCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Key = ");
-			sb.Append("\"");
-			sb.Append(instance.Key);
-			sb.Append("\"");
+			__init.Property("Key");
+			writer.WriteString(Key);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

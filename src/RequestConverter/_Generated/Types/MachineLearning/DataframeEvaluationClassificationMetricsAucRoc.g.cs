@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataframeEvaluationClassificationMetricsAucRoc : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ClassName is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ClassName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ClassName = ");
-			instance.ClassName.FormatCode(sb);
+			__init.Property("ClassName");
+			ClassName.FormatCode(writer);
 		}
 
-		if (instance.IncludeCurve is not null)
+		if (IncludeCurve is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IncludeCurve = ");
-			sb.Append(instance.IncludeCurve.Value ? "true" : "false");
+			__init.Property("IncludeCurve");
+			writer.WriteValue(IncludeCurve.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

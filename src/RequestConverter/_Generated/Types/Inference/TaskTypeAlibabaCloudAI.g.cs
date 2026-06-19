@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class TaskTypeAlibabaCloudAICodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI.Completion:
-				sb.Append("TaskTypeAlibabaCloudAI.Completion");
+				writer.Write("TaskTypeAlibabaCloudAI.Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI.Rerank:
-				sb.Append("TaskTypeAlibabaCloudAI.Rerank");
+				writer.Write("TaskTypeAlibabaCloudAI.Rerank");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI.SparseEmbedding:
-				sb.Append("TaskTypeAlibabaCloudAI.SparseEmbedding");
+				writer.Write("TaskTypeAlibabaCloudAI.SparseEmbedding");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI.TextEmbedding:
-				sb.Append("TaskTypeAlibabaCloudAI.TextEmbedding");
+				writer.Write("TaskTypeAlibabaCloudAI.TextEmbedding");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -25,22 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class TrackHits : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		if (instance.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 		{
-			sb.Append("new TrackHits(");
-			sb.Append(instance.Value1 ? "true" : "false");
-			sb.Append(")");
+			writer.Write("new TrackHits(");
+			writer.WriteValue(Value1);
+			writer.Write(")");
 			return;
 		}
 
-		if (instance.Tag == Elastic.Clients.Elasticsearch.UnionTag.T2)
+		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T2)
 		{
-			sb.Append("new TrackHits(");
-			sb.Append(instance.Value2);
-			sb.Append(")");
+			writer.Write("new TrackHits(");
+			writer.WriteValue(Value2);
+			writer.Write(")");
 			return;
 		}
 	}

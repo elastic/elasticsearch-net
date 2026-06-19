@@ -25,30 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 public partial class AzureRepository : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Settings is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Settings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Settings = ");
-			instance.Settings.FormatCode(sb);
+			__init.Property("Settings");
+			Settings.FormatCode(writer);
 		}
 
-		if (instance.Uuid is not null)
+		if (Uuid is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Uuid = ");
-			sb.Append("\"");
-			sb.Append(instance.Uuid);
-			sb.Append("\"");
+			__init.Property("Uuid");
+			writer.WriteString(Uuid);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,51 +25,36 @@ namespace Elastic.Clients.Elasticsearch.Enrich;
 
 public partial class CoordinatorStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExecutedSearchesTotal = ");
-			sb.Append(instance.ExecutedSearchesTotal);
-			sb.Append("L");
+			__init.Property("ExecutedSearchesTotal");
+			writer.WriteValue(ExecutedSearchesTotal);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NodeId = ");
-			sb.Append("\"");
-			sb.Append(instance.NodeId);
-			sb.Append("\"");
+			__init.Property("NodeId");
+			writer.WriteString(NodeId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueueSize = ");
-			sb.Append(instance.QueueSize);
+			__init.Property("QueueSize");
+			writer.WriteValue(QueueSize);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RemoteRequestsCurrent = ");
-			sb.Append(instance.RemoteRequestsCurrent);
+			__init.Property("RemoteRequestsCurrent");
+			writer.WriteValue(RemoteRequestsCurrent);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RemoteRequestsTotal = ");
-			sb.Append(instance.RemoteRequestsTotal);
-			sb.Append("L");
+			__init.Property("RemoteRequestsTotal");
+			writer.WriteValue(RemoteRequestsTotal);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,92 +25,69 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class InferenceConfigUpdate : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Classification is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Classification is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Classification = ");
-			instance.Classification.FormatCode(sb);
+			__init.Property("Classification");
+			Classification.FormatCode(writer);
 		}
 
-		if (instance.FillMask is not null)
+		if (FillMask is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FillMask = ");
-			instance.FillMask.FormatCode(sb);
+			__init.Property("FillMask");
+			FillMask.FormatCode(writer);
 		}
 
-		if (instance.Ner is not null)
+		if (Ner is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ner = ");
-			instance.Ner.FormatCode(sb);
+			__init.Property("Ner");
+			Ner.FormatCode(writer);
 		}
 
-		if (instance.PassThrough is not null)
+		if (PassThrough is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PassThrough = ");
-			instance.PassThrough.FormatCode(sb);
+			__init.Property("PassThrough");
+			PassThrough.FormatCode(writer);
 		}
 
-		if (instance.QuestionAnswering is not null)
+		if (QuestionAnswering is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QuestionAnswering = ");
-			instance.QuestionAnswering.FormatCode(sb);
+			__init.Property("QuestionAnswering");
+			QuestionAnswering.FormatCode(writer);
 		}
 
-		if (instance.Regression is not null)
+		if (Regression is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Regression = ");
-			instance.Regression.FormatCode(sb);
+			__init.Property("Regression");
+			Regression.FormatCode(writer);
 		}
 
-		if (instance.TextClassification is not null)
+		if (TextClassification is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TextClassification = ");
-			instance.TextClassification.FormatCode(sb);
+			__init.Property("TextClassification");
+			TextClassification.FormatCode(writer);
 		}
 
-		if (instance.TextEmbedding is not null)
+		if (TextEmbedding is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TextEmbedding = ");
-			instance.TextEmbedding.FormatCode(sb);
+			__init.Property("TextEmbedding");
+			TextEmbedding.FormatCode(writer);
 		}
 
-		if (instance.TextExpansion is not null)
+		if (TextExpansion is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TextExpansion = ");
-			instance.TextExpansion.FormatCode(sb);
+			__init.Property("TextExpansion");
+			TextExpansion.FormatCode(writer);
 		}
 
-		if (instance.ZeroShotClassification is not null)
+		if (ZeroShotClassification is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ZeroShotClassification = ");
-			instance.ZeroShotClassification.FormatCode(sb);
+			__init.Property("ZeroShotClassification");
+			ZeroShotClassification.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

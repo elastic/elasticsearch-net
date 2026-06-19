@@ -25,71 +25,52 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots;
 
 public partial class Shared : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BytesReadInBytes = ");
-			instance.BytesReadInBytes.FormatCode(sb);
+			__init.Property("BytesReadInBytes");
+			BytesReadInBytes.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BytesWrittenInBytes = ");
-			instance.BytesWrittenInBytes.FormatCode(sb);
+			__init.Property("BytesWrittenInBytes");
+			BytesWrittenInBytes.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Evictions = ");
-			sb.Append(instance.Evictions);
-			sb.Append("L");
+			__init.Property("Evictions");
+			writer.WriteValue(Evictions);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumRegions = ");
-			sb.Append(instance.NumRegions);
+			__init.Property("NumRegions");
+			writer.WriteValue(NumRegions);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Reads = ");
-			sb.Append(instance.Reads);
-			sb.Append("L");
+			__init.Property("Reads");
+			writer.WriteValue(Reads);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RegionSizeInBytes = ");
-			instance.RegionSizeInBytes.FormatCode(sb);
+			__init.Property("RegionSizeInBytes");
+			RegionSizeInBytes.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SizeInBytes = ");
-			instance.SizeInBytes.FormatCode(sb);
+			__init.Property("SizeInBytes");
+			SizeInBytes.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Writes = ");
-			sb.Append(instance.Writes);
-			sb.Append("L");
+			__init.Property("Writes");
+			writer.WriteValue(Writes);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

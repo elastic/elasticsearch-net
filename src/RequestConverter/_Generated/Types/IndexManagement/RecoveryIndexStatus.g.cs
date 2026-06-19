@@ -25,79 +25,58 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class RecoveryIndexStatus : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Bytes is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Bytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Bytes = ");
-			instance.Bytes.FormatCode(sb);
+			__init.Property("Bytes");
+			Bytes.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Files = ");
-			instance.Files.FormatCode(sb);
+			__init.Property("Files");
+			Files.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			instance.Size.FormatCode(sb);
+			__init.Property("Size");
+			Size.FormatCode(writer);
 		}
 
-		if (instance.SourceThrottleTime is not null)
+		if (SourceThrottleTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SourceThrottleTime = ");
-			instance.SourceThrottleTime.FormatCode(sb);
+			__init.Property("SourceThrottleTime");
+			SourceThrottleTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SourceThrottleTimeInMillis = ");
-			sb.Append(instance.SourceThrottleTimeInMillis);
+			__init.Property("SourceThrottleTimeInMillis");
+			writer.WriteValue(SourceThrottleTimeInMillis);
 		}
 
-		if (instance.TargetThrottleTime is not null)
+		if (TargetThrottleTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TargetThrottleTime = ");
-			instance.TargetThrottleTime.FormatCode(sb);
+			__init.Property("TargetThrottleTime");
+			TargetThrottleTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TargetThrottleTimeInMillis = ");
-			sb.Append(instance.TargetThrottleTimeInMillis);
+			__init.Property("TargetThrottleTimeInMillis");
+			writer.WriteValue(TargetThrottleTimeInMillis);
 		}
 
-		if (instance.TotalTime is not null)
+		if (TotalTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalTime = ");
-			instance.TotalTime.FormatCode(sb);
+			__init.Property("TotalTime");
+			TotalTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalTimeInMillis = ");
-			sb.Append(instance.TotalTimeInMillis);
+			__init.Property("TotalTimeInMillis");
+			writer.WriteValue(TotalTimeInMillis);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

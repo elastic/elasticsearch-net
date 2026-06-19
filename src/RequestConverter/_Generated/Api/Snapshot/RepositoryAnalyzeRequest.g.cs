@@ -25,116 +25,93 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 public partial class RepositoryAnalyzeRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			instance.Name.FormatCode(sb);
+			__init.Property("Name");
+			Name.FormatCode(writer);
 		}
 
-		if (instance.BlobCount is not null)
+		if (BlobCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BlobCount = ");
-			sb.Append(instance.BlobCount.Value);
+			__init.Property("BlobCount");
+			writer.WriteValue(BlobCount.Value);
 		}
 
-		if (instance.Concurrency is not null)
+		if (CheckOverwriteProtection is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Concurrency = ");
-			sb.Append(instance.Concurrency.Value);
+			__init.Property("CheckOverwriteProtection");
+			writer.WriteValue(CheckOverwriteProtection.Value);
 		}
 
-		if (instance.Detailed is not null)
+		if (Concurrency is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Detailed = ");
-			sb.Append(instance.Detailed.Value ? "true" : "false");
+			__init.Property("Concurrency");
+			writer.WriteValue(Concurrency.Value);
 		}
 
-		if (instance.EarlyReadNodeCount is not null)
+		if (Detailed is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EarlyReadNodeCount = ");
-			sb.Append(instance.EarlyReadNodeCount.Value);
+			__init.Property("Detailed");
+			writer.WriteValue(Detailed.Value);
 		}
 
-		if (instance.MaxBlobSize is not null)
+		if (EarlyReadNodeCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxBlobSize = ");
-			instance.MaxBlobSize.FormatCode(sb);
+			__init.Property("EarlyReadNodeCount");
+			writer.WriteValue(EarlyReadNodeCount.Value);
 		}
 
-		if (instance.MaxTotalDataSize is not null)
+		if (MaxBlobSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxTotalDataSize = ");
-			instance.MaxTotalDataSize.FormatCode(sb);
+			__init.Property("MaxBlobSize");
+			MaxBlobSize.FormatCode(writer);
 		}
 
-		if (instance.RareActionProbability is not null)
+		if (MaxTotalDataSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RareActionProbability = ");
-			sb.Append(instance.RareActionProbability.Value);
-			sb.Append("d");
+			__init.Property("MaxTotalDataSize");
+			MaxTotalDataSize.FormatCode(writer);
 		}
 
-		if (instance.RarelyAbortWrites is not null)
+		if (RareActionProbability is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RarelyAbortWrites = ");
-			sb.Append(instance.RarelyAbortWrites.Value ? "true" : "false");
+			__init.Property("RareActionProbability");
+			writer.WriteValue(RareActionProbability.Value);
+			writer.Write("d");
 		}
 
-		if (instance.ReadNodeCount is not null)
+		if (RarelyAbortWrites is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReadNodeCount = ");
-			sb.Append(instance.ReadNodeCount.Value);
+			__init.Property("RarelyAbortWrites");
+			writer.WriteValue(RarelyAbortWrites.Value);
 		}
 
-		if (instance.RegisterOperationCount is not null)
+		if (ReadNodeCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RegisterOperationCount = ");
-			sb.Append(instance.RegisterOperationCount.Value);
+			__init.Property("ReadNodeCount");
+			writer.WriteValue(ReadNodeCount.Value);
 		}
 
-		if (instance.Seed is not null)
+		if (RegisterOperationCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Seed = ");
-			sb.Append(instance.Seed.Value);
+			__init.Property("RegisterOperationCount");
+			writer.WriteValue(RegisterOperationCount.Value);
 		}
 
-		if (instance.Timeout is not null)
+		if (Seed is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Seed");
+			writer.WriteValue(Seed.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		if (Timeout is not null)
+		{
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
+		}
+
+		__init.Dispose();
 	}
 }

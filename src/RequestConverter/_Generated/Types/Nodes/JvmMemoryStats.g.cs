@@ -25,83 +25,64 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class JvmMemoryStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.HeapCommittedInBytes is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (HeapCommittedInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HeapCommittedInBytes = ");
-			sb.Append(instance.HeapCommittedInBytes.Value);
-			sb.Append("L");
+			__init.Property("HeapCommittedInBytes");
+			writer.WriteValue(HeapCommittedInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.HeapMax is not null)
+		if (HeapMax is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HeapMax = ");
-			instance.HeapMax.FormatCode(sb);
+			__init.Property("HeapMax");
+			HeapMax.FormatCode(writer);
 		}
 
-		if (instance.HeapMaxInBytes is not null)
+		if (HeapMaxInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HeapMaxInBytes = ");
-			sb.Append(instance.HeapMaxInBytes.Value);
-			sb.Append("L");
+			__init.Property("HeapMaxInBytes");
+			writer.WriteValue(HeapMaxInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.HeapUsedInBytes is not null)
+		if (HeapUsedInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HeapUsedInBytes = ");
-			sb.Append(instance.HeapUsedInBytes.Value);
-			sb.Append("L");
+			__init.Property("HeapUsedInBytes");
+			writer.WriteValue(HeapUsedInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.HeapUsedPercent is not null)
+		if (HeapUsedPercent is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HeapUsedPercent = ");
-			sb.Append(instance.HeapUsedPercent.Value);
-			sb.Append("L");
+			__init.Property("HeapUsedPercent");
+			writer.WriteValue(HeapUsedPercent.Value);
+			writer.Write("L");
 		}
 
-		if (instance.NonHeapCommittedInBytes is not null)
+		if (NonHeapCommittedInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NonHeapCommittedInBytes = ");
-			sb.Append(instance.NonHeapCommittedInBytes.Value);
-			sb.Append("L");
+			__init.Property("NonHeapCommittedInBytes");
+			writer.WriteValue(NonHeapCommittedInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.NonHeapUsedInBytes is not null)
+		if (NonHeapUsedInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NonHeapUsedInBytes = ");
-			sb.Append(instance.NonHeapUsedInBytes.Value);
-			sb.Append("L");
+			__init.Property("NonHeapUsedInBytes");
+			writer.WriteValue(NonHeapUsedInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Pools is not null)
+		if (Pools is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Pools = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Pools, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Pools");
+			writer.Write("new() ");
+			writer.WriteInlineList(Pools, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public static class MultiValueModeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode.Avg:
-				sb.Append("MultiValueMode.Avg");
+				writer.Write("MultiValueMode.Avg");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode.Max:
-				sb.Append("MultiValueMode.Max");
+				writer.Write("MultiValueMode.Max");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode.Min:
-				sb.Append("MultiValueMode.Min");
+				writer.Write("MultiValueMode.Min");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode.Sum:
-				sb.Append("MultiValueMode.Sum");
+				writer.Write("MultiValueMode.Sum");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

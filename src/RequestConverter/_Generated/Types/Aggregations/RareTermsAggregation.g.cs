@@ -25,72 +25,53 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class RareTermsAggregation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Exclude is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Exclude is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Exclude = ");
-			instance.Exclude.FormatCode(sb);
+			__init.Property("Exclude");
+			Exclude.FormatCode(writer);
 		}
 
-		if (instance.Field is not null)
+		if (Field is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.Include is not null)
+		if (Include is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Include = ");
-			instance.Include.FormatCode(sb);
+			__init.Property("Include");
+			Include.FormatCode(writer);
 		}
 
-		if (instance.MaxDocCount is not null)
+		if (MaxDocCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxDocCount = ");
-			sb.Append(instance.MaxDocCount.Value);
-			sb.Append("L");
+			__init.Property("MaxDocCount");
+			writer.WriteValue(MaxDocCount.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Missing is not null)
+		if (Missing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Missing = ");
-			RequestConverter.CodeFormatter.FormatCode(instance.Missing, sb);
+			__init.Property("Missing");
+			writer.WriteValue(Missing);
 		}
 
-		if (instance.Precision is not null)
+		if (Precision is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Precision = ");
-			sb.Append(instance.Precision.Value);
-			sb.Append("d");
+			__init.Property("Precision");
+			writer.WriteValue(Precision.Value);
+			writer.Write("d");
 		}
 
-		if (instance.ValueType is not null)
+		if (ValueType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ValueType = ");
-			sb.Append("\"");
-			sb.Append(instance.ValueType);
-			sb.Append("\"");
+			__init.Property("ValueType");
+			writer.WriteString(ValueType);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

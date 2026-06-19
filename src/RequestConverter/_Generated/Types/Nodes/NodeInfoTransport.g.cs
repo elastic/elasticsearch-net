@@ -25,38 +25,25 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class NodeInfoTransport : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BoundAddress = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.BoundAddress, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("BoundAddress");
+			writer.WriteInlineList(BoundAddress, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Profiles = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Profiles, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("\""); sb.Append(v); sb.Append("\""); }, sb);
+			__init.Property("Profiles");
+			writer.Write("new() ");
+			writer.WriteInlineList(Profiles, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PublishAddress = ");
-			sb.Append("\"");
-			sb.Append(instance.PublishAddress);
-			sb.Append("\"");
+			__init.Property("PublishAddress");
+			writer.WriteString(PublishAddress);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

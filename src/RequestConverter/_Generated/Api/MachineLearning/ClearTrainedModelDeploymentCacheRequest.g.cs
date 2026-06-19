@@ -25,19 +25,14 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class ClearTrainedModelDeploymentCacheRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelId = ");
-			instance.ModelId.FormatCode(sb);
+			__init.Property("ModelId");
+			ModelId.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

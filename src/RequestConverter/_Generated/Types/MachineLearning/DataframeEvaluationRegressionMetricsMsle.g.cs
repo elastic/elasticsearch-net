@@ -25,21 +25,16 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataframeEvaluationRegressionMetricsMsle : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Offset is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Offset is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Offset = ");
-			sb.Append(instance.Offset.Value);
-			sb.Append("d");
+			__init.Property("Offset");
+			writer.WriteValue(Offset.Value);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

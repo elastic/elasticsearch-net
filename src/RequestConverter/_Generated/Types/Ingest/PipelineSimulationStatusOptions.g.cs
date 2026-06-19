@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public static class PipelineSimulationStatusOptionsCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions.Dropped:
-				sb.Append("PipelineSimulationStatusOptions.Dropped");
+				writer.Write("PipelineSimulationStatusOptions.Dropped");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions.Error:
-				sb.Append("PipelineSimulationStatusOptions.Error");
+				writer.Write("PipelineSimulationStatusOptions.Error");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions.ErrorIgnored:
-				sb.Append("PipelineSimulationStatusOptions.ErrorIgnored");
+				writer.Write("PipelineSimulationStatusOptions.ErrorIgnored");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions.Skipped:
-				sb.Append("PipelineSimulationStatusOptions.Skipped");
+				writer.Write("PipelineSimulationStatusOptions.Skipped");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions.Success:
-				sb.Append("PipelineSimulationStatusOptions.Success");
+				writer.Write("PipelineSimulationStatusOptions.Success");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

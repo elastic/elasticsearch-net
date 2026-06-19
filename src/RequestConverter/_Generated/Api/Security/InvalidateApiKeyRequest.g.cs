@@ -25,64 +25,45 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class InvalidateApiKeyRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Id is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Id is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			instance.Id.FormatCode(sb);
+			__init.Property("Id");
+			Id.FormatCode(writer);
 		}
 
-		if (instance.Ids is not null)
+		if (Ids is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ids = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Ids, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Ids");
+			writer.WriteInlineList(Ids, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Name is not null)
+		if (Name is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			instance.Name.FormatCode(sb);
+			__init.Property("Name");
+			Name.FormatCode(writer);
 		}
 
-		if (instance.Owner is not null)
+		if (Owner is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Owner = ");
-			sb.Append(instance.Owner.Value ? "true" : "false");
+			__init.Property("Owner");
+			writer.WriteValue(Owner.Value);
 		}
 
-		if (instance.RealmName is not null)
+		if (RealmName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RealmName = ");
-			sb.Append("\"");
-			sb.Append(instance.RealmName);
-			sb.Append("\"");
+			__init.Property("RealmName");
+			writer.WriteString(RealmName);
 		}
 
-		if (instance.Username is not null)
+		if (Username is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Username = ");
-			instance.Username.FormatCode(sb);
+			__init.Property("Username");
+			Username.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

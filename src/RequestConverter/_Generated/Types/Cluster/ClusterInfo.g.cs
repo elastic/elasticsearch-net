@@ -25,54 +25,39 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class ClusterInfo : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Nodes = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Nodes, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Nodes");
+			writer.Write("new() ");
+			writer.WriteInlineList(Nodes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReservedSizes = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.ReservedSizes, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("ReservedSizes");
+			writer.WriteInlineList(ReservedSizes, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.ShardDataSetSizes is not null)
+		if (ShardDataSetSizes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShardDataSetSizes = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.ShardDataSetSizes, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("\""); sb.Append(v); sb.Append("\""); }, sb);
+			__init.Property("ShardDataSetSizes");
+			writer.Write("new() ");
+			writer.WriteInlineList(ShardDataSetSizes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShardPaths = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.ShardPaths, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("\""); sb.Append(v); sb.Append("\""); }, sb);
+			__init.Property("ShardPaths");
+			writer.Write("new() ");
+			writer.WriteInlineList(ShardPaths, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShardSizes = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.ShardSizes, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append(v); sb.Append("L"); }, sb);
+			__init.Property("ShardSizes");
+			writer.Write("new() ");
+			writer.WriteInlineList(ShardSizes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,33 +25,33 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public static class TermVectorOptionCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.TermVectorOption instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.TermVectorOption instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.No:
-				sb.Append("TermVectorOption.No");
+				writer.Write("TermVectorOption.No");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.WithOffsets:
-				sb.Append("TermVectorOption.WithOffsets");
+				writer.Write("TermVectorOption.WithOffsets");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.WithPositions:
-				sb.Append("TermVectorOption.WithPositions");
+				writer.Write("TermVectorOption.WithPositions");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.WithPositionsOffsets:
-				sb.Append("TermVectorOption.WithPositionsOffsets");
+				writer.Write("TermVectorOption.WithPositionsOffsets");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.WithPositionsOffsetsPayloads:
-				sb.Append("TermVectorOption.WithPositionsOffsetsPayloads");
+				writer.Write("TermVectorOption.WithPositionsOffsetsPayloads");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.WithPositionsPayloads:
-				sb.Append("TermVectorOption.WithPositionsPayloads");
+				writer.Write("TermVectorOption.WithPositionsPayloads");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.Yes:
-				sb.Append("TermVectorOption.Yes");
+				writer.Write("TermVectorOption.Yes");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

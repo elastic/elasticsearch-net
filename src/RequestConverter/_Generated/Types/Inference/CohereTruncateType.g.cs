@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class CohereTruncateTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.CohereTruncateType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.CohereTruncateType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.CohereTruncateType.End:
-				sb.Append("CohereTruncateType.End");
+				writer.Write("CohereTruncateType.End");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.CohereTruncateType.None:
-				sb.Append("CohereTruncateType.None");
+				writer.Write("CohereTruncateType.None");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.CohereTruncateType.Start:
-				sb.Append("CohereTruncateType.Start");
+				writer.Write("CohereTruncateType.Start");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

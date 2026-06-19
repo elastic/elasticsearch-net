@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.TextStructure;
 
 public static class EcsCompatibilityTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType.Disabled:
-				sb.Append("EcsCompatibilityType.Disabled");
+				writer.Write("EcsCompatibilityType.Disabled");
 				break;
 			case Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType.V1:
-				sb.Append("EcsCompatibilityType.V1");
+				writer.Write("EcsCompatibilityType.V1");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

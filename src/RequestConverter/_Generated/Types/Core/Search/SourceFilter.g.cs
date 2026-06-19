@@ -25,36 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class SourceFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Excludes is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Excludes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Excludes = ");
-			instance.Excludes.FormatCode(sb);
+			__init.Property("Excludes");
+			Excludes.FormatCode(writer);
 		}
 
-		if (instance.ExcludeVectors is not null)
+		if (ExcludeVectors is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExcludeVectors = ");
-			sb.Append(instance.ExcludeVectors.Value ? "true" : "false");
+			__init.Property("ExcludeVectors");
+			writer.WriteValue(ExcludeVectors.Value);
 		}
 
-		if (instance.Includes is not null)
+		if (Includes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Includes = ");
-			instance.Includes.FormatCode(sb);
+			__init.Property("Includes");
+			Includes.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

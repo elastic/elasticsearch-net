@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public static class HighlighterEncoderCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder.Default:
-				sb.Append("HighlighterEncoder.Default");
+				writer.Write("HighlighterEncoder.Default");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder.Html:
-				sb.Append("HighlighterEncoder.Html");
+				writer.Write("HighlighterEncoder.Html");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

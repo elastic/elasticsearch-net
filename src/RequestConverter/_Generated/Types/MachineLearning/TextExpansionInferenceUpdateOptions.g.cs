@@ -25,30 +25,21 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class TextExpansionInferenceUpdateOptions : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ResultsField is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ResultsField is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ResultsField = ");
-			sb.Append("\"");
-			sb.Append(instance.ResultsField);
-			sb.Append("\"");
+			__init.Property("ResultsField");
+			writer.WriteString(ResultsField);
 		}
 
-		if (instance.Tokenization is not null)
+		if (Tokenization is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Tokenization = ");
-			instance.Tokenization.FormatCode(sb);
+			__init.Property("Tokenization");
+			Tokenization.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

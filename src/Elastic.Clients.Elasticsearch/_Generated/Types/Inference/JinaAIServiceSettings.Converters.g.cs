@@ -27,7 +27,7 @@ public sealed partial class JinaAIServiceSettingsConverter : System.Text.Json.Se
 {
 	private static readonly System.Text.Json.JsonEncodedText PropApiKey = System.Text.Json.JsonEncodedText.Encode("api_key"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDimensions = System.Text.Json.JsonEncodedText.Encode("dimensions"u8);
-	private static readonly System.Text.Json.JsonEncodedText PropElementType = System.Text.Json.JsonEncodedText.Encode("element_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEmbeddingType = System.Text.Json.JsonEncodedText.Encode("embedding_type"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMultimodalModel = System.Text.Json.JsonEncodedText.Encode("multimodal_model"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRateLimit = System.Text.Json.JsonEncodedText.Encode("rate_limit"u8);
@@ -38,7 +38,7 @@ public sealed partial class JinaAIServiceSettingsConverter : System.Text.Json.Se
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string> propApiKey = default;
 		LocalJsonValue<int?> propDimensions = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.JinaAIElementType?> propElementType = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.JinaAIElementType?> propEmbeddingType = default;
 		LocalJsonValue<string> propModelId = default;
 		LocalJsonValue<bool?> propMultimodalModel = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.RateLimitSetting?> propRateLimit = default;
@@ -55,7 +55,7 @@ public sealed partial class JinaAIServiceSettingsConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propElementType.TryReadProperty(ref reader, options, PropElementType, static Elastic.Clients.Elasticsearch.Inference.JinaAIElementType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Inference.JinaAIElementType>(o)))
+			if (propEmbeddingType.TryReadProperty(ref reader, options, PropEmbeddingType, static Elastic.Clients.Elasticsearch.Inference.JinaAIElementType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Inference.JinaAIElementType>(o)))
 			{
 				continue;
 			}
@@ -94,7 +94,7 @@ public sealed partial class JinaAIServiceSettingsConverter : System.Text.Json.Se
 		{
 			ApiKey = propApiKey.Value,
 			Dimensions = propDimensions.Value,
-			ElementType = propElementType.Value,
+			EmbeddingType = propEmbeddingType.Value,
 			ModelId = propModelId.Value,
 			MultimodalModel = propMultimodalModel.Value,
 			RateLimit = propRateLimit.Value,
@@ -107,7 +107,7 @@ public sealed partial class JinaAIServiceSettingsConverter : System.Text.Json.Se
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropApiKey, value.ApiKey, null, null);
 		writer.WriteProperty(options, PropDimensions, value.Dimensions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteProperty(options, PropElementType, value.ElementType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Inference.JinaAIElementType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Inference.JinaAIElementType>(o, v));
+		writer.WriteProperty(options, PropEmbeddingType, value.EmbeddingType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Inference.JinaAIElementType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Inference.JinaAIElementType>(o, v));
 		writer.WriteProperty(options, PropModelId, value.ModelId, null, null);
 		writer.WriteProperty(options, PropMultimodalModel, value.MultimodalModel, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropRateLimit, value.RateLimit, null, null);

@@ -25,80 +25,57 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class MultiSearchTemplateRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Indices is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Indices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indices = ");
-			instance.Indices.FormatCode(sb);
+			__init.Property("Indices");
+			Indices.FormatCode(writer);
 		}
 
-		if (instance.CcsMinimizeRoundtrips is not null)
+		if (CcsMinimizeRoundtrips is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CcsMinimizeRoundtrips = ");
-			sb.Append(instance.CcsMinimizeRoundtrips.Value ? "true" : "false");
+			__init.Property("CcsMinimizeRoundtrips");
+			writer.WriteValue(CcsMinimizeRoundtrips.Value);
 		}
 
-		if (instance.MaxConcurrentSearches is not null)
+		if (MaxConcurrentSearches is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxConcurrentSearches = ");
-			sb.Append(instance.MaxConcurrentSearches.Value);
-			sb.Append("L");
+			__init.Property("MaxConcurrentSearches");
+			writer.WriteValue(MaxConcurrentSearches.Value);
+			writer.Write("L");
 		}
 
-		if (instance.ProjectRouting is not null)
+		if (ProjectRouting is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ProjectRouting = ");
-			sb.Append("\"");
-			sb.Append(instance.ProjectRouting);
-			sb.Append("\"");
+			__init.Property("ProjectRouting");
+			writer.WriteString(ProjectRouting);
 		}
 
-		if (instance.RestTotalHitsAsInt is not null)
+		if (RestTotalHitsAsInt is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RestTotalHitsAsInt = ");
-			sb.Append(instance.RestTotalHitsAsInt.Value ? "true" : "false");
+			__init.Property("RestTotalHitsAsInt");
+			writer.WriteValue(RestTotalHitsAsInt.Value);
 		}
 
-		if (instance.SearchType is not null)
+		if (SearchType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SearchType = ");
-			Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(instance.SearchType.Value, sb);
+			__init.Property("SearchType");
+			Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(SearchType.Value, writer);
 		}
 
-		if (instance.TypedKeys is not null)
+		if (TypedKeys is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TypedKeys = ");
-			sb.Append(instance.TypedKeys.Value ? "true" : "false");
+			__init.Property("TypedKeys");
+			writer.WriteValue(TypedKeys.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SearchTemplates = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.SearchTemplates, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("SearchTemplates");
+			writer.WriteInlineList(SearchTemplates, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,20 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class Datafeed : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count);
-			sb.Append("L");
+			__init.Property("Count");
+			writer.WriteValue(Count);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

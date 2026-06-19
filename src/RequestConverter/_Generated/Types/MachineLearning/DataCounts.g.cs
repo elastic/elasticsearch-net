@@ -25,172 +25,129 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataCounts : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BucketCount = ");
-			sb.Append(instance.BucketCount);
-			sb.Append("L");
+			__init.Property("BucketCount");
+			writer.WriteValue(BucketCount);
+			writer.Write("L");
 		}
 
-		if (instance.EarliestRecordTimestamp is not null)
+		if (EarliestRecordTimestamp is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EarliestRecordTimestamp = ");
-			sb.Append(instance.EarliestRecordTimestamp.Value);
-			sb.Append("L");
+			__init.Property("EarliestRecordTimestamp");
+			writer.WriteValue(EarliestRecordTimestamp.Value);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EmptyBucketCount = ");
-			sb.Append(instance.EmptyBucketCount);
-			sb.Append("L");
+			__init.Property("EmptyBucketCount");
+			writer.WriteValue(EmptyBucketCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InputBytes = ");
-			sb.Append(instance.InputBytes);
-			sb.Append("L");
+			__init.Property("InputBytes");
+			writer.WriteValue(InputBytes);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InputFieldCount = ");
-			sb.Append(instance.InputFieldCount);
-			sb.Append("L");
+			__init.Property("InputFieldCount");
+			writer.WriteValue(InputFieldCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InputRecordCount = ");
-			sb.Append(instance.InputRecordCount);
-			sb.Append("L");
+			__init.Property("InputRecordCount");
+			writer.WriteValue(InputRecordCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InvalidDateCount = ");
-			sb.Append(instance.InvalidDateCount);
-			sb.Append("L");
+			__init.Property("InvalidDateCount");
+			writer.WriteValue(InvalidDateCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JobId = ");
-			sb.Append("\"");
-			sb.Append(instance.JobId);
-			sb.Append("\"");
+			__init.Property("JobId");
+			writer.WriteString(JobId);
 		}
 
-		if (instance.LastDataTime is not null)
+		if (LastDataTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LastDataTime = ");
-			sb.Append(instance.LastDataTime.Value);
-			sb.Append("L");
+			__init.Property("LastDataTime");
+			writer.WriteValue(LastDataTime.Value);
+			writer.Write("L");
 		}
 
-		if (instance.LatestBucketTimestamp is not null)
+		if (LatestBucketTimestamp is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LatestBucketTimestamp = ");
-			sb.Append(instance.LatestBucketTimestamp.Value);
-			sb.Append("L");
+			__init.Property("LatestBucketTimestamp");
+			writer.WriteValue(LatestBucketTimestamp.Value);
+			writer.Write("L");
 		}
 
-		if (instance.LatestEmptyBucketTimestamp is not null)
+		if (LatestEmptyBucketTimestamp is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LatestEmptyBucketTimestamp = ");
-			sb.Append(instance.LatestEmptyBucketTimestamp.Value);
-			sb.Append("L");
+			__init.Property("LatestEmptyBucketTimestamp");
+			writer.WriteValue(LatestEmptyBucketTimestamp.Value);
+			writer.Write("L");
 		}
 
-		if (instance.LatestRecordTimestamp is not null)
+		if (LatestRecordTimestamp is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LatestRecordTimestamp = ");
-			sb.Append(instance.LatestRecordTimestamp.Value);
-			sb.Append("L");
+			__init.Property("LatestRecordTimestamp");
+			writer.WriteValue(LatestRecordTimestamp.Value);
+			writer.Write("L");
 		}
 
-		if (instance.LatestSparseBucketTimestamp is not null)
+		if (LatestSparseBucketTimestamp is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LatestSparseBucketTimestamp = ");
-			sb.Append(instance.LatestSparseBucketTimestamp.Value);
-			sb.Append("L");
+			__init.Property("LatestSparseBucketTimestamp");
+			writer.WriteValue(LatestSparseBucketTimestamp.Value);
+			writer.Write("L");
 		}
 
-		if (instance.LogTime is not null)
+		if (LogTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LogTime = ");
-			sb.Append(instance.LogTime.Value);
-			sb.Append("L");
+			__init.Property("LogTime");
+			writer.WriteValue(LogTime.Value);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MissingFieldCount = ");
-			sb.Append(instance.MissingFieldCount);
-			sb.Append("L");
+			__init.Property("MissingFieldCount");
+			writer.WriteValue(MissingFieldCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OutOfOrderTimestampCount = ");
-			sb.Append(instance.OutOfOrderTimestampCount);
-			sb.Append("L");
+			__init.Property("OutOfOrderTimestampCount");
+			writer.WriteValue(OutOfOrderTimestampCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ProcessedFieldCount = ");
-			sb.Append(instance.ProcessedFieldCount);
-			sb.Append("L");
+			__init.Property("ProcessedFieldCount");
+			writer.WriteValue(ProcessedFieldCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ProcessedRecordCount = ");
-			sb.Append(instance.ProcessedRecordCount);
-			sb.Append("L");
+			__init.Property("ProcessedRecordCount");
+			writer.WriteValue(ProcessedRecordCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SparseBucketCount = ");
-			sb.Append(instance.SparseBucketCount);
-			sb.Append("L");
+			__init.Property("SparseBucketCount");
+			writer.WriteValue(SparseBucketCount);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

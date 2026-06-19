@@ -25,30 +25,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class DataStreamSettingsError : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Error = ");
-			sb.Append("\"");
-			sb.Append(instance.Error);
-			sb.Append("\"");
+			__init.Property("Error");
+			writer.WriteString(Error);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			sb.Append("\"");
-			sb.Append(instance.Index);
-			sb.Append("\"");
+			__init.Property("Index");
+			writer.WriteString(Index);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

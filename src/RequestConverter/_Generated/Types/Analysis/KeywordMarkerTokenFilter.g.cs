@@ -25,60 +25,39 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class KeywordMarkerTokenFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.IgnoreCase is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (IgnoreCase is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreCase = ");
-			sb.Append(instance.IgnoreCase.Value ? "true" : "false");
+			__init.Property("IgnoreCase");
+			writer.WriteValue(IgnoreCase.Value);
 		}
 
-		if (instance.Keywords is not null)
+		if (Keywords is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Keywords = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Keywords, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Keywords");
+			writer.WriteInlineList(Keywords, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.KeywordsPath is not null)
+		if (KeywordsPath is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("KeywordsPath = ");
-			sb.Append("\"");
-			sb.Append(instance.KeywordsPath);
-			sb.Append("\"");
+			__init.Property("KeywordsPath");
+			writer.WriteString(KeywordsPath);
 		}
 
-		if (instance.KeywordsPattern is not null)
+		if (KeywordsPattern is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("KeywordsPattern = ");
-			sb.Append("\"");
-			sb.Append(instance.KeywordsPattern);
-			sb.Append("\"");
+			__init.Property("KeywordsPattern");
+			writer.WriteString(KeywordsPattern);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

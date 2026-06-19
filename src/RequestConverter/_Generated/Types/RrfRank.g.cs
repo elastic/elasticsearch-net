@@ -25,30 +25,23 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class RrfRank : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.RankConstant is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (RankConstant is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RankConstant = ");
-			sb.Append(instance.RankConstant.Value);
-			sb.Append("L");
+			__init.Property("RankConstant");
+			writer.WriteValue(RankConstant.Value);
+			writer.Write("L");
 		}
 
-		if (instance.RankWindowSize is not null)
+		if (RankWindowSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RankWindowSize = ");
-			sb.Append(instance.RankWindowSize.Value);
-			sb.Append("L");
+			__init.Property("RankWindowSize");
+			writer.WriteValue(RankWindowSize.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

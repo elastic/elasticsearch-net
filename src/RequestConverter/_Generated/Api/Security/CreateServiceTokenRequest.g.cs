@@ -25,46 +25,31 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class CreateServiceTokenRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Name is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Name is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			instance.Name.FormatCode(sb);
+			__init.Property("Name");
+			Name.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Namespace = ");
-			sb.Append("\"");
-			sb.Append(instance.Namespace);
-			sb.Append("\"");
+			__init.Property("Namespace");
+			writer.WriteString(Namespace);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Service = ");
-			sb.Append("\"");
-			sb.Append(instance.Service);
-			sb.Append("\"");
+			__init.Property("Service");
+			writer.WriteString(Service);
 		}
 
-		if (instance.Refresh is not null)
+		if (Refresh is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Refresh = ");
-			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(instance.Refresh.Value, sb);
+			__init.Property("Refresh");
+			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots;
 
 public partial class SearchableSnapshotsStatsRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Indices is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Indices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indices = ");
-			instance.Indices.FormatCode(sb);
+			__init.Property("Indices");
+			Indices.FormatCode(writer);
 		}
 
-		if (instance.Level is not null)
+		if (Level is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Level = ");
-			Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevelCodeFormatter.FormatCode(instance.Level.Value, sb);
+			__init.Property("Level");
+			Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevelCodeFormatter.FormatCode(Level.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

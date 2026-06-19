@@ -25,49 +25,36 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class MemStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AdjustedTotal is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AdjustedTotal is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AdjustedTotal = ");
-			instance.AdjustedTotal.FormatCode(sb);
+			__init.Property("AdjustedTotal");
+			AdjustedTotal.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AdjustedTotalInBytes = ");
-			sb.Append(instance.AdjustedTotalInBytes);
+			__init.Property("AdjustedTotalInBytes");
+			writer.WriteValue(AdjustedTotalInBytes);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ml = ");
-			instance.Ml.FormatCode(sb);
+			__init.Property("Ml");
+			Ml.FormatCode(writer);
 		}
 
-		if (instance.Total is not null)
+		if (Total is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			instance.Total.FormatCode(sb);
+			__init.Property("Total");
+			Total.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalInBytes = ");
-			sb.Append(instance.TotalInBytes);
+			__init.Property("TotalInBytes");
+			writer.WriteValue(TotalInBytes);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

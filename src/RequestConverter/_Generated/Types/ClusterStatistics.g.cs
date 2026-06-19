@@ -25,63 +25,46 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class ClusterStatistics : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Details is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Details is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Details = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Details, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Details");
+			writer.Write("new() ");
+			writer.WriteInlineList(Details, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Failed = ");
-			sb.Append(instance.Failed);
+			__init.Property("Failed");
+			writer.WriteValue(Failed);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Partial = ");
-			sb.Append(instance.Partial);
+			__init.Property("Partial");
+			writer.WriteValue(Partial);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Running = ");
-			sb.Append(instance.Running);
+			__init.Property("Running");
+			writer.WriteValue(Running);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Skipped = ");
-			sb.Append(instance.Skipped);
+			__init.Property("Skipped");
+			writer.WriteValue(Skipped);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Successful = ");
-			sb.Append(instance.Successful);
+			__init.Property("Successful");
+			writer.WriteValue(Successful);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			sb.Append(instance.Total);
+			__init.Property("Total");
+			writer.WriteValue(Total);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

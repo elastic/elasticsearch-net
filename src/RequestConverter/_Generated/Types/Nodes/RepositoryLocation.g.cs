@@ -25,41 +25,26 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class RepositoryLocation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BasePath = ");
-			sb.Append("\"");
-			sb.Append(instance.BasePath);
-			sb.Append("\"");
+			__init.Property("BasePath");
+			writer.WriteString(BasePath);
 		}
 
-		if (instance.Bucket is not null)
+		if (Bucket is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Bucket = ");
-			sb.Append("\"");
-			sb.Append(instance.Bucket);
-			sb.Append("\"");
+			__init.Property("Bucket");
+			writer.WriteString(Bucket);
 		}
 
-		if (instance.Container is not null)
+		if (Container is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Container = ");
-			sb.Append("\"");
-			sb.Append(instance.Container);
-			sb.Append("\"");
+			__init.Property("Container");
+			writer.WriteString(Container);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

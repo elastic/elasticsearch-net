@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public static class SubobjectsCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.Subobjects instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.Subobjects instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.Subobjects.Auto:
-				sb.Append("Subobjects.Auto");
+				writer.Write("Subobjects.Auto");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.Subobjects.False:
-				sb.Append("Subobjects.False");
+				writer.Write("Subobjects.False");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.Subobjects.True:
-				sb.Append("Subobjects.True");
+				writer.Write("Subobjects.True");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

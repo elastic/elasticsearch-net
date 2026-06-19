@@ -25,70 +25,51 @@ namespace Elastic.Clients.Elasticsearch.Tasks;
 
 public partial class ListRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Actions is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Actions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Actions = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Actions, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Actions");
+			writer.WriteInlineList(Actions, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Detailed is not null)
+		if (Detailed is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Detailed = ");
-			sb.Append(instance.Detailed.Value ? "true" : "false");
+			__init.Property("Detailed");
+			writer.WriteValue(Detailed.Value);
 		}
 
-		if (instance.GroupBy is not null)
+		if (GroupBy is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GroupBy = ");
-			Elastic.Clients.Elasticsearch.Tasks.GroupByCodeFormatter.FormatCode(instance.GroupBy.Value, sb);
+			__init.Property("GroupBy");
+			Elastic.Clients.Elasticsearch.Tasks.GroupByCodeFormatter.FormatCode(GroupBy.Value, writer);
 		}
 
-		if (instance.Nodes is not null)
+		if (Nodes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Nodes = ");
-			instance.Nodes.FormatCode(sb);
+			__init.Property("Nodes");
+			Nodes.FormatCode(writer);
 		}
 
-		if (instance.ParentTaskId is not null)
+		if (ParentTaskId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ParentTaskId = ");
-			instance.ParentTaskId.FormatCode(sb);
+			__init.Property("ParentTaskId");
+			ParentTaskId.FormatCode(writer);
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (instance.WaitForCompletion is not null)
+		if (WaitForCompletion is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WaitForCompletion = ");
-			sb.Append(instance.WaitForCompletion.Value ? "true" : "false");
+			__init.Property("WaitForCompletion");
+			writer.WriteValue(WaitForCompletion.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

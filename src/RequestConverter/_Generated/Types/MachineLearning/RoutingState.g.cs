@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public static class RoutingStateCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.RoutingState instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.RoutingState instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.RoutingState.Failed:
-				sb.Append("RoutingState.Failed");
+				writer.Write("RoutingState.Failed");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.RoutingState.Started:
-				sb.Append("RoutingState.Started");
+				writer.Write("RoutingState.Started");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.RoutingState.Starting:
-				sb.Append("RoutingState.Starting");
+				writer.Write("RoutingState.Starting");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.RoutingState.Stopped:
-				sb.Append("RoutingState.Stopped");
+				writer.Write("RoutingState.Stopped");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.RoutingState.Stopping:
-				sb.Append("RoutingState.Stopping");
+				writer.Write("RoutingState.Stopping");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -25,43 +25,32 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DeleteJobRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JobId = ");
-			instance.JobId.FormatCode(sb);
+			__init.Property("JobId");
+			JobId.FormatCode(writer);
 		}
 
-		if (instance.DeleteUserAnnotations is not null)
+		if (DeleteUserAnnotations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DeleteUserAnnotations = ");
-			sb.Append(instance.DeleteUserAnnotations.Value ? "true" : "false");
+			__init.Property("DeleteUserAnnotations");
+			writer.WriteValue(DeleteUserAnnotations.Value);
 		}
 
-		if (instance.Force is not null)
+		if (Force is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Force = ");
-			sb.Append(instance.Force.Value ? "true" : "false");
+			__init.Property("Force");
+			writer.WriteValue(Force.Value);
 		}
 
-		if (instance.WaitForCompletion is not null)
+		if (WaitForCompletion is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WaitForCompletion = ");
-			sb.Append(instance.WaitForCompletion.Value ? "true" : "false");
+			__init.Property("WaitForCompletion");
+			writer.WriteValue(WaitForCompletion.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

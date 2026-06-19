@@ -25,59 +25,42 @@ namespace Elastic.Clients.Elasticsearch.Enrich;
 
 public partial class EnrichPolicy : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ElasticsearchVersion is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ElasticsearchVersion is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ElasticsearchVersion = ");
-			sb.Append("\"");
-			sb.Append(instance.ElasticsearchVersion);
-			sb.Append("\"");
+			__init.Property("ElasticsearchVersion");
+			writer.WriteString(ElasticsearchVersion);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EnrichFields = ");
-			instance.EnrichFields.FormatCode(sb);
+			__init.Property("EnrichFields");
+			EnrichFields.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indices = ");
-			instance.Indices.FormatCode(sb);
+			__init.Property("Indices");
+			Indices.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MatchField = ");
-			instance.MatchField.FormatCode(sb);
+			__init.Property("MatchField");
+			MatchField.FormatCode(writer);
 		}
 
-		if (instance.Name is not null)
+		if (Name is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			instance.Name.FormatCode(sb);
+			__init.Property("Name");
+			Name.FormatCode(writer);
 		}
 
-		if (instance.Query is not null)
+		if (Query is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			instance.Query.FormatCode(sb);
+			__init.Property("Query");
+			Query.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

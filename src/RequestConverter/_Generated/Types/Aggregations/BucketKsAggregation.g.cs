@@ -25,50 +25,33 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class BucketKsAggregation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Alternative is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Alternative is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Alternative = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Alternative, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Alternative");
+			writer.WriteInlineList(Alternative, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.BucketsPath is not null)
+		if (BucketsPath is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BucketsPath = ");
-			instance.BucketsPath.FormatCode(sb);
+			__init.Property("BucketsPath");
+			BucketsPath.FormatCode(writer);
 		}
 
-		if (instance.Fractions is not null)
+		if (Fractions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fractions = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Fractions, (item, sb) => { sb.Append(item); sb.Append("d"); }, sb);
-			sb.Append("]");
+			__init.Property("Fractions");
+			writer.WriteInlineList(Fractions, (w, item) => { w.WriteValue(item); w.Write("d"); });
 		}
 
-		if (instance.SamplingMethod is not null)
+		if (SamplingMethod is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SamplingMethod = ");
-			sb.Append("\"");
-			sb.Append(instance.SamplingMethod);
-			sb.Append("\"");
+			__init.Property("SamplingMethod");
+			writer.WriteString(SamplingMethod);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

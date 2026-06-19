@@ -25,51 +25,38 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class Limits : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.EffectiveMaxModelMemoryLimit is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (EffectiveMaxModelMemoryLimit is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EffectiveMaxModelMemoryLimit = ");
-			instance.EffectiveMaxModelMemoryLimit.FormatCode(sb);
+			__init.Property("EffectiveMaxModelMemoryLimit");
+			EffectiveMaxModelMemoryLimit.FormatCode(writer);
 		}
 
-		if (instance.MaxModelMemoryLimit is not null)
+		if (MaxModelMemoryLimit is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxModelMemoryLimit = ");
-			instance.MaxModelMemoryLimit.FormatCode(sb);
+			__init.Property("MaxModelMemoryLimit");
+			MaxModelMemoryLimit.FormatCode(writer);
 		}
 
-		if (instance.MaxSingleMlNodeProcessors is not null)
+		if (MaxSingleMlNodeProcessors is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxSingleMlNodeProcessors = ");
-			sb.Append(instance.MaxSingleMlNodeProcessors.Value);
+			__init.Property("MaxSingleMlNodeProcessors");
+			writer.WriteValue(MaxSingleMlNodeProcessors.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalMlMemory = ");
-			instance.TotalMlMemory.FormatCode(sb);
+			__init.Property("TotalMlMemory");
+			TotalMlMemory.FormatCode(writer);
 		}
 
-		if (instance.TotalMlProcessors is not null)
+		if (TotalMlProcessors is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalMlProcessors = ");
-			sb.Append(instance.TotalMlProcessors.Value);
+			__init.Property("TotalMlProcessors");
+			writer.WriteValue(TotalMlProcessors.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

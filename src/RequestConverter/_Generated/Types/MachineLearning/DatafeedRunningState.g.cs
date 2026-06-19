@@ -25,34 +25,25 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DatafeedRunningState : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RealTimeConfigured = ");
-			sb.Append(instance.RealTimeConfigured ? "true" : "false");
+			__init.Property("RealTimeConfigured");
+			writer.WriteValue(RealTimeConfigured);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RealTimeRunning = ");
-			sb.Append(instance.RealTimeRunning ? "true" : "false");
+			__init.Property("RealTimeRunning");
+			writer.WriteValue(RealTimeRunning);
 		}
 
-		if (instance.SearchInterval is not null)
+		if (SearchInterval is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SearchInterval = ");
-			instance.SearchInterval.FormatCode(sb);
+			__init.Property("SearchInterval");
+			SearchInterval.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

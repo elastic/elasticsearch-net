@@ -25,29 +25,20 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
 public partial class ForceMergeAction : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.IndexCodec is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (IndexCodec is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexCodec = ");
-			sb.Append("\"");
-			sb.Append(instance.IndexCodec);
-			sb.Append("\"");
+			__init.Property("IndexCodec");
+			writer.WriteString(IndexCodec);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxNumSegments = ");
-			sb.Append(instance.MaxNumSegments);
+			__init.Property("MaxNumSegments");
+			writer.WriteValue(MaxNumSegments);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,58 +25,39 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class IpRangeBucket : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Aggregations is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Aggregations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Aggregations = ");
-			instance.Aggregations.FormatCode(sb);
+			__init.Property("Aggregations");
+			Aggregations.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocCount = ");
-			sb.Append(instance.DocCount);
-			sb.Append("L");
+			__init.Property("DocCount");
+			writer.WriteValue(DocCount);
+			writer.Write("L");
 		}
 
-		if (instance.From is not null)
+		if (From is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("From = ");
-			sb.Append("\"");
-			sb.Append(instance.From);
-			sb.Append("\"");
+			__init.Property("From");
+			writer.WriteString(From);
 		}
 
-		if (instance.Key is not null)
+		if (Key is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Key = ");
-			sb.Append("\"");
-			sb.Append(instance.Key);
-			sb.Append("\"");
+			__init.Property("Key");
+			writer.WriteString(Key);
 		}
 
-		if (instance.To is not null)
+		if (To is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("To = ");
-			sb.Append("\"");
-			sb.Append(instance.To);
-			sb.Append("\"");
+			__init.Property("To");
+			writer.WriteString(To);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

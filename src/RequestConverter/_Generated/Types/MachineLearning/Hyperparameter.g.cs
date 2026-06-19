@@ -25,54 +25,39 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class Hyperparameter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AbsoluteImportance is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AbsoluteImportance is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AbsoluteImportance = ");
-			sb.Append(instance.AbsoluteImportance.Value);
-			sb.Append("d");
+			__init.Property("AbsoluteImportance");
+			writer.WriteValue(AbsoluteImportance.Value);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
-		if (instance.RelativeImportance is not null)
+		if (RelativeImportance is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RelativeImportance = ");
-			sb.Append(instance.RelativeImportance.Value);
-			sb.Append("d");
+			__init.Property("RelativeImportance");
+			writer.WriteValue(RelativeImportance.Value);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Supplied = ");
-			sb.Append(instance.Supplied ? "true" : "false");
+			__init.Property("Supplied");
+			writer.WriteValue(Supplied);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Value = ");
-			sb.Append(instance.Value);
-			sb.Append("d");
+			__init.Property("Value");
+			writer.WriteValue(Value);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

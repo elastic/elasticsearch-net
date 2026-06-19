@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class ExpandWildcardCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.ExpandWildcard instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.ExpandWildcard instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.ExpandWildcard.All:
-				sb.Append("ExpandWildcard.All");
+				writer.Write("ExpandWildcard.All");
 				break;
 			case Elastic.Clients.Elasticsearch.ExpandWildcard.Closed:
-				sb.Append("ExpandWildcard.Closed");
+				writer.Write("ExpandWildcard.Closed");
 				break;
 			case Elastic.Clients.Elasticsearch.ExpandWildcard.Hidden:
-				sb.Append("ExpandWildcard.Hidden");
+				writer.Write("ExpandWildcard.Hidden");
 				break;
 			case Elastic.Clients.Elasticsearch.ExpandWildcard.None:
-				sb.Append("ExpandWildcard.None");
+				writer.Write("ExpandWildcard.None");
 				break;
 			case Elastic.Clients.Elasticsearch.ExpandWildcard.Open:
-				sb.Append("ExpandWildcard.Open");
+				writer.Write("ExpandWildcard.Open");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

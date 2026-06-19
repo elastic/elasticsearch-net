@@ -25,36 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class ClusterStatsRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.NodeId is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (NodeId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NodeId = ");
-			instance.NodeId.FormatCode(sb);
+			__init.Property("NodeId");
+			NodeId.FormatCode(writer);
 		}
 
-		if (instance.IncludeRemotes is not null)
+		if (IncludeRemotes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IncludeRemotes = ");
-			sb.Append(instance.IncludeRemotes.Value ? "true" : "false");
+			__init.Property("IncludeRemotes");
+			writer.WriteValue(IncludeRemotes.Value);
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

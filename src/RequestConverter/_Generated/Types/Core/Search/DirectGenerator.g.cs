@@ -25,106 +25,77 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class DirectGenerator : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.MaxEdits is not null)
+		if (MaxEdits is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxEdits = ");
-			sb.Append(instance.MaxEdits.Value);
+			__init.Property("MaxEdits");
+			writer.WriteValue(MaxEdits.Value);
 		}
 
-		if (instance.MaxInspections is not null)
+		if (MaxInspections is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxInspections = ");
-			sb.Append(instance.MaxInspections.Value);
-			sb.Append("f");
+			__init.Property("MaxInspections");
+			writer.WriteValue(MaxInspections.Value);
+			writer.Write("f");
 		}
 
-		if (instance.MaxTermFreq is not null)
+		if (MaxTermFreq is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxTermFreq = ");
-			sb.Append(instance.MaxTermFreq.Value);
-			sb.Append("f");
+			__init.Property("MaxTermFreq");
+			writer.WriteValue(MaxTermFreq.Value);
+			writer.Write("f");
 		}
 
-		if (instance.MinDocFreq is not null)
+		if (MinDocFreq is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinDocFreq = ");
-			sb.Append(instance.MinDocFreq.Value);
-			sb.Append("f");
+			__init.Property("MinDocFreq");
+			writer.WriteValue(MinDocFreq.Value);
+			writer.Write("f");
 		}
 
-		if (instance.MinWordLength is not null)
+		if (MinWordLength is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinWordLength = ");
-			sb.Append(instance.MinWordLength.Value);
+			__init.Property("MinWordLength");
+			writer.WriteValue(MinWordLength.Value);
 		}
 
-		if (instance.PostFilter is not null)
+		if (PostFilter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PostFilter = ");
-			sb.Append("\"");
-			sb.Append(instance.PostFilter);
-			sb.Append("\"");
+			__init.Property("PostFilter");
+			writer.WriteString(PostFilter);
 		}
 
-		if (instance.PreFilter is not null)
+		if (PreFilter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PreFilter = ");
-			sb.Append("\"");
-			sb.Append(instance.PreFilter);
-			sb.Append("\"");
+			__init.Property("PreFilter");
+			writer.WriteString(PreFilter);
 		}
 
-		if (instance.PrefixLength is not null)
+		if (PrefixLength is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PrefixLength = ");
-			sb.Append(instance.PrefixLength.Value);
+			__init.Property("PrefixLength");
+			writer.WriteValue(PrefixLength.Value);
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append(instance.Size.Value);
+			__init.Property("Size");
+			writer.WriteValue(Size.Value);
 		}
 
-		if (instance.SuggestMode is not null)
+		if (SuggestMode is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SuggestMode = ");
-			Elastic.Clients.Elasticsearch.SuggestModeCodeFormatter.FormatCode(instance.SuggestMode.Value, sb);
+			__init.Property("SuggestMode");
+			Elastic.Clients.Elasticsearch.SuggestModeCodeFormatter.FormatCode(SuggestMode.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,63 +25,46 @@ namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
 public partial class SlmConfiguration : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.FeatureStates is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (FeatureStates is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FeatureStates = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.FeatureStates, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("FeatureStates");
+			writer.WriteInlineList(FeatureStates, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.IgnoreUnavailable is not null)
+		if (IgnoreUnavailable is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreUnavailable = ");
-			sb.Append(instance.IgnoreUnavailable.Value ? "true" : "false");
+			__init.Property("IgnoreUnavailable");
+			writer.WriteValue(IgnoreUnavailable.Value);
 		}
 
-		if (instance.IncludeGlobalState is not null)
+		if (IncludeGlobalState is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IncludeGlobalState = ");
-			sb.Append(instance.IncludeGlobalState.Value ? "true" : "false");
+			__init.Property("IncludeGlobalState");
+			writer.WriteValue(IncludeGlobalState.Value);
 		}
 
-		if (instance.Indices is not null)
+		if (Indices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indices = ");
-			instance.Indices.FormatCode(sb);
+			__init.Property("Indices");
+			Indices.FormatCode(writer);
 		}
 
-		if (instance.Metadata is not null)
+		if (Metadata is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Metadata = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Metadata, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Metadata");
+			writer.Write("new() ");
+			writer.WriteInlineList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Partial is not null)
+		if (Partial is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Partial = ");
-			sb.Append(instance.Partial.Value ? "true" : "false");
+			__init.Property("Partial");
+			writer.WriteValue(Partial.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

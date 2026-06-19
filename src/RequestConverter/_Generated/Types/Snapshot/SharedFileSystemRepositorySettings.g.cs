@@ -25,69 +25,50 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 public partial class SharedFileSystemRepositorySettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ChunkSize is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ChunkSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ChunkSize = ");
-			instance.ChunkSize.FormatCode(sb);
+			__init.Property("ChunkSize");
+			ChunkSize.FormatCode(writer);
 		}
 
-		if (instance.Compress is not null)
+		if (Compress is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Compress = ");
-			sb.Append(instance.Compress.Value ? "true" : "false");
+			__init.Property("Compress");
+			writer.WriteValue(Compress.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Location = ");
-			sb.Append("\"");
-			sb.Append(instance.Location);
-			sb.Append("\"");
+			__init.Property("Location");
+			writer.WriteString(Location);
 		}
 
-		if (instance.MaxNumberOfSnapshots is not null)
+		if (MaxNumberOfSnapshots is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxNumberOfSnapshots = ");
-			sb.Append(instance.MaxNumberOfSnapshots.Value);
+			__init.Property("MaxNumberOfSnapshots");
+			writer.WriteValue(MaxNumberOfSnapshots.Value);
 		}
 
-		if (instance.MaxRestoreBytesPerSec is not null)
+		if (MaxRestoreBytesPerSec is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxRestoreBytesPerSec = ");
-			instance.MaxRestoreBytesPerSec.FormatCode(sb);
+			__init.Property("MaxRestoreBytesPerSec");
+			MaxRestoreBytesPerSec.FormatCode(writer);
 		}
 
-		if (instance.MaxSnapshotBytesPerSec is not null)
+		if (MaxSnapshotBytesPerSec is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxSnapshotBytesPerSec = ");
-			instance.MaxSnapshotBytesPerSec.FormatCode(sb);
+			__init.Property("MaxSnapshotBytesPerSec");
+			MaxSnapshotBytesPerSec.FormatCode(writer);
 		}
 
-		if (instance.Readonly is not null)
+		if (Readonly is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Readonly = ");
-			sb.Append(instance.Readonly.Value ? "true" : "false");
+			__init.Property("Readonly");
+			writer.WriteValue(Readonly.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

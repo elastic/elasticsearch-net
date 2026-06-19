@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class TaskTypeAmazonSageMakerCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonSageMaker instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonSageMaker instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonSageMaker.ChatCompletion:
-				sb.Append("TaskTypeAmazonSageMaker.ChatCompletion");
+				writer.Write("TaskTypeAmazonSageMaker.ChatCompletion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonSageMaker.Completion:
-				sb.Append("TaskTypeAmazonSageMaker.Completion");
+				writer.Write("TaskTypeAmazonSageMaker.Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonSageMaker.Rerank:
-				sb.Append("TaskTypeAmazonSageMaker.Rerank");
+				writer.Write("TaskTypeAmazonSageMaker.Rerank");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonSageMaker.SparseEmbedding:
-				sb.Append("TaskTypeAmazonSageMaker.SparseEmbedding");
+				writer.Write("TaskTypeAmazonSageMaker.SparseEmbedding");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonSageMaker.TextEmbedding:
-				sb.Append("TaskTypeAmazonSageMaker.TextEmbedding");
+				writer.Write("TaskTypeAmazonSageMaker.TextEmbedding");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

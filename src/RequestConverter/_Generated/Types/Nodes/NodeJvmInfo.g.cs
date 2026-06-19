@@ -25,111 +25,70 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class NodeJvmInfo : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GcCollectors = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.GcCollectors, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("GcCollectors");
+			writer.WriteInlineList(GcCollectors, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InputArguments = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.InputArguments, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("InputArguments");
+			writer.WriteInlineList(InputArguments, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mem = ");
-			instance.Mem.FormatCode(sb);
+			__init.Property("Mem");
+			Mem.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MemoryPools = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.MemoryPools, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("MemoryPools");
+			writer.WriteInlineList(MemoryPools, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Pid = ");
-			sb.Append(instance.Pid);
+			__init.Property("Pid");
+			writer.WriteValue(Pid);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StartTimeInMillis = ");
-			sb.Append(instance.StartTimeInMillis);
+			__init.Property("StartTimeInMillis");
+			writer.WriteValue(StartTimeInMillis);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UsingBundledJdk = ");
-			sb.Append(instance.UsingBundledJdk ? "true" : "false");
+			__init.Property("UsingBundledJdk");
+			writer.WriteValue(UsingBundledJdk);
 		}
 
-		if (instance.UsingCompressedOrdinaryObjectPointers is not null)
+		if (UsingCompressedOrdinaryObjectPointers is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UsingCompressedOrdinaryObjectPointers = ");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<bool, string>(instance.UsingCompressedOrdinaryObjectPointers, sb);
+			__init.Property("UsingCompressedOrdinaryObjectPointers");
+			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<bool, string>(UsingCompressedOrdinaryObjectPointers, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VmName = ");
-			sb.Append("\"");
-			sb.Append(instance.VmName);
-			sb.Append("\"");
+			__init.Property("VmName");
+			writer.WriteString(VmName);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VmVendor = ");
-			sb.Append("\"");
-			sb.Append(instance.VmVendor);
-			sb.Append("\"");
+			__init.Property("VmVendor");
+			writer.WriteString(VmVendor);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VmVersion = ");
-			sb.Append("\"");
-			sb.Append(instance.VmVersion);
-			sb.Append("\"");
+			__init.Property("VmVersion");
+			writer.WriteString(VmVersion);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

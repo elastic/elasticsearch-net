@@ -25,111 +25,86 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class RequestCounts : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.GetBlob is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (GetBlob is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GetBlob = ");
-			sb.Append(instance.GetBlob.Value);
-			sb.Append("L");
+			__init.Property("GetBlob");
+			writer.WriteValue(GetBlob.Value);
+			writer.Write("L");
 		}
 
-		if (instance.GetBlobProperties is not null)
+		if (GetBlobProperties is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GetBlobProperties = ");
-			sb.Append(instance.GetBlobProperties.Value);
-			sb.Append("L");
+			__init.Property("GetBlobProperties");
+			writer.WriteValue(GetBlobProperties.Value);
+			writer.Write("L");
 		}
 
-		if (instance.GetObject is not null)
+		if (GetObject is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GetObject = ");
-			sb.Append(instance.GetObject.Value);
-			sb.Append("L");
+			__init.Property("GetObject");
+			writer.WriteValue(GetObject.Value);
+			writer.Write("L");
 		}
 
-		if (instance.InsertObject is not null)
+		if (InsertObject is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InsertObject = ");
-			sb.Append(instance.InsertObject.Value);
-			sb.Append("L");
+			__init.Property("InsertObject");
+			writer.WriteValue(InsertObject.Value);
+			writer.Write("L");
 		}
 
-		if (instance.ListBlobs is not null)
+		if (ListBlobs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ListBlobs = ");
-			sb.Append(instance.ListBlobs.Value);
-			sb.Append("L");
+			__init.Property("ListBlobs");
+			writer.WriteValue(ListBlobs.Value);
+			writer.Write("L");
 		}
 
-		if (instance.ListObjects is not null)
+		if (ListObjects is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ListObjects = ");
-			sb.Append(instance.ListObjects.Value);
-			sb.Append("L");
+			__init.Property("ListObjects");
+			writer.WriteValue(ListObjects.Value);
+			writer.Write("L");
 		}
 
-		if (instance.PutBlob is not null)
+		if (PutBlob is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PutBlob = ");
-			sb.Append(instance.PutBlob.Value);
-			sb.Append("L");
+			__init.Property("PutBlob");
+			writer.WriteValue(PutBlob.Value);
+			writer.Write("L");
 		}
 
-		if (instance.PutBlock is not null)
+		if (PutBlock is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PutBlock = ");
-			sb.Append(instance.PutBlock.Value);
-			sb.Append("L");
+			__init.Property("PutBlock");
+			writer.WriteValue(PutBlock.Value);
+			writer.Write("L");
 		}
 
-		if (instance.PutBlockList is not null)
+		if (PutBlockList is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PutBlockList = ");
-			sb.Append(instance.PutBlockList.Value);
-			sb.Append("L");
+			__init.Property("PutBlockList");
+			writer.WriteValue(PutBlockList.Value);
+			writer.Write("L");
 		}
 
-		if (instance.PutMultipartObject is not null)
+		if (PutMultipartObject is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PutMultipartObject = ");
-			sb.Append(instance.PutMultipartObject.Value);
-			sb.Append("L");
+			__init.Property("PutMultipartObject");
+			writer.WriteValue(PutMultipartObject.Value);
+			writer.Write("L");
 		}
 
-		if (instance.PutObject is not null)
+		if (PutObject is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PutObject = ");
-			sb.Append(instance.PutObject.Value);
-			sb.Append("L");
+			__init.Property("PutObject");
+			writer.WriteValue(PutObject.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

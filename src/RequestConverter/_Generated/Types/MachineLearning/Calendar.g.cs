@@ -25,40 +25,25 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class Calendar : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CalendarId = ");
-			sb.Append("\"");
-			sb.Append(instance.CalendarId);
-			sb.Append("\"");
+			__init.Property("CalendarId");
+			writer.WriteString(CalendarId);
 		}
 
-		if (instance.Description is not null)
+		if (Description is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JobIds = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.JobIds, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("JobIds");
+			writer.WriteInlineList(JobIds, (w, item) => { w.WriteString(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

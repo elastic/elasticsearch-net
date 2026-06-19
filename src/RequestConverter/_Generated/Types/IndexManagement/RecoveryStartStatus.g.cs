@@ -25,42 +25,31 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class RecoveryStartStatus : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CheckIndexTime is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CheckIndexTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CheckIndexTime = ");
-			instance.CheckIndexTime.FormatCode(sb);
+			__init.Property("CheckIndexTime");
+			CheckIndexTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CheckIndexTimeInMillis = ");
-			sb.Append(instance.CheckIndexTimeInMillis);
+			__init.Property("CheckIndexTimeInMillis");
+			writer.WriteValue(CheckIndexTimeInMillis);
 		}
 
-		if (instance.TotalTime is not null)
+		if (TotalTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalTime = ");
-			instance.TotalTime.FormatCode(sb);
+			__init.Property("TotalTime");
+			TotalTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalTimeInMillis = ");
-			sb.Append(instance.TotalTimeInMillis);
+			__init.Property("TotalTimeInMillis");
+			writer.WriteValue(TotalTimeInMillis);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

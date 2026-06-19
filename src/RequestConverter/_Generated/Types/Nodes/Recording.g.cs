@@ -25,47 +25,34 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class Recording : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CumulativeExecutionCount is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CumulativeExecutionCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CumulativeExecutionCount = ");
-			sb.Append(instance.CumulativeExecutionCount.Value);
-			sb.Append("L");
+			__init.Property("CumulativeExecutionCount");
+			writer.WriteValue(CumulativeExecutionCount.Value);
+			writer.Write("L");
 		}
 
-		if (instance.CumulativeExecutionTime is not null)
+		if (CumulativeExecutionTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CumulativeExecutionTime = ");
-			instance.CumulativeExecutionTime.FormatCode(sb);
+			__init.Property("CumulativeExecutionTime");
+			CumulativeExecutionTime.FormatCode(writer);
 		}
 
-		if (instance.CumulativeExecutionTimeMillis is not null)
+		if (CumulativeExecutionTimeMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CumulativeExecutionTimeMillis = ");
-			sb.Append(instance.CumulativeExecutionTimeMillis.Value);
+			__init.Property("CumulativeExecutionTimeMillis");
+			writer.WriteValue(CumulativeExecutionTimeMillis.Value);
 		}
 
-		if (instance.Name is not null)
+		if (Name is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

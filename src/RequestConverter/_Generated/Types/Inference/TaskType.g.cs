@@ -25,30 +25,30 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class TaskTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.TaskType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.TaskType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.TaskType.ChatCompletion:
-				sb.Append("TaskType.ChatCompletion");
+				writer.Write("TaskType.ChatCompletion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskType.Completion:
-				sb.Append("TaskType.Completion");
+				writer.Write("TaskType.Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskType.Embedding:
-				sb.Append("TaskType.Embedding");
+				writer.Write("TaskType.Embedding");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskType.Rerank:
-				sb.Append("TaskType.Rerank");
+				writer.Write("TaskType.Rerank");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskType.SparseEmbedding:
-				sb.Append("TaskType.SparseEmbedding");
+				writer.Write("TaskType.SparseEmbedding");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskType.TextEmbedding:
-				sb.Append("TaskType.TextEmbedding");
+				writer.Write("TaskType.TextEmbedding");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

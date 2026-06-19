@@ -25,44 +25,31 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class UpdateModelSnapshotRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JobId = ");
-			instance.JobId.FormatCode(sb);
+			__init.Property("JobId");
+			JobId.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SnapshotId = ");
-			instance.SnapshotId.FormatCode(sb);
+			__init.Property("SnapshotId");
+			SnapshotId.FormatCode(writer);
 		}
 
-		if (instance.Description is not null)
+		if (Description is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
-		if (instance.Retain is not null)
+		if (Retain is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Retain = ");
-			sb.Append(instance.Retain.Value ? "true" : "false");
+			__init.Property("Retain");
+			writer.WriteValue(Retain.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

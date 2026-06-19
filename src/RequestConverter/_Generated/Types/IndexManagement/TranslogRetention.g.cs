@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class TranslogRetention : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Age is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Age is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Age = ");
-			instance.Age.FormatCode(sb);
+			__init.Property("Age");
+			Age.FormatCode(writer);
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			instance.Size.FormatCode(sb);
+			__init.Property("Size");
+			Size.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

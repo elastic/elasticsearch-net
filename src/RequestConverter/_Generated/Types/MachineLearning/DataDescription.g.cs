@@ -25,50 +25,33 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataDescription : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.FieldDelimiter is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (FieldDelimiter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FieldDelimiter = ");
-			sb.Append("\"");
-			sb.Append(instance.FieldDelimiter);
-			sb.Append("\"");
+			__init.Property("FieldDelimiter");
+			writer.WriteString(FieldDelimiter);
 		}
 
-		if (instance.Format is not null)
+		if (Format is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Format = ");
-			sb.Append("\"");
-			sb.Append(instance.Format);
-			sb.Append("\"");
+			__init.Property("Format");
+			writer.WriteString(Format);
 		}
 
-		if (instance.TimeField is not null)
+		if (TimeField is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeField = ");
-			instance.TimeField.FormatCode(sb);
+			__init.Property("TimeField");
+			TimeField.FormatCode(writer);
 		}
 
-		if (instance.TimeFormat is not null)
+		if (TimeFormat is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeFormat = ");
-			sb.Append("\"");
-			sb.Append(instance.TimeFormat);
-			sb.Append("\"");
+			__init.Property("TimeFormat");
+			writer.WriteString(TimeFormat);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

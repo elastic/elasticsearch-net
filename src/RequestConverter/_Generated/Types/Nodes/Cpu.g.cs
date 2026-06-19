@@ -25,77 +25,58 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class Cpu : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.LoadAverage is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (LoadAverage is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LoadAverage = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.LoadAverage, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append(v); sb.Append("d"); }, sb);
+			__init.Property("LoadAverage");
+			writer.Write("new() ");
+			writer.WriteInlineList(LoadAverage, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Percent is not null)
+		if (Percent is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Percent = ");
-			sb.Append(instance.Percent.Value);
+			__init.Property("Percent");
+			writer.WriteValue(Percent.Value);
 		}
 
-		if (instance.Sys is not null)
+		if (Sys is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sys = ");
-			instance.Sys.FormatCode(sb);
+			__init.Property("Sys");
+			Sys.FormatCode(writer);
 		}
 
-		if (instance.SysInMillis is not null)
+		if (SysInMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SysInMillis = ");
-			sb.Append(instance.SysInMillis.Value);
+			__init.Property("SysInMillis");
+			writer.WriteValue(SysInMillis.Value);
 		}
 
-		if (instance.Total is not null)
+		if (Total is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			instance.Total.FormatCode(sb);
+			__init.Property("Total");
+			Total.FormatCode(writer);
 		}
 
-		if (instance.TotalInMillis is not null)
+		if (TotalInMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalInMillis = ");
-			sb.Append(instance.TotalInMillis.Value);
+			__init.Property("TotalInMillis");
+			writer.WriteValue(TotalInMillis.Value);
 		}
 
-		if (instance.User is not null)
+		if (User is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("User = ");
-			instance.User.FormatCode(sb);
+			__init.Property("User");
+			User.FormatCode(writer);
 		}
 
-		if (instance.UserInMillis is not null)
+		if (UserInMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UserInMillis = ");
-			sb.Append(instance.UserInMillis.Value);
+			__init.Property("UserInMillis");
+			writer.WriteValue(UserInMillis.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

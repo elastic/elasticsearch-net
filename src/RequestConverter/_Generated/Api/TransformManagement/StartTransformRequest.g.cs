@@ -25,37 +25,26 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
 public partial class StartTransformRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TransformId = ");
-			instance.TransformId.FormatCode(sb);
+			__init.Property("TransformId");
+			TransformId.FormatCode(writer);
 		}
 
-		if (instance.From is not null)
+		if (From is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("From = ");
-			sb.Append("\"");
-			sb.Append(instance.From);
-			sb.Append("\"");
+			__init.Property("From");
+			writer.WriteString(From);
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

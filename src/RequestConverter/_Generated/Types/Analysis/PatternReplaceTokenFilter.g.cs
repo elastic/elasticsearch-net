@@ -25,59 +25,38 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class PatternReplaceTokenFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.All is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (All is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("All = ");
-			sb.Append(instance.All.Value ? "true" : "false");
+			__init.Property("All");
+			writer.WriteValue(All.Value);
 		}
 
-		if (instance.Flags is not null)
+		if (Flags is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Flags = ");
-			sb.Append("\"");
-			sb.Append(instance.Flags);
-			sb.Append("\"");
+			__init.Property("Flags");
+			writer.WriteString(Flags);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Pattern = ");
-			sb.Append("\"");
-			sb.Append(instance.Pattern);
-			sb.Append("\"");
+			__init.Property("Pattern");
+			writer.WriteString(Pattern);
 		}
 
-		if (instance.Replacement is not null)
+		if (Replacement is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Replacement = ");
-			sb.Append("\"");
-			sb.Append(instance.Replacement);
-			sb.Append("\"");
+			__init.Property("Replacement");
+			writer.WriteString(Replacement);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

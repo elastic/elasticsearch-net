@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public static class ChildScoreModeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.Avg:
-				sb.Append("ChildScoreMode.Avg");
+				writer.Write("ChildScoreMode.Avg");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.Max:
-				sb.Append("ChildScoreMode.Max");
+				writer.Write("ChildScoreMode.Max");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.Min:
-				sb.Append("ChildScoreMode.Min");
+				writer.Write("ChildScoreMode.Min");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.None:
-				sb.Append("ChildScoreMode.None");
+				writer.Write("ChildScoreMode.None");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.Sum:
-				sb.Append("ChildScoreMode.Sum");
+				writer.Write("ChildScoreMode.Sum");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

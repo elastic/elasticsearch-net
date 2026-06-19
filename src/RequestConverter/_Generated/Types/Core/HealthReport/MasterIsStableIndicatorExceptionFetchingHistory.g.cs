@@ -25,30 +25,19 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
 public partial class MasterIsStableIndicatorExceptionFetchingHistory : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Message = ");
-			sb.Append("\"");
-			sb.Append(instance.Message);
-			sb.Append("\"");
+			__init.Property("Message");
+			writer.WriteString(Message);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StackTrace = ");
-			sb.Append("\"");
-			sb.Append(instance.StackTrace);
-			sb.Append("\"");
+			__init.Property("StackTrace");
+			writer.WriteString(StackTrace);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

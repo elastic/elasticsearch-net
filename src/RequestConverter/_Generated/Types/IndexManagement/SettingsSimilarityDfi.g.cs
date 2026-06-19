@@ -25,19 +25,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class SettingsSimilarityDfi : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndependenceMeasure = ");
-			Elastic.Clients.Elasticsearch.DFIIndependenceMeasureCodeFormatter.FormatCode(instance.IndependenceMeasure, sb);
+			__init.Property("IndependenceMeasure");
+			Elastic.Clients.Elasticsearch.DFIIndependenceMeasureCodeFormatter.FormatCode(IndependenceMeasure, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

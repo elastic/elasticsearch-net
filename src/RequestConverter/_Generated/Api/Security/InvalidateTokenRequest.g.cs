@@ -25,48 +25,33 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class InvalidateTokenRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.RealmName is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (RealmName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RealmName = ");
-			instance.RealmName.FormatCode(sb);
+			__init.Property("RealmName");
+			RealmName.FormatCode(writer);
 		}
 
-		if (instance.RefreshToken is not null)
+		if (RefreshToken is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RefreshToken = ");
-			sb.Append("\"");
-			sb.Append(instance.RefreshToken);
-			sb.Append("\"");
+			__init.Property("RefreshToken");
+			writer.WriteString(RefreshToken);
 		}
 
-		if (instance.Token is not null)
+		if (Token is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Token = ");
-			sb.Append("\"");
-			sb.Append(instance.Token);
-			sb.Append("\"");
+			__init.Property("Token");
+			writer.WriteString(Token);
 		}
 
-		if (instance.Username is not null)
+		if (Username is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Username = ");
-			instance.Username.FormatCode(sb);
+			__init.Property("Username");
+			Username.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

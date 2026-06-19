@@ -25,48 +25,35 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 public partial class ShardsStatsSummary : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Incremental = ");
-			instance.Incremental.FormatCode(sb);
+			__init.Property("Incremental");
+			Incremental.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StartTimeInMillis = ");
-			sb.Append(instance.StartTimeInMillis);
+			__init.Property("StartTimeInMillis");
+			writer.WriteValue(StartTimeInMillis);
 		}
 
-		if (instance.Time is not null)
+		if (Time is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Time = ");
-			instance.Time.FormatCode(sb);
+			__init.Property("Time");
+			Time.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeInMillis = ");
-			sb.Append(instance.TimeInMillis);
+			__init.Property("TimeInMillis");
+			writer.WriteValue(TimeInMillis);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			instance.Total.FormatCode(sb);
+			__init.Property("Total");
+			Total.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

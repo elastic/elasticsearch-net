@@ -25,77 +25,64 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class FunctionScore : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Filter is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Filter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Filter = ");
-			instance.Filter.FormatCode(sb);
+			__init.Property("Filter");
+			Filter.FormatCode(writer);
 		}
 
-		if (instance.Weight is not null)
+		if (Name is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Weight = ");
-			sb.Append(instance.Weight.Value);
-			sb.Append("d");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
-		if (instance.Exp is not null)
+		if (Weight is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Exp = ");
-			instance.Exp.FormatCode(sb);
+			__init.Property("Weight");
+			writer.WriteValue(Weight.Value);
+			writer.Write("d");
 		}
 
-		if (instance.FieldValueFactor is not null)
+		if (Exp is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FieldValueFactor = ");
-			instance.FieldValueFactor.FormatCode(sb);
+			__init.Property("Exp");
+			Exp.FormatCode(writer);
 		}
 
-		if (instance.Gauss is not null)
+		if (FieldValueFactor is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Gauss = ");
-			instance.Gauss.FormatCode(sb);
+			__init.Property("FieldValueFactor");
+			FieldValueFactor.FormatCode(writer);
 		}
 
-		if (instance.Linear is not null)
+		if (Gauss is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Linear = ");
-			instance.Linear.FormatCode(sb);
+			__init.Property("Gauss");
+			Gauss.FormatCode(writer);
 		}
 
-		if (instance.RandomScore is not null)
+		if (Linear is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RandomScore = ");
-			instance.RandomScore.FormatCode(sb);
+			__init.Property("Linear");
+			Linear.FormatCode(writer);
 		}
 
-		if (instance.ScriptScore is not null)
+		if (RandomScore is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ScriptScore = ");
-			instance.ScriptScore.FormatCode(sb);
+			__init.Property("RandomScore");
+			RandomScore.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		if (ScriptScore is not null)
+		{
+			__init.Property("ScriptScore");
+			ScriptScore.FormatCode(writer);
+		}
+
+		__init.Dispose();
 	}
 }

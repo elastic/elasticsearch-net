@@ -25,453 +25,452 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial interface ITokenFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	void RequestConverter.ICodeFormattable.FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.ApostropheTokenFilter c1)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.ApostropheTokenFilter c1)
 		{
-			c1.FormatCode(sb);
+			c1.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.ArabicNormalizationTokenFilter c2)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.ArabicNormalizationTokenFilter c2)
 		{
-			c2.FormatCode(sb);
+			c2.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.ArabicStemTokenFilter c3)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.ArabicStemTokenFilter c3)
 		{
-			c3.FormatCode(sb);
+			c3.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter c4)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter c4)
 		{
-			c4.FormatCode(sb);
+			c4.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.BengaliNormalizationTokenFilter c5)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.BengaliNormalizationTokenFilter c5)
 		{
-			c5.FormatCode(sb);
+			c5.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.BrazilianStemTokenFilter c6)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.BrazilianStemTokenFilter c6)
 		{
-			c6.FormatCode(sb);
+			c6.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.CjkBigramTokenFilter c7)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.CjkBigramTokenFilter c7)
 		{
-			c7.FormatCode(sb);
+			c7.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.CjkWidthTokenFilter c8)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.CjkWidthTokenFilter c8)
 		{
-			c8.FormatCode(sb);
+			c8.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.ClassicTokenFilter c9)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.ClassicTokenFilter c9)
 		{
-			c9.FormatCode(sb);
+			c9.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilter c10)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilter c10)
 		{
-			c10.FormatCode(sb);
+			c10.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilter c11)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilter c11)
 		{
-			c11.FormatCode(sb);
+			c11.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.CzechStemTokenFilter c12)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.CzechStemTokenFilter c12)
 		{
-			c12.FormatCode(sb);
+			c12.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.DecimalDigitTokenFilter c13)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.DecimalDigitTokenFilter c13)
 		{
-			c13.FormatCode(sb);
+			c13.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter c14)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter c14)
 		{
-			c14.FormatCode(sb);
+			c14.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilter c15)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilter c15)
 		{
-			c15.FormatCode(sb);
+			c15.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.DutchStemTokenFilter c16)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.DutchStemTokenFilter c16)
 		{
-			c16.FormatCode(sb);
+			c16.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilter c17)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilter c17)
 		{
-			c17.FormatCode(sb);
+			c17.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter c18)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter c18)
 		{
-			c18.FormatCode(sb);
+			c18.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter c19)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter c19)
 		{
-			c19.FormatCode(sb);
+			c19.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.FlattenGraphTokenFilter c20)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.FlattenGraphTokenFilter c20)
 		{
-			c20.FormatCode(sb);
+			c20.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.FrenchStemTokenFilter c21)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.FrenchStemTokenFilter c21)
 		{
-			c21.FormatCode(sb);
+			c21.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.GermanNormalizationTokenFilter c22)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.GermanNormalizationTokenFilter c22)
 		{
-			c22.FormatCode(sb);
+			c22.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.GermanStemTokenFilter c23)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.GermanStemTokenFilter c23)
 		{
-			c23.FormatCode(sb);
+			c23.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.HindiNormalizationTokenFilter c24)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.HindiNormalizationTokenFilter c24)
 		{
-			c24.FormatCode(sb);
+			c24.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter c25)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter c25)
 		{
-			c25.FormatCode(sb);
+			c25.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilter c26)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilter c26)
 		{
-			c26.FormatCode(sb);
+			c26.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.IcuCollationTokenFilter c27)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.IcuCollationTokenFilter c27)
 		{
-			c27.FormatCode(sb);
+			c27.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilter c28)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilter c28)
 		{
-			c28.FormatCode(sb);
+			c28.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTokenFilter c29)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTokenFilter c29)
 		{
-			c29.FormatCode(sb);
+			c29.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter c30)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter c30)
 		{
-			c30.FormatCode(sb);
+			c30.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.IndicNormalizationTokenFilter c31)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.IndicNormalizationTokenFilter c31)
 		{
-			c31.FormatCode(sb);
+			c31.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.JaStopTokenFilter c32)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.JaStopTokenFilter c32)
 		{
-			c32.FormatCode(sb);
+			c32.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter c33)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter c33)
 		{
-			c33.FormatCode(sb);
+			c33.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter c34)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter c34)
 		{
-			c34.FormatCode(sb);
+			c34.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter c35)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter c35)
 		{
-			c35.FormatCode(sb);
+			c35.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.KeywordRepeatTokenFilter c36)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.KeywordRepeatTokenFilter c36)
 		{
-			c36.FormatCode(sb);
+			c36.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.KStemTokenFilter c37)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.KStemTokenFilter c37)
 		{
-			c37.FormatCode(sb);
+			c37.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilter c38)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilter c38)
 		{
-			c38.FormatCode(sb);
+			c38.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter c39)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter c39)
 		{
-			c39.FormatCode(sb);
+			c39.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilter c40)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilter c40)
 		{
-			c40.FormatCode(sb);
+			c40.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter c41)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter c41)
 		{
-			c41.FormatCode(sb);
+			c41.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilter c42)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilter c42)
 		{
-			c42.FormatCode(sb);
+			c42.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilter c43)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilter c43)
 		{
-			c43.FormatCode(sb);
+			c43.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.MinHashTokenFilter c44)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.MinHashTokenFilter c44)
 		{
-			c44.FormatCode(sb);
+			c44.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilter c45)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilter c45)
 		{
-			c45.FormatCode(sb);
+			c45.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilter c46)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilter c46)
 		{
-			c46.FormatCode(sb);
+			c46.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilter c47)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilter c47)
 		{
-			c47.FormatCode(sb);
+			c47.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter c48)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter c48)
 		{
-			c48.FormatCode(sb);
+			c48.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter c49)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter c49)
 		{
-			c49.FormatCode(sb);
+			c49.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.PersianNormalizationTokenFilter c50)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.PersianNormalizationTokenFilter c50)
 		{
-			c50.FormatCode(sb);
+			c50.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.PersianStemTokenFilter c51)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.PersianStemTokenFilter c51)
 		{
-			c51.FormatCode(sb);
+			c51.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilter c52)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilter c52)
 		{
-			c52.FormatCode(sb);
+			c52.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.PorterStemTokenFilter c53)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.PorterStemTokenFilter c53)
 		{
-			c53.FormatCode(sb);
+			c53.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter c54)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter c54)
 		{
-			c54.FormatCode(sb);
+			c54.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.RemoveDuplicatesTokenFilter c55)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.RemoveDuplicatesTokenFilter c55)
 		{
-			c55.FormatCode(sb);
+			c55.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilter c56)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilter c56)
 		{
-			c56.FormatCode(sb);
+			c56.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.RussianStemTokenFilter c57)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.RussianStemTokenFilter c57)
 		{
-			c57.FormatCode(sb);
+			c57.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.ScandinavianFoldingTokenFilter c58)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.ScandinavianFoldingTokenFilter c58)
 		{
-			c58.FormatCode(sb);
+			c58.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.ScandinavianNormalizationTokenFilter c59)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.ScandinavianNormalizationTokenFilter c59)
 		{
-			c59.FormatCode(sb);
+			c59.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.SerbianNormalizationTokenFilter c60)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.SerbianNormalizationTokenFilter c60)
 		{
-			c60.FormatCode(sb);
+			c60.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter c61)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter c61)
 		{
-			c61.FormatCode(sb);
+			c61.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilter c62)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilter c62)
 		{
-			c62.FormatCode(sb);
+			c62.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.SoraniNormalizationTokenFilter c63)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.SoraniNormalizationTokenFilter c63)
 		{
-			c63.FormatCode(sb);
+			c63.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilter c64)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilter c64)
 		{
-			c64.FormatCode(sb);
+			c64.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter c65)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter c65)
 		{
-			c65.FormatCode(sb);
+			c65.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.StopTokenFilter c66)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.StopTokenFilter c66)
 		{
-			c66.FormatCode(sb);
+			c66.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter c67)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter c67)
 		{
-			c67.FormatCode(sb);
+			c67.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilter c68)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilter c68)
 		{
-			c68.FormatCode(sb);
+			c68.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.TrimTokenFilter c69)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.TrimTokenFilter c69)
 		{
-			c69.FormatCode(sb);
+			c69.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter c70)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter c70)
 		{
-			c70.FormatCode(sb);
+			c70.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter c71)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter c71)
 		{
-			c71.FormatCode(sb);
+			c71.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.UppercaseTokenFilter c72)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.UppercaseTokenFilter c72)
 		{
-			c72.FormatCode(sb);
+			c72.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter c73)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter c73)
 		{
-			c73.FormatCode(sb);
+			c73.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilter c74)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilter c74)
 		{
-			c74.FormatCode(sb);
+			c74.FormatCode(writer);
 			return;
 		}
 
-		sb.Append(instance.ToString());
+		writer.Write(ToString());
 	}
 }

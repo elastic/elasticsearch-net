@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
 public partial class RankEvalMetricMeanReciprocalRank : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.K is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (K is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("K = ");
-			sb.Append(instance.K.Value);
+			__init.Property("K");
+			writer.WriteValue(K.Value);
 		}
 
-		if (instance.RelevantRatingThreshold is not null)
+		if (RelevantRatingThreshold is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RelevantRatingThreshold = ");
-			sb.Append(instance.RelevantRatingThreshold.Value);
+			__init.Property("RelevantRatingThreshold");
+			writer.WriteValue(RelevantRatingThreshold.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

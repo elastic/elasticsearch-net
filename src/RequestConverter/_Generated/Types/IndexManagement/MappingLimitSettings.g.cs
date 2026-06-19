@@ -25,84 +25,63 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class MappingLimitSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Coerce is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Coerce is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Coerce = ");
-			sb.Append(instance.Coerce.Value ? "true" : "false");
+			__init.Property("Coerce");
+			writer.WriteValue(Coerce.Value);
 		}
 
-		if (instance.Depth is not null)
+		if (Depth is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Depth = ");
-			instance.Depth.FormatCode(sb);
+			__init.Property("Depth");
+			Depth.FormatCode(writer);
 		}
 
-		if (instance.DimensionFields is not null)
+		if (DimensionFields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DimensionFields = ");
-			instance.DimensionFields.FormatCode(sb);
+			__init.Property("DimensionFields");
+			DimensionFields.FormatCode(writer);
 		}
 
-		if (instance.FieldNameLength is not null)
+		if (FieldNameLength is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FieldNameLength = ");
-			instance.FieldNameLength.FormatCode(sb);
+			__init.Property("FieldNameLength");
+			FieldNameLength.FormatCode(writer);
 		}
 
-		if (instance.IgnoreMalformed is not null)
+		if (IgnoreMalformed is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreMalformed = ");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<bool, string>(instance.IgnoreMalformed, sb);
+			__init.Property("IgnoreMalformed");
+			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<bool, string>(IgnoreMalformed, writer);
 		}
 
-		if (instance.NestedFields is not null)
+		if (NestedFields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NestedFields = ");
-			instance.NestedFields.FormatCode(sb);
+			__init.Property("NestedFields");
+			NestedFields.FormatCode(writer);
 		}
 
-		if (instance.NestedObjects is not null)
+		if (NestedObjects is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NestedObjects = ");
-			instance.NestedObjects.FormatCode(sb);
+			__init.Property("NestedObjects");
+			NestedObjects.FormatCode(writer);
 		}
 
-		if (instance.Source is not null)
+		if (Source is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Source = ");
-			instance.Source.FormatCode(sb);
+			__init.Property("Source");
+			Source.FormatCode(writer);
 		}
 
-		if (instance.TotalFields is not null)
+		if (TotalFields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalFields = ");
-			instance.TotalFields.FormatCode(sb);
+			__init.Property("TotalFields");
+			TotalFields.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

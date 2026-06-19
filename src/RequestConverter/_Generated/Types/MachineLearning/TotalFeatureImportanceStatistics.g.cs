@@ -25,34 +25,25 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class TotalFeatureImportanceStatistics : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Max = ");
-			sb.Append(instance.Max);
+			__init.Property("Max");
+			writer.WriteValue(Max);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MeanMagnitude = ");
-			sb.Append(instance.MeanMagnitude);
-			sb.Append("d");
+			__init.Property("MeanMagnitude");
+			writer.WriteValue(MeanMagnitude);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Min = ");
-			sb.Append(instance.Min);
+			__init.Property("Min");
+			writer.WriteValue(Min);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

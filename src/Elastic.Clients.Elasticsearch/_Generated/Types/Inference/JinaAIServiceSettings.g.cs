@@ -17,9 +17,9 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
@@ -50,8 +50,8 @@ public sealed partial class JinaAIServiceSettings
 	/// <include file="JinaAIServiceSettings.g.xml" path="doc/member[@key='inference._types.JinaAIServiceSettings#dimensions']/*"/>
 	public int? Dimensions { get; set; }
 
-	/// <include file="JinaAIServiceSettings.g.xml" path="doc/member[@key='inference._types.JinaAIServiceSettings#element_type']/*"/>
-	public Elastic.Clients.Elasticsearch.Inference.JinaAIElementType? ElementType { get; set; }
+	/// <include file="JinaAIServiceSettings.g.xml" path="doc/member[@key='inference._types.JinaAIServiceSettings#embedding_type']/*"/>
+	public Elastic.Clients.Elasticsearch.Inference.JinaAIElementType? EmbeddingType { get; set; }
 
 	/// <include file="JinaAIServiceSettings.g.xml" path="doc/member[@key='inference._types.JinaAIServiceSettings#model_id']/*"/>
 	public required string ModelId { get; set; }
@@ -100,10 +100,10 @@ public readonly partial struct JinaAiServiceSettingsDescriptor
 		return this;
 	}
 
-	/// <include file="JinaAIServiceSettings.g.xml" path="doc/member[@key='inference._types.JinaAIServiceSettings#element_type']/*"/>
-	public Elastic.Clients.Elasticsearch.Inference.JinaAiServiceSettingsDescriptor ElementType(Elastic.Clients.Elasticsearch.Inference.JinaAIElementType? value)
+	/// <include file="JinaAIServiceSettings.g.xml" path="doc/member[@key='inference._types.JinaAIServiceSettings#embedding_type']/*"/>
+	public Elastic.Clients.Elasticsearch.Inference.JinaAiServiceSettingsDescriptor EmbeddingType(Elastic.Clients.Elasticsearch.Inference.JinaAIElementType? value)
 	{
-		Instance.ElementType = value;
+		Instance.EmbeddingType = value;
 		return this;
 	}
 

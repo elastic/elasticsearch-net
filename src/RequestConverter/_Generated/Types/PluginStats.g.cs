@@ -25,89 +25,54 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class PluginStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Classname = ");
-			sb.Append("\"");
-			sb.Append(instance.Classname);
-			sb.Append("\"");
+			__init.Property("Classname");
+			writer.WriteString(Classname);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ElasticsearchVersion = ");
-			sb.Append("\"");
-			sb.Append(instance.ElasticsearchVersion);
-			sb.Append("\"");
+			__init.Property("ElasticsearchVersion");
+			writer.WriteString(ElasticsearchVersion);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExtendedPlugins = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.ExtendedPlugins, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("ExtendedPlugins");
+			writer.WriteInlineList(ExtendedPlugins, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HasNativeController = ");
-			sb.Append(instance.HasNativeController ? "true" : "false");
+			__init.Property("HasNativeController");
+			writer.WriteValue(HasNativeController);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JavaVersion = ");
-			sb.Append("\"");
-			sb.Append(instance.JavaVersion);
-			sb.Append("\"");
+			__init.Property("JavaVersion");
+			writer.WriteString(JavaVersion);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Licensed = ");
-			sb.Append(instance.Licensed ? "true" : "false");
+			__init.Property("Licensed");
+			writer.WriteValue(Licensed);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

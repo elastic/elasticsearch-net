@@ -25,21 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class CustomRequestParams : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Content = ");
-			sb.Append("\"");
-			sb.Append(instance.Content);
-			sb.Append("\"");
+			__init.Property("Content");
+			writer.WriteString(Content);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

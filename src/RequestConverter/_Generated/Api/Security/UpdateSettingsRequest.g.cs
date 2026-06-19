@@ -25,52 +25,39 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class UpdateSettingsRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.MasterTimeout is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (MasterTimeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MasterTimeout = ");
-			instance.MasterTimeout.FormatCode(sb);
+			__init.Property("MasterTimeout");
+			MasterTimeout.FormatCode(writer);
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (instance.Security is not null)
+		if (Security is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Security = ");
-			instance.Security.FormatCode(sb);
+			__init.Property("Security");
+			Security.FormatCode(writer);
 		}
 
-		if (instance.SecurityProfile is not null)
+		if (SecurityProfile is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SecurityProfile = ");
-			instance.SecurityProfile.FormatCode(sb);
+			__init.Property("SecurityProfile");
+			SecurityProfile.FormatCode(writer);
 		}
 
-		if (instance.SecurityTokens is not null)
+		if (SecurityTokens is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SecurityTokens = ");
-			instance.SecurityTokens.FormatCode(sb);
+			__init.Property("SecurityTokens");
+			SecurityTokens.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

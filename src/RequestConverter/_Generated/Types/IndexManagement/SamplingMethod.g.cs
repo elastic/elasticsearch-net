@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public static class SamplingMethodCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod.Aggregate:
-				sb.Append("SamplingMethod.Aggregate");
+				writer.Write("SamplingMethod.Aggregate");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod.LastValue:
-				sb.Append("SamplingMethod.LastValue");
+				writer.Write("SamplingMethod.LastValue");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

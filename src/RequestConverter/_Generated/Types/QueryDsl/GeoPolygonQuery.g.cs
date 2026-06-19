@@ -25,61 +25,44 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class GeoPolygonQuery : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Boost is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Boost is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Boost = ");
-			sb.Append(instance.Boost.Value);
-			sb.Append("f");
+			__init.Property("Boost");
+			writer.WriteValue(Boost.Value);
+			writer.Write("f");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.IgnoreUnmapped is not null)
+		if (IgnoreUnmapped is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreUnmapped = ");
-			sb.Append(instance.IgnoreUnmapped.Value ? "true" : "false");
+			__init.Property("IgnoreUnmapped");
+			writer.WriteValue(IgnoreUnmapped.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Polygon = ");
-			instance.Polygon.FormatCode(sb);
+			__init.Property("Polygon");
+			Polygon.FormatCode(writer);
 		}
 
-		if (instance.QueryName is not null)
+		if (QueryName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryName = ");
-			sb.Append("\"");
-			sb.Append(instance.QueryName);
-			sb.Append("\"");
+			__init.Property("QueryName");
+			writer.WriteString(QueryName);
 		}
 
-		if (instance.ValidationMethod is not null)
+		if (ValidationMethod is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ValidationMethod = ");
-			Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethodCodeFormatter.FormatCode(instance.ValidationMethod.Value, sb);
+			__init.Property("ValidationMethod");
+			Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethodCodeFormatter.FormatCode(ValidationMethod.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

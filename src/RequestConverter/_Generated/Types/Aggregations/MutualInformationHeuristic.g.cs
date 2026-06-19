@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class MutualInformationHeuristic : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.BackgroundIsSuperset is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (BackgroundIsSuperset is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BackgroundIsSuperset = ");
-			sb.Append(instance.BackgroundIsSuperset.Value ? "true" : "false");
+			__init.Property("BackgroundIsSuperset");
+			writer.WriteValue(BackgroundIsSuperset.Value);
 		}
 
-		if (instance.IncludeNegatives is not null)
+		if (IncludeNegatives is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IncludeNegatives = ");
-			sb.Append(instance.IncludeNegatives.Value ? "true" : "false");
+			__init.Property("IncludeNegatives");
+			writer.WriteValue(IncludeNegatives.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,172 +25,129 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class KnnQueryProfileBreakdown : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Advance = ");
-			sb.Append(instance.Advance);
-			sb.Append("L");
+			__init.Property("Advance");
+			writer.WriteValue(Advance);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AdvanceCount = ");
-			sb.Append(instance.AdvanceCount);
-			sb.Append("L");
+			__init.Property("AdvanceCount");
+			writer.WriteValue(AdvanceCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BuildScorer = ");
-			sb.Append(instance.BuildScorer);
-			sb.Append("L");
+			__init.Property("BuildScorer");
+			writer.WriteValue(BuildScorer);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BuildScorerCount = ");
-			sb.Append(instance.BuildScorerCount);
-			sb.Append("L");
+			__init.Property("BuildScorerCount");
+			writer.WriteValue(BuildScorerCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ComputeMaxScore = ");
-			sb.Append(instance.ComputeMaxScore);
-			sb.Append("L");
+			__init.Property("ComputeMaxScore");
+			writer.WriteValue(ComputeMaxScore);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ComputeMaxScoreCount = ");
-			sb.Append(instance.ComputeMaxScoreCount);
-			sb.Append("L");
+			__init.Property("ComputeMaxScoreCount");
+			writer.WriteValue(ComputeMaxScoreCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CountWeight = ");
-			sb.Append(instance.CountWeight);
-			sb.Append("L");
+			__init.Property("CountWeight");
+			writer.WriteValue(CountWeight);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CountWeightCount = ");
-			sb.Append(instance.CountWeightCount);
-			sb.Append("L");
+			__init.Property("CountWeightCount");
+			writer.WriteValue(CountWeightCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CreateWeight = ");
-			sb.Append(instance.CreateWeight);
-			sb.Append("L");
+			__init.Property("CreateWeight");
+			writer.WriteValue(CreateWeight);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CreateWeightCount = ");
-			sb.Append(instance.CreateWeightCount);
-			sb.Append("L");
+			__init.Property("CreateWeightCount");
+			writer.WriteValue(CreateWeightCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Match = ");
-			sb.Append(instance.Match);
-			sb.Append("L");
+			__init.Property("Match");
+			writer.WriteValue(Match);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MatchCount = ");
-			sb.Append(instance.MatchCount);
-			sb.Append("L");
+			__init.Property("MatchCount");
+			writer.WriteValue(MatchCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NextDoc = ");
-			sb.Append(instance.NextDoc);
-			sb.Append("L");
+			__init.Property("NextDoc");
+			writer.WriteValue(NextDoc);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NextDocCount = ");
-			sb.Append(instance.NextDocCount);
-			sb.Append("L");
+			__init.Property("NextDocCount");
+			writer.WriteValue(NextDocCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Score = ");
-			sb.Append(instance.Score);
-			sb.Append("L");
+			__init.Property("Score");
+			writer.WriteValue(Score);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ScoreCount = ");
-			sb.Append(instance.ScoreCount);
-			sb.Append("L");
+			__init.Property("ScoreCount");
+			writer.WriteValue(ScoreCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SetMinCompetitiveScore = ");
-			sb.Append(instance.SetMinCompetitiveScore);
-			sb.Append("L");
+			__init.Property("SetMinCompetitiveScore");
+			writer.WriteValue(SetMinCompetitiveScore);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SetMinCompetitiveScoreCount = ");
-			sb.Append(instance.SetMinCompetitiveScoreCount);
-			sb.Append("L");
+			__init.Property("SetMinCompetitiveScoreCount");
+			writer.WriteValue(SetMinCompetitiveScoreCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShallowAdvance = ");
-			sb.Append(instance.ShallowAdvance);
-			sb.Append("L");
+			__init.Property("ShallowAdvance");
+			writer.WriteValue(ShallowAdvance);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShallowAdvanceCount = ");
-			sb.Append(instance.ShallowAdvanceCount);
-			sb.Append("L");
+			__init.Property("ShallowAdvanceCount");
+			writer.WriteValue(ShallowAdvanceCount);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

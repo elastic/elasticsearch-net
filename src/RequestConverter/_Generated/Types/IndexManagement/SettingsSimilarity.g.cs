@@ -25,57 +25,56 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial interface ISettingsSimilarity : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	void RequestConverter.ICodeFormattable.FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		if (instance is Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25 c1)
+		if (this is Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25 c1)
 		{
-			c1.FormatCode(sb);
+			c1.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean c2)
+		if (this is Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean c2)
 		{
-			c2.FormatCode(sb);
+			c2.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi c3)
+		if (this is Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi c3)
 		{
-			c3.FormatCode(sb);
+			c3.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfr c4)
+		if (this is Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfr c4)
 		{
-			c4.FormatCode(sb);
+			c4.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb c5)
+		if (this is Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb c5)
 		{
-			c5.FormatCode(sb);
+			c5.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmd c6)
+		if (this is Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmd c6)
 		{
-			c6.FormatCode(sb);
+			c6.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj c7)
+		if (this is Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj c7)
 		{
-			c7.FormatCode(sb);
+			c7.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted c8)
+		if (this is Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted c8)
 		{
-			c8.FormatCode(sb);
+			c8.FormatCode(writer);
 			return;
 		}
 
-		sb.Append(instance.ToString());
+		writer.Write(ToString());
 	}
 }

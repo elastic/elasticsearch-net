@@ -25,87 +25,64 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class ValidateRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AnalysisConfig is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AnalysisConfig is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AnalysisConfig = ");
-			instance.AnalysisConfig.FormatCode(sb);
+			__init.Property("AnalysisConfig");
+			AnalysisConfig.FormatCode(writer);
 		}
 
-		if (instance.AnalysisLimits is not null)
+		if (AnalysisLimits is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AnalysisLimits = ");
-			instance.AnalysisLimits.FormatCode(sb);
+			__init.Property("AnalysisLimits");
+			AnalysisLimits.FormatCode(writer);
 		}
 
-		if (instance.DataDescription is not null)
+		if (DataDescription is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DataDescription = ");
-			instance.DataDescription.FormatCode(sb);
+			__init.Property("DataDescription");
+			DataDescription.FormatCode(writer);
 		}
 
-		if (instance.Description is not null)
+		if (Description is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
-		if (instance.JobId is not null)
+		if (JobId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JobId = ");
-			instance.JobId.FormatCode(sb);
+			__init.Property("JobId");
+			JobId.FormatCode(writer);
 		}
 
-		if (instance.ModelPlot is not null)
+		if (ModelPlot is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelPlot = ");
-			instance.ModelPlot.FormatCode(sb);
+			__init.Property("ModelPlot");
+			ModelPlot.FormatCode(writer);
 		}
 
-		if (instance.ModelSnapshotId is not null)
+		if (ModelSnapshotId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelSnapshotId = ");
-			instance.ModelSnapshotId.FormatCode(sb);
+			__init.Property("ModelSnapshotId");
+			ModelSnapshotId.FormatCode(writer);
 		}
 
-		if (instance.ModelSnapshotRetentionDays is not null)
+		if (ModelSnapshotRetentionDays is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelSnapshotRetentionDays = ");
-			sb.Append(instance.ModelSnapshotRetentionDays.Value);
-			sb.Append("L");
+			__init.Property("ModelSnapshotRetentionDays");
+			writer.WriteValue(ModelSnapshotRetentionDays.Value);
+			writer.Write("L");
 		}
 
-		if (instance.ResultsIndexName is not null)
+		if (ResultsIndexName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ResultsIndexName = ");
-			instance.ResultsIndexName.FormatCode(sb);
+			__init.Property("ResultsIndexName");
+			ResultsIndexName.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

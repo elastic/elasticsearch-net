@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 public static class SnapshotStateCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Snapshot.SnapshotState instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Snapshot.SnapshotState instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotState.Failed:
-				sb.Append("SnapshotState.Failed");
+				writer.Write("SnapshotState.Failed");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotState.InProgress:
-				sb.Append("SnapshotState.InProgress");
+				writer.Write("SnapshotState.InProgress");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotState.Incompatible:
-				sb.Append("SnapshotState.Incompatible");
+				writer.Write("SnapshotState.Incompatible");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotState.Partial:
-				sb.Append("SnapshotState.Partial");
+				writer.Write("SnapshotState.Partial");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotState.Success:
-				sb.Append("SnapshotState.Success");
+				writer.Write("SnapshotState.Success");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

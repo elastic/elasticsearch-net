@@ -25,221 +25,166 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class ShardStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Bulk is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Bulk is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Bulk = ");
-			instance.Bulk.FormatCode(sb);
+			__init.Property("Bulk");
+			Bulk.FormatCode(writer);
 		}
 
-		if (instance.Commit is not null)
+		if (Commit is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Commit = ");
-			instance.Commit.FormatCode(sb);
+			__init.Property("Commit");
+			Commit.FormatCode(writer);
 		}
 
-		if (instance.Completion is not null)
+		if (Completion is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Completion = ");
-			instance.Completion.FormatCode(sb);
+			__init.Property("Completion");
+			Completion.FormatCode(writer);
 		}
 
-		if (instance.Docs is not null)
+		if (Docs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Docs = ");
-			instance.Docs.FormatCode(sb);
+			__init.Property("Docs");
+			Docs.FormatCode(writer);
 		}
 
-		if (instance.Fielddata is not null)
+		if (Fielddata is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fielddata = ");
-			instance.Fielddata.FormatCode(sb);
+			__init.Property("Fielddata");
+			Fielddata.FormatCode(writer);
 		}
 
-		if (instance.Flush is not null)
+		if (Flush is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Flush = ");
-			instance.Flush.FormatCode(sb);
+			__init.Property("Flush");
+			Flush.FormatCode(writer);
 		}
 
-		if (instance.Get is not null)
+		if (Get is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Get = ");
-			instance.Get.FormatCode(sb);
+			__init.Property("Get");
+			Get.FormatCode(writer);
 		}
 
-		if (instance.Indexing is not null)
+		if (Indexing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indexing = ");
-			instance.Indexing.FormatCode(sb);
+			__init.Property("Indexing");
+			Indexing.FormatCode(writer);
 		}
 
-		if (instance.Indices is not null)
+		if (Indices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indices = ");
-			instance.Indices.FormatCode(sb);
+			__init.Property("Indices");
+			Indices.FormatCode(writer);
 		}
 
-		if (instance.Mappings is not null)
+		if (Mappings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mappings = ");
-			instance.Mappings.FormatCode(sb);
+			__init.Property("Mappings");
+			Mappings.FormatCode(writer);
 		}
 
-		if (instance.Merges is not null)
+		if (Merges is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Merges = ");
-			instance.Merges.FormatCode(sb);
+			__init.Property("Merges");
+			Merges.FormatCode(writer);
 		}
 
-		if (instance.QueryCache is not null)
+		if (QueryCache is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryCache = ");
-			instance.QueryCache.FormatCode(sb);
+			__init.Property("QueryCache");
+			QueryCache.FormatCode(writer);
 		}
 
-		if (instance.Recovery is not null)
+		if (Recovery is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Recovery = ");
-			instance.Recovery.FormatCode(sb);
+			__init.Property("Recovery");
+			Recovery.FormatCode(writer);
 		}
 
-		if (instance.Refresh is not null)
+		if (Refresh is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Refresh = ");
-			instance.Refresh.FormatCode(sb);
+			__init.Property("Refresh");
+			Refresh.FormatCode(writer);
 		}
 
-		if (instance.RequestCache is not null)
+		if (RequestCache is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RequestCache = ");
-			instance.RequestCache.FormatCode(sb);
+			__init.Property("RequestCache");
+			RequestCache.FormatCode(writer);
 		}
 
-		if (instance.RetentionLeases is not null)
+		if (RetentionLeases is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RetentionLeases = ");
-			instance.RetentionLeases.FormatCode(sb);
+			__init.Property("RetentionLeases");
+			RetentionLeases.FormatCode(writer);
 		}
 
-		if (instance.Routing is not null)
+		if (Routing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Routing = ");
-			instance.Routing.FormatCode(sb);
+			__init.Property("Routing");
+			Routing.FormatCode(writer);
 		}
 
-		if (instance.Search is not null)
+		if (Search is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Search = ");
-			instance.Search.FormatCode(sb);
+			__init.Property("Search");
+			Search.FormatCode(writer);
 		}
 
-		if (instance.Segments is not null)
+		if (Segments is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Segments = ");
-			instance.Segments.FormatCode(sb);
+			__init.Property("Segments");
+			Segments.FormatCode(writer);
 		}
 
-		if (instance.SeqNo is not null)
+		if (SeqNo is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SeqNo = ");
-			instance.SeqNo.FormatCode(sb);
+			__init.Property("SeqNo");
+			SeqNo.FormatCode(writer);
 		}
 
-		if (instance.ShardPath is not null)
+		if (ShardPath is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShardPath = ");
-			instance.ShardPath.FormatCode(sb);
+			__init.Property("ShardPath");
+			ShardPath.FormatCode(writer);
 		}
 
-		if (instance.Shards is not null)
+		if (Shards is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Shards = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Shards, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Shards");
+			writer.Write("new() ");
+			writer.WriteInlineList(Shards, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.ShardStats2 is not null)
+		if (ShardStats2 is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShardStats2 = ");
-			instance.ShardStats2.FormatCode(sb);
+			__init.Property("ShardStats2");
+			ShardStats2.FormatCode(writer);
 		}
 
-		if (instance.Store is not null)
+		if (Store is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Store = ");
-			instance.Store.FormatCode(sb);
+			__init.Property("Store");
+			Store.FormatCode(writer);
 		}
 
-		if (instance.Translog is not null)
+		if (Translog is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Translog = ");
-			instance.Translog.FormatCode(sb);
+			__init.Property("Translog");
+			Translog.FormatCode(writer);
 		}
 
-		if (instance.Warmer is not null)
+		if (Warmer is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Warmer = ");
-			instance.Warmer.FormatCode(sb);
+			__init.Property("Warmer");
+			Warmer.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

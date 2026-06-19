@@ -25,150 +25,101 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class PhraseSuggester : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Analyzer is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Analyzer is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Analyzer = ");
-			sb.Append("\"");
-			sb.Append(instance.Analyzer);
-			sb.Append("\"");
+			__init.Property("Analyzer");
+			writer.WriteString(Analyzer);
 		}
 
-		if (instance.Collate is not null)
+		if (Collate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Collate = ");
-			instance.Collate.FormatCode(sb);
+			__init.Property("Collate");
+			Collate.FormatCode(writer);
 		}
 
-		if (instance.Confidence is not null)
+		if (Confidence is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Confidence = ");
-			sb.Append(instance.Confidence.Value);
-			sb.Append("d");
+			__init.Property("Confidence");
+			writer.WriteValue(Confidence.Value);
+			writer.Write("d");
 		}
 
-		if (instance.DirectGenerator is not null)
+		if (DirectGenerator is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DirectGenerator = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.DirectGenerator, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("DirectGenerator");
+			writer.WriteInlineList(DirectGenerator, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.ForceUnigrams is not null)
+		if (ForceUnigrams is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ForceUnigrams = ");
-			sb.Append(instance.ForceUnigrams.Value ? "true" : "false");
+			__init.Property("ForceUnigrams");
+			writer.WriteValue(ForceUnigrams.Value);
 		}
 
-		if (instance.GramSize is not null)
+		if (GramSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GramSize = ");
-			sb.Append(instance.GramSize.Value);
+			__init.Property("GramSize");
+			writer.WriteValue(GramSize.Value);
 		}
 
-		if (instance.Highlight is not null)
+		if (Highlight is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Highlight = ");
-			instance.Highlight.FormatCode(sb);
+			__init.Property("Highlight");
+			Highlight.FormatCode(writer);
 		}
 
-		if (instance.MaxErrors is not null)
+		if (MaxErrors is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxErrors = ");
-			sb.Append(instance.MaxErrors.Value);
-			sb.Append("d");
+			__init.Property("MaxErrors");
+			writer.WriteValue(MaxErrors.Value);
+			writer.Write("d");
 		}
 
-		if (instance.RealWordErrorLikelihood is not null)
+		if (RealWordErrorLikelihood is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RealWordErrorLikelihood = ");
-			sb.Append(instance.RealWordErrorLikelihood.Value);
-			sb.Append("d");
+			__init.Property("RealWordErrorLikelihood");
+			writer.WriteValue(RealWordErrorLikelihood.Value);
+			writer.Write("d");
 		}
 
-		if (instance.Separator is not null)
+		if (Separator is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Separator = ");
-			sb.Append("\"");
-			sb.Append(instance.Separator);
-			sb.Append("\"");
+			__init.Property("Separator");
+			writer.WriteString(Separator);
 		}
 
-		if (instance.ShardSize is not null)
+		if (ShardSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShardSize = ");
-			sb.Append(instance.ShardSize.Value);
+			__init.Property("ShardSize");
+			writer.WriteValue(ShardSize.Value);
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append(instance.Size.Value);
+			__init.Property("Size");
+			writer.WriteValue(Size.Value);
 		}
 
-		if (instance.Smoothing is not null)
+		if (Smoothing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Smoothing = ");
-			instance.Smoothing.FormatCode(sb);
+			__init.Property("Smoothing");
+			Smoothing.FormatCode(writer);
 		}
 
-		if (instance.Text is not null)
+		if (TokenLimit is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Text = ");
-			sb.Append("\"");
-			sb.Append(instance.Text);
-			sb.Append("\"");
+			__init.Property("TokenLimit");
+			writer.WriteValue(TokenLimit.Value);
 		}
 
-		if (instance.TokenLimit is not null)
-		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TokenLimit = ");
-			sb.Append(instance.TokenLimit.Value);
-		}
-
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

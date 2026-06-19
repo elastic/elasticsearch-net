@@ -25,44 +25,33 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class FrequentItemSetsBucket : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Aggregations is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Aggregations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Aggregations = ");
-			instance.Aggregations.FormatCode(sb);
+			__init.Property("Aggregations");
+			Aggregations.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocCount = ");
-			sb.Append(instance.DocCount);
-			sb.Append("L");
+			__init.Property("DocCount");
+			writer.WriteValue(DocCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Key = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Key, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("["); RequestConverter.CodeFormatter.FormatCode(v, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb); sb.Append("]"); }, sb);
+			__init.Property("Key");
+			writer.Write("new() ");
+			writer.WriteInlineList(Key, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteString(item); }); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Support = ");
-			sb.Append(instance.Support);
-			sb.Append("d");
+			__init.Property("Support");
+			writer.WriteValue(Support);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,35 +25,26 @@ namespace Elastic.Clients.Elasticsearch.Core.TermVectors;
 
 public partial class FieldStatistics : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocCount = ");
-			sb.Append(instance.DocCount);
+			__init.Property("DocCount");
+			writer.WriteValue(DocCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SumDocFreq = ");
-			sb.Append(instance.SumDocFreq);
-			sb.Append("L");
+			__init.Property("SumDocFreq");
+			writer.WriteValue(SumDocFreq);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SumTtf = ");
-			sb.Append(instance.SumTtf);
-			sb.Append("L");
+			__init.Property("SumTtf");
+			writer.WriteValue(SumTtf);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

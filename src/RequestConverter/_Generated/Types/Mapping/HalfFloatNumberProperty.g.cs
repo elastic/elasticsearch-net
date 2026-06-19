@@ -25,159 +25,120 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public partial class HalfFloatNumberProperty : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Boost is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Boost is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Boost = ");
-			sb.Append(instance.Boost.Value);
-			sb.Append("d");
+			__init.Property("Boost");
+			writer.WriteValue(Boost.Value);
+			writer.Write("d");
 		}
 
-		if (instance.Coerce is not null)
+		if (Coerce is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Coerce = ");
-			sb.Append(instance.Coerce.Value ? "true" : "false");
+			__init.Property("Coerce");
+			writer.WriteValue(Coerce.Value);
 		}
 
-		if (instance.CopyTo is not null)
+		if (CopyTo is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CopyTo = ");
-			instance.CopyTo.FormatCode(sb);
+			__init.Property("CopyTo");
+			CopyTo.FormatCode(writer);
 		}
 
-		if (instance.DocValues is not null)
+		if (DocValues is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocValues = ");
-			sb.Append(instance.DocValues.Value ? "true" : "false");
+			__init.Property("DocValues");
+			writer.WriteValue(DocValues.Value);
 		}
 
-		if (instance.Dynamic is not null)
+		if (Dynamic is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Dynamic = ");
-			Elastic.Clients.Elasticsearch.Mapping.DynamicMappingCodeFormatter.FormatCode(instance.Dynamic.Value, sb);
+			__init.Property("Dynamic");
+			Elastic.Clients.Elasticsearch.Mapping.DynamicMappingCodeFormatter.FormatCode(Dynamic.Value, writer);
 		}
 
-		if (instance.Fields is not null)
+		if (Fields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fields = ");
-			instance.Fields.FormatCode(sb);
+			__init.Property("Fields");
+			Fields.FormatCode(writer);
 		}
 
-		if (instance.IgnoreAbove is not null)
+		if (IgnoreAbove is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreAbove = ");
-			sb.Append(instance.IgnoreAbove.Value);
+			__init.Property("IgnoreAbove");
+			writer.WriteValue(IgnoreAbove.Value);
 		}
 
-		if (instance.IgnoreMalformed is not null)
+		if (IgnoreMalformed is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreMalformed = ");
-			sb.Append(instance.IgnoreMalformed.Value ? "true" : "false");
+			__init.Property("IgnoreMalformed");
+			writer.WriteValue(IgnoreMalformed.Value);
 		}
 
-		if (instance.Index is not null)
+		if (Index is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			sb.Append(instance.Index.Value ? "true" : "false");
+			__init.Property("Index");
+			writer.WriteValue(Index.Value);
 		}
 
-		if (instance.Meta is not null)
+		if (Meta is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Meta = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Meta, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("\""); sb.Append(v); sb.Append("\""); }, sb);
+			__init.Property("Meta");
+			writer.Write("new() ");
+			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.NullValue is not null)
+		if (NullValue is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NullValue = ");
-			sb.Append(instance.NullValue.Value);
-			sb.Append("f");
+			__init.Property("NullValue");
+			writer.WriteValue(NullValue.Value);
+			writer.Write("f");
 		}
 
-		if (instance.OnScriptError is not null)
+		if (OnScriptError is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OnScriptError = ");
-			Elastic.Clients.Elasticsearch.Mapping.OnScriptErrorCodeFormatter.FormatCode(instance.OnScriptError.Value, sb);
+			__init.Property("OnScriptError");
+			Elastic.Clients.Elasticsearch.Mapping.OnScriptErrorCodeFormatter.FormatCode(OnScriptError.Value, writer);
 		}
 
-		if (instance.Properties is not null)
+		if (Properties is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Properties = ");
-			instance.Properties.FormatCode(sb);
+			__init.Property("Properties");
+			Properties.FormatCode(writer);
 		}
 
-		if (instance.Script is not null)
+		if (Script is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Script = ");
-			instance.Script.FormatCode(sb);
+			__init.Property("Script");
+			Script.FormatCode(writer);
 		}
 
-		if (instance.Store is not null)
+		if (Store is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Store = ");
-			sb.Append(instance.Store.Value ? "true" : "false");
+			__init.Property("Store");
+			writer.WriteValue(Store.Value);
 		}
 
-		if (instance.SyntheticSourceKeep is not null)
+		if (SyntheticSourceKeep is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SyntheticSourceKeep = ");
-			Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnumCodeFormatter.FormatCode(instance.SyntheticSourceKeep.Value, sb);
+			__init.Property("SyntheticSourceKeep");
+			Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnumCodeFormatter.FormatCode(SyntheticSourceKeep.Value, writer);
 		}
 
-		if (instance.TimeSeriesDimension is not null)
+		if (TimeSeriesDimension is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeSeriesDimension = ");
-			sb.Append(instance.TimeSeriesDimension.Value ? "true" : "false");
+			__init.Property("TimeSeriesDimension");
+			writer.WriteValue(TimeSeriesDimension.Value);
 		}
 
-		if (instance.TimeSeriesMetric is not null)
+		if (TimeSeriesMetric is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeSeriesMetric = ");
-			Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricTypeCodeFormatter.FormatCode(instance.TimeSeriesMetric.Value, sb);
+			__init.Property("TimeSeriesMetric");
+			Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricTypeCodeFormatter.FormatCode(TimeSeriesMetric.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class CartesianPoint : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("X = ");
-			sb.Append(instance.X);
-			sb.Append("d");
+			__init.Property("X");
+			writer.WriteValue(X);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Y = ");
-			sb.Append(instance.Y);
-			sb.Append("d");
+			__init.Property("Y");
+			writer.WriteValue(Y);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Simulate;
 
 public static class MergeTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Simulate.MergeType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Simulate.MergeType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Simulate.MergeType.Index:
-				sb.Append("MergeType.Index");
+				writer.Write("MergeType.Index");
 				break;
 			case Elastic.Clients.Elasticsearch.Simulate.MergeType.Template:
-				sb.Append("MergeType.Template");
+				writer.Write("MergeType.Template");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

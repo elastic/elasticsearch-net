@@ -25,102 +25,75 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class AddAction : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Alias is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Alias is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Alias = ");
-			instance.Alias.FormatCode(sb);
+			__init.Property("Alias");
+			Alias.FormatCode(writer);
 		}
 
-		if (instance.Aliases is not null)
+		if (Aliases is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Aliases = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Aliases, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Aliases");
+			writer.WriteInlineList(Aliases, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Filter is not null)
+		if (Filter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Filter = ");
-			instance.Filter.FormatCode(sb);
+			__init.Property("Filter");
+			Filter.FormatCode(writer);
 		}
 
-		if (instance.Index is not null)
+		if (Index is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			instance.Index.FormatCode(sb);
+			__init.Property("Index");
+			Index.FormatCode(writer);
 		}
 
-		if (instance.IndexRouting is not null)
+		if (IndexRouting is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexRouting = ");
-			instance.IndexRouting.FormatCode(sb);
+			__init.Property("IndexRouting");
+			writer.WriteString(IndexRouting);
 		}
 
-		if (instance.Indices is not null)
+		if (Indices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indices = ");
-			instance.Indices.FormatCode(sb);
+			__init.Property("Indices");
+			Indices.FormatCode(writer);
 		}
 
-		if (instance.IsHidden is not null)
+		if (IsHidden is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IsHidden = ");
-			sb.Append(instance.IsHidden.Value ? "true" : "false");
+			__init.Property("IsHidden");
+			writer.WriteValue(IsHidden.Value);
 		}
 
-		if (instance.IsWriteIndex is not null)
+		if (IsWriteIndex is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IsWriteIndex = ");
-			sb.Append(instance.IsWriteIndex.Value ? "true" : "false");
+			__init.Property("IsWriteIndex");
+			writer.WriteValue(IsWriteIndex.Value);
 		}
 
-		if (instance.MustExist is not null)
+		if (MustExist is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MustExist = ");
-			sb.Append(instance.MustExist.Value ? "true" : "false");
+			__init.Property("MustExist");
+			writer.WriteValue(MustExist.Value);
 		}
 
-		if (instance.Routing is not null)
+		if (Routing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Routing = ");
-			instance.Routing.FormatCode(sb);
+			__init.Property("Routing");
+			writer.WriteString(Routing);
 		}
 
-		if (instance.SearchRouting is not null)
+		if (SearchRouting is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SearchRouting = ");
-			instance.SearchRouting.FormatCode(sb);
+			__init.Property("SearchRouting");
+			writer.WriteString(SearchRouting);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

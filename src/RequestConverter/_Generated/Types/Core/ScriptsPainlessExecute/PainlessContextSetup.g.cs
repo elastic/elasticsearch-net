@@ -25,34 +25,25 @@ namespace Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute;
 
 public partial class PainlessContextSetup : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Document = ");
-			RequestConverter.CodeFormatter.FormatCode(instance.Document, sb);
+			__init.Property("Document");
+			writer.WriteValue(Document);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			instance.Index.FormatCode(sb);
+			__init.Property("Index");
+			Index.FormatCode(writer);
 		}
 
-		if (instance.Query is not null)
+		if (Query is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			instance.Query.FormatCode(sb);
+			__init.Property("Query");
+			Query.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

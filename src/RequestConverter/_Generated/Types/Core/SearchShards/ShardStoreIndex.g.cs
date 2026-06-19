@@ -25,30 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Core.SearchShards;
 
 public partial class ShardStoreIndex : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Aliases is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Aliases is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Aliases = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Aliases, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Aliases");
+			writer.WriteInlineList(Aliases, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Filter is not null)
+		if (Filter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Filter = ");
-			instance.Filter.FormatCode(sb);
+			__init.Property("Filter");
+			Filter.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

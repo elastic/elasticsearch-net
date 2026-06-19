@@ -25,50 +25,33 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class KeepWordsTokenFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.KeepWords is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (KeepWords is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("KeepWords = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.KeepWords, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("KeepWords");
+			writer.WriteInlineList(KeepWords, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.KeepWordsCase is not null)
+		if (KeepWordsCase is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("KeepWordsCase = ");
-			sb.Append(instance.KeepWordsCase.Value ? "true" : "false");
+			__init.Property("KeepWordsCase");
+			writer.WriteValue(KeepWordsCase.Value);
 		}
 
-		if (instance.KeepWordsPath is not null)
+		if (KeepWordsPath is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("KeepWordsPath = ");
-			sb.Append("\"");
-			sb.Append(instance.KeepWordsPath);
-			sb.Append("\"");
+			__init.Property("KeepWordsPath");
+			writer.WriteString(KeepWordsPath);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

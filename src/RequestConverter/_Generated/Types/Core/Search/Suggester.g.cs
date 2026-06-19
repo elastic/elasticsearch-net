@@ -25,31 +25,22 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class Suggester : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Suggesters is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Suggesters is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Suggesters = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Suggesters, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Suggesters");
+			writer.Write("new() ");
+			writer.WriteInlineList(Suggesters, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Text is not null)
+		if (Text is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Text = ");
-			sb.Append("\"");
-			sb.Append(instance.Text);
-			sb.Append("\"");
+			__init.Property("Text");
+			writer.WriteString(Text);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,126 +25,93 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 
 public partial class AsyncSearch<TDocument> : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Aggregations is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Aggregations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Aggregations = ");
-			instance.Aggregations.FormatCode(sb);
+			__init.Property("Aggregations");
+			Aggregations.FormatCode(writer);
 		}
 
-		if (instance.Clusters is not null)
+		if (Clusters is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Clusters = ");
-			instance.Clusters.FormatCode(sb);
+			__init.Property("Clusters");
+			Clusters.FormatCode(writer);
 		}
 
-		if (instance.Fields is not null)
+		if (Fields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fields = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Fields, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Fields");
+			writer.Write("new() ");
+			writer.WriteInlineList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HitsMetadata = ");
-			instance.HitsMetadata.FormatCode(sb);
+			__init.Property("HitsMetadata");
+			HitsMetadata.FormatCode(writer);
 		}
 
-		if (instance.MaxScore is not null)
+		if (MaxScore is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxScore = ");
-			sb.Append(instance.MaxScore.Value);
-			sb.Append("d");
+			__init.Property("MaxScore");
+			writer.WriteValue(MaxScore.Value);
+			writer.Write("d");
 		}
 
-		if (instance.NumReducePhases is not null)
+		if (NumReducePhases is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumReducePhases = ");
-			sb.Append(instance.NumReducePhases.Value);
-			sb.Append("L");
+			__init.Property("NumReducePhases");
+			writer.WriteValue(NumReducePhases.Value);
+			writer.Write("L");
 		}
 
-		if (instance.PitId is not null)
+		if (PitId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PitId = ");
-			sb.Append("\"");
-			sb.Append(instance.PitId);
-			sb.Append("\"");
+			__init.Property("PitId");
+			writer.WriteString(PitId);
 		}
 
-		if (instance.Profile is not null)
+		if (Profile is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Profile = ");
-			instance.Profile.FormatCode(sb);
+			__init.Property("Profile");
+			Profile.FormatCode(writer);
 		}
 
-		if (instance.ScrollId is not null)
+		if (ScrollId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ScrollId = ");
-			instance.ScrollId.FormatCode(sb);
+			__init.Property("ScrollId");
+			ScrollId.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Shards = ");
-			instance.Shards.FormatCode(sb);
+			__init.Property("Shards");
+			Shards.FormatCode(writer);
 		}
 
-		if (instance.Suggest is not null)
+		if (Suggest is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Suggest = ");
-			instance.Suggest.FormatCode(sb);
+			__init.Property("Suggest");
+			Suggest.FormatCode(writer);
 		}
 
-		if (instance.TerminatedEarly is not null)
+		if (TerminatedEarly is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TerminatedEarly = ");
-			sb.Append(instance.TerminatedEarly.Value ? "true" : "false");
+			__init.Property("TerminatedEarly");
+			writer.WriteValue(TerminatedEarly.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimedOut = ");
-			sb.Append(instance.TimedOut ? "true" : "false");
+			__init.Property("TimedOut");
+			writer.WriteValue(TimedOut);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Took = ");
-			sb.Append(instance.Took);
-			sb.Append("L");
+			__init.Property("Took");
+			writer.WriteValue(Took);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

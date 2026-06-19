@@ -25,39 +25,26 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class PutFilterRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FilterId = ");
-			instance.FilterId.FormatCode(sb);
+			__init.Property("FilterId");
+			FilterId.FormatCode(writer);
 		}
 
-		if (instance.Description is not null)
+		if (Description is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
-		if (instance.Items is not null)
+		if (Items is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Items = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Items, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Items");
+			writer.WriteInlineList(Items, (w, item) => { w.WriteString(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

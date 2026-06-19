@@ -25,66 +25,45 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class AliasDefinition : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Filter is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Filter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Filter = ");
-			instance.Filter.FormatCode(sb);
+			__init.Property("Filter");
+			Filter.FormatCode(writer);
 		}
 
-		if (instance.IndexRouting is not null)
+		if (IndexRouting is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexRouting = ");
-			sb.Append("\"");
-			sb.Append(instance.IndexRouting);
-			sb.Append("\"");
+			__init.Property("IndexRouting");
+			writer.WriteString(IndexRouting);
 		}
 
-		if (instance.IsHidden is not null)
+		if (IsHidden is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IsHidden = ");
-			sb.Append(instance.IsHidden.Value ? "true" : "false");
+			__init.Property("IsHidden");
+			writer.WriteValue(IsHidden.Value);
 		}
 
-		if (instance.IsWriteIndex is not null)
+		if (IsWriteIndex is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IsWriteIndex = ");
-			sb.Append(instance.IsWriteIndex.Value ? "true" : "false");
+			__init.Property("IsWriteIndex");
+			writer.WriteValue(IsWriteIndex.Value);
 		}
 
-		if (instance.Routing is not null)
+		if (Routing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Routing = ");
-			sb.Append("\"");
-			sb.Append(instance.Routing);
-			sb.Append("\"");
+			__init.Property("Routing");
+			writer.WriteString(Routing);
 		}
 
-		if (instance.SearchRouting is not null)
+		if (SearchRouting is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SearchRouting = ");
-			sb.Append("\"");
-			sb.Append(instance.SearchRouting);
-			sb.Append("\"");
+			__init.Property("SearchRouting");
+			writer.WriteString(SearchRouting);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

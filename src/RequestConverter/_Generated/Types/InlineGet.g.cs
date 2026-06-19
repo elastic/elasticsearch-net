@@ -25,73 +25,54 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class InlineGet<TDocument> : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Fields is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Fields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fields = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Fields, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Fields");
+			writer.Write("new() ");
+			writer.WriteInlineList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Found = ");
-			sb.Append(instance.Found ? "true" : "false");
+			__init.Property("Found");
+			writer.WriteValue(Found);
 		}
 
-		if (instance.Metadata is not null)
+		if (Metadata is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Metadata = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Metadata, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Metadata");
+			writer.Write("new() ");
+			writer.WriteInlineList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.PrimaryTerm is not null)
+		if (PrimaryTerm is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PrimaryTerm = ");
-			sb.Append(instance.PrimaryTerm.Value);
-			sb.Append("L");
+			__init.Property("PrimaryTerm");
+			writer.WriteValue(PrimaryTerm.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Routing is not null)
+		if (Routing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Routing = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Routing, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Routing");
+			writer.WriteInlineList(Routing, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.SeqNo is not null)
+		if (SeqNo is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SeqNo = ");
-			sb.Append(instance.SeqNo.Value);
-			sb.Append("L");
+			__init.Property("SeqNo");
+			writer.WriteValue(SeqNo.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Source is not null)
+		if (Source is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Source = ");
-			RequestConverter.CodeFormatter.FormatCode<TDocument>(instance.Source, sb);
+			__init.Property("Source");
+			writer.WriteValue(Source);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

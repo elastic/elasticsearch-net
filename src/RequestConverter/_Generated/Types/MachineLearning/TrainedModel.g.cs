@@ -25,36 +25,27 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class TrainedModel : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Ensemble is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Ensemble is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ensemble = ");
-			instance.Ensemble.FormatCode(sb);
+			__init.Property("Ensemble");
+			Ensemble.FormatCode(writer);
 		}
 
-		if (instance.Tree is not null)
+		if (Tree is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Tree = ");
-			instance.Tree.FormatCode(sb);
+			__init.Property("Tree");
+			Tree.FormatCode(writer);
 		}
 
-		if (instance.TreeNode is not null)
+		if (TreeNode is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TreeNode = ");
-			instance.TreeNode.FormatCode(sb);
+			__init.Property("TreeNode");
+			TreeNode.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

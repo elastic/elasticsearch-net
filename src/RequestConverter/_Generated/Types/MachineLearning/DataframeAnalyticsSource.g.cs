@@ -25,44 +25,33 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataframeAnalyticsSource : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indices = ");
-			instance.Indices.FormatCode(sb);
+			__init.Property("Indices");
+			Indices.FormatCode(writer);
 		}
 
-		if (instance.Query is not null)
+		if (Query is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			instance.Query.FormatCode(sb);
+			__init.Property("Query");
+			Query.FormatCode(writer);
 		}
 
-		if (instance.RuntimeMappings is not null)
+		if (RuntimeMappings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RuntimeMappings = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.RuntimeMappings, (k, sb) => { k.FormatCode(sb); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("RuntimeMappings");
+			writer.Write("new() ");
+			writer.WriteInlineList(RuntimeMappings, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Source is not null)
+		if (Source is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Source = ");
-			instance.Source.FormatCode(sb);
+			__init.Property("Source");
+			Source.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

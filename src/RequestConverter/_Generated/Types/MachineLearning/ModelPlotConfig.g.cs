@@ -25,36 +25,27 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class ModelPlotConfig : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AnnotationsEnabled is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AnnotationsEnabled is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AnnotationsEnabled = ");
-			sb.Append(instance.AnnotationsEnabled.Value ? "true" : "false");
+			__init.Property("AnnotationsEnabled");
+			writer.WriteValue(AnnotationsEnabled.Value);
 		}
 
-		if (instance.Enabled is not null)
+		if (Enabled is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Enabled = ");
-			sb.Append(instance.Enabled.Value ? "true" : "false");
+			__init.Property("Enabled");
+			writer.WriteValue(Enabled.Value);
 		}
 
-		if (instance.Terms is not null)
+		if (Terms is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Terms = ");
-			instance.Terms.FormatCode(sb);
+			__init.Property("Terms");
+			Terms.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

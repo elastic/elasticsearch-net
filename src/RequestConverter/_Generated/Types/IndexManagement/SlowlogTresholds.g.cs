@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class SlowlogTresholds : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Fetch is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Fetch is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fetch = ");
-			instance.Fetch.FormatCode(sb);
+			__init.Property("Fetch");
+			Fetch.FormatCode(writer);
 		}
 
-		if (instance.Query is not null)
+		if (Query is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			instance.Query.FormatCode(sb);
+			__init.Property("Query");
+			Query.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

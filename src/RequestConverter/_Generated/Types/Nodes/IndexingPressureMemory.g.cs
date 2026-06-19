@@ -25,45 +25,34 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class IndexingPressureMemory : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Current is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Current is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Current = ");
-			instance.Current.FormatCode(sb);
+			__init.Property("Current");
+			Current.FormatCode(writer);
 		}
 
-		if (instance.Limit is not null)
+		if (Limit is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Limit = ");
-			instance.Limit.FormatCode(sb);
+			__init.Property("Limit");
+			Limit.FormatCode(writer);
 		}
 
-		if (instance.LimitInBytes is not null)
+		if (LimitInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LimitInBytes = ");
-			sb.Append(instance.LimitInBytes.Value);
-			sb.Append("L");
+			__init.Property("LimitInBytes");
+			writer.WriteValue(LimitInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Total is not null)
+		if (Total is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			instance.Total.FormatCode(sb);
+			__init.Property("Total");
+			Total.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

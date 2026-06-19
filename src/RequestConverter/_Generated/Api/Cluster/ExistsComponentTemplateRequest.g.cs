@@ -25,35 +25,26 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class ExistsComponentTemplateRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			instance.Name.FormatCode(sb);
+			__init.Property("Name");
+			Name.FormatCode(writer);
 		}
 #pragma warning disable CS0618
-		if (instance.Local is not null)
+		if (Local is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Local = ");
-			sb.Append(instance.Local.Value ? "true" : "false");
+			__init.Property("Local");
+			writer.WriteValue(Local.Value);
 		}
 #pragma warning restore CS0618
-		if (instance.MasterTimeout is not null)
+		if (MasterTimeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MasterTimeout = ");
-			instance.MasterTimeout.FormatCode(sb);
+			__init.Property("MasterTimeout");
+			MasterTimeout.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

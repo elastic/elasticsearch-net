@@ -25,20 +25,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class Merge : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Scheduler is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Scheduler is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Scheduler = ");
-			instance.Scheduler.FormatCode(sb);
+			__init.Property("Scheduler");
+			Scheduler.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

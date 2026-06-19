@@ -25,64 +25,43 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class DataStreamIndex : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.IlmPolicy is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (IlmPolicy is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IlmPolicy = ");
-			sb.Append("\"");
-			sb.Append(instance.IlmPolicy);
-			sb.Append("\"");
+			__init.Property("IlmPolicy");
+			writer.WriteString(IlmPolicy);
 		}
 
-		if (instance.IndexMode is not null)
+		if (IndexMode is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexMode = ");
-			Elastic.Clients.Elasticsearch.IndexManagement.IndexModeCodeFormatter.FormatCode(instance.IndexMode.Value, sb);
+			__init.Property("IndexMode");
+			Elastic.Clients.Elasticsearch.IndexManagement.IndexModeCodeFormatter.FormatCode(IndexMode.Value, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexName = ");
-			sb.Append("\"");
-			sb.Append(instance.IndexName);
-			sb.Append("\"");
+			__init.Property("IndexName");
+			writer.WriteString(IndexName);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexUuid = ");
-			sb.Append("\"");
-			sb.Append(instance.IndexUuid);
-			sb.Append("\"");
+			__init.Property("IndexUuid");
+			writer.WriteString(IndexUuid);
 		}
 
-		if (instance.ManagedBy is not null)
+		if (ManagedBy is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ManagedBy = ");
-			Elastic.Clients.Elasticsearch.IndexManagement.ManagedByCodeFormatter.FormatCode(instance.ManagedBy.Value, sb);
+			__init.Property("ManagedBy");
+			Elastic.Clients.Elasticsearch.IndexManagement.ManagedByCodeFormatter.FormatCode(ManagedBy.Value, writer);
 		}
 
-		if (instance.PreferIlm is not null)
+		if (PreferIlm is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PreferIlm = ");
-			sb.Append(instance.PreferIlm.Value ? "true" : "false");
+			__init.Property("PreferIlm");
+			writer.WriteValue(PreferIlm.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

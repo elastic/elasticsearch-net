@@ -25,32 +25,21 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class TrainedModelPrefixStrings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Ingest is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Ingest is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ingest = ");
-			sb.Append("\"");
-			sb.Append(instance.Ingest);
-			sb.Append("\"");
+			__init.Property("Ingest");
+			writer.WriteString(Ingest);
 		}
 
-		if (instance.Search is not null)
+		if (Search is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Search = ");
-			sb.Append("\"");
-			sb.Append(instance.Search);
-			sb.Append("\"");
+			__init.Property("Search");
+			writer.WriteString(Search);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,26 +25,19 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
 public partial class ShardsCapacityIndicatorDetails : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Data = ");
-			instance.Data.FormatCode(sb);
+			__init.Property("Data");
+			Data.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Frozen = ");
-			instance.Frozen.FormatCode(sb);
+			__init.Property("Frozen");
+			Frozen.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

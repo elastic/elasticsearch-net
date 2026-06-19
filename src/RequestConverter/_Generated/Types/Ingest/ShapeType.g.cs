@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public static class ShapeTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Ingest.ShapeType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Ingest.ShapeType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Ingest.ShapeType.GeoShape:
-				sb.Append("ShapeType.GeoShape");
+				writer.Write("ShapeType.GeoShape");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.ShapeType.Shape:
-				sb.Append("ShapeType.Shape");
+				writer.Write("ShapeType.Shape");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

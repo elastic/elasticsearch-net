@@ -25,27 +25,20 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class FilterRef : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FilterId = ");
-			instance.FilterId.FormatCode(sb);
+			__init.Property("FilterId");
+			FilterId.FormatCode(writer);
 		}
 
-		if (instance.FilterType is not null)
+		if (FilterType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FilterType = ");
-			Elastic.Clients.Elasticsearch.MachineLearning.FilterTypeCodeFormatter.FormatCode(instance.FilterType.Value, sb);
+			__init.Property("FilterType");
+			Elastic.Clients.Elasticsearch.MachineLearning.FilterTypeCodeFormatter.FormatCode(FilterType.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

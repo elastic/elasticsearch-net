@@ -25,82 +25,59 @@ namespace Elastic.Clients.Elasticsearch.Simulate;
 
 public partial class IngestRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Index is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Index is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			instance.Index.FormatCode(sb);
+			__init.Property("Index");
+			Index.FormatCode(writer);
 		}
 
-		if (instance.MergeType is not null)
+		if (MergeType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MergeType = ");
-			Elastic.Clients.Elasticsearch.Simulate.MergeTypeCodeFormatter.FormatCode(instance.MergeType.Value, sb);
+			__init.Property("MergeType");
+			Elastic.Clients.Elasticsearch.Simulate.MergeTypeCodeFormatter.FormatCode(MergeType.Value, writer);
 		}
 
-		if (instance.Pipeline is not null)
+		if (Pipeline is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Pipeline = ");
-			sb.Append("\"");
-			sb.Append(instance.Pipeline);
-			sb.Append("\"");
+			__init.Property("Pipeline");
+			writer.WriteString(Pipeline);
 		}
 
-		if (instance.ComponentTemplateSubstitutions is not null)
+		if (ComponentTemplateSubstitutions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ComponentTemplateSubstitutions = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.ComponentTemplateSubstitutions, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("ComponentTemplateSubstitutions");
+			writer.Write("new() ");
+			writer.WriteInlineList(ComponentTemplateSubstitutions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Docs = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Docs, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Docs");
+			writer.WriteInlineList(Docs, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.IndexTemplateSubstitutions is not null)
+		if (IndexTemplateSubstitutions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexTemplateSubstitutions = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.IndexTemplateSubstitutions, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("IndexTemplateSubstitutions");
+			writer.Write("new() ");
+			writer.WriteInlineList(IndexTemplateSubstitutions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.MappingAddition is not null)
+		if (MappingAddition is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MappingAddition = ");
-			instance.MappingAddition.FormatCode(sb);
+			__init.Property("MappingAddition");
+			MappingAddition.FormatCode(writer);
 		}
 
-		if (instance.PipelineSubstitutions is not null)
+		if (PipelineSubstitutions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PipelineSubstitutions = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.PipelineSubstitutions, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("PipelineSubstitutions");
+			writer.Write("new() ");
+			writer.WriteInlineList(PipelineSubstitutions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

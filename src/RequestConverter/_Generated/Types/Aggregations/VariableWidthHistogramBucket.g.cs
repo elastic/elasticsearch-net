@@ -25,82 +25,57 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class VariableWidthHistogramBucket : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Aggregations is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Aggregations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Aggregations = ");
-			instance.Aggregations.FormatCode(sb);
+			__init.Property("Aggregations");
+			Aggregations.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocCount = ");
-			sb.Append(instance.DocCount);
-			sb.Append("L");
+			__init.Property("DocCount");
+			writer.WriteValue(DocCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Key = ");
-			sb.Append(instance.Key);
-			sb.Append("d");
+			__init.Property("Key");
+			writer.WriteValue(Key);
+			writer.Write("d");
 		}
 
-		if (instance.KeyAsString is not null)
+		if (KeyAsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("KeyAsString = ");
-			sb.Append("\"");
-			sb.Append(instance.KeyAsString);
-			sb.Append("\"");
+			__init.Property("KeyAsString");
+			writer.WriteString(KeyAsString);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Max = ");
-			sb.Append(instance.Max);
-			sb.Append("d");
+			__init.Property("Max");
+			writer.WriteValue(Max);
+			writer.Write("d");
 		}
 
-		if (instance.MaxAsString is not null)
+		if (MaxAsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxAsString = ");
-			sb.Append("\"");
-			sb.Append(instance.MaxAsString);
-			sb.Append("\"");
+			__init.Property("MaxAsString");
+			writer.WriteString(MaxAsString);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Min = ");
-			sb.Append(instance.Min);
-			sb.Append("d");
+			__init.Property("Min");
+			writer.WriteValue(Min);
+			writer.Write("d");
 		}
 
-		if (instance.MinAsString is not null)
+		if (MinAsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinAsString = ");
-			sb.Append("\"");
-			sb.Append(instance.MinAsString);
-			sb.Append("\"");
+			__init.Property("MinAsString");
+			writer.WriteString(MinAsString);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

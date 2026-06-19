@@ -25,54 +25,37 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class LlamaServiceSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.MaxInputTokens is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (MaxInputTokens is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxInputTokens = ");
-			sb.Append(instance.MaxInputTokens.Value);
+			__init.Property("MaxInputTokens");
+			writer.WriteValue(MaxInputTokens.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelId = ");
-			sb.Append("\"");
-			sb.Append(instance.ModelId);
-			sb.Append("\"");
+			__init.Property("ModelId");
+			writer.WriteString(ModelId);
 		}
 
-		if (instance.RateLimit is not null)
+		if (RateLimit is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RateLimit = ");
-			instance.RateLimit.FormatCode(sb);
+			__init.Property("RateLimit");
+			RateLimit.FormatCode(writer);
 		}
 
-		if (instance.Similarity is not null)
+		if (Similarity is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Similarity = ");
-			Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityTypeCodeFormatter.FormatCode(instance.Similarity.Value, sb);
+			__init.Property("Similarity");
+			Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityTypeCodeFormatter.FormatCode(Similarity.Value, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Url = ");
-			sb.Append("\"");
-			sb.Append(instance.Url);
-			sb.Append("\"");
+			__init.Property("Url");
+			writer.WriteString(Url);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

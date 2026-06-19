@@ -25,30 +25,19 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public partial class GeoIpNodeDatabases : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Databases = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Databases, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Databases");
+			writer.WriteInlineList(Databases, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FilesInTemp = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.FilesInTemp, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("FilesInTemp");
+			writer.WriteInlineList(FilesInTemp, (w, item) => { w.WriteString(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

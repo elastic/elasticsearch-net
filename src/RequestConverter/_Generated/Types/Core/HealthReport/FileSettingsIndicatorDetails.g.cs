@@ -25,29 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
 public partial class FileSettingsIndicatorDetails : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FailureStreak = ");
-			sb.Append(instance.FailureStreak);
-			sb.Append("L");
+			__init.Property("FailureStreak");
+			writer.WriteValue(FailureStreak);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MostRecentFailure = ");
-			sb.Append("\"");
-			sb.Append(instance.MostRecentFailure);
-			sb.Append("\"");
+			__init.Property("MostRecentFailure");
+			writer.WriteString(MostRecentFailure);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

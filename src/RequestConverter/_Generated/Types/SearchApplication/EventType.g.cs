@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
 public static class EventTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.SearchApplication.EventType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.SearchApplication.EventType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.SearchApplication.EventType.PageView:
-				sb.Append("EventType.PageView");
+				writer.Write("EventType.PageView");
 				break;
 			case Elastic.Clients.Elasticsearch.SearchApplication.EventType.Search:
-				sb.Append("EventType.Search");
+				writer.Write("EventType.Search");
 				break;
 			case Elastic.Clients.Elasticsearch.SearchApplication.EventType.SearchClick:
-				sb.Append("EventType.SearchClick");
+				writer.Write("EventType.SearchClick");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

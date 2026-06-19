@@ -25,47 +25,34 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class TrainedModelInferenceStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CacheMissCount = ");
-			sb.Append(instance.CacheMissCount);
+			__init.Property("CacheMissCount");
+			writer.WriteValue(CacheMissCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FailureCount = ");
-			sb.Append(instance.FailureCount);
+			__init.Property("FailureCount");
+			writer.WriteValue(FailureCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InferenceCount = ");
-			sb.Append(instance.InferenceCount);
+			__init.Property("InferenceCount");
+			writer.WriteValue(InferenceCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MissingAllFieldsCount = ");
-			sb.Append(instance.MissingAllFieldsCount);
+			__init.Property("MissingAllFieldsCount");
+			writer.WriteValue(MissingAllFieldsCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timestamp = ");
-			sb.Append(instance.Timestamp);
+			__init.Property("Timestamp");
+			writer.WriteValue(Timestamp);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

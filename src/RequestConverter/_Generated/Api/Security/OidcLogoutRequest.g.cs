@@ -25,31 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class OidcLogoutRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.RefreshToken is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (RefreshToken is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RefreshToken = ");
-			sb.Append("\"");
-			sb.Append(instance.RefreshToken);
-			sb.Append("\"");
+			__init.Property("RefreshToken");
+			writer.WriteString(RefreshToken);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Token = ");
-			sb.Append("\"");
-			sb.Append(instance.Token);
-			sb.Append("\"");
+			__init.Property("Token");
+			writer.WriteString(Token);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

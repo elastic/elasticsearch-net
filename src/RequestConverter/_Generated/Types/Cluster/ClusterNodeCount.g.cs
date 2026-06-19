@@ -25,139 +25,104 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class ClusterNodeCount : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CoordinatingOnly is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CoordinatingOnly is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CoordinatingOnly = ");
-			sb.Append(instance.CoordinatingOnly.Value);
+			__init.Property("CoordinatingOnly");
+			writer.WriteValue(CoordinatingOnly.Value);
 		}
 
-		if (instance.Data is not null)
+		if (Data is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Data = ");
-			sb.Append(instance.Data.Value);
+			__init.Property("Data");
+			writer.WriteValue(Data.Value);
 		}
 
-		if (instance.DataCold is not null)
+		if (DataCold is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DataCold = ");
-			sb.Append(instance.DataCold.Value);
+			__init.Property("DataCold");
+			writer.WriteValue(DataCold.Value);
 		}
 
-		if (instance.DataContent is not null)
+		if (DataContent is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DataContent = ");
-			sb.Append(instance.DataContent.Value);
+			__init.Property("DataContent");
+			writer.WriteValue(DataContent.Value);
 		}
 
-		if (instance.DataFrozen is not null)
+		if (DataFrozen is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DataFrozen = ");
-			sb.Append(instance.DataFrozen.Value);
+			__init.Property("DataFrozen");
+			writer.WriteValue(DataFrozen.Value);
 		}
 
-		if (instance.DataHot is not null)
+		if (DataHot is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DataHot = ");
-			sb.Append(instance.DataHot.Value);
+			__init.Property("DataHot");
+			writer.WriteValue(DataHot.Value);
 		}
 
-		if (instance.DataWarm is not null)
+		if (DataWarm is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DataWarm = ");
-			sb.Append(instance.DataWarm.Value);
+			__init.Property("DataWarm");
+			writer.WriteValue(DataWarm.Value);
 		}
 
-		if (instance.Index is not null)
+		if (Index is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			sb.Append(instance.Index.Value);
+			__init.Property("Index");
+			writer.WriteValue(Index.Value);
 		}
 
-		if (instance.Ingest is not null)
+		if (Ingest is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ingest = ");
-			sb.Append(instance.Ingest.Value);
+			__init.Property("Ingest");
+			writer.WriteValue(Ingest.Value);
 		}
 
-		if (instance.Master is not null)
+		if (Master is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Master = ");
-			sb.Append(instance.Master.Value);
+			__init.Property("Master");
+			writer.WriteValue(Master.Value);
 		}
 
-		if (instance.Ml is not null)
+		if (Ml is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ml = ");
-			sb.Append(instance.Ml.Value);
+			__init.Property("Ml");
+			writer.WriteValue(Ml.Value);
 		}
 
-		if (instance.RemoteClusterClient is not null)
+		if (RemoteClusterClient is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RemoteClusterClient = ");
-			sb.Append(instance.RemoteClusterClient.Value);
+			__init.Property("RemoteClusterClient");
+			writer.WriteValue(RemoteClusterClient.Value);
 		}
 
-		if (instance.Search is not null)
+		if (Search is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Search = ");
-			sb.Append(instance.Search.Value);
+			__init.Property("Search");
+			writer.WriteValue(Search.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			sb.Append(instance.Total);
+			__init.Property("Total");
+			writer.WriteValue(Total);
 		}
 
-		if (instance.Transform is not null)
+		if (Transform is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Transform = ");
-			sb.Append(instance.Transform.Value);
+			__init.Property("Transform");
+			writer.WriteValue(Transform.Value);
 		}
 
-		if (instance.VotingOnly is not null)
+		if (VotingOnly is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VotingOnly = ");
-			sb.Append(instance.VotingOnly.Value);
+			__init.Property("VotingOnly");
+			writer.WriteValue(VotingOnly.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

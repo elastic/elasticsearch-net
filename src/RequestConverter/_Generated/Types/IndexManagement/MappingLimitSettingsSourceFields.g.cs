@@ -25,19 +25,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class MappingLimitSettingsSourceFields : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mode = ");
-			Elastic.Clients.Elasticsearch.IndexManagement.SourceModeCodeFormatter.FormatCode(instance.Mode, sb);
+			__init.Property("Mode");
+			Elastic.Clients.Elasticsearch.IndexManagement.SourceModeCodeFormatter.FormatCode(Mode, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

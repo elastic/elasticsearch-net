@@ -25,37 +25,24 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class ShardSegmentRouting : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Node = ");
-			sb.Append("\"");
-			sb.Append(instance.Node);
-			sb.Append("\"");
+			__init.Property("Node");
+			writer.WriteString(Node);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Primary = ");
-			sb.Append(instance.Primary ? "true" : "false");
+			__init.Property("Primary");
+			writer.WriteValue(Primary);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("State = ");
-			sb.Append("\"");
-			sb.Append(instance.State);
-			sb.Append("\"");
+			__init.Property("State");
+			writer.WriteString(State);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

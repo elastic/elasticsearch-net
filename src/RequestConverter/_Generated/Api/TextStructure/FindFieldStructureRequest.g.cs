@@ -25,134 +25,99 @@ namespace Elastic.Clients.Elasticsearch.TextStructure;
 
 public partial class FindFieldStructureRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ColumnNames is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ColumnNames is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ColumnNames = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.ColumnNames, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("ColumnNames");
+			writer.WriteInlineList(ColumnNames, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Delimiter is not null)
+		if (Delimiter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Delimiter = ");
-			sb.Append("\"");
-			sb.Append(instance.Delimiter);
-			sb.Append("\"");
+			__init.Property("Delimiter");
+			writer.WriteString(Delimiter);
 		}
 
-		if (instance.DocumentsToSample is not null)
+		if (DocumentsToSample is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocumentsToSample = ");
-			sb.Append(instance.DocumentsToSample.Value);
+			__init.Property("DocumentsToSample");
+			writer.WriteValue(DocumentsToSample.Value);
 		}
 
-		if (instance.EcsCompatibility is not null)
+		if (EcsCompatibility is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EcsCompatibility = ");
-			Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityTypeCodeFormatter.FormatCode(instance.EcsCompatibility.Value, sb);
+			__init.Property("EcsCompatibility");
+			Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityTypeCodeFormatter.FormatCode(EcsCompatibility.Value, writer);
 		}
 
-		if (instance.Explain is not null)
+		if (Explain is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Explain = ");
-			sb.Append(instance.Explain.Value ? "true" : "false");
+			__init.Property("Explain");
+			writer.WriteValue(Explain.Value);
 		}
 
-		if (instance.Field is not null)
+		if (Field is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.Format is not null)
+		if (Format is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Format = ");
-			Elastic.Clients.Elasticsearch.TextStructure.FormatTypeCodeFormatter.FormatCode(instance.Format.Value, sb);
+			__init.Property("Format");
+			Elastic.Clients.Elasticsearch.TextStructure.FormatTypeCodeFormatter.FormatCode(Format.Value, writer);
 		}
 
-		if (instance.GrokPattern is not null)
+		if (GrokPattern is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GrokPattern = ");
-			sb.Append("\"");
-			sb.Append(instance.GrokPattern);
-			sb.Append("\"");
+			__init.Property("GrokPattern");
+			writer.WriteString(GrokPattern);
 		}
 
-		if (instance.Index is not null)
+		if (Index is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			instance.Index.FormatCode(sb);
+			__init.Property("Index");
+			Index.FormatCode(writer);
 		}
 
-		if (instance.Quote is not null)
+		if (Quote is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Quote = ");
-			sb.Append("\"");
-			sb.Append(instance.Quote);
-			sb.Append("\"");
+			__init.Property("Quote");
+			writer.WriteString(Quote);
 		}
 
-		if (instance.ShouldTrimFields is not null)
+		if (ShouldParseRecursively is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShouldTrimFields = ");
-			sb.Append(instance.ShouldTrimFields.Value ? "true" : "false");
+			__init.Property("ShouldParseRecursively");
+			writer.WriteValue(ShouldParseRecursively.Value);
 		}
 
-		if (instance.Timeout is not null)
+		if (ShouldTrimFields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("ShouldTrimFields");
+			writer.WriteValue(ShouldTrimFields.Value);
 		}
 
-		if (instance.TimestampField is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimestampField = ");
-			instance.TimestampField.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (instance.TimestampFormat is not null)
+		if (TimestampField is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimestampFormat = ");
-			sb.Append("\"");
-			sb.Append(instance.TimestampFormat);
-			sb.Append("\"");
+			__init.Property("TimestampField");
+			TimestampField.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		if (TimestampFormat is not null)
+		{
+			__init.Property("TimestampFormat");
+			writer.WriteString(TimestampFormat);
+		}
+
+		__init.Dispose();
 	}
 }

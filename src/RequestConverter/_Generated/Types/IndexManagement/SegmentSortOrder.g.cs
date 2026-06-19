@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public static class SegmentSortOrderCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder.Asc:
-				sb.Append("SegmentSortOrder.Asc");
+				writer.Write("SegmentSortOrder.Asc");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder.Desc:
-				sb.Append("SegmentSortOrder.Desc");
+				writer.Write("SegmentSortOrder.Desc");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

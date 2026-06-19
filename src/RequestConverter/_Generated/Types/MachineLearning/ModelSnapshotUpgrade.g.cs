@@ -25,60 +25,39 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class ModelSnapshotUpgrade : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AssignmentExplanation = ");
-			sb.Append("\"");
-			sb.Append(instance.AssignmentExplanation);
-			sb.Append("\"");
+			__init.Property("AssignmentExplanation");
+			writer.WriteString(AssignmentExplanation);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JobId = ");
-			sb.Append("\"");
-			sb.Append(instance.JobId);
-			sb.Append("\"");
+			__init.Property("JobId");
+			writer.WriteString(JobId);
 		}
 
-		if (instance.Node is not null)
+		if (Node is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Node = ");
-			sb.Append("new(");
-			sb.Append("\"");
-			sb.Append(instance.Node.Value.Key);
-			sb.Append("\"");
-			sb.Append(", ");
-			instance.Node.Value.Value.FormatCode(sb);
-			sb.Append(")");
+			__init.Property("Node");
+			writer.Write("new(");
+			writer.WriteString(Node.Value.Key);
+			writer.Write(", ");
+			Node.Value.Value.FormatCode(writer);
+			writer.Write(")");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SnapshotId = ");
-			sb.Append("\"");
-			sb.Append(instance.SnapshotId);
-			sb.Append("\"");
+			__init.Property("SnapshotId");
+			writer.WriteString(SnapshotId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("State = ");
-			Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeStateCodeFormatter.FormatCode(instance.State, sb);
+			__init.Property("State");
+			Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeStateCodeFormatter.FormatCode(State, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

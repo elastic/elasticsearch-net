@@ -25,53 +25,38 @@ namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
 public partial class RankEvalRequestItem : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			instance.Id.FormatCode(sb);
+			__init.Property("Id");
+			Id.FormatCode(writer);
 		}
 
-		if (instance.Params is not null)
+		if (Params is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Params = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Params, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Params");
+			writer.Write("new() ");
+			writer.WriteInlineList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ratings = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Ratings, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Ratings");
+			writer.WriteInlineList(Ratings, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Request is not null)
+		if (Request is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Request = ");
-			instance.Request.FormatCode(sb);
+			__init.Property("Request");
+			Request.FormatCode(writer);
 		}
 
-		if (instance.TemplateId is not null)
+		if (TemplateId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TemplateId = ");
-			instance.TemplateId.FormatCode(sb);
+			__init.Property("TemplateId");
+			TemplateId.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

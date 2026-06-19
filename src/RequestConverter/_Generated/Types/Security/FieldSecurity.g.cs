@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class FieldSecurity : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Except is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Except is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Except = ");
-			instance.Except.FormatCode(sb);
+			__init.Property("Except");
+			Except.FormatCode(writer);
 		}
 
-		if (instance.Grant is not null)
+		if (Grant is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Grant = ");
-			instance.Grant.FormatCode(sb);
+			__init.Property("Grant");
+			Grant.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

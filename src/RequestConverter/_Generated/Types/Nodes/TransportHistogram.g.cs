@@ -25,39 +25,30 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class TransportHistogram : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Count is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Count is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count.Value);
-			sb.Append("L");
+			__init.Property("Count");
+			writer.WriteValue(Count.Value);
+			writer.Write("L");
 		}
 
-		if (instance.GeMillis is not null)
+		if (GeMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GeMillis = ");
-			sb.Append(instance.GeMillis.Value);
-			sb.Append("L");
+			__init.Property("GeMillis");
+			writer.WriteValue(GeMillis.Value);
+			writer.Write("L");
 		}
 
-		if (instance.LtMillis is not null)
+		if (LtMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LtMillis = ");
-			sb.Append(instance.LtMillis.Value);
-			sb.Append("L");
+			__init.Property("LtMillis");
+			writer.WriteValue(LtMillis.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

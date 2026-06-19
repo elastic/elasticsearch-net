@@ -25,39 +25,26 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class IntervalsRegexp : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Analyzer is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Analyzer is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Analyzer = ");
-			sb.Append("\"");
-			sb.Append(instance.Analyzer);
-			sb.Append("\"");
+			__init.Property("Analyzer");
+			writer.WriteString(Analyzer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Pattern = ");
-			sb.Append("\"");
-			sb.Append(instance.Pattern);
-			sb.Append("\"");
+			__init.Property("Pattern");
+			writer.WriteString(Pattern);
 		}
 
-		if (instance.UseField is not null)
+		if (UseField is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UseField = ");
-			instance.UseField.FormatCode(sb);
+			__init.Property("UseField");
+			UseField.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,51 +25,38 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class StopDatafeedRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DatafeedId = ");
-			instance.DatafeedId.FormatCode(sb);
+			__init.Property("DatafeedId");
+			DatafeedId.FormatCode(writer);
 		}
 
-		if (instance.AllowNoMatch is not null)
+		if (AllowNoMatch is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowNoMatch = ");
-			sb.Append(instance.AllowNoMatch.Value ? "true" : "false");
+			__init.Property("AllowNoMatch");
+			writer.WriteValue(AllowNoMatch.Value);
 		}
 
-		if (instance.CloseJob is not null)
+		if (CloseJob is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CloseJob = ");
-			sb.Append(instance.CloseJob.Value ? "true" : "false");
+			__init.Property("CloseJob");
+			writer.WriteValue(CloseJob.Value);
 		}
 
-		if (instance.Force is not null)
+		if (Force is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Force = ");
-			sb.Append(instance.Force.Value ? "true" : "false");
+			__init.Property("Force");
+			writer.WriteValue(Force.Value);
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

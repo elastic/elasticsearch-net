@@ -25,116 +25,87 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
 public partial class Actions : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Allocate is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Allocate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Allocate = ");
-			instance.Allocate.FormatCode(sb);
+			__init.Property("Allocate");
+			Allocate.FormatCode(writer);
 		}
 
-		if (instance.Delete is not null)
+		if (Delete is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Delete = ");
-			instance.Delete.FormatCode(sb);
+			__init.Property("Delete");
+			Delete.FormatCode(writer);
 		}
 
-		if (instance.Downsample is not null)
+		if (Downsample is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Downsample = ");
-			instance.Downsample.FormatCode(sb);
+			__init.Property("Downsample");
+			Downsample.FormatCode(writer);
 		}
 
-		if (instance.Forcemerge is not null)
+		if (Forcemerge is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Forcemerge = ");
-			instance.Forcemerge.FormatCode(sb);
+			__init.Property("Forcemerge");
+			Forcemerge.FormatCode(writer);
 		}
 #pragma warning disable CS0618
-		if (instance.Freeze is not null)
+		if (Freeze is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Freeze = ");
-			instance.Freeze.FormatCode(sb);
+			__init.Property("Freeze");
+			Freeze.FormatCode(writer);
 		}
 #pragma warning restore CS0618
-		if (instance.Migrate is not null)
+		if (Migrate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Migrate = ");
-			instance.Migrate.FormatCode(sb);
+			__init.Property("Migrate");
+			Migrate.FormatCode(writer);
 		}
 
-		if (instance.Readonly is not null)
+		if (Readonly is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Readonly = ");
-			instance.Readonly.FormatCode(sb);
+			__init.Property("Readonly");
+			Readonly.FormatCode(writer);
 		}
 
-		if (instance.Rollover is not null)
+		if (Rollover is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Rollover = ");
-			instance.Rollover.FormatCode(sb);
+			__init.Property("Rollover");
+			Rollover.FormatCode(writer);
 		}
 
-		if (instance.SearchableSnapshot is not null)
+		if (SearchableSnapshot is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SearchableSnapshot = ");
-			instance.SearchableSnapshot.FormatCode(sb);
+			__init.Property("SearchableSnapshot");
+			SearchableSnapshot.FormatCode(writer);
 		}
 
-		if (instance.SetPriority is not null)
+		if (SetPriority is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SetPriority = ");
-			instance.SetPriority.FormatCode(sb);
+			__init.Property("SetPriority");
+			SetPriority.FormatCode(writer);
 		}
 
-		if (instance.Shrink is not null)
+		if (Shrink is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Shrink = ");
-			instance.Shrink.FormatCode(sb);
+			__init.Property("Shrink");
+			Shrink.FormatCode(writer);
 		}
 
-		if (instance.Unfollow is not null)
+		if (Unfollow is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Unfollow = ");
-			instance.Unfollow.FormatCode(sb);
+			__init.Property("Unfollow");
+			Unfollow.FormatCode(writer);
 		}
 
-		if (instance.WaitForSnapshot is not null)
+		if (WaitForSnapshot is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WaitForSnapshot = ");
-			instance.WaitForSnapshot.FormatCode(sb);
+			__init.Property("WaitForSnapshot");
+			WaitForSnapshot.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,670 +25,503 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class Aggregation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Aggregations is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Aggregations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Aggregations = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Aggregations, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Aggregations");
+			writer.Write("new() ");
+			writer.WriteInlineList(Aggregations, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Meta is not null)
+		if (Meta is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Meta = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Meta, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Meta");
+			writer.Write("new() ");
+			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.AdjacencyMatrix is not null)
+		if (AdjacencyMatrix is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AdjacencyMatrix = ");
-			instance.AdjacencyMatrix.FormatCode(sb);
+			__init.Property("AdjacencyMatrix");
+			AdjacencyMatrix.FormatCode(writer);
 		}
 
-		if (instance.AutoDateHistogram is not null)
+		if (AutoDateHistogram is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AutoDateHistogram = ");
-			instance.AutoDateHistogram.FormatCode(sb);
+			__init.Property("AutoDateHistogram");
+			AutoDateHistogram.FormatCode(writer);
 		}
 
-		if (instance.Avg is not null)
+		if (Avg is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Avg = ");
-			instance.Avg.FormatCode(sb);
+			__init.Property("Avg");
+			Avg.FormatCode(writer);
 		}
 
-		if (instance.AvgBucket is not null)
+		if (AvgBucket is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AvgBucket = ");
-			instance.AvgBucket.FormatCode(sb);
+			__init.Property("AvgBucket");
+			AvgBucket.FormatCode(writer);
 		}
 
-		if (instance.Boxplot is not null)
+		if (Boxplot is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Boxplot = ");
-			instance.Boxplot.FormatCode(sb);
+			__init.Property("Boxplot");
+			Boxplot.FormatCode(writer);
 		}
 
-		if (instance.BucketCorrelation is not null)
+		if (BucketCorrelation is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BucketCorrelation = ");
-			instance.BucketCorrelation.FormatCode(sb);
+			__init.Property("BucketCorrelation");
+			BucketCorrelation.FormatCode(writer);
 		}
 
-		if (instance.BucketCountKsTest is not null)
+		if (BucketCountKsTest is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BucketCountKsTest = ");
-			instance.BucketCountKsTest.FormatCode(sb);
+			__init.Property("BucketCountKsTest");
+			BucketCountKsTest.FormatCode(writer);
 		}
 
-		if (instance.BucketScript is not null)
+		if (BucketScript is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BucketScript = ");
-			instance.BucketScript.FormatCode(sb);
+			__init.Property("BucketScript");
+			BucketScript.FormatCode(writer);
 		}
 
-		if (instance.BucketSelector is not null)
+		if (BucketSelector is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BucketSelector = ");
-			instance.BucketSelector.FormatCode(sb);
+			__init.Property("BucketSelector");
+			BucketSelector.FormatCode(writer);
 		}
 
-		if (instance.BucketSort is not null)
+		if (BucketSort is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BucketSort = ");
-			instance.BucketSort.FormatCode(sb);
+			__init.Property("BucketSort");
+			BucketSort.FormatCode(writer);
 		}
 
-		if (instance.Cardinality is not null)
+		if (Cardinality is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Cardinality = ");
-			instance.Cardinality.FormatCode(sb);
+			__init.Property("Cardinality");
+			Cardinality.FormatCode(writer);
 		}
 
-		if (instance.CartesianBounds is not null)
+		if (CartesianBounds is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CartesianBounds = ");
-			instance.CartesianBounds.FormatCode(sb);
+			__init.Property("CartesianBounds");
+			CartesianBounds.FormatCode(writer);
 		}
 
-		if (instance.CartesianCentroid is not null)
+		if (CartesianCentroid is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CartesianCentroid = ");
-			instance.CartesianCentroid.FormatCode(sb);
+			__init.Property("CartesianCentroid");
+			CartesianCentroid.FormatCode(writer);
 		}
 
-		if (instance.CategorizeText is not null)
+		if (CategorizeText is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CategorizeText = ");
-			instance.CategorizeText.FormatCode(sb);
+			__init.Property("CategorizeText");
+			CategorizeText.FormatCode(writer);
 		}
 
-		if (instance.ChangePoint is not null)
+		if (ChangePoint is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ChangePoint = ");
-			instance.ChangePoint.FormatCode(sb);
+			__init.Property("ChangePoint");
+			ChangePoint.FormatCode(writer);
 		}
 
-		if (instance.Children is not null)
+		if (Children is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Children = ");
-			instance.Children.FormatCode(sb);
+			__init.Property("Children");
+			Children.FormatCode(writer);
 		}
 
-		if (instance.Composite is not null)
+		if (Composite is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Composite = ");
-			instance.Composite.FormatCode(sb);
+			__init.Property("Composite");
+			Composite.FormatCode(writer);
 		}
 
-		if (instance.CumulativeCardinality is not null)
+		if (CumulativeCardinality is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CumulativeCardinality = ");
-			instance.CumulativeCardinality.FormatCode(sb);
+			__init.Property("CumulativeCardinality");
+			CumulativeCardinality.FormatCode(writer);
 		}
 
-		if (instance.CumulativeSum is not null)
+		if (CumulativeSum is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CumulativeSum = ");
-			instance.CumulativeSum.FormatCode(sb);
+			__init.Property("CumulativeSum");
+			CumulativeSum.FormatCode(writer);
 		}
 
-		if (instance.DateHistogram is not null)
+		if (DateHistogram is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DateHistogram = ");
-			instance.DateHistogram.FormatCode(sb);
+			__init.Property("DateHistogram");
+			DateHistogram.FormatCode(writer);
 		}
 
-		if (instance.DateRange is not null)
+		if (DateRange is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DateRange = ");
-			instance.DateRange.FormatCode(sb);
+			__init.Property("DateRange");
+			DateRange.FormatCode(writer);
 		}
 
-		if (instance.Derivative is not null)
+		if (Derivative is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Derivative = ");
-			instance.Derivative.FormatCode(sb);
+			__init.Property("Derivative");
+			Derivative.FormatCode(writer);
 		}
 
-		if (instance.DiversifiedSampler is not null)
+		if (DiversifiedSampler is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DiversifiedSampler = ");
-			instance.DiversifiedSampler.FormatCode(sb);
+			__init.Property("DiversifiedSampler");
+			DiversifiedSampler.FormatCode(writer);
 		}
 
-		if (instance.ExtendedStats is not null)
+		if (ExtendedStats is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExtendedStats = ");
-			instance.ExtendedStats.FormatCode(sb);
+			__init.Property("ExtendedStats");
+			ExtendedStats.FormatCode(writer);
 		}
 
-		if (instance.ExtendedStatsBucket is not null)
+		if (ExtendedStatsBucket is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExtendedStatsBucket = ");
-			instance.ExtendedStatsBucket.FormatCode(sb);
+			__init.Property("ExtendedStatsBucket");
+			ExtendedStatsBucket.FormatCode(writer);
 		}
 
-		if (instance.Filter is not null)
+		if (Filter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Filter = ");
-			instance.Filter.FormatCode(sb);
+			__init.Property("Filter");
+			Filter.FormatCode(writer);
 		}
 
-		if (instance.Filters is not null)
+		if (Filters is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Filters = ");
-			instance.Filters.FormatCode(sb);
+			__init.Property("Filters");
+			Filters.FormatCode(writer);
 		}
 
-		if (instance.FrequentItemSets is not null)
+		if (FrequentItemSets is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FrequentItemSets = ");
-			instance.FrequentItemSets.FormatCode(sb);
+			__init.Property("FrequentItemSets");
+			FrequentItemSets.FormatCode(writer);
 		}
 
-		if (instance.GeoBounds is not null)
+		if (GeoBounds is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GeoBounds = ");
-			instance.GeoBounds.FormatCode(sb);
+			__init.Property("GeoBounds");
+			GeoBounds.FormatCode(writer);
 		}
 
-		if (instance.GeoCentroid is not null)
+		if (GeoCentroid is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GeoCentroid = ");
-			instance.GeoCentroid.FormatCode(sb);
+			__init.Property("GeoCentroid");
+			GeoCentroid.FormatCode(writer);
 		}
 
-		if (instance.GeoDistance is not null)
+		if (GeoDistance is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GeoDistance = ");
-			instance.GeoDistance.FormatCode(sb);
+			__init.Property("GeoDistance");
+			GeoDistance.FormatCode(writer);
 		}
 
-		if (instance.GeohashGrid is not null)
+		if (GeohashGrid is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GeohashGrid = ");
-			instance.GeohashGrid.FormatCode(sb);
+			__init.Property("GeohashGrid");
+			GeohashGrid.FormatCode(writer);
 		}
 
-		if (instance.GeohexGrid is not null)
+		if (GeohexGrid is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GeohexGrid = ");
-			instance.GeohexGrid.FormatCode(sb);
+			__init.Property("GeohexGrid");
+			GeohexGrid.FormatCode(writer);
 		}
 
-		if (instance.GeoLine is not null)
+		if (GeoLine is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GeoLine = ");
-			instance.GeoLine.FormatCode(sb);
+			__init.Property("GeoLine");
+			GeoLine.FormatCode(writer);
 		}
 
-		if (instance.GeotileGrid is not null)
+		if (GeotileGrid is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GeotileGrid = ");
-			instance.GeotileGrid.FormatCode(sb);
+			__init.Property("GeotileGrid");
+			GeotileGrid.FormatCode(writer);
 		}
 
-		if (instance.Global is not null)
+		if (Global is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Global = ");
-			instance.Global.FormatCode(sb);
+			__init.Property("Global");
+			Global.FormatCode(writer);
 		}
 
-		if (instance.Histogram is not null)
+		if (Histogram is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Histogram = ");
-			instance.Histogram.FormatCode(sb);
+			__init.Property("Histogram");
+			Histogram.FormatCode(writer);
 		}
 
-		if (instance.Inference is not null)
+		if (Inference is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Inference = ");
-			instance.Inference.FormatCode(sb);
+			__init.Property("Inference");
+			Inference.FormatCode(writer);
 		}
 
-		if (instance.IpPrefix is not null)
+		if (IpPrefix is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IpPrefix = ");
-			instance.IpPrefix.FormatCode(sb);
+			__init.Property("IpPrefix");
+			IpPrefix.FormatCode(writer);
 		}
 
-		if (instance.IpRange is not null)
+		if (IpRange is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IpRange = ");
-			instance.IpRange.FormatCode(sb);
+			__init.Property("IpRange");
+			IpRange.FormatCode(writer);
 		}
 
-		if (instance.Line is not null)
+		if (Line is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Line = ");
-			instance.Line.FormatCode(sb);
+			__init.Property("Line");
+			Line.FormatCode(writer);
 		}
 
-		if (instance.MatrixStats is not null)
+		if (MatrixStats is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MatrixStats = ");
-			instance.MatrixStats.FormatCode(sb);
+			__init.Property("MatrixStats");
+			MatrixStats.FormatCode(writer);
 		}
 
-		if (instance.Max is not null)
+		if (Max is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Max = ");
-			instance.Max.FormatCode(sb);
+			__init.Property("Max");
+			Max.FormatCode(writer);
 		}
 
-		if (instance.MaxBucket is not null)
+		if (MaxBucket is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxBucket = ");
-			instance.MaxBucket.FormatCode(sb);
+			__init.Property("MaxBucket");
+			MaxBucket.FormatCode(writer);
 		}
 
-		if (instance.MedianAbsoluteDeviation is not null)
+		if (MedianAbsoluteDeviation is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MedianAbsoluteDeviation = ");
-			instance.MedianAbsoluteDeviation.FormatCode(sb);
+			__init.Property("MedianAbsoluteDeviation");
+			MedianAbsoluteDeviation.FormatCode(writer);
 		}
 
-		if (instance.Min is not null)
+		if (Min is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Min = ");
-			instance.Min.FormatCode(sb);
+			__init.Property("Min");
+			Min.FormatCode(writer);
 		}
 
-		if (instance.MinBucket is not null)
+		if (MinBucket is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinBucket = ");
-			instance.MinBucket.FormatCode(sb);
+			__init.Property("MinBucket");
+			MinBucket.FormatCode(writer);
 		}
 
-		if (instance.Missing is not null)
+		if (Missing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Missing = ");
-			instance.Missing.FormatCode(sb);
+			__init.Property("Missing");
+			Missing.FormatCode(writer);
 		}
 
-		if (instance.MovingFn is not null)
+		if (MovingFn is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MovingFn = ");
-			instance.MovingFn.FormatCode(sb);
+			__init.Property("MovingFn");
+			MovingFn.FormatCode(writer);
 		}
 
-		if (instance.MovingPercentiles is not null)
+		if (MovingPercentiles is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MovingPercentiles = ");
-			instance.MovingPercentiles.FormatCode(sb);
+			__init.Property("MovingPercentiles");
+			MovingPercentiles.FormatCode(writer);
 		}
 
-		if (instance.MultiTerms is not null)
+		if (MultiTerms is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MultiTerms = ");
-			instance.MultiTerms.FormatCode(sb);
+			__init.Property("MultiTerms");
+			MultiTerms.FormatCode(writer);
 		}
 
-		if (instance.Nested is not null)
+		if (Nested is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Nested = ");
-			instance.Nested.FormatCode(sb);
+			__init.Property("Nested");
+			Nested.FormatCode(writer);
 		}
 
-		if (instance.Normalize is not null)
+		if (Normalize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Normalize = ");
-			instance.Normalize.FormatCode(sb);
+			__init.Property("Normalize");
+			Normalize.FormatCode(writer);
 		}
 
-		if (instance.Parent is not null)
+		if (Parent is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Parent = ");
-			instance.Parent.FormatCode(sb);
+			__init.Property("Parent");
+			Parent.FormatCode(writer);
 		}
 
-		if (instance.PercentileRanks is not null)
+		if (PercentileRanks is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PercentileRanks = ");
-			instance.PercentileRanks.FormatCode(sb);
+			__init.Property("PercentileRanks");
+			PercentileRanks.FormatCode(writer);
 		}
 
-		if (instance.Percentiles is not null)
+		if (Percentiles is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Percentiles = ");
-			instance.Percentiles.FormatCode(sb);
+			__init.Property("Percentiles");
+			Percentiles.FormatCode(writer);
 		}
 
-		if (instance.PercentilesBucket is not null)
+		if (PercentilesBucket is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PercentilesBucket = ");
-			instance.PercentilesBucket.FormatCode(sb);
+			__init.Property("PercentilesBucket");
+			PercentilesBucket.FormatCode(writer);
 		}
 
-		if (instance.RandomSampler is not null)
+		if (RandomSampler is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RandomSampler = ");
-			instance.RandomSampler.FormatCode(sb);
+			__init.Property("RandomSampler");
+			RandomSampler.FormatCode(writer);
 		}
 
-		if (instance.Range is not null)
+		if (Range is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Range = ");
-			instance.Range.FormatCode(sb);
+			__init.Property("Range");
+			Range.FormatCode(writer);
 		}
 
-		if (instance.RareTerms is not null)
+		if (RareTerms is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RareTerms = ");
-			instance.RareTerms.FormatCode(sb);
+			__init.Property("RareTerms");
+			RareTerms.FormatCode(writer);
 		}
 
-		if (instance.Rate is not null)
+		if (Rate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Rate = ");
-			instance.Rate.FormatCode(sb);
+			__init.Property("Rate");
+			Rate.FormatCode(writer);
 		}
 
-		if (instance.ReverseNested is not null)
+		if (ReverseNested is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReverseNested = ");
-			instance.ReverseNested.FormatCode(sb);
+			__init.Property("ReverseNested");
+			ReverseNested.FormatCode(writer);
 		}
 
-		if (instance.Sampler is not null)
+		if (Sampler is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sampler = ");
-			instance.Sampler.FormatCode(sb);
+			__init.Property("Sampler");
+			Sampler.FormatCode(writer);
 		}
 
-		if (instance.ScriptedMetric is not null)
+		if (ScriptedMetric is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ScriptedMetric = ");
-			instance.ScriptedMetric.FormatCode(sb);
+			__init.Property("ScriptedMetric");
+			ScriptedMetric.FormatCode(writer);
 		}
 
-		if (instance.SerialDiff is not null)
+		if (SerialDiff is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SerialDiff = ");
-			instance.SerialDiff.FormatCode(sb);
+			__init.Property("SerialDiff");
+			SerialDiff.FormatCode(writer);
 		}
 
-		if (instance.SignificantTerms is not null)
+		if (SignificantTerms is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SignificantTerms = ");
-			instance.SignificantTerms.FormatCode(sb);
+			__init.Property("SignificantTerms");
+			SignificantTerms.FormatCode(writer);
 		}
 
-		if (instance.SignificantText is not null)
+		if (SignificantText is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SignificantText = ");
-			instance.SignificantText.FormatCode(sb);
+			__init.Property("SignificantText");
+			SignificantText.FormatCode(writer);
 		}
 
-		if (instance.Stats is not null)
+		if (Stats is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Stats = ");
-			instance.Stats.FormatCode(sb);
+			__init.Property("Stats");
+			Stats.FormatCode(writer);
 		}
 
-		if (instance.StatsBucket is not null)
+		if (StatsBucket is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StatsBucket = ");
-			instance.StatsBucket.FormatCode(sb);
+			__init.Property("StatsBucket");
+			StatsBucket.FormatCode(writer);
 		}
 
-		if (instance.StringStats is not null)
+		if (StringStats is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StringStats = ");
-			instance.StringStats.FormatCode(sb);
+			__init.Property("StringStats");
+			StringStats.FormatCode(writer);
 		}
 
-		if (instance.Sum is not null)
+		if (Sum is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sum = ");
-			instance.Sum.FormatCode(sb);
+			__init.Property("Sum");
+			Sum.FormatCode(writer);
 		}
 
-		if (instance.SumBucket is not null)
+		if (SumBucket is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SumBucket = ");
-			instance.SumBucket.FormatCode(sb);
+			__init.Property("SumBucket");
+			SumBucket.FormatCode(writer);
 		}
 
-		if (instance.Terms is not null)
+		if (Terms is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Terms = ");
-			instance.Terms.FormatCode(sb);
+			__init.Property("Terms");
+			Terms.FormatCode(writer);
 		}
 
-		if (instance.TimeSeries is not null)
+		if (TimeSeries is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeSeries = ");
-			instance.TimeSeries.FormatCode(sb);
+			__init.Property("TimeSeries");
+			TimeSeries.FormatCode(writer);
 		}
 
-		if (instance.TopHits is not null)
+		if (TopHits is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TopHits = ");
-			instance.TopHits.FormatCode(sb);
+			__init.Property("TopHits");
+			TopHits.FormatCode(writer);
 		}
 
-		if (instance.TopMetrics is not null)
+		if (TopMetrics is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TopMetrics = ");
-			instance.TopMetrics.FormatCode(sb);
+			__init.Property("TopMetrics");
+			TopMetrics.FormatCode(writer);
 		}
 
-		if (instance.TTest is not null)
+		if (TTest is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TTest = ");
-			instance.TTest.FormatCode(sb);
+			__init.Property("TTest");
+			TTest.FormatCode(writer);
 		}
 
-		if (instance.ValueCount is not null)
+		if (ValueCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ValueCount = ");
-			instance.ValueCount.FormatCode(sb);
+			__init.Property("ValueCount");
+			ValueCount.FormatCode(writer);
 		}
 
-		if (instance.VariableWidthHistogram is not null)
+		if (VariableWidthHistogram is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VariableWidthHistogram = ");
-			instance.VariableWidthHistogram.FormatCode(sb);
+			__init.Property("VariableWidthHistogram");
+			VariableWidthHistogram.FormatCode(writer);
 		}
 
-		if (instance.WeightedAvg is not null)
+		if (WeightedAvg is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WeightedAvg = ");
-			instance.WeightedAvg.FormatCode(sb);
+			__init.Property("WeightedAvg");
+			WeightedAvg.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

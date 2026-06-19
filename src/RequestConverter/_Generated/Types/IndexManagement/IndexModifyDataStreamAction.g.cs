@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class IndexModifyDataStreamAction : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AddBackingIndex is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AddBackingIndex is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AddBackingIndex = ");
-			instance.AddBackingIndex.FormatCode(sb);
+			__init.Property("AddBackingIndex");
+			AddBackingIndex.FormatCode(writer);
 		}
 
-		if (instance.RemoveBackingIndex is not null)
+		if (RemoveBackingIndex is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RemoveBackingIndex = ");
-			instance.RemoveBackingIndex.FormatCode(sb);
+			__init.Property("RemoveBackingIndex");
+			RemoveBackingIndex.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

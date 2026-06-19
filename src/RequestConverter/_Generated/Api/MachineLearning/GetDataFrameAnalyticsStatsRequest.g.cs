@@ -25,52 +25,39 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class GetDataFrameAnalyticsStatsRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Id is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Id is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			instance.Id.FormatCode(sb);
+			__init.Property("Id");
+			Id.FormatCode(writer);
 		}
 
-		if (instance.AllowNoMatch is not null)
+		if (AllowNoMatch is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowNoMatch = ");
-			sb.Append(instance.AllowNoMatch.Value ? "true" : "false");
+			__init.Property("AllowNoMatch");
+			writer.WriteValue(AllowNoMatch.Value);
 		}
 
-		if (instance.From is not null)
+		if (From is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("From = ");
-			sb.Append(instance.From.Value);
+			__init.Property("From");
+			writer.WriteValue(From.Value);
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append(instance.Size.Value);
+			__init.Property("Size");
+			writer.WriteValue(Size.Value);
 		}
 
-		if (instance.Verbose is not null)
+		if (Verbose is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Verbose = ");
-			sb.Append(instance.Verbose.Value ? "true" : "false");
+			__init.Property("Verbose");
+			writer.WriteValue(Verbose.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

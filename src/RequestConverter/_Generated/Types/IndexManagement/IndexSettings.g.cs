@@ -25,483 +25,352 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class IndexSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Analysis is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Analysis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Analysis = ");
-			instance.Analysis.FormatCode(sb);
+			__init.Property("Analysis");
+			Analysis.FormatCode(writer);
 		}
 
-		if (instance.Analyze is not null)
+		if (Analyze is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Analyze = ");
-			instance.Analyze.FormatCode(sb);
+			__init.Property("Analyze");
+			Analyze.FormatCode(writer);
 		}
 
-		if (instance.AutoExpandReplicas is not null)
+		if (AutoExpandReplicas is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AutoExpandReplicas = ");
-			sb.Append("\"");
-			sb.Append(instance.AutoExpandReplicas);
-			sb.Append("\"");
+			__init.Property("AutoExpandReplicas");
+			writer.WriteString(AutoExpandReplicas);
 		}
 
-		if (instance.Blocks is not null)
+		if (Blocks is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Blocks = ");
-			instance.Blocks.FormatCode(sb);
+			__init.Property("Blocks");
+			Blocks.FormatCode(writer);
 		}
 
-		if (instance.CheckOnStartup is not null)
+		if (CheckOnStartup is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CheckOnStartup = ");
-			Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartupCodeFormatter.FormatCode(instance.CheckOnStartup.Value, sb);
+			__init.Property("CheckOnStartup");
+			Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartupCodeFormatter.FormatCode(CheckOnStartup.Value, writer);
 		}
 
-		if (instance.Codec is not null)
+		if (Codec is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Codec = ");
-			sb.Append("\"");
-			sb.Append(instance.Codec);
-			sb.Append("\"");
+			__init.Property("Codec");
+			writer.WriteString(Codec);
 		}
 
-		if (instance.CreationDate is not null)
+		if (CreationDate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CreationDate = ");
-			sb.Append(instance.CreationDate.Value);
+			__init.Property("CreationDate");
+			writer.WriteValue(CreationDate.Value);
 		}
 
-		if (instance.CreationDateString is not null)
+		if (CreationDateString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CreationDateString = ");
-			sb.Append(instance.CreationDateString.Value);
+			__init.Property("CreationDateString");
+			writer.WriteValue(CreationDateString.Value);
 		}
 
-		if (instance.DefaultPipeline is not null)
+		if (DefaultPipeline is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DefaultPipeline = ");
-			sb.Append("\"");
-			sb.Append(instance.DefaultPipeline);
-			sb.Append("\"");
+			__init.Property("DefaultPipeline");
+			writer.WriteString(DefaultPipeline);
 		}
 
-		if (instance.FinalPipeline is not null)
+		if (FinalPipeline is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FinalPipeline = ");
-			sb.Append("\"");
-			sb.Append(instance.FinalPipeline);
-			sb.Append("\"");
+			__init.Property("FinalPipeline");
+			writer.WriteString(FinalPipeline);
 		}
 
-		if (instance.Format is not null)
+		if (Format is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Format = ");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<string, int>(instance.Format, sb);
+			__init.Property("Format");
+			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<string, int>(Format, writer);
 		}
 
-		if (instance.GcDeletes is not null)
+		if (GcDeletes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GcDeletes = ");
-			instance.GcDeletes.FormatCode(sb);
+			__init.Property("GcDeletes");
+			GcDeletes.FormatCode(writer);
 		}
 
-		if (instance.Hidden is not null)
+		if (Hidden is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Hidden = ");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<bool, string>(instance.Hidden, sb);
+			__init.Property("Hidden");
+			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<bool, string>(Hidden, writer);
 		}
 
-		if (instance.Highlight is not null)
+		if (Highlight is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Highlight = ");
-			instance.Highlight.FormatCode(sb);
+			__init.Property("Highlight");
+			Highlight.FormatCode(writer);
 		}
 
-		if (instance.Index is not null)
+		if (Index is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			instance.Index.FormatCode(sb);
+			__init.Property("Index");
+			Index.FormatCode(writer);
 		}
 
-		if (instance.IndexingPressure is not null)
+		if (IndexingPressure is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexingPressure = ");
-			instance.IndexingPressure.FormatCode(sb);
+			__init.Property("IndexingPressure");
+			IndexingPressure.FormatCode(writer);
 		}
 
-		if (instance.IndexingSlowlog is not null)
+		if (IndexingSlowlog is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexingSlowlog = ");
-			instance.IndexingSlowlog.FormatCode(sb);
+			__init.Property("IndexingSlowlog");
+			IndexingSlowlog.FormatCode(writer);
 		}
 
-		if (instance.Lifecycle is not null)
+		if (Lifecycle is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Lifecycle = ");
-			instance.Lifecycle.FormatCode(sb);
+			__init.Property("Lifecycle");
+			Lifecycle.FormatCode(writer);
 		}
 
-		if (instance.LoadFixedBitsetFiltersEagerly is not null)
+		if (LoadFixedBitsetFiltersEagerly is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LoadFixedBitsetFiltersEagerly = ");
-			sb.Append(instance.LoadFixedBitsetFiltersEagerly.Value ? "true" : "false");
+			__init.Property("LoadFixedBitsetFiltersEagerly");
+			writer.WriteValue(LoadFixedBitsetFiltersEagerly.Value);
 		}
 
-		if (instance.Mapping is not null)
+		if (Mapping is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mapping = ");
-			instance.Mapping.FormatCode(sb);
+			__init.Property("Mapping");
+			Mapping.FormatCode(writer);
 		}
 
-		if (instance.MaxDocvalueFieldsSearch is not null)
+		if (MaxDocvalueFieldsSearch is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxDocvalueFieldsSearch = ");
-			sb.Append(instance.MaxDocvalueFieldsSearch.Value);
+			__init.Property("MaxDocvalueFieldsSearch");
+			writer.WriteValue(MaxDocvalueFieldsSearch.Value);
 		}
 
-		if (instance.MaxInnerResultWindow is not null)
+		if (MaxInnerResultWindow is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxInnerResultWindow = ");
-			sb.Append(instance.MaxInnerResultWindow.Value);
+			__init.Property("MaxInnerResultWindow");
+			writer.WriteValue(MaxInnerResultWindow.Value);
 		}
 
-		if (instance.MaxNgramDiff is not null)
+		if (MaxNgramDiff is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxNgramDiff = ");
-			sb.Append(instance.MaxNgramDiff.Value);
+			__init.Property("MaxNgramDiff");
+			writer.WriteValue(MaxNgramDiff.Value);
 		}
 
-		if (instance.MaxRefreshListeners is not null)
+		if (MaxRefreshListeners is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxRefreshListeners = ");
-			sb.Append(instance.MaxRefreshListeners.Value);
+			__init.Property("MaxRefreshListeners");
+			writer.WriteValue(MaxRefreshListeners.Value);
 		}
 
-		if (instance.MaxRegexLength is not null)
+		if (MaxRegexLength is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxRegexLength = ");
-			sb.Append(instance.MaxRegexLength.Value);
+			__init.Property("MaxRegexLength");
+			writer.WriteValue(MaxRegexLength.Value);
 		}
 
-		if (instance.MaxRescoreWindow is not null)
+		if (MaxRescoreWindow is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxRescoreWindow = ");
-			sb.Append(instance.MaxRescoreWindow.Value);
+			__init.Property("MaxRescoreWindow");
+			writer.WriteValue(MaxRescoreWindow.Value);
 		}
 
-		if (instance.MaxResultWindow is not null)
+		if (MaxResultWindow is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxResultWindow = ");
-			sb.Append(instance.MaxResultWindow.Value);
+			__init.Property("MaxResultWindow");
+			writer.WriteValue(MaxResultWindow.Value);
 		}
 
-		if (instance.MaxScriptFields is not null)
+		if (MaxScriptFields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxScriptFields = ");
-			sb.Append(instance.MaxScriptFields.Value);
+			__init.Property("MaxScriptFields");
+			writer.WriteValue(MaxScriptFields.Value);
 		}
 
-		if (instance.MaxShingleDiff is not null)
+		if (MaxShingleDiff is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxShingleDiff = ");
-			sb.Append(instance.MaxShingleDiff.Value);
+			__init.Property("MaxShingleDiff");
+			writer.WriteValue(MaxShingleDiff.Value);
 		}
 
-		if (instance.MaxSlicesPerScroll is not null)
+		if (MaxSlicesPerScroll is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxSlicesPerScroll = ");
-			sb.Append(instance.MaxSlicesPerScroll.Value);
+			__init.Property("MaxSlicesPerScroll");
+			writer.WriteValue(MaxSlicesPerScroll.Value);
 		}
 
-		if (instance.MaxTermsCount is not null)
+		if (MaxTermsCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxTermsCount = ");
-			sb.Append(instance.MaxTermsCount.Value);
+			__init.Property("MaxTermsCount");
+			writer.WriteValue(MaxTermsCount.Value);
 		}
 
-		if (instance.Merge is not null)
+		if (Merge is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Merge = ");
-			instance.Merge.FormatCode(sb);
+			__init.Property("Merge");
+			Merge.FormatCode(writer);
 		}
 
-		if (instance.Mode is not null)
+		if (Mode is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mode = ");
-			sb.Append("\"");
-			sb.Append(instance.Mode);
-			sb.Append("\"");
+			__init.Property("Mode");
+			writer.WriteString(Mode);
 		}
 
-		if (instance.NumberOfReplicas is not null)
+		if (NumberOfReplicas is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumberOfReplicas = ");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<int, string>(instance.NumberOfReplicas, sb);
+			__init.Property("NumberOfReplicas");
+			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<int, string>(NumberOfReplicas, writer);
 		}
 
-		if (instance.NumberOfRoutingShards is not null)
+		if (NumberOfRoutingShards is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumberOfRoutingShards = ");
-			sb.Append(instance.NumberOfRoutingShards.Value);
+			__init.Property("NumberOfRoutingShards");
+			writer.WriteValue(NumberOfRoutingShards.Value);
 		}
 
-		if (instance.NumberOfShards is not null)
+		if (NumberOfShards is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumberOfShards = ");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<int, string>(instance.NumberOfShards, sb);
+			__init.Property("NumberOfShards");
+			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<int, string>(NumberOfShards, writer);
 		}
 
-		if (instance.OtherSettings is not null)
+		if (OtherSettings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OtherSettings = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.OtherSettings, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("OtherSettings");
+			writer.Write("new() ");
+			writer.WriteInlineList(OtherSettings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Priority is not null)
+		if (Priority is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Priority = ");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<int, string>(instance.Priority, sb);
+			__init.Property("Priority");
+			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<int, string>(Priority, writer);
 		}
 
-		if (instance.ProvidedName is not null)
+		if (ProvidedName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ProvidedName = ");
-			instance.ProvidedName.FormatCode(sb);
+			__init.Property("ProvidedName");
+			ProvidedName.FormatCode(writer);
 		}
 
-		if (instance.Queries is not null)
+		if (Queries is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Queries = ");
-			instance.Queries.FormatCode(sb);
+			__init.Property("Queries");
+			Queries.FormatCode(writer);
 		}
 
-		if (instance.QueryString is not null)
+		if (QueryString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryString = ");
-			instance.QueryString.FormatCode(sb);
+			__init.Property("QueryString");
+			QueryString.FormatCode(writer);
 		}
 
-		if (instance.RefreshInterval is not null)
+		if (RefreshInterval is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RefreshInterval = ");
-			instance.RefreshInterval.FormatCode(sb);
+			__init.Property("RefreshInterval");
+			RefreshInterval.FormatCode(writer);
 		}
 
-		if (instance.Routing is not null)
+		if (Routing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Routing = ");
-			instance.Routing.FormatCode(sb);
+			__init.Property("Routing");
+			Routing.FormatCode(writer);
 		}
 
-		if (instance.RoutingPartitionSize is not null)
+		if (RoutingPartitionSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RoutingPartitionSize = ");
-			sb.Append(instance.RoutingPartitionSize.Value);
+			__init.Property("RoutingPartitionSize");
+			writer.WriteValue(RoutingPartitionSize.Value);
 		}
 
-		if (instance.RoutingPath is not null)
+		if (RoutingPath is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RoutingPath = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.RoutingPath, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("RoutingPath");
+			writer.WriteInlineList(RoutingPath, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Search is not null)
+		if (Search is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Search = ");
-			instance.Search.FormatCode(sb);
+			__init.Property("Search");
+			Search.FormatCode(writer);
 		}
 
-		if (instance.Settings is not null)
+		if (Settings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Settings = ");
-			instance.Settings.FormatCode(sb);
+			__init.Property("Settings");
+			Settings.FormatCode(writer);
 		}
 
-		if (instance.Similarity is not null)
+		if (Similarity is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Similarity = ");
-			instance.Similarity.FormatCode(sb);
+			__init.Property("Similarity");
+			Similarity.FormatCode(writer);
 		}
 
-		if (instance.SoftDeletes is not null)
+		if (SoftDeletes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SoftDeletes = ");
-			instance.SoftDeletes.FormatCode(sb);
+			__init.Property("SoftDeletes");
+			SoftDeletes.FormatCode(writer);
 		}
 
-		if (instance.Sort is not null)
+		if (Sort is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sort = ");
-			instance.Sort.FormatCode(sb);
+			__init.Property("Sort");
+			Sort.FormatCode(writer);
 		}
 
-		if (instance.Store is not null)
+		if (Store is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Store = ");
-			instance.Store.FormatCode(sb);
+			__init.Property("Store");
+			Store.FormatCode(writer);
 		}
 
-		if (instance.TimeSeries is not null)
+		if (TimeSeries is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeSeries = ");
-			instance.TimeSeries.FormatCode(sb);
+			__init.Property("TimeSeries");
+			TimeSeries.FormatCode(writer);
 		}
 
-		if (instance.TopMetricsMaxSize is not null)
+		if (TopMetricsMaxSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TopMetricsMaxSize = ");
-			sb.Append(instance.TopMetricsMaxSize.Value);
+			__init.Property("TopMetricsMaxSize");
+			writer.WriteValue(TopMetricsMaxSize.Value);
 		}
 
-		if (instance.Translog is not null)
+		if (Translog is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Translog = ");
-			instance.Translog.FormatCode(sb);
+			__init.Property("Translog");
+			Translog.FormatCode(writer);
 		}
 
-		if (instance.Uuid is not null)
+		if (Uuid is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Uuid = ");
-			sb.Append("\"");
-			sb.Append(instance.Uuid);
-			sb.Append("\"");
+			__init.Property("Uuid");
+			writer.WriteString(Uuid);
 		}
 
-		if (instance.VerifiedBeforeClose is not null)
+		if (VerifiedBeforeClose is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VerifiedBeforeClose = ");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<bool, string>(instance.VerifiedBeforeClose, sb);
+			__init.Property("VerifiedBeforeClose");
+			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<bool, string>(VerifiedBeforeClose, writer);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			instance.Version.FormatCode(sb);
+			__init.Property("Version");
+			Version.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

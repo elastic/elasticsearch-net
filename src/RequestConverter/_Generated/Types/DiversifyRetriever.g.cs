@@ -25,107 +25,74 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class DiversifyRetriever : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			sb.Append("\"");
-			sb.Append(instance.Field);
-			sb.Append("\"");
+			__init.Property("Field");
+			writer.WriteString(Field);
 		}
 
-		if (instance.Filter is not null)
+		if (Filter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Filter = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Filter, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Filter");
+			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Lambda is not null)
+		if (Lambda is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Lambda = ");
-			sb.Append(instance.Lambda.Value);
-			sb.Append("f");
+			__init.Property("Lambda");
+			writer.WriteValue(Lambda.Value);
+			writer.Write("f");
 		}
 
-		if (instance.MinScore is not null)
+		if (MinScore is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinScore = ");
-			sb.Append(instance.MinScore.Value);
-			sb.Append("f");
+			__init.Property("MinScore");
+			writer.WriteValue(MinScore.Value);
+			writer.Write("f");
 		}
 
-		if (instance.Name is not null)
+		if (Name is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
-		if (instance.QueryVector is not null)
+		if (QueryVector is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryVector = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.QueryVector, (item, sb) => { sb.Append(item); sb.Append("f"); }, sb);
-			sb.Append("]");
+			__init.Property("QueryVector");
+			writer.WriteInlineList(QueryVector, (w, item) => { w.WriteValue(item); w.Write("f"); });
 		}
 
-		if (instance.QueryVectorBuilder is not null)
+		if (QueryVectorBuilder is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryVectorBuilder = ");
-			instance.QueryVectorBuilder.FormatCode(sb);
+			__init.Property("QueryVectorBuilder");
+			QueryVectorBuilder.FormatCode(writer);
 		}
 
-		if (instance.RankWindowSize is not null)
+		if (RankWindowSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RankWindowSize = ");
-			sb.Append(instance.RankWindowSize.Value);
+			__init.Property("RankWindowSize");
+			writer.WriteValue(RankWindowSize.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Retriever = ");
-			instance.Retriever.FormatCode(sb);
+			__init.Property("Retriever");
+			Retriever.FormatCode(writer);
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append(instance.Size.Value);
+			__init.Property("Size");
+			writer.WriteValue(Size.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			Elastic.Clients.Elasticsearch.DiversifyRetrieverTypesCodeFormatter.FormatCode(instance.Type, sb);
+			__init.Property("Type");
+			Elastic.Clients.Elasticsearch.DiversifyRetrieverTypesCodeFormatter.FormatCode(Type, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

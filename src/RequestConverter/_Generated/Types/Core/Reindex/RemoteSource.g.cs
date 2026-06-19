@@ -25,74 +25,51 @@ namespace Elastic.Clients.Elasticsearch.Core.Reindex;
 
 public partial class RemoteSource : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ApiKey is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ApiKey is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ApiKey = ");
-			sb.Append("\"");
-			sb.Append(instance.ApiKey);
-			sb.Append("\"");
+			__init.Property("ApiKey");
+			writer.WriteString(ApiKey);
 		}
 
-		if (instance.ConnectTimeout is not null)
+		if (ConnectTimeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ConnectTimeout = ");
-			instance.ConnectTimeout.FormatCode(sb);
+			__init.Property("ConnectTimeout");
+			ConnectTimeout.FormatCode(writer);
 		}
 
-		if (instance.Headers is not null)
+		if (Headers is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Headers = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Headers, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("\""); sb.Append(v); sb.Append("\""); }, sb);
+			__init.Property("Headers");
+			writer.Write("new() ");
+			writer.WriteInlineList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Host = ");
-			sb.Append("\"");
-			sb.Append(instance.Host);
-			sb.Append("\"");
+			__init.Property("Host");
+			writer.WriteString(Host);
 		}
 
-		if (instance.Password is not null)
+		if (Password is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Password = ");
-			sb.Append("\"");
-			sb.Append(instance.Password);
-			sb.Append("\"");
+			__init.Property("Password");
+			writer.WriteString(Password);
 		}
 
-		if (instance.SocketTimeout is not null)
+		if (SocketTimeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SocketTimeout = ");
-			instance.SocketTimeout.FormatCode(sb);
+			__init.Property("SocketTimeout");
+			SocketTimeout.FormatCode(writer);
 		}
 
-		if (instance.Username is not null)
+		if (Username is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Username = ");
-			instance.Username.FormatCode(sb);
+			__init.Property("Username");
+			Username.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

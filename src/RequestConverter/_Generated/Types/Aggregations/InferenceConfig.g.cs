@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class InferenceConfig : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Classification is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Classification is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Classification = ");
-			instance.Classification.FormatCode(sb);
+			__init.Property("Classification");
+			Classification.FormatCode(writer);
 		}
 
-		if (instance.Regression is not null)
+		if (Regression is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Regression = ");
-			instance.Regression.FormatCode(sb);
+			__init.Property("Regression");
+			Regression.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

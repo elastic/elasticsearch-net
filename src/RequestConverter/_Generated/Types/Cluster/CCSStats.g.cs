@@ -25,36 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class CCSStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Clusters is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Clusters is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Clusters = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Clusters, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Clusters");
+			writer.Write("new() ");
+			writer.WriteInlineList(Clusters, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Esql is not null)
+		if (Esql is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Esql = ");
-			instance.Esql.FormatCode(sb);
+			__init.Property("Esql");
+			Esql.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Search = ");
-			instance.Search.FormatCode(sb);
+			__init.Property("Search");
+			Search.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,70 +25,51 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class CompletionSuggester : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Analyzer is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Analyzer is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Analyzer = ");
-			sb.Append("\"");
-			sb.Append(instance.Analyzer);
-			sb.Append("\"");
+			__init.Property("Analyzer");
+			writer.WriteString(Analyzer);
 		}
 
-		if (instance.Contexts is not null)
+		if (Contexts is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Contexts = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Contexts, (k, sb) => { k.FormatCode(sb); }, (v, sb) => { sb.Append("["); RequestConverter.CodeFormatter.FormatCode(v, (item, sb) => { item.FormatCode(sb); }, sb); sb.Append("]"); }, sb);
+			__init.Property("Contexts");
+			writer.Write("new() ");
+			writer.WriteInlineList(Contexts, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { item.FormatCode(w); }); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.Fuzzy is not null)
+		if (Fuzzy is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fuzzy = ");
-			instance.Fuzzy.FormatCode(sb);
+			__init.Property("Fuzzy");
+			Fuzzy.FormatCode(writer);
 		}
 
-		if (instance.Regex is not null)
+		if (Regex is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Regex = ");
-			instance.Regex.FormatCode(sb);
+			__init.Property("Regex");
+			Regex.FormatCode(writer);
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append(instance.Size.Value);
+			__init.Property("Size");
+			writer.WriteValue(Size.Value);
 		}
 
-		if (instance.SkipDuplicates is not null)
+		if (SkipDuplicates is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SkipDuplicates = ");
-			sb.Append(instance.SkipDuplicates.Value ? "true" : "false");
+			__init.Property("SkipDuplicates");
+			writer.WriteValue(SkipDuplicates.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

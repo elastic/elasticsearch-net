@@ -25,39 +25,26 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 public partial class SnapshotResponseItem : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Error is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Error is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Error = ");
-			instance.Error.FormatCode(sb);
+			__init.Property("Error");
+			Error.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Repository = ");
-			sb.Append("\"");
-			sb.Append(instance.Repository);
-			sb.Append("\"");
+			__init.Property("Repository");
+			writer.WriteString(Repository);
 		}
 
-		if (instance.Snapshots is not null)
+		if (Snapshots is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Snapshots = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Snapshots, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Snapshots");
+			writer.WriteInlineList(Snapshots, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

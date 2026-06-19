@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class RandomScoreFunction : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Field is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Field is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.Seed is not null)
+		if (Seed is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Seed = ");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<long, string>(instance.Seed, sb);
+			__init.Property("Seed");
+			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<long, string>(Seed, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

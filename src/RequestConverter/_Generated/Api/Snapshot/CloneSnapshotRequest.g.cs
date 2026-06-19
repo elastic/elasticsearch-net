@@ -25,50 +25,35 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 public partial class CloneSnapshotRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Repository = ");
-			instance.Repository.FormatCode(sb);
+			__init.Property("Repository");
+			Repository.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Snapshot = ");
-			instance.Snapshot.FormatCode(sb);
+			__init.Property("Snapshot");
+			Snapshot.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TargetSnapshot = ");
-			instance.TargetSnapshot.FormatCode(sb);
+			__init.Property("TargetSnapshot");
+			TargetSnapshot.FormatCode(writer);
 		}
 
-		if (instance.MasterTimeout is not null)
+		if (MasterTimeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MasterTimeout = ");
-			instance.MasterTimeout.FormatCode(sb);
+			__init.Property("MasterTimeout");
+			MasterTimeout.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indices = ");
-			sb.Append("\"");
-			sb.Append(instance.Indices);
-			sb.Append("\"");
+			__init.Property("Indices");
+			writer.WriteString(Indices);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

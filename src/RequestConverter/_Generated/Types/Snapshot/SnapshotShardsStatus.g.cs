@@ -25,26 +25,19 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 public partial class SnapshotShardsStatus : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Stage = ");
-			Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStageCodeFormatter.FormatCode(instance.Stage, sb);
+			__init.Property("Stage");
+			Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStageCodeFormatter.FormatCode(Stage, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Stats = ");
-			instance.Stats.FormatCode(sb);
+			__init.Property("Stats");
+			Stats.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

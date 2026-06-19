@@ -25,63 +25,46 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class MedianAbsoluteDeviationAggregation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Compression is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Compression is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Compression = ");
-			sb.Append(instance.Compression.Value);
-			sb.Append("d");
+			__init.Property("Compression");
+			writer.WriteValue(Compression.Value);
+			writer.Write("d");
 		}
 
-		if (instance.ExecutionHint is not null)
+		if (ExecutionHint is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExecutionHint = ");
-			Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHintCodeFormatter.FormatCode(instance.ExecutionHint.Value, sb);
+			__init.Property("ExecutionHint");
+			Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, writer);
 		}
 
-		if (instance.Field is not null)
+		if (Field is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.Format is not null)
+		if (Format is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Format = ");
-			sb.Append("\"");
-			sb.Append(instance.Format);
-			sb.Append("\"");
+			__init.Property("Format");
+			writer.WriteString(Format);
 		}
 
-		if (instance.Missing is not null)
+		if (Missing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Missing = ");
-			RequestConverter.CodeFormatter.FormatCode(instance.Missing, sb);
+			__init.Property("Missing");
+			writer.WriteValue(Missing);
 		}
 
-		if (instance.Script is not null)
+		if (Script is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Script = ");
-			instance.Script.FormatCode(sb);
+			__init.Property("Script");
+			Script.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

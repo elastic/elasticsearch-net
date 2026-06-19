@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class OpenAISimilarityTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType.Cosine:
-				sb.Append("OpenAISimilarityType.Cosine");
+				writer.Write("OpenAISimilarityType.Cosine");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType.DotProduct:
-				sb.Append("OpenAISimilarityType.DotProduct");
+				writer.Write("OpenAISimilarityType.DotProduct");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType.L2Norm:
-				sb.Append("OpenAISimilarityType.L2Norm");
+				writer.Write("OpenAISimilarityType.L2Norm");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

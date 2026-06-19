@@ -25,54 +25,54 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public static class NodesInfoMetricCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.All:
-				sb.Append("NodesInfoMetric.All");
+				writer.Write("NodesInfoMetric.All");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.None:
-				sb.Append("NodesInfoMetric.None");
+				writer.Write("NodesInfoMetric.None");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.Aggregations:
-				sb.Append("NodesInfoMetric.Aggregations");
+				writer.Write("NodesInfoMetric.Aggregations");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.Http:
-				sb.Append("NodesInfoMetric.Http");
+				writer.Write("NodesInfoMetric.Http");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.Indices:
-				sb.Append("NodesInfoMetric.Indices");
+				writer.Write("NodesInfoMetric.Indices");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.Ingest:
-				sb.Append("NodesInfoMetric.Ingest");
+				writer.Write("NodesInfoMetric.Ingest");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.Jvm:
-				sb.Append("NodesInfoMetric.Jvm");
+				writer.Write("NodesInfoMetric.Jvm");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.Os:
-				sb.Append("NodesInfoMetric.Os");
+				writer.Write("NodesInfoMetric.Os");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.Plugins:
-				sb.Append("NodesInfoMetric.Plugins");
+				writer.Write("NodesInfoMetric.Plugins");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.Process:
-				sb.Append("NodesInfoMetric.Process");
+				writer.Write("NodesInfoMetric.Process");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.RemoteClusterServer:
-				sb.Append("NodesInfoMetric.RemoteClusterServer");
+				writer.Write("NodesInfoMetric.RemoteClusterServer");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.Settings:
-				sb.Append("NodesInfoMetric.Settings");
+				writer.Write("NodesInfoMetric.Settings");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.ThreadPool:
-				sb.Append("NodesInfoMetric.ThreadPool");
+				writer.Write("NodesInfoMetric.ThreadPool");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.Transport:
-				sb.Append("NodesInfoMetric.Transport");
+				writer.Write("NodesInfoMetric.Transport");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

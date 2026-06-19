@@ -25,29 +25,22 @@ namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
 public partial class GetLicenseRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 #pragma warning disable CS0618
-		if (instance.AcceptEnterprise is not null)
+		if (AcceptEnterprise is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AcceptEnterprise = ");
-			sb.Append(instance.AcceptEnterprise.Value ? "true" : "false");
+			__init.Property("AcceptEnterprise");
+			writer.WriteValue(AcceptEnterprise.Value);
 		}
 #pragma warning restore CS0618
-		if (instance.Local is not null)
+		if (Local is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Local = ");
-			sb.Append(instance.Local.Value ? "true" : "false");
+			__init.Property("Local");
+			writer.WriteValue(Local.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

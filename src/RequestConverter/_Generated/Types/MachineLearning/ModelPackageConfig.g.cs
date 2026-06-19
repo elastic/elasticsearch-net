@@ -25,143 +25,94 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class ModelPackageConfig : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CreateTime is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CreateTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CreateTime = ");
-			sb.Append(instance.CreateTime.Value);
+			__init.Property("CreateTime");
+			writer.WriteValue(CreateTime.Value);
 		}
 
-		if (instance.Description is not null)
+		if (Description is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
-		if (instance.InferenceConfig is not null)
+		if (InferenceConfig is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InferenceConfig = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.InferenceConfig, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("InferenceConfig");
+			writer.Write("new() ");
+			writer.WriteInlineList(InferenceConfig, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Metadata is not null)
+		if (Metadata is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Metadata = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Metadata, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Metadata");
+			writer.Write("new() ");
+			writer.WriteInlineList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.MinimumVersion is not null)
+		if (MinimumVersion is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinimumVersion = ");
-			sb.Append("\"");
-			sb.Append(instance.MinimumVersion);
-			sb.Append("\"");
+			__init.Property("MinimumVersion");
+			writer.WriteString(MinimumVersion);
 		}
 
-		if (instance.ModelRepository is not null)
+		if (ModelRepository is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelRepository = ");
-			sb.Append("\"");
-			sb.Append(instance.ModelRepository);
-			sb.Append("\"");
+			__init.Property("ModelRepository");
+			writer.WriteString(ModelRepository);
 		}
 
-		if (instance.ModelType is not null)
+		if (ModelType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelType = ");
-			sb.Append("\"");
-			sb.Append(instance.ModelType);
-			sb.Append("\"");
+			__init.Property("ModelType");
+			writer.WriteString(ModelType);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PackagedModelId = ");
-			sb.Append("\"");
-			sb.Append(instance.PackagedModelId);
-			sb.Append("\"");
+			__init.Property("PackagedModelId");
+			writer.WriteString(PackagedModelId);
 		}
 
-		if (instance.PlatformArchitecture is not null)
+		if (PlatformArchitecture is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PlatformArchitecture = ");
-			sb.Append("\"");
-			sb.Append(instance.PlatformArchitecture);
-			sb.Append("\"");
+			__init.Property("PlatformArchitecture");
+			writer.WriteString(PlatformArchitecture);
 		}
 
-		if (instance.PrefixStrings is not null)
+		if (PrefixStrings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PrefixStrings = ");
-			instance.PrefixStrings.FormatCode(sb);
+			__init.Property("PrefixStrings");
+			PrefixStrings.FormatCode(writer);
 		}
 
-		if (instance.Sha256 is not null)
+		if (Sha256 is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sha256 = ");
-			sb.Append("\"");
-			sb.Append(instance.Sha256);
-			sb.Append("\"");
+			__init.Property("Sha256");
+			writer.WriteString(Sha256);
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			instance.Size.FormatCode(sb);
+			__init.Property("Size");
+			Size.FormatCode(writer);
 		}
 
-		if (instance.Tags is not null)
+		if (Tags is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Tags = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Tags, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Tags");
+			writer.WriteInlineList(Tags, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.VocabularyFile is not null)
+		if (VocabularyFile is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VocabularyFile = ");
-			sb.Append("\"");
-			sb.Append(instance.VocabularyFile);
-			sb.Append("\"");
+			__init.Property("VocabularyFile");
+			writer.WriteString(VocabularyFile);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

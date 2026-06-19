@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Tasks;
 
 public static class GroupByCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Tasks.GroupBy instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Tasks.GroupBy instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Tasks.GroupBy.Nodes:
-				sb.Append("GroupBy.Nodes");
+				writer.Write("GroupBy.Nodes");
 				break;
 			case Elastic.Clients.Elasticsearch.Tasks.GroupBy.None:
-				sb.Append("GroupBy.None");
+				writer.Write("GroupBy.None");
 				break;
 			case Elastic.Clients.Elasticsearch.Tasks.GroupBy.Parents:
-				sb.Append("GroupBy.Parents");
+				writer.Write("GroupBy.Parents");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

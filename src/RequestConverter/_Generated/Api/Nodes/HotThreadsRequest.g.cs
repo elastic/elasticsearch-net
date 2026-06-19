@@ -25,78 +25,59 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class HotThreadsRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.NodeId is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (NodeId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NodeId = ");
-			instance.NodeId.FormatCode(sb);
+			__init.Property("NodeId");
+			NodeId.FormatCode(writer);
 		}
 
-		if (instance.IgnoreIdleThreads is not null)
+		if (IgnoreIdleThreads is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreIdleThreads = ");
-			sb.Append(instance.IgnoreIdleThreads.Value ? "true" : "false");
+			__init.Property("IgnoreIdleThreads");
+			writer.WriteValue(IgnoreIdleThreads.Value);
 		}
 
-		if (instance.Interval is not null)
+		if (Interval is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Interval = ");
-			instance.Interval.FormatCode(sb);
+			__init.Property("Interval");
+			Interval.FormatCode(writer);
 		}
 
-		if (instance.Snapshots is not null)
+		if (Snapshots is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Snapshots = ");
-			sb.Append(instance.Snapshots.Value);
-			sb.Append("L");
+			__init.Property("Snapshots");
+			writer.WriteValue(Snapshots.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Sort is not null)
+		if (Sort is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sort = ");
-			Elastic.Clients.Elasticsearch.ThreadTypeCodeFormatter.FormatCode(instance.Sort.Value, sb);
+			__init.Property("Sort");
+			Elastic.Clients.Elasticsearch.ThreadTypeCodeFormatter.FormatCode(Sort.Value, writer);
 		}
 
-		if (instance.Threads is not null)
+		if (Threads is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Threads = ");
-			sb.Append(instance.Threads.Value);
-			sb.Append("L");
+			__init.Property("Threads");
+			writer.WriteValue(Threads.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (instance.Type is not null)
+		if (Type is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			Elastic.Clients.Elasticsearch.ThreadTypeCodeFormatter.FormatCode(instance.Type.Value, sb);
+			__init.Property("Type");
+			Elastic.Clients.Elasticsearch.ThreadTypeCodeFormatter.FormatCode(Type.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

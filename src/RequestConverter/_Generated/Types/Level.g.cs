@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class LevelCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Level instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Level instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Level.Cluster:
-				sb.Append("Level.Cluster");
+				writer.Write("Level.Cluster");
 				break;
 			case Elastic.Clients.Elasticsearch.Level.Indices:
-				sb.Append("Level.Indices");
+				writer.Write("Level.Indices");
 				break;
 			case Elastic.Clients.Elasticsearch.Level.Shards:
-				sb.Append("Level.Shards");
+				writer.Write("Level.Shards");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -25,7 +25,7 @@ namespace RequestConverter;
 
 internal static partial class RequestFactory
 {
-	private static readonly System.Collections.Frozen.FrozenDictionary<string, System.Func<Elastic.Transport.Serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>?, System.Collections.Generic.IReadOnlyDictionary<string, string>?, string, Elastic.Clients.Elasticsearch.Requests.Request?>> Lookup = new System.Collections.Generic.Dictionary<string, System.Func<Elastic.Transport.Serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>?, System.Collections.Generic.IReadOnlyDictionary<string, string>?, string, Elastic.Clients.Elasticsearch.Requests.Request?>>
+	private static readonly System.Collections.Frozen.FrozenDictionary<string, System.Func<Elastic.Transport.Serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>?, System.Collections.Generic.IReadOnlyDictionary<string, string>?, string, Elastic.Clients.Elasticsearch.Requests.Request?>> Lookup = System.Collections.Frozen.FrozenDictionary.ToFrozenDictionary(new System.Collections.Generic.Dictionary<string, System.Func<Elastic.Transport.Serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>?, System.Collections.Generic.IReadOnlyDictionary<string, string>?, string, Elastic.Clients.Elasticsearch.Requests.Request?>>
 	{
 		{
 			"bulk",
@@ -46,6 +46,8 @@ internal static partial class RequestFactory
 							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -192,6 +194,46 @@ internal static partial class RequestFactory
 		}
 ,
 		{
+			"cancel_reindex",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.CancelReindexRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "task_id", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.TaskId = Elastic.Clients.Elasticsearch.TaskId.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "wait_for_completion", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.WaitForCompletion = bool.Parse(parameter.Value);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
 			"capabilities",
 			(serializer, pathParameters, queryParameters, body) =>
 			{
@@ -324,6 +366,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -522,6 +566,8 @@ internal static partial class RequestFactory
 							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -665,6 +711,8 @@ internal static partial class RequestFactory
 							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -780,6 +828,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -1114,6 +1164,8 @@ internal static partial class RequestFactory
 							request.TaskId = Elastic.Clients.Elasticsearch.TaskId.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -1152,6 +1204,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -1207,6 +1261,8 @@ internal static partial class RequestFactory
 							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -1350,6 +1406,8 @@ internal static partial class RequestFactory
 							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -1482,6 +1540,8 @@ internal static partial class RequestFactory
 							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -1646,6 +1706,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -1771,6 +1833,8 @@ internal static partial class RequestFactory
 							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -1917,6 +1981,57 @@ internal static partial class RequestFactory
 		}
 ,
 		{
+			"get_reindex",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.GetReindexRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "task_id", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.TaskId = Elastic.Clients.Elasticsearch.TaskId.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "wait_for_completion", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.WaitForCompletion = bool.Parse(parameter.Value);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
 			"get_script",
 			(serializer, pathParameters, queryParameters, body) =>
 			{
@@ -1930,6 +2045,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -1992,6 +2109,8 @@ internal static partial class RequestFactory
 							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -2128,6 +2247,8 @@ internal static partial class RequestFactory
 							request.Feature = list.Select(x => x).ToList();
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -2204,6 +2325,8 @@ internal static partial class RequestFactory
 							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -2370,6 +2493,32 @@ internal static partial class RequestFactory
 		}
 ,
 		{
+			"list_reindex",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.ListReindexRequest>(serializer, body);
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "detailed", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Detailed = bool.Parse(parameter.Value);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
 			"mget",
 			(serializer, pathParameters, queryParameters, body) =>
 			{
@@ -2388,6 +2537,8 @@ internal static partial class RequestFactory
 							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -2524,6 +2675,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -2680,6 +2833,17 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+						if (string.Equals(parameter.Key, "_slice", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Slice = parameter.Value;
+							continue;
+						}
+
 						if (string.Equals(parameter.Key, "typed_keys", System.StringComparison.OrdinalIgnoreCase))
 						{
 							if (parameter.Value is null)
@@ -2721,6 +2885,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -2819,6 +2985,8 @@ internal static partial class RequestFactory
 							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -2967,6 +3135,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -3101,6 +3271,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -3160,6 +3332,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -3344,6 +3518,8 @@ internal static partial class RequestFactory
 							request.TaskId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -3351,6 +3527,17 @@ internal static partial class RequestFactory
 				{
 					foreach (var parameter in queryParameters)
 					{
+						if (string.Equals(parameter.Key, "group_by", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.GroupBy = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Tasks.GroupBy>.Parse(parameter.Value);
+							continue;
+						}
+
 						if (string.Equals(parameter.Key, "requests_per_second", System.StringComparison.OrdinalIgnoreCase))
 						{
 							if (parameter.Value is null)
@@ -3436,6 +3623,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -3834,6 +4023,8 @@ internal static partial class RequestFactory
 							request.Zoom = int.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -3860,6 +4051,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -3948,6 +4141,17 @@ internal static partial class RequestFactory
 							request.Routing = Elastic.Clients.Elasticsearch.Routing.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						if (string.Equals(parameter.Key, "_slice", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Slice = parameter.Value;
+							continue;
+						}
 					}
 				}
 
@@ -3974,6 +4178,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -4133,6 +4339,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -4165,6 +4373,8 @@ internal static partial class RequestFactory
 							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -4220,6 +4430,8 @@ internal static partial class RequestFactory
 							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -4379,6 +4591,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -4740,6 +4954,8 @@ internal static partial class RequestFactory
 							request.TaskId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -4778,6 +4994,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -4799,6 +5017,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -4814,6 +5034,17 @@ internal static partial class RequestFactory
 							}
 
 							request.KeepAlive = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "return_intermediate_results", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.ReturnIntermediateResults = bool.Parse(parameter.Value);
 							continue;
 						}
 
@@ -4859,6 +5090,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -4902,6 +5135,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -5253,6 +5488,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -5296,6 +5533,8 @@ internal static partial class RequestFactory
 							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -5345,6 +5584,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -5383,6 +5624,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -5421,6 +5664,8 @@ internal static partial class RequestFactory
 							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -5464,6 +5709,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -5502,6 +5749,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -5540,6 +5789,8 @@ internal static partial class RequestFactory
 							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -5583,6 +5834,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -5621,6 +5874,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -5659,6 +5914,8 @@ internal static partial class RequestFactory
 							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -5734,6 +5991,8 @@ internal static partial class RequestFactory
 							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -5820,6 +6079,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -5906,6 +6167,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -5961,6 +6224,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -6113,6 +6378,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -6271,6 +6538,8 @@ internal static partial class RequestFactory
 							request.Target = list.Select(x => Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.ClusterInfoTarget>.Parse(x)).ToList();
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -6393,6 +6662,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -6506,6 +6777,8 @@ internal static partial class RequestFactory
 							request.NodeId = Elastic.Clients.Elasticsearch.NodeIds.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -6564,6 +6837,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -6602,6 +6877,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -6656,6 +6933,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -6694,6 +6973,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -6758,6 +7039,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -6779,6 +7062,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -6828,6 +7113,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -6854,6 +7141,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -6994,6 +7283,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -7015,6 +7306,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -7086,6 +7379,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -7121,9 +7416,11 @@ internal static partial class RequestFactory
 					{
 						if (string.Equals(parameter.Key, "name", System.StringComparison.OrdinalIgnoreCase))
 						{
-							request.Name = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							request.Name = Elastic.Clients.Elasticsearch.Ids.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -7145,6 +7442,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -7171,6 +7470,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -7206,6 +7507,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -7343,6 +7646,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -7392,6 +7697,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -7446,6 +7753,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -7546,6 +7855,8 @@ internal static partial class RequestFactory
 							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -7567,6 +7878,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -7616,6 +7929,8 @@ internal static partial class RequestFactory
 							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -7637,6 +7952,8 @@ internal static partial class RequestFactory
 							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -7737,6 +8054,8 @@ internal static partial class RequestFactory
 							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -7758,6 +8077,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -7784,6 +8105,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -7899,6 +8222,8 @@ internal static partial class RequestFactory
 							request.Target = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -7959,6 +8284,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -8057,6 +8384,8 @@ internal static partial class RequestFactory
 							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -8117,6 +8446,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.DataStreamName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -8172,6 +8503,8 @@ internal static partial class RequestFactory
 							request.Source = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -8198,6 +8531,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -8241,6 +8576,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -8334,6 +8671,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -8383,6 +8722,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.DataStreamNames.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -8448,6 +8789,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.DataStreamNames.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -8502,6 +8845,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.DataStreamNames.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -8567,55 +8912,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
-					}
-				}
 
-				if (queryParameters is not null)
-				{
-					foreach (var parameter in queryParameters)
-					{
-						if (string.Equals(parameter.Key, "master_timeout", System.StringComparison.OrdinalIgnoreCase))
-						{
-							if (parameter.Value is null)
-							{
-								continue;
-							}
-
-							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
-							continue;
-						}
-
-						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
-						{
-							if (parameter.Value is null)
-							{
-								continue;
-							}
-
-							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
-							continue;
-						}
-					}
-				}
-
-				return request;
-			}
-		}
-,
-		{
-			"indices.delete_sample_configuration",
-			(serializer, pathParameters, queryParameters, body) =>
-			{
-				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.DeleteSampleConfigurationRequest>(serializer, body);
-				if (pathParameters is not null)
-				{
-					foreach (var parameter in pathParameters)
-					{
-						if (string.Equals(parameter.Key, "index", System.StringComparison.OrdinalIgnoreCase))
-						{
-							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
-							continue;
-						}
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -8665,6 +8963,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -8714,6 +9014,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -8812,6 +9114,8 @@ internal static partial class RequestFactory
 							request.TargetIndex = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -8833,6 +9137,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -8942,6 +9248,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -9018,6 +9326,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -9078,6 +9388,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -9139,6 +9451,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -9188,6 +9502,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -9269,6 +9585,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -9361,6 +9679,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -9470,6 +9790,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -9611,6 +9933,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -9674,32 +9998,6 @@ internal static partial class RequestFactory
 		}
 ,
 		{
-			"indices.get_all_sample_configuration",
-			(serializer, pathParameters, queryParameters, body) =>
-			{
-				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.GetAllSampleConfigurationRequest>(serializer, body);
-				if (queryParameters is not null)
-				{
-					foreach (var parameter in queryParameters)
-					{
-						if (string.Equals(parameter.Key, "master_timeout", System.StringComparison.OrdinalIgnoreCase))
-						{
-							if (parameter.Value is null)
-							{
-								continue;
-							}
-
-							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
-							continue;
-						}
-					}
-				}
-
-				return request;
-			}
-		}
-,
-		{
 			"indices.get_data_lifecycle",
 			(serializer, pathParameters, queryParameters, body) =>
 			{
@@ -9713,6 +10011,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.DataStreamNames.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -9792,6 +10092,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.DataStreamNames.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -9868,6 +10170,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -9906,6 +10210,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.DataStreamNames.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -9960,6 +10266,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -10009,6 +10317,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -10090,6 +10400,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -10167,6 +10479,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -10255,86 +10569,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
-					}
-				}
 
-				return request;
-			}
-		}
-,
-		{
-			"indices.get_sample",
-			(serializer, pathParameters, queryParameters, body) =>
-			{
-				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequest>(serializer, body);
-				if (pathParameters is not null)
-				{
-					foreach (var parameter in pathParameters)
-					{
-						if (string.Equals(parameter.Key, "index", System.StringComparison.OrdinalIgnoreCase))
-						{
-							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
-							continue;
-						}
-					}
-				}
-
-				return request;
-			}
-		}
-,
-		{
-			"indices.get_sample_configuration",
-			(serializer, pathParameters, queryParameters, body) =>
-			{
-				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleConfigurationRequest>(serializer, body);
-				if (pathParameters is not null)
-				{
-					foreach (var parameter in pathParameters)
-					{
-						if (string.Equals(parameter.Key, "index", System.StringComparison.OrdinalIgnoreCase))
-						{
-							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
-							continue;
-						}
-					}
-				}
-
-				if (queryParameters is not null)
-				{
-					foreach (var parameter in queryParameters)
-					{
-						if (string.Equals(parameter.Key, "master_timeout", System.StringComparison.OrdinalIgnoreCase))
-						{
-							if (parameter.Value is null)
-							{
-								continue;
-							}
-
-							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
-							continue;
-						}
-					}
-				}
-
-				return request;
-			}
-		}
-,
-		{
-			"indices.get_sample_stats",
-			(serializer, pathParameters, queryParameters, body) =>
-			{
-				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequest>(serializer, body);
-				if (pathParameters is not null)
-				{
-					foreach (var parameter in pathParameters)
-					{
-						if (string.Equals(parameter.Key, "index", System.StringComparison.OrdinalIgnoreCase))
-						{
-							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
-							continue;
-						}
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -10372,6 +10608,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -10487,6 +10725,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -10562,6 +10802,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -10625,6 +10867,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -10723,6 +10967,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -10767,6 +11013,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -10816,6 +11064,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.DataStreamNames.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -10886,6 +11136,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -10946,6 +11198,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.DataStreamNames.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -11016,6 +11270,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -11076,6 +11332,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -11136,6 +11394,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -11221,60 +11481,6 @@ internal static partial class RequestFactory
 		}
 ,
 		{
-			"indices.put_sample_configuration",
-			(serializer, pathParameters, queryParameters, body) =>
-			{
-				if (string.IsNullOrEmpty(body))
-				{
-					throw new System.InvalidOperationException("Body is required.");
-				}
-
-				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.PutSampleConfigurationRequest>(serializer, body);
-				if (pathParameters is not null)
-				{
-					foreach (var parameter in pathParameters)
-					{
-						if (string.Equals(parameter.Key, "index", System.StringComparison.OrdinalIgnoreCase))
-						{
-							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
-							continue;
-						}
-					}
-				}
-
-				if (queryParameters is not null)
-				{
-					foreach (var parameter in queryParameters)
-					{
-						if (string.Equals(parameter.Key, "master_timeout", System.StringComparison.OrdinalIgnoreCase))
-						{
-							if (parameter.Value is null)
-							{
-								continue;
-							}
-
-							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
-							continue;
-						}
-
-						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
-						{
-							if (parameter.Value is null)
-							{
-								continue;
-							}
-
-							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
-							continue;
-						}
-					}
-				}
-
-				return request;
-			}
-		}
-,
-		{
 			"indices.put_settings",
 			(serializer, pathParameters, queryParameters, body) =>
 			{
@@ -11298,6 +11504,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -11418,6 +11626,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -11483,6 +11693,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -11575,6 +11787,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -11640,6 +11854,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -11722,6 +11938,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -11814,6 +12032,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -11902,6 +12122,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -11994,6 +12216,8 @@ internal static partial class RequestFactory
 							request.NewIndex = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -12081,6 +12305,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -12151,6 +12377,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -12238,6 +12466,8 @@ internal static partial class RequestFactory
 							request.Target = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -12298,6 +12528,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -12374,6 +12606,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -12451,6 +12685,8 @@ internal static partial class RequestFactory
 							request.Target = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -12532,6 +12768,8 @@ internal static partial class RequestFactory
 							request.Metric = list.Select(x => Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.CommonStatsFlag>.Parse(x)).ToList();
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -12710,6 +12948,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -12879,6 +13119,8 @@ internal static partial class RequestFactory
 							request.InferenceId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -12922,6 +13164,8 @@ internal static partial class RequestFactory
 							request.InferenceId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -12971,6 +13215,8 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.TaskType>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -13025,6 +13271,8 @@ internal static partial class RequestFactory
 							request.InferenceId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -13079,6 +13327,8 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.TaskType>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -13116,6 +13366,8 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.TaskType>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -13170,6 +13422,8 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.TaskType>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -13219,6 +13473,8 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.Ai21TaskType>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -13268,6 +13524,8 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -13317,6 +13575,8 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -13366,6 +13626,8 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonSageMaker>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -13415,6 +13677,8 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -13464,6 +13728,8 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -13513,6 +13779,8 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskType>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -13562,6 +13830,8 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.CohereTaskType>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -13611,6 +13881,8 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.TaskTypeContextualAI>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -13660,6 +13932,8 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.CustomTaskType>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -13692,6 +13966,8 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.TaskTypeDeepSeek>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -13741,6 +14017,8 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -13790,6 +14068,59 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.ElserTaskType>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
+			"inference.put_fireworksai",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				if (string.IsNullOrEmpty(body))
+				{
+					throw new System.InvalidOperationException("Body is required.");
+				}
+
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Inference.PutFireworksaiRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "fireworksai_inference_id", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.FireworksaiInferenceId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "task_type", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.FireworksAITaskType>.Parse(parameter.Value);
+							continue;
+						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -13839,6 +14170,8 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -13888,6 +14221,8 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -13937,6 +14272,8 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.GroqTaskType>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -13986,6 +14323,8 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -14035,6 +14374,8 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.JinaAITaskType>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -14084,6 +14425,8 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.LlamaTaskType>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -14133,6 +14476,8 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.MistralTaskType>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -14182,6 +14527,8 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.NvidiaTaskType>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -14231,6 +14578,8 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.OpenAITaskType>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -14280,6 +14629,8 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskType>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -14329,6 +14680,8 @@ internal static partial class RequestFactory
 							request.VoyageaiInferenceId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -14378,6 +14731,8 @@ internal static partial class RequestFactory
 							request.WatsonxInferenceId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -14421,6 +14776,8 @@ internal static partial class RequestFactory
 							request.InferenceId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -14464,6 +14821,8 @@ internal static partial class RequestFactory
 							request.InferenceId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -14507,6 +14866,8 @@ internal static partial class RequestFactory
 							request.InferenceId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -14550,6 +14911,8 @@ internal static partial class RequestFactory
 							request.InferenceId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -14604,6 +14967,8 @@ internal static partial class RequestFactory
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.TaskType>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -14625,6 +14990,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Ids.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -14674,6 +15041,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Ids.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -14723,6 +15092,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -14786,6 +15157,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Ids.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -14812,6 +15185,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Ids.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -14838,6 +15213,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -14901,6 +15278,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -14955,6 +15334,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -15004,6 +15385,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -15074,6 +15457,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -15349,6 +15734,8 @@ internal static partial class RequestFactory
 							request.ModelId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -15370,6 +15757,8 @@ internal static partial class RequestFactory
 							request.JobId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -15391,6 +15780,8 @@ internal static partial class RequestFactory
 							request.CalendarId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -15418,6 +15809,8 @@ internal static partial class RequestFactory
 							request.EventId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -15445,6 +15838,8 @@ internal static partial class RequestFactory
 							request.JobId = Elastic.Clients.Elasticsearch.Ids.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -15466,6 +15861,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -15515,6 +15912,8 @@ internal static partial class RequestFactory
 							request.DatafeedId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -15558,6 +15957,8 @@ internal static partial class RequestFactory
 							request.JobId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -15579,6 +15980,8 @@ internal static partial class RequestFactory
 							request.FilterId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -15611,6 +16014,8 @@ internal static partial class RequestFactory
 							request.JobId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -15660,6 +16065,8 @@ internal static partial class RequestFactory
 							request.JobId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -15726,6 +16133,8 @@ internal static partial class RequestFactory
 							request.SnapshotId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -15747,6 +16156,8 @@ internal static partial class RequestFactory
 							request.ModelId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -15802,6 +16213,8 @@ internal static partial class RequestFactory
 							request.ModelId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -15851,6 +16264,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -15872,6 +16287,8 @@ internal static partial class RequestFactory
 							request.JobId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -15893,6 +16310,8 @@ internal static partial class RequestFactory
 							request.JobId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -15925,6 +16344,8 @@ internal static partial class RequestFactory
 							request.Timestamp = System.DateTimeOffset.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -15974,6 +16395,8 @@ internal static partial class RequestFactory
 							request.CalendarId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -16061,6 +16484,8 @@ internal static partial class RequestFactory
 							request.CalendarId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -16121,6 +16546,8 @@ internal static partial class RequestFactory
 							request.JobId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -16186,6 +16613,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -16262,6 +16691,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -16338,6 +16769,8 @@ internal static partial class RequestFactory
 							request.DatafeedId = Elastic.Clients.Elasticsearch.Ids.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -16381,6 +16814,8 @@ internal static partial class RequestFactory
 							request.DatafeedId = Elastic.Clients.Elasticsearch.Ids.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -16435,6 +16870,8 @@ internal static partial class RequestFactory
 							request.FilterId = Elastic.Clients.Elasticsearch.Ids.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -16484,6 +16921,8 @@ internal static partial class RequestFactory
 							request.JobId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -16604,6 +17043,8 @@ internal static partial class RequestFactory
 							request.JobId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -16647,6 +17088,8 @@ internal static partial class RequestFactory
 							request.JobId = Elastic.Clients.Elasticsearch.Ids.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -16701,6 +17144,8 @@ internal static partial class RequestFactory
 							request.NodeId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -16756,6 +17201,8 @@ internal static partial class RequestFactory
 							request.SnapshotId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -16805,6 +17252,8 @@ internal static partial class RequestFactory
 							request.SnapshotId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -16854,6 +17303,8 @@ internal static partial class RequestFactory
 							request.JobId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -16875,6 +17326,8 @@ internal static partial class RequestFactory
 							request.JobId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -16929,6 +17382,8 @@ internal static partial class RequestFactory
 							request.ModelId = Elastic.Clients.Elasticsearch.Ids.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -17043,6 +17498,8 @@ internal static partial class RequestFactory
 							request.ModelId = Elastic.Clients.Elasticsearch.Ids.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -17108,6 +17565,8 @@ internal static partial class RequestFactory
 							request.ModelId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -17155,6 +17614,8 @@ internal static partial class RequestFactory
 							request.JobId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -17181,6 +17642,8 @@ internal static partial class RequestFactory
 							request.CalendarId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -17207,6 +17670,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -17228,6 +17693,8 @@ internal static partial class RequestFactory
 							request.CalendarId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -17255,6 +17722,8 @@ internal static partial class RequestFactory
 							request.JobId = Elastic.Clients.Elasticsearch.Ids.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -17281,6 +17750,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -17302,6 +17773,8 @@ internal static partial class RequestFactory
 							request.DatafeedId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -17379,6 +17852,8 @@ internal static partial class RequestFactory
 							request.FilterId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -17405,6 +17880,8 @@ internal static partial class RequestFactory
 							request.JobId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -17482,6 +17959,8 @@ internal static partial class RequestFactory
 							request.ModelId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -17537,6 +18016,8 @@ internal static partial class RequestFactory
 							request.ModelId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -17586,6 +18067,8 @@ internal static partial class RequestFactory
 							request.Part = int.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -17612,6 +18095,8 @@ internal static partial class RequestFactory
 							request.ModelId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -17633,6 +18118,8 @@ internal static partial class RequestFactory
 							request.JobId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -17688,6 +18175,8 @@ internal static partial class RequestFactory
 							request.SnapshotId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -17746,6 +18235,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -17767,6 +18258,8 @@ internal static partial class RequestFactory
 							request.DatafeedId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -17788,6 +18281,8 @@ internal static partial class RequestFactory
 							request.ModelId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -17903,6 +18398,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -17924,6 +18421,8 @@ internal static partial class RequestFactory
 							request.DatafeedId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -17945,6 +18444,8 @@ internal static partial class RequestFactory
 							request.ModelId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -17966,6 +18467,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -17987,6 +18490,8 @@ internal static partial class RequestFactory
 							request.DatafeedId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -18064,6 +18569,8 @@ internal static partial class RequestFactory
 							request.FilterId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -18085,6 +18592,8 @@ internal static partial class RequestFactory
 							request.JobId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -18112,6 +18621,8 @@ internal static partial class RequestFactory
 							request.SnapshotId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -18133,6 +18644,8 @@ internal static partial class RequestFactory
 							request.ModelId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -18160,6 +18673,8 @@ internal static partial class RequestFactory
 							request.SnapshotId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -18238,6 +18753,8 @@ internal static partial class RequestFactory
 							request.NodeId = Elastic.Clients.Elasticsearch.NodeIds.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -18259,6 +18776,8 @@ internal static partial class RequestFactory
 							request.NodeId = Elastic.Clients.Elasticsearch.NodeIds.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -18285,6 +18804,8 @@ internal static partial class RequestFactory
 							request.NodeId = Elastic.Clients.Elasticsearch.NodeIds.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -18410,6 +18931,8 @@ internal static partial class RequestFactory
 							request.NodeId = Elastic.Clients.Elasticsearch.NodeIds.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -18464,6 +18987,8 @@ internal static partial class RequestFactory
 							request.NodeId = Elastic.Clients.Elasticsearch.NodeIds.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -18539,6 +19064,8 @@ internal static partial class RequestFactory
 							request.NodeId = Elastic.Clients.Elasticsearch.NodeIds.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -18691,6 +19218,8 @@ internal static partial class RequestFactory
 							request.NodeId = Elastic.Clients.Elasticsearch.NodeIds.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -18748,6 +19277,8 @@ internal static partial class RequestFactory
 							request.Name = parameter.Value;
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -18769,6 +19300,8 @@ internal static partial class RequestFactory
 							request.Name = parameter.Value;
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -18799,6 +19332,8 @@ internal static partial class RequestFactory
 							request.Name = parameter.Value;
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -18835,6 +19370,8 @@ internal static partial class RequestFactory
 							request.RulesetId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -18856,6 +19393,8 @@ internal static partial class RequestFactory
 							request.RulesetId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -18883,6 +19422,8 @@ internal static partial class RequestFactory
 							request.RulesetId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -18904,6 +19445,8 @@ internal static partial class RequestFactory
 							request.RulesetId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -18973,6 +19516,8 @@ internal static partial class RequestFactory
 							request.RulesetId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -18999,6 +19544,8 @@ internal static partial class RequestFactory
 							request.RulesetId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -19025,6 +19572,8 @@ internal static partial class RequestFactory
 							request.RulesetId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -19046,6 +19595,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -19072,6 +19623,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -19098,6 +19651,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -19119,6 +19674,8 @@ internal static partial class RequestFactory
 							request.Index = Elastic.Clients.Elasticsearch.Ids.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -19145,6 +19702,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -19166,6 +19725,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -19215,6 +19776,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -19236,6 +19799,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -19285,6 +19850,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -19306,6 +19873,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -19327,6 +19896,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -19358,6 +19929,8 @@ internal static partial class RequestFactory
 							request.Name = list.Select(x => Elastic.Clients.Elasticsearch.Name.Parse(x, System.Globalization.CultureInfo.InvariantCulture)).ToList();
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -19438,6 +20011,8 @@ internal static partial class RequestFactory
 							request.EventType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.SearchApplication.EventType>.Parse(parameter.Value);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -19481,6 +20056,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -19519,6 +20096,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -19540,6 +20119,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -19561,6 +20142,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -19604,23 +20187,8 @@ internal static partial class RequestFactory
 							request.NodeId = Elastic.Clients.Elasticsearch.NodeIds.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
-					}
-				}
 
-				if (queryParameters is not null)
-				{
-					foreach (var parameter in queryParameters)
-					{
-						if (string.Equals(parameter.Key, "master_timeout", System.StringComparison.OrdinalIgnoreCase))
-						{
-							if (parameter.Value is null)
-							{
-								continue;
-							}
-
-							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
-							continue;
-						}
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -19647,6 +20215,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -19723,6 +20293,8 @@ internal static partial class RequestFactory
 							request.Snapshot = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -19748,7 +20320,7 @@ internal static partial class RequestFactory
 								continue;
 							}
 
-							request.Storage = parameter.Value;
+							request.Storage = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.SearchableSnapshots.StorageOption>.Parse(parameter.Value);
 							continue;
 						}
 
@@ -19788,6 +20360,8 @@ internal static partial class RequestFactory
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -19930,6 +20504,8 @@ internal static partial class RequestFactory
 							request.Username = Elastic.Clients.Elasticsearch.Username.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -19968,6 +20544,8 @@ internal static partial class RequestFactory
 							request.Ids = Elastic.Clients.Elasticsearch.Ids.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -19989,6 +20567,8 @@ internal static partial class RequestFactory
 							request.Application = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -20010,6 +20590,8 @@ internal static partial class RequestFactory
 							request.Realms = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -20053,6 +20635,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -20084,6 +20668,39 @@ internal static partial class RequestFactory
 						if (string.Equals(parameter.Key, "service", System.StringComparison.OrdinalIgnoreCase))
 						{
 							request.Service = parameter.Value;
+							continue;
+						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
+			"security.clone_api_key",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				if (string.IsNullOrEmpty(body))
+				{
+					throw new System.InvalidOperationException("Body is required.");
+				}
+
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequest>(serializer, body);
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "refresh", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Refresh = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Refresh>.Parse(parameter.Value);
 							continue;
 						}
 					}
@@ -20164,6 +20781,8 @@ internal static partial class RequestFactory
 							request.Service = parameter.Value;
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -20222,6 +20841,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -20260,6 +20881,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -20298,6 +20921,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -20348,6 +20973,8 @@ internal static partial class RequestFactory
 							request.Service = parameter.Value;
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -20386,6 +21013,8 @@ internal static partial class RequestFactory
 							request.Username = Elastic.Clients.Elasticsearch.Username.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -20424,6 +21053,8 @@ internal static partial class RequestFactory
 							request.Username = Elastic.Clients.Elasticsearch.Username.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -20462,6 +21093,8 @@ internal static partial class RequestFactory
 							request.Uid = parameter.Value;
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -20500,6 +21133,8 @@ internal static partial class RequestFactory
 							request.Username = Elastic.Clients.Elasticsearch.Username.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -20538,6 +21173,8 @@ internal static partial class RequestFactory
 							request.Uid = parameter.Value;
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -20722,6 +21359,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -20746,6 +21385,25 @@ internal static partial class RequestFactory
 							}
 
 							request.Name = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "include_implicit", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.IncludeImplicit = bool.Parse(parameter.Value);
 							continue;
 						}
 					}
@@ -20774,6 +21432,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -20811,6 +21471,8 @@ internal static partial class RequestFactory
 							request.Service = parameter.Value;
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -20838,6 +21500,8 @@ internal static partial class RequestFactory
 							request.Service = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -20913,6 +21577,8 @@ internal static partial class RequestFactory
 							request.Username = list.Select(x => Elastic.Clients.Elasticsearch.Username.Parse(x, System.Globalization.CultureInfo.InvariantCulture)).ToList();
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -20965,6 +21631,8 @@ internal static partial class RequestFactory
 							request.Uid = list.Select(x => x).ToList();
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -21044,6 +21712,8 @@ internal static partial class RequestFactory
 							request.User = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -21165,6 +21835,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -21203,6 +21875,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -21241,6 +21915,8 @@ internal static partial class RequestFactory
 							request.Username = Elastic.Clients.Elasticsearch.Username.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -21427,6 +22103,8 @@ internal static partial class RequestFactory
 							request.RealmName = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -21457,6 +22135,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -21483,6 +22163,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -21541,6 +22223,8 @@ internal static partial class RequestFactory
 							request.Uid = parameter.Value;
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -21611,6 +22295,8 @@ internal static partial class RequestFactory
 							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -21660,6 +22346,8 @@ internal static partial class RequestFactory
 							request.PolicyId = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -21709,6 +22397,8 @@ internal static partial class RequestFactory
 							request.PolicyId = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -21800,6 +22490,8 @@ internal static partial class RequestFactory
 							request.PolicyId = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -21923,6 +22615,8 @@ internal static partial class RequestFactory
 							request.PolicyId = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -22046,6 +22740,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -22112,6 +22808,8 @@ internal static partial class RequestFactory
 							request.TargetSnapshot = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -22156,6 +22854,8 @@ internal static partial class RequestFactory
 							request.Snapshot = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -22210,6 +22910,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -22276,6 +22978,8 @@ internal static partial class RequestFactory
 							request.Snapshot = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -22325,6 +23029,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -22380,6 +23086,8 @@ internal static partial class RequestFactory
 							request.Snapshot = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -22571,6 +23279,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -22620,6 +23330,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -22635,6 +23347,17 @@ internal static partial class RequestFactory
 							}
 
 							request.BlobCount = int.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "check_overwrite_protection", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.CheckOverwriteProtection = bool.Parse(parameter.Value);
 							continue;
 						}
 
@@ -22779,6 +23502,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -22900,6 +23625,8 @@ internal static partial class RequestFactory
 							request.Snapshot = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -22965,6 +23692,8 @@ internal static partial class RequestFactory
 							request.Snapshot = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -23014,6 +23743,8 @@ internal static partial class RequestFactory
 							request.Name = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -23077,6 +23808,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -23098,6 +23831,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -23169,6 +23904,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -23221,6 +23958,20 @@ internal static partial class RequestFactory
 			(serializer, pathParameters, queryParameters, body) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Streams.LogsDisableRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "name", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.Name = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Streams.StreamType>.Parse(parameter.Value);
+							continue;
+						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+					}
+				}
+
 				if (queryParameters is not null)
 				{
 					foreach (var parameter in queryParameters)
@@ -23258,6 +24009,20 @@ internal static partial class RequestFactory
 			(serializer, pathParameters, queryParameters, body) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Streams.LogsEnableRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "name", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.Name = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Streams.StreamType>.Parse(parameter.Value);
+							continue;
+						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+					}
+				}
+
 				if (queryParameters is not null)
 				{
 					foreach (var parameter in queryParameters)
@@ -23330,6 +24095,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -23357,6 +24124,8 @@ internal static partial class RequestFactory
 							request.SetId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -23395,6 +24164,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -23410,6 +24181,17 @@ internal static partial class RequestFactory
 							}
 
 							request.From = int.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "search_after", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.SearchAfter = parameter.Value;
 							continue;
 						}
 
@@ -23450,6 +24232,8 @@ internal static partial class RequestFactory
 							request.SetId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -23513,6 +24297,8 @@ internal static partial class RequestFactory
 							request.Id = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -23520,6 +24306,17 @@ internal static partial class RequestFactory
 				{
 					foreach (var parameter in queryParameters)
 					{
+						if (string.Equals(parameter.Key, "append", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Append = bool.Parse(parameter.Value);
+							continue;
+						}
+
 						if (string.Equals(parameter.Key, "refresh", System.StringComparison.OrdinalIgnoreCase))
 						{
 							if (parameter.Value is null)
@@ -23562,6 +24359,8 @@ internal static partial class RequestFactory
 							request.SetId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -23605,6 +24404,8 @@ internal static partial class RequestFactory
 							request.TaskId = Elastic.Clients.Elasticsearch.TaskId.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -23686,6 +24487,8 @@ internal static partial class RequestFactory
 							request.TaskId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -23693,6 +24496,17 @@ internal static partial class RequestFactory
 				{
 					foreach (var parameter in queryParameters)
 					{
+						if (string.Equals(parameter.Key, "follow_relocations", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.FollowRelocations = bool.Parse(parameter.Value);
+							continue;
+						}
+
 						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
 						{
 							if (parameter.Value is null)
@@ -23942,6 +24756,17 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+						if (string.Equals(parameter.Key, "should_parse_recursively", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.ShouldParseRecursively = bool.Parse(parameter.Value);
+							continue;
+						}
+
 						if (string.Equals(parameter.Key, "should_trim_fields", System.StringComparison.OrdinalIgnoreCase))
 						{
 							if (parameter.Value is null)
@@ -24088,6 +24913,17 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+						if (string.Equals(parameter.Key, "should_parse_recursively", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.ShouldParseRecursively = bool.Parse(parameter.Value);
+							continue;
+						}
+
 						if (string.Equals(parameter.Key, "should_trim_fields", System.StringComparison.OrdinalIgnoreCase))
 						{
 							if (parameter.Value is null)
@@ -24183,6 +25019,8 @@ internal static partial class RequestFactory
 							request.TransformId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -24257,6 +25095,8 @@ internal static partial class RequestFactory
 							request.TransformId = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -24328,6 +25168,8 @@ internal static partial class RequestFactory
 							request.TransformId = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -24404,6 +25246,8 @@ internal static partial class RequestFactory
 							request.TransformId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -24447,6 +25291,8 @@ internal static partial class RequestFactory
 							request.TransformId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -24496,6 +25342,8 @@ internal static partial class RequestFactory
 							request.TransformId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -24545,6 +25393,8 @@ internal static partial class RequestFactory
 							request.TransformId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -24552,6 +25402,17 @@ internal static partial class RequestFactory
 				{
 					foreach (var parameter in queryParameters)
 					{
+						if (string.Equals(parameter.Key, "defer", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Defer = bool.Parse(parameter.Value);
+							continue;
+						}
+
 						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
 						{
 							if (parameter.Value is null)
@@ -24620,6 +25481,8 @@ internal static partial class RequestFactory
 							request.TransformId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -24669,6 +25532,8 @@ internal static partial class RequestFactory
 							request.TransformId = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -24751,6 +25616,8 @@ internal static partial class RequestFactory
 							request.TransformId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
 					}
 				}
 
@@ -24891,5 +25758,5 @@ internal static partial class RequestFactory
 				return request;
 			}
 		}
-	}.ToFrozenDictionary();
+	});
 }

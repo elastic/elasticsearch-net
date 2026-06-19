@@ -25,131 +25,94 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class MultiTermVectorsRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Index is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Index is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			instance.Index.FormatCode(sb);
+			__init.Property("Index");
+			Index.FormatCode(writer);
 		}
 
-		if (instance.Fields is not null)
+		if (Fields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fields = ");
-			instance.Fields.FormatCode(sb);
+			__init.Property("Fields");
+			Fields.FormatCode(writer);
 		}
 
-		if (instance.FieldStatistics is not null)
+		if (FieldStatistics is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FieldStatistics = ");
-			sb.Append(instance.FieldStatistics.Value ? "true" : "false");
+			__init.Property("FieldStatistics");
+			writer.WriteValue(FieldStatistics.Value);
 		}
 
-		if (instance.Offsets is not null)
+		if (Offsets is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Offsets = ");
-			sb.Append(instance.Offsets.Value ? "true" : "false");
+			__init.Property("Offsets");
+			writer.WriteValue(Offsets.Value);
 		}
 
-		if (instance.Payloads is not null)
+		if (Payloads is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Payloads = ");
-			sb.Append(instance.Payloads.Value ? "true" : "false");
+			__init.Property("Payloads");
+			writer.WriteValue(Payloads.Value);
 		}
 
-		if (instance.Positions is not null)
+		if (Positions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Positions = ");
-			sb.Append(instance.Positions.Value ? "true" : "false");
+			__init.Property("Positions");
+			writer.WriteValue(Positions.Value);
 		}
 
-		if (instance.Preference is not null)
+		if (Preference is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Preference = ");
-			sb.Append("\"");
-			sb.Append(instance.Preference);
-			sb.Append("\"");
+			__init.Property("Preference");
+			writer.WriteString(Preference);
 		}
 
-		if (instance.Realtime is not null)
+		if (Realtime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Realtime = ");
-			sb.Append(instance.Realtime.Value ? "true" : "false");
+			__init.Property("Realtime");
+			writer.WriteValue(Realtime.Value);
 		}
 
-		if (instance.Routing is not null)
+		if (Routing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Routing = ");
-			instance.Routing.FormatCode(sb);
+			__init.Property("Routing");
+			Routing.FormatCode(writer);
 		}
 
-		if (instance.TermStatistics is not null)
+		if (TermStatistics is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TermStatistics = ");
-			sb.Append(instance.TermStatistics.Value ? "true" : "false");
+			__init.Property("TermStatistics");
+			writer.WriteValue(TermStatistics.Value);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append(instance.Version.Value);
-			sb.Append("L");
+			__init.Property("Version");
+			writer.WriteValue(Version.Value);
+			writer.Write("L");
 		}
 
-		if (instance.VersionType is not null)
+		if (VersionType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VersionType = ");
-			Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(instance.VersionType.Value, sb);
+			__init.Property("VersionType");
+			Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, writer);
 		}
 
-		if (instance.Docs is not null)
+		if (Docs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Docs = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Docs, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Docs");
+			writer.WriteInlineList(Docs, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Ids is not null)
+		if (Ids is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ids = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Ids, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Ids");
+			writer.WriteInlineList(Ids, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

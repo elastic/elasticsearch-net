@@ -25,19 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class CustomResponseParams : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JsonParser = ");
-			RequestConverter.CodeFormatter.FormatCode(instance.JsonParser, sb);
+			__init.Property("JsonParser");
+			writer.Write("new() ");
+			writer.WriteInlineList(JsonParser, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

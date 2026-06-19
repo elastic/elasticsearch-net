@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public static class SourceFieldModeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode.Disabled:
-				sb.Append("SourceFieldMode.Disabled");
+				writer.Write("SourceFieldMode.Disabled");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode.Stored:
-				sb.Append("SourceFieldMode.Stored");
+				writer.Write("SourceFieldMode.Stored");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode.Synthetic:
-				sb.Append("SourceFieldMode.Synthetic");
+				writer.Write("SourceFieldMode.Synthetic");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

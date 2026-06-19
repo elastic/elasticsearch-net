@@ -25,35 +25,24 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class DataStreamStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BackingIndicesInError = ");
-			sb.Append(instance.BackingIndicesInError);
+			__init.Property("BackingIndicesInError");
+			writer.WriteValue(BackingIndicesInError);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BackingIndicesInTotal = ");
-			sb.Append(instance.BackingIndicesInTotal);
+			__init.Property("BackingIndicesInTotal");
+			writer.WriteValue(BackingIndicesInTotal);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

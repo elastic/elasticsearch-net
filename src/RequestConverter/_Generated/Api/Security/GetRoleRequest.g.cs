@@ -25,20 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class GetRoleRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Name is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Name is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			instance.Name.FormatCode(sb);
+			__init.Property("Name");
+			Name.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		if (IncludeImplicit is not null)
+		{
+			__init.Property("IncludeImplicit");
+			writer.WriteValue(IncludeImplicit.Value);
+		}
+
+		__init.Dispose();
 	}
 }

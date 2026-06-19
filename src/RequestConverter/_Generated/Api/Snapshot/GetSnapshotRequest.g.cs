@@ -25,144 +25,103 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 public partial class GetSnapshotRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Repository = ");
-			instance.Repository.FormatCode(sb);
+			__init.Property("Repository");
+			Repository.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Snapshot = ");
-			instance.Snapshot.FormatCode(sb);
+			__init.Property("Snapshot");
+			Snapshot.FormatCode(writer);
 		}
 
-		if (instance.After is not null)
+		if (After is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("After = ");
-			sb.Append("\"");
-			sb.Append(instance.After);
-			sb.Append("\"");
+			__init.Property("After");
+			writer.WriteString(After);
 		}
 
-		if (instance.FromSortValue is not null)
+		if (FromSortValue is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FromSortValue = ");
-			sb.Append("\"");
-			sb.Append(instance.FromSortValue);
-			sb.Append("\"");
+			__init.Property("FromSortValue");
+			writer.WriteString(FromSortValue);
 		}
 
-		if (instance.IgnoreUnavailable is not null)
+		if (IgnoreUnavailable is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreUnavailable = ");
-			sb.Append(instance.IgnoreUnavailable.Value ? "true" : "false");
+			__init.Property("IgnoreUnavailable");
+			writer.WriteValue(IgnoreUnavailable.Value);
 		}
 
-		if (instance.IncludeRepository is not null)
+		if (IncludeRepository is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IncludeRepository = ");
-			sb.Append(instance.IncludeRepository.Value ? "true" : "false");
+			__init.Property("IncludeRepository");
+			writer.WriteValue(IncludeRepository.Value);
 		}
 
-		if (instance.IndexDetails is not null)
+		if (IndexDetails is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexDetails = ");
-			sb.Append(instance.IndexDetails.Value ? "true" : "false");
+			__init.Property("IndexDetails");
+			writer.WriteValue(IndexDetails.Value);
 		}
 
-		if (instance.IndexNames is not null)
+		if (IndexNames is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexNames = ");
-			sb.Append(instance.IndexNames.Value ? "true" : "false");
+			__init.Property("IndexNames");
+			writer.WriteValue(IndexNames.Value);
 		}
 
-		if (instance.MasterTimeout is not null)
+		if (MasterTimeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MasterTimeout = ");
-			instance.MasterTimeout.FormatCode(sb);
+			__init.Property("MasterTimeout");
+			MasterTimeout.FormatCode(writer);
 		}
 
-		if (instance.Offset is not null)
+		if (Offset is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Offset = ");
-			sb.Append(instance.Offset.Value);
+			__init.Property("Offset");
+			writer.WriteValue(Offset.Value);
 		}
 
-		if (instance.Order is not null)
+		if (Order is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Order = ");
-			Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(instance.Order.Value, sb);
+			__init.Property("Order");
+			Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, writer);
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append(instance.Size.Value);
+			__init.Property("Size");
+			writer.WriteValue(Size.Value);
 		}
 
-		if (instance.SlmPolicyFilter is not null)
+		if (SlmPolicyFilter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SlmPolicyFilter = ");
-			instance.SlmPolicyFilter.FormatCode(sb);
+			__init.Property("SlmPolicyFilter");
+			SlmPolicyFilter.FormatCode(writer);
 		}
 
-		if (instance.Sort is not null)
+		if (Sort is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sort = ");
-			Elastic.Clients.Elasticsearch.Snapshot.SnapshotSortCodeFormatter.FormatCode(instance.Sort.Value, sb);
+			__init.Property("Sort");
+			Elastic.Clients.Elasticsearch.Snapshot.SnapshotSortCodeFormatter.FormatCode(Sort.Value, writer);
 		}
 
-		if (instance.State is not null)
+		if (State is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("State = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.State, (item, sb) => { Elastic.Clients.Elasticsearch.Snapshot.SnapshotStateCodeFormatter.FormatCode(item, sb); }, sb);
-			sb.Append("]");
+			__init.Property("State");
+			writer.WriteInlineList(State, (w, item) => { Elastic.Clients.Elasticsearch.Snapshot.SnapshotStateCodeFormatter.FormatCode(item, w); });
 		}
 
-		if (instance.Verbose is not null)
+		if (Verbose is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Verbose = ");
-			sb.Append(instance.Verbose.Value ? "true" : "false");
+			__init.Property("Verbose");
+			writer.WriteValue(Verbose.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

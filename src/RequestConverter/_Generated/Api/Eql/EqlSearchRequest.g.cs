@@ -25,205 +25,146 @@ namespace Elastic.Clients.Elasticsearch.Eql;
 
 public partial class EqlSearchRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indices = ");
-			instance.Indices.FormatCode(sb);
+			__init.Property("Indices");
+			Indices.FormatCode(writer);
 		}
 
-		if (instance.AllowNoIndices is not null)
+		if (AllowNoIndices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowNoIndices = ");
-			sb.Append(instance.AllowNoIndices.Value ? "true" : "false");
+			__init.Property("AllowNoIndices");
+			writer.WriteValue(AllowNoIndices.Value);
 		}
 
-		if (instance.CcsMinimizeRoundtrips is not null)
+		if (CcsMinimizeRoundtrips is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CcsMinimizeRoundtrips = ");
-			sb.Append(instance.CcsMinimizeRoundtrips.Value ? "true" : "false");
+			__init.Property("CcsMinimizeRoundtrips");
+			writer.WriteValue(CcsMinimizeRoundtrips.Value);
 		}
 
-		if (instance.ExpandWildcards is not null)
+		if (ExpandWildcards is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExpandWildcards = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.ExpandWildcards, (item, sb) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, sb); }, sb);
-			sb.Append("]");
+			__init.Property("ExpandWildcards");
+			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
 		}
 
-		if (instance.IgnoreUnavailable is not null)
+		if (IgnoreUnavailable is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreUnavailable = ");
-			sb.Append(instance.IgnoreUnavailable.Value ? "true" : "false");
+			__init.Property("IgnoreUnavailable");
+			writer.WriteValue(IgnoreUnavailable.Value);
 		}
 
-		if (instance.AllowPartialSearchResults is not null)
+		if (AllowPartialSearchResults is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowPartialSearchResults = ");
-			sb.Append(instance.AllowPartialSearchResults.Value ? "true" : "false");
+			__init.Property("AllowPartialSearchResults");
+			writer.WriteValue(AllowPartialSearchResults.Value);
 		}
 
-		if (instance.AllowPartialSequenceResults is not null)
+		if (AllowPartialSequenceResults is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowPartialSequenceResults = ");
-			sb.Append(instance.AllowPartialSequenceResults.Value ? "true" : "false");
+			__init.Property("AllowPartialSequenceResults");
+			writer.WriteValue(AllowPartialSequenceResults.Value);
 		}
 
-		if (instance.CaseSensitive is not null)
+		if (CaseSensitive is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CaseSensitive = ");
-			sb.Append(instance.CaseSensitive.Value ? "true" : "false");
+			__init.Property("CaseSensitive");
+			writer.WriteValue(CaseSensitive.Value);
 		}
 
-		if (instance.EventCategoryField is not null)
+		if (EventCategoryField is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EventCategoryField = ");
-			instance.EventCategoryField.FormatCode(sb);
+			__init.Property("EventCategoryField");
+			EventCategoryField.FormatCode(writer);
 		}
 
-		if (instance.FetchSize is not null)
+		if (FetchSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FetchSize = ");
-			sb.Append(instance.FetchSize.Value);
+			__init.Property("FetchSize");
+			writer.WriteValue(FetchSize.Value);
 		}
 
-		if (instance.Fields is not null)
+		if (Fields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fields = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Fields, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Fields");
+			writer.WriteInlineList(Fields, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Filter is not null)
+		if (Filter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Filter = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Filter, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Filter");
+			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.KeepAlive is not null)
+		if (KeepAlive is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("KeepAlive = ");
-			instance.KeepAlive.FormatCode(sb);
+			__init.Property("KeepAlive");
+			KeepAlive.FormatCode(writer);
 		}
 
-		if (instance.KeepOnCompletion is not null)
+		if (KeepOnCompletion is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("KeepOnCompletion = ");
-			sb.Append(instance.KeepOnCompletion.Value ? "true" : "false");
+			__init.Property("KeepOnCompletion");
+			writer.WriteValue(KeepOnCompletion.Value);
 		}
 
-		if (instance.MaxSamplesPerKey is not null)
+		if (MaxSamplesPerKey is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxSamplesPerKey = ");
-			sb.Append(instance.MaxSamplesPerKey.Value);
+			__init.Property("MaxSamplesPerKey");
+			writer.WriteValue(MaxSamplesPerKey.Value);
 		}
 
-		if (instance.ProjectRouting is not null)
+		if (ProjectRouting is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ProjectRouting = ");
-			sb.Append("\"");
-			sb.Append(instance.ProjectRouting);
-			sb.Append("\"");
+			__init.Property("ProjectRouting");
+			writer.WriteString(ProjectRouting);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			sb.Append("\"");
-			sb.Append(instance.Query);
-			sb.Append("\"");
+			__init.Property("Query");
+			writer.WriteString(Query);
 		}
 
-		if (instance.ResultPosition is not null)
+		if (ResultPosition is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ResultPosition = ");
-			Elastic.Clients.Elasticsearch.Eql.ResultPositionCodeFormatter.FormatCode(instance.ResultPosition.Value, sb);
+			__init.Property("ResultPosition");
+			Elastic.Clients.Elasticsearch.Eql.ResultPositionCodeFormatter.FormatCode(ResultPosition.Value, writer);
 		}
 
-		if (instance.RuntimeMappings is not null)
+		if (RuntimeMappings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RuntimeMappings = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.RuntimeMappings, (k, sb) => { k.FormatCode(sb); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("RuntimeMappings");
+			writer.Write("new() ");
+			writer.WriteInlineList(RuntimeMappings, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append(instance.Size.Value);
+			__init.Property("Size");
+			writer.WriteValue(Size.Value);
 		}
 
-		if (instance.TiebreakerField is not null)
+		if (TiebreakerField is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TiebreakerField = ");
-			instance.TiebreakerField.FormatCode(sb);
+			__init.Property("TiebreakerField");
+			TiebreakerField.FormatCode(writer);
 		}
 
-		if (instance.TimestampField is not null)
+		if (TimestampField is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimestampField = ");
-			instance.TimestampField.FormatCode(sb);
+			__init.Property("TimestampField");
+			TimestampField.FormatCode(writer);
 		}
 
-		if (instance.WaitForCompletionTimeout is not null)
+		if (WaitForCompletionTimeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WaitForCompletionTimeout = ");
-			instance.WaitForCompletionTimeout.FormatCode(sb);
+			__init.Property("WaitForCompletionTimeout");
+			WaitForCompletionTimeout.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

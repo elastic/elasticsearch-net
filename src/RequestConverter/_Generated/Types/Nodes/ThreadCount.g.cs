@@ -25,66 +25,51 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class ThreadCount : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Active is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Active is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Active = ");
-			sb.Append(instance.Active.Value);
-			sb.Append("L");
+			__init.Property("Active");
+			writer.WriteValue(Active.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Completed is not null)
+		if (Completed is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Completed = ");
-			sb.Append(instance.Completed.Value);
-			sb.Append("L");
+			__init.Property("Completed");
+			writer.WriteValue(Completed.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Largest is not null)
+		if (Largest is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Largest = ");
-			sb.Append(instance.Largest.Value);
-			sb.Append("L");
+			__init.Property("Largest");
+			writer.WriteValue(Largest.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Queue is not null)
+		if (Queue is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Queue = ");
-			sb.Append(instance.Queue.Value);
-			sb.Append("L");
+			__init.Property("Queue");
+			writer.WriteValue(Queue.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Rejected is not null)
+		if (Rejected is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Rejected = ");
-			sb.Append(instance.Rejected.Value);
-			sb.Append("L");
+			__init.Property("Rejected");
+			writer.WriteValue(Rejected.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Threads is not null)
+		if (Threads is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Threads = ");
-			sb.Append(instance.Threads.Value);
-			sb.Append("L");
+			__init.Property("Threads");
+			writer.WriteValue(Threads.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,71 +25,50 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class HasParentQuery : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Boost is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Boost is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Boost = ");
-			sb.Append(instance.Boost.Value);
-			sb.Append("f");
+			__init.Property("Boost");
+			writer.WriteValue(Boost.Value);
+			writer.Write("f");
 		}
 
-		if (instance.IgnoreUnmapped is not null)
+		if (IgnoreUnmapped is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreUnmapped = ");
-			sb.Append(instance.IgnoreUnmapped.Value ? "true" : "false");
+			__init.Property("IgnoreUnmapped");
+			writer.WriteValue(IgnoreUnmapped.Value);
 		}
 
-		if (instance.InnerHits is not null)
+		if (InnerHits is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InnerHits = ");
-			instance.InnerHits.FormatCode(sb);
+			__init.Property("InnerHits");
+			InnerHits.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ParentType = ");
-			sb.Append("\"");
-			sb.Append(instance.ParentType);
-			sb.Append("\"");
+			__init.Property("ParentType");
+			writer.WriteString(ParentType);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			instance.Query.FormatCode(sb);
+			__init.Property("Query");
+			Query.FormatCode(writer);
 		}
 
-		if (instance.QueryName is not null)
+		if (QueryName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryName = ");
-			sb.Append("\"");
-			sb.Append(instance.QueryName);
-			sb.Append("\"");
+			__init.Property("QueryName");
+			writer.WriteString(QueryName);
 		}
 
-		if (instance.Score is not null)
+		if (Score is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Score = ");
-			sb.Append(instance.Score.Value ? "true" : "false");
+			__init.Property("Score");
+			writer.WriteValue(Score.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

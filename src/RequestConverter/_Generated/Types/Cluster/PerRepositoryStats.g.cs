@@ -25,46 +25,31 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class PerRepositoryStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CurrentCounts = ");
-			instance.CurrentCounts.FormatCode(sb);
+			__init.Property("CurrentCounts");
+			CurrentCounts.FormatCode(writer);
 		}
 
-		if (instance.OldestStartTime is not null)
+		if (OldestStartTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OldestStartTime = ");
-			sb.Append("\"");
-			sb.Append(instance.OldestStartTime);
-			sb.Append("\"");
+			__init.Property("OldestStartTime");
+			writer.WriteString(OldestStartTime);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OldestStartTimeMillis = ");
-			sb.Append(instance.OldestStartTimeMillis);
-			sb.Append("L");
+			__init.Property("OldestStartTimeMillis");
+			writer.WriteValue(OldestStartTimeMillis);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			sb.Append("\"");
-			sb.Append(instance.Type);
-			sb.Append("\"");
+			__init.Property("Type");
+			writer.WriteString(Type);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

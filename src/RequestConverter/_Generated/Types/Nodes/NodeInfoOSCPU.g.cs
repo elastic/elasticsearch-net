@@ -25,74 +25,49 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class NodeInfoOSCPU : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CacheSize = ");
-			sb.Append("\"");
-			sb.Append(instance.CacheSize);
-			sb.Append("\"");
+			__init.Property("CacheSize");
+			writer.WriteString(CacheSize);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CacheSizeInBytes = ");
-			sb.Append(instance.CacheSizeInBytes);
+			__init.Property("CacheSizeInBytes");
+			writer.WriteValue(CacheSizeInBytes);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CoresPerSocket = ");
-			sb.Append(instance.CoresPerSocket);
+			__init.Property("CoresPerSocket");
+			writer.WriteValue(CoresPerSocket);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mhz = ");
-			sb.Append(instance.Mhz);
+			__init.Property("Mhz");
+			writer.WriteValue(Mhz);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Model = ");
-			sb.Append("\"");
-			sb.Append(instance.Model);
-			sb.Append("\"");
+			__init.Property("Model");
+			writer.WriteString(Model);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalCores = ");
-			sb.Append(instance.TotalCores);
+			__init.Property("TotalCores");
+			writer.WriteValue(TotalCores);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalSockets = ");
-			sb.Append(instance.TotalSockets);
+			__init.Property("TotalSockets");
+			writer.WriteValue(TotalSockets);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Vendor = ");
-			sb.Append("\"");
-			sb.Append(instance.Vendor);
-			sb.Append("\"");
+			__init.Property("Vendor");
+			writer.WriteString(Vendor);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,55 +25,38 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class TermSuggestOption : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CollateMatch is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CollateMatch is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CollateMatch = ");
-			sb.Append(instance.CollateMatch.Value ? "true" : "false");
+			__init.Property("CollateMatch");
+			writer.WriteValue(CollateMatch.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Freq = ");
-			sb.Append(instance.Freq);
-			sb.Append("L");
+			__init.Property("Freq");
+			writer.WriteValue(Freq);
+			writer.Write("L");
 		}
 
-		if (instance.Highlighted is not null)
+		if (Highlighted is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Highlighted = ");
-			sb.Append("\"");
-			sb.Append(instance.Highlighted);
-			sb.Append("\"");
+			__init.Property("Highlighted");
+			writer.WriteString(Highlighted);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Score = ");
-			sb.Append(instance.Score);
-			sb.Append("d");
+			__init.Property("Score");
+			writer.WriteValue(Score);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Text = ");
-			sb.Append("\"");
-			sb.Append(instance.Text);
-			sb.Append("\"");
+			__init.Property("Text");
+			writer.WriteString(Text);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

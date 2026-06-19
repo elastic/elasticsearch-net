@@ -25,54 +25,39 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class GeoDistanceAggregation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.DistanceType is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (DistanceType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DistanceType = ");
-			Elastic.Clients.Elasticsearch.GeoDistanceTypeCodeFormatter.FormatCode(instance.DistanceType.Value, sb);
+			__init.Property("DistanceType");
+			Elastic.Clients.Elasticsearch.GeoDistanceTypeCodeFormatter.FormatCode(DistanceType.Value, writer);
 		}
 
-		if (instance.Field is not null)
+		if (Field is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.Origin is not null)
+		if (Origin is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Origin = ");
-			instance.Origin.FormatCode(sb);
+			__init.Property("Origin");
+			Origin.FormatCode(writer);
 		}
 
-		if (instance.Ranges is not null)
+		if (Ranges is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ranges = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Ranges, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Ranges");
+			writer.WriteInlineList(Ranges, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Unit is not null)
+		if (Unit is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Unit = ");
-			Elastic.Clients.Elasticsearch.DistanceUnitCodeFormatter.FormatCode(instance.Unit.Value, sb);
+			__init.Property("Unit");
+			Elastic.Clients.Elasticsearch.DistanceUnitCodeFormatter.FormatCode(Unit.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

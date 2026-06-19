@@ -25,55 +25,38 @@ namespace Elastic.Clients.Elasticsearch.Sql;
 
 public partial class GetAsyncRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			instance.Id.FormatCode(sb);
+			__init.Property("Id");
+			Id.FormatCode(writer);
 		}
 
-		if (instance.Delimiter is not null)
+		if (Delimiter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Delimiter = ");
-			sb.Append("\"");
-			sb.Append(instance.Delimiter);
-			sb.Append("\"");
+			__init.Property("Delimiter");
+			writer.WriteString(Delimiter);
 		}
 
-		if (instance.Format is not null)
+		if (Format is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Format = ");
-			sb.Append("\"");
-			sb.Append(instance.Format);
-			sb.Append("\"");
+			__init.Property("Format");
+			writer.WriteString(Format);
 		}
 
-		if (instance.KeepAlive is not null)
+		if (KeepAlive is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("KeepAlive = ");
-			instance.KeepAlive.FormatCode(sb);
+			__init.Property("KeepAlive");
+			KeepAlive.FormatCode(writer);
 		}
 
-		if (instance.WaitForCompletionTimeout is not null)
+		if (WaitForCompletionTimeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WaitForCompletionTimeout = ");
-			instance.WaitForCompletionTimeout.FormatCode(sb);
+			__init.Property("WaitForCompletionTimeout");
+			WaitForCompletionTimeout.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

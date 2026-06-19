@@ -25,44 +25,31 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class InferTrainedModelRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelId = ");
-			instance.ModelId.FormatCode(sb);
+			__init.Property("ModelId");
+			ModelId.FormatCode(writer);
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Docs = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Docs, (item, sb) => { sb.Append("new()"); RequestConverter.CodeFormatter.FormatCode(item, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb); }, sb);
-			sb.Append("]");
+			__init.Property("Docs");
+			writer.WriteInlineList(Docs, (w, item) => { w.Write("new() "); w.WriteInlineList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", "); });
 		}
 
-		if (instance.InferenceConfig is not null)
+		if (InferenceConfig is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InferenceConfig = ");
-			instance.InferenceConfig.FormatCode(sb);
+			__init.Property("InferenceConfig");
+			InferenceConfig.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

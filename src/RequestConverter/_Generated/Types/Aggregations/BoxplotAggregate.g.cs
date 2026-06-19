@@ -25,147 +25,100 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class BoxplotAggregate : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Lower = ");
-			sb.Append(instance.Lower);
-			sb.Append("d");
+			__init.Property("Lower");
+			writer.WriteValue(Lower);
+			writer.Write("d");
 		}
 
-		if (instance.LowerAsString is not null)
+		if (LowerAsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LowerAsString = ");
-			sb.Append("\"");
-			sb.Append(instance.LowerAsString);
-			sb.Append("\"");
+			__init.Property("LowerAsString");
+			writer.WriteString(LowerAsString);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Max = ");
-			sb.Append(instance.Max);
-			sb.Append("d");
+			__init.Property("Max");
+			writer.WriteValue(Max);
+			writer.Write("d");
 		}
 
-		if (instance.MaxAsString is not null)
+		if (MaxAsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxAsString = ");
-			sb.Append("\"");
-			sb.Append(instance.MaxAsString);
-			sb.Append("\"");
+			__init.Property("MaxAsString");
+			writer.WriteString(MaxAsString);
 		}
 
-		if (instance.Meta is not null)
+		if (Meta is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Meta = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Meta, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Meta");
+			writer.Write("new() ");
+			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Min = ");
-			sb.Append(instance.Min);
-			sb.Append("d");
+			__init.Property("Min");
+			writer.WriteValue(Min);
+			writer.Write("d");
 		}
 
-		if (instance.MinAsString is not null)
+		if (MinAsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinAsString = ");
-			sb.Append("\"");
-			sb.Append(instance.MinAsString);
-			sb.Append("\"");
+			__init.Property("MinAsString");
+			writer.WriteString(MinAsString);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Q1 = ");
-			sb.Append(instance.Q1);
-			sb.Append("d");
+			__init.Property("Q1");
+			writer.WriteValue(Q1);
+			writer.Write("d");
 		}
 
-		if (instance.Q1AsString is not null)
+		if (Q1AsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Q1AsString = ");
-			sb.Append("\"");
-			sb.Append(instance.Q1AsString);
-			sb.Append("\"");
+			__init.Property("Q1AsString");
+			writer.WriteString(Q1AsString);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Q2 = ");
-			sb.Append(instance.Q2);
-			sb.Append("d");
+			__init.Property("Q2");
+			writer.WriteValue(Q2);
+			writer.Write("d");
 		}
 
-		if (instance.Q2AsString is not null)
+		if (Q2AsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Q2AsString = ");
-			sb.Append("\"");
-			sb.Append(instance.Q2AsString);
-			sb.Append("\"");
+			__init.Property("Q2AsString");
+			writer.WriteString(Q2AsString);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Q3 = ");
-			sb.Append(instance.Q3);
-			sb.Append("d");
+			__init.Property("Q3");
+			writer.WriteValue(Q3);
+			writer.Write("d");
 		}
 
-		if (instance.Q3AsString is not null)
+		if (Q3AsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Q3AsString = ");
-			sb.Append("\"");
-			sb.Append(instance.Q3AsString);
-			sb.Append("\"");
+			__init.Property("Q3AsString");
+			writer.WriteString(Q3AsString);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Upper = ");
-			sb.Append(instance.Upper);
-			sb.Append("d");
+			__init.Property("Upper");
+			writer.WriteValue(Upper);
+			writer.Write("d");
 		}
 
-		if (instance.UpperAsString is not null)
+		if (UpperAsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UpperAsString = ");
-			sb.Append("\"");
-			sb.Append(instance.UpperAsString);
-			sb.Append("\"");
+			__init.Property("UpperAsString");
+			writer.WriteString(UpperAsString);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

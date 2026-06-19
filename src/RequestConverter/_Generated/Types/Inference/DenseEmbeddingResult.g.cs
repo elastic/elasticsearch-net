@@ -25,21 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class DenseEmbeddingResult : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Embedding = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Embedding, (item, sb) => { sb.Append(item); sb.Append("f"); }, sb);
-			sb.Append("]");
+			__init.Property("Embedding");
+			writer.WriteInlineList(Embedding, (w, item) => { w.WriteValue(item); w.Write("f"); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

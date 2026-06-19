@@ -25,55 +25,40 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class DoubleTermsBucket : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Aggregations is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Aggregations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Aggregations = ");
-			instance.Aggregations.FormatCode(sb);
+			__init.Property("Aggregations");
+			Aggregations.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocCount = ");
-			sb.Append(instance.DocCount);
-			sb.Append("L");
+			__init.Property("DocCount");
+			writer.WriteValue(DocCount);
+			writer.Write("L");
 		}
 
-		if (instance.DocCountErrorUpperBound is not null)
+		if (DocCountErrorUpperBound is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocCountErrorUpperBound = ");
-			sb.Append(instance.DocCountErrorUpperBound.Value);
-			sb.Append("L");
+			__init.Property("DocCountErrorUpperBound");
+			writer.WriteValue(DocCountErrorUpperBound.Value);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Key = ");
-			sb.Append(instance.Key);
-			sb.Append("d");
+			__init.Property("Key");
+			writer.WriteValue(Key);
+			writer.Write("d");
 		}
 
-		if (instance.KeyAsString is not null)
+		if (KeyAsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("KeyAsString = ");
-			sb.Append("\"");
-			sb.Append(instance.KeyAsString);
-			sb.Append("\"");
+			__init.Property("KeyAsString");
+			writer.WriteString(KeyAsString);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

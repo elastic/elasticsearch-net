@@ -25,78 +25,63 @@ namespace Elastic.Clients.Elasticsearch.Core.Reindex;
 
 public partial class Source : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indices = ");
-			instance.Indices.FormatCode(sb);
+			__init.Property("Indices");
+			Indices.FormatCode(writer);
 		}
 
-		if (instance.Query is not null)
+		if (ProjectRouting is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			instance.Query.FormatCode(sb);
+			__init.Property("ProjectRouting");
+			writer.WriteString(ProjectRouting);
 		}
 
-		if (instance.Remote is not null)
+		if (Query is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Remote = ");
-			instance.Remote.FormatCode(sb);
+			__init.Property("Query");
+			Query.FormatCode(writer);
 		}
 
-		if (instance.RuntimeMappings is not null)
+		if (Remote is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RuntimeMappings = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.RuntimeMappings, (k, sb) => { k.FormatCode(sb); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Remote");
+			Remote.FormatCode(writer);
 		}
 
-		if (instance.Size is not null)
+		if (RuntimeMappings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append(instance.Size.Value);
+			__init.Property("RuntimeMappings");
+			writer.Write("new() ");
+			writer.WriteInlineList(RuntimeMappings, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Slice is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Slice = ");
-			instance.Slice.FormatCode(sb);
+			__init.Property("Size");
+			writer.WriteValue(Size.Value);
+		}
+
+		if (Slice is not null)
+		{
+			__init.Property("Slice");
+			Slice.FormatCode(writer);
 		}
 #pragma warning disable CS0618
-		if (instance.Sort is not null)
+		if (Sort is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sort = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Sort, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Sort");
+			writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
 		}
 #pragma warning restore CS0618
-		if (instance.SourceFields is not null)
+		if (SourceFields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SourceFields = ");
-			instance.SourceFields.FormatCode(sb);
+			__init.Property("SourceFields");
+			SourceFields.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

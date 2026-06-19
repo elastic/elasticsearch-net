@@ -25,34 +25,25 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class GeoDecayFunction : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.MultiValueMode is not null)
+		if (MultiValueMode is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MultiValueMode = ");
-			Elastic.Clients.Elasticsearch.QueryDsl.MultiValueModeCodeFormatter.FormatCode(instance.MultiValueMode.Value, sb);
+			__init.Property("MultiValueMode");
+			Elastic.Clients.Elasticsearch.QueryDsl.MultiValueModeCodeFormatter.FormatCode(MultiValueMode.Value, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Placement = ");
-			instance.Placement.FormatCode(sb);
+			__init.Property("Placement");
+			Placement.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

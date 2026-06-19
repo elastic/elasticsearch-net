@@ -25,41 +25,30 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class RepositoryStatsShards : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Complete = ");
-			sb.Append(instance.Complete);
+			__init.Property("Complete");
+			writer.WriteValue(Complete);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Incomplete = ");
-			sb.Append(instance.Incomplete);
+			__init.Property("Incomplete");
+			writer.WriteValue(Incomplete);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("States = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.States, (k, sb) => { Elastic.Clients.Elasticsearch.Cluster.ShardStateCodeFormatter.FormatCode(k, sb); }, (v, sb) => { sb.Append(v); }, sb);
+			__init.Property("States");
+			writer.Write("new() ");
+			writer.WriteInlineList(States, (w, kvp) => { w.Write("{ "); Elastic.Clients.Elasticsearch.Cluster.ShardStateCodeFormatter.FormatCode(kvp.Key, w); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			sb.Append(instance.Total);
+			__init.Property("Total");
+			writer.WriteValue(Total);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

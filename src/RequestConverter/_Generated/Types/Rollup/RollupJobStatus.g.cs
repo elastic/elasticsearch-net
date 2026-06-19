@@ -25,36 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Rollup;
 
 public partial class RollupJobStatus : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CurrentPosition is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CurrentPosition is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CurrentPosition = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.CurrentPosition, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("CurrentPosition");
+			writer.Write("new() ");
+			writer.WriteInlineList(CurrentPosition, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JobState = ");
-			Elastic.Clients.Elasticsearch.Rollup.IndexingJobStateCodeFormatter.FormatCode(instance.JobState, sb);
+			__init.Property("JobState");
+			Elastic.Clients.Elasticsearch.Rollup.IndexingJobStateCodeFormatter.FormatCode(JobState, writer);
 		}
 
-		if (instance.UpgradedDocId is not null)
+		if (UpgradedDocId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UpgradedDocId = ");
-			sb.Append(instance.UpgradedDocId.Value ? "true" : "false");
+			__init.Property("UpgradedDocId");
+			writer.WriteValue(UpgradedDocId.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

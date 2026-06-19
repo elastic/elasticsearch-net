@@ -25,33 +25,24 @@ namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
 public partial class Retention : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExpireAfter = ");
-			instance.ExpireAfter.FormatCode(sb);
+			__init.Property("ExpireAfter");
+			ExpireAfter.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxCount = ");
-			sb.Append(instance.MaxCount);
+			__init.Property("MaxCount");
+			writer.WriteValue(MaxCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinCount = ");
-			sb.Append(instance.MinCount);
+			__init.Property("MinCount");
+			writer.WriteValue(MinCount);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

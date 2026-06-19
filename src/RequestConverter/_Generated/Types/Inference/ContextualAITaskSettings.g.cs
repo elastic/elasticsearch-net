@@ -25,38 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class ContextualAITaskSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Instruction is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Instruction is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Instruction = ");
-			sb.Append("\"");
-			sb.Append(instance.Instruction);
-			sb.Append("\"");
+			__init.Property("Instruction");
+			writer.WriteString(Instruction);
 		}
 
-		if (instance.ReturnDocuments is not null)
+		if (TopK is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReturnDocuments = ");
-			sb.Append(instance.ReturnDocuments.Value ? "true" : "false");
+			__init.Property("TopK");
+			writer.WriteValue(TopK.Value);
 		}
 
-		if (instance.TopK is not null)
-		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TopK = ");
-			sb.Append(instance.TopK.Value);
-		}
-
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

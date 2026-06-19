@@ -25,37 +25,28 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DeleteExpiredDataRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.JobId is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (JobId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JobId = ");
-			instance.JobId.FormatCode(sb);
+			__init.Property("JobId");
+			JobId.FormatCode(writer);
 		}
 
-		if (instance.RequestsPerSecond is not null)
+		if (RequestsPerSecond is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RequestsPerSecond = ");
-			sb.Append(instance.RequestsPerSecond.Value);
-			sb.Append("f");
+			__init.Property("RequestsPerSecond");
+			writer.WriteValue(RequestsPerSecond.Value);
+			writer.Write("f");
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

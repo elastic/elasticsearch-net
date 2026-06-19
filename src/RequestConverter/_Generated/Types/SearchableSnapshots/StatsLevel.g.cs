@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots;
 
 public static class StatsLevelCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel.Cluster:
-				sb.Append("StatsLevel.Cluster");
+				writer.Write("StatsLevel.Cluster");
 				break;
 			case Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel.Indices:
-				sb.Append("StatsLevel.Indices");
+				writer.Write("StatsLevel.Indices");
 				break;
 			case Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel.Shards:
-				sb.Append("StatsLevel.Shards");
+				writer.Write("StatsLevel.Shards");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

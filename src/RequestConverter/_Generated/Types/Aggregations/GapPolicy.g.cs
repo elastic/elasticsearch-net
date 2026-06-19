@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public static class GapPolicyCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Aggregations.GapPolicy.InsertZeros:
-				sb.Append("GapPolicy.InsertZeros");
+				writer.Write("GapPolicy.InsertZeros");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.GapPolicy.KeepValues:
-				sb.Append("GapPolicy.KeepValues");
+				writer.Write("GapPolicy.KeepValues");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.GapPolicy.Skip:
-				sb.Append("GapPolicy.Skip");
+				writer.Write("GapPolicy.Skip");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

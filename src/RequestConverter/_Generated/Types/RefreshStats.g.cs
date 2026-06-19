@@ -25,58 +25,43 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class RefreshStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExternalTotal = ");
-			sb.Append(instance.ExternalTotal);
-			sb.Append("L");
+			__init.Property("ExternalTotal");
+			writer.WriteValue(ExternalTotal);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExternalTotalTimeInMillis = ");
-			sb.Append(instance.ExternalTotalTimeInMillis);
+			__init.Property("ExternalTotalTimeInMillis");
+			writer.WriteValue(ExternalTotalTimeInMillis);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Listeners = ");
-			sb.Append(instance.Listeners);
-			sb.Append("L");
+			__init.Property("Listeners");
+			writer.WriteValue(Listeners);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			sb.Append(instance.Total);
-			sb.Append("L");
+			__init.Property("Total");
+			writer.WriteValue(Total);
+			writer.Write("L");
 		}
 
-		if (instance.TotalTime is not null)
+		if (TotalTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalTime = ");
-			instance.TotalTime.FormatCode(sb);
+			__init.Property("TotalTime");
+			TotalTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalTimeInMillis = ");
-			sb.Append(instance.TotalTimeInMillis);
+			__init.Property("TotalTimeInMillis");
+			writer.WriteValue(TotalTimeInMillis);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

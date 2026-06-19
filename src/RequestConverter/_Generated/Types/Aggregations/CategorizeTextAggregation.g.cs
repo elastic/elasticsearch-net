@@ -25,93 +25,68 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class CategorizeTextAggregation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CategorizationAnalyzer is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CategorizationAnalyzer is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CategorizationAnalyzer = ");
-			instance.CategorizationAnalyzer.FormatCode(sb);
+			__init.Property("CategorizationAnalyzer");
+			CategorizationAnalyzer.FormatCode(writer);
 		}
 
-		if (instance.CategorizationFilters is not null)
+		if (CategorizationFilters is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CategorizationFilters = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.CategorizationFilters, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("CategorizationFilters");
+			writer.WriteInlineList(CategorizationFilters, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.MaxMatchedTokens is not null)
+		if (MaxMatchedTokens is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxMatchedTokens = ");
-			sb.Append(instance.MaxMatchedTokens.Value);
+			__init.Property("MaxMatchedTokens");
+			writer.WriteValue(MaxMatchedTokens.Value);
 		}
 
-		if (instance.MaxUniqueTokens is not null)
+		if (MaxUniqueTokens is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxUniqueTokens = ");
-			sb.Append(instance.MaxUniqueTokens.Value);
+			__init.Property("MaxUniqueTokens");
+			writer.WriteValue(MaxUniqueTokens.Value);
 		}
 
-		if (instance.MinDocCount is not null)
+		if (MinDocCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinDocCount = ");
-			sb.Append(instance.MinDocCount.Value);
+			__init.Property("MinDocCount");
+			writer.WriteValue(MinDocCount.Value);
 		}
 
-		if (instance.ShardMinDocCount is not null)
+		if (ShardMinDocCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShardMinDocCount = ");
-			sb.Append(instance.ShardMinDocCount.Value);
+			__init.Property("ShardMinDocCount");
+			writer.WriteValue(ShardMinDocCount.Value);
 		}
 
-		if (instance.ShardSize is not null)
+		if (ShardSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShardSize = ");
-			sb.Append(instance.ShardSize.Value);
+			__init.Property("ShardSize");
+			writer.WriteValue(ShardSize.Value);
 		}
 
-		if (instance.SimilarityThreshold is not null)
+		if (SimilarityThreshold is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SimilarityThreshold = ");
-			sb.Append(instance.SimilarityThreshold.Value);
+			__init.Property("SimilarityThreshold");
+			writer.WriteValue(SimilarityThreshold.Value);
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append(instance.Size.Value);
+			__init.Property("Size");
+			writer.WriteValue(Size.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

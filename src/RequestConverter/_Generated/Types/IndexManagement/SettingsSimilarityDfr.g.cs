@@ -25,33 +25,24 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class SettingsSimilarityDfr : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AfterEffect = ");
-			Elastic.Clients.Elasticsearch.DFRAfterEffectCodeFormatter.FormatCode(instance.AfterEffect, sb);
+			__init.Property("AfterEffect");
+			Elastic.Clients.Elasticsearch.DFRAfterEffectCodeFormatter.FormatCode(AfterEffect, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BasicModel = ");
-			Elastic.Clients.Elasticsearch.DFRBasicModelCodeFormatter.FormatCode(instance.BasicModel, sb);
+			__init.Property("BasicModel");
+			Elastic.Clients.Elasticsearch.DFRBasicModelCodeFormatter.FormatCode(BasicModel, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Normalization = ");
-			Elastic.Clients.Elasticsearch.NormalizationCodeFormatter.FormatCode(instance.Normalization, sb);
+			__init.Property("Normalization");
+			Elastic.Clients.Elasticsearch.NormalizationCodeFormatter.FormatCode(Normalization, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,28 +25,19 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class Ilm : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PolicyCount = ");
-			sb.Append(instance.PolicyCount);
+			__init.Property("PolicyCount");
+			writer.WriteValue(PolicyCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PolicyStats = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.PolicyStats, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("PolicyStats");
+			writer.WriteInlineList(PolicyStats, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

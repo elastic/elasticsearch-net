@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public static class SortTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Cluster.SortType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Cluster.SortType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Cluster.SortType.Doc:
-				sb.Append("SortType.Doc");
+				writer.Write("SortType.Doc");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.SortType.GeoDistance:
-				sb.Append("SortType.GeoDistance");
+				writer.Write("SortType.GeoDistance");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.SortType.Score:
-				sb.Append("SortType.Score");
+				writer.Write("SortType.Score");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.SortType.Script:
-				sb.Append("SortType.Script");
+				writer.Write("SortType.Script");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.SortType.FieldSort:
-				sb.Append("SortType.FieldSort");
+				writer.Write("SortType.FieldSort");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

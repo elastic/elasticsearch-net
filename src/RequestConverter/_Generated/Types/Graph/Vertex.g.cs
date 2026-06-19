@@ -25,46 +25,31 @@ namespace Elastic.Clients.Elasticsearch.Graph;
 
 public partial class Vertex : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Depth = ");
-			sb.Append(instance.Depth);
-			sb.Append("L");
+			__init.Property("Depth");
+			writer.WriteValue(Depth);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			sb.Append("\"");
-			sb.Append(instance.Field);
-			sb.Append("\"");
+			__init.Property("Field");
+			writer.WriteString(Field);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Term = ");
-			sb.Append("\"");
-			sb.Append(instance.Term);
-			sb.Append("\"");
+			__init.Property("Term");
+			writer.WriteString(Term);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Weight = ");
-			sb.Append(instance.Weight);
-			sb.Append("d");
+			__init.Property("Weight");
+			writer.WriteValue(Weight);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

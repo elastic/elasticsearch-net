@@ -25,39 +25,24 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class ReloadDetails : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			sb.Append("\"");
-			sb.Append(instance.Index);
-			sb.Append("\"");
+			__init.Property("Index");
+			writer.WriteString(Index);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReloadedAnalyzers = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.ReloadedAnalyzers, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("ReloadedAnalyzers");
+			writer.WriteInlineList(ReloadedAnalyzers, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReloadedNodeIds = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.ReloadedNodeIds, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("ReloadedNodeIds");
+			writer.WriteInlineList(ReloadedNodeIds, (w, item) => { w.WriteString(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

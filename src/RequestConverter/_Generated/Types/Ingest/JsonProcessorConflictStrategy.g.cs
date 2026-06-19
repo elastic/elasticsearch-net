@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public static class JsonProcessorConflictStrategyCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy.Merge:
-				sb.Append("JsonProcessorConflictStrategy.Merge");
+				writer.Write("JsonProcessorConflictStrategy.Merge");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy.Replace:
-				sb.Append("JsonProcessorConflictStrategy.Replace");
+				writer.Write("JsonProcessorConflictStrategy.Replace");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

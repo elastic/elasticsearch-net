@@ -25,32 +25,21 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class GeoResults : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ActualPoint is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ActualPoint is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ActualPoint = ");
-			sb.Append("\"");
-			sb.Append(instance.ActualPoint);
-			sb.Append("\"");
+			__init.Property("ActualPoint");
+			writer.WriteString(ActualPoint);
 		}
 
-		if (instance.TypicalPoint is not null)
+		if (TypicalPoint is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TypicalPoint = ");
-			sb.Append("\"");
-			sb.Append(instance.TypicalPoint);
-			sb.Append("\"");
+			__init.Property("TypicalPoint");
+			writer.WriteString(TypicalPoint);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

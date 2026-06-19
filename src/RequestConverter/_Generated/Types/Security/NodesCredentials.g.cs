@@ -25,27 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class NodesCredentials : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FileTokens = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.FileTokens, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("FileTokens");
+			writer.Write("new() ");
+			writer.WriteInlineList(FileTokens, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Nodes = ");
-			instance.Nodes.FormatCode(sb);
+			__init.Property("Nodes");
+			Nodes.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,101 +25,76 @@ namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
 public partial class Statistics : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Policy is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Policy is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Policy = ");
-			sb.Append("\"");
-			sb.Append(instance.Policy);
-			sb.Append("\"");
+			__init.Property("Policy");
+			writer.WriteString(Policy);
 		}
 
-		if (instance.RetentionDeletionTime is not null)
+		if (RetentionDeletionTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RetentionDeletionTime = ");
-			instance.RetentionDeletionTime.FormatCode(sb);
+			__init.Property("RetentionDeletionTime");
+			RetentionDeletionTime.FormatCode(writer);
 		}
 
-		if (instance.RetentionDeletionTimeMillis is not null)
+		if (RetentionDeletionTimeMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RetentionDeletionTimeMillis = ");
-			sb.Append(instance.RetentionDeletionTimeMillis.Value);
+			__init.Property("RetentionDeletionTimeMillis");
+			writer.WriteValue(RetentionDeletionTimeMillis.Value);
 		}
 
-		if (instance.RetentionFailed is not null)
+		if (RetentionFailed is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RetentionFailed = ");
-			sb.Append(instance.RetentionFailed.Value);
-			sb.Append("L");
+			__init.Property("RetentionFailed");
+			writer.WriteValue(RetentionFailed.Value);
+			writer.Write("L");
 		}
 
-		if (instance.RetentionRuns is not null)
+		if (RetentionRuns is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RetentionRuns = ");
-			sb.Append(instance.RetentionRuns.Value);
-			sb.Append("L");
+			__init.Property("RetentionRuns");
+			writer.WriteValue(RetentionRuns.Value);
+			writer.Write("L");
 		}
 
-		if (instance.RetentionTimedOut is not null)
+		if (RetentionTimedOut is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RetentionTimedOut = ");
-			sb.Append(instance.RetentionTimedOut.Value);
-			sb.Append("L");
+			__init.Property("RetentionTimedOut");
+			writer.WriteValue(RetentionTimedOut.Value);
+			writer.Write("L");
 		}
 
-		if (instance.TotalSnapshotDeletionFailures is not null)
+		if (TotalSnapshotDeletionFailures is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalSnapshotDeletionFailures = ");
-			sb.Append(instance.TotalSnapshotDeletionFailures.Value);
-			sb.Append("L");
+			__init.Property("TotalSnapshotDeletionFailures");
+			writer.WriteValue(TotalSnapshotDeletionFailures.Value);
+			writer.Write("L");
 		}
 
-		if (instance.TotalSnapshotsDeleted is not null)
+		if (TotalSnapshotsDeleted is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalSnapshotsDeleted = ");
-			sb.Append(instance.TotalSnapshotsDeleted.Value);
-			sb.Append("L");
+			__init.Property("TotalSnapshotsDeleted");
+			writer.WriteValue(TotalSnapshotsDeleted.Value);
+			writer.Write("L");
 		}
 
-		if (instance.TotalSnapshotsFailed is not null)
+		if (TotalSnapshotsFailed is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalSnapshotsFailed = ");
-			sb.Append(instance.TotalSnapshotsFailed.Value);
-			sb.Append("L");
+			__init.Property("TotalSnapshotsFailed");
+			writer.WriteValue(TotalSnapshotsFailed.Value);
+			writer.Write("L");
 		}
 
-		if (instance.TotalSnapshotsTaken is not null)
+		if (TotalSnapshotsTaken is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalSnapshotsTaken = ");
-			sb.Append(instance.TotalSnapshotsTaken.Value);
-			sb.Append("L");
+			__init.Property("TotalSnapshotsTaken");
+			writer.WriteValue(TotalSnapshotsTaken.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

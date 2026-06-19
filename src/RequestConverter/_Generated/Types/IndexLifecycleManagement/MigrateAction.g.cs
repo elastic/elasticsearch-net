@@ -25,20 +25,15 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
 public partial class MigrateAction : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Enabled is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Enabled is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Enabled = ");
-			sb.Append(instance.Enabled.Value ? "true" : "false");
+			__init.Property("Enabled");
+			writer.WriteValue(Enabled.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,47 +25,34 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class FileSystem : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Data is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Data is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Data = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Data, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Data");
+			writer.WriteInlineList(Data, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.IoStats is not null)
+		if (IoStats is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IoStats = ");
-			instance.IoStats.FormatCode(sb);
+			__init.Property("IoStats");
+			IoStats.FormatCode(writer);
 		}
 
-		if (instance.Timestamp is not null)
+		if (Timestamp is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timestamp = ");
-			sb.Append(instance.Timestamp.Value);
-			sb.Append("L");
+			__init.Property("Timestamp");
+			writer.WriteValue(Timestamp.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Total is not null)
+		if (Total is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			instance.Total.FormatCode(sb);
+			__init.Property("Total");
+			Total.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,42 +25,37 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class GeoLocation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		if (instance.TryGetLatitudeLongitude(out var v1))
+		if (TryGetLatitudeLongitude(out var v1))
 		{
-			sb.Append("GeoLocation.LatitudeLongitude(");
-			v1.FormatCode(sb);
-			sb.Append(")");
+			writer.Write("GeoLocation.LatitudeLongitude(");
+			v1.FormatCode(writer);
+			writer.Write(")");
 			return;
 		}
 
-		if (instance.TryGetGeoHash(out var v2))
+		if (TryGetGeoHash(out var v2))
 		{
-			sb.Append("GeoLocation.GeoHash(");
-			v2.FormatCode(sb);
-			sb.Append(")");
+			writer.Write("GeoLocation.GeoHash(");
+			v2.FormatCode(writer);
+			writer.Write(")");
 			return;
 		}
 
-		if (instance.TryGetCoordinates(out var v3))
+		if (TryGetCoordinates(out var v3))
 		{
-			sb.Append("GeoLocation.Coordinates(");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(v3, (item, sb) => { sb.Append(item); sb.Append("d"); }, sb);
-			sb.Append("]");
-			sb.Append(")");
+			writer.Write("GeoLocation.Coordinates(");
+			writer.WriteInlineList(v3, (w, item) => { w.WriteValue(item); w.Write("d"); });
+			writer.Write(")");
 			return;
 		}
 
-		if (instance.TryGetText(out var v4))
+		if (TryGetText(out var v4))
 		{
-			sb.Append("GeoLocation.Text(");
-			sb.Append("\"");
-			sb.Append(v4);
-			sb.Append("\"");
-			sb.Append(")");
+			writer.Write("GeoLocation.Text(");
+			writer.WriteString(v4);
+			writer.Write(")");
 			return;
 		}
 	}

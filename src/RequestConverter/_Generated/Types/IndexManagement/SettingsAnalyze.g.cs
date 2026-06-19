@@ -25,20 +25,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class SettingsAnalyze : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.MaxTokenCount is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (MaxTokenCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxTokenCount = ");
-			sb.Append(instance.MaxTokenCount.Value);
+			__init.Property("MaxTokenCount");
+			writer.WriteValue(MaxTokenCount.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

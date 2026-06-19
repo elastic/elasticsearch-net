@@ -25,39 +25,30 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class NodeInfoXpackSecurityAuthcRealms : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.File is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (File is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("File = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.File, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("File");
+			writer.Write("new() ");
+			writer.WriteInlineList(File, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Native is not null)
+		if (Native is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Native = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Native, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Native");
+			writer.Write("new() ");
+			writer.WriteInlineList(Native, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Pki is not null)
+		if (Pki is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Pki = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Pki, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Pki");
+			writer.Write("new() ");
+			writer.WriteInlineList(Pki, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

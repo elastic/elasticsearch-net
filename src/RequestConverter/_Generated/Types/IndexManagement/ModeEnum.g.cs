@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public static class ModeEnumCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.ModeEnum instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.ModeEnum instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.ModeEnum.Upgrade:
-				sb.Append("ModeEnum.Upgrade");
+				writer.Write("ModeEnum.Upgrade");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

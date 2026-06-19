@@ -25,26 +25,19 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class Defaults : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AnomalyDetectors = ");
-			instance.AnomalyDetectors.FormatCode(sb);
+			__init.Property("AnomalyDetectors");
+			AnomalyDetectors.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Datafeeds = ");
-			instance.Datafeeds.FormatCode(sb);
+			__init.Property("Datafeeds");
+			Datafeeds.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

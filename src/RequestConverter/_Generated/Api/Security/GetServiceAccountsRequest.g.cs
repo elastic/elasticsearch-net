@@ -25,32 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class GetServiceAccountsRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Namespace is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Namespace is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Namespace = ");
-			sb.Append("\"");
-			sb.Append(instance.Namespace);
-			sb.Append("\"");
+			__init.Property("Namespace");
+			writer.WriteString(Namespace);
 		}
 
-		if (instance.Service is not null)
+		if (Service is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Service = ");
-			sb.Append("\"");
-			sb.Append(instance.Service);
-			sb.Append("\"");
+			__init.Property("Service");
+			writer.WriteString(Service);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public static class GeoGridTargetFormatCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Ingest.GeoGridTargetFormat instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Ingest.GeoGridTargetFormat instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Ingest.GeoGridTargetFormat.Geojson:
-				sb.Append("GeoGridTargetFormat.Geojson");
+				writer.Write("GeoGridTargetFormat.Geojson");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.GeoGridTargetFormat.Wkt:
-				sb.Append("GeoGridTargetFormat.Wkt");
+				writer.Write("GeoGridTargetFormat.Wkt");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

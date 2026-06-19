@@ -25,27 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class ClearRepositoriesMeteringArchiveRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxArchiveVersion = ");
-			sb.Append(instance.MaxArchiveVersion);
-			sb.Append("L");
+			__init.Property("MaxArchiveVersion");
+			writer.WriteValue(MaxArchiveVersion);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NodeId = ");
-			instance.NodeId.FormatCode(sb);
+			__init.Property("NodeId");
+			NodeId.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

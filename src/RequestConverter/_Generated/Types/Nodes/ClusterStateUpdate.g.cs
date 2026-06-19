@@ -25,132 +25,99 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class ClusterStateUpdate : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CommitTime is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CommitTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CommitTime = ");
-			instance.CommitTime.FormatCode(sb);
+			__init.Property("CommitTime");
+			CommitTime.FormatCode(writer);
 		}
 
-		if (instance.CommitTimeMillis is not null)
+		if (CommitTimeMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CommitTimeMillis = ");
-			sb.Append(instance.CommitTimeMillis.Value);
+			__init.Property("CommitTimeMillis");
+			writer.WriteValue(CommitTimeMillis.Value);
 		}
 
-		if (instance.CompletionTime is not null)
+		if (CompletionTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CompletionTime = ");
-			instance.CompletionTime.FormatCode(sb);
+			__init.Property("CompletionTime");
+			CompletionTime.FormatCode(writer);
 		}
 
-		if (instance.CompletionTimeMillis is not null)
+		if (CompletionTimeMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CompletionTimeMillis = ");
-			sb.Append(instance.CompletionTimeMillis.Value);
+			__init.Property("CompletionTimeMillis");
+			writer.WriteValue(CompletionTimeMillis.Value);
 		}
 
-		if (instance.ComputationTime is not null)
+		if (ComputationTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ComputationTime = ");
-			instance.ComputationTime.FormatCode(sb);
+			__init.Property("ComputationTime");
+			ComputationTime.FormatCode(writer);
 		}
 
-		if (instance.ComputationTimeMillis is not null)
+		if (ComputationTimeMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ComputationTimeMillis = ");
-			sb.Append(instance.ComputationTimeMillis.Value);
+			__init.Property("ComputationTimeMillis");
+			writer.WriteValue(ComputationTimeMillis.Value);
 		}
 
-		if (instance.ContextConstructionTime is not null)
+		if (ContextConstructionTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ContextConstructionTime = ");
-			instance.ContextConstructionTime.FormatCode(sb);
+			__init.Property("ContextConstructionTime");
+			ContextConstructionTime.FormatCode(writer);
 		}
 
-		if (instance.ContextConstructionTimeMillis is not null)
+		if (ContextConstructionTimeMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ContextConstructionTimeMillis = ");
-			sb.Append(instance.ContextConstructionTimeMillis.Value);
+			__init.Property("ContextConstructionTimeMillis");
+			writer.WriteValue(ContextConstructionTimeMillis.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count);
-			sb.Append("L");
+			__init.Property("Count");
+			writer.WriteValue(Count);
+			writer.Write("L");
 		}
 
-		if (instance.MasterApplyTime is not null)
+		if (MasterApplyTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MasterApplyTime = ");
-			instance.MasterApplyTime.FormatCode(sb);
+			__init.Property("MasterApplyTime");
+			MasterApplyTime.FormatCode(writer);
 		}
 
-		if (instance.MasterApplyTimeMillis is not null)
+		if (MasterApplyTimeMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MasterApplyTimeMillis = ");
-			sb.Append(instance.MasterApplyTimeMillis.Value);
+			__init.Property("MasterApplyTimeMillis");
+			writer.WriteValue(MasterApplyTimeMillis.Value);
 		}
 
-		if (instance.NotificationTime is not null)
+		if (NotificationTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NotificationTime = ");
-			instance.NotificationTime.FormatCode(sb);
+			__init.Property("NotificationTime");
+			NotificationTime.FormatCode(writer);
 		}
 
-		if (instance.NotificationTimeMillis is not null)
+		if (NotificationTimeMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NotificationTimeMillis = ");
-			sb.Append(instance.NotificationTimeMillis.Value);
+			__init.Property("NotificationTimeMillis");
+			writer.WriteValue(NotificationTimeMillis.Value);
 		}
 
-		if (instance.PublicationTime is not null)
+		if (PublicationTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PublicationTime = ");
-			instance.PublicationTime.FormatCode(sb);
+			__init.Property("PublicationTime");
+			PublicationTime.FormatCode(writer);
 		}
 
-		if (instance.PublicationTimeMillis is not null)
+		if (PublicationTimeMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PublicationTimeMillis = ");
-			sb.Append(instance.PublicationTimeMillis.Value);
+			__init.Property("PublicationTimeMillis");
+			writer.WriteValue(PublicationTimeMillis.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

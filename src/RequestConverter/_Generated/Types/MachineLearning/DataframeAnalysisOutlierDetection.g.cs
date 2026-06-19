@@ -25,64 +25,47 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataframeAnalysisOutlierDetection : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ComputeFeatureInfluence is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ComputeFeatureInfluence is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ComputeFeatureInfluence = ");
-			sb.Append(instance.ComputeFeatureInfluence.Value ? "true" : "false");
+			__init.Property("ComputeFeatureInfluence");
+			writer.WriteValue(ComputeFeatureInfluence.Value);
 		}
 
-		if (instance.FeatureInfluenceThreshold is not null)
+		if (FeatureInfluenceThreshold is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FeatureInfluenceThreshold = ");
-			sb.Append(instance.FeatureInfluenceThreshold.Value);
-			sb.Append("d");
+			__init.Property("FeatureInfluenceThreshold");
+			writer.WriteValue(FeatureInfluenceThreshold.Value);
+			writer.Write("d");
 		}
 
-		if (instance.Method is not null)
+		if (Method is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Method = ");
-			sb.Append("\"");
-			sb.Append(instance.Method);
-			sb.Append("\"");
+			__init.Property("Method");
+			writer.WriteString(Method);
 		}
 
-		if (instance.NNeighbors is not null)
+		if (NNeighbors is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NNeighbors = ");
-			sb.Append(instance.NNeighbors.Value);
+			__init.Property("NNeighbors");
+			writer.WriteValue(NNeighbors.Value);
 		}
 
-		if (instance.OutlierFraction is not null)
+		if (OutlierFraction is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OutlierFraction = ");
-			sb.Append(instance.OutlierFraction.Value);
-			sb.Append("d");
+			__init.Property("OutlierFraction");
+			writer.WriteValue(OutlierFraction.Value);
+			writer.Write("d");
 		}
 
-		if (instance.StandardizationEnabled is not null)
+		if (StandardizationEnabled is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StandardizationEnabled = ");
-			sb.Append(instance.StandardizationEnabled.Value ? "true" : "false");
+			__init.Property("StandardizationEnabled");
+			writer.WriteValue(StandardizationEnabled.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public static class NumericFielddataFormatCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat.Array:
-				sb.Append("NumericFielddataFormat.Array");
+				writer.Write("NumericFielddataFormat.Array");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat.Disabled:
-				sb.Append("NumericFielddataFormat.Disabled");
+				writer.Write("NumericFielddataFormat.Disabled");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

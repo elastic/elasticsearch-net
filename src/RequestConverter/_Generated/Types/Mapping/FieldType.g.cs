@@ -25,156 +25,159 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public static class FieldTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.FieldType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.FieldType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.AggregateMetricDouble:
-				sb.Append("FieldType.AggregateMetricDouble");
+				writer.Write("FieldType.AggregateMetricDouble");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Alias:
-				sb.Append("FieldType.Alias");
+				writer.Write("FieldType.Alias");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Binary:
-				sb.Append("FieldType.Binary");
+				writer.Write("FieldType.Binary");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Boolean:
-				sb.Append("FieldType.Boolean");
+				writer.Write("FieldType.Boolean");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Byte:
-				sb.Append("FieldType.Byte");
+				writer.Write("FieldType.Byte");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Completion:
-				sb.Append("FieldType.Completion");
+				writer.Write("FieldType.Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.ConstantKeyword:
-				sb.Append("FieldType.ConstantKeyword");
+				writer.Write("FieldType.ConstantKeyword");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.CountedKeyword:
-				sb.Append("FieldType.CountedKeyword");
+				writer.Write("FieldType.CountedKeyword");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Date:
-				sb.Append("FieldType.Date");
+				writer.Write("FieldType.Date");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.DateNanos:
-				sb.Append("FieldType.DateNanos");
+				writer.Write("FieldType.DateNanos");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.DateRange:
-				sb.Append("FieldType.DateRange");
+				writer.Write("FieldType.DateRange");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.DenseVector:
-				sb.Append("FieldType.DenseVector");
+				writer.Write("FieldType.DenseVector");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Double:
-				sb.Append("FieldType.Double");
+				writer.Write("FieldType.Double");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.DoubleRange:
-				sb.Append("FieldType.DoubleRange");
+				writer.Write("FieldType.DoubleRange");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Flattened:
-				sb.Append("FieldType.Flattened");
+				writer.Write("FieldType.Flattened");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Float:
-				sb.Append("FieldType.Float");
+				writer.Write("FieldType.Float");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.FloatRange:
-				sb.Append("FieldType.FloatRange");
+				writer.Write("FieldType.FloatRange");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.GeoPoint:
-				sb.Append("FieldType.GeoPoint");
+				writer.Write("FieldType.GeoPoint");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.GeoShape:
-				sb.Append("FieldType.GeoShape");
+				writer.Write("FieldType.GeoShape");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.HalfFloat:
-				sb.Append("FieldType.HalfFloat");
+				writer.Write("FieldType.HalfFloat");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Histogram:
-				sb.Append("FieldType.Histogram");
+				writer.Write("FieldType.Histogram");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.IcuCollationKeyword:
-				sb.Append("FieldType.IcuCollationKeyword");
+				writer.Write("FieldType.IcuCollationKeyword");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Integer:
-				sb.Append("FieldType.Integer");
+				writer.Write("FieldType.Integer");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.IntegerRange:
-				sb.Append("FieldType.IntegerRange");
+				writer.Write("FieldType.IntegerRange");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Ip:
-				sb.Append("FieldType.Ip");
+				writer.Write("FieldType.Ip");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.IpRange:
-				sb.Append("FieldType.IpRange");
+				writer.Write("FieldType.IpRange");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Join:
-				sb.Append("FieldType.Join");
+				writer.Write("FieldType.Join");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Keyword:
-				sb.Append("FieldType.Keyword");
+				writer.Write("FieldType.Keyword");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Long:
-				sb.Append("FieldType.Long");
+				writer.Write("FieldType.Long");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.LongRange:
-				sb.Append("FieldType.LongRange");
+				writer.Write("FieldType.LongRange");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.MatchOnlyText:
-				sb.Append("FieldType.MatchOnlyText");
+				writer.Write("FieldType.MatchOnlyText");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Murmur3:
-				sb.Append("FieldType.Murmur3");
+				writer.Write("FieldType.Murmur3");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Nested:
-				sb.Append("FieldType.Nested");
+				writer.Write("FieldType.Nested");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.None:
-				sb.Append("FieldType.None");
+				writer.Write("FieldType.None");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Object:
-				sb.Append("FieldType.Object");
+				writer.Write("FieldType.Object");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Passthrough:
-				sb.Append("FieldType.Passthrough");
+				writer.Write("FieldType.Passthrough");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Percolator:
-				sb.Append("FieldType.Percolator");
+				writer.Write("FieldType.Percolator");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.RankFeature:
-				sb.Append("FieldType.RankFeature");
+				writer.Write("FieldType.RankFeature");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.RankFeatures:
-				sb.Append("FieldType.RankFeatures");
+				writer.Write("FieldType.RankFeatures");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.ScaledFloat:
-				sb.Append("FieldType.ScaledFloat");
+				writer.Write("FieldType.ScaledFloat");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.SearchAsYouType:
-				sb.Append("FieldType.SearchAsYouType");
+				writer.Write("FieldType.SearchAsYouType");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.SemanticText:
-				sb.Append("FieldType.SemanticText");
+				writer.Write("FieldType.SemanticText");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Shape:
-				sb.Append("FieldType.Shape");
+				writer.Write("FieldType.Shape");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Short:
-				sb.Append("FieldType.Short");
+				writer.Write("FieldType.Short");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.SparseVector:
-				sb.Append("FieldType.SparseVector");
+				writer.Write("FieldType.SparseVector");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Text:
-				sb.Append("FieldType.Text");
+				writer.Write("FieldType.Text");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.TokenCount:
-				sb.Append("FieldType.TokenCount");
+				writer.Write("FieldType.TokenCount");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Version:
-				sb.Append("FieldType.Version");
+				writer.Write("FieldType.Version");
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Wildcard:
+				writer.Write("FieldType.Wildcard");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

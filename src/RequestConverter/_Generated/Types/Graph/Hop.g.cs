@@ -25,37 +25,26 @@ namespace Elastic.Clients.Elasticsearch.Graph;
 
 public partial class Hop : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Connections is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Connections is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Connections = ");
-			instance.Connections.FormatCode(sb);
+			__init.Property("Connections");
+			Connections.FormatCode(writer);
 		}
 
-		if (instance.Query is not null)
+		if (Query is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			instance.Query.FormatCode(sb);
+			__init.Property("Query");
+			Query.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Vertices = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Vertices, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Vertices");
+			writer.WriteInlineList(Vertices, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

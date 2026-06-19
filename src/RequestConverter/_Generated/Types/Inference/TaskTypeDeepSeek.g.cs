@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class TaskTypeDeepSeekCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.TaskTypeDeepSeek instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.TaskTypeDeepSeek instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeDeepSeek.ChatCompletion:
-				sb.Append("TaskTypeDeepSeek.ChatCompletion");
+				writer.Write("TaskTypeDeepSeek.ChatCompletion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeDeepSeek.Completion:
-				sb.Append("TaskTypeDeepSeek.Completion");
+				writer.Write("TaskTypeDeepSeek.Completion");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

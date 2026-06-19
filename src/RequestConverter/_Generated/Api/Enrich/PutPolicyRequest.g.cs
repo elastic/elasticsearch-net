@@ -25,51 +25,38 @@ namespace Elastic.Clients.Elasticsearch.Enrich;
 
 public partial class PutPolicyRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			instance.Name.FormatCode(sb);
+			__init.Property("Name");
+			Name.FormatCode(writer);
 		}
 
-		if (instance.MasterTimeout is not null)
+		if (MasterTimeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MasterTimeout = ");
-			instance.MasterTimeout.FormatCode(sb);
+			__init.Property("MasterTimeout");
+			MasterTimeout.FormatCode(writer);
 		}
 
-		if (instance.GeoMatch is not null)
+		if (GeoMatch is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GeoMatch = ");
-			instance.GeoMatch.FormatCode(sb);
+			__init.Property("GeoMatch");
+			GeoMatch.FormatCode(writer);
 		}
 
-		if (instance.Match is not null)
+		if (Match is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Match = ");
-			instance.Match.FormatCode(sb);
+			__init.Property("Match");
+			Match.FormatCode(writer);
 		}
 
-		if (instance.Range is not null)
+		if (Range is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Range = ");
-			instance.Range.FormatCode(sb);
+			__init.Property("Range");
+			Range.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

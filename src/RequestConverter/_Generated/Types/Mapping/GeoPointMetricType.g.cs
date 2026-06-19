@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public static class GeoPointMetricTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType.Counter:
-				sb.Append("GeoPointMetricType.Counter");
+				writer.Write("GeoPointMetricType.Counter");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType.Gauge:
-				sb.Append("GeoPointMetricType.Gauge");
+				writer.Write("GeoPointMetricType.Gauge");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType.Position:
-				sb.Append("GeoPointMetricType.Position");
+				writer.Write("GeoPointMetricType.Position");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

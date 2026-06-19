@@ -25,30 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class FetchProfileDebug : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.FastPath is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (FastPath is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FastPath = ");
-			sb.Append(instance.FastPath.Value);
+			__init.Property("FastPath");
+			writer.WriteValue(FastPath.Value);
 		}
 
-		if (instance.StoredFields is not null)
+		if (StoredFields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StoredFields = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.StoredFields, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("StoredFields");
+			writer.WriteInlineList(StoredFields, (w, item) => { w.WriteString(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

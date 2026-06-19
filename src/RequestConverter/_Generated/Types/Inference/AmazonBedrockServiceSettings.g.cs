@@ -25,66 +25,41 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class AmazonBedrockServiceSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AccessKey = ");
-			sb.Append("\"");
-			sb.Append(instance.AccessKey);
-			sb.Append("\"");
+			__init.Property("AccessKey");
+			writer.WriteString(AccessKey);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Model = ");
-			sb.Append("\"");
-			sb.Append(instance.Model);
-			sb.Append("\"");
+			__init.Property("Model");
+			writer.WriteString(Model);
 		}
 
-		if (instance.Provider is not null)
+		if (Provider is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Provider = ");
-			sb.Append("\"");
-			sb.Append(instance.Provider);
-			sb.Append("\"");
+			__init.Property("Provider");
+			writer.WriteString(Provider);
 		}
 
-		if (instance.RateLimit is not null)
+		if (RateLimit is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RateLimit = ");
-			instance.RateLimit.FormatCode(sb);
+			__init.Property("RateLimit");
+			RateLimit.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Region = ");
-			sb.Append("\"");
-			sb.Append(instance.Region);
-			sb.Append("\"");
+			__init.Property("Region");
+			writer.WriteString(Region);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SecretKey = ");
-			sb.Append("\"");
-			sb.Append(instance.SecretKey);
-			sb.Append("\"");
+			__init.Property("SecretKey");
+			writer.WriteString(SecretKey);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

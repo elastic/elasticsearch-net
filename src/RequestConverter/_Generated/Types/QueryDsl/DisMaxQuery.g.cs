@@ -25,49 +25,34 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class DisMaxQuery : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Boost is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Boost is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Boost = ");
-			sb.Append(instance.Boost.Value);
-			sb.Append("f");
+			__init.Property("Boost");
+			writer.WriteValue(Boost.Value);
+			writer.Write("f");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Queries = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Queries, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Queries");
+			writer.WriteInlineList(Queries, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.QueryName is not null)
+		if (QueryName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryName = ");
-			sb.Append("\"");
-			sb.Append(instance.QueryName);
-			sb.Append("\"");
+			__init.Property("QueryName");
+			writer.WriteString(QueryName);
 		}
 
-		if (instance.TieBreaker is not null)
+		if (TieBreaker is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TieBreaker = ");
-			sb.Append(instance.TieBreaker.Value);
-			sb.Append("d");
+			__init.Property("TieBreaker");
+			writer.WriteValue(TieBreaker.Value);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

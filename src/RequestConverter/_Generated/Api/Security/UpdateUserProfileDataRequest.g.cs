@@ -25,65 +25,48 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class UpdateUserProfileDataRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Uid = ");
-			sb.Append("\"");
-			sb.Append(instance.Uid);
-			sb.Append("\"");
+			__init.Property("Uid");
+			writer.WriteString(Uid);
 		}
 
-		if (instance.IfPrimaryTerm is not null)
+		if (IfPrimaryTerm is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IfPrimaryTerm = ");
-			sb.Append(instance.IfPrimaryTerm.Value);
-			sb.Append("L");
+			__init.Property("IfPrimaryTerm");
+			writer.WriteValue(IfPrimaryTerm.Value);
+			writer.Write("L");
 		}
 
-		if (instance.IfSeqNo is not null)
+		if (IfSeqNo is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IfSeqNo = ");
-			sb.Append(instance.IfSeqNo.Value);
-			sb.Append("L");
+			__init.Property("IfSeqNo");
+			writer.WriteValue(IfSeqNo.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Refresh is not null)
+		if (Refresh is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Refresh = ");
-			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(instance.Refresh.Value, sb);
+			__init.Property("Refresh");
+			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
 		}
 
-		if (instance.Data is not null)
+		if (Data is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Data = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Data, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Data");
+			writer.Write("new() ");
+			writer.WriteInlineList(Data, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Labels is not null)
+		if (Labels is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Labels = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Labels, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Labels");
+			writer.Write("new() ");
+			writer.WriteInlineList(Labels, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,80 +25,63 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class SearchShardsRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Indices is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Indices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indices = ");
-			instance.Indices.FormatCode(sb);
+			__init.Property("Indices");
+			Indices.FormatCode(writer);
 		}
 
-		if (instance.AllowNoIndices is not null)
+		if (AllowNoIndices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowNoIndices = ");
-			sb.Append(instance.AllowNoIndices.Value ? "true" : "false");
+			__init.Property("AllowNoIndices");
+			writer.WriteValue(AllowNoIndices.Value);
 		}
 
-		if (instance.ExpandWildcards is not null)
+		if (ExpandWildcards is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExpandWildcards = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.ExpandWildcards, (item, sb) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, sb); }, sb);
-			sb.Append("]");
+			__init.Property("ExpandWildcards");
+			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
 		}
 
-		if (instance.IgnoreUnavailable is not null)
+		if (IgnoreUnavailable is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreUnavailable = ");
-			sb.Append(instance.IgnoreUnavailable.Value ? "true" : "false");
+			__init.Property("IgnoreUnavailable");
+			writer.WriteValue(IgnoreUnavailable.Value);
 		}
 
-		if (instance.Local is not null)
+		if (Local is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Local = ");
-			sb.Append(instance.Local.Value ? "true" : "false");
+			__init.Property("Local");
+			writer.WriteValue(Local.Value);
 		}
 
-		if (instance.MasterTimeout is not null)
+		if (MasterTimeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MasterTimeout = ");
-			instance.MasterTimeout.FormatCode(sb);
+			__init.Property("MasterTimeout");
+			MasterTimeout.FormatCode(writer);
 		}
 
-		if (instance.Preference is not null)
+		if (Preference is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Preference = ");
-			sb.Append("\"");
-			sb.Append(instance.Preference);
-			sb.Append("\"");
+			__init.Property("Preference");
+			writer.WriteString(Preference);
 		}
 
-		if (instance.Routing is not null)
+		if (Routing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Routing = ");
-			instance.Routing.FormatCode(sb);
+			__init.Property("Routing");
+			Routing.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		if (Slice is not null)
+		{
+			__init.Property("Slice");
+			writer.WriteString(Slice);
+		}
+
+		__init.Dispose();
 	}
 }

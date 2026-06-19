@@ -25,30 +25,30 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public static class TokenCharCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.TokenChar instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.TokenChar instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.TokenChar.Custom:
-				sb.Append("TokenChar.Custom");
+				writer.Write("TokenChar.Custom");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.TokenChar.Digit:
-				sb.Append("TokenChar.Digit");
+				writer.Write("TokenChar.Digit");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.TokenChar.Letter:
-				sb.Append("TokenChar.Letter");
+				writer.Write("TokenChar.Letter");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.TokenChar.Punctuation:
-				sb.Append("TokenChar.Punctuation");
+				writer.Write("TokenChar.Punctuation");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.TokenChar.Symbol:
-				sb.Append("TokenChar.Symbol");
+				writer.Write("TokenChar.Symbol");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.TokenChar.Whitespace:
-				sb.Append("TokenChar.Whitespace");
+				writer.Write("TokenChar.Whitespace");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

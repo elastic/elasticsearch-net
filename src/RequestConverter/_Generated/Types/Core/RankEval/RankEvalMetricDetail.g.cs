@@ -25,46 +25,31 @@ namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
 public partial class RankEvalMetricDetail : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Hits = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Hits, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Hits");
+			writer.WriteInlineList(Hits, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MetricDetails = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.MetricDetails, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("new()"); RequestConverter.CodeFormatter.FormatCode(v, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb); }, sb);
+			__init.Property("MetricDetails");
+			writer.Write("new() ");
+			writer.WriteInlineList(MetricDetails, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.Write("new() "); w.WriteInlineList(kvp.Value, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", "); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MetricScore = ");
-			sb.Append(instance.MetricScore);
-			sb.Append("d");
+			__init.Property("MetricScore");
+			writer.WriteValue(MetricScore);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UnratedDocs = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.UnratedDocs, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("UnratedDocs");
+			writer.WriteInlineList(UnratedDocs, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

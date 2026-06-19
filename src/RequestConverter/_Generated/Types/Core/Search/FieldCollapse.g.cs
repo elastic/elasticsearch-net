@@ -25,45 +25,32 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class FieldCollapse : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Collapse is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Collapse is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Collapse = ");
-			instance.Collapse.FormatCode(sb);
+			__init.Property("Collapse");
+			Collapse.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.InnerHits is not null)
+		if (InnerHits is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InnerHits = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.InnerHits, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("InnerHits");
+			writer.WriteInlineList(InnerHits, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.MaxConcurrentGroupSearches is not null)
+		if (MaxConcurrentGroupSearches is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxConcurrentGroupSearches = ");
-			sb.Append(instance.MaxConcurrentGroupSearches.Value);
+			__init.Property("MaxConcurrentGroupSearches");
+			writer.WriteValue(MaxConcurrentGroupSearches.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

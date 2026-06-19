@@ -25,36 +25,27 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class MappingStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalCount = ");
-			sb.Append(instance.TotalCount);
-			sb.Append("L");
+			__init.Property("TotalCount");
+			writer.WriteValue(TotalCount);
+			writer.Write("L");
 		}
 
-		if (instance.TotalEstimatedOverhead is not null)
+		if (TotalEstimatedOverhead is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalEstimatedOverhead = ");
-			instance.TotalEstimatedOverhead.FormatCode(sb);
+			__init.Property("TotalEstimatedOverhead");
+			TotalEstimatedOverhead.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalEstimatedOverheadInBytes = ");
-			sb.Append(instance.TotalEstimatedOverheadInBytes);
-			sb.Append("L");
+			__init.Property("TotalEstimatedOverheadInBytes");
+			writer.WriteValue(TotalEstimatedOverheadInBytes);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,63 +25,44 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class AnalyzeToken : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EndOffset = ");
-			sb.Append(instance.EndOffset);
-			sb.Append("L");
+			__init.Property("EndOffset");
+			writer.WriteValue(EndOffset);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Position = ");
-			sb.Append(instance.Position);
-			sb.Append("L");
+			__init.Property("Position");
+			writer.WriteValue(Position);
+			writer.Write("L");
 		}
 
-		if (instance.PositionLength is not null)
+		if (PositionLength is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PositionLength = ");
-			sb.Append(instance.PositionLength.Value);
-			sb.Append("L");
+			__init.Property("PositionLength");
+			writer.WriteValue(PositionLength.Value);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StartOffset = ");
-			sb.Append(instance.StartOffset);
-			sb.Append("L");
+			__init.Property("StartOffset");
+			writer.WriteValue(StartOffset);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Token = ");
-			sb.Append("\"");
-			sb.Append(instance.Token);
-			sb.Append("\"");
+			__init.Property("Token");
+			writer.WriteString(Token);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			sb.Append("\"");
-			sb.Append(instance.Type);
-			sb.Append("\"");
+			__init.Property("Type");
+			writer.WriteString(Type);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

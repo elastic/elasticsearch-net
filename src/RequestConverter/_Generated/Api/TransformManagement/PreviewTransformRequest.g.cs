@@ -25,102 +25,75 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
 public partial class PreviewTransformRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.TransformId is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (TransformId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TransformId = ");
-			instance.TransformId.FormatCode(sb);
+			__init.Property("TransformId");
+			TransformId.FormatCode(writer);
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (instance.Description is not null)
+		if (Description is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
-		if (instance.Dest is not null)
+		if (Dest is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Dest = ");
-			instance.Dest.FormatCode(sb);
+			__init.Property("Dest");
+			Dest.FormatCode(writer);
 		}
 
-		if (instance.Frequency is not null)
+		if (Frequency is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Frequency = ");
-			instance.Frequency.FormatCode(sb);
+			__init.Property("Frequency");
+			Frequency.FormatCode(writer);
 		}
 
-		if (instance.Latest is not null)
+		if (Latest is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Latest = ");
-			instance.Latest.FormatCode(sb);
+			__init.Property("Latest");
+			Latest.FormatCode(writer);
 		}
 
-		if (instance.Pivot is not null)
+		if (Pivot is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Pivot = ");
-			instance.Pivot.FormatCode(sb);
+			__init.Property("Pivot");
+			Pivot.FormatCode(writer);
 		}
 
-		if (instance.RetentionPolicy is not null)
+		if (RetentionPolicy is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RetentionPolicy = ");
-			instance.RetentionPolicy.FormatCode(sb);
+			__init.Property("RetentionPolicy");
+			RetentionPolicy.FormatCode(writer);
 		}
 
-		if (instance.Settings is not null)
+		if (Settings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Settings = ");
-			instance.Settings.FormatCode(sb);
+			__init.Property("Settings");
+			Settings.FormatCode(writer);
 		}
 
-		if (instance.Source is not null)
+		if (Source is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Source = ");
-			instance.Source.FormatCode(sb);
+			__init.Property("Source");
+			Source.FormatCode(writer);
 		}
 
-		if (instance.Sync is not null)
+		if (Sync is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sync = ");
-			instance.Sync.FormatCode(sb);
+			__init.Property("Sync");
+			Sync.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

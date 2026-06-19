@@ -25,47 +25,44 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class Message : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Content is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Content is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Content = ");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.ContentObject>>(instance.Content, sb);
+			__init.Property("Content");
+			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.ContentObject>>(Content, writer);
+		}
+
+		if (Reasoning is not null)
+		{
+			__init.Property("Reasoning");
+			writer.WriteString(Reasoning);
+		}
+
+		if (ReasoningDetails is not null)
+		{
+			__init.Property("ReasoningDetails");
+			writer.WriteInlineList(ReasoningDetails, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Role = ");
-			sb.Append("\"");
-			sb.Append(instance.Role);
-			sb.Append("\"");
+			__init.Property("Role");
+			writer.WriteString(Role);
 		}
 
-		if (instance.ToolCallId is not null)
+		if (ToolCallId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ToolCallId = ");
-			instance.ToolCallId.FormatCode(sb);
+			__init.Property("ToolCallId");
+			ToolCallId.FormatCode(writer);
 		}
 
-		if (instance.ToolCalls is not null)
+		if (ToolCalls is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ToolCalls = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.ToolCalls, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("ToolCalls");
+			writer.WriteInlineList(ToolCalls, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,34 +25,25 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataframeEvaluationRegression : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ActualField = ");
-			instance.ActualField.FormatCode(sb);
+			__init.Property("ActualField");
+			ActualField.FormatCode(writer);
 		}
 
-		if (instance.Metrics is not null)
+		if (Metrics is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Metrics = ");
-			instance.Metrics.FormatCode(sb);
+			__init.Property("Metrics");
+			Metrics.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PredictedField = ");
-			instance.PredictedField.FormatCode(sb);
+			__init.Property("PredictedField");
+			PredictedField.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

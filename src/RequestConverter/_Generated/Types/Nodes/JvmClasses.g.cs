@@ -25,39 +25,30 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class JvmClasses : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CurrentLoadedCount is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CurrentLoadedCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CurrentLoadedCount = ");
-			sb.Append(instance.CurrentLoadedCount.Value);
-			sb.Append("L");
+			__init.Property("CurrentLoadedCount");
+			writer.WriteValue(CurrentLoadedCount.Value);
+			writer.Write("L");
 		}
 
-		if (instance.TotalLoadedCount is not null)
+		if (TotalLoadedCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalLoadedCount = ");
-			sb.Append(instance.TotalLoadedCount.Value);
-			sb.Append("L");
+			__init.Property("TotalLoadedCount");
+			writer.WriteValue(TotalLoadedCount.Value);
+			writer.Write("L");
 		}
 
-		if (instance.TotalUnloadedCount is not null)
+		if (TotalUnloadedCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalUnloadedCount = ");
-			sb.Append(instance.TotalUnloadedCount.Value);
-			sb.Append("L");
+			__init.Property("TotalUnloadedCount");
+			writer.WriteValue(TotalUnloadedCount.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public static class RankVectorElementTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.RankVectorElementType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.RankVectorElementType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.RankVectorElementType.Bit:
-				sb.Append("RankVectorElementType.Bit");
+				writer.Write("RankVectorElementType.Bit");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.RankVectorElementType.Byte:
-				sb.Append("RankVectorElementType.Byte");
+				writer.Write("RankVectorElementType.Byte");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.RankVectorElementType.Float:
-				sb.Append("RankVectorElementType.Float");
+				writer.Write("RankVectorElementType.Float");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

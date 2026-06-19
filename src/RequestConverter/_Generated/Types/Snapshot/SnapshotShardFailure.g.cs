@@ -25,65 +25,40 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 public partial class SnapshotShardFailure : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			sb.Append("\"");
-			sb.Append(instance.Index);
-			sb.Append("\"");
+			__init.Property("Index");
+			writer.WriteString(Index);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexUuid = ");
-			sb.Append("\"");
-			sb.Append(instance.IndexUuid);
-			sb.Append("\"");
+			__init.Property("IndexUuid");
+			writer.WriteString(IndexUuid);
 		}
 
-		if (instance.NodeId is not null)
+		if (NodeId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NodeId = ");
-			sb.Append("\"");
-			sb.Append(instance.NodeId);
-			sb.Append("\"");
+			__init.Property("NodeId");
+			writer.WriteString(NodeId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Reason = ");
-			sb.Append("\"");
-			sb.Append(instance.Reason);
-			sb.Append("\"");
+			__init.Property("Reason");
+			writer.WriteString(Reason);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShardId = ");
-			sb.Append(instance.ShardId);
+			__init.Property("ShardId");
+			writer.WriteValue(ShardId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Status = ");
-			sb.Append("\"");
-			sb.Append(instance.Status);
-			sb.Append("\"");
+			__init.Property("Status");
+			writer.WriteString(Status);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,36 +25,36 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public static class ShardStateCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Cluster.ShardState instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Cluster.ShardState instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Cluster.ShardState.Aborted:
-				sb.Append("ShardState.Aborted");
+				writer.Write("ShardState.Aborted");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.ShardState.Failed:
-				sb.Append("ShardState.Failed");
+				writer.Write("ShardState.Failed");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.ShardState.Init:
-				sb.Append("ShardState.Init");
+				writer.Write("ShardState.Init");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.ShardState.Missing:
-				sb.Append("ShardState.Missing");
+				writer.Write("ShardState.Missing");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.ShardState.PausedForNodeRemoval:
-				sb.Append("ShardState.PausedForNodeRemoval");
+				writer.Write("ShardState.PausedForNodeRemoval");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.ShardState.Queued:
-				sb.Append("ShardState.Queued");
+				writer.Write("ShardState.Queued");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.ShardState.Success:
-				sb.Append("ShardState.Success");
+				writer.Write("ShardState.Success");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.ShardState.Waiting:
-				sb.Append("ShardState.Waiting");
+				writer.Write("ShardState.Waiting");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

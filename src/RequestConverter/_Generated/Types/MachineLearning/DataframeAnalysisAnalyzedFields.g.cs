@@ -25,32 +25,21 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataframeAnalysisAnalyzedFields : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Excludes is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Excludes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Excludes = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Excludes, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Excludes");
+			writer.WriteInlineList(Excludes, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Includes is not null)
+		if (Includes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Includes = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Includes, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Includes");
+			writer.WriteInlineList(Includes, (w, item) => { w.WriteString(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

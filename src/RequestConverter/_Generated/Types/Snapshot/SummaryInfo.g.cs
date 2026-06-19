@@ -25,26 +25,19 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 public partial class SummaryInfo : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Read = ");
-			instance.Read.FormatCode(sb);
+			__init.Property("Read");
+			Read.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Write = ");
-			instance.Write.FormatCode(sb);
+			__init.Property("Write");
+			Write.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

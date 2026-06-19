@@ -25,36 +25,27 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
 public partial class ShrinkAction : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AllowWriteAfterShrink is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AllowWriteAfterShrink is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowWriteAfterShrink = ");
-			sb.Append(instance.AllowWriteAfterShrink.Value ? "true" : "false");
+			__init.Property("AllowWriteAfterShrink");
+			writer.WriteValue(AllowWriteAfterShrink.Value);
 		}
 
-		if (instance.MaxPrimaryShardSize is not null)
+		if (MaxPrimaryShardSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxPrimaryShardSize = ");
-			instance.MaxPrimaryShardSize.FormatCode(sb);
+			__init.Property("MaxPrimaryShardSize");
+			MaxPrimaryShardSize.FormatCode(writer);
 		}
 
-		if (instance.NumberOfShards is not null)
+		if (NumberOfShards is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumberOfShards = ");
-			sb.Append(instance.NumberOfShards.Value);
+			__init.Property("NumberOfShards");
+			writer.WriteValue(NumberOfShards.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

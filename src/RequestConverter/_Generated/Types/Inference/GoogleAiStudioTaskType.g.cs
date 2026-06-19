@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class GoogleAiStudioTaskTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType.Completion:
-				sb.Append("GoogleAiStudioTaskType.Completion");
+				writer.Write("GoogleAiStudioTaskType.Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType.TextEmbedding:
-				sb.Append("GoogleAiStudioTaskType.TextEmbedding");
+				writer.Write("GoogleAiStudioTaskType.TextEmbedding");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

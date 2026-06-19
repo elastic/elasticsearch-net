@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class GeoShapeRelationCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.GeoShapeRelation instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.GeoShapeRelation instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.GeoShapeRelation.Contains:
-				sb.Append("GeoShapeRelation.Contains");
+				writer.Write("GeoShapeRelation.Contains");
 				break;
 			case Elastic.Clients.Elasticsearch.GeoShapeRelation.Disjoint:
-				sb.Append("GeoShapeRelation.Disjoint");
+				writer.Write("GeoShapeRelation.Disjoint");
 				break;
 			case Elastic.Clients.Elasticsearch.GeoShapeRelation.Intersects:
-				sb.Append("GeoShapeRelation.Intersects");
+				writer.Write("GeoShapeRelation.Intersects");
 				break;
 			case Elastic.Clients.Elasticsearch.GeoShapeRelation.Within:
-				sb.Append("GeoShapeRelation.Within");
+				writer.Write("GeoShapeRelation.Within");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

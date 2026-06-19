@@ -25,39 +25,28 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class CompositeAggregation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.After is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (After is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("After = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.After, (k, sb) => { k.FormatCode(sb); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("After");
+			writer.Write("new() ");
+			writer.WriteInlineList(After, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append(instance.Size.Value);
+			__init.Property("Size");
+			writer.WriteValue(Size.Value);
 		}
 
-		if (instance.Sources is not null)
+		if (Sources is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sources = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Sources, (item, sb) => { sb.Append("new("); sb.Append("\""); sb.Append(item.Key); sb.Append("\""); sb.Append(", "); item.Value.FormatCode(sb); sb.Append(")"); }, sb);
-			sb.Append("]");
+			__init.Property("Sources");
+			writer.WriteInlineList(Sources, (w, item) => { w.Write("new("); w.WriteString(item.Key); w.Write(", "); item.Value.FormatCode(w); w.Write(")"); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

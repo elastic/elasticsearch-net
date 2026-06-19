@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public static class IcuNormalizationModeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode.Compose:
-				sb.Append("IcuNormalizationMode.Compose");
+				writer.Write("IcuNormalizationMode.Compose");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode.Decompose:
-				sb.Append("IcuNormalizationMode.Decompose");
+				writer.Write("IcuNormalizationMode.Decompose");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -25,97 +25,70 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class PutTemplateRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			instance.Name.FormatCode(sb);
+			__init.Property("Name");
+			Name.FormatCode(writer);
 		}
 
-		if (instance.Cause is not null)
+		if (Cause is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Cause = ");
-			sb.Append("\"");
-			sb.Append(instance.Cause);
-			sb.Append("\"");
+			__init.Property("Cause");
+			writer.WriteString(Cause);
 		}
 
-		if (instance.Create is not null)
+		if (Create is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Create = ");
-			sb.Append(instance.Create.Value ? "true" : "false");
+			__init.Property("Create");
+			writer.WriteValue(Create.Value);
 		}
 
-		if (instance.MasterTimeout is not null)
+		if (MasterTimeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MasterTimeout = ");
-			instance.MasterTimeout.FormatCode(sb);
+			__init.Property("MasterTimeout");
+			MasterTimeout.FormatCode(writer);
 		}
 
-		if (instance.Aliases is not null)
+		if (Aliases is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Aliases = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Aliases, (k, sb) => { k.FormatCode(sb); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Aliases");
+			writer.Write("new() ");
+			writer.WriteInlineList(Aliases, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.IndexPatterns is not null)
+		if (IndexPatterns is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexPatterns = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.IndexPatterns, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("IndexPatterns");
+			writer.WriteInlineList(IndexPatterns, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Mappings is not null)
+		if (Mappings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mappings = ");
-			instance.Mappings.FormatCode(sb);
+			__init.Property("Mappings");
+			Mappings.FormatCode(writer);
 		}
 
-		if (instance.Order is not null)
+		if (Order is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Order = ");
-			sb.Append(instance.Order.Value);
+			__init.Property("Order");
+			writer.WriteValue(Order.Value);
 		}
 
-		if (instance.Settings is not null)
+		if (Settings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Settings = ");
-			instance.Settings.FormatCode(sb);
+			__init.Property("Settings");
+			Settings.FormatCode(writer);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append(instance.Version.Value);
-			sb.Append("L");
+			__init.Property("Version");
+			writer.WriteValue(Version.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

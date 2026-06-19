@@ -25,38 +25,37 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class GeoBounds : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		if (instance.TryGetCoordinates(out var v1))
+		if (TryGetCoordinates(out var v1))
 		{
-			sb.Append("GeoBounds.Coordinates(");
-			v1.FormatCode(sb);
-			sb.Append(")");
+			writer.Write("GeoBounds.Coordinates(");
+			v1.FormatCode(writer);
+			writer.Write(")");
 			return;
 		}
 
-		if (instance.TryGetTopLeftBottomRight(out var v2))
+		if (TryGetTopLeftBottomRight(out var v2))
 		{
-			sb.Append("GeoBounds.TopLeftBottomRight(");
-			v2.FormatCode(sb);
-			sb.Append(")");
+			writer.Write("GeoBounds.TopLeftBottomRight(");
+			v2.FormatCode(writer);
+			writer.Write(")");
 			return;
 		}
 
-		if (instance.TryGetTopRightBottomLeft(out var v3))
+		if (TryGetTopRightBottomLeft(out var v3))
 		{
-			sb.Append("GeoBounds.TopRightBottomLeft(");
-			v3.FormatCode(sb);
-			sb.Append(")");
+			writer.Write("GeoBounds.TopRightBottomLeft(");
+			v3.FormatCode(writer);
+			writer.Write(")");
 			return;
 		}
 
-		if (instance.TryGetWkt(out var v4))
+		if (TryGetWkt(out var v4))
 		{
-			sb.Append("GeoBounds.Wkt(");
-			v4.FormatCode(sb);
-			sb.Append(")");
+			writer.Write("GeoBounds.Wkt(");
+			v4.FormatCode(writer);
+			writer.Write(")");
 			return;
 		}
 	}

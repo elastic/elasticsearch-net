@@ -25,67 +25,44 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class ZeroShotClassificationInferenceOptions : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ClassificationLabels = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.ClassificationLabels, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("ClassificationLabels");
+			writer.WriteInlineList(ClassificationLabels, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.HypothesisTemplate is not null)
+		if (HypothesisTemplate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HypothesisTemplate = ");
-			sb.Append("\"");
-			sb.Append(instance.HypothesisTemplate);
-			sb.Append("\"");
+			__init.Property("HypothesisTemplate");
+			writer.WriteString(HypothesisTemplate);
 		}
 
-		if (instance.Labels is not null)
+		if (Labels is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Labels = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Labels, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Labels");
+			writer.WriteInlineList(Labels, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.MultiLabel is not null)
+		if (MultiLabel is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MultiLabel = ");
-			sb.Append(instance.MultiLabel.Value ? "true" : "false");
+			__init.Property("MultiLabel");
+			writer.WriteValue(MultiLabel.Value);
 		}
 
-		if (instance.ResultsField is not null)
+		if (ResultsField is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ResultsField = ");
-			sb.Append("\"");
-			sb.Append(instance.ResultsField);
-			sb.Append("\"");
+			__init.Property("ResultsField");
+			writer.WriteString(ResultsField);
 		}
 
-		if (instance.Tokenization is not null)
+		if (Tokenization is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Tokenization = ");
-			instance.Tokenization.FormatCode(sb);
+			__init.Property("Tokenization");
+			Tokenization.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

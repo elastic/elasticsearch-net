@@ -25,86 +25,61 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots;
 
 public partial class MountRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Repository = ");
-			instance.Repository.FormatCode(sb);
+			__init.Property("Repository");
+			Repository.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Snapshot = ");
-			instance.Snapshot.FormatCode(sb);
+			__init.Property("Snapshot");
+			Snapshot.FormatCode(writer);
 		}
 
-		if (instance.MasterTimeout is not null)
+		if (MasterTimeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MasterTimeout = ");
-			instance.MasterTimeout.FormatCode(sb);
+			__init.Property("MasterTimeout");
+			MasterTimeout.FormatCode(writer);
 		}
 
-		if (instance.Storage is not null)
+		if (Storage is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Storage = ");
-			sb.Append("\"");
-			sb.Append(instance.Storage);
-			sb.Append("\"");
+			__init.Property("Storage");
+			Elastic.Clients.Elasticsearch.SearchableSnapshots.StorageOptionCodeFormatter.FormatCode(Storage.Value, writer);
 		}
 
-		if (instance.WaitForCompletion is not null)
+		if (WaitForCompletion is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WaitForCompletion = ");
-			sb.Append(instance.WaitForCompletion.Value ? "true" : "false");
+			__init.Property("WaitForCompletion");
+			writer.WriteValue(WaitForCompletion.Value);
 		}
 
-		if (instance.IgnoreIndexSettings is not null)
+		if (IgnoreIndexSettings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreIndexSettings = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.IgnoreIndexSettings, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("IgnoreIndexSettings");
+			writer.WriteInlineList(IgnoreIndexSettings, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			instance.Index.FormatCode(sb);
+			__init.Property("Index");
+			Index.FormatCode(writer);
 		}
 
-		if (instance.IndexSettings is not null)
+		if (IndexSettings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexSettings = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.IndexSettings, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("IndexSettings");
+			writer.Write("new() ");
+			writer.WriteInlineList(IndexSettings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.RenamedIndex is not null)
+		if (RenamedIndex is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RenamedIndex = ");
-			instance.RenamedIndex.FormatCode(sb);
+			__init.Property("RenamedIndex");
+			RenamedIndex.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

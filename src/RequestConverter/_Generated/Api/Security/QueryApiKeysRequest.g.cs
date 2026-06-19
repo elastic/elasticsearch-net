@@ -25,89 +25,64 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class QueryApiKeysRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.TypedKeys is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (TypedKeys is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TypedKeys = ");
-			sb.Append(instance.TypedKeys.Value ? "true" : "false");
+			__init.Property("TypedKeys");
+			writer.WriteValue(TypedKeys.Value);
 		}
 
-		if (instance.WithLimitedBy is not null)
+		if (WithLimitedBy is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WithLimitedBy = ");
-			sb.Append(instance.WithLimitedBy.Value ? "true" : "false");
+			__init.Property("WithLimitedBy");
+			writer.WriteValue(WithLimitedBy.Value);
 		}
 
-		if (instance.WithProfileUid is not null)
+		if (WithProfileUid is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WithProfileUid = ");
-			sb.Append(instance.WithProfileUid.Value ? "true" : "false");
+			__init.Property("WithProfileUid");
+			writer.WriteValue(WithProfileUid.Value);
 		}
 
-		if (instance.Aggregations is not null)
+		if (Aggregations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Aggregations = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Aggregations, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Aggregations");
+			writer.Write("new() ");
+			writer.WriteInlineList(Aggregations, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.From is not null)
+		if (From is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("From = ");
-			sb.Append(instance.From.Value);
+			__init.Property("From");
+			writer.WriteValue(From.Value);
 		}
 
-		if (instance.Query is not null)
+		if (Query is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			instance.Query.FormatCode(sb);
+			__init.Property("Query");
+			Query.FormatCode(writer);
 		}
 
-		if (instance.SearchAfter is not null)
+		if (SearchAfter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SearchAfter = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.SearchAfter, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("SearchAfter");
+			writer.WriteInlineList(SearchAfter, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append(instance.Size.Value);
+			__init.Property("Size");
+			writer.WriteValue(Size.Value);
 		}
 
-		if (instance.Sort is not null)
+		if (Sort is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sort = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Sort, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Sort");
+			writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

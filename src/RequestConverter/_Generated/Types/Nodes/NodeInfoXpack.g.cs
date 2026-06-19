@@ -25,44 +25,33 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class NodeInfoXpack : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.License is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (License is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("License = ");
-			instance.License.FormatCode(sb);
+			__init.Property("License");
+			License.FormatCode(writer);
 		}
 
-		if (instance.Ml is not null)
+		if (Ml is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ml = ");
-			instance.Ml.FormatCode(sb);
+			__init.Property("Ml");
+			Ml.FormatCode(writer);
 		}
 
-		if (instance.Notification is not null)
+		if (Notification is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Notification = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Notification, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Notification");
+			writer.Write("new() ");
+			writer.WriteInlineList(Notification, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Security = ");
-			instance.Security.FormatCode(sb);
+			__init.Property("Security");
+			Security.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,39 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Core.GetScriptContext;
 
 public partial class ContextMethod : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Params = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Params, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Params");
+			writer.WriteInlineList(Params, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReturnType = ");
-			sb.Append("\"");
-			sb.Append(instance.ReturnType);
-			sb.Append("\"");
+			__init.Property("ReturnType");
+			writer.WriteString(ReturnType);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

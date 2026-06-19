@@ -25,52 +25,39 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataframeClassificationSummary : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Accuracy is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Accuracy is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Accuracy = ");
-			instance.Accuracy.FormatCode(sb);
+			__init.Property("Accuracy");
+			Accuracy.FormatCode(writer);
 		}
 
-		if (instance.AucRoc is not null)
+		if (AucRoc is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AucRoc = ");
-			instance.AucRoc.FormatCode(sb);
+			__init.Property("AucRoc");
+			AucRoc.FormatCode(writer);
 		}
 
-		if (instance.MulticlassConfusionMatrix is not null)
+		if (MulticlassConfusionMatrix is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MulticlassConfusionMatrix = ");
-			instance.MulticlassConfusionMatrix.FormatCode(sb);
+			__init.Property("MulticlassConfusionMatrix");
+			MulticlassConfusionMatrix.FormatCode(writer);
 		}
 
-		if (instance.Precision is not null)
+		if (Precision is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Precision = ");
-			instance.Precision.FormatCode(sb);
+			__init.Property("Precision");
+			Precision.FormatCode(writer);
 		}
 
-		if (instance.Recall is not null)
+		if (Recall is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Recall = ");
-			instance.Recall.FormatCode(sb);
+			__init.Property("Recall");
+			Recall.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

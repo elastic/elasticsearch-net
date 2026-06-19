@@ -25,66 +25,45 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class FieldSuggester : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Prefix is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Prefix is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Prefix = ");
-			sb.Append("\"");
-			sb.Append(instance.Prefix);
-			sb.Append("\"");
+			__init.Property("Prefix");
+			writer.WriteString(Prefix);
 		}
 
-		if (instance.Regex is not null)
+		if (Regex is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Regex = ");
-			sb.Append("\"");
-			sb.Append(instance.Regex);
-			sb.Append("\"");
+			__init.Property("Regex");
+			writer.WriteString(Regex);
 		}
 
-		if (instance.Text is not null)
+		if (Text is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Text = ");
-			sb.Append("\"");
-			sb.Append(instance.Text);
-			sb.Append("\"");
+			__init.Property("Text");
+			writer.WriteString(Text);
 		}
 
-		if (instance.Completion is not null)
+		if (Completion is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Completion = ");
-			instance.Completion.FormatCode(sb);
+			__init.Property("Completion");
+			Completion.FormatCode(writer);
 		}
 
-		if (instance.Phrase is not null)
+		if (Phrase is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Phrase = ");
-			instance.Phrase.FormatCode(sb);
+			__init.Property("Phrase");
+			Phrase.FormatCode(writer);
 		}
 
-		if (instance.Term is not null)
+		if (Term is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Term = ");
-			instance.Term.FormatCode(sb);
+			__init.Property("Term");
+			Term.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

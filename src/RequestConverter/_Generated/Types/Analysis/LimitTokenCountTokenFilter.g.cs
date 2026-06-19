@@ -25,38 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class LimitTokenCountTokenFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ConsumeAllTokens is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ConsumeAllTokens is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ConsumeAllTokens = ");
-			sb.Append(instance.ConsumeAllTokens.Value ? "true" : "false");
+			__init.Property("ConsumeAllTokens");
+			writer.WriteValue(ConsumeAllTokens.Value);
 		}
 
-		if (instance.MaxTokenCount is not null)
+		if (MaxTokenCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxTokenCount = ");
-			sb.Append(instance.MaxTokenCount.Value);
+			__init.Property("MaxTokenCount");
+			writer.WriteValue(MaxTokenCount.Value);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

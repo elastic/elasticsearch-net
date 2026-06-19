@@ -25,128 +25,95 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class NodeInfoSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Action is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Action is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Action = ");
-			instance.Action.FormatCode(sb);
+			__init.Property("Action");
+			Action.FormatCode(writer);
 		}
 
-		if (instance.Bootstrap is not null)
+		if (Bootstrap is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Bootstrap = ");
-			instance.Bootstrap.FormatCode(sb);
+			__init.Property("Bootstrap");
+			Bootstrap.FormatCode(writer);
 		}
 
-		if (instance.Client is not null)
+		if (Client is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Client = ");
-			instance.Client.FormatCode(sb);
+			__init.Property("Client");
+			Client.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Cluster = ");
-			instance.Cluster.FormatCode(sb);
+			__init.Property("Cluster");
+			Cluster.FormatCode(writer);
 		}
 
-		if (instance.Discovery is not null)
+		if (Discovery is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Discovery = ");
-			instance.Discovery.FormatCode(sb);
+			__init.Property("Discovery");
+			Discovery.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Http = ");
-			instance.Http.FormatCode(sb);
+			__init.Property("Http");
+			Http.FormatCode(writer);
 		}
 
-		if (instance.Ingest is not null)
+		if (Ingest is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ingest = ");
-			instance.Ingest.FormatCode(sb);
+			__init.Property("Ingest");
+			Ingest.FormatCode(writer);
 		}
 
-		if (instance.Network is not null)
+		if (Network is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Network = ");
-			instance.Network.FormatCode(sb);
+			__init.Property("Network");
+			Network.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Node = ");
-			instance.Node.FormatCode(sb);
+			__init.Property("Node");
+			Node.FormatCode(writer);
 		}
 
-		if (instance.Path is not null)
+		if (Path is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Path = ");
-			instance.Path.FormatCode(sb);
+			__init.Property("Path");
+			Path.FormatCode(writer);
 		}
 
-		if (instance.Repositories is not null)
+		if (Repositories is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Repositories = ");
-			instance.Repositories.FormatCode(sb);
+			__init.Property("Repositories");
+			Repositories.FormatCode(writer);
 		}
 
-		if (instance.Script is not null)
+		if (Script is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Script = ");
-			instance.Script.FormatCode(sb);
+			__init.Property("Script");
+			Script.FormatCode(writer);
 		}
 
-		if (instance.Search is not null)
+		if (Search is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Search = ");
-			instance.Search.FormatCode(sb);
+			__init.Property("Search");
+			Search.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Transport = ");
-			instance.Transport.FormatCode(sb);
+			__init.Property("Transport");
+			Transport.FormatCode(writer);
 		}
 
-		if (instance.Xpack is not null)
+		if (Xpack is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Xpack = ");
-			instance.Xpack.FormatCode(sb);
+			__init.Property("Xpack");
+			Xpack.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

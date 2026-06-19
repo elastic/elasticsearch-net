@@ -25,40 +25,25 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class IndexSettingResults : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AppliedToDataStreamAndBackingIndices = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.AppliedToDataStreamAndBackingIndices, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("AppliedToDataStreamAndBackingIndices");
+			writer.WriteInlineList(AppliedToDataStreamAndBackingIndices, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AppliedToDataStreamOnly = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.AppliedToDataStreamOnly, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("AppliedToDataStreamOnly");
+			writer.WriteInlineList(AppliedToDataStreamOnly, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Errors is not null)
+		if (Errors is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Errors = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Errors, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Errors");
+			writer.WriteInlineList(Errors, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,29 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Enrich;
 
 public partial class ExecuteEnrichPolicyStatus : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Phase = ");
-			Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhaseCodeFormatter.FormatCode(instance.Phase, sb);
+			__init.Property("Phase");
+			Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhaseCodeFormatter.FormatCode(Phase, writer);
 		}
 
-		if (instance.Step is not null)
+		if (Step is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Step = ");
-			sb.Append("\"");
-			sb.Append(instance.Step);
-			sb.Append("\"");
+			__init.Property("Step");
+			writer.WriteString(Step);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

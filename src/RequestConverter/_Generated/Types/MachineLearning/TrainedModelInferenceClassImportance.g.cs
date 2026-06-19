@@ -25,29 +25,20 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class TrainedModelInferenceClassImportance : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ClassName = ");
-			sb.Append("\"");
-			sb.Append(instance.ClassName);
-			sb.Append("\"");
+			__init.Property("ClassName");
+			writer.WriteString(ClassName);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Importance = ");
-			sb.Append(instance.Importance);
-			sb.Append("d");
+			__init.Property("Importance");
+			writer.WriteValue(Importance);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

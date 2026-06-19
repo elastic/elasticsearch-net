@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class JinaAISimilarityTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType.Cosine:
-				sb.Append("JinaAISimilarityType.Cosine");
+				writer.Write("JinaAISimilarityType.Cosine");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType.DotProduct:
-				sb.Append("JinaAISimilarityType.DotProduct");
+				writer.Write("JinaAISimilarityType.DotProduct");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType.L2Norm:
-				sb.Append("JinaAISimilarityType.L2Norm");
+				writer.Write("JinaAISimilarityType.L2Norm");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

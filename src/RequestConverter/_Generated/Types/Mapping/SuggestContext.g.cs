@@ -25,44 +25,31 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public partial class SuggestContext : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			instance.Name.FormatCode(sb);
+			__init.Property("Name");
+			Name.FormatCode(writer);
 		}
 
-		if (instance.Path is not null)
+		if (Path is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Path = ");
-			instance.Path.FormatCode(sb);
+			__init.Property("Path");
+			Path.FormatCode(writer);
 		}
 
-		if (instance.Precision is not null)
+		if (Precision is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Precision = ");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<int, string>(instance.Precision, sb);
+			__init.Property("Precision");
+			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<int, string>(Precision, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			sb.Append("\"");
-			sb.Append(instance.Type);
-			sb.Append("\"");
+			__init.Property("Type");
+			writer.WriteString(Type);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

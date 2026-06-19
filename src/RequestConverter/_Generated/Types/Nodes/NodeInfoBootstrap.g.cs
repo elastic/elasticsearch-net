@@ -25,21 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class NodeInfoBootstrap : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MemoryLock = ");
-			sb.Append("\"");
-			sb.Append(instance.MemoryLock);
-			sb.Append("\"");
+			__init.Property("MemoryLock");
+			writer.WriteString(MemoryLock);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

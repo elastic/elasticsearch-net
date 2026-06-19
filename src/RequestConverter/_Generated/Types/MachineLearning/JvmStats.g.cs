@@ -25,57 +25,42 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class JvmStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.HeapMax is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (HeapMax is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HeapMax = ");
-			instance.HeapMax.FormatCode(sb);
+			__init.Property("HeapMax");
+			HeapMax.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HeapMaxInBytes = ");
-			sb.Append(instance.HeapMaxInBytes);
+			__init.Property("HeapMaxInBytes");
+			writer.WriteValue(HeapMaxInBytes);
 		}
 
-		if (instance.JavaInference is not null)
+		if (JavaInference is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JavaInference = ");
-			instance.JavaInference.FormatCode(sb);
+			__init.Property("JavaInference");
+			JavaInference.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JavaInferenceInBytes = ");
-			sb.Append(instance.JavaInferenceInBytes);
+			__init.Property("JavaInferenceInBytes");
+			writer.WriteValue(JavaInferenceInBytes);
 		}
 
-		if (instance.JavaInferenceMax is not null)
+		if (JavaInferenceMax is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JavaInferenceMax = ");
-			instance.JavaInferenceMax.FormatCode(sb);
+			__init.Property("JavaInferenceMax");
+			JavaInferenceMax.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JavaInferenceMaxInBytes = ");
-			sb.Append(instance.JavaInferenceMaxInBytes);
+			__init.Property("JavaInferenceMaxInBytes");
+			writer.WriteValue(JavaInferenceMaxInBytes);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class DFIIndependenceMeasureCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.DFIIndependenceMeasure instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.DFIIndependenceMeasure instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.DFIIndependenceMeasure.Chisquared:
-				sb.Append("DFIIndependenceMeasure.Chisquared");
+				writer.Write("DFIIndependenceMeasure.Chisquared");
 				break;
 			case Elastic.Clients.Elasticsearch.DFIIndependenceMeasure.Saturated:
-				sb.Append("DFIIndependenceMeasure.Saturated");
+				writer.Write("DFIIndependenceMeasure.Saturated");
 				break;
 			case Elastic.Clients.Elasticsearch.DFIIndependenceMeasure.Standardized:
-				sb.Append("DFIIndependenceMeasure.Standardized");
+				writer.Write("DFIIndependenceMeasure.Standardized");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

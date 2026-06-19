@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class DenseVectorStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.OffHeap is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (OffHeap is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OffHeap = ");
-			instance.OffHeap.FormatCode(sb);
+			__init.Property("OffHeap");
+			OffHeap.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ValueCount = ");
-			sb.Append(instance.ValueCount);
-			sb.Append("L");
+			__init.Property("ValueCount");
+			writer.WriteValue(ValueCount);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

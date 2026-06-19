@@ -25,22 +25,15 @@ namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
 public partial class GetBehavioralAnalyticsRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Name is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Name is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Name, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Name");
+			writer.WriteInlineList(Name, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

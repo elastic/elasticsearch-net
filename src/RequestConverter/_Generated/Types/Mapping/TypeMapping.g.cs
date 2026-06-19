@@ -25,154 +25,113 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public partial class TypeMapping : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AllField is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AllField is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllField = ");
-			instance.AllField.FormatCode(sb);
+			__init.Property("AllField");
+			AllField.FormatCode(writer);
 		}
 
-		if (instance.DataStreamTimestamp is not null)
+		if (DataStreamTimestamp is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DataStreamTimestamp = ");
-			instance.DataStreamTimestamp.FormatCode(sb);
+			__init.Property("DataStreamTimestamp");
+			DataStreamTimestamp.FormatCode(writer);
 		}
 
-		if (instance.DateDetection is not null)
+		if (DateDetection is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DateDetection = ");
-			sb.Append(instance.DateDetection.Value ? "true" : "false");
+			__init.Property("DateDetection");
+			writer.WriteValue(DateDetection.Value);
 		}
 
-		if (instance.Dynamic is not null)
+		if (Dynamic is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Dynamic = ");
-			Elastic.Clients.Elasticsearch.Mapping.DynamicMappingCodeFormatter.FormatCode(instance.Dynamic.Value, sb);
+			__init.Property("Dynamic");
+			Elastic.Clients.Elasticsearch.Mapping.DynamicMappingCodeFormatter.FormatCode(Dynamic.Value, writer);
 		}
 
-		if (instance.DynamicDateFormats is not null)
+		if (DynamicDateFormats is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DynamicDateFormats = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.DynamicDateFormats, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("DynamicDateFormats");
+			writer.WriteInlineList(DynamicDateFormats, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.DynamicTemplates is not null)
+		if (DynamicTemplates is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DynamicTemplates = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.DynamicTemplates, (item, sb) => { sb.Append("new("); sb.Append("\""); sb.Append(item.Key); sb.Append("\""); sb.Append(", "); item.Value.FormatCode(sb); sb.Append(")"); }, sb);
-			sb.Append("]");
+			__init.Property("DynamicTemplates");
+			writer.WriteInlineList(DynamicTemplates, (w, item) => { w.Write("new("); w.WriteString(item.Key); w.Write(", "); item.Value.FormatCode(w); w.Write(")"); });
 		}
 
-		if (instance.Enabled is not null)
+		if (Enabled is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Enabled = ");
-			sb.Append(instance.Enabled.Value ? "true" : "false");
+			__init.Property("Enabled");
+			writer.WriteValue(Enabled.Value);
 		}
 
-		if (instance.FieldNames is not null)
+		if (FieldNames is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FieldNames = ");
-			instance.FieldNames.FormatCode(sb);
+			__init.Property("FieldNames");
+			FieldNames.FormatCode(writer);
 		}
 
-		if (instance.IndexField is not null)
+		if (IndexField is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexField = ");
-			instance.IndexField.FormatCode(sb);
+			__init.Property("IndexField");
+			IndexField.FormatCode(writer);
 		}
 
-		if (instance.Meta is not null)
+		if (Meta is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Meta = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Meta, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Meta");
+			writer.Write("new() ");
+			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.NumericDetection is not null)
+		if (NumericDetection is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumericDetection = ");
-			sb.Append(instance.NumericDetection.Value ? "true" : "false");
+			__init.Property("NumericDetection");
+			writer.WriteValue(NumericDetection.Value);
 		}
 
-		if (instance.Properties is not null)
+		if (Properties is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Properties = ");
-			instance.Properties.FormatCode(sb);
+			__init.Property("Properties");
+			Properties.FormatCode(writer);
 		}
 
-		if (instance.Routing is not null)
+		if (Routing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Routing = ");
-			instance.Routing.FormatCode(sb);
+			__init.Property("Routing");
+			Routing.FormatCode(writer);
 		}
 
-		if (instance.Runtime is not null)
+		if (Runtime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Runtime = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Runtime, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Runtime");
+			writer.Write("new() ");
+			writer.WriteInlineList(Runtime, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			instance.Size.FormatCode(sb);
+			__init.Property("Size");
+			Size.FormatCode(writer);
 		}
 
-		if (instance.Source is not null)
+		if (Source is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Source = ");
-			instance.Source.FormatCode(sb);
+			__init.Property("Source");
+			Source.FormatCode(writer);
 		}
 
-		if (instance.Subobjects is not null)
+		if (Subobjects is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Subobjects = ");
-			Elastic.Clients.Elasticsearch.Mapping.SubobjectsCodeFormatter.FormatCode(instance.Subobjects.Value, sb);
+			__init.Property("Subobjects");
+			Elastic.Clients.Elasticsearch.Mapping.SubobjectsCodeFormatter.FormatCode(Subobjects.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

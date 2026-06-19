@@ -25,33 +25,32 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial interface IDecayFunction : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	void RequestConverter.ICodeFormattable.FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		if (instance is Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunction c1)
+		if (this is Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunction c1)
 		{
-			c1.FormatCode(sb);
+			c1.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction c2)
+		if (this is Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction c2)
 		{
-			c2.FormatCode(sb);
+			c2.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction c3)
+		if (this is Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction c3)
 		{
-			c3.FormatCode(sb);
+			c3.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction c4)
+		if (this is Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction c4)
 		{
-			c4.FormatCode(sb);
+			c4.FormatCode(writer);
 			return;
 		}
 
-		sb.Append(instance.ToString());
+		writer.Write(ToString());
 	}
 }

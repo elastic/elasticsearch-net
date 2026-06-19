@@ -25,19 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class MlDataFrameAnalyticsJobsMemory : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PeakUsageBytes = ");
-			instance.PeakUsageBytes.FormatCode(sb);
+			__init.Property("PeakUsageBytes");
+			PeakUsageBytes.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

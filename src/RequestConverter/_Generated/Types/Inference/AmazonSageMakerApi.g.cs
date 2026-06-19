@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class AmazonSageMakerApiCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerApi instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerApi instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerApi.Elastic:
-				sb.Append("AmazonSageMakerApi.Elastic");
+				writer.Write("AmazonSageMakerApi.Elastic");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerApi.Openai:
-				sb.Append("AmazonSageMakerApi.Openai");
+				writer.Write("AmazonSageMakerApi.Openai");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -25,33 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class ClusterIndicesShardsIndex : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Primaries = ");
-			instance.Primaries.FormatCode(sb);
+			__init.Property("Primaries");
+			Primaries.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Replication = ");
-			instance.Replication.FormatCode(sb);
+			__init.Property("Replication");
+			Replication.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Shards = ");
-			instance.Shards.FormatCode(sb);
+			__init.Property("Shards");
+			Shards.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

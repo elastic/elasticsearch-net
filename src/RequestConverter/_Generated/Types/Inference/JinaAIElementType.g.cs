@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class JinaAIElementTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.JinaAIElementType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.JinaAIElementType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.JinaAIElementType.Binary:
-				sb.Append("JinaAIElementType.Binary");
+				writer.Write("JinaAIElementType.Binary");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.JinaAIElementType.Bit:
-				sb.Append("JinaAIElementType.Bit");
+				writer.Write("JinaAIElementType.Bit");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.JinaAIElementType.Float:
-				sb.Append("JinaAIElementType.Float");
+				writer.Write("JinaAIElementType.Float");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

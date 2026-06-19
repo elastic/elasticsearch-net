@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public static class AllocationExplainDecisionCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision.Always:
-				sb.Append("AllocationExplainDecision.Always");
+				writer.Write("AllocationExplainDecision.Always");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision.No:
-				sb.Append("AllocationExplainDecision.No");
+				writer.Write("AllocationExplainDecision.No");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision.Throttle:
-				sb.Append("AllocationExplainDecision.Throttle");
+				writer.Write("AllocationExplainDecision.Throttle");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision.Yes:
-				sb.Append("AllocationExplainDecision.Yes");
+				writer.Write("AllocationExplainDecision.Yes");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

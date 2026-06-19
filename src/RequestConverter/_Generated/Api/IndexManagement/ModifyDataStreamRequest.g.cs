@@ -25,21 +25,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class ModifyDataStreamRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Actions = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Actions, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Actions");
+			writer.WriteInlineList(Actions, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

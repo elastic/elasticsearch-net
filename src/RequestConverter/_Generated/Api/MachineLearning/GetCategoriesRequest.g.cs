@@ -25,62 +25,45 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class GetCategoriesRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CategoryId is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CategoryId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CategoryId = ");
-			sb.Append(instance.CategoryId.Value);
-			sb.Append("L");
+			__init.Property("CategoryId");
+			writer.WriteValue(CategoryId.Value);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JobId = ");
-			instance.JobId.FormatCode(sb);
+			__init.Property("JobId");
+			JobId.FormatCode(writer);
 		}
 
-		if (instance.From is not null)
+		if (From is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("From = ");
-			sb.Append(instance.From.Value);
+			__init.Property("From");
+			writer.WriteValue(From.Value);
 		}
 
-		if (instance.PartitionFieldValue is not null)
+		if (PartitionFieldValue is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PartitionFieldValue = ");
-			sb.Append("\"");
-			sb.Append(instance.PartitionFieldValue);
-			sb.Append("\"");
+			__init.Property("PartitionFieldValue");
+			writer.WriteString(PartitionFieldValue);
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append(instance.Size.Value);
+			__init.Property("Size");
+			writer.WriteValue(Size.Value);
 		}
 
-		if (instance.Page is not null)
+		if (Page is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Page = ");
-			instance.Page.FormatCode(sb);
+			__init.Property("Page");
+			Page.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

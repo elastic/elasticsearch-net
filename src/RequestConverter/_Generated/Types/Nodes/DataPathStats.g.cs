@@ -25,165 +25,112 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class DataPathStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Available is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Available is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Available = ");
-			sb.Append("\"");
-			sb.Append(instance.Available);
-			sb.Append("\"");
+			__init.Property("Available");
+			writer.WriteString(Available);
 		}
 
-		if (instance.AvailableInBytes is not null)
+		if (AvailableInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AvailableInBytes = ");
-			sb.Append(instance.AvailableInBytes.Value);
-			sb.Append("L");
+			__init.Property("AvailableInBytes");
+			writer.WriteValue(AvailableInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.DiskQueue is not null)
+		if (DiskQueue is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DiskQueue = ");
-			sb.Append("\"");
-			sb.Append(instance.DiskQueue);
-			sb.Append("\"");
+			__init.Property("DiskQueue");
+			writer.WriteString(DiskQueue);
 		}
 
-		if (instance.DiskReads is not null)
+		if (DiskReads is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DiskReads = ");
-			sb.Append(instance.DiskReads.Value);
-			sb.Append("L");
+			__init.Property("DiskReads");
+			writer.WriteValue(DiskReads.Value);
+			writer.Write("L");
 		}
 
-		if (instance.DiskReadSize is not null)
+		if (DiskReadSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DiskReadSize = ");
-			sb.Append("\"");
-			sb.Append(instance.DiskReadSize);
-			sb.Append("\"");
+			__init.Property("DiskReadSize");
+			writer.WriteString(DiskReadSize);
 		}
 
-		if (instance.DiskReadSizeInBytes is not null)
+		if (DiskReadSizeInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DiskReadSizeInBytes = ");
-			sb.Append(instance.DiskReadSizeInBytes.Value);
-			sb.Append("L");
+			__init.Property("DiskReadSizeInBytes");
+			writer.WriteValue(DiskReadSizeInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.DiskWrites is not null)
+		if (DiskWrites is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DiskWrites = ");
-			sb.Append(instance.DiskWrites.Value);
-			sb.Append("L");
+			__init.Property("DiskWrites");
+			writer.WriteValue(DiskWrites.Value);
+			writer.Write("L");
 		}
 
-		if (instance.DiskWriteSize is not null)
+		if (DiskWriteSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DiskWriteSize = ");
-			sb.Append("\"");
-			sb.Append(instance.DiskWriteSize);
-			sb.Append("\"");
+			__init.Property("DiskWriteSize");
+			writer.WriteString(DiskWriteSize);
 		}
 
-		if (instance.DiskWriteSizeInBytes is not null)
+		if (DiskWriteSizeInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DiskWriteSizeInBytes = ");
-			sb.Append(instance.DiskWriteSizeInBytes.Value);
-			sb.Append("L");
+			__init.Property("DiskWriteSizeInBytes");
+			writer.WriteValue(DiskWriteSizeInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Free is not null)
+		if (Free is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Free = ");
-			sb.Append("\"");
-			sb.Append(instance.Free);
-			sb.Append("\"");
+			__init.Property("Free");
+			writer.WriteString(Free);
 		}
 
-		if (instance.FreeInBytes is not null)
+		if (FreeInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FreeInBytes = ");
-			sb.Append(instance.FreeInBytes.Value);
-			sb.Append("L");
+			__init.Property("FreeInBytes");
+			writer.WriteValue(FreeInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Mount is not null)
+		if (Mount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mount = ");
-			sb.Append("\"");
-			sb.Append(instance.Mount);
-			sb.Append("\"");
+			__init.Property("Mount");
+			writer.WriteString(Mount);
 		}
 
-		if (instance.Path is not null)
+		if (Path is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Path = ");
-			sb.Append("\"");
-			sb.Append(instance.Path);
-			sb.Append("\"");
+			__init.Property("Path");
+			writer.WriteString(Path);
 		}
 
-		if (instance.Total is not null)
+		if (Total is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			sb.Append("\"");
-			sb.Append(instance.Total);
-			sb.Append("\"");
+			__init.Property("Total");
+			writer.WriteString(Total);
 		}
 
-		if (instance.TotalInBytes is not null)
+		if (TotalInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalInBytes = ");
-			sb.Append(instance.TotalInBytes.Value);
-			sb.Append("L");
+			__init.Property("TotalInBytes");
+			writer.WriteValue(TotalInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Type is not null)
+		if (Type is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			sb.Append("\"");
-			sb.Append(instance.Type);
-			sb.Append("\"");
+			__init.Property("Type");
+			writer.WriteString(Type);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

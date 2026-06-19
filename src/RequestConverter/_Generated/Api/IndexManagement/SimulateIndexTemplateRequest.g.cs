@@ -25,61 +25,44 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class SimulateIndexTemplateRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			instance.Name.FormatCode(sb);
+			__init.Property("Name");
+			Name.FormatCode(writer);
 		}
 
-		if (instance.Cause is not null)
+		if (Cause is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Cause = ");
-			sb.Append("\"");
-			sb.Append(instance.Cause);
-			sb.Append("\"");
+			__init.Property("Cause");
+			writer.WriteString(Cause);
 		}
 
-		if (instance.Create is not null)
+		if (Create is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Create = ");
-			sb.Append(instance.Create.Value ? "true" : "false");
+			__init.Property("Create");
+			writer.WriteValue(Create.Value);
 		}
 
-		if (instance.IncludeDefaults is not null)
+		if (IncludeDefaults is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IncludeDefaults = ");
-			sb.Append(instance.IncludeDefaults.Value ? "true" : "false");
+			__init.Property("IncludeDefaults");
+			writer.WriteValue(IncludeDefaults.Value);
 		}
 
-		if (instance.MasterTimeout is not null)
+		if (MasterTimeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MasterTimeout = ");
-			instance.MasterTimeout.FormatCode(sb);
+			__init.Property("MasterTimeout");
+			MasterTimeout.FormatCode(writer);
 		}
 
-		if (instance.IndexTemplate is not null)
+		if (IndexTemplate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexTemplate = ");
-			instance.IndexTemplate.FormatCode(sb);
+			__init.Property("IndexTemplate");
+			IndexTemplate.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

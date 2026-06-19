@@ -25,69 +25,48 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class FileSystemTotal : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Available is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Available is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Available = ");
-			sb.Append("\"");
-			sb.Append(instance.Available);
-			sb.Append("\"");
+			__init.Property("Available");
+			writer.WriteString(Available);
 		}
 
-		if (instance.AvailableInBytes is not null)
+		if (AvailableInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AvailableInBytes = ");
-			sb.Append(instance.AvailableInBytes.Value);
-			sb.Append("L");
+			__init.Property("AvailableInBytes");
+			writer.WriteValue(AvailableInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Free is not null)
+		if (Free is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Free = ");
-			sb.Append("\"");
-			sb.Append(instance.Free);
-			sb.Append("\"");
+			__init.Property("Free");
+			writer.WriteString(Free);
 		}
 
-		if (instance.FreeInBytes is not null)
+		if (FreeInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FreeInBytes = ");
-			sb.Append(instance.FreeInBytes.Value);
-			sb.Append("L");
+			__init.Property("FreeInBytes");
+			writer.WriteValue(FreeInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Total is not null)
+		if (Total is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			sb.Append("\"");
-			sb.Append(instance.Total);
-			sb.Append("\"");
+			__init.Property("Total");
+			writer.WriteString(Total);
 		}
 
-		if (instance.TotalInBytes is not null)
+		if (TotalInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalInBytes = ");
-			sb.Append(instance.TotalInBytes.Value);
-			sb.Append("L");
+			__init.Property("TotalInBytes");
+			writer.WriteValue(TotalInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

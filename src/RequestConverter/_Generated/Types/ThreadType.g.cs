@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class ThreadTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.ThreadType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.ThreadType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.ThreadType.Block:
-				sb.Append("ThreadType.Block");
+				writer.Write("ThreadType.Block");
 				break;
 			case Elastic.Clients.Elasticsearch.ThreadType.Cpu:
-				sb.Append("ThreadType.Cpu");
+				writer.Write("ThreadType.Cpu");
 				break;
 			case Elastic.Clients.Elasticsearch.ThreadType.Gpu:
-				sb.Append("ThreadType.Gpu");
+				writer.Write("ThreadType.Gpu");
 				break;
 			case Elastic.Clients.Elasticsearch.ThreadType.Mem:
-				sb.Append("ThreadType.Mem");
+				writer.Write("ThreadType.Mem");
 				break;
 			case Elastic.Clients.Elasticsearch.ThreadType.Wait:
-				sb.Append("ThreadType.Wait");
+				writer.Write("ThreadType.Wait");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

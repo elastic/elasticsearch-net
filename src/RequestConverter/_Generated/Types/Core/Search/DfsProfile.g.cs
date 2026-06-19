@@ -25,30 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class DfsProfile : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Knn is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Knn is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Knn = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Knn, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Knn");
+			writer.WriteInlineList(Knn, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Statistics is not null)
+		if (Statistics is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Statistics = ");
-			instance.Statistics.FormatCode(sb);
+			__init.Property("Statistics");
+			Statistics.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

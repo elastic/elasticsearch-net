@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Rollup;
 
 public static class MetricCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Rollup.Metric instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Rollup.Metric instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Rollup.Metric.Avg:
-				sb.Append("Metric.Avg");
+				writer.Write("Metric.Avg");
 				break;
 			case Elastic.Clients.Elasticsearch.Rollup.Metric.Max:
-				sb.Append("Metric.Max");
+				writer.Write("Metric.Max");
 				break;
 			case Elastic.Clients.Elasticsearch.Rollup.Metric.Min:
-				sb.Append("Metric.Min");
+				writer.Write("Metric.Min");
 				break;
 			case Elastic.Clients.Elasticsearch.Rollup.Metric.Sum:
-				sb.Append("Metric.Sum");
+				writer.Write("Metric.Sum");
 				break;
 			case Elastic.Clients.Elasticsearch.Rollup.Metric.ValueCount:
-				sb.Append("Metric.ValueCount");
+				writer.Write("Metric.ValueCount");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

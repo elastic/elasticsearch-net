@@ -25,100 +25,69 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class BucketInfluencer : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AnomalyScore = ");
-			sb.Append(instance.AnomalyScore);
-			sb.Append("d");
+			__init.Property("AnomalyScore");
+			writer.WriteValue(AnomalyScore);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BucketSpan = ");
-			sb.Append(instance.BucketSpan);
+			__init.Property("BucketSpan");
+			writer.WriteValue(BucketSpan);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InfluencerFieldName = ");
-			sb.Append("\"");
-			sb.Append(instance.InfluencerFieldName);
-			sb.Append("\"");
+			__init.Property("InfluencerFieldName");
+			writer.WriteString(InfluencerFieldName);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InitialAnomalyScore = ");
-			sb.Append(instance.InitialAnomalyScore);
-			sb.Append("d");
+			__init.Property("InitialAnomalyScore");
+			writer.WriteValue(InitialAnomalyScore);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IsInterim = ");
-			sb.Append(instance.IsInterim ? "true" : "false");
+			__init.Property("IsInterim");
+			writer.WriteValue(IsInterim);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JobId = ");
-			sb.Append("\"");
-			sb.Append(instance.JobId);
-			sb.Append("\"");
+			__init.Property("JobId");
+			writer.WriteString(JobId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Probability = ");
-			sb.Append(instance.Probability);
-			sb.Append("d");
+			__init.Property("Probability");
+			writer.WriteValue(Probability);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RawAnomalyScore = ");
-			sb.Append(instance.RawAnomalyScore);
-			sb.Append("d");
+			__init.Property("RawAnomalyScore");
+			writer.WriteValue(RawAnomalyScore);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ResultType = ");
-			sb.Append("\"");
-			sb.Append(instance.ResultType);
-			sb.Append("\"");
+			__init.Property("ResultType");
+			writer.WriteString(ResultType);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timestamp = ");
-			sb.Append(instance.Timestamp);
+			__init.Property("Timestamp");
+			writer.WriteValue(Timestamp);
 		}
 
-		if (instance.TimestampString is not null)
+		if (TimestampString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimestampString = ");
-			sb.Append(instance.TimestampString.Value);
+			__init.Property("TimestampString");
+			writer.WriteValue(TimestampString.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

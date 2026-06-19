@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class ChunkRescorer : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ChunkingSettings is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ChunkingSettings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ChunkingSettings = ");
-			instance.ChunkingSettings.FormatCode(sb);
+			__init.Property("ChunkingSettings");
+			ChunkingSettings.FormatCode(writer);
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append(instance.Size.Value);
+			__init.Property("Size");
+			writer.WriteValue(Size.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

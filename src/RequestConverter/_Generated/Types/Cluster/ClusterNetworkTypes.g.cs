@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class ClusterNetworkTypes : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HttpTypes = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.HttpTypes, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append(v); }, sb);
+			__init.Property("HttpTypes");
+			writer.Write("new() ");
+			writer.WriteInlineList(HttpTypes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TransportTypes = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.TransportTypes, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append(v); }, sb);
+			__init.Property("TransportTypes");
+			writer.Write("new() ");
+			writer.WriteInlineList(TransportTypes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

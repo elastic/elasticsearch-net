@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class LlamaSimilarityTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType.Cosine:
-				sb.Append("LlamaSimilarityType.Cosine");
+				writer.Write("LlamaSimilarityType.Cosine");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType.DotProduct:
-				sb.Append("LlamaSimilarityType.DotProduct");
+				writer.Write("LlamaSimilarityType.DotProduct");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType.L2Norm:
-				sb.Append("LlamaSimilarityType.L2Norm");
+				writer.Write("LlamaSimilarityType.L2Norm");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

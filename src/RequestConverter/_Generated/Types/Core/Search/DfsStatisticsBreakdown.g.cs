@@ -25,76 +25,57 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class DfsStatisticsBreakdown : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CollectionStatistics = ");
-			sb.Append(instance.CollectionStatistics);
-			sb.Append("L");
+			__init.Property("CollectionStatistics");
+			writer.WriteValue(CollectionStatistics);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CollectionStatisticsCount = ");
-			sb.Append(instance.CollectionStatisticsCount);
-			sb.Append("L");
+			__init.Property("CollectionStatisticsCount");
+			writer.WriteValue(CollectionStatisticsCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CreateWeight = ");
-			sb.Append(instance.CreateWeight);
-			sb.Append("L");
+			__init.Property("CreateWeight");
+			writer.WriteValue(CreateWeight);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CreateWeightCount = ");
-			sb.Append(instance.CreateWeightCount);
-			sb.Append("L");
+			__init.Property("CreateWeightCount");
+			writer.WriteValue(CreateWeightCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Rewrite = ");
-			sb.Append(instance.Rewrite);
-			sb.Append("L");
+			__init.Property("Rewrite");
+			writer.WriteValue(Rewrite);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RewriteCount = ");
-			sb.Append(instance.RewriteCount);
-			sb.Append("L");
+			__init.Property("RewriteCount");
+			writer.WriteValue(RewriteCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TermStatistics = ");
-			sb.Append(instance.TermStatistics);
-			sb.Append("L");
+			__init.Property("TermStatistics");
+			writer.WriteValue(TermStatistics);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TermStatisticsCount = ");
-			sb.Append(instance.TermStatisticsCount);
-			sb.Append("L");
+			__init.Property("TermStatisticsCount");
+			writer.WriteValue(TermStatisticsCount);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

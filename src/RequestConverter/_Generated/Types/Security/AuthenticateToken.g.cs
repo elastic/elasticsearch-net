@@ -25,31 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class AuthenticateToken : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
+		if (ManagedBy is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("ManagedBy");
+			Elastic.Clients.Elasticsearch.Security.CredentialManagedByCodeFormatter.FormatCode(ManagedBy.Value, writer);
 		}
 
-		if (instance.Type is not null)
+		if (Name is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			sb.Append("\"");
-			sb.Append(instance.Type);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		if (Type is not null)
+		{
+			__init.Property("Type");
+			writer.WriteString(Type);
+		}
+
+		__init.Dispose();
 	}
 }

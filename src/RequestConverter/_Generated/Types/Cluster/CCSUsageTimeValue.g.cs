@@ -25,33 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class CCSUsageTimeValue : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Avg = ");
-			sb.Append(instance.Avg);
+			__init.Property("Avg");
+			writer.WriteValue(Avg);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Max = ");
-			sb.Append(instance.Max);
+			__init.Property("Max");
+			writer.WriteValue(Max);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("P90 = ");
-			sb.Append(instance.P90);
+			__init.Property("P90");
+			writer.WriteValue(P90);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

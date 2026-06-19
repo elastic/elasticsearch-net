@@ -25,182 +25,131 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class MoreLikeThisQuery : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Analyzer is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Analyzer is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Analyzer = ");
-			sb.Append("\"");
-			sb.Append(instance.Analyzer);
-			sb.Append("\"");
+			__init.Property("Analyzer");
+			writer.WriteString(Analyzer);
 		}
 
-		if (instance.Boost is not null)
+		if (Boost is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Boost = ");
-			sb.Append(instance.Boost.Value);
-			sb.Append("f");
+			__init.Property("Boost");
+			writer.WriteValue(Boost.Value);
+			writer.Write("f");
 		}
 
-		if (instance.BoostTerms is not null)
+		if (BoostTerms is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BoostTerms = ");
-			sb.Append(instance.BoostTerms.Value);
-			sb.Append("d");
+			__init.Property("BoostTerms");
+			writer.WriteValue(BoostTerms.Value);
+			writer.Write("d");
 		}
 
-		if (instance.FailOnUnsupportedField is not null)
+		if (FailOnUnsupportedField is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FailOnUnsupportedField = ");
-			sb.Append(instance.FailOnUnsupportedField.Value ? "true" : "false");
+			__init.Property("FailOnUnsupportedField");
+			writer.WriteValue(FailOnUnsupportedField.Value);
 		}
 
-		if (instance.Fields is not null)
+		if (Fields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fields = ");
-			instance.Fields.FormatCode(sb);
+			__init.Property("Fields");
+			Fields.FormatCode(writer);
 		}
 
-		if (instance.Include is not null)
+		if (Include is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Include = ");
-			sb.Append(instance.Include.Value ? "true" : "false");
+			__init.Property("Include");
+			writer.WriteValue(Include.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Like = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Like, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Like");
+			writer.WriteInlineList(Like, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.MaxDocFreq is not null)
+		if (MaxDocFreq is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxDocFreq = ");
-			sb.Append(instance.MaxDocFreq.Value);
+			__init.Property("MaxDocFreq");
+			writer.WriteValue(MaxDocFreq.Value);
 		}
 
-		if (instance.MaxQueryTerms is not null)
+		if (MaxQueryTerms is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxQueryTerms = ");
-			sb.Append(instance.MaxQueryTerms.Value);
+			__init.Property("MaxQueryTerms");
+			writer.WriteValue(MaxQueryTerms.Value);
 		}
 
-		if (instance.MaxWordLength is not null)
+		if (MaxWordLength is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxWordLength = ");
-			sb.Append(instance.MaxWordLength.Value);
+			__init.Property("MaxWordLength");
+			writer.WriteValue(MaxWordLength.Value);
 		}
 
-		if (instance.MinDocFreq is not null)
+		if (MinDocFreq is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinDocFreq = ");
-			sb.Append(instance.MinDocFreq.Value);
+			__init.Property("MinDocFreq");
+			writer.WriteValue(MinDocFreq.Value);
 		}
 
-		if (instance.MinimumShouldMatch is not null)
+		if (MinimumShouldMatch is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinimumShouldMatch = ");
-			instance.MinimumShouldMatch.FormatCode(sb);
+			__init.Property("MinimumShouldMatch");
+			MinimumShouldMatch.FormatCode(writer);
 		}
 
-		if (instance.MinTermFreq is not null)
+		if (MinTermFreq is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinTermFreq = ");
-			sb.Append(instance.MinTermFreq.Value);
+			__init.Property("MinTermFreq");
+			writer.WriteValue(MinTermFreq.Value);
 		}
 
-		if (instance.MinWordLength is not null)
+		if (MinWordLength is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinWordLength = ");
-			sb.Append(instance.MinWordLength.Value);
+			__init.Property("MinWordLength");
+			writer.WriteValue(MinWordLength.Value);
 		}
 
-		if (instance.QueryName is not null)
+		if (QueryName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryName = ");
-			sb.Append("\"");
-			sb.Append(instance.QueryName);
-			sb.Append("\"");
+			__init.Property("QueryName");
+			writer.WriteString(QueryName);
 		}
 
-		if (instance.Routing is not null)
+		if (Routing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Routing = ");
-			instance.Routing.FormatCode(sb);
+			__init.Property("Routing");
+			writer.WriteString(Routing);
 		}
 
-		if (instance.StopWords is not null)
+		if (StopWords is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StopWords = ");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(instance.StopWords, sb);
+			__init.Property("StopWords");
+			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(StopWords, writer);
 		}
 
-		if (instance.Unlike is not null)
+		if (Unlike is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Unlike = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Unlike, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Unlike");
+			writer.WriteInlineList(Unlike, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append(instance.Version.Value);
-			sb.Append("L");
+			__init.Property("Version");
+			writer.WriteValue(Version.Value);
+			writer.Write("L");
 		}
 
-		if (instance.VersionType is not null)
+		if (VersionType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VersionType = ");
-			Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(instance.VersionType.Value, sb);
+			__init.Property("VersionType");
+			Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

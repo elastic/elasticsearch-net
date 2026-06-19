@@ -25,30 +25,19 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class PhraseSuggestHighlight : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PostTag = ");
-			sb.Append("\"");
-			sb.Append(instance.PostTag);
-			sb.Append("\"");
+			__init.Property("PostTag");
+			writer.WriteString(PostTag);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PreTag = ");
-			sb.Append("\"");
-			sb.Append(instance.PreTag);
-			sb.Append("\"");
+			__init.Property("PreTag");
+			writer.WriteString(PreTag);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,26 +25,19 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
 public partial class Latest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sort = ");
-			instance.Sort.FormatCode(sb);
+			__init.Property("Sort");
+			Sort.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UniqueKey = ");
-			instance.UniqueKey.FormatCode(sb);
+			__init.Property("UniqueKey");
+			UniqueKey.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

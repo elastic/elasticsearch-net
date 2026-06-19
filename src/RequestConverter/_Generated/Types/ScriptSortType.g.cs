@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class ScriptSortTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.ScriptSortType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.ScriptSortType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.ScriptSortType.Number:
-				sb.Append("ScriptSortType.Number");
+				writer.Write("ScriptSortType.Number");
 				break;
 			case Elastic.Clients.Elasticsearch.ScriptSortType.String:
-				sb.Append("ScriptSortType.String");
+				writer.Write("ScriptSortType.String");
 				break;
 			case Elastic.Clients.Elasticsearch.ScriptSortType.Version:
-				sb.Append("ScriptSortType.Version");
+				writer.Write("ScriptSortType.Version");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -25,170 +25,119 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class DataStream : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AllowCustomRouting is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AllowCustomRouting is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowCustomRouting = ");
-			sb.Append(instance.AllowCustomRouting.Value ? "true" : "false");
+			__init.Property("AllowCustomRouting");
+			writer.WriteValue(AllowCustomRouting.Value);
 		}
 
-		if (instance.FailureStore is not null)
+		if (FailureStore is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FailureStore = ");
-			instance.FailureStore.FormatCode(sb);
+			__init.Property("FailureStore");
+			FailureStore.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Generation = ");
-			sb.Append(instance.Generation);
+			__init.Property("Generation");
+			writer.WriteValue(Generation);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Hidden = ");
-			sb.Append(instance.Hidden ? "true" : "false");
+			__init.Property("Hidden");
+			writer.WriteValue(Hidden);
 		}
 
-		if (instance.IlmPolicy is not null)
+		if (IlmPolicy is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IlmPolicy = ");
-			sb.Append("\"");
-			sb.Append(instance.IlmPolicy);
-			sb.Append("\"");
+			__init.Property("IlmPolicy");
+			writer.WriteString(IlmPolicy);
 		}
 
-		if (instance.IndexMode is not null)
+		if (IndexMode is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexMode = ");
-			Elastic.Clients.Elasticsearch.IndexManagement.IndexModeCodeFormatter.FormatCode(instance.IndexMode.Value, sb);
+			__init.Property("IndexMode");
+			Elastic.Clients.Elasticsearch.IndexManagement.IndexModeCodeFormatter.FormatCode(IndexMode.Value, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indices = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Indices, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Indices");
+			writer.WriteInlineList(Indices, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Lifecycle is not null)
+		if (Lifecycle is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Lifecycle = ");
-			instance.Lifecycle.FormatCode(sb);
+			__init.Property("Lifecycle");
+			Lifecycle.FormatCode(writer);
 		}
 
-		if (instance.Mappings is not null)
+		if (Mappings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mappings = ");
-			instance.Mappings.FormatCode(sb);
+			__init.Property("Mappings");
+			Mappings.FormatCode(writer);
 		}
 
-		if (instance.Meta is not null)
+		if (Meta is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Meta = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Meta, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Meta");
+			writer.Write("new() ");
+			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NextGenerationManagedBy = ");
-			Elastic.Clients.Elasticsearch.IndexManagement.ManagedByCodeFormatter.FormatCode(instance.NextGenerationManagedBy, sb);
+			__init.Property("NextGenerationManagedBy");
+			Elastic.Clients.Elasticsearch.IndexManagement.ManagedByCodeFormatter.FormatCode(NextGenerationManagedBy, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PreferIlm = ");
-			sb.Append(instance.PreferIlm ? "true" : "false");
+			__init.Property("PreferIlm");
+			writer.WriteValue(PreferIlm);
 		}
 
-		if (instance.Replicated is not null)
+		if (Replicated is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Replicated = ");
-			sb.Append(instance.Replicated.Value ? "true" : "false");
+			__init.Property("Replicated");
+			writer.WriteValue(Replicated.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RolloverOnWrite = ");
-			sb.Append(instance.RolloverOnWrite ? "true" : "false");
+			__init.Property("RolloverOnWrite");
+			writer.WriteValue(RolloverOnWrite);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Settings = ");
-			instance.Settings.FormatCode(sb);
+			__init.Property("Settings");
+			Settings.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Status = ");
-			Elastic.Clients.Elasticsearch.HealthStatusCodeFormatter.FormatCode(instance.Status, sb);
+			__init.Property("Status");
+			Elastic.Clients.Elasticsearch.HealthStatusCodeFormatter.FormatCode(Status, writer);
 		}
 
-		if (instance.System is not null)
+		if (System is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("System = ");
-			sb.Append(instance.System.Value ? "true" : "false");
+			__init.Property("System");
+			writer.WriteValue(System.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Template = ");
-			sb.Append("\"");
-			sb.Append(instance.Template);
-			sb.Append("\"");
+			__init.Property("Template");
+			writer.WriteString(Template);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimestampField = ");
-			instance.TimestampField.FormatCode(sb);
+			__init.Property("TimestampField");
+			TimestampField.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

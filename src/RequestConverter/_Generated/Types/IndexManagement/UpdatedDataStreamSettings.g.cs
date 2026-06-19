@@ -25,59 +25,40 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class UpdatedDataStreamSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AppliedToDataStream = ");
-			sb.Append(instance.AppliedToDataStream ? "true" : "false");
+			__init.Property("AppliedToDataStream");
+			writer.WriteValue(AppliedToDataStream);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EffectiveSettings = ");
-			instance.EffectiveSettings.FormatCode(sb);
+			__init.Property("EffectiveSettings");
+			EffectiveSettings.FormatCode(writer);
 		}
 
-		if (instance.Error is not null)
+		if (Error is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Error = ");
-			sb.Append("\"");
-			sb.Append(instance.Error);
-			sb.Append("\"");
+			__init.Property("Error");
+			writer.WriteString(Error);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexSettingsResults = ");
-			instance.IndexSettingsResults.FormatCode(sb);
+			__init.Property("IndexSettingsResults");
+			IndexSettingsResults.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Settings = ");
-			instance.Settings.FormatCode(sb);
+			__init.Property("Settings");
+			Settings.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

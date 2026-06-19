@@ -25,54 +25,39 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class CompletionContext : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Boost is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Boost is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Boost = ");
-			sb.Append(instance.Boost.Value);
-			sb.Append("d");
+			__init.Property("Boost");
+			writer.WriteValue(Boost.Value);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Context = ");
-			instance.Context.FormatCode(sb);
+			__init.Property("Context");
+			Context.FormatCode(writer);
 		}
 
-		if (instance.Neighbours is not null)
+		if (Neighbours is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Neighbours = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Neighbours, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Neighbours");
+			writer.WriteInlineList(Neighbours, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Precision is not null)
+		if (Precision is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Precision = ");
-			instance.Precision.FormatCode(sb);
+			__init.Property("Precision");
+			Precision.FormatCode(writer);
 		}
 
-		if (instance.Prefix is not null)
+		if (Prefix is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Prefix = ");
-			sb.Append(instance.Prefix.Value ? "true" : "false");
+			__init.Property("Prefix");
+			writer.WriteValue(Prefix.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

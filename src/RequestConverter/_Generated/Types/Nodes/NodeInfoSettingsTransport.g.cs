@@ -25,45 +25,32 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class NodeInfoSettingsTransport : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Features is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Features is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Features = ");
-			instance.Features.FormatCode(sb);
+			__init.Property("Features");
+			Features.FormatCode(writer);
 		}
 
-		if (instance.IgnoreDeserializationErrors is not null)
+		if (IgnoreDeserializationErrors is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreDeserializationErrors = ");
-			sb.Append(instance.IgnoreDeserializationErrors.Value ? "true" : "false");
+			__init.Property("IgnoreDeserializationErrors");
+			writer.WriteValue(IgnoreDeserializationErrors.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			instance.Type.FormatCode(sb);
+			__init.Property("Type");
+			Type.FormatCode(writer);
 		}
 
-		if (instance.TypeDefault is not null)
+		if (TypeDefault is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TypeDefault = ");
-			sb.Append("\"");
-			sb.Append(instance.TypeDefault);
-			sb.Append("\"");
+			__init.Property("TypeDefault");
+			writer.WriteString(TypeDefault);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

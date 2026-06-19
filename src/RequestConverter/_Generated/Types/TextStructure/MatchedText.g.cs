@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.TextStructure;
 
 public partial class MatchedText : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Fields is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Fields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fields = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Fields, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("["); RequestConverter.CodeFormatter.FormatCode(v, (item, sb) => { item.FormatCode(sb); }, sb); sb.Append("]"); }, sb);
+			__init.Property("Fields");
+			writer.Write("new() ");
+			writer.WriteInlineList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { item.FormatCode(w); }); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Matched = ");
-			sb.Append(instance.Matched ? "true" : "false");
+			__init.Property("Matched");
+			writer.WriteValue(Matched);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

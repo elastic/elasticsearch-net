@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class VersionTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.VersionType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.VersionType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.VersionType.External:
-				sb.Append("VersionType.External");
+				writer.Write("VersionType.External");
 				break;
 			case Elastic.Clients.Elasticsearch.VersionType.ExternalGte:
-				sb.Append("VersionType.ExternalGte");
+				writer.Write("VersionType.ExternalGte");
 				break;
 			case Elastic.Clients.Elasticsearch.VersionType.Internal:
-				sb.Append("VersionType.Internal");
+				writer.Write("VersionType.Internal");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

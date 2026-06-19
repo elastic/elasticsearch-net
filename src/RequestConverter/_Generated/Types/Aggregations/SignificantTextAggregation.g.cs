@@ -25,150 +25,113 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class SignificantTextAggregation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.BackgroundFilter is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (BackgroundFilter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BackgroundFilter = ");
-			instance.BackgroundFilter.FormatCode(sb);
+			__init.Property("BackgroundFilter");
+			BackgroundFilter.FormatCode(writer);
 		}
 
-		if (instance.ChiSquare is not null)
+		if (ChiSquare is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ChiSquare = ");
-			instance.ChiSquare.FormatCode(sb);
+			__init.Property("ChiSquare");
+			ChiSquare.FormatCode(writer);
 		}
 
-		if (instance.Exclude is not null)
+		if (Exclude is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Exclude = ");
-			instance.Exclude.FormatCode(sb);
+			__init.Property("Exclude");
+			Exclude.FormatCode(writer);
 		}
 
-		if (instance.ExecutionHint is not null)
+		if (ExecutionHint is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExecutionHint = ");
-			Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHintCodeFormatter.FormatCode(instance.ExecutionHint.Value, sb);
+			__init.Property("ExecutionHint");
+			Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, writer);
 		}
 
-		if (instance.Field is not null)
+		if (Field is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.FilterDuplicateText is not null)
+		if (FilterDuplicateText is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FilterDuplicateText = ");
-			sb.Append(instance.FilterDuplicateText.Value ? "true" : "false");
+			__init.Property("FilterDuplicateText");
+			writer.WriteValue(FilterDuplicateText.Value);
 		}
 
-		if (instance.Gnd is not null)
+		if (Gnd is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Gnd = ");
-			instance.Gnd.FormatCode(sb);
+			__init.Property("Gnd");
+			Gnd.FormatCode(writer);
 		}
 
-		if (instance.Include is not null)
+		if (Include is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Include = ");
-			instance.Include.FormatCode(sb);
+			__init.Property("Include");
+			Include.FormatCode(writer);
 		}
 
-		if (instance.Jlh is not null)
+		if (Jlh is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Jlh = ");
-			instance.Jlh.FormatCode(sb);
+			__init.Property("Jlh");
+			Jlh.FormatCode(writer);
 		}
 
-		if (instance.MinDocCount is not null)
+		if (MinDocCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinDocCount = ");
-			sb.Append(instance.MinDocCount.Value);
-			sb.Append("L");
+			__init.Property("MinDocCount");
+			writer.WriteValue(MinDocCount.Value);
+			writer.Write("L");
 		}
 
-		if (instance.MutualInformation is not null)
+		if (MutualInformation is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MutualInformation = ");
-			instance.MutualInformation.FormatCode(sb);
+			__init.Property("MutualInformation");
+			MutualInformation.FormatCode(writer);
 		}
 
-		if (instance.Percentage is not null)
+		if (Percentage is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Percentage = ");
-			instance.Percentage.FormatCode(sb);
+			__init.Property("Percentage");
+			Percentage.FormatCode(writer);
 		}
 
-		if (instance.ScriptHeuristic is not null)
+		if (ScriptHeuristic is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ScriptHeuristic = ");
-			instance.ScriptHeuristic.FormatCode(sb);
+			__init.Property("ScriptHeuristic");
+			ScriptHeuristic.FormatCode(writer);
 		}
 
-		if (instance.ShardMinDocCount is not null)
+		if (ShardMinDocCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShardMinDocCount = ");
-			sb.Append(instance.ShardMinDocCount.Value);
-			sb.Append("L");
+			__init.Property("ShardMinDocCount");
+			writer.WriteValue(ShardMinDocCount.Value);
+			writer.Write("L");
 		}
 
-		if (instance.ShardSize is not null)
+		if (ShardSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShardSize = ");
-			sb.Append(instance.ShardSize.Value);
+			__init.Property("ShardSize");
+			writer.WriteValue(ShardSize.Value);
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append(instance.Size.Value);
+			__init.Property("Size");
+			writer.WriteValue(Size.Value);
 		}
 
-		if (instance.SourceFields is not null)
+		if (SourceFields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SourceFields = ");
-			instance.SourceFields.FormatCode(sb);
+			__init.Property("SourceFields");
+			SourceFields.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

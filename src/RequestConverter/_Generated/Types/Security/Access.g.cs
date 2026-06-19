@@ -25,32 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class Access : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Replication is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Replication is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Replication = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Replication, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Replication");
+			writer.WriteInlineList(Replication, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Search is not null)
+		if (Search is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Search = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Search, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Search");
+			writer.WriteInlineList(Search, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

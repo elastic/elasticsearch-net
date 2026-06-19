@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class WaitForActiveShardOptionsCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.WaitForActiveShardOptions instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.WaitForActiveShardOptions instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.WaitForActiveShardOptions.All:
-				sb.Append("WaitForActiveShardOptions.All");
+				writer.Write("WaitForActiveShardOptions.All");
 				break;
 			case Elastic.Clients.Elasticsearch.WaitForActiveShardOptions.IndexSetting:
-				sb.Append("WaitForActiveShardOptions.IndexSetting");
+				writer.Write("WaitForActiveShardOptions.IndexSetting");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

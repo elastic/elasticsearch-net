@@ -25,27 +25,20 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DeleteDatafeedRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DatafeedId = ");
-			instance.DatafeedId.FormatCode(sb);
+			__init.Property("DatafeedId");
+			DatafeedId.FormatCode(writer);
 		}
 
-		if (instance.Force is not null)
+		if (Force is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Force = ");
-			sb.Append(instance.Force.Value ? "true" : "false");
+			__init.Property("Force");
+			writer.WriteValue(Force.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

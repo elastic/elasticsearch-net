@@ -25,19 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class InnerHitsResult : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Hits = ");
-			instance.Hits.FormatCode(sb);
+			__init.Property("Hits");
+			Hits.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

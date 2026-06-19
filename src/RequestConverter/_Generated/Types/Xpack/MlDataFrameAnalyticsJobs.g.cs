@@ -25,43 +25,32 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class MlDataFrameAnalyticsJobs : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("All = ");
-			instance.All.FormatCode(sb);
+			__init.Property("All");
+			All.FormatCode(writer);
 		}
 
-		if (instance.AnalysisCounts is not null)
+		if (AnalysisCounts is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AnalysisCounts = ");
-			instance.AnalysisCounts.FormatCode(sb);
+			__init.Property("AnalysisCounts");
+			AnalysisCounts.FormatCode(writer);
 		}
 
-		if (instance.MemoryUsage is not null)
+		if (MemoryUsage is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MemoryUsage = ");
-			instance.MemoryUsage.FormatCode(sb);
+			__init.Property("MemoryUsage");
+			MemoryUsage.FormatCode(writer);
 		}
 
-		if (instance.Stopped is not null)
+		if (Stopped is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Stopped = ");
-			instance.Stopped.FormatCode(sb);
+			__init.Property("Stopped");
+			Stopped.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

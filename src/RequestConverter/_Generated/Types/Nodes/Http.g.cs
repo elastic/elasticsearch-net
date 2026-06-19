@@ -25,48 +25,35 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class Http : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Clients is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Clients is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Clients = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Clients, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Clients");
+			writer.WriteInlineList(Clients, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.CurrentOpen is not null)
+		if (CurrentOpen is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CurrentOpen = ");
-			sb.Append(instance.CurrentOpen.Value);
+			__init.Property("CurrentOpen");
+			writer.WriteValue(CurrentOpen.Value);
 		}
 
-		if (instance.Routes is not null)
+		if (Routes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Routes = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Routes, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Routes");
+			writer.Write("new() ");
+			writer.WriteInlineList(Routes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.TotalOpened is not null)
+		if (TotalOpened is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalOpened = ");
-			sb.Append(instance.TotalOpened.Value);
-			sb.Append("L");
+			__init.Property("TotalOpened");
+			writer.WriteValue(TotalOpened.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,48 +25,33 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class GrantApiKey : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Expiration is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Expiration is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Expiration = ");
-			sb.Append("\"");
-			sb.Append(instance.Expiration);
-			sb.Append("\"");
+			__init.Property("Expiration");
+			writer.WriteString(Expiration);
 		}
 
-		if (instance.Metadata is not null)
+		if (Metadata is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Metadata = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Metadata, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Metadata");
+			writer.Write("new() ");
+			writer.WriteInlineList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			instance.Name.FormatCode(sb);
+			__init.Property("Name");
+			Name.FormatCode(writer);
 		}
 
-		if (instance.RoleDescriptors is not null)
+		if (RoleDescriptors is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RoleDescriptors = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.RoleDescriptors, (item, sb) => { sb.Append("new()"); RequestConverter.CodeFormatter.FormatCode(item, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb); }, sb);
-			sb.Append("]");
+			__init.Property("RoleDescriptors");
+			writer.WriteInlineList(RoleDescriptors, (w, item) => { w.Write("new() "); w.WriteInlineList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", "); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,43 +25,32 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DeleteForecastRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ForecastId is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ForecastId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ForecastId = ");
-			instance.ForecastId.FormatCode(sb);
+			__init.Property("ForecastId");
+			ForecastId.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JobId = ");
-			instance.JobId.FormatCode(sb);
+			__init.Property("JobId");
+			JobId.FormatCode(writer);
 		}
 
-		if (instance.AllowNoForecasts is not null)
+		if (AllowNoForecasts is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowNoForecasts = ");
-			sb.Append(instance.AllowNoForecasts.Value ? "true" : "false");
+			__init.Property("AllowNoForecasts");
+			writer.WriteValue(AllowNoForecasts.Value);
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

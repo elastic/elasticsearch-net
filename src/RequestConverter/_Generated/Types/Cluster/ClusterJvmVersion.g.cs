@@ -25,69 +25,44 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class ClusterJvmVersion : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BundledJdk = ");
-			sb.Append(instance.BundledJdk ? "true" : "false");
+			__init.Property("BundledJdk");
+			writer.WriteValue(BundledJdk);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count);
+			__init.Property("Count");
+			writer.WriteValue(Count);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UsingBundledJdk = ");
-			sb.Append(instance.UsingBundledJdk ? "true" : "false");
+			__init.Property("UsingBundledJdk");
+			writer.WriteValue(UsingBundledJdk);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VmName = ");
-			sb.Append("\"");
-			sb.Append(instance.VmName);
-			sb.Append("\"");
+			__init.Property("VmName");
+			writer.WriteString(VmName);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VmVendor = ");
-			sb.Append("\"");
-			sb.Append(instance.VmVendor);
-			sb.Append("\"");
+			__init.Property("VmVendor");
+			writer.WriteString(VmVendor);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VmVersion = ");
-			sb.Append("\"");
-			sb.Append(instance.VmVersion);
-			sb.Append("\"");
+			__init.Property("VmVersion");
+			writer.WriteString(VmVersion);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

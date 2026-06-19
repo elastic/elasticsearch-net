@@ -25,18 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class EmbeddingContentTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
+			case Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType.Audio:
+				writer.Write("EmbeddingContentType.Audio");
+				break;
 			case Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType.Image:
-				sb.Append("EmbeddingContentType.Image");
+				writer.Write("EmbeddingContentType.Image");
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType.Pdf:
+				writer.Write("EmbeddingContentType.Pdf");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType.Text:
-				sb.Append("EmbeddingContentType.Text");
+				writer.Write("EmbeddingContentType.Text");
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType.Video:
+				writer.Write("EmbeddingContentType.Video");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

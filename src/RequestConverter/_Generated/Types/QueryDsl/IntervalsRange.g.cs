@@ -25,70 +25,45 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class IntervalsRange : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Analyzer is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Analyzer is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Analyzer = ");
-			sb.Append("\"");
-			sb.Append(instance.Analyzer);
-			sb.Append("\"");
+			__init.Property("Analyzer");
+			writer.WriteString(Analyzer);
 		}
 
-		if (instance.Gt is not null)
+		if (Gt is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Gt = ");
-			sb.Append("\"");
-			sb.Append(instance.Gt);
-			sb.Append("\"");
+			__init.Property("Gt");
+			writer.WriteString(Gt);
 		}
 
-		if (instance.Gte is not null)
+		if (Gte is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Gte = ");
-			sb.Append("\"");
-			sb.Append(instance.Gte);
-			sb.Append("\"");
+			__init.Property("Gte");
+			writer.WriteString(Gte);
 		}
 
-		if (instance.Lt is not null)
+		if (Lt is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Lt = ");
-			sb.Append("\"");
-			sb.Append(instance.Lt);
-			sb.Append("\"");
+			__init.Property("Lt");
+			writer.WriteString(Lt);
 		}
 
-		if (instance.Lte is not null)
+		if (Lte is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Lte = ");
-			sb.Append("\"");
-			sb.Append(instance.Lte);
-			sb.Append("\"");
+			__init.Property("Lte");
+			writer.WriteString(Lte);
 		}
 
-		if (instance.UseField is not null)
+		if (UseField is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UseField = ");
-			instance.UseField.FormatCode(sb);
+			__init.Property("UseField");
+			UseField.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

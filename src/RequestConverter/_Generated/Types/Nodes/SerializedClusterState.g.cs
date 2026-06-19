@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class SerializedClusterState : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Diffs is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Diffs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Diffs = ");
-			instance.Diffs.FormatCode(sb);
+			__init.Property("Diffs");
+			Diffs.FormatCode(writer);
 		}
 
-		if (instance.FullStates is not null)
+		if (FullStates is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FullStates = ");
-			instance.FullStates.FormatCode(sb);
+			__init.Property("FullStates");
+			FullStates.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

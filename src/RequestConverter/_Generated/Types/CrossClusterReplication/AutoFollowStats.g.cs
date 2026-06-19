@@ -25,54 +25,37 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
 public partial class AutoFollowStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AutoFollowedClusters = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.AutoFollowedClusters, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("AutoFollowedClusters");
+			writer.WriteInlineList(AutoFollowedClusters, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumberOfFailedFollowIndices = ");
-			sb.Append(instance.NumberOfFailedFollowIndices);
-			sb.Append("L");
+			__init.Property("NumberOfFailedFollowIndices");
+			writer.WriteValue(NumberOfFailedFollowIndices);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumberOfFailedRemoteClusterStateRequests = ");
-			sb.Append(instance.NumberOfFailedRemoteClusterStateRequests);
-			sb.Append("L");
+			__init.Property("NumberOfFailedRemoteClusterStateRequests");
+			writer.WriteValue(NumberOfFailedRemoteClusterStateRequests);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumberOfSuccessfulFollowIndices = ");
-			sb.Append(instance.NumberOfSuccessfulFollowIndices);
-			sb.Append("L");
+			__init.Property("NumberOfSuccessfulFollowIndices");
+			writer.WriteValue(NumberOfSuccessfulFollowIndices);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RecentAutoFollowErrors = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.RecentAutoFollowErrors, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("RecentAutoFollowErrors");
+			writer.WriteInlineList(RecentAutoFollowErrors, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

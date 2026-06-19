@@ -25,21 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class GarbageCollector : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Collectors is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Collectors is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Collectors = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Collectors, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Collectors");
+			writer.Write("new() ");
+			writer.WriteInlineList(Collectors, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

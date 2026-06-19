@@ -25,35 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class NodeDiskUsage : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LeastAvailable = ");
-			instance.LeastAvailable.FormatCode(sb);
+			__init.Property("LeastAvailable");
+			LeastAvailable.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MostAvailable = ");
-			instance.MostAvailable.FormatCode(sb);
+			__init.Property("MostAvailable");
+			MostAvailable.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NodeName = ");
-			sb.Append("\"");
-			sb.Append(instance.NodeName);
-			sb.Append("\"");
+			__init.Property("NodeName");
+			writer.WriteString(NodeName);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

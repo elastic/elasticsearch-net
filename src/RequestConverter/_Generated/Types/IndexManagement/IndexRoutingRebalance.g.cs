@@ -25,19 +25,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class IndexRoutingRebalance : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Enable = ");
-			Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptionsCodeFormatter.FormatCode(instance.Enable, sb);
+			__init.Property("Enable");
+			Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptionsCodeFormatter.FormatCode(Enable, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

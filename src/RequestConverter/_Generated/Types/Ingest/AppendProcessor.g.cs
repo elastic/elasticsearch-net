@@ -25,109 +25,74 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public partial class AppendProcessor : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AllowDuplicates is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AllowDuplicates is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowDuplicates = ");
-			sb.Append(instance.AllowDuplicates.Value ? "true" : "false");
+			__init.Property("AllowDuplicates");
+			writer.WriteValue(AllowDuplicates.Value);
 		}
 
-		if (instance.CopyFrom is not null)
+		if (CopyFrom is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CopyFrom = ");
-			instance.CopyFrom.FormatCode(sb);
+			__init.Property("CopyFrom");
+			CopyFrom.FormatCode(writer);
 		}
 
-		if (instance.Description is not null)
+		if (Description is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.If is not null)
+		if (If is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("If = ");
-			instance.If.FormatCode(sb);
+			__init.Property("If");
+			If.FormatCode(writer);
 		}
 
-		if (instance.IgnoreEmptyValues is not null)
+		if (IgnoreEmptyValues is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreEmptyValues = ");
-			sb.Append(instance.IgnoreEmptyValues.Value ? "true" : "false");
+			__init.Property("IgnoreEmptyValues");
+			writer.WriteValue(IgnoreEmptyValues.Value);
 		}
 
-		if (instance.IgnoreFailure is not null)
+		if (IgnoreFailure is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreFailure = ");
-			sb.Append(instance.IgnoreFailure.Value ? "true" : "false");
+			__init.Property("IgnoreFailure");
+			writer.WriteValue(IgnoreFailure.Value);
 		}
 
-		if (instance.MediaType is not null)
+		if (MediaType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MediaType = ");
-			sb.Append("\"");
-			sb.Append(instance.MediaType);
-			sb.Append("\"");
+			__init.Property("MediaType");
+			writer.WriteString(MediaType);
 		}
 
-		if (instance.OnFailure is not null)
+		if (OnFailure is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OnFailure = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.OnFailure, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("OnFailure");
+			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Tag is not null)
+		if (Tag is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Tag = ");
-			sb.Append("\"");
-			sb.Append(instance.Tag);
-			sb.Append("\"");
+			__init.Property("Tag");
+			writer.WriteString(Tag);
 		}
 
-		if (instance.Value is not null)
+		if (Value is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Value = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Value, (item, sb) => { RequestConverter.CodeFormatter.FormatCode(item, sb); }, sb);
-			sb.Append("]");
+			__init.Property("Value");
+			writer.WriteInlineList(Value, (w, item) => { w.WriteValue(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

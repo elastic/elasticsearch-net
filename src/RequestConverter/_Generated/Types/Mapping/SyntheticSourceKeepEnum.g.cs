@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public static class SyntheticSourceKeepEnumCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum.All:
-				sb.Append("SyntheticSourceKeepEnum.All");
+				writer.Write("SyntheticSourceKeepEnum.All");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum.Arrays:
-				sb.Append("SyntheticSourceKeepEnum.Arrays");
+				writer.Write("SyntheticSourceKeepEnum.Arrays");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum.None:
-				sb.Append("SyntheticSourceKeepEnum.None");
+				writer.Write("SyntheticSourceKeepEnum.None");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

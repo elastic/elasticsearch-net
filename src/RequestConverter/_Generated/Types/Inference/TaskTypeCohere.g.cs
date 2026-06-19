@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class TaskTypeCohereCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.TaskTypeCohere instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.TaskTypeCohere instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeCohere.Completion:
-				sb.Append("TaskTypeCohere.Completion");
+				writer.Write("TaskTypeCohere.Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeCohere.Rerank:
-				sb.Append("TaskTypeCohere.Rerank");
+				writer.Write("TaskTypeCohere.Rerank");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeCohere.TextEmbedding:
-				sb.Append("TaskTypeCohere.TextEmbedding");
+				writer.Write("TaskTypeCohere.TextEmbedding");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -25,85 +25,64 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class AnalyticsStatistics : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BoxplotUsage = ");
-			sb.Append(instance.BoxplotUsage);
-			sb.Append("L");
+			__init.Property("BoxplotUsage");
+			writer.WriteValue(BoxplotUsage);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CumulativeCardinalityUsage = ");
-			sb.Append(instance.CumulativeCardinalityUsage);
-			sb.Append("L");
+			__init.Property("CumulativeCardinalityUsage");
+			writer.WriteValue(CumulativeCardinalityUsage);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MovingPercentilesUsage = ");
-			sb.Append(instance.MovingPercentilesUsage);
-			sb.Append("L");
+			__init.Property("MovingPercentilesUsage");
+			writer.WriteValue(MovingPercentilesUsage);
+			writer.Write("L");
 		}
 
-		if (instance.MultiTermsUsage is not null)
+		if (MultiTermsUsage is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MultiTermsUsage = ");
-			sb.Append(instance.MultiTermsUsage.Value);
-			sb.Append("L");
+			__init.Property("MultiTermsUsage");
+			writer.WriteValue(MultiTermsUsage.Value);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NormalizeUsage = ");
-			sb.Append(instance.NormalizeUsage);
-			sb.Append("L");
+			__init.Property("NormalizeUsage");
+			writer.WriteValue(NormalizeUsage);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RateUsage = ");
-			sb.Append(instance.RateUsage);
-			sb.Append("L");
+			__init.Property("RateUsage");
+			writer.WriteValue(RateUsage);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StringStatsUsage = ");
-			sb.Append(instance.StringStatsUsage);
-			sb.Append("L");
+			__init.Property("StringStatsUsage");
+			writer.WriteValue(StringStatsUsage);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TopMetricsUsage = ");
-			sb.Append(instance.TopMetricsUsage);
-			sb.Append("L");
+			__init.Property("TopMetricsUsage");
+			writer.WriteValue(TopMetricsUsage);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TTestUsage = ");
-			sb.Append(instance.TTestUsage);
-			sb.Append("L");
+			__init.Property("TTestUsage");
+			writer.WriteValue(TTestUsage);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

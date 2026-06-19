@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public static class SourceModeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.SourceMode instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.SourceMode instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.SourceMode.Disabled:
-				sb.Append("SourceMode.Disabled");
+				writer.Write("SourceMode.Disabled");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.SourceMode.Stored:
-				sb.Append("SourceMode.Stored");
+				writer.Write("SourceMode.Stored");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.SourceMode.Synthetic:
-				sb.Append("SourceMode.Synthetic");
+				writer.Write("SourceMode.Synthetic");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

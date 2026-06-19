@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class SortOrderCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.SortOrder instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.SortOrder instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.SortOrder.Asc:
-				sb.Append("SortOrder.Asc");
+				writer.Write("SortOrder.Asc");
 				break;
 			case Elastic.Clients.Elasticsearch.SortOrder.Desc:
-				sb.Append("SortOrder.Desc");
+				writer.Write("SortOrder.Desc");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

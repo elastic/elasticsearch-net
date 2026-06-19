@@ -25,21 +25,16 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class MappingLimitSettingsNestedObjects : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Limit is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Limit is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Limit = ");
-			sb.Append(instance.Limit.Value);
-			sb.Append("L");
+			__init.Property("Limit");
+			writer.WriteValue(Limit.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

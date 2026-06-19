@@ -25,39 +25,39 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public static class DenseVectorIndexOptionsTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.BbqDisk:
-				sb.Append("DenseVectorIndexOptionsType.BbqDisk");
+				writer.Write("DenseVectorIndexOptionsType.BbqDisk");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.BbqFlat:
-				sb.Append("DenseVectorIndexOptionsType.BbqFlat");
+				writer.Write("DenseVectorIndexOptionsType.BbqFlat");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.BbqHnsw:
-				sb.Append("DenseVectorIndexOptionsType.BbqHnsw");
+				writer.Write("DenseVectorIndexOptionsType.BbqHnsw");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.Flat:
-				sb.Append("DenseVectorIndexOptionsType.Flat");
+				writer.Write("DenseVectorIndexOptionsType.Flat");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.Hnsw:
-				sb.Append("DenseVectorIndexOptionsType.Hnsw");
+				writer.Write("DenseVectorIndexOptionsType.Hnsw");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.Int4Flat:
-				sb.Append("DenseVectorIndexOptionsType.Int4Flat");
+				writer.Write("DenseVectorIndexOptionsType.Int4Flat");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.Int4Hnsw:
-				sb.Append("DenseVectorIndexOptionsType.Int4Hnsw");
+				writer.Write("DenseVectorIndexOptionsType.Int4Hnsw");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.Int8Flat:
-				sb.Append("DenseVectorIndexOptionsType.Int8Flat");
+				writer.Write("DenseVectorIndexOptionsType.Int8Flat");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.Int8Hnsw:
-				sb.Append("DenseVectorIndexOptionsType.Int8Hnsw");
+				writer.Write("DenseVectorIndexOptionsType.Int8Hnsw");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

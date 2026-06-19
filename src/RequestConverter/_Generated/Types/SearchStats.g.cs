@@ -25,163 +25,122 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class SearchStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FetchCurrent = ");
-			sb.Append(instance.FetchCurrent);
-			sb.Append("L");
+			__init.Property("FetchCurrent");
+			writer.WriteValue(FetchCurrent);
+			writer.Write("L");
 		}
 
-		if (instance.FetchTime is not null)
+		if (FetchTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FetchTime = ");
-			instance.FetchTime.FormatCode(sb);
+			__init.Property("FetchTime");
+			FetchTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FetchTimeInMillis = ");
-			sb.Append(instance.FetchTimeInMillis);
+			__init.Property("FetchTimeInMillis");
+			writer.WriteValue(FetchTimeInMillis);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FetchTotal = ");
-			sb.Append(instance.FetchTotal);
-			sb.Append("L");
+			__init.Property("FetchTotal");
+			writer.WriteValue(FetchTotal);
+			writer.Write("L");
 		}
 
-		if (instance.Groups is not null)
+		if (Groups is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Groups = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Groups, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Groups");
+			writer.Write("new() ");
+			writer.WriteInlineList(Groups, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.OpenContexts is not null)
+		if (OpenContexts is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OpenContexts = ");
-			sb.Append(instance.OpenContexts.Value);
-			sb.Append("L");
+			__init.Property("OpenContexts");
+			writer.WriteValue(OpenContexts.Value);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryCurrent = ");
-			sb.Append(instance.QueryCurrent);
-			sb.Append("L");
+			__init.Property("QueryCurrent");
+			writer.WriteValue(QueryCurrent);
+			writer.Write("L");
 		}
 
-		if (instance.QueryTime is not null)
+		if (QueryTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryTime = ");
-			instance.QueryTime.FormatCode(sb);
+			__init.Property("QueryTime");
+			QueryTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryTimeInMillis = ");
-			sb.Append(instance.QueryTimeInMillis);
+			__init.Property("QueryTimeInMillis");
+			writer.WriteValue(QueryTimeInMillis);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryTotal = ");
-			sb.Append(instance.QueryTotal);
-			sb.Append("L");
+			__init.Property("QueryTotal");
+			writer.WriteValue(QueryTotal);
+			writer.Write("L");
 		}
 
-		if (instance.RecentSearchLoad is not null)
+		if (RecentSearchLoad is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RecentSearchLoad = ");
-			sb.Append(instance.RecentSearchLoad.Value);
-			sb.Append("d");
+			__init.Property("RecentSearchLoad");
+			writer.WriteValue(RecentSearchLoad.Value);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ScrollCurrent = ");
-			sb.Append(instance.ScrollCurrent);
-			sb.Append("L");
+			__init.Property("ScrollCurrent");
+			writer.WriteValue(ScrollCurrent);
+			writer.Write("L");
 		}
 
-		if (instance.ScrollTime is not null)
+		if (ScrollTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ScrollTime = ");
-			instance.ScrollTime.FormatCode(sb);
+			__init.Property("ScrollTime");
+			ScrollTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ScrollTimeInMillis = ");
-			sb.Append(instance.ScrollTimeInMillis);
+			__init.Property("ScrollTimeInMillis");
+			writer.WriteValue(ScrollTimeInMillis);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ScrollTotal = ");
-			sb.Append(instance.ScrollTotal);
-			sb.Append("L");
+			__init.Property("ScrollTotal");
+			writer.WriteValue(ScrollTotal);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SuggestCurrent = ");
-			sb.Append(instance.SuggestCurrent);
-			sb.Append("L");
+			__init.Property("SuggestCurrent");
+			writer.WriteValue(SuggestCurrent);
+			writer.Write("L");
 		}
 
-		if (instance.SuggestTime is not null)
+		if (SuggestTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SuggestTime = ");
-			instance.SuggestTime.FormatCode(sb);
+			__init.Property("SuggestTime");
+			SuggestTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SuggestTimeInMillis = ");
-			sb.Append(instance.SuggestTimeInMillis);
+			__init.Property("SuggestTimeInMillis");
+			writer.WriteValue(SuggestTimeInMillis);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SuggestTotal = ");
-			sb.Append(instance.SuggestTotal);
-			sb.Append("L");
+			__init.Property("SuggestTotal");
+			writer.WriteValue(SuggestTotal);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

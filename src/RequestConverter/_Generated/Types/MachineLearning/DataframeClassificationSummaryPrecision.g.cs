@@ -25,29 +25,20 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataframeClassificationSummaryPrecision : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AvgPrecision = ");
-			sb.Append(instance.AvgPrecision);
-			sb.Append("d");
+			__init.Property("AvgPrecision");
+			writer.WriteValue(AvgPrecision);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Classes = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Classes, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Classes");
+			writer.WriteInlineList(Classes, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

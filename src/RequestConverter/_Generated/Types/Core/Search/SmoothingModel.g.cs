@@ -25,36 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class SmoothingModel : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Laplace is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Laplace is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Laplace = ");
-			instance.Laplace.FormatCode(sb);
+			__init.Property("Laplace");
+			Laplace.FormatCode(writer);
 		}
 
-		if (instance.LinearInterpolation is not null)
+		if (LinearInterpolation is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LinearInterpolation = ");
-			instance.LinearInterpolation.FormatCode(sb);
+			__init.Property("LinearInterpolation");
+			LinearInterpolation.FormatCode(writer);
 		}
 
-		if (instance.StupidBackoff is not null)
+		if (StupidBackoff is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StupidBackoff = ");
-			instance.StupidBackoff.FormatCode(sb);
+			__init.Property("StupidBackoff");
+			StupidBackoff.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

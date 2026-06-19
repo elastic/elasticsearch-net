@@ -25,47 +25,36 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataframeEvaluationOutlierDetectionMetrics : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AucRoc is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AucRoc is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AucRoc = ");
-			instance.AucRoc.FormatCode(sb);
+			__init.Property("AucRoc");
+			AucRoc.FormatCode(writer);
 		}
 
-		if (instance.ConfusionMatrix is not null)
+		if (ConfusionMatrix is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ConfusionMatrix = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.ConfusionMatrix, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("ConfusionMatrix");
+			writer.Write("new() ");
+			writer.WriteInlineList(ConfusionMatrix, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Precision is not null)
+		if (Precision is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Precision = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Precision, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Precision");
+			writer.Write("new() ");
+			writer.WriteInlineList(Precision, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Recall is not null)
+		if (Recall is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Recall = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Recall, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Recall");
+			writer.Write("new() ");
+			writer.WriteInlineList(Recall, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

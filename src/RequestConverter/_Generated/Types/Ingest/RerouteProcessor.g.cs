@@ -25,88 +25,57 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public partial class RerouteProcessor : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Dataset is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Dataset is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Dataset = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Dataset, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Dataset");
+			writer.WriteInlineList(Dataset, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Description is not null)
+		if (Description is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
-		if (instance.Destination is not null)
+		if (Destination is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Destination = ");
-			sb.Append("\"");
-			sb.Append(instance.Destination);
-			sb.Append("\"");
+			__init.Property("Destination");
+			writer.WriteString(Destination);
 		}
 
-		if (instance.If is not null)
+		if (If is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("If = ");
-			instance.If.FormatCode(sb);
+			__init.Property("If");
+			If.FormatCode(writer);
 		}
 
-		if (instance.IgnoreFailure is not null)
+		if (IgnoreFailure is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreFailure = ");
-			sb.Append(instance.IgnoreFailure.Value ? "true" : "false");
+			__init.Property("IgnoreFailure");
+			writer.WriteValue(IgnoreFailure.Value);
 		}
 
-		if (instance.Namespace is not null)
+		if (Namespace is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Namespace = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Namespace, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Namespace");
+			writer.WriteInlineList(Namespace, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.OnFailure is not null)
+		if (OnFailure is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OnFailure = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.OnFailure, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("OnFailure");
+			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Tag is not null)
+		if (Tag is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Tag = ");
-			sb.Append("\"");
-			sb.Append(instance.Tag);
-			sb.Append("\"");
+			__init.Property("Tag");
+			writer.WriteString(Tag);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

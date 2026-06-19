@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class TaskTypeContextualAICodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.TaskTypeContextualAI instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.TaskTypeContextualAI instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeContextualAI.Rerank:
-				sb.Append("TaskTypeContextualAI.Rerank");
+				writer.Write("TaskTypeContextualAI.Rerank");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

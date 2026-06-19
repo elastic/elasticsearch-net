@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class ScoreNormalizerCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.ScoreNormalizer instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.ScoreNormalizer instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.ScoreNormalizer.L2Norm:
-				sb.Append("ScoreNormalizer.L2Norm");
+				writer.Write("ScoreNormalizer.L2Norm");
 				break;
 			case Elastic.Clients.Elasticsearch.ScoreNormalizer.Minmax:
-				sb.Append("ScoreNormalizer.Minmax");
+				writer.Write("ScoreNormalizer.Minmax");
 				break;
 			case Elastic.Clients.Elasticsearch.ScoreNormalizer.None:
-				sb.Append("ScoreNormalizer.None");
+				writer.Write("ScoreNormalizer.None");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

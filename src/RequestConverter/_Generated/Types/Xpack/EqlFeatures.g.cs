@@ -25,61 +25,44 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class EqlFeatures : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Event = ");
-			sb.Append(instance.Event);
+			__init.Property("Event");
+			writer.WriteValue(Event);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Join = ");
-			sb.Append(instance.Join);
+			__init.Property("Join");
+			writer.WriteValue(Join);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Joins = ");
-			instance.Joins.FormatCode(sb);
+			__init.Property("Joins");
+			Joins.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Keys = ");
-			instance.Keys.FormatCode(sb);
+			__init.Property("Keys");
+			Keys.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Pipes = ");
-			instance.Pipes.FormatCode(sb);
+			__init.Property("Pipes");
+			Pipes.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sequence = ");
-			sb.Append(instance.Sequence);
+			__init.Property("Sequence");
+			writer.WriteValue(Sequence);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sequences = ");
-			instance.Sequences.FormatCode(sb);
+			__init.Property("Sequences");
+			Sequences.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

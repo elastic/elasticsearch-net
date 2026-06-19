@@ -44,7 +44,7 @@ public sealed partial class SynonymTokenFilterConverter : System.Text.Json.Seria
 		LocalJsonValue<bool?> propLenient = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propSynonyms = default;
 		LocalJsonValue<string?> propSynonymsPath = default;
-		LocalJsonValue<string?> propSynonymsSet = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propSynonymsSet = default;
 		LocalJsonValue<string?> propTokenizer = default;
 		LocalJsonValue<bool?> propUpdateable = default;
 		LocalJsonValue<string?> propVersion = default;
@@ -75,7 +75,7 @@ public sealed partial class SynonymTokenFilterConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propSynonymsSet.TryReadProperty(ref reader, options, PropSynonymsSet, null))
+			if (propSynonymsSet.TryReadProperty(ref reader, options, PropSynonymsSet, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
@@ -133,7 +133,7 @@ public sealed partial class SynonymTokenFilterConverter : System.Text.Json.Seria
 		writer.WriteProperty(options, PropLenient, value.Lenient, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropSynonyms, value.Synonyms, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropSynonymsPath, value.SynonymsPath, null, null);
-		writer.WriteProperty(options, PropSynonymsSet, value.SynonymsSet, null, null);
+		writer.WriteProperty(options, PropSynonymsSet, value.SynonymsSet, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropTokenizer, value.Tokenizer, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropUpdateable, value.Updateable, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));

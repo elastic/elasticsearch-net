@@ -25,53 +25,38 @@ namespace Elastic.Clients.Elasticsearch.Core.Reindex;
 
 public partial class Destination : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			instance.Index.FormatCode(sb);
+			__init.Property("Index");
+			Index.FormatCode(writer);
 		}
 
-		if (instance.OpType is not null)
+		if (OpType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OpType = ");
-			Elastic.Clients.Elasticsearch.OpTypeCodeFormatter.FormatCode(instance.OpType.Value, sb);
+			__init.Property("OpType");
+			Elastic.Clients.Elasticsearch.OpTypeCodeFormatter.FormatCode(OpType.Value, writer);
 		}
 
-		if (instance.Pipeline is not null)
+		if (Pipeline is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Pipeline = ");
-			sb.Append("\"");
-			sb.Append(instance.Pipeline);
-			sb.Append("\"");
+			__init.Property("Pipeline");
+			writer.WriteString(Pipeline);
 		}
 
-		if (instance.Routing is not null)
+		if (Routing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Routing = ");
-			instance.Routing.FormatCode(sb);
+			__init.Property("Routing");
+			writer.WriteString(Routing);
 		}
 
-		if (instance.VersionType is not null)
+		if (VersionType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VersionType = ");
-			Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(instance.VersionType.Value, sb);
+			__init.Property("VersionType");
+			Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

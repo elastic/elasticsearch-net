@@ -25,89 +25,54 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class ElasticsearchVersionInfo : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BuildDate = ");
-			sb.Append(instance.BuildDate);
+			__init.Property("BuildDate");
+			writer.WriteValue(BuildDate);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BuildFlavor = ");
-			sb.Append("\"");
-			sb.Append(instance.BuildFlavor);
-			sb.Append("\"");
+			__init.Property("BuildFlavor");
+			writer.WriteString(BuildFlavor);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BuildHash = ");
-			sb.Append("\"");
-			sb.Append(instance.BuildHash);
-			sb.Append("\"");
+			__init.Property("BuildHash");
+			writer.WriteString(BuildHash);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BuildSnapshot = ");
-			sb.Append(instance.BuildSnapshot ? "true" : "false");
+			__init.Property("BuildSnapshot");
+			writer.WriteValue(BuildSnapshot);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BuildType = ");
-			sb.Append("\"");
-			sb.Append(instance.BuildType);
-			sb.Append("\"");
+			__init.Property("BuildType");
+			writer.WriteString(BuildType);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LuceneVersion = ");
-			sb.Append("\"");
-			sb.Append(instance.LuceneVersion);
-			sb.Append("\"");
+			__init.Property("LuceneVersion");
+			writer.WriteString(LuceneVersion);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinimumIndexCompatibilityVersion = ");
-			sb.Append("\"");
-			sb.Append(instance.MinimumIndexCompatibilityVersion);
-			sb.Append("\"");
+			__init.Property("MinimumIndexCompatibilityVersion");
+			writer.WriteString(MinimumIndexCompatibilityVersion);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinimumWireCompatibilityVersion = ");
-			sb.Append("\"");
-			sb.Append(instance.MinimumWireCompatibilityVersion);
-			sb.Append("\"");
+			__init.Property("MinimumWireCompatibilityVersion");
+			writer.WriteString(MinimumWireCompatibilityVersion);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Number = ");
-			sb.Append("\"");
-			sb.Append(instance.Number);
-			sb.Append("\"");
+			__init.Property("Number");
+			writer.WriteString(Number);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

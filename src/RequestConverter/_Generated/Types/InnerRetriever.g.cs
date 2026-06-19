@@ -25,34 +25,25 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class InnerRetriever : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Normalizer = ");
-			Elastic.Clients.Elasticsearch.ScoreNormalizerCodeFormatter.FormatCode(instance.Normalizer, sb);
+			__init.Property("Normalizer");
+			Elastic.Clients.Elasticsearch.ScoreNormalizerCodeFormatter.FormatCode(Normalizer, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Retriever = ");
-			instance.Retriever.FormatCode(sb);
+			__init.Property("Retriever");
+			Retriever.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Weight = ");
-			sb.Append(instance.Weight);
-			sb.Append("f");
+			__init.Property("Weight");
+			writer.WriteValue(Weight);
+			writer.Write("f");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

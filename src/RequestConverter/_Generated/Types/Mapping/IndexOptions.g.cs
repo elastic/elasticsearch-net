@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public static class IndexOptionsCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.IndexOptions instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.IndexOptions instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.IndexOptions.Docs:
-				sb.Append("IndexOptions.Docs");
+				writer.Write("IndexOptions.Docs");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.IndexOptions.Freqs:
-				sb.Append("IndexOptions.Freqs");
+				writer.Write("IndexOptions.Freqs");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.IndexOptions.Offsets:
-				sb.Append("IndexOptions.Offsets");
+				writer.Write("IndexOptions.Offsets");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.IndexOptions.Positions:
-				sb.Append("IndexOptions.Positions");
+				writer.Write("IndexOptions.Positions");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -25,187 +25,138 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataframeAnalysisRegression : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Alpha is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Alpha is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Alpha = ");
-			sb.Append(instance.Alpha.Value);
-			sb.Append("d");
+			__init.Property("Alpha");
+			writer.WriteValue(Alpha.Value);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DependentVariable = ");
-			sb.Append("\"");
-			sb.Append(instance.DependentVariable);
-			sb.Append("\"");
+			__init.Property("DependentVariable");
+			writer.WriteString(DependentVariable);
 		}
 
-		if (instance.DownsampleFactor is not null)
+		if (DownsampleFactor is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DownsampleFactor = ");
-			sb.Append(instance.DownsampleFactor.Value);
-			sb.Append("d");
+			__init.Property("DownsampleFactor");
+			writer.WriteValue(DownsampleFactor.Value);
+			writer.Write("d");
 		}
 
-		if (instance.EarlyStoppingEnabled is not null)
+		if (EarlyStoppingEnabled is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EarlyStoppingEnabled = ");
-			sb.Append(instance.EarlyStoppingEnabled.Value ? "true" : "false");
+			__init.Property("EarlyStoppingEnabled");
+			writer.WriteValue(EarlyStoppingEnabled.Value);
 		}
 
-		if (instance.Eta is not null)
+		if (Eta is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Eta = ");
-			sb.Append(instance.Eta.Value);
-			sb.Append("d");
+			__init.Property("Eta");
+			writer.WriteValue(Eta.Value);
+			writer.Write("d");
 		}
 
-		if (instance.EtaGrowthRatePerTree is not null)
+		if (EtaGrowthRatePerTree is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EtaGrowthRatePerTree = ");
-			sb.Append(instance.EtaGrowthRatePerTree.Value);
-			sb.Append("d");
+			__init.Property("EtaGrowthRatePerTree");
+			writer.WriteValue(EtaGrowthRatePerTree.Value);
+			writer.Write("d");
 		}
 
-		if (instance.FeatureBagFraction is not null)
+		if (FeatureBagFraction is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FeatureBagFraction = ");
-			sb.Append(instance.FeatureBagFraction.Value);
-			sb.Append("d");
+			__init.Property("FeatureBagFraction");
+			writer.WriteValue(FeatureBagFraction.Value);
+			writer.Write("d");
 		}
 
-		if (instance.FeatureProcessors is not null)
+		if (FeatureProcessors is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FeatureProcessors = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.FeatureProcessors, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("FeatureProcessors");
+			writer.WriteInlineList(FeatureProcessors, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Gamma is not null)
+		if (Gamma is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Gamma = ");
-			sb.Append(instance.Gamma.Value);
-			sb.Append("d");
+			__init.Property("Gamma");
+			writer.WriteValue(Gamma.Value);
+			writer.Write("d");
 		}
 
-		if (instance.Lambda is not null)
+		if (Lambda is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Lambda = ");
-			sb.Append(instance.Lambda.Value);
-			sb.Append("d");
+			__init.Property("Lambda");
+			writer.WriteValue(Lambda.Value);
+			writer.Write("d");
 		}
 
-		if (instance.LossFunction is not null)
+		if (LossFunction is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LossFunction = ");
-			sb.Append("\"");
-			sb.Append(instance.LossFunction);
-			sb.Append("\"");
+			__init.Property("LossFunction");
+			writer.WriteString(LossFunction);
 		}
 
-		if (instance.LossFunctionParameter is not null)
+		if (LossFunctionParameter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LossFunctionParameter = ");
-			sb.Append(instance.LossFunctionParameter.Value);
-			sb.Append("d");
+			__init.Property("LossFunctionParameter");
+			writer.WriteValue(LossFunctionParameter.Value);
+			writer.Write("d");
 		}
 
-		if (instance.MaxOptimizationRoundsPerHyperparameter is not null)
+		if (MaxOptimizationRoundsPerHyperparameter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxOptimizationRoundsPerHyperparameter = ");
-			sb.Append(instance.MaxOptimizationRoundsPerHyperparameter.Value);
+			__init.Property("MaxOptimizationRoundsPerHyperparameter");
+			writer.WriteValue(MaxOptimizationRoundsPerHyperparameter.Value);
 		}
 
-		if (instance.MaxTrees is not null)
+		if (MaxTrees is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxTrees = ");
-			sb.Append(instance.MaxTrees.Value);
+			__init.Property("MaxTrees");
+			writer.WriteValue(MaxTrees.Value);
 		}
 
-		if (instance.NumTopFeatureImportanceValues is not null)
+		if (NumTopFeatureImportanceValues is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumTopFeatureImportanceValues = ");
-			sb.Append(instance.NumTopFeatureImportanceValues.Value);
+			__init.Property("NumTopFeatureImportanceValues");
+			writer.WriteValue(NumTopFeatureImportanceValues.Value);
 		}
 
-		if (instance.PredictionFieldName is not null)
+		if (PredictionFieldName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PredictionFieldName = ");
-			instance.PredictionFieldName.FormatCode(sb);
+			__init.Property("PredictionFieldName");
+			PredictionFieldName.FormatCode(writer);
 		}
 
-		if (instance.RandomizeSeed is not null)
+		if (RandomizeSeed is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RandomizeSeed = ");
-			sb.Append(instance.RandomizeSeed.Value);
-			sb.Append("d");
+			__init.Property("RandomizeSeed");
+			writer.WriteValue(RandomizeSeed.Value);
+			writer.Write("d");
 		}
 
-		if (instance.SoftTreeDepthLimit is not null)
+		if (SoftTreeDepthLimit is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SoftTreeDepthLimit = ");
-			sb.Append(instance.SoftTreeDepthLimit.Value);
+			__init.Property("SoftTreeDepthLimit");
+			writer.WriteValue(SoftTreeDepthLimit.Value);
 		}
 
-		if (instance.SoftTreeDepthTolerance is not null)
+		if (SoftTreeDepthTolerance is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SoftTreeDepthTolerance = ");
-			sb.Append(instance.SoftTreeDepthTolerance.Value);
-			sb.Append("d");
+			__init.Property("SoftTreeDepthTolerance");
+			writer.WriteValue(SoftTreeDepthTolerance.Value);
+			writer.Write("d");
 		}
 
-		if (instance.TrainingPercent is not null)
+		if (TrainingPercent is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TrainingPercent = ");
-			instance.TrainingPercent.FormatCode(sb);
+			__init.Property("TrainingPercent");
+			TrainingPercent.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

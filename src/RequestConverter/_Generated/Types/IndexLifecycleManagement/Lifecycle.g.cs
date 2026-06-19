@@ -25,34 +25,25 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
 public partial class Lifecycle : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModifiedDate = ");
-			sb.Append(instance.ModifiedDate);
+			__init.Property("ModifiedDate");
+			writer.WriteValue(ModifiedDate);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Policy = ");
-			instance.Policy.FormatCode(sb);
+			__init.Property("Policy");
+			Policy.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append(instance.Version);
-			sb.Append("L");
+			__init.Property("Version");
+			writer.WriteValue(Version);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,70 +25,47 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
 public partial class TransformStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Checkpointing = ");
-			instance.Checkpointing.FormatCode(sb);
+			__init.Property("Checkpointing");
+			Checkpointing.FormatCode(writer);
 		}
 
-		if (instance.Health is not null)
+		if (Health is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Health = ");
-			instance.Health.FormatCode(sb);
+			__init.Property("Health");
+			Health.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			sb.Append("\"");
-			sb.Append(instance.Id);
-			sb.Append("\"");
+			__init.Property("Id");
+			writer.WriteString(Id);
 		}
 
-		if (instance.Node is not null)
+		if (Node is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Node = ");
-			instance.Node.FormatCode(sb);
+			__init.Property("Node");
+			Node.FormatCode(writer);
 		}
 
-		if (instance.Reason is not null)
+		if (Reason is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Reason = ");
-			sb.Append("\"");
-			sb.Append(instance.Reason);
-			sb.Append("\"");
+			__init.Property("Reason");
+			writer.WriteString(Reason);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("State = ");
-			sb.Append("\"");
-			sb.Append(instance.State);
-			sb.Append("\"");
+			__init.Property("State");
+			writer.WriteString(State);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Stats = ");
-			instance.Stats.FormatCode(sb);
+			__init.Property("Stats");
+			Stats.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

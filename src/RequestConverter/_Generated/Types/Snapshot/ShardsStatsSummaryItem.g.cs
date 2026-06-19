@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 public partial class ShardsStatsSummaryItem : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FileCount = ");
-			sb.Append(instance.FileCount);
-			sb.Append("L");
+			__init.Property("FileCount");
+			writer.WriteValue(FileCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SizeInBytes = ");
-			sb.Append(instance.SizeInBytes);
-			sb.Append("L");
+			__init.Property("SizeInBytes");
+			writer.WriteValue(SizeInBytes);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

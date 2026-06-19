@@ -25,44 +25,33 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class GoogleVertexAITaskSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AutoTruncate is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AutoTruncate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AutoTruncate = ");
-			sb.Append(instance.AutoTruncate.Value ? "true" : "false");
+			__init.Property("AutoTruncate");
+			writer.WriteValue(AutoTruncate.Value);
 		}
 
-		if (instance.MaxTokens is not null)
+		if (MaxTokens is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxTokens = ");
-			sb.Append(instance.MaxTokens.Value);
+			__init.Property("MaxTokens");
+			writer.WriteValue(MaxTokens.Value);
 		}
 
-		if (instance.ThinkingConfig is not null)
+		if (ThinkingConfig is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ThinkingConfig = ");
-			instance.ThinkingConfig.FormatCode(sb);
+			__init.Property("ThinkingConfig");
+			ThinkingConfig.FormatCode(writer);
 		}
 
-		if (instance.TopN is not null)
+		if (TopN is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TopN = ");
-			sb.Append(instance.TopN.Value);
+			__init.Property("TopN");
+			writer.WriteValue(TopN.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

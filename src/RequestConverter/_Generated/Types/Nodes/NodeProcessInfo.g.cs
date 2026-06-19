@@ -25,34 +25,25 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class NodeProcessInfo : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			sb.Append(instance.Id);
-			sb.Append("L");
+			__init.Property("Id");
+			writer.WriteValue(Id);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mlockall = ");
-			sb.Append(instance.Mlockall ? "true" : "false");
+			__init.Property("Mlockall");
+			writer.WriteValue(Mlockall);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RefreshIntervalInMillis = ");
-			sb.Append(instance.RefreshIntervalInMillis);
+			__init.Property("RefreshIntervalInMillis");
+			writer.WriteValue(RefreshIntervalInMillis);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

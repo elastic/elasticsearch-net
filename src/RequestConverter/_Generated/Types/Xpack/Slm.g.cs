@@ -25,42 +25,31 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class Slm : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Available = ");
-			sb.Append(instance.Available ? "true" : "false");
+			__init.Property("Available");
+			writer.WriteValue(Available);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Enabled = ");
-			sb.Append(instance.Enabled ? "true" : "false");
+			__init.Property("Enabled");
+			writer.WriteValue(Enabled);
 		}
 
-		if (instance.PolicyCount is not null)
+		if (PolicyCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PolicyCount = ");
-			sb.Append(instance.PolicyCount.Value);
+			__init.Property("PolicyCount");
+			writer.WriteValue(PolicyCount.Value);
 		}
 
-		if (instance.PolicyStats is not null)
+		if (PolicyStats is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PolicyStats = ");
-			instance.PolicyStats.FormatCode(sb);
+			__init.Property("PolicyStats");
+			PolicyStats.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,71 +25,50 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class PhoneticTokenFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Encoder = ");
-			Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoderCodeFormatter.FormatCode(instance.Encoder, sb);
+			__init.Property("Encoder");
+			Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoderCodeFormatter.FormatCode(Encoder, writer);
 		}
 
-		if (instance.Languageset is not null)
+		if (Languageset is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Languageset = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Languageset, (item, sb) => { Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguageCodeFormatter.FormatCode(item, sb); }, sb);
-			sb.Append("]");
+			__init.Property("Languageset");
+			writer.WriteInlineList(Languageset, (w, item) => { Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguageCodeFormatter.FormatCode(item, w); });
 		}
 
-		if (instance.MaxCodeLen is not null)
+		if (MaxCodeLen is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxCodeLen = ");
-			sb.Append(instance.MaxCodeLen.Value);
+			__init.Property("MaxCodeLen");
+			writer.WriteValue(MaxCodeLen.Value);
 		}
 
-		if (instance.NameType is not null)
+		if (NameType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NameType = ");
-			Elastic.Clients.Elasticsearch.Analysis.PhoneticNameTypeCodeFormatter.FormatCode(instance.NameType.Value, sb);
+			__init.Property("NameType");
+			Elastic.Clients.Elasticsearch.Analysis.PhoneticNameTypeCodeFormatter.FormatCode(NameType.Value, writer);
 		}
 
-		if (instance.Replace is not null)
+		if (Replace is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Replace = ");
-			sb.Append(instance.Replace.Value ? "true" : "false");
+			__init.Property("Replace");
+			writer.WriteValue(Replace.Value);
 		}
 
-		if (instance.RuleType is not null)
+		if (RuleType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RuleType = ");
-			Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleTypeCodeFormatter.FormatCode(instance.RuleType.Value, sb);
+			__init.Property("RuleType");
+			Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleTypeCodeFormatter.FormatCode(RuleType.Value, writer);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

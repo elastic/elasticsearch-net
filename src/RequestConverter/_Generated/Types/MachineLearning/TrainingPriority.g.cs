@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public static class TrainingPriorityCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority.Low:
-				sb.Append("TrainingPriority.Low");
+				writer.Write("TrainingPriority.Low");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority.Normal:
-				sb.Append("TrainingPriority.Normal");
+				writer.Write("TrainingPriority.Normal");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

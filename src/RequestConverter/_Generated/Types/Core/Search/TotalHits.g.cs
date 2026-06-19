@@ -25,27 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class TotalHits : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Relation = ");
-			Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelationCodeFormatter.FormatCode(instance.Relation, sb);
+			__init.Property("Relation");
+			Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelationCodeFormatter.FormatCode(Relation, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Value = ");
-			sb.Append(instance.Value);
-			sb.Append("L");
+			__init.Property("Value");
+			writer.WriteValue(Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

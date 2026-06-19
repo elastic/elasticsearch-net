@@ -25,92 +25,69 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class NodeInfoJvmMemory : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.DirectMax is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (DirectMax is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DirectMax = ");
-			instance.DirectMax.FormatCode(sb);
+			__init.Property("DirectMax");
+			DirectMax.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DirectMaxInBytes = ");
-			sb.Append(instance.DirectMaxInBytes);
-			sb.Append("L");
+			__init.Property("DirectMaxInBytes");
+			writer.WriteValue(DirectMaxInBytes);
+			writer.Write("L");
 		}
 
-		if (instance.HeapInit is not null)
+		if (HeapInit is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HeapInit = ");
-			instance.HeapInit.FormatCode(sb);
+			__init.Property("HeapInit");
+			HeapInit.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HeapInitInBytes = ");
-			sb.Append(instance.HeapInitInBytes);
-			sb.Append("L");
+			__init.Property("HeapInitInBytes");
+			writer.WriteValue(HeapInitInBytes);
+			writer.Write("L");
 		}
 
-		if (instance.HeapMax is not null)
+		if (HeapMax is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HeapMax = ");
-			instance.HeapMax.FormatCode(sb);
+			__init.Property("HeapMax");
+			HeapMax.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HeapMaxInBytes = ");
-			sb.Append(instance.HeapMaxInBytes);
-			sb.Append("L");
+			__init.Property("HeapMaxInBytes");
+			writer.WriteValue(HeapMaxInBytes);
+			writer.Write("L");
 		}
 
-		if (instance.NonHeapInit is not null)
+		if (NonHeapInit is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NonHeapInit = ");
-			instance.NonHeapInit.FormatCode(sb);
+			__init.Property("NonHeapInit");
+			NonHeapInit.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NonHeapInitInBytes = ");
-			sb.Append(instance.NonHeapInitInBytes);
-			sb.Append("L");
+			__init.Property("NonHeapInitInBytes");
+			writer.WriteValue(NonHeapInitInBytes);
+			writer.Write("L");
 		}
 
-		if (instance.NonHeapMax is not null)
+		if (NonHeapMax is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NonHeapMax = ");
-			instance.NonHeapMax.FormatCode(sb);
+			__init.Property("NonHeapMax");
+			NonHeapMax.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NonHeapMaxInBytes = ");
-			sb.Append(instance.NonHeapMaxInBytes);
-			sb.Append("L");
+			__init.Property("NonHeapMaxInBytes");
+			writer.WriteValue(NonHeapMaxInBytes);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

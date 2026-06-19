@@ -25,155 +25,112 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class TermsAggregation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CollectMode is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CollectMode is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CollectMode = ");
-			Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectModeCodeFormatter.FormatCode(instance.CollectMode.Value, sb);
+			__init.Property("CollectMode");
+			Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectModeCodeFormatter.FormatCode(CollectMode.Value, writer);
 		}
 
-		if (instance.Exclude is not null)
+		if (Exclude is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Exclude = ");
-			instance.Exclude.FormatCode(sb);
+			__init.Property("Exclude");
+			Exclude.FormatCode(writer);
 		}
 
-		if (instance.ExecutionHint is not null)
+		if (ExecutionHint is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExecutionHint = ");
-			Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHintCodeFormatter.FormatCode(instance.ExecutionHint.Value, sb);
+			__init.Property("ExecutionHint");
+			Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, writer);
 		}
 
-		if (instance.Field is not null)
+		if (Field is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.Format is not null)
+		if (Format is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Format = ");
-			sb.Append("\"");
-			sb.Append(instance.Format);
-			sb.Append("\"");
+			__init.Property("Format");
+			writer.WriteString(Format);
 		}
 
-		if (instance.Include is not null)
+		if (Include is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Include = ");
-			instance.Include.FormatCode(sb);
+			__init.Property("Include");
+			Include.FormatCode(writer);
 		}
 
-		if (instance.MinDocCount is not null)
+		if (MinDocCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinDocCount = ");
-			sb.Append(instance.MinDocCount.Value);
+			__init.Property("MinDocCount");
+			writer.WriteValue(MinDocCount.Value);
 		}
 
-		if (instance.Missing is not null)
+		if (Missing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Missing = ");
-			RequestConverter.CodeFormatter.FormatCode(instance.Missing, sb);
+			__init.Property("Missing");
+			writer.WriteValue(Missing);
 		}
 
-		if (instance.MissingBucket is not null)
+		if (MissingBucket is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MissingBucket = ");
-			sb.Append(instance.MissingBucket.Value ? "true" : "false");
+			__init.Property("MissingBucket");
+			writer.WriteValue(MissingBucket.Value);
 		}
 
-		if (instance.MissingOrder is not null)
+		if (MissingOrder is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MissingOrder = ");
-			Elastic.Clients.Elasticsearch.Aggregations.MissingOrderCodeFormatter.FormatCode(instance.MissingOrder.Value, sb);
+			__init.Property("MissingOrder");
+			Elastic.Clients.Elasticsearch.Aggregations.MissingOrderCodeFormatter.FormatCode(MissingOrder.Value, writer);
 		}
 
-		if (instance.Order is not null)
+		if (Order is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Order = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Order, (item, sb) => { sb.Append("new("); item.Key.FormatCode(sb); sb.Append(", "); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(item.Value, sb); sb.Append(")"); }, sb);
-			sb.Append("]");
+			__init.Property("Order");
+			writer.WriteInlineList(Order, (w, item) => { w.Write("new("); item.Key.FormatCode(w); w.Write(", "); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(item.Value, w); w.Write(")"); });
 		}
 
-		if (instance.Script is not null)
+		if (Script is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Script = ");
-			instance.Script.FormatCode(sb);
+			__init.Property("Script");
+			Script.FormatCode(writer);
 		}
 
-		if (instance.ShardMinDocCount is not null)
+		if (ShardMinDocCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShardMinDocCount = ");
-			sb.Append(instance.ShardMinDocCount.Value);
-			sb.Append("L");
+			__init.Property("ShardMinDocCount");
+			writer.WriteValue(ShardMinDocCount.Value);
+			writer.Write("L");
 		}
 
-		if (instance.ShardSize is not null)
+		if (ShardSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShardSize = ");
-			sb.Append(instance.ShardSize.Value);
+			__init.Property("ShardSize");
+			writer.WriteValue(ShardSize.Value);
 		}
 
-		if (instance.ShowTermDocCountError is not null)
+		if (ShowTermDocCountError is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShowTermDocCountError = ");
-			sb.Append(instance.ShowTermDocCountError.Value ? "true" : "false");
+			__init.Property("ShowTermDocCountError");
+			writer.WriteValue(ShowTermDocCountError.Value);
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append(instance.Size.Value);
+			__init.Property("Size");
+			writer.WriteValue(Size.Value);
 		}
 
-		if (instance.ValueType is not null)
+		if (ValueType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ValueType = ");
-			sb.Append("\"");
-			sb.Append(instance.ValueType);
-			sb.Append("\"");
+			__init.Property("ValueType");
+			writer.WriteString(ValueType);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

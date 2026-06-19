@@ -25,55 +25,36 @@ namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
 public partial class SlmPolicy : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Config is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Config is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Config = ");
-			instance.Config.FormatCode(sb);
+			__init.Property("Config");
+			Config.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Repository = ");
-			sb.Append("\"");
-			sb.Append(instance.Repository);
-			sb.Append("\"");
+			__init.Property("Repository");
+			writer.WriteString(Repository);
 		}
 
-		if (instance.Retention is not null)
+		if (Retention is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Retention = ");
-			instance.Retention.FormatCode(sb);
+			__init.Property("Retention");
+			Retention.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Schedule = ");
-			sb.Append("\"");
-			sb.Append(instance.Schedule);
-			sb.Append("\"");
+			__init.Property("Schedule");
+			writer.WriteString(Schedule);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

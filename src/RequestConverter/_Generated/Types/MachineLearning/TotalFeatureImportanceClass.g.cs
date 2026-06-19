@@ -25,30 +25,19 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class TotalFeatureImportanceClass : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ClassName = ");
-			sb.Append("\"");
-			sb.Append(instance.ClassName);
-			sb.Append("\"");
+			__init.Property("ClassName");
+			writer.WriteString(ClassName);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Importance = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Importance, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Importance");
+			writer.WriteInlineList(Importance, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

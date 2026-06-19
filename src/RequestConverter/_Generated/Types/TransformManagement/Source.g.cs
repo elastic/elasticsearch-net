@@ -25,36 +25,33 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
 public partial class Source : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indices = ");
-			instance.Indices.FormatCode(sb);
+			__init.Property("Indices");
+			Indices.FormatCode(writer);
 		}
 
-		if (instance.Query is not null)
+		if (ProjectRouting is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			instance.Query.FormatCode(sb);
+			__init.Property("ProjectRouting");
+			writer.WriteString(ProjectRouting);
 		}
 
-		if (instance.RuntimeMappings is not null)
+		if (Query is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RuntimeMappings = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.RuntimeMappings, (k, sb) => { k.FormatCode(sb); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Query");
+			Query.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		if (RuntimeMappings is not null)
+		{
+			__init.Property("RuntimeMappings");
+			writer.Write("new() ");
+			writer.WriteInlineList(RuntimeMappings, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
+		}
+
+		__init.Dispose();
 	}
 }

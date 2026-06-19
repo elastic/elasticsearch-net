@@ -25,51 +25,36 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class ShardStatistics : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Failed = ");
-			sb.Append(instance.Failed);
+			__init.Property("Failed");
+			writer.WriteValue(Failed);
 		}
 
-		if (instance.Failures is not null)
+		if (Failures is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Failures = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Failures, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Failures");
+			writer.WriteInlineList(Failures, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Skipped is not null)
+		if (Skipped is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Skipped = ");
-			sb.Append(instance.Skipped.Value);
+			__init.Property("Skipped");
+			writer.WriteValue(Skipped.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Successful = ");
-			sb.Append(instance.Successful);
+			__init.Property("Successful");
+			writer.WriteValue(Successful);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			sb.Append(instance.Total);
+			__init.Property("Total");
+			writer.WriteValue(Total);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

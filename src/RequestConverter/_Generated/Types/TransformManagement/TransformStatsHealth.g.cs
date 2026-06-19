@@ -25,29 +25,20 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
 public partial class TransformStatsHealth : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Issues is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Issues is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Issues = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Issues, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Issues");
+			writer.WriteInlineList(Issues, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Status = ");
-			Elastic.Clients.Elasticsearch.HealthStatusCodeFormatter.FormatCode(instance.Status, sb);
+			__init.Property("Status");
+			Elastic.Clients.Elasticsearch.HealthStatusCodeFormatter.FormatCode(Status, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

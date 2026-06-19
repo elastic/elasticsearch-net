@@ -25,48 +25,48 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public static class PhoneticEncoderCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.BeiderMorse:
-				sb.Append("PhoneticEncoder.BeiderMorse");
+				writer.Write("PhoneticEncoder.BeiderMorse");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Caverphone1:
-				sb.Append("PhoneticEncoder.Caverphone1");
+				writer.Write("PhoneticEncoder.Caverphone1");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Caverphone2:
-				sb.Append("PhoneticEncoder.Caverphone2");
+				writer.Write("PhoneticEncoder.Caverphone2");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Cologne:
-				sb.Append("PhoneticEncoder.Cologne");
+				writer.Write("PhoneticEncoder.Cologne");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.DaitchMokotoff:
-				sb.Append("PhoneticEncoder.DaitchMokotoff");
+				writer.Write("PhoneticEncoder.DaitchMokotoff");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.DoubleMetaphone:
-				sb.Append("PhoneticEncoder.DoubleMetaphone");
+				writer.Write("PhoneticEncoder.DoubleMetaphone");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Haasephonetik:
-				sb.Append("PhoneticEncoder.Haasephonetik");
+				writer.Write("PhoneticEncoder.Haasephonetik");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Koelnerphonetik:
-				sb.Append("PhoneticEncoder.Koelnerphonetik");
+				writer.Write("PhoneticEncoder.Koelnerphonetik");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Metaphone:
-				sb.Append("PhoneticEncoder.Metaphone");
+				writer.Write("PhoneticEncoder.Metaphone");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Nysiis:
-				sb.Append("PhoneticEncoder.Nysiis");
+				writer.Write("PhoneticEncoder.Nysiis");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.RefinedSoundex:
-				sb.Append("PhoneticEncoder.RefinedSoundex");
+				writer.Write("PhoneticEncoder.RefinedSoundex");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Soundex:
-				sb.Append("PhoneticEncoder.Soundex");
+				writer.Write("PhoneticEncoder.Soundex");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

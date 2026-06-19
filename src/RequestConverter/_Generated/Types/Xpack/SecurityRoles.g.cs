@@ -25,33 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class SecurityRoles : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Dls = ");
-			instance.Dls.FormatCode(sb);
+			__init.Property("Dls");
+			Dls.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("File = ");
-			instance.File.FormatCode(sb);
+			__init.Property("File");
+			File.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Native = ");
-			instance.Native.FormatCode(sb);
+			__init.Property("Native");
+			Native.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

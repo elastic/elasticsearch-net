@@ -25,52 +25,39 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class DiversifiedSamplerAggregation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ExecutionHint is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ExecutionHint is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExecutionHint = ");
-			Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHintCodeFormatter.FormatCode(instance.ExecutionHint.Value, sb);
+			__init.Property("ExecutionHint");
+			Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, writer);
 		}
 
-		if (instance.Field is not null)
+		if (Field is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.MaxDocsPerValue is not null)
+		if (MaxDocsPerValue is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxDocsPerValue = ");
-			sb.Append(instance.MaxDocsPerValue.Value);
+			__init.Property("MaxDocsPerValue");
+			writer.WriteValue(MaxDocsPerValue.Value);
 		}
 
-		if (instance.Script is not null)
+		if (Script is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Script = ");
-			instance.Script.FormatCode(sb);
+			__init.Property("Script");
+			Script.FormatCode(writer);
 		}
 
-		if (instance.ShardSize is not null)
+		if (ShardSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShardSize = ");
-			sb.Append(instance.ShardSize.Value);
+			__init.Property("ShardSize");
+			writer.WriteValue(ShardSize.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

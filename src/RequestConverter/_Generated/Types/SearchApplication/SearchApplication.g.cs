@@ -25,55 +25,36 @@ namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
 public partial class SearchApplication : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AnalyticsCollectionName is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AnalyticsCollectionName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AnalyticsCollectionName = ");
-			sb.Append("\"");
-			sb.Append(instance.AnalyticsCollectionName);
-			sb.Append("\"");
+			__init.Property("AnalyticsCollectionName");
+			writer.WriteString(AnalyticsCollectionName);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indices = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Indices, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Indices");
+			writer.WriteInlineList(Indices, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
-		if (instance.Template is not null)
+		if (Template is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Template = ");
-			instance.Template.FormatCode(sb);
+			__init.Property("Template");
+			Template.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UpdatedAtMillis = ");
-			sb.Append(instance.UpdatedAtMillis);
+			__init.Property("UpdatedAtMillis");
+			writer.WriteValue(UpdatedAtMillis);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

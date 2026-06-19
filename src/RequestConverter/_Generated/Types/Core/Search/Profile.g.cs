@@ -25,21 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class Profile : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
+		if (Request is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Shards = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Shards, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Request");
+			Request.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		{
+			__init.Property("Shards");
+			writer.WriteInlineList(Shards, (w, item) => { item.FormatCode(w); });
+		}
+
+		__init.Dispose();
 	}
 }

@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class OpTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.OpType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.OpType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.OpType.Create:
-				sb.Append("OpType.Create");
+				writer.Write("OpType.Create");
 				break;
 			case Elastic.Clients.Elasticsearch.OpType.Index:
-				sb.Append("OpType.Index");
+				writer.Write("OpType.Index");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

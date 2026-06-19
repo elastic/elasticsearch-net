@@ -25,94 +25,63 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class SynonymGraphTokenFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Expand is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Expand is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Expand = ");
-			sb.Append(instance.Expand.Value ? "true" : "false");
+			__init.Property("Expand");
+			writer.WriteValue(Expand.Value);
 		}
 
-		if (instance.Format is not null)
+		if (Format is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Format = ");
-			Elastic.Clients.Elasticsearch.Analysis.SynonymFormatCodeFormatter.FormatCode(instance.Format.Value, sb);
+			__init.Property("Format");
+			Elastic.Clients.Elasticsearch.Analysis.SynonymFormatCodeFormatter.FormatCode(Format.Value, writer);
 		}
 
-		if (instance.Lenient is not null)
+		if (Lenient is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Lenient = ");
-			sb.Append(instance.Lenient.Value ? "true" : "false");
+			__init.Property("Lenient");
+			writer.WriteValue(Lenient.Value);
 		}
 
-		if (instance.Synonyms is not null)
+		if (Synonyms is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Synonyms = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Synonyms, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Synonyms");
+			writer.WriteInlineList(Synonyms, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.SynonymsPath is not null)
+		if (SynonymsPath is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SynonymsPath = ");
-			sb.Append("\"");
-			sb.Append(instance.SynonymsPath);
-			sb.Append("\"");
+			__init.Property("SynonymsPath");
+			writer.WriteString(SynonymsPath);
 		}
 
-		if (instance.SynonymsSet is not null)
+		if (SynonymsSet is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SynonymsSet = ");
-			sb.Append("\"");
-			sb.Append(instance.SynonymsSet);
-			sb.Append("\"");
+			__init.Property("SynonymsSet");
+			writer.WriteInlineList(SynonymsSet, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Tokenizer is not null)
+		if (Tokenizer is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Tokenizer = ");
-			sb.Append("\"");
-			sb.Append(instance.Tokenizer);
-			sb.Append("\"");
+			__init.Property("Tokenizer");
+			writer.WriteString(Tokenizer);
 		}
 
-		if (instance.Updateable is not null)
+		if (Updateable is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Updateable = ");
-			sb.Append(instance.Updateable.Value ? "true" : "false");
+			__init.Property("Updateable");
+			writer.WriteValue(Updateable.Value);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

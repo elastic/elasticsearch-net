@@ -25,25 +25,22 @@ namespace Elastic.Clients.Elasticsearch.Tasks;
 
 public partial class TaskInfos : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		if (instance.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 		{
-			sb.Append("new TaskInfos(");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Value1, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
-			sb.Append(")");
+			writer.Write("new TaskInfos(");
+			writer.WriteInlineList(Value1, (w, item) => { item.FormatCode(w); });
+			writer.Write(")");
 			return;
 		}
 
-		if (instance.Tag == Elastic.Clients.Elasticsearch.UnionTag.T2)
+		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T2)
 		{
-			sb.Append("new TaskInfos(");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Value2, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
-			sb.Append(")");
+			writer.Write("new TaskInfos(");
+			writer.Write("new() ");
+			writer.WriteInlineList(Value2, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(")");
 			return;
 		}
 	}

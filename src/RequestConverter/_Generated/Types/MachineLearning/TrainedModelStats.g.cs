@@ -25,60 +25,43 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class TrainedModelStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.DeploymentStats is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (DeploymentStats is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DeploymentStats = ");
-			instance.DeploymentStats.FormatCode(sb);
+			__init.Property("DeploymentStats");
+			DeploymentStats.FormatCode(writer);
 		}
 
-		if (instance.InferenceStats is not null)
+		if (InferenceStats is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InferenceStats = ");
-			instance.InferenceStats.FormatCode(sb);
+			__init.Property("InferenceStats");
+			InferenceStats.FormatCode(writer);
 		}
 
-		if (instance.Ingest is not null)
+		if (Ingest is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ingest = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Ingest, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Ingest");
+			writer.Write("new() ");
+			writer.WriteInlineList(Ingest, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelId = ");
-			sb.Append("\"");
-			sb.Append(instance.ModelId);
-			sb.Append("\"");
+			__init.Property("ModelId");
+			writer.WriteString(ModelId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelSizeStats = ");
-			instance.ModelSizeStats.FormatCode(sb);
+			__init.Property("ModelSizeStats");
+			ModelSizeStats.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PipelineCount = ");
-			sb.Append(instance.PipelineCount);
+			__init.Property("PipelineCount");
+			writer.WriteValue(PipelineCount);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

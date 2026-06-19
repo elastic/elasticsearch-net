@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class NvidiaTaskSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.InputType is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (InputType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InputType = ");
-			Elastic.Clients.Elasticsearch.Inference.NvidiaInputTypeCodeFormatter.FormatCode(instance.InputType.Value, sb);
+			__init.Property("InputType");
+			Elastic.Clients.Elasticsearch.Inference.NvidiaInputTypeCodeFormatter.FormatCode(InputType.Value, writer);
 		}
 
-		if (instance.Truncate is not null)
+		if (Truncate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Truncate = ");
-			Elastic.Clients.Elasticsearch.Inference.CohereTruncateTypeCodeFormatter.FormatCode(instance.Truncate.Value, sb);
+			__init.Property("Truncate");
+			Elastic.Clients.Elasticsearch.Inference.CohereTruncateTypeCodeFormatter.FormatCode(Truncate.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,41 +25,28 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DetectionRule : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Actions is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Actions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Actions = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Actions, (item, sb) => { Elastic.Clients.Elasticsearch.MachineLearning.RuleActionCodeFormatter.FormatCode(item, sb); }, sb);
-			sb.Append("]");
+			__init.Property("Actions");
+			writer.WriteInlineList(Actions, (w, item) => { Elastic.Clients.Elasticsearch.MachineLearning.RuleActionCodeFormatter.FormatCode(item, w); });
 		}
 
-		if (instance.Conditions is not null)
+		if (Conditions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Conditions = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Conditions, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Conditions");
+			writer.WriteInlineList(Conditions, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Scope is not null)
+		if (Scope is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Scope = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Scope, (k, sb) => { k.FormatCode(sb); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Scope");
+			writer.Write("new() ");
+			writer.WriteInlineList(Scope, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

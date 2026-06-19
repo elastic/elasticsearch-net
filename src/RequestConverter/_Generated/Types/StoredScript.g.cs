@@ -25,37 +25,26 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class StoredScript : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Language = ");
-			instance.Language.FormatCode(sb);
+			__init.Property("Language");
+			Language.FormatCode(writer);
 		}
 
-		if (instance.Options is not null)
+		if (Options is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Options = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Options, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("\""); sb.Append(v); sb.Append("\""); }, sb);
+			__init.Property("Options");
+			writer.Write("new() ");
+			writer.WriteInlineList(Options, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Source = ");
-			sb.Append("\"");
-			sb.Append(instance.Source);
-			sb.Append("\"");
+			__init.Property("Source");
+			writer.WriteString(Source);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

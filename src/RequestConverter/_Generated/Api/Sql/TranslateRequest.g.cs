@@ -25,47 +25,32 @@ namespace Elastic.Clients.Elasticsearch.Sql;
 
 public partial class TranslateRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.FetchSize is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (FetchSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FetchSize = ");
-			sb.Append(instance.FetchSize.Value);
+			__init.Property("FetchSize");
+			writer.WriteValue(FetchSize.Value);
 		}
 
-		if (instance.Filter is not null)
+		if (Filter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Filter = ");
-			instance.Filter.FormatCode(sb);
+			__init.Property("Filter");
+			Filter.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			sb.Append("\"");
-			sb.Append(instance.Query);
-			sb.Append("\"");
+			__init.Property("Query");
+			writer.WriteString(Query);
 		}
 
-		if (instance.TimeZone is not null)
+		if (TimeZone is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeZone = ");
-			sb.Append("\"");
-			sb.Append(instance.TimeZone);
-			sb.Append("\"");
+			__init.Property("TimeZone");
+			writer.WriteString(TimeZone);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

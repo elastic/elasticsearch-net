@@ -25,46 +25,31 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class MistralServiceSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ApiKey = ");
-			sb.Append("\"");
-			sb.Append(instance.ApiKey);
-			sb.Append("\"");
+			__init.Property("ApiKey");
+			writer.WriteString(ApiKey);
 		}
 
-		if (instance.MaxInputTokens is not null)
+		if (MaxInputTokens is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxInputTokens = ");
-			sb.Append(instance.MaxInputTokens.Value);
+			__init.Property("MaxInputTokens");
+			writer.WriteValue(MaxInputTokens.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Model = ");
-			sb.Append("\"");
-			sb.Append(instance.Model);
-			sb.Append("\"");
+			__init.Property("Model");
+			writer.WriteString(Model);
 		}
 
-		if (instance.RateLimit is not null)
+		if (RateLimit is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RateLimit = ");
-			instance.RateLimit.FormatCode(sb);
+			__init.Property("RateLimit");
+			RateLimit.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

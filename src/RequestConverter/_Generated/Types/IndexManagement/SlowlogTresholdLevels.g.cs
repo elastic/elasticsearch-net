@@ -25,44 +25,33 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class SlowlogTresholdLevels : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Debug is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Debug is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Debug = ");
-			instance.Debug.FormatCode(sb);
+			__init.Property("Debug");
+			Debug.FormatCode(writer);
 		}
 
-		if (instance.Info is not null)
+		if (Info is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Info = ");
-			instance.Info.FormatCode(sb);
+			__init.Property("Info");
+			Info.FormatCode(writer);
 		}
 
-		if (instance.Trace is not null)
+		if (Trace is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Trace = ");
-			instance.Trace.FormatCode(sb);
+			__init.Property("Trace");
+			Trace.FormatCode(writer);
 		}
 
-		if (instance.Warn is not null)
+		if (Warn is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Warn = ");
-			instance.Warn.FormatCode(sb);
+			__init.Property("Warn");
+			Warn.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

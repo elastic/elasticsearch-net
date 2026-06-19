@@ -25,21 +25,14 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataframeAnalysisFeatureProcessorMultiEncoding : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Processors = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Processors, (item, sb) => { sb.Append(item); }, sb);
-			sb.Append("]");
+			__init.Property("Processors");
+			writer.WriteInlineList(Processors, (w, item) => { w.WriteValue(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

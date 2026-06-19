@@ -25,37 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Core.MGet;
 
 public partial class MultiGetError : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Error = ");
-			instance.Error.FormatCode(sb);
+			__init.Property("Error");
+			Error.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			sb.Append("\"");
-			sb.Append(instance.Id);
-			sb.Append("\"");
+			__init.Property("Id");
+			writer.WriteString(Id);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			sb.Append("\"");
-			sb.Append(instance.Index);
-			sb.Append("\"");
+			__init.Property("Index");
+			writer.WriteString(Index);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

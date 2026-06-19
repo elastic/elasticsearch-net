@@ -25,94 +25,63 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class PutUserRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Username = ");
-			instance.Username.FormatCode(sb);
+			__init.Property("Username");
+			Username.FormatCode(writer);
 		}
 
-		if (instance.Refresh is not null)
+		if (Refresh is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Refresh = ");
-			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(instance.Refresh.Value, sb);
+			__init.Property("Refresh");
+			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
 		}
 
-		if (instance.Email is not null)
+		if (Email is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Email = ");
-			sb.Append("\"");
-			sb.Append(instance.Email);
-			sb.Append("\"");
+			__init.Property("Email");
+			writer.WriteString(Email);
 		}
 
-		if (instance.Enabled is not null)
+		if (Enabled is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Enabled = ");
-			sb.Append(instance.Enabled.Value ? "true" : "false");
+			__init.Property("Enabled");
+			writer.WriteValue(Enabled.Value);
 		}
 
-		if (instance.FullName is not null)
+		if (FullName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FullName = ");
-			sb.Append("\"");
-			sb.Append(instance.FullName);
-			sb.Append("\"");
+			__init.Property("FullName");
+			writer.WriteString(FullName);
 		}
 
-		if (instance.Metadata is not null)
+		if (Metadata is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Metadata = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Metadata, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Metadata");
+			writer.Write("new() ");
+			writer.WriteInlineList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Password is not null)
+		if (Password is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Password = ");
-			sb.Append("\"");
-			sb.Append(instance.Password);
-			sb.Append("\"");
+			__init.Property("Password");
+			writer.WriteString(Password);
 		}
 
-		if (instance.PasswordHash is not null)
+		if (PasswordHash is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PasswordHash = ");
-			sb.Append("\"");
-			sb.Append(instance.PasswordHash);
-			sb.Append("\"");
+			__init.Property("PasswordHash");
+			writer.WriteString(PasswordHash);
 		}
 
-		if (instance.Roles is not null)
+		if (Roles is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Roles = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Roles, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Roles");
+			writer.WriteInlineList(Roles, (w, item) => { w.WriteString(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

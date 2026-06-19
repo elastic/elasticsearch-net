@@ -25,37 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class AllocationDecision : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Decider = ");
-			sb.Append("\"");
-			sb.Append(instance.Decider);
-			sb.Append("\"");
+			__init.Property("Decider");
+			writer.WriteString(Decider);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Decision = ");
-			Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecisionCodeFormatter.FormatCode(instance.Decision, sb);
+			__init.Property("Decision");
+			Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecisionCodeFormatter.FormatCode(Decision, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Explanation = ");
-			sb.Append("\"");
-			sb.Append(instance.Explanation);
-			sb.Append("\"");
+			__init.Property("Explanation");
+			writer.WriteString(Explanation);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

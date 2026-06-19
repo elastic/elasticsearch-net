@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class NodeStatsLevelCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.NodeStatsLevel instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.NodeStatsLevel instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.NodeStatsLevel.Indices:
-				sb.Append("NodeStatsLevel.Indices");
+				writer.Write("NodeStatsLevel.Indices");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeStatsLevel.Node:
-				sb.Append("NodeStatsLevel.Node");
+				writer.Write("NodeStatsLevel.Node");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeStatsLevel.Shards:
-				sb.Append("NodeStatsLevel.Shards");
+				writer.Write("NodeStatsLevel.Shards");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

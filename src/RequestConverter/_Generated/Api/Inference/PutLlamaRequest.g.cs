@@ -25,49 +25,36 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class PutLlamaRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LlamaInferenceId = ");
-			instance.LlamaInferenceId.FormatCode(sb);
+			__init.Property("LlamaInferenceId");
+			LlamaInferenceId.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TaskType = ");
-			Elastic.Clients.Elasticsearch.Inference.LlamaTaskTypeCodeFormatter.FormatCode(instance.TaskType, sb);
+			__init.Property("TaskType");
+			Elastic.Clients.Elasticsearch.Inference.LlamaTaskTypeCodeFormatter.FormatCode(TaskType, writer);
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (instance.ChunkingSettings is not null)
+		if (ChunkingSettings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ChunkingSettings = ");
-			instance.ChunkingSettings.FormatCode(sb);
+			__init.Property("ChunkingSettings");
+			ChunkingSettings.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ServiceSettings = ");
-			instance.ServiceSettings.FormatCode(sb);
+			__init.Property("ServiceSettings");
+			ServiceSettings.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,223 +25,154 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class ExtendedStatsBucketAggregate : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Avg = ");
-			sb.Append(instance.Avg.Value);
-			sb.Append("d");
+			__init.Property("Avg");
+			writer.WriteValue(Avg.Value);
+			writer.Write("d");
 		}
 
-		if (instance.AvgAsString is not null)
+		if (AvgAsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AvgAsString = ");
-			sb.Append("\"");
-			sb.Append(instance.AvgAsString);
-			sb.Append("\"");
+			__init.Property("AvgAsString");
+			writer.WriteString(AvgAsString);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count);
-			sb.Append("L");
+			__init.Property("Count");
+			writer.WriteValue(Count);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Max = ");
-			sb.Append(instance.Max.Value);
-			sb.Append("d");
+			__init.Property("Max");
+			writer.WriteValue(Max.Value);
+			writer.Write("d");
 		}
 
-		if (instance.MaxAsString is not null)
+		if (MaxAsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxAsString = ");
-			sb.Append("\"");
-			sb.Append(instance.MaxAsString);
-			sb.Append("\"");
+			__init.Property("MaxAsString");
+			writer.WriteString(MaxAsString);
 		}
 
-		if (instance.Meta is not null)
+		if (Meta is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Meta = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Meta, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Meta");
+			writer.Write("new() ");
+			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Min = ");
-			sb.Append(instance.Min.Value);
-			sb.Append("d");
+			__init.Property("Min");
+			writer.WriteValue(Min.Value);
+			writer.Write("d");
 		}
 
-		if (instance.MinAsString is not null)
+		if (MinAsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinAsString = ");
-			sb.Append("\"");
-			sb.Append(instance.MinAsString);
-			sb.Append("\"");
+			__init.Property("MinAsString");
+			writer.WriteString(MinAsString);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StdDeviation = ");
-			sb.Append(instance.StdDeviation.Value);
-			sb.Append("d");
+			__init.Property("StdDeviation");
+			writer.WriteValue(StdDeviation.Value);
+			writer.Write("d");
 		}
 
-		if (instance.StdDeviationAsString is not null)
+		if (StdDeviationAsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StdDeviationAsString = ");
-			sb.Append("\"");
-			sb.Append(instance.StdDeviationAsString);
-			sb.Append("\"");
+			__init.Property("StdDeviationAsString");
+			writer.WriteString(StdDeviationAsString);
 		}
 
-		if (instance.StdDeviationBounds is not null)
+		if (StdDeviationBounds is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StdDeviationBounds = ");
-			instance.StdDeviationBounds.FormatCode(sb);
+			__init.Property("StdDeviationBounds");
+			StdDeviationBounds.FormatCode(writer);
 		}
 
-		if (instance.StdDeviationBoundsAsString is not null)
+		if (StdDeviationBoundsAsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StdDeviationBoundsAsString = ");
-			instance.StdDeviationBoundsAsString.FormatCode(sb);
+			__init.Property("StdDeviationBoundsAsString");
+			StdDeviationBoundsAsString.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StdDeviationPopulation = ");
-			sb.Append(instance.StdDeviationPopulation.Value);
-			sb.Append("d");
+			__init.Property("StdDeviationPopulation");
+			writer.WriteValue(StdDeviationPopulation.Value);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StdDeviationSampling = ");
-			sb.Append(instance.StdDeviationSampling.Value);
-			sb.Append("d");
+			__init.Property("StdDeviationSampling");
+			writer.WriteValue(StdDeviationSampling.Value);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sum = ");
-			sb.Append(instance.Sum);
-			sb.Append("d");
+			__init.Property("Sum");
+			writer.WriteValue(Sum);
+			writer.Write("d");
 		}
 
-		if (instance.SumAsString is not null)
+		if (SumAsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SumAsString = ");
-			sb.Append("\"");
-			sb.Append(instance.SumAsString);
-			sb.Append("\"");
+			__init.Property("SumAsString");
+			writer.WriteString(SumAsString);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SumOfSquares = ");
-			sb.Append(instance.SumOfSquares.Value);
-			sb.Append("d");
+			__init.Property("SumOfSquares");
+			writer.WriteValue(SumOfSquares.Value);
+			writer.Write("d");
 		}
 
-		if (instance.SumOfSquaresAsString is not null)
+		if (SumOfSquaresAsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SumOfSquaresAsString = ");
-			sb.Append("\"");
-			sb.Append(instance.SumOfSquaresAsString);
-			sb.Append("\"");
+			__init.Property("SumOfSquaresAsString");
+			writer.WriteString(SumOfSquaresAsString);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Variance = ");
-			sb.Append(instance.Variance.Value);
-			sb.Append("d");
+			__init.Property("Variance");
+			writer.WriteValue(Variance.Value);
+			writer.Write("d");
 		}
 
-		if (instance.VarianceAsString is not null)
+		if (VarianceAsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VarianceAsString = ");
-			sb.Append("\"");
-			sb.Append(instance.VarianceAsString);
-			sb.Append("\"");
+			__init.Property("VarianceAsString");
+			writer.WriteString(VarianceAsString);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VariancePopulation = ");
-			sb.Append(instance.VariancePopulation.Value);
-			sb.Append("d");
+			__init.Property("VariancePopulation");
+			writer.WriteValue(VariancePopulation.Value);
+			writer.Write("d");
 		}
 
-		if (instance.VariancePopulationAsString is not null)
+		if (VariancePopulationAsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VariancePopulationAsString = ");
-			sb.Append("\"");
-			sb.Append(instance.VariancePopulationAsString);
-			sb.Append("\"");
+			__init.Property("VariancePopulationAsString");
+			writer.WriteString(VariancePopulationAsString);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VarianceSampling = ");
-			sb.Append(instance.VarianceSampling.Value);
-			sb.Append("d");
+			__init.Property("VarianceSampling");
+			writer.WriteValue(VarianceSampling.Value);
+			writer.Write("d");
 		}
 
-		if (instance.VarianceSamplingAsString is not null)
+		if (VarianceSamplingAsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VarianceSamplingAsString = ");
-			sb.Append("\"");
-			sb.Append(instance.VarianceSamplingAsString);
-			sb.Append("\"");
+			__init.Property("VarianceSamplingAsString");
+			writer.WriteString(VarianceSamplingAsString);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

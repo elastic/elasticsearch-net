@@ -25,81 +25,60 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 public partial class ReadBlobDetails : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.BeforeWriteComplete is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (BeforeWriteComplete is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BeforeWriteComplete = ");
-			sb.Append(instance.BeforeWriteComplete.Value ? "true" : "false");
+			__init.Property("BeforeWriteComplete");
+			writer.WriteValue(BeforeWriteComplete.Value);
 		}
 
-		if (instance.Elapsed is not null)
+		if (Elapsed is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Elapsed = ");
-			instance.Elapsed.FormatCode(sb);
+			__init.Property("Elapsed");
+			Elapsed.FormatCode(writer);
 		}
 
-		if (instance.ElapsedNanos is not null)
+		if (ElapsedNanos is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ElapsedNanos = ");
-			sb.Append(instance.ElapsedNanos.Value);
+			__init.Property("ElapsedNanos");
+			writer.WriteValue(ElapsedNanos.Value);
 		}
 
-		if (instance.FirstByteTime is not null)
+		if (FirstByteTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FirstByteTime = ");
-			instance.FirstByteTime.FormatCode(sb);
+			__init.Property("FirstByteTime");
+			FirstByteTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FirstByteTimeNanos = ");
-			sb.Append(instance.FirstByteTimeNanos);
+			__init.Property("FirstByteTimeNanos");
+			writer.WriteValue(FirstByteTimeNanos);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Found = ");
-			sb.Append(instance.Found ? "true" : "false");
+			__init.Property("Found");
+			writer.WriteValue(Found);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Node = ");
-			instance.Node.FormatCode(sb);
+			__init.Property("Node");
+			Node.FormatCode(writer);
 		}
 
-		if (instance.Throttled is not null)
+		if (Throttled is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Throttled = ");
-			instance.Throttled.FormatCode(sb);
+			__init.Property("Throttled");
+			Throttled.FormatCode(writer);
 		}
 
-		if (instance.ThrottledNanos is not null)
+		if (ThrottledNanos is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ThrottledNanos = ");
-			sb.Append(instance.ThrottledNanos.Value);
+			__init.Property("ThrottledNanos");
+			writer.WriteValue(ThrottledNanos.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

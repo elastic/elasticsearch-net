@@ -25,31 +25,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class AdjacencyMatrixAggregation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Filters is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Filters is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Filters = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Filters, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Filters");
+			writer.Write("new() ");
+			writer.WriteInlineList(Filters, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Separator is not null)
+		if (Separator is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Separator = ");
-			sb.Append("\"");
-			sb.Append(instance.Separator);
-			sb.Append("\"");
+			__init.Property("Separator");
+			writer.WriteString(Separator);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

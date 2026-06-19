@@ -25,76 +25,57 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class FetchProfileBreakdown : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.LoadSource is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (LoadSource is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LoadSource = ");
-			sb.Append(instance.LoadSource.Value);
+			__init.Property("LoadSource");
+			writer.WriteValue(LoadSource.Value);
 		}
 
-		if (instance.LoadSourceCount is not null)
+		if (LoadSourceCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LoadSourceCount = ");
-			sb.Append(instance.LoadSourceCount.Value);
+			__init.Property("LoadSourceCount");
+			writer.WriteValue(LoadSourceCount.Value);
 		}
 
-		if (instance.LoadStoredFields is not null)
+		if (LoadStoredFields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LoadStoredFields = ");
-			sb.Append(instance.LoadStoredFields.Value);
+			__init.Property("LoadStoredFields");
+			writer.WriteValue(LoadStoredFields.Value);
 		}
 
-		if (instance.LoadStoredFieldsCount is not null)
+		if (LoadStoredFieldsCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LoadStoredFieldsCount = ");
-			sb.Append(instance.LoadStoredFieldsCount.Value);
+			__init.Property("LoadStoredFieldsCount");
+			writer.WriteValue(LoadStoredFieldsCount.Value);
 		}
 
-		if (instance.NextReader is not null)
+		if (NextReader is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NextReader = ");
-			sb.Append(instance.NextReader.Value);
+			__init.Property("NextReader");
+			writer.WriteValue(NextReader.Value);
 		}
 
-		if (instance.NextReaderCount is not null)
+		if (NextReaderCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NextReaderCount = ");
-			sb.Append(instance.NextReaderCount.Value);
+			__init.Property("NextReaderCount");
+			writer.WriteValue(NextReaderCount.Value);
 		}
 
-		if (instance.Process is not null)
+		if (Process is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Process = ");
-			sb.Append(instance.Process.Value);
+			__init.Property("Process");
+			writer.WriteValue(Process.Value);
 		}
 
-		if (instance.ProcessCount is not null)
+		if (ProcessCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ProcessCount = ");
-			sb.Append(instance.ProcessCount.Value);
+			__init.Property("ProcessCount");
+			writer.WriteValue(ProcessCount.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

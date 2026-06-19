@@ -25,66 +25,45 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class CapabilitiesRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Capabilities is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Capabilities is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Capabilities = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Capabilities, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Capabilities");
+			writer.WriteInlineList(Capabilities, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.LocalOnly is not null)
+		if (LocalOnly is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LocalOnly = ");
-			sb.Append(instance.LocalOnly.Value ? "true" : "false");
+			__init.Property("LocalOnly");
+			writer.WriteValue(LocalOnly.Value);
 		}
 
-		if (instance.Method is not null)
+		if (Method is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Method = ");
-			Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethodCodeFormatter.FormatCode(instance.Method.Value, sb);
+			__init.Property("Method");
+			Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethodCodeFormatter.FormatCode(Method.Value, writer);
 		}
 
-		if (instance.Parameters is not null)
+		if (Parameters is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Parameters = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Parameters, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Parameters");
+			writer.WriteInlineList(Parameters, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Path is not null)
+		if (Path is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Path = ");
-			sb.Append("\"");
-			sb.Append(instance.Path);
-			sb.Append("\"");
+			__init.Property("Path");
+			writer.WriteString(Path);
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

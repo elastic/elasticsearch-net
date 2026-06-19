@@ -25,88 +25,65 @@ namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
 public partial class SnapshotLifecycle : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.InProgress is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (InProgress is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InProgress = ");
-			instance.InProgress.FormatCode(sb);
+			__init.Property("InProgress");
+			InProgress.FormatCode(writer);
 		}
 
-		if (instance.LastFailure is not null)
+		if (LastFailure is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LastFailure = ");
-			instance.LastFailure.FormatCode(sb);
+			__init.Property("LastFailure");
+			LastFailure.FormatCode(writer);
 		}
 
-		if (instance.LastSuccess is not null)
+		if (LastSuccess is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LastSuccess = ");
-			instance.LastSuccess.FormatCode(sb);
+			__init.Property("LastSuccess");
+			LastSuccess.FormatCode(writer);
 		}
 
-		if (instance.ModifiedDate is not null)
+		if (ModifiedDate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModifiedDate = ");
-			sb.Append(instance.ModifiedDate.Value);
+			__init.Property("ModifiedDate");
+			writer.WriteValue(ModifiedDate.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModifiedDateMillis = ");
-			sb.Append(instance.ModifiedDateMillis);
+			__init.Property("ModifiedDateMillis");
+			writer.WriteValue(ModifiedDateMillis);
 		}
 
-		if (instance.NextExecution is not null)
+		if (NextExecution is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NextExecution = ");
-			sb.Append(instance.NextExecution.Value);
+			__init.Property("NextExecution");
+			writer.WriteValue(NextExecution.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NextExecutionMillis = ");
-			sb.Append(instance.NextExecutionMillis);
+			__init.Property("NextExecutionMillis");
+			writer.WriteValue(NextExecutionMillis);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Policy = ");
-			instance.Policy.FormatCode(sb);
+			__init.Property("Policy");
+			Policy.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Stats = ");
-			instance.Stats.FormatCode(sb);
+			__init.Property("Stats");
+			Stats.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append(instance.Version);
-			sb.Append("L");
+			__init.Property("Version");
+			writer.WriteValue(Version);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

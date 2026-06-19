@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class DeleteVotingConfigExclusionsRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.MasterTimeout is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (MasterTimeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MasterTimeout = ");
-			instance.MasterTimeout.FormatCode(sb);
+			__init.Property("MasterTimeout");
+			MasterTimeout.FormatCode(writer);
 		}
 
-		if (instance.WaitForRemoval is not null)
+		if (WaitForRemoval is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WaitForRemoval = ");
-			sb.Append(instance.WaitForRemoval.Value ? "true" : "false");
+			__init.Property("WaitForRemoval");
+			writer.WriteValue(WaitForRemoval.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

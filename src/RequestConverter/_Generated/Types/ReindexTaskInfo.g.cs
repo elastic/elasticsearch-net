@@ -21,31 +21,57 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
 
-namespace Elastic.Clients.Elasticsearch.IndexManagement;
+namespace Elastic.Clients.Elasticsearch;
 
-public partial class GetSampleConfigurationRequest : RequestConverter.ICodeFormattable
+public partial class ReindexTaskInfo : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			instance.Index.FormatCode(sb);
+			__init.Property("Cancelled");
+			writer.WriteValue(Cancelled);
 		}
 
-		if (instance.MasterTimeout is not null)
+		if (Description is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MasterTimeout = ");
-			instance.MasterTimeout.FormatCode(sb);
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		{
+			__init.Property("Id");
+			Id.FormatCode(writer);
+		}
+
+		if (RunningTime is not null)
+		{
+			__init.Property("RunningTime");
+			RunningTime.FormatCode(writer);
+		}
+
+		{
+			__init.Property("RunningTimeInNanos");
+			writer.WriteValue(RunningTimeInNanos);
+		}
+
+		if (StartTime is not null)
+		{
+			__init.Property("StartTime");
+			writer.WriteString(StartTime);
+		}
+
+		{
+			__init.Property("StartTimeInMillis");
+			writer.WriteValue(StartTimeInMillis);
+		}
+
+		if (Status is not null)
+		{
+			__init.Property("Status");
+			Status.FormatCode(writer);
+		}
+
+		__init.Dispose();
 	}
 }

@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public static class ChunkingModeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.ChunkingMode instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.ChunkingMode instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.ChunkingMode.Auto:
-				sb.Append("ChunkingMode.Auto");
+				writer.Write("ChunkingMode.Auto");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.ChunkingMode.Manual:
-				sb.Append("ChunkingMode.Manual");
+				writer.Write("ChunkingMode.Manual");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.ChunkingMode.Off:
-				sb.Append("ChunkingMode.Off");
+				writer.Write("ChunkingMode.Off");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

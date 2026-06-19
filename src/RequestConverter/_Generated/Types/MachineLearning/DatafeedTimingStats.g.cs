@@ -25,67 +25,48 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DatafeedTimingStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AverageSearchTimePerBucketMs is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AverageSearchTimePerBucketMs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AverageSearchTimePerBucketMs = ");
-			sb.Append(instance.AverageSearchTimePerBucketMs.Value);
+			__init.Property("AverageSearchTimePerBucketMs");
+			writer.WriteValue(AverageSearchTimePerBucketMs.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BucketCount = ");
-			sb.Append(instance.BucketCount);
-			sb.Append("L");
+			__init.Property("BucketCount");
+			writer.WriteValue(BucketCount);
+			writer.Write("L");
 		}
 
-		if (instance.ExponentialAverageCalculationContext is not null)
+		if (ExponentialAverageCalculationContext is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExponentialAverageCalculationContext = ");
-			instance.ExponentialAverageCalculationContext.FormatCode(sb);
+			__init.Property("ExponentialAverageCalculationContext");
+			ExponentialAverageCalculationContext.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExponentialAverageSearchTimePerHourMs = ");
-			sb.Append(instance.ExponentialAverageSearchTimePerHourMs);
+			__init.Property("ExponentialAverageSearchTimePerHourMs");
+			writer.WriteValue(ExponentialAverageSearchTimePerHourMs);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JobId = ");
-			sb.Append("\"");
-			sb.Append(instance.JobId);
-			sb.Append("\"");
+			__init.Property("JobId");
+			writer.WriteString(JobId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SearchCount = ");
-			sb.Append(instance.SearchCount);
-			sb.Append("L");
+			__init.Property("SearchCount");
+			writer.WriteValue(SearchCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalSearchTimeMs = ");
-			sb.Append(instance.TotalSearchTimeMs);
+			__init.Property("TotalSearchTimeMs");
+			writer.WriteValue(TotalSearchTimeMs);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

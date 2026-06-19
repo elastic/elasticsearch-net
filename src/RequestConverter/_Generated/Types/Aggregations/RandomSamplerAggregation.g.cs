@@ -25,36 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class RandomSamplerAggregation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Probability = ");
-			sb.Append(instance.Probability);
-			sb.Append("d");
+			__init.Property("Probability");
+			writer.WriteValue(Probability);
+			writer.Write("d");
 		}
 
-		if (instance.Seed is not null)
+		if (Seed is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Seed = ");
-			sb.Append(instance.Seed.Value);
+			__init.Property("Seed");
+			writer.WriteValue(Seed.Value);
 		}
 
-		if (instance.ShardSeed is not null)
+		if (ShardSeed is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShardSeed = ");
-			sb.Append(instance.ShardSeed.Value);
+			__init.Property("ShardSeed");
+			writer.WriteValue(ShardSeed.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,100 +25,75 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class UserQuery : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Bool is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Bool is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Bool = ");
-			instance.Bool.FormatCode(sb);
+			__init.Property("Bool");
+			Bool.FormatCode(writer);
 		}
 
-		if (instance.Exists is not null)
+		if (Exists is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Exists = ");
-			instance.Exists.FormatCode(sb);
+			__init.Property("Exists");
+			Exists.FormatCode(writer);
 		}
 
-		if (instance.Ids is not null)
+		if (Ids is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ids = ");
-			instance.Ids.FormatCode(sb);
+			__init.Property("Ids");
+			Ids.FormatCode(writer);
 		}
 
-		if (instance.Match is not null)
+		if (Match is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Match = ");
-			instance.Match.FormatCode(sb);
+			__init.Property("Match");
+			Match.FormatCode(writer);
 		}
 
-		if (instance.MatchAll is not null)
+		if (MatchAll is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MatchAll = ");
-			instance.MatchAll.FormatCode(sb);
+			__init.Property("MatchAll");
+			MatchAll.FormatCode(writer);
 		}
 
-		if (instance.Prefix is not null)
+		if (Prefix is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Prefix = ");
-			instance.Prefix.FormatCode(sb);
+			__init.Property("Prefix");
+			Prefix.FormatCode(writer);
 		}
 
-		if (instance.Range is not null)
+		if (Range is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Range = ");
-			instance.Range.FormatCode(sb);
+			__init.Property("Range");
+			Range.FormatCode(writer);
 		}
 
-		if (instance.SimpleQueryString is not null)
+		if (SimpleQueryString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SimpleQueryString = ");
-			instance.SimpleQueryString.FormatCode(sb);
+			__init.Property("SimpleQueryString");
+			SimpleQueryString.FormatCode(writer);
 		}
 
-		if (instance.Term is not null)
+		if (Term is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Term = ");
-			instance.Term.FormatCode(sb);
+			__init.Property("Term");
+			Term.FormatCode(writer);
 		}
 
-		if (instance.Terms is not null)
+		if (Terms is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Terms = ");
-			instance.Terms.FormatCode(sb);
+			__init.Property("Terms");
+			Terms.FormatCode(writer);
 		}
 
-		if (instance.Wildcard is not null)
+		if (Wildcard is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Wildcard = ");
-			instance.Wildcard.FormatCode(sb);
+			__init.Property("Wildcard");
+			Wildcard.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

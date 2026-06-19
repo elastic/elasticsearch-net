@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public static class ApiKeyTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Security.ApiKeyType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Security.ApiKeyType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Security.ApiKeyType.CrossCluster:
-				sb.Append("ApiKeyType.CrossCluster");
+				writer.Write("ApiKeyType.CrossCluster");
 				break;
 			case Elastic.Clients.Elasticsearch.Security.ApiKeyType.Rest:
-				sb.Append("ApiKeyType.Rest");
+				writer.Write("ApiKeyType.Rest");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -25,96 +25,67 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public partial class CircleProcessor : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Description is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Description is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ErrorDistance = ");
-			sb.Append(instance.ErrorDistance);
-			sb.Append("d");
+			__init.Property("ErrorDistance");
+			writer.WriteValue(ErrorDistance);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.If is not null)
+		if (If is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("If = ");
-			instance.If.FormatCode(sb);
+			__init.Property("If");
+			If.FormatCode(writer);
 		}
 
-		if (instance.IgnoreFailure is not null)
+		if (IgnoreFailure is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreFailure = ");
-			sb.Append(instance.IgnoreFailure.Value ? "true" : "false");
+			__init.Property("IgnoreFailure");
+			writer.WriteValue(IgnoreFailure.Value);
 		}
 
-		if (instance.IgnoreMissing is not null)
+		if (IgnoreMissing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreMissing = ");
-			sb.Append(instance.IgnoreMissing.Value ? "true" : "false");
+			__init.Property("IgnoreMissing");
+			writer.WriteValue(IgnoreMissing.Value);
 		}
 
-		if (instance.OnFailure is not null)
+		if (OnFailure is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OnFailure = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.OnFailure, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("OnFailure");
+			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShapeType = ");
-			Elastic.Clients.Elasticsearch.Ingest.ShapeTypeCodeFormatter.FormatCode(instance.ShapeType, sb);
+			__init.Property("ShapeType");
+			Elastic.Clients.Elasticsearch.Ingest.ShapeTypeCodeFormatter.FormatCode(ShapeType, writer);
 		}
 
-		if (instance.Tag is not null)
+		if (Tag is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Tag = ");
-			sb.Append("\"");
-			sb.Append(instance.Tag);
-			sb.Append("\"");
+			__init.Property("Tag");
+			writer.WriteString(Tag);
 		}
 
-		if (instance.TargetField is not null)
+		if (TargetField is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TargetField = ");
-			instance.TargetField.FormatCode(sb);
+			__init.Property("TargetField");
+			TargetField.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

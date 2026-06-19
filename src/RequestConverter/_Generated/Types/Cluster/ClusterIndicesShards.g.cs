@@ -25,47 +25,36 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class ClusterIndicesShards : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Index is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Index is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			instance.Index.FormatCode(sb);
+			__init.Property("Index");
+			Index.FormatCode(writer);
 		}
 
-		if (instance.Primaries is not null)
+		if (Primaries is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Primaries = ");
-			sb.Append(instance.Primaries.Value);
-			sb.Append("d");
+			__init.Property("Primaries");
+			writer.WriteValue(Primaries.Value);
+			writer.Write("d");
 		}
 
-		if (instance.Replication is not null)
+		if (Replication is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Replication = ");
-			sb.Append(instance.Replication.Value);
-			sb.Append("d");
+			__init.Property("Replication");
+			writer.WriteValue(Replication.Value);
+			writer.Write("d");
 		}
 
-		if (instance.Total is not null)
+		if (Total is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			sb.Append(instance.Total.Value);
-			sb.Append("d");
+			__init.Property("Total");
+			writer.WriteValue(Total.Value);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

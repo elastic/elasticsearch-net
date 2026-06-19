@@ -25,55 +25,40 @@ namespace Elastic.Clients.Elasticsearch.Core.MSearchTemplate;
 
 public partial class TemplateConfig : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Explain is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Explain is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Explain = ");
-			sb.Append(instance.Explain.Value ? "true" : "false");
+			__init.Property("Explain");
+			writer.WriteValue(Explain.Value);
 		}
 
-		if (instance.Id is not null)
+		if (Id is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			instance.Id.FormatCode(sb);
+			__init.Property("Id");
+			Id.FormatCode(writer);
 		}
 
-		if (instance.Params is not null)
+		if (Params is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Params = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Params, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Params");
+			writer.Write("new() ");
+			writer.WriteInlineList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Profile is not null)
+		if (Profile is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Profile = ");
-			sb.Append(instance.Profile.Value ? "true" : "false");
+			__init.Property("Profile");
+			writer.WriteValue(Profile.Value);
 		}
 
-		if (instance.Source is not null)
+		if (Source is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Source = ");
-			sb.Append("\"");
-			sb.Append(instance.Source);
-			sb.Append("\"");
+			__init.Property("Source");
+			writer.WriteString(Source);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,35 +25,34 @@ namespace Elastic.Clients.Elasticsearch;
 
 public readonly partial struct ScriptLanguage : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		if (instance == Elastic.Clients.Elasticsearch.ScriptLanguage.Expression)
+		if (this == Elastic.Clients.Elasticsearch.ScriptLanguage.Expression)
 		{
-			sb.Append("ScriptLanguage.Expression");
+			writer.Write("ScriptLanguage.Expression");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.ScriptLanguage.Java)
+		if (this == Elastic.Clients.Elasticsearch.ScriptLanguage.Java)
 		{
-			sb.Append("ScriptLanguage.Java");
+			writer.Write("ScriptLanguage.Java");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.ScriptLanguage.Mustache)
+		if (this == Elastic.Clients.Elasticsearch.ScriptLanguage.Mustache)
 		{
-			sb.Append("ScriptLanguage.Mustache");
+			writer.Write("ScriptLanguage.Mustache");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.ScriptLanguage.Painless)
+		if (this == Elastic.Clients.Elasticsearch.ScriptLanguage.Painless)
 		{
-			sb.Append("ScriptLanguage.Painless");
+			writer.Write("ScriptLanguage.Painless");
 			return;
 		}
 
-		sb.Append("new ScriptLanguage(\"");
-		sb.Append(instance.Value);
-		sb.Append("\")");
+		writer.Write("new ScriptLanguage(\"");
+		writer.Write(Value);
+		writer.Write("\")");
 	}
 }

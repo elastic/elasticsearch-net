@@ -25,48 +25,31 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class PutTrainedModelVocabularyRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelId = ");
-			instance.ModelId.FormatCode(sb);
+			__init.Property("ModelId");
+			ModelId.FormatCode(writer);
 		}
 
-		if (instance.Merges is not null)
+		if (Merges is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Merges = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Merges, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Merges");
+			writer.WriteInlineList(Merges, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Scores is not null)
+		if (Scores is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Scores = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Scores, (item, sb) => { sb.Append(item); sb.Append("d"); }, sb);
-			sb.Append("]");
+			__init.Property("Scores");
+			writer.WriteInlineList(Scores, (w, item) => { w.WriteValue(item); w.Write("d"); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Vocabulary = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Vocabulary, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Vocabulary");
+			writer.WriteInlineList(Vocabulary, (w, item) => { w.WriteString(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

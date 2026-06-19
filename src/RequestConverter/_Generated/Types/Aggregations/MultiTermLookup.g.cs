@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class MultiTermLookup : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
+		if (Missing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Missing");
+			writer.WriteValue(Missing);
 		}
 
-		if (instance.Missing is not null)
+		if (Field is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Missing = ");
-			RequestConverter.CodeFormatter.FormatCode(instance.Missing, sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		if (Script is not null)
+		{
+			__init.Property("Script");
+			Script.FormatCode(writer);
+		}
+
+		__init.Dispose();
 	}
 }

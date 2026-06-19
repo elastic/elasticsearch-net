@@ -25,30 +25,30 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class GoogleModelGardenProviderCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.Ai21:
-				sb.Append("GoogleModelGardenProvider.Ai21");
+				writer.Write("GoogleModelGardenProvider.Ai21");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.Anthropic:
-				sb.Append("GoogleModelGardenProvider.Anthropic");
+				writer.Write("GoogleModelGardenProvider.Anthropic");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.Google:
-				sb.Append("GoogleModelGardenProvider.Google");
+				writer.Write("GoogleModelGardenProvider.Google");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.HuggingFace:
-				sb.Append("GoogleModelGardenProvider.HuggingFace");
+				writer.Write("GoogleModelGardenProvider.HuggingFace");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.Meta:
-				sb.Append("GoogleModelGardenProvider.Meta");
+				writer.Write("GoogleModelGardenProvider.Meta");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.Mistral:
-				sb.Append("GoogleModelGardenProvider.Mistral");
+				writer.Write("GoogleModelGardenProvider.Mistral");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

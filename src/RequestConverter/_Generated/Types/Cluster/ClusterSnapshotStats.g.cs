@@ -25,27 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class ClusterSnapshotStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CurrentCounts = ");
-			instance.CurrentCounts.FormatCode(sb);
+			__init.Property("CurrentCounts");
+			CurrentCounts.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Repositories = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Repositories, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Repositories");
+			writer.Write("new() ");
+			writer.WriteInlineList(Repositories, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

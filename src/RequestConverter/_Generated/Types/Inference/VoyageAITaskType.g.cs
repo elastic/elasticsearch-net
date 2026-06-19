@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class VoyageAITaskTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.VoyageAITaskType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.VoyageAITaskType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.VoyageAITaskType.Rerank:
-				sb.Append("VoyageAITaskType.Rerank");
+				writer.Write("VoyageAITaskType.Rerank");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.VoyageAITaskType.TextEmbedding:
-				sb.Append("VoyageAITaskType.TextEmbedding");
+				writer.Write("VoyageAITaskType.TextEmbedding");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -25,99 +25,72 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class HistogramAggregation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ExtendedBounds is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ExtendedBounds is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExtendedBounds = ");
-			instance.ExtendedBounds.FormatCode(sb);
+			__init.Property("ExtendedBounds");
+			ExtendedBounds.FormatCode(writer);
 		}
 
-		if (instance.Field is not null)
+		if (Field is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.Format is not null)
+		if (Format is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Format = ");
-			sb.Append("\"");
-			sb.Append(instance.Format);
-			sb.Append("\"");
+			__init.Property("Format");
+			writer.WriteString(Format);
 		}
 
-		if (instance.HardBounds is not null)
+		if (HardBounds is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HardBounds = ");
-			instance.HardBounds.FormatCode(sb);
+			__init.Property("HardBounds");
+			HardBounds.FormatCode(writer);
 		}
 
-		if (instance.Interval is not null)
+		if (Interval is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Interval = ");
-			sb.Append(instance.Interval.Value);
-			sb.Append("d");
+			__init.Property("Interval");
+			writer.WriteValue(Interval.Value);
+			writer.Write("d");
 		}
 
-		if (instance.MinDocCount is not null)
+		if (MinDocCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinDocCount = ");
-			sb.Append(instance.MinDocCount.Value);
+			__init.Property("MinDocCount");
+			writer.WriteValue(MinDocCount.Value);
 		}
 
-		if (instance.Missing is not null)
+		if (Missing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Missing = ");
-			sb.Append(instance.Missing.Value);
-			sb.Append("d");
+			__init.Property("Missing");
+			writer.WriteValue(Missing.Value);
+			writer.Write("d");
 		}
 
-		if (instance.Offset is not null)
+		if (Offset is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Offset = ");
-			sb.Append(instance.Offset.Value);
-			sb.Append("d");
+			__init.Property("Offset");
+			writer.WriteValue(Offset.Value);
+			writer.Write("d");
 		}
 
-		if (instance.Order is not null)
+		if (Order is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Order = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Order, (item, sb) => { sb.Append("new("); item.Key.FormatCode(sb); sb.Append(", "); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(item.Value, sb); sb.Append(")"); }, sb);
-			sb.Append("]");
+			__init.Property("Order");
+			writer.WriteInlineList(Order, (w, item) => { w.Write("new("); item.Key.FormatCode(w); w.Write(", "); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(item.Value, w); w.Write(")"); });
 		}
 
-		if (instance.Script is not null)
+		if (Script is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Script = ");
-			instance.Script.FormatCode(sb);
+			__init.Property("Script");
+			Script.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

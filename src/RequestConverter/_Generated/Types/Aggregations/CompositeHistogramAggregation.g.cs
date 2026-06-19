@@ -25,68 +25,51 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class CompositeHistogramAggregation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Field is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Field is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Interval = ");
-			sb.Append(instance.Interval);
-			sb.Append("d");
+			__init.Property("Interval");
+			writer.WriteValue(Interval);
+			writer.Write("d");
 		}
 
-		if (instance.MissingBucket is not null)
+		if (MissingBucket is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MissingBucket = ");
-			sb.Append(instance.MissingBucket.Value ? "true" : "false");
+			__init.Property("MissingBucket");
+			writer.WriteValue(MissingBucket.Value);
 		}
 
-		if (instance.MissingOrder is not null)
+		if (MissingOrder is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MissingOrder = ");
-			Elastic.Clients.Elasticsearch.Aggregations.MissingOrderCodeFormatter.FormatCode(instance.MissingOrder.Value, sb);
+			__init.Property("MissingOrder");
+			Elastic.Clients.Elasticsearch.Aggregations.MissingOrderCodeFormatter.FormatCode(MissingOrder.Value, writer);
 		}
 
-		if (instance.Order is not null)
+		if (Order is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Order = ");
-			Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(instance.Order.Value, sb);
+			__init.Property("Order");
+			Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, writer);
 		}
 
-		if (instance.Script is not null)
+		if (Script is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Script = ");
-			instance.Script.FormatCode(sb);
+			__init.Property("Script");
+			Script.FormatCode(writer);
 		}
 
-		if (instance.ValueType is not null)
+		if (ValueType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ValueType = ");
-			Elastic.Clients.Elasticsearch.Aggregations.ValueTypeCodeFormatter.FormatCode(instance.ValueType.Value, sb);
+			__init.Property("ValueType");
+			Elastic.Clients.Elasticsearch.Aggregations.ValueTypeCodeFormatter.FormatCode(ValueType.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

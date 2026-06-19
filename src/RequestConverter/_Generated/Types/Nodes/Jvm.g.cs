@@ -25,81 +25,60 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class Jvm : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.BufferPools is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (BufferPools is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BufferPools = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.BufferPools, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("BufferPools");
+			writer.Write("new() ");
+			writer.WriteInlineList(BufferPools, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Classes is not null)
+		if (Classes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Classes = ");
-			instance.Classes.FormatCode(sb);
+			__init.Property("Classes");
+			Classes.FormatCode(writer);
 		}
 
-		if (instance.Gc is not null)
+		if (Gc is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Gc = ");
-			instance.Gc.FormatCode(sb);
+			__init.Property("Gc");
+			Gc.FormatCode(writer);
 		}
 
-		if (instance.Mem is not null)
+		if (Mem is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mem = ");
-			instance.Mem.FormatCode(sb);
+			__init.Property("Mem");
+			Mem.FormatCode(writer);
 		}
 
-		if (instance.Threads is not null)
+		if (Threads is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Threads = ");
-			instance.Threads.FormatCode(sb);
+			__init.Property("Threads");
+			Threads.FormatCode(writer);
 		}
 
-		if (instance.Timestamp is not null)
+		if (Timestamp is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timestamp = ");
-			sb.Append(instance.Timestamp.Value);
-			sb.Append("L");
+			__init.Property("Timestamp");
+			writer.WriteValue(Timestamp.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Uptime is not null)
+		if (Uptime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Uptime = ");
-			sb.Append("\"");
-			sb.Append(instance.Uptime);
-			sb.Append("\"");
+			__init.Property("Uptime");
+			writer.WriteString(Uptime);
 		}
 
-		if (instance.UptimeInMillis is not null)
+		if (UptimeInMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UptimeInMillis = ");
-			sb.Append(instance.UptimeInMillis.Value);
-			sb.Append("L");
+			__init.Property("UptimeInMillis");
+			writer.WriteValue(UptimeInMillis.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

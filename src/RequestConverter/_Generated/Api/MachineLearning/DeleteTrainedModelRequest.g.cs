@@ -25,35 +25,26 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DeleteTrainedModelRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelId = ");
-			instance.ModelId.FormatCode(sb);
+			__init.Property("ModelId");
+			ModelId.FormatCode(writer);
 		}
 
-		if (instance.Force is not null)
+		if (Force is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Force = ");
-			sb.Append(instance.Force.Value ? "true" : "false");
+			__init.Property("Force");
+			writer.WriteValue(Force.Value);
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

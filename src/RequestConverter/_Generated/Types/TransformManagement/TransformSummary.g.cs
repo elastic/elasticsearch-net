@@ -25,136 +25,97 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
 public partial class TransformSummary : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Authorization is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Authorization is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Authorization = ");
-			instance.Authorization.FormatCode(sb);
+			__init.Property("Authorization");
+			Authorization.FormatCode(writer);
 		}
 
-		if (instance.CreateTime is not null)
+		if (CreateTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CreateTime = ");
-			sb.Append(instance.CreateTime.Value);
+			__init.Property("CreateTime");
+			writer.WriteValue(CreateTime.Value);
 		}
 
-		if (instance.CreateTimeString is not null)
+		if (CreateTimeString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CreateTimeString = ");
-			sb.Append(instance.CreateTimeString.Value);
+			__init.Property("CreateTimeString");
+			writer.WriteValue(CreateTimeString.Value);
 		}
 
-		if (instance.Description is not null)
+		if (Description is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Dest = ");
-			instance.Dest.FormatCode(sb);
+			__init.Property("Dest");
+			Dest.FormatCode(writer);
 		}
 
-		if (instance.Frequency is not null)
+		if (Frequency is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Frequency = ");
-			instance.Frequency.FormatCode(sb);
+			__init.Property("Frequency");
+			Frequency.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			sb.Append("\"");
-			sb.Append(instance.Id);
-			sb.Append("\"");
+			__init.Property("Id");
+			writer.WriteString(Id);
 		}
 
-		if (instance.Latest is not null)
+		if (Latest is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Latest = ");
-			instance.Latest.FormatCode(sb);
+			__init.Property("Latest");
+			Latest.FormatCode(writer);
 		}
 
-		if (instance.Meta is not null)
+		if (Meta is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Meta = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Meta, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Meta");
+			writer.Write("new() ");
+			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Pivot is not null)
+		if (Pivot is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Pivot = ");
-			instance.Pivot.FormatCode(sb);
+			__init.Property("Pivot");
+			Pivot.FormatCode(writer);
 		}
 
-		if (instance.RetentionPolicy is not null)
+		if (RetentionPolicy is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RetentionPolicy = ");
-			instance.RetentionPolicy.FormatCode(sb);
+			__init.Property("RetentionPolicy");
+			RetentionPolicy.FormatCode(writer);
 		}
 
-		if (instance.Settings is not null)
+		if (Settings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Settings = ");
-			instance.Settings.FormatCode(sb);
+			__init.Property("Settings");
+			Settings.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Source = ");
-			instance.Source.FormatCode(sb);
+			__init.Property("Source");
+			Source.FormatCode(writer);
 		}
 
-		if (instance.Sync is not null)
+		if (Sync is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sync = ");
-			instance.Sync.FormatCode(sb);
+			__init.Property("Sync");
+			Sync.FormatCode(writer);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

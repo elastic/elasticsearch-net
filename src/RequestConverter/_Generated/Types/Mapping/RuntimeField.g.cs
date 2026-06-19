@@ -25,80 +25,57 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public partial class RuntimeField : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.FetchFields is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (FetchFields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FetchFields = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.FetchFields, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("FetchFields");
+			writer.WriteInlineList(FetchFields, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Fields is not null)
+		if (Fields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fields = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Fields, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Fields");
+			writer.Write("new() ");
+			writer.WriteInlineList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Format is not null)
+		if (Format is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Format = ");
-			sb.Append("\"");
-			sb.Append(instance.Format);
-			sb.Append("\"");
+			__init.Property("Format");
+			writer.WriteString(Format);
 		}
 
-		if (instance.InputField is not null)
+		if (InputField is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InputField = ");
-			instance.InputField.FormatCode(sb);
+			__init.Property("InputField");
+			InputField.FormatCode(writer);
 		}
 
-		if (instance.Script is not null)
+		if (Script is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Script = ");
-			instance.Script.FormatCode(sb);
+			__init.Property("Script");
+			Script.FormatCode(writer);
 		}
 
-		if (instance.TargetField is not null)
+		if (TargetField is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TargetField = ");
-			instance.TargetField.FormatCode(sb);
+			__init.Property("TargetField");
+			TargetField.FormatCode(writer);
 		}
 
-		if (instance.TargetIndex is not null)
+		if (TargetIndex is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TargetIndex = ");
-			instance.TargetIndex.FormatCode(sb);
+			__init.Property("TargetIndex");
+			TargetIndex.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldTypeCodeFormatter.FormatCode(instance.Type, sb);
+			__init.Property("Type");
+			Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldTypeCodeFormatter.FormatCode(Type, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

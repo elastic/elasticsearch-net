@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 public partial class CleanupRepositoryResults : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DeletedBlobs = ");
-			sb.Append(instance.DeletedBlobs);
-			sb.Append("L");
+			__init.Property("DeletedBlobs");
+			writer.WriteValue(DeletedBlobs);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DeletedBytes = ");
-			sb.Append(instance.DeletedBytes);
-			sb.Append("L");
+			__init.Property("DeletedBytes");
+			writer.WriteValue(DeletedBytes);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

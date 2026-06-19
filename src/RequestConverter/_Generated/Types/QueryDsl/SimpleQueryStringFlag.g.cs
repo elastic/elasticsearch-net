@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public static class SimpleQueryStringFlagsCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags instance, RequestConverter.CodeWriter writer)
 	{
 		var first = true;
 		foreach (var value in System.Enum.GetValues<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags>())
@@ -36,10 +36,10 @@ public static class SimpleQueryStringFlagsCodeFormatter
 			}
 
 			if (!first)
-				sb.Append(" | ");
+				writer.Write(" | ");
 			first = false;
-			sb.Append("SimpleQueryStringFlags.");
-			sb.Append(value.ToString());
+			writer.Write("SimpleQueryStringFlags.");
+			writer.Write(value.ToString());
 		}
 	}
 }

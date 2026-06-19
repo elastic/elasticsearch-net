@@ -25,45 +25,32 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class NodeInfoXpackSecurity : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Authc is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Authc is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Authc = ");
-			instance.Authc.FormatCode(sb);
+			__init.Property("Authc");
+			Authc.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Enabled = ");
-			sb.Append("\"");
-			sb.Append(instance.Enabled);
-			sb.Append("\"");
+			__init.Property("Enabled");
+			writer.WriteString(Enabled);
 		}
 
-		if (instance.Http is not null)
+		if (Http is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Http = ");
-			instance.Http.FormatCode(sb);
+			__init.Property("Http");
+			Http.FormatCode(writer);
 		}
 
-		if (instance.Transport is not null)
+		if (Transport is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Transport = ");
-			instance.Transport.FormatCode(sb);
+			__init.Property("Transport");
+			Transport.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

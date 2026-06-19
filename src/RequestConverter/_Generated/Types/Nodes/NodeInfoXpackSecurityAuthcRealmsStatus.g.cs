@@ -25,31 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class NodeInfoXpackSecurityAuthcRealmsStatus : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Enabled is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Enabled is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Enabled = ");
-			sb.Append("\"");
-			sb.Append(instance.Enabled);
-			sb.Append("\"");
+			__init.Property("Enabled");
+			writer.WriteString(Enabled);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Order = ");
-			sb.Append("\"");
-			sb.Append(instance.Order);
-			sb.Append("\"");
+			__init.Property("Order");
+			writer.WriteString(Order);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

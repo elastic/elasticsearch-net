@@ -25,54 +25,39 @@ namespace Elastic.Clients.Elasticsearch.Core.TermVectors;
 
 public partial class Term : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.DocFreq is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (DocFreq is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocFreq = ");
-			sb.Append(instance.DocFreq.Value);
+			__init.Property("DocFreq");
+			writer.WriteValue(DocFreq.Value);
 		}
 
-		if (instance.Score is not null)
+		if (Score is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Score = ");
-			sb.Append(instance.Score.Value);
-			sb.Append("d");
+			__init.Property("Score");
+			writer.WriteValue(Score.Value);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TermFreq = ");
-			sb.Append(instance.TermFreq);
+			__init.Property("TermFreq");
+			writer.WriteValue(TermFreq);
 		}
 
-		if (instance.Tokens is not null)
+		if (Tokens is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Tokens = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Tokens, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Tokens");
+			writer.WriteInlineList(Tokens, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Ttf is not null)
+		if (Ttf is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ttf = ");
-			sb.Append(instance.Ttf.Value);
+			__init.Property("Ttf");
+			writer.WriteValue(Ttf.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

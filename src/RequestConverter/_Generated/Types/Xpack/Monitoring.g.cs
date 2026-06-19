@@ -25,41 +25,30 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class Monitoring : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Available = ");
-			sb.Append(instance.Available ? "true" : "false");
+			__init.Property("Available");
+			writer.WriteValue(Available);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CollectionEnabled = ");
-			sb.Append(instance.CollectionEnabled ? "true" : "false");
+			__init.Property("CollectionEnabled");
+			writer.WriteValue(CollectionEnabled);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Enabled = ");
-			sb.Append(instance.Enabled ? "true" : "false");
+			__init.Property("Enabled");
+			writer.WriteValue(Enabled);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EnabledExporters = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.EnabledExporters, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append(v); sb.Append("L"); }, sb);
+			__init.Property("EnabledExporters");
+			writer.Write("new() ");
+			writer.WriteInlineList(EnabledExporters, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

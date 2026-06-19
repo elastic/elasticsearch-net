@@ -25,146 +25,111 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class MultiSearchRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Indices is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Indices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indices = ");
-			instance.Indices.FormatCode(sb);
+			__init.Property("Indices");
+			Indices.FormatCode(writer);
 		}
 
-		if (instance.AllowNoIndices is not null)
+		if (AllowNoIndices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowNoIndices = ");
-			sb.Append(instance.AllowNoIndices.Value ? "true" : "false");
+			__init.Property("AllowNoIndices");
+			writer.WriteValue(AllowNoIndices.Value);
 		}
 
-		if (instance.CcsMinimizeRoundtrips is not null)
+		if (CcsMinimizeRoundtrips is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CcsMinimizeRoundtrips = ");
-			sb.Append(instance.CcsMinimizeRoundtrips.Value ? "true" : "false");
+			__init.Property("CcsMinimizeRoundtrips");
+			writer.WriteValue(CcsMinimizeRoundtrips.Value);
 		}
 
-		if (instance.ExpandWildcards is not null)
+		if (ExpandWildcards is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExpandWildcards = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.ExpandWildcards, (item, sb) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, sb); }, sb);
-			sb.Append("]");
+			__init.Property("ExpandWildcards");
+			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
 		}
 #pragma warning disable CS0618
-		if (instance.IgnoreThrottled is not null)
+		if (IgnoreThrottled is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreThrottled = ");
-			sb.Append(instance.IgnoreThrottled.Value ? "true" : "false");
+			__init.Property("IgnoreThrottled");
+			writer.WriteValue(IgnoreThrottled.Value);
 		}
 #pragma warning restore CS0618
-		if (instance.IgnoreUnavailable is not null)
+		if (IgnoreUnavailable is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreUnavailable = ");
-			sb.Append(instance.IgnoreUnavailable.Value ? "true" : "false");
+			__init.Property("IgnoreUnavailable");
+			writer.WriteValue(IgnoreUnavailable.Value);
 		}
 
-		if (instance.IncludeNamedQueriesScore is not null)
+		if (IncludeNamedQueriesScore is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IncludeNamedQueriesScore = ");
-			sb.Append(instance.IncludeNamedQueriesScore.Value ? "true" : "false");
+			__init.Property("IncludeNamedQueriesScore");
+			writer.WriteValue(IncludeNamedQueriesScore.Value);
 		}
 
-		if (instance.MaxConcurrentSearches is not null)
+		if (MaxConcurrentSearches is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxConcurrentSearches = ");
-			sb.Append(instance.MaxConcurrentSearches.Value);
+			__init.Property("MaxConcurrentSearches");
+			writer.WriteValue(MaxConcurrentSearches.Value);
 		}
 
-		if (instance.MaxConcurrentShardRequests is not null)
+		if (MaxConcurrentShardRequests is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxConcurrentShardRequests = ");
-			sb.Append(instance.MaxConcurrentShardRequests.Value);
+			__init.Property("MaxConcurrentShardRequests");
+			writer.WriteValue(MaxConcurrentShardRequests.Value);
 		}
 
-		if (instance.PreFilterShardSize is not null)
+		if (PreFilterShardSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PreFilterShardSize = ");
-			sb.Append(instance.PreFilterShardSize.Value);
-			sb.Append("L");
+			__init.Property("PreFilterShardSize");
+			writer.WriteValue(PreFilterShardSize.Value);
+			writer.Write("L");
 		}
 
-		if (instance.ProjectRouting is not null)
+		if (ProjectRouting is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ProjectRouting = ");
-			sb.Append("\"");
-			sb.Append(instance.ProjectRouting);
-			sb.Append("\"");
+			__init.Property("ProjectRouting");
+			writer.WriteString(ProjectRouting);
 		}
 
-		if (instance.RestTotalHitsAsInt is not null)
+		if (RestTotalHitsAsInt is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RestTotalHitsAsInt = ");
-			sb.Append(instance.RestTotalHitsAsInt.Value ? "true" : "false");
+			__init.Property("RestTotalHitsAsInt");
+			writer.WriteValue(RestTotalHitsAsInt.Value);
 		}
 
-		if (instance.Routing is not null)
+		if (Routing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Routing = ");
-			instance.Routing.FormatCode(sb);
+			__init.Property("Routing");
+			Routing.FormatCode(writer);
 		}
 
-		if (instance.SearchType is not null)
+		if (SearchType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SearchType = ");
-			Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(instance.SearchType.Value, sb);
+			__init.Property("SearchType");
+			Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(SearchType.Value, writer);
 		}
 
-		if (instance.TypedKeys is not null)
+		if (Slice is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TypedKeys = ");
-			sb.Append(instance.TypedKeys.Value ? "true" : "false");
+			__init.Property("Slice");
+			writer.WriteString(Slice);
+		}
+
+		if (TypedKeys is not null)
+		{
+			__init.Property("TypedKeys");
+			writer.WriteValue(TypedKeys.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Searches = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Searches, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Searches");
+			writer.WriteInlineList(Searches, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

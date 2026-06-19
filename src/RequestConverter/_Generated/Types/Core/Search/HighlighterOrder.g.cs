@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public static class HighlighterOrderCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder.Score:
-				sb.Append("HighlighterOrder.Score");
+				writer.Write("HighlighterOrder.Score");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

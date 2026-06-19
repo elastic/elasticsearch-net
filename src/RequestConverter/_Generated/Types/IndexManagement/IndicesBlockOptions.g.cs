@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public static class IndicesBlockOptionsCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions.Metadata:
-				sb.Append("IndicesBlockOptions.Metadata");
+				writer.Write("IndicesBlockOptions.Metadata");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions.Read:
-				sb.Append("IndicesBlockOptions.Read");
+				writer.Write("IndicesBlockOptions.Read");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions.ReadOnly:
-				sb.Append("IndicesBlockOptions.ReadOnly");
+				writer.Write("IndicesBlockOptions.ReadOnly");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions.Write:
-				sb.Append("IndicesBlockOptions.Write");
+				writer.Write("IndicesBlockOptions.Write");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

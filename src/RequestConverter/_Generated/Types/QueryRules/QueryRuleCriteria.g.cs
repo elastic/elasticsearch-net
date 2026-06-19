@@ -25,39 +25,26 @@ namespace Elastic.Clients.Elasticsearch.QueryRules;
 
 public partial class QueryRuleCriteria : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Metadata is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Metadata is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Metadata = ");
-			sb.Append("\"");
-			sb.Append(instance.Metadata);
-			sb.Append("\"");
+			__init.Property("Metadata");
+			writer.WriteString(Metadata);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaTypeCodeFormatter.FormatCode(instance.Type, sb);
+			__init.Property("Type");
+			Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaTypeCodeFormatter.FormatCode(Type, writer);
 		}
 
-		if (instance.Values is not null)
+		if (Values is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Values = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Values, (item, sb) => { RequestConverter.CodeFormatter.FormatCode(item, sb); }, sb);
-			sb.Append("]");
+			__init.Property("Values");
+			writer.WriteInlineList(Values, (w, item) => { w.WriteValue(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

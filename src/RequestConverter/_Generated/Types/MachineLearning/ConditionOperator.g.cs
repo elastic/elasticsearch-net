@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public static class ConditionOperatorCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator.Gt:
-				sb.Append("ConditionOperator.Gt");
+				writer.Write("ConditionOperator.Gt");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator.Gte:
-				sb.Append("ConditionOperator.Gte");
+				writer.Write("ConditionOperator.Gte");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator.Lt:
-				sb.Append("ConditionOperator.Lt");
+				writer.Write("ConditionOperator.Lt");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator.Lte:
-				sb.Append("ConditionOperator.Lte");
+				writer.Write("ConditionOperator.Lte");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

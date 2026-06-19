@@ -25,70 +25,51 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 public partial class DetailsInfo : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Blob = ");
-			instance.Blob.FormatCode(sb);
+			__init.Property("Blob");
+			Blob.FormatCode(writer);
 		}
 
-		if (instance.OverwriteElapsed is not null)
+		if (OverwriteElapsed is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OverwriteElapsed = ");
-			instance.OverwriteElapsed.FormatCode(sb);
+			__init.Property("OverwriteElapsed");
+			OverwriteElapsed.FormatCode(writer);
 		}
 
-		if (instance.OverwriteElapsedNanos is not null)
+		if (OverwriteElapsedNanos is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OverwriteElapsedNanos = ");
-			sb.Append(instance.OverwriteElapsedNanos.Value);
+			__init.Property("OverwriteElapsedNanos");
+			writer.WriteValue(OverwriteElapsedNanos.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WriteElapsed = ");
-			instance.WriteElapsed.FormatCode(sb);
+			__init.Property("WriteElapsed");
+			WriteElapsed.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WriteElapsedNanos = ");
-			sb.Append(instance.WriteElapsedNanos);
+			__init.Property("WriteElapsedNanos");
+			writer.WriteValue(WriteElapsedNanos);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WriterNode = ");
-			instance.WriterNode.FormatCode(sb);
+			__init.Property("WriterNode");
+			WriterNode.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WriteThrottled = ");
-			instance.WriteThrottled.FormatCode(sb);
+			__init.Property("WriteThrottled");
+			WriteThrottled.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WriteThrottledNanos = ");
-			sb.Append(instance.WriteThrottledNanos);
+			__init.Property("WriteThrottledNanos");
+			writer.WriteValue(WriteThrottledNanos);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

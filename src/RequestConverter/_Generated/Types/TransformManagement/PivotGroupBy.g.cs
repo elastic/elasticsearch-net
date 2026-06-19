@@ -25,44 +25,33 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
 public partial class PivotGroupBy : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.DateHistogram is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (DateHistogram is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DateHistogram = ");
-			instance.DateHistogram.FormatCode(sb);
+			__init.Property("DateHistogram");
+			DateHistogram.FormatCode(writer);
 		}
 
-		if (instance.GeotileGrid is not null)
+		if (GeotileGrid is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GeotileGrid = ");
-			instance.GeotileGrid.FormatCode(sb);
+			__init.Property("GeotileGrid");
+			GeotileGrid.FormatCode(writer);
 		}
 
-		if (instance.Histogram is not null)
+		if (Histogram is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Histogram = ");
-			instance.Histogram.FormatCode(sb);
+			__init.Property("Histogram");
+			Histogram.FormatCode(writer);
 		}
 
-		if (instance.Terms is not null)
+		if (Terms is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Terms = ");
-			instance.Terms.FormatCode(sb);
+			__init.Property("Terms");
+			Terms.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

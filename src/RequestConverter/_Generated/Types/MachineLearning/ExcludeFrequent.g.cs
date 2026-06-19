@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public static class ExcludeFrequentCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent.All:
-				sb.Append("ExcludeFrequent.All");
+				writer.Write("ExcludeFrequent.All");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent.By:
-				sb.Append("ExcludeFrequent.By");
+				writer.Write("ExcludeFrequent.By");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent.None:
-				sb.Append("ExcludeFrequent.None");
+				writer.Write("ExcludeFrequent.None");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent.Over:
-				sb.Append("ExcludeFrequent.Over");
+				writer.Write("ExcludeFrequent.Over");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

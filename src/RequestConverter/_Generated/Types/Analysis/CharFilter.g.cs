@@ -25,39 +25,38 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial interface ICharFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	void RequestConverter.ICodeFormattable.FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter c1)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter c1)
 		{
-			c1.FormatCode(sb);
+			c1.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilter c2)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilter c2)
 		{
-			c2.FormatCode(sb);
+			c2.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter c3)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter c3)
 		{
-			c3.FormatCode(sb);
+			c3.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.MappingCharFilter c4)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.MappingCharFilter c4)
 		{
-			c4.FormatCode(sb);
+			c4.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter c5)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter c5)
 		{
-			c5.FormatCode(sb);
+			c5.FormatCode(writer);
 			return;
 		}
 
-		sb.Append(instance.ToString());
+		writer.Write(ToString());
 	}
 }

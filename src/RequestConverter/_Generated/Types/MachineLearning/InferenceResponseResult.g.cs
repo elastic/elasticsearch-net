@@ -25,98 +25,65 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class InferenceResponseResult : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Entities is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Entities is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Entities = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Entities, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Entities");
+			writer.WriteInlineList(Entities, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.FeatureImportance is not null)
+		if (FeatureImportance is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FeatureImportance = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.FeatureImportance, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("FeatureImportance");
+			writer.WriteInlineList(FeatureImportance, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.IsTruncated is not null)
+		if (IsTruncated is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IsTruncated = ");
-			sb.Append(instance.IsTruncated.Value ? "true" : "false");
+			__init.Property("IsTruncated");
+			writer.WriteValue(IsTruncated.Value);
 		}
 
-		if (instance.PredictedValue is not null)
+		if (PredictedValue is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PredictedValue = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.PredictedValue, (item, sb) => { sb.Append("["); RequestConverter.CodeFormatter.FormatCode(item, (item, sb) => { item.FormatCode(sb); }, sb); sb.Append("]"); }, sb);
-			sb.Append("]");
+			__init.Property("PredictedValue");
+			writer.WriteInlineList(PredictedValue, (w, item) => { w.WriteInlineList(item, (w, item) => { item.FormatCode(w); }); });
 		}
 
-		if (instance.PredictedValueSequence is not null)
+		if (PredictedValueSequence is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PredictedValueSequence = ");
-			sb.Append("\"");
-			sb.Append(instance.PredictedValueSequence);
-			sb.Append("\"");
+			__init.Property("PredictedValueSequence");
+			writer.WriteString(PredictedValueSequence);
 		}
 
-		if (instance.PredictionProbability is not null)
+		if (PredictionProbability is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PredictionProbability = ");
-			sb.Append(instance.PredictionProbability.Value);
-			sb.Append("d");
+			__init.Property("PredictionProbability");
+			writer.WriteValue(PredictionProbability.Value);
+			writer.Write("d");
 		}
 
-		if (instance.PredictionScore is not null)
+		if (PredictionScore is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PredictionScore = ");
-			sb.Append(instance.PredictionScore.Value);
-			sb.Append("d");
+			__init.Property("PredictionScore");
+			writer.WriteValue(PredictionScore.Value);
+			writer.Write("d");
 		}
 
-		if (instance.TopClasses is not null)
+		if (TopClasses is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TopClasses = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.TopClasses, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("TopClasses");
+			writer.WriteInlineList(TopClasses, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Warning is not null)
+		if (Warning is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Warning = ");
-			sb.Append("\"");
-			sb.Append(instance.Warning);
-			sb.Append("\"");
+			__init.Property("Warning");
+			writer.WriteString(Warning);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

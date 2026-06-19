@@ -25,40 +25,27 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class CategorizationAnalyzerDefinition : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CharFilter is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CharFilter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CharFilter = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.CharFilter, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("CharFilter");
+			writer.WriteInlineList(CharFilter, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Filter is not null)
+		if (Filter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Filter = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Filter, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Filter");
+			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Tokenizer is not null)
+		if (Tokenizer is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Tokenizer = ");
-			instance.Tokenizer.FormatCode(sb);
+			__init.Property("Tokenizer");
+			Tokenizer.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

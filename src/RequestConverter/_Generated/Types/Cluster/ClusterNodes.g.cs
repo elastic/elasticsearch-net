@@ -25,103 +25,70 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class ClusterNodes : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			instance.Count.FormatCode(sb);
+			__init.Property("Count");
+			Count.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DiscoveryTypes = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.DiscoveryTypes, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append(v); }, sb);
+			__init.Property("DiscoveryTypes");
+			writer.Write("new() ");
+			writer.WriteInlineList(DiscoveryTypes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fs = ");
-			instance.Fs.FormatCode(sb);
+			__init.Property("Fs");
+			Fs.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexingPressure = ");
-			instance.IndexingPressure.FormatCode(sb);
+			__init.Property("IndexingPressure");
+			IndexingPressure.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ingest = ");
-			instance.Ingest.FormatCode(sb);
+			__init.Property("Ingest");
+			Ingest.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Jvm = ");
-			instance.Jvm.FormatCode(sb);
+			__init.Property("Jvm");
+			Jvm.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NetworkTypes = ");
-			instance.NetworkTypes.FormatCode(sb);
+			__init.Property("NetworkTypes");
+			NetworkTypes.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Os = ");
-			instance.Os.FormatCode(sb);
+			__init.Property("Os");
+			Os.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PackagingTypes = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.PackagingTypes, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("PackagingTypes");
+			writer.WriteInlineList(PackagingTypes, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Plugins = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Plugins, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Plugins");
+			writer.WriteInlineList(Plugins, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Process = ");
-			instance.Process.FormatCode(sb);
+			__init.Property("Process");
+			Process.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Versions = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Versions, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Versions");
+			writer.WriteInlineList(Versions, (w, item) => { w.WriteString(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

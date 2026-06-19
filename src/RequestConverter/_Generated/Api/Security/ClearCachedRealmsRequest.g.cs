@@ -25,29 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class ClearCachedRealmsRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Realms = ");
-			instance.Realms.FormatCode(sb);
+			__init.Property("Realms");
+			Realms.FormatCode(writer);
 		}
 
-		if (instance.Usernames is not null)
+		if (Usernames is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Usernames = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Usernames, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Usernames");
+			writer.WriteInlineList(Usernames, (w, item) => { w.WriteString(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

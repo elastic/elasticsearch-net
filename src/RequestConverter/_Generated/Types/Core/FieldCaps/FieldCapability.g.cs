@@ -25,118 +25,79 @@ namespace Elastic.Clients.Elasticsearch.Core.FieldCaps;
 
 public partial class FieldCapability : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Aggregatable = ");
-			sb.Append(instance.Aggregatable ? "true" : "false");
+			__init.Property("Aggregatable");
+			writer.WriteValue(Aggregatable);
 		}
 
-		if (instance.Indices is not null)
+		if (Indices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indices = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Indices, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Indices");
+			writer.WriteInlineList(Indices, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Meta is not null)
+		if (Meta is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Meta = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Meta, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Meta");
+			writer.Write("new() ");
+			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.MetadataField is not null)
+		if (MetadataField is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MetadataField = ");
-			sb.Append(instance.MetadataField.Value ? "true" : "false");
+			__init.Property("MetadataField");
+			writer.WriteValue(MetadataField.Value);
 		}
 
-		if (instance.MetricConflictsIndices is not null)
+		if (MetricConflictsIndices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MetricConflictsIndices = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.MetricConflictsIndices, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("MetricConflictsIndices");
+			writer.WriteInlineList(MetricConflictsIndices, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.NonAggregatableIndices is not null)
+		if (NonAggregatableIndices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NonAggregatableIndices = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.NonAggregatableIndices, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("NonAggregatableIndices");
+			writer.WriteInlineList(NonAggregatableIndices, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.NonDimensionIndices is not null)
+		if (NonDimensionIndices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NonDimensionIndices = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.NonDimensionIndices, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("NonDimensionIndices");
+			writer.WriteInlineList(NonDimensionIndices, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.NonSearchableIndices is not null)
+		if (NonSearchableIndices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NonSearchableIndices = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.NonSearchableIndices, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("NonSearchableIndices");
+			writer.WriteInlineList(NonSearchableIndices, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Searchable = ");
-			sb.Append(instance.Searchable ? "true" : "false");
+			__init.Property("Searchable");
+			writer.WriteValue(Searchable);
 		}
 
-		if (instance.TimeSeriesDimension is not null)
+		if (TimeSeriesDimension is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeSeriesDimension = ");
-			sb.Append(instance.TimeSeriesDimension.Value ? "true" : "false");
+			__init.Property("TimeSeriesDimension");
+			writer.WriteValue(TimeSeriesDimension.Value);
 		}
 
-		if (instance.TimeSeriesMetric is not null)
+		if (TimeSeriesMetric is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeSeriesMetric = ");
-			Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricTypeCodeFormatter.FormatCode(instance.TimeSeriesMetric.Value, sb);
+			__init.Property("TimeSeriesMetric");
+			Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricTypeCodeFormatter.FormatCode(TimeSeriesMetric.Value, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			sb.Append("\"");
-			sb.Append(instance.Type);
-			sb.Append("\"");
+			__init.Property("Type");
+			writer.WriteString(Type);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

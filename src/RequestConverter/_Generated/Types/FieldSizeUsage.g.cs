@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class FieldSizeUsage : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Size is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			instance.Size.FormatCode(sb);
+			__init.Property("Size");
+			Size.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SizeInBytes = ");
-			sb.Append(instance.SizeInBytes);
-			sb.Append("L");
+			__init.Property("SizeInBytes");
+			writer.WriteValue(SizeInBytes);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

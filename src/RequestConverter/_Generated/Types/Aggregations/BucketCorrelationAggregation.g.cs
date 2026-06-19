@@ -25,27 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class BucketCorrelationAggregation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.BucketsPath is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (BucketsPath is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BucketsPath = ");
-			instance.BucketsPath.FormatCode(sb);
+			__init.Property("BucketsPath");
+			BucketsPath.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Function = ");
-			instance.Function.FormatCode(sb);
+			__init.Property("Function");
+			Function.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

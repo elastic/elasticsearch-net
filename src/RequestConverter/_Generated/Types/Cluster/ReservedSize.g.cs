@@ -25,47 +25,30 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class ReservedSize : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NodeId = ");
-			sb.Append("\"");
-			sb.Append(instance.NodeId);
-			sb.Append("\"");
+			__init.Property("NodeId");
+			writer.WriteString(NodeId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Path = ");
-			sb.Append("\"");
-			sb.Append(instance.Path);
-			sb.Append("\"");
+			__init.Property("Path");
+			writer.WriteString(Path);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Shards = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Shards, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Shards");
+			writer.WriteInlineList(Shards, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			sb.Append(instance.Total);
-			sb.Append("L");
+			__init.Property("Total");
+			writer.WriteValue(Total);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

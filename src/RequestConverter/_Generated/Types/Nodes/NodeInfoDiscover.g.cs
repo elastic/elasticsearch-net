@@ -25,51 +25,34 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class NodeInfoDiscover : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.SeedHosts is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (SeedHosts is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SeedHosts = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.SeedHosts, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("SeedHosts");
+			writer.WriteInlineList(SeedHosts, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.SeedProviders is not null)
+		if (SeedProviders is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SeedProviders = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.SeedProviders, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("SeedProviders");
+			writer.WriteInlineList(SeedProviders, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Settings is not null)
+		if (Settings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Settings = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Settings, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Settings");
+			writer.Write("new() ");
+			writer.WriteInlineList(Settings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Type is not null)
+		if (Type is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			sb.Append("\"");
-			sb.Append(instance.Type);
-			sb.Append("\"");
+			__init.Property("Type");
+			writer.WriteString(Type);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

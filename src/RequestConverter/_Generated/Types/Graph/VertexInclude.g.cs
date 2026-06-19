@@ -25,30 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Graph;
 
 public partial class VertexInclude : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Boost is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Boost is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Boost = ");
-			sb.Append(instance.Boost.Value);
-			sb.Append("d");
+			__init.Property("Boost");
+			writer.WriteValue(Boost.Value);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Term = ");
-			sb.Append("\"");
-			sb.Append(instance.Term);
-			sb.Append("\"");
+			__init.Property("Term");
+			writer.WriteString(Term);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

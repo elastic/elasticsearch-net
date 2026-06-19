@@ -25,303 +25,302 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial interface IAnalyzer : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	void RequestConverter.ICodeFormattable.FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.ArabicAnalyzer c1)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.ArabicAnalyzer c1)
 		{
-			c1.FormatCode(sb);
+			c1.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.ArmenianAnalyzer c2)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.ArmenianAnalyzer c2)
 		{
-			c2.FormatCode(sb);
+			c2.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.BasqueAnalyzer c3)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.BasqueAnalyzer c3)
 		{
-			c3.FormatCode(sb);
+			c3.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.BengaliAnalyzer c4)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.BengaliAnalyzer c4)
 		{
-			c4.FormatCode(sb);
+			c4.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.BrazilianAnalyzer c5)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.BrazilianAnalyzer c5)
 		{
-			c5.FormatCode(sb);
+			c5.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.BulgarianAnalyzer c6)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.BulgarianAnalyzer c6)
 		{
-			c6.FormatCode(sb);
+			c6.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.CatalanAnalyzer c7)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.CatalanAnalyzer c7)
 		{
-			c7.FormatCode(sb);
+			c7.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.ChineseAnalyzer c8)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.ChineseAnalyzer c8)
 		{
-			c8.FormatCode(sb);
+			c8.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.CjkAnalyzer c9)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.CjkAnalyzer c9)
 		{
-			c9.FormatCode(sb);
+			c9.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzer c10)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzer c10)
 		{
-			c10.FormatCode(sb);
+			c10.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.CzechAnalyzer c11)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.CzechAnalyzer c11)
 		{
-			c11.FormatCode(sb);
+			c11.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.DanishAnalyzer c12)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.DanishAnalyzer c12)
 		{
-			c12.FormatCode(sb);
+			c12.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.DutchAnalyzer c13)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.DutchAnalyzer c13)
 		{
-			c13.FormatCode(sb);
+			c13.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.EnglishAnalyzer c14)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.EnglishAnalyzer c14)
 		{
-			c14.FormatCode(sb);
+			c14.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.EstonianAnalyzer c15)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.EstonianAnalyzer c15)
 		{
-			c15.FormatCode(sb);
+			c15.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer c16)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer c16)
 		{
-			c16.FormatCode(sb);
+			c16.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.FinnishAnalyzer c17)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.FinnishAnalyzer c17)
 		{
-			c17.FormatCode(sb);
+			c17.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.FrenchAnalyzer c18)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.FrenchAnalyzer c18)
 		{
-			c18.FormatCode(sb);
+			c18.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.GalicianAnalyzer c19)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.GalicianAnalyzer c19)
 		{
-			c19.FormatCode(sb);
+			c19.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.GermanAnalyzer c20)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.GermanAnalyzer c20)
 		{
-			c20.FormatCode(sb);
+			c20.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.GreekAnalyzer c21)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.GreekAnalyzer c21)
 		{
-			c21.FormatCode(sb);
+			c21.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.HindiAnalyzer c22)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.HindiAnalyzer c22)
 		{
-			c22.FormatCode(sb);
+			c22.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.HungarianAnalyzer c23)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.HungarianAnalyzer c23)
 		{
-			c23.FormatCode(sb);
+			c23.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzer c24)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzer c24)
 		{
-			c24.FormatCode(sb);
+			c24.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzer c25)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzer c25)
 		{
-			c25.FormatCode(sb);
+			c25.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.IrishAnalyzer c26)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.IrishAnalyzer c26)
 		{
-			c26.FormatCode(sb);
+			c26.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzer c27)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzer c27)
 		{
-			c27.FormatCode(sb);
+			c27.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer c28)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer c28)
 		{
-			c28.FormatCode(sb);
+			c28.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer c29)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer c29)
 		{
-			c29.FormatCode(sb);
+			c29.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.LatvianAnalyzer c30)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.LatvianAnalyzer c30)
 		{
-			c30.FormatCode(sb);
+			c30.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.LithuanianAnalyzer c31)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.LithuanianAnalyzer c31)
 		{
-			c31.FormatCode(sb);
+			c31.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzer c32)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzer c32)
 		{
-			c32.FormatCode(sb);
+			c32.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.NorwegianAnalyzer c33)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.NorwegianAnalyzer c33)
 		{
-			c33.FormatCode(sb);
+			c33.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer c34)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer c34)
 		{
-			c34.FormatCode(sb);
+			c34.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.PersianAnalyzer c35)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.PersianAnalyzer c35)
 		{
-			c35.FormatCode(sb);
+			c35.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.PortugueseAnalyzer c36)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.PortugueseAnalyzer c36)
 		{
-			c36.FormatCode(sb);
+			c36.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.RomanianAnalyzer c37)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.RomanianAnalyzer c37)
 		{
-			c37.FormatCode(sb);
+			c37.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.RussianAnalyzer c38)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.RussianAnalyzer c38)
 		{
-			c38.FormatCode(sb);
+			c38.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.SerbianAnalyzer c39)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.SerbianAnalyzer c39)
 		{
-			c39.FormatCode(sb);
+			c39.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzer c40)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzer c40)
 		{
-			c40.FormatCode(sb);
+			c40.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer c41)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer c41)
 		{
-			c41.FormatCode(sb);
+			c41.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.SoraniAnalyzer c42)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.SoraniAnalyzer c42)
 		{
-			c42.FormatCode(sb);
+			c42.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.SpanishAnalyzer c43)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.SpanishAnalyzer c43)
 		{
-			c43.FormatCode(sb);
+			c43.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzer c44)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzer c44)
 		{
-			c44.FormatCode(sb);
+			c44.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer c45)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer c45)
 		{
-			c45.FormatCode(sb);
+			c45.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.SwedishAnalyzer c46)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.SwedishAnalyzer c46)
 		{
-			c46.FormatCode(sb);
+			c46.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.ThaiAnalyzer c47)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.ThaiAnalyzer c47)
 		{
-			c47.FormatCode(sb);
+			c47.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.TurkishAnalyzer c48)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.TurkishAnalyzer c48)
 		{
-			c48.FormatCode(sb);
+			c48.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.WhitespaceAnalyzer c49)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.WhitespaceAnalyzer c49)
 		{
-			c49.FormatCode(sb);
+			c49.FormatCode(writer);
 			return;
 		}
 
-		sb.Append(instance.ToString());
+		writer.Write(ToString());
 	}
 }

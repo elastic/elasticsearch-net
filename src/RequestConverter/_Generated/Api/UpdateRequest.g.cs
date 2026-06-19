@@ -25,182 +25,135 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class UpdateRequest<TDocument, TPartialDocument> : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			instance.Id.FormatCode(sb);
+			__init.Property("Id");
+			Id.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			instance.Index.FormatCode(sb);
+			__init.Property("Index");
+			Index.FormatCode(writer);
 		}
 
-		if (instance.IfPrimaryTerm is not null)
+		if (IfPrimaryTerm is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IfPrimaryTerm = ");
-			sb.Append(instance.IfPrimaryTerm.Value);
-			sb.Append("L");
+			__init.Property("IfPrimaryTerm");
+			writer.WriteValue(IfPrimaryTerm.Value);
+			writer.Write("L");
 		}
 
-		if (instance.IfSeqNo is not null)
+		if (IfSeqNo is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IfSeqNo = ");
-			sb.Append(instance.IfSeqNo.Value);
-			sb.Append("L");
+			__init.Property("IfSeqNo");
+			writer.WriteValue(IfSeqNo.Value);
+			writer.Write("L");
 		}
 
-		if (instance.IncludeSourceOnError is not null)
+		if (IncludeSourceOnError is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IncludeSourceOnError = ");
-			sb.Append(instance.IncludeSourceOnError.Value ? "true" : "false");
+			__init.Property("IncludeSourceOnError");
+			writer.WriteValue(IncludeSourceOnError.Value);
 		}
 
-		if (instance.Lang is not null)
+		if (Lang is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Lang = ");
-			sb.Append("\"");
-			sb.Append(instance.Lang);
-			sb.Append("\"");
+			__init.Property("Lang");
+			writer.WriteString(Lang);
 		}
 
-		if (instance.Refresh is not null)
+		if (Refresh is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Refresh = ");
-			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(instance.Refresh.Value, sb);
+			__init.Property("Refresh");
+			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
 		}
 
-		if (instance.RequireAlias is not null)
+		if (RequireAlias is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RequireAlias = ");
-			sb.Append(instance.RequireAlias.Value ? "true" : "false");
+			__init.Property("RequireAlias");
+			writer.WriteValue(RequireAlias.Value);
 		}
 
-		if (instance.RetryOnConflict is not null)
+		if (RetryOnConflict is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RetryOnConflict = ");
-			sb.Append(instance.RetryOnConflict.Value);
+			__init.Property("RetryOnConflict");
+			writer.WriteValue(RetryOnConflict.Value);
 		}
 
-		if (instance.Routing is not null)
+		if (Routing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Routing = ");
-			instance.Routing.FormatCode(sb);
+			__init.Property("Routing");
+			Routing.FormatCode(writer);
 		}
 
-		if (instance.SourceExcludes is not null)
+		if (SourceExcludes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SourceExcludes = ");
-			instance.SourceExcludes.FormatCode(sb);
+			__init.Property("SourceExcludes");
+			SourceExcludes.FormatCode(writer);
 		}
 
-		if (instance.SourceIncludes is not null)
+		if (SourceIncludes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SourceIncludes = ");
-			instance.SourceIncludes.FormatCode(sb);
+			__init.Property("SourceIncludes");
+			SourceIncludes.FormatCode(writer);
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (instance.WaitForActiveShards is not null)
+		if (WaitForActiveShards is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WaitForActiveShards = ");
-			instance.WaitForActiveShards.FormatCode(sb);
+			__init.Property("WaitForActiveShards");
+			WaitForActiveShards.FormatCode(writer);
 		}
 
-		if (instance.DetectNoop is not null)
+		if (DetectNoop is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DetectNoop = ");
-			sb.Append(instance.DetectNoop.Value ? "true" : "false");
+			__init.Property("DetectNoop");
+			writer.WriteValue(DetectNoop.Value);
 		}
 
-		if (instance.Doc is not null)
+		if (Doc is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Doc = ");
-			RequestConverter.CodeFormatter.FormatCode<TPartialDocument>(instance.Doc, sb);
+			__init.Property("Doc");
+			writer.WriteValue(Doc);
 		}
 
-		if (instance.DocAsUpsert is not null)
+		if (DocAsUpsert is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocAsUpsert = ");
-			sb.Append(instance.DocAsUpsert.Value ? "true" : "false");
+			__init.Property("DocAsUpsert");
+			writer.WriteValue(DocAsUpsert.Value);
 		}
 
-		if (instance.Script is not null)
+		if (Script is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Script = ");
-			instance.Script.FormatCode(sb);
+			__init.Property("Script");
+			Script.FormatCode(writer);
 		}
 
-		if (instance.ScriptedUpsert is not null)
+		if (ScriptedUpsert is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ScriptedUpsert = ");
-			sb.Append(instance.ScriptedUpsert.Value ? "true" : "false");
+			__init.Property("ScriptedUpsert");
+			writer.WriteValue(ScriptedUpsert.Value);
 		}
 
-		if (instance.Source is not null)
+		if (Source is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Source = ");
-			instance.Source.FormatCode(sb);
+			__init.Property("Source");
+			Source.FormatCode(writer);
 		}
 
-		if (instance.Upsert is not null)
+		if (Upsert is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Upsert = ");
-			RequestConverter.CodeFormatter.FormatCode<TDocument>(instance.Upsert, sb);
+			__init.Property("Upsert");
+			writer.WriteValue(Upsert);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

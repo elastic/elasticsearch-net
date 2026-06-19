@@ -21,40 +21,45 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
 
-namespace Elastic.Clients.Elasticsearch.Inference;
+namespace Elastic.Clients.Elasticsearch.Security;
 
-public partial class EmbeddingContentObjectContents : RequestConverter.ICodeFormattable
+public partial class RoleTemplateScript : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Format is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Id is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Format = ");
-			Elastic.Clients.Elasticsearch.Inference.EmbeddingContentFormatCodeFormatter.FormatCode(instance.Format.Value, sb);
+			__init.Property("Id");
+			Id.FormatCode(writer);
 		}
 
+		if (Lang is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			Elastic.Clients.Elasticsearch.Inference.EmbeddingContentTypeCodeFormatter.FormatCode(instance.Type, sb);
+			__init.Property("Lang");
+			Lang.Value.FormatCode(writer);
 		}
 
+		if (Options is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Value = ");
-			sb.Append("\"");
-			sb.Append(instance.Value);
-			sb.Append("\"");
+			__init.Property("Options");
+			writer.Write("new() ");
+			writer.WriteInlineList(Options, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		if (Params is not null)
+		{
+			__init.Property("Params");
+			writer.Write("new() ");
+			writer.WriteInlineList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
+		}
+
+		if (Source is not null)
+		{
+			__init.Property("Source");
+			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<string, Elastic.Clients.Elasticsearch.QueryDsl.Query>(Source, writer);
+		}
+
+		__init.Dispose();
 	}
 }

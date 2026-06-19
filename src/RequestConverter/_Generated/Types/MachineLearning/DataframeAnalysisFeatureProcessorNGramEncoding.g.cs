@@ -25,62 +25,43 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataframeAnalysisFeatureProcessorNGramEncoding : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Custom is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Custom is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Custom = ");
-			sb.Append(instance.Custom.Value ? "true" : "false");
+			__init.Property("Custom");
+			writer.WriteValue(Custom.Value);
 		}
 
-		if (instance.FeaturePrefix is not null)
+		if (FeaturePrefix is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FeaturePrefix = ");
-			sb.Append("\"");
-			sb.Append(instance.FeaturePrefix);
-			sb.Append("\"");
+			__init.Property("FeaturePrefix");
+			writer.WriteString(FeaturePrefix);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.Length is not null)
+		if (Length is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Length = ");
-			sb.Append(instance.Length.Value);
+			__init.Property("Length");
+			writer.WriteValue(Length.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NGrams = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.NGrams, (item, sb) => { sb.Append(item); }, sb);
-			sb.Append("]");
+			__init.Property("NGrams");
+			writer.WriteInlineList(NGrams, (w, item) => { w.WriteValue(item); });
 		}
 
-		if (instance.Start is not null)
+		if (Start is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Start = ");
-			sb.Append(instance.Start.Value);
+			__init.Property("Start");
+			writer.WriteValue(Start.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

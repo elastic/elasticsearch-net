@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class ExtendedBounds<T> : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Max is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Max is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Max = ");
-			RequestConverter.CodeFormatter.FormatCode<T>(instance.Max, sb);
+			__init.Property("Max");
+			writer.WriteValue(Max);
 		}
 
-		if (instance.Min is not null)
+		if (Min is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Min = ");
-			RequestConverter.CodeFormatter.FormatCode<T>(instance.Min, sb);
+			__init.Property("Min");
+			writer.WriteValue(Min);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

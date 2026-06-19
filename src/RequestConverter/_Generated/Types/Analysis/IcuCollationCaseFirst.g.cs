@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public static class IcuCollationCaseFirstCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst.Lower:
-				sb.Append("IcuCollationCaseFirst.Lower");
+				writer.Write("IcuCollationCaseFirst.Lower");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst.Upper:
-				sb.Append("IcuCollationCaseFirst.Upper");
+				writer.Write("IcuCollationCaseFirst.Upper");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

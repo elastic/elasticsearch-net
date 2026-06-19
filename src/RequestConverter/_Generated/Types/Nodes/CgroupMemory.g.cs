@@ -25,42 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class CgroupMemory : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ControlGroup is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ControlGroup is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ControlGroup = ");
-			sb.Append("\"");
-			sb.Append(instance.ControlGroup);
-			sb.Append("\"");
+			__init.Property("ControlGroup");
+			writer.WriteString(ControlGroup);
 		}
 
-		if (instance.LimitInBytes is not null)
+		if (LimitInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LimitInBytes = ");
-			sb.Append("\"");
-			sb.Append(instance.LimitInBytes);
-			sb.Append("\"");
+			__init.Property("LimitInBytes");
+			writer.WriteString(LimitInBytes);
 		}
 
-		if (instance.UsageInBytes is not null)
+		if (UsageInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UsageInBytes = ");
-			sb.Append("\"");
-			sb.Append(instance.UsageInBytes);
-			sb.Append("\"");
+			__init.Property("UsageInBytes");
+			writer.WriteString(UsageInBytes);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

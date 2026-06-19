@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public static class EdgeNGramSideCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide.Back:
-				sb.Append("EdgeNGramSide.Back");
+				writer.Write("EdgeNGramSide.Back");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide.Front:
-				sb.Append("EdgeNGramSide.Front");
+				writer.Write("EdgeNGramSide.Front");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

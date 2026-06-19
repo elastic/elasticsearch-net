@@ -25,38 +25,27 @@ namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
 public partial class ListRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.From is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (From is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("From = ");
-			sb.Append(instance.From.Value);
+			__init.Property("From");
+			writer.WriteValue(From.Value);
 		}
 
-		if (instance.QueryLuceneSyntax is not null)
+		if (QueryLuceneSyntax is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryLuceneSyntax = ");
-			sb.Append("\"");
-			sb.Append(instance.QueryLuceneSyntax);
-			sb.Append("\"");
+			__init.Property("QueryLuceneSyntax");
+			writer.WriteString(QueryLuceneSyntax);
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append(instance.Size.Value);
+			__init.Property("Size");
+			writer.WriteValue(Size.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

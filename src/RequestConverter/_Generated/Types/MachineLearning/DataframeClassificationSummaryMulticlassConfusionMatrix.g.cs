@@ -25,28 +25,19 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataframeClassificationSummaryMulticlassConfusionMatrix : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ConfusionMatrix = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.ConfusionMatrix, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("ConfusionMatrix");
+			writer.WriteInlineList(ConfusionMatrix, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OtherActualClassCount = ");
-			sb.Append(instance.OtherActualClassCount);
+			__init.Property("OtherActualClassCount");
+			writer.WriteValue(OtherActualClassCount);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

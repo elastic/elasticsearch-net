@@ -25,48 +25,35 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class DoubleTermsAggregate : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Buckets = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Buckets, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Buckets");
+			writer.WriteInlineList(Buckets, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.DocCountErrorUpperBound is not null)
+		if (DocCountErrorUpperBound is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocCountErrorUpperBound = ");
-			sb.Append(instance.DocCountErrorUpperBound.Value);
-			sb.Append("L");
+			__init.Property("DocCountErrorUpperBound");
+			writer.WriteValue(DocCountErrorUpperBound.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Meta is not null)
+		if (Meta is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Meta = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Meta, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Meta");
+			writer.Write("new() ");
+			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.SumOtherDocCount is not null)
+		if (SumOtherDocCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SumOtherDocCount = ");
-			sb.Append(instance.SumOtherDocCount.Value);
-			sb.Append("L");
+			__init.Property("SumOtherDocCount");
+			writer.WriteValue(SumOtherDocCount.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

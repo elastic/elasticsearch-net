@@ -25,59 +25,40 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class PendingTask : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Executing = ");
-			sb.Append(instance.Executing ? "true" : "false");
+			__init.Property("Executing");
+			writer.WriteValue(Executing);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InsertOrder = ");
-			sb.Append(instance.InsertOrder);
+			__init.Property("InsertOrder");
+			writer.WriteValue(InsertOrder);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Priority = ");
-			sb.Append("\"");
-			sb.Append(instance.Priority);
-			sb.Append("\"");
+			__init.Property("Priority");
+			writer.WriteString(Priority);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Source = ");
-			sb.Append("\"");
-			sb.Append(instance.Source);
-			sb.Append("\"");
+			__init.Property("Source");
+			writer.WriteString(Source);
 		}
 
-		if (instance.TimeInQueue is not null)
+		if (TimeInQueue is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeInQueue = ");
-			instance.TimeInQueue.FormatCode(sb);
+			__init.Property("TimeInQueue");
+			TimeInQueue.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeInQueueMillis = ");
-			sb.Append(instance.TimeInQueueMillis);
+			__init.Property("TimeInQueueMillis");
+			writer.WriteValue(TimeInQueueMillis);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public static class CombinedFieldsZeroTermsCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms.All:
-				sb.Append("CombinedFieldsZeroTerms.All");
+				writer.Write("CombinedFieldsZeroTerms.All");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms.None:
-				sb.Append("CombinedFieldsZeroTerms.None");
+				writer.Write("CombinedFieldsZeroTerms.None");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

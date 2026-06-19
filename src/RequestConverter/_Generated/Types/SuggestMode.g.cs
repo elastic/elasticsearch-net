@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class SuggestModeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.SuggestMode instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.SuggestMode instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.SuggestMode.Always:
-				sb.Append("SuggestMode.Always");
+				writer.Write("SuggestMode.Always");
 				break;
 			case Elastic.Clients.Elasticsearch.SuggestMode.Missing:
-				sb.Append("SuggestMode.Missing");
+				writer.Write("SuggestMode.Missing");
 				break;
 			case Elastic.Clients.Elasticsearch.SuggestMode.Popular:
-				sb.Append("SuggestMode.Popular");
+				writer.Write("SuggestMode.Popular");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

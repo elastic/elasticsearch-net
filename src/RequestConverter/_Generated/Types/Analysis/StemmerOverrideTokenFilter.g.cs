@@ -25,42 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class StemmerOverrideTokenFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Rules is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Rules is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Rules = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Rules, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Rules");
+			writer.WriteInlineList(Rules, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.RulesPath is not null)
+		if (RulesPath is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RulesPath = ");
-			sb.Append("\"");
-			sb.Append(instance.RulesPath);
-			sb.Append("\"");
+			__init.Property("RulesPath");
+			writer.WriteString(RulesPath);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

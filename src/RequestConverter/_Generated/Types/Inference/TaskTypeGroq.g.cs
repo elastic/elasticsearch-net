@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class TaskTypeGroqCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.TaskTypeGroq instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.TaskTypeGroq instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeGroq.ChatCompletion:
-				sb.Append("TaskTypeGroq.ChatCompletion");
+				writer.Write("TaskTypeGroq.ChatCompletion");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -25,39 +25,26 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class MultiplexerTokenFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Filters = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Filters, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Filters");
+			writer.WriteInlineList(Filters, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.PreserveOriginal is not null)
+		if (PreserveOriginal is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PreserveOriginal = ");
-			sb.Append(instance.PreserveOriginal.Value ? "true" : "false");
+			__init.Property("PreserveOriginal");
+			writer.WriteValue(PreserveOriginal.Value);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,41 +25,30 @@ namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
 public partial class PostBehavioralAnalyticsEventRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CollectionName = ");
-			instance.CollectionName.FormatCode(sb);
+			__init.Property("CollectionName");
+			CollectionName.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EventType = ");
-			Elastic.Clients.Elasticsearch.SearchApplication.EventTypeCodeFormatter.FormatCode(instance.EventType, sb);
+			__init.Property("EventType");
+			Elastic.Clients.Elasticsearch.SearchApplication.EventTypeCodeFormatter.FormatCode(EventType, writer);
 		}
 
-		if (instance.Debug is not null)
+		if (Debug is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Debug = ");
-			sb.Append(instance.Debug.Value ? "true" : "false");
+			__init.Property("Debug");
+			writer.WriteValue(Debug.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Payload = ");
-			RequestConverter.CodeFormatter.FormatCode(instance.Payload, sb);
+			__init.Property("Payload");
+			writer.WriteValue(Payload);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

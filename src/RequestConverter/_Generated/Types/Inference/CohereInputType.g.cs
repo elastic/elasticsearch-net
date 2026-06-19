@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class CohereInputTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.CohereInputType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.CohereInputType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.CohereInputType.Classification:
-				sb.Append("CohereInputType.Classification");
+				writer.Write("CohereInputType.Classification");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.CohereInputType.Clustering:
-				sb.Append("CohereInputType.Clustering");
+				writer.Write("CohereInputType.Clustering");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.CohereInputType.Ingest:
-				sb.Append("CohereInputType.Ingest");
+				writer.Write("CohereInputType.Ingest");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.CohereInputType.Search:
-				sb.Append("CohereInputType.Search");
+				writer.Write("CohereInputType.Search");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

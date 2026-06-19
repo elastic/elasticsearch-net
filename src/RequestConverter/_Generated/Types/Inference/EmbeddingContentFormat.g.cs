@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class EmbeddingContentFormatCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.EmbeddingContentFormat instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.EmbeddingContentFormat instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.EmbeddingContentFormat.Base64:
-				sb.Append("EmbeddingContentFormat.Base64");
+				writer.Write("EmbeddingContentFormat.Base64");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.EmbeddingContentFormat.Text:
-				sb.Append("EmbeddingContentFormat.Text");
+				writer.Write("EmbeddingContentFormat.Text");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

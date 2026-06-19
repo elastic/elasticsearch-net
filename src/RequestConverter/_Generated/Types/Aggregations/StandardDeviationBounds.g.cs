@@ -25,60 +25,45 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class StandardDeviationBounds : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Lower = ");
-			sb.Append(instance.Lower.Value);
-			sb.Append("d");
+			__init.Property("Lower");
+			writer.WriteValue(Lower.Value);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LowerPopulation = ");
-			sb.Append(instance.LowerPopulation.Value);
-			sb.Append("d");
+			__init.Property("LowerPopulation");
+			writer.WriteValue(LowerPopulation.Value);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LowerSampling = ");
-			sb.Append(instance.LowerSampling.Value);
-			sb.Append("d");
+			__init.Property("LowerSampling");
+			writer.WriteValue(LowerSampling.Value);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Upper = ");
-			sb.Append(instance.Upper.Value);
-			sb.Append("d");
+			__init.Property("Upper");
+			writer.WriteValue(Upper.Value);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UpperPopulation = ");
-			sb.Append(instance.UpperPopulation.Value);
-			sb.Append("d");
+			__init.Property("UpperPopulation");
+			writer.WriteValue(UpperPopulation.Value);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UpperSampling = ");
-			sb.Append(instance.UpperSampling.Value);
-			sb.Append("d");
+			__init.Property("UpperSampling");
+			writer.WriteValue(UpperSampling.Value);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

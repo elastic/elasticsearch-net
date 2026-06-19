@@ -25,20 +25,15 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class RescoreVector : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Oversample = ");
-			sb.Append(instance.Oversample);
-			sb.Append("f");
+			__init.Property("Oversample");
+			writer.WriteValue(Oversample);
+			writer.Write("f");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class GoogleVertexAITaskTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType.ChatCompletion:
-				sb.Append("GoogleVertexAITaskType.ChatCompletion");
+				writer.Write("GoogleVertexAITaskType.ChatCompletion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType.Completion:
-				sb.Append("GoogleVertexAITaskType.Completion");
+				writer.Write("GoogleVertexAITaskType.Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType.Rerank:
-				sb.Append("GoogleVertexAITaskType.Rerank");
+				writer.Write("GoogleVertexAITaskType.Rerank");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType.TextEmbedding:
-				sb.Append("GoogleVertexAITaskType.TextEmbedding");
+				writer.Write("GoogleVertexAITaskType.TextEmbedding");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

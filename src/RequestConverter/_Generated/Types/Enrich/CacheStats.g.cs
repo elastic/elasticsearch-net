@@ -25,71 +25,50 @@ namespace Elastic.Clients.Elasticsearch.Enrich;
 
 public partial class CacheStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count);
+			__init.Property("Count");
+			writer.WriteValue(Count);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Evictions = ");
-			sb.Append(instance.Evictions);
+			__init.Property("Evictions");
+			writer.WriteValue(Evictions);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Hits = ");
-			sb.Append(instance.Hits);
+			__init.Property("Hits");
+			writer.WriteValue(Hits);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HitsTimeInMillis = ");
-			sb.Append(instance.HitsTimeInMillis);
+			__init.Property("HitsTimeInMillis");
+			writer.WriteValue(HitsTimeInMillis);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Misses = ");
-			sb.Append(instance.Misses);
+			__init.Property("Misses");
+			writer.WriteValue(Misses);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MissesTimeInMillis = ");
-			sb.Append(instance.MissesTimeInMillis);
+			__init.Property("MissesTimeInMillis");
+			writer.WriteValue(MissesTimeInMillis);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NodeId = ");
-			sb.Append("\"");
-			sb.Append(instance.NodeId);
-			sb.Append("\"");
+			__init.Property("NodeId");
+			writer.WriteString(NodeId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SizeInBytes = ");
-			sb.Append(instance.SizeInBytes);
-			sb.Append("L");
+			__init.Property("SizeInBytes");
+			writer.WriteValue(SizeInBytes);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

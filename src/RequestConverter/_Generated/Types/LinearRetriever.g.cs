@@ -25,87 +25,58 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class LinearRetriever : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Fields is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Fields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fields = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Fields, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Fields");
+			writer.WriteInlineList(Fields, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Filter is not null)
+		if (Filter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Filter = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Filter, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Filter");
+			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.MinScore is not null)
+		if (MinScore is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinScore = ");
-			sb.Append(instance.MinScore.Value);
-			sb.Append("f");
+			__init.Property("MinScore");
+			writer.WriteValue(MinScore.Value);
+			writer.Write("f");
 		}
 
-		if (instance.Name is not null)
+		if (Name is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
-		if (instance.Normalizer is not null)
+		if (Normalizer is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Normalizer = ");
-			Elastic.Clients.Elasticsearch.ScoreNormalizerCodeFormatter.FormatCode(instance.Normalizer.Value, sb);
+			__init.Property("Normalizer");
+			Elastic.Clients.Elasticsearch.ScoreNormalizerCodeFormatter.FormatCode(Normalizer.Value, writer);
 		}
 
-		if (instance.Query is not null)
+		if (Query is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			sb.Append("\"");
-			sb.Append(instance.Query);
-			sb.Append("\"");
+			__init.Property("Query");
+			writer.WriteString(Query);
 		}
 
-		if (instance.RankWindowSize is not null)
+		if (RankWindowSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RankWindowSize = ");
-			sb.Append(instance.RankWindowSize.Value);
+			__init.Property("RankWindowSize");
+			writer.WriteValue(RankWindowSize.Value);
 		}
 
-		if (instance.Retrievers is not null)
+		if (Retrievers is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Retrievers = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Retrievers, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Retrievers");
+			writer.WriteInlineList(Retrievers, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

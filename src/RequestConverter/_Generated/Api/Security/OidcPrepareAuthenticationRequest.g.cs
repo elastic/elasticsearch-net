@@ -25,62 +25,39 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class OidcPrepareAuthenticationRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Iss is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Iss is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Iss = ");
-			sb.Append("\"");
-			sb.Append(instance.Iss);
-			sb.Append("\"");
+			__init.Property("Iss");
+			writer.WriteString(Iss);
 		}
 
-		if (instance.LoginHint is not null)
+		if (LoginHint is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LoginHint = ");
-			sb.Append("\"");
-			sb.Append(instance.LoginHint);
-			sb.Append("\"");
+			__init.Property("LoginHint");
+			writer.WriteString(LoginHint);
 		}
 
-		if (instance.Nonce is not null)
+		if (Nonce is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Nonce = ");
-			sb.Append("\"");
-			sb.Append(instance.Nonce);
-			sb.Append("\"");
+			__init.Property("Nonce");
+			writer.WriteString(Nonce);
 		}
 
-		if (instance.Realm is not null)
+		if (Realm is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Realm = ");
-			sb.Append("\"");
-			sb.Append(instance.Realm);
-			sb.Append("\"");
+			__init.Property("Realm");
+			writer.WriteString(Realm);
 		}
 
-		if (instance.State is not null)
+		if (State is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("State = ");
-			sb.Append("\"");
-			sb.Append(instance.State);
-			sb.Append("\"");
+			__init.Property("State");
+			writer.WriteString(State);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

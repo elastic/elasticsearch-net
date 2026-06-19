@@ -25,51 +25,38 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class IpPrefixAggregation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AppendPrefixLength is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AppendPrefixLength is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AppendPrefixLength = ");
-			sb.Append(instance.AppendPrefixLength.Value ? "true" : "false");
+			__init.Property("AppendPrefixLength");
+			writer.WriteValue(AppendPrefixLength.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.IsIpv6 is not null)
+		if (IsIpv6 is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IsIpv6 = ");
-			sb.Append(instance.IsIpv6.Value ? "true" : "false");
+			__init.Property("IsIpv6");
+			writer.WriteValue(IsIpv6.Value);
 		}
 
-		if (instance.MinDocCount is not null)
+		if (MinDocCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinDocCount = ");
-			sb.Append(instance.MinDocCount.Value);
-			sb.Append("L");
+			__init.Property("MinDocCount");
+			writer.WriteValue(MinDocCount.Value);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PrefixLength = ");
-			sb.Append(instance.PrefixLength);
+			__init.Property("PrefixLength");
+			writer.WriteValue(PrefixLength);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

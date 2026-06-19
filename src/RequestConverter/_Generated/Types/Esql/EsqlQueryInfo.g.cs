@@ -25,54 +25,37 @@ namespace Elastic.Clients.Elasticsearch.Esql;
 
 public partial class EsqlQueryInfo : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			sb.Append(instance.Id);
-			sb.Append("L");
+			__init.Property("Id");
+			writer.WriteValue(Id);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Node = ");
-			sb.Append("\"");
-			sb.Append(instance.Node);
-			sb.Append("\"");
+			__init.Property("Node");
+			writer.WriteString(Node);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			sb.Append("\"");
-			sb.Append(instance.Query);
-			sb.Append("\"");
+			__init.Property("Query");
+			writer.WriteString(Query);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RunningTimeNanos = ");
-			sb.Append(instance.RunningTimeNanos);
-			sb.Append("L");
+			__init.Property("RunningTimeNanos");
+			writer.WriteValue(RunningTimeNanos);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StartTimeMillis = ");
-			sb.Append(instance.StartTimeMillis);
-			sb.Append("L");
+			__init.Property("StartTimeMillis");
+			writer.WriteValue(StartTimeMillis);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

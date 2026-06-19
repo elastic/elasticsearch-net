@@ -25,19 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public partial class Redact : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IsRedacted = ");
-			sb.Append(instance.IsRedacted ? "true" : "false");
+			__init.Property("IsRedacted");
+			writer.WriteValue(IsRedacted);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

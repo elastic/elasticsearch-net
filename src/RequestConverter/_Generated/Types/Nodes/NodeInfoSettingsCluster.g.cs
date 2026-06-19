@@ -25,54 +25,37 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class NodeInfoSettingsCluster : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.DeprecationIndexing is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (DeprecationIndexing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DeprecationIndexing = ");
-			instance.DeprecationIndexing.FormatCode(sb);
+			__init.Property("DeprecationIndexing");
+			DeprecationIndexing.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Election = ");
-			instance.Election.FormatCode(sb);
+			__init.Property("Election");
+			Election.FormatCode(writer);
 		}
 
-		if (instance.InitialMasterNodes is not null)
+		if (InitialMasterNodes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InitialMasterNodes = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.InitialMasterNodes, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("InitialMasterNodes");
+			writer.WriteInlineList(InitialMasterNodes, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
-		if (instance.Routing is not null)
+		if (Routing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Routing = ");
-			instance.Routing.FormatCode(sb);
+			__init.Property("Routing");
+			Routing.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,46 +25,35 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataframeEvaluationRegressionMetrics : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Huber is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Huber is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Huber = ");
-			instance.Huber.FormatCode(sb);
+			__init.Property("Huber");
+			Huber.FormatCode(writer);
 		}
 
-		if (instance.Mse is not null)
+		if (Mse is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mse = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Mse, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Mse");
+			writer.Write("new() ");
+			writer.WriteInlineList(Mse, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Msle is not null)
+		if (Msle is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Msle = ");
-			instance.Msle.FormatCode(sb);
+			__init.Property("Msle");
+			Msle.FormatCode(writer);
 		}
 
-		if (instance.RSquared is not null)
+		if (RSquared is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RSquared = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.RSquared, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("RSquared");
+			writer.Write("new() ");
+			writer.WriteInlineList(RSquared, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

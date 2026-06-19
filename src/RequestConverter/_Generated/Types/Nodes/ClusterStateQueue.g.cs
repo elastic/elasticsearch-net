@@ -25,39 +25,30 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class ClusterStateQueue : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Committed is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Committed is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Committed = ");
-			sb.Append(instance.Committed.Value);
-			sb.Append("L");
+			__init.Property("Committed");
+			writer.WriteValue(Committed.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Pending is not null)
+		if (Pending is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Pending = ");
-			sb.Append(instance.Pending.Value);
-			sb.Append("L");
+			__init.Property("Pending");
+			writer.WriteValue(Pending.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Total is not null)
+		if (Total is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			sb.Append(instance.Total.Value);
-			sb.Append("L");
+			__init.Property("Total");
+			writer.WriteValue(Total.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

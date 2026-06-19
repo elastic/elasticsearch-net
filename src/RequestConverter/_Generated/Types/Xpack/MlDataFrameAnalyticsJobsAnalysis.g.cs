@@ -25,36 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class MlDataFrameAnalyticsJobsAnalysis : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Classification is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Classification is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Classification = ");
-			sb.Append(instance.Classification.Value);
+			__init.Property("Classification");
+			writer.WriteValue(Classification.Value);
 		}
 
-		if (instance.OutlierDetection is not null)
+		if (OutlierDetection is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OutlierDetection = ");
-			sb.Append(instance.OutlierDetection.Value);
+			__init.Property("OutlierDetection");
+			writer.WriteValue(OutlierDetection.Value);
 		}
 
-		if (instance.Regression is not null)
+		if (Regression is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Regression = ");
-			sb.Append(instance.Regression.Value);
+			__init.Property("Regression");
+			writer.WriteValue(Regression.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

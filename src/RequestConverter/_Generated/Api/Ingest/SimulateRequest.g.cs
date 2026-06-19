@@ -25,45 +25,32 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public partial class SimulateRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Id is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Id is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			instance.Id.FormatCode(sb);
+			__init.Property("Id");
+			Id.FormatCode(writer);
 		}
 
-		if (instance.Verbose is not null)
+		if (Verbose is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Verbose = ");
-			sb.Append(instance.Verbose.Value ? "true" : "false");
+			__init.Property("Verbose");
+			writer.WriteValue(Verbose.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Docs = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Docs, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Docs");
+			writer.WriteInlineList(Docs, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Pipeline is not null)
+		if (Pipeline is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Pipeline = ");
-			instance.Pipeline.FormatCode(sb);
+			__init.Property("Pipeline");
+			Pipeline.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

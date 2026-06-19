@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.TextStructure;
 
 public static class FormatTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.TextStructure.FormatType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.TextStructure.FormatType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.TextStructure.FormatType.Delimited:
-				sb.Append("FormatType.Delimited");
+				writer.Write("FormatType.Delimited");
 				break;
 			case Elastic.Clients.Elasticsearch.TextStructure.FormatType.Ndjson:
-				sb.Append("FormatType.Ndjson");
+				writer.Write("FormatType.Ndjson");
 				break;
 			case Elastic.Clients.Elasticsearch.TextStructure.FormatType.SemiStructuredText:
-				sb.Append("FormatType.SemiStructuredText");
+				writer.Write("FormatType.SemiStructuredText");
 				break;
 			case Elastic.Clients.Elasticsearch.TextStructure.FormatType.Xml:
-				sb.Append("FormatType.Xml");
+				writer.Write("FormatType.Xml");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

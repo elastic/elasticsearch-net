@@ -25,57 +25,57 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public static class UnassignedInformationReasonCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.AllocationFailed:
-				sb.Append("UnassignedInformationReason.AllocationFailed");
+				writer.Write("UnassignedInformationReason.AllocationFailed");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.ClusterRecovered:
-				sb.Append("UnassignedInformationReason.ClusterRecovered");
+				writer.Write("UnassignedInformationReason.ClusterRecovered");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.DanglingIndexImported:
-				sb.Append("UnassignedInformationReason.DanglingIndexImported");
+				writer.Write("UnassignedInformationReason.DanglingIndexImported");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.ExistingIndexRestored:
-				sb.Append("UnassignedInformationReason.ExistingIndexRestored");
+				writer.Write("UnassignedInformationReason.ExistingIndexRestored");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.ForcedEmptyPrimary:
-				sb.Append("UnassignedInformationReason.ForcedEmptyPrimary");
+				writer.Write("UnassignedInformationReason.ForcedEmptyPrimary");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.IndexCreated:
-				sb.Append("UnassignedInformationReason.IndexCreated");
+				writer.Write("UnassignedInformationReason.IndexCreated");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.IndexReopened:
-				sb.Append("UnassignedInformationReason.IndexReopened");
+				writer.Write("UnassignedInformationReason.IndexReopened");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.ManualAllocation:
-				sb.Append("UnassignedInformationReason.ManualAllocation");
+				writer.Write("UnassignedInformationReason.ManualAllocation");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.NewIndexRestored:
-				sb.Append("UnassignedInformationReason.NewIndexRestored");
+				writer.Write("UnassignedInformationReason.NewIndexRestored");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.NodeLeft:
-				sb.Append("UnassignedInformationReason.NodeLeft");
+				writer.Write("UnassignedInformationReason.NodeLeft");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.PrimaryFailed:
-				sb.Append("UnassignedInformationReason.PrimaryFailed");
+				writer.Write("UnassignedInformationReason.PrimaryFailed");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.ReallocatedReplica:
-				sb.Append("UnassignedInformationReason.ReallocatedReplica");
+				writer.Write("UnassignedInformationReason.ReallocatedReplica");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.Reinitialized:
-				sb.Append("UnassignedInformationReason.Reinitialized");
+				writer.Write("UnassignedInformationReason.Reinitialized");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.ReplicaAdded:
-				sb.Append("UnassignedInformationReason.ReplicaAdded");
+				writer.Write("UnassignedInformationReason.ReplicaAdded");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.RerouteCancelled:
-				sb.Append("UnassignedInformationReason.RerouteCancelled");
+				writer.Write("UnassignedInformationReason.RerouteCancelled");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

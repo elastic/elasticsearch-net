@@ -25,48 +25,45 @@ namespace Elastic.Clients.Elasticsearch.QueryRules;
 
 public static class QueryRuleCriteriaTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Always:
-				sb.Append("QueryRuleCriteriaType.Always");
+				writer.Write("QueryRuleCriteriaType.Always");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Contains:
-				sb.Append("QueryRuleCriteriaType.Contains");
+				writer.Write("QueryRuleCriteriaType.Contains");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Exact:
-				sb.Append("QueryRuleCriteriaType.Exact");
-				break;
-			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.ExactFuzzy:
-				sb.Append("QueryRuleCriteriaType.ExactFuzzy");
+				writer.Write("QueryRuleCriteriaType.Exact");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Fuzzy:
-				sb.Append("QueryRuleCriteriaType.Fuzzy");
+				writer.Write("QueryRuleCriteriaType.Fuzzy");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Global:
-				sb.Append("QueryRuleCriteriaType.Global");
+				writer.Write("QueryRuleCriteriaType.Global");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Gt:
-				sb.Append("QueryRuleCriteriaType.Gt");
+				writer.Write("QueryRuleCriteriaType.Gt");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Gte:
-				sb.Append("QueryRuleCriteriaType.Gte");
+				writer.Write("QueryRuleCriteriaType.Gte");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Lt:
-				sb.Append("QueryRuleCriteriaType.Lt");
+				writer.Write("QueryRuleCriteriaType.Lt");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Lte:
-				sb.Append("QueryRuleCriteriaType.Lte");
+				writer.Write("QueryRuleCriteriaType.Lte");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Prefix:
-				sb.Append("QueryRuleCriteriaType.Prefix");
+				writer.Write("QueryRuleCriteriaType.Prefix");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Suffix:
-				sb.Append("QueryRuleCriteriaType.Suffix");
+				writer.Write("QueryRuleCriteriaType.Suffix");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

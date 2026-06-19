@@ -25,104 +25,69 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class AnalyzeIndexRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Index is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Index is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			instance.Index.FormatCode(sb);
+			__init.Property("Index");
+			Index.FormatCode(writer);
 		}
 
-		if (instance.Analyzer is not null)
+		if (Analyzer is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Analyzer = ");
-			sb.Append("\"");
-			sb.Append(instance.Analyzer);
-			sb.Append("\"");
+			__init.Property("Analyzer");
+			writer.WriteString(Analyzer);
 		}
 
-		if (instance.Attributes is not null)
+		if (Attributes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Attributes = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Attributes, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Attributes");
+			writer.WriteInlineList(Attributes, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.CharFilter is not null)
+		if (CharFilter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CharFilter = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.CharFilter, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("CharFilter");
+			writer.WriteInlineList(CharFilter, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Explain is not null)
+		if (Explain is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Explain = ");
-			sb.Append(instance.Explain.Value ? "true" : "false");
+			__init.Property("Explain");
+			writer.WriteValue(Explain.Value);
 		}
 
-		if (instance.Field is not null)
+		if (Field is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.Filter is not null)
+		if (Filter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Filter = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Filter, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Filter");
+			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Normalizer is not null)
+		if (Normalizer is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Normalizer = ");
-			sb.Append("\"");
-			sb.Append(instance.Normalizer);
-			sb.Append("\"");
+			__init.Property("Normalizer");
+			writer.WriteString(Normalizer);
 		}
 
-		if (instance.Text is not null)
+		if (Text is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Text = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Text, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Text");
+			writer.WriteInlineList(Text, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Tokenizer is not null)
+		if (Tokenizer is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Tokenizer = ");
-			instance.Tokenizer.FormatCode(sb);
+			__init.Property("Tokenizer");
+			Tokenizer.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public static class SnapshotUpgradeStateCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState.Failed:
-				sb.Append("SnapshotUpgradeState.Failed");
+				writer.Write("SnapshotUpgradeState.Failed");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState.LoadingOldState:
-				sb.Append("SnapshotUpgradeState.LoadingOldState");
+				writer.Write("SnapshotUpgradeState.LoadingOldState");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState.SavingNewState:
-				sb.Append("SnapshotUpgradeState.SavingNewState");
+				writer.Write("SnapshotUpgradeState.SavingNewState");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState.Stopped:
-				sb.Append("SnapshotUpgradeState.Stopped");
+				writer.Write("SnapshotUpgradeState.Stopped");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

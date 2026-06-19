@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.QueryRules;
 
 public static class QueryRuleTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType.Exclude:
-				sb.Append("QueryRuleType.Exclude");
+				writer.Write("QueryRuleType.Exclude");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType.Pinned:
-				sb.Append("QueryRuleType.Pinned");
+				writer.Write("QueryRuleType.Pinned");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -30,6 +30,9 @@ public sealed partial class GetSynonymRequestParameters : Elastic.Transport.Requ
 	/// <include file="GetSynonymRequest.g.xml" path="doc/member[@key='synonyms.get_synonym.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
+	/// <include file="GetSynonymRequest.g.xml" path="doc/member[@key='synonyms.get_synonym.Request#search_after']/*"/>
+	public string? SearchAfter { get => Q<string?>("search_after"); set => Q("search_after", value); }
+
 	/// <include file="GetSynonymRequest.g.xml" path="doc/member[@key='synonyms.get_synonym.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
@@ -67,6 +70,9 @@ public sealed partial class GetSynonymRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <include file="GetSynonymRequest.g.xml" path="doc/member[@key='synonyms.get_synonym.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
+
+	/// <include file="GetSynonymRequest.g.xml" path="doc/member[@key='synonyms.get_synonym.Request#search_after']/*"/>
+	public string? SearchAfter { get => Q<string?>("search_after"); set => Q("search_after", value); }
 
 	/// <include file="GetSynonymRequest.g.xml" path="doc/member[@key='synonyms.get_synonym.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
@@ -109,6 +115,13 @@ public readonly partial struct GetSynonymRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor From(int? value)
 	{
 		Instance.From = value;
+		return this;
+	}
+
+	/// <include file="GetSynonymRequest.g.xml" path="doc/member[@key='synonyms.get_synonym.Request#search_after']/*"/>
+	public Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor SearchAfter(string? value)
+	{
+		Instance.SearchAfter = value;
 		return this;
 	}
 

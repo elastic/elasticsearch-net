@@ -25,152 +25,109 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class UpdateJobRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JobId = ");
-			instance.JobId.FormatCode(sb);
+			__init.Property("JobId");
+			JobId.FormatCode(writer);
 		}
 
-		if (instance.AllowLazyOpen is not null)
+		if (AllowLazyOpen is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowLazyOpen = ");
-			sb.Append(instance.AllowLazyOpen.Value ? "true" : "false");
+			__init.Property("AllowLazyOpen");
+			writer.WriteValue(AllowLazyOpen.Value);
 		}
 
-		if (instance.AnalysisLimits is not null)
+		if (AnalysisLimits is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AnalysisLimits = ");
-			instance.AnalysisLimits.FormatCode(sb);
+			__init.Property("AnalysisLimits");
+			AnalysisLimits.FormatCode(writer);
 		}
 
-		if (instance.BackgroundPersistInterval is not null)
+		if (BackgroundPersistInterval is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BackgroundPersistInterval = ");
-			instance.BackgroundPersistInterval.FormatCode(sb);
+			__init.Property("BackgroundPersistInterval");
+			BackgroundPersistInterval.FormatCode(writer);
 		}
 
-		if (instance.CategorizationFilters is not null)
+		if (CategorizationFilters is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CategorizationFilters = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.CategorizationFilters, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("CategorizationFilters");
+			writer.WriteInlineList(CategorizationFilters, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.CustomSettings is not null)
+		if (CustomSettings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CustomSettings = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.CustomSettings, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("CustomSettings");
+			writer.Write("new() ");
+			writer.WriteInlineList(CustomSettings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.DailyModelSnapshotRetentionAfterDays is not null)
+		if (DailyModelSnapshotRetentionAfterDays is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DailyModelSnapshotRetentionAfterDays = ");
-			sb.Append(instance.DailyModelSnapshotRetentionAfterDays.Value);
-			sb.Append("L");
+			__init.Property("DailyModelSnapshotRetentionAfterDays");
+			writer.WriteValue(DailyModelSnapshotRetentionAfterDays.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Description is not null)
+		if (Description is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
-		if (instance.Detectors is not null)
+		if (Detectors is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Detectors = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Detectors, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Detectors");
+			writer.WriteInlineList(Detectors, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Groups is not null)
+		if (Groups is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Groups = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Groups, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Groups");
+			writer.WriteInlineList(Groups, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.ModelPlotConfig is not null)
+		if (ModelPlotConfig is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelPlotConfig = ");
-			instance.ModelPlotConfig.FormatCode(sb);
+			__init.Property("ModelPlotConfig");
+			ModelPlotConfig.FormatCode(writer);
 		}
 
-		if (instance.ModelPruneWindow is not null)
+		if (ModelPruneWindow is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelPruneWindow = ");
-			instance.ModelPruneWindow.FormatCode(sb);
+			__init.Property("ModelPruneWindow");
+			ModelPruneWindow.FormatCode(writer);
 		}
 
-		if (instance.ModelSnapshotRetentionDays is not null)
+		if (ModelSnapshotRetentionDays is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelSnapshotRetentionDays = ");
-			sb.Append(instance.ModelSnapshotRetentionDays.Value);
-			sb.Append("L");
+			__init.Property("ModelSnapshotRetentionDays");
+			writer.WriteValue(ModelSnapshotRetentionDays.Value);
+			writer.Write("L");
 		}
 
-		if (instance.PerPartitionCategorization is not null)
+		if (PerPartitionCategorization is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PerPartitionCategorization = ");
-			instance.PerPartitionCategorization.FormatCode(sb);
+			__init.Property("PerPartitionCategorization");
+			PerPartitionCategorization.FormatCode(writer);
 		}
 
-		if (instance.RenormalizationWindowDays is not null)
+		if (RenormalizationWindowDays is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RenormalizationWindowDays = ");
-			sb.Append(instance.RenormalizationWindowDays.Value);
-			sb.Append("L");
+			__init.Property("RenormalizationWindowDays");
+			writer.WriteValue(RenormalizationWindowDays.Value);
+			writer.Write("L");
 		}
 
-		if (instance.ResultsRetentionDays is not null)
+		if (ResultsRetentionDays is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ResultsRetentionDays = ");
-			sb.Append(instance.ResultsRetentionDays.Value);
-			sb.Append("L");
+			__init.Property("ResultsRetentionDays");
+			writer.WriteValue(ResultsRetentionDays.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

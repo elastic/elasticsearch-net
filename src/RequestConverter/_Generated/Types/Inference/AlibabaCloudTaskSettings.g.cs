@@ -25,30 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class AlibabaCloudTaskSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.InputType is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (InputType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InputType = ");
-			sb.Append("\"");
-			sb.Append(instance.InputType);
-			sb.Append("\"");
+			__init.Property("InputType");
+			writer.WriteString(InputType);
 		}
 
-		if (instance.ReturnToken is not null)
+		if (ReturnToken is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReturnToken = ");
-			sb.Append(instance.ReturnToken.Value ? "true" : "false");
+			__init.Property("ReturnToken");
+			writer.WriteValue(ReturnToken.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

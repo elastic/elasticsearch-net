@@ -25,68 +25,45 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class PatternAnalyzer : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Flags is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Flags is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Flags = ");
-			sb.Append("\"");
-			sb.Append(instance.Flags);
-			sb.Append("\"");
+			__init.Property("Flags");
+			writer.WriteString(Flags);
 		}
 
-		if (instance.Lowercase is not null)
+		if (Lowercase is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Lowercase = ");
-			sb.Append(instance.Lowercase.Value ? "true" : "false");
+			__init.Property("Lowercase");
+			writer.WriteValue(Lowercase.Value);
 		}
 
-		if (instance.Pattern is not null)
+		if (Pattern is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Pattern = ");
-			sb.Append("\"");
-			sb.Append(instance.Pattern);
-			sb.Append("\"");
+			__init.Property("Pattern");
+			writer.WriteString(Pattern);
 		}
 
-		if (instance.Stopwords is not null)
+		if (Stopwords is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Stopwords = ");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(instance.Stopwords, sb);
+			__init.Property("Stopwords");
+			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(Stopwords, writer);
 		}
 
-		if (instance.StopwordsPath is not null)
+		if (StopwordsPath is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StopwordsPath = ");
-			sb.Append("\"");
-			sb.Append(instance.StopwordsPath);
-			sb.Append("\"");
+			__init.Property("StopwordsPath");
+			writer.WriteString(StopwordsPath);
 		}
 #pragma warning disable CS0618
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 #pragma warning restore CS0618
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

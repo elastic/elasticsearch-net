@@ -25,28 +25,19 @@ namespace Elastic.Clients.Elasticsearch.Core.GetScriptLanguages;
 
 public partial class LanguageContext : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Contexts = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Contexts, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Contexts");
+			writer.WriteInlineList(Contexts, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Language = ");
-			instance.Language.FormatCode(sb);
+			__init.Property("Language");
+			Language.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

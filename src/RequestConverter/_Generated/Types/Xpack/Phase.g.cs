@@ -25,28 +25,19 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class Phase : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Actions = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Actions, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Actions");
+			writer.WriteInlineList(Actions, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinAge = ");
-			sb.Append(instance.MinAge);
+			__init.Property("MinAge");
+			writer.WriteValue(MinAge);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,51 +25,38 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class MlInferenceTrainedModels : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("All = ");
-			instance.All.FormatCode(sb);
+			__init.Property("All");
+			All.FormatCode(writer);
 		}
 
-		if (instance.Count is not null)
+		if (Count is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			instance.Count.FormatCode(sb);
+			__init.Property("Count");
+			Count.FormatCode(writer);
 		}
 
-		if (instance.EstimatedHeapMemoryUsageBytes is not null)
+		if (EstimatedHeapMemoryUsageBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EstimatedHeapMemoryUsageBytes = ");
-			instance.EstimatedHeapMemoryUsageBytes.FormatCode(sb);
+			__init.Property("EstimatedHeapMemoryUsageBytes");
+			EstimatedHeapMemoryUsageBytes.FormatCode(writer);
 		}
 
-		if (instance.EstimatedOperations is not null)
+		if (EstimatedOperations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EstimatedOperations = ");
-			instance.EstimatedOperations.FormatCode(sb);
+			__init.Property("EstimatedOperations");
+			EstimatedOperations.FormatCode(writer);
 		}
 
-		if (instance.ModelSizeBytes is not null)
+		if (ModelSizeBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelSizeBytes = ");
-			instance.ModelSizeBytes.FormatCode(sb);
+			__init.Property("ModelSizeBytes");
+			ModelSizeBytes.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

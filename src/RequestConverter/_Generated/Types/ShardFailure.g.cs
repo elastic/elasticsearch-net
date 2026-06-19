@@ -25,65 +25,44 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class ShardFailure : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Index is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Index is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			sb.Append("\"");
-			sb.Append(instance.Index);
-			sb.Append("\"");
+			__init.Property("Index");
+			writer.WriteString(Index);
 		}
 
-		if (instance.Node is not null)
+		if (Node is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Node = ");
-			sb.Append("\"");
-			sb.Append(instance.Node);
-			sb.Append("\"");
+			__init.Property("Node");
+			writer.WriteString(Node);
 		}
 
-		if (instance.Primary is not null)
+		if (Primary is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Primary = ");
-			sb.Append(instance.Primary.Value ? "true" : "false");
+			__init.Property("Primary");
+			writer.WriteValue(Primary.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Reason = ");
-			instance.Reason.FormatCode(sb);
+			__init.Property("Reason");
+			Reason.FormatCode(writer);
 		}
 
-		if (instance.Shard is not null)
+		if (Shard is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Shard = ");
-			sb.Append(instance.Shard.Value);
+			__init.Property("Shard");
+			writer.WriteValue(Shard.Value);
 		}
 
-		if (instance.Status is not null)
+		if (Status is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Status = ");
-			sb.Append("\"");
-			sb.Append(instance.Status);
-			sb.Append("\"");
+			__init.Property("Status");
+			writer.WriteString(Status);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

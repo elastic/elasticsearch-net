@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class JinaAITextEmbeddingTaskCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask.Classification:
-				sb.Append("JinaAITextEmbeddingTask.Classification");
+				writer.Write("JinaAITextEmbeddingTask.Classification");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask.Clustering:
-				sb.Append("JinaAITextEmbeddingTask.Clustering");
+				writer.Write("JinaAITextEmbeddingTask.Clustering");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask.Ingest:
-				sb.Append("JinaAITextEmbeddingTask.Ingest");
+				writer.Write("JinaAITextEmbeddingTask.Ingest");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask.Search:
-				sb.Append("JinaAITextEmbeddingTask.Search");
+				writer.Write("JinaAITextEmbeddingTask.Search");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

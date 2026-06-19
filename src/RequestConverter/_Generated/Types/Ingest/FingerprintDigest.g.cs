@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public static class FingerprintDigestCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest.Md5:
-				sb.Append("FingerprintDigest.Md5");
+				writer.Write("FingerprintDigest.Md5");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest.MurmurHash3:
-				sb.Append("FingerprintDigest.MurmurHash3");
+				writer.Write("FingerprintDigest.MurmurHash3");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest.Sha1:
-				sb.Append("FingerprintDigest.Sha1");
+				writer.Write("FingerprintDigest.Sha1");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest.Sha256:
-				sb.Append("FingerprintDigest.Sha256");
+				writer.Write("FingerprintDigest.Sha256");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest.Sha512:
-				sb.Append("FingerprintDigest.Sha512");
+				writer.Write("FingerprintDigest.Sha512");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

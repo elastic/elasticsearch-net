@@ -25,116 +25,83 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class ClusterIndices : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Analysis is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Analysis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Analysis = ");
-			instance.Analysis.FormatCode(sb);
+			__init.Property("Analysis");
+			Analysis.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Completion = ");
-			instance.Completion.FormatCode(sb);
+			__init.Property("Completion");
+			Completion.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count);
-			sb.Append("L");
+			__init.Property("Count");
+			writer.WriteValue(Count);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DenseVector = ");
-			instance.DenseVector.FormatCode(sb);
+			__init.Property("DenseVector");
+			DenseVector.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Docs = ");
-			instance.Docs.FormatCode(sb);
+			__init.Property("Docs");
+			Docs.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fielddata = ");
-			instance.Fielddata.FormatCode(sb);
+			__init.Property("Fielddata");
+			Fielddata.FormatCode(writer);
 		}
 
-		if (instance.Mappings is not null)
+		if (Mappings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mappings = ");
-			instance.Mappings.FormatCode(sb);
+			__init.Property("Mappings");
+			Mappings.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryCache = ");
-			instance.QueryCache.FormatCode(sb);
+			__init.Property("QueryCache");
+			QueryCache.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Search = ");
-			instance.Search.FormatCode(sb);
+			__init.Property("Search");
+			Search.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Segments = ");
-			instance.Segments.FormatCode(sb);
+			__init.Property("Segments");
+			Segments.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Shards = ");
-			instance.Shards.FormatCode(sb);
+			__init.Property("Shards");
+			Shards.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SparseVector = ");
-			instance.SparseVector.FormatCode(sb);
+			__init.Property("SparseVector");
+			SparseVector.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Store = ");
-			instance.Store.FormatCode(sb);
+			__init.Property("Store");
+			Store.FormatCode(writer);
 		}
 
-		if (instance.Versions is not null)
+		if (Versions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Versions = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Versions, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Versions");
+			writer.WriteInlineList(Versions, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

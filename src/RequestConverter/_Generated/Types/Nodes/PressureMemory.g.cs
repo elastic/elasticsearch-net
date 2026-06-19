@@ -25,142 +25,109 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class PressureMemory : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.All is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (All is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("All = ");
-			instance.All.FormatCode(sb);
+			__init.Property("All");
+			All.FormatCode(writer);
 		}
 
-		if (instance.AllInBytes is not null)
+		if (AllInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllInBytes = ");
-			sb.Append(instance.AllInBytes.Value);
-			sb.Append("L");
+			__init.Property("AllInBytes");
+			writer.WriteValue(AllInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.CombinedCoordinatingAndPrimary is not null)
+		if (CombinedCoordinatingAndPrimary is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CombinedCoordinatingAndPrimary = ");
-			instance.CombinedCoordinatingAndPrimary.FormatCode(sb);
+			__init.Property("CombinedCoordinatingAndPrimary");
+			CombinedCoordinatingAndPrimary.FormatCode(writer);
 		}
 
-		if (instance.CombinedCoordinatingAndPrimaryInBytes is not null)
+		if (CombinedCoordinatingAndPrimaryInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CombinedCoordinatingAndPrimaryInBytes = ");
-			sb.Append(instance.CombinedCoordinatingAndPrimaryInBytes.Value);
-			sb.Append("L");
+			__init.Property("CombinedCoordinatingAndPrimaryInBytes");
+			writer.WriteValue(CombinedCoordinatingAndPrimaryInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Coordinating is not null)
+		if (Coordinating is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Coordinating = ");
-			instance.Coordinating.FormatCode(sb);
+			__init.Property("Coordinating");
+			Coordinating.FormatCode(writer);
 		}
 
-		if (instance.CoordinatingInBytes is not null)
+		if (CoordinatingInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CoordinatingInBytes = ");
-			sb.Append(instance.CoordinatingInBytes.Value);
-			sb.Append("L");
+			__init.Property("CoordinatingInBytes");
+			writer.WriteValue(CoordinatingInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.CoordinatingRejections is not null)
+		if (CoordinatingRejections is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CoordinatingRejections = ");
-			sb.Append(instance.CoordinatingRejections.Value);
-			sb.Append("L");
+			__init.Property("CoordinatingRejections");
+			writer.WriteValue(CoordinatingRejections.Value);
+			writer.Write("L");
 		}
 
-		if (instance.LargeOperationRejections is not null)
+		if (LargeOperationRejections is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LargeOperationRejections = ");
-			sb.Append(instance.LargeOperationRejections.Value);
-			sb.Append("L");
+			__init.Property("LargeOperationRejections");
+			writer.WriteValue(LargeOperationRejections.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Primary is not null)
+		if (Primary is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Primary = ");
-			instance.Primary.FormatCode(sb);
+			__init.Property("Primary");
+			Primary.FormatCode(writer);
 		}
 
-		if (instance.PrimaryDocumentRejections is not null)
+		if (PrimaryDocumentRejections is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PrimaryDocumentRejections = ");
-			sb.Append(instance.PrimaryDocumentRejections.Value);
-			sb.Append("L");
+			__init.Property("PrimaryDocumentRejections");
+			writer.WriteValue(PrimaryDocumentRejections.Value);
+			writer.Write("L");
 		}
 
-		if (instance.PrimaryInBytes is not null)
+		if (PrimaryInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PrimaryInBytes = ");
-			sb.Append(instance.PrimaryInBytes.Value);
-			sb.Append("L");
+			__init.Property("PrimaryInBytes");
+			writer.WriteValue(PrimaryInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.PrimaryRejections is not null)
+		if (PrimaryRejections is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PrimaryRejections = ");
-			sb.Append(instance.PrimaryRejections.Value);
-			sb.Append("L");
+			__init.Property("PrimaryRejections");
+			writer.WriteValue(PrimaryRejections.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Replica is not null)
+		if (Replica is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Replica = ");
-			instance.Replica.FormatCode(sb);
+			__init.Property("Replica");
+			Replica.FormatCode(writer);
 		}
 
-		if (instance.ReplicaInBytes is not null)
+		if (ReplicaInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReplicaInBytes = ");
-			sb.Append(instance.ReplicaInBytes.Value);
-			sb.Append("L");
+			__init.Property("ReplicaInBytes");
+			writer.WriteValue(ReplicaInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.ReplicaRejections is not null)
+		if (ReplicaRejections is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReplicaRejections = ");
-			sb.Append(instance.ReplicaRejections.Value);
-			sb.Append("L");
+			__init.Property("ReplicaRejections");
+			writer.WriteValue(ReplicaRejections.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

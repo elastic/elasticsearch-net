@@ -25,91 +25,64 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class AutoDateHistogramAggregation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Buckets is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Buckets is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Buckets = ");
-			sb.Append(instance.Buckets.Value);
+			__init.Property("Buckets");
+			writer.WriteValue(Buckets.Value);
 		}
 
-		if (instance.Field is not null)
+		if (Field is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.Format is not null)
+		if (Format is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Format = ");
-			sb.Append("\"");
-			sb.Append(instance.Format);
-			sb.Append("\"");
+			__init.Property("Format");
+			writer.WriteString(Format);
 		}
 
-		if (instance.MinimumInterval is not null)
+		if (MinimumInterval is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinimumInterval = ");
-			Elastic.Clients.Elasticsearch.Aggregations.MinimumIntervalCodeFormatter.FormatCode(instance.MinimumInterval.Value, sb);
+			__init.Property("MinimumInterval");
+			Elastic.Clients.Elasticsearch.Aggregations.MinimumIntervalCodeFormatter.FormatCode(MinimumInterval.Value, writer);
 		}
 
-		if (instance.Missing is not null)
+		if (Missing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Missing = ");
-			sb.Append(instance.Missing.Value);
+			__init.Property("Missing");
+			writer.WriteValue(Missing.Value);
 		}
 
-		if (instance.Offset is not null)
+		if (Offset is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Offset = ");
-			sb.Append("\"");
-			sb.Append(instance.Offset);
-			sb.Append("\"");
+			__init.Property("Offset");
+			writer.WriteString(Offset);
 		}
 
-		if (instance.Params is not null)
+		if (Params is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Params = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Params, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Params");
+			writer.Write("new() ");
+			writer.WriteInlineList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Script is not null)
+		if (Script is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Script = ");
-			instance.Script.FormatCode(sb);
+			__init.Property("Script");
+			Script.FormatCode(writer);
 		}
 
-		if (instance.TimeZone is not null)
+		if (TimeZone is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeZone = ");
-			sb.Append("\"");
-			sb.Append(instance.TimeZone);
-			sb.Append("\"");
+			__init.Property("TimeZone");
+			writer.WriteString(TimeZone);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,20 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class ExtendedRetrieversSearchUsage : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.TextSimilarityReranker is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (TextSimilarityReranker is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TextSimilarityReranker = ");
-			instance.TextSimilarityReranker.FormatCode(sb);
+			__init.Property("TextSimilarityReranker");
+			TextSimilarityReranker.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

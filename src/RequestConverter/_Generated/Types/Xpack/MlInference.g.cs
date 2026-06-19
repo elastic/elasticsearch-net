@@ -25,35 +25,26 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class MlInference : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Deployments is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Deployments is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Deployments = ");
-			instance.Deployments.FormatCode(sb);
+			__init.Property("Deployments");
+			Deployments.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IngestProcessors = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.IngestProcessors, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("IngestProcessors");
+			writer.Write("new() ");
+			writer.WriteInlineList(IngestProcessors, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TrainedModels = ");
-			instance.TrainedModels.FormatCode(sb);
+			__init.Property("TrainedModels");
+			TrainedModels.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

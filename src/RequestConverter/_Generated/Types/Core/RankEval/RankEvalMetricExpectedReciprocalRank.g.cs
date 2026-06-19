@@ -25,27 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
 public partial class RankEvalMetricExpectedReciprocalRank : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.K is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (K is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("K = ");
-			sb.Append(instance.K.Value);
+			__init.Property("K");
+			writer.WriteValue(K.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaximumRelevance = ");
-			sb.Append(instance.MaximumRelevance);
+			__init.Property("MaximumRelevance");
+			writer.WriteValue(MaximumRelevance);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

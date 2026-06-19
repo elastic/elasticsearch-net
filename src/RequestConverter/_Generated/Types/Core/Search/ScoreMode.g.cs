@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public static class ScoreModeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.Search.ScoreMode instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.Search.ScoreMode instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.Search.ScoreMode.Avg:
-				sb.Append("ScoreMode.Avg");
+				writer.Write("ScoreMode.Avg");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.ScoreMode.Max:
-				sb.Append("ScoreMode.Max");
+				writer.Write("ScoreMode.Max");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.ScoreMode.Min:
-				sb.Append("ScoreMode.Min");
+				writer.Write("ScoreMode.Min");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.ScoreMode.Multiply:
-				sb.Append("ScoreMode.Multiply");
+				writer.Write("ScoreMode.Multiply");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.ScoreMode.Total:
-				sb.Append("ScoreMode.Total");
+				writer.Write("ScoreMode.Total");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

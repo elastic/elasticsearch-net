@@ -25,36 +25,25 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
 public partial class DataStreamLifecycleDetails : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.StagnatingBackingIndices is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (StagnatingBackingIndices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StagnatingBackingIndices = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.StagnatingBackingIndices, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("StagnatingBackingIndices");
+			writer.WriteInlineList(StagnatingBackingIndices, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StagnatingBackingIndicesCount = ");
-			sb.Append(instance.StagnatingBackingIndicesCount);
+			__init.Property("StagnatingBackingIndicesCount");
+			writer.WriteValue(StagnatingBackingIndicesCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalBackingIndicesInError = ");
-			sb.Append(instance.TotalBackingIndicesInError);
+			__init.Property("TotalBackingIndicesInError");
+			writer.WriteValue(TotalBackingIndicesInError);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

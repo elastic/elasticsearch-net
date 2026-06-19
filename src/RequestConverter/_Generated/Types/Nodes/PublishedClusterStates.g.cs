@@ -25,39 +25,30 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class PublishedClusterStates : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CompatibleDiffs is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CompatibleDiffs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CompatibleDiffs = ");
-			sb.Append(instance.CompatibleDiffs.Value);
-			sb.Append("L");
+			__init.Property("CompatibleDiffs");
+			writer.WriteValue(CompatibleDiffs.Value);
+			writer.Write("L");
 		}
 
-		if (instance.FullStates is not null)
+		if (FullStates is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FullStates = ");
-			sb.Append(instance.FullStates.Value);
-			sb.Append("L");
+			__init.Property("FullStates");
+			writer.WriteValue(FullStates.Value);
+			writer.Write("L");
 		}
 
-		if (instance.IncompatibleDiffs is not null)
+		if (IncompatibleDiffs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IncompatibleDiffs = ");
-			sb.Append(instance.IncompatibleDiffs.Value);
-			sb.Append("L");
+			__init.Property("IncompatibleDiffs");
+			writer.WriteValue(IncompatibleDiffs.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

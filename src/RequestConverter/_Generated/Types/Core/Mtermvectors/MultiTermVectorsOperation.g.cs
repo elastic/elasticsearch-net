@@ -25,117 +25,88 @@ namespace Elastic.Clients.Elasticsearch.Core.Mtermvectors;
 
 public partial class MultiTermVectorsOperation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Doc is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Doc is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Doc = ");
-			RequestConverter.CodeFormatter.FormatCode(instance.Doc, sb);
+			__init.Property("Doc");
+			writer.WriteValue(Doc);
 		}
 
-		if (instance.Fields is not null)
+		if (Fields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fields = ");
-			instance.Fields.FormatCode(sb);
+			__init.Property("Fields");
+			Fields.FormatCode(writer);
 		}
 
-		if (instance.FieldStatistics is not null)
+		if (FieldStatistics is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FieldStatistics = ");
-			sb.Append(instance.FieldStatistics.Value ? "true" : "false");
+			__init.Property("FieldStatistics");
+			writer.WriteValue(FieldStatistics.Value);
 		}
 
-		if (instance.Filter is not null)
+		if (Filter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Filter = ");
-			instance.Filter.FormatCode(sb);
+			__init.Property("Filter");
+			Filter.FormatCode(writer);
 		}
 
-		if (instance.Id is not null)
+		if (Id is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			instance.Id.FormatCode(sb);
+			__init.Property("Id");
+			Id.FormatCode(writer);
 		}
 
-		if (instance.Index is not null)
+		if (Index is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			instance.Index.FormatCode(sb);
+			__init.Property("Index");
+			Index.FormatCode(writer);
 		}
 
-		if (instance.Offsets is not null)
+		if (Offsets is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Offsets = ");
-			sb.Append(instance.Offsets.Value ? "true" : "false");
+			__init.Property("Offsets");
+			writer.WriteValue(Offsets.Value);
 		}
 
-		if (instance.Payloads is not null)
+		if (Payloads is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Payloads = ");
-			sb.Append(instance.Payloads.Value ? "true" : "false");
+			__init.Property("Payloads");
+			writer.WriteValue(Payloads.Value);
 		}
 
-		if (instance.Positions is not null)
+		if (Positions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Positions = ");
-			sb.Append(instance.Positions.Value ? "true" : "false");
+			__init.Property("Positions");
+			writer.WriteValue(Positions.Value);
 		}
 
-		if (instance.Routing is not null)
+		if (Routing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Routing = ");
-			instance.Routing.FormatCode(sb);
+			__init.Property("Routing");
+			Routing.FormatCode(writer);
 		}
 
-		if (instance.TermStatistics is not null)
+		if (TermStatistics is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TermStatistics = ");
-			sb.Append(instance.TermStatistics.Value ? "true" : "false");
+			__init.Property("TermStatistics");
+			writer.WriteValue(TermStatistics.Value);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append(instance.Version.Value);
-			sb.Append("L");
+			__init.Property("Version");
+			writer.WriteValue(Version.Value);
+			writer.Write("L");
 		}
 
-		if (instance.VersionType is not null)
+		if (VersionType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VersionType = ");
-			Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(instance.VersionType.Value, sb);
+			__init.Property("VersionType");
+			Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

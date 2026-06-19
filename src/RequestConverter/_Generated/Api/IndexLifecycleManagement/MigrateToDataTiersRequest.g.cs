@@ -25,48 +25,33 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
 public partial class MigrateToDataTiersRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.DryRun is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (DryRun is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DryRun = ");
-			sb.Append(instance.DryRun.Value ? "true" : "false");
+			__init.Property("DryRun");
+			writer.WriteValue(DryRun.Value);
 		}
 
-		if (instance.MasterTimeout is not null)
+		if (MasterTimeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MasterTimeout = ");
-			instance.MasterTimeout.FormatCode(sb);
+			__init.Property("MasterTimeout");
+			MasterTimeout.FormatCode(writer);
 		}
 
-		if (instance.LegacyTemplateToDelete is not null)
+		if (LegacyTemplateToDelete is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LegacyTemplateToDelete = ");
-			sb.Append("\"");
-			sb.Append(instance.LegacyTemplateToDelete);
-			sb.Append("\"");
+			__init.Property("LegacyTemplateToDelete");
+			writer.WriteString(LegacyTemplateToDelete);
 		}
 
-		if (instance.NodeAttribute is not null)
+		if (NodeAttribute is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NodeAttribute = ");
-			sb.Append("\"");
-			sb.Append(instance.NodeAttribute);
-			sb.Append("\"");
+			__init.Property("NodeAttribute");
+			writer.WriteString(NodeAttribute);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

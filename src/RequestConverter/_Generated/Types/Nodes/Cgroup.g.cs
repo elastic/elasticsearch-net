@@ -25,36 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class Cgroup : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Cpu is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Cpu is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Cpu = ");
-			instance.Cpu.FormatCode(sb);
+			__init.Property("Cpu");
+			Cpu.FormatCode(writer);
 		}
 
-		if (instance.Cpuacct is not null)
+		if (Cpuacct is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Cpuacct = ");
-			instance.Cpuacct.FormatCode(sb);
+			__init.Property("Cpuacct");
+			Cpuacct.FormatCode(writer);
 		}
 
-		if (instance.Memory is not null)
+		if (Memory is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Memory = ");
-			instance.Memory.FormatCode(sb);
+			__init.Property("Memory");
+			Memory.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

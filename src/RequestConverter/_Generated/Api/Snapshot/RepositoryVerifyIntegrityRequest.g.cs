@@ -25,85 +25,62 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 public partial class RepositoryVerifyIntegrityRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			instance.Name.FormatCode(sb);
+			__init.Property("Name");
+			Name.FormatCode(writer);
 		}
 
-		if (instance.BlobThreadPoolConcurrency is not null)
+		if (BlobThreadPoolConcurrency is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BlobThreadPoolConcurrency = ");
-			sb.Append(instance.BlobThreadPoolConcurrency.Value);
+			__init.Property("BlobThreadPoolConcurrency");
+			writer.WriteValue(BlobThreadPoolConcurrency.Value);
 		}
 
-		if (instance.IndexSnapshotVerificationConcurrency is not null)
+		if (IndexSnapshotVerificationConcurrency is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexSnapshotVerificationConcurrency = ");
-			sb.Append(instance.IndexSnapshotVerificationConcurrency.Value);
+			__init.Property("IndexSnapshotVerificationConcurrency");
+			writer.WriteValue(IndexSnapshotVerificationConcurrency.Value);
 		}
 
-		if (instance.IndexVerificationConcurrency is not null)
+		if (IndexVerificationConcurrency is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexVerificationConcurrency = ");
-			sb.Append(instance.IndexVerificationConcurrency.Value);
+			__init.Property("IndexVerificationConcurrency");
+			writer.WriteValue(IndexVerificationConcurrency.Value);
 		}
 
-		if (instance.MaxBytesPerSec is not null)
+		if (MaxBytesPerSec is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxBytesPerSec = ");
-			sb.Append("\"");
-			sb.Append(instance.MaxBytesPerSec);
-			sb.Append("\"");
+			__init.Property("MaxBytesPerSec");
+			writer.WriteString(MaxBytesPerSec);
 		}
 
-		if (instance.MaxFailedShardSnapshots is not null)
+		if (MaxFailedShardSnapshots is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxFailedShardSnapshots = ");
-			sb.Append(instance.MaxFailedShardSnapshots.Value);
+			__init.Property("MaxFailedShardSnapshots");
+			writer.WriteValue(MaxFailedShardSnapshots.Value);
 		}
 
-		if (instance.MetaThreadPoolConcurrency is not null)
+		if (MetaThreadPoolConcurrency is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MetaThreadPoolConcurrency = ");
-			sb.Append(instance.MetaThreadPoolConcurrency.Value);
+			__init.Property("MetaThreadPoolConcurrency");
+			writer.WriteValue(MetaThreadPoolConcurrency.Value);
 		}
 
-		if (instance.SnapshotVerificationConcurrency is not null)
+		if (SnapshotVerificationConcurrency is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SnapshotVerificationConcurrency = ");
-			sb.Append(instance.SnapshotVerificationConcurrency.Value);
+			__init.Property("SnapshotVerificationConcurrency");
+			writer.WriteValue(SnapshotVerificationConcurrency.Value);
 		}
 
-		if (instance.VerifyBlobContents is not null)
+		if (VerifyBlobContents is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VerifyBlobContents = ");
-			sb.Append(instance.VerifyBlobContents.Value ? "true" : "false");
+			__init.Property("VerifyBlobContents");
+			writer.WriteValue(VerifyBlobContents.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,92 +25,63 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 public partial class GcsRepositorySettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 #pragma warning disable CS0618
-		if (instance.ApplicationName is not null)
+		if (ApplicationName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ApplicationName = ");
-			sb.Append("\"");
-			sb.Append(instance.ApplicationName);
-			sb.Append("\"");
+			__init.Property("ApplicationName");
+			writer.WriteString(ApplicationName);
 		}
 #pragma warning restore CS0618
-		if (instance.BasePath is not null)
+		if (BasePath is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BasePath = ");
-			sb.Append("\"");
-			sb.Append(instance.BasePath);
-			sb.Append("\"");
+			__init.Property("BasePath");
+			writer.WriteString(BasePath);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Bucket = ");
-			sb.Append("\"");
-			sb.Append(instance.Bucket);
-			sb.Append("\"");
+			__init.Property("Bucket");
+			writer.WriteString(Bucket);
 		}
 
-		if (instance.ChunkSize is not null)
+		if (ChunkSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ChunkSize = ");
-			instance.ChunkSize.FormatCode(sb);
+			__init.Property("ChunkSize");
+			ChunkSize.FormatCode(writer);
 		}
 
-		if (instance.Client is not null)
+		if (Client is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Client = ");
-			sb.Append("\"");
-			sb.Append(instance.Client);
-			sb.Append("\"");
+			__init.Property("Client");
+			writer.WriteString(Client);
 		}
 
-		if (instance.Compress is not null)
+		if (Compress is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Compress = ");
-			sb.Append(instance.Compress.Value ? "true" : "false");
+			__init.Property("Compress");
+			writer.WriteValue(Compress.Value);
 		}
 
-		if (instance.MaxRestoreBytesPerSec is not null)
+		if (MaxRestoreBytesPerSec is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxRestoreBytesPerSec = ");
-			instance.MaxRestoreBytesPerSec.FormatCode(sb);
+			__init.Property("MaxRestoreBytesPerSec");
+			MaxRestoreBytesPerSec.FormatCode(writer);
 		}
 
-		if (instance.MaxSnapshotBytesPerSec is not null)
+		if (MaxSnapshotBytesPerSec is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxSnapshotBytesPerSec = ");
-			instance.MaxSnapshotBytesPerSec.FormatCode(sb);
+			__init.Property("MaxSnapshotBytesPerSec");
+			MaxSnapshotBytesPerSec.FormatCode(writer);
 		}
 
-		if (instance.Readonly is not null)
+		if (Readonly is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Readonly = ");
-			sb.Append(instance.Readonly.Value ? "true" : "false");
+			__init.Property("Readonly");
+			writer.WriteValue(Readonly.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,110 +25,83 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class AggregationBreakdown : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BuildAggregation = ");
-			sb.Append(instance.BuildAggregation);
-			sb.Append("L");
+			__init.Property("BuildAggregation");
+			writer.WriteValue(BuildAggregation);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BuildAggregationCount = ");
-			sb.Append(instance.BuildAggregationCount);
-			sb.Append("L");
+			__init.Property("BuildAggregationCount");
+			writer.WriteValue(BuildAggregationCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BuildLeafCollector = ");
-			sb.Append(instance.BuildLeafCollector);
-			sb.Append("L");
+			__init.Property("BuildLeafCollector");
+			writer.WriteValue(BuildLeafCollector);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BuildLeafCollectorCount = ");
-			sb.Append(instance.BuildLeafCollectorCount);
-			sb.Append("L");
+			__init.Property("BuildLeafCollectorCount");
+			writer.WriteValue(BuildLeafCollectorCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Collect = ");
-			sb.Append(instance.Collect);
-			sb.Append("L");
+			__init.Property("Collect");
+			writer.WriteValue(Collect);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CollectCount = ");
-			sb.Append(instance.CollectCount);
-			sb.Append("L");
+			__init.Property("CollectCount");
+			writer.WriteValue(CollectCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Initialize = ");
-			sb.Append(instance.Initialize);
-			sb.Append("L");
+			__init.Property("Initialize");
+			writer.WriteValue(Initialize);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InitializeCount = ");
-			sb.Append(instance.InitializeCount);
-			sb.Append("L");
+			__init.Property("InitializeCount");
+			writer.WriteValue(InitializeCount);
+			writer.Write("L");
 		}
 
-		if (instance.PostCollection is not null)
+		if (PostCollection is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PostCollection = ");
-			sb.Append(instance.PostCollection.Value);
-			sb.Append("L");
+			__init.Property("PostCollection");
+			writer.WriteValue(PostCollection.Value);
+			writer.Write("L");
 		}
 
-		if (instance.PostCollectionCount is not null)
+		if (PostCollectionCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PostCollectionCount = ");
-			sb.Append(instance.PostCollectionCount.Value);
-			sb.Append("L");
+			__init.Property("PostCollectionCount");
+			writer.WriteValue(PostCollectionCount.Value);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Reduce = ");
-			sb.Append(instance.Reduce);
-			sb.Append("L");
+			__init.Property("Reduce");
+			writer.WriteValue(Reduce);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReduceCount = ");
-			sb.Append(instance.ReduceCount);
-			sb.Append("L");
+			__init.Property("ReduceCount");
+			writer.WriteValue(ReduceCount);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

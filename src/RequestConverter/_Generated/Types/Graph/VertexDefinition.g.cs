@@ -25,65 +25,46 @@ namespace Elastic.Clients.Elasticsearch.Graph;
 
 public partial class VertexDefinition : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Exclude is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Exclude is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Exclude = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Exclude, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Exclude");
+			writer.WriteInlineList(Exclude, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.Include is not null)
+		if (Include is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Include = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Include, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Include");
+			writer.WriteInlineList(Include, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.MinDocCount is not null)
+		if (MinDocCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinDocCount = ");
-			sb.Append(instance.MinDocCount.Value);
-			sb.Append("L");
+			__init.Property("MinDocCount");
+			writer.WriteValue(MinDocCount.Value);
+			writer.Write("L");
 		}
 
-		if (instance.ShardMinDocCount is not null)
+		if (ShardMinDocCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShardMinDocCount = ");
-			sb.Append(instance.ShardMinDocCount.Value);
-			sb.Append("L");
+			__init.Property("ShardMinDocCount");
+			writer.WriteValue(ShardMinDocCount.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append(instance.Size.Value);
+			__init.Property("Size");
+			writer.WriteValue(Size.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

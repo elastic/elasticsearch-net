@@ -25,94 +25,69 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class FieldTypes : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count);
+			__init.Property("Count");
+			writer.WriteValue(Count);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexCount = ");
-			sb.Append(instance.IndexCount);
+			__init.Property("IndexCount");
+			writer.WriteValue(IndexCount);
 		}
 
-		if (instance.IndexedVectorCount is not null)
+		if (IndexedVectorCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexedVectorCount = ");
-			sb.Append(instance.IndexedVectorCount.Value);
+			__init.Property("IndexedVectorCount");
+			writer.WriteValue(IndexedVectorCount.Value);
 		}
 
-		if (instance.IndexedVectorDimMax is not null)
+		if (IndexedVectorDimMax is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexedVectorDimMax = ");
-			sb.Append(instance.IndexedVectorDimMax.Value);
+			__init.Property("IndexedVectorDimMax");
+			writer.WriteValue(IndexedVectorDimMax.Value);
 		}
 
-		if (instance.IndexedVectorDimMin is not null)
+		if (IndexedVectorDimMin is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexedVectorDimMin = ");
-			sb.Append(instance.IndexedVectorDimMin.Value);
+			__init.Property("IndexedVectorDimMin");
+			writer.WriteValue(IndexedVectorDimMin.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
-		if (instance.ScriptCount is not null)
+		if (ScriptCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ScriptCount = ");
-			sb.Append(instance.ScriptCount.Value);
+			__init.Property("ScriptCount");
+			writer.WriteValue(ScriptCount.Value);
 		}
 
-		if (instance.VectorElementTypeCount is not null)
+		if (VectorElementTypeCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VectorElementTypeCount = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.VectorElementTypeCount, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append(v); }, sb);
+			__init.Property("VectorElementTypeCount");
+			writer.Write("new() ");
+			writer.WriteInlineList(VectorElementTypeCount, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.VectorIndexTypeCount is not null)
+		if (VectorIndexTypeCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VectorIndexTypeCount = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.VectorIndexTypeCount, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append(v); }, sb);
+			__init.Property("VectorIndexTypeCount");
+			writer.Write("new() ");
+			writer.WriteInlineList(VectorIndexTypeCount, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.VectorSimilarityTypeCount is not null)
+		if (VectorSimilarityTypeCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VectorSimilarityTypeCount = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.VectorSimilarityTypeCount, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append(v); }, sb);
+			__init.Property("VectorSimilarityTypeCount");
+			writer.Write("new() ");
+			writer.WriteInlineList(VectorSimilarityTypeCount, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

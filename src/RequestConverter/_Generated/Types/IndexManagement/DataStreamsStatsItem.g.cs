@@ -25,51 +25,36 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class DataStreamsStatsItem : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BackingIndices = ");
-			sb.Append(instance.BackingIndices);
+			__init.Property("BackingIndices");
+			writer.WriteValue(BackingIndices);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DataStream = ");
-			sb.Append("\"");
-			sb.Append(instance.DataStream);
-			sb.Append("\"");
+			__init.Property("DataStream");
+			writer.WriteString(DataStream);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaximumTimestamp = ");
-			sb.Append(instance.MaximumTimestamp);
+			__init.Property("MaximumTimestamp");
+			writer.WriteValue(MaximumTimestamp);
 		}
 
-		if (instance.StoreSize is not null)
+		if (StoreSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StoreSize = ");
-			instance.StoreSize.FormatCode(sb);
+			__init.Property("StoreSize");
+			StoreSize.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StoreSizeBytes = ");
-			sb.Append(instance.StoreSizeBytes);
-			sb.Append("L");
+			__init.Property("StoreSizeBytes");
+			writer.WriteValue(StoreSizeBytes);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

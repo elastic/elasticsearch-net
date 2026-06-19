@@ -25,26 +25,19 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class HttpRoute : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Requests = ");
-			instance.Requests.FormatCode(sb);
+			__init.Property("Requests");
+			Requests.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Responses = ");
-			instance.Responses.FormatCode(sb);
+			__init.Property("Responses");
+			Responses.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

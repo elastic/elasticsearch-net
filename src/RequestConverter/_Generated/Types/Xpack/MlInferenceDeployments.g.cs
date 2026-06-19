@@ -25,40 +25,29 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class MlInferenceDeployments : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count);
+			__init.Property("Count");
+			writer.WriteValue(Count);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InferenceCounts = ");
-			instance.InferenceCounts.FormatCode(sb);
+			__init.Property("InferenceCounts");
+			InferenceCounts.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelSizesBytes = ");
-			instance.ModelSizesBytes.FormatCode(sb);
+			__init.Property("ModelSizesBytes");
+			ModelSizesBytes.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeMs = ");
-			instance.TimeMs.FormatCode(sb);
+			__init.Property("TimeMs");
+			TimeMs.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

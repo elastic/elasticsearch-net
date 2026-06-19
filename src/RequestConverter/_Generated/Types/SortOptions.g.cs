@@ -25,52 +25,39 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class SortOptions : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Doc is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Doc is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Doc = ");
-			instance.Doc.FormatCode(sb);
+			__init.Property("Doc");
+			Doc.FormatCode(writer);
 		}
 
-		if (instance.Field is not null)
+		if (Field is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.GeoDistance is not null)
+		if (GeoDistance is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GeoDistance = ");
-			instance.GeoDistance.FormatCode(sb);
+			__init.Property("GeoDistance");
+			GeoDistance.FormatCode(writer);
 		}
 
-		if (instance.Score is not null)
+		if (Score is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Score = ");
-			instance.Score.FormatCode(sb);
+			__init.Property("Score");
+			Score.FormatCode(writer);
 		}
 
-		if (instance.Script is not null)
+		if (Script is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Script = ");
-			instance.Script.FormatCode(sb);
+			__init.Property("Script");
+			Script.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

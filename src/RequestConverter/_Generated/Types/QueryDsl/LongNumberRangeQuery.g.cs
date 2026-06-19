@@ -21,32 +21,65 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
 
-namespace Elastic.Clients.Elasticsearch.IndexManagement;
+namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public partial class IndexSamplingConfiguration : RequestConverter.ICodeFormattable
+public partial class LongNumberRangeQuery : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
+		if (Boost is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Configuration = ");
-			instance.Configuration.FormatCode(sb);
+			__init.Property("Boost");
+			writer.WriteValue(Boost.Value);
+			writer.Write("f");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			sb.Append("\"");
-			sb.Append(instance.Index);
-			sb.Append("\"");
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		if (Gt is not null)
+		{
+			__init.Property("Gt");
+			writer.WriteValue(Gt.Value);
+			writer.Write("L");
+		}
+
+		if (Gte is not null)
+		{
+			__init.Property("Gte");
+			writer.WriteValue(Gte.Value);
+			writer.Write("L");
+		}
+
+		if (Lt is not null)
+		{
+			__init.Property("Lt");
+			writer.WriteValue(Lt.Value);
+			writer.Write("L");
+		}
+
+		if (Lte is not null)
+		{
+			__init.Property("Lte");
+			writer.WriteValue(Lte.Value);
+			writer.Write("L");
+		}
+
+		if (QueryName is not null)
+		{
+			__init.Property("QueryName");
+			writer.WriteString(QueryName);
+		}
+
+		if (Relation is not null)
+		{
+			__init.Property("Relation");
+			Elastic.Clients.Elasticsearch.QueryDsl.RangeRelationCodeFormatter.FormatCode(Relation.Value, writer);
+		}
+
+		__init.Dispose();
 	}
 }

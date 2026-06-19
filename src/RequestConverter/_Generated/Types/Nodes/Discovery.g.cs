@@ -25,53 +25,40 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class Discovery : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ClusterApplierStats is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ClusterApplierStats is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ClusterApplierStats = ");
-			instance.ClusterApplierStats.FormatCode(sb);
+			__init.Property("ClusterApplierStats");
+			ClusterApplierStats.FormatCode(writer);
 		}
 
-		if (instance.ClusterStateQueue is not null)
+		if (ClusterStateQueue is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ClusterStateQueue = ");
-			instance.ClusterStateQueue.FormatCode(sb);
+			__init.Property("ClusterStateQueue");
+			ClusterStateQueue.FormatCode(writer);
 		}
 
-		if (instance.ClusterStateUpdate is not null)
+		if (ClusterStateUpdate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ClusterStateUpdate = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.ClusterStateUpdate, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("ClusterStateUpdate");
+			writer.Write("new() ");
+			writer.WriteInlineList(ClusterStateUpdate, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.PublishedClusterStates is not null)
+		if (PublishedClusterStates is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PublishedClusterStates = ");
-			instance.PublishedClusterStates.FormatCode(sb);
+			__init.Property("PublishedClusterStates");
+			PublishedClusterStates.FormatCode(writer);
 		}
 
-		if (instance.SerializedClusterStates is not null)
+		if (SerializedClusterStates is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SerializedClusterStates = ");
-			instance.SerializedClusterStates.FormatCode(sb);
+			__init.Property("SerializedClusterStates");
+			SerializedClusterStates.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

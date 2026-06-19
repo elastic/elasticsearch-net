@@ -25,67 +25,46 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class OverallBucket : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BucketSpan = ");
-			sb.Append(instance.BucketSpan);
+			__init.Property("BucketSpan");
+			writer.WriteValue(BucketSpan);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IsInterim = ");
-			sb.Append(instance.IsInterim ? "true" : "false");
+			__init.Property("IsInterim");
+			writer.WriteValue(IsInterim);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Jobs = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Jobs, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Jobs");
+			writer.WriteInlineList(Jobs, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OverallScore = ");
-			sb.Append(instance.OverallScore);
-			sb.Append("d");
+			__init.Property("OverallScore");
+			writer.WriteValue(OverallScore);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ResultType = ");
-			sb.Append("\"");
-			sb.Append(instance.ResultType);
-			sb.Append("\"");
+			__init.Property("ResultType");
+			writer.WriteString(ResultType);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timestamp = ");
-			sb.Append(instance.Timestamp);
+			__init.Property("Timestamp");
+			writer.WriteValue(Timestamp);
 		}
 
-		if (instance.TimestampString is not null)
+		if (TimestampString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimestampString = ");
-			sb.Append(instance.TimestampString.Value);
+			__init.Property("TimestampString");
+			writer.WriteValue(TimestampString.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

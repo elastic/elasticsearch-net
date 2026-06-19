@@ -25,46 +25,33 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class IndexingSlowlogSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Level is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Level is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Level = ");
-			sb.Append("\"");
-			sb.Append(instance.Level);
-			sb.Append("\"");
+			__init.Property("Level");
+			writer.WriteString(Level);
 		}
 
-		if (instance.Reformat is not null)
+		if (Reformat is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Reformat = ");
-			sb.Append(instance.Reformat.Value ? "true" : "false");
+			__init.Property("Reformat");
+			writer.WriteValue(Reformat.Value);
 		}
 
-		if (instance.Source is not null)
+		if (Source is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Source = ");
-			sb.Append(instance.Source.Value);
+			__init.Property("Source");
+			writer.WriteValue(Source.Value);
 		}
 
-		if (instance.Threshold is not null)
+		if (Threshold is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Threshold = ");
-			instance.Threshold.FormatCode(sb);
+			__init.Property("Threshold");
+			Threshold.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

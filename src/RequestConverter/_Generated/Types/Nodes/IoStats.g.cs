@@ -25,30 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class IoStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Devices is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Devices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Devices = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Devices, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Devices");
+			writer.WriteInlineList(Devices, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Total is not null)
+		if (Total is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			instance.Total.FormatCode(sb);
+			__init.Property("Total");
+			Total.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

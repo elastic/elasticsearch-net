@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class TaskTypeHuggingFaceCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.TaskTypeHuggingFace instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.TaskTypeHuggingFace instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeHuggingFace.ChatCompletion:
-				sb.Append("TaskTypeHuggingFace.ChatCompletion");
+				writer.Write("TaskTypeHuggingFace.ChatCompletion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeHuggingFace.Completion:
-				sb.Append("TaskTypeHuggingFace.Completion");
+				writer.Write("TaskTypeHuggingFace.Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeHuggingFace.Rerank:
-				sb.Append("TaskTypeHuggingFace.Rerank");
+				writer.Write("TaskTypeHuggingFace.Rerank");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeHuggingFace.TextEmbedding:
-				sb.Append("TaskTypeHuggingFace.TextEmbedding");
+				writer.Write("TaskTypeHuggingFace.TextEmbedding");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -25,50 +25,35 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class PutTrainedModelDefinitionPartRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelId = ");
-			instance.ModelId.FormatCode(sb);
+			__init.Property("ModelId");
+			ModelId.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Part = ");
-			sb.Append(instance.Part);
+			__init.Property("Part");
+			writer.WriteValue(Part);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Definition = ");
-			sb.Append("\"");
-			sb.Append(instance.Definition);
-			sb.Append("\"");
+			__init.Property("Definition");
+			writer.WriteString(Definition);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalDefinitionLength = ");
-			sb.Append(instance.TotalDefinitionLength);
-			sb.Append("L");
+			__init.Property("TotalDefinitionLength");
+			writer.WriteValue(TotalDefinitionLength);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalParts = ");
-			sb.Append(instance.TotalParts);
+			__init.Property("TotalParts");
+			writer.WriteValue(TotalParts);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

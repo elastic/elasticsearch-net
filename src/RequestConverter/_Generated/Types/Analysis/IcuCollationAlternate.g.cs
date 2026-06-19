@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public static class IcuCollationAlternateCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate.NonIgnorable:
-				sb.Append("IcuCollationAlternate.NonIgnorable");
+				writer.Write("IcuCollationAlternate.NonIgnorable");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate.Shifted:
-				sb.Append("IcuCollationAlternate.Shifted");
+				writer.Write("IcuCollationAlternate.Shifted");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

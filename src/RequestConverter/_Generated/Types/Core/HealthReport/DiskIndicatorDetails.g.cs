@@ -25,52 +25,39 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
 public partial class DiskIndicatorDetails : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndicesWithReadonlyBlock = ");
-			sb.Append(instance.IndicesWithReadonlyBlock);
-			sb.Append("L");
+			__init.Property("IndicesWithReadonlyBlock");
+			writer.WriteValue(IndicesWithReadonlyBlock);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NodesOverFloodStageWatermark = ");
-			sb.Append(instance.NodesOverFloodStageWatermark);
-			sb.Append("L");
+			__init.Property("NodesOverFloodStageWatermark");
+			writer.WriteValue(NodesOverFloodStageWatermark);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NodesOverHighWatermark = ");
-			sb.Append(instance.NodesOverHighWatermark);
-			sb.Append("L");
+			__init.Property("NodesOverHighWatermark");
+			writer.WriteValue(NodesOverHighWatermark);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NodesWithEnoughDiskSpace = ");
-			sb.Append(instance.NodesWithEnoughDiskSpace);
-			sb.Append("L");
+			__init.Property("NodesWithEnoughDiskSpace");
+			writer.WriteValue(NodesWithEnoughDiskSpace);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NodesWithUnknownDiskStatus = ");
-			sb.Append(instance.NodesWithUnknownDiskStatus);
-			sb.Append("L");
+			__init.Property("NodesWithUnknownDiskStatus");
+			writer.WriteValue(NodesWithUnknownDiskStatus);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

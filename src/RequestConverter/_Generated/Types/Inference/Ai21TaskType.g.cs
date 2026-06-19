@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class Ai21TaskTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.Ai21TaskType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.Ai21TaskType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.Ai21TaskType.ChatCompletion:
-				sb.Append("Ai21TaskType.ChatCompletion");
+				writer.Write("Ai21TaskType.ChatCompletion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.Ai21TaskType.Completion:
-				sb.Append("Ai21TaskType.Completion");
+				writer.Write("Ai21TaskType.Completion");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

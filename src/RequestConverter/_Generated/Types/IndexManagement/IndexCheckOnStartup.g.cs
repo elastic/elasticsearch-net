@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public static class IndexCheckOnStartupCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.Checksum:
-				sb.Append("IndexCheckOnStartup.Checksum");
+				writer.Write("IndexCheckOnStartup.Checksum");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.False:
-				sb.Append("IndexCheckOnStartup.False");
+				writer.Write("IndexCheckOnStartup.False");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.True:
-				sb.Append("IndexCheckOnStartup.True");
+				writer.Write("IndexCheckOnStartup.True");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -25,132 +25,93 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class PutTrainedModelRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelId = ");
-			instance.ModelId.FormatCode(sb);
+			__init.Property("ModelId");
+			ModelId.FormatCode(writer);
 		}
 
-		if (instance.DeferDefinitionDecompression is not null)
+		if (DeferDefinitionDecompression is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DeferDefinitionDecompression = ");
-			sb.Append(instance.DeferDefinitionDecompression.Value ? "true" : "false");
+			__init.Property("DeferDefinitionDecompression");
+			writer.WriteValue(DeferDefinitionDecompression.Value);
 		}
 
-		if (instance.WaitForCompletion is not null)
+		if (WaitForCompletion is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WaitForCompletion = ");
-			sb.Append(instance.WaitForCompletion.Value ? "true" : "false");
+			__init.Property("WaitForCompletion");
+			writer.WriteValue(WaitForCompletion.Value);
 		}
 
-		if (instance.CompressedDefinition is not null)
+		if (CompressedDefinition is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CompressedDefinition = ");
-			sb.Append("\"");
-			sb.Append(instance.CompressedDefinition);
-			sb.Append("\"");
+			__init.Property("CompressedDefinition");
+			writer.WriteString(CompressedDefinition);
 		}
 
-		if (instance.Definition is not null)
+		if (Definition is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Definition = ");
-			instance.Definition.FormatCode(sb);
+			__init.Property("Definition");
+			Definition.FormatCode(writer);
 		}
 
-		if (instance.Description is not null)
+		if (Description is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
-		if (instance.InferenceConfig is not null)
+		if (InferenceConfig is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InferenceConfig = ");
-			instance.InferenceConfig.FormatCode(sb);
+			__init.Property("InferenceConfig");
+			InferenceConfig.FormatCode(writer);
 		}
 
-		if (instance.Input is not null)
+		if (Input is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Input = ");
-			instance.Input.FormatCode(sb);
+			__init.Property("Input");
+			Input.FormatCode(writer);
 		}
 
-		if (instance.Metadata is not null)
+		if (Metadata is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Metadata = ");
-			RequestConverter.CodeFormatter.FormatCode(instance.Metadata, sb);
+			__init.Property("Metadata");
+			writer.WriteValue(Metadata);
 		}
 
-		if (instance.ModelSizeBytes is not null)
+		if (ModelSizeBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelSizeBytes = ");
-			sb.Append(instance.ModelSizeBytes.Value);
-			sb.Append("L");
+			__init.Property("ModelSizeBytes");
+			writer.WriteValue(ModelSizeBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.ModelType is not null)
+		if (ModelType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelType = ");
-			Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTypeCodeFormatter.FormatCode(instance.ModelType.Value, sb);
+			__init.Property("ModelType");
+			Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTypeCodeFormatter.FormatCode(ModelType.Value, writer);
 		}
 
-		if (instance.PlatformArchitecture is not null)
+		if (PlatformArchitecture is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PlatformArchitecture = ");
-			sb.Append("\"");
-			sb.Append(instance.PlatformArchitecture);
-			sb.Append("\"");
+			__init.Property("PlatformArchitecture");
+			writer.WriteString(PlatformArchitecture);
 		}
 
-		if (instance.PrefixStrings is not null)
+		if (PrefixStrings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PrefixStrings = ");
-			instance.PrefixStrings.FormatCode(sb);
+			__init.Property("PrefixStrings");
+			PrefixStrings.FormatCode(writer);
 		}
 
-		if (instance.Tags is not null)
+		if (Tags is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Tags = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Tags, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Tags");
+			writer.WriteInlineList(Tags, (w, item) => { w.WriteString(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

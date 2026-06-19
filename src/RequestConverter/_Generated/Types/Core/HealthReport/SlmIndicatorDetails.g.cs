@@ -25,35 +25,26 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
 public partial class SlmIndicatorDetails : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Policies = ");
-			sb.Append(instance.Policies);
-			sb.Append("L");
+			__init.Property("Policies");
+			writer.WriteValue(Policies);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SlmStatus = ");
-			Elastic.Clients.Elasticsearch.LifecycleOperationModeCodeFormatter.FormatCode(instance.SlmStatus, sb);
+			__init.Property("SlmStatus");
+			Elastic.Clients.Elasticsearch.LifecycleOperationModeCodeFormatter.FormatCode(SlmStatus, writer);
 		}
 
-		if (instance.UnhealthyPolicies is not null)
+		if (UnhealthyPolicies is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UnhealthyPolicies = ");
-			instance.UnhealthyPolicies.FormatCode(sb);
+			__init.Property("UnhealthyPolicies");
+			UnhealthyPolicies.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

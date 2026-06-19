@@ -25,123 +25,123 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public static class StopWordLanguageCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Arabic:
-				sb.Append("StopWordLanguage.Arabic");
+				writer.Write("StopWordLanguage.Arabic");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Armenian:
-				sb.Append("StopWordLanguage.Armenian");
+				writer.Write("StopWordLanguage.Armenian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Basque:
-				sb.Append("StopWordLanguage.Basque");
+				writer.Write("StopWordLanguage.Basque");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Bengali:
-				sb.Append("StopWordLanguage.Bengali");
+				writer.Write("StopWordLanguage.Bengali");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Brazilian:
-				sb.Append("StopWordLanguage.Brazilian");
+				writer.Write("StopWordLanguage.Brazilian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Bulgarian:
-				sb.Append("StopWordLanguage.Bulgarian");
+				writer.Write("StopWordLanguage.Bulgarian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Catalan:
-				sb.Append("StopWordLanguage.Catalan");
+				writer.Write("StopWordLanguage.Catalan");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Cjk:
-				sb.Append("StopWordLanguage.Cjk");
+				writer.Write("StopWordLanguage.Cjk");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Czech:
-				sb.Append("StopWordLanguage.Czech");
+				writer.Write("StopWordLanguage.Czech");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Danish:
-				sb.Append("StopWordLanguage.Danish");
+				writer.Write("StopWordLanguage.Danish");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Dutch:
-				sb.Append("StopWordLanguage.Dutch");
+				writer.Write("StopWordLanguage.Dutch");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.English:
-				sb.Append("StopWordLanguage.English");
+				writer.Write("StopWordLanguage.English");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Estonian:
-				sb.Append("StopWordLanguage.Estonian");
+				writer.Write("StopWordLanguage.Estonian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Finnish:
-				sb.Append("StopWordLanguage.Finnish");
+				writer.Write("StopWordLanguage.Finnish");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.French:
-				sb.Append("StopWordLanguage.French");
+				writer.Write("StopWordLanguage.French");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Galician:
-				sb.Append("StopWordLanguage.Galician");
+				writer.Write("StopWordLanguage.Galician");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.German:
-				sb.Append("StopWordLanguage.German");
+				writer.Write("StopWordLanguage.German");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Greek:
-				sb.Append("StopWordLanguage.Greek");
+				writer.Write("StopWordLanguage.Greek");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Hindi:
-				sb.Append("StopWordLanguage.Hindi");
+				writer.Write("StopWordLanguage.Hindi");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Hungarian:
-				sb.Append("StopWordLanguage.Hungarian");
+				writer.Write("StopWordLanguage.Hungarian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Indonesian:
-				sb.Append("StopWordLanguage.Indonesian");
+				writer.Write("StopWordLanguage.Indonesian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Irish:
-				sb.Append("StopWordLanguage.Irish");
+				writer.Write("StopWordLanguage.Irish");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Italian:
-				sb.Append("StopWordLanguage.Italian");
+				writer.Write("StopWordLanguage.Italian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Latvian:
-				sb.Append("StopWordLanguage.Latvian");
+				writer.Write("StopWordLanguage.Latvian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Lithuanian:
-				sb.Append("StopWordLanguage.Lithuanian");
+				writer.Write("StopWordLanguage.Lithuanian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.None:
-				sb.Append("StopWordLanguage.None");
+				writer.Write("StopWordLanguage.None");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Norwegian:
-				sb.Append("StopWordLanguage.Norwegian");
+				writer.Write("StopWordLanguage.Norwegian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Persian:
-				sb.Append("StopWordLanguage.Persian");
+				writer.Write("StopWordLanguage.Persian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Portuguese:
-				sb.Append("StopWordLanguage.Portuguese");
+				writer.Write("StopWordLanguage.Portuguese");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Romanian:
-				sb.Append("StopWordLanguage.Romanian");
+				writer.Write("StopWordLanguage.Romanian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Russian:
-				sb.Append("StopWordLanguage.Russian");
+				writer.Write("StopWordLanguage.Russian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Serbian:
-				sb.Append("StopWordLanguage.Serbian");
+				writer.Write("StopWordLanguage.Serbian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Sorani:
-				sb.Append("StopWordLanguage.Sorani");
+				writer.Write("StopWordLanguage.Sorani");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Spanish:
-				sb.Append("StopWordLanguage.Spanish");
+				writer.Write("StopWordLanguage.Spanish");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Swedish:
-				sb.Append("StopWordLanguage.Swedish");
+				writer.Write("StopWordLanguage.Swedish");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Thai:
-				sb.Append("StopWordLanguage.Thai");
+				writer.Write("StopWordLanguage.Thai");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Turkish:
-				sb.Append("StopWordLanguage.Turkish");
+				writer.Write("StopWordLanguage.Turkish");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

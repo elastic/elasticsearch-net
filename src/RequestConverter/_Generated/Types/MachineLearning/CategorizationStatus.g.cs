@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public static class CategorizationStatusCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.CategorizationStatus instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.CategorizationStatus instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.CategorizationStatus.Ok:
-				sb.Append("CategorizationStatus.Ok");
+				writer.Write("CategorizationStatus.Ok");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.CategorizationStatus.Warn:
-				sb.Append("CategorizationStatus.Warn");
+				writer.Write("CategorizationStatus.Warn");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

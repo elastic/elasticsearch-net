@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public static class JobBlockedReasonCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.JobBlockedReason instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.JobBlockedReason instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.JobBlockedReason.Delete:
-				sb.Append("JobBlockedReason.Delete");
+				writer.Write("JobBlockedReason.Delete");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.JobBlockedReason.Reset:
-				sb.Append("JobBlockedReason.Reset");
+				writer.Write("JobBlockedReason.Reset");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.JobBlockedReason.Revert:
-				sb.Append("JobBlockedReason.Revert");
+				writer.Write("JobBlockedReason.Revert");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

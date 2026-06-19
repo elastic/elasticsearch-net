@@ -25,146 +25,103 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class Datafeed : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Aggregations is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Aggregations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Aggregations = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Aggregations, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Aggregations");
+			writer.Write("new() ");
+			writer.WriteInlineList(Aggregations, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Authorization is not null)
+		if (Authorization is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Authorization = ");
-			instance.Authorization.FormatCode(sb);
+			__init.Property("Authorization");
+			Authorization.FormatCode(writer);
 		}
 
-		if (instance.ChunkingConfig is not null)
+		if (ChunkingConfig is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ChunkingConfig = ");
-			instance.ChunkingConfig.FormatCode(sb);
+			__init.Property("ChunkingConfig");
+			ChunkingConfig.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DatafeedId = ");
-			sb.Append("\"");
-			sb.Append(instance.DatafeedId);
-			sb.Append("\"");
+			__init.Property("DatafeedId");
+			writer.WriteString(DatafeedId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DelayedDataCheckConfig = ");
-			instance.DelayedDataCheckConfig.FormatCode(sb);
+			__init.Property("DelayedDataCheckConfig");
+			DelayedDataCheckConfig.FormatCode(writer);
 		}
 
-		if (instance.Frequency is not null)
+		if (Frequency is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Frequency = ");
-			instance.Frequency.FormatCode(sb);
+			__init.Property("Frequency");
+			Frequency.FormatCode(writer);
 		}
 
-		if (instance.Indexes is not null)
+		if (Indexes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indexes = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Indexes, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Indexes");
+			writer.WriteInlineList(Indexes, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indices = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Indices, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Indices");
+			writer.WriteInlineList(Indices, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.IndicesOptions is not null)
+		if (IndicesOptions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndicesOptions = ");
-			instance.IndicesOptions.FormatCode(sb);
+			__init.Property("IndicesOptions");
+			IndicesOptions.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JobId = ");
-			sb.Append("\"");
-			sb.Append(instance.JobId);
-			sb.Append("\"");
+			__init.Property("JobId");
+			writer.WriteString(JobId);
 		}
 
-		if (instance.MaxEmptySearches is not null)
+		if (MaxEmptySearches is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxEmptySearches = ");
-			sb.Append(instance.MaxEmptySearches.Value);
+			__init.Property("MaxEmptySearches");
+			writer.WriteValue(MaxEmptySearches.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			instance.Query.FormatCode(sb);
+			__init.Property("Query");
+			Query.FormatCode(writer);
 		}
 
-		if (instance.QueryDelay is not null)
+		if (QueryDelay is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryDelay = ");
-			instance.QueryDelay.FormatCode(sb);
+			__init.Property("QueryDelay");
+			QueryDelay.FormatCode(writer);
 		}
 
-		if (instance.RuntimeMappings is not null)
+		if (RuntimeMappings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RuntimeMappings = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.RuntimeMappings, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("RuntimeMappings");
+			writer.Write("new() ");
+			writer.WriteInlineList(RuntimeMappings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.ScriptFields is not null)
+		if (ScriptFields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ScriptFields = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.ScriptFields, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("ScriptFields");
+			writer.Write("new() ");
+			writer.WriteInlineList(ScriptFields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.ScrollSize is not null)
+		if (ScrollSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ScrollSize = ");
-			sb.Append(instance.ScrollSize.Value);
+			__init.Property("ScrollSize");
+			writer.WriteValue(ScrollSize.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

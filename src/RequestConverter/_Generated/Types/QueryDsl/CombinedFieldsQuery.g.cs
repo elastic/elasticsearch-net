@@ -25,79 +25,56 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class CombinedFieldsQuery : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AutoGenerateSynonymsPhraseQuery is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AutoGenerateSynonymsPhraseQuery is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AutoGenerateSynonymsPhraseQuery = ");
-			sb.Append(instance.AutoGenerateSynonymsPhraseQuery.Value ? "true" : "false");
+			__init.Property("AutoGenerateSynonymsPhraseQuery");
+			writer.WriteValue(AutoGenerateSynonymsPhraseQuery.Value);
 		}
 
-		if (instance.Boost is not null)
+		if (Boost is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Boost = ");
-			sb.Append(instance.Boost.Value);
-			sb.Append("f");
+			__init.Property("Boost");
+			writer.WriteValue(Boost.Value);
+			writer.Write("f");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fields = ");
-			instance.Fields.FormatCode(sb);
+			__init.Property("Fields");
+			Fields.FormatCode(writer);
 		}
 
-		if (instance.MinimumShouldMatch is not null)
+		if (MinimumShouldMatch is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinimumShouldMatch = ");
-			instance.MinimumShouldMatch.FormatCode(sb);
+			__init.Property("MinimumShouldMatch");
+			MinimumShouldMatch.FormatCode(writer);
 		}
 
-		if (instance.Operator is not null)
+		if (Operator is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Operator = ");
-			Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperatorCodeFormatter.FormatCode(instance.Operator.Value, sb);
+			__init.Property("Operator");
+			Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperatorCodeFormatter.FormatCode(Operator.Value, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			sb.Append("\"");
-			sb.Append(instance.Query);
-			sb.Append("\"");
+			__init.Property("Query");
+			writer.WriteString(Query);
 		}
 
-		if (instance.QueryName is not null)
+		if (QueryName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryName = ");
-			sb.Append("\"");
-			sb.Append(instance.QueryName);
-			sb.Append("\"");
+			__init.Property("QueryName");
+			writer.WriteString(QueryName);
 		}
 
-		if (instance.ZeroTermsQuery is not null)
+		if (ZeroTermsQuery is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ZeroTermsQuery = ");
-			Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTermsCodeFormatter.FormatCode(instance.ZeroTermsQuery.Value, sb);
+			__init.Property("ZeroTermsQuery");
+			Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTermsCodeFormatter.FormatCode(ZeroTermsQuery.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

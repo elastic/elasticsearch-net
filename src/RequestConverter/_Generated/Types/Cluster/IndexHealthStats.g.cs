@@ -25,84 +25,61 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class IndexHealthStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ActivePrimaryShards = ");
-			sb.Append(instance.ActivePrimaryShards);
+			__init.Property("ActivePrimaryShards");
+			writer.WriteValue(ActivePrimaryShards);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ActiveShards = ");
-			sb.Append(instance.ActiveShards);
+			__init.Property("ActiveShards");
+			writer.WriteValue(ActiveShards);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InitializingShards = ");
-			sb.Append(instance.InitializingShards);
+			__init.Property("InitializingShards");
+			writer.WriteValue(InitializingShards);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumberOfReplicas = ");
-			sb.Append(instance.NumberOfReplicas);
+			__init.Property("NumberOfReplicas");
+			writer.WriteValue(NumberOfReplicas);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumberOfShards = ");
-			sb.Append(instance.NumberOfShards);
+			__init.Property("NumberOfShards");
+			writer.WriteValue(NumberOfShards);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RelocatingShards = ");
-			sb.Append(instance.RelocatingShards);
+			__init.Property("RelocatingShards");
+			writer.WriteValue(RelocatingShards);
 		}
 
-		if (instance.Shards is not null)
+		if (Shards is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Shards = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Shards, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Shards");
+			writer.Write("new() ");
+			writer.WriteInlineList(Shards, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Status = ");
-			Elastic.Clients.Elasticsearch.HealthStatusCodeFormatter.FormatCode(instance.Status, sb);
+			__init.Property("Status");
+			Elastic.Clients.Elasticsearch.HealthStatusCodeFormatter.FormatCode(Status, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UnassignedPrimaryShards = ");
-			sb.Append(instance.UnassignedPrimaryShards);
+			__init.Property("UnassignedPrimaryShards");
+			writer.WriteValue(UnassignedPrimaryShards);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UnassignedShards = ");
-			sb.Append(instance.UnassignedShards);
+			__init.Property("UnassignedShards");
+			writer.WriteValue(UnassignedShards);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

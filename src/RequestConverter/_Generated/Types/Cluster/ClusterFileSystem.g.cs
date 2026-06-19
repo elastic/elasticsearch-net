@@ -25,161 +25,118 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class ClusterFileSystem : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Available is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Available is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Available = ");
-			instance.Available.FormatCode(sb);
+			__init.Property("Available");
+			Available.FormatCode(writer);
 		}
 
-		if (instance.AvailableInBytes is not null)
+		if (AvailableInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AvailableInBytes = ");
-			sb.Append(instance.AvailableInBytes.Value);
-			sb.Append("L");
+			__init.Property("AvailableInBytes");
+			writer.WriteValue(AvailableInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.FloodStageFreeSpace is not null)
+		if (FloodStageFreeSpace is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FloodStageFreeSpace = ");
-			instance.FloodStageFreeSpace.FormatCode(sb);
+			__init.Property("FloodStageFreeSpace");
+			FloodStageFreeSpace.FormatCode(writer);
 		}
 
-		if (instance.FloodStageFreeSpaceInBytes is not null)
+		if (FloodStageFreeSpaceInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FloodStageFreeSpaceInBytes = ");
-			sb.Append(instance.FloodStageFreeSpaceInBytes.Value);
-			sb.Append("L");
+			__init.Property("FloodStageFreeSpaceInBytes");
+			writer.WriteValue(FloodStageFreeSpaceInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Free is not null)
+		if (Free is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Free = ");
-			instance.Free.FormatCode(sb);
+			__init.Property("Free");
+			Free.FormatCode(writer);
 		}
 
-		if (instance.FreeInBytes is not null)
+		if (FreeInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FreeInBytes = ");
-			sb.Append(instance.FreeInBytes.Value);
-			sb.Append("L");
+			__init.Property("FreeInBytes");
+			writer.WriteValue(FreeInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.FrozenFloodStageFreeSpace is not null)
+		if (FrozenFloodStageFreeSpace is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FrozenFloodStageFreeSpace = ");
-			instance.FrozenFloodStageFreeSpace.FormatCode(sb);
+			__init.Property("FrozenFloodStageFreeSpace");
+			FrozenFloodStageFreeSpace.FormatCode(writer);
 		}
 
-		if (instance.FrozenFloodStageFreeSpaceInBytes is not null)
+		if (FrozenFloodStageFreeSpaceInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FrozenFloodStageFreeSpaceInBytes = ");
-			sb.Append(instance.FrozenFloodStageFreeSpaceInBytes.Value);
-			sb.Append("L");
+			__init.Property("FrozenFloodStageFreeSpaceInBytes");
+			writer.WriteValue(FrozenFloodStageFreeSpaceInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.HighWatermarkFreeSpace is not null)
+		if (HighWatermarkFreeSpace is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HighWatermarkFreeSpace = ");
-			instance.HighWatermarkFreeSpace.FormatCode(sb);
+			__init.Property("HighWatermarkFreeSpace");
+			HighWatermarkFreeSpace.FormatCode(writer);
 		}
 
-		if (instance.HighWatermarkFreeSpaceInBytes is not null)
+		if (HighWatermarkFreeSpaceInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HighWatermarkFreeSpaceInBytes = ");
-			sb.Append(instance.HighWatermarkFreeSpaceInBytes.Value);
-			sb.Append("L");
+			__init.Property("HighWatermarkFreeSpaceInBytes");
+			writer.WriteValue(HighWatermarkFreeSpaceInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.LowWatermarkFreeSpace is not null)
+		if (LowWatermarkFreeSpace is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LowWatermarkFreeSpace = ");
-			instance.LowWatermarkFreeSpace.FormatCode(sb);
+			__init.Property("LowWatermarkFreeSpace");
+			LowWatermarkFreeSpace.FormatCode(writer);
 		}
 
-		if (instance.LowWatermarkFreeSpaceInBytes is not null)
+		if (LowWatermarkFreeSpaceInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LowWatermarkFreeSpaceInBytes = ");
-			sb.Append(instance.LowWatermarkFreeSpaceInBytes.Value);
-			sb.Append("L");
+			__init.Property("LowWatermarkFreeSpaceInBytes");
+			writer.WriteValue(LowWatermarkFreeSpaceInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Mount is not null)
+		if (Mount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mount = ");
-			sb.Append("\"");
-			sb.Append(instance.Mount);
-			sb.Append("\"");
+			__init.Property("Mount");
+			writer.WriteString(Mount);
 		}
 
-		if (instance.Path is not null)
+		if (Path is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Path = ");
-			sb.Append("\"");
-			sb.Append(instance.Path);
-			sb.Append("\"");
+			__init.Property("Path");
+			writer.WriteString(Path);
 		}
 
-		if (instance.Total is not null)
+		if (Total is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			instance.Total.FormatCode(sb);
+			__init.Property("Total");
+			Total.FormatCode(writer);
 		}
 
-		if (instance.TotalInBytes is not null)
+		if (TotalInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalInBytes = ");
-			sb.Append(instance.TotalInBytes.Value);
-			sb.Append("L");
+			__init.Property("TotalInBytes");
+			writer.WriteValue(TotalInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Type is not null)
+		if (Type is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			sb.Append("\"");
-			sb.Append(instance.Type);
-			sb.Append("\"");
+			__init.Property("Type");
+			writer.WriteString(Type);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

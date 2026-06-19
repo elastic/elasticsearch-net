@@ -25,36 +25,27 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class GetDatafeedsRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.DatafeedId is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (DatafeedId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DatafeedId = ");
-			instance.DatafeedId.FormatCode(sb);
+			__init.Property("DatafeedId");
+			DatafeedId.FormatCode(writer);
 		}
 
-		if (instance.AllowNoMatch is not null)
+		if (AllowNoMatch is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowNoMatch = ");
-			sb.Append(instance.AllowNoMatch.Value ? "true" : "false");
+			__init.Property("AllowNoMatch");
+			writer.WriteValue(AllowNoMatch.Value);
 		}
 
-		if (instance.ExcludeGenerated is not null)
+		if (ExcludeGenerated is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExcludeGenerated = ");
-			sb.Append(instance.ExcludeGenerated.Value ? "true" : "false");
+			__init.Property("ExcludeGenerated");
+			writer.WriteValue(ExcludeGenerated.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

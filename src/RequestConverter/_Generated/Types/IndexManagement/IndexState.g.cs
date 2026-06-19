@@ -25,63 +25,46 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class IndexState : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Aliases is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Aliases is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Aliases = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Aliases, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Aliases");
+			writer.Write("new() ");
+			writer.WriteInlineList(Aliases, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.DataStream is not null)
+		if (DataStream is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DataStream = ");
-			sb.Append("\"");
-			sb.Append(instance.DataStream);
-			sb.Append("\"");
+			__init.Property("DataStream");
+			writer.WriteString(DataStream);
 		}
 
-		if (instance.Defaults is not null)
+		if (Defaults is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Defaults = ");
-			instance.Defaults.FormatCode(sb);
+			__init.Property("Defaults");
+			Defaults.FormatCode(writer);
 		}
 
-		if (instance.Lifecycle is not null)
+		if (Lifecycle is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Lifecycle = ");
-			instance.Lifecycle.FormatCode(sb);
+			__init.Property("Lifecycle");
+			Lifecycle.FormatCode(writer);
 		}
 
-		if (instance.Mappings is not null)
+		if (Mappings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mappings = ");
-			instance.Mappings.FormatCode(sb);
+			__init.Property("Mappings");
+			Mappings.FormatCode(writer);
 		}
 
-		if (instance.Settings is not null)
+		if (Settings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Settings = ");
-			instance.Settings.FormatCode(sb);
+			__init.Property("Settings");
+			Settings.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

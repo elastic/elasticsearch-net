@@ -25,116 +25,81 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class Client : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Agent is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Agent is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Agent = ");
-			sb.Append("\"");
-			sb.Append(instance.Agent);
-			sb.Append("\"");
+			__init.Property("Agent");
+			writer.WriteString(Agent);
 		}
 
-		if (instance.ClosedTimeMillis is not null)
+		if (ClosedTimeMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ClosedTimeMillis = ");
-			sb.Append(instance.ClosedTimeMillis.Value);
-			sb.Append("L");
+			__init.Property("ClosedTimeMillis");
+			writer.WriteValue(ClosedTimeMillis.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Id is not null)
+		if (Id is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			sb.Append(instance.Id.Value);
-			sb.Append("L");
+			__init.Property("Id");
+			writer.WriteValue(Id.Value);
+			writer.Write("L");
 		}
 
-		if (instance.LastRequestTimeMillis is not null)
+		if (LastRequestTimeMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LastRequestTimeMillis = ");
-			sb.Append(instance.LastRequestTimeMillis.Value);
-			sb.Append("L");
+			__init.Property("LastRequestTimeMillis");
+			writer.WriteValue(LastRequestTimeMillis.Value);
+			writer.Write("L");
 		}
 
-		if (instance.LastUri is not null)
+		if (LastUri is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LastUri = ");
-			sb.Append("\"");
-			sb.Append(instance.LastUri);
-			sb.Append("\"");
+			__init.Property("LastUri");
+			writer.WriteString(LastUri);
 		}
 
-		if (instance.LocalAddress is not null)
+		if (LocalAddress is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LocalAddress = ");
-			sb.Append("\"");
-			sb.Append(instance.LocalAddress);
-			sb.Append("\"");
+			__init.Property("LocalAddress");
+			writer.WriteString(LocalAddress);
 		}
 
-		if (instance.OpenedTimeMillis is not null)
+		if (OpenedTimeMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OpenedTimeMillis = ");
-			sb.Append(instance.OpenedTimeMillis.Value);
-			sb.Append("L");
+			__init.Property("OpenedTimeMillis");
+			writer.WriteValue(OpenedTimeMillis.Value);
+			writer.Write("L");
 		}
 
-		if (instance.RemoteAddress is not null)
+		if (RemoteAddress is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RemoteAddress = ");
-			sb.Append("\"");
-			sb.Append(instance.RemoteAddress);
-			sb.Append("\"");
+			__init.Property("RemoteAddress");
+			writer.WriteString(RemoteAddress);
 		}
 
-		if (instance.RequestCount is not null)
+		if (RequestCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RequestCount = ");
-			sb.Append(instance.RequestCount.Value);
-			sb.Append("L");
+			__init.Property("RequestCount");
+			writer.WriteValue(RequestCount.Value);
+			writer.Write("L");
 		}
 
-		if (instance.RequestSizeBytes is not null)
+		if (RequestSizeBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RequestSizeBytes = ");
-			sb.Append(instance.RequestSizeBytes.Value);
-			sb.Append("L");
+			__init.Property("RequestSizeBytes");
+			writer.WriteValue(RequestSizeBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.XOpaqueId is not null)
+		if (XOpaqueId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("XOpaqueId = ");
-			sb.Append("\"");
-			sb.Append(instance.XOpaqueId);
-			sb.Append("\"");
+			__init.Property("XOpaqueId");
+			writer.WriteString(XOpaqueId);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

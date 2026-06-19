@@ -25,21 +25,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class GeoPolygonPoints : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Points = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Points, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Points");
+			writer.WriteInlineList(Points, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

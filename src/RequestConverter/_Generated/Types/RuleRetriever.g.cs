@@ -25,72 +25,49 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class RuleRetriever : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Filter is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Filter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Filter = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Filter, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Filter");
+			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MatchCriteria = ");
-			RequestConverter.CodeFormatter.FormatCode(instance.MatchCriteria, sb);
+			__init.Property("MatchCriteria");
+			writer.WriteValue(MatchCriteria);
 		}
 
-		if (instance.MinScore is not null)
+		if (MinScore is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinScore = ");
-			sb.Append(instance.MinScore.Value);
-			sb.Append("f");
+			__init.Property("MinScore");
+			writer.WriteValue(MinScore.Value);
+			writer.Write("f");
 		}
 
-		if (instance.Name is not null)
+		if (Name is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
-		if (instance.RankWindowSize is not null)
+		if (RankWindowSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RankWindowSize = ");
-			sb.Append(instance.RankWindowSize.Value);
+			__init.Property("RankWindowSize");
+			writer.WriteValue(RankWindowSize.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Retriever = ");
-			instance.Retriever.FormatCode(sb);
+			__init.Property("Retriever");
+			Retriever.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RulesetIds = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.RulesetIds, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("RulesetIds");
+			writer.WriteInlineList(RulesetIds, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

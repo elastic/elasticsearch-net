@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class LifecycleOperationModeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.LifecycleOperationMode instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.LifecycleOperationMode instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.LifecycleOperationMode.Running:
-				sb.Append("LifecycleOperationMode.Running");
+				writer.Write("LifecycleOperationMode.Running");
 				break;
 			case Elastic.Clients.Elasticsearch.LifecycleOperationMode.Stopped:
-				sb.Append("LifecycleOperationMode.Stopped");
+				writer.Write("LifecycleOperationMode.Stopped");
 				break;
 			case Elastic.Clients.Elasticsearch.LifecycleOperationMode.Stopping:
-				sb.Append("LifecycleOperationMode.Stopping");
+				writer.Write("LifecycleOperationMode.Stopping");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

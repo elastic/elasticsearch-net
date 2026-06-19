@@ -25,73 +25,54 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class SecurityRolesDlsBitSetCache : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count);
+			__init.Property("Count");
+			writer.WriteValue(Count);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Evictions = ");
-			sb.Append(instance.Evictions);
-			sb.Append("L");
+			__init.Property("Evictions");
+			writer.WriteValue(Evictions);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Hits = ");
-			sb.Append(instance.Hits);
-			sb.Append("L");
+			__init.Property("Hits");
+			writer.WriteValue(Hits);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HitsTimeInMillis = ");
-			sb.Append(instance.HitsTimeInMillis);
+			__init.Property("HitsTimeInMillis");
+			writer.WriteValue(HitsTimeInMillis);
 		}
 
-		if (instance.Memory is not null)
+		if (Memory is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Memory = ");
-			instance.Memory.FormatCode(sb);
+			__init.Property("Memory");
+			Memory.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MemoryInBytes = ");
-			sb.Append(instance.MemoryInBytes);
-			sb.Append("L");
+			__init.Property("MemoryInBytes");
+			writer.WriteValue(MemoryInBytes);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Misses = ");
-			sb.Append(instance.Misses);
-			sb.Append("L");
+			__init.Property("Misses");
+			writer.WriteValue(Misses);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MissesTimeInMillis = ");
-			sb.Append(instance.MissesTimeInMillis);
+			__init.Property("MissesTimeInMillis");
+			writer.WriteValue(MissesTimeInMillis);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

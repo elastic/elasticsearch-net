@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class ResultCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Result instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Result instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Result.Created:
-				sb.Append("Result.Created");
+				writer.Write("Result.Created");
 				break;
 			case Elastic.Clients.Elasticsearch.Result.Deleted:
-				sb.Append("Result.Deleted");
+				writer.Write("Result.Deleted");
 				break;
 			case Elastic.Clients.Elasticsearch.Result.NoOp:
-				sb.Append("Result.NoOp");
+				writer.Write("Result.NoOp");
 				break;
 			case Elastic.Clients.Elasticsearch.Result.NotFound:
-				sb.Append("Result.NotFound");
+				writer.Write("Result.NotFound");
 				break;
 			case Elastic.Clients.Elasticsearch.Result.Updated:
-				sb.Append("Result.Updated");
+				writer.Write("Result.Updated");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

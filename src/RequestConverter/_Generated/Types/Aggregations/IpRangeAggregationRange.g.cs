@@ -25,42 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class IpRangeAggregationRange : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.From is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (From is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("From = ");
-			sb.Append("\"");
-			sb.Append(instance.From);
-			sb.Append("\"");
+			__init.Property("From");
+			writer.WriteString(From);
 		}
 
-		if (instance.Mask is not null)
+		if (Mask is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mask = ");
-			sb.Append("\"");
-			sb.Append(instance.Mask);
-			sb.Append("\"");
+			__init.Property("Mask");
+			writer.WriteString(Mask);
 		}
 
-		if (instance.To is not null)
+		if (To is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("To = ");
-			sb.Append("\"");
-			sb.Append(instance.To);
-			sb.Append("\"");
+			__init.Property("To");
+			writer.WriteString(To);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

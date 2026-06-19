@@ -25,39 +25,26 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DetectorUpdate : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CustomRules is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CustomRules is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CustomRules = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.CustomRules, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("CustomRules");
+			writer.WriteInlineList(CustomRules, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Description is not null)
+		if (Description is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DetectorIndex = ");
-			sb.Append(instance.DetectorIndex);
+			__init.Property("DetectorIndex");
+			writer.WriteValue(DetectorIndex);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

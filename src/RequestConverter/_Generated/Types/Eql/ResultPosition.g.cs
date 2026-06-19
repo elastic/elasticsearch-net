@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Eql;
 
 public static class ResultPositionCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Eql.ResultPosition instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Eql.ResultPosition instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Eql.ResultPosition.Head:
-				sb.Append("ResultPosition.Head");
+				writer.Write("ResultPosition.Head");
 				break;
 			case Elastic.Clients.Elasticsearch.Eql.ResultPosition.Tail:
-				sb.Append("ResultPosition.Tail");
+				writer.Write("ResultPosition.Tail");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

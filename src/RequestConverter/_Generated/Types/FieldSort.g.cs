@@ -25,77 +25,56 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class FieldSort : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.Format is not null)
+		if (Format is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Format = ");
-			sb.Append("\"");
-			sb.Append(instance.Format);
-			sb.Append("\"");
+			__init.Property("Format");
+			writer.WriteString(Format);
 		}
 
-		if (instance.Missing is not null)
+		if (Missing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Missing = ");
-			RequestConverter.CodeFormatter.FormatCode(instance.Missing, sb);
+			__init.Property("Missing");
+			writer.WriteValue(Missing);
 		}
 
-		if (instance.Mode is not null)
+		if (Mode is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mode = ");
-			Elastic.Clients.Elasticsearch.SortModeCodeFormatter.FormatCode(instance.Mode.Value, sb);
+			__init.Property("Mode");
+			Elastic.Clients.Elasticsearch.SortModeCodeFormatter.FormatCode(Mode.Value, writer);
 		}
 
-		if (instance.Nested is not null)
+		if (Nested is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Nested = ");
-			instance.Nested.FormatCode(sb);
+			__init.Property("Nested");
+			Nested.FormatCode(writer);
 		}
 
-		if (instance.NumericType is not null)
+		if (NumericType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumericType = ");
-			Elastic.Clients.Elasticsearch.FieldSortNumericTypeCodeFormatter.FormatCode(instance.NumericType.Value, sb);
+			__init.Property("NumericType");
+			Elastic.Clients.Elasticsearch.FieldSortNumericTypeCodeFormatter.FormatCode(NumericType.Value, writer);
 		}
 
-		if (instance.Order is not null)
+		if (Order is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Order = ");
-			Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(instance.Order.Value, sb);
+			__init.Property("Order");
+			Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, writer);
 		}
 
-		if (instance.UnmappedType is not null)
+		if (UnmappedType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UnmappedType = ");
-			Elastic.Clients.Elasticsearch.Mapping.FieldTypeCodeFormatter.FormatCode(instance.UnmappedType.Value, sb);
+			__init.Property("UnmappedType");
+			Elastic.Clients.Elasticsearch.Mapping.FieldTypeCodeFormatter.FormatCode(UnmappedType.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

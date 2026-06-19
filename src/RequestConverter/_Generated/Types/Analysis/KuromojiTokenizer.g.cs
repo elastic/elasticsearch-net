@@ -25,83 +25,56 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class KuromojiTokenizer : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.DiscardCompoundToken is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (DiscardCompoundToken is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DiscardCompoundToken = ");
-			sb.Append(instance.DiscardCompoundToken.Value ? "true" : "false");
+			__init.Property("DiscardCompoundToken");
+			writer.WriteValue(DiscardCompoundToken.Value);
 		}
 
-		if (instance.DiscardPunctuation is not null)
+		if (DiscardPunctuation is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DiscardPunctuation = ");
-			sb.Append(instance.DiscardPunctuation.Value ? "true" : "false");
+			__init.Property("DiscardPunctuation");
+			writer.WriteValue(DiscardPunctuation.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mode = ");
-			Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationModeCodeFormatter.FormatCode(instance.Mode, sb);
+			__init.Property("Mode");
+			Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationModeCodeFormatter.FormatCode(Mode, writer);
 		}
 
-		if (instance.NbestCost is not null)
+		if (NbestCost is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NbestCost = ");
-			sb.Append(instance.NbestCost.Value);
+			__init.Property("NbestCost");
+			writer.WriteValue(NbestCost.Value);
 		}
 
-		if (instance.NbestExamples is not null)
+		if (NbestExamples is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NbestExamples = ");
-			sb.Append("\"");
-			sb.Append(instance.NbestExamples);
-			sb.Append("\"");
+			__init.Property("NbestExamples");
+			writer.WriteString(NbestExamples);
 		}
 
-		if (instance.UserDictionary is not null)
+		if (UserDictionary is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UserDictionary = ");
-			sb.Append("\"");
-			sb.Append(instance.UserDictionary);
-			sb.Append("\"");
+			__init.Property("UserDictionary");
+			writer.WriteString(UserDictionary);
 		}
 
-		if (instance.UserDictionaryRules is not null)
+		if (UserDictionaryRules is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UserDictionaryRules = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.UserDictionaryRules, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("UserDictionaryRules");
+			writer.WriteInlineList(UserDictionaryRules, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

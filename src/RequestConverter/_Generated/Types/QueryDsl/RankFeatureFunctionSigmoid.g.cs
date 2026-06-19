@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class RankFeatureFunctionSigmoid : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Exponent = ");
-			sb.Append(instance.Exponent);
-			sb.Append("f");
+			__init.Property("Exponent");
+			writer.WriteValue(Exponent);
+			writer.Write("f");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Pivot = ");
-			sb.Append(instance.Pivot);
-			sb.Append("f");
+			__init.Property("Pivot");
+			writer.WriteValue(Pivot);
+			writer.Write("f");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

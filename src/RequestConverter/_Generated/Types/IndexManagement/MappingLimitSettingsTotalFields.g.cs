@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class MappingLimitSettingsTotalFields : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.IgnoreDynamicBeyondLimit is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (IgnoreDynamicBeyondLimit is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreDynamicBeyondLimit = ");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<bool, string>(instance.IgnoreDynamicBeyondLimit, sb);
+			__init.Property("IgnoreDynamicBeyondLimit");
+			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<bool, string>(IgnoreDynamicBeyondLimit, writer);
 		}
 
-		if (instance.Limit is not null)
+		if (Limit is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Limit = ");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<long, string>(instance.Limit, sb);
+			__init.Property("Limit");
+			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<long, string>(Limit, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

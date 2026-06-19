@@ -25,39 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class ApplicationPrivilegesCheck : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Application = ");
-			sb.Append("\"");
-			sb.Append(instance.Application);
-			sb.Append("\"");
+			__init.Property("Application");
+			writer.WriteString(Application);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Privileges = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Privileges, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Privileges");
+			writer.WriteInlineList(Privileges, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Resources = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Resources, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Resources");
+			writer.WriteInlineList(Resources, (w, item) => { w.WriteString(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

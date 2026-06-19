@@ -25,39 +25,39 @@ namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
 public static class LicenseTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Basic:
-				sb.Append("LicenseType.Basic");
+				writer.Write("LicenseType.Basic");
 				break;
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Dev:
-				sb.Append("LicenseType.Dev");
+				writer.Write("LicenseType.Dev");
 				break;
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Enterprise:
-				sb.Append("LicenseType.Enterprise");
+				writer.Write("LicenseType.Enterprise");
 				break;
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Gold:
-				sb.Append("LicenseType.Gold");
+				writer.Write("LicenseType.Gold");
 				break;
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Missing:
-				sb.Append("LicenseType.Missing");
+				writer.Write("LicenseType.Missing");
 				break;
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Platinum:
-				sb.Append("LicenseType.Platinum");
+				writer.Write("LicenseType.Platinum");
 				break;
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Silver:
-				sb.Append("LicenseType.Silver");
+				writer.Write("LicenseType.Silver");
 				break;
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Standard:
-				sb.Append("LicenseType.Standard");
+				writer.Write("LicenseType.Standard");
 				break;
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Trial:
-				sb.Append("LicenseType.Trial");
+				writer.Write("LicenseType.Trial");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

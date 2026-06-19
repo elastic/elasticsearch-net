@@ -25,108 +25,75 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public partial class NetworkDirectionProcessor : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Description is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Description is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
-		if (instance.DestinationIp is not null)
+		if (DestinationIp is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DestinationIp = ");
-			instance.DestinationIp.FormatCode(sb);
+			__init.Property("DestinationIp");
+			DestinationIp.FormatCode(writer);
 		}
 
-		if (instance.If is not null)
+		if (If is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("If = ");
-			instance.If.FormatCode(sb);
+			__init.Property("If");
+			If.FormatCode(writer);
 		}
 
-		if (instance.IgnoreFailure is not null)
+		if (IgnoreFailure is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreFailure = ");
-			sb.Append(instance.IgnoreFailure.Value ? "true" : "false");
+			__init.Property("IgnoreFailure");
+			writer.WriteValue(IgnoreFailure.Value);
 		}
 
-		if (instance.IgnoreMissing is not null)
+		if (IgnoreMissing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreMissing = ");
-			sb.Append(instance.IgnoreMissing.Value ? "true" : "false");
+			__init.Property("IgnoreMissing");
+			writer.WriteValue(IgnoreMissing.Value);
 		}
 
-		if (instance.InternalNetworks is not null)
+		if (InternalNetworks is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InternalNetworks = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.InternalNetworks, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("InternalNetworks");
+			writer.WriteInlineList(InternalNetworks, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.InternalNetworksField is not null)
+		if (InternalNetworksField is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InternalNetworksField = ");
-			instance.InternalNetworksField.FormatCode(sb);
+			__init.Property("InternalNetworksField");
+			InternalNetworksField.FormatCode(writer);
 		}
 
-		if (instance.OnFailure is not null)
+		if (OnFailure is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OnFailure = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.OnFailure, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("OnFailure");
+			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.SourceIp is not null)
+		if (SourceIp is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SourceIp = ");
-			instance.SourceIp.FormatCode(sb);
+			__init.Property("SourceIp");
+			SourceIp.FormatCode(writer);
 		}
 
-		if (instance.Tag is not null)
+		if (Tag is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Tag = ");
-			sb.Append("\"");
-			sb.Append(instance.Tag);
-			sb.Append("\"");
+			__init.Property("Tag");
+			writer.WriteString(Tag);
 		}
 
-		if (instance.TargetField is not null)
+		if (TargetField is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TargetField = ");
-			instance.TargetField.FormatCode(sb);
+			__init.Property("TargetField");
+			TargetField.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

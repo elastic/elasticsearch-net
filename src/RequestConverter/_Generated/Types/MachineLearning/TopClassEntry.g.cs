@@ -25,37 +25,26 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class TopClassEntry : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ClassName = ");
-			sb.Append("\"");
-			sb.Append(instance.ClassName);
-			sb.Append("\"");
+			__init.Property("ClassName");
+			writer.WriteString(ClassName);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ClassProbability = ");
-			sb.Append(instance.ClassProbability);
-			sb.Append("d");
+			__init.Property("ClassProbability");
+			writer.WriteValue(ClassProbability);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ClassScore = ");
-			sb.Append(instance.ClassScore);
-			sb.Append("d");
+			__init.Property("ClassScore");
+			writer.WriteValue(ClassScore);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

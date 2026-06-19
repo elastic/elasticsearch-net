@@ -25,69 +25,69 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public static class NodeStatsMetricCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric.All:
-				sb.Append("NodeStatsMetric.All");
+				writer.Write("NodeStatsMetric.All");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric.None:
-				sb.Append("NodeStatsMetric.None");
+				writer.Write("NodeStatsMetric.None");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric.AdaptiveSelection:
-				sb.Append("NodeStatsMetric.AdaptiveSelection");
+				writer.Write("NodeStatsMetric.AdaptiveSelection");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric.Allocations:
-				sb.Append("NodeStatsMetric.Allocations");
+				writer.Write("NodeStatsMetric.Allocations");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric.Breaker:
-				sb.Append("NodeStatsMetric.Breaker");
+				writer.Write("NodeStatsMetric.Breaker");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric.Discovery:
-				sb.Append("NodeStatsMetric.Discovery");
+				writer.Write("NodeStatsMetric.Discovery");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric.Fs:
-				sb.Append("NodeStatsMetric.Fs");
+				writer.Write("NodeStatsMetric.Fs");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric.Http:
-				sb.Append("NodeStatsMetric.Http");
+				writer.Write("NodeStatsMetric.Http");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric.IndexingPressure:
-				sb.Append("NodeStatsMetric.IndexingPressure");
+				writer.Write("NodeStatsMetric.IndexingPressure");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric.Indices:
-				sb.Append("NodeStatsMetric.Indices");
+				writer.Write("NodeStatsMetric.Indices");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric.Ingest:
-				sb.Append("NodeStatsMetric.Ingest");
+				writer.Write("NodeStatsMetric.Ingest");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric.Jvm:
-				sb.Append("NodeStatsMetric.Jvm");
+				writer.Write("NodeStatsMetric.Jvm");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric.Os:
-				sb.Append("NodeStatsMetric.Os");
+				writer.Write("NodeStatsMetric.Os");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric.Process:
-				sb.Append("NodeStatsMetric.Process");
+				writer.Write("NodeStatsMetric.Process");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric.Repositories:
-				sb.Append("NodeStatsMetric.Repositories");
+				writer.Write("NodeStatsMetric.Repositories");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric.Script:
-				sb.Append("NodeStatsMetric.Script");
+				writer.Write("NodeStatsMetric.Script");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric.ScriptCache:
-				sb.Append("NodeStatsMetric.ScriptCache");
+				writer.Write("NodeStatsMetric.ScriptCache");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric.ThreadPool:
-				sb.Append("NodeStatsMetric.ThreadPool");
+				writer.Write("NodeStatsMetric.ThreadPool");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric.Transport:
-				sb.Append("NodeStatsMetric.Transport");
+				writer.Write("NodeStatsMetric.Transport");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -25,44 +25,29 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class PhraseSuggest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Length = ");
-			sb.Append(instance.Length);
+			__init.Property("Length");
+			writer.WriteValue(Length);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Offset = ");
-			sb.Append(instance.Offset);
+			__init.Property("Offset");
+			writer.WriteValue(Offset);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Options = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Options, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Options");
+			writer.WriteInlineList(Options, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Text = ");
-			sb.Append("\"");
-			sb.Append(instance.Text);
-			sb.Append("\"");
+			__init.Property("Text");
+			writer.WriteString(Text);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

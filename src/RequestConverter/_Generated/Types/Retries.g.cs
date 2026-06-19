@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class Retries : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Bulk = ");
-			sb.Append(instance.Bulk);
-			sb.Append("L");
+			__init.Property("Bulk");
+			writer.WriteValue(Bulk);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Search = ");
-			sb.Append(instance.Search);
-			sb.Append("L");
+			__init.Property("Search");
+			writer.WriteValue(Search);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

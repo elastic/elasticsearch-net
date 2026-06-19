@@ -25,68 +25,51 @@ namespace Elastic.Clients.Elasticsearch.Core.TermVectors;
 
 public partial class Filter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.MaxDocFreq is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (MaxDocFreq is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxDocFreq = ");
-			sb.Append(instance.MaxDocFreq.Value);
+			__init.Property("MaxDocFreq");
+			writer.WriteValue(MaxDocFreq.Value);
 		}
 
-		if (instance.MaxNumTerms is not null)
+		if (MaxNumTerms is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxNumTerms = ");
-			sb.Append(instance.MaxNumTerms.Value);
+			__init.Property("MaxNumTerms");
+			writer.WriteValue(MaxNumTerms.Value);
 		}
 
-		if (instance.MaxTermFreq is not null)
+		if (MaxTermFreq is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxTermFreq = ");
-			sb.Append(instance.MaxTermFreq.Value);
+			__init.Property("MaxTermFreq");
+			writer.WriteValue(MaxTermFreq.Value);
 		}
 
-		if (instance.MaxWordLength is not null)
+		if (MaxWordLength is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxWordLength = ");
-			sb.Append(instance.MaxWordLength.Value);
+			__init.Property("MaxWordLength");
+			writer.WriteValue(MaxWordLength.Value);
 		}
 
-		if (instance.MinDocFreq is not null)
+		if (MinDocFreq is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinDocFreq = ");
-			sb.Append(instance.MinDocFreq.Value);
+			__init.Property("MinDocFreq");
+			writer.WriteValue(MinDocFreq.Value);
 		}
 
-		if (instance.MinTermFreq is not null)
+		if (MinTermFreq is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinTermFreq = ");
-			sb.Append(instance.MinTermFreq.Value);
+			__init.Property("MinTermFreq");
+			writer.WriteValue(MinTermFreq.Value);
 		}
 
-		if (instance.MinWordLength is not null)
+		if (MinWordLength is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinWordLength = ");
-			sb.Append(instance.MinWordLength.Value);
+			__init.Property("MinWordLength");
+			writer.WriteValue(MinWordLength.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

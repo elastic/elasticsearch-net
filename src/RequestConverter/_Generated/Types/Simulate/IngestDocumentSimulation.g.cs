@@ -25,90 +25,61 @@ namespace Elastic.Clients.Elasticsearch.Simulate;
 
 public partial class IngestDocumentSimulation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.EffectiveMapping is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (EffectiveMapping is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EffectiveMapping = ");
-			instance.EffectiveMapping.FormatCode(sb);
+			__init.Property("EffectiveMapping");
+			EffectiveMapping.FormatCode(writer);
 		}
 
-		if (instance.Error is not null)
+		if (Error is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Error = ");
-			instance.Error.FormatCode(sb);
+			__init.Property("Error");
+			Error.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExecutedPipelines = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.ExecutedPipelines, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("ExecutedPipelines");
+			writer.WriteInlineList(ExecutedPipelines, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			sb.Append("\"");
-			sb.Append(instance.Id);
-			sb.Append("\"");
+			__init.Property("Id");
+			writer.WriteString(Id);
 		}
 
-		if (instance.IgnoredFields is not null)
+		if (IgnoredFields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoredFields = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.IgnoredFields, (item, sb) => { sb.Append("new()"); RequestConverter.CodeFormatter.FormatCode(item, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("\""); sb.Append(v); sb.Append("\""); }, sb); }, sb);
-			sb.Append("]");
+			__init.Property("IgnoredFields");
+			writer.WriteInlineList(IgnoredFields, (w, item) => { w.Write("new() "); w.WriteInlineList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", "); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			sb.Append("\"");
-			sb.Append(instance.Index);
-			sb.Append("\"");
+			__init.Property("Index");
+			writer.WriteString(Index);
 		}
 
-		if (instance.Metadata is not null)
+		if (Metadata is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Metadata = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Metadata, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("\""); sb.Append(v); sb.Append("\""); }, sb);
+			__init.Property("Metadata");
+			writer.Write("new() ");
+			writer.WriteInlineList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Source = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Source, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Source");
+			writer.Write("new() ");
+			writer.WriteInlineList(Source, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append(instance.Version);
-			sb.Append("L");
+			__init.Property("Version");
+			writer.WriteValue(Version);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

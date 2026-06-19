@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class WatsonxTaskTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType.ChatCompletion:
-				sb.Append("WatsonxTaskType.ChatCompletion");
+				writer.Write("WatsonxTaskType.ChatCompletion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType.Completion:
-				sb.Append("WatsonxTaskType.Completion");
+				writer.Write("WatsonxTaskType.Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType.Rerank:
-				sb.Append("WatsonxTaskType.Rerank");
+				writer.Write("WatsonxTaskType.Rerank");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType.TextEmbedding:
-				sb.Append("WatsonxTaskType.TextEmbedding");
+				writer.Write("WatsonxTaskType.TextEmbedding");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

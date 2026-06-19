@@ -25,27 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class WatcherWatchTrigger : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("All = ");
-			instance.All.FormatCode(sb);
+			__init.Property("All");
+			All.FormatCode(writer);
 		}
 
-		if (instance.Schedule is not null)
+		if (Schedule is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Schedule = ");
-			instance.Schedule.FormatCode(sb);
+			__init.Property("Schedule");
+			Schedule.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

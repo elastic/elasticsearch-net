@@ -25,28 +25,19 @@ namespace Elastic.Clients.Elasticsearch.Synonyms;
 
 public partial class SynonymsSetItem : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count);
+			__init.Property("Count");
+			writer.WriteValue(Count);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SynonymsSet = ");
-			sb.Append("\"");
-			sb.Append(instance.SynonymsSet);
-			sb.Append("\"");
+			__init.Property("SynonymsSet");
+			writer.WriteString(SynonymsSet);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

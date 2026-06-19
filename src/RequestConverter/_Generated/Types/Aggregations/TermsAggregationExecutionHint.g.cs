@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public static class TermsAggregationExecutionHintCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint.GlobalOrdinals:
-				sb.Append("TermsAggregationExecutionHint.GlobalOrdinals");
+				writer.Write("TermsAggregationExecutionHint.GlobalOrdinals");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint.GlobalOrdinalsHash:
-				sb.Append("TermsAggregationExecutionHint.GlobalOrdinalsHash");
+				writer.Write("TermsAggregationExecutionHint.GlobalOrdinalsHash");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint.GlobalOrdinalsLowCardinality:
-				sb.Append("TermsAggregationExecutionHint.GlobalOrdinalsLowCardinality");
+				writer.Write("TermsAggregationExecutionHint.GlobalOrdinalsLowCardinality");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint.Map:
-				sb.Append("TermsAggregationExecutionHint.Map");
+				writer.Write("TermsAggregationExecutionHint.Map");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

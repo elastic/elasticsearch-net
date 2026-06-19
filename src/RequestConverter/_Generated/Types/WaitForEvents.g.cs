@@ -25,30 +25,30 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class WaitForEventsCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.WaitForEvents instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.WaitForEvents instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.WaitForEvents.High:
-				sb.Append("WaitForEvents.High");
+				writer.Write("WaitForEvents.High");
 				break;
 			case Elastic.Clients.Elasticsearch.WaitForEvents.Immediate:
-				sb.Append("WaitForEvents.Immediate");
+				writer.Write("WaitForEvents.Immediate");
 				break;
 			case Elastic.Clients.Elasticsearch.WaitForEvents.Languid:
-				sb.Append("WaitForEvents.Languid");
+				writer.Write("WaitForEvents.Languid");
 				break;
 			case Elastic.Clients.Elasticsearch.WaitForEvents.Low:
-				sb.Append("WaitForEvents.Low");
+				writer.Write("WaitForEvents.Low");
 				break;
 			case Elastic.Clients.Elasticsearch.WaitForEvents.Normal:
-				sb.Append("WaitForEvents.Normal");
+				writer.Write("WaitForEvents.Normal");
 				break;
 			case Elastic.Clients.Elasticsearch.WaitForEvents.Urgent:
-				sb.Append("WaitForEvents.Urgent");
+				writer.Write("WaitForEvents.Urgent");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

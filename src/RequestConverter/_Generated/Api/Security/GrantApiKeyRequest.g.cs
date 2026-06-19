@@ -25,70 +25,49 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class GrantApiKeyRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Refresh is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Refresh is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Refresh = ");
-			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(instance.Refresh.Value, sb);
+			__init.Property("Refresh");
+			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
 		}
 
-		if (instance.AccessToken is not null)
+		if (AccessToken is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AccessToken = ");
-			sb.Append("\"");
-			sb.Append(instance.AccessToken);
-			sb.Append("\"");
+			__init.Property("AccessToken");
+			writer.WriteString(AccessToken);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ApiKey = ");
-			instance.ApiKey.FormatCode(sb);
+			__init.Property("ApiKey");
+			ApiKey.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GrantType = ");
-			Elastic.Clients.Elasticsearch.Security.ApiKeyGrantTypeCodeFormatter.FormatCode(instance.GrantType, sb);
+			__init.Property("GrantType");
+			Elastic.Clients.Elasticsearch.Security.ApiKeyGrantTypeCodeFormatter.FormatCode(GrantType, writer);
 		}
 
-		if (instance.Password is not null)
+		if (Password is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Password = ");
-			sb.Append("\"");
-			sb.Append(instance.Password);
-			sb.Append("\"");
+			__init.Property("Password");
+			writer.WriteString(Password);
 		}
 
-		if (instance.RunAs is not null)
+		if (RunAs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RunAs = ");
-			instance.RunAs.FormatCode(sb);
+			__init.Property("RunAs");
+			RunAs.FormatCode(writer);
 		}
 
-		if (instance.Username is not null)
+		if (Username is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Username = ");
-			instance.Username.FormatCode(sb);
+			__init.Property("Username");
+			Username.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

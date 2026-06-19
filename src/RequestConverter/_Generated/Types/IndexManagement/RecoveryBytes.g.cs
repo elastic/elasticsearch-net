@@ -25,80 +25,59 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class RecoveryBytes : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Percent = ");
-			instance.Percent.FormatCode(sb);
+			__init.Property("Percent");
+			Percent.FormatCode(writer);
 		}
 
-		if (instance.Recovered is not null)
+		if (Recovered is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Recovered = ");
-			instance.Recovered.FormatCode(sb);
+			__init.Property("Recovered");
+			Recovered.FormatCode(writer);
 		}
 
-		if (instance.RecoveredFromSnapshot is not null)
+		if (RecoveredFromSnapshot is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RecoveredFromSnapshot = ");
-			instance.RecoveredFromSnapshot.FormatCode(sb);
+			__init.Property("RecoveredFromSnapshot");
+			RecoveredFromSnapshot.FormatCode(writer);
 		}
 
-		if (instance.RecoveredFromSnapshotInBytes is not null)
+		if (RecoveredFromSnapshotInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RecoveredFromSnapshotInBytes = ");
-			instance.RecoveredFromSnapshotInBytes.FormatCode(sb);
+			__init.Property("RecoveredFromSnapshotInBytes");
+			RecoveredFromSnapshotInBytes.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RecoveredInBytes = ");
-			instance.RecoveredInBytes.FormatCode(sb);
+			__init.Property("RecoveredInBytes");
+			RecoveredInBytes.FormatCode(writer);
 		}
 
-		if (instance.Reused is not null)
+		if (Reused is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Reused = ");
-			instance.Reused.FormatCode(sb);
+			__init.Property("Reused");
+			Reused.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReusedInBytes = ");
-			instance.ReusedInBytes.FormatCode(sb);
+			__init.Property("ReusedInBytes");
+			ReusedInBytes.FormatCode(writer);
 		}
 
-		if (instance.Total is not null)
+		if (Total is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			instance.Total.FormatCode(sb);
+			__init.Property("Total");
+			Total.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalInBytes = ");
-			instance.TotalInBytes.FormatCode(sb);
+			__init.Property("TotalInBytes");
+			TotalInBytes.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

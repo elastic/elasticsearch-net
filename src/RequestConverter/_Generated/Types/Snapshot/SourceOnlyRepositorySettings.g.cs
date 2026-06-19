@@ -23,72 +23,40 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
-public partial class SourceOnlyRepositorySettings : RequestConverter.ICodeFormattable
+public partial interface ISourceOnlyRepositorySettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	void RequestConverter.ICodeFormattable.FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ChunkSize is not null)
+		if (this is Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzure c1)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ChunkSize = ");
-			instance.ChunkSize.FormatCode(sb);
+			c1.FormatCode(writer);
+			return;
 		}
 
-		if (instance.Compress is not null)
+		if (this is Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForSharedFileSystem c2)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Compress = ");
-			sb.Append(instance.Compress.Value ? "true" : "false");
+			c2.FormatCode(writer);
+			return;
 		}
 
-		if (instance.DelegateType is not null)
+		if (this is Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForGcs c3)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DelegateType = ");
-			sb.Append("\"");
-			sb.Append(instance.DelegateType);
-			sb.Append("\"");
+			c3.FormatCode(writer);
+			return;
 		}
 
-		if (instance.MaxNumberOfSnapshots is not null)
+		if (this is Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3 c4)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxNumberOfSnapshots = ");
-			sb.Append(instance.MaxNumberOfSnapshots.Value);
+			c4.FormatCode(writer);
+			return;
 		}
 
-		if (instance.MaxRestoreBytesPerSec is not null)
+		if (this is Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForReadOnlyUrl c5)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxRestoreBytesPerSec = ");
-			instance.MaxRestoreBytesPerSec.FormatCode(sb);
+			c5.FormatCode(writer);
+			return;
 		}
 
-		if (instance.MaxSnapshotBytesPerSec is not null)
-		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxSnapshotBytesPerSec = ");
-			instance.MaxSnapshotBytesPerSec.FormatCode(sb);
-		}
-
-		if (instance.ReadOnly is not null)
-		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReadOnly = ");
-			sb.Append(instance.ReadOnly.Value ? "true" : "false");
-		}
-
-		if (hasProps)
-			sb.Append(" }");
+		writer.Write(ToString());
 	}
 }

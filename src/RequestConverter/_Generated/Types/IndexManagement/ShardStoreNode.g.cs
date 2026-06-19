@@ -25,67 +25,42 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class ShardStoreNode : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Attributes = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Attributes, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("\""); sb.Append(v); sb.Append("\""); }, sb);
+			__init.Property("Attributes");
+			writer.Write("new() ");
+			writer.WriteInlineList(Attributes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.EphemeralId is not null)
+		if (EphemeralId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EphemeralId = ");
-			sb.Append("\"");
-			sb.Append(instance.EphemeralId);
-			sb.Append("\"");
+			__init.Property("EphemeralId");
+			writer.WriteString(EphemeralId);
 		}
 
-		if (instance.ExternalId is not null)
+		if (ExternalId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExternalId = ");
-			sb.Append("\"");
-			sb.Append(instance.ExternalId);
-			sb.Append("\"");
+			__init.Property("ExternalId");
+			writer.WriteString(ExternalId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Roles = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Roles, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Roles");
+			writer.WriteInlineList(Roles, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TransportAddress = ");
-			sb.Append("\"");
-			sb.Append(instance.TransportAddress);
-			sb.Append("\"");
+			__init.Property("TransportAddress");
+			writer.WriteString(TransportAddress);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

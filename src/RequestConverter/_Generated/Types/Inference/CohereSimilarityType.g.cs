@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class CohereSimilarityTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType.Cosine:
-				sb.Append("CohereSimilarityType.Cosine");
+				writer.Write("CohereSimilarityType.Cosine");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType.DotProduct:
-				sb.Append("CohereSimilarityType.DotProduct");
+				writer.Write("CohereSimilarityType.DotProduct");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType.L2Norm:
-				sb.Append("CohereSimilarityType.L2Norm");
+				writer.Write("CohereSimilarityType.L2Norm");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

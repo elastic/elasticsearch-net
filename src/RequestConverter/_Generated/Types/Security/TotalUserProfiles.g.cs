@@ -25,29 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class TotalUserProfiles : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Relation = ");
-			sb.Append("\"");
-			sb.Append(instance.Relation);
-			sb.Append("\"");
+			__init.Property("Relation");
+			writer.WriteString(Relation);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Value = ");
-			sb.Append(instance.Value);
-			sb.Append("L");
+			__init.Property("Value");
+			writer.WriteValue(Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

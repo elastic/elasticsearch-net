@@ -25,30 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class KuromojiAnalyzer : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Mode is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Mode is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mode = ");
-			Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationModeCodeFormatter.FormatCode(instance.Mode.Value, sb);
+			__init.Property("Mode");
+			Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationModeCodeFormatter.FormatCode(Mode.Value, writer);
 		}
 
-		if (instance.UserDictionary is not null)
+		if (UserDictionary is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UserDictionary = ");
-			sb.Append("\"");
-			sb.Append(instance.UserDictionary);
-			sb.Append("\"");
+			__init.Property("UserDictionary");
+			writer.WriteString(UserDictionary);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

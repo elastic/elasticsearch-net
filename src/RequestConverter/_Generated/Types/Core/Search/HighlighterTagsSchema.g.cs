@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public static class HighlighterTagsSchemaCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema.Styled:
-				sb.Append("HighlighterTagsSchema.Styled");
+				writer.Write("HighlighterTagsSchema.Styled");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

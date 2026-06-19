@@ -25,206 +25,155 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class Features : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AggregateMetric = ");
-			instance.AggregateMetric.FormatCode(sb);
+			__init.Property("AggregateMetric");
+			AggregateMetric.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Analytics = ");
-			instance.Analytics.FormatCode(sb);
+			__init.Property("Analytics");
+			Analytics.FormatCode(writer);
 		}
 
-		if (instance.Archive is not null)
+		if (Archive is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Archive = ");
-			instance.Archive.FormatCode(sb);
+			__init.Property("Archive");
+			Archive.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ccr = ");
-			instance.Ccr.FormatCode(sb);
+			__init.Property("Ccr");
+			Ccr.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DataStreams = ");
-			instance.DataStreams.FormatCode(sb);
+			__init.Property("DataStreams");
+			DataStreams.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DataTiers = ");
-			instance.DataTiers.FormatCode(sb);
+			__init.Property("DataTiers");
+			DataTiers.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Enrich = ");
-			instance.Enrich.FormatCode(sb);
+			__init.Property("Enrich");
+			Enrich.FormatCode(writer);
 		}
 
-		if (instance.EnterpriseSearch is not null)
+		if (EnterpriseSearch is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EnterpriseSearch = ");
-			instance.EnterpriseSearch.FormatCode(sb);
+			__init.Property("EnterpriseSearch");
+			EnterpriseSearch.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Eql = ");
-			instance.Eql.FormatCode(sb);
+			__init.Property("Eql");
+			Eql.FormatCode(writer);
 		}
 
-		if (instance.Esql is not null)
+		if (Esql is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Esql = ");
-			instance.Esql.FormatCode(sb);
+			__init.Property("Esql");
+			Esql.FormatCode(writer);
 		}
 
+		if (GpuVectorIndexing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Graph = ");
-			instance.Graph.FormatCode(sb);
+			__init.Property("GpuVectorIndexing");
+			GpuVectorIndexing.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ilm = ");
-			instance.Ilm.FormatCode(sb);
+			__init.Property("Graph");
+			Graph.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Logsdb = ");
-			instance.Logsdb.FormatCode(sb);
+			__init.Property("Ilm");
+			Ilm.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Logstash = ");
-			instance.Logstash.FormatCode(sb);
+			__init.Property("Logsdb");
+			Logsdb.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ml = ");
-			instance.Ml.FormatCode(sb);
+			__init.Property("Logstash");
+			Logstash.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Monitoring = ");
-			instance.Monitoring.FormatCode(sb);
+			__init.Property("Ml");
+			Ml.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Rollup = ");
-			instance.Rollup.FormatCode(sb);
-		}
-
-		if (instance.RuntimeFields is not null)
-		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RuntimeFields = ");
-			instance.RuntimeFields.FormatCode(sb);
+			__init.Property("Monitoring");
+			Monitoring.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SearchableSnapshots = ");
-			instance.SearchableSnapshots.FormatCode(sb);
+			__init.Property("Rollup");
+			Rollup.FormatCode(writer);
+		}
+
+		if (RuntimeFields is not null)
+		{
+			__init.Property("RuntimeFields");
+			RuntimeFields.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Security = ");
-			instance.Security.FormatCode(sb);
+			__init.Property("SearchableSnapshots");
+			SearchableSnapshots.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Slm = ");
-			instance.Slm.FormatCode(sb);
+			__init.Property("Security");
+			Security.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Spatial = ");
-			instance.Spatial.FormatCode(sb);
+			__init.Property("Slm");
+			Slm.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sql = ");
-			instance.Sql.FormatCode(sb);
+			__init.Property("Spatial");
+			Spatial.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Transform = ");
-			instance.Transform.FormatCode(sb);
-		}
-
-		if (instance.UniversalProfiling is not null)
-		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UniversalProfiling = ");
-			instance.UniversalProfiling.FormatCode(sb);
+			__init.Property("Sql");
+			Sql.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VotingOnly = ");
-			instance.VotingOnly.FormatCode(sb);
+			__init.Property("Transform");
+			Transform.FormatCode(writer);
+		}
+
+		if (UniversalProfiling is not null)
+		{
+			__init.Property("UniversalProfiling");
+			UniversalProfiling.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Watcher = ");
-			instance.Watcher.FormatCode(sb);
+			__init.Property("VotingOnly");
+			VotingOnly.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		{
+			__init.Property("Watcher");
+			Watcher.FormatCode(writer);
+		}
+
+		__init.Dispose();
 	}
 }

@@ -25,130 +25,81 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class RecoveryOrigin : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.BootstrapNewHistoryUuid is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (BootstrapNewHistoryUuid is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BootstrapNewHistoryUuid = ");
-			sb.Append(instance.BootstrapNewHistoryUuid.Value ? "true" : "false");
+			__init.Property("BootstrapNewHistoryUuid");
+			writer.WriteValue(BootstrapNewHistoryUuid.Value);
 		}
 
-		if (instance.Host is not null)
+		if (Host is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Host = ");
-			sb.Append("\"");
-			sb.Append(instance.Host);
-			sb.Append("\"");
+			__init.Property("Host");
+			writer.WriteString(Host);
 		}
 
-		if (instance.Hostname is not null)
+		if (Hostname is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Hostname = ");
-			sb.Append("\"");
-			sb.Append(instance.Hostname);
-			sb.Append("\"");
+			__init.Property("Hostname");
+			writer.WriteString(Hostname);
 		}
 
-		if (instance.Id is not null)
+		if (Id is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			sb.Append("\"");
-			sb.Append(instance.Id);
-			sb.Append("\"");
+			__init.Property("Id");
+			writer.WriteString(Id);
 		}
 
-		if (instance.Index is not null)
+		if (Index is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			sb.Append("\"");
-			sb.Append(instance.Index);
-			sb.Append("\"");
+			__init.Property("Index");
+			writer.WriteString(Index);
 		}
 
-		if (instance.Ip is not null)
+		if (Ip is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ip = ");
-			sb.Append("\"");
-			sb.Append(instance.Ip);
-			sb.Append("\"");
+			__init.Property("Ip");
+			writer.WriteString(Ip);
 		}
 
-		if (instance.Name is not null)
+		if (Name is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
-		if (instance.Repository is not null)
+		if (Repository is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Repository = ");
-			sb.Append("\"");
-			sb.Append(instance.Repository);
-			sb.Append("\"");
+			__init.Property("Repository");
+			writer.WriteString(Repository);
 		}
 
-		if (instance.RestoreUuid is not null)
+		if (RestoreUuid is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RestoreUuid = ");
-			sb.Append("\"");
-			sb.Append(instance.RestoreUuid);
-			sb.Append("\"");
+			__init.Property("RestoreUuid");
+			writer.WriteString(RestoreUuid);
 		}
 
-		if (instance.Snapshot is not null)
+		if (Snapshot is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Snapshot = ");
-			sb.Append("\"");
-			sb.Append(instance.Snapshot);
-			sb.Append("\"");
+			__init.Property("Snapshot");
+			writer.WriteString(Snapshot);
 		}
 
-		if (instance.TransportAddress is not null)
+		if (TransportAddress is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TransportAddress = ");
-			sb.Append("\"");
-			sb.Append(instance.TransportAddress);
-			sb.Append("\"");
+			__init.Property("TransportAddress");
+			writer.WriteString(TransportAddress);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

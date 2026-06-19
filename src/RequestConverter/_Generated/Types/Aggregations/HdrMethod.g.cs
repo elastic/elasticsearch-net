@@ -25,20 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class HdrMethod : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.NumberOfSignificantValueDigits is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (NumberOfSignificantValueDigits is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumberOfSignificantValueDigits = ");
-			sb.Append(instance.NumberOfSignificantValueDigits.Value);
+			__init.Property("NumberOfSignificantValueDigits");
+			writer.WriteValue(NumberOfSignificantValueDigits.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

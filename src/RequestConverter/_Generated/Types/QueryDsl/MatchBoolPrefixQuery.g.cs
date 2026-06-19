@@ -25,115 +25,80 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class MatchBoolPrefixQuery : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Analyzer is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Analyzer is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Analyzer = ");
-			sb.Append("\"");
-			sb.Append(instance.Analyzer);
-			sb.Append("\"");
+			__init.Property("Analyzer");
+			writer.WriteString(Analyzer);
 		}
 
-		if (instance.Boost is not null)
+		if (Boost is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Boost = ");
-			sb.Append(instance.Boost.Value);
-			sb.Append("f");
+			__init.Property("Boost");
+			writer.WriteValue(Boost.Value);
+			writer.Write("f");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.Fuzziness is not null)
+		if (Fuzziness is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fuzziness = ");
-			instance.Fuzziness.FormatCode(sb);
+			__init.Property("Fuzziness");
+			Fuzziness.FormatCode(writer);
 		}
 
-		if (instance.FuzzyRewrite is not null)
+		if (FuzzyRewrite is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FuzzyRewrite = ");
-			sb.Append("\"");
-			sb.Append(instance.FuzzyRewrite);
-			sb.Append("\"");
+			__init.Property("FuzzyRewrite");
+			writer.WriteString(FuzzyRewrite);
 		}
 
-		if (instance.FuzzyTranspositions is not null)
+		if (FuzzyTranspositions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FuzzyTranspositions = ");
-			sb.Append(instance.FuzzyTranspositions.Value ? "true" : "false");
+			__init.Property("FuzzyTranspositions");
+			writer.WriteValue(FuzzyTranspositions.Value);
 		}
 
-		if (instance.MaxExpansions is not null)
+		if (MaxExpansions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxExpansions = ");
-			sb.Append(instance.MaxExpansions.Value);
+			__init.Property("MaxExpansions");
+			writer.WriteValue(MaxExpansions.Value);
 		}
 
-		if (instance.MinimumShouldMatch is not null)
+		if (MinimumShouldMatch is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinimumShouldMatch = ");
-			instance.MinimumShouldMatch.FormatCode(sb);
+			__init.Property("MinimumShouldMatch");
+			MinimumShouldMatch.FormatCode(writer);
 		}
 
-		if (instance.Operator is not null)
+		if (Operator is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Operator = ");
-			Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(instance.Operator.Value, sb);
+			__init.Property("Operator");
+			Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(Operator.Value, writer);
 		}
 
-		if (instance.PrefixLength is not null)
+		if (PrefixLength is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PrefixLength = ");
-			sb.Append(instance.PrefixLength.Value);
+			__init.Property("PrefixLength");
+			writer.WriteValue(PrefixLength.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			sb.Append("\"");
-			sb.Append(instance.Query);
-			sb.Append("\"");
+			__init.Property("Query");
+			writer.WriteString(Query);
 		}
 
-		if (instance.QueryName is not null)
+		if (QueryName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryName = ");
-			sb.Append("\"");
-			sb.Append(instance.QueryName);
-			sb.Append("\"");
+			__init.Property("QueryName");
+			writer.WriteString(QueryName);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

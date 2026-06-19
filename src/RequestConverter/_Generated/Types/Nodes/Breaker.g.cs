@@ -25,68 +25,49 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class Breaker : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.EstimatedSize is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (EstimatedSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EstimatedSize = ");
-			sb.Append("\"");
-			sb.Append(instance.EstimatedSize);
-			sb.Append("\"");
+			__init.Property("EstimatedSize");
+			writer.WriteString(EstimatedSize);
 		}
 
-		if (instance.EstimatedSizeInBytes is not null)
+		if (EstimatedSizeInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EstimatedSizeInBytes = ");
-			sb.Append(instance.EstimatedSizeInBytes.Value);
-			sb.Append("L");
+			__init.Property("EstimatedSizeInBytes");
+			writer.WriteValue(EstimatedSizeInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.LimitSize is not null)
+		if (LimitSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LimitSize = ");
-			sb.Append("\"");
-			sb.Append(instance.LimitSize);
-			sb.Append("\"");
+			__init.Property("LimitSize");
+			writer.WriteString(LimitSize);
 		}
 
-		if (instance.LimitSizeInBytes is not null)
+		if (LimitSizeInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LimitSizeInBytes = ");
-			sb.Append(instance.LimitSizeInBytes.Value);
-			sb.Append("L");
+			__init.Property("LimitSizeInBytes");
+			writer.WriteValue(LimitSizeInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Overhead is not null)
+		if (Overhead is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Overhead = ");
-			sb.Append(instance.Overhead.Value);
-			sb.Append("f");
+			__init.Property("Overhead");
+			writer.WriteValue(Overhead.Value);
+			writer.Write("f");
 		}
 
-		if (instance.Tripped is not null)
+		if (Tripped is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Tripped = ");
-			sb.Append(instance.Tripped.Value);
-			sb.Append("f");
+			__init.Property("Tripped");
+			writer.WriteValue(Tripped.Value);
+			writer.Write("f");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

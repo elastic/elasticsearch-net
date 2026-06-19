@@ -25,195 +25,146 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class SegmentsStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count);
+			__init.Property("Count");
+			writer.WriteValue(Count);
 		}
 
-		if (instance.DocValuesMemory is not null)
+		if (DocValuesMemory is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocValuesMemory = ");
-			instance.DocValuesMemory.FormatCode(sb);
+			__init.Property("DocValuesMemory");
+			DocValuesMemory.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocValuesMemoryInBytes = ");
-			sb.Append(instance.DocValuesMemoryInBytes);
-			sb.Append("L");
+			__init.Property("DocValuesMemoryInBytes");
+			writer.WriteValue(DocValuesMemoryInBytes);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FileSizes = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.FileSizes, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("FileSizes");
+			writer.Write("new() ");
+			writer.WriteInlineList(FileSizes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.FixedBitSet is not null)
+		if (FixedBitSet is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FixedBitSet = ");
-			instance.FixedBitSet.FormatCode(sb);
+			__init.Property("FixedBitSet");
+			FixedBitSet.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FixedBitSetMemoryInBytes = ");
-			sb.Append(instance.FixedBitSetMemoryInBytes);
-			sb.Append("L");
+			__init.Property("FixedBitSetMemoryInBytes");
+			writer.WriteValue(FixedBitSetMemoryInBytes);
+			writer.Write("L");
 		}
 
-		if (instance.IndexWriterMemory is not null)
+		if (IndexWriterMemory is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexWriterMemory = ");
-			instance.IndexWriterMemory.FormatCode(sb);
+			__init.Property("IndexWriterMemory");
+			IndexWriterMemory.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexWriterMemoryInBytes = ");
-			sb.Append(instance.IndexWriterMemoryInBytes);
-			sb.Append("L");
+			__init.Property("IndexWriterMemoryInBytes");
+			writer.WriteValue(IndexWriterMemoryInBytes);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxUnsafeAutoIdTimestamp = ");
-			sb.Append(instance.MaxUnsafeAutoIdTimestamp);
-			sb.Append("L");
+			__init.Property("MaxUnsafeAutoIdTimestamp");
+			writer.WriteValue(MaxUnsafeAutoIdTimestamp);
+			writer.Write("L");
 		}
 
-		if (instance.Memory is not null)
+		if (Memory is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Memory = ");
-			instance.Memory.FormatCode(sb);
+			__init.Property("Memory");
+			Memory.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MemoryInBytes = ");
-			sb.Append(instance.MemoryInBytes);
-			sb.Append("L");
+			__init.Property("MemoryInBytes");
+			writer.WriteValue(MemoryInBytes);
+			writer.Write("L");
 		}
 
-		if (instance.NormsMemory is not null)
+		if (NormsMemory is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NormsMemory = ");
-			instance.NormsMemory.FormatCode(sb);
+			__init.Property("NormsMemory");
+			NormsMemory.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NormsMemoryInBytes = ");
-			sb.Append(instance.NormsMemoryInBytes);
-			sb.Append("L");
+			__init.Property("NormsMemoryInBytes");
+			writer.WriteValue(NormsMemoryInBytes);
+			writer.Write("L");
 		}
 
-		if (instance.PointsMemory is not null)
+		if (PointsMemory is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PointsMemory = ");
-			instance.PointsMemory.FormatCode(sb);
+			__init.Property("PointsMemory");
+			PointsMemory.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PointsMemoryInBytes = ");
-			sb.Append(instance.PointsMemoryInBytes);
-			sb.Append("L");
+			__init.Property("PointsMemoryInBytes");
+			writer.WriteValue(PointsMemoryInBytes);
+			writer.Write("L");
 		}
 
-		if (instance.StoredFieldsMemory is not null)
+		if (StoredFieldsMemory is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StoredFieldsMemory = ");
-			instance.StoredFieldsMemory.FormatCode(sb);
+			__init.Property("StoredFieldsMemory");
+			StoredFieldsMemory.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StoredFieldsMemoryInBytes = ");
-			sb.Append(instance.StoredFieldsMemoryInBytes);
-			sb.Append("L");
+			__init.Property("StoredFieldsMemoryInBytes");
+			writer.WriteValue(StoredFieldsMemoryInBytes);
+			writer.Write("L");
 		}
 
-		if (instance.TermsMemory is not null)
+		if (TermsMemory is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TermsMemory = ");
-			instance.TermsMemory.FormatCode(sb);
+			__init.Property("TermsMemory");
+			TermsMemory.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TermsMemoryInBytes = ");
-			sb.Append(instance.TermsMemoryInBytes);
-			sb.Append("L");
+			__init.Property("TermsMemoryInBytes");
+			writer.WriteValue(TermsMemoryInBytes);
+			writer.Write("L");
 		}
 
-		if (instance.TermVectorsMemory is not null)
+		if (TermVectorsMemory is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TermVectorsMemory = ");
-			instance.TermVectorsMemory.FormatCode(sb);
+			__init.Property("TermVectorsMemory");
+			TermVectorsMemory.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TermVectorsMemoryInBytes = ");
-			sb.Append(instance.TermVectorsMemoryInBytes);
-			sb.Append("L");
+			__init.Property("TermVectorsMemoryInBytes");
+			writer.WriteValue(TermVectorsMemoryInBytes);
+			writer.Write("L");
 		}
 
-		if (instance.VersionMapMemory is not null)
+		if (VersionMapMemory is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VersionMapMemory = ");
-			instance.VersionMapMemory.FormatCode(sb);
+			__init.Property("VersionMapMemory");
+			VersionMapMemory.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VersionMapMemoryInBytes = ");
-			sb.Append(instance.VersionMapMemoryInBytes);
-			sb.Append("L");
+			__init.Property("VersionMapMemoryInBytes");
+			writer.WriteValue(VersionMapMemoryInBytes);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

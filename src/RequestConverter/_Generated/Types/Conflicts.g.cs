@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class ConflictsCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Conflicts instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Conflicts instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Conflicts.Abort:
-				sb.Append("Conflicts.Abort");
+				writer.Write("Conflicts.Abort");
 				break;
 			case Elastic.Clients.Elasticsearch.Conflicts.Proceed:
-				sb.Append("Conflicts.Proceed");
+				writer.Write("Conflicts.Proceed");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

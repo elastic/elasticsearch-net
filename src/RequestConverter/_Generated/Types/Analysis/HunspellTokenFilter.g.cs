@@ -25,57 +25,38 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class HunspellTokenFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Dedup is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Dedup is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Dedup = ");
-			sb.Append(instance.Dedup.Value ? "true" : "false");
+			__init.Property("Dedup");
+			writer.WriteValue(Dedup.Value);
 		}
 
-		if (instance.Dictionary is not null)
+		if (Dictionary is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Dictionary = ");
-			sb.Append("\"");
-			sb.Append(instance.Dictionary);
-			sb.Append("\"");
+			__init.Property("Dictionary");
+			writer.WriteString(Dictionary);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Locale = ");
-			sb.Append("\"");
-			sb.Append(instance.Locale);
-			sb.Append("\"");
+			__init.Property("Locale");
+			writer.WriteString(Locale);
 		}
 
-		if (instance.LongestOnly is not null)
+		if (LongestOnly is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LongestOnly = ");
-			sb.Append(instance.LongestOnly.Value ? "true" : "false");
+			__init.Property("LongestOnly");
+			writer.WriteValue(LongestOnly.Value);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

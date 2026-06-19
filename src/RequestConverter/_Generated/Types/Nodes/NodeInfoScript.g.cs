@@ -25,31 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class NodeInfoScript : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowedTypes = ");
-			sb.Append("\"");
-			sb.Append(instance.AllowedTypes);
-			sb.Append("\"");
+			__init.Property("AllowedTypes");
+			writer.WriteString(AllowedTypes);
 		}
 
-		if (instance.DisableMaxCompilationsRate is not null)
+		if (DisableMaxCompilationsRate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DisableMaxCompilationsRate = ");
-			sb.Append("\"");
-			sb.Append(instance.DisableMaxCompilationsRate);
-			sb.Append("\"");
+			__init.Property("DisableMaxCompilationsRate");
+			writer.WriteString(DisableMaxCompilationsRate);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

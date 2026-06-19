@@ -25,33 +25,33 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 public static class SnapshotSortCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.Duration:
-				sb.Append("SnapshotSort.Duration");
+				writer.Write("SnapshotSort.Duration");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.FailedShardCount:
-				sb.Append("SnapshotSort.FailedShardCount");
+				writer.Write("SnapshotSort.FailedShardCount");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.IndexCount:
-				sb.Append("SnapshotSort.IndexCount");
+				writer.Write("SnapshotSort.IndexCount");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.Name:
-				sb.Append("SnapshotSort.Name");
+				writer.Write("SnapshotSort.Name");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.Repository:
-				sb.Append("SnapshotSort.Repository");
+				writer.Write("SnapshotSort.Repository");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.ShardCount:
-				sb.Append("SnapshotSort.ShardCount");
+				writer.Write("SnapshotSort.ShardCount");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.StartTime:
-				sb.Append("SnapshotSort.StartTime");
+				writer.Write("SnapshotSort.StartTime");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

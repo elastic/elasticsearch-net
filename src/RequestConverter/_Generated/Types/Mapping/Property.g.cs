@@ -25,327 +25,326 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public partial interface IProperty : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	void RequestConverter.ICodeFormattable.FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.DynamicProperty c1)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.DynamicProperty c1)
 		{
-			c1.FormatCode(sb);
+			c1.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoubleProperty c2)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoubleProperty c2)
 		{
-			c2.FormatCode(sb);
+			c2.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.FieldAliasProperty c3)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.FieldAliasProperty c3)
 		{
-			c3.FormatCode(sb);
+			c3.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.BinaryProperty c4)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.BinaryProperty c4)
 		{
-			c4.FormatCode(sb);
+			c4.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.BooleanProperty c5)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.BooleanProperty c5)
 		{
-			c5.FormatCode(sb);
+			c5.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.ByteNumberProperty c6)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.ByteNumberProperty c6)
 		{
-			c6.FormatCode(sb);
+			c6.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.CompletionProperty c7)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.CompletionProperty c7)
 		{
-			c7.FormatCode(sb);
+			c7.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty c8)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty c8)
 		{
-			c8.FormatCode(sb);
+			c8.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.CountedKeywordProperty c9)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.CountedKeywordProperty c9)
 		{
-			c9.FormatCode(sb);
+			c9.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.DateProperty c10)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.DateProperty c10)
 		{
-			c10.FormatCode(sb);
+			c10.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.DateNanosProperty c11)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.DateNanosProperty c11)
 		{
-			c11.FormatCode(sb);
+			c11.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.DateRangeProperty c12)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.DateRangeProperty c12)
 		{
-			c12.FormatCode(sb);
+			c12.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty c13)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty c13)
 		{
-			c13.FormatCode(sb);
+			c13.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.DoubleNumberProperty c14)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.DoubleNumberProperty c14)
 		{
-			c14.FormatCode(sb);
+			c14.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.DoubleRangeProperty c15)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.DoubleRangeProperty c15)
 		{
-			c15.FormatCode(sb);
+			c15.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramProperty c16)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramProperty c16)
 		{
-			c16.FormatCode(sb);
+			c16.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty c17)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty c17)
 		{
-			c17.FormatCode(sb);
+			c17.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.FloatNumberProperty c18)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.FloatNumberProperty c18)
 		{
-			c18.FormatCode(sb);
+			c18.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.FloatRangeProperty c19)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.FloatRangeProperty c19)
 		{
-			c19.FormatCode(sb);
+			c19.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.GeoPointProperty c20)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.GeoPointProperty c20)
 		{
-			c20.FormatCode(sb);
+			c20.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty c21)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty c21)
 		{
-			c21.FormatCode(sb);
+			c21.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberProperty c22)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberProperty c22)
 		{
-			c22.FormatCode(sb);
+			c22.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.HistogramProperty c23)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.HistogramProperty c23)
 		{
-			c23.FormatCode(sb);
+			c23.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty c24)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty c24)
 		{
-			c24.FormatCode(sb);
+			c24.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty c25)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty c25)
 		{
-			c25.FormatCode(sb);
+			c25.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.IntegerRangeProperty c26)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.IntegerRangeProperty c26)
 		{
-			c26.FormatCode(sb);
+			c26.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.IpProperty c27)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.IpProperty c27)
 		{
-			c27.FormatCode(sb);
+			c27.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.IpRangeProperty c28)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.IpRangeProperty c28)
 		{
-			c28.FormatCode(sb);
+			c28.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.JoinProperty c29)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.JoinProperty c29)
 		{
-			c29.FormatCode(sb);
+			c29.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.KeywordProperty c30)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.KeywordProperty c30)
 		{
-			c30.FormatCode(sb);
+			c30.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.LongNumberProperty c31)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.LongNumberProperty c31)
 		{
-			c31.FormatCode(sb);
+			c31.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.LongRangeProperty c32)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.LongRangeProperty c32)
 		{
-			c32.FormatCode(sb);
+			c32.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty c33)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty c33)
 		{
-			c33.FormatCode(sb);
+			c33.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.Murmur3HashProperty c34)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.Murmur3HashProperty c34)
 		{
-			c34.FormatCode(sb);
+			c34.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.NestedProperty c35)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.NestedProperty c35)
 		{
-			c35.FormatCode(sb);
+			c35.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.ObjectProperty c36)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.ObjectProperty c36)
 		{
-			c36.FormatCode(sb);
+			c36.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectProperty c37)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectProperty c37)
 		{
-			c37.FormatCode(sb);
+			c37.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.PercolatorProperty c38)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.PercolatorProperty c38)
 		{
-			c38.FormatCode(sb);
+			c38.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.PointProperty c39)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.PointProperty c39)
 		{
-			c39.FormatCode(sb);
+			c39.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty c40)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty c40)
 		{
-			c40.FormatCode(sb);
+			c40.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.RankFeaturesProperty c41)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.RankFeaturesProperty c41)
 		{
-			c41.FormatCode(sb);
+			c41.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.RankVectorProperty c42)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.RankVectorProperty c42)
 		{
-			c42.FormatCode(sb);
+			c42.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty c43)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty c43)
 		{
-			c43.FormatCode(sb);
+			c43.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypeProperty c44)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypeProperty c44)
 		{
-			c44.FormatCode(sb);
+			c44.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty c45)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty c45)
 		{
-			c45.FormatCode(sb);
+			c45.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.ShapeProperty c46)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.ShapeProperty c46)
 		{
-			c46.FormatCode(sb);
+			c46.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.ShortNumberProperty c47)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.ShortNumberProperty c47)
 		{
-			c47.FormatCode(sb);
+			c47.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.SparseVectorProperty c48)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.SparseVectorProperty c48)
 		{
-			c48.FormatCode(sb);
+			c48.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.TextProperty c49)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.TextProperty c49)
 		{
-			c49.FormatCode(sb);
+			c49.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.TokenCountProperty c50)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.TokenCountProperty c50)
 		{
-			c50.FormatCode(sb);
+			c50.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberProperty c51)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberProperty c51)
 		{
-			c51.FormatCode(sb);
+			c51.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.VersionProperty c52)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.VersionProperty c52)
 		{
-			c52.FormatCode(sb);
+			c52.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Mapping.WildcardProperty c53)
+		if (this is Elastic.Clients.Elasticsearch.Mapping.WildcardProperty c53)
 		{
-			c53.FormatCode(sb);
+			c53.FormatCode(writer);
 			return;
 		}
 
-		sb.Append(instance.ToString());
+		writer.Write(ToString());
 	}
 }

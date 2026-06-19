@@ -25,79 +25,52 @@ namespace Elastic.Clients.Elasticsearch.Tasks;
 
 public partial class NodeTasks : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Attributes is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Attributes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Attributes = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Attributes, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("\""); sb.Append(v); sb.Append("\""); }, sb);
+			__init.Property("Attributes");
+			writer.Write("new() ");
+			writer.WriteInlineList(Attributes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Host is not null)
+		if (Host is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Host = ");
-			sb.Append("\"");
-			sb.Append(instance.Host);
-			sb.Append("\"");
+			__init.Property("Host");
+			writer.WriteString(Host);
 		}
 
-		if (instance.Ip is not null)
+		if (Ip is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ip = ");
-			sb.Append("\"");
-			sb.Append(instance.Ip);
-			sb.Append("\"");
+			__init.Property("Ip");
+			writer.WriteString(Ip);
 		}
 
-		if (instance.Name is not null)
+		if (Name is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
-		if (instance.Roles is not null)
+		if (Roles is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Roles = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Roles, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Roles");
+			writer.WriteInlineList(Roles, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Tasks = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Tasks, (k, sb) => { k.FormatCode(sb); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Tasks");
+			writer.Write("new() ");
+			writer.WriteInlineList(Tasks, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.TransportAddress is not null)
+		if (TransportAddress is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TransportAddress = ");
-			sb.Append("\"");
-			sb.Append(instance.TransportAddress);
-			sb.Append("\"");
+			__init.Property("TransportAddress");
+			writer.WriteString(TransportAddress);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

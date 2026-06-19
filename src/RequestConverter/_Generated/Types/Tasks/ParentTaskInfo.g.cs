@@ -25,128 +25,105 @@ namespace Elastic.Clients.Elasticsearch.Tasks;
 
 public partial class ParentTaskInfo : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Action = ");
-			sb.Append("\"");
-			sb.Append(instance.Action);
-			sb.Append("\"");
+			__init.Property("Action");
+			writer.WriteString(Action);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Cancellable = ");
-			sb.Append(instance.Cancellable ? "true" : "false");
+			__init.Property("Cancellable");
+			writer.WriteValue(Cancellable);
 		}
 
-		if (instance.Cancelled is not null)
+		if (Cancelled is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Cancelled = ");
-			sb.Append(instance.Cancelled.Value ? "true" : "false");
+			__init.Property("Cancelled");
+			writer.WriteValue(Cancelled.Value);
 		}
 
-		if (instance.Children is not null)
+		if (Children is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Children = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Children, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Children");
+			writer.WriteInlineList(Children, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Description is not null)
+		if (Description is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Headers = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Headers, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("\""); sb.Append(v); sb.Append("\""); }, sb);
+			__init.Property("Headers");
+			writer.Write("new() ");
+			writer.WriteInlineList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			sb.Append(instance.Id);
-			sb.Append("L");
+			__init.Property("Id");
+			writer.WriteValue(Id);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Node = ");
-			sb.Append("\"");
-			sb.Append(instance.Node);
-			sb.Append("\"");
+			__init.Property("Node");
+			writer.WriteString(Node);
 		}
 
-		if (instance.ParentTaskId is not null)
+		if (OriginalStartTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ParentTaskId = ");
-			instance.ParentTaskId.FormatCode(sb);
+			__init.Property("OriginalStartTime");
+			writer.WriteString(OriginalStartTime);
 		}
 
-		if (instance.RunningTime is not null)
+		if (OriginalStartTimeInMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RunningTime = ");
-			instance.RunningTime.FormatCode(sb);
+			__init.Property("OriginalStartTimeInMillis");
+			writer.WriteValue(OriginalStartTimeInMillis.Value);
 		}
 
+		if (OriginalTaskId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RunningTimeInNanos = ");
-			sb.Append(instance.RunningTimeInNanos);
+			__init.Property("OriginalTaskId");
+			OriginalTaskId.FormatCode(writer);
 		}
 
+		if (ParentTaskId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StartTimeInMillis = ");
-			sb.Append(instance.StartTimeInMillis);
+			__init.Property("ParentTaskId");
+			ParentTaskId.FormatCode(writer);
 		}
 
-		if (instance.Status is not null)
+		if (RunningTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Status = ");
-			RequestConverter.CodeFormatter.FormatCode(instance.Status, sb);
+			__init.Property("RunningTime");
+			RunningTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			sb.Append("\"");
-			sb.Append(instance.Type);
-			sb.Append("\"");
+			__init.Property("RunningTimeInNanos");
+			writer.WriteValue(RunningTimeInNanos);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		{
+			__init.Property("StartTimeInMillis");
+			writer.WriteValue(StartTimeInMillis);
+		}
+
+		if (Status is not null)
+		{
+			__init.Property("Status");
+			writer.WriteValue(Status);
+		}
+
+		{
+			__init.Property("Type");
+			writer.WriteString(Type);
+		}
+
+		__init.Dispose();
 	}
 }

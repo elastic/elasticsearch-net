@@ -25,68 +25,45 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class GetTokenRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.GrantType is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (GrantType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GrantType = ");
-			Elastic.Clients.Elasticsearch.Security.AccessTokenGrantTypeCodeFormatter.FormatCode(instance.GrantType.Value, sb);
+			__init.Property("GrantType");
+			Elastic.Clients.Elasticsearch.Security.AccessTokenGrantTypeCodeFormatter.FormatCode(GrantType.Value, writer);
 		}
 
-		if (instance.KerberosTicket is not null)
+		if (KerberosTicket is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("KerberosTicket = ");
-			sb.Append("\"");
-			sb.Append(instance.KerberosTicket);
-			sb.Append("\"");
+			__init.Property("KerberosTicket");
+			writer.WriteString(KerberosTicket);
 		}
 
-		if (instance.Password is not null)
+		if (Password is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Password = ");
-			sb.Append("\"");
-			sb.Append(instance.Password);
-			sb.Append("\"");
+			__init.Property("Password");
+			writer.WriteString(Password);
 		}
 
-		if (instance.RefreshToken is not null)
+		if (RefreshToken is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RefreshToken = ");
-			sb.Append("\"");
-			sb.Append(instance.RefreshToken);
-			sb.Append("\"");
+			__init.Property("RefreshToken");
+			writer.WriteString(RefreshToken);
 		}
 
-		if (instance.Scope is not null)
+		if (Scope is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Scope = ");
-			sb.Append("\"");
-			sb.Append(instance.Scope);
-			sb.Append("\"");
+			__init.Property("Scope");
+			writer.WriteString(Scope);
 		}
 
-		if (instance.Username is not null)
+		if (Username is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Username = ");
-			instance.Username.FormatCode(sb);
+			__init.Property("Username");
+			Username.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,81 +25,62 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class MlInferenceTrainedModelsCount : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Classification is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Classification is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Classification = ");
-			sb.Append(instance.Classification.Value);
-			sb.Append("L");
+			__init.Property("Classification");
+			writer.WriteValue(Classification.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Ner is not null)
+		if (Ner is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ner = ");
-			sb.Append(instance.Ner.Value);
-			sb.Append("L");
+			__init.Property("Ner");
+			writer.WriteValue(Ner.Value);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Other = ");
-			sb.Append(instance.Other);
-			sb.Append("L");
+			__init.Property("Other");
+			writer.WriteValue(Other);
+			writer.Write("L");
 		}
 
-		if (instance.PassThrough is not null)
+		if (PassThrough is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PassThrough = ");
-			sb.Append(instance.PassThrough.Value);
-			sb.Append("L");
+			__init.Property("PassThrough");
+			writer.WriteValue(PassThrough.Value);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Prepackaged = ");
-			sb.Append(instance.Prepackaged);
-			sb.Append("L");
+			__init.Property("Prepackaged");
+			writer.WriteValue(Prepackaged);
+			writer.Write("L");
 		}
 
-		if (instance.Regression is not null)
+		if (Regression is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Regression = ");
-			sb.Append(instance.Regression.Value);
-			sb.Append("L");
+			__init.Property("Regression");
+			writer.WriteValue(Regression.Value);
+			writer.Write("L");
 		}
 
-		if (instance.TextEmbedding is not null)
+		if (TextEmbedding is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TextEmbedding = ");
-			sb.Append(instance.TextEmbedding.Value);
-			sb.Append("L");
+			__init.Property("TextEmbedding");
+			writer.WriteValue(TextEmbedding.Value);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			sb.Append(instance.Total);
-			sb.Append("L");
+			__init.Property("Total");
+			writer.WriteValue(Total);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

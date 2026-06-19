@@ -25,65 +25,44 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class RuleQuery : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Boost is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Boost is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Boost = ");
-			sb.Append(instance.Boost.Value);
-			sb.Append("f");
+			__init.Property("Boost");
+			writer.WriteValue(Boost.Value);
+			writer.Write("f");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MatchCriteria = ");
-			RequestConverter.CodeFormatter.FormatCode(instance.MatchCriteria, sb);
+			__init.Property("MatchCriteria");
+			writer.WriteValue(MatchCriteria);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Organic = ");
-			instance.Organic.FormatCode(sb);
+			__init.Property("Organic");
+			Organic.FormatCode(writer);
 		}
 
-		if (instance.QueryName is not null)
+		if (QueryName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryName = ");
-			sb.Append("\"");
-			sb.Append(instance.QueryName);
-			sb.Append("\"");
+			__init.Property("QueryName");
+			writer.WriteString(QueryName);
 		}
 
-		if (instance.RulesetId is not null)
+		if (RulesetId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RulesetId = ");
-			sb.Append("\"");
-			sb.Append(instance.RulesetId);
-			sb.Append("\"");
+			__init.Property("RulesetId");
+			writer.WriteString(RulesetId);
 		}
 
-		if (instance.RulesetIds is not null)
+		if (RulesetIds is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RulesetIds = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.RulesetIds, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("RulesetIds");
+			writer.WriteInlineList(RulesetIds, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

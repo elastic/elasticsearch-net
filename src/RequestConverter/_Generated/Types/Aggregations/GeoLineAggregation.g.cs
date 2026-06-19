@@ -25,51 +25,38 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class GeoLineAggregation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.IncludeSort is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (IncludeSort is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IncludeSort = ");
-			sb.Append(instance.IncludeSort.Value ? "true" : "false");
+			__init.Property("IncludeSort");
+			writer.WriteValue(IncludeSort.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Point = ");
-			instance.Point.FormatCode(sb);
+			__init.Property("Point");
+			Point.FormatCode(writer);
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append(instance.Size.Value);
+			__init.Property("Size");
+			writer.WriteValue(Size.Value);
 		}
 
-		if (instance.Sort is not null)
+		if (Sort is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sort = ");
-			instance.Sort.FormatCode(sb);
+			__init.Property("Sort");
+			Sort.FormatCode(writer);
 		}
 
-		if (instance.SortOrder is not null)
+		if (SortOrder is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SortOrder = ");
-			Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(instance.SortOrder.Value, sb);
+			__init.Property("SortOrder");
+			Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(SortOrder.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

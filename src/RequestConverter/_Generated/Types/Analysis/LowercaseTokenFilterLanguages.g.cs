@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public static class LowercaseTokenFilterLanguagesCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages.Greek:
-				sb.Append("LowercaseTokenFilterLanguages.Greek");
+				writer.Write("LowercaseTokenFilterLanguages.Greek");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages.Irish:
-				sb.Append("LowercaseTokenFilterLanguages.Irish");
+				writer.Write("LowercaseTokenFilterLanguages.Irish");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages.Turkish:
-				sb.Append("LowercaseTokenFilterLanguages.Turkish");
+				writer.Write("LowercaseTokenFilterLanguages.Turkish");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -25,39 +25,28 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class GlobalOrdinalsStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.BuildTime is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (BuildTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BuildTime = ");
-			sb.Append("\"");
-			sb.Append(instance.BuildTime);
-			sb.Append("\"");
+			__init.Property("BuildTime");
+			writer.WriteString(BuildTime);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BuildTimeInMillis = ");
-			sb.Append(instance.BuildTimeInMillis);
-			sb.Append("L");
+			__init.Property("BuildTimeInMillis");
+			writer.WriteValue(BuildTimeInMillis);
+			writer.Write("L");
 		}
 
-		if (instance.Fields is not null)
+		if (Fields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fields = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Fields, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Fields");
+			writer.Write("new() ");
+			writer.WriteInlineList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

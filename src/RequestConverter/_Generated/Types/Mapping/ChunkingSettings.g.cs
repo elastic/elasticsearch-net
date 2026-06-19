@@ -25,64 +25,43 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public partial class ChunkingSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxChunkSize = ");
-			sb.Append(instance.MaxChunkSize);
+			__init.Property("MaxChunkSize");
+			writer.WriteValue(MaxChunkSize);
 		}
 
-		if (instance.Overlap is not null)
+		if (Overlap is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Overlap = ");
-			sb.Append(instance.Overlap.Value);
+			__init.Property("Overlap");
+			writer.WriteValue(Overlap.Value);
 		}
 
-		if (instance.SentenceOverlap is not null)
+		if (SentenceOverlap is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SentenceOverlap = ");
-			sb.Append(instance.SentenceOverlap.Value);
+			__init.Property("SentenceOverlap");
+			writer.WriteValue(SentenceOverlap.Value);
 		}
 
-		if (instance.SeparatorGroup is not null)
+		if (SeparatorGroup is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SeparatorGroup = ");
-			sb.Append("\"");
-			sb.Append(instance.SeparatorGroup);
-			sb.Append("\"");
+			__init.Property("SeparatorGroup");
+			writer.WriteString(SeparatorGroup);
 		}
 
-		if (instance.Separators is not null)
+		if (Separators is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Separators = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Separators, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Separators");
+			writer.WriteInlineList(Separators, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Strategy = ");
-			sb.Append("\"");
-			sb.Append(instance.Strategy);
-			sb.Append("\"");
+			__init.Property("Strategy");
+			writer.WriteString(Strategy);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class TaskTypeElasticsearchCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.TaskTypeElasticsearch instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.TaskTypeElasticsearch instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeElasticsearch.Rerank:
-				sb.Append("TaskTypeElasticsearch.Rerank");
+				writer.Write("TaskTypeElasticsearch.Rerank");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeElasticsearch.SparseEmbedding:
-				sb.Append("TaskTypeElasticsearch.SparseEmbedding");
+				writer.Write("TaskTypeElasticsearch.SparseEmbedding");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeElasticsearch.TextEmbedding:
-				sb.Append("TaskTypeElasticsearch.TextEmbedding");
+				writer.Write("TaskTypeElasticsearch.TextEmbedding");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

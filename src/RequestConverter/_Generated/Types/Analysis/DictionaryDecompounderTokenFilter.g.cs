@@ -25,74 +25,51 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class DictionaryDecompounderTokenFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.MaxSubwordSize is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (MaxSubwordSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxSubwordSize = ");
-			sb.Append(instance.MaxSubwordSize.Value);
+			__init.Property("MaxSubwordSize");
+			writer.WriteValue(MaxSubwordSize.Value);
 		}
 
-		if (instance.MinSubwordSize is not null)
+		if (MinSubwordSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinSubwordSize = ");
-			sb.Append(instance.MinSubwordSize.Value);
+			__init.Property("MinSubwordSize");
+			writer.WriteValue(MinSubwordSize.Value);
 		}
 
-		if (instance.MinWordSize is not null)
+		if (MinWordSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinWordSize = ");
-			sb.Append(instance.MinWordSize.Value);
+			__init.Property("MinWordSize");
+			writer.WriteValue(MinWordSize.Value);
 		}
 
-		if (instance.OnlyLongestMatch is not null)
+		if (OnlyLongestMatch is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OnlyLongestMatch = ");
-			sb.Append(instance.OnlyLongestMatch.Value ? "true" : "false");
+			__init.Property("OnlyLongestMatch");
+			writer.WriteValue(OnlyLongestMatch.Value);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (instance.WordList is not null)
+		if (WordList is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WordList = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.WordList, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("WordList");
+			writer.WriteInlineList(WordList, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.WordListPath is not null)
+		if (WordListPath is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WordListPath = ");
-			sb.Append("\"");
-			sb.Append(instance.WordListPath);
-			sb.Append("\"");
+			__init.Property("WordListPath");
+			writer.WriteString(WordListPath);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

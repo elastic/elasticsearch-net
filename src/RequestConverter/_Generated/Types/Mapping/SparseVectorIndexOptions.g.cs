@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public partial class SparseVectorIndexOptions : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Prune is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Prune is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Prune = ");
-			sb.Append(instance.Prune.Value ? "true" : "false");
+			__init.Property("Prune");
+			writer.WriteValue(Prune.Value);
 		}
 
-		if (instance.PruningConfig is not null)
+		if (PruningConfig is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PruningConfig = ");
-			instance.PruningConfig.FormatCode(sb);
+			__init.Property("PruningConfig");
+			PruningConfig.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

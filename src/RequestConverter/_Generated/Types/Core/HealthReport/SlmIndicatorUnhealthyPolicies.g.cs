@@ -25,29 +25,22 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
 public partial class SlmIndicatorUnhealthyPolicies : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count);
-			sb.Append("L");
+			__init.Property("Count");
+			writer.WriteValue(Count);
+			writer.Write("L");
 		}
 
-		if (instance.InvocationsSinceLastSuccess is not null)
+		if (InvocationsSinceLastSuccess is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InvocationsSinceLastSuccess = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.InvocationsSinceLastSuccess, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append(v); sb.Append("L"); }, sb);
+			__init.Property("InvocationsSinceLastSuccess");
+			writer.Write("new() ");
+			writer.WriteInlineList(InvocationsSinceLastSuccess, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

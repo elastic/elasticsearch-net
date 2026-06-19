@@ -25,53 +25,40 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class FielddataStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Evictions is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Evictions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Evictions = ");
-			sb.Append(instance.Evictions.Value);
-			sb.Append("L");
+			__init.Property("Evictions");
+			writer.WriteValue(Evictions.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Fields is not null)
+		if (Fields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fields = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Fields, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Fields");
+			writer.Write("new() ");
+			writer.WriteInlineList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GlobalOrdinals = ");
-			instance.GlobalOrdinals.FormatCode(sb);
+			__init.Property("GlobalOrdinals");
+			GlobalOrdinals.FormatCode(writer);
 		}
 
-		if (instance.MemorySize is not null)
+		if (MemorySize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MemorySize = ");
-			instance.MemorySize.FormatCode(sb);
+			__init.Property("MemorySize");
+			MemorySize.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MemorySizeInBytes = ");
-			sb.Append(instance.MemorySizeInBytes);
-			sb.Append("L");
+			__init.Property("MemorySizeInBytes");
+			writer.WriteValue(MemorySizeInBytes);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

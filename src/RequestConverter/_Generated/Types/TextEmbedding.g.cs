@@ -25,31 +25,20 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class TextEmbedding : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ModelId is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ModelId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelId = ");
-			sb.Append("\"");
-			sb.Append(instance.ModelId);
-			sb.Append("\"");
+			__init.Property("ModelId");
+			writer.WriteString(ModelId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelText = ");
-			sb.Append("\"");
-			sb.Append(instance.ModelText);
-			sb.Append("\"");
+			__init.Property("ModelText");
+			writer.WriteString(ModelText);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

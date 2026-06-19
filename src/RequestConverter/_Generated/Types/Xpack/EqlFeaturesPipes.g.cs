@@ -25,26 +25,19 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class EqlFeaturesPipes : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PipeHead = ");
-			sb.Append(instance.PipeHead);
+			__init.Property("PipeHead");
+			writer.WriteValue(PipeHead);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PipeTail = ");
-			sb.Append(instance.PipeTail);
+			__init.Property("PipeTail");
+			writer.WriteValue(PipeTail);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

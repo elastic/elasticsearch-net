@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class SortModeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.SortMode instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.SortMode instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.SortMode.Avg:
-				sb.Append("SortMode.Avg");
+				writer.Write("SortMode.Avg");
 				break;
 			case Elastic.Clients.Elasticsearch.SortMode.Max:
-				sb.Append("SortMode.Max");
+				writer.Write("SortMode.Max");
 				break;
 			case Elastic.Clients.Elasticsearch.SortMode.Median:
-				sb.Append("SortMode.Median");
+				writer.Write("SortMode.Median");
 				break;
 			case Elastic.Clients.Elasticsearch.SortMode.Min:
-				sb.Append("SortMode.Min");
+				writer.Write("SortMode.Min");
 				break;
 			case Elastic.Clients.Elasticsearch.SortMode.Sum:
-				sb.Append("SortMode.Sum");
+				writer.Write("SortMode.Sum");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

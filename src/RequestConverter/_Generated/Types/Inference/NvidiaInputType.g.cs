@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class NvidiaInputTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.NvidiaInputType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.NvidiaInputType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.NvidiaInputType.Ingest:
-				sb.Append("NvidiaInputType.Ingest");
+				writer.Write("NvidiaInputType.Ingest");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.NvidiaInputType.Search:
-				sb.Append("NvidiaInputType.Search");
+				writer.Write("NvidiaInputType.Search");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

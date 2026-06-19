@@ -25,21 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class DelegatePkiRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("X509CertificateChain = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.X509CertificateChain, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("X509CertificateChain");
+			writer.WriteInlineList(X509CertificateChain, (w, item) => { w.WriteString(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

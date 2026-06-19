@@ -25,39 +25,26 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class GroqServiceSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ApiKey is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ApiKey is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ApiKey = ");
-			sb.Append("\"");
-			sb.Append(instance.ApiKey);
-			sb.Append("\"");
+			__init.Property("ApiKey");
+			writer.WriteString(ApiKey);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelId = ");
-			sb.Append("\"");
-			sb.Append(instance.ModelId);
-			sb.Append("\"");
+			__init.Property("ModelId");
+			writer.WriteString(ModelId);
 		}
 
-		if (instance.RateLimit is not null)
+		if (RateLimit is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RateLimit = ");
-			instance.RateLimit.FormatCode(sb);
+			__init.Property("RateLimit");
+			RateLimit.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,34 +25,23 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public partial class FieldMapping : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FullName = ");
-			sb.Append("\"");
-			sb.Append(instance.FullName);
-			sb.Append("\"");
+			__init.Property("FullName");
+			writer.WriteString(FullName);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mapping = ");
-			sb.Append("new(");
-			sb.Append("\"");
-			sb.Append(instance.Mapping.Key);
-			sb.Append("\"");
-			sb.Append(", ");
-			instance.Mapping.Value.FormatCode(sb);
-			sb.Append(")");
+			__init.Property("Mapping");
+			writer.Write("new(");
+			writer.WriteString(Mapping.Key);
+			writer.Write(", ");
+			Mapping.Value.FormatCode(writer);
+			writer.Write(")");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

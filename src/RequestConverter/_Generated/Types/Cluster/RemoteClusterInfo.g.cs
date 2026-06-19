@@ -25,137 +25,90 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class RemoteClusterInfo : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ClusterUuid = ");
-			sb.Append("\"");
-			sb.Append(instance.ClusterUuid);
-			sb.Append("\"");
+			__init.Property("ClusterUuid");
+			writer.WriteString(ClusterUuid);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndicesCount = ");
-			sb.Append(instance.IndicesCount);
+			__init.Property("IndicesCount");
+			writer.WriteValue(IndicesCount);
 		}
 
-		if (instance.IndicesTotalSize is not null)
+		if (IndicesTotalSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndicesTotalSize = ");
-			sb.Append("\"");
-			sb.Append(instance.IndicesTotalSize);
-			sb.Append("\"");
+			__init.Property("IndicesTotalSize");
+			writer.WriteString(IndicesTotalSize);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndicesTotalSizeInBytes = ");
-			sb.Append(instance.IndicesTotalSizeInBytes);
-			sb.Append("L");
+			__init.Property("IndicesTotalSizeInBytes");
+			writer.WriteValue(IndicesTotalSizeInBytes);
+			writer.Write("L");
 		}
 
-		if (instance.MaxHeap is not null)
+		if (MaxHeap is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxHeap = ");
-			sb.Append("\"");
-			sb.Append(instance.MaxHeap);
-			sb.Append("\"");
+			__init.Property("MaxHeap");
+			writer.WriteString(MaxHeap);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxHeapInBytes = ");
-			sb.Append(instance.MaxHeapInBytes);
-			sb.Append("L");
+			__init.Property("MaxHeapInBytes");
+			writer.WriteValue(MaxHeapInBytes);
+			writer.Write("L");
 		}
 
-		if (instance.MemTotal is not null)
+		if (MemTotal is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MemTotal = ");
-			sb.Append("\"");
-			sb.Append(instance.MemTotal);
-			sb.Append("\"");
+			__init.Property("MemTotal");
+			writer.WriteString(MemTotal);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MemTotalInBytes = ");
-			sb.Append(instance.MemTotalInBytes);
-			sb.Append("L");
+			__init.Property("MemTotalInBytes");
+			writer.WriteValue(MemTotalInBytes);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mode = ");
-			sb.Append("\"");
-			sb.Append(instance.Mode);
-			sb.Append("\"");
+			__init.Property("Mode");
+			writer.WriteString(Mode);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NodesCount = ");
-			sb.Append(instance.NodesCount);
+			__init.Property("NodesCount");
+			writer.WriteValue(NodesCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShardsCount = ");
-			sb.Append(instance.ShardsCount);
+			__init.Property("ShardsCount");
+			writer.WriteValue(ShardsCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SkipUnavailable = ");
-			sb.Append(instance.SkipUnavailable ? "true" : "false");
+			__init.Property("SkipUnavailable");
+			writer.WriteValue(SkipUnavailable);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Status = ");
-			Elastic.Clients.Elasticsearch.HealthStatusCodeFormatter.FormatCode(instance.Status, sb);
+			__init.Property("Status");
+			Elastic.Clients.Elasticsearch.HealthStatusCodeFormatter.FormatCode(Status, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TransportCompress = ");
-			sb.Append("\"");
-			sb.Append(instance.TransportCompress);
-			sb.Append("\"");
+			__init.Property("TransportCompress");
+			writer.WriteString(TransportCompress);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Version, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Version");
+			writer.WriteInlineList(Version, (w, item) => { w.WriteString(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

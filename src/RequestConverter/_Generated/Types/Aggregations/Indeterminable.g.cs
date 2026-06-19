@@ -25,21 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class Indeterminable : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Reason = ");
-			sb.Append("\"");
-			sb.Append(instance.Reason);
-			sb.Append("\"");
+			__init.Property("Reason");
+			writer.WriteString(Reason);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

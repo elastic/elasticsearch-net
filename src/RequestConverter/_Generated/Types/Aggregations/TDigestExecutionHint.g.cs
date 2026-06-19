@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public static class TDigestExecutionHintCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint.Default:
-				sb.Append("TDigestExecutionHint.Default");
+				writer.Write("TDigestExecutionHint.Default");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint.HighAccuracy:
-				sb.Append("TDigestExecutionHint.HighAccuracy");
+				writer.Write("TDigestExecutionHint.HighAccuracy");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

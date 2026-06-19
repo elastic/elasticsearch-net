@@ -25,73 +25,52 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 public partial class BlobDetails : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Overwritten = ");
-			sb.Append(instance.Overwritten ? "true" : "false");
+			__init.Property("Overwritten");
+			writer.WriteValue(Overwritten);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReadEarly = ");
-			sb.Append(instance.ReadEarly ? "true" : "false");
+			__init.Property("ReadEarly");
+			writer.WriteValue(ReadEarly);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReadEnd = ");
-			sb.Append(instance.ReadEnd);
-			sb.Append("L");
+			__init.Property("ReadEnd");
+			writer.WriteValue(ReadEnd);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Reads = ");
-			instance.Reads.FormatCode(sb);
+			__init.Property("Reads");
+			Reads.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReadStart = ");
-			sb.Append(instance.ReadStart);
-			sb.Append("L");
+			__init.Property("ReadStart");
+			writer.WriteValue(ReadStart);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			instance.Size.FormatCode(sb);
+			__init.Property("Size");
+			Size.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SizeBytes = ");
-			sb.Append(instance.SizeBytes);
-			sb.Append("L");
+			__init.Property("SizeBytes");
+			writer.WriteValue(SizeBytes);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

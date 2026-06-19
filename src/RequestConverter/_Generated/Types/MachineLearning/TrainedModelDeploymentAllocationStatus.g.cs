@@ -25,33 +25,24 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class TrainedModelDeploymentAllocationStatus : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllocationCount = ");
-			sb.Append(instance.AllocationCount);
+			__init.Property("AllocationCount");
+			writer.WriteValue(AllocationCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("State = ");
-			Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationStateCodeFormatter.FormatCode(instance.State, sb);
+			__init.Property("State");
+			Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationStateCodeFormatter.FormatCode(State, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TargetAllocationCount = ");
-			sb.Append(instance.TargetAllocationCount);
+			__init.Property("TargetAllocationCount");
+			writer.WriteValue(TargetAllocationCount);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

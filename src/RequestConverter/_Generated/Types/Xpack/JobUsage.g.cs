@@ -25,48 +25,35 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class JobUsage : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count);
+			__init.Property("Count");
+			writer.WriteValue(Count);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CreatedBy = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.CreatedBy, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append(v); sb.Append("L"); }, sb);
+			__init.Property("CreatedBy");
+			writer.Write("new() ");
+			writer.WriteInlineList(CreatedBy, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Detectors = ");
-			instance.Detectors.FormatCode(sb);
+			__init.Property("Detectors");
+			Detectors.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Forecasts = ");
-			instance.Forecasts.FormatCode(sb);
+			__init.Property("Forecasts");
+			Forecasts.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelSize = ");
-			instance.ModelSize.FormatCode(sb);
+			__init.Property("ModelSize");
+			ModelSize.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

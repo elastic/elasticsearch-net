@@ -25,24 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class Context : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		if (instance.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 		{
-			sb.Append("new Context(");
-			sb.Append("\"");
-			sb.Append(instance.Value1);
-			sb.Append("\"");
-			sb.Append(")");
+			writer.Write("new Context(");
+			writer.WriteString(Value1);
+			writer.Write(")");
 			return;
 		}
 
-		if (instance.Tag == Elastic.Clients.Elasticsearch.UnionTag.T2)
+		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T2)
 		{
-			sb.Append("new Context(");
-			instance.Value2.FormatCode(sb);
-			sb.Append(")");
+			writer.Write("new Context(");
+			Value2.FormatCode(writer);
+			writer.Write(")");
 			return;
 		}
 	}

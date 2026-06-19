@@ -25,101 +25,76 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class RolloverRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Alias = ");
-			instance.Alias.FormatCode(sb);
+			__init.Property("Alias");
+			Alias.FormatCode(writer);
 		}
 
-		if (instance.NewIndex is not null)
+		if (NewIndex is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NewIndex = ");
-			instance.NewIndex.FormatCode(sb);
+			__init.Property("NewIndex");
+			NewIndex.FormatCode(writer);
 		}
 
-		if (instance.DryRun is not null)
+		if (DryRun is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DryRun = ");
-			sb.Append(instance.DryRun.Value ? "true" : "false");
+			__init.Property("DryRun");
+			writer.WriteValue(DryRun.Value);
 		}
 
-		if (instance.Lazy is not null)
+		if (Lazy is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Lazy = ");
-			sb.Append(instance.Lazy.Value ? "true" : "false");
+			__init.Property("Lazy");
+			writer.WriteValue(Lazy.Value);
 		}
 
-		if (instance.MasterTimeout is not null)
+		if (MasterTimeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MasterTimeout = ");
-			instance.MasterTimeout.FormatCode(sb);
+			__init.Property("MasterTimeout");
+			MasterTimeout.FormatCode(writer);
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (instance.WaitForActiveShards is not null)
+		if (WaitForActiveShards is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WaitForActiveShards = ");
-			instance.WaitForActiveShards.FormatCode(sb);
+			__init.Property("WaitForActiveShards");
+			WaitForActiveShards.FormatCode(writer);
 		}
 
-		if (instance.Aliases is not null)
+		if (Aliases is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Aliases = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Aliases, (k, sb) => { k.FormatCode(sb); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Aliases");
+			writer.Write("new() ");
+			writer.WriteInlineList(Aliases, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Conditions is not null)
+		if (Conditions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Conditions = ");
-			instance.Conditions.FormatCode(sb);
+			__init.Property("Conditions");
+			Conditions.FormatCode(writer);
 		}
 
-		if (instance.Mappings is not null)
+		if (Mappings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mappings = ");
-			instance.Mappings.FormatCode(sb);
+			__init.Property("Mappings");
+			Mappings.FormatCode(writer);
 		}
 
-		if (instance.Settings is not null)
+		if (Settings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Settings = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Settings, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Settings");
+			writer.Write("new() ");
+			writer.WriteInlineList(Settings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

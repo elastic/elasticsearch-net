@@ -25,36 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class TTestAggregation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.A is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (A is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("A = ");
-			instance.A.FormatCode(sb);
+			__init.Property("A");
+			A.FormatCode(writer);
 		}
 
-		if (instance.B is not null)
+		if (B is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("B = ");
-			instance.B.FormatCode(sb);
+			__init.Property("B");
+			B.FormatCode(writer);
 		}
 
-		if (instance.Type is not null)
+		if (Type is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			Elastic.Clients.Elasticsearch.Aggregations.TTestTypeCodeFormatter.FormatCode(instance.Type.Value, sb);
+			__init.Property("Type");
+			Elastic.Clients.Elasticsearch.Aggregations.TTestTypeCodeFormatter.FormatCode(Type.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

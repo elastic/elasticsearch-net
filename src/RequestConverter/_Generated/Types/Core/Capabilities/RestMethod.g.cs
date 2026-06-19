@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Core.Capabilities;
 
 public static class RestMethodCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethod instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethod instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethod.Delete:
-				sb.Append("RestMethod.Delete");
+				writer.Write("RestMethod.Delete");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethod.Get:
-				sb.Append("RestMethod.Get");
+				writer.Write("RestMethod.Get");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethod.Head:
-				sb.Append("RestMethod.Head");
+				writer.Write("RestMethod.Head");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethod.Post:
-				sb.Append("RestMethod.Post");
+				writer.Write("RestMethod.Post");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethod.Put:
-				sb.Append("RestMethod.Put");
+				writer.Write("RestMethod.Put");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

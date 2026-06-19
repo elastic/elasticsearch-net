@@ -25,29 +25,20 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class Definition : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Preprocessors is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Preprocessors is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Preprocessors = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Preprocessors, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Preprocessors");
+			writer.WriteInlineList(Preprocessors, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TrainedModel = ");
-			instance.TrainedModel.FormatCode(sb);
+			__init.Property("TrainedModel");
+			TrainedModel.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

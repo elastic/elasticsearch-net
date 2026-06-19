@@ -25,44 +25,33 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class AggregateOutput : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Exponent is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Exponent is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Exponent = ");
-			instance.Exponent.FormatCode(sb);
+			__init.Property("Exponent");
+			Exponent.FormatCode(writer);
 		}
 
-		if (instance.LogisticRegression is not null)
+		if (LogisticRegression is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LogisticRegression = ");
-			instance.LogisticRegression.FormatCode(sb);
+			__init.Property("LogisticRegression");
+			LogisticRegression.FormatCode(writer);
 		}
 
-		if (instance.WeightedMode is not null)
+		if (WeightedMode is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WeightedMode = ");
-			instance.WeightedMode.FormatCode(sb);
+			__init.Property("WeightedMode");
+			WeightedMode.FormatCode(writer);
 		}
 
-		if (instance.WeightedSum is not null)
+		if (WeightedSum is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WeightedSum = ");
-			instance.WeightedSum.FormatCode(sb);
+			__init.Property("WeightedSum");
+			WeightedSum.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

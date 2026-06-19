@@ -25,74 +25,51 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class ShingleTokenFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.FillerToken is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (FillerToken is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FillerToken = ");
-			sb.Append("\"");
-			sb.Append(instance.FillerToken);
-			sb.Append("\"");
+			__init.Property("FillerToken");
+			writer.WriteString(FillerToken);
 		}
 
-		if (instance.MaxShingleSize is not null)
+		if (MaxShingleSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxShingleSize = ");
-			sb.Append(instance.MaxShingleSize.Value);
+			__init.Property("MaxShingleSize");
+			writer.WriteValue(MaxShingleSize.Value);
 		}
 
-		if (instance.MinShingleSize is not null)
+		if (MinShingleSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinShingleSize = ");
-			sb.Append(instance.MinShingleSize.Value);
+			__init.Property("MinShingleSize");
+			writer.WriteValue(MinShingleSize.Value);
 		}
 
-		if (instance.OutputUnigrams is not null)
+		if (OutputUnigrams is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OutputUnigrams = ");
-			sb.Append(instance.OutputUnigrams.Value ? "true" : "false");
+			__init.Property("OutputUnigrams");
+			writer.WriteValue(OutputUnigrams.Value);
 		}
 
-		if (instance.OutputUnigramsIfNoShingles is not null)
+		if (OutputUnigramsIfNoShingles is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OutputUnigramsIfNoShingles = ");
-			sb.Append(instance.OutputUnigramsIfNoShingles.Value ? "true" : "false");
+			__init.Property("OutputUnigramsIfNoShingles");
+			writer.WriteValue(OutputUnigramsIfNoShingles.Value);
 		}
 
-		if (instance.TokenSeparator is not null)
+		if (TokenSeparator is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TokenSeparator = ");
-			sb.Append("\"");
-			sb.Append(instance.TokenSeparator);
-			sb.Append("\"");
+			__init.Property("TokenSeparator");
+			writer.WriteString(TokenSeparator);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

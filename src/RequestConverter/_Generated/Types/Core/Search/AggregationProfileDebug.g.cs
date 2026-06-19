@@ -25,280 +25,201 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class AggregationProfileDebug : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.BruteForceUsed is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (BruteForceUsed is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BruteForceUsed = ");
-			sb.Append(instance.BruteForceUsed.Value);
+			__init.Property("BruteForceUsed");
+			writer.WriteValue(BruteForceUsed.Value);
 		}
 
-		if (instance.BuiltBuckets is not null)
+		if (BuiltBuckets is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BuiltBuckets = ");
-			sb.Append(instance.BuiltBuckets.Value);
+			__init.Property("BuiltBuckets");
+			writer.WriteValue(BuiltBuckets.Value);
 		}
 
-		if (instance.CharsFetched is not null)
+		if (CharsFetched is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CharsFetched = ");
-			sb.Append(instance.CharsFetched.Value);
+			__init.Property("CharsFetched");
+			writer.WriteValue(CharsFetched.Value);
 		}
 
-		if (instance.CollectAnalyzedCount is not null)
+		if (CollectAnalyzedCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CollectAnalyzedCount = ");
-			sb.Append(instance.CollectAnalyzedCount.Value);
+			__init.Property("CollectAnalyzedCount");
+			writer.WriteValue(CollectAnalyzedCount.Value);
 		}
 
-		if (instance.CollectAnalyzedNs is not null)
+		if (CollectAnalyzedNs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CollectAnalyzedNs = ");
-			sb.Append(instance.CollectAnalyzedNs.Value);
+			__init.Property("CollectAnalyzedNs");
+			writer.WriteValue(CollectAnalyzedNs.Value);
 		}
 
-		if (instance.CollectionStrategy is not null)
+		if (CollectionStrategy is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CollectionStrategy = ");
-			sb.Append("\"");
-			sb.Append(instance.CollectionStrategy);
-			sb.Append("\"");
+			__init.Property("CollectionStrategy");
+			writer.WriteString(CollectionStrategy);
 		}
 
-		if (instance.DeferredAggregators is not null)
+		if (DeferredAggregators is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DeferredAggregators = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.DeferredAggregators, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("DeferredAggregators");
+			writer.WriteInlineList(DeferredAggregators, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Delegate is not null)
+		if (Delegate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Delegate = ");
-			sb.Append("\"");
-			sb.Append(instance.Delegate);
-			sb.Append("\"");
+			__init.Property("Delegate");
+			writer.WriteString(Delegate);
 		}
 
-		if (instance.DelegateDebug is not null)
+		if (DelegateDebug is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DelegateDebug = ");
-			instance.DelegateDebug.FormatCode(sb);
+			__init.Property("DelegateDebug");
+			DelegateDebug.FormatCode(writer);
 		}
 
-		if (instance.DynamicPruningAttempted is not null)
+		if (DynamicPruningAttempted is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DynamicPruningAttempted = ");
-			sb.Append(instance.DynamicPruningAttempted.Value);
+			__init.Property("DynamicPruningAttempted");
+			writer.WriteValue(DynamicPruningAttempted.Value);
 		}
 
-		if (instance.DynamicPruningUsed is not null)
+		if (DynamicPruningUsed is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DynamicPruningUsed = ");
-			sb.Append(instance.DynamicPruningUsed.Value);
+			__init.Property("DynamicPruningUsed");
+			writer.WriteValue(DynamicPruningUsed.Value);
 		}
 
-		if (instance.EmptyCollectorsUsed is not null)
+		if (EmptyCollectorsUsed is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EmptyCollectorsUsed = ");
-			sb.Append(instance.EmptyCollectorsUsed.Value);
+			__init.Property("EmptyCollectorsUsed");
+			writer.WriteValue(EmptyCollectorsUsed.Value);
 		}
 
-		if (instance.ExtractCount is not null)
+		if (ExtractCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExtractCount = ");
-			sb.Append(instance.ExtractCount.Value);
+			__init.Property("ExtractCount");
+			writer.WriteValue(ExtractCount.Value);
 		}
 
-		if (instance.ExtractNs is not null)
+		if (ExtractNs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExtractNs = ");
-			sb.Append(instance.ExtractNs.Value);
+			__init.Property("ExtractNs");
+			writer.WriteValue(ExtractNs.Value);
 		}
 
-		if (instance.Filters is not null)
+		if (Filters is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Filters = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Filters, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Filters");
+			writer.WriteInlineList(Filters, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.HasFilter is not null)
+		if (HasFilter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HasFilter = ");
-			sb.Append(instance.HasFilter.Value ? "true" : "false");
+			__init.Property("HasFilter");
+			writer.WriteValue(HasFilter.Value);
 		}
 
-		if (instance.MapReducer is not null)
+		if (MapReducer is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MapReducer = ");
-			sb.Append("\"");
-			sb.Append(instance.MapReducer);
-			sb.Append("\"");
+			__init.Property("MapReducer");
+			writer.WriteString(MapReducer);
 		}
 
-		if (instance.NumericCollectorsUsed is not null)
+		if (NumericCollectorsUsed is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumericCollectorsUsed = ");
-			sb.Append(instance.NumericCollectorsUsed.Value);
+			__init.Property("NumericCollectorsUsed");
+			writer.WriteValue(NumericCollectorsUsed.Value);
 		}
 
-		if (instance.OrdinalsCollectorsOverheadTooHigh is not null)
+		if (OrdinalsCollectorsOverheadTooHigh is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OrdinalsCollectorsOverheadTooHigh = ");
-			sb.Append(instance.OrdinalsCollectorsOverheadTooHigh.Value);
+			__init.Property("OrdinalsCollectorsOverheadTooHigh");
+			writer.WriteValue(OrdinalsCollectorsOverheadTooHigh.Value);
 		}
 
-		if (instance.OrdinalsCollectorsUsed is not null)
+		if (OrdinalsCollectorsUsed is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OrdinalsCollectorsUsed = ");
-			sb.Append(instance.OrdinalsCollectorsUsed.Value);
+			__init.Property("OrdinalsCollectorsUsed");
+			writer.WriteValue(OrdinalsCollectorsUsed.Value);
 		}
 
-		if (instance.ResultStrategy is not null)
+		if (ResultStrategy is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ResultStrategy = ");
-			sb.Append("\"");
-			sb.Append(instance.ResultStrategy);
-			sb.Append("\"");
+			__init.Property("ResultStrategy");
+			writer.WriteString(ResultStrategy);
 		}
 
-		if (instance.SegmentsCollected is not null)
+		if (SegmentsCollected is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SegmentsCollected = ");
-			sb.Append(instance.SegmentsCollected.Value);
+			__init.Property("SegmentsCollected");
+			writer.WriteValue(SegmentsCollected.Value);
 		}
 
-		if (instance.SegmentsCounted is not null)
+		if (SegmentsCounted is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SegmentsCounted = ");
-			sb.Append(instance.SegmentsCounted.Value);
+			__init.Property("SegmentsCounted");
+			writer.WriteValue(SegmentsCounted.Value);
 		}
 
-		if (instance.SegmentsWithDeletedDocs is not null)
+		if (SegmentsWithDeletedDocs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SegmentsWithDeletedDocs = ");
-			sb.Append(instance.SegmentsWithDeletedDocs.Value);
+			__init.Property("SegmentsWithDeletedDocs");
+			writer.WriteValue(SegmentsWithDeletedDocs.Value);
 		}
 
-		if (instance.SegmentsWithDocCountField is not null)
+		if (SegmentsWithDocCountField is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SegmentsWithDocCountField = ");
-			sb.Append(instance.SegmentsWithDocCountField.Value);
+			__init.Property("SegmentsWithDocCountField");
+			writer.WriteValue(SegmentsWithDocCountField.Value);
 		}
 
-		if (instance.SegmentsWithMultiValuedOrds is not null)
+		if (SegmentsWithMultiValuedOrds is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SegmentsWithMultiValuedOrds = ");
-			sb.Append(instance.SegmentsWithMultiValuedOrds.Value);
+			__init.Property("SegmentsWithMultiValuedOrds");
+			writer.WriteValue(SegmentsWithMultiValuedOrds.Value);
 		}
 
-		if (instance.SegmentsWithSingleValuedOrds is not null)
+		if (SegmentsWithSingleValuedOrds is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SegmentsWithSingleValuedOrds = ");
-			sb.Append(instance.SegmentsWithSingleValuedOrds.Value);
+			__init.Property("SegmentsWithSingleValuedOrds");
+			writer.WriteValue(SegmentsWithSingleValuedOrds.Value);
 		}
 
-		if (instance.SkippedDueToNoData is not null)
+		if (SkippedDueToNoData is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SkippedDueToNoData = ");
-			sb.Append(instance.SkippedDueToNoData.Value);
+			__init.Property("SkippedDueToNoData");
+			writer.WriteValue(SkippedDueToNoData.Value);
 		}
 
-		if (instance.StringHashingCollectorsUsed is not null)
+		if (StringHashingCollectorsUsed is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StringHashingCollectorsUsed = ");
-			sb.Append(instance.StringHashingCollectorsUsed.Value);
+			__init.Property("StringHashingCollectorsUsed");
+			writer.WriteValue(StringHashingCollectorsUsed.Value);
 		}
 
-		if (instance.SurvivingBuckets is not null)
+		if (SurvivingBuckets is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SurvivingBuckets = ");
-			sb.Append(instance.SurvivingBuckets.Value);
+			__init.Property("SurvivingBuckets");
+			writer.WriteValue(SurvivingBuckets.Value);
 		}
 
-		if (instance.TotalBuckets is not null)
+		if (TotalBuckets is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalBuckets = ");
-			sb.Append(instance.TotalBuckets.Value);
+			__init.Property("TotalBuckets");
+			writer.WriteValue(TotalBuckets.Value);
 		}
 
-		if (instance.ValuesFetched is not null)
+		if (ValuesFetched is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ValuesFetched = ");
-			sb.Append(instance.ValuesFetched.Value);
+			__init.Property("ValuesFetched");
+			writer.WriteValue(ValuesFetched.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public static class IcuNormalizationTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType.Nfc:
-				sb.Append("IcuNormalizationType.Nfc");
+				writer.Write("IcuNormalizationType.Nfc");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType.Nfkc:
-				sb.Append("IcuNormalizationType.Nfkc");
+				writer.Write("IcuNormalizationType.Nfkc");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType.NfkcCf:
-				sb.Append("IcuNormalizationType.NfkcCf");
+				writer.Write("IcuNormalizationType.NfkcCf");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

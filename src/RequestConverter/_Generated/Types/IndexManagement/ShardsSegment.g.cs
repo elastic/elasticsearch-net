@@ -25,41 +25,30 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class ShardsSegment : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumCommittedSegments = ");
-			sb.Append(instance.NumCommittedSegments);
+			__init.Property("NumCommittedSegments");
+			writer.WriteValue(NumCommittedSegments);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumSearchSegments = ");
-			sb.Append(instance.NumSearchSegments);
+			__init.Property("NumSearchSegments");
+			writer.WriteValue(NumSearchSegments);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Routing = ");
-			instance.Routing.FormatCode(sb);
+			__init.Property("Routing");
+			Routing.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Segments = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Segments, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Segments");
+			writer.Write("new() ");
+			writer.WriteInlineList(Segments, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

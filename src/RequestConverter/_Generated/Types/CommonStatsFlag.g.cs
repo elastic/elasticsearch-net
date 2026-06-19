@@ -25,78 +25,78 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class CommonStatsFlagCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.CommonStatsFlag instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.CommonStatsFlag instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.All:
-				sb.Append("CommonStatsFlag.All");
+				writer.Write("CommonStatsFlag.All");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Bulk:
-				sb.Append("CommonStatsFlag.Bulk");
+				writer.Write("CommonStatsFlag.Bulk");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Completion:
-				sb.Append("CommonStatsFlag.Completion");
+				writer.Write("CommonStatsFlag.Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.DenseVector:
-				sb.Append("CommonStatsFlag.DenseVector");
+				writer.Write("CommonStatsFlag.DenseVector");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Docs:
-				sb.Append("CommonStatsFlag.Docs");
+				writer.Write("CommonStatsFlag.Docs");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Fielddata:
-				sb.Append("CommonStatsFlag.Fielddata");
+				writer.Write("CommonStatsFlag.Fielddata");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Flush:
-				sb.Append("CommonStatsFlag.Flush");
+				writer.Write("CommonStatsFlag.Flush");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Get:
-				sb.Append("CommonStatsFlag.Get");
+				writer.Write("CommonStatsFlag.Get");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Indexing:
-				sb.Append("CommonStatsFlag.Indexing");
+				writer.Write("CommonStatsFlag.Indexing");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Mappings:
-				sb.Append("CommonStatsFlag.Mappings");
+				writer.Write("CommonStatsFlag.Mappings");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Merge:
-				sb.Append("CommonStatsFlag.Merge");
+				writer.Write("CommonStatsFlag.Merge");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.QueryCache:
-				sb.Append("CommonStatsFlag.QueryCache");
+				writer.Write("CommonStatsFlag.QueryCache");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Recovery:
-				sb.Append("CommonStatsFlag.Recovery");
+				writer.Write("CommonStatsFlag.Recovery");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Refresh:
-				sb.Append("CommonStatsFlag.Refresh");
+				writer.Write("CommonStatsFlag.Refresh");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.RequestCache:
-				sb.Append("CommonStatsFlag.RequestCache");
+				writer.Write("CommonStatsFlag.RequestCache");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Search:
-				sb.Append("CommonStatsFlag.Search");
+				writer.Write("CommonStatsFlag.Search");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Segments:
-				sb.Append("CommonStatsFlag.Segments");
+				writer.Write("CommonStatsFlag.Segments");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.ShardStats:
-				sb.Append("CommonStatsFlag.ShardStats");
+				writer.Write("CommonStatsFlag.ShardStats");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.SparseVector:
-				sb.Append("CommonStatsFlag.SparseVector");
+				writer.Write("CommonStatsFlag.SparseVector");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Store:
-				sb.Append("CommonStatsFlag.Store");
+				writer.Write("CommonStatsFlag.Store");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Translog:
-				sb.Append("CommonStatsFlag.Translog");
+				writer.Write("CommonStatsFlag.Translog");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Warmer:
-				sb.Append("CommonStatsFlag.Warmer");
+				writer.Write("CommonStatsFlag.Warmer");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

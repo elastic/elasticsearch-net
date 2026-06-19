@@ -25,96 +25,67 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class ExplainAnalyzeToken : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Attributes is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Attributes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Attributes = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Attributes, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Attributes");
+			writer.Write("new() ");
+			writer.WriteInlineList(Attributes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Bytes = ");
-			sb.Append("\"");
-			sb.Append(instance.Bytes);
-			sb.Append("\"");
+			__init.Property("Bytes");
+			writer.WriteString(Bytes);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EndOffset = ");
-			sb.Append(instance.EndOffset);
-			sb.Append("L");
+			__init.Property("EndOffset");
+			writer.WriteValue(EndOffset);
+			writer.Write("L");
 		}
 
-		if (instance.Keyword is not null)
+		if (Keyword is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Keyword = ");
-			sb.Append(instance.Keyword.Value ? "true" : "false");
+			__init.Property("Keyword");
+			writer.WriteValue(Keyword.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Position = ");
-			sb.Append(instance.Position);
-			sb.Append("L");
+			__init.Property("Position");
+			writer.WriteValue(Position);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PositionLength = ");
-			sb.Append(instance.PositionLength);
-			sb.Append("L");
+			__init.Property("PositionLength");
+			writer.WriteValue(PositionLength);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StartOffset = ");
-			sb.Append(instance.StartOffset);
-			sb.Append("L");
+			__init.Property("StartOffset");
+			writer.WriteValue(StartOffset);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TermFrequency = ");
-			sb.Append(instance.TermFrequency);
-			sb.Append("L");
+			__init.Property("TermFrequency");
+			writer.WriteValue(TermFrequency);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Token = ");
-			sb.Append("\"");
-			sb.Append(instance.Token);
-			sb.Append("\"");
+			__init.Property("Token");
+			writer.WriteString(Token);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			sb.Append("\"");
-			sb.Append(instance.Type);
-			sb.Append("\"");
+			__init.Property("Type");
+			writer.WriteString(Type);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,54 +25,39 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class FrequentItemSetsAggregation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fields = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Fields, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Fields");
+			writer.WriteInlineList(Fields, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Filter is not null)
+		if (Filter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Filter = ");
-			instance.Filter.FormatCode(sb);
+			__init.Property("Filter");
+			Filter.FormatCode(writer);
 		}
 
-		if (instance.MinimumSetSize is not null)
+		if (MinimumSetSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinimumSetSize = ");
-			sb.Append(instance.MinimumSetSize.Value);
+			__init.Property("MinimumSetSize");
+			writer.WriteValue(MinimumSetSize.Value);
 		}
 
-		if (instance.MinimumSupport is not null)
+		if (MinimumSupport is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinimumSupport = ");
-			sb.Append(instance.MinimumSupport.Value);
-			sb.Append("d");
+			__init.Property("MinimumSupport");
+			writer.WriteValue(MinimumSupport.Value);
+			writer.Write("d");
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append(instance.Size.Value);
+			__init.Property("Size");
+			writer.WriteValue(Size.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

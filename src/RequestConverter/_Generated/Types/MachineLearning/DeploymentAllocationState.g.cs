@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public static class DeploymentAllocationStateCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState.FullyAllocated:
-				sb.Append("DeploymentAllocationState.FullyAllocated");
+				writer.Write("DeploymentAllocationState.FullyAllocated");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState.Started:
-				sb.Append("DeploymentAllocationState.Started");
+				writer.Write("DeploymentAllocationState.Started");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState.Starting:
-				sb.Append("DeploymentAllocationState.Starting");
+				writer.Write("DeploymentAllocationState.Starting");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

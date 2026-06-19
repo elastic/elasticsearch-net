@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public static class AccessTokenGrantTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.Kerberos:
-				sb.Append("AccessTokenGrantType.Kerberos");
+				writer.Write("AccessTokenGrantType.Kerberos");
 				break;
 			case Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.ClientCredentials:
-				sb.Append("AccessTokenGrantType.ClientCredentials");
+				writer.Write("AccessTokenGrantType.ClientCredentials");
 				break;
 			case Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.Password:
-				sb.Append("AccessTokenGrantType.Password");
+				writer.Write("AccessTokenGrantType.Password");
 				break;
 			case Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.RefreshToken:
-				sb.Append("AccessTokenGrantType.RefreshToken");
+				writer.Write("AccessTokenGrantType.RefreshToken");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

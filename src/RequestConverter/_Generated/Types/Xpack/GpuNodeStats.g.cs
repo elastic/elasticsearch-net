@@ -21,23 +21,35 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
 
-namespace Elastic.Clients.Elasticsearch.IndexManagement;
+namespace Elastic.Clients.Elasticsearch.Xpack;
 
-public partial class GetSampleStatsRequest : RequestConverter.ICodeFormattable
+public partial class GpuNodeStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			instance.Index.FormatCode(sb);
+			__init.Property("Enabled");
+			writer.WriteValue(Enabled);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		{
+			__init.Property("IndexBuildCount");
+			writer.WriteValue(IndexBuildCount);
+			writer.Write("L");
+		}
+
+		{
+			__init.Property("MemoryInBytes");
+			writer.WriteValue(MemoryInBytes);
+			writer.Write("L");
+		}
+
+		{
+			__init.Property("Type");
+			writer.WriteString(Type);
+		}
+
+		__init.Dispose();
 	}
 }

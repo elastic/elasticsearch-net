@@ -25,52 +25,39 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
 public partial class Phases : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Cold is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Cold is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Cold = ");
-			instance.Cold.FormatCode(sb);
+			__init.Property("Cold");
+			Cold.FormatCode(writer);
 		}
 
-		if (instance.Delete is not null)
+		if (Delete is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Delete = ");
-			instance.Delete.FormatCode(sb);
+			__init.Property("Delete");
+			Delete.FormatCode(writer);
 		}
 
-		if (instance.Frozen is not null)
+		if (Frozen is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Frozen = ");
-			instance.Frozen.FormatCode(sb);
+			__init.Property("Frozen");
+			Frozen.FormatCode(writer);
 		}
 
-		if (instance.Hot is not null)
+		if (Hot is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Hot = ");
-			instance.Hot.FormatCode(sb);
+			__init.Property("Hot");
+			Hot.FormatCode(writer);
 		}
 
-		if (instance.Warm is not null)
+		if (Warm is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Warm = ");
-			instance.Warm.FormatCode(sb);
+			__init.Property("Warm");
+			Warm.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

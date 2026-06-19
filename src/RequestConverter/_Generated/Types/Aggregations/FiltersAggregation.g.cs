@@ -25,38 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class FiltersAggregation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Filters is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Filters is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Filters = ");
-			instance.Filters.FormatCode(sb);
+			__init.Property("Filters");
+			Filters.FormatCode(writer);
 		}
 
-		if (instance.OtherBucket is not null)
+		if (OtherBucket is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OtherBucket = ");
-			sb.Append(instance.OtherBucket.Value ? "true" : "false");
+			__init.Property("OtherBucket");
+			writer.WriteValue(OtherBucket.Value);
 		}
 
-		if (instance.OtherBucketKey is not null)
+		if (OtherBucketKey is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OtherBucketKey = ");
-			sb.Append("\"");
-			sb.Append(instance.OtherBucketKey);
-			sb.Append("\"");
+			__init.Property("OtherBucketKey");
+			writer.WriteString(OtherBucketKey);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

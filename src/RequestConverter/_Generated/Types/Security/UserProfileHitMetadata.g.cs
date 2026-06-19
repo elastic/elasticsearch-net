@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class UserProfileHitMetadata : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PrimaryTerm = ");
-			sb.Append(instance.PrimaryTerm);
-			sb.Append("L");
+			__init.Property("PrimaryTerm");
+			writer.WriteValue(PrimaryTerm);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SeqNo = ");
-			sb.Append(instance.SeqNo);
-			sb.Append("L");
+			__init.Property("SeqNo");
+			writer.WriteValue(SeqNo);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

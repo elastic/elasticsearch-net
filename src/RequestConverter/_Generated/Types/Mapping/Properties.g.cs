@@ -25,23 +25,22 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public partial class Properties : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
+		writer.Write("new()");
 		var hasProps = false;
-		foreach (var kvp in instance)
+		foreach (var kvp in this)
 		{
-			sb.Append(hasProps ? ", " : " { ");
+			writer.Write(hasProps ? ", " : " { ");
 			hasProps = true;
-			sb.Append("{ ");
-			kvp.Key.FormatCode(sb);
-			sb.Append(", ");
-			kvp.Value.FormatCode(sb);
-			sb.Append(" }");
+			writer.Write("{ ");
+			kvp.Key.FormatCode(writer);
+			writer.Write(", ");
+			kvp.Value.FormatCode(writer);
+			writer.Write(" }");
 		}
 
 		if (hasProps)
-			sb.Append(" }");
+			writer.Write(" }");
 	}
 }

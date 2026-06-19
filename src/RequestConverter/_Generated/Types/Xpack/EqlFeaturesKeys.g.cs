@@ -25,47 +25,34 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class EqlFeaturesKeys : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JoinKeysFiveOrMore = ");
-			sb.Append(instance.JoinKeysFiveOrMore);
+			__init.Property("JoinKeysFiveOrMore");
+			writer.WriteValue(JoinKeysFiveOrMore);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JoinKeysFour = ");
-			sb.Append(instance.JoinKeysFour);
+			__init.Property("JoinKeysFour");
+			writer.WriteValue(JoinKeysFour);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JoinKeysOne = ");
-			sb.Append(instance.JoinKeysOne);
+			__init.Property("JoinKeysOne");
+			writer.WriteValue(JoinKeysOne);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JoinKeysThree = ");
-			sb.Append(instance.JoinKeysThree);
+			__init.Property("JoinKeysThree");
+			writer.WriteValue(JoinKeysThree);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JoinKeysTwo = ");
-			sb.Append(instance.JoinKeysTwo);
+			__init.Property("JoinKeysTwo");
+			writer.WriteValue(JoinKeysTwo);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

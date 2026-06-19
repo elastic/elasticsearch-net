@@ -25,63 +25,42 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
 public partial class TransformHealthIssue : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count);
+			__init.Property("Count");
+			writer.WriteValue(Count);
 		}
 
-		if (instance.Details is not null)
+		if (Details is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Details = ");
-			sb.Append("\"");
-			sb.Append(instance.Details);
-			sb.Append("\"");
+			__init.Property("Details");
+			writer.WriteString(Details);
 		}
 
-		if (instance.FirstOccurenceString is not null)
+		if (FirstOccurenceString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FirstOccurenceString = ");
-			sb.Append(instance.FirstOccurenceString.Value);
+			__init.Property("FirstOccurenceString");
+			writer.WriteValue(FirstOccurenceString.Value);
 		}
 
-		if (instance.FirstOccurrence is not null)
+		if (FirstOccurrence is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FirstOccurrence = ");
-			sb.Append(instance.FirstOccurrence.Value);
+			__init.Property("FirstOccurrence");
+			writer.WriteValue(FirstOccurrence.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Issue = ");
-			sb.Append("\"");
-			sb.Append(instance.Issue);
-			sb.Append("\"");
+			__init.Property("Issue");
+			writer.WriteString(Issue);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			sb.Append("\"");
-			sb.Append(instance.Type);
-			sb.Append("\"");
+			__init.Property("Type");
+			writer.WriteString(Type);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

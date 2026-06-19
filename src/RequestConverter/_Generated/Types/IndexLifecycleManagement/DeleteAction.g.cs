@@ -25,20 +25,15 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
 public partial class DeleteAction : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.DeleteSearchableSnapshot is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (DeleteSearchableSnapshot is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DeleteSearchableSnapshot = ");
-			sb.Append(instance.DeleteSearchableSnapshot.Value ? "true" : "false");
+			__init.Property("DeleteSearchableSnapshot");
+			writer.WriteValue(DeleteSearchableSnapshot.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

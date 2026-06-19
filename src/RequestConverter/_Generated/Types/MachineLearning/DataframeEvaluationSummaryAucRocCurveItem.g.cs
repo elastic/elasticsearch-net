@@ -25,36 +25,27 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataframeEvaluationSummaryAucRocCurveItem : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fpr = ");
-			sb.Append(instance.Fpr);
-			sb.Append("d");
+			__init.Property("Fpr");
+			writer.WriteValue(Fpr);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Threshold = ");
-			sb.Append(instance.Threshold);
-			sb.Append("d");
+			__init.Property("Threshold");
+			writer.WriteValue(Threshold);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Tpr = ");
-			sb.Append(instance.Tpr);
-			sb.Append("d");
+			__init.Property("Tpr");
+			writer.WriteValue(Tpr);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

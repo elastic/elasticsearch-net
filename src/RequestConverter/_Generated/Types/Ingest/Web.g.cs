@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public partial class Web : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
+		var __init = writer.BeginObjectInitializer();
+		__init.Dispose();
 	}
 }

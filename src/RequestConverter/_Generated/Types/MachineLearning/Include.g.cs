@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public static class IncludeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.Include instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.Include instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.Include.Definition:
-				sb.Append("Include.Definition");
+				writer.Write("Include.Definition");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.Include.DefinitionStatus:
-				sb.Append("Include.DefinitionStatus");
+				writer.Write("Include.DefinitionStatus");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.Include.FeatureImportanceBaseline:
-				sb.Append("Include.FeatureImportanceBaseline");
+				writer.Write("Include.FeatureImportanceBaseline");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.Include.Hyperparameters:
-				sb.Append("Include.Hyperparameters");
+				writer.Write("Include.Hyperparameters");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.Include.TotalFeatureImportance:
-				sb.Append("Include.TotalFeatureImportance");
+				writer.Write("Include.TotalFeatureImportance");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

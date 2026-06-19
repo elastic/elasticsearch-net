@@ -25,51 +25,38 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class ClusterProcessor : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count);
-			sb.Append("L");
+			__init.Property("Count");
+			writer.WriteValue(Count);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Current = ");
-			sb.Append(instance.Current);
-			sb.Append("L");
+			__init.Property("Current");
+			writer.WriteValue(Current);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Failed = ");
-			sb.Append(instance.Failed);
-			sb.Append("L");
+			__init.Property("Failed");
+			writer.WriteValue(Failed);
+			writer.Write("L");
 		}
 
-		if (instance.Time is not null)
+		if (Time is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Time = ");
-			instance.Time.FormatCode(sb);
+			__init.Property("Time");
+			Time.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeInMillis = ");
-			sb.Append(instance.TimeInMillis);
+			__init.Property("TimeInMillis");
+			writer.WriteValue(TimeInMillis);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

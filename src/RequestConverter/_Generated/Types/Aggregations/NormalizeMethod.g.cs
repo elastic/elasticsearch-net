@@ -25,30 +25,30 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public static class NormalizeMethodCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.Mean:
-				sb.Append("NormalizeMethod.Mean");
+				writer.Write("NormalizeMethod.Mean");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.PercentOfSum:
-				sb.Append("NormalizeMethod.PercentOfSum");
+				writer.Write("NormalizeMethod.PercentOfSum");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.Rescale01:
-				sb.Append("NormalizeMethod.Rescale01");
+				writer.Write("NormalizeMethod.Rescale01");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.Rescale0100:
-				sb.Append("NormalizeMethod.Rescale0100");
+				writer.Write("NormalizeMethod.Rescale0100");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.Softmax:
-				sb.Append("NormalizeMethod.Softmax");
+				writer.Write("NormalizeMethod.Softmax");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.ZScore:
-				sb.Append("NormalizeMethod.ZScore");
+				writer.Write("NormalizeMethod.ZScore");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

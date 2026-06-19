@@ -25,87 +25,60 @@ namespace Elastic.Clients.Elasticsearch.TextStructure;
 
 public partial class FieldStat : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Cardinality = ");
-			sb.Append(instance.Cardinality);
+			__init.Property("Cardinality");
+			writer.WriteValue(Cardinality);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count);
+			__init.Property("Count");
+			writer.WriteValue(Count);
 		}
 
-		if (instance.Earliest is not null)
+		if (Earliest is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Earliest = ");
-			sb.Append("\"");
-			sb.Append(instance.Earliest);
-			sb.Append("\"");
+			__init.Property("Earliest");
+			writer.WriteString(Earliest);
 		}
 
-		if (instance.Latest is not null)
+		if (Latest is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Latest = ");
-			sb.Append("\"");
-			sb.Append(instance.Latest);
-			sb.Append("\"");
+			__init.Property("Latest");
+			writer.WriteString(Latest);
 		}
 
-		if (instance.MaxValue is not null)
+		if (MaxValue is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxValue = ");
-			sb.Append(instance.MaxValue.Value);
+			__init.Property("MaxValue");
+			writer.WriteValue(MaxValue.Value);
 		}
 
-		if (instance.MeanValue is not null)
+		if (MeanValue is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MeanValue = ");
-			sb.Append(instance.MeanValue.Value);
+			__init.Property("MeanValue");
+			writer.WriteValue(MeanValue.Value);
 		}
 
-		if (instance.MedianValue is not null)
+		if (MedianValue is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MedianValue = ");
-			sb.Append(instance.MedianValue.Value);
+			__init.Property("MedianValue");
+			writer.WriteValue(MedianValue.Value);
 		}
 
-		if (instance.MinValue is not null)
+		if (MinValue is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinValue = ");
-			sb.Append(instance.MinValue.Value);
+			__init.Property("MinValue");
+			writer.WriteValue(MinValue.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TopHits = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.TopHits, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("TopHits");
+			writer.WriteInlineList(TopHits, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

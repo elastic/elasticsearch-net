@@ -25,69 +25,42 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class UserProfileUser : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Email is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Email is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Email = ");
-			sb.Append("\"");
-			sb.Append(instance.Email);
-			sb.Append("\"");
+			__init.Property("Email");
+			writer.WriteString(Email);
 		}
 
-		if (instance.FullName is not null)
+		if (FullName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FullName = ");
-			sb.Append("\"");
-			sb.Append(instance.FullName);
-			sb.Append("\"");
+			__init.Property("FullName");
+			writer.WriteString(FullName);
 		}
 
-		if (instance.RealmDomain is not null)
+		if (RealmDomain is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RealmDomain = ");
-			sb.Append("\"");
-			sb.Append(instance.RealmDomain);
-			sb.Append("\"");
+			__init.Property("RealmDomain");
+			writer.WriteString(RealmDomain);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RealmName = ");
-			sb.Append("\"");
-			sb.Append(instance.RealmName);
-			sb.Append("\"");
+			__init.Property("RealmName");
+			writer.WriteString(RealmName);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Roles = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Roles, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Roles");
+			writer.WriteInlineList(Roles, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Username = ");
-			sb.Append("\"");
-			sb.Append(instance.Username);
-			sb.Append("\"");
+			__init.Property("Username");
+			writer.WriteString(Username);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

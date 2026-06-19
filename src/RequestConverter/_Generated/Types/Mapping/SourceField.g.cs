@@ -25,66 +25,45 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public partial class SourceField : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Compress is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Compress is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Compress = ");
-			sb.Append(instance.Compress.Value ? "true" : "false");
+			__init.Property("Compress");
+			writer.WriteValue(Compress.Value);
 		}
 
-		if (instance.CompressThreshold is not null)
+		if (CompressThreshold is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CompressThreshold = ");
-			sb.Append("\"");
-			sb.Append(instance.CompressThreshold);
-			sb.Append("\"");
+			__init.Property("CompressThreshold");
+			writer.WriteString(CompressThreshold);
 		}
 
-		if (instance.Enabled is not null)
+		if (Enabled is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Enabled = ");
-			sb.Append(instance.Enabled.Value ? "true" : "false");
+			__init.Property("Enabled");
+			writer.WriteValue(Enabled.Value);
 		}
 
-		if (instance.Excludes is not null)
+		if (Excludes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Excludes = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Excludes, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Excludes");
+			writer.WriteInlineList(Excludes, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Includes is not null)
+		if (Includes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Includes = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Includes, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Includes");
+			writer.WriteInlineList(Includes, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Mode is not null)
+		if (Mode is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mode = ");
-			Elastic.Clients.Elasticsearch.Mapping.SourceFieldModeCodeFormatter.FormatCode(instance.Mode.Value, sb);
+			__init.Property("Mode");
+			Elastic.Clients.Elasticsearch.Mapping.SourceFieldModeCodeFormatter.FormatCode(Mode.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

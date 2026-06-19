@@ -25,65 +25,44 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
 public partial class ForgetFollowerRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			instance.Index.FormatCode(sb);
+			__init.Property("Index");
+			Index.FormatCode(writer);
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (instance.FollowerCluster is not null)
+		if (FollowerCluster is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FollowerCluster = ");
-			sb.Append("\"");
-			sb.Append(instance.FollowerCluster);
-			sb.Append("\"");
+			__init.Property("FollowerCluster");
+			writer.WriteString(FollowerCluster);
 		}
 
-		if (instance.FollowerIndex is not null)
+		if (FollowerIndex is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FollowerIndex = ");
-			instance.FollowerIndex.FormatCode(sb);
+			__init.Property("FollowerIndex");
+			FollowerIndex.FormatCode(writer);
 		}
 
-		if (instance.FollowerIndexUuid is not null)
+		if (FollowerIndexUuid is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FollowerIndexUuid = ");
-			sb.Append("\"");
-			sb.Append(instance.FollowerIndexUuid);
-			sb.Append("\"");
+			__init.Property("FollowerIndexUuid");
+			writer.WriteString(FollowerIndexUuid);
 		}
 
-		if (instance.LeaderRemoteCluster is not null)
+		if (LeaderRemoteCluster is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LeaderRemoteCluster = ");
-			sb.Append("\"");
-			sb.Append(instance.LeaderRemoteCluster);
-			sb.Append("\"");
+			__init.Property("LeaderRemoteCluster");
+			writer.WriteString(LeaderRemoteCluster);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

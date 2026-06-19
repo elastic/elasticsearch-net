@@ -25,38 +25,29 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class EstimateModelMemoryRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AnalysisConfig is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AnalysisConfig is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AnalysisConfig = ");
-			instance.AnalysisConfig.FormatCode(sb);
+			__init.Property("AnalysisConfig");
+			AnalysisConfig.FormatCode(writer);
 		}
 
-		if (instance.MaxBucketCardinality is not null)
+		if (MaxBucketCardinality is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxBucketCardinality = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.MaxBucketCardinality, (k, sb) => { k.FormatCode(sb); }, (v, sb) => { sb.Append(v); sb.Append("L"); }, sb);
+			__init.Property("MaxBucketCardinality");
+			writer.Write("new() ");
+			writer.WriteInlineList(MaxBucketCardinality, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.OverallCardinality is not null)
+		if (OverallCardinality is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OverallCardinality = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.OverallCardinality, (k, sb) => { k.FormatCode(sb); }, (v, sb) => { sb.Append(v); sb.Append("L"); }, sb);
+			__init.Property("OverallCardinality");
+			writer.Write("new() ");
+			writer.WriteInlineList(OverallCardinality, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

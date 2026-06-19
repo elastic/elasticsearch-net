@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public static class KeepTypesModeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode.Exclude:
-				sb.Append("KeepTypesMode.Exclude");
+				writer.Write("KeepTypesMode.Exclude");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode.Include:
-				sb.Append("KeepTypesMode.Include");
+				writer.Write("KeepTypesMode.Include");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -25,41 +25,30 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class PutAi21Request : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ai21InferenceId = ");
-			instance.Ai21InferenceId.FormatCode(sb);
+			__init.Property("Ai21InferenceId");
+			Ai21InferenceId.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TaskType = ");
-			Elastic.Clients.Elasticsearch.Inference.Ai21TaskTypeCodeFormatter.FormatCode(instance.TaskType, sb);
+			__init.Property("TaskType");
+			Elastic.Clients.Elasticsearch.Inference.Ai21TaskTypeCodeFormatter.FormatCode(TaskType, writer);
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ServiceSettings = ");
-			instance.ServiceSettings.FormatCode(sb);
+			__init.Property("ServiceSettings");
+			ServiceSettings.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,37 +25,26 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class QueryFeatureExtractor : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.DefaultScore is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (DefaultScore is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DefaultScore = ");
-			sb.Append(instance.DefaultScore.Value);
-			sb.Append("f");
+			__init.Property("DefaultScore");
+			writer.WriteValue(DefaultScore.Value);
+			writer.Write("f");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FeatureName = ");
-			sb.Append("\"");
-			sb.Append(instance.FeatureName);
-			sb.Append("\"");
+			__init.Property("FeatureName");
+			writer.WriteString(FeatureName);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			instance.Query.FormatCode(sb);
+			__init.Property("Query");
+			Query.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

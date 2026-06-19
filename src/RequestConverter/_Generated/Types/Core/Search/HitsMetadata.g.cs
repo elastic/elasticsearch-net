@@ -25,38 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class HitsMetadata<T> : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Hits = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Hits, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Hits");
+			writer.WriteInlineList(Hits, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.MaxScore is not null)
+		if (MaxScore is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxScore = ");
-			sb.Append(instance.MaxScore.Value);
-			sb.Append("d");
+			__init.Property("MaxScore");
+			writer.WriteValue(MaxScore.Value);
+			writer.Write("d");
 		}
 
-		if (instance.Total is not null)
+		if (Total is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<Elastic.Clients.Elasticsearch.Core.Search.TotalHits, long>(instance.Total, sb);
+			__init.Property("Total");
+			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<Elastic.Clients.Elasticsearch.Core.Search.TotalHits, long>(Total, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

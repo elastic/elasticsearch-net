@@ -25,101 +25,76 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class AmazonSageMakerServiceSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AccessKey = ");
-			sb.Append("\"");
-			sb.Append(instance.AccessKey);
-			sb.Append("\"");
+			__init.Property("AccessKey");
+			writer.WriteString(AccessKey);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Api = ");
-			Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerApiCodeFormatter.FormatCode(instance.Api, sb);
+			__init.Property("Api");
+			Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerApiCodeFormatter.FormatCode(Api, writer);
 		}
 
-		if (instance.BatchSize is not null)
+		if (BatchSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BatchSize = ");
-			sb.Append(instance.BatchSize.Value);
+			__init.Property("BatchSize");
+			writer.WriteValue(BatchSize.Value);
 		}
 
-		if (instance.Dimensions is not null)
+		if (Dimensions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Dimensions = ");
-			sb.Append(instance.Dimensions.Value);
+			__init.Property("Dimensions");
+			writer.WriteValue(Dimensions.Value);
 		}
 
+		if (ElementType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EndpointName = ");
-			sb.Append("\"");
-			sb.Append(instance.EndpointName);
-			sb.Append("\"");
-		}
-
-		if (instance.InferenceComponentName is not null)
-		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InferenceComponentName = ");
-			sb.Append("\"");
-			sb.Append(instance.InferenceComponentName);
-			sb.Append("\"");
+			__init.Property("ElementType");
+			Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerElementTypeCodeFormatter.FormatCode(ElementType.Value, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Region = ");
-			sb.Append("\"");
-			sb.Append(instance.Region);
-			sb.Append("\"");
+			__init.Property("EndpointName");
+			writer.WriteString(EndpointName);
+		}
+
+		if (InferenceComponentName is not null)
+		{
+			__init.Property("InferenceComponentName");
+			writer.WriteString(InferenceComponentName);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SecretKey = ");
-			sb.Append("\"");
-			sb.Append(instance.SecretKey);
-			sb.Append("\"");
+			__init.Property("Region");
+			writer.WriteString(Region);
 		}
 
-		if (instance.TargetContainerHostname is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TargetContainerHostname = ");
-			sb.Append("\"");
-			sb.Append(instance.TargetContainerHostname);
-			sb.Append("\"");
+			__init.Property("SecretKey");
+			writer.WriteString(SecretKey);
 		}
 
-		if (instance.TargetModel is not null)
+		if (Similarity is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TargetModel = ");
-			sb.Append("\"");
-			sb.Append(instance.TargetModel);
-			sb.Append("\"");
+			__init.Property("Similarity");
+			Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerSimilarityCodeFormatter.FormatCode(Similarity.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		if (TargetContainerHostname is not null)
+		{
+			__init.Property("TargetContainerHostname");
+			writer.WriteString(TargetContainerHostname);
+		}
+
+		if (TargetModel is not null)
+		{
+			__init.Property("TargetModel");
+			writer.WriteString(TargetModel);
+		}
+
+		__init.Dispose();
 	}
 }

@@ -25,103 +25,72 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class CompletionSuggestOption<TDocument> : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CollateMatch is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CollateMatch is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CollateMatch = ");
-			sb.Append(instance.CollateMatch.Value ? "true" : "false");
+			__init.Property("CollateMatch");
+			writer.WriteValue(CollateMatch.Value);
 		}
 
-		if (instance.Contexts is not null)
+		if (Contexts is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Contexts = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Contexts, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("["); RequestConverter.CodeFormatter.FormatCode(v, (item, sb) => { item.FormatCode(sb); }, sb); sb.Append("]"); }, sb);
+			__init.Property("Contexts");
+			writer.Write("new() ");
+			writer.WriteInlineList(Contexts, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { item.FormatCode(w); }); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Fields is not null)
+		if (Fields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fields = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Fields, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Fields");
+			writer.Write("new() ");
+			writer.WriteInlineList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Id is not null)
+		if (Id is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			sb.Append("\"");
-			sb.Append(instance.Id);
-			sb.Append("\"");
+			__init.Property("Id");
+			writer.WriteString(Id);
 		}
 
-		if (instance.Index is not null)
+		if (Index is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			sb.Append("\"");
-			sb.Append(instance.Index);
-			sb.Append("\"");
+			__init.Property("Index");
+			writer.WriteString(Index);
 		}
 
-		if (instance.Routing is not null)
+		if (Routing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Routing = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Routing, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Routing");
+			writer.WriteString(Routing);
 		}
 
-		if (instance.Score is not null)
+		if (Score is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Score = ");
-			sb.Append(instance.Score.Value);
-			sb.Append("d");
+			__init.Property("Score");
+			writer.WriteValue(Score.Value);
+			writer.Write("d");
 		}
 
-		if (instance.Score0 is not null)
+		if (Score0 is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Score0 = ");
-			sb.Append(instance.Score0.Value);
-			sb.Append("d");
+			__init.Property("Score0");
+			writer.WriteValue(Score0.Value);
+			writer.Write("d");
 		}
 
-		if (instance.Source is not null)
+		if (Source is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Source = ");
-			RequestConverter.CodeFormatter.FormatCode<TDocument>(instance.Source, sb);
+			__init.Property("Source");
+			writer.WriteValue(Source);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Text = ");
-			sb.Append("\"");
-			sb.Append(instance.Text);
-			sb.Append("\"");
+			__init.Property("Text");
+			writer.WriteString(Text);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

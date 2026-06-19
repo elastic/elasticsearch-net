@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
 public static class ImpactAreaCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Backup:
-				sb.Append("ImpactArea.Backup");
+				writer.Write("ImpactArea.Backup");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.DeploymentManagement:
-				sb.Append("ImpactArea.DeploymentManagement");
+				writer.Write("ImpactArea.DeploymentManagement");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Ingest:
-				sb.Append("ImpactArea.Ingest");
+				writer.Write("ImpactArea.Ingest");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Search:
-				sb.Append("ImpactArea.Search");
+				writer.Write("ImpactArea.Search");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

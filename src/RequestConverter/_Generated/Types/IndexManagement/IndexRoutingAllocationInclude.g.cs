@@ -25,30 +25,21 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class IndexRoutingAllocationInclude : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Id is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Id is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			instance.Id.FormatCode(sb);
+			__init.Property("Id");
+			Id.FormatCode(writer);
 		}
 
-		if (instance.TierPreference is not null)
+		if (TierPreference is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TierPreference = ");
-			sb.Append("\"");
-			sb.Append(instance.TierPreference);
-			sb.Append("\"");
+			__init.Property("TierPreference");
+			writer.WriteString(TierPreference);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

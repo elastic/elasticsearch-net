@@ -25,53 +25,38 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class RecoveryFiles : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Details is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Details is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Details = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Details, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Details");
+			writer.WriteInlineList(Details, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Percent = ");
-			instance.Percent.FormatCode(sb);
+			__init.Property("Percent");
+			Percent.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Recovered = ");
-			sb.Append(instance.Recovered);
-			sb.Append("L");
+			__init.Property("Recovered");
+			writer.WriteValue(Recovered);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Reused = ");
-			sb.Append(instance.Reused);
-			sb.Append("L");
+			__init.Property("Reused");
+			writer.WriteValue(Reused);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			sb.Append(instance.Total);
-			sb.Append("L");
+			__init.Property("Total");
+			writer.WriteValue(Total);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

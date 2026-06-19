@@ -25,51 +25,36 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class IndicesVersions : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexCount = ");
-			sb.Append(instance.IndexCount);
+			__init.Property("IndexCount");
+			writer.WriteValue(IndexCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PrimaryShardCount = ");
-			sb.Append(instance.PrimaryShardCount);
+			__init.Property("PrimaryShardCount");
+			writer.WriteValue(PrimaryShardCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalPrimaryBytes = ");
-			sb.Append(instance.TotalPrimaryBytes);
-			sb.Append("L");
+			__init.Property("TotalPrimaryBytes");
+			writer.WriteValue(TotalPrimaryBytes);
+			writer.Write("L");
 		}
 
-		if (instance.TotalPrimarySize is not null)
+		if (TotalPrimarySize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalPrimarySize = ");
-			instance.TotalPrimarySize.FormatCode(sb);
+			__init.Property("TotalPrimarySize");
+			TotalPrimarySize.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

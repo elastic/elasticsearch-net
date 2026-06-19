@@ -21,23 +21,46 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
 
-namespace Elastic.Clients.Elasticsearch.IndexManagement;
+namespace Elastic.Clients.Elasticsearch.Inference;
 
-public partial class GetSampleRequest : RequestConverter.ICodeFormattable
+public partial class PutFireworksaiRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			instance.Index.FormatCode(sb);
+			__init.Property("FireworksaiInferenceId");
+			FireworksaiInferenceId.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		{
+			__init.Property("TaskType");
+			Elastic.Clients.Elasticsearch.Inference.FireworksAITaskTypeCodeFormatter.FormatCode(TaskType, writer);
+		}
+
+		if (Timeout is not null)
+		{
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
+		}
+
+		if (ChunkingSettings is not null)
+		{
+			__init.Property("ChunkingSettings");
+			ChunkingSettings.FormatCode(writer);
+		}
+
+		{
+			__init.Property("ServiceSettings");
+			ServiceSettings.FormatCode(writer);
+		}
+
+		if (TaskSettings is not null)
+		{
+			__init.Property("TaskSettings");
+			TaskSettings.FormatCode(writer);
+		}
+
+		__init.Dispose();
 	}
 }

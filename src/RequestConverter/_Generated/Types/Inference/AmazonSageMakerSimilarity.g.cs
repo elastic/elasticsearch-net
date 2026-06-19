@@ -21,32 +21,26 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
 
-namespace Elastic.Clients.Elasticsearch.IndexManagement;
+namespace Elastic.Clients.Elasticsearch.Inference;
 
-public partial class RawDocument : RequestConverter.ICodeFormattable
+public static class AmazonSageMakerSimilarityCodeFormatter
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerSimilarity instance, RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		switch (instance)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			sb.Append("\"");
-			sb.Append(instance.Index);
-			sb.Append("\"");
+			case Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerSimilarity.Cosine:
+				writer.Write("AmazonSageMakerSimilarity.Cosine");
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerSimilarity.DotProduct:
+				writer.Write("AmazonSageMakerSimilarity.DotProduct");
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerSimilarity.L2Norm:
+				writer.Write("AmazonSageMakerSimilarity.L2Norm");
+				break;
+			default:
+				writer.Write(instance.ToString());
+				break;
 		}
-
-		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Source = ");
-			instance.Source.FormatCode(sb);
-		}
-
-		if (hasProps)
-			sb.Append(" }");
 	}
 }

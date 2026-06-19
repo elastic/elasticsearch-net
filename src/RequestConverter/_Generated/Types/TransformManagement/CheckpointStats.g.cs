@@ -25,60 +25,45 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
 public partial class CheckpointStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Checkpoint = ");
-			sb.Append(instance.Checkpoint);
-			sb.Append("L");
+			__init.Property("Checkpoint");
+			writer.WriteValue(Checkpoint);
+			writer.Write("L");
 		}
 
-		if (instance.CheckpointProgress is not null)
+		if (CheckpointProgress is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CheckpointProgress = ");
-			instance.CheckpointProgress.FormatCode(sb);
+			__init.Property("CheckpointProgress");
+			CheckpointProgress.FormatCode(writer);
 		}
 
-		if (instance.Timestamp is not null)
+		if (Timestamp is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timestamp = ");
-			sb.Append(instance.Timestamp.Value);
+			__init.Property("Timestamp");
+			writer.WriteValue(Timestamp.Value);
 		}
 
-		if (instance.TimestampMillis is not null)
+		if (TimestampMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimestampMillis = ");
-			sb.Append(instance.TimestampMillis.Value);
+			__init.Property("TimestampMillis");
+			writer.WriteValue(TimestampMillis.Value);
 		}
 
-		if (instance.TimeUpperBound is not null)
+		if (TimeUpperBound is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeUpperBound = ");
-			sb.Append(instance.TimeUpperBound.Value);
+			__init.Property("TimeUpperBound");
+			writer.WriteValue(TimeUpperBound.Value);
 		}
 
-		if (instance.TimeUpperBoundMillis is not null)
+		if (TimeUpperBoundMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeUpperBoundMillis = ");
-			sb.Append(instance.TimeUpperBoundMillis.Value);
+			__init.Property("TimeUpperBoundMillis");
+			writer.WriteValue(TimeUpperBoundMillis.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

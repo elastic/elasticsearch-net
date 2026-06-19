@@ -25,36 +25,27 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class CreateFrom : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.MappingsOverride is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (MappingsOverride is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MappingsOverride = ");
-			instance.MappingsOverride.FormatCode(sb);
+			__init.Property("MappingsOverride");
+			MappingsOverride.FormatCode(writer);
 		}
 
-		if (instance.RemoveIndexBlocks is not null)
+		if (RemoveIndexBlocks is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RemoveIndexBlocks = ");
-			sb.Append(instance.RemoveIndexBlocks.Value ? "true" : "false");
+			__init.Property("RemoveIndexBlocks");
+			writer.WriteValue(RemoveIndexBlocks.Value);
 		}
 
-		if (instance.SettingsOverride is not null)
+		if (SettingsOverride is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SettingsOverride = ");
-			instance.SettingsOverride.FormatCode(sb);
+			__init.Property("SettingsOverride");
+			SettingsOverride.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

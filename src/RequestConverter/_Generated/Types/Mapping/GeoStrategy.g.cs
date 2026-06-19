@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public static class GeoStrategyCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.GeoStrategy instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.GeoStrategy instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.GeoStrategy.Recursive:
-				sb.Append("GeoStrategy.Recursive");
+				writer.Write("GeoStrategy.Recursive");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.GeoStrategy.Term:
-				sb.Append("GeoStrategy.Term");
+				writer.Write("GeoStrategy.Term");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

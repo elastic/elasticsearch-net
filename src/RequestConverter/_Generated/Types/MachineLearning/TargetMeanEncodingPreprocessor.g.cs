@@ -25,46 +25,31 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class TargetMeanEncodingPreprocessor : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DefaultValue = ");
-			sb.Append(instance.DefaultValue);
-			sb.Append("d");
+			__init.Property("DefaultValue");
+			writer.WriteValue(DefaultValue);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FeatureName = ");
-			sb.Append("\"");
-			sb.Append(instance.FeatureName);
-			sb.Append("\"");
+			__init.Property("FeatureName");
+			writer.WriteString(FeatureName);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			sb.Append("\"");
-			sb.Append(instance.Field);
-			sb.Append("\"");
+			__init.Property("Field");
+			writer.WriteString(Field);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TargetMap = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.TargetMap, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append(v); sb.Append("d"); }, sb);
+			__init.Property("TargetMap");
+			writer.Write("new() ");
+			writer.WriteInlineList(TargetMap, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

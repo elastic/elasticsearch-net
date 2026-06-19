@@ -25,20 +25,15 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
 public partial class Sync : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Time is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Time is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Time = ");
-			instance.Time.FormatCode(sb);
+			__init.Property("Time");
+			Time.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

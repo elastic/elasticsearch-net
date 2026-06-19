@@ -25,141 +25,88 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class Category : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CategoryId = ");
-			sb.Append(instance.CategoryId);
-			sb.Append("L");
+			__init.Property("CategoryId");
+			writer.WriteValue(CategoryId);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Examples = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Examples, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Examples");
+			writer.WriteInlineList(Examples, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.GrokPattern is not null)
+		if (GrokPattern is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GrokPattern = ");
-			sb.Append("\"");
-			sb.Append(instance.GrokPattern);
-			sb.Append("\"");
+			__init.Property("GrokPattern");
+			writer.WriteString(GrokPattern);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JobId = ");
-			sb.Append("\"");
-			sb.Append(instance.JobId);
-			sb.Append("\"");
+			__init.Property("JobId");
+			writer.WriteString(JobId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxMatchingLength = ");
-			sb.Append(instance.MaxMatchingLength);
-			sb.Append("L");
+			__init.Property("MaxMatchingLength");
+			writer.WriteValue(MaxMatchingLength);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mlcategory = ");
-			sb.Append("\"");
-			sb.Append(instance.Mlcategory);
-			sb.Append("\"");
+			__init.Property("Mlcategory");
+			writer.WriteString(Mlcategory);
 		}
 
-		if (instance.NumMatches is not null)
+		if (NumMatches is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumMatches = ");
-			sb.Append(instance.NumMatches.Value);
-			sb.Append("L");
+			__init.Property("NumMatches");
+			writer.WriteValue(NumMatches.Value);
+			writer.Write("L");
 		}
 
-		if (instance.P is not null)
+		if (P is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("P = ");
-			sb.Append("\"");
-			sb.Append(instance.P);
-			sb.Append("\"");
+			__init.Property("P");
+			writer.WriteString(P);
 		}
 
-		if (instance.PartitionFieldName is not null)
+		if (PartitionFieldName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PartitionFieldName = ");
-			sb.Append("\"");
-			sb.Append(instance.PartitionFieldName);
-			sb.Append("\"");
+			__init.Property("PartitionFieldName");
+			writer.WriteString(PartitionFieldName);
 		}
 
-		if (instance.PartitionFieldValue is not null)
+		if (PartitionFieldValue is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PartitionFieldValue = ");
-			sb.Append("\"");
-			sb.Append(instance.PartitionFieldValue);
-			sb.Append("\"");
+			__init.Property("PartitionFieldValue");
+			writer.WriteString(PartitionFieldValue);
 		}
 
-		if (instance.PreferredToCategories is not null)
+		if (PreferredToCategories is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PreferredToCategories = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.PreferredToCategories, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("PreferredToCategories");
+			writer.WriteInlineList(PreferredToCategories, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Regex = ");
-			sb.Append("\"");
-			sb.Append(instance.Regex);
-			sb.Append("\"");
+			__init.Property("Regex");
+			writer.WriteString(Regex);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ResultType = ");
-			sb.Append("\"");
-			sb.Append(instance.ResultType);
-			sb.Append("\"");
+			__init.Property("ResultType");
+			writer.WriteString(ResultType);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Terms = ");
-			sb.Append("\"");
-			sb.Append(instance.Terms);
-			sb.Append("\"");
+			__init.Property("Terms");
+			writer.WriteString(Terms);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

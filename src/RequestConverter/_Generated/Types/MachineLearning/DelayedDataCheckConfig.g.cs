@@ -25,27 +25,20 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DelayedDataCheckConfig : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CheckWindow is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CheckWindow is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CheckWindow = ");
-			instance.CheckWindow.FormatCode(sb);
+			__init.Property("CheckWindow");
+			CheckWindow.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Enabled = ");
-			sb.Append(instance.Enabled ? "true" : "false");
+			__init.Property("Enabled");
+			writer.WriteValue(Enabled);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

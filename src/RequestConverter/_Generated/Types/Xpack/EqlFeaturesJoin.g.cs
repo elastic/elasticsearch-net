@@ -25,47 +25,34 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class EqlFeaturesJoin : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JoinQueriesFiveOrMore = ");
-			sb.Append(instance.JoinQueriesFiveOrMore);
+			__init.Property("JoinQueriesFiveOrMore");
+			writer.WriteValue(JoinQueriesFiveOrMore);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JoinQueriesFour = ");
-			sb.Append(instance.JoinQueriesFour);
+			__init.Property("JoinQueriesFour");
+			writer.WriteValue(JoinQueriesFour);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JoinQueriesThree = ");
-			sb.Append(instance.JoinQueriesThree);
+			__init.Property("JoinQueriesThree");
+			writer.WriteValue(JoinQueriesThree);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JoinQueriesTwo = ");
-			sb.Append(instance.JoinQueriesTwo);
+			__init.Property("JoinQueriesTwo");
+			writer.WriteValue(JoinQueriesTwo);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JoinUntil = ");
-			sb.Append(instance.JoinUntil);
+			__init.Property("JoinUntil");
+			writer.WriteValue(JoinUntil);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

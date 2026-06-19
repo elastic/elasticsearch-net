@@ -25,30 +25,30 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public static class FunctionScoreModeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.Avg:
-				sb.Append("FunctionScoreMode.Avg");
+				writer.Write("FunctionScoreMode.Avg");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.First:
-				sb.Append("FunctionScoreMode.First");
+				writer.Write("FunctionScoreMode.First");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.Max:
-				sb.Append("FunctionScoreMode.Max");
+				writer.Write("FunctionScoreMode.Max");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.Min:
-				sb.Append("FunctionScoreMode.Min");
+				writer.Write("FunctionScoreMode.Min");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.Multiply:
-				sb.Append("FunctionScoreMode.Multiply");
+				writer.Write("FunctionScoreMode.Multiply");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.Sum:
-				sb.Append("FunctionScoreMode.Sum");
+				writer.Write("FunctionScoreMode.Sum");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

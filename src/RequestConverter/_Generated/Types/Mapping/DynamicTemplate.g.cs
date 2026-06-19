@@ -25,96 +25,63 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public partial class DynamicTemplate : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Match is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Match is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Match = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Match, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Match");
+			writer.WriteInlineList(Match, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.MatchMappingType is not null)
+		if (MatchMappingType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MatchMappingType = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.MatchMappingType, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("MatchMappingType");
+			writer.WriteInlineList(MatchMappingType, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.MatchPattern is not null)
+		if (MatchPattern is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MatchPattern = ");
-			Elastic.Clients.Elasticsearch.Mapping.MatchTypeCodeFormatter.FormatCode(instance.MatchPattern.Value, sb);
+			__init.Property("MatchPattern");
+			Elastic.Clients.Elasticsearch.Mapping.MatchTypeCodeFormatter.FormatCode(MatchPattern.Value, writer);
 		}
 
-		if (instance.PathMatch is not null)
+		if (PathMatch is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PathMatch = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.PathMatch, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("PathMatch");
+			writer.WriteInlineList(PathMatch, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.PathUnmatch is not null)
+		if (PathUnmatch is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PathUnmatch = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.PathUnmatch, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("PathUnmatch");
+			writer.WriteInlineList(PathUnmatch, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Unmatch is not null)
+		if (Unmatch is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Unmatch = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Unmatch, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Unmatch");
+			writer.WriteInlineList(Unmatch, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.UnmatchMappingType is not null)
+		if (UnmatchMappingType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UnmatchMappingType = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.UnmatchMappingType, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("UnmatchMappingType");
+			writer.WriteInlineList(UnmatchMappingType, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Mapping is not null)
+		if (Mapping is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mapping = ");
-			instance.Mapping.FormatCode(sb);
+			__init.Property("Mapping");
+			Mapping.FormatCode(writer);
 		}
 
-		if (instance.Runtime is not null)
+		if (Runtime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Runtime = ");
-			instance.Runtime.FormatCode(sb);
+			__init.Property("Runtime");
+			Runtime.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

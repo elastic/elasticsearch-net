@@ -25,31 +25,22 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class XpackInfoRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 #pragma warning disable CS0618
-		if (instance.AcceptEnterprise is not null)
+		if (AcceptEnterprise is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AcceptEnterprise = ");
-			sb.Append(instance.AcceptEnterprise.Value ? "true" : "false");
+			__init.Property("AcceptEnterprise");
+			writer.WriteValue(AcceptEnterprise.Value);
 		}
 #pragma warning restore CS0618
-		if (instance.Categories is not null)
+		if (Categories is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Categories = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Categories, (item, sb) => { Elastic.Clients.Elasticsearch.Xpack.XPackCategoryCodeFormatter.FormatCode(item, sb); }, sb);
-			sb.Append("]");
+			__init.Property("Categories");
+			writer.WriteInlineList(Categories, (w, item) => { Elastic.Clients.Elasticsearch.Xpack.XPackCategoryCodeFormatter.FormatCode(item, w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

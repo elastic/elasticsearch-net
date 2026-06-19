@@ -25,43 +25,32 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class FlushStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Periodic = ");
-			sb.Append(instance.Periodic);
-			sb.Append("L");
+			__init.Property("Periodic");
+			writer.WriteValue(Periodic);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			sb.Append(instance.Total);
-			sb.Append("L");
+			__init.Property("Total");
+			writer.WriteValue(Total);
+			writer.Write("L");
 		}
 
-		if (instance.TotalTime is not null)
+		if (TotalTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalTime = ");
-			instance.TotalTime.FormatCode(sb);
+			__init.Property("TotalTime");
+			TotalTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalTimeInMillis = ");
-			sb.Append(instance.TotalTimeInMillis);
+			__init.Property("TotalTimeInMillis");
+			writer.WriteValue(TotalTimeInMillis);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,72 +25,58 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class SparseVectorQuery : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Boost is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Boost is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Boost = ");
-			sb.Append(instance.Boost.Value);
-			sb.Append("f");
+			__init.Property("Boost");
+			writer.WriteValue(Boost.Value);
+			writer.Write("f");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.Prune is not null)
+		if (Prune is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Prune = ");
-			sb.Append(instance.Prune.Value ? "true" : "false");
+			__init.Property("Prune");
+			writer.WriteValue(Prune.Value);
 		}
 
-		if (instance.PruningConfig is not null)
+		if (PruningConfig is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PruningConfig = ");
-			instance.PruningConfig.FormatCode(sb);
+			__init.Property("PruningConfig");
+			PruningConfig.FormatCode(writer);
 		}
 
-		if (instance.Query is not null)
+		if (Query is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			sb.Append("\"");
-			sb.Append(instance.Query);
-			sb.Append("\"");
+			__init.Property("Query");
+			writer.WriteString(Query);
 		}
 
-		if (instance.QueryName is not null)
+		if (QueryName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryName = ");
-			sb.Append("\"");
-			sb.Append(instance.QueryName);
-			sb.Append("\"");
+			__init.Property("QueryName");
+			writer.WriteString(QueryName);
 		}
 
-		if (instance.InferenceId is not null)
+		if (InferenceId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InferenceId = ");
-			instance.InferenceId.FormatCode(sb);
+			__init.Property("InferenceId");
+			InferenceId.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		if (QueryVector is not null)
+		{
+			__init.Property("QueryVector");
+			writer.Write("new() ");
+			writer.WriteInlineList(QueryVector, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("f"); w.Write(" }"); }, "{ ", " }", ", ");
+		}
+
+		__init.Dispose();
 	}
 }

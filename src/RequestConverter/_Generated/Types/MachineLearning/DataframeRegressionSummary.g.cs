@@ -25,44 +25,33 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataframeRegressionSummary : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Huber is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Huber is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Huber = ");
-			instance.Huber.FormatCode(sb);
+			__init.Property("Huber");
+			Huber.FormatCode(writer);
 		}
 
-		if (instance.Mse is not null)
+		if (Mse is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mse = ");
-			instance.Mse.FormatCode(sb);
+			__init.Property("Mse");
+			Mse.FormatCode(writer);
 		}
 
-		if (instance.Msle is not null)
+		if (Msle is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Msle = ");
-			instance.Msle.FormatCode(sb);
+			__init.Property("Msle");
+			Msle.FormatCode(writer);
 		}
 
-		if (instance.RSquared is not null)
+		if (RSquared is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RSquared = ");
-			instance.RSquared.FormatCode(sb);
+			__init.Property("RSquared");
+			RSquared.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

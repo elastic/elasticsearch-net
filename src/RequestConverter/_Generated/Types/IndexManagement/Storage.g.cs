@@ -25,35 +25,26 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class Storage : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AllowMmap is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AllowMmap is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowMmap = ");
-			sb.Append(instance.AllowMmap.Value ? "true" : "false");
+			__init.Property("AllowMmap");
+			writer.WriteValue(AllowMmap.Value);
 		}
 
-		if (instance.StatsRefreshInterval is not null)
+		if (StatsRefreshInterval is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StatsRefreshInterval = ");
-			instance.StatsRefreshInterval.FormatCode(sb);
+			__init.Property("StatsRefreshInterval");
+			StatsRefreshInterval.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			instance.Type.FormatCode(sb);
+			__init.Property("Type");
+			Type.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

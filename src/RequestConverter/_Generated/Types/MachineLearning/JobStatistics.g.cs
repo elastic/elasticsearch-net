@@ -25,44 +25,33 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class JobStatistics : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Avg = ");
-			sb.Append(instance.Avg);
-			sb.Append("d");
+			__init.Property("Avg");
+			writer.WriteValue(Avg);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Max = ");
-			sb.Append(instance.Max);
-			sb.Append("d");
+			__init.Property("Max");
+			writer.WriteValue(Max);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Min = ");
-			sb.Append(instance.Min);
-			sb.Append("d");
+			__init.Property("Min");
+			writer.WriteValue(Min);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			sb.Append(instance.Total);
-			sb.Append("d");
+			__init.Property("Total");
+			writer.WriteValue(Total);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

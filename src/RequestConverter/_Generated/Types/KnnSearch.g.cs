@@ -25,106 +25,83 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class KnnSearch : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Boost is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Boost is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Boost = ");
-			sb.Append(instance.Boost.Value);
-			sb.Append("f");
+			__init.Property("Boost");
+			writer.WriteValue(Boost.Value);
+			writer.Write("f");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.Filter is not null)
+		if (Filter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Filter = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Filter, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Filter");
+			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.InnerHits is not null)
+		if (InnerHits is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InnerHits = ");
-			instance.InnerHits.FormatCode(sb);
+			__init.Property("InnerHits");
+			InnerHits.FormatCode(writer);
 		}
 
-		if (instance.K is not null)
+		if (K is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("K = ");
-			sb.Append(instance.K.Value);
+			__init.Property("K");
+			writer.WriteValue(K.Value);
 		}
 
-		if (instance.NumCandidates is not null)
+		if (NumCandidates is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumCandidates = ");
-			sb.Append(instance.NumCandidates.Value);
+			__init.Property("NumCandidates");
+			writer.WriteValue(NumCandidates.Value);
 		}
 
-		if (instance.QueryVector is not null)
+		if (QueryName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryVector = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.QueryVector, (item, sb) => { sb.Append(item); sb.Append("f"); }, sb);
-			sb.Append("]");
+			__init.Property("QueryName");
+			writer.WriteString(QueryName);
 		}
 
-		if (instance.QueryVectorBuilder is not null)
+		if (QueryVector is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryVectorBuilder = ");
-			instance.QueryVectorBuilder.FormatCode(sb);
+			__init.Property("QueryVector");
+			writer.WriteInlineList(QueryVector, (w, item) => { w.WriteValue(item); w.Write("f"); });
 		}
 
-		if (instance.RescoreVector is not null)
+		if (QueryVectorBuilder is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RescoreVector = ");
-			instance.RescoreVector.FormatCode(sb);
+			__init.Property("QueryVectorBuilder");
+			QueryVectorBuilder.FormatCode(writer);
 		}
 
-		if (instance.Similarity is not null)
+		if (RescoreVector is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Similarity = ");
-			sb.Append(instance.Similarity.Value);
-			sb.Append("f");
+			__init.Property("RescoreVector");
+			RescoreVector.FormatCode(writer);
 		}
 
-		if (instance.VisitPercentage is not null)
+		if (Similarity is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VisitPercentage = ");
-			sb.Append(instance.VisitPercentage.Value);
-			sb.Append("f");
+			__init.Property("Similarity");
+			writer.WriteValue(Similarity.Value);
+			writer.Write("f");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		if (VisitPercentage is not null)
+		{
+			__init.Property("VisitPercentage");
+			writer.WriteValue(VisitPercentage.Value);
+			writer.Write("f");
+		}
+
+		__init.Dispose();
 	}
 }

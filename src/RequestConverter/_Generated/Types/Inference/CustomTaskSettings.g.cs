@@ -25,20 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class CustomTaskSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Parameters is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Parameters is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Parameters = ");
-			RequestConverter.CodeFormatter.FormatCode(instance.Parameters, sb);
+			__init.Property("Parameters");
+			writer.Write("new() ");
+			writer.WriteInlineList(Parameters, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

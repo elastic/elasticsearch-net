@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public static class DenseVectorSimilarityCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity.Cosine:
-				sb.Append("DenseVectorSimilarity.Cosine");
+				writer.Write("DenseVectorSimilarity.Cosine");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity.DotProduct:
-				sb.Append("DenseVectorSimilarity.DotProduct");
+				writer.Write("DenseVectorSimilarity.DotProduct");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity.L2Norm:
-				sb.Append("DenseVectorSimilarity.L2Norm");
+				writer.Write("DenseVectorSimilarity.L2Norm");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity.MaxInnerProduct:
-				sb.Append("DenseVectorSimilarity.MaxInnerProduct");
+				writer.Write("DenseVectorSimilarity.MaxInnerProduct");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

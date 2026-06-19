@@ -25,139 +25,110 @@ namespace Elastic.Clients.Elasticsearch.Esql;
 
 public partial class AsyncQueryRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AllowPartialResults is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AllowPartialResults is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowPartialResults = ");
-			sb.Append(instance.AllowPartialResults.Value ? "true" : "false");
+			__init.Property("AllowPartialResults");
+			writer.WriteValue(AllowPartialResults.Value);
 		}
 
-		if (instance.Delimiter is not null)
+		if (Delimiter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Delimiter = ");
-			sb.Append("\"");
-			sb.Append(instance.Delimiter);
-			sb.Append("\"");
+			__init.Property("Delimiter");
+			writer.WriteString(Delimiter);
 		}
 
-		if (instance.DropNullColumns is not null)
+		if (DropNullColumns is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DropNullColumns = ");
-			sb.Append(instance.DropNullColumns.Value ? "true" : "false");
+			__init.Property("DropNullColumns");
+			writer.WriteValue(DropNullColumns.Value);
 		}
 
-		if (instance.Format is not null)
+		if (Format is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Format = ");
-			Elastic.Clients.Elasticsearch.Esql.EsqlFormatCodeFormatter.FormatCode(instance.Format.Value, sb);
+			__init.Property("Format");
+			Elastic.Clients.Elasticsearch.Esql.EsqlFormatCodeFormatter.FormatCode(Format.Value, writer);
 		}
 
-		if (instance.Columnar is not null)
+		if (Columnar is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Columnar = ");
-			sb.Append(instance.Columnar.Value ? "true" : "false");
+			__init.Property("Columnar");
+			writer.WriteValue(Columnar.Value);
 		}
 
-		if (instance.Filter is not null)
+		if (Filter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Filter = ");
-			instance.Filter.FormatCode(sb);
+			__init.Property("Filter");
+			Filter.FormatCode(writer);
 		}
 
-		if (instance.IncludeCcsMetadata is not null)
+		if (IncludeCcsMetadata is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IncludeCcsMetadata = ");
-			sb.Append(instance.IncludeCcsMetadata.Value ? "true" : "false");
+			__init.Property("IncludeCcsMetadata");
+			writer.WriteValue(IncludeCcsMetadata.Value);
 		}
 
-		if (instance.IncludeExecutionMetadata is not null)
+		if (IncludeExecutionMetadata is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IncludeExecutionMetadata = ");
-			sb.Append(instance.IncludeExecutionMetadata.Value ? "true" : "false");
+			__init.Property("IncludeExecutionMetadata");
+			writer.WriteValue(IncludeExecutionMetadata.Value);
 		}
 
-		if (instance.KeepAlive is not null)
+		if (KeepAlive is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("KeepAlive = ");
-			instance.KeepAlive.FormatCode(sb);
+			__init.Property("KeepAlive");
+			KeepAlive.FormatCode(writer);
 		}
 
-		if (instance.KeepOnCompletion is not null)
+		if (KeepOnCompletion is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("KeepOnCompletion = ");
-			sb.Append(instance.KeepOnCompletion.Value ? "true" : "false");
+			__init.Property("KeepOnCompletion");
+			writer.WriteValue(KeepOnCompletion.Value);
 		}
 
-		if (instance.Locale is not null)
+		if (Locale is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Locale = ");
-			sb.Append("\"");
-			sb.Append(instance.Locale);
-			sb.Append("\"");
+			__init.Property("Locale");
+			writer.WriteString(Locale);
 		}
 
-		if (instance.Params is not null)
+		if (Params is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Params = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Params, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Params");
+			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>>(Params, writer);
 		}
 
-		if (instance.Profile is not null)
+		if (Profile is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Profile = ");
-			sb.Append(instance.Profile.Value ? "true" : "false");
+			__init.Property("Profile");
+			writer.WriteValue(Profile.Value);
+		}
+
+		if (ProjectRouting is not null)
+		{
+			__init.Property("ProjectRouting");
+			writer.WriteString(ProjectRouting);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			sb.Append("\"");
-			sb.Append(instance.Query);
-			sb.Append("\"");
+			__init.Property("Query");
+			writer.WriteString(Query);
 		}
 
-		if (instance.WaitForCompletionTimeout is not null)
+		if (TimeZone is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WaitForCompletionTimeout = ");
-			instance.WaitForCompletionTimeout.FormatCode(sb);
+			__init.Property("TimeZone");
+			writer.WriteString(TimeZone);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		if (WaitForCompletionTimeout is not null)
+		{
+			__init.Property("WaitForCompletionTimeout");
+			WaitForCompletionTimeout.FormatCode(writer);
+		}
+
+		__init.Dispose();
 	}
 }

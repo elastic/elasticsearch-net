@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public static class FeatureCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.Feature instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.Feature instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.Feature.Aliases:
-				sb.Append("Feature.Aliases");
+				writer.Write("Feature.Aliases");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.Feature.Mappings:
-				sb.Append("Feature.Mappings");
+				writer.Write("Feature.Mappings");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.Feature.Settings:
-				sb.Append("Feature.Settings");
+				writer.Write("Feature.Settings");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

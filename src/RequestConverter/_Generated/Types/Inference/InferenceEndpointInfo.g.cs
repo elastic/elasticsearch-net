@@ -25,60 +25,41 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class InferenceEndpointInfo : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ChunkingSettings is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ChunkingSettings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ChunkingSettings = ");
-			instance.ChunkingSettings.FormatCode(sb);
+			__init.Property("ChunkingSettings");
+			ChunkingSettings.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InferenceId = ");
-			sb.Append("\"");
-			sb.Append(instance.InferenceId);
-			sb.Append("\"");
+			__init.Property("InferenceId");
+			writer.WriteString(InferenceId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Service = ");
-			sb.Append("\"");
-			sb.Append(instance.Service);
-			sb.Append("\"");
+			__init.Property("Service");
+			writer.WriteString(Service);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ServiceSettings = ");
-			RequestConverter.CodeFormatter.FormatCode(instance.ServiceSettings, sb);
+			__init.Property("ServiceSettings");
+			writer.WriteValue(ServiceSettings);
 		}
 
-		if (instance.TaskSettings is not null)
+		if (TaskSettings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TaskSettings = ");
-			RequestConverter.CodeFormatter.FormatCode(instance.TaskSettings, sb);
+			__init.Property("TaskSettings");
+			writer.WriteValue(TaskSettings);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TaskType = ");
-			Elastic.Clients.Elasticsearch.Inference.TaskTypeCodeFormatter.FormatCode(instance.TaskType, sb);
+			__init.Property("TaskType");
+			Elastic.Clients.Elasticsearch.Inference.TaskTypeCodeFormatter.FormatCode(TaskType, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

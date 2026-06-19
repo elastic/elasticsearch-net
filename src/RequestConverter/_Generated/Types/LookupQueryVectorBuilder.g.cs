@@ -21,23 +21,34 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
 
-namespace Elastic.Clients.Elasticsearch.Streams;
+namespace Elastic.Clients.Elasticsearch;
 
-public partial class LogsStatus : RequestConverter.ICodeFormattable
+public partial class LookupQueryVectorBuilder : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Enabled = ");
-			sb.Append(instance.Enabled ? "true" : "false");
+			__init.Property("Id");
+			writer.WriteString(Id);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		{
+			__init.Property("Index");
+			writer.WriteString(Index);
+		}
+
+		{
+			__init.Property("Path");
+			writer.WriteString(Path);
+		}
+
+		if (Routing is not null)
+		{
+			__init.Property("Routing");
+			writer.WriteString(Routing);
+		}
+
+		__init.Dispose();
 	}
 }

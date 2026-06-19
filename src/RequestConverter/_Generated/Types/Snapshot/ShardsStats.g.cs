@@ -25,60 +25,45 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 public partial class ShardsStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Done = ");
-			sb.Append(instance.Done);
-			sb.Append("L");
+			__init.Property("Done");
+			writer.WriteValue(Done);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Failed = ");
-			sb.Append(instance.Failed);
-			sb.Append("L");
+			__init.Property("Failed");
+			writer.WriteValue(Failed);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Finalizing = ");
-			sb.Append(instance.Finalizing);
-			sb.Append("L");
+			__init.Property("Finalizing");
+			writer.WriteValue(Finalizing);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Initializing = ");
-			sb.Append(instance.Initializing);
-			sb.Append("L");
+			__init.Property("Initializing");
+			writer.WriteValue(Initializing);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Started = ");
-			sb.Append(instance.Started);
-			sb.Append("L");
+			__init.Property("Started");
+			writer.WriteValue(Started);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			sb.Append(instance.Total);
-			sb.Append("L");
+			__init.Property("Total");
+			writer.WriteValue(Total);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

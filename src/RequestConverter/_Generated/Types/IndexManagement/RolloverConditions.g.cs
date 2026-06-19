@@ -25,140 +25,107 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class RolloverConditions : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.MaxAge is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (MaxAge is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxAge = ");
-			instance.MaxAge.FormatCode(sb);
+			__init.Property("MaxAge");
+			MaxAge.FormatCode(writer);
 		}
 
-		if (instance.MaxAgeMillis is not null)
+		if (MaxAgeMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxAgeMillis = ");
-			sb.Append(instance.MaxAgeMillis.Value);
+			__init.Property("MaxAgeMillis");
+			writer.WriteValue(MaxAgeMillis.Value);
 		}
 
-		if (instance.MaxDocs is not null)
+		if (MaxDocs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxDocs = ");
-			sb.Append(instance.MaxDocs.Value);
-			sb.Append("L");
+			__init.Property("MaxDocs");
+			writer.WriteValue(MaxDocs.Value);
+			writer.Write("L");
 		}
 
-		if (instance.MaxPrimaryShardDocs is not null)
+		if (MaxPrimaryShardDocs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxPrimaryShardDocs = ");
-			sb.Append(instance.MaxPrimaryShardDocs.Value);
-			sb.Append("L");
+			__init.Property("MaxPrimaryShardDocs");
+			writer.WriteValue(MaxPrimaryShardDocs.Value);
+			writer.Write("L");
 		}
 
-		if (instance.MaxPrimaryShardSize is not null)
+		if (MaxPrimaryShardSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxPrimaryShardSize = ");
-			instance.MaxPrimaryShardSize.FormatCode(sb);
+			__init.Property("MaxPrimaryShardSize");
+			MaxPrimaryShardSize.FormatCode(writer);
 		}
 
-		if (instance.MaxPrimaryShardSizeBytes is not null)
+		if (MaxPrimaryShardSizeBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxPrimaryShardSizeBytes = ");
-			sb.Append(instance.MaxPrimaryShardSizeBytes.Value);
-			sb.Append("L");
+			__init.Property("MaxPrimaryShardSizeBytes");
+			writer.WriteValue(MaxPrimaryShardSizeBytes.Value);
+			writer.Write("L");
 		}
 #pragma warning disable CS0618
-		if (instance.MaxSize is not null)
+		if (MaxSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxSize = ");
-			instance.MaxSize.FormatCode(sb);
+			__init.Property("MaxSize");
+			MaxSize.FormatCode(writer);
 		}
 #pragma warning restore CS0618
-		if (instance.MaxSizeBytes is not null)
+		if (MaxSizeBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxSizeBytes = ");
-			sb.Append(instance.MaxSizeBytes.Value);
-			sb.Append("L");
+			__init.Property("MaxSizeBytes");
+			writer.WriteValue(MaxSizeBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.MinAge is not null)
+		if (MinAge is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinAge = ");
-			instance.MinAge.FormatCode(sb);
+			__init.Property("MinAge");
+			MinAge.FormatCode(writer);
 		}
 
-		if (instance.MinDocs is not null)
+		if (MinDocs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinDocs = ");
-			sb.Append(instance.MinDocs.Value);
-			sb.Append("L");
+			__init.Property("MinDocs");
+			writer.WriteValue(MinDocs.Value);
+			writer.Write("L");
 		}
 
-		if (instance.MinPrimaryShardDocs is not null)
+		if (MinPrimaryShardDocs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinPrimaryShardDocs = ");
-			sb.Append(instance.MinPrimaryShardDocs.Value);
-			sb.Append("L");
+			__init.Property("MinPrimaryShardDocs");
+			writer.WriteValue(MinPrimaryShardDocs.Value);
+			writer.Write("L");
 		}
 
-		if (instance.MinPrimaryShardSize is not null)
+		if (MinPrimaryShardSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinPrimaryShardSize = ");
-			instance.MinPrimaryShardSize.FormatCode(sb);
+			__init.Property("MinPrimaryShardSize");
+			MinPrimaryShardSize.FormatCode(writer);
 		}
 
-		if (instance.MinPrimaryShardSizeBytes is not null)
+		if (MinPrimaryShardSizeBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinPrimaryShardSizeBytes = ");
-			sb.Append(instance.MinPrimaryShardSizeBytes.Value);
-			sb.Append("L");
+			__init.Property("MinPrimaryShardSizeBytes");
+			writer.WriteValue(MinPrimaryShardSizeBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.MinSize is not null)
+		if (MinSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinSize = ");
-			instance.MinSize.FormatCode(sb);
+			__init.Property("MinSize");
+			MinSize.FormatCode(writer);
 		}
 
-		if (instance.MinSizeBytes is not null)
+		if (MinSizeBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinSizeBytes = ");
-			sb.Append(instance.MinSizeBytes.Value);
-			sb.Append("L");
+			__init.Property("MinSizeBytes");
+			writer.WriteValue(MinSizeBytes.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

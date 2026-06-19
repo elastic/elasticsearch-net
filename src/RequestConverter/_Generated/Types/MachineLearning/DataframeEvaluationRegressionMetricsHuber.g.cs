@@ -25,21 +25,16 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataframeEvaluationRegressionMetricsHuber : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Delta is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Delta is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Delta = ");
-			sb.Append(instance.Delta.Value);
-			sb.Append("d");
+			__init.Property("Delta");
+			writer.WriteValue(Delta.Value);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,106 +25,67 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class Realm : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Available = ");
-			sb.Append(instance.Available ? "true" : "false");
+			__init.Property("Available");
+			writer.WriteValue(Available);
 		}
 
-		if (instance.Cache is not null)
+		if (Cache is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Cache = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Cache, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Cache");
+			writer.WriteInlineList(Cache, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Enabled = ");
-			sb.Append(instance.Enabled ? "true" : "false");
+			__init.Property("Enabled");
+			writer.WriteValue(Enabled);
 		}
 
-		if (instance.HasAuthorizationRealms is not null)
+		if (HasAuthorizationRealms is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HasAuthorizationRealms = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.HasAuthorizationRealms, (item, sb) => { sb.Append(item ? "true" : "false"); }, sb);
-			sb.Append("]");
+			__init.Property("HasAuthorizationRealms");
+			writer.WriteInlineList(HasAuthorizationRealms, (w, item) => { w.WriteValue(item); });
 		}
 
-		if (instance.HasDefaultUsernamePattern is not null)
+		if (HasDefaultUsernamePattern is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HasDefaultUsernamePattern = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.HasDefaultUsernamePattern, (item, sb) => { sb.Append(item ? "true" : "false"); }, sb);
-			sb.Append("]");
+			__init.Property("HasDefaultUsernamePattern");
+			writer.WriteInlineList(HasDefaultUsernamePattern, (w, item) => { w.WriteValue(item); });
 		}
 
-		if (instance.HasTruststore is not null)
+		if (HasTruststore is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HasTruststore = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.HasTruststore, (item, sb) => { sb.Append(item ? "true" : "false"); }, sb);
-			sb.Append("]");
+			__init.Property("HasTruststore");
+			writer.WriteInlineList(HasTruststore, (w, item) => { w.WriteValue(item); });
 		}
 
-		if (instance.IsAuthenticationDelegated is not null)
+		if (IsAuthenticationDelegated is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IsAuthenticationDelegated = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.IsAuthenticationDelegated, (item, sb) => { sb.Append(item ? "true" : "false"); }, sb);
-			sb.Append("]");
+			__init.Property("IsAuthenticationDelegated");
+			writer.WriteInlineList(IsAuthenticationDelegated, (w, item) => { w.WriteValue(item); });
 		}
 
-		if (instance.Name is not null)
+		if (Name is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Name, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Name");
+			writer.WriteInlineList(Name, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Order is not null)
+		if (Order is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Order = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Order, (item, sb) => { sb.Append(item); sb.Append("L"); }, sb);
-			sb.Append("]");
+			__init.Property("Order");
+			writer.WriteInlineList(Order, (w, item) => { w.WriteValue(item); w.Write("L"); });
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Size, (item, sb) => { sb.Append(item); sb.Append("L"); }, sb);
-			sb.Append("]");
+			__init.Property("Size");
+			writer.WriteInlineList(Size, (w, item) => { w.WriteValue(item); w.Write("L"); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

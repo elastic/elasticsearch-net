@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class SlicesCalculationCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.SlicesCalculation instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.SlicesCalculation instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.SlicesCalculation.Auto:
-				sb.Append("SlicesCalculation.Auto");
+				writer.Write("SlicesCalculation.Auto");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

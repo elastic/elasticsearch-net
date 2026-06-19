@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
 public static class LicenseStatusCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus.Active:
-				sb.Append("LicenseStatus.Active");
+				writer.Write("LicenseStatus.Active");
 				break;
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus.Expired:
-				sb.Append("LicenseStatus.Expired");
+				writer.Write("LicenseStatus.Expired");
 				break;
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus.Invalid:
-				sb.Append("LicenseStatus.Invalid");
+				writer.Write("LicenseStatus.Invalid");
 				break;
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus.Valid:
-				sb.Append("LicenseStatus.Valid");
+				writer.Write("LicenseStatus.Valid");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

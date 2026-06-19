@@ -25,133 +25,100 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public partial class GeoShapeProperty : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Coerce is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Coerce is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Coerce = ");
-			sb.Append(instance.Coerce.Value ? "true" : "false");
+			__init.Property("Coerce");
+			writer.WriteValue(Coerce.Value);
 		}
 
-		if (instance.CopyTo is not null)
+		if (CopyTo is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CopyTo = ");
-			instance.CopyTo.FormatCode(sb);
+			__init.Property("CopyTo");
+			CopyTo.FormatCode(writer);
 		}
 
-		if (instance.DocValues is not null)
+		if (DocValues is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocValues = ");
-			sb.Append(instance.DocValues.Value ? "true" : "false");
+			__init.Property("DocValues");
+			writer.WriteValue(DocValues.Value);
 		}
 
-		if (instance.Dynamic is not null)
+		if (Dynamic is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Dynamic = ");
-			Elastic.Clients.Elasticsearch.Mapping.DynamicMappingCodeFormatter.FormatCode(instance.Dynamic.Value, sb);
+			__init.Property("Dynamic");
+			Elastic.Clients.Elasticsearch.Mapping.DynamicMappingCodeFormatter.FormatCode(Dynamic.Value, writer);
 		}
 
-		if (instance.Fields is not null)
+		if (Fields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fields = ");
-			instance.Fields.FormatCode(sb);
+			__init.Property("Fields");
+			Fields.FormatCode(writer);
 		}
 
-		if (instance.IgnoreAbove is not null)
+		if (IgnoreAbove is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreAbove = ");
-			sb.Append(instance.IgnoreAbove.Value);
+			__init.Property("IgnoreAbove");
+			writer.WriteValue(IgnoreAbove.Value);
 		}
 
-		if (instance.IgnoreMalformed is not null)
+		if (IgnoreMalformed is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreMalformed = ");
-			sb.Append(instance.IgnoreMalformed.Value ? "true" : "false");
+			__init.Property("IgnoreMalformed");
+			writer.WriteValue(IgnoreMalformed.Value);
 		}
 
-		if (instance.IgnoreZValue is not null)
+		if (IgnoreZValue is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreZValue = ");
-			sb.Append(instance.IgnoreZValue.Value ? "true" : "false");
+			__init.Property("IgnoreZValue");
+			writer.WriteValue(IgnoreZValue.Value);
 		}
 
-		if (instance.Index is not null)
+		if (Index is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			sb.Append(instance.Index.Value ? "true" : "false");
+			__init.Property("Index");
+			writer.WriteValue(Index.Value);
 		}
 
-		if (instance.Meta is not null)
+		if (Meta is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Meta = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Meta, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("\""); sb.Append(v); sb.Append("\""); }, sb);
+			__init.Property("Meta");
+			writer.Write("new() ");
+			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Orientation is not null)
+		if (Orientation is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Orientation = ");
-			Elastic.Clients.Elasticsearch.Mapping.GeoOrientationCodeFormatter.FormatCode(instance.Orientation.Value, sb);
+			__init.Property("Orientation");
+			Elastic.Clients.Elasticsearch.Mapping.GeoOrientationCodeFormatter.FormatCode(Orientation.Value, writer);
 		}
 
-		if (instance.Properties is not null)
+		if (Properties is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Properties = ");
-			instance.Properties.FormatCode(sb);
+			__init.Property("Properties");
+			Properties.FormatCode(writer);
 		}
 
-		if (instance.Store is not null)
+		if (Store is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Store = ");
-			sb.Append(instance.Store.Value ? "true" : "false");
+			__init.Property("Store");
+			writer.WriteValue(Store.Value);
 		}
 
-		if (instance.Strategy is not null)
+		if (Strategy is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Strategy = ");
-			Elastic.Clients.Elasticsearch.Mapping.GeoStrategyCodeFormatter.FormatCode(instance.Strategy.Value, sb);
+			__init.Property("Strategy");
+			Elastic.Clients.Elasticsearch.Mapping.GeoStrategyCodeFormatter.FormatCode(Strategy.Value, writer);
 		}
 
-		if (instance.SyntheticSourceKeep is not null)
+		if (SyntheticSourceKeep is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SyntheticSourceKeep = ");
-			Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnumCodeFormatter.FormatCode(instance.SyntheticSourceKeep.Value, sb);
+			__init.Property("SyntheticSourceKeep");
+			Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnumCodeFormatter.FormatCode(SyntheticSourceKeep.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

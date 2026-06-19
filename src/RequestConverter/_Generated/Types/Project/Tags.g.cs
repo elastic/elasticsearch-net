@@ -25,57 +25,36 @@ namespace Elastic.Clients.Elasticsearch.Project;
 
 public partial class Tags : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Alias = ");
-			sb.Append("\"");
-			sb.Append(instance.Alias);
-			sb.Append("\"");
+			__init.Property("Alias");
+			writer.WriteString(Alias);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			sb.Append("\"");
-			sb.Append(instance.Id);
-			sb.Append("\"");
+			__init.Property("Id");
+			writer.WriteString(Id);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Organisation = ");
-			sb.Append("\"");
-			sb.Append(instance.Organisation);
-			sb.Append("\"");
+			__init.Property("Organisation");
+			writer.WriteString(Organisation);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			sb.Append("\"");
-			sb.Append(instance.Type);
-			sb.Append("\"");
+			__init.Property("Type");
+			writer.WriteString(Type);
 		}
 
-		if (instance.UserDefinedTags is not null)
+		if (UserDefinedTags is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UserDefinedTags = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.UserDefinedTags, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("\""); sb.Append(v); sb.Append("\""); }, sb);
+			__init.Property("UserDefinedTags");
+			writer.Write("new() ");
+			writer.WriteInlineList(UserDefinedTags, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

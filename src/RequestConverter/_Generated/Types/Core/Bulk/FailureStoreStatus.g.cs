@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
 public static class FailureStoreStatusCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.Failed:
-				sb.Append("FailureStoreStatus.Failed");
+				writer.Write("FailureStoreStatus.Failed");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.NotApplicableOrUnknown:
-				sb.Append("FailureStoreStatus.NotApplicableOrUnknown");
+				writer.Write("FailureStoreStatus.NotApplicableOrUnknown");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.NotEnabled:
-				sb.Append("FailureStoreStatus.NotEnabled");
+				writer.Write("FailureStoreStatus.NotEnabled");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.Used:
-				sb.Append("FailureStoreStatus.Used");
+				writer.Write("FailureStoreStatus.Used");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

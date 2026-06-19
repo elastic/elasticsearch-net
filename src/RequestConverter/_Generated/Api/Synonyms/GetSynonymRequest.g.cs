@@ -25,35 +25,32 @@ namespace Elastic.Clients.Elasticsearch.Synonyms;
 
 public partial class GetSynonymRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			instance.Id.FormatCode(sb);
+			__init.Property("Id");
+			Id.FormatCode(writer);
 		}
 
-		if (instance.From is not null)
+		if (From is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("From = ");
-			sb.Append(instance.From.Value);
+			__init.Property("From");
+			writer.WriteValue(From.Value);
 		}
 
-		if (instance.Size is not null)
+		if (SearchAfter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append(instance.Size.Value);
+			__init.Property("SearchAfter");
+			writer.WriteString(SearchAfter);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		if (Size is not null)
+		{
+			__init.Property("Size");
+			writer.WriteValue(Size.Value);
+		}
+
+		__init.Dispose();
 	}
 }

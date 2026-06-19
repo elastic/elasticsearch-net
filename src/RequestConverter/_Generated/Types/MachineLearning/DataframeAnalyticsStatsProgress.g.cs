@@ -25,28 +25,19 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataframeAnalyticsStatsProgress : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Phase = ");
-			sb.Append("\"");
-			sb.Append(instance.Phase);
-			sb.Append("\"");
+			__init.Property("Phase");
+			writer.WriteString(Phase);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ProgressPercent = ");
-			sb.Append(instance.ProgressPercent);
+			__init.Property("ProgressPercent");
+			writer.WriteValue(ProgressPercent);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

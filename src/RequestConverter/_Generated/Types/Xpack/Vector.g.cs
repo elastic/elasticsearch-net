@@ -25,48 +25,35 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class Vector : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Available = ");
-			sb.Append(instance.Available ? "true" : "false");
+			__init.Property("Available");
+			writer.WriteValue(Available);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DenseVectorDimsAvgCount = ");
-			sb.Append(instance.DenseVectorDimsAvgCount);
+			__init.Property("DenseVectorDimsAvgCount");
+			writer.WriteValue(DenseVectorDimsAvgCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DenseVectorFieldsCount = ");
-			sb.Append(instance.DenseVectorFieldsCount);
+			__init.Property("DenseVectorFieldsCount");
+			writer.WriteValue(DenseVectorFieldsCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Enabled = ");
-			sb.Append(instance.Enabled ? "true" : "false");
+			__init.Property("Enabled");
+			writer.WriteValue(Enabled);
 		}
 
-		if (instance.SparseVectorFieldsCount is not null)
+		if (SparseVectorFieldsCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SparseVectorFieldsCount = ");
-			sb.Append(instance.SparseVectorFieldsCount.Value);
+			__init.Property("SparseVectorFieldsCount");
+			writer.WriteValue(SparseVectorFieldsCount.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

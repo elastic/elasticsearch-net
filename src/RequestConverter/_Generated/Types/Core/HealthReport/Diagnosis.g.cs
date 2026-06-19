@@ -25,55 +25,34 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
 public partial class Diagnosis : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Action = ");
-			sb.Append("\"");
-			sb.Append(instance.Action);
-			sb.Append("\"");
+			__init.Property("Action");
+			writer.WriteString(Action);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AffectedResources = ");
-			instance.AffectedResources.FormatCode(sb);
+			__init.Property("AffectedResources");
+			AffectedResources.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Cause = ");
-			sb.Append("\"");
-			sb.Append(instance.Cause);
-			sb.Append("\"");
+			__init.Property("Cause");
+			writer.WriteString(Cause);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HelpUrl = ");
-			sb.Append("\"");
-			sb.Append(instance.HelpUrl);
-			sb.Append("\"");
+			__init.Property("HelpUrl");
+			writer.WriteString(HelpUrl);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			sb.Append("\"");
-			sb.Append(instance.Id);
-			sb.Append("\"");
+			__init.Property("Id");
+			writer.WriteString(Id);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

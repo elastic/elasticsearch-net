@@ -25,36 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class MlInferenceIngestProcessorCount : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Max = ");
-			sb.Append(instance.Max);
-			sb.Append("L");
+			__init.Property("Max");
+			writer.WriteValue(Max);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Min = ");
-			sb.Append(instance.Min);
-			sb.Append("L");
+			__init.Property("Min");
+			writer.WriteValue(Min);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sum = ");
-			sb.Append(instance.Sum);
-			sb.Append("L");
+			__init.Property("Sum");
+			writer.WriteValue(Sum);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

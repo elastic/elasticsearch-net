@@ -25,173 +25,122 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 public partial class S3RepositorySettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.BasePath is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (BasePath is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BasePath = ");
-			sb.Append("\"");
-			sb.Append(instance.BasePath);
-			sb.Append("\"");
+			__init.Property("BasePath");
+			writer.WriteString(BasePath);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Bucket = ");
-			sb.Append("\"");
-			sb.Append(instance.Bucket);
-			sb.Append("\"");
+			__init.Property("Bucket");
+			writer.WriteString(Bucket);
 		}
 
-		if (instance.BufferSize is not null)
+		if (BufferSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BufferSize = ");
-			instance.BufferSize.FormatCode(sb);
+			__init.Property("BufferSize");
+			BufferSize.FormatCode(writer);
 		}
 
-		if (instance.CannedAcl is not null)
+		if (CannedAcl is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CannedAcl = ");
-			sb.Append("\"");
-			sb.Append(instance.CannedAcl);
-			sb.Append("\"");
+			__init.Property("CannedAcl");
+			writer.WriteString(CannedAcl);
 		}
 
-		if (instance.ChunkSize is not null)
+		if (ChunkSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ChunkSize = ");
-			instance.ChunkSize.FormatCode(sb);
+			__init.Property("ChunkSize");
+			ChunkSize.FormatCode(writer);
 		}
 
-		if (instance.Client is not null)
+		if (Client is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Client = ");
-			sb.Append("\"");
-			sb.Append(instance.Client);
-			sb.Append("\"");
+			__init.Property("Client");
+			writer.WriteString(Client);
 		}
 
-		if (instance.Compress is not null)
+		if (Compress is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Compress = ");
-			sb.Append(instance.Compress.Value ? "true" : "false");
+			__init.Property("Compress");
+			writer.WriteValue(Compress.Value);
 		}
 
-		if (instance.DeleteObjectsMaxSize is not null)
+		if (DeleteObjectsMaxSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DeleteObjectsMaxSize = ");
-			sb.Append(instance.DeleteObjectsMaxSize.Value);
+			__init.Property("DeleteObjectsMaxSize");
+			writer.WriteValue(DeleteObjectsMaxSize.Value);
 		}
 
-		if (instance.GetRegisterRetryDelay is not null)
+		if (GetRegisterRetryDelay is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GetRegisterRetryDelay = ");
-			instance.GetRegisterRetryDelay.FormatCode(sb);
+			__init.Property("GetRegisterRetryDelay");
+			GetRegisterRetryDelay.FormatCode(writer);
 		}
 
-		if (instance.MaxMultipartParts is not null)
+		if (MaxMultipartParts is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxMultipartParts = ");
-			sb.Append(instance.MaxMultipartParts.Value);
+			__init.Property("MaxMultipartParts");
+			writer.WriteValue(MaxMultipartParts.Value);
 		}
 
-		if (instance.MaxMultipartUploadCleanupSize is not null)
+		if (MaxMultipartUploadCleanupSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxMultipartUploadCleanupSize = ");
-			sb.Append(instance.MaxMultipartUploadCleanupSize.Value);
+			__init.Property("MaxMultipartUploadCleanupSize");
+			writer.WriteValue(MaxMultipartUploadCleanupSize.Value);
 		}
 
-		if (instance.MaxRestoreBytesPerSec is not null)
+		if (MaxRestoreBytesPerSec is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxRestoreBytesPerSec = ");
-			instance.MaxRestoreBytesPerSec.FormatCode(sb);
+			__init.Property("MaxRestoreBytesPerSec");
+			MaxRestoreBytesPerSec.FormatCode(writer);
 		}
 
-		if (instance.MaxSnapshotBytesPerSec is not null)
+		if (MaxSnapshotBytesPerSec is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxSnapshotBytesPerSec = ");
-			instance.MaxSnapshotBytesPerSec.FormatCode(sb);
+			__init.Property("MaxSnapshotBytesPerSec");
+			MaxSnapshotBytesPerSec.FormatCode(writer);
 		}
 
-		if (instance.Readonly is not null)
+		if (Readonly is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Readonly = ");
-			sb.Append(instance.Readonly.Value ? "true" : "false");
+			__init.Property("Readonly");
+			writer.WriteValue(Readonly.Value);
 		}
 
-		if (instance.ServerSideEncryption is not null)
+		if (ServerSideEncryption is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ServerSideEncryption = ");
-			sb.Append(instance.ServerSideEncryption.Value ? "true" : "false");
+			__init.Property("ServerSideEncryption");
+			writer.WriteValue(ServerSideEncryption.Value);
 		}
 
-		if (instance.StorageClass is not null)
+		if (StorageClass is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StorageClass = ");
-			sb.Append("\"");
-			sb.Append(instance.StorageClass);
-			sb.Append("\"");
+			__init.Property("StorageClass");
+			writer.WriteString(StorageClass);
 		}
 
-		if (instance.ThrottledDeleteRetryDelayIncrement is not null)
+		if (ThrottledDeleteRetryDelayIncrement is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ThrottledDeleteRetryDelayIncrement = ");
-			instance.ThrottledDeleteRetryDelayIncrement.FormatCode(sb);
+			__init.Property("ThrottledDeleteRetryDelayIncrement");
+			ThrottledDeleteRetryDelayIncrement.FormatCode(writer);
 		}
 
-		if (instance.ThrottledDeleteRetryMaximumDelay is not null)
+		if (ThrottledDeleteRetryMaximumDelay is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ThrottledDeleteRetryMaximumDelay = ");
-			instance.ThrottledDeleteRetryMaximumDelay.FormatCode(sb);
+			__init.Property("ThrottledDeleteRetryMaximumDelay");
+			ThrottledDeleteRetryMaximumDelay.FormatCode(writer);
 		}
 
-		if (instance.ThrottledDeleteRetryMaximumNumberOfRetries is not null)
+		if (ThrottledDeleteRetryMaximumNumberOfRetries is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ThrottledDeleteRetryMaximumNumberOfRetries = ");
-			sb.Append(instance.ThrottledDeleteRetryMaximumNumberOfRetries.Value);
+			__init.Property("ThrottledDeleteRetryMaximumNumberOfRetries");
+			writer.WriteValue(ThrottledDeleteRetryMaximumNumberOfRetries.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

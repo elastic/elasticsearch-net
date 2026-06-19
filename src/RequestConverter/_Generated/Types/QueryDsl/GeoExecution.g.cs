@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public static class GeoExecutionCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution.Indexed:
-				sb.Append("GeoExecution.Indexed");
+				writer.Write("GeoExecution.Indexed");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution.Memory:
-				sb.Append("GeoExecution.Memory");
+				writer.Write("GeoExecution.Memory");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public static class BoundaryScannerCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner.Chars:
-				sb.Append("BoundaryScanner.Chars");
+				writer.Write("BoundaryScanner.Chars");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner.Sentence:
-				sb.Append("BoundaryScanner.Sentence");
+				writer.Write("BoundaryScanner.Sentence");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner.Word:
-				sb.Append("BoundaryScanner.Word");
+				writer.Write("BoundaryScanner.Word");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

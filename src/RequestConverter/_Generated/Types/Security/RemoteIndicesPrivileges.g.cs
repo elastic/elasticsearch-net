@@ -25,61 +25,42 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class RemoteIndicesPrivileges : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AllowRestrictedIndices is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AllowRestrictedIndices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowRestrictedIndices = ");
-			sb.Append(instance.AllowRestrictedIndices.Value ? "true" : "false");
+			__init.Property("AllowRestrictedIndices");
+			writer.WriteValue(AllowRestrictedIndices.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Clusters = ");
-			instance.Clusters.FormatCode(sb);
+			__init.Property("Clusters");
+			Clusters.FormatCode(writer);
 		}
 
-		if (instance.FieldSecurity is not null)
+		if (FieldSecurity is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FieldSecurity = ");
-			instance.FieldSecurity.FormatCode(sb);
+			__init.Property("FieldSecurity");
+			FieldSecurity.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Names = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Names, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Names");
+			writer.WriteInlineList(Names, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Privileges = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Privileges, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Privileges");
+			writer.WriteInlineList(Privileges, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Query is not null)
+		if (Query is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			RequestConverter.CodeFormatter.FormatCode(instance.Query, sb);
+			__init.Property("Query");
+			writer.WriteValue(Query);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

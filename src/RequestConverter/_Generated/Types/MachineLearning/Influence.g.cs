@@ -25,30 +25,19 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class Influence : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InfluencerFieldName = ");
-			sb.Append("\"");
-			sb.Append(instance.InfluencerFieldName);
-			sb.Append("\"");
+			__init.Property("InfluencerFieldName");
+			writer.WriteString(InfluencerFieldName);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InfluencerFieldValues = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.InfluencerFieldValues, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("InfluencerFieldValues");
+			writer.WriteInlineList(InfluencerFieldValues, (w, item) => { w.WriteString(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

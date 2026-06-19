@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class IndexSettingsTimeSeries : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.EndTime is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (EndTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EndTime = ");
-			sb.Append(instance.EndTime.Value);
+			__init.Property("EndTime");
+			writer.WriteValue(EndTime.Value);
 		}
 
-		if (instance.StartTime is not null)
+		if (StartTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StartTime = ");
-			sb.Append(instance.StartTime.Value);
+			__init.Property("StartTime");
+			writer.WriteValue(StartTime.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

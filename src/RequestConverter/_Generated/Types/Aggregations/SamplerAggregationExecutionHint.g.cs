@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public static class SamplerAggregationExecutionHintCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint.BytesHash:
-				sb.Append("SamplerAggregationExecutionHint.BytesHash");
+				writer.Write("SamplerAggregationExecutionHint.BytesHash");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint.GlobalOrdinals:
-				sb.Append("SamplerAggregationExecutionHint.GlobalOrdinals");
+				writer.Write("SamplerAggregationExecutionHint.GlobalOrdinals");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint.Map:
-				sb.Append("SamplerAggregationExecutionHint.Map");
+				writer.Write("SamplerAggregationExecutionHint.Map");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

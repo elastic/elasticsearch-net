@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public static class RemoteClusterPrivilegeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege.MonitorEnrich:
-				sb.Append("RemoteClusterPrivilege.MonitorEnrich");
+				writer.Write("RemoteClusterPrivilege.MonitorEnrich");
 				break;
 			case Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege.MonitorStats:
-				sb.Append("RemoteClusterPrivilege.MonitorStats");
+				writer.Write("RemoteClusterPrivilege.MonitorStats");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

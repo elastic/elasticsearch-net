@@ -25,23 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Enrich;
 
 public partial class EnrichSummary : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Config = ");
-			sb.Append("new(");
-			Elastic.Clients.Elasticsearch.Enrich.PolicyTypeCodeFormatter.FormatCode(instance.Config.Key, sb);
-			sb.Append(", ");
-			instance.Config.Value.FormatCode(sb);
-			sb.Append(")");
+			__init.Property("Config");
+			writer.Write("new(");
+			Elastic.Clients.Elasticsearch.Enrich.PolicyTypeCodeFormatter.FormatCode(Config.Key, writer);
+			writer.Write(", ");
+			Config.Value.FormatCode(writer);
+			writer.Write(")");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

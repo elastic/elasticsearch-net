@@ -25,74 +25,55 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class AdaptiveSelection : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AvgQueueSize is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AvgQueueSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AvgQueueSize = ");
-			sb.Append(instance.AvgQueueSize.Value);
-			sb.Append("L");
+			__init.Property("AvgQueueSize");
+			writer.WriteValue(AvgQueueSize.Value);
+			writer.Write("L");
 		}
 
-		if (instance.AvgResponseTime is not null)
+		if (AvgResponseTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AvgResponseTime = ");
-			instance.AvgResponseTime.FormatCode(sb);
+			__init.Property("AvgResponseTime");
+			AvgResponseTime.FormatCode(writer);
 		}
 
-		if (instance.AvgResponseTimeNs is not null)
+		if (AvgResponseTimeNs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AvgResponseTimeNs = ");
-			sb.Append(instance.AvgResponseTimeNs.Value);
-			sb.Append("L");
+			__init.Property("AvgResponseTimeNs");
+			writer.WriteValue(AvgResponseTimeNs.Value);
+			writer.Write("L");
 		}
 
-		if (instance.AvgServiceTime is not null)
+		if (AvgServiceTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AvgServiceTime = ");
-			instance.AvgServiceTime.FormatCode(sb);
+			__init.Property("AvgServiceTime");
+			AvgServiceTime.FormatCode(writer);
 		}
 
-		if (instance.AvgServiceTimeNs is not null)
+		if (AvgServiceTimeNs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AvgServiceTimeNs = ");
-			sb.Append(instance.AvgServiceTimeNs.Value);
-			sb.Append("L");
+			__init.Property("AvgServiceTimeNs");
+			writer.WriteValue(AvgServiceTimeNs.Value);
+			writer.Write("L");
 		}
 
-		if (instance.OutgoingSearches is not null)
+		if (OutgoingSearches is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OutgoingSearches = ");
-			sb.Append(instance.OutgoingSearches.Value);
-			sb.Append("L");
+			__init.Property("OutgoingSearches");
+			writer.WriteValue(OutgoingSearches.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Rank is not null)
+		if (Rank is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Rank = ");
-			sb.Append("\"");
-			sb.Append(instance.Rank);
-			sb.Append("\"");
+			__init.Property("Rank");
+			writer.WriteString(Rank);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

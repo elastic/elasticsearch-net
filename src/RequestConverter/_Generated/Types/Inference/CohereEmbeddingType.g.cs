@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class CohereEmbeddingTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Binary:
-				sb.Append("CohereEmbeddingType.Binary");
+				writer.Write("CohereEmbeddingType.Binary");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Bit:
-				sb.Append("CohereEmbeddingType.Bit");
+				writer.Write("CohereEmbeddingType.Bit");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Byte:
-				sb.Append("CohereEmbeddingType.Byte");
+				writer.Write("CohereEmbeddingType.Byte");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Float:
-				sb.Append("CohereEmbeddingType.Float");
+				writer.Write("CohereEmbeddingType.Float");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Int8:
-				sb.Append("CohereEmbeddingType.Int8");
+				writer.Write("CohereEmbeddingType.Int8");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

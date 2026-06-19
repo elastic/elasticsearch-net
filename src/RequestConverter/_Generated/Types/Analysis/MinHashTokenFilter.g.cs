@@ -25,54 +25,39 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class MinHashTokenFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.BucketCount is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (BucketCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BucketCount = ");
-			sb.Append(instance.BucketCount.Value);
+			__init.Property("BucketCount");
+			writer.WriteValue(BucketCount.Value);
 		}
 
-		if (instance.HashCount is not null)
+		if (HashCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HashCount = ");
-			sb.Append(instance.HashCount.Value);
+			__init.Property("HashCount");
+			writer.WriteValue(HashCount.Value);
 		}
 
-		if (instance.HashSetSize is not null)
+		if (HashSetSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HashSetSize = ");
-			sb.Append(instance.HashSetSize.Value);
+			__init.Property("HashSetSize");
+			writer.WriteValue(HashSetSize.Value);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (instance.WithRotation is not null)
+		if (WithRotation is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WithRotation = ");
-			sb.Append(instance.WithRotation.Value ? "true" : "false");
+			__init.Property("WithRotation");
+			writer.WriteValue(WithRotation.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

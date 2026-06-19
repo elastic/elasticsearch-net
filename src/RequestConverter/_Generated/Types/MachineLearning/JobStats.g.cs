@@ -25,90 +25,63 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class JobStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AssignmentExplanation is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AssignmentExplanation is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AssignmentExplanation = ");
-			sb.Append("\"");
-			sb.Append(instance.AssignmentExplanation);
-			sb.Append("\"");
+			__init.Property("AssignmentExplanation");
+			writer.WriteString(AssignmentExplanation);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DataCounts = ");
-			instance.DataCounts.FormatCode(sb);
+			__init.Property("DataCounts");
+			DataCounts.FormatCode(writer);
 		}
 
-		if (instance.Deleting is not null)
+		if (Deleting is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Deleting = ");
-			sb.Append(instance.Deleting.Value ? "true" : "false");
+			__init.Property("Deleting");
+			writer.WriteValue(Deleting.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ForecastsStats = ");
-			instance.ForecastsStats.FormatCode(sb);
+			__init.Property("ForecastsStats");
+			ForecastsStats.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JobId = ");
-			sb.Append("\"");
-			sb.Append(instance.JobId);
-			sb.Append("\"");
+			__init.Property("JobId");
+			writer.WriteString(JobId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelSizeStats = ");
-			instance.ModelSizeStats.FormatCode(sb);
+			__init.Property("ModelSizeStats");
+			ModelSizeStats.FormatCode(writer);
 		}
 
-		if (instance.Node is not null)
+		if (Node is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Node = ");
-			instance.Node.FormatCode(sb);
+			__init.Property("Node");
+			Node.FormatCode(writer);
 		}
 
-		if (instance.OpenTime is not null)
+		if (OpenTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OpenTime = ");
-			sb.Append(instance.OpenTime.Value);
+			__init.Property("OpenTime");
+			writer.WriteValue(OpenTime.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("State = ");
-			Elastic.Clients.Elasticsearch.MachineLearning.JobStateCodeFormatter.FormatCode(instance.State, sb);
+			__init.Property("State");
+			Elastic.Clients.Elasticsearch.MachineLearning.JobStateCodeFormatter.FormatCode(State, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimingStats = ");
-			instance.TimingStats.FormatCode(sb);
+			__init.Property("TimingStats");
+			TimingStats.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

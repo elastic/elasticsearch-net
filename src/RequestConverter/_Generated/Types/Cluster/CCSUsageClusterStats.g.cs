@@ -25,33 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class CCSUsageClusterStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Skipped = ");
-			sb.Append(instance.Skipped);
+			__init.Property("Skipped");
+			writer.WriteValue(Skipped);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Took = ");
-			instance.Took.FormatCode(sb);
+			__init.Property("Took");
+			Took.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			sb.Append(instance.Total);
+			__init.Property("Total");
+			writer.WriteValue(Total);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,42 +25,42 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public static class ValueTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Aggregations.ValueType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Aggregations.ValueType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.Boolean:
-				sb.Append("ValueType.Boolean");
+				writer.Write("ValueType.Boolean");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.Date:
-				sb.Append("ValueType.Date");
+				writer.Write("ValueType.Date");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.DateNanos:
-				sb.Append("ValueType.DateNanos");
+				writer.Write("ValueType.DateNanos");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.Double:
-				sb.Append("ValueType.Double");
+				writer.Write("ValueType.Double");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.GeoPoint:
-				sb.Append("ValueType.GeoPoint");
+				writer.Write("ValueType.GeoPoint");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.Ip:
-				sb.Append("ValueType.Ip");
+				writer.Write("ValueType.Ip");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.Long:
-				sb.Append("ValueType.Long");
+				writer.Write("ValueType.Long");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.Number:
-				sb.Append("ValueType.Number");
+				writer.Write("ValueType.Number");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.Numeric:
-				sb.Append("ValueType.Numeric");
+				writer.Write("ValueType.Numeric");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.String:
-				sb.Append("ValueType.String");
+				writer.Write("ValueType.String");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

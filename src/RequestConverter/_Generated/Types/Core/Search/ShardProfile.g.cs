@@ -25,89 +25,56 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class ShardProfile : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Aggregations = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Aggregations, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Aggregations");
+			writer.WriteInlineList(Aggregations, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Cluster = ");
-			sb.Append("\"");
-			sb.Append(instance.Cluster);
-			sb.Append("\"");
+			__init.Property("Cluster");
+			writer.WriteString(Cluster);
 		}
 
-		if (instance.Dfs is not null)
+		if (Dfs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Dfs = ");
-			instance.Dfs.FormatCode(sb);
+			__init.Property("Dfs");
+			Dfs.FormatCode(writer);
 		}
 
-		if (instance.Fetch is not null)
+		if (Fetch is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fetch = ");
-			instance.Fetch.FormatCode(sb);
+			__init.Property("Fetch");
+			Fetch.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			sb.Append("\"");
-			sb.Append(instance.Id);
-			sb.Append("\"");
+			__init.Property("Id");
+			writer.WriteString(Id);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			sb.Append("\"");
-			sb.Append(instance.Index);
-			sb.Append("\"");
+			__init.Property("Index");
+			writer.WriteString(Index);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NodeId = ");
-			sb.Append("\"");
-			sb.Append(instance.NodeId);
-			sb.Append("\"");
+			__init.Property("NodeId");
+			writer.WriteString(NodeId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Searches = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Searches, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Searches");
+			writer.WriteInlineList(Searches, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShardId = ");
-			sb.Append(instance.ShardId);
+			__init.Property("ShardId");
+			writer.WriteValue(ShardId);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

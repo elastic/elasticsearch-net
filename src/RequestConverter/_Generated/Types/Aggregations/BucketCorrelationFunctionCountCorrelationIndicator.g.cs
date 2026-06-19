@@ -25,38 +25,25 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class BucketCorrelationFunctionCountCorrelationIndicator : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocCount = ");
-			sb.Append(instance.DocCount);
+			__init.Property("DocCount");
+			writer.WriteValue(DocCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Expectations = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Expectations, (item, sb) => { sb.Append(item); sb.Append("d"); }, sb);
-			sb.Append("]");
+			__init.Property("Expectations");
+			writer.WriteInlineList(Expectations, (w, item) => { w.WriteValue(item); w.Write("d"); });
 		}
 
-		if (instance.Fractions is not null)
+		if (Fractions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fractions = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Fractions, (item, sb) => { sb.Append(item); sb.Append("d"); }, sb);
-			sb.Append("]");
+			__init.Property("Fractions");
+			writer.WriteInlineList(Fractions, (w, item) => { w.WriteValue(item); w.Write("d"); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,163 +25,128 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class TrainedModelDeploymentNodesStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AverageInferenceTimeMs is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AverageInferenceProcessMemoryRssBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AverageInferenceTimeMs = ");
-			sb.Append(instance.AverageInferenceTimeMs.Value);
+			__init.Property("AverageInferenceProcessMemoryRssBytes");
+			AverageInferenceProcessMemoryRssBytes.FormatCode(writer);
 		}
 
-		if (instance.AverageInferenceTimeMsExcludingCacheHits is not null)
+		if (AverageInferenceTimeMs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AverageInferenceTimeMsExcludingCacheHits = ");
-			sb.Append(instance.AverageInferenceTimeMsExcludingCacheHits.Value);
+			__init.Property("AverageInferenceTimeMs");
+			writer.WriteValue(AverageInferenceTimeMs.Value);
 		}
 
-		if (instance.AverageInferenceTimeMsLastMinute is not null)
+		if (AverageInferenceTimeMsExcludingCacheHits is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AverageInferenceTimeMsLastMinute = ");
-			sb.Append(instance.AverageInferenceTimeMsLastMinute.Value);
+			__init.Property("AverageInferenceTimeMsExcludingCacheHits");
+			writer.WriteValue(AverageInferenceTimeMsExcludingCacheHits.Value);
 		}
 
-		if (instance.ErrorCount is not null)
+		if (AverageInferenceTimeMsLastMinute is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ErrorCount = ");
-			sb.Append(instance.ErrorCount.Value);
+			__init.Property("AverageInferenceTimeMsLastMinute");
+			writer.WriteValue(AverageInferenceTimeMsLastMinute.Value);
 		}
 
-		if (instance.InferenceCacheHitCount is not null)
+		if (ErrorCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InferenceCacheHitCount = ");
-			sb.Append(instance.InferenceCacheHitCount.Value);
-			sb.Append("L");
+			__init.Property("ErrorCount");
+			writer.WriteValue(ErrorCount.Value);
 		}
 
-		if (instance.InferenceCacheHitCountLastMinute is not null)
+		if (InferenceCacheHitCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InferenceCacheHitCountLastMinute = ");
-			sb.Append(instance.InferenceCacheHitCountLastMinute.Value);
-			sb.Append("L");
+			__init.Property("InferenceCacheHitCount");
+			writer.WriteValue(InferenceCacheHitCount.Value);
+			writer.Write("L");
 		}
 
-		if (instance.InferenceCount is not null)
+		if (InferenceCacheHitCountLastMinute is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InferenceCount = ");
-			sb.Append(instance.InferenceCount.Value);
-			sb.Append("L");
+			__init.Property("InferenceCacheHitCountLastMinute");
+			writer.WriteValue(InferenceCacheHitCountLastMinute.Value);
+			writer.Write("L");
 		}
 
-		if (instance.LastAccess is not null)
+		if (InferenceCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LastAccess = ");
-			sb.Append(instance.LastAccess.Value);
+			__init.Property("InferenceCount");
+			writer.WriteValue(InferenceCount.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Node is not null)
+		if (LastAccess is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Node = ");
-			sb.Append("new(");
-			sb.Append("\"");
-			sb.Append(instance.Node.Value.Key);
-			sb.Append("\"");
-			sb.Append(", ");
-			instance.Node.Value.Value.FormatCode(sb);
-			sb.Append(")");
+			__init.Property("LastAccess");
+			writer.WriteValue(LastAccess.Value);
 		}
 
-		if (instance.NumberOfAllocations is not null)
+		if (Node is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumberOfAllocations = ");
-			sb.Append(instance.NumberOfAllocations.Value);
+			__init.Property("Node");
+			writer.Write("new(");
+			writer.WriteString(Node.Value.Key);
+			writer.Write(", ");
+			Node.Value.Value.FormatCode(writer);
+			writer.Write(")");
 		}
 
-		if (instance.NumberOfPendingRequests is not null)
+		if (NumberOfAllocations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumberOfPendingRequests = ");
-			sb.Append(instance.NumberOfPendingRequests.Value);
+			__init.Property("NumberOfAllocations");
+			writer.WriteValue(NumberOfAllocations.Value);
+		}
+
+		if (NumberOfPendingRequests is not null)
+		{
+			__init.Property("NumberOfPendingRequests");
+			writer.WriteValue(NumberOfPendingRequests.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PeakThroughputPerMinute = ");
-			sb.Append(instance.PeakThroughputPerMinute);
-			sb.Append("L");
+			__init.Property("PeakThroughputPerMinute");
+			writer.WriteValue(PeakThroughputPerMinute);
+			writer.Write("L");
 		}
 
-		if (instance.RejectedExecutionCount is not null)
+		if (RejectedExecutionCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RejectedExecutionCount = ");
-			sb.Append(instance.RejectedExecutionCount.Value);
+			__init.Property("RejectedExecutionCount");
+			writer.WriteValue(RejectedExecutionCount.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RoutingState = ");
-			instance.RoutingState.FormatCode(sb);
+			__init.Property("RoutingState");
+			RoutingState.FormatCode(writer);
 		}
 
-		if (instance.StartTime is not null)
+		if (StartTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StartTime = ");
-			sb.Append(instance.StartTime.Value);
+			__init.Property("StartTime");
+			writer.WriteValue(StartTime.Value);
 		}
 
-		if (instance.ThreadsPerAllocation is not null)
+		if (ThreadsPerAllocation is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ThreadsPerAllocation = ");
-			sb.Append(instance.ThreadsPerAllocation.Value);
+			__init.Property("ThreadsPerAllocation");
+			writer.WriteValue(ThreadsPerAllocation.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ThroughputLastMinute = ");
-			sb.Append(instance.ThroughputLastMinute);
+			__init.Property("ThroughputLastMinute");
+			writer.WriteValue(ThroughputLastMinute);
 		}
 
-		if (instance.TimeoutCount is not null)
+		if (TimeoutCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeoutCount = ");
-			sb.Append(instance.TimeoutCount.Value);
+			__init.Property("TimeoutCount");
+			writer.WriteValue(TimeoutCount.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,44 +25,33 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class ClusterJvmMemory : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.HeapMax is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (HeapMax is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HeapMax = ");
-			instance.HeapMax.FormatCode(sb);
+			__init.Property("HeapMax");
+			HeapMax.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HeapMaxInBytes = ");
-			sb.Append(instance.HeapMaxInBytes);
-			sb.Append("L");
+			__init.Property("HeapMaxInBytes");
+			writer.WriteValue(HeapMaxInBytes);
+			writer.Write("L");
 		}
 
-		if (instance.HeapUsed is not null)
+		if (HeapUsed is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HeapUsed = ");
-			instance.HeapUsed.FormatCode(sb);
+			__init.Property("HeapUsed");
+			HeapUsed.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HeapUsedInBytes = ");
-			sb.Append(instance.HeapUsedInBytes);
-			sb.Append("L");
+			__init.Property("HeapUsedInBytes");
+			writer.WriteValue(HeapUsedInBytes);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

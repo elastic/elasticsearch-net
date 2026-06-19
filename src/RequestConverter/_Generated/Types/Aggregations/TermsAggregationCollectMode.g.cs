@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public static class TermsAggregationCollectModeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode.BreadthFirst:
-				sb.Append("TermsAggregationCollectMode.BreadthFirst");
+				writer.Write("TermsAggregationCollectMode.BreadthFirst");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode.DepthFirst:
-				sb.Append("TermsAggregationCollectMode.DepthFirst");
+				writer.Write("TermsAggregationCollectMode.DepthFirst");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

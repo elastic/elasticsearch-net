@@ -25,85 +25,58 @@ namespace Elastic.Clients.Elasticsearch.Rollup;
 
 public partial class PutJobRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			instance.Id.FormatCode(sb);
+			__init.Property("Id");
+			Id.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Cron = ");
-			sb.Append("\"");
-			sb.Append(instance.Cron);
-			sb.Append("\"");
+			__init.Property("Cron");
+			writer.WriteString(Cron);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Groups = ");
-			instance.Groups.FormatCode(sb);
+			__init.Property("Groups");
+			Groups.FormatCode(writer);
 		}
 
-		if (instance.Headers is not null)
+		if (Headers is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Headers = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Headers, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("["); RequestConverter.CodeFormatter.FormatCode(v, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb); sb.Append("]"); }, sb);
+			__init.Property("Headers");
+			writer.Write("new() ");
+			writer.WriteInlineList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteString(item); }); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexPattern = ");
-			sb.Append("\"");
-			sb.Append(instance.IndexPattern);
-			sb.Append("\"");
+			__init.Property("IndexPattern");
+			writer.WriteString(IndexPattern);
 		}
 
-		if (instance.Metrics is not null)
+		if (Metrics is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Metrics = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Metrics, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Metrics");
+			writer.WriteInlineList(Metrics, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PageSize = ");
-			sb.Append(instance.PageSize);
+			__init.Property("PageSize");
+			writer.WriteValue(PageSize);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RollupIndex = ");
-			instance.RollupIndex.FormatCode(sb);
+			__init.Property("RollupIndex");
+			RollupIndex.FormatCode(writer);
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

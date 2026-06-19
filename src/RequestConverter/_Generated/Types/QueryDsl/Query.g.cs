@@ -25,502 +25,377 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class Query : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Bool is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Bool is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Bool = ");
-			instance.Bool.FormatCode(sb);
+			__init.Property("Bool");
+			Bool.FormatCode(writer);
 		}
 
-		if (instance.Boosting is not null)
+		if (Boosting is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Boosting = ");
-			instance.Boosting.FormatCode(sb);
+			__init.Property("Boosting");
+			Boosting.FormatCode(writer);
 		}
 
-		if (instance.CombinedFields is not null)
+		if (CombinedFields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CombinedFields = ");
-			instance.CombinedFields.FormatCode(sb);
+			__init.Property("CombinedFields");
+			CombinedFields.FormatCode(writer);
 		}
 #pragma warning disable CS0618
-		if (instance.Common is not null)
+		if (Common is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Common = ");
-			instance.Common.FormatCode(sb);
+			__init.Property("Common");
+			Common.FormatCode(writer);
 		}
 #pragma warning restore CS0618
-		if (instance.ConstantScore is not null)
+		if (ConstantScore is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ConstantScore = ");
-			instance.ConstantScore.FormatCode(sb);
+			__init.Property("ConstantScore");
+			ConstantScore.FormatCode(writer);
 		}
 
-		if (instance.DisMax is not null)
+		if (DisMax is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DisMax = ");
-			instance.DisMax.FormatCode(sb);
+			__init.Property("DisMax");
+			DisMax.FormatCode(writer);
 		}
 
-		if (instance.DistanceFeature is not null)
+		if (DistanceFeature is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DistanceFeature = ");
-			instance.DistanceFeature.FormatCode(sb);
+			__init.Property("DistanceFeature");
+			DistanceFeature.FormatCode(writer);
 		}
 
-		if (instance.Exists is not null)
+		if (Exists is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Exists = ");
-			instance.Exists.FormatCode(sb);
+			__init.Property("Exists");
+			Exists.FormatCode(writer);
 		}
 
-		if (instance.FunctionScore is not null)
+		if (FunctionScore is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FunctionScore = ");
-			instance.FunctionScore.FormatCode(sb);
+			__init.Property("FunctionScore");
+			FunctionScore.FormatCode(writer);
 		}
 
-		if (instance.Fuzzy is not null)
+		if (Fuzzy is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fuzzy = ");
-			instance.Fuzzy.FormatCode(sb);
+			__init.Property("Fuzzy");
+			Fuzzy.FormatCode(writer);
 		}
 
-		if (instance.GeoBoundingBox is not null)
+		if (GeoBoundingBox is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GeoBoundingBox = ");
-			instance.GeoBoundingBox.FormatCode(sb);
+			__init.Property("GeoBoundingBox");
+			GeoBoundingBox.FormatCode(writer);
 		}
 
-		if (instance.GeoDistance is not null)
+		if (GeoDistance is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GeoDistance = ");
-			instance.GeoDistance.FormatCode(sb);
+			__init.Property("GeoDistance");
+			GeoDistance.FormatCode(writer);
 		}
 
-		if (instance.GeoGrid is not null)
+		if (GeoGrid is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GeoGrid = ");
-			instance.GeoGrid.FormatCode(sb);
+			__init.Property("GeoGrid");
+			GeoGrid.FormatCode(writer);
 		}
 #pragma warning disable CS0618
-		if (instance.GeoPolygon is not null)
+		if (GeoPolygon is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GeoPolygon = ");
-			instance.GeoPolygon.FormatCode(sb);
+			__init.Property("GeoPolygon");
+			GeoPolygon.FormatCode(writer);
 		}
 #pragma warning restore CS0618
-		if (instance.GeoShape is not null)
+		if (GeoShape is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GeoShape = ");
-			instance.GeoShape.FormatCode(sb);
+			__init.Property("GeoShape");
+			GeoShape.FormatCode(writer);
 		}
 
-		if (instance.HasChild is not null)
+		if (HasChild is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HasChild = ");
-			instance.HasChild.FormatCode(sb);
+			__init.Property("HasChild");
+			HasChild.FormatCode(writer);
 		}
 
-		if (instance.HasParent is not null)
+		if (HasParent is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HasParent = ");
-			instance.HasParent.FormatCode(sb);
+			__init.Property("HasParent");
+			HasParent.FormatCode(writer);
 		}
 
-		if (instance.Ids is not null)
+		if (Ids is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ids = ");
-			instance.Ids.FormatCode(sb);
+			__init.Property("Ids");
+			Ids.FormatCode(writer);
 		}
 
-		if (instance.Intervals is not null)
+		if (Intervals is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Intervals = ");
-			instance.Intervals.FormatCode(sb);
+			__init.Property("Intervals");
+			Intervals.FormatCode(writer);
 		}
 
-		if (instance.Knn is not null)
+		if (Knn is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Knn = ");
-			instance.Knn.FormatCode(sb);
+			__init.Property("Knn");
+			Knn.FormatCode(writer);
 		}
 
-		if (instance.Match is not null)
+		if (Match is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Match = ");
-			instance.Match.FormatCode(sb);
+			__init.Property("Match");
+			Match.FormatCode(writer);
 		}
 
-		if (instance.MatchAll is not null)
+		if (MatchAll is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MatchAll = ");
-			instance.MatchAll.FormatCode(sb);
+			__init.Property("MatchAll");
+			MatchAll.FormatCode(writer);
 		}
 
-		if (instance.MatchBoolPrefix is not null)
+		if (MatchBoolPrefix is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MatchBoolPrefix = ");
-			instance.MatchBoolPrefix.FormatCode(sb);
+			__init.Property("MatchBoolPrefix");
+			MatchBoolPrefix.FormatCode(writer);
 		}
 
-		if (instance.MatchNone is not null)
+		if (MatchNone is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MatchNone = ");
-			instance.MatchNone.FormatCode(sb);
+			__init.Property("MatchNone");
+			MatchNone.FormatCode(writer);
 		}
 
-		if (instance.MatchPhrase is not null)
+		if (MatchPhrase is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MatchPhrase = ");
-			instance.MatchPhrase.FormatCode(sb);
+			__init.Property("MatchPhrase");
+			MatchPhrase.FormatCode(writer);
 		}
 
-		if (instance.MatchPhrasePrefix is not null)
+		if (MatchPhrasePrefix is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MatchPhrasePrefix = ");
-			instance.MatchPhrasePrefix.FormatCode(sb);
+			__init.Property("MatchPhrasePrefix");
+			MatchPhrasePrefix.FormatCode(writer);
 		}
 
-		if (instance.MoreLikeThis is not null)
+		if (MoreLikeThis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MoreLikeThis = ");
-			instance.MoreLikeThis.FormatCode(sb);
+			__init.Property("MoreLikeThis");
+			MoreLikeThis.FormatCode(writer);
 		}
 
-		if (instance.MultiMatch is not null)
+		if (MultiMatch is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MultiMatch = ");
-			instance.MultiMatch.FormatCode(sb);
+			__init.Property("MultiMatch");
+			MultiMatch.FormatCode(writer);
 		}
 
-		if (instance.Nested is not null)
+		if (Nested is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Nested = ");
-			instance.Nested.FormatCode(sb);
+			__init.Property("Nested");
+			Nested.FormatCode(writer);
 		}
 
-		if (instance.ParentId is not null)
+		if (ParentId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ParentId = ");
-			instance.ParentId.FormatCode(sb);
+			__init.Property("ParentId");
+			ParentId.FormatCode(writer);
 		}
 
-		if (instance.Percolate is not null)
+		if (Percolate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Percolate = ");
-			instance.Percolate.FormatCode(sb);
+			__init.Property("Percolate");
+			Percolate.FormatCode(writer);
 		}
 
-		if (instance.Pinned is not null)
+		if (Pinned is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Pinned = ");
-			instance.Pinned.FormatCode(sb);
+			__init.Property("Pinned");
+			Pinned.FormatCode(writer);
 		}
 
-		if (instance.Prefix is not null)
+		if (Prefix is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Prefix = ");
-			instance.Prefix.FormatCode(sb);
+			__init.Property("Prefix");
+			Prefix.FormatCode(writer);
 		}
 
-		if (instance.QueryString is not null)
+		if (QueryString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryString = ");
-			instance.QueryString.FormatCode(sb);
+			__init.Property("QueryString");
+			QueryString.FormatCode(writer);
 		}
 
-		if (instance.Range is not null)
+		if (Range is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Range = ");
-			instance.Range.FormatCode(sb);
+			__init.Property("Range");
+			Range.FormatCode(writer);
 		}
 
-		if (instance.RankFeature is not null)
+		if (RankFeature is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RankFeature = ");
-			instance.RankFeature.FormatCode(sb);
+			__init.Property("RankFeature");
+			RankFeature.FormatCode(writer);
 		}
 
-		if (instance.Regexp is not null)
+		if (Regexp is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Regexp = ");
-			instance.Regexp.FormatCode(sb);
+			__init.Property("Regexp");
+			Regexp.FormatCode(writer);
 		}
 
-		if (instance.Rule is not null)
+		if (Rule is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Rule = ");
-			instance.Rule.FormatCode(sb);
+			__init.Property("Rule");
+			Rule.FormatCode(writer);
 		}
 
-		if (instance.Script is not null)
+		if (Script is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Script = ");
-			instance.Script.FormatCode(sb);
+			__init.Property("Script");
+			Script.FormatCode(writer);
 		}
 
-		if (instance.ScriptScore is not null)
+		if (ScriptScore is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ScriptScore = ");
-			instance.ScriptScore.FormatCode(sb);
+			__init.Property("ScriptScore");
+			ScriptScore.FormatCode(writer);
 		}
 
-		if (instance.Semantic is not null)
+		if (Semantic is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Semantic = ");
-			instance.Semantic.FormatCode(sb);
+			__init.Property("Semantic");
+			Semantic.FormatCode(writer);
 		}
 
-		if (instance.Shape is not null)
+		if (Shape is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Shape = ");
-			instance.Shape.FormatCode(sb);
+			__init.Property("Shape");
+			Shape.FormatCode(writer);
 		}
 
-		if (instance.SimpleQueryString is not null)
+		if (SimpleQueryString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SimpleQueryString = ");
-			instance.SimpleQueryString.FormatCode(sb);
+			__init.Property("SimpleQueryString");
+			SimpleQueryString.FormatCode(writer);
 		}
 
-		if (instance.SpanContaining is not null)
+		if (SpanContaining is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SpanContaining = ");
-			instance.SpanContaining.FormatCode(sb);
+			__init.Property("SpanContaining");
+			SpanContaining.FormatCode(writer);
 		}
 
-		if (instance.SpanFieldMasking is not null)
+		if (SpanFieldMasking is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SpanFieldMasking = ");
-			instance.SpanFieldMasking.FormatCode(sb);
+			__init.Property("SpanFieldMasking");
+			SpanFieldMasking.FormatCode(writer);
 		}
 
-		if (instance.SpanFirst is not null)
+		if (SpanFirst is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SpanFirst = ");
-			instance.SpanFirst.FormatCode(sb);
+			__init.Property("SpanFirst");
+			SpanFirst.FormatCode(writer);
 		}
 
-		if (instance.SpanMulti is not null)
+		if (SpanMulti is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SpanMulti = ");
-			instance.SpanMulti.FormatCode(sb);
+			__init.Property("SpanMulti");
+			SpanMulti.FormatCode(writer);
 		}
 
-		if (instance.SpanNear is not null)
+		if (SpanNear is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SpanNear = ");
-			instance.SpanNear.FormatCode(sb);
+			__init.Property("SpanNear");
+			SpanNear.FormatCode(writer);
 		}
 
-		if (instance.SpanNot is not null)
+		if (SpanNot is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SpanNot = ");
-			instance.SpanNot.FormatCode(sb);
+			__init.Property("SpanNot");
+			SpanNot.FormatCode(writer);
 		}
 
-		if (instance.SpanOr is not null)
+		if (SpanOr is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SpanOr = ");
-			instance.SpanOr.FormatCode(sb);
+			__init.Property("SpanOr");
+			SpanOr.FormatCode(writer);
 		}
 
-		if (instance.SpanTerm is not null)
+		if (SpanTerm is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SpanTerm = ");
-			instance.SpanTerm.FormatCode(sb);
+			__init.Property("SpanTerm");
+			SpanTerm.FormatCode(writer);
 		}
 
-		if (instance.SpanWithin is not null)
+		if (SpanWithin is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SpanWithin = ");
-			instance.SpanWithin.FormatCode(sb);
+			__init.Property("SpanWithin");
+			SpanWithin.FormatCode(writer);
 		}
 
-		if (instance.SparseVector is not null)
+		if (SparseVector is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SparseVector = ");
-			instance.SparseVector.FormatCode(sb);
+			__init.Property("SparseVector");
+			SparseVector.FormatCode(writer);
 		}
 
-		if (instance.Term is not null)
+		if (Term is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Term = ");
-			instance.Term.FormatCode(sb);
+			__init.Property("Term");
+			Term.FormatCode(writer);
 		}
 
-		if (instance.Terms is not null)
+		if (Terms is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Terms = ");
-			instance.Terms.FormatCode(sb);
+			__init.Property("Terms");
+			Terms.FormatCode(writer);
 		}
 
-		if (instance.TermsSet is not null)
+		if (TermsSet is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TermsSet = ");
-			instance.TermsSet.FormatCode(sb);
+			__init.Property("TermsSet");
+			TermsSet.FormatCode(writer);
 		}
 #pragma warning disable CS0618
-		if (instance.TextExpansion is not null)
+		if (TextExpansion is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TextExpansion = ");
-			instance.TextExpansion.FormatCode(sb);
+			__init.Property("TextExpansion");
+			TextExpansion.FormatCode(writer);
 		}
 #pragma warning restore CS0618
 #pragma warning disable CS0618
-		if (instance.Type is not null)
+		if (Type is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			instance.Type.FormatCode(sb);
+			__init.Property("Type");
+			Type.FormatCode(writer);
 		}
 #pragma warning restore CS0618
 #pragma warning disable CS0618
-		if (instance.WeightedTokens is not null)
+		if (WeightedTokens is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WeightedTokens = ");
-			instance.WeightedTokens.FormatCode(sb);
+			__init.Property("WeightedTokens");
+			WeightedTokens.FormatCode(writer);
 		}
 #pragma warning restore CS0618
-		if (instance.Wildcard is not null)
+		if (Wildcard is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Wildcard = ");
-			instance.Wildcard.FormatCode(sb);
+			__init.Property("Wildcard");
+			Wildcard.FormatCode(writer);
 		}
 
-		if (instance.Wrapper is not null)
+		if (Wrapper is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Wrapper = ");
-			instance.Wrapper.FormatCode(sb);
+			__init.Property("Wrapper");
+			Wrapper.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,29 +25,20 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataframeClassificationSummaryRecall : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AvgRecall = ");
-			sb.Append(instance.AvgRecall);
-			sb.Append("d");
+			__init.Property("AvgRecall");
+			writer.WriteValue(AvgRecall);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Classes = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Classes, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Classes");
+			writer.WriteInlineList(Classes, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

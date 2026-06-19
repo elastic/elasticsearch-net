@@ -25,39 +25,24 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class ResolveIndexDataStreamsItem : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BackingIndices = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.BackingIndices, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("BackingIndices");
+			writer.WriteInlineList(BackingIndices, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimestampField = ");
-			sb.Append("\"");
-			sb.Append(instance.TimestampField);
-			sb.Append("\"");
+			__init.Property("TimestampField");
+			writer.WriteString(TimestampField);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

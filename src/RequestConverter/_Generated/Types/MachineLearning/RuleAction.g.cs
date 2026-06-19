@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public static class RuleActionCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.RuleAction instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.RuleAction instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.RuleAction.SkipModelUpdate:
-				sb.Append("RuleAction.SkipModelUpdate");
+				writer.Write("RuleAction.SkipModelUpdate");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.RuleAction.SkipResult:
-				sb.Append("RuleAction.SkipResult");
+				writer.Write("RuleAction.SkipResult");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

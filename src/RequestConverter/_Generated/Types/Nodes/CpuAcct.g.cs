@@ -25,30 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class CpuAcct : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ControlGroup is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ControlGroup is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ControlGroup = ");
-			sb.Append("\"");
-			sb.Append(instance.ControlGroup);
-			sb.Append("\"");
+			__init.Property("ControlGroup");
+			writer.WriteString(ControlGroup);
 		}
 
-		if (instance.UsageNanos is not null)
+		if (UsageNanos is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UsageNanos = ");
-			sb.Append(instance.UsageNanos.Value);
+			__init.Property("UsageNanos");
+			writer.WriteValue(UsageNanos.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

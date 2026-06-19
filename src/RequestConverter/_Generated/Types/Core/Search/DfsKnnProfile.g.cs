@@ -25,47 +25,32 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class DfsKnnProfile : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Collector = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Collector, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Collector");
+			writer.WriteInlineList(Collector, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Query, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Query");
+			writer.WriteInlineList(Query, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RewriteTime = ");
-			sb.Append(instance.RewriteTime);
-			sb.Append("L");
+			__init.Property("RewriteTime");
+			writer.WriteValue(RewriteTime);
+			writer.Write("L");
 		}
 
-		if (instance.VectorOperationsCount is not null)
+		if (VectorOperationsCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VectorOperationsCount = ");
-			sb.Append(instance.VectorOperationsCount.Value);
-			sb.Append("L");
+			__init.Property("VectorOperationsCount");
+			writer.WriteValue(VectorOperationsCount.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

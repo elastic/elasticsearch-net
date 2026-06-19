@@ -25,38 +25,29 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class SizeHttpHistogram : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count);
-			sb.Append("L");
+			__init.Property("Count");
+			writer.WriteValue(Count);
+			writer.Write("L");
 		}
 
-		if (instance.GeBytes is not null)
+		if (GeBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GeBytes = ");
-			sb.Append(instance.GeBytes.Value);
-			sb.Append("L");
+			__init.Property("GeBytes");
+			writer.WriteValue(GeBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.LtBytes is not null)
+		if (LtBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LtBytes = ");
-			sb.Append(instance.LtBytes.Value);
-			sb.Append("L");
+			__init.Property("LtBytes");
+			writer.WriteValue(LtBytes.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

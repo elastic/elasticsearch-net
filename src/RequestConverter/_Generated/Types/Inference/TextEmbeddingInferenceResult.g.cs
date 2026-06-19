@@ -25,42 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class TextEmbeddingInferenceResult : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.TextEmbedding is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (TextEmbedding is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TextEmbedding = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.TextEmbedding, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("TextEmbedding");
+			writer.WriteInlineList(TextEmbedding, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.TextEmbeddingBits is not null)
+		if (TextEmbeddingBits is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TextEmbeddingBits = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.TextEmbeddingBits, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("TextEmbeddingBits");
+			writer.WriteInlineList(TextEmbeddingBits, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.TextEmbeddingBytes is not null)
+		if (TextEmbeddingBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TextEmbeddingBytes = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.TextEmbeddingBytes, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("TextEmbeddingBytes");
+			writer.WriteInlineList(TextEmbeddingBytes, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

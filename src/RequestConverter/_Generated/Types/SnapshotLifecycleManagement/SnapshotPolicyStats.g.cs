@@ -25,53 +25,38 @@ namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
 public partial class SnapshotPolicyStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Policy = ");
-			sb.Append("\"");
-			sb.Append(instance.Policy);
-			sb.Append("\"");
+			__init.Property("Policy");
+			writer.WriteString(Policy);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SnapshotDeletionFailures = ");
-			sb.Append(instance.SnapshotDeletionFailures);
-			sb.Append("L");
+			__init.Property("SnapshotDeletionFailures");
+			writer.WriteValue(SnapshotDeletionFailures);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SnapshotsDeleted = ");
-			sb.Append(instance.SnapshotsDeleted);
-			sb.Append("L");
+			__init.Property("SnapshotsDeleted");
+			writer.WriteValue(SnapshotsDeleted);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SnapshotsFailed = ");
-			sb.Append(instance.SnapshotsFailed);
-			sb.Append("L");
+			__init.Property("SnapshotsFailed");
+			writer.WriteValue(SnapshotsFailed);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SnapshotsTaken = ");
-			sb.Append(instance.SnapshotsTaken);
-			sb.Append("L");
+			__init.Property("SnapshotsTaken");
+			writer.WriteValue(SnapshotsTaken);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

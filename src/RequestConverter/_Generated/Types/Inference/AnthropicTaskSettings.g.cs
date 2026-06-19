@@ -25,45 +25,34 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class AnthropicTaskSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxTokens = ");
-			sb.Append(instance.MaxTokens);
+			__init.Property("MaxTokens");
+			writer.WriteValue(MaxTokens);
 		}
 
-		if (instance.Temperature is not null)
+		if (Temperature is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Temperature = ");
-			sb.Append(instance.Temperature.Value);
-			sb.Append("f");
+			__init.Property("Temperature");
+			writer.WriteValue(Temperature.Value);
+			writer.Write("f");
 		}
 
-		if (instance.TopK is not null)
+		if (TopK is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TopK = ");
-			sb.Append(instance.TopK.Value);
+			__init.Property("TopK");
+			writer.WriteValue(TopK.Value);
 		}
 
-		if (instance.TopP is not null)
+		if (TopP is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TopP = ");
-			sb.Append(instance.TopP.Value);
-			sb.Append("f");
+			__init.Property("TopP");
+			writer.WriteValue(TopP.Value);
+			writer.Write("f");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,117 +25,116 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial interface ITokenizer : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	void RequestConverter.ICodeFormattable.FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizer c1)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizer c1)
 		{
-			c1.FormatCode(sb);
+			c1.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizer c2)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizer c2)
 		{
-			c2.FormatCode(sb);
+			c2.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer c3)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer c3)
 		{
-			c3.FormatCode(sb);
+			c3.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer c4)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer c4)
 		{
-			c4.FormatCode(sb);
+			c4.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer c5)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer c5)
 		{
-			c5.FormatCode(sb);
+			c5.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer c6)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer c6)
 		{
-			c6.FormatCode(sb);
+			c6.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer c7)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer c7)
 		{
-			c7.FormatCode(sb);
+			c7.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenizer c8)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenizer c8)
 		{
-			c8.FormatCode(sb);
+			c8.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.NGramTokenizer c9)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.NGramTokenizer c9)
 		{
-			c9.FormatCode(sb);
+			c9.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer c10)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer c10)
 		{
-			c10.FormatCode(sb);
+			c10.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer c11)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer c11)
 		{
-			c11.FormatCode(sb);
+			c11.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.PatternTokenizer c12)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.PatternTokenizer c12)
 		{
-			c12.FormatCode(sb);
+			c12.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizer c13)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizer c13)
 		{
-			c13.FormatCode(sb);
+			c13.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.SimplePatternSplitTokenizer c14)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.SimplePatternSplitTokenizer c14)
 		{
-			c14.FormatCode(sb);
+			c14.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.StandardTokenizer c15)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.StandardTokenizer c15)
 		{
-			c15.FormatCode(sb);
+			c15.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizer c16)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizer c16)
 		{
-			c16.FormatCode(sb);
+			c16.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.UaxEmailUrlTokenizer c17)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.UaxEmailUrlTokenizer c17)
 		{
-			c17.FormatCode(sb);
+			c17.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.WhitespaceTokenizer c18)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.WhitespaceTokenizer c18)
 		{
-			c18.FormatCode(sb);
+			c18.FormatCode(writer);
 			return;
 		}
 
-		sb.Append(instance.ToString());
+		writer.Write(ToString());
 	}
 }

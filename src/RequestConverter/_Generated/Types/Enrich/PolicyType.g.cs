@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Enrich;
 
 public static class PolicyTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Enrich.PolicyType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Enrich.PolicyType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Enrich.PolicyType.GeoMatch:
-				sb.Append("PolicyType.GeoMatch");
+				writer.Write("PolicyType.GeoMatch");
 				break;
 			case Elastic.Clients.Elasticsearch.Enrich.PolicyType.Match:
-				sb.Append("PolicyType.Match");
+				writer.Write("PolicyType.Match");
 				break;
 			case Elastic.Clients.Elasticsearch.Enrich.PolicyType.Range:
-				sb.Append("PolicyType.Range");
+				writer.Write("PolicyType.Range");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

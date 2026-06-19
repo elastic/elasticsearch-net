@@ -25,83 +25,60 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class FunctionScoreQuery : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Boost is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Boost is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Boost = ");
-			sb.Append(instance.Boost.Value);
-			sb.Append("f");
+			__init.Property("Boost");
+			writer.WriteValue(Boost.Value);
+			writer.Write("f");
 		}
 
-		if (instance.BoostMode is not null)
+		if (BoostMode is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BoostMode = ");
-			Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostModeCodeFormatter.FormatCode(instance.BoostMode.Value, sb);
+			__init.Property("BoostMode");
+			Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostModeCodeFormatter.FormatCode(BoostMode.Value, writer);
 		}
 
-		if (instance.Functions is not null)
+		if (Functions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Functions = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Functions, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Functions");
+			writer.WriteInlineList(Functions, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.MaxBoost is not null)
+		if (MaxBoost is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxBoost = ");
-			sb.Append(instance.MaxBoost.Value);
-			sb.Append("d");
+			__init.Property("MaxBoost");
+			writer.WriteValue(MaxBoost.Value);
+			writer.Write("d");
 		}
 
-		if (instance.MinScore is not null)
+		if (MinScore is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinScore = ");
-			sb.Append(instance.MinScore.Value);
-			sb.Append("d");
+			__init.Property("MinScore");
+			writer.WriteValue(MinScore.Value);
+			writer.Write("d");
 		}
 
-		if (instance.Query is not null)
+		if (Query is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			instance.Query.FormatCode(sb);
+			__init.Property("Query");
+			Query.FormatCode(writer);
 		}
 
-		if (instance.QueryName is not null)
+		if (QueryName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryName = ");
-			sb.Append("\"");
-			sb.Append(instance.QueryName);
-			sb.Append("\"");
+			__init.Property("QueryName");
+			writer.WriteString(QueryName);
 		}
 
-		if (instance.ScoreMode is not null)
+		if (ScoreMode is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ScoreMode = ");
-			Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreModeCodeFormatter.FormatCode(instance.ScoreMode.Value, sb);
+			__init.Property("ScoreMode");
+			Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreModeCodeFormatter.FormatCode(ScoreMode.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

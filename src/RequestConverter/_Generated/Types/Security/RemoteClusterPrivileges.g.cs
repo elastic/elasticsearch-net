@@ -25,28 +25,19 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class RemoteClusterPrivileges : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Clusters = ");
-			instance.Clusters.FormatCode(sb);
+			__init.Property("Clusters");
+			Clusters.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Privileges = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Privileges, (item, sb) => { Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegeCodeFormatter.FormatCode(item, sb); }, sb);
-			sb.Append("]");
+			__init.Property("Privileges");
+			writer.WriteInlineList(Privileges, (w, item) => { Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegeCodeFormatter.FormatCode(item, w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,75 +25,54 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class JobTimingStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AverageBucketProcessingTimeMs is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AverageBucketProcessingTimeMs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AverageBucketProcessingTimeMs = ");
-			sb.Append(instance.AverageBucketProcessingTimeMs.Value);
+			__init.Property("AverageBucketProcessingTimeMs");
+			writer.WriteValue(AverageBucketProcessingTimeMs.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BucketCount = ");
-			sb.Append(instance.BucketCount);
-			sb.Append("L");
+			__init.Property("BucketCount");
+			writer.WriteValue(BucketCount);
+			writer.Write("L");
 		}
 
-		if (instance.ExponentialAverageBucketProcessingTimeMs is not null)
+		if (ExponentialAverageBucketProcessingTimeMs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExponentialAverageBucketProcessingTimeMs = ");
-			sb.Append(instance.ExponentialAverageBucketProcessingTimeMs.Value);
+			__init.Property("ExponentialAverageBucketProcessingTimeMs");
+			writer.WriteValue(ExponentialAverageBucketProcessingTimeMs.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExponentialAverageBucketProcessingTimePerHourMs = ");
-			sb.Append(instance.ExponentialAverageBucketProcessingTimePerHourMs);
+			__init.Property("ExponentialAverageBucketProcessingTimePerHourMs");
+			writer.WriteValue(ExponentialAverageBucketProcessingTimePerHourMs);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JobId = ");
-			sb.Append("\"");
-			sb.Append(instance.JobId);
-			sb.Append("\"");
+			__init.Property("JobId");
+			writer.WriteString(JobId);
 		}
 
-		if (instance.MaximumBucketProcessingTimeMs is not null)
+		if (MaximumBucketProcessingTimeMs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaximumBucketProcessingTimeMs = ");
-			sb.Append(instance.MaximumBucketProcessingTimeMs.Value);
+			__init.Property("MaximumBucketProcessingTimeMs");
+			writer.WriteValue(MaximumBucketProcessingTimeMs.Value);
 		}
 
-		if (instance.MinimumBucketProcessingTimeMs is not null)
+		if (MinimumBucketProcessingTimeMs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinimumBucketProcessingTimeMs = ");
-			sb.Append(instance.MinimumBucketProcessingTimeMs.Value);
+			__init.Property("MinimumBucketProcessingTimeMs");
+			writer.WriteValue(MinimumBucketProcessingTimeMs.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalBucketProcessingTimeMs = ");
-			sb.Append(instance.TotalBucketProcessingTimeMs);
+			__init.Property("TotalBucketProcessingTimeMs");
+			writer.WriteValue(TotalBucketProcessingTimeMs);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

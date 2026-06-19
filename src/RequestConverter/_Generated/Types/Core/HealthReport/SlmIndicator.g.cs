@@ -25,56 +25,37 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
 public partial class SlmIndicator : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Details is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Details is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Details = ");
-			instance.Details.FormatCode(sb);
+			__init.Property("Details");
+			Details.FormatCode(writer);
 		}
 
-		if (instance.Diagnosis is not null)
+		if (Diagnosis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Diagnosis = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Diagnosis, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Diagnosis");
+			writer.WriteInlineList(Diagnosis, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Impacts is not null)
+		if (Impacts is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Impacts = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Impacts, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Impacts");
+			writer.WriteInlineList(Impacts, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Status = ");
-			Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatusCodeFormatter.FormatCode(instance.Status, sb);
+			__init.Property("Status");
+			Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatusCodeFormatter.FormatCode(Status, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Symptom = ");
-			sb.Append("\"");
-			sb.Append(instance.Symptom);
-			sb.Append("\"");
+			__init.Property("Symptom");
+			writer.WriteString(Symptom);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

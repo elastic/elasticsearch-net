@@ -25,59 +25,42 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class NodeBufferPool : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Count is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Count is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count.Value);
-			sb.Append("L");
+			__init.Property("Count");
+			writer.WriteValue(Count.Value);
+			writer.Write("L");
 		}
 
-		if (instance.TotalCapacity is not null)
+		if (TotalCapacity is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalCapacity = ");
-			sb.Append("\"");
-			sb.Append(instance.TotalCapacity);
-			sb.Append("\"");
+			__init.Property("TotalCapacity");
+			writer.WriteString(TotalCapacity);
 		}
 
-		if (instance.TotalCapacityInBytes is not null)
+		if (TotalCapacityInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalCapacityInBytes = ");
-			sb.Append(instance.TotalCapacityInBytes.Value);
-			sb.Append("L");
+			__init.Property("TotalCapacityInBytes");
+			writer.WriteValue(TotalCapacityInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Used is not null)
+		if (Used is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Used = ");
-			sb.Append("\"");
-			sb.Append(instance.Used);
-			sb.Append("\"");
+			__init.Property("Used");
+			writer.WriteString(Used);
 		}
 
-		if (instance.UsedInBytes is not null)
+		if (UsedInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UsedInBytes = ");
-			sb.Append(instance.UsedInBytes.Value);
-			sb.Append("L");
+			__init.Property("UsedInBytes");
+			writer.WriteValue(UsedInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

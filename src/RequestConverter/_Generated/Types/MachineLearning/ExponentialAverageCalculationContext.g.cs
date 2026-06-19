@@ -25,35 +25,26 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class ExponentialAverageCalculationContext : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IncrementalMetricValueMs = ");
-			sb.Append(instance.IncrementalMetricValueMs);
+			__init.Property("IncrementalMetricValueMs");
+			writer.WriteValue(IncrementalMetricValueMs);
 		}
 
-		if (instance.LatestTimestamp is not null)
+		if (LatestTimestamp is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LatestTimestamp = ");
-			sb.Append(instance.LatestTimestamp.Value);
+			__init.Property("LatestTimestamp");
+			writer.WriteValue(LatestTimestamp.Value);
 		}
 
-		if (instance.PreviousExponentialAverageMs is not null)
+		if (PreviousExponentialAverageMs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PreviousExponentialAverageMs = ");
-			sb.Append(instance.PreviousExponentialAverageMs.Value);
+			__init.Property("PreviousExponentialAverageMs");
+			writer.WriteValue(PreviousExponentialAverageMs.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

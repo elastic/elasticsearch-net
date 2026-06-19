@@ -25,50 +25,33 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class ElisionTokenFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Articles is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Articles is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Articles = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Articles, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Articles");
+			writer.WriteInlineList(Articles, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.ArticlesCase is not null)
+		if (ArticlesCase is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ArticlesCase = ");
-			sb.Append(instance.ArticlesCase.Value ? "true" : "false");
+			__init.Property("ArticlesCase");
+			writer.WriteValue(ArticlesCase.Value);
 		}
 
-		if (instance.ArticlesPath is not null)
+		if (ArticlesPath is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ArticlesPath = ");
-			sb.Append("\"");
-			sb.Append(instance.ArticlesPath);
-			sb.Append("\"");
+			__init.Property("ArticlesPath");
+			writer.WriteString(ArticlesPath);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public static class IndexModeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.IndexMode instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.IndexMode instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexMode.Logsdb:
-				sb.Append("IndexMode.Logsdb");
+				writer.Write("IndexMode.Logsdb");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexMode.Lookup:
-				sb.Append("IndexMode.Lookup");
+				writer.Write("IndexMode.Lookup");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexMode.Standard:
-				sb.Append("IndexMode.Standard");
+				writer.Write("IndexMode.Standard");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexMode.TimeSeries:
-				sb.Append("IndexMode.TimeSeries");
+				writer.Write("IndexMode.TimeSeries");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -21,24 +21,41 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
 
-namespace Elastic.Clients.Elasticsearch.IndexManagement;
+namespace Elastic.Clients.Elasticsearch.Security;
 
-public partial class GetAllSampleConfigurationRequest : RequestConverter.ICodeFormattable
+public partial class IndicesPrivilegesBase : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.MasterTimeout is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AllowRestrictedIndices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MasterTimeout = ");
-			instance.MasterTimeout.FormatCode(sb);
+			__init.Property("AllowRestrictedIndices");
+			writer.WriteValue(AllowRestrictedIndices.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		if (FieldSecurity is not null)
+		{
+			__init.Property("FieldSecurity");
+			FieldSecurity.FormatCode(writer);
+		}
+
+		{
+			__init.Property("Names");
+			writer.WriteInlineList(Names, (w, item) => { item.FormatCode(w); });
+		}
+
+		{
+			__init.Property("Privileges");
+			writer.WriteInlineList(Privileges, (w, item) => { item.FormatCode(w); });
+		}
+
+		if (Query is not null)
+		{
+			__init.Property("Query");
+			writer.WriteValue(Query);
+		}
+
+		__init.Dispose();
 	}
 }

@@ -25,133 +25,98 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class ReindexStatus : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Batches = ");
-			sb.Append(instance.Batches);
-			sb.Append("L");
+			__init.Property("Batches");
+			writer.WriteValue(Batches);
+			writer.Write("L");
 		}
 
-		if (instance.Cancelled is not null)
+		if (Cancelled is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Cancelled = ");
-			sb.Append("\"");
-			sb.Append(instance.Cancelled);
-			sb.Append("\"");
+			__init.Property("Cancelled");
+			writer.WriteString(Cancelled);
 		}
 
-		if (instance.Created is not null)
+		if (Created is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Created = ");
-			sb.Append(instance.Created.Value);
-			sb.Append("L");
+			__init.Property("Created");
+			writer.WriteValue(Created.Value);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Deleted = ");
-			sb.Append(instance.Deleted);
-			sb.Append("L");
+			__init.Property("Deleted");
+			writer.WriteValue(Deleted);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Noops = ");
-			sb.Append(instance.Noops);
-			sb.Append("L");
+			__init.Property("Noops");
+			writer.WriteValue(Noops);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RequestsPerSecond = ");
-			sb.Append(instance.RequestsPerSecond);
-			sb.Append("f");
+			__init.Property("RequestsPerSecond");
+			writer.WriteValue(RequestsPerSecond);
+			writer.Write("f");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Retries = ");
-			instance.Retries.FormatCode(sb);
+			__init.Property("Retries");
+			Retries.FormatCode(writer);
 		}
 
-		if (instance.SliceId is not null)
+		if (SliceId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SliceId = ");
-			sb.Append(instance.SliceId.Value);
+			__init.Property("SliceId");
+			writer.WriteValue(SliceId.Value);
 		}
 
-		if (instance.Throttled is not null)
+		if (Throttled is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Throttled = ");
-			instance.Throttled.FormatCode(sb);
+			__init.Property("Throttled");
+			Throttled.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ThrottledMillis = ");
-			sb.Append(instance.ThrottledMillis);
+			__init.Property("ThrottledMillis");
+			writer.WriteValue(ThrottledMillis);
 		}
 
-		if (instance.ThrottledUntil is not null)
+		if (ThrottledUntil is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ThrottledUntil = ");
-			instance.ThrottledUntil.FormatCode(sb);
+			__init.Property("ThrottledUntil");
+			ThrottledUntil.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ThrottledUntilMillis = ");
-			sb.Append(instance.ThrottledUntilMillis);
+			__init.Property("ThrottledUntilMillis");
+			writer.WriteValue(ThrottledUntilMillis);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			sb.Append(instance.Total);
-			sb.Append("L");
+			__init.Property("Total");
+			writer.WriteValue(Total);
+			writer.Write("L");
 		}
 
-		if (instance.Updated is not null)
+		if (Updated is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Updated = ");
-			sb.Append(instance.Updated.Value);
-			sb.Append("L");
+			__init.Property("Updated");
+			writer.WriteValue(Updated.Value);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VersionConflicts = ");
-			sb.Append(instance.VersionConflicts);
-			sb.Append("L");
+			__init.Property("VersionConflicts");
+			writer.WriteValue(VersionConflicts);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

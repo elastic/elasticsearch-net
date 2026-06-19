@@ -25,32 +25,21 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class IndexVersioning : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Created is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Created is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Created = ");
-			sb.Append("\"");
-			sb.Append(instance.Created);
-			sb.Append("\"");
+			__init.Property("Created");
+			writer.WriteString(Created);
 		}
 
-		if (instance.CreatedString is not null)
+		if (CreatedString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CreatedString = ");
-			sb.Append("\"");
-			sb.Append(instance.CreatedString);
-			sb.Append("\"");
+			__init.Property("CreatedString");
+			writer.WriteString(CreatedString);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

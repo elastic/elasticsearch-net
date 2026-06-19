@@ -25,39 +25,26 @@ namespace Elastic.Clients.Elasticsearch.Rollup;
 
 public partial class RollupFieldSummary : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Agg = ");
-			sb.Append("\"");
-			sb.Append(instance.Agg);
-			sb.Append("\"");
+			__init.Property("Agg");
+			writer.WriteString(Agg);
 		}
 
-		if (instance.CalendarInterval is not null)
+		if (CalendarInterval is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CalendarInterval = ");
-			instance.CalendarInterval.FormatCode(sb);
+			__init.Property("CalendarInterval");
+			CalendarInterval.FormatCode(writer);
 		}
 
-		if (instance.TimeZone is not null)
+		if (TimeZone is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeZone = ");
-			sb.Append("\"");
-			sb.Append(instance.TimeZone);
-			sb.Append("\"");
+			__init.Property("TimeZone");
+			writer.WriteString(TimeZone);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

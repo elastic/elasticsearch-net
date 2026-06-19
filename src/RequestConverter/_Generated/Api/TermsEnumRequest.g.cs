@@ -25,78 +25,55 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class TermsEnumRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indices = ");
-			instance.Indices.FormatCode(sb);
+			__init.Property("Indices");
+			Indices.FormatCode(writer);
 		}
 
-		if (instance.CaseInsensitive is not null)
+		if (CaseInsensitive is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CaseInsensitive = ");
-			sb.Append(instance.CaseInsensitive.Value ? "true" : "false");
+			__init.Property("CaseInsensitive");
+			writer.WriteValue(CaseInsensitive.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.IndexFilter is not null)
+		if (IndexFilter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexFilter = ");
-			instance.IndexFilter.FormatCode(sb);
+			__init.Property("IndexFilter");
+			IndexFilter.FormatCode(writer);
 		}
 
-		if (instance.SearchAfter is not null)
+		if (SearchAfter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SearchAfter = ");
-			sb.Append("\"");
-			sb.Append(instance.SearchAfter);
-			sb.Append("\"");
+			__init.Property("SearchAfter");
+			writer.WriteString(SearchAfter);
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append(instance.Size.Value);
+			__init.Property("Size");
+			writer.WriteValue(Size.Value);
 		}
 
-		if (instance.String is not null)
+		if (String is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("String = ");
-			sb.Append("\"");
-			sb.Append(instance.String);
-			sb.Append("\"");
+			__init.Property("String");
+			writer.WriteString(String);
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

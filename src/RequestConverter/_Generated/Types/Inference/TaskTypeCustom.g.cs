@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class TaskTypeCustomCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.TaskTypeCustom instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.TaskTypeCustom instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeCustom.Completion:
-				sb.Append("TaskTypeCustom.Completion");
+				writer.Write("TaskTypeCustom.Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeCustom.Rerank:
-				sb.Append("TaskTypeCustom.Rerank");
+				writer.Write("TaskTypeCustom.Rerank");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeCustom.SparseEmbedding:
-				sb.Append("TaskTypeCustom.SparseEmbedding");
+				writer.Write("TaskTypeCustom.SparseEmbedding");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeCustom.TextEmbedding:
-				sb.Append("TaskTypeCustom.TextEmbedding");
+				writer.Write("TaskTypeCustom.TextEmbedding");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

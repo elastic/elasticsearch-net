@@ -25,52 +25,37 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public partial class IpDatabaseConfigurationMetadata : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Database = ");
-			instance.Database.FormatCode(sb);
+			__init.Property("Database");
+			Database.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			sb.Append("\"");
-			sb.Append(instance.Id);
-			sb.Append("\"");
+			__init.Property("Id");
+			writer.WriteString(Id);
 		}
 
-		if (instance.ModifiedDate is not null)
+		if (ModifiedDate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModifiedDate = ");
-			sb.Append(instance.ModifiedDate.Value);
+			__init.Property("ModifiedDate");
+			writer.WriteValue(ModifiedDate.Value);
 		}
 
-		if (instance.ModifiedDateMillis is not null)
+		if (ModifiedDateMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModifiedDateMillis = ");
-			sb.Append(instance.ModifiedDateMillis.Value);
+			__init.Property("ModifiedDateMillis");
+			writer.WriteValue(ModifiedDateMillis.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append(instance.Version);
-			sb.Append("L");
+			__init.Property("Version");
+			writer.WriteValue(Version);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

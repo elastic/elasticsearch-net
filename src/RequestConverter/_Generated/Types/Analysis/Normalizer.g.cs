@@ -25,21 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial interface INormalizer : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	void RequestConverter.ICodeFormattable.FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer c1)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer c1)
 		{
-			c1.FormatCode(sb);
+			c1.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer c2)
+		if (this is Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer c2)
 		{
-			c2.FormatCode(sb);
+			c2.FormatCode(writer);
 			return;
 		}
 
-		sb.Append(instance.ToString());
+		writer.Write(ToString());
 	}
 }

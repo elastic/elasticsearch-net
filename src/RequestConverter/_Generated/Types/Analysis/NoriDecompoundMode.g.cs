@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public static class NoriDecompoundModeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode.Discard:
-				sb.Append("NoriDecompoundMode.Discard");
+				writer.Write("NoriDecompoundMode.Discard");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode.Mixed:
-				sb.Append("NoriDecompoundMode.Mixed");
+				writer.Write("NoriDecompoundMode.Mixed");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode.None:
-				sb.Append("NoriDecompoundMode.None");
+				writer.Write("NoriDecompoundMode.None");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

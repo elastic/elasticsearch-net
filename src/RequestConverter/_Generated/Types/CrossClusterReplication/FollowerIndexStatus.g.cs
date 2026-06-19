@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
 public static class FollowerIndexStatusCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatus instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatus instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatus.Active:
-				sb.Append("FollowerIndexStatus.Active");
+				writer.Write("FollowerIndexStatus.Active");
 				break;
 			case Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatus.Paused:
-				sb.Append("FollowerIndexStatus.Paused");
+				writer.Write("FollowerIndexStatus.Paused");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

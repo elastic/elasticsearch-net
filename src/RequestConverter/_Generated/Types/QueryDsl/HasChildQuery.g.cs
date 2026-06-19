@@ -25,87 +25,62 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class HasChildQuery : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Boost is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Boost is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Boost = ");
-			sb.Append(instance.Boost.Value);
-			sb.Append("f");
+			__init.Property("Boost");
+			writer.WriteValue(Boost.Value);
+			writer.Write("f");
 		}
 
-		if (instance.IgnoreUnmapped is not null)
+		if (IgnoreUnmapped is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreUnmapped = ");
-			sb.Append(instance.IgnoreUnmapped.Value ? "true" : "false");
+			__init.Property("IgnoreUnmapped");
+			writer.WriteValue(IgnoreUnmapped.Value);
 		}
 
-		if (instance.InnerHits is not null)
+		if (InnerHits is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InnerHits = ");
-			instance.InnerHits.FormatCode(sb);
+			__init.Property("InnerHits");
+			InnerHits.FormatCode(writer);
 		}
 
-		if (instance.MaxChildren is not null)
+		if (MaxChildren is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxChildren = ");
-			sb.Append(instance.MaxChildren.Value);
+			__init.Property("MaxChildren");
+			writer.WriteValue(MaxChildren.Value);
 		}
 
-		if (instance.MinChildren is not null)
+		if (MinChildren is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinChildren = ");
-			sb.Append(instance.MinChildren.Value);
+			__init.Property("MinChildren");
+			writer.WriteValue(MinChildren.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			instance.Query.FormatCode(sb);
+			__init.Property("Query");
+			Query.FormatCode(writer);
 		}
 
-		if (instance.QueryName is not null)
+		if (QueryName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryName = ");
-			sb.Append("\"");
-			sb.Append(instance.QueryName);
-			sb.Append("\"");
+			__init.Property("QueryName");
+			writer.WriteString(QueryName);
 		}
 
-		if (instance.ScoreMode is not null)
+		if (ScoreMode is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ScoreMode = ");
-			Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreModeCodeFormatter.FormatCode(instance.ScoreMode.Value, sb);
+			__init.Property("ScoreMode");
+			Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreModeCodeFormatter.FormatCode(ScoreMode.Value, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			sb.Append("\"");
-			sb.Append(instance.Type);
-			sb.Append("\"");
+			__init.Property("Type");
+			writer.WriteString(Type);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

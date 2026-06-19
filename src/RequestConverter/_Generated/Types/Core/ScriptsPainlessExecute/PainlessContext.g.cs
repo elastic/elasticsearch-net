@@ -25,45 +25,45 @@ namespace Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute;
 
 public static class PainlessContextCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.BooleanField:
-				sb.Append("PainlessContext.BooleanField");
+				writer.Write("PainlessContext.BooleanField");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.CompositeField:
-				sb.Append("PainlessContext.CompositeField");
+				writer.Write("PainlessContext.CompositeField");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.DateField:
-				sb.Append("PainlessContext.DateField");
+				writer.Write("PainlessContext.DateField");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.DoubleField:
-				sb.Append("PainlessContext.DoubleField");
+				writer.Write("PainlessContext.DoubleField");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.Filter:
-				sb.Append("PainlessContext.Filter");
+				writer.Write("PainlessContext.Filter");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.GeoPointField:
-				sb.Append("PainlessContext.GeoPointField");
+				writer.Write("PainlessContext.GeoPointField");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.IpField:
-				sb.Append("PainlessContext.IpField");
+				writer.Write("PainlessContext.IpField");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.KeywordField:
-				sb.Append("PainlessContext.KeywordField");
+				writer.Write("PainlessContext.KeywordField");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.LongField:
-				sb.Append("PainlessContext.LongField");
+				writer.Write("PainlessContext.LongField");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.PainlessTest:
-				sb.Append("PainlessContext.PainlessTest");
+				writer.Write("PainlessContext.PainlessTest");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.Score:
-				sb.Append("PainlessContext.Score");
+				writer.Write("PainlessContext.Score");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

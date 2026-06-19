@@ -25,38 +25,25 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class SamlAuthenticateRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Content = ");
-			sb.Append("\"");
-			sb.Append(instance.Content);
-			sb.Append("\"");
+			__init.Property("Content");
+			writer.WriteString(Content);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ids = ");
-			instance.Ids.FormatCode(sb);
+			__init.Property("Ids");
+			Ids.FormatCode(writer);
 		}
 
-		if (instance.Realm is not null)
+		if (Realm is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Realm = ");
-			sb.Append("\"");
-			sb.Append(instance.Realm);
-			sb.Append("\"");
+			__init.Property("Realm");
+			writer.WriteString(Realm);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

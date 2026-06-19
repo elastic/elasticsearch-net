@@ -25,101 +25,70 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class StatsBucketAggregate : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Avg = ");
-			sb.Append(instance.Avg.Value);
-			sb.Append("d");
+			__init.Property("Avg");
+			writer.WriteValue(Avg.Value);
+			writer.Write("d");
 		}
 
-		if (instance.AvgAsString is not null)
+		if (AvgAsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AvgAsString = ");
-			sb.Append("\"");
-			sb.Append(instance.AvgAsString);
-			sb.Append("\"");
+			__init.Property("AvgAsString");
+			writer.WriteString(AvgAsString);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count);
-			sb.Append("L");
+			__init.Property("Count");
+			writer.WriteValue(Count);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Max = ");
-			sb.Append(instance.Max.Value);
-			sb.Append("d");
+			__init.Property("Max");
+			writer.WriteValue(Max.Value);
+			writer.Write("d");
 		}
 
-		if (instance.MaxAsString is not null)
+		if (MaxAsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxAsString = ");
-			sb.Append("\"");
-			sb.Append(instance.MaxAsString);
-			sb.Append("\"");
+			__init.Property("MaxAsString");
+			writer.WriteString(MaxAsString);
 		}
 
-		if (instance.Meta is not null)
+		if (Meta is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Meta = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Meta, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Meta");
+			writer.Write("new() ");
+			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Min = ");
-			sb.Append(instance.Min.Value);
-			sb.Append("d");
+			__init.Property("Min");
+			writer.WriteValue(Min.Value);
+			writer.Write("d");
 		}
 
-		if (instance.MinAsString is not null)
+		if (MinAsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinAsString = ");
-			sb.Append("\"");
-			sb.Append(instance.MinAsString);
-			sb.Append("\"");
+			__init.Property("MinAsString");
+			writer.WriteString(MinAsString);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sum = ");
-			sb.Append(instance.Sum);
-			sb.Append("d");
+			__init.Property("Sum");
+			writer.WriteValue(Sum);
+			writer.Write("d");
 		}
 
-		if (instance.SumAsString is not null)
+		if (SumAsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SumAsString = ");
-			sb.Append("\"");
-			sb.Append(instance.SumAsString);
-			sb.Append("\"");
+			__init.Property("SumAsString");
+			writer.WriteString(SumAsString);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,38 +25,27 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class LearningToRankConfig : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.DefaultParams is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (DefaultParams is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DefaultParams = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.DefaultParams, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("DefaultParams");
+			writer.Write("new() ");
+			writer.WriteInlineList(DefaultParams, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.FeatureExtractors is not null)
+		if (FeatureExtractors is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FeatureExtractors = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.FeatureExtractors, (item, sb) => { sb.Append("new()"); RequestConverter.CodeFormatter.FormatCode(item, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb); }, sb);
-			sb.Append("]");
+			__init.Property("FeatureExtractors");
+			writer.WriteInlineList(FeatureExtractors, (w, item) => { w.Write("new() "); w.WriteInlineList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", "); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumTopFeatureImportanceValues = ");
-			sb.Append(instance.NumTopFeatureImportanceValues);
+			__init.Property("NumTopFeatureImportanceValues");
+			writer.WriteValue(NumTopFeatureImportanceValues);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

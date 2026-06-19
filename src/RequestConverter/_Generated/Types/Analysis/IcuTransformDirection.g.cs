@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public static class IcuTransformDirectionCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection.Forward:
-				sb.Append("IcuTransformDirection.Forward");
+				writer.Write("IcuTransformDirection.Forward");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection.Reverse:
-				sb.Append("IcuTransformDirection.Reverse");
+				writer.Write("IcuTransformDirection.Reverse");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

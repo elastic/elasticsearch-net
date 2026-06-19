@@ -25,84 +25,63 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
 public partial class Indicators : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.DataStreamLifecycle is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (DataStreamLifecycle is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DataStreamLifecycle = ");
-			instance.DataStreamLifecycle.FormatCode(sb);
+			__init.Property("DataStreamLifecycle");
+			DataStreamLifecycle.FormatCode(writer);
 		}
 
-		if (instance.Disk is not null)
+		if (Disk is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Disk = ");
-			instance.Disk.FormatCode(sb);
+			__init.Property("Disk");
+			Disk.FormatCode(writer);
 		}
 
-		if (instance.FileSettings is not null)
+		if (FileSettings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FileSettings = ");
-			instance.FileSettings.FormatCode(sb);
+			__init.Property("FileSettings");
+			FileSettings.FormatCode(writer);
 		}
 
-		if (instance.Ilm is not null)
+		if (Ilm is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ilm = ");
-			instance.Ilm.FormatCode(sb);
+			__init.Property("Ilm");
+			Ilm.FormatCode(writer);
 		}
 
-		if (instance.MasterIsStable is not null)
+		if (MasterIsStable is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MasterIsStable = ");
-			instance.MasterIsStable.FormatCode(sb);
+			__init.Property("MasterIsStable");
+			MasterIsStable.FormatCode(writer);
 		}
 
-		if (instance.RepositoryIntegrity is not null)
+		if (RepositoryIntegrity is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RepositoryIntegrity = ");
-			instance.RepositoryIntegrity.FormatCode(sb);
+			__init.Property("RepositoryIntegrity");
+			RepositoryIntegrity.FormatCode(writer);
 		}
 
-		if (instance.ShardsAvailability is not null)
+		if (ShardsAvailability is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShardsAvailability = ");
-			instance.ShardsAvailability.FormatCode(sb);
+			__init.Property("ShardsAvailability");
+			ShardsAvailability.FormatCode(writer);
 		}
 
-		if (instance.ShardsCapacity is not null)
+		if (ShardsCapacity is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShardsCapacity = ");
-			instance.ShardsCapacity.FormatCode(sb);
+			__init.Property("ShardsCapacity");
+			ShardsCapacity.FormatCode(writer);
 		}
 
-		if (instance.Slm is not null)
+		if (Slm is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Slm = ");
-			instance.Slm.FormatCode(sb);
+			__init.Property("Slm");
+			Slm.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

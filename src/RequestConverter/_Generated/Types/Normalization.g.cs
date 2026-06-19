@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class NormalizationCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Normalization instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Normalization instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Normalization.H1:
-				sb.Append("Normalization.H1");
+				writer.Write("Normalization.H1");
 				break;
 			case Elastic.Clients.Elasticsearch.Normalization.H2:
-				sb.Append("Normalization.H2");
+				writer.Write("Normalization.H2");
 				break;
 			case Elastic.Clients.Elasticsearch.Normalization.H3:
-				sb.Append("Normalization.H3");
+				writer.Write("Normalization.H3");
 				break;
 			case Elastic.Clients.Elasticsearch.Normalization.No:
-				sb.Append("Normalization.No");
+				writer.Write("Normalization.No");
 				break;
 			case Elastic.Clients.Elasticsearch.Normalization.Z:
-				sb.Append("Normalization.Z");
+				writer.Write("Normalization.Z");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

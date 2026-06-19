@@ -25,30 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class GetUserRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Username is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Username is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Username = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Username, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Username");
+			writer.WriteInlineList(Username, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.WithProfileUid is not null)
+		if (WithProfileUid is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WithProfileUid = ");
-			sb.Append(instance.WithProfileUid.Value ? "true" : "false");
+			__init.Property("WithProfileUid");
+			writer.WriteValue(WithProfileUid.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

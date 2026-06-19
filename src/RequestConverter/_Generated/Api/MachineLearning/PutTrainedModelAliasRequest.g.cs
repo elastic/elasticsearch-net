@@ -25,34 +25,25 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class PutTrainedModelAliasRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelAlias = ");
-			instance.ModelAlias.FormatCode(sb);
+			__init.Property("ModelAlias");
+			ModelAlias.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelId = ");
-			instance.ModelId.FormatCode(sb);
+			__init.Property("ModelId");
+			ModelId.FormatCode(writer);
 		}
 
-		if (instance.Reassign is not null)
+		if (Reassign is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Reassign = ");
-			sb.Append(instance.Reassign.Value ? "true" : "false");
+			__init.Property("Reassign");
+			writer.WriteValue(Reassign.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

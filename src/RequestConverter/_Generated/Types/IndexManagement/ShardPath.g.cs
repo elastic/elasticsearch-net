@@ -25,37 +25,24 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class ShardPath : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DataPath = ");
-			sb.Append("\"");
-			sb.Append(instance.DataPath);
-			sb.Append("\"");
+			__init.Property("DataPath");
+			writer.WriteString(DataPath);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IsCustomDataPath = ");
-			sb.Append(instance.IsCustomDataPath ? "true" : "false");
+			__init.Property("IsCustomDataPath");
+			writer.WriteValue(IsCustomDataPath);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StatePath = ");
-			sb.Append("\"");
-			sb.Append(instance.StatePath);
-			sb.Append("\"");
+			__init.Property("StatePath");
+			writer.WriteString(StatePath);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

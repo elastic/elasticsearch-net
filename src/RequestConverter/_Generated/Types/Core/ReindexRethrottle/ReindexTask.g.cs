@@ -25,99 +25,66 @@ namespace Elastic.Clients.Elasticsearch.Core.ReindexRethrottle;
 
 public partial class ReindexTask : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Action = ");
-			sb.Append("\"");
-			sb.Append(instance.Action);
-			sb.Append("\"");
+			__init.Property("Action");
+			writer.WriteString(Action);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Cancellable = ");
-			sb.Append(instance.Cancellable ? "true" : "false");
+			__init.Property("Cancellable");
+			writer.WriteValue(Cancellable);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Cancelled = ");
-			sb.Append(instance.Cancelled ? "true" : "false");
+			__init.Property("Cancelled");
+			writer.WriteValue(Cancelled);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Headers = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Headers, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("["); RequestConverter.CodeFormatter.FormatCode(v, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb); sb.Append("]"); }, sb);
+			__init.Property("Headers");
+			writer.Write("new() ");
+			writer.WriteInlineList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteString(item); }); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			sb.Append(instance.Id);
-			sb.Append("L");
+			__init.Property("Id");
+			writer.WriteValue(Id);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Node = ");
-			sb.Append("\"");
-			sb.Append(instance.Node);
-			sb.Append("\"");
+			__init.Property("Node");
+			writer.WriteString(Node);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RunningTimeInNanos = ");
-			sb.Append(instance.RunningTimeInNanos);
+			__init.Property("RunningTimeInNanos");
+			writer.WriteValue(RunningTimeInNanos);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StartTimeInMillis = ");
-			sb.Append(instance.StartTimeInMillis);
+			__init.Property("StartTimeInMillis");
+			writer.WriteValue(StartTimeInMillis);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Status = ");
-			instance.Status.FormatCode(sb);
+			__init.Property("Status");
+			Status.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			sb.Append("\"");
-			sb.Append(instance.Type);
-			sb.Append("\"");
+			__init.Property("Type");
+			writer.WriteString(Type);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

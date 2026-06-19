@@ -25,87 +25,62 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class FuzzyQuery : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Boost is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Boost is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Boost = ");
-			sb.Append(instance.Boost.Value);
-			sb.Append("f");
+			__init.Property("Boost");
+			writer.WriteValue(Boost.Value);
+			writer.Write("f");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.Fuzziness is not null)
+		if (Fuzziness is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fuzziness = ");
-			instance.Fuzziness.FormatCode(sb);
+			__init.Property("Fuzziness");
+			Fuzziness.FormatCode(writer);
 		}
 
-		if (instance.MaxExpansions is not null)
+		if (MaxExpansions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxExpansions = ");
-			sb.Append(instance.MaxExpansions.Value);
+			__init.Property("MaxExpansions");
+			writer.WriteValue(MaxExpansions.Value);
 		}
 
-		if (instance.PrefixLength is not null)
+		if (PrefixLength is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PrefixLength = ");
-			sb.Append(instance.PrefixLength.Value);
+			__init.Property("PrefixLength");
+			writer.WriteValue(PrefixLength.Value);
 		}
 
-		if (instance.QueryName is not null)
+		if (QueryName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryName = ");
-			sb.Append("\"");
-			sb.Append(instance.QueryName);
-			sb.Append("\"");
+			__init.Property("QueryName");
+			writer.WriteString(QueryName);
 		}
 
-		if (instance.Rewrite is not null)
+		if (Rewrite is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Rewrite = ");
-			sb.Append("\"");
-			sb.Append(instance.Rewrite);
-			sb.Append("\"");
+			__init.Property("Rewrite");
+			writer.WriteString(Rewrite);
 		}
 
-		if (instance.Transpositions is not null)
+		if (Transpositions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Transpositions = ");
-			sb.Append(instance.Transpositions.Value ? "true" : "false");
+			__init.Property("Transpositions");
+			writer.WriteValue(Transpositions.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Value = ");
-			RequestConverter.CodeFormatter.FormatCode(instance.Value, sb);
+			__init.Property("Value");
+			writer.WriteValue(Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

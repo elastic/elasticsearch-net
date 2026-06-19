@@ -25,68 +25,49 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class FieldSummary : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Any = ");
-			sb.Append(instance.Any);
+			__init.Property("Any");
+			writer.WriteValue(Any);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocValues = ");
-			sb.Append(instance.DocValues);
+			__init.Property("DocValues");
+			writer.WriteValue(DocValues);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InvertedIndex = ");
-			instance.InvertedIndex.FormatCode(sb);
+			__init.Property("InvertedIndex");
+			InvertedIndex.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("KnnVectors = ");
-			sb.Append(instance.KnnVectors);
+			__init.Property("KnnVectors");
+			writer.WriteValue(KnnVectors);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Norms = ");
-			sb.Append(instance.Norms);
+			__init.Property("Norms");
+			writer.WriteValue(Norms);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Points = ");
-			sb.Append(instance.Points);
+			__init.Property("Points");
+			writer.WriteValue(Points);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StoredFields = ");
-			sb.Append(instance.StoredFields);
+			__init.Property("StoredFields");
+			writer.WriteValue(StoredFields);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TermVectors = ");
-			sb.Append(instance.TermVectors);
+			__init.Property("TermVectors");
+			writer.WriteValue(TermVectors);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,45 +25,32 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class ForecastRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JobId = ");
-			instance.JobId.FormatCode(sb);
+			__init.Property("JobId");
+			JobId.FormatCode(writer);
 		}
 
-		if (instance.Duration is not null)
+		if (Duration is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Duration = ");
-			instance.Duration.FormatCode(sb);
+			__init.Property("Duration");
+			Duration.FormatCode(writer);
 		}
 
-		if (instance.ExpiresIn is not null)
+		if (ExpiresIn is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExpiresIn = ");
-			instance.ExpiresIn.FormatCode(sb);
+			__init.Property("ExpiresIn");
+			ExpiresIn.FormatCode(writer);
 		}
 
-		if (instance.MaxModelMemory is not null)
+		if (MaxModelMemory is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxModelMemory = ");
-			sb.Append("\"");
-			sb.Append(instance.MaxModelMemory);
-			sb.Append("\"");
+			__init.Property("MaxModelMemory");
+			writer.WriteString(MaxModelMemory);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

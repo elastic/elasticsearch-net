@@ -25,28 +25,19 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class BuildInformation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Date = ");
-			sb.Append(instance.Date);
+			__init.Property("Date");
+			writer.WriteValue(Date);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Hash = ");
-			sb.Append("\"");
-			sb.Append(instance.Hash);
-			sb.Append("\"");
+			__init.Property("Hash");
+			writer.WriteString(Hash);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

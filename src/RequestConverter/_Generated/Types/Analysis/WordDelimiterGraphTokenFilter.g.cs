@@ -25,150 +25,105 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class WordDelimiterGraphTokenFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AdjustOffsets is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AdjustOffsets is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AdjustOffsets = ");
-			sb.Append(instance.AdjustOffsets.Value ? "true" : "false");
+			__init.Property("AdjustOffsets");
+			writer.WriteValue(AdjustOffsets.Value);
 		}
 
-		if (instance.CatenateAll is not null)
+		if (CatenateAll is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CatenateAll = ");
-			sb.Append(instance.CatenateAll.Value ? "true" : "false");
+			__init.Property("CatenateAll");
+			writer.WriteValue(CatenateAll.Value);
 		}
 
-		if (instance.CatenateNumbers is not null)
+		if (CatenateNumbers is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CatenateNumbers = ");
-			sb.Append(instance.CatenateNumbers.Value ? "true" : "false");
+			__init.Property("CatenateNumbers");
+			writer.WriteValue(CatenateNumbers.Value);
 		}
 
-		if (instance.CatenateWords is not null)
+		if (CatenateWords is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CatenateWords = ");
-			sb.Append(instance.CatenateWords.Value ? "true" : "false");
+			__init.Property("CatenateWords");
+			writer.WriteValue(CatenateWords.Value);
 		}
 
-		if (instance.GenerateNumberParts is not null)
+		if (GenerateNumberParts is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GenerateNumberParts = ");
-			sb.Append(instance.GenerateNumberParts.Value ? "true" : "false");
+			__init.Property("GenerateNumberParts");
+			writer.WriteValue(GenerateNumberParts.Value);
 		}
 
-		if (instance.GenerateWordParts is not null)
+		if (GenerateWordParts is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GenerateWordParts = ");
-			sb.Append(instance.GenerateWordParts.Value ? "true" : "false");
+			__init.Property("GenerateWordParts");
+			writer.WriteValue(GenerateWordParts.Value);
 		}
 
-		if (instance.IgnoreKeywords is not null)
+		if (IgnoreKeywords is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreKeywords = ");
-			sb.Append(instance.IgnoreKeywords.Value ? "true" : "false");
+			__init.Property("IgnoreKeywords");
+			writer.WriteValue(IgnoreKeywords.Value);
 		}
 
-		if (instance.PreserveOriginal is not null)
+		if (PreserveOriginal is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PreserveOriginal = ");
-			sb.Append(instance.PreserveOriginal.Value ? "true" : "false");
+			__init.Property("PreserveOriginal");
+			writer.WriteValue(PreserveOriginal.Value);
 		}
 
-		if (instance.ProtectedWords is not null)
+		if (ProtectedWords is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ProtectedWords = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.ProtectedWords, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("ProtectedWords");
+			writer.WriteInlineList(ProtectedWords, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.ProtectedWordsPath is not null)
+		if (ProtectedWordsPath is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ProtectedWordsPath = ");
-			sb.Append("\"");
-			sb.Append(instance.ProtectedWordsPath);
-			sb.Append("\"");
+			__init.Property("ProtectedWordsPath");
+			writer.WriteString(ProtectedWordsPath);
 		}
 
-		if (instance.SplitOnCaseChange is not null)
+		if (SplitOnCaseChange is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SplitOnCaseChange = ");
-			sb.Append(instance.SplitOnCaseChange.Value ? "true" : "false");
+			__init.Property("SplitOnCaseChange");
+			writer.WriteValue(SplitOnCaseChange.Value);
 		}
 
-		if (instance.SplitOnNumerics is not null)
+		if (SplitOnNumerics is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SplitOnNumerics = ");
-			sb.Append(instance.SplitOnNumerics.Value ? "true" : "false");
+			__init.Property("SplitOnNumerics");
+			writer.WriteValue(SplitOnNumerics.Value);
 		}
 
-		if (instance.StemEnglishPossessive is not null)
+		if (StemEnglishPossessive is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StemEnglishPossessive = ");
-			sb.Append(instance.StemEnglishPossessive.Value ? "true" : "false");
+			__init.Property("StemEnglishPossessive");
+			writer.WriteValue(StemEnglishPossessive.Value);
 		}
 
-		if (instance.TypeTable is not null)
+		if (TypeTable is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TypeTable = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.TypeTable, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("TypeTable");
+			writer.WriteInlineList(TypeTable, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.TypeTablePath is not null)
+		if (TypeTablePath is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TypeTablePath = ");
-			sb.Append("\"");
-			sb.Append(instance.TypeTablePath);
-			sb.Append("\"");
+			__init.Property("TypeTablePath");
+			writer.WriteString(TypeTablePath);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

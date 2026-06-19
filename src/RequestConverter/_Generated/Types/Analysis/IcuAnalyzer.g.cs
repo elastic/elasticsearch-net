@@ -25,26 +25,19 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class IcuAnalyzer : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Method = ");
-			Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTypeCodeFormatter.FormatCode(instance.Method, sb);
+			__init.Property("Method");
+			Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTypeCodeFormatter.FormatCode(Method, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mode = ");
-			Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationModeCodeFormatter.FormatCode(instance.Mode, sb);
+			__init.Property("Mode");
+			Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationModeCodeFormatter.FormatCode(Mode, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

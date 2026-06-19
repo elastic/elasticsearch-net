@@ -25,77 +25,56 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 public partial class ReadOnlyUrlRepositorySettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ChunkSize is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ChunkSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ChunkSize = ");
-			instance.ChunkSize.FormatCode(sb);
+			__init.Property("ChunkSize");
+			ChunkSize.FormatCode(writer);
 		}
 
-		if (instance.Compress is not null)
+		if (Compress is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Compress = ");
-			sb.Append(instance.Compress.Value ? "true" : "false");
+			__init.Property("Compress");
+			writer.WriteValue(Compress.Value);
 		}
 
-		if (instance.HttpMaxRetries is not null)
+		if (HttpMaxRetries is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HttpMaxRetries = ");
-			sb.Append(instance.HttpMaxRetries.Value);
+			__init.Property("HttpMaxRetries");
+			writer.WriteValue(HttpMaxRetries.Value);
 		}
 
-		if (instance.HttpSocketTimeout is not null)
+		if (HttpSocketTimeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HttpSocketTimeout = ");
-			instance.HttpSocketTimeout.FormatCode(sb);
+			__init.Property("HttpSocketTimeout");
+			HttpSocketTimeout.FormatCode(writer);
 		}
 
-		if (instance.MaxNumberOfSnapshots is not null)
+		if (MaxNumberOfSnapshots is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxNumberOfSnapshots = ");
-			sb.Append(instance.MaxNumberOfSnapshots.Value);
+			__init.Property("MaxNumberOfSnapshots");
+			writer.WriteValue(MaxNumberOfSnapshots.Value);
 		}
 
-		if (instance.MaxRestoreBytesPerSec is not null)
+		if (MaxRestoreBytesPerSec is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxRestoreBytesPerSec = ");
-			instance.MaxRestoreBytesPerSec.FormatCode(sb);
+			__init.Property("MaxRestoreBytesPerSec");
+			MaxRestoreBytesPerSec.FormatCode(writer);
 		}
 
-		if (instance.MaxSnapshotBytesPerSec is not null)
+		if (MaxSnapshotBytesPerSec is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxSnapshotBytesPerSec = ");
-			instance.MaxSnapshotBytesPerSec.FormatCode(sb);
+			__init.Property("MaxSnapshotBytesPerSec");
+			MaxSnapshotBytesPerSec.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Url = ");
-			sb.Append("\"");
-			sb.Append(instance.Url);
-			sb.Append("\"");
+			__init.Property("Url");
+			writer.WriteString(Url);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

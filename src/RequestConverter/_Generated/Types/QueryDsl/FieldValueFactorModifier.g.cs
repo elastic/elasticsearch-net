@@ -25,42 +25,42 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public static class FieldValueFactorModifierCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Ln:
-				sb.Append("FieldValueFactorModifier.Ln");
+				writer.Write("FieldValueFactorModifier.Ln");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Ln1p:
-				sb.Append("FieldValueFactorModifier.Ln1p");
+				writer.Write("FieldValueFactorModifier.Ln1p");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Ln2p:
-				sb.Append("FieldValueFactorModifier.Ln2p");
+				writer.Write("FieldValueFactorModifier.Ln2p");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Log:
-				sb.Append("FieldValueFactorModifier.Log");
+				writer.Write("FieldValueFactorModifier.Log");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Log1p:
-				sb.Append("FieldValueFactorModifier.Log1p");
+				writer.Write("FieldValueFactorModifier.Log1p");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Log2p:
-				sb.Append("FieldValueFactorModifier.Log2p");
+				writer.Write("FieldValueFactorModifier.Log2p");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.None:
-				sb.Append("FieldValueFactorModifier.None");
+				writer.Write("FieldValueFactorModifier.None");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Reciprocal:
-				sb.Append("FieldValueFactorModifier.Reciprocal");
+				writer.Write("FieldValueFactorModifier.Reciprocal");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Sqrt:
-				sb.Append("FieldValueFactorModifier.Sqrt");
+				writer.Write("FieldValueFactorModifier.Sqrt");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Square:
-				sb.Append("FieldValueFactorModifier.Square");
+				writer.Write("FieldValueFactorModifier.Square");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -25,115 +25,82 @@ namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
 public partial class ResponseItem : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Error is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Error is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Error = ");
-			instance.Error.FormatCode(sb);
+			__init.Property("Error");
+			Error.FormatCode(writer);
 		}
 
-		if (instance.FailureStore is not null)
+		if (FailureStore is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FailureStore = ");
-			Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatusCodeFormatter.FormatCode(instance.FailureStore.Value, sb);
+			__init.Property("FailureStore");
+			Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatusCodeFormatter.FormatCode(FailureStore.Value, writer);
 		}
 
-		if (instance.ForcedRefresh is not null)
+		if (ForcedRefresh is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ForcedRefresh = ");
-			sb.Append(instance.ForcedRefresh.Value ? "true" : "false");
+			__init.Property("ForcedRefresh");
+			writer.WriteValue(ForcedRefresh.Value);
 		}
 
-		if (instance.Get is not null)
+		if (Get is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Get = ");
-			instance.Get.FormatCode(sb);
+			__init.Property("Get");
+			Get.FormatCode(writer);
 		}
 
-		if (instance.Id is not null)
+		if (Id is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			sb.Append("\"");
-			sb.Append(instance.Id);
-			sb.Append("\"");
+			__init.Property("Id");
+			writer.WriteString(Id);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			sb.Append("\"");
-			sb.Append(instance.Index);
-			sb.Append("\"");
+			__init.Property("Index");
+			writer.WriteString(Index);
 		}
 
-		if (instance.PrimaryTerm is not null)
+		if (PrimaryTerm is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PrimaryTerm = ");
-			sb.Append(instance.PrimaryTerm.Value);
-			sb.Append("L");
+			__init.Property("PrimaryTerm");
+			writer.WriteValue(PrimaryTerm.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Result is not null)
+		if (Result is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Result = ");
-			sb.Append("\"");
-			sb.Append(instance.Result);
-			sb.Append("\"");
+			__init.Property("Result");
+			writer.WriteString(Result);
 		}
 
-		if (instance.SeqNo is not null)
+		if (SeqNo is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SeqNo = ");
-			sb.Append(instance.SeqNo.Value);
-			sb.Append("L");
+			__init.Property("SeqNo");
+			writer.WriteValue(SeqNo.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Shards is not null)
+		if (Shards is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Shards = ");
-			instance.Shards.FormatCode(sb);
+			__init.Property("Shards");
+			Shards.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Status = ");
-			sb.Append(instance.Status);
+			__init.Property("Status");
+			writer.WriteValue(Status);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append(instance.Version.Value);
-			sb.Append("L");
+			__init.Property("Version");
+			writer.WriteValue(Version.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

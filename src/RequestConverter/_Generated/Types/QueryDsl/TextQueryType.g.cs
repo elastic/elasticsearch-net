@@ -25,30 +25,30 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public static class TextQueryTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.BestFields:
-				sb.Append("TextQueryType.BestFields");
+				writer.Write("TextQueryType.BestFields");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.BoolPrefix:
-				sb.Append("TextQueryType.BoolPrefix");
+				writer.Write("TextQueryType.BoolPrefix");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.CrossFields:
-				sb.Append("TextQueryType.CrossFields");
+				writer.Write("TextQueryType.CrossFields");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.MostFields:
-				sb.Append("TextQueryType.MostFields");
+				writer.Write("TextQueryType.MostFields");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.Phrase:
-				sb.Append("TextQueryType.Phrase");
+				writer.Write("TextQueryType.Phrase");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.PhrasePrefix:
-				sb.Append("TextQueryType.PhrasePrefix");
+				writer.Write("TextQueryType.PhrasePrefix");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

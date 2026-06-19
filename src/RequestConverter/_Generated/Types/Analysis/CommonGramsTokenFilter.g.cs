@@ -25,58 +25,39 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class CommonGramsTokenFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CommonWords is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CommonWords is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CommonWords = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.CommonWords, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("CommonWords");
+			writer.WriteInlineList(CommonWords, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.CommonWordsPath is not null)
+		if (CommonWordsPath is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CommonWordsPath = ");
-			sb.Append("\"");
-			sb.Append(instance.CommonWordsPath);
-			sb.Append("\"");
+			__init.Property("CommonWordsPath");
+			writer.WriteString(CommonWordsPath);
 		}
 
-		if (instance.IgnoreCase is not null)
+		if (IgnoreCase is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreCase = ");
-			sb.Append(instance.IgnoreCase.Value ? "true" : "false");
+			__init.Property("IgnoreCase");
+			writer.WriteValue(IgnoreCase.Value);
 		}
 
-		if (instance.QueryMode is not null)
+		if (QueryMode is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryMode = ");
-			sb.Append(instance.QueryMode.Value ? "true" : "false");
+			__init.Property("QueryMode");
+			writer.WriteValue(QueryMode.Value);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

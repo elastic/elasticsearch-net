@@ -25,29 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class NodeInfoMemory : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			sb.Append("\"");
-			sb.Append(instance.Total);
-			sb.Append("\"");
+			__init.Property("Total");
+			writer.WriteString(Total);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalInBytes = ");
-			sb.Append(instance.TotalInBytes);
-			sb.Append("L");
+			__init.Property("TotalInBytes");
+			writer.WriteValue(TotalInBytes);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

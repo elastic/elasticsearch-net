@@ -25,38 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public partial class SimulateDocumentResult : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Doc is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Doc is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Doc = ");
-			instance.Doc.FormatCode(sb);
+			__init.Property("Doc");
+			Doc.FormatCode(writer);
 		}
 
-		if (instance.Error is not null)
+		if (Error is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Error = ");
-			instance.Error.FormatCode(sb);
+			__init.Property("Error");
+			Error.FormatCode(writer);
 		}
 
-		if (instance.ProcessorResults is not null)
+		if (ProcessorResults is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ProcessorResults = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.ProcessorResults, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("ProcessorResults");
+			writer.WriteInlineList(ProcessorResults, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

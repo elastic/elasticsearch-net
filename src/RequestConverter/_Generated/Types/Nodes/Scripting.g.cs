@@ -25,58 +25,43 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class Scripting : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CacheEvictions is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CacheEvictions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CacheEvictions = ");
-			sb.Append(instance.CacheEvictions.Value);
-			sb.Append("L");
+			__init.Property("CacheEvictions");
+			writer.WriteValue(CacheEvictions.Value);
+			writer.Write("L");
 		}
 
-		if (instance.CompilationLimitTriggered is not null)
+		if (CompilationLimitTriggered is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CompilationLimitTriggered = ");
-			sb.Append(instance.CompilationLimitTriggered.Value);
-			sb.Append("L");
+			__init.Property("CompilationLimitTriggered");
+			writer.WriteValue(CompilationLimitTriggered.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Compilations is not null)
+		if (Compilations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Compilations = ");
-			sb.Append(instance.Compilations.Value);
-			sb.Append("L");
+			__init.Property("Compilations");
+			writer.WriteValue(Compilations.Value);
+			writer.Write("L");
 		}
 
-		if (instance.CompilationsHistory is not null)
+		if (CompilationsHistory is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CompilationsHistory = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.CompilationsHistory, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append(v); sb.Append("L"); }, sb);
+			__init.Property("CompilationsHistory");
+			writer.Write("new() ");
+			writer.WriteInlineList(CompilationsHistory, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Contexts is not null)
+		if (Contexts is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Contexts = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Contexts, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Contexts");
+			writer.WriteInlineList(Contexts, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public static class DataframeStateCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.DataframeState instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.DataframeState instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Failed:
-				sb.Append("DataframeState.Failed");
+				writer.Write("DataframeState.Failed");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Started:
-				sb.Append("DataframeState.Started");
+				writer.Write("DataframeState.Started");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Starting:
-				sb.Append("DataframeState.Starting");
+				writer.Write("DataframeState.Starting");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Stopped:
-				sb.Append("DataframeState.Stopped");
+				writer.Write("DataframeState.Stopped");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Stopping:
-				sb.Append("DataframeState.Stopping");
+				writer.Write("DataframeState.Stopping");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

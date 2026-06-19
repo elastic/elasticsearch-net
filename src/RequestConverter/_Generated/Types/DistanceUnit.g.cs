@@ -25,39 +25,39 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class DistanceUnitCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.DistanceUnit instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.DistanceUnit instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.DistanceUnit.Centimeters:
-				sb.Append("DistanceUnit.Centimeters");
+				writer.Write("DistanceUnit.Centimeters");
 				break;
 			case Elastic.Clients.Elasticsearch.DistanceUnit.Feet:
-				sb.Append("DistanceUnit.Feet");
+				writer.Write("DistanceUnit.Feet");
 				break;
 			case Elastic.Clients.Elasticsearch.DistanceUnit.Inches:
-				sb.Append("DistanceUnit.Inches");
+				writer.Write("DistanceUnit.Inches");
 				break;
 			case Elastic.Clients.Elasticsearch.DistanceUnit.Kilometers:
-				sb.Append("DistanceUnit.Kilometers");
+				writer.Write("DistanceUnit.Kilometers");
 				break;
 			case Elastic.Clients.Elasticsearch.DistanceUnit.Meters:
-				sb.Append("DistanceUnit.Meters");
+				writer.Write("DistanceUnit.Meters");
 				break;
 			case Elastic.Clients.Elasticsearch.DistanceUnit.Miles:
-				sb.Append("DistanceUnit.Miles");
+				writer.Write("DistanceUnit.Miles");
 				break;
 			case Elastic.Clients.Elasticsearch.DistanceUnit.Millimeters:
-				sb.Append("DistanceUnit.Millimeters");
+				writer.Write("DistanceUnit.Millimeters");
 				break;
 			case Elastic.Clients.Elasticsearch.DistanceUnit.NauticMiles:
-				sb.Append("DistanceUnit.NauticMiles");
+				writer.Write("DistanceUnit.NauticMiles");
 				break;
 			case Elastic.Clients.Elasticsearch.DistanceUnit.Yards:
-				sb.Append("DistanceUnit.Yards");
+				writer.Write("DistanceUnit.Yards");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

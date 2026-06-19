@@ -25,87 +25,64 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class TrainedModelTreeNode : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.DecisionType is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (DecisionType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DecisionType = ");
-			sb.Append("\"");
-			sb.Append(instance.DecisionType);
-			sb.Append("\"");
+			__init.Property("DecisionType");
+			writer.WriteString(DecisionType);
 		}
 
-		if (instance.DefaultLeft is not null)
+		if (DefaultLeft is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DefaultLeft = ");
-			sb.Append(instance.DefaultLeft.Value ? "true" : "false");
+			__init.Property("DefaultLeft");
+			writer.WriteValue(DefaultLeft.Value);
 		}
 
-		if (instance.LeafValue is not null)
+		if (LeafValue is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LeafValue = ");
-			sb.Append(instance.LeafValue.Value);
-			sb.Append("d");
+			__init.Property("LeafValue");
+			writer.WriteValue(LeafValue.Value);
+			writer.Write("d");
 		}
 
-		if (instance.LeftChild is not null)
+		if (LeftChild is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LeftChild = ");
-			sb.Append(instance.LeftChild.Value);
+			__init.Property("LeftChild");
+			writer.WriteValue(LeftChild.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NodeIndex = ");
-			sb.Append(instance.NodeIndex);
+			__init.Property("NodeIndex");
+			writer.WriteValue(NodeIndex);
 		}
 
-		if (instance.RightChild is not null)
+		if (RightChild is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RightChild = ");
-			sb.Append(instance.RightChild.Value);
+			__init.Property("RightChild");
+			writer.WriteValue(RightChild.Value);
 		}
 
-		if (instance.SplitFeature is not null)
+		if (SplitFeature is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SplitFeature = ");
-			sb.Append(instance.SplitFeature.Value);
+			__init.Property("SplitFeature");
+			writer.WriteValue(SplitFeature.Value);
 		}
 
-		if (instance.SplitGain is not null)
+		if (SplitGain is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SplitGain = ");
-			sb.Append(instance.SplitGain.Value);
+			__init.Property("SplitGain");
+			writer.WriteValue(SplitGain.Value);
 		}
 
-		if (instance.Threshold is not null)
+		if (Threshold is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Threshold = ");
-			sb.Append(instance.Threshold.Value);
-			sb.Append("d");
+			__init.Property("Threshold");
+			writer.WriteValue(Threshold.Value);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

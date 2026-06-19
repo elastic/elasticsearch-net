@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public static class MemoryStatusCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus.HardLimit:
-				sb.Append("MemoryStatus.HardLimit");
+				writer.Write("MemoryStatus.HardLimit");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus.Ok:
-				sb.Append("MemoryStatus.Ok");
+				writer.Write("MemoryStatus.Ok");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus.SoftLimit:
-				sb.Append("MemoryStatus.SoftLimit");
+				writer.Write("MemoryStatus.SoftLimit");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

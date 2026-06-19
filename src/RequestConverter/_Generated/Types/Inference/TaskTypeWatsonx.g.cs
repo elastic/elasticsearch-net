@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class TaskTypeWatsonxCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.TaskTypeWatsonx instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.TaskTypeWatsonx instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeWatsonx.ChatCompletion:
-				sb.Append("TaskTypeWatsonx.ChatCompletion");
+				writer.Write("TaskTypeWatsonx.ChatCompletion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeWatsonx.Completion:
-				sb.Append("TaskTypeWatsonx.Completion");
+				writer.Write("TaskTypeWatsonx.Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeWatsonx.TextEmbedding:
-				sb.Append("TaskTypeWatsonx.TextEmbedding");
+				writer.Write("TaskTypeWatsonx.TextEmbedding");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

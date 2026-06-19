@@ -25,43 +25,32 @@ namespace Elastic.Clients.Elasticsearch.Graph;
 
 public partial class ExploreControls : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.SampleDiversity is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (SampleDiversity is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SampleDiversity = ");
-			instance.SampleDiversity.FormatCode(sb);
+			__init.Property("SampleDiversity");
+			SampleDiversity.FormatCode(writer);
 		}
 
-		if (instance.SampleSize is not null)
+		if (SampleSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SampleSize = ");
-			sb.Append(instance.SampleSize.Value);
+			__init.Property("SampleSize");
+			writer.WriteValue(SampleSize.Value);
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UseSignificance = ");
-			sb.Append(instance.UseSignificance ? "true" : "false");
+			__init.Property("UseSignificance");
+			writer.WriteValue(UseSignificance);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

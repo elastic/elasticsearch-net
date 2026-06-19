@@ -25,67 +25,48 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class UserProfileWithMetadata : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Data = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Data, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Data");
+			writer.Write("new() ");
+			writer.WriteInlineList(Data, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Doc = ");
-			instance.Doc.FormatCode(sb);
+			__init.Property("Doc");
+			Doc.FormatCode(writer);
 		}
 
-		if (instance.Enabled is not null)
+		if (Enabled is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Enabled = ");
-			sb.Append(instance.Enabled.Value ? "true" : "false");
+			__init.Property("Enabled");
+			writer.WriteValue(Enabled.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Labels = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Labels, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Labels");
+			writer.Write("new() ");
+			writer.WriteInlineList(Labels, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LastSynchronized = ");
-			sb.Append(instance.LastSynchronized);
-			sb.Append("L");
+			__init.Property("LastSynchronized");
+			writer.WriteValue(LastSynchronized);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Uid = ");
-			sb.Append("\"");
-			sb.Append(instance.Uid);
-			sb.Append("\"");
+			__init.Property("Uid");
+			writer.WriteString(Uid);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("User = ");
-			instance.User.FormatCode(sb);
+			__init.Property("User");
+			User.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

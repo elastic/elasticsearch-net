@@ -25,43 +25,38 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 
 public partial class GetAsyncSearchRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			instance.Id.FormatCode(sb);
+			__init.Property("Id");
+			Id.FormatCode(writer);
 		}
 
-		if (instance.KeepAlive is not null)
+		if (KeepAlive is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("KeepAlive = ");
-			instance.KeepAlive.FormatCode(sb);
+			__init.Property("KeepAlive");
+			KeepAlive.FormatCode(writer);
 		}
 
-		if (instance.TypedKeys is not null)
+		if (ReturnIntermediateResults is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TypedKeys = ");
-			sb.Append(instance.TypedKeys.Value ? "true" : "false");
+			__init.Property("ReturnIntermediateResults");
+			writer.WriteValue(ReturnIntermediateResults.Value);
 		}
 
-		if (instance.WaitForCompletionTimeout is not null)
+		if (TypedKeys is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WaitForCompletionTimeout = ");
-			instance.WaitForCompletionTimeout.FormatCode(sb);
+			__init.Property("TypedKeys");
+			writer.WriteValue(TypedKeys.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		if (WaitForCompletionTimeout is not null)
+		{
+			__init.Property("WaitForCompletionTimeout");
+			WaitForCompletionTimeout.FormatCode(writer);
+		}
+
+		__init.Dispose();
 	}
 }

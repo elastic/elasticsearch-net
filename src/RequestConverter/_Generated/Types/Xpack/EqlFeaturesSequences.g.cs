@@ -25,54 +25,39 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class EqlFeaturesSequences : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SequenceMaxspan = ");
-			sb.Append(instance.SequenceMaxspan);
+			__init.Property("SequenceMaxspan");
+			writer.WriteValue(SequenceMaxspan);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SequenceQueriesFiveOrMore = ");
-			sb.Append(instance.SequenceQueriesFiveOrMore);
+			__init.Property("SequenceQueriesFiveOrMore");
+			writer.WriteValue(SequenceQueriesFiveOrMore);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SequenceQueriesFour = ");
-			sb.Append(instance.SequenceQueriesFour);
+			__init.Property("SequenceQueriesFour");
+			writer.WriteValue(SequenceQueriesFour);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SequenceQueriesThree = ");
-			sb.Append(instance.SequenceQueriesThree);
+			__init.Property("SequenceQueriesThree");
+			writer.WriteValue(SequenceQueriesThree);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SequenceQueriesTwo = ");
-			sb.Append(instance.SequenceQueriesTwo);
+			__init.Property("SequenceQueriesTwo");
+			writer.WriteValue(SequenceQueriesTwo);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SequenceUntil = ");
-			sb.Append(instance.SequenceUntil);
+			__init.Property("SequenceUntil");
+			writer.WriteValue(SequenceUntil);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,76 +25,57 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class ChangeType : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Dip is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Dip is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Dip = ");
-			instance.Dip.FormatCode(sb);
+			__init.Property("Dip");
+			Dip.FormatCode(writer);
 		}
 
-		if (instance.DistributionChange is not null)
+		if (DistributionChange is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DistributionChange = ");
-			instance.DistributionChange.FormatCode(sb);
+			__init.Property("DistributionChange");
+			DistributionChange.FormatCode(writer);
 		}
 
-		if (instance.Indeterminable is not null)
+		if (Indeterminable is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indeterminable = ");
-			instance.Indeterminable.FormatCode(sb);
+			__init.Property("Indeterminable");
+			Indeterminable.FormatCode(writer);
 		}
 
-		if (instance.NonStationary is not null)
+		if (NonStationary is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NonStationary = ");
-			instance.NonStationary.FormatCode(sb);
+			__init.Property("NonStationary");
+			NonStationary.FormatCode(writer);
 		}
 
-		if (instance.Spike is not null)
+		if (Spike is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Spike = ");
-			instance.Spike.FormatCode(sb);
+			__init.Property("Spike");
+			Spike.FormatCode(writer);
 		}
 
-		if (instance.Stationary is not null)
+		if (Stationary is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Stationary = ");
-			instance.Stationary.FormatCode(sb);
+			__init.Property("Stationary");
+			Stationary.FormatCode(writer);
 		}
 
-		if (instance.StepChange is not null)
+		if (StepChange is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StepChange = ");
-			instance.StepChange.FormatCode(sb);
+			__init.Property("StepChange");
+			StepChange.FormatCode(writer);
 		}
 
-		if (instance.TrendChange is not null)
+		if (TrendChange is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TrendChange = ");
-			instance.TrendChange.FormatCode(sb);
+			__init.Property("TrendChange");
+			TrendChange.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

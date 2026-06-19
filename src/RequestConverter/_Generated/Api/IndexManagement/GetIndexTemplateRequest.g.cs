@@ -25,52 +25,39 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class GetIndexTemplateRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Name is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Name is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			instance.Name.FormatCode(sb);
+			__init.Property("Name");
+			Name.FormatCode(writer);
 		}
 
-		if (instance.FlatSettings is not null)
+		if (FlatSettings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FlatSettings = ");
-			sb.Append(instance.FlatSettings.Value ? "true" : "false");
+			__init.Property("FlatSettings");
+			writer.WriteValue(FlatSettings.Value);
 		}
 
-		if (instance.IncludeDefaults is not null)
+		if (IncludeDefaults is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IncludeDefaults = ");
-			sb.Append(instance.IncludeDefaults.Value ? "true" : "false");
+			__init.Property("IncludeDefaults");
+			writer.WriteValue(IncludeDefaults.Value);
 		}
 #pragma warning disable CS0618
-		if (instance.Local is not null)
+		if (Local is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Local = ");
-			sb.Append(instance.Local.Value ? "true" : "false");
+			__init.Property("Local");
+			writer.WriteValue(Local.Value);
 		}
 #pragma warning restore CS0618
-		if (instance.MasterTimeout is not null)
+		if (MasterTimeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MasterTimeout = ");
-			instance.MasterTimeout.FormatCode(sb);
+			__init.Property("MasterTimeout");
+			MasterTimeout.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

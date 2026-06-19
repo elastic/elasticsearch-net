@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public static class TranslogDurabilityCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability.Async:
-				sb.Append("TranslogDurability.Async");
+				writer.Write("TranslogDurability.Async");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability.Request:
-				sb.Append("TranslogDurability.Request");
+				writer.Write("TranslogDurability.Request");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

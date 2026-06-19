@@ -25,35 +25,34 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public readonly partial struct StorageType : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		if (instance == Elastic.Clients.Elasticsearch.IndexManagement.StorageType.Fs)
+		if (this == Elastic.Clients.Elasticsearch.IndexManagement.StorageType.Fs)
 		{
-			sb.Append("StorageType.Fs");
+			writer.Write("StorageType.Fs");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.IndexManagement.StorageType.Hybridfs)
+		if (this == Elastic.Clients.Elasticsearch.IndexManagement.StorageType.Hybridfs)
 		{
-			sb.Append("StorageType.Hybridfs");
+			writer.Write("StorageType.Hybridfs");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.IndexManagement.StorageType.Mmapfs)
+		if (this == Elastic.Clients.Elasticsearch.IndexManagement.StorageType.Mmapfs)
 		{
-			sb.Append("StorageType.Mmapfs");
+			writer.Write("StorageType.Mmapfs");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.IndexManagement.StorageType.Niofs)
+		if (this == Elastic.Clients.Elasticsearch.IndexManagement.StorageType.Niofs)
 		{
-			sb.Append("StorageType.Niofs");
+			writer.Write("StorageType.Niofs");
 			return;
 		}
 
-		sb.Append("new StorageType(\"");
-		sb.Append(instance.Value);
-		sb.Append("\")");
+		writer.Write("new StorageType(\"");
+		writer.Write(Value);
+		writer.Write("\")");
 	}
 }

@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
 public static class OperationTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.Bulk.OperationType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.Bulk.OperationType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Create:
-				sb.Append("OperationType.Create");
+				writer.Write("OperationType.Create");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Delete:
-				sb.Append("OperationType.Delete");
+				writer.Write("OperationType.Delete");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Index:
-				sb.Append("OperationType.Index");
+				writer.Write("OperationType.Index");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Update:
-				sb.Append("OperationType.Update");
+				writer.Write("OperationType.Update");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

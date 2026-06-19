@@ -25,30 +25,19 @@ namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
 public partial class Acknowledgement : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("License = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.License, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("License");
+			writer.WriteInlineList(License, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Message = ");
-			sb.Append("\"");
-			sb.Append(instance.Message);
-			sb.Append("\"");
+			__init.Property("Message");
+			writer.WriteString(Message);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

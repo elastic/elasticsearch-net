@@ -25,52 +25,33 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class NodeInfoPath : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Data is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Data is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Data = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Data, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Data");
+			writer.WriteInlineList(Data, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Home is not null)
+		if (Home is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Home = ");
-			sb.Append("\"");
-			sb.Append(instance.Home);
-			sb.Append("\"");
+			__init.Property("Home");
+			writer.WriteString(Home);
 		}
 
-		if (instance.Logs is not null)
+		if (Logs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Logs = ");
-			sb.Append("\"");
-			sb.Append(instance.Logs);
-			sb.Append("\"");
+			__init.Property("Logs");
+			writer.WriteString(Logs);
 		}
 
-		if (instance.Repo is not null)
+		if (Repo is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Repo = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Repo, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Repo");
+			writer.WriteInlineList(Repo, (w, item) => { w.WriteString(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,37 +25,28 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class TokenPruningConfig : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.OnlyScorePrunedTokens is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (OnlyScorePrunedTokens is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OnlyScorePrunedTokens = ");
-			sb.Append(instance.OnlyScorePrunedTokens.Value ? "true" : "false");
+			__init.Property("OnlyScorePrunedTokens");
+			writer.WriteValue(OnlyScorePrunedTokens.Value);
 		}
 
-		if (instance.TokensFreqRatioThreshold is not null)
+		if (TokensFreqRatioThreshold is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TokensFreqRatioThreshold = ");
-			sb.Append(instance.TokensFreqRatioThreshold.Value);
+			__init.Property("TokensFreqRatioThreshold");
+			writer.WriteValue(TokensFreqRatioThreshold.Value);
 		}
 
-		if (instance.TokensWeightThreshold is not null)
+		if (TokensWeightThreshold is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TokensWeightThreshold = ");
-			sb.Append(instance.TokensWeightThreshold.Value);
-			sb.Append("f");
+			__init.Property("TokensWeightThreshold");
+			writer.WriteValue(TokensWeightThreshold.Value);
+			writer.Write("f");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

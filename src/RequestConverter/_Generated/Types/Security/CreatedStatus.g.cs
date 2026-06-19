@@ -25,19 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class CreatedStatus : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Created = ");
-			sb.Append(instance.Created ? "true" : "false");
+			__init.Property("Created");
+			writer.WriteValue(Created);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,40 +25,27 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class TransformAuthorization : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ApiKey is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ApiKey is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ApiKey = ");
-			instance.ApiKey.FormatCode(sb);
+			__init.Property("ApiKey");
+			ApiKey.FormatCode(writer);
 		}
 
-		if (instance.Roles is not null)
+		if (Roles is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Roles = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Roles, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Roles");
+			writer.WriteInlineList(Roles, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.ServiceAccount is not null)
+		if (ServiceAccount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ServiceAccount = ");
-			sb.Append("\"");
-			sb.Append(instance.ServiceAccount);
-			sb.Append("\"");
+			__init.Property("ServiceAccount");
+			writer.WriteString(ServiceAccount);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

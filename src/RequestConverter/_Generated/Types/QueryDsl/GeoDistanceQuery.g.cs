@@ -25,78 +25,55 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class GeoDistanceQuery : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Boost is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Boost is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Boost = ");
-			sb.Append(instance.Boost.Value);
-			sb.Append("f");
+			__init.Property("Boost");
+			writer.WriteValue(Boost.Value);
+			writer.Write("f");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Distance = ");
-			sb.Append("\"");
-			sb.Append(instance.Distance);
-			sb.Append("\"");
+			__init.Property("Distance");
+			writer.WriteString(Distance);
 		}
 
-		if (instance.DistanceType is not null)
+		if (DistanceType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DistanceType = ");
-			Elastic.Clients.Elasticsearch.GeoDistanceTypeCodeFormatter.FormatCode(instance.DistanceType.Value, sb);
+			__init.Property("DistanceType");
+			Elastic.Clients.Elasticsearch.GeoDistanceTypeCodeFormatter.FormatCode(DistanceType.Value, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.IgnoreUnmapped is not null)
+		if (IgnoreUnmapped is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreUnmapped = ");
-			sb.Append(instance.IgnoreUnmapped.Value ? "true" : "false");
+			__init.Property("IgnoreUnmapped");
+			writer.WriteValue(IgnoreUnmapped.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Location = ");
-			instance.Location.FormatCode(sb);
+			__init.Property("Location");
+			Location.FormatCode(writer);
 		}
 
-		if (instance.QueryName is not null)
+		if (QueryName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryName = ");
-			sb.Append("\"");
-			sb.Append(instance.QueryName);
-			sb.Append("\"");
+			__init.Property("QueryName");
+			writer.WriteString(QueryName);
 		}
 
-		if (instance.ValidationMethod is not null)
+		if (ValidationMethod is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ValidationMethod = ");
-			Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethodCodeFormatter.FormatCode(instance.ValidationMethod.Value, sb);
+			__init.Property("ValidationMethod");
+			Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethodCodeFormatter.FormatCode(ValidationMethod.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

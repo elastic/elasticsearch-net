@@ -25,67 +25,50 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class IoStatDevice : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.DeviceName is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (DeviceName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DeviceName = ");
-			sb.Append("\"");
-			sb.Append(instance.DeviceName);
-			sb.Append("\"");
+			__init.Property("DeviceName");
+			writer.WriteString(DeviceName);
 		}
 
-		if (instance.Operations is not null)
+		if (Operations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Operations = ");
-			sb.Append(instance.Operations.Value);
-			sb.Append("L");
+			__init.Property("Operations");
+			writer.WriteValue(Operations.Value);
+			writer.Write("L");
 		}
 
-		if (instance.ReadKilobytes is not null)
+		if (ReadKilobytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReadKilobytes = ");
-			sb.Append(instance.ReadKilobytes.Value);
-			sb.Append("L");
+			__init.Property("ReadKilobytes");
+			writer.WriteValue(ReadKilobytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.ReadOperations is not null)
+		if (ReadOperations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReadOperations = ");
-			sb.Append(instance.ReadOperations.Value);
-			sb.Append("L");
+			__init.Property("ReadOperations");
+			writer.WriteValue(ReadOperations.Value);
+			writer.Write("L");
 		}
 
-		if (instance.WriteKilobytes is not null)
+		if (WriteKilobytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WriteKilobytes = ");
-			sb.Append(instance.WriteKilobytes.Value);
-			sb.Append("L");
+			__init.Property("WriteKilobytes");
+			writer.WriteValue(WriteKilobytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.WriteOperations is not null)
+		if (WriteOperations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WriteOperations = ");
-			sb.Append(instance.WriteOperations.Value);
-			sb.Append("L");
+			__init.Property("WriteOperations");
+			writer.WriteValue(WriteOperations.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

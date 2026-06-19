@@ -25,43 +25,32 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class DeleteInferenceRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InferenceId = ");
-			instance.InferenceId.FormatCode(sb);
+			__init.Property("InferenceId");
+			InferenceId.FormatCode(writer);
 		}
 
-		if (instance.TaskType is not null)
+		if (TaskType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TaskType = ");
-			Elastic.Clients.Elasticsearch.Inference.TaskTypeCodeFormatter.FormatCode(instance.TaskType.Value, sb);
+			__init.Property("TaskType");
+			Elastic.Clients.Elasticsearch.Inference.TaskTypeCodeFormatter.FormatCode(TaskType.Value, writer);
 		}
 
-		if (instance.DryRun is not null)
+		if (DryRun is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DryRun = ");
-			sb.Append(instance.DryRun.Value ? "true" : "false");
+			__init.Property("DryRun");
+			writer.WriteValue(DryRun.Value);
 		}
 
-		if (instance.Force is not null)
+		if (Force is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Force = ");
-			sb.Append(instance.Force.Value ? "true" : "false");
+			__init.Property("Force");
+			writer.WriteValue(Force.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

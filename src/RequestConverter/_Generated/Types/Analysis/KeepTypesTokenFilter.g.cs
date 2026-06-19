@@ -25,39 +25,26 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class KeepTypesTokenFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Mode is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Mode is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mode = ");
-			Elastic.Clients.Elasticsearch.Analysis.KeepTypesModeCodeFormatter.FormatCode(instance.Mode.Value, sb);
+			__init.Property("Mode");
+			Elastic.Clients.Elasticsearch.Analysis.KeepTypesModeCodeFormatter.FormatCode(Mode.Value, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Types = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Types, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Types");
+			writer.WriteInlineList(Types, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

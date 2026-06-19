@@ -25,38 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class NodesUsageRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Metric is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Metric is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Metric = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Metric, (item, sb) => { Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetricCodeFormatter.FormatCode(item, sb); }, sb);
-			sb.Append("]");
+			__init.Property("Metric");
+			writer.WriteInlineList(Metric, (w, item) => { Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetricCodeFormatter.FormatCode(item, w); });
 		}
 
-		if (instance.NodeId is not null)
+		if (NodeId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NodeId = ");
-			instance.NodeId.FormatCode(sb);
+			__init.Property("NodeId");
+			NodeId.FormatCode(writer);
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

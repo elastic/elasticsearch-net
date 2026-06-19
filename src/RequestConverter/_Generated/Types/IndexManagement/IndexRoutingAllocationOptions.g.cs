@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public static class IndexRoutingAllocationOptionsCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.All:
-				sb.Append("IndexRoutingAllocationOptions.All");
+				writer.Write("IndexRoutingAllocationOptions.All");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.NewPrimaries:
-				sb.Append("IndexRoutingAllocationOptions.NewPrimaries");
+				writer.Write("IndexRoutingAllocationOptions.NewPrimaries");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.None:
-				sb.Append("IndexRoutingAllocationOptions.None");
+				writer.Write("IndexRoutingAllocationOptions.None");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.Primaries:
-				sb.Append("IndexRoutingAllocationOptions.Primaries");
+				writer.Write("IndexRoutingAllocationOptions.Primaries");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

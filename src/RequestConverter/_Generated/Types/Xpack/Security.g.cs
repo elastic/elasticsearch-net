@@ -25,113 +25,82 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class Security : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Anonymous = ");
-			instance.Anonymous.FormatCode(sb);
+			__init.Property("Anonymous");
+			Anonymous.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ApiKeyService = ");
-			instance.ApiKeyService.FormatCode(sb);
+			__init.Property("ApiKeyService");
+			ApiKeyService.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Audit = ");
-			instance.Audit.FormatCode(sb);
+			__init.Property("Audit");
+			Audit.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Available = ");
-			sb.Append(instance.Available ? "true" : "false");
+			__init.Property("Available");
+			writer.WriteValue(Available);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Enabled = ");
-			sb.Append(instance.Enabled ? "true" : "false");
+			__init.Property("Enabled");
+			writer.WriteValue(Enabled);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fips140 = ");
-			instance.Fips140.FormatCode(sb);
+			__init.Property("Fips140");
+			Fips140.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ipfilter = ");
-			instance.Ipfilter.FormatCode(sb);
+			__init.Property("Ipfilter");
+			Ipfilter.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OperatorPrivileges = ");
-			instance.OperatorPrivileges.FormatCode(sb);
+			__init.Property("OperatorPrivileges");
+			OperatorPrivileges.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Realms = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Realms, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Realms");
+			writer.Write("new() ");
+			writer.WriteInlineList(Realms, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RoleMapping = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.RoleMapping, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("RoleMapping");
+			writer.Write("new() ");
+			writer.WriteInlineList(RoleMapping, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Roles = ");
-			instance.Roles.FormatCode(sb);
+			__init.Property("Roles");
+			Roles.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ssl = ");
-			instance.Ssl.FormatCode(sb);
+			__init.Property("Ssl");
+			Ssl.FormatCode(writer);
 		}
 
-		if (instance.SystemKey is not null)
+		if (SystemKey is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SystemKey = ");
-			instance.SystemKey.FormatCode(sb);
+			__init.Property("SystemKey");
+			SystemKey.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TokenService = ");
-			instance.TokenService.FormatCode(sb);
+			__init.Property("TokenService");
+			TokenService.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

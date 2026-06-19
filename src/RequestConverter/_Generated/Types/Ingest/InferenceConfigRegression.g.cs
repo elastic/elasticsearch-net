@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public partial class InferenceConfigRegression : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.NumTopFeatureImportanceValues is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (NumTopFeatureImportanceValues is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumTopFeatureImportanceValues = ");
-			sb.Append(instance.NumTopFeatureImportanceValues.Value);
+			__init.Property("NumTopFeatureImportanceValues");
+			writer.WriteValue(NumTopFeatureImportanceValues.Value);
 		}
 
-		if (instance.ResultsField is not null)
+		if (ResultsField is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ResultsField = ");
-			instance.ResultsField.FormatCode(sb);
+			__init.Property("ResultsField");
+			ResultsField.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

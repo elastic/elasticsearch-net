@@ -25,52 +25,39 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataframeAnalysisFeatureProcessor : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.FrequencyEncoding is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (FrequencyEncoding is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FrequencyEncoding = ");
-			instance.FrequencyEncoding.FormatCode(sb);
+			__init.Property("FrequencyEncoding");
+			FrequencyEncoding.FormatCode(writer);
 		}
 
-		if (instance.MultiEncoding is not null)
+		if (MultiEncoding is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MultiEncoding = ");
-			instance.MultiEncoding.FormatCode(sb);
+			__init.Property("MultiEncoding");
+			MultiEncoding.FormatCode(writer);
 		}
 
-		if (instance.NGramEncoding is not null)
+		if (NGramEncoding is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NGramEncoding = ");
-			instance.NGramEncoding.FormatCode(sb);
+			__init.Property("NGramEncoding");
+			NGramEncoding.FormatCode(writer);
 		}
 
-		if (instance.OneHotEncoding is not null)
+		if (OneHotEncoding is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OneHotEncoding = ");
-			instance.OneHotEncoding.FormatCode(sb);
+			__init.Property("OneHotEncoding");
+			OneHotEncoding.FormatCode(writer);
 		}
 
-		if (instance.TargetMeanEncoding is not null)
+		if (TargetMeanEncoding is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TargetMeanEncoding = ");
-			instance.TargetMeanEncoding.FormatCode(sb);
+			__init.Property("TargetMeanEncoding");
+			TargetMeanEncoding.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,59 +25,42 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class SerializedClusterStateDetail : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CompressedSize is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CompressedSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CompressedSize = ");
-			sb.Append("\"");
-			sb.Append(instance.CompressedSize);
-			sb.Append("\"");
+			__init.Property("CompressedSize");
+			writer.WriteString(CompressedSize);
 		}
 
-		if (instance.CompressedSizeInBytes is not null)
+		if (CompressedSizeInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CompressedSizeInBytes = ");
-			sb.Append(instance.CompressedSizeInBytes.Value);
-			sb.Append("L");
+			__init.Property("CompressedSizeInBytes");
+			writer.WriteValue(CompressedSizeInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Count is not null)
+		if (Count is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count.Value);
-			sb.Append("L");
+			__init.Property("Count");
+			writer.WriteValue(Count.Value);
+			writer.Write("L");
 		}
 
-		if (instance.UncompressedSize is not null)
+		if (UncompressedSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UncompressedSize = ");
-			sb.Append("\"");
-			sb.Append(instance.UncompressedSize);
-			sb.Append("\"");
+			__init.Property("UncompressedSize");
+			writer.WriteString(UncompressedSize);
 		}
 
-		if (instance.UncompressedSizeInBytes is not null)
+		if (UncompressedSizeInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UncompressedSizeInBytes = ");
-			sb.Append(instance.UncompressedSizeInBytes.Value);
-			sb.Append("L");
+			__init.Property("UncompressedSizeInBytes");
+			writer.WriteValue(UncompressedSizeInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

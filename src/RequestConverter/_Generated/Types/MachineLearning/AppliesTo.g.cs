@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public static class AppliesToCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo.Actual:
-				sb.Append("AppliesTo.Actual");
+				writer.Write("AppliesTo.Actual");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo.DiffFromTypical:
-				sb.Append("AppliesTo.DiffFromTypical");
+				writer.Write("AppliesTo.DiffFromTypical");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo.Time:
-				sb.Append("AppliesTo.Time");
+				writer.Write("AppliesTo.Time");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo.Typical:
-				sb.Append("AppliesTo.Typical");
+				writer.Write("AppliesTo.Typical");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

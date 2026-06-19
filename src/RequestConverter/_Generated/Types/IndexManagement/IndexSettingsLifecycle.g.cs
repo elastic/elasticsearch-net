@@ -25,71 +25,52 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class IndexSettingsLifecycle : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.IndexingComplete is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (IndexingComplete is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexingComplete = ");
-			sb.Append(instance.IndexingComplete.Value ? "true" : "false");
+			__init.Property("IndexingComplete");
+			writer.WriteValue(IndexingComplete.Value);
 		}
 
-		if (instance.Name is not null)
+		if (Name is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			instance.Name.FormatCode(sb);
+			__init.Property("Name");
+			Name.FormatCode(writer);
 		}
 
-		if (instance.OriginationDate is not null)
+		if (OriginationDate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OriginationDate = ");
-			sb.Append(instance.OriginationDate.Value);
-			sb.Append("L");
+			__init.Property("OriginationDate");
+			writer.WriteValue(OriginationDate.Value);
+			writer.Write("L");
 		}
 
-		if (instance.ParseOriginationDate is not null)
+		if (ParseOriginationDate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ParseOriginationDate = ");
-			sb.Append(instance.ParseOriginationDate.Value ? "true" : "false");
+			__init.Property("ParseOriginationDate");
+			writer.WriteValue(ParseOriginationDate.Value);
 		}
 
-		if (instance.PreferIlm is not null)
+		if (PreferIlm is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PreferIlm = ");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<bool, string>(instance.PreferIlm, sb);
+			__init.Property("PreferIlm");
+			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<bool, string>(PreferIlm, writer);
 		}
 
-		if (instance.RolloverAlias is not null)
+		if (RolloverAlias is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RolloverAlias = ");
-			sb.Append("\"");
-			sb.Append(instance.RolloverAlias);
-			sb.Append("\"");
+			__init.Property("RolloverAlias");
+			writer.WriteString(RolloverAlias);
 		}
 
-		if (instance.Step is not null)
+		if (Step is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Step = ");
-			instance.Step.FormatCode(sb);
+			__init.Property("Step");
+			Step.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

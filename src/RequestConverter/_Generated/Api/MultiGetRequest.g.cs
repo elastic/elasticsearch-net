@@ -25,112 +25,81 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class MultiGetRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Index is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Index is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			instance.Index.FormatCode(sb);
+			__init.Property("Index");
+			Index.FormatCode(writer);
 		}
 
-		if (instance.ForceSyntheticSource is not null)
+		if (ForceSyntheticSource is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ForceSyntheticSource = ");
-			sb.Append(instance.ForceSyntheticSource.Value ? "true" : "false");
+			__init.Property("ForceSyntheticSource");
+			writer.WriteValue(ForceSyntheticSource.Value);
 		}
 
-		if (instance.Preference is not null)
+		if (Preference is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Preference = ");
-			sb.Append("\"");
-			sb.Append(instance.Preference);
-			sb.Append("\"");
+			__init.Property("Preference");
+			writer.WriteString(Preference);
 		}
 
-		if (instance.Realtime is not null)
+		if (Realtime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Realtime = ");
-			sb.Append(instance.Realtime.Value ? "true" : "false");
+			__init.Property("Realtime");
+			writer.WriteValue(Realtime.Value);
 		}
 
-		if (instance.Refresh is not null)
+		if (Refresh is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Refresh = ");
-			sb.Append(instance.Refresh.Value ? "true" : "false");
+			__init.Property("Refresh");
+			writer.WriteValue(Refresh.Value);
 		}
 
-		if (instance.Routing is not null)
+		if (Routing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Routing = ");
-			instance.Routing.FormatCode(sb);
+			__init.Property("Routing");
+			Routing.FormatCode(writer);
 		}
 
-		if (instance.Source is not null)
+		if (Source is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Source = ");
-			instance.Source.FormatCode(sb);
+			__init.Property("Source");
+			Source.FormatCode(writer);
 		}
 
-		if (instance.SourceExcludes is not null)
+		if (SourceExcludes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SourceExcludes = ");
-			instance.SourceExcludes.FormatCode(sb);
+			__init.Property("SourceExcludes");
+			SourceExcludes.FormatCode(writer);
 		}
 
-		if (instance.SourceIncludes is not null)
+		if (SourceIncludes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SourceIncludes = ");
-			instance.SourceIncludes.FormatCode(sb);
+			__init.Property("SourceIncludes");
+			SourceIncludes.FormatCode(writer);
 		}
 
-		if (instance.StoredFields is not null)
+		if (StoredFields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StoredFields = ");
-			instance.StoredFields.FormatCode(sb);
+			__init.Property("StoredFields");
+			StoredFields.FormatCode(writer);
 		}
 
-		if (instance.Docs is not null)
+		if (Docs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Docs = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Docs, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Docs");
+			writer.WriteInlineList(Docs, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Ids is not null)
+		if (Ids is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ids = ");
-			instance.Ids.FormatCode(sb);
+			__init.Property("Ids");
+			Ids.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

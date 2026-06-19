@@ -25,96 +25,73 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class SpanQuery : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.SpanContaining is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (SpanContaining is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SpanContaining = ");
-			instance.SpanContaining.FormatCode(sb);
+			__init.Property("SpanContaining");
+			SpanContaining.FormatCode(writer);
 		}
 
-		if (instance.SpanFieldMasking is not null)
+		if (SpanFieldMasking is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SpanFieldMasking = ");
-			instance.SpanFieldMasking.FormatCode(sb);
+			__init.Property("SpanFieldMasking");
+			SpanFieldMasking.FormatCode(writer);
 		}
 
-		if (instance.SpanFirst is not null)
+		if (SpanFirst is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SpanFirst = ");
-			instance.SpanFirst.FormatCode(sb);
+			__init.Property("SpanFirst");
+			SpanFirst.FormatCode(writer);
 		}
 
-		if (instance.SpanGap is not null)
+		if (SpanGap is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SpanGap = ");
-			sb.Append("new(");
-			instance.SpanGap.Value.Key.FormatCode(sb);
-			sb.Append(", ");
-			sb.Append(instance.SpanGap.Value.Value);
-			sb.Append(")");
+			__init.Property("SpanGap");
+			writer.Write("new(");
+			SpanGap.Value.Key.FormatCode(writer);
+			writer.Write(", ");
+			writer.WriteValue(SpanGap.Value.Value);
+			writer.Write(")");
 		}
 
-		if (instance.SpanMulti is not null)
+		if (SpanMulti is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SpanMulti = ");
-			instance.SpanMulti.FormatCode(sb);
+			__init.Property("SpanMulti");
+			SpanMulti.FormatCode(writer);
 		}
 
-		if (instance.SpanNear is not null)
+		if (SpanNear is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SpanNear = ");
-			instance.SpanNear.FormatCode(sb);
+			__init.Property("SpanNear");
+			SpanNear.FormatCode(writer);
 		}
 
-		if (instance.SpanNot is not null)
+		if (SpanNot is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SpanNot = ");
-			instance.SpanNot.FormatCode(sb);
+			__init.Property("SpanNot");
+			SpanNot.FormatCode(writer);
 		}
 
-		if (instance.SpanOr is not null)
+		if (SpanOr is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SpanOr = ");
-			instance.SpanOr.FormatCode(sb);
+			__init.Property("SpanOr");
+			SpanOr.FormatCode(writer);
 		}
 
-		if (instance.SpanTerm is not null)
+		if (SpanTerm is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SpanTerm = ");
-			instance.SpanTerm.FormatCode(sb);
+			__init.Property("SpanTerm");
+			SpanTerm.FormatCode(writer);
 		}
 
-		if (instance.SpanWithin is not null)
+		if (SpanWithin is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SpanWithin = ");
-			instance.SpanWithin.FormatCode(sb);
+			__init.Property("SpanWithin");
+			SpanWithin.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

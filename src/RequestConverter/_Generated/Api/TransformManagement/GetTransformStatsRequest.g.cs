@@ -25,53 +25,40 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
 public partial class GetTransformStatsRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TransformId = ");
-			instance.TransformId.FormatCode(sb);
+			__init.Property("TransformId");
+			TransformId.FormatCode(writer);
 		}
 
-		if (instance.AllowNoMatch is not null)
+		if (AllowNoMatch is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowNoMatch = ");
-			sb.Append(instance.AllowNoMatch.Value ? "true" : "false");
+			__init.Property("AllowNoMatch");
+			writer.WriteValue(AllowNoMatch.Value);
 		}
 
-		if (instance.From is not null)
+		if (From is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("From = ");
-			sb.Append(instance.From.Value);
-			sb.Append("L");
+			__init.Property("From");
+			writer.WriteValue(From.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append(instance.Size.Value);
-			sb.Append("L");
+			__init.Property("Size");
+			writer.WriteValue(Size.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

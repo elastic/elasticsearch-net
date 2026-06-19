@@ -25,77 +25,50 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 public partial class Status : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IncludeGlobalState = ");
-			sb.Append(instance.IncludeGlobalState ? "true" : "false");
+			__init.Property("IncludeGlobalState");
+			writer.WriteValue(IncludeGlobalState);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indices = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Indices, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Indices");
+			writer.Write("new() ");
+			writer.WriteInlineList(Indices, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Repository = ");
-			sb.Append("\"");
-			sb.Append(instance.Repository);
-			sb.Append("\"");
+			__init.Property("Repository");
+			writer.WriteString(Repository);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShardsStats = ");
-			instance.ShardsStats.FormatCode(sb);
+			__init.Property("ShardsStats");
+			ShardsStats.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Snapshot = ");
-			sb.Append("\"");
-			sb.Append(instance.Snapshot);
-			sb.Append("\"");
+			__init.Property("Snapshot");
+			writer.WriteString(Snapshot);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("State = ");
-			sb.Append("\"");
-			sb.Append(instance.State);
-			sb.Append("\"");
+			__init.Property("State");
+			writer.WriteString(State);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Stats = ");
-			instance.Stats.FormatCode(sb);
+			__init.Property("Stats");
+			Stats.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Uuid = ");
-			sb.Append("\"");
-			sb.Append(instance.Uuid);
-			sb.Append("\"");
+			__init.Property("Uuid");
+			writer.WriteString(Uuid);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

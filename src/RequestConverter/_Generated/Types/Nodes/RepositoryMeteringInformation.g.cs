@@ -25,84 +25,57 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class RepositoryMeteringInformation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Archived = ");
-			sb.Append(instance.Archived ? "true" : "false");
+			__init.Property("Archived");
+			writer.WriteValue(Archived);
 		}
 
-		if (instance.ClusterVersion is not null)
+		if (ClusterVersion is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ClusterVersion = ");
-			sb.Append(instance.ClusterVersion.Value);
-			sb.Append("L");
+			__init.Property("ClusterVersion");
+			writer.WriteValue(ClusterVersion.Value);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RepositoryEphemeralId = ");
-			sb.Append("\"");
-			sb.Append(instance.RepositoryEphemeralId);
-			sb.Append("\"");
+			__init.Property("RepositoryEphemeralId");
+			writer.WriteString(RepositoryEphemeralId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RepositoryLocation = ");
-			instance.RepositoryLocation.FormatCode(sb);
+			__init.Property("RepositoryLocation");
+			RepositoryLocation.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RepositoryName = ");
-			sb.Append("\"");
-			sb.Append(instance.RepositoryName);
-			sb.Append("\"");
+			__init.Property("RepositoryName");
+			writer.WriteString(RepositoryName);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RepositoryStartedAt = ");
-			sb.Append(instance.RepositoryStartedAt);
+			__init.Property("RepositoryStartedAt");
+			writer.WriteValue(RepositoryStartedAt);
 		}
 
-		if (instance.RepositoryStoppedAt is not null)
+		if (RepositoryStoppedAt is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RepositoryStoppedAt = ");
-			sb.Append(instance.RepositoryStoppedAt.Value);
+			__init.Property("RepositoryStoppedAt");
+			writer.WriteValue(RepositoryStoppedAt.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RepositoryType = ");
-			sb.Append("\"");
-			sb.Append(instance.RepositoryType);
-			sb.Append("\"");
+			__init.Property("RepositoryType");
+			writer.WriteString(RepositoryType);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RequestCounts = ");
-			instance.RequestCounts.FormatCode(sb);
+			__init.Property("RequestCounts");
+			RequestCounts.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class TaskTypeELSERCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.TaskTypeELSER instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.TaskTypeELSER instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeELSER.SparseEmbedding:
-				sb.Append("TaskTypeELSER.SparseEmbedding");
+				writer.Write("TaskTypeELSER.SparseEmbedding");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

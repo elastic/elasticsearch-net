@@ -25,26 +25,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class MigrateReindex : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mode = ");
-			Elastic.Clients.Elasticsearch.IndexManagement.ModeEnumCodeFormatter.FormatCode(instance.Mode, sb);
+			__init.Property("Mode");
+			Elastic.Clients.Elasticsearch.IndexManagement.ModeEnumCodeFormatter.FormatCode(Mode, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Source = ");
-			instance.Source.FormatCode(sb);
+			__init.Property("Source");
+			Source.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

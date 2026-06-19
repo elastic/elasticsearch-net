@@ -25,58 +25,39 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class EdgeNGramTokenizer : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CustomTokenChars is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CustomTokenChars is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CustomTokenChars = ");
-			sb.Append("\"");
-			sb.Append(instance.CustomTokenChars);
-			sb.Append("\"");
+			__init.Property("CustomTokenChars");
+			writer.WriteString(CustomTokenChars);
 		}
 
-		if (instance.MaxGram is not null)
+		if (MaxGram is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxGram = ");
-			sb.Append(instance.MaxGram.Value);
+			__init.Property("MaxGram");
+			writer.WriteValue(MaxGram.Value);
 		}
 
-		if (instance.MinGram is not null)
+		if (MinGram is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinGram = ");
-			sb.Append(instance.MinGram.Value);
+			__init.Property("MinGram");
+			writer.WriteValue(MinGram.Value);
 		}
 
-		if (instance.TokenChars is not null)
+		if (TokenChars is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TokenChars = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.TokenChars, (item, sb) => { Elastic.Clients.Elasticsearch.Analysis.TokenCharCodeFormatter.FormatCode(item, sb); }, sb);
-			sb.Append("]");
+			__init.Property("TokenChars");
+			writer.WriteInlineList(TokenChars, (w, item) => { Elastic.Clients.Elasticsearch.Analysis.TokenCharCodeFormatter.FormatCode(item, w); });
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

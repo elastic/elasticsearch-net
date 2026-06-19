@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public static class HighlighterFragmenterCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter.Simple:
-				sb.Append("HighlighterFragmenter.Simple");
+				writer.Write("HighlighterFragmenter.Simple");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter.Span:
-				sb.Append("HighlighterFragmenter.Span");
+				writer.Write("HighlighterFragmenter.Span");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

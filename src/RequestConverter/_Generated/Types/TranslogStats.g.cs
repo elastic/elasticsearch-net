@@ -25,71 +25,50 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class TranslogStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EarliestLastModifiedAge = ");
-			sb.Append(instance.EarliestLastModifiedAge);
-			sb.Append("L");
+			__init.Property("EarliestLastModifiedAge");
+			writer.WriteValue(EarliestLastModifiedAge);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Operations = ");
-			sb.Append(instance.Operations);
-			sb.Append("L");
+			__init.Property("Operations");
+			writer.WriteValue(Operations);
+			writer.Write("L");
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append("\"");
-			sb.Append(instance.Size);
-			sb.Append("\"");
+			__init.Property("Size");
+			writer.WriteString(Size);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SizeInBytes = ");
-			sb.Append(instance.SizeInBytes);
-			sb.Append("L");
+			__init.Property("SizeInBytes");
+			writer.WriteValue(SizeInBytes);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UncommittedOperations = ");
-			sb.Append(instance.UncommittedOperations);
+			__init.Property("UncommittedOperations");
+			writer.WriteValue(UncommittedOperations);
 		}
 
-		if (instance.UncommittedSize is not null)
+		if (UncommittedSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UncommittedSize = ");
-			sb.Append("\"");
-			sb.Append(instance.UncommittedSize);
-			sb.Append("\"");
+			__init.Property("UncommittedSize");
+			writer.WriteString(UncommittedSize);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UncommittedSizeInBytes = ");
-			sb.Append(instance.UncommittedSizeInBytes);
-			sb.Append("L");
+			__init.Property("UncommittedSizeInBytes");
+			writer.WriteValue(UncommittedSizeInBytes);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

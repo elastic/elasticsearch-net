@@ -25,89 +25,58 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class NodeAllocationExplanation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Deciders is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Deciders is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Deciders = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Deciders, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Deciders");
+			writer.WriteInlineList(Deciders, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NodeAttributes = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.NodeAttributes, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("\""); sb.Append(v); sb.Append("\""); }, sb);
+			__init.Property("NodeAttributes");
+			writer.Write("new() ");
+			writer.WriteInlineList(NodeAttributes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NodeDecision = ");
-			Elastic.Clients.Elasticsearch.Cluster.DecisionCodeFormatter.FormatCode(instance.NodeDecision, sb);
+			__init.Property("NodeDecision");
+			Elastic.Clients.Elasticsearch.Cluster.DecisionCodeFormatter.FormatCode(NodeDecision, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NodeId = ");
-			sb.Append("\"");
-			sb.Append(instance.NodeId);
-			sb.Append("\"");
+			__init.Property("NodeId");
+			writer.WriteString(NodeId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NodeName = ");
-			sb.Append("\"");
-			sb.Append(instance.NodeName);
-			sb.Append("\"");
+			__init.Property("NodeName");
+			writer.WriteString(NodeName);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Roles = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Roles, (item, sb) => { Elastic.Clients.Elasticsearch.NodeRoleCodeFormatter.FormatCode(item, sb); }, sb);
-			sb.Append("]");
+			__init.Property("Roles");
+			writer.WriteInlineList(Roles, (w, item) => { Elastic.Clients.Elasticsearch.NodeRoleCodeFormatter.FormatCode(item, w); });
 		}
 
-		if (instance.Store is not null)
+		if (Store is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Store = ");
-			instance.Store.FormatCode(sb);
+			__init.Property("Store");
+			Store.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TransportAddress = ");
-			sb.Append("\"");
-			sb.Append(instance.TransportAddress);
-			sb.Append("\"");
+			__init.Property("TransportAddress");
+			writer.WriteString(TransportAddress);
 		}
 
-		if (instance.WeightRanking is not null)
+		if (WeightRanking is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WeightRanking = ");
-			sb.Append(instance.WeightRanking.Value);
+			__init.Property("WeightRanking");
+			writer.WriteValue(WeightRanking.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

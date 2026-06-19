@@ -25,36 +25,27 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class ScriptsPainlessExecuteRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Context is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Context is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Context = ");
-			Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextCodeFormatter.FormatCode(instance.Context.Value, sb);
+			__init.Property("Context");
+			Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextCodeFormatter.FormatCode(Context.Value, writer);
 		}
 
-		if (instance.ContextSetup is not null)
+		if (ContextSetup is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ContextSetup = ");
-			instance.ContextSetup.FormatCode(sb);
+			__init.Property("ContextSetup");
+			ContextSetup.FormatCode(writer);
 		}
 
-		if (instance.Script is not null)
+		if (Script is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Script = ");
-			instance.Script.FormatCode(sb);
+			__init.Property("Script");
+			Script.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

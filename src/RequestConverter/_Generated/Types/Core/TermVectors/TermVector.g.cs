@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Core.TermVectors;
 
 public partial class TermVector : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.FieldStatistics is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (FieldStatistics is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FieldStatistics = ");
-			instance.FieldStatistics.FormatCode(sb);
+			__init.Property("FieldStatistics");
+			FieldStatistics.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Terms = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Terms, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Terms");
+			writer.Write("new() ");
+			writer.WriteInlineList(Terms, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

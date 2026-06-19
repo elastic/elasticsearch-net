@@ -25,50 +25,33 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class IndexSegmentSort : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Field is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Field is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.Missing is not null)
+		if (Missing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Missing = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Missing, (item, sb) => { Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissingCodeFormatter.FormatCode(item, sb); }, sb);
-			sb.Append("]");
+			__init.Property("Missing");
+			writer.WriteInlineList(Missing, (w, item) => { Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissingCodeFormatter.FormatCode(item, w); });
 		}
 
-		if (instance.Mode is not null)
+		if (Mode is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mode = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Mode, (item, sb) => { Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortModeCodeFormatter.FormatCode(item, sb); }, sb);
-			sb.Append("]");
+			__init.Property("Mode");
+			writer.WriteInlineList(Mode, (w, item) => { Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortModeCodeFormatter.FormatCode(item, w); });
 		}
 
-		if (instance.Order is not null)
+		if (Order is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Order = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Order, (item, sb) => { Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrderCodeFormatter.FormatCode(item, sb); }, sb);
-			sb.Append("]");
+			__init.Property("Order");
+			writer.WriteInlineList(Order, (w, item) => { Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrderCodeFormatter.FormatCode(item, w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

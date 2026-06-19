@@ -25,22 +25,21 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class Slices : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		if (instance.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 		{
-			sb.Append("new Slices(");
-			sb.Append(instance.Value1);
-			sb.Append(")");
+			writer.Write("new Slices(");
+			writer.WriteValue(Value1);
+			writer.Write(")");
 			return;
 		}
 
-		if (instance.Tag == Elastic.Clients.Elasticsearch.UnionTag.T2)
+		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T2)
 		{
-			sb.Append("new Slices(");
-			Elastic.Clients.Elasticsearch.SlicesCalculationCodeFormatter.FormatCode(instance.Value2, sb);
-			sb.Append(")");
+			writer.Write("new Slices(");
+			Elastic.Clients.Elasticsearch.SlicesCalculationCodeFormatter.FormatCode(Value2, writer);
+			writer.Write(")");
 			return;
 		}
 	}

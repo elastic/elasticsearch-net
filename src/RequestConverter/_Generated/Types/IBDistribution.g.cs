@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class IBDistributionCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.IBDistribution instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.IBDistribution instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IBDistribution.Ll:
-				sb.Append("IBDistribution.Ll");
+				writer.Write("IBDistribution.Ll");
 				break;
 			case Elastic.Clients.Elasticsearch.IBDistribution.Spl:
-				sb.Append("IBDistribution.Spl");
+				writer.Write("IBDistribution.Spl");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

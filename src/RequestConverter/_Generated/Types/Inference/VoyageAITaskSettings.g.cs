@@ -25,46 +25,33 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class VoyageAITaskSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.InputType is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (InputType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InputType = ");
-			sb.Append("\"");
-			sb.Append(instance.InputType);
-			sb.Append("\"");
+			__init.Property("InputType");
+			writer.WriteString(InputType);
 		}
 
-		if (instance.ReturnDocuments is not null)
+		if (ReturnDocuments is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReturnDocuments = ");
-			sb.Append(instance.ReturnDocuments.Value ? "true" : "false");
+			__init.Property("ReturnDocuments");
+			writer.WriteValue(ReturnDocuments.Value);
 		}
 
-		if (instance.TopK is not null)
+		if (TopK is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TopK = ");
-			sb.Append(instance.TopK.Value);
+			__init.Property("TopK");
+			writer.WriteValue(TopK.Value);
 		}
 
-		if (instance.Truncation is not null)
+		if (Truncation is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Truncation = ");
-			sb.Append(instance.Truncation.Value ? "true" : "false");
+			__init.Property("Truncation");
+			writer.WriteValue(Truncation.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

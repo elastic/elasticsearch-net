@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class NvidiaSimilarityTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.NvidiaSimilarityType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.NvidiaSimilarityType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.NvidiaSimilarityType.Cosine:
-				sb.Append("NvidiaSimilarityType.Cosine");
+				writer.Write("NvidiaSimilarityType.Cosine");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.NvidiaSimilarityType.DotProduct:
-				sb.Append("NvidiaSimilarityType.DotProduct");
+				writer.Write("NvidiaSimilarityType.DotProduct");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.NvidiaSimilarityType.L2Norm:
-				sb.Append("NvidiaSimilarityType.L2Norm");
+				writer.Write("NvidiaSimilarityType.L2Norm");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

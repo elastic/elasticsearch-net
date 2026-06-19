@@ -25,31 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class GetUserProfileRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Uid = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Uid, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Uid");
+			writer.WriteInlineList(Uid, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Data is not null)
+		if (Data is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Data = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Data, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Data");
+			writer.WriteInlineList(Data, (w, item) => { w.WriteString(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,103 +25,68 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class GoogleVertexAIServiceSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Dimensions is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Dimensions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Dimensions = ");
-			sb.Append(instance.Dimensions.Value);
+			__init.Property("Dimensions");
+			writer.WriteValue(Dimensions.Value);
 		}
 
-		if (instance.Location is not null)
+		if (Location is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Location = ");
-			sb.Append("\"");
-			sb.Append(instance.Location);
-			sb.Append("\"");
+			__init.Property("Location");
+			writer.WriteString(Location);
 		}
 
-		if (instance.MaxBatchSize is not null)
+		if (MaxBatchSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxBatchSize = ");
-			sb.Append(instance.MaxBatchSize.Value);
+			__init.Property("MaxBatchSize");
+			writer.WriteValue(MaxBatchSize.Value);
 		}
 
-		if (instance.ModelId is not null)
+		if (ModelId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelId = ");
-			sb.Append("\"");
-			sb.Append(instance.ModelId);
-			sb.Append("\"");
+			__init.Property("ModelId");
+			writer.WriteString(ModelId);
 		}
 
-		if (instance.ProjectId is not null)
+		if (ProjectId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ProjectId = ");
-			sb.Append("\"");
-			sb.Append(instance.ProjectId);
-			sb.Append("\"");
+			__init.Property("ProjectId");
+			writer.WriteString(ProjectId);
 		}
 
-		if (instance.Provider is not null)
+		if (Provider is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Provider = ");
-			Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProviderCodeFormatter.FormatCode(instance.Provider.Value, sb);
+			__init.Property("Provider");
+			Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProviderCodeFormatter.FormatCode(Provider.Value, writer);
 		}
 
-		if (instance.RateLimit is not null)
+		if (RateLimit is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RateLimit = ");
-			instance.RateLimit.FormatCode(sb);
+			__init.Property("RateLimit");
+			RateLimit.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ServiceAccountJson = ");
-			sb.Append("\"");
-			sb.Append(instance.ServiceAccountJson);
-			sb.Append("\"");
+			__init.Property("ServiceAccountJson");
+			writer.WriteString(ServiceAccountJson);
 		}
 
-		if (instance.StreamingUrl is not null)
+		if (StreamingUrl is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StreamingUrl = ");
-			sb.Append("\"");
-			sb.Append(instance.StreamingUrl);
-			sb.Append("\"");
+			__init.Property("StreamingUrl");
+			writer.WriteString(StreamingUrl);
 		}
 
-		if (instance.Url is not null)
+		if (Url is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Url = ");
-			sb.Append("\"");
-			sb.Append(instance.Url);
-			sb.Append("\"");
+			__init.Property("Url");
+			writer.WriteString(Url);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

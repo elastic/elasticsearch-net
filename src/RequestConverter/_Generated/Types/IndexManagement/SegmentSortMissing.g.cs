@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public static class SegmentSortMissingCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing.First:
-				sb.Append("SegmentSortMissing.First");
+				writer.Write("SegmentSortMissing.First");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing.Last:
-				sb.Append("SegmentSortMissing.Last");
+				writer.Write("SegmentSortMissing.Last");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

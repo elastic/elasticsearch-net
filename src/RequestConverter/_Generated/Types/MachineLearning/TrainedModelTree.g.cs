@@ -25,50 +25,31 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class TrainedModelTree : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ClassificationLabels is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ClassificationLabels is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ClassificationLabels = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.ClassificationLabels, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("ClassificationLabels");
+			writer.WriteInlineList(ClassificationLabels, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FeatureNames = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.FeatureNames, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("FeatureNames");
+			writer.WriteInlineList(FeatureNames, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.TargetType is not null)
+		if (TargetType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TargetType = ");
-			sb.Append("\"");
-			sb.Append(instance.TargetType);
-			sb.Append("\"");
+			__init.Property("TargetType");
+			writer.WriteString(TargetType);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TreeStructure = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.TreeStructure, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("TreeStructure");
+			writer.WriteInlineList(TreeStructure, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Rollup;
 
 public static class IndexingJobStateCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Rollup.IndexingJobState instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Rollup.IndexingJobState instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Aborting:
-				sb.Append("IndexingJobState.Aborting");
+				writer.Write("IndexingJobState.Aborting");
 				break;
 			case Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Indexing:
-				sb.Append("IndexingJobState.Indexing");
+				writer.Write("IndexingJobState.Indexing");
 				break;
 			case Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Started:
-				sb.Append("IndexingJobState.Started");
+				writer.Write("IndexingJobState.Started");
 				break;
 			case Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Stopped:
-				sb.Append("IndexingJobState.Stopped");
+				writer.Write("IndexingJobState.Stopped");
 				break;
 			case Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Stopping:
-				sb.Append("IndexingJobState.Stopping");
+				writer.Write("IndexingJobState.Stopping");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

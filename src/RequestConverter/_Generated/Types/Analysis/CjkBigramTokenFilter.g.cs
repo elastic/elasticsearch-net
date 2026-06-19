@@ -25,40 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class CjkBigramTokenFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.IgnoredScripts is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (IgnoredScripts is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoredScripts = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.IgnoredScripts, (item, sb) => { Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScriptCodeFormatter.FormatCode(item, sb); }, sb);
-			sb.Append("]");
+			__init.Property("IgnoredScripts");
+			writer.WriteInlineList(IgnoredScripts, (w, item) => { Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScriptCodeFormatter.FormatCode(item, w); });
 		}
 
-		if (instance.OutputUnigrams is not null)
+		if (OutputUnigrams is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OutputUnigrams = ");
-			sb.Append(instance.OutputUnigrams.Value ? "true" : "false");
+			__init.Property("OutputUnigrams");
+			writer.WriteValue(OutputUnigrams.Value);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

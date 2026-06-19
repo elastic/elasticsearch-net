@@ -25,19 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class EmbeddingContentObject : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Content = ");
-			instance.Content.FormatCode(sb);
+			__init.Property("Content");
+			writer.WriteInlineList(Content, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

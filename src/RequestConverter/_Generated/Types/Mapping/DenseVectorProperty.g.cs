@@ -25,101 +25,76 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public partial class DenseVectorProperty : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Dims is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Dims is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Dims = ");
-			sb.Append(instance.Dims.Value);
+			__init.Property("Dims");
+			writer.WriteValue(Dims.Value);
 		}
 
-		if (instance.Dynamic is not null)
+		if (Dynamic is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Dynamic = ");
-			Elastic.Clients.Elasticsearch.Mapping.DynamicMappingCodeFormatter.FormatCode(instance.Dynamic.Value, sb);
+			__init.Property("Dynamic");
+			Elastic.Clients.Elasticsearch.Mapping.DynamicMappingCodeFormatter.FormatCode(Dynamic.Value, writer);
 		}
 
-		if (instance.ElementType is not null)
+		if (ElementType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ElementType = ");
-			Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementTypeCodeFormatter.FormatCode(instance.ElementType.Value, sb);
+			__init.Property("ElementType");
+			Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementTypeCodeFormatter.FormatCode(ElementType.Value, writer);
 		}
 
-		if (instance.Fields is not null)
+		if (Fields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fields = ");
-			instance.Fields.FormatCode(sb);
+			__init.Property("Fields");
+			Fields.FormatCode(writer);
 		}
 
-		if (instance.IgnoreAbove is not null)
+		if (IgnoreAbove is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreAbove = ");
-			sb.Append(instance.IgnoreAbove.Value);
+			__init.Property("IgnoreAbove");
+			writer.WriteValue(IgnoreAbove.Value);
 		}
 
-		if (instance.Index is not null)
+		if (Index is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			sb.Append(instance.Index.Value ? "true" : "false");
+			__init.Property("Index");
+			writer.WriteValue(Index.Value);
 		}
 
-		if (instance.IndexOptions is not null)
+		if (IndexOptions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexOptions = ");
-			instance.IndexOptions.FormatCode(sb);
+			__init.Property("IndexOptions");
+			IndexOptions.FormatCode(writer);
 		}
 
-		if (instance.Meta is not null)
+		if (Meta is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Meta = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Meta, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("\""); sb.Append(v); sb.Append("\""); }, sb);
+			__init.Property("Meta");
+			writer.Write("new() ");
+			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Properties is not null)
+		if (Properties is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Properties = ");
-			instance.Properties.FormatCode(sb);
+			__init.Property("Properties");
+			Properties.FormatCode(writer);
 		}
 
-		if (instance.Similarity is not null)
+		if (Similarity is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Similarity = ");
-			Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarityCodeFormatter.FormatCode(instance.Similarity.Value, sb);
+			__init.Property("Similarity");
+			Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarityCodeFormatter.FormatCode(Similarity.Value, writer);
 		}
 
-		if (instance.SyntheticSourceKeep is not null)
+		if (SyntheticSourceKeep is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SyntheticSourceKeep = ");
-			Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnumCodeFormatter.FormatCode(instance.SyntheticSourceKeep.Value, sb);
+			__init.Property("SyntheticSourceKeep");
+			Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnumCodeFormatter.FormatCode(SyntheticSourceKeep.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

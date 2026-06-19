@@ -25,29 +25,20 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class TrainedModelAssignmentRoutingStateAndReason : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Reason is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Reason is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Reason = ");
-			sb.Append("\"");
-			sb.Append(instance.Reason);
-			sb.Append("\"");
+			__init.Property("Reason");
+			writer.WriteString(Reason);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RoutingState = ");
-			Elastic.Clients.Elasticsearch.MachineLearning.RoutingStateCodeFormatter.FormatCode(instance.RoutingState, sb);
+			__init.Property("RoutingState");
+			Elastic.Clients.Elasticsearch.MachineLearning.RoutingStateCodeFormatter.FormatCode(RoutingState, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

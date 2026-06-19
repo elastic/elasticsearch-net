@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class RefreshCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Refresh instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Refresh instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Refresh.False:
-				sb.Append("Refresh.False");
+				writer.Write("Refresh.False");
 				break;
 			case Elastic.Clients.Elasticsearch.Refresh.True:
-				sb.Append("Refresh.True");
+				writer.Write("Refresh.True");
 				break;
 			case Elastic.Clients.Elasticsearch.Refresh.WaitFor:
-				sb.Append("Refresh.WaitFor");
+				writer.Write("Refresh.WaitFor");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

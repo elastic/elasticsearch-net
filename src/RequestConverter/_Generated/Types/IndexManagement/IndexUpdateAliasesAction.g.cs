@@ -25,36 +25,27 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class IndexUpdateAliasesAction : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Add is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Add is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Add = ");
-			instance.Add.FormatCode(sb);
+			__init.Property("Add");
+			Add.FormatCode(writer);
 		}
 
-		if (instance.Remove is not null)
+		if (Remove is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Remove = ");
-			instance.Remove.FormatCode(sb);
+			__init.Property("Remove");
+			Remove.FormatCode(writer);
 		}
 
-		if (instance.RemoveIndex is not null)
+		if (RemoveIndex is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RemoveIndex = ");
-			instance.RemoveIndex.FormatCode(sb);
+			__init.Property("RemoveIndex");
+			RemoveIndex.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

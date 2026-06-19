@@ -25,40 +25,25 @@ namespace Elastic.Clients.Elasticsearch.TextStructure;
 
 public partial class TestGrokPatternRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.EcsCompatibility is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (EcsCompatibility is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EcsCompatibility = ");
-			sb.Append("\"");
-			sb.Append(instance.EcsCompatibility);
-			sb.Append("\"");
+			__init.Property("EcsCompatibility");
+			writer.WriteString(EcsCompatibility);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GrokPattern = ");
-			sb.Append("\"");
-			sb.Append(instance.GrokPattern);
-			sb.Append("\"");
+			__init.Property("GrokPattern");
+			writer.WriteString(GrokPattern);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Text = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Text, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Text");
+			writer.WriteInlineList(Text, (w, item) => { w.WriteString(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,46 +25,29 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
 public partial class Impact : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			sb.Append("\"");
-			sb.Append(instance.Id);
-			sb.Append("\"");
+			__init.Property("Id");
+			writer.WriteString(Id);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ImpactAreas = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.ImpactAreas, (item, sb) => { Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactAreaCodeFormatter.FormatCode(item, sb); }, sb);
-			sb.Append("]");
+			__init.Property("ImpactAreas");
+			writer.WriteInlineList(ImpactAreas, (w, item) => { Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactAreaCodeFormatter.FormatCode(item, w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Severity = ");
-			sb.Append(instance.Severity);
+			__init.Property("Severity");
+			writer.WriteValue(Severity);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

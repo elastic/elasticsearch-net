@@ -25,40 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Eql;
 
 public partial class EqlHits<TEvent> : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Events is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Events is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Events = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Events, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Events");
+			writer.WriteInlineList(Events, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Sequences is not null)
+		if (Sequences is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sequences = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Sequences, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Sequences");
+			writer.WriteInlineList(Sequences, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Total is not null)
+		if (Total is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			instance.Total.FormatCode(sb);
+			__init.Property("Total");
+			Total.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

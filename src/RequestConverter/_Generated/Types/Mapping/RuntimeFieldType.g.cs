@@ -25,42 +25,42 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public static class RuntimeFieldTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType.Boolean:
-				sb.Append("RuntimeFieldType.Boolean");
+				writer.Write("RuntimeFieldType.Boolean");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType.Composite:
-				sb.Append("RuntimeFieldType.Composite");
+				writer.Write("RuntimeFieldType.Composite");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType.Date:
-				sb.Append("RuntimeFieldType.Date");
+				writer.Write("RuntimeFieldType.Date");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType.Double:
-				sb.Append("RuntimeFieldType.Double");
+				writer.Write("RuntimeFieldType.Double");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType.GeoPoint:
-				sb.Append("RuntimeFieldType.GeoPoint");
+				writer.Write("RuntimeFieldType.GeoPoint");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType.GeoShape:
-				sb.Append("RuntimeFieldType.GeoShape");
+				writer.Write("RuntimeFieldType.GeoShape");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType.Ip:
-				sb.Append("RuntimeFieldType.Ip");
+				writer.Write("RuntimeFieldType.Ip");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType.Keyword:
-				sb.Append("RuntimeFieldType.Keyword");
+				writer.Write("RuntimeFieldType.Keyword");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType.Long:
-				sb.Append("RuntimeFieldType.Long");
+				writer.Write("RuntimeFieldType.Long");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType.Lookup:
-				sb.Append("RuntimeFieldType.Lookup");
+				writer.Write("RuntimeFieldType.Lookup");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Enrich;
 
 public static class EnrichPolicyPhaseCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Cancelled:
-				sb.Append("EnrichPolicyPhase.Cancelled");
+				writer.Write("EnrichPolicyPhase.Cancelled");
 				break;
 			case Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Complete:
-				sb.Append("EnrichPolicyPhase.Complete");
+				writer.Write("EnrichPolicyPhase.Complete");
 				break;
 			case Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Failed:
-				sb.Append("EnrichPolicyPhase.Failed");
+				writer.Write("EnrichPolicyPhase.Failed");
 				break;
 			case Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Running:
-				sb.Append("EnrichPolicyPhase.Running");
+				writer.Write("EnrichPolicyPhase.Running");
 				break;
 			case Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Scheduled:
-				sb.Append("EnrichPolicyPhase.Scheduled");
+				writer.Write("EnrichPolicyPhase.Scheduled");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

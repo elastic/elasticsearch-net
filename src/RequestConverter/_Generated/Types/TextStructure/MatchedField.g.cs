@@ -25,35 +25,24 @@ namespace Elastic.Clients.Elasticsearch.TextStructure;
 
 public partial class MatchedField : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Length = ");
-			sb.Append(instance.Length);
+			__init.Property("Length");
+			writer.WriteValue(Length);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Match = ");
-			sb.Append("\"");
-			sb.Append(instance.Match);
-			sb.Append("\"");
+			__init.Property("Match");
+			writer.WriteString(Match);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Offset = ");
-			sb.Append(instance.Offset);
+			__init.Property("Offset");
+			writer.WriteValue(Offset);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

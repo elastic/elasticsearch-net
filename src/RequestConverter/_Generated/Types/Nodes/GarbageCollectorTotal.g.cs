@@ -25,40 +25,29 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class GarbageCollectorTotal : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CollectionCount is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CollectionCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CollectionCount = ");
-			sb.Append(instance.CollectionCount.Value);
-			sb.Append("L");
+			__init.Property("CollectionCount");
+			writer.WriteValue(CollectionCount.Value);
+			writer.Write("L");
 		}
 
-		if (instance.CollectionTime is not null)
+		if (CollectionTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CollectionTime = ");
-			sb.Append("\"");
-			sb.Append(instance.CollectionTime);
-			sb.Append("\"");
+			__init.Property("CollectionTime");
+			writer.WriteString(CollectionTime);
 		}
 
-		if (instance.CollectionTimeInMillis is not null)
+		if (CollectionTimeInMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CollectionTimeInMillis = ");
-			sb.Append(instance.CollectionTimeInMillis.Value);
-			sb.Append("L");
+			__init.Property("CollectionTimeInMillis");
+			writer.WriteValue(CollectionTimeInMillis.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

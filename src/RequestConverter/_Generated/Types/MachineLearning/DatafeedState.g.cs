@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public static class DatafeedStateCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState.Started:
-				sb.Append("DatafeedState.Started");
+				writer.Write("DatafeedState.Started");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState.Starting:
-				sb.Append("DatafeedState.Starting");
+				writer.Write("DatafeedState.Starting");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState.Stopped:
-				sb.Append("DatafeedState.Stopped");
+				writer.Write("DatafeedState.Stopped");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState.Stopping:
-				sb.Append("DatafeedState.Stopping");
+				writer.Write("DatafeedState.Stopping");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

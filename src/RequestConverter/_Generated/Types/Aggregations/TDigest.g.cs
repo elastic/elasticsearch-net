@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class TDigest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Compression is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Compression is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Compression = ");
-			sb.Append(instance.Compression.Value);
+			__init.Property("Compression");
+			writer.WriteValue(Compression.Value);
 		}
 
-		if (instance.ExecutionHint is not null)
+		if (ExecutionHint is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExecutionHint = ");
-			Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHintCodeFormatter.FormatCode(instance.ExecutionHint.Value, sb);
+			__init.Property("ExecutionHint");
+			Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

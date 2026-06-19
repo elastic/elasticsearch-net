@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public static class KuromojiTokenizationModeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode.Extended:
-				sb.Append("KuromojiTokenizationMode.Extended");
+				writer.Write("KuromojiTokenizationMode.Extended");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode.Normal:
-				sb.Append("KuromojiTokenizationMode.Normal");
+				writer.Write("KuromojiTokenizationMode.Normal");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode.Search:
-				sb.Append("KuromojiTokenizationMode.Search");
+				writer.Write("KuromojiTokenizationMode.Search");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

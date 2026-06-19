@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public static class ManagedByCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.Datastream:
-				sb.Append("ManagedBy.Datastream");
+				writer.Write("ManagedBy.Datastream");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.Ilm:
-				sb.Append("ManagedBy.Ilm");
+				writer.Write("ManagedBy.Ilm");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.Unmanaged:
-				sb.Append("ManagedBy.Unmanaged");
+				writer.Write("ManagedBy.Unmanaged");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

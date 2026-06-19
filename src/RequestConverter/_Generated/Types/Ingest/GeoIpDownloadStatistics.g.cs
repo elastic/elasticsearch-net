@@ -25,54 +25,39 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public partial class GeoIpDownloadStatistics : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DatabasesCount = ");
-			sb.Append(instance.DatabasesCount);
+			__init.Property("DatabasesCount");
+			writer.WriteValue(DatabasesCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExpiredDatabases = ");
-			sb.Append(instance.ExpiredDatabases);
+			__init.Property("ExpiredDatabases");
+			writer.WriteValue(ExpiredDatabases);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FailedDownloads = ");
-			sb.Append(instance.FailedDownloads);
+			__init.Property("FailedDownloads");
+			writer.WriteValue(FailedDownloads);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SkippedUpdates = ");
-			sb.Append(instance.SkippedUpdates);
+			__init.Property("SkippedUpdates");
+			writer.WriteValue(SkippedUpdates);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SuccessfulDownloads = ");
-			sb.Append(instance.SuccessfulDownloads);
+			__init.Property("SuccessfulDownloads");
+			writer.WriteValue(SuccessfulDownloads);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalDownloadTime = ");
-			sb.Append(instance.TotalDownloadTime);
+			__init.Property("TotalDownloadTime");
+			writer.WriteValue(TotalDownloadTime);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class NodeInfoXpackSecurityAuthc : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Realms is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Realms is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Realms = ");
-			instance.Realms.FormatCode(sb);
+			__init.Property("Realms");
+			Realms.FormatCode(writer);
 		}
 
-		if (instance.Token is not null)
+		if (Token is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Token = ");
-			instance.Token.FormatCode(sb);
+			__init.Property("Token");
+			Token.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

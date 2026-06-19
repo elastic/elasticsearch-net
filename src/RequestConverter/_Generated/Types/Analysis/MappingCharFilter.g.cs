@@ -25,42 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class MappingCharFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Mappings is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Mappings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mappings = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Mappings, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Mappings");
+			writer.WriteInlineList(Mappings, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.MappingsPath is not null)
+		if (MappingsPath is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MappingsPath = ");
-			sb.Append("\"");
-			sb.Append(instance.MappingsPath);
-			sb.Append("\"");
+			__init.Property("MappingsPath");
+			writer.WriteString(MappingsPath);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

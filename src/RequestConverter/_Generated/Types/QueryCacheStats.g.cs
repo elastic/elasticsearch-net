@@ -25,76 +25,57 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class QueryCacheStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CacheCount = ");
-			sb.Append(instance.CacheCount);
-			sb.Append("L");
+			__init.Property("CacheCount");
+			writer.WriteValue(CacheCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CacheSize = ");
-			sb.Append(instance.CacheSize);
-			sb.Append("L");
+			__init.Property("CacheSize");
+			writer.WriteValue(CacheSize);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Evictions = ");
-			sb.Append(instance.Evictions);
-			sb.Append("L");
+			__init.Property("Evictions");
+			writer.WriteValue(Evictions);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HitCount = ");
-			sb.Append(instance.HitCount);
-			sb.Append("L");
+			__init.Property("HitCount");
+			writer.WriteValue(HitCount);
+			writer.Write("L");
 		}
 
-		if (instance.MemorySize is not null)
+		if (MemorySize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MemorySize = ");
-			instance.MemorySize.FormatCode(sb);
+			__init.Property("MemorySize");
+			MemorySize.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MemorySizeInBytes = ");
-			sb.Append(instance.MemorySizeInBytes);
-			sb.Append("L");
+			__init.Property("MemorySizeInBytes");
+			writer.WriteValue(MemorySizeInBytes);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MissCount = ");
-			sb.Append(instance.MissCount);
-			sb.Append("L");
+			__init.Property("MissCount");
+			writer.WriteValue(MissCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalCount = ");
-			sb.Append(instance.TotalCount);
-			sb.Append("L");
+			__init.Property("TotalCount");
+			writer.WriteValue(TotalCount);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

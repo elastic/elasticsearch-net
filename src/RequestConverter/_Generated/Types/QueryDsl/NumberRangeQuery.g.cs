@@ -25,78 +25,57 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class NumberRangeQuery : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Boost is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Boost is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Boost = ");
-			sb.Append(instance.Boost.Value);
-			sb.Append("f");
+			__init.Property("Boost");
+			writer.WriteValue(Boost.Value);
+			writer.Write("f");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.Gt is not null)
+		if (Gt is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Gt = ");
-			RequestConverter.CodeFormatter.FormatCode(instance.Gt, sb);
+			__init.Property("Gt");
+			writer.WriteValue(Gt);
 		}
 
-		if (instance.Gte is not null)
+		if (Gte is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Gte = ");
-			RequestConverter.CodeFormatter.FormatCode(instance.Gte, sb);
+			__init.Property("Gte");
+			writer.WriteValue(Gte);
 		}
 
-		if (instance.Lt is not null)
+		if (Lt is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Lt = ");
-			RequestConverter.CodeFormatter.FormatCode(instance.Lt, sb);
+			__init.Property("Lt");
+			writer.WriteValue(Lt);
 		}
 
-		if (instance.Lte is not null)
+		if (Lte is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Lte = ");
-			RequestConverter.CodeFormatter.FormatCode(instance.Lte, sb);
+			__init.Property("Lte");
+			writer.WriteValue(Lte);
 		}
 
-		if (instance.QueryName is not null)
+		if (QueryName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryName = ");
-			sb.Append("\"");
-			sb.Append(instance.QueryName);
-			sb.Append("\"");
+			__init.Property("QueryName");
+			writer.WriteString(QueryName);
 		}
 
-		if (instance.Relation is not null)
+		if (Relation is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Relation = ");
-			Elastic.Clients.Elasticsearch.QueryDsl.RangeRelationCodeFormatter.FormatCode(instance.Relation.Value, sb);
+			__init.Property("Relation");
+			Elastic.Clients.Elasticsearch.QueryDsl.RangeRelationCodeFormatter.FormatCode(Relation.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

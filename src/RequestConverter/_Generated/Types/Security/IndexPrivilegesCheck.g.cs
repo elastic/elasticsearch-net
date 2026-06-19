@@ -25,36 +25,25 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class IndexPrivilegesCheck : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AllowRestrictedIndices is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AllowRestrictedIndices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowRestrictedIndices = ");
-			sb.Append(instance.AllowRestrictedIndices.Value ? "true" : "false");
+			__init.Property("AllowRestrictedIndices");
+			writer.WriteValue(AllowRestrictedIndices.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Names = ");
-			instance.Names.FormatCode(sb);
+			__init.Property("Names");
+			Names.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Privileges = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Privileges, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Privileges");
+			writer.WriteInlineList(Privileges, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

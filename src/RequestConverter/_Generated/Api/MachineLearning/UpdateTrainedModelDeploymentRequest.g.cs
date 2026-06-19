@@ -25,35 +25,26 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class UpdateTrainedModelDeploymentRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelId = ");
-			instance.ModelId.FormatCode(sb);
+			__init.Property("ModelId");
+			ModelId.FormatCode(writer);
 		}
 
-		if (instance.AdaptiveAllocations is not null)
+		if (AdaptiveAllocations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AdaptiveAllocations = ");
-			instance.AdaptiveAllocations.FormatCode(sb);
+			__init.Property("AdaptiveAllocations");
+			AdaptiveAllocations.FormatCode(writer);
 		}
 
-		if (instance.NumberOfAllocations is not null)
+		if (NumberOfAllocations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumberOfAllocations = ");
-			sb.Append(instance.NumberOfAllocations.Value);
+			__init.Property("NumberOfAllocations");
+			writer.WriteValue(NumberOfAllocations.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

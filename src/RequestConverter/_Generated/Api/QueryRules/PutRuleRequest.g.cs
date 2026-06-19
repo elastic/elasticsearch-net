@@ -25,57 +25,40 @@ namespace Elastic.Clients.Elasticsearch.QueryRules;
 
 public partial class PutRuleRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RuleId = ");
-			instance.RuleId.FormatCode(sb);
+			__init.Property("RuleId");
+			RuleId.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RulesetId = ");
-			instance.RulesetId.FormatCode(sb);
+			__init.Property("RulesetId");
+			RulesetId.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Actions = ");
-			instance.Actions.FormatCode(sb);
+			__init.Property("Actions");
+			Actions.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Criteria = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Criteria, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Criteria");
+			writer.WriteInlineList(Criteria, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Priority is not null)
+		if (Priority is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Priority = ");
-			sb.Append(instance.Priority.Value);
+			__init.Property("Priority");
+			writer.WriteValue(Priority.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			Elastic.Clients.Elasticsearch.QueryRules.QueryRuleTypeCodeFormatter.FormatCode(instance.Type, sb);
+			__init.Property("Type");
+			Elastic.Clients.Elasticsearch.QueryRules.QueryRuleTypeCodeFormatter.FormatCode(Type, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

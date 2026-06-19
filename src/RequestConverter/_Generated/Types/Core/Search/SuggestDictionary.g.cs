@@ -25,27 +25,22 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class SuggestDictionary<TDocument> : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
+		writer.Write("new()");
 		var hasProps = false;
-		foreach (var kvp in instance)
+		foreach (var kvp in this)
 		{
-			sb.Append(hasProps ? ", " : " { ");
+			writer.Write(hasProps ? ", " : " { ");
 			hasProps = true;
-			sb.Append("{ ");
-			sb.Append("\"");
-			sb.Append(kvp.Key);
-			sb.Append("\"");
-			sb.Append(", ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(kvp.Value, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
-			sb.Append(" }");
+			writer.Write("{ ");
+			writer.WriteString(kvp.Key);
+			writer.Write(", ");
+			writer.WriteInlineList(kvp.Value, (w, item) => { item.FormatCode(w); });
+			writer.Write(" }");
 		}
 
 		if (hasProps)
-			sb.Append(" }");
+			writer.Write(" }");
 	}
 }

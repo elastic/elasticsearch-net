@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class UpdateByQueryRethrottleRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TaskId = ");
-			instance.TaskId.FormatCode(sb);
+			__init.Property("TaskId");
+			TaskId.FormatCode(writer);
 		}
 
-		if (instance.RequestsPerSecond is not null)
+		if (RequestsPerSecond is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RequestsPerSecond = ");
-			sb.Append(instance.RequestsPerSecond.Value);
-			sb.Append("f");
+			__init.Property("RequestsPerSecond");
+			writer.WriteValue(RequestsPerSecond.Value);
+			writer.Write("f");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

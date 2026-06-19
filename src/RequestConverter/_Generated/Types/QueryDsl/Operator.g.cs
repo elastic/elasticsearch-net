@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public static class OperatorCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.Operator instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.Operator instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.Operator.And:
-				sb.Append("Operator.And");
+				writer.Write("Operator.And");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.Operator.Or:
-				sb.Append("Operator.Or");
+				writer.Write("Operator.Or");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -25,40 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class InferenceFeatureImportance : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Classes is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Classes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Classes = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Classes, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Classes");
+			writer.WriteInlineList(Classes, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FeatureName = ");
-			sb.Append("\"");
-			sb.Append(instance.FeatureName);
-			sb.Append("\"");
+			__init.Property("FeatureName");
+			writer.WriteString(FeatureName);
 		}
 
-		if (instance.Importance is not null)
+		if (Importance is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Importance = ");
-			sb.Append(instance.Importance.Value);
-			sb.Append("d");
+			__init.Property("Importance");
+			writer.WriteValue(Importance.Value);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

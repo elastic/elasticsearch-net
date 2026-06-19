@@ -25,17 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public readonly partial struct RestrictionWorkflow : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		if (instance == Elastic.Clients.Elasticsearch.Security.RestrictionWorkflow.SearchApplicationQuery)
+		if (this == Elastic.Clients.Elasticsearch.Security.RestrictionWorkflow.SearchApplicationQuery)
 		{
-			sb.Append("RestrictionWorkflow.SearchApplicationQuery");
+			writer.Write("RestrictionWorkflow.SearchApplicationQuery");
 			return;
 		}
 
-		sb.Append("new RestrictionWorkflow(\"");
-		sb.Append(instance.Value);
-		sb.Append("\")");
+		writer.Write("new RestrictionWorkflow(\"");
+		writer.Write(Value);
+		writer.Write("\")");
 	}
 }

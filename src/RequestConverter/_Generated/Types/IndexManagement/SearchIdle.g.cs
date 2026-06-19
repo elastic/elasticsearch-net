@@ -25,20 +25,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class SearchIdle : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.After is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (After is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("After = ");
-			instance.After.FormatCode(sb);
+			__init.Property("After");
+			After.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

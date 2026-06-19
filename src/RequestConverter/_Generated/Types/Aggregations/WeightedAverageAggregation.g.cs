@@ -25,46 +25,33 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class WeightedAverageAggregation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Format is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Format is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Format = ");
-			sb.Append("\"");
-			sb.Append(instance.Format);
-			sb.Append("\"");
+			__init.Property("Format");
+			writer.WriteString(Format);
 		}
 
-		if (instance.Value is not null)
+		if (Value is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Value = ");
-			instance.Value.FormatCode(sb);
+			__init.Property("Value");
+			Value.FormatCode(writer);
 		}
 
-		if (instance.ValueType is not null)
+		if (ValueType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ValueType = ");
-			Elastic.Clients.Elasticsearch.Aggregations.ValueTypeCodeFormatter.FormatCode(instance.ValueType.Value, sb);
+			__init.Property("ValueType");
+			Elastic.Clients.Elasticsearch.Aggregations.ValueTypeCodeFormatter.FormatCode(ValueType.Value, writer);
 		}
 
-		if (instance.Weight is not null)
+		if (Weight is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Weight = ");
-			instance.Weight.FormatCode(sb);
+			__init.Property("Weight");
+			Weight.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

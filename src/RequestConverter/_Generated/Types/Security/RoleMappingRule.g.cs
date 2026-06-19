@@ -25,54 +25,37 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class RoleMappingRule : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.All is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (All is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("All = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.All, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("All");
+			writer.WriteInlineList(All, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Any is not null)
+		if (Any is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Any = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Any, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Any");
+			writer.WriteInlineList(Any, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Except is not null)
+		if (Except is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Except = ");
-			instance.Except.FormatCode(sb);
+			__init.Property("Except");
+			Except.FormatCode(writer);
 		}
 
-		if (instance.Field is not null)
+		if (Field is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			sb.Append("new(");
-			instance.Field.Value.Key.FormatCode(sb);
-			sb.Append(", ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Field.Value.Value, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
-			sb.Append(")");
+			__init.Property("Field");
+			writer.Write("new(");
+			Field.Value.Key.FormatCode(writer);
+			writer.Write(", ");
+			writer.WriteInlineList(Field.Value.Value, (w, item) => { item.FormatCode(w); });
+			writer.Write(")");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

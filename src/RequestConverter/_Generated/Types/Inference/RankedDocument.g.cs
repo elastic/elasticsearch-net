@@ -25,37 +25,26 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class RankedDocument : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			sb.Append(instance.Index);
+			__init.Property("Index");
+			writer.WriteValue(Index);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RelevanceScore = ");
-			sb.Append(instance.RelevanceScore);
-			sb.Append("f");
+			__init.Property("RelevanceScore");
+			writer.WriteValue(RelevanceScore);
+			writer.Write("f");
 		}
 
-		if (instance.Text is not null)
+		if (Text is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Text = ");
-			sb.Append("\"");
-			sb.Append(instance.Text);
-			sb.Append("\"");
+			__init.Property("Text");
+			writer.WriteString(Text);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

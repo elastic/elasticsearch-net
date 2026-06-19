@@ -25,48 +25,29 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class ElasticsearchVersionMinInfo : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BuildFlavor = ");
-			sb.Append("\"");
-			sb.Append(instance.BuildFlavor);
-			sb.Append("\"");
+			__init.Property("BuildFlavor");
+			writer.WriteString(BuildFlavor);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinimumIndexCompatibilityVersion = ");
-			sb.Append("\"");
-			sb.Append(instance.MinimumIndexCompatibilityVersion);
-			sb.Append("\"");
+			__init.Property("MinimumIndexCompatibilityVersion");
+			writer.WriteString(MinimumIndexCompatibilityVersion);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinimumWireCompatibilityVersion = ");
-			sb.Append("\"");
-			sb.Append(instance.MinimumWireCompatibilityVersion);
-			sb.Append("\"");
+			__init.Property("MinimumWireCompatibilityVersion");
+			writer.WriteString(MinimumWireCompatibilityVersion);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Number = ");
-			sb.Append("\"");
-			sb.Append(instance.Number);
-			sb.Append("\"");
+			__init.Property("Number");
+			writer.WriteString(Number);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

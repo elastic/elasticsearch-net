@@ -25,38 +25,29 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class SettingsSimilarityBm25 : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.B is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (B is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("B = ");
-			sb.Append(instance.B.Value);
-			sb.Append("d");
+			__init.Property("B");
+			writer.WriteValue(B.Value);
+			writer.Write("d");
 		}
 
-		if (instance.DiscountOverlaps is not null)
+		if (DiscountOverlaps is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DiscountOverlaps = ");
-			sb.Append(instance.DiscountOverlaps.Value ? "true" : "false");
+			__init.Property("DiscountOverlaps");
+			writer.WriteValue(DiscountOverlaps.Value);
 		}
 
-		if (instance.K1 is not null)
+		if (K1 is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("K1 = ");
-			sb.Append(instance.K1.Value);
-			sb.Append("d");
+			__init.Property("K1");
+			writer.WriteValue(K1.Value);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

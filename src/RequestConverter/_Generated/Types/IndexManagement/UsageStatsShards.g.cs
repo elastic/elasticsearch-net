@@ -25,42 +25,29 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class UsageStatsShards : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Routing = ");
-			instance.Routing.FormatCode(sb);
+			__init.Property("Routing");
+			Routing.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Stats = ");
-			instance.Stats.FormatCode(sb);
+			__init.Property("Stats");
+			Stats.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TrackingId = ");
-			sb.Append("\"");
-			sb.Append(instance.TrackingId);
-			sb.Append("\"");
+			__init.Property("TrackingId");
+			writer.WriteString(TrackingId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TrackingStartedAtMillis = ");
-			sb.Append(instance.TrackingStartedAtMillis);
+			__init.Property("TrackingStartedAtMillis");
+			writer.WriteValue(TrackingStartedAtMillis);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

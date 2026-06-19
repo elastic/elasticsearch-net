@@ -25,103 +25,68 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class Influencer : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BucketSpan = ");
-			sb.Append(instance.BucketSpan);
+			__init.Property("BucketSpan");
+			writer.WriteValue(BucketSpan);
 		}
 
-		if (instance.Foo is not null)
+		if (Foo is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Foo = ");
-			sb.Append("\"");
-			sb.Append(instance.Foo);
-			sb.Append("\"");
+			__init.Property("Foo");
+			writer.WriteString(Foo);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InfluencerFieldName = ");
-			sb.Append("\"");
-			sb.Append(instance.InfluencerFieldName);
-			sb.Append("\"");
+			__init.Property("InfluencerFieldName");
+			writer.WriteString(InfluencerFieldName);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InfluencerFieldValue = ");
-			sb.Append("\"");
-			sb.Append(instance.InfluencerFieldValue);
-			sb.Append("\"");
+			__init.Property("InfluencerFieldValue");
+			writer.WriteString(InfluencerFieldValue);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InfluencerScore = ");
-			sb.Append(instance.InfluencerScore);
-			sb.Append("d");
+			__init.Property("InfluencerScore");
+			writer.WriteValue(InfluencerScore);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InitialInfluencerScore = ");
-			sb.Append(instance.InitialInfluencerScore);
-			sb.Append("d");
+			__init.Property("InitialInfluencerScore");
+			writer.WriteValue(InitialInfluencerScore);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IsInterim = ");
-			sb.Append(instance.IsInterim ? "true" : "false");
+			__init.Property("IsInterim");
+			writer.WriteValue(IsInterim);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JobId = ");
-			sb.Append("\"");
-			sb.Append(instance.JobId);
-			sb.Append("\"");
+			__init.Property("JobId");
+			writer.WriteString(JobId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Probability = ");
-			sb.Append(instance.Probability);
-			sb.Append("d");
+			__init.Property("Probability");
+			writer.WriteValue(Probability);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ResultType = ");
-			sb.Append("\"");
-			sb.Append(instance.ResultType);
-			sb.Append("\"");
+			__init.Property("ResultType");
+			writer.WriteString(ResultType);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timestamp = ");
-			sb.Append(instance.Timestamp);
+			__init.Property("Timestamp");
+			writer.WriteValue(Timestamp);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

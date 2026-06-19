@@ -25,61 +25,44 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class InvertedIndex : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Offsets = ");
-			sb.Append(instance.Offsets);
+			__init.Property("Offsets");
+			writer.WriteValue(Offsets);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Payloads = ");
-			sb.Append(instance.Payloads);
+			__init.Property("Payloads");
+			writer.WriteValue(Payloads);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Positions = ");
-			sb.Append(instance.Positions);
+			__init.Property("Positions");
+			writer.WriteValue(Positions);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Postings = ");
-			sb.Append(instance.Postings);
+			__init.Property("Postings");
+			writer.WriteValue(Postings);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Proximity = ");
-			sb.Append(instance.Proximity);
+			__init.Property("Proximity");
+			writer.WriteValue(Proximity);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TermFrequencies = ");
-			sb.Append(instance.TermFrequencies);
+			__init.Property("TermFrequencies");
+			writer.WriteValue(TermFrequencies);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Terms = ");
-			sb.Append(instance.Terms);
+			__init.Property("Terms");
+			writer.WriteValue(Terms);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,33 +25,33 @@ namespace Elastic.Clients.Elasticsearch.Sql;
 
 public static class SqlFormatCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Sql.SqlFormat instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Sql.SqlFormat instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Sql.SqlFormat.Cbor:
-				sb.Append("SqlFormat.Cbor");
+				writer.Write("SqlFormat.Cbor");
 				break;
 			case Elastic.Clients.Elasticsearch.Sql.SqlFormat.Csv:
-				sb.Append("SqlFormat.Csv");
+				writer.Write("SqlFormat.Csv");
 				break;
 			case Elastic.Clients.Elasticsearch.Sql.SqlFormat.Json:
-				sb.Append("SqlFormat.Json");
+				writer.Write("SqlFormat.Json");
 				break;
 			case Elastic.Clients.Elasticsearch.Sql.SqlFormat.Smile:
-				sb.Append("SqlFormat.Smile");
+				writer.Write("SqlFormat.Smile");
 				break;
 			case Elastic.Clients.Elasticsearch.Sql.SqlFormat.Tsv:
-				sb.Append("SqlFormat.Tsv");
+				writer.Write("SqlFormat.Tsv");
 				break;
 			case Elastic.Clients.Elasticsearch.Sql.SqlFormat.Txt:
-				sb.Append("SqlFormat.Txt");
+				writer.Write("SqlFormat.Txt");
 				break;
 			case Elastic.Clients.Elasticsearch.Sql.SqlFormat.Yaml:
-				sb.Append("SqlFormat.Yaml");
+				writer.Write("SqlFormat.Yaml");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public static class IcuCollationDecompositionCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition.Identical:
-				sb.Append("IcuCollationDecomposition.Identical");
+				writer.Write("IcuCollationDecomposition.Identical");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition.No:
-				sb.Append("IcuCollationDecomposition.No");
+				writer.Write("IcuCollationDecomposition.No");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

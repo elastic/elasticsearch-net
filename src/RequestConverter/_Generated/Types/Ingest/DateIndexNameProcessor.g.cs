@@ -25,124 +25,79 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public partial class DateIndexNameProcessor : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.DateFormats is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (DateFormats is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DateFormats = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.DateFormats, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("DateFormats");
+			writer.WriteInlineList(DateFormats, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DateRounding = ");
-			sb.Append("\"");
-			sb.Append(instance.DateRounding);
-			sb.Append("\"");
+			__init.Property("DateRounding");
+			writer.WriteString(DateRounding);
 		}
 
-		if (instance.Description is not null)
+		if (Description is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.If is not null)
+		if (If is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("If = ");
-			instance.If.FormatCode(sb);
+			__init.Property("If");
+			If.FormatCode(writer);
 		}
 
-		if (instance.IgnoreFailure is not null)
+		if (IgnoreFailure is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreFailure = ");
-			sb.Append(instance.IgnoreFailure.Value ? "true" : "false");
+			__init.Property("IgnoreFailure");
+			writer.WriteValue(IgnoreFailure.Value);
 		}
 
-		if (instance.IndexNameFormat is not null)
+		if (IndexNameFormat is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexNameFormat = ");
-			sb.Append("\"");
-			sb.Append(instance.IndexNameFormat);
-			sb.Append("\"");
+			__init.Property("IndexNameFormat");
+			writer.WriteString(IndexNameFormat);
 		}
 
-		if (instance.IndexNamePrefix is not null)
+		if (IndexNamePrefix is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexNamePrefix = ");
-			sb.Append("\"");
-			sb.Append(instance.IndexNamePrefix);
-			sb.Append("\"");
+			__init.Property("IndexNamePrefix");
+			writer.WriteString(IndexNamePrefix);
 		}
 
-		if (instance.Locale is not null)
+		if (Locale is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Locale = ");
-			sb.Append("\"");
-			sb.Append(instance.Locale);
-			sb.Append("\"");
+			__init.Property("Locale");
+			writer.WriteString(Locale);
 		}
 
-		if (instance.OnFailure is not null)
+		if (OnFailure is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OnFailure = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.OnFailure, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("OnFailure");
+			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Tag is not null)
+		if (Tag is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Tag = ");
-			sb.Append("\"");
-			sb.Append(instance.Tag);
-			sb.Append("\"");
+			__init.Property("Tag");
+			writer.WriteString(Tag);
 		}
 
-		if (instance.Timezone is not null)
+		if (Timezone is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timezone = ");
-			sb.Append("\"");
-			sb.Append(instance.Timezone);
-			sb.Append("\"");
+			__init.Property("Timezone");
+			writer.WriteString(Timezone);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

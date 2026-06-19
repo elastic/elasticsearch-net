@@ -25,62 +25,43 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DatafeedStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AssignmentExplanation is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AssignmentExplanation is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AssignmentExplanation = ");
-			sb.Append("\"");
-			sb.Append(instance.AssignmentExplanation);
-			sb.Append("\"");
+			__init.Property("AssignmentExplanation");
+			writer.WriteString(AssignmentExplanation);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DatafeedId = ");
-			sb.Append("\"");
-			sb.Append(instance.DatafeedId);
-			sb.Append("\"");
+			__init.Property("DatafeedId");
+			writer.WriteString(DatafeedId);
 		}
 
-		if (instance.Node is not null)
+		if (Node is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Node = ");
-			instance.Node.FormatCode(sb);
+			__init.Property("Node");
+			Node.FormatCode(writer);
 		}
 
-		if (instance.RunningState is not null)
+		if (RunningState is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RunningState = ");
-			instance.RunningState.FormatCode(sb);
+			__init.Property("RunningState");
+			RunningState.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("State = ");
-			Elastic.Clients.Elasticsearch.MachineLearning.DatafeedStateCodeFormatter.FormatCode(instance.State, sb);
+			__init.Property("State");
+			Elastic.Clients.Elasticsearch.MachineLearning.DatafeedStateCodeFormatter.FormatCode(State, writer);
 		}
 
-		if (instance.TimingStats is not null)
+		if (TimingStats is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimingStats = ");
-			instance.TimingStats.FormatCode(sb);
+			__init.Property("TimingStats");
+			TimingStats.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

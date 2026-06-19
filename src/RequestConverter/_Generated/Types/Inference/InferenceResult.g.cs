@@ -25,102 +25,63 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class InferenceResult : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Completion is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Completion is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Completion = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Completion, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Completion");
+			writer.WriteInlineList(Completion, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Embeddings is not null)
+		if (Embeddings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Embeddings = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Embeddings, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Embeddings");
+			writer.WriteInlineList(Embeddings, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.EmbeddingsBits is not null)
+		if (EmbeddingsBits is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EmbeddingsBits = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.EmbeddingsBits, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("EmbeddingsBits");
+			writer.WriteInlineList(EmbeddingsBits, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.EmbeddingsBytes is not null)
+		if (EmbeddingsBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EmbeddingsBytes = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.EmbeddingsBytes, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("EmbeddingsBytes");
+			writer.WriteInlineList(EmbeddingsBytes, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Rerank is not null)
+		if (Rerank is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Rerank = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Rerank, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Rerank");
+			writer.WriteInlineList(Rerank, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.SparseEmbedding is not null)
+		if (SparseEmbedding is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SparseEmbedding = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.SparseEmbedding, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("SparseEmbedding");
+			writer.WriteInlineList(SparseEmbedding, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.TextEmbedding is not null)
+		if (TextEmbedding is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TextEmbedding = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.TextEmbedding, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("TextEmbedding");
+			writer.WriteInlineList(TextEmbedding, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.TextEmbeddingBits is not null)
+		if (TextEmbeddingBits is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TextEmbeddingBits = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.TextEmbeddingBits, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("TextEmbeddingBits");
+			writer.WriteInlineList(TextEmbeddingBits, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.TextEmbeddingBytes is not null)
+		if (TextEmbeddingBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TextEmbeddingBytes = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.TextEmbeddingBytes, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("TextEmbeddingBytes");
+			writer.WriteInlineList(TextEmbeddingBytes, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

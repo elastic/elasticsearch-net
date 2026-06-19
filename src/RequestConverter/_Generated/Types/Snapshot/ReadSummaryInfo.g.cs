@@ -25,90 +25,65 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 public partial class ReadSummaryInfo : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count);
+			__init.Property("Count");
+			writer.WriteValue(Count);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxWait = ");
-			instance.MaxWait.FormatCode(sb);
+			__init.Property("MaxWait");
+			MaxWait.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxWaitNanos = ");
-			sb.Append(instance.MaxWaitNanos);
+			__init.Property("MaxWaitNanos");
+			writer.WriteValue(MaxWaitNanos);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalElapsed = ");
-			instance.TotalElapsed.FormatCode(sb);
+			__init.Property("TotalElapsed");
+			TotalElapsed.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalElapsedNanos = ");
-			sb.Append(instance.TotalElapsedNanos);
+			__init.Property("TotalElapsedNanos");
+			writer.WriteValue(TotalElapsedNanos);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalSize = ");
-			instance.TotalSize.FormatCode(sb);
+			__init.Property("TotalSize");
+			TotalSize.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalSizeBytes = ");
-			sb.Append(instance.TotalSizeBytes);
-			sb.Append("L");
+			__init.Property("TotalSizeBytes");
+			writer.WriteValue(TotalSizeBytes);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalThrottled = ");
-			instance.TotalThrottled.FormatCode(sb);
+			__init.Property("TotalThrottled");
+			TotalThrottled.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalThrottledNanos = ");
-			sb.Append(instance.TotalThrottledNanos);
+			__init.Property("TotalThrottledNanos");
+			writer.WriteValue(TotalThrottledNanos);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalWait = ");
-			instance.TotalWait.FormatCode(sb);
+			__init.Property("TotalWait");
+			TotalWait.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalWaitNanos = ");
-			sb.Append(instance.TotalWaitNanos);
+			__init.Property("TotalWaitNanos");
+			writer.WriteValue(TotalWaitNanos);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,118 +25,87 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class BulkRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Index is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Index is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			instance.Index.FormatCode(sb);
+			__init.Property("Index");
+			Index.FormatCode(writer);
 		}
 
-		if (instance.IncludeSourceOnError is not null)
+		if (IncludeSourceOnError is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IncludeSourceOnError = ");
-			sb.Append(instance.IncludeSourceOnError.Value ? "true" : "false");
+			__init.Property("IncludeSourceOnError");
+			writer.WriteValue(IncludeSourceOnError.Value);
 		}
 
-		if (instance.ListExecutedPipelines is not null)
+		if (ListExecutedPipelines is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ListExecutedPipelines = ");
-			sb.Append(instance.ListExecutedPipelines.Value ? "true" : "false");
+			__init.Property("ListExecutedPipelines");
+			writer.WriteValue(ListExecutedPipelines.Value);
 		}
 
-		if (instance.Pipeline is not null)
+		if (Pipeline is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Pipeline = ");
-			sb.Append("\"");
-			sb.Append(instance.Pipeline);
-			sb.Append("\"");
+			__init.Property("Pipeline");
+			writer.WriteString(Pipeline);
 		}
 
-		if (instance.Refresh is not null)
+		if (Refresh is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Refresh = ");
-			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(instance.Refresh.Value, sb);
+			__init.Property("Refresh");
+			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
 		}
 
-		if (instance.RequireAlias is not null)
+		if (RequireAlias is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RequireAlias = ");
-			sb.Append(instance.RequireAlias.Value ? "true" : "false");
+			__init.Property("RequireAlias");
+			writer.WriteValue(RequireAlias.Value);
 		}
 
-		if (instance.RequireDataStream is not null)
+		if (RequireDataStream is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RequireDataStream = ");
-			sb.Append(instance.RequireDataStream.Value ? "true" : "false");
+			__init.Property("RequireDataStream");
+			writer.WriteValue(RequireDataStream.Value);
 		}
 
-		if (instance.Routing is not null)
+		if (Routing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Routing = ");
-			instance.Routing.FormatCode(sb);
+			__init.Property("Routing");
+			Routing.FormatCode(writer);
 		}
 
-		if (instance.Source is not null)
+		if (Source is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Source = ");
-			instance.Source.FormatCode(sb);
+			__init.Property("Source");
+			Source.FormatCode(writer);
 		}
 
-		if (instance.SourceExcludes is not null)
+		if (SourceExcludes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SourceExcludes = ");
-			instance.SourceExcludes.FormatCode(sb);
+			__init.Property("SourceExcludes");
+			SourceExcludes.FormatCode(writer);
 		}
 
-		if (instance.SourceIncludes is not null)
+		if (SourceIncludes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SourceIncludes = ");
-			instance.SourceIncludes.FormatCode(sb);
+			__init.Property("SourceIncludes");
+			SourceIncludes.FormatCode(writer);
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (instance.WaitForActiveShards is not null)
+		if (WaitForActiveShards is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WaitForActiveShards = ");
-			instance.WaitForActiveShards.Value.FormatCode(sb);
+			__init.Property("WaitForActiveShards");
+			WaitForActiveShards.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public static class TTestTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Aggregations.TTestType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Aggregations.TTestType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Aggregations.TTestType.Heteroscedastic:
-				sb.Append("TTestType.Heteroscedastic");
+				writer.Write("TTestType.Heteroscedastic");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.TTestType.Homoscedastic:
-				sb.Append("TTestType.Homoscedastic");
+				writer.Write("TTestType.Homoscedastic");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.TTestType.Paired:
-				sb.Append("TTestType.Paired");
+				writer.Write("TTestType.Paired");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

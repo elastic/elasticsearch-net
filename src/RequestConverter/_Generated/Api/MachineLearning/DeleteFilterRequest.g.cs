@@ -25,19 +25,14 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DeleteFilterRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FilterId = ");
-			instance.FilterId.FormatCode(sb);
+			__init.Property("FilterId");
+			FilterId.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

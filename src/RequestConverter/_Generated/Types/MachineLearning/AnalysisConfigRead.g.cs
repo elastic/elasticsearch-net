@@ -25,105 +25,72 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class AnalysisConfigRead : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BucketSpan = ");
-			instance.BucketSpan.FormatCode(sb);
+			__init.Property("BucketSpan");
+			BucketSpan.FormatCode(writer);
 		}
 
-		if (instance.CategorizationAnalyzer is not null)
+		if (CategorizationAnalyzer is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CategorizationAnalyzer = ");
-			instance.CategorizationAnalyzer.FormatCode(sb);
+			__init.Property("CategorizationAnalyzer");
+			CategorizationAnalyzer.FormatCode(writer);
 		}
 
-		if (instance.CategorizationFieldName is not null)
+		if (CategorizationFieldName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CategorizationFieldName = ");
-			sb.Append("\"");
-			sb.Append(instance.CategorizationFieldName);
-			sb.Append("\"");
+			__init.Property("CategorizationFieldName");
+			writer.WriteString(CategorizationFieldName);
 		}
 
-		if (instance.CategorizationFilters is not null)
+		if (CategorizationFilters is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CategorizationFilters = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.CategorizationFilters, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("CategorizationFilters");
+			writer.WriteInlineList(CategorizationFilters, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Detectors = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Detectors, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Detectors");
+			writer.WriteInlineList(Detectors, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Influencers = ");
-			instance.Influencers.FormatCode(sb);
+			__init.Property("Influencers");
+			Influencers.FormatCode(writer);
 		}
 
-		if (instance.Latency is not null)
+		if (Latency is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Latency = ");
-			instance.Latency.FormatCode(sb);
+			__init.Property("Latency");
+			Latency.FormatCode(writer);
 		}
 
-		if (instance.ModelPruneWindow is not null)
+		if (ModelPruneWindow is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelPruneWindow = ");
-			instance.ModelPruneWindow.FormatCode(sb);
+			__init.Property("ModelPruneWindow");
+			ModelPruneWindow.FormatCode(writer);
 		}
 
-		if (instance.MultivariateByFields is not null)
+		if (MultivariateByFields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MultivariateByFields = ");
-			sb.Append(instance.MultivariateByFields.Value ? "true" : "false");
+			__init.Property("MultivariateByFields");
+			writer.WriteValue(MultivariateByFields.Value);
 		}
 
-		if (instance.PerPartitionCategorization is not null)
+		if (PerPartitionCategorization is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PerPartitionCategorization = ");
-			instance.PerPartitionCategorization.FormatCode(sb);
+			__init.Property("PerPartitionCategorization");
+			PerPartitionCategorization.FormatCode(writer);
 		}
 
-		if (instance.SummaryCountFieldName is not null)
+		if (SummaryCountFieldName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SummaryCountFieldName = ");
-			sb.Append("\"");
-			sb.Append(instance.SummaryCountFieldName);
-			sb.Append("\"");
+			__init.Property("SummaryCountFieldName");
+			writer.WriteString(SummaryCountFieldName);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

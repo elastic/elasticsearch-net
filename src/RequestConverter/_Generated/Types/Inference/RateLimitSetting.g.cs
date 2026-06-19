@@ -25,20 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class RateLimitSetting : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.RequestsPerMinute is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (RequestsPerMinute is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RequestsPerMinute = ");
-			sb.Append(instance.RequestsPerMinute.Value);
+			__init.Property("RequestsPerMinute");
+			writer.WriteValue(RequestsPerMinute.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,31 +25,22 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class Hint : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Labels is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Labels is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Labels = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Labels, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("["); RequestConverter.CodeFormatter.FormatCode(v, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb); sb.Append("]"); }, sb);
+			__init.Property("Labels");
+			writer.Write("new() ");
+			writer.WriteInlineList(Labels, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteString(item); }); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Uids is not null)
+		if (Uids is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Uids = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Uids, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Uids");
+			writer.WriteInlineList(Uids, (w, item) => { w.WriteString(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

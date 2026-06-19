@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Core.SearchMvt;
 
 public static class GridAggregationTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType.Geohex:
-				sb.Append("GridAggregationType.Geohex");
+				writer.Write("GridAggregationType.Geohex");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType.Geotile:
-				sb.Append("GridAggregationType.Geotile");
+				writer.Write("GridAggregationType.Geotile");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

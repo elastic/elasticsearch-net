@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public static class SynonymFormatCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.SynonymFormat instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.SynonymFormat instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.SynonymFormat.Solr:
-				sb.Append("SynonymFormat.Solr");
+				writer.Write("SynonymFormat.Solr");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SynonymFormat.Wordnet:
-				sb.Append("SynonymFormat.Wordnet");
+				writer.Write("SynonymFormat.Wordnet");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

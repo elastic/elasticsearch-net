@@ -25,44 +25,31 @@ namespace Elastic.Clients.Elasticsearch.QueryRules;
 
 public partial class QueryRulesetListItem : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RuleCriteriaTypesCounts = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.RuleCriteriaTypesCounts, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append(v); }, sb);
+			__init.Property("RuleCriteriaTypesCounts");
+			writer.Write("new() ");
+			writer.WriteInlineList(RuleCriteriaTypesCounts, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RulesetId = ");
-			sb.Append("\"");
-			sb.Append(instance.RulesetId);
-			sb.Append("\"");
+			__init.Property("RulesetId");
+			writer.WriteString(RulesetId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RuleTotalCount = ");
-			sb.Append(instance.RuleTotalCount);
+			__init.Property("RuleTotalCount");
+			writer.WriteValue(RuleTotalCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RuleTypeCounts = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.RuleTypeCounts, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append(v); }, sb);
+			__init.Property("RuleTypeCounts");
+			writer.Write("new() ");
+			writer.WriteInlineList(RuleTypeCounts, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

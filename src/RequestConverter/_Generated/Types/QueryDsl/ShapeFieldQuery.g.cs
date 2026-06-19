@@ -25,36 +25,27 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class ShapeFieldQuery : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.IndexedShape is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (IndexedShape is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexedShape = ");
-			instance.IndexedShape.FormatCode(sb);
+			__init.Property("IndexedShape");
+			IndexedShape.FormatCode(writer);
 		}
 
-		if (instance.Relation is not null)
+		if (Relation is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Relation = ");
-			Elastic.Clients.Elasticsearch.GeoShapeRelationCodeFormatter.FormatCode(instance.Relation.Value, sb);
+			__init.Property("Relation");
+			Elastic.Clients.Elasticsearch.GeoShapeRelationCodeFormatter.FormatCode(Relation.Value, writer);
 		}
 
-		if (instance.Shape is not null)
+		if (Shape is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Shape = ");
-			RequestConverter.CodeFormatter.FormatCode(instance.Shape, sb);
+			__init.Property("Shape");
+			writer.WriteValue(Shape);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

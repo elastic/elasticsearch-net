@@ -25,86 +25,65 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class RequestChatCompletion : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.MaxCompletionTokens is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (MaxCompletionTokens is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxCompletionTokens = ");
-			sb.Append(instance.MaxCompletionTokens.Value);
-			sb.Append("L");
+			__init.Property("MaxCompletionTokens");
+			writer.WriteValue(MaxCompletionTokens.Value);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Messages = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Messages, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Messages");
+			writer.WriteInlineList(Messages, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Model is not null)
+		if (Model is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Model = ");
-			sb.Append("\"");
-			sb.Append(instance.Model);
-			sb.Append("\"");
+			__init.Property("Model");
+			writer.WriteString(Model);
 		}
 
-		if (instance.Stop is not null)
+		if (Reasoning is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Stop = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Stop, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Reasoning");
+			Reasoning.FormatCode(writer);
 		}
 
-		if (instance.Temperature is not null)
+		if (Stop is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Temperature = ");
-			sb.Append(instance.Temperature.Value);
-			sb.Append("f");
+			__init.Property("Stop");
+			writer.WriteInlineList(Stop, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.ToolChoice is not null)
+		if (Temperature is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ToolChoice = ");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<string, Elastic.Clients.Elasticsearch.Inference.CompletionToolChoice>(instance.ToolChoice, sb);
+			__init.Property("Temperature");
+			writer.WriteValue(Temperature.Value);
+			writer.Write("f");
 		}
 
-		if (instance.Tools is not null)
+		if (ToolChoice is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Tools = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Tools, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("ToolChoice");
+			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<string, Elastic.Clients.Elasticsearch.Inference.CompletionToolChoice>(ToolChoice, writer);
 		}
 
-		if (instance.TopP is not null)
+		if (Tools is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TopP = ");
-			sb.Append(instance.TopP.Value);
-			sb.Append("f");
+			__init.Property("Tools");
+			writer.WriteInlineList(Tools, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		if (TopP is not null)
+		{
+			__init.Property("TopP");
+			writer.WriteValue(TopP.Value);
+			writer.Write("f");
+		}
+
+		__init.Dispose();
 	}
 }

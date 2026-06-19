@@ -25,63 +25,46 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class IndicesStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Health is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Health is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Health = ");
-			Elastic.Clients.Elasticsearch.HealthStatusCodeFormatter.FormatCode(instance.Health.Value, sb);
+			__init.Property("Health");
+			Elastic.Clients.Elasticsearch.HealthStatusCodeFormatter.FormatCode(Health.Value, writer);
 		}
 
-		if (instance.Primaries is not null)
+		if (Primaries is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Primaries = ");
-			instance.Primaries.FormatCode(sb);
+			__init.Property("Primaries");
+			Primaries.FormatCode(writer);
 		}
 
-		if (instance.Shards is not null)
+		if (Shards is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Shards = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Shards, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("["); RequestConverter.CodeFormatter.FormatCode(v, (item, sb) => { item.FormatCode(sb); }, sb); sb.Append("]"); }, sb);
+			__init.Property("Shards");
+			writer.Write("new() ");
+			writer.WriteInlineList(Shards, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { item.FormatCode(w); }); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Status is not null)
+		if (Status is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Status = ");
-			Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataStateCodeFormatter.FormatCode(instance.Status.Value, sb);
+			__init.Property("Status");
+			Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataStateCodeFormatter.FormatCode(Status.Value, writer);
 		}
 
-		if (instance.Total is not null)
+		if (Total is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			instance.Total.FormatCode(sb);
+			__init.Property("Total");
+			Total.FormatCode(writer);
 		}
 
-		if (instance.Uuid is not null)
+		if (Uuid is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Uuid = ");
-			sb.Append("\"");
-			sb.Append(instance.Uuid);
-			sb.Append("\"");
+			__init.Property("Uuid");
+			writer.WriteString(Uuid);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

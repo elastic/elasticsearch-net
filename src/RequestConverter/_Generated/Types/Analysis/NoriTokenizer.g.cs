@@ -25,58 +25,39 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class NoriTokenizer : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.DecompoundMode is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (DecompoundMode is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DecompoundMode = ");
-			Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundModeCodeFormatter.FormatCode(instance.DecompoundMode.Value, sb);
+			__init.Property("DecompoundMode");
+			Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundModeCodeFormatter.FormatCode(DecompoundMode.Value, writer);
 		}
 
-		if (instance.DiscardPunctuation is not null)
+		if (DiscardPunctuation is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DiscardPunctuation = ");
-			sb.Append(instance.DiscardPunctuation.Value ? "true" : "false");
+			__init.Property("DiscardPunctuation");
+			writer.WriteValue(DiscardPunctuation.Value);
 		}
 
-		if (instance.UserDictionary is not null)
+		if (UserDictionary is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UserDictionary = ");
-			sb.Append("\"");
-			sb.Append(instance.UserDictionary);
-			sb.Append("\"");
+			__init.Property("UserDictionary");
+			writer.WriteString(UserDictionary);
 		}
 
-		if (instance.UserDictionaryRules is not null)
+		if (UserDictionaryRules is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UserDictionaryRules = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.UserDictionaryRules, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("UserDictionaryRules");
+			writer.WriteInlineList(UserDictionaryRules, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

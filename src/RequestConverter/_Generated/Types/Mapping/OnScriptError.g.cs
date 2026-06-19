@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public static class OnScriptErrorCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.OnScriptError instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.OnScriptError instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.OnScriptError.Continue:
-				sb.Append("OnScriptError.Continue");
+				writer.Write("OnScriptError.Continue");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.OnScriptError.Fail:
-				sb.Append("OnScriptError.Fail");
+				writer.Write("OnScriptError.Fail");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

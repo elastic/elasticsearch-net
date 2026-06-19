@@ -25,52 +25,35 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class TrainedModelEntities : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ClassName = ");
-			sb.Append("\"");
-			sb.Append(instance.ClassName);
-			sb.Append("\"");
+			__init.Property("ClassName");
+			writer.WriteString(ClassName);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ClassProbability = ");
-			sb.Append(instance.ClassProbability);
-			sb.Append("d");
+			__init.Property("ClassProbability");
+			writer.WriteValue(ClassProbability);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EndPos = ");
-			sb.Append(instance.EndPos);
+			__init.Property("EndPos");
+			writer.WriteValue(EndPos);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Entity = ");
-			sb.Append("\"");
-			sb.Append(instance.Entity);
-			sb.Append("\"");
+			__init.Property("Entity");
+			writer.WriteString(Entity);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StartPos = ");
-			sb.Append(instance.StartPos);
+			__init.Property("StartPos");
+			writer.WriteValue(StartPos);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,37 +25,26 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class HttpRouteRequests : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count);
-			sb.Append("L");
+			__init.Property("Count");
+			writer.WriteValue(Count);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SizeHistogram = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.SizeHistogram, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("SizeHistogram");
+			writer.WriteInlineList(SizeHistogram, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalSizeInBytes = ");
-			sb.Append(instance.TotalSizeInBytes);
-			sb.Append("L");
+			__init.Property("TotalSizeInBytes");
+			writer.WriteValue(TotalSizeInBytes);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

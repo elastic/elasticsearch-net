@@ -25,36 +25,27 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class ShardSequenceNumber : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GlobalCheckpoint = ");
-			sb.Append(instance.GlobalCheckpoint);
-			sb.Append("L");
+			__init.Property("GlobalCheckpoint");
+			writer.WriteValue(GlobalCheckpoint);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LocalCheckpoint = ");
-			sb.Append(instance.LocalCheckpoint);
-			sb.Append("L");
+			__init.Property("LocalCheckpoint");
+			writer.WriteValue(LocalCheckpoint);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxSeqNo = ");
-			sb.Append(instance.MaxSeqNo);
-			sb.Append("L");
+			__init.Property("MaxSeqNo");
+			writer.WriteValue(MaxSeqNo);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

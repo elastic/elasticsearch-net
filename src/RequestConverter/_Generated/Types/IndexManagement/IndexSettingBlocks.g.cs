@@ -25,52 +25,39 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class IndexSettingBlocks : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Metadata is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Metadata is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Metadata = ");
-			sb.Append(instance.Metadata.Value ? "true" : "false");
+			__init.Property("Metadata");
+			writer.WriteValue(Metadata.Value);
 		}
 
-		if (instance.Read is not null)
+		if (Read is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Read = ");
-			sb.Append(instance.Read.Value ? "true" : "false");
+			__init.Property("Read");
+			writer.WriteValue(Read.Value);
 		}
 
-		if (instance.ReadOnly is not null)
+		if (ReadOnly is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReadOnly = ");
-			sb.Append(instance.ReadOnly.Value ? "true" : "false");
+			__init.Property("ReadOnly");
+			writer.WriteValue(ReadOnly.Value);
 		}
 
-		if (instance.ReadOnlyAllowDelete is not null)
+		if (ReadOnlyAllowDelete is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReadOnlyAllowDelete = ");
-			sb.Append(instance.ReadOnlyAllowDelete.Value ? "true" : "false");
+			__init.Property("ReadOnlyAllowDelete");
+			writer.WriteValue(ReadOnlyAllowDelete.Value);
 		}
 
-		if (instance.Write is not null)
+		if (Write is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Write = ");
-			sb.Append(instance.Write.Value ? "true" : "false");
+			__init.Property("Write");
+			writer.WriteValue(Write.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

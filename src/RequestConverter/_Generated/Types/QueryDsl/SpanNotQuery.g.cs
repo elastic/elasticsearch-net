@@ -25,69 +25,50 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class SpanNotQuery : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Boost is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Boost is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Boost = ");
-			sb.Append(instance.Boost.Value);
-			sb.Append("f");
+			__init.Property("Boost");
+			writer.WriteValue(Boost.Value);
+			writer.Write("f");
 		}
 
-		if (instance.Dist is not null)
+		if (Dist is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Dist = ");
-			sb.Append(instance.Dist.Value);
+			__init.Property("Dist");
+			writer.WriteValue(Dist.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Exclude = ");
-			instance.Exclude.FormatCode(sb);
+			__init.Property("Exclude");
+			Exclude.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Include = ");
-			instance.Include.FormatCode(sb);
+			__init.Property("Include");
+			Include.FormatCode(writer);
 		}
 
-		if (instance.Post is not null)
+		if (Post is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Post = ");
-			sb.Append(instance.Post.Value);
+			__init.Property("Post");
+			writer.WriteValue(Post.Value);
 		}
 
-		if (instance.Pre is not null)
+		if (Pre is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Pre = ");
-			sb.Append(instance.Pre.Value);
+			__init.Property("Pre");
+			writer.WriteValue(Pre.Value);
 		}
 
-		if (instance.QueryName is not null)
+		if (QueryName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryName = ");
-			sb.Append("\"");
-			sb.Append(instance.QueryName);
-			sb.Append("\"");
+			__init.Property("QueryName");
+			writer.WriteString(QueryName);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,46 +25,33 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class CgroupCpu : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CfsPeriodMicros is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CfsPeriodMicros is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CfsPeriodMicros = ");
-			sb.Append(instance.CfsPeriodMicros.Value);
+			__init.Property("CfsPeriodMicros");
+			writer.WriteValue(CfsPeriodMicros.Value);
 		}
 
-		if (instance.CfsQuotaMicros is not null)
+		if (CfsQuotaMicros is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CfsQuotaMicros = ");
-			sb.Append(instance.CfsQuotaMicros.Value);
+			__init.Property("CfsQuotaMicros");
+			writer.WriteValue(CfsQuotaMicros.Value);
 		}
 
-		if (instance.ControlGroup is not null)
+		if (ControlGroup is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ControlGroup = ");
-			sb.Append("\"");
-			sb.Append(instance.ControlGroup);
-			sb.Append("\"");
+			__init.Property("ControlGroup");
+			writer.WriteString(ControlGroup);
 		}
 
-		if (instance.Stat is not null)
+		if (Stat is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Stat = ");
-			instance.Stat.FormatCode(sb);
+			__init.Property("Stat");
+			Stat.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

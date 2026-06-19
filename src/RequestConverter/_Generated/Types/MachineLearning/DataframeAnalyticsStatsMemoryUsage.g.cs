@@ -25,46 +25,33 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataframeAnalyticsStatsMemoryUsage : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.MemoryReestimateBytes is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (MemoryReestimateBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MemoryReestimateBytes = ");
-			sb.Append(instance.MemoryReestimateBytes.Value);
-			sb.Append("L");
+			__init.Property("MemoryReestimateBytes");
+			writer.WriteValue(MemoryReestimateBytes.Value);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PeakUsageBytes = ");
-			sb.Append(instance.PeakUsageBytes);
-			sb.Append("L");
+			__init.Property("PeakUsageBytes");
+			writer.WriteValue(PeakUsageBytes);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Status = ");
-			sb.Append("\"");
-			sb.Append(instance.Status);
-			sb.Append("\"");
+			__init.Property("Status");
+			writer.WriteString(Status);
 		}
 
-		if (instance.Timestamp is not null)
+		if (Timestamp is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timestamp = ");
-			sb.Append(instance.Timestamp.Value);
+			__init.Property("Timestamp");
+			writer.WriteValue(Timestamp.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

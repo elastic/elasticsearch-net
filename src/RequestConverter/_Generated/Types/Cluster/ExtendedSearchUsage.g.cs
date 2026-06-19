@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class ExtendedSearchUsage : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Retrievers is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Retrievers is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Retrievers = ");
-			instance.Retrievers.FormatCode(sb);
+			__init.Property("Retrievers");
+			Retrievers.FormatCode(writer);
 		}
 
-		if (instance.Section is not null)
+		if (Section is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Section = ");
-			instance.Section.FormatCode(sb);
+			__init.Property("Section");
+			Section.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

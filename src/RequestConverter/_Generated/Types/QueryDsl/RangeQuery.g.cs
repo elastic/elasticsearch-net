@@ -25,33 +25,38 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial interface IRangeQuery : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	void RequestConverter.ICodeFormattable.FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		if (instance is Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery c1)
+		if (this is Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery c1)
 		{
-			c1.FormatCode(sb);
+			c1.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery c2)
+		if (this is Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQuery c2)
 		{
-			c2.FormatCode(sb);
+			c2.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery c3)
+		if (this is Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery c3)
 		{
-			c3.FormatCode(sb);
+			c3.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery c4)
+		if (this is Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery c4)
 		{
-			c4.FormatCode(sb);
+			c4.FormatCode(writer);
 			return;
 		}
 
-		sb.Append(instance.ToString());
+		if (this is Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery c5)
+		{
+			c5.FormatCode(writer);
+			return;
+		}
+
+		writer.Write(ToString());
 	}
 }

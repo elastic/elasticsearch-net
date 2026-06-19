@@ -25,47 +25,34 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class ExtendedStatsBucketAggregation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.BucketsPath is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (BucketsPath is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BucketsPath = ");
-			instance.BucketsPath.FormatCode(sb);
+			__init.Property("BucketsPath");
+			BucketsPath.FormatCode(writer);
 		}
 
-		if (instance.Format is not null)
+		if (Format is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Format = ");
-			sb.Append("\"");
-			sb.Append(instance.Format);
-			sb.Append("\"");
+			__init.Property("Format");
+			writer.WriteString(Format);
 		}
 
-		if (instance.GapPolicy is not null)
+		if (GapPolicy is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GapPolicy = ");
-			Elastic.Clients.Elasticsearch.Aggregations.GapPolicyCodeFormatter.FormatCode(instance.GapPolicy.Value, sb);
+			__init.Property("GapPolicy");
+			Elastic.Clients.Elasticsearch.Aggregations.GapPolicyCodeFormatter.FormatCode(GapPolicy.Value, writer);
 		}
 
-		if (instance.Sigma is not null)
+		if (Sigma is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sigma = ");
-			sb.Append(instance.Sigma.Value);
-			sb.Append("d");
+			__init.Property("Sigma");
+			writer.WriteValue(Sigma.Value);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

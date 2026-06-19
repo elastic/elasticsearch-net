@@ -25,76 +25,57 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class GetOverallBucketsRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JobId = ");
-			instance.JobId.FormatCode(sb);
+			__init.Property("JobId");
+			JobId.FormatCode(writer);
 		}
 
-		if (instance.AllowNoMatch is not null)
+		if (AllowNoMatch is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowNoMatch = ");
-			sb.Append(instance.AllowNoMatch.Value ? "true" : "false");
+			__init.Property("AllowNoMatch");
+			writer.WriteValue(AllowNoMatch.Value);
 		}
 
-		if (instance.BucketSpan is not null)
+		if (BucketSpan is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BucketSpan = ");
-			instance.BucketSpan.FormatCode(sb);
+			__init.Property("BucketSpan");
+			BucketSpan.FormatCode(writer);
 		}
 
-		if (instance.End is not null)
+		if (End is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("End = ");
-			sb.Append(instance.End.Value);
+			__init.Property("End");
+			writer.WriteValue(End.Value);
 		}
 
-		if (instance.ExcludeInterim is not null)
+		if (ExcludeInterim is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExcludeInterim = ");
-			sb.Append(instance.ExcludeInterim.Value ? "true" : "false");
+			__init.Property("ExcludeInterim");
+			writer.WriteValue(ExcludeInterim.Value);
 		}
 
-		if (instance.OverallScore is not null)
+		if (OverallScore is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OverallScore = ");
-			sb.Append(instance.OverallScore.Value);
-			sb.Append("d");
+			__init.Property("OverallScore");
+			writer.WriteValue(OverallScore.Value);
+			writer.Write("d");
 		}
 
-		if (instance.Start is not null)
+		if (Start is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Start = ");
-			sb.Append(instance.Start.Value);
+			__init.Property("Start");
+			writer.WriteValue(Start.Value);
 		}
 
-		if (instance.TopN is not null)
+		if (TopN is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TopN = ");
-			sb.Append(instance.TopN.Value);
+			__init.Property("TopN");
+			writer.WriteValue(TopN.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

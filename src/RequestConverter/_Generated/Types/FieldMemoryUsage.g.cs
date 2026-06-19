@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class FieldMemoryUsage : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.MemorySize is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (MemorySize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MemorySize = ");
-			instance.MemorySize.FormatCode(sb);
+			__init.Property("MemorySize");
+			MemorySize.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MemorySizeInBytes = ");
-			sb.Append(instance.MemorySizeInBytes);
-			sb.Append("L");
+			__init.Property("MemorySizeInBytes");
+			writer.WriteValue(MemorySizeInBytes);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

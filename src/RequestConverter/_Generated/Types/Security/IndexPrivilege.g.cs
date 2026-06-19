@@ -25,143 +25,166 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public readonly partial struct IndexPrivilege : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		if (instance == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.All)
+		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.All)
 		{
-			sb.Append("IndexPrivilege.All");
+			writer.Write("IndexPrivilege.All");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.AutoConfigure)
+		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.AutoConfigure)
 		{
-			sb.Append("IndexPrivilege.AutoConfigure");
+			writer.Write("IndexPrivilege.AutoConfigure");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Create)
+		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Create)
 		{
-			sb.Append("IndexPrivilege.Create");
+			writer.Write("IndexPrivilege.Create");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.CreateDoc)
+		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.CreateDoc)
 		{
-			sb.Append("IndexPrivilege.CreateDoc");
+			writer.Write("IndexPrivilege.CreateDoc");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.CreateIndex)
+		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.CreateIndex)
 		{
-			sb.Append("IndexPrivilege.CreateIndex");
+			writer.Write("IndexPrivilege.CreateIndex");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.CrossClusterReplication)
+		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.CreateView)
 		{
-			sb.Append("IndexPrivilege.CrossClusterReplication");
+			writer.Write("IndexPrivilege.CreateView");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.CrossClusterReplicationInternal)
+		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.CrossClusterReplication)
 		{
-			sb.Append("IndexPrivilege.CrossClusterReplicationInternal");
+			writer.Write("IndexPrivilege.CrossClusterReplication");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Delete)
+		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.CrossClusterReplicationInternal)
 		{
-			sb.Append("IndexPrivilege.Delete");
+			writer.Write("IndexPrivilege.CrossClusterReplicationInternal");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.DeleteIndex)
+		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Delete)
 		{
-			sb.Append("IndexPrivilege.DeleteIndex");
+			writer.Write("IndexPrivilege.Delete");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Index)
+		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.DeleteIndex)
 		{
-			sb.Append("IndexPrivilege.Index");
+			writer.Write("IndexPrivilege.DeleteIndex");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Maintenance)
+		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.DeleteView)
 		{
-			sb.Append("IndexPrivilege.Maintenance");
+			writer.Write("IndexPrivilege.DeleteView");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Manage)
+		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Index)
 		{
-			sb.Append("IndexPrivilege.Manage");
+			writer.Write("IndexPrivilege.Index");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ManageDataStreamLifecycle)
+		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Maintenance)
 		{
-			sb.Append("IndexPrivilege.ManageDataStreamLifecycle");
+			writer.Write("IndexPrivilege.Maintenance");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ManageFollowIndex)
+		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Manage)
 		{
-			sb.Append("IndexPrivilege.ManageFollowIndex");
+			writer.Write("IndexPrivilege.Manage");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ManageIlm)
+		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ManageDataStreamLifecycle)
 		{
-			sb.Append("IndexPrivilege.ManageIlm");
+			writer.Write("IndexPrivilege.ManageDataStreamLifecycle");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ManageLeaderIndex)
+		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ManageFollowIndex)
 		{
-			sb.Append("IndexPrivilege.ManageLeaderIndex");
+			writer.Write("IndexPrivilege.ManageFollowIndex");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Monitor)
+		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ManageIlm)
 		{
-			sb.Append("IndexPrivilege.Monitor");
+			writer.Write("IndexPrivilege.ManageIlm");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.None)
+		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ManageLeaderIndex)
 		{
-			sb.Append("IndexPrivilege.None");
+			writer.Write("IndexPrivilege.ManageLeaderIndex");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Read)
+		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ManageView)
 		{
-			sb.Append("IndexPrivilege.Read");
+			writer.Write("IndexPrivilege.ManageView");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ReadCrossCluster)
+		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Monitor)
 		{
-			sb.Append("IndexPrivilege.ReadCrossCluster");
+			writer.Write("IndexPrivilege.Monitor");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ViewIndexMetadata)
+		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.None)
 		{
-			sb.Append("IndexPrivilege.ViewIndexMetadata");
+			writer.Write("IndexPrivilege.None");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Write)
+		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Read)
 		{
-			sb.Append("IndexPrivilege.Write");
+			writer.Write("IndexPrivilege.Read");
 			return;
 		}
 
-		sb.Append("new IndexPrivilege(\"");
-		sb.Append(instance.Value);
-		sb.Append("\")");
+		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ReadCrossCluster)
+		{
+			writer.Write("IndexPrivilege.ReadCrossCluster");
+			return;
+		}
+
+		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ReadViewMetadata)
+		{
+			writer.Write("IndexPrivilege.ReadViewMetadata");
+			return;
+		}
+
+		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ViewIndexMetadata)
+		{
+			writer.Write("IndexPrivilege.ViewIndexMetadata");
+			return;
+		}
+
+		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Write)
+		{
+			writer.Write("IndexPrivilege.Write");
+			return;
+		}
+
+		writer.Write("new IndexPrivilege(\"");
+		writer.Write(Value);
+		writer.Write("\")");
 	}
 }

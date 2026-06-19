@@ -25,43 +25,32 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class RecoveryStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CurrentAsSource = ");
-			sb.Append(instance.CurrentAsSource);
-			sb.Append("L");
+			__init.Property("CurrentAsSource");
+			writer.WriteValue(CurrentAsSource);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CurrentAsTarget = ");
-			sb.Append(instance.CurrentAsTarget);
-			sb.Append("L");
+			__init.Property("CurrentAsTarget");
+			writer.WriteValue(CurrentAsTarget);
+			writer.Write("L");
 		}
 
-		if (instance.ThrottleTime is not null)
+		if (ThrottleTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ThrottleTime = ");
-			instance.ThrottleTime.FormatCode(sb);
+			__init.Property("ThrottleTime");
+			ThrottleTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ThrottleTimeInMillis = ");
-			sb.Append(instance.ThrottleTimeInMillis);
+			__init.Property("ThrottleTimeInMillis");
+			writer.WriteValue(ThrottleTimeInMillis);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,36 +25,36 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public static class DecisionCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Cluster.Decision instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Cluster.Decision instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Cluster.Decision.AllocationDelayed:
-				sb.Append("Decision.AllocationDelayed");
+				writer.Write("Decision.AllocationDelayed");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.Decision.AwaitingInfo:
-				sb.Append("Decision.AwaitingInfo");
+				writer.Write("Decision.AwaitingInfo");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.Decision.No:
-				sb.Append("Decision.No");
+				writer.Write("Decision.No");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.Decision.NoAttempt:
-				sb.Append("Decision.NoAttempt");
+				writer.Write("Decision.NoAttempt");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.Decision.NoValidShardCopy:
-				sb.Append("Decision.NoValidShardCopy");
+				writer.Write("Decision.NoValidShardCopy");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.Decision.Throttled:
-				sb.Append("Decision.Throttled");
+				writer.Write("Decision.Throttled");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.Decision.WorseBalance:
-				sb.Append("Decision.WorseBalance");
+				writer.Write("Decision.WorseBalance");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.Decision.Yes:
-				sb.Append("Decision.Yes");
+				writer.Write("Decision.Yes");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

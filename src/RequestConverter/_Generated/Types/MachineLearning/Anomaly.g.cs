@@ -25,228 +25,147 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class Anomaly : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Actual is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Actual is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Actual = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Actual, (item, sb) => { sb.Append(item); sb.Append("d"); }, sb);
-			sb.Append("]");
+			__init.Property("Actual");
+			writer.WriteInlineList(Actual, (w, item) => { w.WriteValue(item); w.Write("d"); });
 		}
 
-		if (instance.AnomalyScoreExplanation is not null)
+		if (AnomalyScoreExplanation is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AnomalyScoreExplanation = ");
-			instance.AnomalyScoreExplanation.FormatCode(sb);
+			__init.Property("AnomalyScoreExplanation");
+			AnomalyScoreExplanation.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BucketSpan = ");
-			sb.Append(instance.BucketSpan);
+			__init.Property("BucketSpan");
+			writer.WriteValue(BucketSpan);
 		}
 
-		if (instance.ByFieldName is not null)
+		if (ByFieldName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ByFieldName = ");
-			sb.Append("\"");
-			sb.Append(instance.ByFieldName);
-			sb.Append("\"");
+			__init.Property("ByFieldName");
+			writer.WriteString(ByFieldName);
 		}
 
-		if (instance.ByFieldValue is not null)
+		if (ByFieldValue is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ByFieldValue = ");
-			sb.Append("\"");
-			sb.Append(instance.ByFieldValue);
-			sb.Append("\"");
+			__init.Property("ByFieldValue");
+			writer.WriteString(ByFieldValue);
 		}
 
-		if (instance.Causes is not null)
+		if (Causes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Causes = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Causes, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Causes");
+			writer.WriteInlineList(Causes, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DetectorIndex = ");
-			sb.Append(instance.DetectorIndex);
+			__init.Property("DetectorIndex");
+			writer.WriteValue(DetectorIndex);
 		}
 
-		if (instance.FieldName is not null)
+		if (FieldName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FieldName = ");
-			sb.Append("\"");
-			sb.Append(instance.FieldName);
-			sb.Append("\"");
+			__init.Property("FieldName");
+			writer.WriteString(FieldName);
 		}
 
-		if (instance.Function is not null)
+		if (Function is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Function = ");
-			sb.Append("\"");
-			sb.Append(instance.Function);
-			sb.Append("\"");
+			__init.Property("Function");
+			writer.WriteString(Function);
 		}
 
-		if (instance.FunctionDescription is not null)
+		if (FunctionDescription is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FunctionDescription = ");
-			sb.Append("\"");
-			sb.Append(instance.FunctionDescription);
-			sb.Append("\"");
+			__init.Property("FunctionDescription");
+			writer.WriteString(FunctionDescription);
 		}
 
-		if (instance.GeoResults is not null)
+		if (GeoResults is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GeoResults = ");
-			instance.GeoResults.FormatCode(sb);
+			__init.Property("GeoResults");
+			GeoResults.FormatCode(writer);
 		}
 
-		if (instance.Influencers is not null)
+		if (Influencers is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Influencers = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Influencers, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Influencers");
+			writer.WriteInlineList(Influencers, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InitialRecordScore = ");
-			sb.Append(instance.InitialRecordScore);
-			sb.Append("d");
+			__init.Property("InitialRecordScore");
+			writer.WriteValue(InitialRecordScore);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IsInterim = ");
-			sb.Append(instance.IsInterim ? "true" : "false");
+			__init.Property("IsInterim");
+			writer.WriteValue(IsInterim);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JobId = ");
-			sb.Append("\"");
-			sb.Append(instance.JobId);
-			sb.Append("\"");
+			__init.Property("JobId");
+			writer.WriteString(JobId);
 		}
 
-		if (instance.OverFieldName is not null)
+		if (OverFieldName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OverFieldName = ");
-			sb.Append("\"");
-			sb.Append(instance.OverFieldName);
-			sb.Append("\"");
+			__init.Property("OverFieldName");
+			writer.WriteString(OverFieldName);
 		}
 
-		if (instance.OverFieldValue is not null)
+		if (OverFieldValue is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OverFieldValue = ");
-			sb.Append("\"");
-			sb.Append(instance.OverFieldValue);
-			sb.Append("\"");
+			__init.Property("OverFieldValue");
+			writer.WriteString(OverFieldValue);
 		}
 
-		if (instance.PartitionFieldName is not null)
+		if (PartitionFieldName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PartitionFieldName = ");
-			sb.Append("\"");
-			sb.Append(instance.PartitionFieldName);
-			sb.Append("\"");
+			__init.Property("PartitionFieldName");
+			writer.WriteString(PartitionFieldName);
 		}
 
-		if (instance.PartitionFieldValue is not null)
+		if (PartitionFieldValue is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PartitionFieldValue = ");
-			sb.Append("\"");
-			sb.Append(instance.PartitionFieldValue);
-			sb.Append("\"");
+			__init.Property("PartitionFieldValue");
+			writer.WriteString(PartitionFieldValue);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Probability = ");
-			sb.Append(instance.Probability);
-			sb.Append("d");
+			__init.Property("Probability");
+			writer.WriteValue(Probability);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RecordScore = ");
-			sb.Append(instance.RecordScore);
-			sb.Append("d");
+			__init.Property("RecordScore");
+			writer.WriteValue(RecordScore);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ResultType = ");
-			sb.Append("\"");
-			sb.Append(instance.ResultType);
-			sb.Append("\"");
+			__init.Property("ResultType");
+			writer.WriteString(ResultType);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timestamp = ");
-			sb.Append(instance.Timestamp);
+			__init.Property("Timestamp");
+			writer.WriteValue(Timestamp);
 		}
 
-		if (instance.Typical is not null)
+		if (Typical is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Typical = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Typical, (item, sb) => { sb.Append(item); sb.Append("d"); }, sb);
-			sb.Append("]");
+			__init.Property("Typical");
+			writer.WriteInlineList(Typical, (w, item) => { w.WriteValue(item); w.Write("d"); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

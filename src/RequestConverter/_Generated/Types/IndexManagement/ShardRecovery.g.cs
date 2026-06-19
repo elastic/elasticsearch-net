@@ -25,134 +25,95 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class ShardRecovery : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			sb.Append(instance.Id);
-			sb.Append("L");
+			__init.Property("Id");
+			writer.WriteValue(Id);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			instance.Index.FormatCode(sb);
+			__init.Property("Index");
+			Index.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Primary = ");
-			sb.Append(instance.Primary ? "true" : "false");
+			__init.Property("Primary");
+			writer.WriteValue(Primary);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Source = ");
-			instance.Source.FormatCode(sb);
+			__init.Property("Source");
+			Source.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Stage = ");
-			sb.Append("\"");
-			sb.Append(instance.Stage);
-			sb.Append("\"");
+			__init.Property("Stage");
+			Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStageCodeFormatter.FormatCode(Stage, writer);
 		}
 
-		if (instance.Start is not null)
+		if (Start is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Start = ");
-			instance.Start.FormatCode(sb);
+			__init.Property("Start");
+			Start.FormatCode(writer);
 		}
 
-		if (instance.StartTime is not null)
+		if (StartTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StartTime = ");
-			sb.Append(instance.StartTime.Value);
+			__init.Property("StartTime");
+			writer.WriteValue(StartTime.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StartTimeInMillis = ");
-			sb.Append(instance.StartTimeInMillis);
+			__init.Property("StartTimeInMillis");
+			writer.WriteValue(StartTimeInMillis);
 		}
 
-		if (instance.StopTime is not null)
+		if (StopTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StopTime = ");
-			sb.Append(instance.StopTime.Value);
+			__init.Property("StopTime");
+			writer.WriteValue(StopTime.Value);
 		}
 
-		if (instance.StopTimeInMillis is not null)
+		if (StopTimeInMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StopTimeInMillis = ");
-			sb.Append(instance.StopTimeInMillis.Value);
+			__init.Property("StopTimeInMillis");
+			writer.WriteValue(StopTimeInMillis.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Target = ");
-			instance.Target.FormatCode(sb);
+			__init.Property("Target");
+			Target.FormatCode(writer);
 		}
 
-		if (instance.TotalTime is not null)
+		if (TotalTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalTime = ");
-			instance.TotalTime.FormatCode(sb);
+			__init.Property("TotalTime");
+			TotalTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalTimeInMillis = ");
-			sb.Append(instance.TotalTimeInMillis);
+			__init.Property("TotalTimeInMillis");
+			writer.WriteValue(TotalTimeInMillis);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Translog = ");
-			instance.Translog.FormatCode(sb);
+			__init.Property("Translog");
+			Translog.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			sb.Append("\"");
-			sb.Append(instance.Type);
-			sb.Append("\"");
+			__init.Property("Type");
+			Elastic.Clients.Elasticsearch.IndexManagement.RecoveryTypeCodeFormatter.FormatCode(Type, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VerifyIndex = ");
-			instance.VerifyIndex.FormatCode(sb);
+			__init.Property("VerifyIndex");
+			VerifyIndex.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

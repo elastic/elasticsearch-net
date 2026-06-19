@@ -25,160 +25,105 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class ApiKey : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Access is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Access is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Access = ");
-			instance.Access.FormatCode(sb);
+			__init.Property("Access");
+			Access.FormatCode(writer);
 		}
 
-		if (instance.CertificateIdentity is not null)
+		if (CertificateIdentity is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CertificateIdentity = ");
-			sb.Append("\"");
-			sb.Append(instance.CertificateIdentity);
-			sb.Append("\"");
+			__init.Property("CertificateIdentity");
+			writer.WriteString(CertificateIdentity);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Creation = ");
-			sb.Append(instance.Creation);
+			__init.Property("Creation");
+			writer.WriteValue(Creation);
 		}
 
-		if (instance.Expiration is not null)
+		if (Expiration is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Expiration = ");
-			sb.Append(instance.Expiration.Value);
+			__init.Property("Expiration");
+			writer.WriteValue(Expiration.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			sb.Append("\"");
-			sb.Append(instance.Id);
-			sb.Append("\"");
+			__init.Property("Id");
+			writer.WriteString(Id);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Invalidated = ");
-			sb.Append(instance.Invalidated ? "true" : "false");
+			__init.Property("Invalidated");
+			writer.WriteValue(Invalidated);
 		}
 
-		if (instance.Invalidation is not null)
+		if (Invalidation is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Invalidation = ");
-			sb.Append(instance.Invalidation.Value);
+			__init.Property("Invalidation");
+			writer.WriteValue(Invalidation.Value);
 		}
 
-		if (instance.LimitedBy is not null)
+		if (LimitedBy is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LimitedBy = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.LimitedBy, (item, sb) => { sb.Append("new()"); RequestConverter.CodeFormatter.FormatCode(item, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb); }, sb);
-			sb.Append("]");
+			__init.Property("LimitedBy");
+			writer.WriteInlineList(LimitedBy, (w, item) => { w.Write("new() "); w.WriteInlineList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", "); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Metadata = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Metadata, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Metadata");
+			writer.Write("new() ");
+			writer.WriteInlineList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
-		if (instance.ProfileUid is not null)
+		if (ProfileUid is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ProfileUid = ");
-			sb.Append("\"");
-			sb.Append(instance.ProfileUid);
-			sb.Append("\"");
+			__init.Property("ProfileUid");
+			writer.WriteString(ProfileUid);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Realm = ");
-			sb.Append("\"");
-			sb.Append(instance.Realm);
-			sb.Append("\"");
+			__init.Property("Realm");
+			writer.WriteString(Realm);
 		}
 
-		if (instance.RealmType is not null)
+		if (RealmType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RealmType = ");
-			sb.Append("\"");
-			sb.Append(instance.RealmType);
-			sb.Append("\"");
+			__init.Property("RealmType");
+			writer.WriteString(RealmType);
 		}
 
-		if (instance.RoleDescriptors is not null)
+		if (RoleDescriptors is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RoleDescriptors = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.RoleDescriptors, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("RoleDescriptors");
+			writer.Write("new() ");
+			writer.WriteInlineList(RoleDescriptors, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Sort is not null)
+		if (Sort is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sort = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Sort, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Sort");
+			writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			Elastic.Clients.Elasticsearch.Security.ApiKeyTypeCodeFormatter.FormatCode(instance.Type, sb);
+			__init.Property("Type");
+			Elastic.Clients.Elasticsearch.Security.ApiKeyTypeCodeFormatter.FormatCode(Type, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Username = ");
-			sb.Append("\"");
-			sb.Append(instance.Username);
-			sb.Append("\"");
+			__init.Property("Username");
+			writer.WriteString(Username);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

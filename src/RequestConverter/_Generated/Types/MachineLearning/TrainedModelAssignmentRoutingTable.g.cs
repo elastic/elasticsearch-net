@@ -25,43 +25,30 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class TrainedModelAssignmentRoutingTable : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CurrentAllocations = ");
-			sb.Append(instance.CurrentAllocations);
+			__init.Property("CurrentAllocations");
+			writer.WriteValue(CurrentAllocations);
 		}
 
-		if (instance.Reason is not null)
+		if (Reason is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Reason = ");
-			sb.Append("\"");
-			sb.Append(instance.Reason);
-			sb.Append("\"");
+			__init.Property("Reason");
+			writer.WriteString(Reason);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RoutingState = ");
-			Elastic.Clients.Elasticsearch.MachineLearning.RoutingStateCodeFormatter.FormatCode(instance.RoutingState, sb);
+			__init.Property("RoutingState");
+			Elastic.Clients.Elasticsearch.MachineLearning.RoutingStateCodeFormatter.FormatCode(RoutingState, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TargetAllocations = ");
-			sb.Append(instance.TargetAllocations);
+			__init.Property("TargetAllocations");
+			writer.WriteValue(TargetAllocations);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

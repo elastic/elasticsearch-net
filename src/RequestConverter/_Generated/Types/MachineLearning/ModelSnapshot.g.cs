@@ -25,96 +25,65 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class ModelSnapshot : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Description is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Description is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JobId = ");
-			sb.Append("\"");
-			sb.Append(instance.JobId);
-			sb.Append("\"");
+			__init.Property("JobId");
+			writer.WriteString(JobId);
 		}
 
-		if (instance.LatestRecordTimeStamp is not null)
+		if (LatestRecordTimeStamp is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LatestRecordTimeStamp = ");
-			sb.Append(instance.LatestRecordTimeStamp.Value);
+			__init.Property("LatestRecordTimeStamp");
+			writer.WriteValue(LatestRecordTimeStamp.Value);
 		}
 
-		if (instance.LatestResultTimeStamp is not null)
+		if (LatestResultTimeStamp is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LatestResultTimeStamp = ");
-			sb.Append(instance.LatestResultTimeStamp.Value);
+			__init.Property("LatestResultTimeStamp");
+			writer.WriteValue(LatestResultTimeStamp.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinVersion = ");
-			sb.Append("\"");
-			sb.Append(instance.MinVersion);
-			sb.Append("\"");
+			__init.Property("MinVersion");
+			writer.WriteString(MinVersion);
 		}
 
-		if (instance.ModelSizeStats is not null)
+		if (ModelSizeStats is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelSizeStats = ");
-			instance.ModelSizeStats.FormatCode(sb);
+			__init.Property("ModelSizeStats");
+			ModelSizeStats.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Retain = ");
-			sb.Append(instance.Retain ? "true" : "false");
+			__init.Property("Retain");
+			writer.WriteValue(Retain);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SnapshotDocCount = ");
-			sb.Append(instance.SnapshotDocCount);
-			sb.Append("L");
+			__init.Property("SnapshotDocCount");
+			writer.WriteValue(SnapshotDocCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SnapshotId = ");
-			sb.Append("\"");
-			sb.Append(instance.SnapshotId);
-			sb.Append("\"");
+			__init.Property("SnapshotId");
+			writer.WriteString(SnapshotId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timestamp = ");
-			sb.Append(instance.Timestamp);
-			sb.Append("L");
+			__init.Property("Timestamp");
+			writer.WriteValue(Timestamp);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

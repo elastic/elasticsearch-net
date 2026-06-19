@@ -25,45 +25,32 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class IntervalsAllOf : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Filter is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Filter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Filter = ");
-			instance.Filter.FormatCode(sb);
+			__init.Property("Filter");
+			Filter.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Intervals = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Intervals, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Intervals");
+			writer.WriteInlineList(Intervals, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.MaxGaps is not null)
+		if (MaxGaps is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxGaps = ");
-			sb.Append(instance.MaxGaps.Value);
+			__init.Property("MaxGaps");
+			writer.WriteValue(MaxGaps.Value);
 		}
 
-		if (instance.Ordered is not null)
+		if (Ordered is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ordered = ");
-			sb.Append(instance.Ordered.Value ? "true" : "false");
+			__init.Property("Ordered");
+			writer.WriteValue(Ordered.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

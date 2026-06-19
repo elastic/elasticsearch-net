@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class AzureAiStudioTaskTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType.Completion:
-				sb.Append("AzureAiStudioTaskType.Completion");
+				writer.Write("AzureAiStudioTaskType.Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType.Rerank:
-				sb.Append("AzureAiStudioTaskType.Rerank");
+				writer.Write("AzureAiStudioTaskType.Rerank");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType.TextEmbedding:
-				sb.Append("AzureAiStudioTaskType.TextEmbedding");
+				writer.Write("AzureAiStudioTaskType.TextEmbedding");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

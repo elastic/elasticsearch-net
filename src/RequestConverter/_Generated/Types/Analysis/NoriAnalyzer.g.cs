@@ -25,50 +25,33 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class NoriAnalyzer : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.DecompoundMode is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (DecompoundMode is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DecompoundMode = ");
-			Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundModeCodeFormatter.FormatCode(instance.DecompoundMode.Value, sb);
+			__init.Property("DecompoundMode");
+			Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundModeCodeFormatter.FormatCode(DecompoundMode.Value, writer);
 		}
 
-		if (instance.Stoptags is not null)
+		if (Stoptags is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Stoptags = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Stoptags, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Stoptags");
+			writer.WriteInlineList(Stoptags, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.UserDictionary is not null)
+		if (UserDictionary is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UserDictionary = ");
-			sb.Append("\"");
-			sb.Append(instance.UserDictionary);
-			sb.Append("\"");
+			__init.Property("UserDictionary");
+			writer.WriteString(UserDictionary);
 		}
 #pragma warning disable CS0618
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 #pragma warning restore CS0618
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

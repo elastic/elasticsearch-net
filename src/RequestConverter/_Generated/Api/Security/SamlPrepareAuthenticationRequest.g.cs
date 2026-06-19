@@ -25,42 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class SamlPrepareAuthenticationRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Acs is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Acs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Acs = ");
-			sb.Append("\"");
-			sb.Append(instance.Acs);
-			sb.Append("\"");
+			__init.Property("Acs");
+			writer.WriteString(Acs);
 		}
 
-		if (instance.Realm is not null)
+		if (Realm is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Realm = ");
-			sb.Append("\"");
-			sb.Append(instance.Realm);
-			sb.Append("\"");
+			__init.Property("Realm");
+			writer.WriteString(Realm);
 		}
 
-		if (instance.RelayState is not null)
+		if (RelayState is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RelayState = ");
-			sb.Append("\"");
-			sb.Append(instance.RelayState);
-			sb.Append("\"");
+			__init.Property("RelayState");
+			writer.WriteString(RelayState);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

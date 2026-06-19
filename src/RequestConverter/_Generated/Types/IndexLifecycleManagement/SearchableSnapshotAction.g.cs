@@ -25,29 +25,20 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
 public partial class SearchableSnapshotAction : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ForceMergeIndex is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ForceMergeIndex is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ForceMergeIndex = ");
-			sb.Append(instance.ForceMergeIndex.Value ? "true" : "false");
+			__init.Property("ForceMergeIndex");
+			writer.WriteValue(ForceMergeIndex.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SnapshotRepository = ");
-			sb.Append("\"");
-			sb.Append(instance.SnapshotRepository);
-			sb.Append("\"");
+			__init.Property("SnapshotRepository");
+			writer.WriteString(SnapshotRepository);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

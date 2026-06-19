@@ -25,20 +25,15 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class ClearScrollRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ScrollId is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ScrollId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ScrollId = ");
-			instance.ScrollId.FormatCode(sb);
+			__init.Property("ScrollId");
+			ScrollId.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

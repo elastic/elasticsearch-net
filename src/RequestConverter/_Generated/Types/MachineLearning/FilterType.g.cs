@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public static class FilterTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.FilterType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.FilterType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.FilterType.Exclude:
-				sb.Append("FilterType.Exclude");
+				writer.Write("FilterType.Exclude");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.FilterType.Include:
-				sb.Append("FilterType.Include");
+				writer.Write("FilterType.Include");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

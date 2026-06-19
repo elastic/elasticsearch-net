@@ -25,61 +25,46 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public partial class SemanticTextProperty : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ChunkingSettings is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ChunkingSettings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ChunkingSettings = ");
-			instance.ChunkingSettings.FormatCode(sb);
+			__init.Property("ChunkingSettings");
+			ChunkingSettings.FormatCode(writer);
 		}
 
-		if (instance.Fields is not null)
+		if (Fields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fields = ");
-			instance.Fields.FormatCode(sb);
+			__init.Property("Fields");
+			Fields.FormatCode(writer);
 		}
 
-		if (instance.IndexOptions is not null)
+		if (IndexOptions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexOptions = ");
-			instance.IndexOptions.FormatCode(sb);
+			__init.Property("IndexOptions");
+			IndexOptions.FormatCode(writer);
 		}
 
-		if (instance.InferenceId is not null)
+		if (InferenceId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InferenceId = ");
-			instance.InferenceId.FormatCode(sb);
+			__init.Property("InferenceId");
+			InferenceId.FormatCode(writer);
 		}
 
-		if (instance.Meta is not null)
+		if (Meta is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Meta = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Meta, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("\""); sb.Append(v); sb.Append("\""); }, sb);
+			__init.Property("Meta");
+			writer.Write("new() ");
+			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.SearchInferenceId is not null)
+		if (SearchInferenceId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SearchInferenceId = ");
-			instance.SearchInferenceId.FormatCode(sb);
+			__init.Property("SearchInferenceId");
+			SearchInferenceId.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

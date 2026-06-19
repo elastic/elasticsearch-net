@@ -25,73 +25,54 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class AzureAiStudioTaskSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.DoSample is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (DoSample is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DoSample = ");
-			sb.Append(instance.DoSample.Value);
-			sb.Append("f");
+			__init.Property("DoSample");
+			writer.WriteValue(DoSample.Value);
+			writer.Write("f");
 		}
 
-		if (instance.MaxNewTokens is not null)
+		if (MaxNewTokens is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxNewTokens = ");
-			sb.Append(instance.MaxNewTokens.Value);
+			__init.Property("MaxNewTokens");
+			writer.WriteValue(MaxNewTokens.Value);
 		}
 
-		if (instance.ReturnDocuments is not null)
+		if (ReturnDocuments is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReturnDocuments = ");
-			sb.Append(instance.ReturnDocuments.Value ? "true" : "false");
+			__init.Property("ReturnDocuments");
+			writer.WriteValue(ReturnDocuments.Value);
 		}
 
-		if (instance.Temperature is not null)
+		if (Temperature is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Temperature = ");
-			sb.Append(instance.Temperature.Value);
-			sb.Append("f");
+			__init.Property("Temperature");
+			writer.WriteValue(Temperature.Value);
+			writer.Write("f");
 		}
 
-		if (instance.TopN is not null)
+		if (TopN is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TopN = ");
-			sb.Append(instance.TopN.Value);
+			__init.Property("TopN");
+			writer.WriteValue(TopN.Value);
 		}
 
-		if (instance.TopP is not null)
+		if (TopP is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TopP = ");
-			sb.Append(instance.TopP.Value);
-			sb.Append("f");
+			__init.Property("TopP");
+			writer.WriteValue(TopP.Value);
+			writer.Write("f");
 		}
 
-		if (instance.User is not null)
+		if (User is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("User = ");
-			sb.Append("\"");
-			sb.Append(instance.User);
-			sb.Append("\"");
+			__init.Property("User");
+			writer.WriteString(User);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

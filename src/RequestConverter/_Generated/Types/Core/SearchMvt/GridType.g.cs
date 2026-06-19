@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Core.SearchMvt;
 
 public static class GridTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType.Centroid:
-				sb.Append("GridType.Centroid");
+				writer.Write("GridType.Centroid");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType.Grid:
-				sb.Append("GridType.Grid");
+				writer.Write("GridType.Grid");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType.Point:
-				sb.Append("GridType.Point");
+				writer.Write("GridType.Point");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

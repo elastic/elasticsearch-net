@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public static class IndexMetadataStateCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState.Close:
-				sb.Append("IndexMetadataState.Close");
+				writer.Write("IndexMetadataState.Close");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState.Open:
-				sb.Append("IndexMetadataState.Open");
+				writer.Write("IndexMetadataState.Open");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

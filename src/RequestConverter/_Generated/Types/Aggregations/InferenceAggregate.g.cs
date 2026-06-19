@@ -25,68 +25,47 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class InferenceAggregate : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Data is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Data is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Data = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Data, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Data");
+			writer.Write("new() ");
+			writer.WriteInlineList(Data, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.FeatureImportance is not null)
+		if (FeatureImportance is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FeatureImportance = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.FeatureImportance, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("FeatureImportance");
+			writer.WriteInlineList(FeatureImportance, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Meta is not null)
+		if (Meta is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Meta = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Meta, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Meta");
+			writer.Write("new() ");
+			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.TopClasses is not null)
+		if (TopClasses is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TopClasses = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.TopClasses, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("TopClasses");
+			writer.WriteInlineList(TopClasses, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Value is not null)
+		if (Value is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Value = ");
-			instance.Value.FormatCode(sb);
+			__init.Property("Value");
+			Value.FormatCode(writer);
 		}
 
-		if (instance.Warning is not null)
+		if (Warning is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Warning = ");
-			sb.Append("\"");
-			sb.Append(instance.Warning);
-			sb.Append("\"");
+			__init.Property("Warning");
+			writer.WriteString(Warning);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

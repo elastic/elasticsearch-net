@@ -25,21 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class ExtendedSectionSearchUsage : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Sort is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Sort is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sort = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Sort, (k, sb) => { Elastic.Clients.Elasticsearch.Cluster.SortTypeCodeFormatter.FormatCode(k, sb); }, (v, sb) => { sb.Append(v); sb.Append("L"); }, sb);
+			__init.Property("Sort");
+			writer.Write("new() ");
+			writer.WriteInlineList(Sort, (w, kvp) => { w.Write("{ "); Elastic.Clients.Elasticsearch.Cluster.SortTypeCodeFormatter.FormatCode(kvp.Key, w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

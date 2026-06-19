@@ -25,36 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class ClusterProcessOpenFileDescriptors : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Avg = ");
-			sb.Append(instance.Avg);
-			sb.Append("L");
+			__init.Property("Avg");
+			writer.WriteValue(Avg);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Max = ");
-			sb.Append(instance.Max);
-			sb.Append("L");
+			__init.Property("Max");
+			writer.WriteValue(Max);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Min = ");
-			sb.Append(instance.Min);
-			sb.Append("L");
+			__init.Property("Min");
+			writer.WriteValue(Min);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

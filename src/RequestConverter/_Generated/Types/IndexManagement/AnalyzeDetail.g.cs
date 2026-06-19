@@ -25,55 +25,38 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class AnalyzeDetail : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Analyzer is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Analyzer is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Analyzer = ");
-			instance.Analyzer.FormatCode(sb);
+			__init.Property("Analyzer");
+			Analyzer.FormatCode(writer);
 		}
 
-		if (instance.Charfilters is not null)
+		if (Charfilters is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Charfilters = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Charfilters, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Charfilters");
+			writer.WriteInlineList(Charfilters, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CustomAnalyzer = ");
-			sb.Append(instance.CustomAnalyzer ? "true" : "false");
+			__init.Property("CustomAnalyzer");
+			writer.WriteValue(CustomAnalyzer);
 		}
 
-		if (instance.Tokenfilters is not null)
+		if (Tokenfilters is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Tokenfilters = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Tokenfilters, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Tokenfilters");
+			writer.WriteInlineList(Tokenfilters, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Tokenizer is not null)
+		if (Tokenizer is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Tokenizer = ");
-			instance.Tokenizer.FormatCode(sb);
+			__init.Property("Tokenizer");
+			Tokenizer.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

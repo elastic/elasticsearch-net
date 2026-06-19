@@ -25,21 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class NodeInfoSettingsTransportFeatures : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("XPack = ");
-			sb.Append("\"");
-			sb.Append(instance.XPack);
-			sb.Append("\"");
+			__init.Property("XPack");
+			writer.WriteString(XPack);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

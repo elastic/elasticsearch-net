@@ -25,37 +25,26 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class NonStationary : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PValue = ");
-			sb.Append(instance.PValue);
-			sb.Append("d");
+			__init.Property("PValue");
+			writer.WriteValue(PValue);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RValue = ");
-			sb.Append(instance.RValue);
-			sb.Append("d");
+			__init.Property("RValue");
+			writer.WriteValue(RValue);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Trend = ");
-			sb.Append("\"");
-			sb.Append(instance.Trend);
-			sb.Append("\"");
+			__init.Property("Trend");
+			writer.WriteString(Trend);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public partial class SemanticTextIndexOptions : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.DenseVector is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (DenseVector is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DenseVector = ");
-			instance.DenseVector.FormatCode(sb);
+			__init.Property("DenseVector");
+			DenseVector.FormatCode(writer);
 		}
 
-		if (instance.SparseVector is not null)
+		if (SparseVector is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SparseVector = ");
-			instance.SparseVector.FormatCode(sb);
+			__init.Property("SparseVector");
+			SparseVector.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class PerPartitionCategorization : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Enabled is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Enabled is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Enabled = ");
-			sb.Append(instance.Enabled.Value ? "true" : "false");
+			__init.Property("Enabled");
+			writer.WriteValue(Enabled.Value);
 		}
 
-		if (instance.StopOnWarn is not null)
+		if (StopOnWarn is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StopOnWarn = ");
-			sb.Append(instance.StopOnWarn.Value ? "true" : "false");
+			__init.Property("StopOnWarn");
+			writer.WriteValue(StopOnWarn.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

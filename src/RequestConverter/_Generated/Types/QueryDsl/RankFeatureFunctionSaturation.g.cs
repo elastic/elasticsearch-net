@@ -25,21 +25,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class RankFeatureFunctionSaturation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Pivot is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Pivot is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Pivot = ");
-			sb.Append(instance.Pivot.Value);
-			sb.Append("f");
+			__init.Property("Pivot");
+			writer.WriteValue(Pivot.Value);
+			writer.Write("f");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

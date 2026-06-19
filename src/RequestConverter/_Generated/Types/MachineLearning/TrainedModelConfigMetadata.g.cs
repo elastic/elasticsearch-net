@@ -25,51 +25,34 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class TrainedModelConfigMetadata : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.FeatureImportanceBaseline is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (FeatureImportanceBaseline is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FeatureImportanceBaseline = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.FeatureImportanceBaseline, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("\""); sb.Append(v); sb.Append("\""); }, sb);
+			__init.Property("FeatureImportanceBaseline");
+			writer.Write("new() ");
+			writer.WriteInlineList(FeatureImportanceBaseline, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Hyperparameters is not null)
+		if (Hyperparameters is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Hyperparameters = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Hyperparameters, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Hyperparameters");
+			writer.WriteInlineList(Hyperparameters, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.ModelAliases is not null)
+		if (ModelAliases is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelAliases = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.ModelAliases, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("ModelAliases");
+			writer.WriteInlineList(ModelAliases, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.TotalFeatureImportance is not null)
+		if (TotalFeatureImportance is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalFeatureImportance = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.TotalFeatureImportance, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("TotalFeatureImportance");
+			writer.WriteInlineList(TotalFeatureImportance, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

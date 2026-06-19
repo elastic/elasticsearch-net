@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 public static class ShardsStatsStageCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage.Done:
-				sb.Append("ShardsStatsStage.Done");
+				writer.Write("ShardsStatsStage.Done");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage.Failure:
-				sb.Append("ShardsStatsStage.Failure");
+				writer.Write("ShardsStatsStage.Failure");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage.Finalize:
-				sb.Append("ShardsStatsStage.Finalize");
+				writer.Write("ShardsStatsStage.Finalize");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage.Init:
-				sb.Append("ShardsStatsStage.Init");
+				writer.Write("ShardsStatsStage.Init");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage.Started:
-				sb.Append("ShardsStatsStage.Started");
+				writer.Write("ShardsStatsStage.Started");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

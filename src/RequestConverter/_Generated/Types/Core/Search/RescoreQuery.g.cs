@@ -25,45 +25,34 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class RescoreQuery : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			instance.Query.FormatCode(sb);
+			__init.Property("Query");
+			Query.FormatCode(writer);
 		}
 
-		if (instance.QueryWeight is not null)
+		if (QueryWeight is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryWeight = ");
-			sb.Append(instance.QueryWeight.Value);
-			sb.Append("d");
+			__init.Property("QueryWeight");
+			writer.WriteValue(QueryWeight.Value);
+			writer.Write("d");
 		}
 
-		if (instance.RescoreQueryWeight is not null)
+		if (RescoreQueryWeight is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RescoreQueryWeight = ");
-			sb.Append(instance.RescoreQueryWeight.Value);
-			sb.Append("d");
+			__init.Property("RescoreQueryWeight");
+			writer.WriteValue(RescoreQueryWeight.Value);
+			writer.Write("d");
 		}
 
-		if (instance.ScoreMode is not null)
+		if (ScoreMode is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ScoreMode = ");
-			Elastic.Clients.Elasticsearch.Core.Search.ScoreModeCodeFormatter.FormatCode(instance.ScoreMode.Value, sb);
+			__init.Property("ScoreMode");
+			Elastic.Clients.Elasticsearch.Core.Search.ScoreModeCodeFormatter.FormatCode(ScoreMode.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

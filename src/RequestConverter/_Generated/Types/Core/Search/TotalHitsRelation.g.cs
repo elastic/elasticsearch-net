@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public static class TotalHitsRelationCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation.Eq:
-				sb.Append("TotalHitsRelation.Eq");
+				writer.Write("TotalHitsRelation.Eq");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation.Gte:
-				sb.Append("TotalHitsRelation.Gte");
+				writer.Write("TotalHitsRelation.Gte");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

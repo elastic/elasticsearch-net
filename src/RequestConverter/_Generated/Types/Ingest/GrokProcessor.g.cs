@@ -25,109 +25,80 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public partial class GrokProcessor : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Description is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Description is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
-		if (instance.EcsCompatibility is not null)
+		if (EcsCompatibility is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EcsCompatibility = ");
-			sb.Append("\"");
-			sb.Append(instance.EcsCompatibility);
-			sb.Append("\"");
+			__init.Property("EcsCompatibility");
+			writer.WriteString(EcsCompatibility);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.If is not null)
+		if (If is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("If = ");
-			instance.If.FormatCode(sb);
+			__init.Property("If");
+			If.FormatCode(writer);
 		}
 
-		if (instance.IgnoreFailure is not null)
+		if (IgnoreFailure is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreFailure = ");
-			sb.Append(instance.IgnoreFailure.Value ? "true" : "false");
+			__init.Property("IgnoreFailure");
+			writer.WriteValue(IgnoreFailure.Value);
 		}
 
-		if (instance.IgnoreMissing is not null)
+		if (IgnoreMissing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreMissing = ");
-			sb.Append(instance.IgnoreMissing.Value ? "true" : "false");
+			__init.Property("IgnoreMissing");
+			writer.WriteValue(IgnoreMissing.Value);
 		}
 
-		if (instance.OnFailure is not null)
+		if (OnFailure is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OnFailure = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.OnFailure, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("OnFailure");
+			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.PatternDefinitions is not null)
+		if (PatternDefinitions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PatternDefinitions = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.PatternDefinitions, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("\""); sb.Append(v); sb.Append("\""); }, sb);
+			__init.Property("PatternDefinitions");
+			writer.Write("new() ");
+			writer.WriteInlineList(PatternDefinitions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Patterns = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Patterns, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Patterns");
+			writer.WriteInlineList(Patterns, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Tag is not null)
+		if (Tag is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Tag = ");
-			sb.Append("\"");
-			sb.Append(instance.Tag);
-			sb.Append("\"");
+			__init.Property("Tag");
+			writer.WriteString(Tag);
 		}
 
-		if (instance.TraceMatch is not null)
+		if (TraceMatch is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TraceMatch = ");
-			sb.Append(instance.TraceMatch.Value ? "true" : "false");
+			__init.Property("TraceMatch");
+			writer.WriteValue(TraceMatch.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		if (ValidateOnly is not null)
+		{
+			__init.Property("ValidateOnly");
+			writer.WriteValue(ValidateOnly.Value);
+		}
+
+		__init.Dispose();
 	}
 }

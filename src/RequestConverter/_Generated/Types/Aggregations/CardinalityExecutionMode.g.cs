@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public static class CardinalityExecutionModeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode.Direct:
-				sb.Append("CardinalityExecutionMode.Direct");
+				writer.Write("CardinalityExecutionMode.Direct");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode.GlobalOrdinals:
-				sb.Append("CardinalityExecutionMode.GlobalOrdinals");
+				writer.Write("CardinalityExecutionMode.GlobalOrdinals");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode.SaveMemoryHeuristic:
-				sb.Append("CardinalityExecutionMode.SaveMemoryHeuristic");
+				writer.Write("CardinalityExecutionMode.SaveMemoryHeuristic");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode.SaveTimeHeuristic:
-				sb.Append("CardinalityExecutionMode.SaveTimeHeuristic");
+				writer.Write("CardinalityExecutionMode.SaveTimeHeuristic");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode.SegmentOrdinals:
-				sb.Append("CardinalityExecutionMode.SegmentOrdinals");
+				writer.Write("CardinalityExecutionMode.SegmentOrdinals");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

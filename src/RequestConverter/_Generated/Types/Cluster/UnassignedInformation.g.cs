@@ -25,72 +25,49 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class UnassignedInformation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AllocationStatus is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AllocationStatus is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllocationStatus = ");
-			sb.Append("\"");
-			sb.Append(instance.AllocationStatus);
-			sb.Append("\"");
+			__init.Property("AllocationStatus");
+			writer.WriteString(AllocationStatus);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("At = ");
-			sb.Append(instance.At);
+			__init.Property("At");
+			writer.WriteValue(At);
 		}
 
-		if (instance.Delayed is not null)
+		if (Delayed is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Delayed = ");
-			sb.Append(instance.Delayed.Value ? "true" : "false");
+			__init.Property("Delayed");
+			writer.WriteValue(Delayed.Value);
 		}
 
-		if (instance.Details is not null)
+		if (Details is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Details = ");
-			sb.Append("\"");
-			sb.Append(instance.Details);
-			sb.Append("\"");
+			__init.Property("Details");
+			writer.WriteString(Details);
 		}
 
-		if (instance.FailedAllocationAttempts is not null)
+		if (FailedAllocationAttempts is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FailedAllocationAttempts = ");
-			sb.Append(instance.FailedAllocationAttempts.Value);
+			__init.Property("FailedAllocationAttempts");
+			writer.WriteValue(FailedAllocationAttempts.Value);
 		}
 
-		if (instance.LastAllocationStatus is not null)
+		if (LastAllocationStatus is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LastAllocationStatus = ");
-			sb.Append("\"");
-			sb.Append(instance.LastAllocationStatus);
-			sb.Append("\"");
+			__init.Property("LastAllocationStatus");
+			writer.WriteString(LastAllocationStatus);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Reason = ");
-			Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReasonCodeFormatter.FormatCode(instance.Reason, sb);
+			__init.Property("Reason");
+			Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReasonCodeFormatter.FormatCode(Reason, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

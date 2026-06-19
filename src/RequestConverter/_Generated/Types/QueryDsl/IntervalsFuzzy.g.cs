@@ -25,63 +25,44 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class IntervalsFuzzy : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Analyzer is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Analyzer is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Analyzer = ");
-			sb.Append("\"");
-			sb.Append(instance.Analyzer);
-			sb.Append("\"");
+			__init.Property("Analyzer");
+			writer.WriteString(Analyzer);
 		}
 
-		if (instance.Fuzziness is not null)
+		if (Fuzziness is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fuzziness = ");
-			instance.Fuzziness.FormatCode(sb);
+			__init.Property("Fuzziness");
+			Fuzziness.FormatCode(writer);
 		}
 
-		if (instance.PrefixLength is not null)
+		if (PrefixLength is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PrefixLength = ");
-			sb.Append(instance.PrefixLength.Value);
+			__init.Property("PrefixLength");
+			writer.WriteValue(PrefixLength.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Term = ");
-			sb.Append("\"");
-			sb.Append(instance.Term);
-			sb.Append("\"");
+			__init.Property("Term");
+			writer.WriteString(Term);
 		}
 
-		if (instance.Transpositions is not null)
+		if (Transpositions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Transpositions = ");
-			sb.Append(instance.Transpositions.Value ? "true" : "false");
+			__init.Property("Transpositions");
+			writer.WriteValue(Transpositions.Value);
 		}
 
-		if (instance.UseField is not null)
+		if (UseField is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UseField = ");
-			instance.UseField.FormatCode(sb);
+			__init.Property("UseField");
+			UseField.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

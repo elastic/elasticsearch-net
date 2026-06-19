@@ -25,48 +25,38 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class IndicesValidationExplanation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Error is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Error is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Error = ");
-			sb.Append("\"");
-			sb.Append(instance.Error);
-			sb.Append("\"");
+			__init.Property("Error");
+			writer.WriteString(Error);
 		}
 
-		if (instance.Explanation is not null)
+		if (Explanation is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Explanation = ");
-			sb.Append("\"");
-			sb.Append(instance.Explanation);
-			sb.Append("\"");
+			__init.Property("Explanation");
+			writer.WriteString(Explanation);
 		}
 
+		if (Index is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			sb.Append("\"");
-			sb.Append(instance.Index);
-			sb.Append("\"");
+			__init.Property("Index");
+			writer.WriteString(Index);
+		}
+
+		if (Shard is not null)
+		{
+			__init.Property("Shard");
+			writer.WriteValue(Shard.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Valid = ");
-			sb.Append(instance.Valid ? "true" : "false");
+			__init.Property("Valid");
+			writer.WriteValue(Valid);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

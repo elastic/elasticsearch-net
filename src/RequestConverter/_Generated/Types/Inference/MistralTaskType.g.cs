@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class MistralTaskTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.MistralTaskType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.MistralTaskType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.MistralTaskType.ChatCompletion:
-				sb.Append("MistralTaskType.ChatCompletion");
+				writer.Write("MistralTaskType.ChatCompletion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.MistralTaskType.Completion:
-				sb.Append("MistralTaskType.Completion");
+				writer.Write("MistralTaskType.Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.MistralTaskType.TextEmbedding:
-				sb.Append("MistralTaskType.TextEmbedding");
+				writer.Write("MistralTaskType.TextEmbedding");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

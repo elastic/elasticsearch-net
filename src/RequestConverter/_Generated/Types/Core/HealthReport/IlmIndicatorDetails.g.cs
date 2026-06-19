@@ -25,34 +25,25 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
 public partial class IlmIndicatorDetails : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IlmStatus = ");
-			Elastic.Clients.Elasticsearch.LifecycleOperationModeCodeFormatter.FormatCode(instance.IlmStatus, sb);
+			__init.Property("IlmStatus");
+			Elastic.Clients.Elasticsearch.LifecycleOperationModeCodeFormatter.FormatCode(IlmStatus, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Policies = ");
-			sb.Append(instance.Policies);
-			sb.Append("L");
+			__init.Property("Policies");
+			writer.WriteValue(Policies);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StagnatingIndices = ");
-			sb.Append(instance.StagnatingIndices);
+			__init.Property("StagnatingIndices");
+			writer.WriteValue(StagnatingIndices);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

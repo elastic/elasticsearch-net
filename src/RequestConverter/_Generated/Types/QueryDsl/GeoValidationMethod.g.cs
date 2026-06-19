@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public static class GeoValidationMethodCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod.Coerce:
-				sb.Append("GeoValidationMethod.Coerce");
+				writer.Write("GeoValidationMethod.Coerce");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod.IgnoreMalformed:
-				sb.Append("GeoValidationMethod.IgnoreMalformed");
+				writer.Write("GeoValidationMethod.IgnoreMalformed");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod.Strict:
-				sb.Append("GeoValidationMethod.Strict");
+				writer.Write("GeoValidationMethod.Strict");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

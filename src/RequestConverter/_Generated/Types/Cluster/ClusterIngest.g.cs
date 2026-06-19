@@ -25,27 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class ClusterIngest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumberOfPipelines = ");
-			sb.Append(instance.NumberOfPipelines);
+			__init.Property("NumberOfPipelines");
+			writer.WriteValue(NumberOfPipelines);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ProcessorStats = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.ProcessorStats, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("ProcessorStats");
+			writer.Write("new() ");
+			writer.WriteInlineList(ProcessorStats, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

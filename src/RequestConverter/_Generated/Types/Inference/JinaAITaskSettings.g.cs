@@ -25,44 +25,33 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class JinaAITaskSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.InputType is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (InputType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InputType = ");
-			Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTaskCodeFormatter.FormatCode(instance.InputType.Value, sb);
+			__init.Property("InputType");
+			Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTaskCodeFormatter.FormatCode(InputType.Value, writer);
 		}
 
-		if (instance.LateChunking is not null)
+		if (LateChunking is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LateChunking = ");
-			sb.Append(instance.LateChunking.Value ? "true" : "false");
+			__init.Property("LateChunking");
+			writer.WriteValue(LateChunking.Value);
 		}
 
-		if (instance.ReturnDocuments is not null)
+		if (ReturnDocuments is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReturnDocuments = ");
-			sb.Append(instance.ReturnDocuments.Value ? "true" : "false");
+			__init.Property("ReturnDocuments");
+			writer.WriteValue(ReturnDocuments.Value);
 		}
 
-		if (instance.TopN is not null)
+		if (TopN is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TopN = ");
-			sb.Append(instance.TopN.Value);
+			__init.Property("TopN");
+			writer.WriteValue(TopN.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

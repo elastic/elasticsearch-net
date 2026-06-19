@@ -25,34 +25,25 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
 public partial class ReadException : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Exception = ");
-			instance.Exception.FormatCode(sb);
+			__init.Property("Exception");
+			Exception.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FromSeqNo = ");
-			sb.Append(instance.FromSeqNo);
-			sb.Append("L");
+			__init.Property("FromSeqNo");
+			writer.WriteValue(FromSeqNo);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Retries = ");
-			sb.Append(instance.Retries);
+			__init.Property("Retries");
+			writer.WriteValue(Retries);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

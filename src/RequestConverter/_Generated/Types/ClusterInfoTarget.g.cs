@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class ClusterInfoTargetCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.ClusterInfoTarget instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.ClusterInfoTarget instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.ClusterInfoTarget.All:
-				sb.Append("ClusterInfoTarget.All");
+				writer.Write("ClusterInfoTarget.All");
 				break;
 			case Elastic.Clients.Elasticsearch.ClusterInfoTarget.Http:
-				sb.Append("ClusterInfoTarget.Http");
+				writer.Write("ClusterInfoTarget.Http");
 				break;
 			case Elastic.Clients.Elasticsearch.ClusterInfoTarget.Ingest:
-				sb.Append("ClusterInfoTarget.Ingest");
+				writer.Write("ClusterInfoTarget.Ingest");
 				break;
 			case Elastic.Clients.Elasticsearch.ClusterInfoTarget.Script:
-				sb.Append("ClusterInfoTarget.Script");
+				writer.Write("ClusterInfoTarget.Script");
 				break;
 			case Elastic.Clients.Elasticsearch.ClusterInfoTarget.ThreadPool:
-				sb.Append("ClusterInfoTarget.ThreadPool");
+				writer.Write("ClusterInfoTarget.ThreadPool");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

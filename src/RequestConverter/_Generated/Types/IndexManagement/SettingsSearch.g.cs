@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class SettingsSearch : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Idle is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Idle is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Idle = ");
-			instance.Idle.FormatCode(sb);
+			__init.Property("Idle");
+			Idle.FormatCode(writer);
 		}
 
-		if (instance.Slowlog is not null)
+		if (Slowlog is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Slowlog = ");
-			instance.Slowlog.FormatCode(sb);
+			__init.Property("Slowlog");
+			Slowlog.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

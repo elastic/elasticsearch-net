@@ -25,121 +25,84 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataframeAnalyticsSummary : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AllowLazyStart is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AllowLazyStart is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowLazyStart = ");
-			sb.Append(instance.AllowLazyStart.Value ? "true" : "false");
+			__init.Property("AllowLazyStart");
+			writer.WriteValue(AllowLazyStart.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Analysis = ");
-			instance.Analysis.FormatCode(sb);
+			__init.Property("Analysis");
+			Analysis.FormatCode(writer);
 		}
 
-		if (instance.AnalyzedFields is not null)
+		if (AnalyzedFields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AnalyzedFields = ");
-			instance.AnalyzedFields.FormatCode(sb);
+			__init.Property("AnalyzedFields");
+			AnalyzedFields.FormatCode(writer);
 		}
 
-		if (instance.Authorization is not null)
+		if (Authorization is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Authorization = ");
-			instance.Authorization.FormatCode(sb);
+			__init.Property("Authorization");
+			Authorization.FormatCode(writer);
 		}
 
-		if (instance.CreateTime is not null)
+		if (CreateTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CreateTime = ");
-			sb.Append(instance.CreateTime.Value);
+			__init.Property("CreateTime");
+			writer.WriteValue(CreateTime.Value);
 		}
 
-		if (instance.Description is not null)
+		if (Description is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Dest = ");
-			instance.Dest.FormatCode(sb);
+			__init.Property("Dest");
+			Dest.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			sb.Append("\"");
-			sb.Append(instance.Id);
-			sb.Append("\"");
+			__init.Property("Id");
+			writer.WriteString(Id);
 		}
 
-		if (instance.MaxNumThreads is not null)
+		if (MaxNumThreads is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxNumThreads = ");
-			sb.Append(instance.MaxNumThreads.Value);
+			__init.Property("MaxNumThreads");
+			writer.WriteValue(MaxNumThreads.Value);
 		}
 
-		if (instance.Meta is not null)
+		if (Meta is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Meta = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Meta, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Meta");
+			writer.Write("new() ");
+			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.ModelMemoryLimit is not null)
+		if (ModelMemoryLimit is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelMemoryLimit = ");
-			sb.Append("\"");
-			sb.Append(instance.ModelMemoryLimit);
-			sb.Append("\"");
+			__init.Property("ModelMemoryLimit");
+			writer.WriteString(ModelMemoryLimit);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Source = ");
-			instance.Source.FormatCode(sb);
+			__init.Property("Source");
+			Source.FormatCode(writer);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,30 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class SnowballTokenFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Language is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Language is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Language = ");
-			Elastic.Clients.Elasticsearch.Analysis.SnowballLanguageCodeFormatter.FormatCode(instance.Language.Value, sb);
+			__init.Property("Language");
+			Elastic.Clients.Elasticsearch.Analysis.SnowballLanguageCodeFormatter.FormatCode(Language.Value, writer);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

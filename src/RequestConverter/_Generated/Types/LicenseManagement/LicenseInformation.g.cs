@@ -25,106 +25,73 @@ namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
 public partial class LicenseInformation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ExpiryDate is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ExpiryDate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExpiryDate = ");
-			sb.Append(instance.ExpiryDate.Value);
+			__init.Property("ExpiryDate");
+			writer.WriteValue(ExpiryDate.Value);
 		}
 
-		if (instance.ExpiryDateInMillis is not null)
+		if (ExpiryDateInMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExpiryDateInMillis = ");
-			sb.Append(instance.ExpiryDateInMillis.Value);
+			__init.Property("ExpiryDateInMillis");
+			writer.WriteValue(ExpiryDateInMillis.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IssueDate = ");
-			sb.Append(instance.IssueDate);
+			__init.Property("IssueDate");
+			writer.WriteValue(IssueDate);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IssueDateInMillis = ");
-			sb.Append(instance.IssueDateInMillis);
+			__init.Property("IssueDateInMillis");
+			writer.WriteValue(IssueDateInMillis);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IssuedTo = ");
-			sb.Append("\"");
-			sb.Append(instance.IssuedTo);
-			sb.Append("\"");
+			__init.Property("IssuedTo");
+			writer.WriteString(IssuedTo);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Issuer = ");
-			sb.Append("\"");
-			sb.Append(instance.Issuer);
-			sb.Append("\"");
+			__init.Property("Issuer");
+			writer.WriteString(Issuer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxNodes = ");
-			sb.Append(instance.MaxNodes.Value);
-			sb.Append("L");
+			__init.Property("MaxNodes");
+			writer.WriteValue(MaxNodes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.MaxResourceUnits is not null)
+		if (MaxResourceUnits is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxResourceUnits = ");
-			sb.Append(instance.MaxResourceUnits.Value);
+			__init.Property("MaxResourceUnits");
+			writer.WriteValue(MaxResourceUnits.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StartDateInMillis = ");
-			sb.Append(instance.StartDateInMillis);
+			__init.Property("StartDateInMillis");
+			writer.WriteValue(StartDateInMillis);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Status = ");
-			Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatusCodeFormatter.FormatCode(instance.Status, sb);
+			__init.Property("Status");
+			Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatusCodeFormatter.FormatCode(Status, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			Elastic.Clients.Elasticsearch.LicenseManagement.LicenseTypeCodeFormatter.FormatCode(instance.Type, sb);
+			__init.Property("Type");
+			Elastic.Clients.Elasticsearch.LicenseManagement.LicenseTypeCodeFormatter.FormatCode(Type, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Uid = ");
-			sb.Append("\"");
-			sb.Append(instance.Uid);
-			sb.Append("\"");
+			__init.Property("Uid");
+			writer.WriteString(Uid);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

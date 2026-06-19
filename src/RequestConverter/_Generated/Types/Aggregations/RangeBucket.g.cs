@@ -25,76 +25,53 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class RangeBucket : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Aggregations is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Aggregations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Aggregations = ");
-			instance.Aggregations.FormatCode(sb);
+			__init.Property("Aggregations");
+			Aggregations.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocCount = ");
-			sb.Append(instance.DocCount);
-			sb.Append("L");
+			__init.Property("DocCount");
+			writer.WriteValue(DocCount);
+			writer.Write("L");
 		}
 
-		if (instance.From is not null)
+		if (From is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("From = ");
-			sb.Append(instance.From.Value);
-			sb.Append("d");
+			__init.Property("From");
+			writer.WriteValue(From.Value);
+			writer.Write("d");
 		}
 
-		if (instance.FromAsString is not null)
+		if (FromAsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FromAsString = ");
-			sb.Append("\"");
-			sb.Append(instance.FromAsString);
-			sb.Append("\"");
+			__init.Property("FromAsString");
+			writer.WriteString(FromAsString);
 		}
 
-		if (instance.Key is not null)
+		if (Key is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Key = ");
-			sb.Append("\"");
-			sb.Append(instance.Key);
-			sb.Append("\"");
+			__init.Property("Key");
+			writer.WriteString(Key);
 		}
 
-		if (instance.To is not null)
+		if (To is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("To = ");
-			sb.Append(instance.To.Value);
-			sb.Append("d");
+			__init.Property("To");
+			writer.WriteValue(To.Value);
+			writer.Write("d");
 		}
 
-		if (instance.ToAsString is not null)
+		if (ToAsString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ToAsString = ");
-			sb.Append("\"");
-			sb.Append(instance.ToAsString);
-			sb.Append("\"");
+			__init.Property("ToAsString");
+			writer.WriteString(ToAsString);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

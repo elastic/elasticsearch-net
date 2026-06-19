@@ -25,46 +25,31 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class ShardLease : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			sb.Append("\"");
-			sb.Append(instance.Id);
-			sb.Append("\"");
+			__init.Property("Id");
+			writer.WriteString(Id);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RetainingSeqNo = ");
-			sb.Append(instance.RetainingSeqNo);
-			sb.Append("L");
+			__init.Property("RetainingSeqNo");
+			writer.WriteValue(RetainingSeqNo);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Source = ");
-			sb.Append("\"");
-			sb.Append(instance.Source);
-			sb.Append("\"");
+			__init.Property("Source");
+			writer.WriteString(Source);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timestamp = ");
-			sb.Append(instance.Timestamp);
-			sb.Append("L");
+			__init.Property("Timestamp");
+			writer.WriteValue(Timestamp);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

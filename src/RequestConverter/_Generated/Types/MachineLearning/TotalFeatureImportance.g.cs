@@ -25,39 +25,24 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class TotalFeatureImportance : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Classes = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Classes, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Classes");
+			writer.WriteInlineList(Classes, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FeatureName = ");
-			sb.Append("\"");
-			sb.Append(instance.FeatureName);
-			sb.Append("\"");
+			__init.Property("FeatureName");
+			writer.WriteString(FeatureName);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Importance = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Importance, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Importance");
+			writer.WriteInlineList(Importance, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

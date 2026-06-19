@@ -25,46 +25,29 @@ namespace Elastic.Clients.Elasticsearch.DanglingIndices;
 
 public partial class DanglingIndex : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CreationDateMillis = ");
-			sb.Append(instance.CreationDateMillis);
+			__init.Property("CreationDateMillis");
+			writer.WriteValue(CreationDateMillis);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexName = ");
-			sb.Append("\"");
-			sb.Append(instance.IndexName);
-			sb.Append("\"");
+			__init.Property("IndexName");
+			writer.WriteString(IndexName);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexUuid = ");
-			sb.Append("\"");
-			sb.Append(instance.IndexUuid);
-			sb.Append("\"");
+			__init.Property("IndexUuid");
+			writer.WriteString(IndexUuid);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NodeIds = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.NodeIds, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("NodeIds");
+			writer.WriteInlineList(NodeIds, (w, item) => { w.WriteString(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

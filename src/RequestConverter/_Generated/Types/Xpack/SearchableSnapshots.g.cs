@@ -25,49 +25,36 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class SearchableSnapshots : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Available = ");
-			sb.Append(instance.Available ? "true" : "false");
+			__init.Property("Available");
+			writer.WriteValue(Available);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Enabled = ");
-			sb.Append(instance.Enabled ? "true" : "false");
+			__init.Property("Enabled");
+			writer.WriteValue(Enabled);
 		}
 
-		if (instance.FullCopyIndicesCount is not null)
+		if (FullCopyIndicesCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FullCopyIndicesCount = ");
-			sb.Append(instance.FullCopyIndicesCount.Value);
+			__init.Property("FullCopyIndicesCount");
+			writer.WriteValue(FullCopyIndicesCount.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndicesCount = ");
-			sb.Append(instance.IndicesCount);
+			__init.Property("IndicesCount");
+			writer.WriteValue(IndicesCount);
 		}
 
-		if (instance.SharedCacheIndicesCount is not null)
+		if (SharedCacheIndicesCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SharedCacheIndicesCount = ");
-			sb.Append(instance.SharedCacheIndicesCount.Value);
+			__init.Property("SharedCacheIndicesCount");
+			writer.WriteValue(SharedCacheIndicesCount.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

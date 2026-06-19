@@ -25,37 +25,26 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class RequestEmbedding : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Input = ");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<System.Collections.Generic.ICollection<string>, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObject>>(instance.Input, sb);
+			__init.Property("Input");
+			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<System.Collections.Generic.ICollection<string>, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObject>>(Input, writer);
 		}
 
-		if (instance.InputType is not null)
+		if (InputType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InputType = ");
-			sb.Append("\"");
-			sb.Append(instance.InputType);
-			sb.Append("\"");
+			__init.Property("InputType");
+			writer.WriteString(InputType);
 		}
 
-		if (instance.TaskSettings is not null)
+		if (TaskSettings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TaskSettings = ");
-			RequestConverter.CodeFormatter.FormatCode(instance.TaskSettings, sb);
+			__init.Property("TaskSettings");
+			writer.WriteValue(TaskSettings);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

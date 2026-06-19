@@ -25,25 +25,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class Buckets<TBucket> : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		if (instance.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 		{
-			sb.Append("new Buckets(");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Value1, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode<TBucket>(v, sb); }, sb);
-			sb.Append(")");
+			writer.Write("new Buckets(");
+			writer.Write("new() ");
+			writer.WriteInlineList(Value1, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(")");
 			return;
 		}
 
-		if (instance.Tag == Elastic.Clients.Elasticsearch.UnionTag.T2)
+		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T2)
 		{
-			sb.Append("new Buckets(");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Value2, (item, sb) => { RequestConverter.CodeFormatter.FormatCode<TBucket>(item, sb); }, sb);
-			sb.Append("]");
-			sb.Append(")");
+			writer.Write("new Buckets(");
+			writer.WriteInlineList(Value2, (w, item) => { w.WriteValue(item); });
+			writer.Write(")");
 			return;
 		}
 	}

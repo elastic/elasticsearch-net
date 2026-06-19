@@ -25,36 +25,25 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
 public partial class StagnatingBackingIndices : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FirstOccurrenceTimestamp = ");
-			sb.Append(instance.FirstOccurrenceTimestamp);
-			sb.Append("L");
+			__init.Property("FirstOccurrenceTimestamp");
+			writer.WriteValue(FirstOccurrenceTimestamp);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexName = ");
-			sb.Append("\"");
-			sb.Append(instance.IndexName);
-			sb.Append("\"");
+			__init.Property("IndexName");
+			writer.WriteString(IndexName);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RetryCount = ");
-			sb.Append(instance.RetryCount);
+			__init.Property("RetryCount");
+			writer.WriteValue(RetryCount);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

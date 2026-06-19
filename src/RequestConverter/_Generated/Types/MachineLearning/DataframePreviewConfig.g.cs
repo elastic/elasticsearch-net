@@ -25,52 +25,37 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataframePreviewConfig : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Analysis = ");
-			instance.Analysis.FormatCode(sb);
+			__init.Property("Analysis");
+			Analysis.FormatCode(writer);
 		}
 
-		if (instance.AnalyzedFields is not null)
+		if (AnalyzedFields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AnalyzedFields = ");
-			instance.AnalyzedFields.FormatCode(sb);
+			__init.Property("AnalyzedFields");
+			AnalyzedFields.FormatCode(writer);
 		}
 
-		if (instance.MaxNumThreads is not null)
+		if (MaxNumThreads is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxNumThreads = ");
-			sb.Append(instance.MaxNumThreads.Value);
+			__init.Property("MaxNumThreads");
+			writer.WriteValue(MaxNumThreads.Value);
 		}
 
-		if (instance.ModelMemoryLimit is not null)
+		if (ModelMemoryLimit is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelMemoryLimit = ");
-			sb.Append("\"");
-			sb.Append(instance.ModelMemoryLimit);
-			sb.Append("\"");
+			__init.Property("ModelMemoryLimit");
+			writer.WriteString(ModelMemoryLimit);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Source = ");
-			instance.Source.FormatCode(sb);
+			__init.Property("Source");
+			Source.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

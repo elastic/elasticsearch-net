@@ -25,127 +25,94 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class IndexTemplate : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AllowAutoCreate is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AllowAutoCreate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowAutoCreate = ");
-			sb.Append(instance.AllowAutoCreate.Value ? "true" : "false");
+			__init.Property("AllowAutoCreate");
+			writer.WriteValue(AllowAutoCreate.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ComposedOf = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.ComposedOf, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("ComposedOf");
+			writer.WriteInlineList(ComposedOf, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.CreatedDate is not null)
+		if (CreatedDate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CreatedDate = ");
-			sb.Append(instance.CreatedDate.Value);
+			__init.Property("CreatedDate");
+			writer.WriteValue(CreatedDate.Value);
 		}
 
-		if (instance.CreatedDateMillis is not null)
+		if (CreatedDateMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CreatedDateMillis = ");
-			sb.Append(instance.CreatedDateMillis.Value);
+			__init.Property("CreatedDateMillis");
+			writer.WriteValue(CreatedDateMillis.Value);
 		}
 
-		if (instance.DataStream is not null)
+		if (DataStream is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DataStream = ");
-			instance.DataStream.FormatCode(sb);
+			__init.Property("DataStream");
+			DataStream.FormatCode(writer);
 		}
 
-		if (instance.Deprecated is not null)
+		if (Deprecated is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Deprecated = ");
-			sb.Append(instance.Deprecated.Value ? "true" : "false");
+			__init.Property("Deprecated");
+			writer.WriteValue(Deprecated.Value);
 		}
 
-		if (instance.IgnoreMissingComponentTemplates is not null)
+		if (IgnoreMissingComponentTemplates is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreMissingComponentTemplates = ");
-			instance.IgnoreMissingComponentTemplates.FormatCode(sb);
+			__init.Property("IgnoreMissingComponentTemplates");
+			IgnoreMissingComponentTemplates.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexPatterns = ");
-			instance.IndexPatterns.FormatCode(sb);
+			__init.Property("IndexPatterns");
+			IndexPatterns.FormatCode(writer);
 		}
 
-		if (instance.Meta is not null)
+		if (Meta is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Meta = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Meta, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Meta");
+			writer.Write("new() ");
+			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.ModifiedDate is not null)
+		if (ModifiedDate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModifiedDate = ");
-			sb.Append(instance.ModifiedDate.Value);
+			__init.Property("ModifiedDate");
+			writer.WriteValue(ModifiedDate.Value);
 		}
 
-		if (instance.ModifiedDateMillis is not null)
+		if (ModifiedDateMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModifiedDateMillis = ");
-			sb.Append(instance.ModifiedDateMillis.Value);
+			__init.Property("ModifiedDateMillis");
+			writer.WriteValue(ModifiedDateMillis.Value);
 		}
 
-		if (instance.Priority is not null)
+		if (Priority is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Priority = ");
-			sb.Append(instance.Priority.Value);
-			sb.Append("L");
+			__init.Property("Priority");
+			writer.WriteValue(Priority.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Template is not null)
+		if (Template is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Template = ");
-			instance.Template.FormatCode(sb);
+			__init.Property("Template");
+			Template.FormatCode(writer);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append(instance.Version.Value);
-			sb.Append("L");
+			__init.Property("Version");
+			writer.WriteValue(Version.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

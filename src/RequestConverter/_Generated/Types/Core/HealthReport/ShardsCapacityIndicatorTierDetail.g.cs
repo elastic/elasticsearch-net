@@ -25,27 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
 public partial class ShardsCapacityIndicatorTierDetail : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CurrentUsedShards is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CurrentUsedShards is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CurrentUsedShards = ");
-			sb.Append(instance.CurrentUsedShards.Value);
+			__init.Property("CurrentUsedShards");
+			writer.WriteValue(CurrentUsedShards.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxShardsInCluster = ");
-			sb.Append(instance.MaxShardsInCluster);
+			__init.Property("MaxShardsInCluster");
+			writer.WriteValue(MaxShardsInCluster);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

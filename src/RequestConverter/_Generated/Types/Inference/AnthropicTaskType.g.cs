@@ -25,15 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class AnthropicTaskTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
+			case Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType.ChatCompletion:
+				writer.Write("AnthropicTaskType.ChatCompletion");
+				break;
 			case Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType.Completion:
-				sb.Append("AnthropicTaskType.Completion");
+				writer.Write("AnthropicTaskType.Completion");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

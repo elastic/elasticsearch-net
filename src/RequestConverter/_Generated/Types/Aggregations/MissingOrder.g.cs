@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public static class MissingOrderCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Aggregations.MissingOrder instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Aggregations.MissingOrder instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Aggregations.MissingOrder.Default:
-				sb.Append("MissingOrder.Default");
+				writer.Write("MissingOrder.Default");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.MissingOrder.First:
-				sb.Append("MissingOrder.First");
+				writer.Write("MissingOrder.First");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.MissingOrder.Last:
-				sb.Append("MissingOrder.Last");
+				writer.Write("MissingOrder.Last");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

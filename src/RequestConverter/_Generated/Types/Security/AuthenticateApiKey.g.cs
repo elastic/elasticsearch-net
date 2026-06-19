@@ -25,46 +25,31 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class AuthenticateApiKey : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			sb.Append("\"");
-			sb.Append(instance.Id);
-			sb.Append("\"");
+			__init.Property("Id");
+			writer.WriteString(Id);
 		}
 
-		if (instance.Internal is not null)
+		if (Internal is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Internal = ");
-			sb.Append(instance.Internal.Value ? "true" : "false");
+			__init.Property("Internal");
+			writer.WriteValue(Internal.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ManagedBy = ");
-			Elastic.Clients.Elasticsearch.Security.ApiKeyManagedByCodeFormatter.FormatCode(instance.ManagedBy, sb);
+			__init.Property("ManagedBy");
+			Elastic.Clients.Elasticsearch.Security.CredentialManagedByCodeFormatter.FormatCode(ManagedBy, writer);
 		}
 
-		if (instance.Name is not null)
+		if (Name is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

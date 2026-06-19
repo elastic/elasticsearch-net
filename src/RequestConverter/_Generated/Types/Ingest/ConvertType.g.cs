@@ -25,36 +25,36 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public static class ConvertTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Ingest.ConvertType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Ingest.ConvertType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.Auto:
-				sb.Append("ConvertType.Auto");
+				writer.Write("ConvertType.Auto");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.Boolean:
-				sb.Append("ConvertType.Boolean");
+				writer.Write("ConvertType.Boolean");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.Double:
-				sb.Append("ConvertType.Double");
+				writer.Write("ConvertType.Double");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.Float:
-				sb.Append("ConvertType.Float");
+				writer.Write("ConvertType.Float");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.Integer:
-				sb.Append("ConvertType.Integer");
+				writer.Write("ConvertType.Integer");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.Ip:
-				sb.Append("ConvertType.Ip");
+				writer.Write("ConvertType.Ip");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.Long:
-				sb.Append("ConvertType.Long");
+				writer.Write("ConvertType.Long");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.String:
-				sb.Append("ConvertType.String");
+				writer.Write("ConvertType.String");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

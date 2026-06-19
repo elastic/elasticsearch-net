@@ -25,70 +25,53 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
 public partial class Checkpointing : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ChangesLastDetectedAt is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ChangesLastDetectedAt is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ChangesLastDetectedAt = ");
-			sb.Append(instance.ChangesLastDetectedAt.Value);
-			sb.Append("L");
+			__init.Property("ChangesLastDetectedAt");
+			writer.WriteValue(ChangesLastDetectedAt.Value);
+			writer.Write("L");
 		}
 
-		if (instance.ChangesLastDetectedAtString is not null)
+		if (ChangesLastDetectedAtString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ChangesLastDetectedAtString = ");
-			sb.Append(instance.ChangesLastDetectedAtString.Value);
+			__init.Property("ChangesLastDetectedAtString");
+			writer.WriteValue(ChangesLastDetectedAtString.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Last = ");
-			instance.Last.FormatCode(sb);
+			__init.Property("Last");
+			Last.FormatCode(writer);
 		}
 
-		if (instance.LastSearchTime is not null)
+		if (LastSearchTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LastSearchTime = ");
-			sb.Append(instance.LastSearchTime.Value);
-			sb.Append("L");
+			__init.Property("LastSearchTime");
+			writer.WriteValue(LastSearchTime.Value);
+			writer.Write("L");
 		}
 
-		if (instance.LastSearchTimeString is not null)
+		if (LastSearchTimeString is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LastSearchTimeString = ");
-			sb.Append(instance.LastSearchTimeString.Value);
+			__init.Property("LastSearchTimeString");
+			writer.WriteValue(LastSearchTimeString.Value);
 		}
 
-		if (instance.Next is not null)
+		if (Next is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Next = ");
-			instance.Next.FormatCode(sb);
+			__init.Property("Next");
+			Next.FormatCode(writer);
 		}
 
-		if (instance.OperationsBehind is not null)
+		if (OperationsBehind is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OperationsBehind = ");
-			sb.Append(instance.OperationsBehind.Value);
-			sb.Append("L");
+			__init.Property("OperationsBehind");
+			writer.WriteValue(OperationsBehind.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,61 +25,46 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class StoreStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Reserved is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Reserved is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Reserved = ");
-			instance.Reserved.FormatCode(sb);
+			__init.Property("Reserved");
+			Reserved.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReservedInBytes = ");
-			sb.Append(instance.ReservedInBytes);
-			sb.Append("L");
+			__init.Property("ReservedInBytes");
+			writer.WriteValue(ReservedInBytes);
+			writer.Write("L");
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			instance.Size.FormatCode(sb);
+			__init.Property("Size");
+			Size.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SizeInBytes = ");
-			sb.Append(instance.SizeInBytes);
-			sb.Append("L");
+			__init.Property("SizeInBytes");
+			writer.WriteValue(SizeInBytes);
+			writer.Write("L");
 		}
 
-		if (instance.TotalDataSetSize is not null)
+		if (TotalDataSetSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalDataSetSize = ");
-			instance.TotalDataSetSize.FormatCode(sb);
+			__init.Property("TotalDataSetSize");
+			TotalDataSetSize.FormatCode(writer);
 		}
 
-		if (instance.TotalDataSetSizeInBytes is not null)
+		if (TotalDataSetSizeInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalDataSetSizeInBytes = ");
-			sb.Append(instance.TotalDataSetSizeInBytes.Value);
-			sb.Append("L");
+			__init.Property("TotalDataSetSizeInBytes");
+			writer.WriteValue(TotalDataSetSizeInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

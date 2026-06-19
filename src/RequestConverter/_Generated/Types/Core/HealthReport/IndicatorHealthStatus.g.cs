@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
 public static class IndicatorHealthStatusCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Green:
-				sb.Append("IndicatorHealthStatus.Green");
+				writer.Write("IndicatorHealthStatus.Green");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Red:
-				sb.Append("IndicatorHealthStatus.Red");
+				writer.Write("IndicatorHealthStatus.Red");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Unavailable:
-				sb.Append("IndicatorHealthStatus.Unavailable");
+				writer.Write("IndicatorHealthStatus.Unavailable");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Unknown:
-				sb.Append("IndicatorHealthStatus.Unknown");
+				writer.Write("IndicatorHealthStatus.Unknown");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Yellow:
-				sb.Append("IndicatorHealthStatus.Yellow");
+				writer.Write("IndicatorHealthStatus.Yellow");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

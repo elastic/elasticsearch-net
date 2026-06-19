@@ -25,36 +25,25 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
 public partial class AutoFollowedCluster : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ClusterName = ");
-			sb.Append("\"");
-			sb.Append(instance.ClusterName);
-			sb.Append("\"");
+			__init.Property("ClusterName");
+			writer.WriteString(ClusterName);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LastSeenMetadataVersion = ");
-			sb.Append(instance.LastSeenMetadataVersion);
-			sb.Append("L");
+			__init.Property("LastSeenMetadataVersion");
+			writer.WriteValue(LastSeenMetadataVersion);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeSinceLastCheckMillis = ");
-			sb.Append(instance.TimeSinceLastCheckMillis);
+			__init.Property("TimeSinceLastCheckMillis");
+			writer.WriteValue(TimeSinceLastCheckMillis);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

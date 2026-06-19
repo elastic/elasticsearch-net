@@ -25,50 +25,33 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class HasPrivilegesRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.User is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (User is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("User = ");
-			instance.User.FormatCode(sb);
+			__init.Property("User");
+			User.FormatCode(writer);
 		}
 
-		if (instance.Application is not null)
+		if (Application is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Application = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Application, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Application");
+			writer.WriteInlineList(Application, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Cluster is not null)
+		if (Cluster is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Cluster = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Cluster, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Cluster");
+			writer.WriteInlineList(Cluster, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Index is not null)
+		if (Index is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Index, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Index");
+			writer.WriteInlineList(Index, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

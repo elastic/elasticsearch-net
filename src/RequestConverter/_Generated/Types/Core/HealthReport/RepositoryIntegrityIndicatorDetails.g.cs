@@ -25,40 +25,29 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
 public partial class RepositoryIntegrityIndicatorDetails : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Corrupted is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Corrupted is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Corrupted = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Corrupted, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Corrupted");
+			writer.WriteInlineList(Corrupted, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.CorruptedRepositories is not null)
+		if (CorruptedRepositories is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CorruptedRepositories = ");
-			sb.Append(instance.CorruptedRepositories.Value);
-			sb.Append("L");
+			__init.Property("CorruptedRepositories");
+			writer.WriteValue(CorruptedRepositories.Value);
+			writer.Write("L");
 		}
 
-		if (instance.TotalRepositories is not null)
+		if (TotalRepositories is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalRepositories = ");
-			sb.Append(instance.TotalRepositories.Value);
-			sb.Append("L");
+			__init.Property("TotalRepositories");
+			writer.WriteValue(TotalRepositories.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

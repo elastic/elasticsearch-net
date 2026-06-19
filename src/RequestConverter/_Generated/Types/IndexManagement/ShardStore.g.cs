@@ -25,53 +25,36 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class ShardStore : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Allocation = ");
-			Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocationCodeFormatter.FormatCode(instance.Allocation, sb);
+			__init.Property("Allocation");
+			Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocationCodeFormatter.FormatCode(Allocation, writer);
 		}
 
-		if (instance.AllocationId is not null)
+		if (AllocationId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllocationId = ");
-			sb.Append("\"");
-			sb.Append(instance.AllocationId);
-			sb.Append("\"");
+			__init.Property("AllocationId");
+			writer.WriteString(AllocationId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Node = ");
-			instance.Node.FormatCode(sb);
+			__init.Property("Node");
+			Node.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NodeId = ");
-			sb.Append("\"");
-			sb.Append(instance.NodeId);
-			sb.Append("\"");
+			__init.Property("NodeId");
+			writer.WriteString(NodeId);
 		}
 
-		if (instance.StoreException is not null)
+		if (StoreException is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StoreException = ");
-			instance.StoreException.FormatCode(sb);
+			__init.Property("StoreException");
+			StoreException.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

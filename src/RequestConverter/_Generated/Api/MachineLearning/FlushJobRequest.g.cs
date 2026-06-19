@@ -25,59 +25,44 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class FlushJobRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JobId = ");
-			instance.JobId.FormatCode(sb);
+			__init.Property("JobId");
+			JobId.FormatCode(writer);
 		}
 
-		if (instance.AdvanceTime is not null)
+		if (AdvanceTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AdvanceTime = ");
-			sb.Append(instance.AdvanceTime.Value);
+			__init.Property("AdvanceTime");
+			writer.WriteValue(AdvanceTime.Value);
 		}
 
-		if (instance.CalcInterim is not null)
+		if (CalcInterim is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CalcInterim = ");
-			sb.Append(instance.CalcInterim.Value ? "true" : "false");
+			__init.Property("CalcInterim");
+			writer.WriteValue(CalcInterim.Value);
 		}
 
-		if (instance.End is not null)
+		if (End is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("End = ");
-			sb.Append(instance.End.Value);
+			__init.Property("End");
+			writer.WriteValue(End.Value);
 		}
 
-		if (instance.SkipTime is not null)
+		if (SkipTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SkipTime = ");
-			sb.Append(instance.SkipTime.Value);
+			__init.Property("SkipTime");
+			writer.WriteValue(SkipTime.Value);
 		}
 
-		if (instance.Start is not null)
+		if (Start is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Start = ");
-			sb.Append(instance.Start.Value);
+			__init.Property("Start");
+			writer.WriteValue(Start.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

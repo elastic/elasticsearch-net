@@ -25,52 +25,39 @@ namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
 public partial class RankEvalMetric : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Dcg is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Dcg is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Dcg = ");
-			instance.Dcg.FormatCode(sb);
+			__init.Property("Dcg");
+			Dcg.FormatCode(writer);
 		}
 
-		if (instance.ExpectedReciprocalRank is not null)
+		if (ExpectedReciprocalRank is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExpectedReciprocalRank = ");
-			instance.ExpectedReciprocalRank.FormatCode(sb);
+			__init.Property("ExpectedReciprocalRank");
+			ExpectedReciprocalRank.FormatCode(writer);
 		}
 
-		if (instance.MeanReciprocalRank is not null)
+		if (MeanReciprocalRank is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MeanReciprocalRank = ");
-			instance.MeanReciprocalRank.FormatCode(sb);
+			__init.Property("MeanReciprocalRank");
+			MeanReciprocalRank.FormatCode(writer);
 		}
 
-		if (instance.Precision is not null)
+		if (Precision is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Precision = ");
-			instance.Precision.FormatCode(sb);
+			__init.Property("Precision");
+			Precision.FormatCode(writer);
 		}
 
-		if (instance.Recall is not null)
+		if (Recall is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Recall = ");
-			instance.Recall.FormatCode(sb);
+			__init.Property("Recall");
+			Recall.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

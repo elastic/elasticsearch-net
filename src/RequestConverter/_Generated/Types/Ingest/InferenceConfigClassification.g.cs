@@ -25,54 +25,39 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public partial class InferenceConfigClassification : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.NumTopClasses is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (NumTopClasses is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumTopClasses = ");
-			sb.Append(instance.NumTopClasses.Value);
+			__init.Property("NumTopClasses");
+			writer.WriteValue(NumTopClasses.Value);
 		}
 
-		if (instance.NumTopFeatureImportanceValues is not null)
+		if (NumTopFeatureImportanceValues is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumTopFeatureImportanceValues = ");
-			sb.Append(instance.NumTopFeatureImportanceValues.Value);
+			__init.Property("NumTopFeatureImportanceValues");
+			writer.WriteValue(NumTopFeatureImportanceValues.Value);
 		}
 
-		if (instance.PredictionFieldType is not null)
+		if (PredictionFieldType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PredictionFieldType = ");
-			sb.Append("\"");
-			sb.Append(instance.PredictionFieldType);
-			sb.Append("\"");
+			__init.Property("PredictionFieldType");
+			writer.WriteString(PredictionFieldType);
 		}
 
-		if (instance.ResultsField is not null)
+		if (ResultsField is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ResultsField = ");
-			instance.ResultsField.FormatCode(sb);
+			__init.Property("ResultsField");
+			ResultsField.FormatCode(writer);
 		}
 
-		if (instance.TopClassesResultsField is not null)
+		if (TopClassesResultsField is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TopClassesResultsField = ");
-			instance.TopClassesResultsField.FormatCode(sb);
+			__init.Property("TopClassesResultsField");
+			TopClassesResultsField.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

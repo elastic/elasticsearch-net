@@ -25,128 +25,87 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class IcuCollationTokenFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Alternate is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Alternate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Alternate = ");
-			Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternateCodeFormatter.FormatCode(instance.Alternate.Value, sb);
+			__init.Property("Alternate");
+			Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternateCodeFormatter.FormatCode(Alternate.Value, writer);
 		}
 
-		if (instance.CaseFirst is not null)
+		if (CaseFirst is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CaseFirst = ");
-			Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirstCodeFormatter.FormatCode(instance.CaseFirst.Value, sb);
+			__init.Property("CaseFirst");
+			Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirstCodeFormatter.FormatCode(CaseFirst.Value, writer);
 		}
 
-		if (instance.CaseLevel is not null)
+		if (CaseLevel is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CaseLevel = ");
-			sb.Append(instance.CaseLevel.Value ? "true" : "false");
+			__init.Property("CaseLevel");
+			writer.WriteValue(CaseLevel.Value);
 		}
 
-		if (instance.Country is not null)
+		if (Country is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Country = ");
-			sb.Append("\"");
-			sb.Append(instance.Country);
-			sb.Append("\"");
+			__init.Property("Country");
+			writer.WriteString(Country);
 		}
 
-		if (instance.Decomposition is not null)
+		if (Decomposition is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Decomposition = ");
-			Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecompositionCodeFormatter.FormatCode(instance.Decomposition.Value, sb);
+			__init.Property("Decomposition");
+			Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecompositionCodeFormatter.FormatCode(Decomposition.Value, writer);
 		}
 
-		if (instance.HiraganaQuaternaryMode is not null)
+		if (HiraganaQuaternaryMode is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HiraganaQuaternaryMode = ");
-			sb.Append(instance.HiraganaQuaternaryMode.Value ? "true" : "false");
+			__init.Property("HiraganaQuaternaryMode");
+			writer.WriteValue(HiraganaQuaternaryMode.Value);
 		}
 
-		if (instance.Language is not null)
+		if (Language is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Language = ");
-			sb.Append("\"");
-			sb.Append(instance.Language);
-			sb.Append("\"");
+			__init.Property("Language");
+			writer.WriteString(Language);
 		}
 
-		if (instance.Numeric is not null)
+		if (Numeric is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Numeric = ");
-			sb.Append(instance.Numeric.Value ? "true" : "false");
+			__init.Property("Numeric");
+			writer.WriteValue(Numeric.Value);
 		}
 
-		if (instance.Rules is not null)
+		if (Rules is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Rules = ");
-			sb.Append("\"");
-			sb.Append(instance.Rules);
-			sb.Append("\"");
+			__init.Property("Rules");
+			writer.WriteString(Rules);
 		}
 
-		if (instance.Strength is not null)
+		if (Strength is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Strength = ");
-			Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrengthCodeFormatter.FormatCode(instance.Strength.Value, sb);
+			__init.Property("Strength");
+			Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrengthCodeFormatter.FormatCode(Strength.Value, writer);
 		}
 
-		if (instance.VariableTop is not null)
+		if (VariableTop is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VariableTop = ");
-			sb.Append("\"");
-			sb.Append(instance.VariableTop);
-			sb.Append("\"");
+			__init.Property("VariableTop");
+			writer.WriteString(VariableTop);
 		}
 
-		if (instance.Variant is not null)
+		if (Variant is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Variant = ");
-			sb.Append("\"");
-			sb.Append(instance.Variant);
-			sb.Append("\"");
+			__init.Property("Variant");
+			writer.WriteString(Variant);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

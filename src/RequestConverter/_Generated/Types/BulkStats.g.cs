@@ -25,82 +25,61 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class BulkStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AvgSize is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AvgSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AvgSize = ");
-			instance.AvgSize.FormatCode(sb);
+			__init.Property("AvgSize");
+			AvgSize.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AvgSizeInBytes = ");
-			sb.Append(instance.AvgSizeInBytes);
-			sb.Append("L");
+			__init.Property("AvgSizeInBytes");
+			writer.WriteValue(AvgSizeInBytes);
+			writer.Write("L");
 		}
 
-		if (instance.AvgTime is not null)
+		if (AvgTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AvgTime = ");
-			instance.AvgTime.FormatCode(sb);
+			__init.Property("AvgTime");
+			AvgTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AvgTimeInMillis = ");
-			sb.Append(instance.AvgTimeInMillis);
+			__init.Property("AvgTimeInMillis");
+			writer.WriteValue(AvgTimeInMillis);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalOperations = ");
-			sb.Append(instance.TotalOperations);
-			sb.Append("L");
+			__init.Property("TotalOperations");
+			writer.WriteValue(TotalOperations);
+			writer.Write("L");
 		}
 
-		if (instance.TotalSize is not null)
+		if (TotalSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalSize = ");
-			instance.TotalSize.FormatCode(sb);
+			__init.Property("TotalSize");
+			TotalSize.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalSizeInBytes = ");
-			sb.Append(instance.TotalSizeInBytes);
-			sb.Append("L");
+			__init.Property("TotalSizeInBytes");
+			writer.WriteValue(TotalSizeInBytes);
+			writer.Write("L");
 		}
 
-		if (instance.TotalTime is not null)
+		if (TotalTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalTime = ");
-			instance.TotalTime.FormatCode(sb);
+			__init.Property("TotalTime");
+			TotalTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalTimeInMillis = ");
-			sb.Append(instance.TotalTimeInMillis);
+			__init.Property("TotalTimeInMillis");
+			writer.WriteValue(TotalTimeInMillis);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

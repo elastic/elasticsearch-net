@@ -25,30 +25,30 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public static class MinimumIntervalCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Day:
-				sb.Append("MinimumInterval.Day");
+				writer.Write("MinimumInterval.Day");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Hour:
-				sb.Append("MinimumInterval.Hour");
+				writer.Write("MinimumInterval.Hour");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Minute:
-				sb.Append("MinimumInterval.Minute");
+				writer.Write("MinimumInterval.Minute");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Month:
-				sb.Append("MinimumInterval.Month");
+				writer.Write("MinimumInterval.Month");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Second:
-				sb.Append("MinimumInterval.Second");
+				writer.Write("MinimumInterval.Second");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Year:
-				sb.Append("MinimumInterval.Year");
+				writer.Write("MinimumInterval.Year");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

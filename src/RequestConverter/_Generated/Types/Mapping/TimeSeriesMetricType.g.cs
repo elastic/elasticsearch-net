@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public static class TimeSeriesMetricTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Counter:
-				sb.Append("TimeSeriesMetricType.Counter");
+				writer.Write("TimeSeriesMetricType.Counter");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Gauge:
-				sb.Append("TimeSeriesMetricType.Gauge");
+				writer.Write("TimeSeriesMetricType.Gauge");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Histogram:
-				sb.Append("TimeSeriesMetricType.Histogram");
+				writer.Write("TimeSeriesMetricType.Histogram");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Position:
-				sb.Append("TimeSeriesMetricType.Position");
+				writer.Write("TimeSeriesMetricType.Position");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Summary:
-				sb.Append("TimeSeriesMetricType.Summary");
+				writer.Write("TimeSeriesMetricType.Summary");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

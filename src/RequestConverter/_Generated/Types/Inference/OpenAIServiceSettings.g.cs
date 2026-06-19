@@ -25,74 +25,49 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class OpenAIServiceSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ApiKey = ");
-			sb.Append("\"");
-			sb.Append(instance.ApiKey);
-			sb.Append("\"");
+			__init.Property("ApiKey");
+			writer.WriteString(ApiKey);
 		}
 
-		if (instance.Dimensions is not null)
+		if (Dimensions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Dimensions = ");
-			sb.Append(instance.Dimensions.Value);
+			__init.Property("Dimensions");
+			writer.WriteValue(Dimensions.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelId = ");
-			sb.Append("\"");
-			sb.Append(instance.ModelId);
-			sb.Append("\"");
+			__init.Property("ModelId");
+			writer.WriteString(ModelId);
 		}
 
-		if (instance.OrganizationId is not null)
+		if (OrganizationId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OrganizationId = ");
-			sb.Append("\"");
-			sb.Append(instance.OrganizationId);
-			sb.Append("\"");
+			__init.Property("OrganizationId");
+			writer.WriteString(OrganizationId);
 		}
 
-		if (instance.RateLimit is not null)
+		if (RateLimit is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RateLimit = ");
-			instance.RateLimit.FormatCode(sb);
+			__init.Property("RateLimit");
+			RateLimit.FormatCode(writer);
 		}
 
-		if (instance.Similarity is not null)
+		if (Similarity is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Similarity = ");
-			Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityTypeCodeFormatter.FormatCode(instance.Similarity.Value, sb);
+			__init.Property("Similarity");
+			Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityTypeCodeFormatter.FormatCode(Similarity.Value, writer);
 		}
 
-		if (instance.Url is not null)
+		if (Url is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Url = ");
-			sb.Append("\"");
-			sb.Append(instance.Url);
-			sb.Append("\"");
+			__init.Property("Url");
+			writer.WriteString(Url);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

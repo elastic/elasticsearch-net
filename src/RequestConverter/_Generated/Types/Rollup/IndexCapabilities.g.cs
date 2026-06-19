@@ -25,21 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Rollup;
 
 public partial class IndexCapabilities : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RollupJobs = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.RollupJobs, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("RollupJobs");
+			writer.WriteInlineList(RollupJobs, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

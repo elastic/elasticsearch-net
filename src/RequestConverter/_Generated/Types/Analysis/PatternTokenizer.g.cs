@@ -25,50 +25,33 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class PatternTokenizer : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Flags is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Flags is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Flags = ");
-			sb.Append("\"");
-			sb.Append(instance.Flags);
-			sb.Append("\"");
+			__init.Property("Flags");
+			writer.WriteString(Flags);
 		}
 
-		if (instance.Group is not null)
+		if (Group is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Group = ");
-			sb.Append(instance.Group.Value);
+			__init.Property("Group");
+			writer.WriteValue(Group.Value);
 		}
 
-		if (instance.Pattern is not null)
+		if (Pattern is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Pattern = ");
-			sb.Append("\"");
-			sb.Append(instance.Pattern);
-			sb.Append("\"");
+			__init.Property("Pattern");
+			writer.WriteString(Pattern);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

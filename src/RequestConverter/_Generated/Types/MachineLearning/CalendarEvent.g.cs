@@ -25,75 +25,54 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class CalendarEvent : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CalendarId is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CalendarId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CalendarId = ");
-			instance.CalendarId.FormatCode(sb);
+			__init.Property("CalendarId");
+			CalendarId.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EndTime = ");
-			sb.Append(instance.EndTime);
+			__init.Property("EndTime");
+			writer.WriteValue(EndTime);
 		}
 
-		if (instance.EventId is not null)
+		if (EventId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EventId = ");
-			instance.EventId.FormatCode(sb);
+			__init.Property("EventId");
+			EventId.FormatCode(writer);
 		}
 
-		if (instance.ForceTimeShift is not null)
+		if (ForceTimeShift is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ForceTimeShift = ");
-			sb.Append(instance.ForceTimeShift.Value);
+			__init.Property("ForceTimeShift");
+			writer.WriteValue(ForceTimeShift.Value);
 		}
 
-		if (instance.SkipModelUpdate is not null)
+		if (SkipModelUpdate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SkipModelUpdate = ");
-			sb.Append(instance.SkipModelUpdate.Value ? "true" : "false");
+			__init.Property("SkipModelUpdate");
+			writer.WriteValue(SkipModelUpdate.Value);
 		}
 
-		if (instance.SkipResult is not null)
+		if (SkipResult is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SkipResult = ");
-			sb.Append(instance.SkipResult.Value ? "true" : "false");
+			__init.Property("SkipResult");
+			writer.WriteValue(SkipResult.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StartTime = ");
-			sb.Append(instance.StartTime);
+			__init.Property("StartTime");
+			writer.WriteValue(StartTime);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

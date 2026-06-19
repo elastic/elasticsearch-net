@@ -25,56 +25,39 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class StopTokenFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.IgnoreCase is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (IgnoreCase is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreCase = ");
-			sb.Append(instance.IgnoreCase.Value ? "true" : "false");
+			__init.Property("IgnoreCase");
+			writer.WriteValue(IgnoreCase.Value);
 		}
 
-		if (instance.RemoveTrailing is not null)
+		if (RemoveTrailing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RemoveTrailing = ");
-			sb.Append(instance.RemoveTrailing.Value ? "true" : "false");
+			__init.Property("RemoveTrailing");
+			writer.WriteValue(RemoveTrailing.Value);
 		}
 
-		if (instance.Stopwords is not null)
+		if (Stopwords is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Stopwords = ");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(instance.Stopwords, sb);
+			__init.Property("Stopwords");
+			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(Stopwords, writer);
 		}
 
-		if (instance.StopwordsPath is not null)
+		if (StopwordsPath is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StopwordsPath = ");
-			sb.Append("\"");
-			sb.Append(instance.StopwordsPath);
-			sb.Append("\"");
+			__init.Property("StopwordsPath");
+			writer.WriteString(StopwordsPath);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class DFRAfterEffectCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.DFRAfterEffect instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.DFRAfterEffect instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.DFRAfterEffect.B:
-				sb.Append("DFRAfterEffect.B");
+				writer.Write("DFRAfterEffect.B");
 				break;
 			case Elastic.Clients.Elasticsearch.DFRAfterEffect.L:
-				sb.Append("DFRAfterEffect.L");
+				writer.Write("DFRAfterEffect.L");
 				break;
 			case Elastic.Clients.Elasticsearch.DFRAfterEffect.No:
-				sb.Append("DFRAfterEffect.No");
+				writer.Write("DFRAfterEffect.No");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

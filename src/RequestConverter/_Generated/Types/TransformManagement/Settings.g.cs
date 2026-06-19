@@ -25,69 +25,58 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
 public partial class Settings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AlignCheckpoints is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AlignCheckpoints is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AlignCheckpoints = ");
-			sb.Append(instance.AlignCheckpoints.Value ? "true" : "false");
+			__init.Property("AlignCheckpoints");
+			writer.WriteValue(AlignCheckpoints.Value);
 		}
 
-		if (instance.DatesAsEpochMillis is not null)
+		if (DatesAsEpochMillis is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DatesAsEpochMillis = ");
-			sb.Append(instance.DatesAsEpochMillis.Value ? "true" : "false");
+			__init.Property("DatesAsEpochMillis");
+			writer.WriteValue(DatesAsEpochMillis.Value);
 		}
 
-		if (instance.DeduceMappings is not null)
+		if (DeduceMappings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DeduceMappings = ");
-			sb.Append(instance.DeduceMappings.Value ? "true" : "false");
+			__init.Property("DeduceMappings");
+			writer.WriteValue(DeduceMappings.Value);
 		}
 
-		if (instance.DocsPerSecond is not null)
+		if (DocsPerSecond is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocsPerSecond = ");
-			sb.Append(instance.DocsPerSecond.Value);
-			sb.Append("f");
+			__init.Property("DocsPerSecond");
+			writer.WriteValue(DocsPerSecond.Value);
+			writer.Write("f");
 		}
 
-		if (instance.MaxPageSearchSize is not null)
+		if (MaxPageSearchSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxPageSearchSize = ");
-			sb.Append(instance.MaxPageSearchSize.Value);
+			__init.Property("MaxPageSearchSize");
+			writer.WriteValue(MaxPageSearchSize.Value);
 		}
 
-		if (instance.Unattended is not null)
+		if (NumFailureRetries is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Unattended = ");
-			sb.Append(instance.Unattended.Value ? "true" : "false");
+			__init.Property("NumFailureRetries");
+			writer.WriteValue(NumFailureRetries.Value);
 		}
 
-		if (instance.UsePointInTime is not null)
+		if (Unattended is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UsePointInTime = ");
-			sb.Append(instance.UsePointInTime.Value ? "true" : "false");
+			__init.Property("Unattended");
+			writer.WriteValue(Unattended.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		if (UsePointInTime is not null)
+		{
+			__init.Property("UsePointInTime");
+			writer.WriteValue(UsePointInTime.Value);
+		}
+
+		__init.Dispose();
 	}
 }

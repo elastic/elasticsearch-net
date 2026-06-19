@@ -25,22 +25,22 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class AzureOpenAITaskSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.User is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Headers is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("User = ");
-			sb.Append("\"");
-			sb.Append(instance.User);
-			sb.Append("\"");
+			__init.Property("Headers");
+			writer.Write("new() ");
+			writer.WriteInlineList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		if (User is not null)
+		{
+			__init.Property("User");
+			writer.WriteString(User);
+		}
+
+		__init.Dispose();
 	}
 }

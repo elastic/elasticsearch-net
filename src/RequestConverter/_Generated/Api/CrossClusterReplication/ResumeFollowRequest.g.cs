@@ -25,118 +25,85 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
 public partial class ResumeFollowRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			instance.Index.FormatCode(sb);
+			__init.Property("Index");
+			Index.FormatCode(writer);
 		}
 
-		if (instance.MasterTimeout is not null)
+		if (MasterTimeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MasterTimeout = ");
-			instance.MasterTimeout.FormatCode(sb);
+			__init.Property("MasterTimeout");
+			MasterTimeout.FormatCode(writer);
 		}
 
-		if (instance.MaxOutstandingReadRequests is not null)
+		if (MaxOutstandingReadRequests is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxOutstandingReadRequests = ");
-			sb.Append(instance.MaxOutstandingReadRequests.Value);
-			sb.Append("L");
+			__init.Property("MaxOutstandingReadRequests");
+			writer.WriteValue(MaxOutstandingReadRequests.Value);
+			writer.Write("L");
 		}
 
-		if (instance.MaxOutstandingWriteRequests is not null)
+		if (MaxOutstandingWriteRequests is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxOutstandingWriteRequests = ");
-			sb.Append(instance.MaxOutstandingWriteRequests.Value);
-			sb.Append("L");
+			__init.Property("MaxOutstandingWriteRequests");
+			writer.WriteValue(MaxOutstandingWriteRequests.Value);
+			writer.Write("L");
 		}
 
-		if (instance.MaxReadRequestOperationCount is not null)
+		if (MaxReadRequestOperationCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxReadRequestOperationCount = ");
-			sb.Append(instance.MaxReadRequestOperationCount.Value);
-			sb.Append("L");
+			__init.Property("MaxReadRequestOperationCount");
+			writer.WriteValue(MaxReadRequestOperationCount.Value);
+			writer.Write("L");
 		}
 
-		if (instance.MaxReadRequestSize is not null)
+		if (MaxReadRequestSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxReadRequestSize = ");
-			sb.Append("\"");
-			sb.Append(instance.MaxReadRequestSize);
-			sb.Append("\"");
+			__init.Property("MaxReadRequestSize");
+			writer.WriteString(MaxReadRequestSize);
 		}
 
-		if (instance.MaxRetryDelay is not null)
+		if (MaxRetryDelay is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxRetryDelay = ");
-			instance.MaxRetryDelay.FormatCode(sb);
+			__init.Property("MaxRetryDelay");
+			MaxRetryDelay.FormatCode(writer);
 		}
 
-		if (instance.MaxWriteBufferCount is not null)
+		if (MaxWriteBufferCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxWriteBufferCount = ");
-			sb.Append(instance.MaxWriteBufferCount.Value);
-			sb.Append("L");
+			__init.Property("MaxWriteBufferCount");
+			writer.WriteValue(MaxWriteBufferCount.Value);
+			writer.Write("L");
 		}
 
-		if (instance.MaxWriteBufferSize is not null)
+		if (MaxWriteBufferSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxWriteBufferSize = ");
-			sb.Append("\"");
-			sb.Append(instance.MaxWriteBufferSize);
-			sb.Append("\"");
+			__init.Property("MaxWriteBufferSize");
+			writer.WriteString(MaxWriteBufferSize);
 		}
 
-		if (instance.MaxWriteRequestOperationCount is not null)
+		if (MaxWriteRequestOperationCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxWriteRequestOperationCount = ");
-			sb.Append(instance.MaxWriteRequestOperationCount.Value);
-			sb.Append("L");
+			__init.Property("MaxWriteRequestOperationCount");
+			writer.WriteValue(MaxWriteRequestOperationCount.Value);
+			writer.Write("L");
 		}
 
-		if (instance.MaxWriteRequestSize is not null)
+		if (MaxWriteRequestSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxWriteRequestSize = ");
-			sb.Append("\"");
-			sb.Append(instance.MaxWriteRequestSize);
-			sb.Append("\"");
+			__init.Property("MaxWriteRequestSize");
+			writer.WriteString(MaxWriteRequestSize);
 		}
 
-		if (instance.ReadPollTimeout is not null)
+		if (ReadPollTimeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReadPollTimeout = ");
-			instance.ReadPollTimeout.FormatCode(sb);
+			__init.Property("ReadPollTimeout");
+			ReadPollTimeout.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

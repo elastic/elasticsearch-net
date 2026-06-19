@@ -25,48 +25,33 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class ChangePasswordRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Username is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Username is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Username = ");
-			instance.Username.FormatCode(sb);
+			__init.Property("Username");
+			Username.FormatCode(writer);
 		}
 
-		if (instance.Refresh is not null)
+		if (Refresh is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Refresh = ");
-			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(instance.Refresh.Value, sb);
+			__init.Property("Refresh");
+			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
 		}
 
-		if (instance.Password is not null)
+		if (Password is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Password = ");
-			sb.Append("\"");
-			sb.Append(instance.Password);
-			sb.Append("\"");
+			__init.Property("Password");
+			writer.WriteString(Password);
 		}
 
-		if (instance.PasswordHash is not null)
+		if (PasswordHash is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PasswordHash = ");
-			sb.Append("\"");
-			sb.Append(instance.PasswordHash);
-			sb.Append("\"");
+			__init.Property("PasswordHash");
+			writer.WriteString(PasswordHash);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

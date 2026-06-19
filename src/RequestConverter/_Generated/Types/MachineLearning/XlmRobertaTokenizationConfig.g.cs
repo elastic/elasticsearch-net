@@ -25,52 +25,39 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class XlmRobertaTokenizationConfig : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.DoLowerCase is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (DoLowerCase is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DoLowerCase = ");
-			sb.Append(instance.DoLowerCase.Value ? "true" : "false");
+			__init.Property("DoLowerCase");
+			writer.WriteValue(DoLowerCase.Value);
 		}
 
-		if (instance.MaxSequenceLength is not null)
+		if (MaxSequenceLength is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxSequenceLength = ");
-			sb.Append(instance.MaxSequenceLength.Value);
+			__init.Property("MaxSequenceLength");
+			writer.WriteValue(MaxSequenceLength.Value);
 		}
 
-		if (instance.Span is not null)
+		if (Span is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Span = ");
-			sb.Append(instance.Span.Value);
+			__init.Property("Span");
+			writer.WriteValue(Span.Value);
 		}
 
-		if (instance.Truncate is not null)
+		if (Truncate is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Truncate = ");
-			Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncateCodeFormatter.FormatCode(instance.Truncate.Value, sb);
+			__init.Property("Truncate");
+			Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncateCodeFormatter.FormatCode(Truncate.Value, writer);
 		}
 
-		if (instance.WithSpecialTokens is not null)
+		if (WithSpecialTokens is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WithSpecialTokens = ");
-			sb.Append(instance.WithSpecialTokens.Value ? "true" : "false");
+			__init.Property("WithSpecialTokens");
+			writer.WriteValue(WithSpecialTokens.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

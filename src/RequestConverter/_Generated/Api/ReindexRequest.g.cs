@@ -25,116 +25,87 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class ReindexRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Refresh is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Refresh is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Refresh = ");
-			sb.Append(instance.Refresh.Value ? "true" : "false");
+			__init.Property("Refresh");
+			writer.WriteValue(Refresh.Value);
 		}
 
-		if (instance.RequestsPerSecond is not null)
+		if (RequestsPerSecond is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RequestsPerSecond = ");
-			sb.Append(instance.RequestsPerSecond.Value);
-			sb.Append("f");
+			__init.Property("RequestsPerSecond");
+			writer.WriteValue(RequestsPerSecond.Value);
+			writer.Write("f");
 		}
 
-		if (instance.RequireAlias is not null)
+		if (RequireAlias is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RequireAlias = ");
-			sb.Append(instance.RequireAlias.Value ? "true" : "false");
+			__init.Property("RequireAlias");
+			writer.WriteValue(RequireAlias.Value);
 		}
 
-		if (instance.Scroll is not null)
+		if (Scroll is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Scroll = ");
-			instance.Scroll.FormatCode(sb);
+			__init.Property("Scroll");
+			Scroll.FormatCode(writer);
 		}
 
-		if (instance.Slices is not null)
+		if (Slices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Slices = ");
-			instance.Slices.FormatCode(sb);
+			__init.Property("Slices");
+			Slices.FormatCode(writer);
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (instance.WaitForActiveShards is not null)
+		if (WaitForActiveShards is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WaitForActiveShards = ");
-			instance.WaitForActiveShards.FormatCode(sb);
+			__init.Property("WaitForActiveShards");
+			WaitForActiveShards.FormatCode(writer);
 		}
 
-		if (instance.WaitForCompletion is not null)
+		if (WaitForCompletion is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WaitForCompletion = ");
-			sb.Append(instance.WaitForCompletion.Value ? "true" : "false");
+			__init.Property("WaitForCompletion");
+			writer.WriteValue(WaitForCompletion.Value);
 		}
 
-		if (instance.Conflicts is not null)
+		if (Conflicts is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Conflicts = ");
-			Elastic.Clients.Elasticsearch.ConflictsCodeFormatter.FormatCode(instance.Conflicts.Value, sb);
+			__init.Property("Conflicts");
+			Elastic.Clients.Elasticsearch.ConflictsCodeFormatter.FormatCode(Conflicts.Value, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Dest = ");
-			instance.Dest.FormatCode(sb);
+			__init.Property("Dest");
+			Dest.FormatCode(writer);
 		}
 
-		if (instance.MaxDocs is not null)
+		if (MaxDocs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxDocs = ");
-			sb.Append(instance.MaxDocs.Value);
-			sb.Append("L");
+			__init.Property("MaxDocs");
+			writer.WriteValue(MaxDocs.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Script is not null)
+		if (Script is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Script = ");
-			instance.Script.FormatCode(sb);
+			__init.Property("Script");
+			Script.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Source = ");
-			instance.Source.FormatCode(sb);
+			__init.Property("Source");
+			Source.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

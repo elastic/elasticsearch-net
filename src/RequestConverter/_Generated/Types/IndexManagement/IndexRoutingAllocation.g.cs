@@ -25,44 +25,33 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class IndexRoutingAllocation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Disk is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Disk is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Disk = ");
-			instance.Disk.FormatCode(sb);
+			__init.Property("Disk");
+			Disk.FormatCode(writer);
 		}
 
-		if (instance.Enable is not null)
+		if (Enable is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Enable = ");
-			Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptionsCodeFormatter.FormatCode(instance.Enable.Value, sb);
+			__init.Property("Enable");
+			Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptionsCodeFormatter.FormatCode(Enable.Value, writer);
 		}
 
-		if (instance.Include is not null)
+		if (Include is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Include = ");
-			instance.Include.FormatCode(sb);
+			__init.Property("Include");
+			Include.FormatCode(writer);
 		}
 
-		if (instance.InitialRecovery is not null)
+		if (InitialRecovery is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InitialRecovery = ");
-			instance.InitialRecovery.FormatCode(sb);
+			__init.Property("InitialRecovery");
+			InitialRecovery.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

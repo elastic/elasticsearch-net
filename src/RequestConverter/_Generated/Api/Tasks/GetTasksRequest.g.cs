@@ -25,35 +25,32 @@ namespace Elastic.Clients.Elasticsearch.Tasks;
 
 public partial class GetTasksRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TaskId = ");
-			instance.TaskId.FormatCode(sb);
+			__init.Property("TaskId");
+			TaskId.FormatCode(writer);
 		}
 
-		if (instance.Timeout is not null)
+		if (FollowRelocations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("FollowRelocations");
+			writer.WriteValue(FollowRelocations.Value);
 		}
 
-		if (instance.WaitForCompletion is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WaitForCompletion = ");
-			sb.Append(instance.WaitForCompletion.Value ? "true" : "false");
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		if (WaitForCompletion is not null)
+		{
+			__init.Property("WaitForCompletion");
+			writer.WriteValue(WaitForCompletion.Value);
+		}
+
+		__init.Dispose();
 	}
 }

@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public static class MatchTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.MatchType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.MatchType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.MatchType.Regex:
-				sb.Append("MatchType.Regex");
+				writer.Write("MatchType.Regex");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.MatchType.Simple:
-				sb.Append("MatchType.Simple");
+				writer.Write("MatchType.Simple");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

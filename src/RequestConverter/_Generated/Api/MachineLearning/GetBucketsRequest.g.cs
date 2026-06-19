@@ -25,108 +25,81 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class GetBucketsRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JobId = ");
-			instance.JobId.FormatCode(sb);
+			__init.Property("JobId");
+			JobId.FormatCode(writer);
 		}
 
-		if (instance.Timestamp is not null)
+		if (Timestamp is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timestamp = ");
-			sb.Append(instance.Timestamp.Value);
+			__init.Property("Timestamp");
+			writer.WriteValue(Timestamp.Value);
 		}
 
-		if (instance.From is not null)
+		if (From is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("From = ");
-			sb.Append(instance.From.Value);
+			__init.Property("From");
+			writer.WriteValue(From.Value);
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append(instance.Size.Value);
+			__init.Property("Size");
+			writer.WriteValue(Size.Value);
 		}
 
-		if (instance.AnomalyScore is not null)
+		if (AnomalyScore is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AnomalyScore = ");
-			sb.Append(instance.AnomalyScore.Value);
-			sb.Append("d");
+			__init.Property("AnomalyScore");
+			writer.WriteValue(AnomalyScore.Value);
+			writer.Write("d");
 		}
 
-		if (instance.Desc is not null)
+		if (Desc is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Desc = ");
-			sb.Append(instance.Desc.Value ? "true" : "false");
+			__init.Property("Desc");
+			writer.WriteValue(Desc.Value);
 		}
 
-		if (instance.End is not null)
+		if (End is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("End = ");
-			sb.Append(instance.End.Value);
+			__init.Property("End");
+			writer.WriteValue(End.Value);
 		}
 
-		if (instance.ExcludeInterim is not null)
+		if (ExcludeInterim is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExcludeInterim = ");
-			sb.Append(instance.ExcludeInterim.Value ? "true" : "false");
+			__init.Property("ExcludeInterim");
+			writer.WriteValue(ExcludeInterim.Value);
 		}
 
-		if (instance.Expand is not null)
+		if (Expand is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Expand = ");
-			sb.Append(instance.Expand.Value ? "true" : "false");
+			__init.Property("Expand");
+			writer.WriteValue(Expand.Value);
 		}
 
-		if (instance.Page is not null)
+		if (Page is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Page = ");
-			instance.Page.FormatCode(sb);
+			__init.Property("Page");
+			Page.FormatCode(writer);
 		}
 
-		if (instance.Sort is not null)
+		if (Sort is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sort = ");
-			instance.Sort.FormatCode(sb);
+			__init.Property("Sort");
+			Sort.FormatCode(writer);
 		}
 
-		if (instance.Start is not null)
+		if (Start is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Start = ");
-			sb.Append(instance.Start.Value);
+			__init.Property("Start");
+			writer.WriteValue(Start.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

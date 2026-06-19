@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public static class AmazonBedrockTaskTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType.ChatCompletion:
-				sb.Append("AmazonBedrockTaskType.ChatCompletion");
+				writer.Write("AmazonBedrockTaskType.ChatCompletion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType.Completion:
-				sb.Append("AmazonBedrockTaskType.Completion");
+				writer.Write("AmazonBedrockTaskType.Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType.TextEmbedding:
-				sb.Append("AmazonBedrockTaskType.TextEmbedding");
+				writer.Write("AmazonBedrockTaskType.TextEmbedding");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

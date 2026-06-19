@@ -25,27 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class RoleTemplate : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Format is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Format is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Format = ");
-			Elastic.Clients.Elasticsearch.Security.TemplateFormatCodeFormatter.FormatCode(instance.Format.Value, sb);
+			__init.Property("Format");
+			Elastic.Clients.Elasticsearch.Security.TemplateFormatCodeFormatter.FormatCode(Format.Value, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Template = ");
-			instance.Template.FormatCode(sb);
+			__init.Property("Template");
+			Template.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

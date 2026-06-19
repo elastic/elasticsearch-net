@@ -25,22 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class ClusterAppliedStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Recordings is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Recordings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Recordings = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Recordings, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Recordings");
+			writer.WriteInlineList(Recordings, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

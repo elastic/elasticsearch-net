@@ -25,48 +25,48 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public static class PhoneticLanguageCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Any:
-				sb.Append("PhoneticLanguage.Any");
+				writer.Write("PhoneticLanguage.Any");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Common:
-				sb.Append("PhoneticLanguage.Common");
+				writer.Write("PhoneticLanguage.Common");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Cyrillic:
-				sb.Append("PhoneticLanguage.Cyrillic");
+				writer.Write("PhoneticLanguage.Cyrillic");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.English:
-				sb.Append("PhoneticLanguage.English");
+				writer.Write("PhoneticLanguage.English");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.French:
-				sb.Append("PhoneticLanguage.French");
+				writer.Write("PhoneticLanguage.French");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.German:
-				sb.Append("PhoneticLanguage.German");
+				writer.Write("PhoneticLanguage.German");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Hebrew:
-				sb.Append("PhoneticLanguage.Hebrew");
+				writer.Write("PhoneticLanguage.Hebrew");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Hungarian:
-				sb.Append("PhoneticLanguage.Hungarian");
+				writer.Write("PhoneticLanguage.Hungarian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Polish:
-				sb.Append("PhoneticLanguage.Polish");
+				writer.Write("PhoneticLanguage.Polish");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Romanian:
-				sb.Append("PhoneticLanguage.Romanian");
+				writer.Write("PhoneticLanguage.Romanian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Russian:
-				sb.Append("PhoneticLanguage.Russian");
+				writer.Write("PhoneticLanguage.Russian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Spanish:
-				sb.Append("PhoneticLanguage.Spanish");
+				writer.Write("PhoneticLanguage.Spanish");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

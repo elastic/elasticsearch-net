@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public static class XPackCategoryCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Xpack.XPackCategory instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Xpack.XPackCategory instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Xpack.XPackCategory.Build:
-				sb.Append("XPackCategory.Build");
+				writer.Write("XPackCategory.Build");
 				break;
 			case Elastic.Clients.Elasticsearch.Xpack.XPackCategory.Features:
-				sb.Append("XPackCategory.Features");
+				writer.Write("XPackCategory.Features");
 				break;
 			case Elastic.Clients.Elasticsearch.Xpack.XPackCategory.License:
-				sb.Append("XPackCategory.License");
+				writer.Write("XPackCategory.License");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

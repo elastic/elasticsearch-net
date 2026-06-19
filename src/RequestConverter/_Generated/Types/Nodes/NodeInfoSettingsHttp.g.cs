@@ -25,45 +25,32 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class NodeInfoSettingsHttp : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Compression is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Compression is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Compression = ");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<bool, string>(instance.Compression, sb);
+			__init.Property("Compression");
+			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<bool, string>(Compression, writer);
 		}
 
-		if (instance.Port is not null)
+		if (Port is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Port = ");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<int, string>(instance.Port, sb);
+			__init.Property("Port");
+			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<int, string>(Port, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			instance.Type.FormatCode(sb);
+			__init.Property("Type");
+			Type.FormatCode(writer);
 		}
 
-		if (instance.TypeDefault is not null)
+		if (TypeDefault is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TypeDefault = ");
-			sb.Append("\"");
-			sb.Append(instance.TypeDefault);
-			sb.Append("\"");
+			__init.Property("TypeDefault");
+			writer.WriteString(TypeDefault);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,45 +25,30 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class ShardRouting : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Node = ");
-			sb.Append("\"");
-			sb.Append(instance.Node);
-			sb.Append("\"");
+			__init.Property("Node");
+			writer.WriteString(Node);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Primary = ");
-			sb.Append(instance.Primary ? "true" : "false");
+			__init.Property("Primary");
+			writer.WriteValue(Primary);
 		}
 
-		if (instance.RelocatingNode is not null)
+		if (RelocatingNode is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RelocatingNode = ");
-			sb.Append("\"");
-			sb.Append(instance.RelocatingNode);
-			sb.Append("\"");
+			__init.Property("RelocatingNode");
+			writer.WriteString(RelocatingNode);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("State = ");
-			Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingStateCodeFormatter.FormatCode(instance.State, sb);
+			__init.Property("State");
+			Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingStateCodeFormatter.FormatCode(State, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

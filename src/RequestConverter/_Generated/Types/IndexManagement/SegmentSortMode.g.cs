@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public static class SegmentSortModeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode.Max:
-				sb.Append("SegmentSortMode.Max");
+				writer.Write("SegmentSortMode.Max");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode.Min:
-				sb.Append("SegmentSortMode.Min");
+				writer.Write("SegmentSortMode.Min");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

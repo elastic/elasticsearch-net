@@ -25,26 +25,19 @@ namespace Elastic.Clients.Elasticsearch.QueryRules;
 
 public partial class DeleteRuleRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RuleId = ");
-			instance.RuleId.FormatCode(sb);
+			__init.Property("RuleId");
+			RuleId.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RulesetId = ");
-			instance.RulesetId.FormatCode(sb);
+			__init.Property("RulesetId");
+			RulesetId.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

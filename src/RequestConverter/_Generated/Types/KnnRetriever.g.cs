@@ -25,108 +25,75 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class KnnRetriever : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			sb.Append("\"");
-			sb.Append(instance.Field);
-			sb.Append("\"");
+			__init.Property("Field");
+			writer.WriteString(Field);
 		}
 
-		if (instance.Filter is not null)
+		if (Filter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Filter = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Filter, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Filter");
+			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("K = ");
-			sb.Append(instance.K);
+			__init.Property("K");
+			writer.WriteValue(K);
 		}
 
-		if (instance.MinScore is not null)
+		if (MinScore is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinScore = ");
-			sb.Append(instance.MinScore.Value);
-			sb.Append("f");
+			__init.Property("MinScore");
+			writer.WriteValue(MinScore.Value);
+			writer.Write("f");
 		}
 
-		if (instance.Name is not null)
+		if (Name is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumCandidates = ");
-			sb.Append(instance.NumCandidates);
+			__init.Property("NumCandidates");
+			writer.WriteValue(NumCandidates);
 		}
 
-		if (instance.QueryVector is not null)
+		if (QueryVector is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryVector = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.QueryVector, (item, sb) => { sb.Append(item); sb.Append("f"); }, sb);
-			sb.Append("]");
+			__init.Property("QueryVector");
+			writer.WriteInlineList(QueryVector, (w, item) => { w.WriteValue(item); w.Write("f"); });
 		}
 
-		if (instance.QueryVectorBuilder is not null)
+		if (QueryVectorBuilder is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueryVectorBuilder = ");
-			instance.QueryVectorBuilder.FormatCode(sb);
+			__init.Property("QueryVectorBuilder");
+			QueryVectorBuilder.FormatCode(writer);
 		}
 
-		if (instance.RescoreVector is not null)
+		if (RescoreVector is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RescoreVector = ");
-			instance.RescoreVector.FormatCode(sb);
+			__init.Property("RescoreVector");
+			RescoreVector.FormatCode(writer);
 		}
 
-		if (instance.Similarity is not null)
+		if (Similarity is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Similarity = ");
-			sb.Append(instance.Similarity.Value);
-			sb.Append("f");
+			__init.Property("Similarity");
+			writer.WriteValue(Similarity.Value);
+			writer.Write("f");
 		}
 
-		if (instance.VisitPercentage is not null)
+		if (VisitPercentage is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("VisitPercentage = ");
-			sb.Append(instance.VisitPercentage.Value);
-			sb.Append("f");
+			__init.Property("VisitPercentage");
+			writer.WriteValue(VisitPercentage.Value);
+			writer.Write("f");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,62 +25,39 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class AmazonSageMakerTaskSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CustomAttributes is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CustomAttributes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CustomAttributes = ");
-			sb.Append("\"");
-			sb.Append(instance.CustomAttributes);
-			sb.Append("\"");
+			__init.Property("CustomAttributes");
+			writer.WriteString(CustomAttributes);
 		}
 
-		if (instance.EnableExplanations is not null)
+		if (EnableExplanations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EnableExplanations = ");
-			sb.Append("\"");
-			sb.Append(instance.EnableExplanations);
-			sb.Append("\"");
+			__init.Property("EnableExplanations");
+			writer.WriteString(EnableExplanations);
 		}
 
-		if (instance.InferenceId is not null)
+		if (InferenceId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InferenceId = ");
-			sb.Append("\"");
-			sb.Append(instance.InferenceId);
-			sb.Append("\"");
+			__init.Property("InferenceId");
+			writer.WriteString(InferenceId);
 		}
 
-		if (instance.SessionId is not null)
+		if (SessionId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SessionId = ");
-			sb.Append("\"");
-			sb.Append(instance.SessionId);
-			sb.Append("\"");
+			__init.Property("SessionId");
+			writer.WriteString(SessionId);
 		}
 
-		if (instance.TargetVariant is not null)
+		if (TargetVariant is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TargetVariant = ");
-			sb.Append("\"");
-			sb.Append(instance.TargetVariant);
-			sb.Append("\"");
+			__init.Property("TargetVariant");
+			writer.WriteString(TargetVariant);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

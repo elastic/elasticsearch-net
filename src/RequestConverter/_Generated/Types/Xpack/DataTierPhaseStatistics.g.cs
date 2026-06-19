@@ -25,92 +25,69 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class DataTierPhaseStatistics : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocCount = ");
-			sb.Append(instance.DocCount);
-			sb.Append("L");
+			__init.Property("DocCount");
+			writer.WriteValue(DocCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexCount = ");
-			sb.Append(instance.IndexCount);
-			sb.Append("L");
+			__init.Property("IndexCount");
+			writer.WriteValue(IndexCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NodeCount = ");
-			sb.Append(instance.NodeCount);
-			sb.Append("L");
+			__init.Property("NodeCount");
+			writer.WriteValue(NodeCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PrimaryShardCount = ");
-			sb.Append(instance.PrimaryShardCount);
-			sb.Append("L");
+			__init.Property("PrimaryShardCount");
+			writer.WriteValue(PrimaryShardCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PrimaryShardSizeAvgBytes = ");
-			sb.Append(instance.PrimaryShardSizeAvgBytes);
-			sb.Append("L");
+			__init.Property("PrimaryShardSizeAvgBytes");
+			writer.WriteValue(PrimaryShardSizeAvgBytes);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PrimaryShardSizeMadBytes = ");
-			sb.Append(instance.PrimaryShardSizeMadBytes);
-			sb.Append("L");
+			__init.Property("PrimaryShardSizeMadBytes");
+			writer.WriteValue(PrimaryShardSizeMadBytes);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PrimaryShardSizeMedianBytes = ");
-			sb.Append(instance.PrimaryShardSizeMedianBytes);
-			sb.Append("L");
+			__init.Property("PrimaryShardSizeMedianBytes");
+			writer.WriteValue(PrimaryShardSizeMedianBytes);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PrimarySizeBytes = ");
-			sb.Append(instance.PrimarySizeBytes);
-			sb.Append("L");
+			__init.Property("PrimarySizeBytes");
+			writer.WriteValue(PrimarySizeBytes);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalShardCount = ");
-			sb.Append(instance.TotalShardCount);
-			sb.Append("L");
+			__init.Property("TotalShardCount");
+			writer.WriteValue(TotalShardCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalSizeBytes = ");
-			sb.Append(instance.TotalSizeBytes);
-			sb.Append("L");
+			__init.Property("TotalSizeBytes");
+			writer.WriteValue(TotalSizeBytes);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

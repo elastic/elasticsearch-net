@@ -25,30 +25,19 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataframeAnalyticsMemoryEstimation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExpectedMemoryWithDisk = ");
-			sb.Append("\"");
-			sb.Append(instance.ExpectedMemoryWithDisk);
-			sb.Append("\"");
+			__init.Property("ExpectedMemoryWithDisk");
+			writer.WriteString(ExpectedMemoryWithDisk);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExpectedMemoryWithoutDisk = ");
-			sb.Append("\"");
-			sb.Append(instance.ExpectedMemoryWithoutDisk);
-			sb.Append("\"");
+			__init.Property("ExpectedMemoryWithoutDisk");
+			writer.WriteString(ExpectedMemoryWithoutDisk);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

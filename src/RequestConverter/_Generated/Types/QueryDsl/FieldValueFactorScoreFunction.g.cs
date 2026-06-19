@@ -25,45 +25,34 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class FieldValueFactorScoreFunction : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Factor is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Factor is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Factor = ");
-			sb.Append(instance.Factor.Value);
-			sb.Append("d");
+			__init.Property("Factor");
+			writer.WriteValue(Factor.Value);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
-		if (instance.Missing is not null)
+		if (Missing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Missing = ");
-			sb.Append(instance.Missing.Value);
-			sb.Append("d");
+			__init.Property("Missing");
+			writer.WriteValue(Missing.Value);
+			writer.Write("d");
 		}
 
-		if (instance.Modifier is not null)
+		if (Modifier is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Modifier = ");
-			Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifierCodeFormatter.FormatCode(instance.Modifier.Value, sb);
+			__init.Property("Modifier");
+			Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifierCodeFormatter.FormatCode(Modifier.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

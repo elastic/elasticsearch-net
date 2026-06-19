@@ -25,21 +25,14 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class GeoHashLocation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Geohash = ");
-			sb.Append("\"");
-			sb.Append(instance.Geohash);
-			sb.Append("\"");
+			__init.Property("Geohash");
+			writer.WriteString(Geohash);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

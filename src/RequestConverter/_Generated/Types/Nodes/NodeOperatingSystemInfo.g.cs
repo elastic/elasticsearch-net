@@ -25,94 +25,63 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class NodeOperatingSystemInfo : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AllocatedProcessors is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AllocatedProcessors is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllocatedProcessors = ");
-			sb.Append(instance.AllocatedProcessors.Value);
+			__init.Property("AllocatedProcessors");
+			writer.WriteValue(AllocatedProcessors.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Arch = ");
-			sb.Append("\"");
-			sb.Append(instance.Arch);
-			sb.Append("\"");
+			__init.Property("Arch");
+			writer.WriteString(Arch);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AvailableProcessors = ");
-			sb.Append(instance.AvailableProcessors);
+			__init.Property("AvailableProcessors");
+			writer.WriteValue(AvailableProcessors);
 		}
 
-		if (instance.Cpu is not null)
+		if (Cpu is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Cpu = ");
-			instance.Cpu.FormatCode(sb);
+			__init.Property("Cpu");
+			Cpu.FormatCode(writer);
 		}
 
-		if (instance.Mem is not null)
+		if (Mem is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mem = ");
-			instance.Mem.FormatCode(sb);
+			__init.Property("Mem");
+			Mem.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PrettyName = ");
-			sb.Append("\"");
-			sb.Append(instance.PrettyName);
-			sb.Append("\"");
+			__init.Property("PrettyName");
+			writer.WriteString(PrettyName);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RefreshIntervalInMillis = ");
-			sb.Append(instance.RefreshIntervalInMillis);
+			__init.Property("RefreshIntervalInMillis");
+			writer.WriteValue(RefreshIntervalInMillis);
 		}
 
-		if (instance.Swap is not null)
+		if (Swap is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Swap = ");
-			instance.Swap.FormatCode(sb);
+			__init.Property("Swap");
+			Swap.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

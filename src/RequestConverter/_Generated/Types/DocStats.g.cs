@@ -25,45 +25,34 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class DocStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count);
-			sb.Append("L");
+			__init.Property("Count");
+			writer.WriteValue(Count);
+			writer.Write("L");
 		}
 
-		if (instance.Deleted is not null)
+		if (Deleted is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Deleted = ");
-			sb.Append(instance.Deleted.Value);
-			sb.Append("L");
+			__init.Property("Deleted");
+			writer.WriteValue(Deleted.Value);
+			writer.Write("L");
 		}
 
-		if (instance.TotalSize is not null)
+		if (TotalSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalSize = ");
-			instance.TotalSize.FormatCode(sb);
+			__init.Property("TotalSize");
+			TotalSize.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalSizeInBytes = ");
-			sb.Append(instance.TotalSizeInBytes);
-			sb.Append("L");
+			__init.Property("TotalSizeInBytes");
+			writer.WriteValue(TotalSizeInBytes);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

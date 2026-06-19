@@ -25,70 +25,51 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class AllocationExplainRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.IncludeDiskInfo is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (IncludeDiskInfo is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IncludeDiskInfo = ");
-			sb.Append(instance.IncludeDiskInfo.Value ? "true" : "false");
+			__init.Property("IncludeDiskInfo");
+			writer.WriteValue(IncludeDiskInfo.Value);
 		}
 
-		if (instance.IncludeYesDecisions is not null)
+		if (IncludeYesDecisions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IncludeYesDecisions = ");
-			sb.Append(instance.IncludeYesDecisions.Value ? "true" : "false");
+			__init.Property("IncludeYesDecisions");
+			writer.WriteValue(IncludeYesDecisions.Value);
 		}
 
-		if (instance.MasterTimeout is not null)
+		if (MasterTimeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MasterTimeout = ");
-			instance.MasterTimeout.FormatCode(sb);
+			__init.Property("MasterTimeout");
+			MasterTimeout.FormatCode(writer);
 		}
 
-		if (instance.CurrentNode is not null)
+		if (CurrentNode is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CurrentNode = ");
-			sb.Append("\"");
-			sb.Append(instance.CurrentNode);
-			sb.Append("\"");
+			__init.Property("CurrentNode");
+			writer.WriteString(CurrentNode);
 		}
 
-		if (instance.Index is not null)
+		if (Index is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			instance.Index.FormatCode(sb);
+			__init.Property("Index");
+			Index.FormatCode(writer);
 		}
 
-		if (instance.Primary is not null)
+		if (Primary is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Primary = ");
-			sb.Append(instance.Primary.Value ? "true" : "false");
+			__init.Property("Primary");
+			writer.WriteValue(Primary.Value);
 		}
 
-		if (instance.Shard is not null)
+		if (Shard is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Shard = ");
-			sb.Append(instance.Shard.Value);
+			__init.Property("Shard");
+			writer.WriteValue(Shard.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

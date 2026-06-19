@@ -25,155 +25,110 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
 public partial class PutAutoFollowPatternRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			instance.Name.FormatCode(sb);
+			__init.Property("Name");
+			Name.FormatCode(writer);
 		}
 
-		if (instance.MasterTimeout is not null)
+		if (MasterTimeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MasterTimeout = ");
-			instance.MasterTimeout.FormatCode(sb);
+			__init.Property("MasterTimeout");
+			MasterTimeout.FormatCode(writer);
 		}
 
-		if (instance.FollowIndexPattern is not null)
+		if (FollowIndexPattern is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FollowIndexPattern = ");
-			sb.Append("\"");
-			sb.Append(instance.FollowIndexPattern);
-			sb.Append("\"");
+			__init.Property("FollowIndexPattern");
+			writer.WriteString(FollowIndexPattern);
 		}
 
-		if (instance.LeaderIndexExclusionPatterns is not null)
+		if (LeaderIndexExclusionPatterns is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LeaderIndexExclusionPatterns = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.LeaderIndexExclusionPatterns, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("LeaderIndexExclusionPatterns");
+			writer.WriteInlineList(LeaderIndexExclusionPatterns, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.LeaderIndexPatterns is not null)
+		if (LeaderIndexPatterns is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LeaderIndexPatterns = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.LeaderIndexPatterns, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("LeaderIndexPatterns");
+			writer.WriteInlineList(LeaderIndexPatterns, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.MaxOutstandingReadRequests is not null)
+		if (MaxOutstandingReadRequests is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxOutstandingReadRequests = ");
-			sb.Append(instance.MaxOutstandingReadRequests.Value);
+			__init.Property("MaxOutstandingReadRequests");
+			writer.WriteValue(MaxOutstandingReadRequests.Value);
 		}
 
-		if (instance.MaxOutstandingWriteRequests is not null)
+		if (MaxOutstandingWriteRequests is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxOutstandingWriteRequests = ");
-			sb.Append(instance.MaxOutstandingWriteRequests.Value);
+			__init.Property("MaxOutstandingWriteRequests");
+			writer.WriteValue(MaxOutstandingWriteRequests.Value);
 		}
 
-		if (instance.MaxReadRequestOperationCount is not null)
+		if (MaxReadRequestOperationCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxReadRequestOperationCount = ");
-			sb.Append(instance.MaxReadRequestOperationCount.Value);
+			__init.Property("MaxReadRequestOperationCount");
+			writer.WriteValue(MaxReadRequestOperationCount.Value);
 		}
 
-		if (instance.MaxReadRequestSize is not null)
+		if (MaxReadRequestSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxReadRequestSize = ");
-			instance.MaxReadRequestSize.FormatCode(sb);
+			__init.Property("MaxReadRequestSize");
+			MaxReadRequestSize.FormatCode(writer);
 		}
 
-		if (instance.MaxRetryDelay is not null)
+		if (MaxRetryDelay is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxRetryDelay = ");
-			instance.MaxRetryDelay.FormatCode(sb);
+			__init.Property("MaxRetryDelay");
+			MaxRetryDelay.FormatCode(writer);
 		}
 
-		if (instance.MaxWriteBufferCount is not null)
+		if (MaxWriteBufferCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxWriteBufferCount = ");
-			sb.Append(instance.MaxWriteBufferCount.Value);
+			__init.Property("MaxWriteBufferCount");
+			writer.WriteValue(MaxWriteBufferCount.Value);
 		}
 
-		if (instance.MaxWriteBufferSize is not null)
+		if (MaxWriteBufferSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxWriteBufferSize = ");
-			instance.MaxWriteBufferSize.FormatCode(sb);
+			__init.Property("MaxWriteBufferSize");
+			MaxWriteBufferSize.FormatCode(writer);
 		}
 
-		if (instance.MaxWriteRequestOperationCount is not null)
+		if (MaxWriteRequestOperationCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxWriteRequestOperationCount = ");
-			sb.Append(instance.MaxWriteRequestOperationCount.Value);
+			__init.Property("MaxWriteRequestOperationCount");
+			writer.WriteValue(MaxWriteRequestOperationCount.Value);
 		}
 
-		if (instance.MaxWriteRequestSize is not null)
+		if (MaxWriteRequestSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxWriteRequestSize = ");
-			instance.MaxWriteRequestSize.FormatCode(sb);
+			__init.Property("MaxWriteRequestSize");
+			MaxWriteRequestSize.FormatCode(writer);
 		}
 
-		if (instance.ReadPollTimeout is not null)
+		if (ReadPollTimeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReadPollTimeout = ");
-			instance.ReadPollTimeout.FormatCode(sb);
+			__init.Property("ReadPollTimeout");
+			ReadPollTimeout.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RemoteCluster = ");
-			sb.Append("\"");
-			sb.Append(instance.RemoteCluster);
-			sb.Append("\"");
+			__init.Property("RemoteCluster");
+			writer.WriteString(RemoteCluster);
 		}
 
-		if (instance.Settings is not null)
+		if (Settings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Settings = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Settings, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Settings");
+			writer.Write("new() ");
+			writer.WriteInlineList(Settings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

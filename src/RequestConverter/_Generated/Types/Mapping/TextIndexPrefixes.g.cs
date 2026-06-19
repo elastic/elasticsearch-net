@@ -25,26 +25,19 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public partial class TextIndexPrefixes : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxChars = ");
-			sb.Append(instance.MaxChars);
+			__init.Property("MaxChars");
+			writer.WriteValue(MaxChars);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinChars = ");
-			sb.Append(instance.MinChars);
+			__init.Property("MinChars");
+			writer.WriteValue(MinChars);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

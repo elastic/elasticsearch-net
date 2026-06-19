@@ -25,45 +25,34 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class DecayPlacement<TOrigin, TScale> : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Decay is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Decay is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Decay = ");
-			sb.Append(instance.Decay.Value);
-			sb.Append("d");
+			__init.Property("Decay");
+			writer.WriteValue(Decay.Value);
+			writer.Write("d");
 		}
 
-		if (instance.Offset is not null)
+		if (Offset is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Offset = ");
-			RequestConverter.CodeFormatter.FormatCode<TScale>(instance.Offset, sb);
+			__init.Property("Offset");
+			writer.WriteValue(Offset);
 		}
 
-		if (instance.Origin is not null)
+		if (Origin is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Origin = ");
-			RequestConverter.CodeFormatter.FormatCode<TOrigin>(instance.Origin, sb);
+			__init.Property("Origin");
+			writer.WriteValue(Origin);
 		}
 
-		if (instance.Scale is not null)
+		if (Scale is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Scale = ");
-			RequestConverter.CodeFormatter.FormatCode<TScale>(instance.Scale, sb);
+			__init.Property("Scale");
+			writer.WriteValue(Scale);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

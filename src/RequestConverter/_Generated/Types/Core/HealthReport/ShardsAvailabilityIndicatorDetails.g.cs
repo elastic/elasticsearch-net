@@ -25,92 +25,69 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
 public partial class ShardsAvailabilityIndicatorDetails : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CreatingPrimaries = ");
-			sb.Append(instance.CreatingPrimaries);
-			sb.Append("L");
+			__init.Property("CreatingPrimaries");
+			writer.WriteValue(CreatingPrimaries);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CreatingReplicas = ");
-			sb.Append(instance.CreatingReplicas);
-			sb.Append("L");
+			__init.Property("CreatingReplicas");
+			writer.WriteValue(CreatingReplicas);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InitializingPrimaries = ");
-			sb.Append(instance.InitializingPrimaries);
-			sb.Append("L");
+			__init.Property("InitializingPrimaries");
+			writer.WriteValue(InitializingPrimaries);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InitializingReplicas = ");
-			sb.Append(instance.InitializingReplicas);
-			sb.Append("L");
+			__init.Property("InitializingReplicas");
+			writer.WriteValue(InitializingReplicas);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RestartingPrimaries = ");
-			sb.Append(instance.RestartingPrimaries);
-			sb.Append("L");
+			__init.Property("RestartingPrimaries");
+			writer.WriteValue(RestartingPrimaries);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RestartingReplicas = ");
-			sb.Append(instance.RestartingReplicas);
-			sb.Append("L");
+			__init.Property("RestartingReplicas");
+			writer.WriteValue(RestartingReplicas);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StartedPrimaries = ");
-			sb.Append(instance.StartedPrimaries);
-			sb.Append("L");
+			__init.Property("StartedPrimaries");
+			writer.WriteValue(StartedPrimaries);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StartedReplicas = ");
-			sb.Append(instance.StartedReplicas);
-			sb.Append("L");
+			__init.Property("StartedReplicas");
+			writer.WriteValue(StartedReplicas);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UnassignedPrimaries = ");
-			sb.Append(instance.UnassignedPrimaries);
-			sb.Append("L");
+			__init.Property("UnassignedPrimaries");
+			writer.WriteValue(UnassignedPrimaries);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UnassignedReplicas = ");
-			sb.Append(instance.UnassignedReplicas);
-			sb.Append("L");
+			__init.Property("UnassignedReplicas");
+			writer.WriteValue(UnassignedReplicas);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

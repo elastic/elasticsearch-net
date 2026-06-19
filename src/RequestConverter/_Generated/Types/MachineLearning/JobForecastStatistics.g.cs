@@ -25,60 +25,45 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class JobForecastStatistics : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ForecastedJobs = ");
-			sb.Append(instance.ForecastedJobs);
+			__init.Property("ForecastedJobs");
+			writer.WriteValue(ForecastedJobs);
 		}
 
-		if (instance.MemoryBytes is not null)
+		if (MemoryBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MemoryBytes = ");
-			instance.MemoryBytes.FormatCode(sb);
+			__init.Property("MemoryBytes");
+			MemoryBytes.FormatCode(writer);
 		}
 
-		if (instance.ProcessingTimeMs is not null)
+		if (ProcessingTimeMs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ProcessingTimeMs = ");
-			instance.ProcessingTimeMs.FormatCode(sb);
+			__init.Property("ProcessingTimeMs");
+			ProcessingTimeMs.FormatCode(writer);
 		}
 
-		if (instance.Records is not null)
+		if (Records is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Records = ");
-			instance.Records.FormatCode(sb);
+			__init.Property("Records");
+			Records.FormatCode(writer);
 		}
 
-		if (instance.Status is not null)
+		if (Status is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Status = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Status, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append(v); sb.Append("L"); }, sb);
+			__init.Property("Status");
+			writer.Write("new() ");
+			writer.WriteInlineList(Status, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			sb.Append(instance.Total);
-			sb.Append("L");
+			__init.Property("Total");
+			writer.WriteValue(Total);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

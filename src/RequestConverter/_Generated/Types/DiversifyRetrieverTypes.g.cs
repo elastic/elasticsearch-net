@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class DiversifyRetrieverTypesCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.DiversifyRetrieverTypes instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.DiversifyRetrieverTypes instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.DiversifyRetrieverTypes.Mmr:
-				sb.Append("DiversifyRetrieverTypes.Mmr");
+				writer.Write("DiversifyRetrieverTypes.Mmr");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

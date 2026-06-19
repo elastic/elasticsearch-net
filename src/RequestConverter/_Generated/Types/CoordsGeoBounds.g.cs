@@ -25,44 +25,33 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class CoordsGeoBounds : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Bottom = ");
-			sb.Append(instance.Bottom);
-			sb.Append("d");
+			__init.Property("Bottom");
+			writer.WriteValue(Bottom);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Left = ");
-			sb.Append(instance.Left);
-			sb.Append("d");
+			__init.Property("Left");
+			writer.WriteValue(Left);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Right = ");
-			sb.Append(instance.Right);
-			sb.Append("d");
+			__init.Property("Right");
+			writer.WriteValue(Right);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Top = ");
-			sb.Append(instance.Top);
-			sb.Append("d");
+			__init.Property("Top");
+			writer.WriteValue(Top);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

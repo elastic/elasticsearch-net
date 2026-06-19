@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class RegexOptions : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Flags is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Flags is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Flags = ");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<int, string>(instance.Flags, sb);
+			__init.Property("Flags");
+			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<int, string>(Flags, writer);
 		}
 
-		if (instance.MaxDeterminizedStates is not null)
+		if (MaxDeterminizedStates is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxDeterminizedStates = ");
-			sb.Append(instance.MaxDeterminizedStates.Value);
+			__init.Property("MaxDeterminizedStates");
+			writer.WriteValue(MaxDeterminizedStates.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

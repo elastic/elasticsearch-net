@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public static class DenseVectorElementTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType.Bfloat16:
-				sb.Append("DenseVectorElementType.Bfloat16");
+				writer.Write("DenseVectorElementType.Bfloat16");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType.Bit:
-				sb.Append("DenseVectorElementType.Bit");
+				writer.Write("DenseVectorElementType.Bit");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType.Byte:
-				sb.Append("DenseVectorElementType.Byte");
+				writer.Write("DenseVectorElementType.Byte");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType.Float:
-				sb.Append("DenseVectorElementType.Float");
+				writer.Write("DenseVectorElementType.Float");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

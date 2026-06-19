@@ -25,21 +25,14 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
 public partial class WaitForSnapshotAction : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Policy = ");
-			sb.Append("\"");
-			sb.Append(instance.Policy);
-			sb.Append("\"");
+			__init.Property("Policy");
+			writer.WriteString(Policy);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,48 +25,33 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class TextClassificationInferenceUpdateOptions : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ClassificationLabels is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ClassificationLabels is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ClassificationLabels = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.ClassificationLabels, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("ClassificationLabels");
+			writer.WriteInlineList(ClassificationLabels, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.NumTopClasses is not null)
+		if (NumTopClasses is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumTopClasses = ");
-			sb.Append(instance.NumTopClasses.Value);
+			__init.Property("NumTopClasses");
+			writer.WriteValue(NumTopClasses.Value);
 		}
 
-		if (instance.ResultsField is not null)
+		if (ResultsField is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ResultsField = ");
-			sb.Append("\"");
-			sb.Append(instance.ResultsField);
-			sb.Append("\"");
+			__init.Property("ResultsField");
+			writer.WriteString(ResultsField);
 		}
 
-		if (instance.Tokenization is not null)
+		if (Tokenization is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Tokenization = ");
-			instance.Tokenization.FormatCode(sb);
+			__init.Property("Tokenization");
+			Tokenization.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

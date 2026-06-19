@@ -25,447 +25,446 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial interface IAggregate : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	void RequestConverter.ICodeFormattable.FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregate c1)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregate c1)
 		{
-			c1.FormatCode(sb);
+			c1.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregate c2)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregate c2)
 		{
-			c2.FormatCode(sb);
+			c2.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.AverageAggregate c3)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.AverageAggregate c3)
 		{
-			c3.FormatCode(sb);
+			c3.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregate c4)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregate c4)
 		{
-			c4.FormatCode(sb);
+			c4.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.BucketMetricValueAggregate c5)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.BucketMetricValueAggregate c5)
 		{
-			c5.FormatCode(sb);
+			c5.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregate c6)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregate c6)
 		{
-			c6.FormatCode(sb);
+			c6.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregate c7)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregate c7)
 		{
-			c7.FormatCode(sb);
+			c7.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregate c8)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregate c8)
 		{
-			c8.FormatCode(sb);
+			c8.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregate c9)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregate c9)
 		{
-			c9.FormatCode(sb);
+			c9.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregate c10)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregate c10)
 		{
-			c10.FormatCode(sb);
+			c10.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregate c11)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregate c11)
 		{
-			c11.FormatCode(sb);
+			c11.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregate c12)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregate c12)
 		{
-			c12.FormatCode(sb);
+			c12.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregate c13)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregate c13)
 		{
-			c13.FormatCode(sb);
+			c13.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregate c14)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregate c14)
 		{
-			c14.FormatCode(sb);
+			c14.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.DoubleTermsAggregate c15)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.DoubleTermsAggregate c15)
 		{
-			c15.FormatCode(sb);
+			c15.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregate c16)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregate c16)
 		{
-			c16.FormatCode(sb);
+			c16.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregate c17)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregate c17)
 		{
-			c17.FormatCode(sb);
+			c17.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.FilterAggregate c18)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.FilterAggregate c18)
 		{
-			c18.FormatCode(sb);
+			c18.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregate c19)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregate c19)
 		{
-			c19.FormatCode(sb);
+			c19.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregate c20)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregate c20)
 		{
-			c20.FormatCode(sb);
+			c20.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregate c21)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregate c21)
 		{
-			c21.FormatCode(sb);
+			c21.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregate c22)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregate c22)
 		{
-			c22.FormatCode(sb);
+			c22.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregate c23)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregate c23)
 		{
-			c23.FormatCode(sb);
+			c23.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregate c24)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregate c24)
 		{
-			c24.FormatCode(sb);
+			c24.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregate c25)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregate c25)
 		{
-			c25.FormatCode(sb);
+			c25.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregate c26)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregate c26)
 		{
-			c26.FormatCode(sb);
+			c26.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregate c27)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregate c27)
 		{
-			c27.FormatCode(sb);
+			c27.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregate c28)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregate c28)
 		{
-			c28.FormatCode(sb);
+			c28.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.HdrPercentileRanksAggregate c29)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.HdrPercentileRanksAggregate c29)
 		{
-			c29.FormatCode(sb);
+			c29.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.HdrPercentilesAggregate c30)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.HdrPercentilesAggregate c30)
 		{
-			c30.FormatCode(sb);
+			c30.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregate c31)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregate c31)
 		{
-			c31.FormatCode(sb);
+			c31.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregate c32)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregate c32)
 		{
-			c32.FormatCode(sb);
+			c32.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregate c33)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregate c33)
 		{
-			c33.FormatCode(sb);
+			c33.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregate c34)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregate c34)
 		{
-			c34.FormatCode(sb);
+			c34.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.LongRareTermsAggregate c35)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.LongRareTermsAggregate c35)
 		{
-			c35.FormatCode(sb);
+			c35.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.LongTermsAggregate c36)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.LongTermsAggregate c36)
 		{
-			c36.FormatCode(sb);
+			c36.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregate c37)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregate c37)
 		{
-			c37.FormatCode(sb);
+			c37.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.MaxAggregate c38)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.MaxAggregate c38)
 		{
-			c38.FormatCode(sb);
+			c38.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregate c39)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregate c39)
 		{
-			c39.FormatCode(sb);
+			c39.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.MinAggregate c40)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.MinAggregate c40)
 		{
-			c40.FormatCode(sb);
+			c40.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.MissingAggregate c41)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.MissingAggregate c41)
 		{
-			c41.FormatCode(sb);
+			c41.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregate c42)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregate c42)
 		{
-			c42.FormatCode(sb);
+			c42.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.NestedAggregate c43)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.NestedAggregate c43)
 		{
-			c43.FormatCode(sb);
+			c43.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.ParentAggregate c44)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.ParentAggregate c44)
 		{
-			c44.FormatCode(sb);
+			c44.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregate c45)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregate c45)
 		{
-			c45.FormatCode(sb);
+			c45.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.RangeAggregate c46)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.RangeAggregate c46)
 		{
-			c46.FormatCode(sb);
+			c46.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.RateAggregate c47)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.RateAggregate c47)
 		{
-			c47.FormatCode(sb);
+			c47.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregate c48)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregate c48)
 		{
-			c48.FormatCode(sb);
+			c48.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregate c49)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregate c49)
 		{
-			c49.FormatCode(sb);
+			c49.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregate c50)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregate c50)
 		{
-			c50.FormatCode(sb);
+			c50.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.SignificantLongTermsAggregate c51)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.SignificantLongTermsAggregate c51)
 		{
-			c51.FormatCode(sb);
+			c51.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.SignificantStringTermsAggregate c52)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.SignificantStringTermsAggregate c52)
 		{
-			c52.FormatCode(sb);
+			c52.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregate c53)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregate c53)
 		{
-			c53.FormatCode(sb);
+			c53.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.SimpleValueAggregate c54)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.SimpleValueAggregate c54)
 		{
-			c54.FormatCode(sb);
+			c54.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.StringRareTermsAggregate c55)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.StringRareTermsAggregate c55)
 		{
-			c55.FormatCode(sb);
+			c55.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.StatsAggregate c56)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.StatsAggregate c56)
 		{
-			c56.FormatCode(sb);
+			c56.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregate c57)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregate c57)
 		{
-			c57.FormatCode(sb);
+			c57.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.StringTermsAggregate c58)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.StringTermsAggregate c58)
 		{
-			c58.FormatCode(sb);
+			c58.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate c59)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate c59)
 		{
-			c59.FormatCode(sb);
+			c59.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.SumAggregate c60)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.SumAggregate c60)
 		{
-			c60.FormatCode(sb);
+			c60.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.TTestAggregate c61)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.TTestAggregate c61)
 		{
-			c61.FormatCode(sb);
+			c61.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentileRanksAggregate c62)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentileRanksAggregate c62)
 		{
-			c62.FormatCode(sb);
+			c62.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentilesAggregate c63)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentilesAggregate c63)
 		{
-			c63.FormatCode(sb);
+			c63.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregate c64)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregate c64)
 		{
-			c64.FormatCode(sb);
+			c64.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregate c65)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregate c65)
 		{
-			c65.FormatCode(sb);
+			c65.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregate c66)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregate c66)
 		{
-			c66.FormatCode(sb);
+			c66.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.UnmappedRareTermsAggregate c67)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.UnmappedRareTermsAggregate c67)
 		{
-			c67.FormatCode(sb);
+			c67.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.UnmappedSignificantTermsAggregate c68)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.UnmappedSignificantTermsAggregate c68)
 		{
-			c68.FormatCode(sb);
+			c68.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.UnmappedTermsAggregate c69)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.UnmappedTermsAggregate c69)
 		{
-			c69.FormatCode(sb);
+			c69.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.UnmappedSamplerAggregate c70)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.UnmappedSamplerAggregate c70)
 		{
-			c70.FormatCode(sb);
+			c70.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregate c71)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregate c71)
 		{
-			c71.FormatCode(sb);
+			c71.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregate c72)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregate c72)
 		{
-			c72.FormatCode(sb);
+			c72.FormatCode(writer);
 			return;
 		}
 
-		if (instance is Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregate c73)
+		if (this is Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregate c73)
 		{
-			c73.FormatCode(sb);
+			c73.FormatCode(writer);
 			return;
 		}
 
-		sb.Append(instance.ToString());
+		writer.Write(ToString());
 	}
 }

@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public static class TokenizationTruncateCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate.First:
-				sb.Append("TokenizationTruncate.First");
+				writer.Write("TokenizationTruncate.First");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate.None:
-				sb.Append("TokenizationTruncate.None");
+				writer.Write("TokenizationTruncate.None");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate.Second:
-				sb.Append("TokenizationTruncate.Second");
+				writer.Write("TokenizationTruncate.Second");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

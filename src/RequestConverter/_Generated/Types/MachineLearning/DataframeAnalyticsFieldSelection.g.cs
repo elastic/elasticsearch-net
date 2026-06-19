@@ -25,64 +25,41 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataframeAnalyticsFieldSelection : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.FeatureType is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (FeatureType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FeatureType = ");
-			sb.Append("\"");
-			sb.Append(instance.FeatureType);
-			sb.Append("\"");
+			__init.Property("FeatureType");
+			writer.WriteString(FeatureType);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IsIncluded = ");
-			sb.Append(instance.IsIncluded ? "true" : "false");
+			__init.Property("IsIncluded");
+			writer.WriteValue(IsIncluded);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IsRequired = ");
-			sb.Append(instance.IsRequired ? "true" : "false");
+			__init.Property("IsRequired");
+			writer.WriteValue(IsRequired);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MappingTypes = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.MappingTypes, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("MappingTypes");
+			writer.WriteInlineList(MappingTypes, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
-		if (instance.Reason is not null)
+		if (Reason is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Reason = ");
-			sb.Append("\"");
-			sb.Append(instance.Reason);
-			sb.Append("\"");
+			__init.Property("Reason");
+			writer.WriteString(Reason);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

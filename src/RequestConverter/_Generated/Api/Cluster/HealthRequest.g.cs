@@ -25,110 +25,81 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class HealthRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Indices is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Indices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indices = ");
-			instance.Indices.FormatCode(sb);
+			__init.Property("Indices");
+			Indices.FormatCode(writer);
 		}
 
-		if (instance.ExpandWildcards is not null)
+		if (ExpandWildcards is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExpandWildcards = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.ExpandWildcards, (item, sb) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, sb); }, sb);
-			sb.Append("]");
+			__init.Property("ExpandWildcards");
+			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
 		}
 
-		if (instance.Level is not null)
+		if (Level is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Level = ");
-			Elastic.Clients.Elasticsearch.LevelCodeFormatter.FormatCode(instance.Level.Value, sb);
+			__init.Property("Level");
+			Elastic.Clients.Elasticsearch.LevelCodeFormatter.FormatCode(Level.Value, writer);
 		}
 
-		if (instance.Local is not null)
+		if (Local is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Local = ");
-			sb.Append(instance.Local.Value ? "true" : "false");
+			__init.Property("Local");
+			writer.WriteValue(Local.Value);
 		}
 
-		if (instance.MasterTimeout is not null)
+		if (MasterTimeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MasterTimeout = ");
-			instance.MasterTimeout.FormatCode(sb);
+			__init.Property("MasterTimeout");
+			MasterTimeout.FormatCode(writer);
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (instance.WaitForActiveShards is not null)
+		if (WaitForActiveShards is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WaitForActiveShards = ");
-			instance.WaitForActiveShards.FormatCode(sb);
+			__init.Property("WaitForActiveShards");
+			WaitForActiveShards.FormatCode(writer);
 		}
 
-		if (instance.WaitForEvents is not null)
+		if (WaitForEvents is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WaitForEvents = ");
-			Elastic.Clients.Elasticsearch.WaitForEventsCodeFormatter.FormatCode(instance.WaitForEvents.Value, sb);
+			__init.Property("WaitForEvents");
+			Elastic.Clients.Elasticsearch.WaitForEventsCodeFormatter.FormatCode(WaitForEvents.Value, writer);
 		}
 
-		if (instance.WaitForNodes is not null)
+		if (WaitForNodes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WaitForNodes = ");
-			instance.WaitForNodes.FormatCode(sb);
+			__init.Property("WaitForNodes");
+			WaitForNodes.FormatCode(writer);
 		}
 
-		if (instance.WaitForNoInitializingShards is not null)
+		if (WaitForNoInitializingShards is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WaitForNoInitializingShards = ");
-			sb.Append(instance.WaitForNoInitializingShards.Value ? "true" : "false");
+			__init.Property("WaitForNoInitializingShards");
+			writer.WriteValue(WaitForNoInitializingShards.Value);
 		}
 
-		if (instance.WaitForNoRelocatingShards is not null)
+		if (WaitForNoRelocatingShards is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WaitForNoRelocatingShards = ");
-			sb.Append(instance.WaitForNoRelocatingShards.Value ? "true" : "false");
+			__init.Property("WaitForNoRelocatingShards");
+			writer.WriteValue(WaitForNoRelocatingShards.Value);
 		}
 
-		if (instance.WaitForStatus is not null)
+		if (WaitForStatus is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WaitForStatus = ");
-			Elastic.Clients.Elasticsearch.HealthStatusCodeFormatter.FormatCode(instance.WaitForStatus.Value, sb);
+			__init.Property("WaitForStatus");
+			Elastic.Clients.Elasticsearch.HealthStatusCodeFormatter.FormatCode(WaitForStatus.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

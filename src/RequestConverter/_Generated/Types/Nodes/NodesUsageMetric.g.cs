@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public static class NodesUsageMetricCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric.All:
-				sb.Append("NodesUsageMetric.All");
+				writer.Write("NodesUsageMetric.All");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric.Aggregations:
-				sb.Append("NodesUsageMetric.Aggregations");
+				writer.Write("NodesUsageMetric.Aggregations");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric.RestActions:
-				sb.Append("NodesUsageMetric.RestActions");
+				writer.Write("NodesUsageMetric.RestActions");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

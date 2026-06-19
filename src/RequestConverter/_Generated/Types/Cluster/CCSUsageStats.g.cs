@@ -25,103 +25,76 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class CCSUsageStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Clients = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Clients, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append(v); }, sb);
+			__init.Property("Clients");
+			writer.Write("new() ");
+			writer.WriteInlineList(Clients, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Clusters = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Clusters, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Clusters");
+			writer.Write("new() ");
+			writer.WriteInlineList(Clusters, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FailureReasons = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.FailureReasons, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append(v); }, sb);
+			__init.Property("FailureReasons");
+			writer.Write("new() ");
+			writer.WriteInlineList(FailureReasons, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Features = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Features, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append(v); }, sb);
+			__init.Property("Features");
+			writer.Write("new() ");
+			writer.WriteInlineList(Features, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RemotesPerSearchAvg = ");
-			sb.Append(instance.RemotesPerSearchAvg);
-			sb.Append("d");
+			__init.Property("RemotesPerSearchAvg");
+			writer.WriteValue(RemotesPerSearchAvg);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RemotesPerSearchMax = ");
-			sb.Append(instance.RemotesPerSearchMax);
+			__init.Property("RemotesPerSearchMax");
+			writer.WriteValue(RemotesPerSearchMax);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Skipped = ");
-			sb.Append(instance.Skipped);
+			__init.Property("Skipped");
+			writer.WriteValue(Skipped);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Success = ");
-			sb.Append(instance.Success);
+			__init.Property("Success");
+			writer.WriteValue(Success);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Took = ");
-			instance.Took.FormatCode(sb);
+			__init.Property("Took");
+			Took.FormatCode(writer);
 		}
 
-		if (instance.TookMrtFalse is not null)
+		if (TookMrtFalse is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TookMrtFalse = ");
-			instance.TookMrtFalse.FormatCode(sb);
+			__init.Property("TookMrtFalse");
+			TookMrtFalse.FormatCode(writer);
 		}
 
-		if (instance.TookMrtTrue is not null)
+		if (TookMrtTrue is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TookMrtTrue = ");
-			instance.TookMrtTrue.FormatCode(sb);
+			__init.Property("TookMrtTrue");
+			TookMrtTrue.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			sb.Append(instance.Total);
+			__init.Property("Total");
+			writer.WriteValue(Total);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

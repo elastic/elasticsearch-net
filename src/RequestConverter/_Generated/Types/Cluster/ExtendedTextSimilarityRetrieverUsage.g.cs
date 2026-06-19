@@ -25,21 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class ExtendedTextSimilarityRetrieverUsage : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ChunkRescorer is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ChunkRescorer is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ChunkRescorer = ");
-			sb.Append(instance.ChunkRescorer.Value);
-			sb.Append("L");
+			__init.Property("ChunkRescorer");
+			writer.WriteValue(ChunkRescorer.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

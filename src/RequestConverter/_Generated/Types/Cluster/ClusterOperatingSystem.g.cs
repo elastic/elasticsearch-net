@@ -25,61 +25,40 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class ClusterOperatingSystem : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllocatedProcessors = ");
-			sb.Append(instance.AllocatedProcessors);
+			__init.Property("AllocatedProcessors");
+			writer.WriteValue(AllocatedProcessors);
 		}
 
-		if (instance.Architectures is not null)
+		if (Architectures is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Architectures = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Architectures, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Architectures");
+			writer.WriteInlineList(Architectures, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AvailableProcessors = ");
-			sb.Append(instance.AvailableProcessors);
+			__init.Property("AvailableProcessors");
+			writer.WriteValue(AvailableProcessors);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mem = ");
-			instance.Mem.FormatCode(sb);
+			__init.Property("Mem");
+			Mem.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Names = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Names, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Names");
+			writer.WriteInlineList(Names, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PrettyNames = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.PrettyNames, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("PrettyNames");
+			writer.WriteInlineList(PrettyNames, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

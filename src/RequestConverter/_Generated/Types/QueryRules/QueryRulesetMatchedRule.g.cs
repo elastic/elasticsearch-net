@@ -25,30 +25,19 @@ namespace Elastic.Clients.Elasticsearch.QueryRules;
 
 public partial class QueryRulesetMatchedRule : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RuleId = ");
-			sb.Append("\"");
-			sb.Append(instance.RuleId);
-			sb.Append("\"");
+			__init.Property("RuleId");
+			writer.WriteString(RuleId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RulesetId = ");
-			sb.Append("\"");
-			sb.Append(instance.RulesetId);
-			sb.Append("\"");
+			__init.Property("RulesetId");
+			writer.WriteString(RulesetId);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

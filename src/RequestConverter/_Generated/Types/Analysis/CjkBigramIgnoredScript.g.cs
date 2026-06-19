@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public static class CjkBigramIgnoredScriptCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript.Han:
-				sb.Append("CjkBigramIgnoredScript.Han");
+				writer.Write("CjkBigramIgnoredScript.Han");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript.Hangul:
-				sb.Append("CjkBigramIgnoredScript.Hangul");
+				writer.Write("CjkBigramIgnoredScript.Hangul");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript.Hiragana:
-				sb.Append("CjkBigramIgnoredScript.Hiragana");
+				writer.Write("CjkBigramIgnoredScript.Hiragana");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript.Katakana:
-				sb.Append("CjkBigramIgnoredScript.Katakana");
+				writer.Write("CjkBigramIgnoredScript.Katakana");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

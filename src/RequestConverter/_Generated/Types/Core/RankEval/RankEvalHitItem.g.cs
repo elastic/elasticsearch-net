@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
 public partial class RankEvalHitItem : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Hit = ");
-			instance.Hit.FormatCode(sb);
+			__init.Property("Hit");
+			Hit.FormatCode(writer);
 		}
 
-		if (instance.Rating is not null)
+		if (Rating is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Rating = ");
-			sb.Append(instance.Rating.Value);
-			sb.Append("d");
+			__init.Property("Rating");
+			writer.WriteValue(Rating.Value);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

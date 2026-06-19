@@ -25,36 +25,25 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class KuromojiIterationMarkCharFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NormalizeKana = ");
-			sb.Append(instance.NormalizeKana ? "true" : "false");
+			__init.Property("NormalizeKana");
+			writer.WriteValue(NormalizeKana);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NormalizeKanji = ");
-			sb.Append(instance.NormalizeKanji ? "true" : "false");
+			__init.Property("NormalizeKanji");
+			writer.WriteValue(NormalizeKanji);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

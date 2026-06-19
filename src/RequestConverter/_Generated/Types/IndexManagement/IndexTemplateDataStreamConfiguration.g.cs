@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class IndexTemplateDataStreamConfiguration : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AllowCustomRouting is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AllowCustomRouting is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowCustomRouting = ");
-			sb.Append(instance.AllowCustomRouting.Value ? "true" : "false");
+			__init.Property("AllowCustomRouting");
+			writer.WriteValue(AllowCustomRouting.Value);
 		}
 
-		if (instance.Hidden is not null)
+		if (Hidden is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Hidden = ");
-			sb.Append(instance.Hidden.Value ? "true" : "false");
+			__init.Property("Hidden");
+			writer.WriteValue(Hidden.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

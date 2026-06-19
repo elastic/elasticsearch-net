@@ -25,308 +25,219 @@ namespace Elastic.Clients.Elasticsearch.Core.MSearch;
 
 public partial class MultisearchBody : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Aggregations is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Aggregations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Aggregations = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Aggregations, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Aggregations");
+			writer.Write("new() ");
+			writer.WriteInlineList(Aggregations, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Collapse is not null)
+		if (Collapse is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Collapse = ");
-			instance.Collapse.FormatCode(sb);
+			__init.Property("Collapse");
+			Collapse.FormatCode(writer);
 		}
 
-		if (instance.DocvalueFields is not null)
+		if (DocvalueFields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocvalueFields = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.DocvalueFields, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("DocvalueFields");
+			writer.WriteInlineList(DocvalueFields, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Explain is not null)
+		if (Explain is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Explain = ");
-			sb.Append(instance.Explain.Value ? "true" : "false");
+			__init.Property("Explain");
+			writer.WriteValue(Explain.Value);
 		}
 
-		if (instance.Ext is not null)
+		if (Ext is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Ext = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Ext, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Ext");
+			writer.Write("new() ");
+			writer.WriteInlineList(Ext, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Fields is not null)
+		if (Fields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fields = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Fields, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Fields");
+			writer.WriteInlineList(Fields, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.From is not null)
+		if (From is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("From = ");
-			sb.Append(instance.From.Value);
+			__init.Property("From");
+			writer.WriteValue(From.Value);
 		}
 
-		if (instance.Highlight is not null)
+		if (Highlight is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Highlight = ");
-			instance.Highlight.FormatCode(sb);
+			__init.Property("Highlight");
+			Highlight.FormatCode(writer);
 		}
 
-		if (instance.IndicesBoost is not null)
+		if (IndicesBoost is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndicesBoost = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.IndicesBoost, (item, sb) => { sb.Append("new("); item.Key.FormatCode(sb); sb.Append(", "); sb.Append(item.Value); sb.Append("d"); sb.Append(")"); }, sb);
-			sb.Append("]");
+			__init.Property("IndicesBoost");
+			writer.WriteInlineList(IndicesBoost, (w, item) => { w.Write("new("); item.Key.FormatCode(w); w.Write(", "); w.WriteValue(item.Value); w.Write("d"); w.Write(")"); });
 		}
 
-		if (instance.Knn is not null)
+		if (Knn is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Knn = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Knn, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Knn");
+			writer.WriteInlineList(Knn, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.MinScore is not null)
+		if (MinScore is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MinScore = ");
-			sb.Append(instance.MinScore.Value);
-			sb.Append("d");
+			__init.Property("MinScore");
+			writer.WriteValue(MinScore.Value);
+			writer.Write("d");
 		}
 
-		if (instance.Pit is not null)
+		if (Pit is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Pit = ");
-			instance.Pit.FormatCode(sb);
+			__init.Property("Pit");
+			Pit.FormatCode(writer);
 		}
 
-		if (instance.PostFilter is not null)
+		if (PostFilter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PostFilter = ");
-			instance.PostFilter.FormatCode(sb);
+			__init.Property("PostFilter");
+			PostFilter.FormatCode(writer);
 		}
 
-		if (instance.Profile is not null)
+		if (Profile is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Profile = ");
-			sb.Append(instance.Profile.Value ? "true" : "false");
+			__init.Property("Profile");
+			writer.WriteValue(Profile.Value);
 		}
 
-		if (instance.Query is not null)
+		if (Query is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			instance.Query.FormatCode(sb);
+			__init.Property("Query");
+			Query.FormatCode(writer);
 		}
 
-		if (instance.Rank is not null)
+		if (Rank is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Rank = ");
-			instance.Rank.FormatCode(sb);
+			__init.Property("Rank");
+			Rank.FormatCode(writer);
 		}
 
-		if (instance.Rescore is not null)
+		if (Rescore is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Rescore = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Rescore, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Rescore");
+			writer.WriteInlineList(Rescore, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Retriever is not null)
+		if (Retriever is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Retriever = ");
-			instance.Retriever.FormatCode(sb);
+			__init.Property("Retriever");
+			Retriever.FormatCode(writer);
 		}
 
-		if (instance.RuntimeMappings is not null)
+		if (RuntimeMappings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RuntimeMappings = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.RuntimeMappings, (k, sb) => { k.FormatCode(sb); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("RuntimeMappings");
+			writer.Write("new() ");
+			writer.WriteInlineList(RuntimeMappings, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.ScriptFields is not null)
+		if (ScriptFields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ScriptFields = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.ScriptFields, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("ScriptFields");
+			writer.Write("new() ");
+			writer.WriteInlineList(ScriptFields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.SearchAfter is not null)
+		if (SearchAfter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SearchAfter = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.SearchAfter, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("SearchAfter");
+			writer.WriteInlineList(SearchAfter, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.SeqNoPrimaryTerm is not null)
+		if (SeqNoPrimaryTerm is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SeqNoPrimaryTerm = ");
-			sb.Append(instance.SeqNoPrimaryTerm.Value ? "true" : "false");
+			__init.Property("SeqNoPrimaryTerm");
+			writer.WriteValue(SeqNoPrimaryTerm.Value);
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append(instance.Size.Value);
+			__init.Property("Size");
+			writer.WriteValue(Size.Value);
 		}
 
-		if (instance.Slice is not null)
+		if (Slice is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Slice = ");
-			instance.Slice.FormatCode(sb);
+			__init.Property("Slice");
+			Slice.FormatCode(writer);
 		}
 
-		if (instance.Sort is not null)
+		if (Sort is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sort = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Sort, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Sort");
+			writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Source is not null)
+		if (Source is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Source = ");
-			instance.Source.FormatCode(sb);
+			__init.Property("Source");
+			Source.FormatCode(writer);
 		}
 
-		if (instance.Stats is not null)
+		if (Stats is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Stats = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Stats, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Stats");
+			writer.WriteInlineList(Stats, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.StoredFields is not null)
+		if (StoredFields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StoredFields = ");
-			instance.StoredFields.FormatCode(sb);
+			__init.Property("StoredFields");
+			StoredFields.FormatCode(writer);
 		}
 
-		if (instance.Suggest is not null)
+		if (Suggest is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Suggest = ");
-			instance.Suggest.FormatCode(sb);
+			__init.Property("Suggest");
+			Suggest.FormatCode(writer);
 		}
 
-		if (instance.TerminateAfter is not null)
+		if (TerminateAfter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TerminateAfter = ");
-			sb.Append(instance.TerminateAfter.Value);
-			sb.Append("L");
+			__init.Property("TerminateAfter");
+			writer.WriteValue(TerminateAfter.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			sb.Append("\"");
-			sb.Append(instance.Timeout);
-			sb.Append("\"");
+			__init.Property("Timeout");
+			writer.WriteString(Timeout);
 		}
 
-		if (instance.TrackScores is not null)
+		if (TrackScores is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TrackScores = ");
-			sb.Append(instance.TrackScores.Value ? "true" : "false");
+			__init.Property("TrackScores");
+			writer.WriteValue(TrackScores.Value);
 		}
 
-		if (instance.TrackTotalHits is not null)
+		if (TrackTotalHits is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TrackTotalHits = ");
-			instance.TrackTotalHits.FormatCode(sb);
+			__init.Property("TrackTotalHits");
+			TrackTotalHits.FormatCode(writer);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append(instance.Version.Value ? "true" : "false");
+			__init.Property("Version");
+			writer.WriteValue(Version.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

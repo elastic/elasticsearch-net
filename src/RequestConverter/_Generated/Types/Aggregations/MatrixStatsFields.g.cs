@@ -25,77 +25,56 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class MatrixStatsFields : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Correlation = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Correlation, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append(v); sb.Append("d"); }, sb);
+			__init.Property("Correlation");
+			writer.Write("new() ");
+			writer.WriteInlineList(Correlation, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count);
-			sb.Append("L");
+			__init.Property("Count");
+			writer.WriteValue(Count);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Covariance = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Covariance, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append(v); sb.Append("d"); }, sb);
+			__init.Property("Covariance");
+			writer.Write("new() ");
+			writer.WriteInlineList(Covariance, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Kurtosis = ");
-			sb.Append(instance.Kurtosis);
-			sb.Append("d");
+			__init.Property("Kurtosis");
+			writer.WriteValue(Kurtosis);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mean = ");
-			sb.Append(instance.Mean);
-			sb.Append("d");
+			__init.Property("Mean");
+			writer.WriteValue(Mean);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Skewness = ");
-			sb.Append(instance.Skewness);
-			sb.Append("d");
+			__init.Property("Skewness");
+			writer.WriteValue(Skewness);
+			writer.Write("d");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Variance = ");
-			sb.Append(instance.Variance);
-			sb.Append("d");
+			__init.Property("Variance");
+			writer.WriteValue(Variance);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

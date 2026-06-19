@@ -25,28 +25,19 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class PostCalendarEventsRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CalendarId = ");
-			instance.CalendarId.FormatCode(sb);
+			__init.Property("CalendarId");
+			CalendarId.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Events = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Events, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Events");
+			writer.WriteInlineList(Events, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

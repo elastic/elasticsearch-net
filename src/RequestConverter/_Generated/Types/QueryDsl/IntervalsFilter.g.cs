@@ -25,84 +25,63 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class IntervalsFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.After is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (After is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("After = ");
-			instance.After.FormatCode(sb);
+			__init.Property("After");
+			After.FormatCode(writer);
 		}
 
-		if (instance.Before is not null)
+		if (Before is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Before = ");
-			instance.Before.FormatCode(sb);
+			__init.Property("Before");
+			Before.FormatCode(writer);
 		}
 
-		if (instance.ContainedBy is not null)
+		if (ContainedBy is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ContainedBy = ");
-			instance.ContainedBy.FormatCode(sb);
+			__init.Property("ContainedBy");
+			ContainedBy.FormatCode(writer);
 		}
 
-		if (instance.Containing is not null)
+		if (Containing is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Containing = ");
-			instance.Containing.FormatCode(sb);
+			__init.Property("Containing");
+			Containing.FormatCode(writer);
 		}
 
-		if (instance.NotContainedBy is not null)
+		if (NotContainedBy is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NotContainedBy = ");
-			instance.NotContainedBy.FormatCode(sb);
+			__init.Property("NotContainedBy");
+			NotContainedBy.FormatCode(writer);
 		}
 
-		if (instance.NotContaining is not null)
+		if (NotContaining is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NotContaining = ");
-			instance.NotContaining.FormatCode(sb);
+			__init.Property("NotContaining");
+			NotContaining.FormatCode(writer);
 		}
 
-		if (instance.NotOverlapping is not null)
+		if (NotOverlapping is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NotOverlapping = ");
-			instance.NotOverlapping.FormatCode(sb);
+			__init.Property("NotOverlapping");
+			NotOverlapping.FormatCode(writer);
 		}
 
-		if (instance.Overlapping is not null)
+		if (Overlapping is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Overlapping = ");
-			instance.Overlapping.FormatCode(sb);
+			__init.Property("Overlapping");
+			Overlapping.FormatCode(writer);
 		}
 
-		if (instance.Script is not null)
+		if (Script is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Script = ");
-			instance.Script.FormatCode(sb);
+			__init.Property("Script");
+			Script.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

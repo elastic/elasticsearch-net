@@ -25,31 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Eql;
 
 public partial class HitsSequence<TEvent> : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Events = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Events, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Events");
+			writer.WriteInlineList(Events, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.JoinKeys is not null)
+		if (JoinKeys is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JoinKeys = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.JoinKeys, (item, sb) => { RequestConverter.CodeFormatter.FormatCode(item, sb); }, sb);
-			sb.Append("]");
+			__init.Property("JoinKeys");
+			writer.WriteInlineList(JoinKeys, (w, item) => { w.WriteValue(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

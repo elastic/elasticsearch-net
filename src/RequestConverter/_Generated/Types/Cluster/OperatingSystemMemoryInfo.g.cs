@@ -25,91 +25,68 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class OperatingSystemMemoryInfo : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AdjustedTotal is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AdjustedTotal is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AdjustedTotal = ");
-			instance.AdjustedTotal.FormatCode(sb);
+			__init.Property("AdjustedTotal");
+			AdjustedTotal.FormatCode(writer);
 		}
 
-		if (instance.AdjustedTotalInBytes is not null)
+		if (AdjustedTotalInBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AdjustedTotalInBytes = ");
-			sb.Append(instance.AdjustedTotalInBytes.Value);
-			sb.Append("L");
+			__init.Property("AdjustedTotalInBytes");
+			writer.WriteValue(AdjustedTotalInBytes.Value);
+			writer.Write("L");
 		}
 
-		if (instance.Free is not null)
+		if (Free is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Free = ");
-			instance.Free.FormatCode(sb);
+			__init.Property("Free");
+			Free.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FreeInBytes = ");
-			sb.Append(instance.FreeInBytes);
-			sb.Append("L");
+			__init.Property("FreeInBytes");
+			writer.WriteValue(FreeInBytes);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FreePercent = ");
-			sb.Append(instance.FreePercent);
+			__init.Property("FreePercent");
+			writer.WriteValue(FreePercent);
 		}
 
-		if (instance.Total is not null)
+		if (Total is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			instance.Total.FormatCode(sb);
+			__init.Property("Total");
+			Total.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalInBytes = ");
-			sb.Append(instance.TotalInBytes);
-			sb.Append("L");
+			__init.Property("TotalInBytes");
+			writer.WriteValue(TotalInBytes);
+			writer.Write("L");
 		}
 
-		if (instance.Used is not null)
+		if (Used is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Used = ");
-			instance.Used.FormatCode(sb);
+			__init.Property("Used");
+			Used.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UsedInBytes = ");
-			sb.Append(instance.UsedInBytes);
-			sb.Append("L");
+			__init.Property("UsedInBytes");
+			writer.WriteValue(UsedInBytes);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UsedPercent = ");
-			sb.Append(instance.UsedPercent);
+			__init.Property("UsedPercent");
+			writer.WriteValue(UsedPercent);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

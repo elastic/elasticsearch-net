@@ -25,40 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class FingerprintTokenFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.MaxOutputSize is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (MaxOutputSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxOutputSize = ");
-			sb.Append(instance.MaxOutputSize.Value);
+			__init.Property("MaxOutputSize");
+			writer.WriteValue(MaxOutputSize.Value);
 		}
 
-		if (instance.Separator is not null)
+		if (Separator is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Separator = ");
-			sb.Append("\"");
-			sb.Append(instance.Separator);
-			sb.Append("\"");
+			__init.Property("Separator");
+			writer.WriteString(Separator);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

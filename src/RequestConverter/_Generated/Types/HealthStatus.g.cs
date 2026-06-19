@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class HealthStatusCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.HealthStatus instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.HealthStatus instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.HealthStatus.Green:
-				sb.Append("HealthStatus.Green");
+				writer.Write("HealthStatus.Green");
 				break;
 			case Elastic.Clients.Elasticsearch.HealthStatus.Red:
-				sb.Append("HealthStatus.Red");
+				writer.Write("HealthStatus.Red");
 				break;
 			case Elastic.Clients.Elasticsearch.HealthStatus.Unavailable:
-				sb.Append("HealthStatus.Unavailable");
+				writer.Write("HealthStatus.Unavailable");
 				break;
 			case Elastic.Clients.Elasticsearch.HealthStatus.Unknown:
-				sb.Append("HealthStatus.Unknown");
+				writer.Write("HealthStatus.Unknown");
 				break;
 			case Elastic.Clients.Elasticsearch.HealthStatus.Yellow:
-				sb.Append("HealthStatus.Yellow");
+				writer.Write("HealthStatus.Yellow");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

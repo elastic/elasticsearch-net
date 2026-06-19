@@ -25,206 +25,147 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class Highlight : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.BoundaryChars is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (BoundaryChars is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BoundaryChars = ");
-			sb.Append("\"");
-			sb.Append(instance.BoundaryChars);
-			sb.Append("\"");
+			__init.Property("BoundaryChars");
+			writer.WriteString(BoundaryChars);
 		}
 
-		if (instance.BoundaryMaxScan is not null)
+		if (BoundaryMaxScan is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BoundaryMaxScan = ");
-			sb.Append(instance.BoundaryMaxScan.Value);
+			__init.Property("BoundaryMaxScan");
+			writer.WriteValue(BoundaryMaxScan.Value);
 		}
 
-		if (instance.BoundaryScanner is not null)
+		if (BoundaryScanner is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BoundaryScanner = ");
-			Elastic.Clients.Elasticsearch.Core.Search.BoundaryScannerCodeFormatter.FormatCode(instance.BoundaryScanner.Value, sb);
+			__init.Property("BoundaryScanner");
+			Elastic.Clients.Elasticsearch.Core.Search.BoundaryScannerCodeFormatter.FormatCode(BoundaryScanner.Value, writer);
 		}
 
-		if (instance.BoundaryScannerLocale is not null)
+		if (BoundaryScannerLocale is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BoundaryScannerLocale = ");
-			sb.Append("\"");
-			sb.Append(instance.BoundaryScannerLocale);
-			sb.Append("\"");
+			__init.Property("BoundaryScannerLocale");
+			writer.WriteString(BoundaryScannerLocale);
 		}
 
-		if (instance.Encoder is not null)
+		if (Encoder is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Encoder = ");
-			Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoderCodeFormatter.FormatCode(instance.Encoder.Value, sb);
+			__init.Property("Encoder");
+			Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoderCodeFormatter.FormatCode(Encoder.Value, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fields = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Fields, (item, sb) => { sb.Append("new("); item.Key.FormatCode(sb); sb.Append(", "); item.Value.FormatCode(sb); sb.Append(")"); }, sb);
-			sb.Append("]");
+			__init.Property("Fields");
+			writer.WriteInlineList(Fields, (w, item) => { w.Write("new("); item.Key.FormatCode(w); w.Write(", "); item.Value.FormatCode(w); w.Write(")"); });
 		}
 
-		if (instance.ForceSource is not null)
+		if (ForceSource is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ForceSource = ");
-			sb.Append(instance.ForceSource.Value ? "true" : "false");
+			__init.Property("ForceSource");
+			writer.WriteValue(ForceSource.Value);
 		}
 
-		if (instance.Fragmenter is not null)
+		if (Fragmenter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fragmenter = ");
-			Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenterCodeFormatter.FormatCode(instance.Fragmenter.Value, sb);
+			__init.Property("Fragmenter");
+			Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenterCodeFormatter.FormatCode(Fragmenter.Value, writer);
 		}
 
-		if (instance.FragmentSize is not null)
+		if (FragmentSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FragmentSize = ");
-			sb.Append(instance.FragmentSize.Value);
+			__init.Property("FragmentSize");
+			writer.WriteValue(FragmentSize.Value);
 		}
 
-		if (instance.HighlightFilter is not null)
+		if (HighlightFilter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HighlightFilter = ");
-			sb.Append(instance.HighlightFilter.Value ? "true" : "false");
+			__init.Property("HighlightFilter");
+			writer.WriteValue(HighlightFilter.Value);
 		}
 
-		if (instance.HighlightQuery is not null)
+		if (HighlightQuery is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HighlightQuery = ");
-			instance.HighlightQuery.FormatCode(sb);
+			__init.Property("HighlightQuery");
+			HighlightQuery.FormatCode(writer);
 		}
 
-		if (instance.MaxAnalyzedOffset is not null)
+		if (MaxAnalyzedOffset is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxAnalyzedOffset = ");
-			sb.Append(instance.MaxAnalyzedOffset.Value);
+			__init.Property("MaxAnalyzedOffset");
+			writer.WriteValue(MaxAnalyzedOffset.Value);
 		}
 
-		if (instance.MaxFragmentLength is not null)
+		if (MaxFragmentLength is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxFragmentLength = ");
-			sb.Append(instance.MaxFragmentLength.Value);
+			__init.Property("MaxFragmentLength");
+			writer.WriteValue(MaxFragmentLength.Value);
 		}
 
-		if (instance.NoMatchSize is not null)
+		if (NoMatchSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NoMatchSize = ");
-			sb.Append(instance.NoMatchSize.Value);
+			__init.Property("NoMatchSize");
+			writer.WriteValue(NoMatchSize.Value);
 		}
 
-		if (instance.NumberOfFragments is not null)
+		if (NumberOfFragments is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumberOfFragments = ");
-			sb.Append(instance.NumberOfFragments.Value);
+			__init.Property("NumberOfFragments");
+			writer.WriteValue(NumberOfFragments.Value);
 		}
 
-		if (instance.Options is not null)
+		if (Options is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Options = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Options, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Options");
+			writer.Write("new() ");
+			writer.WriteInlineList(Options, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Order is not null)
+		if (Order is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Order = ");
-			Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrderCodeFormatter.FormatCode(instance.Order.Value, sb);
+			__init.Property("Order");
+			Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrderCodeFormatter.FormatCode(Order.Value, writer);
 		}
 
-		if (instance.PhraseLimit is not null)
+		if (PhraseLimit is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PhraseLimit = ");
-			sb.Append(instance.PhraseLimit.Value);
+			__init.Property("PhraseLimit");
+			writer.WriteValue(PhraseLimit.Value);
 		}
 
-		if (instance.PostTags is not null)
+		if (PostTags is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PostTags = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.PostTags, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("PostTags");
+			writer.WriteInlineList(PostTags, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.PreTags is not null)
+		if (PreTags is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PreTags = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.PreTags, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("PreTags");
+			writer.WriteInlineList(PreTags, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.RequireFieldMatch is not null)
+		if (RequireFieldMatch is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RequireFieldMatch = ");
-			sb.Append(instance.RequireFieldMatch.Value ? "true" : "false");
+			__init.Property("RequireFieldMatch");
+			writer.WriteValue(RequireFieldMatch.Value);
 		}
 
-		if (instance.TagsSchema is not null)
+		if (TagsSchema is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TagsSchema = ");
-			Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchemaCodeFormatter.FormatCode(instance.TagsSchema.Value, sb);
+			__init.Property("TagsSchema");
+			Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchemaCodeFormatter.FormatCode(TagsSchema.Value, writer);
 		}
 
-		if (instance.Type is not null)
+		if (Type is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			instance.Type.Value.FormatCode(sb);
+			__init.Property("Type");
+			Type.Value.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

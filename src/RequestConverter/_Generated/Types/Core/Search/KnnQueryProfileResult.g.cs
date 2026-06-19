@@ -25,71 +25,48 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class KnnQueryProfileResult : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Breakdown = ");
-			instance.Breakdown.FormatCode(sb);
+			__init.Property("Breakdown");
+			Breakdown.FormatCode(writer);
 		}
 
-		if (instance.Children is not null)
+		if (Children is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Children = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Children, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Children");
+			writer.WriteInlineList(Children, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Debug is not null)
+		if (Debug is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Debug = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Debug, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Debug");
+			writer.Write("new() ");
+			writer.WriteInlineList(Debug, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
-		if (instance.Time is not null)
+		if (Time is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Time = ");
-			instance.Time.FormatCode(sb);
+			__init.Property("Time");
+			Time.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeInNanos = ");
-			sb.Append(instance.TimeInNanos);
+			__init.Property("TimeInNanos");
+			writer.WriteValue(TimeInNanos);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			sb.Append("\"");
-			sb.Append(instance.Type);
-			sb.Append("\"");
+			__init.Property("Type");
+			writer.WriteString(Type);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

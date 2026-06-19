@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class SearchTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.SearchType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.SearchType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.SearchType.DfsQueryThenFetch:
-				sb.Append("SearchType.DfsQueryThenFetch");
+				writer.Write("SearchType.DfsQueryThenFetch");
 				break;
 			case Elastic.Clients.Elasticsearch.SearchType.QueryThenFetch:
-				sb.Append("SearchType.QueryThenFetch");
+				writer.Write("SearchType.QueryThenFetch");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

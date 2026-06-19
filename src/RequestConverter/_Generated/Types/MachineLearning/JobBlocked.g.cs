@@ -25,27 +25,20 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class JobBlocked : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Reason = ");
-			Elastic.Clients.Elasticsearch.MachineLearning.JobBlockedReasonCodeFormatter.FormatCode(instance.Reason, sb);
+			__init.Property("Reason");
+			Elastic.Clients.Elasticsearch.MachineLearning.JobBlockedReasonCodeFormatter.FormatCode(Reason, writer);
 		}
 
-		if (instance.TaskId is not null)
+		if (TaskId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TaskId = ");
-			instance.TaskId.FormatCode(sb);
+			__init.Property("TaskId");
+			TaskId.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

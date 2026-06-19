@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public static class IndexRoutingRebalanceOptionsCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.All:
-				sb.Append("IndexRoutingRebalanceOptions.All");
+				writer.Write("IndexRoutingRebalanceOptions.All");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.None:
-				sb.Append("IndexRoutingRebalanceOptions.None");
+				writer.Write("IndexRoutingRebalanceOptions.None");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.Primaries:
-				sb.Append("IndexRoutingRebalanceOptions.Primaries");
+				writer.Write("IndexRoutingRebalanceOptions.Primaries");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.Replicas:
-				sb.Append("IndexRoutingRebalanceOptions.Replicas");
+				writer.Write("IndexRoutingRebalanceOptions.Replicas");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

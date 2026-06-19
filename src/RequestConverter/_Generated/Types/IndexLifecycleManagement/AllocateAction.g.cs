@@ -25,55 +25,42 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
 public partial class AllocateAction : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Exclude is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Exclude is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Exclude = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Exclude, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("\""); sb.Append(v); sb.Append("\""); }, sb);
+			__init.Property("Exclude");
+			writer.Write("new() ");
+			writer.WriteInlineList(Exclude, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Include is not null)
+		if (Include is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Include = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Include, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("\""); sb.Append(v); sb.Append("\""); }, sb);
+			__init.Property("Include");
+			writer.Write("new() ");
+			writer.WriteInlineList(Include, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.NumberOfReplicas is not null)
+		if (NumberOfReplicas is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumberOfReplicas = ");
-			sb.Append(instance.NumberOfReplicas.Value);
+			__init.Property("NumberOfReplicas");
+			writer.WriteValue(NumberOfReplicas.Value);
 		}
 
-		if (instance.Require is not null)
+		if (Require is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Require = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Require, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("\""); sb.Append(v); sb.Append("\""); }, sb);
+			__init.Property("Require");
+			writer.Write("new() ");
+			writer.WriteInlineList(Require, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.TotalShardsPerNode is not null)
+		if (TotalShardsPerNode is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalShardsPerNode = ");
-			sb.Append(instance.TotalShardsPerNode.Value);
+			__init.Property("TotalShardsPerNode");
+			writer.WriteValue(TotalShardsPerNode.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

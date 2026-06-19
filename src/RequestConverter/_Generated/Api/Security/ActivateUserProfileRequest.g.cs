@@ -25,49 +25,32 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class ActivateUserProfileRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AccessToken is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AccessToken is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AccessToken = ");
-			sb.Append("\"");
-			sb.Append(instance.AccessToken);
-			sb.Append("\"");
+			__init.Property("AccessToken");
+			writer.WriteString(AccessToken);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GrantType = ");
-			Elastic.Clients.Elasticsearch.Security.GrantTypeCodeFormatter.FormatCode(instance.GrantType, sb);
+			__init.Property("GrantType");
+			Elastic.Clients.Elasticsearch.Security.GrantTypeCodeFormatter.FormatCode(GrantType, writer);
 		}
 
-		if (instance.Password is not null)
+		if (Password is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Password = ");
-			sb.Append("\"");
-			sb.Append(instance.Password);
-			sb.Append("\"");
+			__init.Property("Password");
+			writer.WriteString(Password);
 		}
 
-		if (instance.Username is not null)
+		if (Username is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Username = ");
-			sb.Append("\"");
-			sb.Append(instance.Username);
-			sb.Append("\"");
+			__init.Property("Username");
+			writer.WriteString(Username);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

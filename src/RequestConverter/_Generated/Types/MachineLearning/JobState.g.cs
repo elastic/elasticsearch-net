@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public static class JobStateCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.JobState instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.JobState instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.JobState.Closed:
-				sb.Append("JobState.Closed");
+				writer.Write("JobState.Closed");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.JobState.Closing:
-				sb.Append("JobState.Closing");
+				writer.Write("JobState.Closing");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.JobState.Failed:
-				sb.Append("JobState.Failed");
+				writer.Write("JobState.Failed");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.JobState.Opened:
-				sb.Append("JobState.Opened");
+				writer.Write("JobState.Opened");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.JobState.Opening:
-				sb.Append("JobState.Opening");
+				writer.Write("JobState.Opening");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

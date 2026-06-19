@@ -25,59 +25,40 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class AllocationStore : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllocationId = ");
-			sb.Append("\"");
-			sb.Append(instance.AllocationId);
-			sb.Append("\"");
+			__init.Property("AllocationId");
+			writer.WriteString(AllocationId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Found = ");
-			sb.Append(instance.Found ? "true" : "false");
+			__init.Property("Found");
+			writer.WriteValue(Found);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InSync = ");
-			sb.Append(instance.InSync ? "true" : "false");
+			__init.Property("InSync");
+			writer.WriteValue(InSync);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MatchingSizeInBytes = ");
-			sb.Append(instance.MatchingSizeInBytes);
-			sb.Append("L");
+			__init.Property("MatchingSizeInBytes");
+			writer.WriteValue(MatchingSizeInBytes);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MatchingSyncId = ");
-			sb.Append(instance.MatchingSyncId ? "true" : "false");
+			__init.Property("MatchingSyncId");
+			writer.WriteValue(MatchingSyncId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StoreException = ");
-			sb.Append("\"");
-			sb.Append(instance.StoreException);
-			sb.Append("\"");
+			__init.Property("StoreException");
+			writer.WriteString(StoreException);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,54 +25,39 @@ namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
 public partial class PostRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Acknowledge is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Acknowledge is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Acknowledge = ");
-			sb.Append(instance.Acknowledge.Value ? "true" : "false");
+			__init.Property("Acknowledge");
+			writer.WriteValue(Acknowledge.Value);
 		}
 
-		if (instance.MasterTimeout is not null)
+		if (MasterTimeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MasterTimeout = ");
-			instance.MasterTimeout.FormatCode(sb);
+			__init.Property("MasterTimeout");
+			MasterTimeout.FormatCode(writer);
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (instance.License is not null)
+		if (License is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("License = ");
-			instance.License.FormatCode(sb);
+			__init.Property("License");
+			License.FormatCode(writer);
 		}
 
-		if (instance.Licenses is not null)
+		if (Licenses is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Licenses = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Licenses, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Licenses");
+			writer.WriteInlineList(Licenses, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

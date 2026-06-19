@@ -25,72 +25,49 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class ElasticsearchServiceSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AdaptiveAllocations is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AdaptiveAllocations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AdaptiveAllocations = ");
-			instance.AdaptiveAllocations.FormatCode(sb);
+			__init.Property("AdaptiveAllocations");
+			AdaptiveAllocations.FormatCode(writer);
 		}
 
-		if (instance.DeploymentId is not null)
+		if (DeploymentId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DeploymentId = ");
-			sb.Append("\"");
-			sb.Append(instance.DeploymentId);
-			sb.Append("\"");
+			__init.Property("DeploymentId");
+			writer.WriteString(DeploymentId);
 		}
 
-		if (instance.LongDocumentStrategy is not null)
+		if (LongDocumentStrategy is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LongDocumentStrategy = ");
-			sb.Append("\"");
-			sb.Append(instance.LongDocumentStrategy);
-			sb.Append("\"");
+			__init.Property("LongDocumentStrategy");
+			writer.WriteString(LongDocumentStrategy);
 		}
 
-		if (instance.MaxChunksPerDoc is not null)
+		if (MaxChunksPerDoc is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxChunksPerDoc = ");
-			sb.Append(instance.MaxChunksPerDoc.Value);
+			__init.Property("MaxChunksPerDoc");
+			writer.WriteValue(MaxChunksPerDoc.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelId = ");
-			sb.Append("\"");
-			sb.Append(instance.ModelId);
-			sb.Append("\"");
+			__init.Property("ModelId");
+			writer.WriteString(ModelId);
 		}
 
-		if (instance.NumAllocations is not null)
+		if (NumAllocations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumAllocations = ");
-			sb.Append(instance.NumAllocations.Value);
+			__init.Property("NumAllocations");
+			writer.WriteValue(NumAllocations.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumThreads = ");
-			sb.Append(instance.NumThreads);
+			__init.Property("NumThreads");
+			writer.WriteValue(NumThreads);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

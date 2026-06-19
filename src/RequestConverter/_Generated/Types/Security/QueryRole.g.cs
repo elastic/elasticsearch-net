@@ -25,137 +25,88 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class QueryRole : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Applications is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Applications is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Applications = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Applications, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Applications");
+			writer.WriteInlineList(Applications, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Cluster is not null)
+		if (Cluster is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Cluster = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Cluster, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Cluster");
+			writer.WriteInlineList(Cluster, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Description is not null)
+		if (Description is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
-		if (instance.Global is not null)
+		if (Global is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Global = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Global, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Global");
+			writer.WriteInlineList(Global, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Indices is not null)
+		if (Indices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indices = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Indices, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Indices");
+			writer.WriteInlineList(Indices, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Metadata is not null)
+		if (Metadata is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Metadata = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Metadata, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("Metadata");
+			writer.Write("new() ");
+			writer.WriteInlineList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
-		if (instance.RemoteCluster is not null)
+		if (RemoteCluster is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RemoteCluster = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.RemoteCluster, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("RemoteCluster");
+			writer.WriteInlineList(RemoteCluster, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.RemoteIndices is not null)
+		if (RemoteIndices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RemoteIndices = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.RemoteIndices, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("RemoteIndices");
+			writer.WriteInlineList(RemoteIndices, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Restriction is not null)
+		if (Restriction is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Restriction = ");
-			instance.Restriction.FormatCode(sb);
+			__init.Property("Restriction");
+			Restriction.FormatCode(writer);
 		}
 
-		if (instance.RunAs is not null)
+		if (RunAs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RunAs = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.RunAs, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("RunAs");
+			writer.WriteInlineList(RunAs, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Sort is not null)
+		if (Sort is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sort = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Sort, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Sort");
+			writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.TransientMetadata is not null)
+		if (TransientMetadata is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TransientMetadata = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.TransientMetadata, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { RequestConverter.CodeFormatter.FormatCode(v, sb); }, sb);
+			__init.Property("TransientMetadata");
+			writer.Write("new() ");
+			writer.WriteInlineList(TransientMetadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

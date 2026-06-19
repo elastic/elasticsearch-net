@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public static class DynamicMappingCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.False:
-				sb.Append("DynamicMapping.False");
+				writer.Write("DynamicMapping.False");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.Runtime:
-				sb.Append("DynamicMapping.Runtime");
+				writer.Write("DynamicMapping.Runtime");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.Strict:
-				sb.Append("DynamicMapping.Strict");
+				writer.Write("DynamicMapping.Strict");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.True:
-				sb.Append("DynamicMapping.True");
+				writer.Write("DynamicMapping.True");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

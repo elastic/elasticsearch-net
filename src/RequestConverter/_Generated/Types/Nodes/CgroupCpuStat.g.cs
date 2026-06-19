@@ -25,38 +25,29 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class CgroupCpuStat : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.NumberOfElapsedPeriods is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (NumberOfElapsedPeriods is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumberOfElapsedPeriods = ");
-			sb.Append(instance.NumberOfElapsedPeriods.Value);
-			sb.Append("L");
+			__init.Property("NumberOfElapsedPeriods");
+			writer.WriteValue(NumberOfElapsedPeriods.Value);
+			writer.Write("L");
 		}
 
-		if (instance.NumberOfTimesThrottled is not null)
+		if (NumberOfTimesThrottled is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumberOfTimesThrottled = ");
-			sb.Append(instance.NumberOfTimesThrottled.Value);
-			sb.Append("L");
+			__init.Property("NumberOfTimesThrottled");
+			writer.WriteValue(NumberOfTimesThrottled.Value);
+			writer.Write("L");
 		}
 
-		if (instance.TimeThrottledNanos is not null)
+		if (TimeThrottledNanos is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeThrottledNanos = ");
-			sb.Append(instance.TimeThrottledNanos.Value);
+			__init.Property("TimeThrottledNanos");
+			writer.WriteValue(TimeThrottledNanos.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

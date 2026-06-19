@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public static class FieldAccessPatternCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Ingest.FieldAccessPattern instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Ingest.FieldAccessPattern instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Ingest.FieldAccessPattern.Classic:
-				sb.Append("FieldAccessPattern.Classic");
+				writer.Write("FieldAccessPattern.Classic");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.FieldAccessPattern.Flexible:
-				sb.Append("FieldAccessPattern.Flexible");
+				writer.Write("FieldAccessPattern.Flexible");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

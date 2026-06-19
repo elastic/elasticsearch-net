@@ -25,84 +25,63 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class Retriever : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Diversify is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Diversify is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Diversify = ");
-			instance.Diversify.FormatCode(sb);
+			__init.Property("Diversify");
+			Diversify.FormatCode(writer);
 		}
 
-		if (instance.Knn is not null)
+		if (Knn is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Knn = ");
-			instance.Knn.FormatCode(sb);
+			__init.Property("Knn");
+			Knn.FormatCode(writer);
 		}
 
-		if (instance.Linear is not null)
+		if (Linear is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Linear = ");
-			instance.Linear.FormatCode(sb);
+			__init.Property("Linear");
+			Linear.FormatCode(writer);
 		}
 
-		if (instance.Pinned is not null)
+		if (Pinned is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Pinned = ");
-			instance.Pinned.FormatCode(sb);
+			__init.Property("Pinned");
+			Pinned.FormatCode(writer);
 		}
 
-		if (instance.Rescorer is not null)
+		if (Rescorer is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Rescorer = ");
-			instance.Rescorer.FormatCode(sb);
+			__init.Property("Rescorer");
+			Rescorer.FormatCode(writer);
 		}
 
-		if (instance.Rrf is not null)
+		if (Rrf is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Rrf = ");
-			instance.Rrf.FormatCode(sb);
+			__init.Property("Rrf");
+			Rrf.FormatCode(writer);
 		}
 
-		if (instance.Rule is not null)
+		if (Rule is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Rule = ");
-			instance.Rule.FormatCode(sb);
+			__init.Property("Rule");
+			Rule.FormatCode(writer);
 		}
 
-		if (instance.Standard is not null)
+		if (Standard is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Standard = ");
-			instance.Standard.FormatCode(sb);
+			__init.Property("Standard");
+			Standard.FormatCode(writer);
 		}
 
-		if (instance.TextSimilarityReranker is not null)
+		if (TextSimilarityReranker is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TextSimilarityReranker = ");
-			instance.TextSimilarityReranker.FormatCode(sb);
+			__init.Property("TextSimilarityReranker");
+			TextSimilarityReranker.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

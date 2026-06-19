@@ -25,53 +25,40 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class Process : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Cpu is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Cpu is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Cpu = ");
-			instance.Cpu.FormatCode(sb);
+			__init.Property("Cpu");
+			Cpu.FormatCode(writer);
 		}
 
-		if (instance.MaxFileDescriptors is not null)
+		if (MaxFileDescriptors is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxFileDescriptors = ");
-			sb.Append(instance.MaxFileDescriptors.Value);
+			__init.Property("MaxFileDescriptors");
+			writer.WriteValue(MaxFileDescriptors.Value);
 		}
 
-		if (instance.Mem is not null)
+		if (Mem is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mem = ");
-			instance.Mem.FormatCode(sb);
+			__init.Property("Mem");
+			Mem.FormatCode(writer);
 		}
 
-		if (instance.OpenFileDescriptors is not null)
+		if (OpenFileDescriptors is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OpenFileDescriptors = ");
-			sb.Append(instance.OpenFileDescriptors.Value);
+			__init.Property("OpenFileDescriptors");
+			writer.WriteValue(OpenFileDescriptors.Value);
 		}
 
-		if (instance.Timestamp is not null)
+		if (Timestamp is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timestamp = ");
-			sb.Append(instance.Timestamp.Value);
-			sb.Append("L");
+			__init.Property("Timestamp");
+			writer.WriteValue(Timestamp.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,55 +25,36 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class UserIndicesPrivileges : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowRestrictedIndices = ");
-			sb.Append(instance.AllowRestrictedIndices ? "true" : "false");
+			__init.Property("AllowRestrictedIndices");
+			writer.WriteValue(AllowRestrictedIndices);
 		}
 
-		if (instance.FieldSecurity is not null)
+		if (FieldSecurity is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FieldSecurity = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.FieldSecurity, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("FieldSecurity");
+			writer.WriteInlineList(FieldSecurity, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Names = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Names, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Names");
+			writer.WriteInlineList(Names, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Privileges = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Privileges, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Privileges");
+			writer.WriteInlineList(Privileges, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Query is not null)
+		if (Query is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			RequestConverter.CodeFormatter.FormatCode(instance.Query, sb);
+			__init.Property("Query");
+			writer.WriteInlineList(Query, (w, item) => { w.WriteValue(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

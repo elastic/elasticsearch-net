@@ -25,33 +25,33 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class TimeUnitCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.TimeUnit instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.TimeUnit instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.TimeUnit.Days:
-				sb.Append("TimeUnit.Days");
+				writer.Write("TimeUnit.Days");
 				break;
 			case Elastic.Clients.Elasticsearch.TimeUnit.Hours:
-				sb.Append("TimeUnit.Hours");
+				writer.Write("TimeUnit.Hours");
 				break;
 			case Elastic.Clients.Elasticsearch.TimeUnit.Minutes:
-				sb.Append("TimeUnit.Minutes");
+				writer.Write("TimeUnit.Minutes");
 				break;
 			case Elastic.Clients.Elasticsearch.TimeUnit.Microseconds:
-				sb.Append("TimeUnit.Microseconds");
+				writer.Write("TimeUnit.Microseconds");
 				break;
 			case Elastic.Clients.Elasticsearch.TimeUnit.Milliseconds:
-				sb.Append("TimeUnit.Milliseconds");
+				writer.Write("TimeUnit.Milliseconds");
 				break;
 			case Elastic.Clients.Elasticsearch.TimeUnit.Nanoseconds:
-				sb.Append("TimeUnit.Nanoseconds");
+				writer.Write("TimeUnit.Nanoseconds");
 				break;
 			case Elastic.Clients.Elasticsearch.TimeUnit.Seconds:
-				sb.Append("TimeUnit.Seconds");
+				writer.Write("TimeUnit.Seconds");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

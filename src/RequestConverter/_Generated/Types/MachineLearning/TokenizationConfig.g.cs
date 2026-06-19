@@ -25,52 +25,39 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class TokenizationConfig : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Bert is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Bert is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Bert = ");
-			instance.Bert.FormatCode(sb);
+			__init.Property("Bert");
+			Bert.FormatCode(writer);
 		}
 
-		if (instance.BertJa is not null)
+		if (BertJa is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BertJa = ");
-			instance.BertJa.FormatCode(sb);
+			__init.Property("BertJa");
+			BertJa.FormatCode(writer);
 		}
 
-		if (instance.Mpnet is not null)
+		if (Mpnet is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mpnet = ");
-			instance.Mpnet.FormatCode(sb);
+			__init.Property("Mpnet");
+			Mpnet.FormatCode(writer);
 		}
 
-		if (instance.Roberta is not null)
+		if (Roberta is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Roberta = ");
-			instance.Roberta.FormatCode(sb);
+			__init.Property("Roberta");
+			Roberta.FormatCode(writer);
 		}
 
-		if (instance.XlmRoberta is not null)
+		if (XlmRoberta is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("XlmRoberta = ");
-			instance.XlmRoberta.FormatCode(sb);
+			__init.Property("XlmRoberta");
+			XlmRoberta.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public static class DelimitedPayloadEncodingCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding.Float:
-				sb.Append("DelimitedPayloadEncoding.Float");
+				writer.Write("DelimitedPayloadEncoding.Float");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding.Identity:
-				sb.Append("DelimitedPayloadEncoding.Identity");
+				writer.Write("DelimitedPayloadEncoding.Identity");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding.Integer:
-				sb.Append("DelimitedPayloadEncoding.Integer");
+				writer.Write("DelimitedPayloadEncoding.Integer");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -25,44 +25,33 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class Translog : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Durability is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Durability is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Durability = ");
-			Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurabilityCodeFormatter.FormatCode(instance.Durability.Value, sb);
+			__init.Property("Durability");
+			Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurabilityCodeFormatter.FormatCode(Durability.Value, writer);
 		}
 
-		if (instance.FlushThresholdSize is not null)
+		if (FlushThresholdSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FlushThresholdSize = ");
-			instance.FlushThresholdSize.FormatCode(sb);
+			__init.Property("FlushThresholdSize");
+			FlushThresholdSize.FormatCode(writer);
 		}
 
-		if (instance.Retention is not null)
+		if (Retention is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Retention = ");
-			instance.Retention.FormatCode(sb);
+			__init.Property("Retention");
+			Retention.FormatCode(writer);
 		}
 
-		if (instance.SyncInterval is not null)
+		if (SyncInterval is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SyncInterval = ");
-			instance.SyncInterval.FormatCode(sb);
+			__init.Property("SyncInterval");
+			SyncInterval.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

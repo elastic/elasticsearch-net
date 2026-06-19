@@ -25,28 +25,19 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class ClusterOperatingSystemPrettyName : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count);
+			__init.Property("Count");
+			writer.WriteValue(Count);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PrettyName = ");
-			sb.Append("\"");
-			sb.Append(instance.PrettyName);
-			sb.Append("\"");
+			__init.Property("PrettyName");
+			writer.WriteString(PrettyName);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,34 +25,25 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class ElserServiceSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AdaptiveAllocations is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AdaptiveAllocations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AdaptiveAllocations = ");
-			instance.AdaptiveAllocations.FormatCode(sb);
+			__init.Property("AdaptiveAllocations");
+			AdaptiveAllocations.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumAllocations = ");
-			sb.Append(instance.NumAllocations);
+			__init.Property("NumAllocations");
+			writer.WriteValue(NumAllocations);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumThreads = ");
-			sb.Append(instance.NumThreads);
+			__init.Property("NumThreads");
+			writer.WriteValue(NumThreads);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

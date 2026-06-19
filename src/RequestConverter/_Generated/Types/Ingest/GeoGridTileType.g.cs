@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public static class GeoGridTileTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType.Geohash:
-				sb.Append("GeoGridTileType.Geohash");
+				writer.Write("GeoGridTileType.Geohash");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType.Geohex:
-				sb.Append("GeoGridTileType.Geohex");
+				writer.Write("GeoGridTileType.Geohex");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType.Geotile:
-				sb.Append("GeoGridTileType.Geotile");
+				writer.Write("GeoGridTileType.Geotile");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

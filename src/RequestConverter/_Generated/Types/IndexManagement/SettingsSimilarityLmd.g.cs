@@ -25,21 +25,16 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class SettingsSimilarityLmd : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Mu is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Mu is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mu = ");
-			sb.Append(instance.Mu.Value);
-			sb.Append("d");
+			__init.Property("Mu");
+			writer.WriteValue(Mu.Value);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

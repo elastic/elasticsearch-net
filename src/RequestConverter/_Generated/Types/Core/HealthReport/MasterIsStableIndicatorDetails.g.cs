@@ -25,46 +25,31 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
 public partial class MasterIsStableIndicatorDetails : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ClusterFormation is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ClusterFormation is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ClusterFormation = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.ClusterFormation, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("ClusterFormation");
+			writer.WriteInlineList(ClusterFormation, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CurrentMaster = ");
-			instance.CurrentMaster.FormatCode(sb);
+			__init.Property("CurrentMaster");
+			CurrentMaster.FormatCode(writer);
 		}
 
-		if (instance.ExceptionFetchingHistory is not null)
+		if (ExceptionFetchingHistory is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExceptionFetchingHistory = ");
-			instance.ExceptionFetchingHistory.FormatCode(sb);
+			__init.Property("ExceptionFetchingHistory");
+			ExceptionFetchingHistory.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RecentMasters = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.RecentMasters, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("RecentMasters");
+			writer.WriteInlineList(RecentMasters, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

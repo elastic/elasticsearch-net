@@ -25,63 +25,40 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
 public partial class AutoFollowPatternSummary : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Active = ");
-			sb.Append(instance.Active ? "true" : "false");
+			__init.Property("Active");
+			writer.WriteValue(Active);
 		}
 
-		if (instance.FollowIndexPattern is not null)
+		if (FollowIndexPattern is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FollowIndexPattern = ");
-			sb.Append("\"");
-			sb.Append(instance.FollowIndexPattern);
-			sb.Append("\"");
+			__init.Property("FollowIndexPattern");
+			writer.WriteString(FollowIndexPattern);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LeaderIndexExclusionPatterns = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.LeaderIndexExclusionPatterns, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("LeaderIndexExclusionPatterns");
+			writer.WriteInlineList(LeaderIndexExclusionPatterns, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LeaderIndexPatterns = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.LeaderIndexPatterns, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("LeaderIndexPatterns");
+			writer.WriteInlineList(LeaderIndexPatterns, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxOutstandingReadRequests = ");
-			sb.Append(instance.MaxOutstandingReadRequests);
+			__init.Property("MaxOutstandingReadRequests");
+			writer.WriteValue(MaxOutstandingReadRequests);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RemoteCluster = ");
-			sb.Append("\"");
-			sb.Append(instance.RemoteCluster);
-			sb.Append("\"");
+			__init.Property("RemoteCluster");
+			writer.WriteString(RemoteCluster);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

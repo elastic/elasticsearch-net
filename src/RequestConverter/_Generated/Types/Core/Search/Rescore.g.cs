@@ -25,44 +25,33 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class Rescore : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.WindowSize is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (WindowSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WindowSize = ");
-			sb.Append(instance.WindowSize.Value);
+			__init.Property("WindowSize");
+			writer.WriteValue(WindowSize.Value);
 		}
 
-		if (instance.LearningToRank is not null)
+		if (LearningToRank is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LearningToRank = ");
-			instance.LearningToRank.FormatCode(sb);
+			__init.Property("LearningToRank");
+			LearningToRank.FormatCode(writer);
 		}
 
-		if (instance.Query is not null)
+		if (Query is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			instance.Query.FormatCode(sb);
+			__init.Property("Query");
+			Query.FormatCode(writer);
 		}
 
-		if (instance.Script is not null)
+		if (Script is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Script = ");
-			instance.Script.FormatCode(sb);
+			__init.Property("Script");
+			Script.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

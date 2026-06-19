@@ -25,55 +25,42 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
 public partial class TransformProgress : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocsIndexed = ");
-			sb.Append(instance.DocsIndexed);
-			sb.Append("L");
+			__init.Property("DocsIndexed");
+			writer.WriteValue(DocsIndexed);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocsProcessed = ");
-			sb.Append(instance.DocsProcessed);
-			sb.Append("L");
+			__init.Property("DocsProcessed");
+			writer.WriteValue(DocsProcessed);
+			writer.Write("L");
 		}
 
-		if (instance.DocsRemaining is not null)
+		if (DocsRemaining is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocsRemaining = ");
-			sb.Append(instance.DocsRemaining.Value);
-			sb.Append("L");
+			__init.Property("DocsRemaining");
+			writer.WriteValue(DocsRemaining.Value);
+			writer.Write("L");
 		}
 
-		if (instance.PercentComplete is not null)
+		if (PercentComplete is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PercentComplete = ");
-			sb.Append(instance.PercentComplete.Value);
-			sb.Append("d");
+			__init.Property("PercentComplete");
+			writer.WriteValue(PercentComplete.Value);
+			writer.Write("d");
 		}
 
-		if (instance.TotalDocs is not null)
+		if (TotalDocs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalDocs = ");
-			sb.Append(instance.TotalDocs.Value);
-			sb.Append("L");
+			__init.Property("TotalDocs");
+			writer.WriteValue(TotalDocs.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

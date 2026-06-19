@@ -25,173 +25,126 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class SearchMvtRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indices = ");
-			instance.Indices.FormatCode(sb);
+			__init.Property("Indices");
+			Indices.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("X = ");
-			sb.Append(instance.X);
+			__init.Property("X");
+			writer.WriteValue(X);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Y = ");
-			sb.Append(instance.Y);
+			__init.Property("Y");
+			writer.WriteValue(Y);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Zoom = ");
-			sb.Append(instance.Zoom);
+			__init.Property("Zoom");
+			writer.WriteValue(Zoom);
 		}
 
-		if (instance.Aggs is not null)
+		if (Aggs is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Aggs = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Aggs, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Aggs");
+			writer.Write("new() ");
+			writer.WriteInlineList(Aggs, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Buffer is not null)
+		if (Buffer is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Buffer = ");
-			sb.Append(instance.Buffer.Value);
+			__init.Property("Buffer");
+			writer.WriteValue(Buffer.Value);
 		}
 
-		if (instance.ExactBounds is not null)
+		if (ExactBounds is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExactBounds = ");
-			sb.Append(instance.ExactBounds.Value ? "true" : "false");
+			__init.Property("ExactBounds");
+			writer.WriteValue(ExactBounds.Value);
 		}
 
-		if (instance.Extent is not null)
+		if (Extent is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Extent = ");
-			sb.Append(instance.Extent.Value);
+			__init.Property("Extent");
+			writer.WriteValue(Extent.Value);
 		}
 
-		if (instance.Fields is not null)
+		if (Fields is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Fields = ");
-			instance.Fields.FormatCode(sb);
+			__init.Property("Fields");
+			Fields.FormatCode(writer);
 		}
 
-		if (instance.GridAgg is not null)
+		if (GridAgg is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GridAgg = ");
-			Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationTypeCodeFormatter.FormatCode(instance.GridAgg.Value, sb);
+			__init.Property("GridAgg");
+			Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationTypeCodeFormatter.FormatCode(GridAgg.Value, writer);
 		}
 
-		if (instance.GridPrecision is not null)
+		if (GridPrecision is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GridPrecision = ");
-			sb.Append(instance.GridPrecision.Value);
+			__init.Property("GridPrecision");
+			writer.WriteValue(GridPrecision.Value);
 		}
 
-		if (instance.GridType is not null)
+		if (GridType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("GridType = ");
-			Elastic.Clients.Elasticsearch.Core.SearchMvt.GridTypeCodeFormatter.FormatCode(instance.GridType.Value, sb);
+			__init.Property("GridType");
+			Elastic.Clients.Elasticsearch.Core.SearchMvt.GridTypeCodeFormatter.FormatCode(GridType.Value, writer);
 		}
 
-		if (instance.ProjectRouting is not null)
+		if (ProjectRouting is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ProjectRouting = ");
-			sb.Append("\"");
-			sb.Append(instance.ProjectRouting);
-			sb.Append("\"");
+			__init.Property("ProjectRouting");
+			writer.WriteString(ProjectRouting);
 		}
 
-		if (instance.Query is not null)
+		if (Query is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			instance.Query.FormatCode(sb);
+			__init.Property("Query");
+			Query.FormatCode(writer);
 		}
 
-		if (instance.RuntimeMappings is not null)
+		if (RuntimeMappings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RuntimeMappings = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.RuntimeMappings, (k, sb) => { k.FormatCode(sb); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("RuntimeMappings");
+			writer.Write("new() ");
+			writer.WriteInlineList(RuntimeMappings, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Size is not null)
+		if (Size is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Size = ");
-			sb.Append(instance.Size.Value);
+			__init.Property("Size");
+			writer.WriteValue(Size.Value);
 		}
 
-		if (instance.Sort is not null)
+		if (Sort is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Sort = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Sort, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Sort");
+			writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.TrackTotalHits is not null)
+		if (TrackTotalHits is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TrackTotalHits = ");
-			instance.TrackTotalHits.FormatCode(sb);
+			__init.Property("TrackTotalHits");
+			TrackTotalHits.FormatCode(writer);
 		}
 
-		if (instance.WithLabels is not null)
+		if (WithLabels is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WithLabels = ");
-			sb.Append(instance.WithLabels.Value ? "true" : "false");
+			__init.Property("WithLabels");
+			writer.WriteValue(WithLabels.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

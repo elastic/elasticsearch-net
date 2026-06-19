@@ -25,97 +25,72 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class AnomalyExplanation : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AnomalyCharacteristicsImpact is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AnomalyCharacteristicsImpact is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AnomalyCharacteristicsImpact = ");
-			sb.Append(instance.AnomalyCharacteristicsImpact.Value);
+			__init.Property("AnomalyCharacteristicsImpact");
+			writer.WriteValue(AnomalyCharacteristicsImpact.Value);
 		}
 
-		if (instance.AnomalyLength is not null)
+		if (AnomalyLength is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AnomalyLength = ");
-			sb.Append(instance.AnomalyLength.Value);
+			__init.Property("AnomalyLength");
+			writer.WriteValue(AnomalyLength.Value);
 		}
 
-		if (instance.AnomalyType is not null)
+		if (AnomalyType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AnomalyType = ");
-			sb.Append("\"");
-			sb.Append(instance.AnomalyType);
-			sb.Append("\"");
+			__init.Property("AnomalyType");
+			writer.WriteString(AnomalyType);
 		}
 
-		if (instance.HighVariancePenalty is not null)
+		if (HighVariancePenalty is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("HighVariancePenalty = ");
-			sb.Append(instance.HighVariancePenalty.Value ? "true" : "false");
+			__init.Property("HighVariancePenalty");
+			writer.WriteValue(HighVariancePenalty.Value);
 		}
 
-		if (instance.IncompleteBucketPenalty is not null)
+		if (IncompleteBucketPenalty is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IncompleteBucketPenalty = ");
-			sb.Append(instance.IncompleteBucketPenalty.Value ? "true" : "false");
+			__init.Property("IncompleteBucketPenalty");
+			writer.WriteValue(IncompleteBucketPenalty.Value);
 		}
 
-		if (instance.LowerConfidenceBound is not null)
+		if (LowerConfidenceBound is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LowerConfidenceBound = ");
-			sb.Append(instance.LowerConfidenceBound.Value);
-			sb.Append("d");
+			__init.Property("LowerConfidenceBound");
+			writer.WriteValue(LowerConfidenceBound.Value);
+			writer.Write("d");
 		}
 
-		if (instance.MultiBucketImpact is not null)
+		if (MultiBucketImpact is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MultiBucketImpact = ");
-			sb.Append(instance.MultiBucketImpact.Value);
+			__init.Property("MultiBucketImpact");
+			writer.WriteValue(MultiBucketImpact.Value);
 		}
 
-		if (instance.SingleBucketImpact is not null)
+		if (SingleBucketImpact is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SingleBucketImpact = ");
-			sb.Append(instance.SingleBucketImpact.Value);
+			__init.Property("SingleBucketImpact");
+			writer.WriteValue(SingleBucketImpact.Value);
 		}
 
-		if (instance.TypicalValue is not null)
+		if (TypicalValue is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TypicalValue = ");
-			sb.Append(instance.TypicalValue.Value);
-			sb.Append("d");
+			__init.Property("TypicalValue");
+			writer.WriteValue(TypicalValue.Value);
+			writer.Write("d");
 		}
 
-		if (instance.UpperConfidenceBound is not null)
+		if (UpperConfidenceBound is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UpperConfidenceBound = ");
-			sb.Append(instance.UpperConfidenceBound.Value);
-			sb.Append("d");
+			__init.Property("UpperConfidenceBound");
+			writer.WriteValue(UpperConfidenceBound.Value);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

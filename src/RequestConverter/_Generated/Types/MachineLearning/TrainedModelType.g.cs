@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public static class TrainedModelTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType.LangIdent:
-				sb.Append("TrainedModelType.LangIdent");
+				writer.Write("TrainedModelType.LangIdent");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType.Pytorch:
-				sb.Append("TrainedModelType.Pytorch");
+				writer.Write("TrainedModelType.Pytorch");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType.TreeEnsemble:
-				sb.Append("TrainedModelType.TreeEnsemble");
+				writer.Write("TrainedModelType.TreeEnsemble");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

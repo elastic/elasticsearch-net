@@ -25,40 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class DelimitedPayloadTokenFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Delimiter is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Delimiter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Delimiter = ");
-			sb.Append("\"");
-			sb.Append(instance.Delimiter);
-			sb.Append("\"");
+			__init.Property("Delimiter");
+			writer.WriteString(Delimiter);
 		}
 
-		if (instance.Encoding is not null)
+		if (Encoding is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Encoding = ");
-			Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncodingCodeFormatter.FormatCode(instance.Encoding.Value, sb);
+			__init.Property("Encoding");
+			Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncodingCodeFormatter.FormatCode(Encoding.Value, writer);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

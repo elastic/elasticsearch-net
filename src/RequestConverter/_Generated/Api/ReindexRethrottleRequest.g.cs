@@ -25,28 +25,27 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class ReindexRethrottleRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TaskId = ");
-			instance.TaskId.FormatCode(sb);
+			__init.Property("TaskId");
+			TaskId.FormatCode(writer);
 		}
 
-		if (instance.RequestsPerSecond is not null)
+		if (GroupBy is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RequestsPerSecond = ");
-			sb.Append(instance.RequestsPerSecond.Value);
-			sb.Append("f");
+			__init.Property("GroupBy");
+			Elastic.Clients.Elasticsearch.Tasks.GroupByCodeFormatter.FormatCode(GroupBy.Value, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		if (RequestsPerSecond is not null)
+		{
+			__init.Property("RequestsPerSecond");
+			writer.WriteValue(RequestsPerSecond.Value);
+			writer.Write("f");
+		}
+
+		__init.Dispose();
 	}
 }

@@ -25,93 +25,68 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class StartTrainedModelDeploymentRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelId = ");
-			instance.ModelId.FormatCode(sb);
+			__init.Property("ModelId");
+			ModelId.FormatCode(writer);
 		}
 
-		if (instance.CacheSize is not null)
+		if (CacheSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CacheSize = ");
-			instance.CacheSize.FormatCode(sb);
+			__init.Property("CacheSize");
+			CacheSize.FormatCode(writer);
 		}
 
-		if (instance.DeploymentId is not null)
+		if (DeploymentId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DeploymentId = ");
-			sb.Append("\"");
-			sb.Append(instance.DeploymentId);
-			sb.Append("\"");
+			__init.Property("DeploymentId");
+			writer.WriteString(DeploymentId);
 		}
 
-		if (instance.NumberOfAllocations is not null)
+		if (NumberOfAllocations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumberOfAllocations = ");
-			sb.Append(instance.NumberOfAllocations.Value);
+			__init.Property("NumberOfAllocations");
+			writer.WriteValue(NumberOfAllocations.Value);
 		}
 
-		if (instance.Priority is not null)
+		if (Priority is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Priority = ");
-			Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriorityCodeFormatter.FormatCode(instance.Priority.Value, sb);
+			__init.Property("Priority");
+			Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriorityCodeFormatter.FormatCode(Priority.Value, writer);
 		}
 
-		if (instance.QueueCapacity is not null)
+		if (QueueCapacity is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueueCapacity = ");
-			sb.Append(instance.QueueCapacity.Value);
+			__init.Property("QueueCapacity");
+			writer.WriteValue(QueueCapacity.Value);
 		}
 
-		if (instance.ThreadsPerAllocation is not null)
+		if (ThreadsPerAllocation is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ThreadsPerAllocation = ");
-			sb.Append(instance.ThreadsPerAllocation.Value);
+			__init.Property("ThreadsPerAllocation");
+			writer.WriteValue(ThreadsPerAllocation.Value);
 		}
 
-		if (instance.Timeout is not null)
+		if (Timeout is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (instance.WaitFor is not null)
+		if (WaitFor is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WaitFor = ");
-			Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationStateCodeFormatter.FormatCode(instance.WaitFor.Value, sb);
+			__init.Property("WaitFor");
+			Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationStateCodeFormatter.FormatCode(WaitFor.Value, writer);
 		}
 
-		if (instance.AdaptiveAllocations is not null)
+		if (AdaptiveAllocations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AdaptiveAllocations = ");
-			instance.AdaptiveAllocations.FormatCode(sb);
+			__init.Property("AdaptiveAllocations");
+			AdaptiveAllocations.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,54 +25,39 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class RemoveAction : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Alias is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Alias is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Alias = ");
-			instance.Alias.FormatCode(sb);
+			__init.Property("Alias");
+			Alias.FormatCode(writer);
 		}
 
-		if (instance.Aliases is not null)
+		if (Aliases is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Aliases = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Aliases, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Aliases");
+			writer.WriteInlineList(Aliases, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Index is not null)
+		if (Index is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			instance.Index.FormatCode(sb);
+			__init.Property("Index");
+			Index.FormatCode(writer);
 		}
 
-		if (instance.Indices is not null)
+		if (Indices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indices = ");
-			instance.Indices.FormatCode(sb);
+			__init.Property("Indices");
+			Indices.FormatCode(writer);
 		}
 
-		if (instance.MustExist is not null)
+		if (MustExist is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MustExist = ");
-			sb.Append(instance.MustExist.Value ? "true" : "false");
+			__init.Property("MustExist");
+			writer.WriteValue(MustExist.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

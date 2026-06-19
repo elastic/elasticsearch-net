@@ -25,28 +25,19 @@ namespace Elastic.Clients.Elasticsearch.QueryRules;
 
 public partial class PutRulesetRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RulesetId = ");
-			instance.RulesetId.FormatCode(sb);
+			__init.Property("RulesetId");
+			RulesetId.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Rules = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Rules, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Rules");
+			writer.WriteInlineList(Rules, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

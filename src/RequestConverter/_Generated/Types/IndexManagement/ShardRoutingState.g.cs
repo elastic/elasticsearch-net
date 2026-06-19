@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public static class ShardRoutingStateCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Initializing:
-				sb.Append("ShardRoutingState.Initializing");
+				writer.Write("ShardRoutingState.Initializing");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Relocating:
-				sb.Append("ShardRoutingState.Relocating");
+				writer.Write("ShardRoutingState.Relocating");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Started:
-				sb.Append("ShardRoutingState.Started");
+				writer.Write("ShardRoutingState.Started");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Unassigned:
-				sb.Append("ShardRoutingState.Unassigned");
+				writer.Write("ShardRoutingState.Unassigned");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

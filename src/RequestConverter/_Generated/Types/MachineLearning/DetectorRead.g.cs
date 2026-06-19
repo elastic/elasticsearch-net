@@ -25,105 +25,68 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DetectorRead : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ByFieldName is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ByFieldName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ByFieldName = ");
-			sb.Append("\"");
-			sb.Append(instance.ByFieldName);
-			sb.Append("\"");
+			__init.Property("ByFieldName");
+			writer.WriteString(ByFieldName);
 		}
 
-		if (instance.CustomRules is not null)
+		if (CustomRules is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CustomRules = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.CustomRules, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("CustomRules");
+			writer.WriteInlineList(CustomRules, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.DetectorDescription is not null)
+		if (DetectorDescription is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DetectorDescription = ");
-			sb.Append("\"");
-			sb.Append(instance.DetectorDescription);
-			sb.Append("\"");
+			__init.Property("DetectorDescription");
+			writer.WriteString(DetectorDescription);
 		}
 
-		if (instance.DetectorIndex is not null)
+		if (DetectorIndex is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DetectorIndex = ");
-			sb.Append(instance.DetectorIndex.Value);
+			__init.Property("DetectorIndex");
+			writer.WriteValue(DetectorIndex.Value);
 		}
 
-		if (instance.ExcludeFrequent is not null)
+		if (ExcludeFrequent is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExcludeFrequent = ");
-			Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequentCodeFormatter.FormatCode(instance.ExcludeFrequent.Value, sb);
+			__init.Property("ExcludeFrequent");
+			Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequentCodeFormatter.FormatCode(ExcludeFrequent.Value, writer);
 		}
 
-		if (instance.FieldName is not null)
+		if (FieldName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FieldName = ");
-			sb.Append("\"");
-			sb.Append(instance.FieldName);
-			sb.Append("\"");
+			__init.Property("FieldName");
+			writer.WriteString(FieldName);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Function = ");
-			sb.Append("\"");
-			sb.Append(instance.Function);
-			sb.Append("\"");
+			__init.Property("Function");
+			writer.WriteString(Function);
 		}
 
-		if (instance.OverFieldName is not null)
+		if (OverFieldName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OverFieldName = ");
-			sb.Append("\"");
-			sb.Append(instance.OverFieldName);
-			sb.Append("\"");
+			__init.Property("OverFieldName");
+			writer.WriteString(OverFieldName);
 		}
 
-		if (instance.PartitionFieldName is not null)
+		if (PartitionFieldName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PartitionFieldName = ");
-			sb.Append("\"");
-			sb.Append(instance.PartitionFieldName);
-			sb.Append("\"");
+			__init.Property("PartitionFieldName");
+			writer.WriteString(PartitionFieldName);
 		}
 
-		if (instance.UseNull is not null)
+		if (UseNull is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UseNull = ");
-			sb.Append(instance.UseNull.Value ? "true" : "false");
+			__init.Property("UseNull");
+			writer.WriteValue(UseNull.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,126 +25,91 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class RuntimeFieldsType : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CharsMax = ");
-			sb.Append(instance.CharsMax);
-			sb.Append("L");
+			__init.Property("CharsMax");
+			writer.WriteValue(CharsMax);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CharsTotal = ");
-			sb.Append(instance.CharsTotal);
-			sb.Append("L");
+			__init.Property("CharsTotal");
+			writer.WriteValue(CharsTotal);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count);
-			sb.Append("L");
+			__init.Property("Count");
+			writer.WriteValue(Count);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocMax = ");
-			sb.Append(instance.DocMax);
-			sb.Append("L");
+			__init.Property("DocMax");
+			writer.WriteValue(DocMax);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DocTotal = ");
-			sb.Append(instance.DocTotal);
-			sb.Append("L");
+			__init.Property("DocTotal");
+			writer.WriteValue(DocTotal);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexCount = ");
-			sb.Append(instance.IndexCount);
-			sb.Append("L");
+			__init.Property("IndexCount");
+			writer.WriteValue(IndexCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Lang = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Lang, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Lang");
+			writer.WriteInlineList(Lang, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LinesMax = ");
-			sb.Append(instance.LinesMax);
-			sb.Append("L");
+			__init.Property("LinesMax");
+			writer.WriteValue(LinesMax);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LinesTotal = ");
-			sb.Append(instance.LinesTotal);
-			sb.Append("L");
+			__init.Property("LinesTotal");
+			writer.WriteValue(LinesTotal);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Name = ");
-			sb.Append("\"");
-			sb.Append(instance.Name);
-			sb.Append("\"");
+			__init.Property("Name");
+			writer.WriteString(Name);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ScriptlessCount = ");
-			sb.Append(instance.ScriptlessCount);
-			sb.Append("L");
+			__init.Property("ScriptlessCount");
+			writer.WriteValue(ScriptlessCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ShadowedCount = ");
-			sb.Append(instance.ShadowedCount);
-			sb.Append("L");
+			__init.Property("ShadowedCount");
+			writer.WriteValue(ShadowedCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SourceMax = ");
-			sb.Append(instance.SourceMax);
-			sb.Append("L");
+			__init.Property("SourceMax");
+			writer.WriteValue(SourceMax);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SourceTotal = ");
-			sb.Append(instance.SourceTotal);
-			sb.Append("L");
+			__init.Property("SourceTotal");
+			writer.WriteValue(SourceTotal);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

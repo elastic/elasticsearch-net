@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public static class PhoneticRuleTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType.Approx:
-				sb.Append("PhoneticRuleType.Approx");
+				writer.Write("PhoneticRuleType.Approx");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType.Exact:
-				sb.Append("PhoneticRuleType.Exact");
+				writer.Write("PhoneticRuleType.Exact");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

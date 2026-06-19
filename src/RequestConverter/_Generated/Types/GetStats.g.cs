@@ -25,89 +25,66 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class GetStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Current = ");
-			sb.Append(instance.Current);
-			sb.Append("L");
+			__init.Property("Current");
+			writer.WriteValue(Current);
+			writer.Write("L");
 		}
 
-		if (instance.ExistsTime is not null)
+		if (ExistsTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExistsTime = ");
-			instance.ExistsTime.FormatCode(sb);
+			__init.Property("ExistsTime");
+			ExistsTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExistsTimeInMillis = ");
-			sb.Append(instance.ExistsTimeInMillis);
+			__init.Property("ExistsTimeInMillis");
+			writer.WriteValue(ExistsTimeInMillis);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExistsTotal = ");
-			sb.Append(instance.ExistsTotal);
-			sb.Append("L");
+			__init.Property("ExistsTotal");
+			writer.WriteValue(ExistsTotal);
+			writer.Write("L");
 		}
 
-		if (instance.MissingTime is not null)
+		if (MissingTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MissingTime = ");
-			instance.MissingTime.FormatCode(sb);
+			__init.Property("MissingTime");
+			MissingTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MissingTimeInMillis = ");
-			sb.Append(instance.MissingTimeInMillis);
+			__init.Property("MissingTimeInMillis");
+			writer.WriteValue(MissingTimeInMillis);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MissingTotal = ");
-			sb.Append(instance.MissingTotal);
-			sb.Append("L");
+			__init.Property("MissingTotal");
+			writer.WriteValue(MissingTotal);
+			writer.Write("L");
 		}
 
-		if (instance.Time is not null)
+		if (Time is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Time = ");
-			instance.Time.FormatCode(sb);
+			__init.Property("Time");
+			Time.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeInMillis = ");
-			sb.Append(instance.TimeInMillis);
+			__init.Property("TimeInMillis");
+			writer.WriteValue(TimeInMillis);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			sb.Append(instance.Total);
-			sb.Append("L");
+			__init.Property("Total");
+			writer.WriteValue(Total);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

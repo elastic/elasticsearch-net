@@ -25,58 +25,39 @@ namespace Elastic.Clients.Elasticsearch.Tasks;
 
 public partial class CancelRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.TaskId is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (TaskId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TaskId = ");
-			instance.TaskId.FormatCode(sb);
+			__init.Property("TaskId");
+			TaskId.FormatCode(writer);
 		}
 
-		if (instance.Actions is not null)
+		if (Actions is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Actions = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Actions, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Actions");
+			writer.WriteInlineList(Actions, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Nodes is not null)
+		if (Nodes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Nodes = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Nodes, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Nodes");
+			writer.WriteInlineList(Nodes, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.ParentTaskId is not null)
+		if (ParentTaskId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ParentTaskId = ");
-			sb.Append("\"");
-			sb.Append(instance.ParentTaskId);
-			sb.Append("\"");
+			__init.Property("ParentTaskId");
+			writer.WriteString(ParentTaskId);
 		}
 
-		if (instance.WaitForCompletion is not null)
+		if (WaitForCompletion is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WaitForCompletion = ");
-			sb.Append(instance.WaitForCompletion.Value ? "true" : "false");
+			__init.Property("WaitForCompletion");
+			writer.WriteValue(WaitForCompletion.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

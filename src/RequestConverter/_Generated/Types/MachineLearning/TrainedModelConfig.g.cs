@@ -25,194 +25,133 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class TrainedModelConfig : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CompressedDefinition is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CompressedDefinition is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CompressedDefinition = ");
-			sb.Append("\"");
-			sb.Append(instance.CompressedDefinition);
-			sb.Append("\"");
+			__init.Property("CompressedDefinition");
+			writer.WriteString(CompressedDefinition);
 		}
 
-		if (instance.CreatedBy is not null)
+		if (CreatedBy is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CreatedBy = ");
-			sb.Append("\"");
-			sb.Append(instance.CreatedBy);
-			sb.Append("\"");
+			__init.Property("CreatedBy");
+			writer.WriteString(CreatedBy);
 		}
 
-		if (instance.CreateTime is not null)
+		if (CreateTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CreateTime = ");
-			sb.Append(instance.CreateTime.Value);
+			__init.Property("CreateTime");
+			writer.WriteValue(CreateTime.Value);
 		}
 
-		if (instance.DefaultFieldMap is not null)
+		if (DefaultFieldMap is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DefaultFieldMap = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.DefaultFieldMap, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("\""); sb.Append(v); sb.Append("\""); }, sb);
+			__init.Property("DefaultFieldMap");
+			writer.Write("new() ");
+			writer.WriteInlineList(DefaultFieldMap, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.Description is not null)
+		if (Description is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
-		if (instance.EstimatedHeapMemoryUsageBytes is not null)
+		if (EstimatedHeapMemoryUsageBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EstimatedHeapMemoryUsageBytes = ");
-			sb.Append(instance.EstimatedHeapMemoryUsageBytes.Value);
+			__init.Property("EstimatedHeapMemoryUsageBytes");
+			writer.WriteValue(EstimatedHeapMemoryUsageBytes.Value);
 		}
 
-		if (instance.EstimatedOperations is not null)
+		if (EstimatedOperations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EstimatedOperations = ");
-			sb.Append(instance.EstimatedOperations.Value);
+			__init.Property("EstimatedOperations");
+			writer.WriteValue(EstimatedOperations.Value);
 		}
 
-		if (instance.FullyDefined is not null)
+		if (FullyDefined is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("FullyDefined = ");
-			sb.Append(instance.FullyDefined.Value ? "true" : "false");
+			__init.Property("FullyDefined");
+			writer.WriteValue(FullyDefined.Value);
 		}
 
-		if (instance.InferenceConfig is not null)
+		if (InferenceConfig is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InferenceConfig = ");
-			instance.InferenceConfig.FormatCode(sb);
+			__init.Property("InferenceConfig");
+			InferenceConfig.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Input = ");
-			instance.Input.FormatCode(sb);
+			__init.Property("Input");
+			Input.FormatCode(writer);
 		}
 
-		if (instance.LicenseLevel is not null)
+		if (LicenseLevel is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LicenseLevel = ");
-			sb.Append("\"");
-			sb.Append(instance.LicenseLevel);
-			sb.Append("\"");
+			__init.Property("LicenseLevel");
+			writer.WriteString(LicenseLevel);
 		}
 
-		if (instance.Location is not null)
+		if (Location is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Location = ");
-			instance.Location.FormatCode(sb);
+			__init.Property("Location");
+			Location.FormatCode(writer);
 		}
 
-		if (instance.Metadata is not null)
+		if (Metadata is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Metadata = ");
-			instance.Metadata.FormatCode(sb);
+			__init.Property("Metadata");
+			Metadata.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelId = ");
-			sb.Append("\"");
-			sb.Append(instance.ModelId);
-			sb.Append("\"");
+			__init.Property("ModelId");
+			writer.WriteString(ModelId);
 		}
 
-		if (instance.ModelPackage is not null)
+		if (ModelPackage is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelPackage = ");
-			instance.ModelPackage.FormatCode(sb);
+			__init.Property("ModelPackage");
+			ModelPackage.FormatCode(writer);
 		}
 
-		if (instance.ModelSizeBytes is not null)
+		if (ModelSizeBytes is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelSizeBytes = ");
-			instance.ModelSizeBytes.FormatCode(sb);
+			__init.Property("ModelSizeBytes");
+			ModelSizeBytes.FormatCode(writer);
 		}
 
-		if (instance.ModelType is not null)
+		if (ModelType is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelType = ");
-			Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTypeCodeFormatter.FormatCode(instance.ModelType.Value, sb);
+			__init.Property("ModelType");
+			Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTypeCodeFormatter.FormatCode(ModelType.Value, writer);
 		}
 
-		if (instance.PlatformArchitecture is not null)
+		if (PlatformArchitecture is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PlatformArchitecture = ");
-			sb.Append("\"");
-			sb.Append(instance.PlatformArchitecture);
-			sb.Append("\"");
+			__init.Property("PlatformArchitecture");
+			writer.WriteString(PlatformArchitecture);
 		}
 
-		if (instance.PrefixStrings is not null)
+		if (PrefixStrings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PrefixStrings = ");
-			instance.PrefixStrings.FormatCode(sb);
+			__init.Property("PrefixStrings");
+			PrefixStrings.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Tags = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Tags, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Tags");
+			writer.WriteInlineList(Tags, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

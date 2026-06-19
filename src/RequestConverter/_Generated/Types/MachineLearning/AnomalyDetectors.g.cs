@@ -25,49 +25,34 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class AnomalyDetectors : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CategorizationAnalyzer = ");
-			instance.CategorizationAnalyzer.FormatCode(sb);
+			__init.Property("CategorizationAnalyzer");
+			CategorizationAnalyzer.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CategorizationExamplesLimit = ");
-			sb.Append(instance.CategorizationExamplesLimit);
+			__init.Property("CategorizationExamplesLimit");
+			writer.WriteValue(CategorizationExamplesLimit);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DailyModelSnapshotRetentionAfterDays = ");
-			sb.Append(instance.DailyModelSnapshotRetentionAfterDays);
+			__init.Property("DailyModelSnapshotRetentionAfterDays");
+			writer.WriteValue(DailyModelSnapshotRetentionAfterDays);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelMemoryLimit = ");
-			sb.Append("\"");
-			sb.Append(instance.ModelMemoryLimit);
-			sb.Append("\"");
+			__init.Property("ModelMemoryLimit");
+			writer.WriteString(ModelMemoryLimit);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelSnapshotRetentionDays = ");
-			sb.Append(instance.ModelSnapshotRetentionDays);
+			__init.Property("ModelSnapshotRetentionDays");
+			writer.WriteValue(ModelSnapshotRetentionDays);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

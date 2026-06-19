@@ -25,67 +25,48 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class TrainedModelAssignment : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AdaptiveAllocations is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AdaptiveAllocations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AdaptiveAllocations = ");
-			instance.AdaptiveAllocations.FormatCode(sb);
+			__init.Property("AdaptiveAllocations");
+			AdaptiveAllocations.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AssignmentState = ");
-			Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentStateCodeFormatter.FormatCode(instance.AssignmentState, sb);
+			__init.Property("AssignmentState");
+			Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentStateCodeFormatter.FormatCode(AssignmentState, writer);
 		}
 
-		if (instance.MaxAssignedAllocations is not null)
+		if (MaxAssignedAllocations is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxAssignedAllocations = ");
-			sb.Append(instance.MaxAssignedAllocations.Value);
+			__init.Property("MaxAssignedAllocations");
+			writer.WriteValue(MaxAssignedAllocations.Value);
 		}
 
-		if (instance.Reason is not null)
+		if (Reason is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Reason = ");
-			sb.Append("\"");
-			sb.Append(instance.Reason);
-			sb.Append("\"");
+			__init.Property("Reason");
+			writer.WriteString(Reason);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RoutingTable = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.RoutingTable, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("RoutingTable");
+			writer.Write("new() ");
+			writer.WriteInlineList(RoutingTable, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StartTime = ");
-			sb.Append(instance.StartTime);
+			__init.Property("StartTime");
+			writer.WriteValue(StartTime);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TaskParameters = ");
-			instance.TaskParameters.FormatCode(sb);
+			__init.Property("TaskParameters");
+			TaskParameters.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

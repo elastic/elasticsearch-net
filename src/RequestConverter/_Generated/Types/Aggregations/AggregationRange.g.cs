@@ -25,40 +25,29 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class AggregationRange : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.From is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (From is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("From = ");
-			sb.Append(instance.From.Value);
-			sb.Append("d");
+			__init.Property("From");
+			writer.WriteValue(From.Value);
+			writer.Write("d");
 		}
 
-		if (instance.Key is not null)
+		if (Key is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Key = ");
-			sb.Append("\"");
-			sb.Append(instance.Key);
-			sb.Append("\"");
+			__init.Property("Key");
+			writer.WriteString(Key);
 		}
 
-		if (instance.To is not null)
+		if (To is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("To = ");
-			sb.Append(instance.To.Value);
-			sb.Append("d");
+			__init.Property("To");
+			writer.WriteValue(To.Value);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

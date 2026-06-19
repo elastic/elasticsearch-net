@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public static class TemplateFormatCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Security.TemplateFormat instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Security.TemplateFormat instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Security.TemplateFormat.Json:
-				sb.Append("TemplateFormat.Json");
+				writer.Write("TemplateFormat.Json");
 				break;
 			case Elastic.Clients.Elasticsearch.Security.TemplateFormat.String:
-				sb.Append("TemplateFormat.String");
+				writer.Write("TemplateFormat.String");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

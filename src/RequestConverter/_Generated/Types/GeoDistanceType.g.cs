@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class GeoDistanceTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.GeoDistanceType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.GeoDistanceType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.GeoDistanceType.Arc:
-				sb.Append("GeoDistanceType.Arc");
+				writer.Write("GeoDistanceType.Arc");
 				break;
 			case Elastic.Clients.Elasticsearch.GeoDistanceType.Plane:
-				sb.Append("GeoDistanceType.Plane");
+				writer.Write("GeoDistanceType.Plane");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

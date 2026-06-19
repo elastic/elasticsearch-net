@@ -25,68 +25,49 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 
 public partial class IngestStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Count = ");
-			sb.Append(instance.Count);
-			sb.Append("L");
+			__init.Property("Count");
+			writer.WriteValue(Count);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Current = ");
-			sb.Append(instance.Current);
-			sb.Append("L");
+			__init.Property("Current");
+			writer.WriteValue(Current);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Failed = ");
-			sb.Append(instance.Failed);
-			sb.Append("L");
+			__init.Property("Failed");
+			writer.WriteValue(Failed);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IngestedAsFirstPipelineInBytes = ");
-			sb.Append(instance.IngestedAsFirstPipelineInBytes);
-			sb.Append("L");
+			__init.Property("IngestedAsFirstPipelineInBytes");
+			writer.WriteValue(IngestedAsFirstPipelineInBytes);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Processors = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Processors, (item, sb) => { sb.Append("new()"); RequestConverter.CodeFormatter.FormatCode(item, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb); }, sb);
-			sb.Append("]");
+			__init.Property("Processors");
+			writer.WriteInlineList(Processors, (w, item) => { w.Write("new() "); w.WriteInlineList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", "); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ProducedAsFirstPipelineInBytes = ");
-			sb.Append(instance.ProducedAsFirstPipelineInBytes);
-			sb.Append("L");
+			__init.Property("ProducedAsFirstPipelineInBytes");
+			writer.WriteValue(ProducedAsFirstPipelineInBytes);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TimeInMillis = ");
-			sb.Append(instance.TimeInMillis);
+			__init.Property("TimeInMillis");
+			writer.WriteValue(TimeInMillis);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

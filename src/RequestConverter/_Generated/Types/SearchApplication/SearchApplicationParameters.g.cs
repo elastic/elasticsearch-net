@@ -25,37 +25,26 @@ namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
 public partial class SearchApplicationParameters : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AnalyticsCollectionName is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AnalyticsCollectionName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AnalyticsCollectionName = ");
-			instance.AnalyticsCollectionName.FormatCode(sb);
+			__init.Property("AnalyticsCollectionName");
+			AnalyticsCollectionName.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Indices = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Indices, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Indices");
+			writer.WriteInlineList(Indices, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (instance.Template is not null)
+		if (Template is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Template = ");
-			instance.Template.FormatCode(sb);
+			__init.Property("Template");
+			Template.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

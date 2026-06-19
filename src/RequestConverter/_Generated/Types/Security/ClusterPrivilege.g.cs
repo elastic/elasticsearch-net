@@ -25,377 +25,400 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public readonly partial struct ClusterPrivilege : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.All)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.All)
 		{
-			sb.Append("ClusterPrivilege.All");
+			writer.Write("ClusterPrivilege.All");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.CancelTask)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.CancelTask)
 		{
-			sb.Append("ClusterPrivilege.CancelTask");
+			writer.Write("ClusterPrivilege.CancelTask");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.CreateSnapshot)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.CreateSnapshot)
 		{
-			sb.Append("ClusterPrivilege.CreateSnapshot");
+			writer.Write("ClusterPrivilege.CreateSnapshot");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.CrossClusterReplication)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.CrossClusterReplication)
 		{
-			sb.Append("ClusterPrivilege.CrossClusterReplication");
+			writer.Write("ClusterPrivilege.CrossClusterReplication");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.CrossClusterSearch)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.CrossClusterSearch)
 		{
-			sb.Append("ClusterPrivilege.CrossClusterSearch");
+			writer.Write("ClusterPrivilege.CrossClusterSearch");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.DelegatePki)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.DelegatePki)
 		{
-			sb.Append("ClusterPrivilege.DelegatePki");
+			writer.Write("ClusterPrivilege.DelegatePki");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.GrantApiKey)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.GrantApiKey)
 		{
-			sb.Append("ClusterPrivilege.GrantApiKey");
+			writer.Write("ClusterPrivilege.GrantApiKey");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.Manage)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.Manage)
 		{
-			sb.Append("ClusterPrivilege.Manage");
+			writer.Write("ClusterPrivilege.Manage");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageApiKey)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageApiKey)
 		{
-			sb.Append("ClusterPrivilege.ManageApiKey");
+			writer.Write("ClusterPrivilege.ManageApiKey");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageAutoscaling)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageAutoscaling)
 		{
-			sb.Append("ClusterPrivilege.ManageAutoscaling");
+			writer.Write("ClusterPrivilege.ManageAutoscaling");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageBehavioralAnalytics)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageBehavioralAnalytics)
 		{
-			sb.Append("ClusterPrivilege.ManageBehavioralAnalytics");
+			writer.Write("ClusterPrivilege.ManageBehavioralAnalytics");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageCcr)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageCcr)
 		{
-			sb.Append("ClusterPrivilege.ManageCcr");
+			writer.Write("ClusterPrivilege.ManageCcr");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageDataFrameTransforms)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageDataFrameTransforms)
 		{
-			sb.Append("ClusterPrivilege.ManageDataFrameTransforms");
+			writer.Write("ClusterPrivilege.ManageDataFrameTransforms");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageDataStreamGlobalRetention)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageDataStreamGlobalRetention)
 		{
-			sb.Append("ClusterPrivilege.ManageDataStreamGlobalRetention");
+			writer.Write("ClusterPrivilege.ManageDataStreamGlobalRetention");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageEnrich)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageEnrich)
 		{
-			sb.Append("ClusterPrivilege.ManageEnrich");
+			writer.Write("ClusterPrivilege.ManageEnrich");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageEsql)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageEsql)
 		{
-			sb.Append("ClusterPrivilege.ManageEsql");
+			writer.Write("ClusterPrivilege.ManageEsql");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageIlm)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageIlm)
 		{
-			sb.Append("ClusterPrivilege.ManageIlm");
+			writer.Write("ClusterPrivilege.ManageIlm");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageIndexTemplates)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageIndexTemplates)
 		{
-			sb.Append("ClusterPrivilege.ManageIndexTemplates");
+			writer.Write("ClusterPrivilege.ManageIndexTemplates");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageInference)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageInference)
 		{
-			sb.Append("ClusterPrivilege.ManageInference");
+			writer.Write("ClusterPrivilege.ManageInference");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageIngestPipelines)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageIngestPipelines)
 		{
-			sb.Append("ClusterPrivilege.ManageIngestPipelines");
+			writer.Write("ClusterPrivilege.ManageIngestPipelines");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageLogstashPipelines)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageLogstashPipelines)
 		{
-			sb.Append("ClusterPrivilege.ManageLogstashPipelines");
+			writer.Write("ClusterPrivilege.ManageLogstashPipelines");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageMl)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageMl)
 		{
-			sb.Append("ClusterPrivilege.ManageMl");
+			writer.Write("ClusterPrivilege.ManageMl");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageOidc)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageOidc)
 		{
-			sb.Append("ClusterPrivilege.ManageOidc");
+			writer.Write("ClusterPrivilege.ManageOidc");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageOwnApiKey)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageOwnApiKey)
 		{
-			sb.Append("ClusterPrivilege.ManageOwnApiKey");
+			writer.Write("ClusterPrivilege.ManageOwnApiKey");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManagePipeline)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManagePipeline)
 		{
-			sb.Append("ClusterPrivilege.ManagePipeline");
+			writer.Write("ClusterPrivilege.ManagePipeline");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageRollup)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageProjectRouting)
 		{
-			sb.Append("ClusterPrivilege.ManageRollup");
+			writer.Write("ClusterPrivilege.ManageProjectRouting");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageSaml)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageReindex)
 		{
-			sb.Append("ClusterPrivilege.ManageSaml");
+			writer.Write("ClusterPrivilege.ManageReindex");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageSearchApplication)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageRollup)
 		{
-			sb.Append("ClusterPrivilege.ManageSearchApplication");
+			writer.Write("ClusterPrivilege.ManageRollup");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageSearchQueryRules)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageSaml)
 		{
-			sb.Append("ClusterPrivilege.ManageSearchQueryRules");
+			writer.Write("ClusterPrivilege.ManageSaml");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageSearchSynonyms)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageSearchApplication)
 		{
-			sb.Append("ClusterPrivilege.ManageSearchSynonyms");
+			writer.Write("ClusterPrivilege.ManageSearchApplication");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageSecurity)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageSearchQueryRules)
 		{
-			sb.Append("ClusterPrivilege.ManageSecurity");
+			writer.Write("ClusterPrivilege.ManageSearchQueryRules");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageServiceAccount)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageSearchSynonyms)
 		{
-			sb.Append("ClusterPrivilege.ManageServiceAccount");
+			writer.Write("ClusterPrivilege.ManageSearchSynonyms");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageSlm)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageSecurity)
 		{
-			sb.Append("ClusterPrivilege.ManageSlm");
+			writer.Write("ClusterPrivilege.ManageSecurity");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageToken)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageServiceAccount)
 		{
-			sb.Append("ClusterPrivilege.ManageToken");
+			writer.Write("ClusterPrivilege.ManageServiceAccount");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageTransform)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageSlm)
 		{
-			sb.Append("ClusterPrivilege.ManageTransform");
+			writer.Write("ClusterPrivilege.ManageSlm");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageUserProfile)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageToken)
 		{
-			sb.Append("ClusterPrivilege.ManageUserProfile");
+			writer.Write("ClusterPrivilege.ManageToken");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageWatcher)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageTransform)
 		{
-			sb.Append("ClusterPrivilege.ManageWatcher");
+			writer.Write("ClusterPrivilege.ManageTransform");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.Monitor)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageUserProfile)
 		{
-			sb.Append("ClusterPrivilege.Monitor");
+			writer.Write("ClusterPrivilege.ManageUserProfile");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.MonitorDataFrameTransforms)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ManageWatcher)
 		{
-			sb.Append("ClusterPrivilege.MonitorDataFrameTransforms");
+			writer.Write("ClusterPrivilege.ManageWatcher");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.MonitorDataStreamGlobalRetention)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.Monitor)
 		{
-			sb.Append("ClusterPrivilege.MonitorDataStreamGlobalRetention");
+			writer.Write("ClusterPrivilege.Monitor");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.MonitorEnrich)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.MonitorDataFrameTransforms)
 		{
-			sb.Append("ClusterPrivilege.MonitorEnrich");
+			writer.Write("ClusterPrivilege.MonitorDataFrameTransforms");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.MonitorEsql)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.MonitorDataStreamGlobalRetention)
 		{
-			sb.Append("ClusterPrivilege.MonitorEsql");
+			writer.Write("ClusterPrivilege.MonitorDataStreamGlobalRetention");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.MonitorInference)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.MonitorEnrich)
 		{
-			sb.Append("ClusterPrivilege.MonitorInference");
+			writer.Write("ClusterPrivilege.MonitorEnrich");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.MonitorMl)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.MonitorEsql)
 		{
-			sb.Append("ClusterPrivilege.MonitorMl");
+			writer.Write("ClusterPrivilege.MonitorEsql");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.MonitorRollup)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.MonitorInference)
 		{
-			sb.Append("ClusterPrivilege.MonitorRollup");
+			writer.Write("ClusterPrivilege.MonitorInference");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.MonitorSnapshot)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.MonitorMl)
 		{
-			sb.Append("ClusterPrivilege.MonitorSnapshot");
+			writer.Write("ClusterPrivilege.MonitorMl");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.MonitorStats)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.MonitorReindex)
 		{
-			sb.Append("ClusterPrivilege.MonitorStats");
+			writer.Write("ClusterPrivilege.MonitorReindex");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.MonitorTextStructure)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.MonitorRollup)
 		{
-			sb.Append("ClusterPrivilege.MonitorTextStructure");
+			writer.Write("ClusterPrivilege.MonitorRollup");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.MonitorTransform)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.MonitorSnapshot)
 		{
-			sb.Append("ClusterPrivilege.MonitorTransform");
+			writer.Write("ClusterPrivilege.MonitorSnapshot");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.MonitorWatcher)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.MonitorStats)
 		{
-			sb.Append("ClusterPrivilege.MonitorWatcher");
+			writer.Write("ClusterPrivilege.MonitorStats");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.None)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.MonitorTextStructure)
 		{
-			sb.Append("ClusterPrivilege.None");
+			writer.Write("ClusterPrivilege.MonitorTextStructure");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.PostBehavioralAnalyticsEvent)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.MonitorTransform)
 		{
-			sb.Append("ClusterPrivilege.PostBehavioralAnalyticsEvent");
+			writer.Write("ClusterPrivilege.MonitorTransform");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ReadCcr)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.MonitorWatcher)
 		{
-			sb.Append("ClusterPrivilege.ReadCcr");
+			writer.Write("ClusterPrivilege.MonitorWatcher");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ReadFleetSecrets)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.None)
 		{
-			sb.Append("ClusterPrivilege.ReadFleetSecrets");
+			writer.Write("ClusterPrivilege.None");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ReadIlm)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.PostBehavioralAnalyticsEvent)
 		{
-			sb.Append("ClusterPrivilege.ReadIlm");
+			writer.Write("ClusterPrivilege.PostBehavioralAnalyticsEvent");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ReadPipeline)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ReadCcr)
 		{
-			sb.Append("ClusterPrivilege.ReadPipeline");
+			writer.Write("ClusterPrivilege.ReadCcr");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ReadSecurity)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ReadFleetSecrets)
 		{
-			sb.Append("ClusterPrivilege.ReadSecurity");
+			writer.Write("ClusterPrivilege.ReadFleetSecrets");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ReadSlm)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ReadIlm)
 		{
-			sb.Append("ClusterPrivilege.ReadSlm");
+			writer.Write("ClusterPrivilege.ReadIlm");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.TransportClient)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ReadPipeline)
 		{
-			sb.Append("ClusterPrivilege.TransportClient");
+			writer.Write("ClusterPrivilege.ReadPipeline");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.WriteConnectorSecrets)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ReadProjectRouting)
 		{
-			sb.Append("ClusterPrivilege.WriteConnectorSecrets");
+			writer.Write("ClusterPrivilege.ReadProjectRouting");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.WriteFleetSecrets)
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ReadSecurity)
 		{
-			sb.Append("ClusterPrivilege.WriteFleetSecrets");
+			writer.Write("ClusterPrivilege.ReadSecurity");
 			return;
 		}
 
-		sb.Append("new ClusterPrivilege(\"");
-		sb.Append(instance.Value);
-		sb.Append("\")");
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.ReadSlm)
+		{
+			writer.Write("ClusterPrivilege.ReadSlm");
+			return;
+		}
+
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.TransportClient)
+		{
+			writer.Write("ClusterPrivilege.TransportClient");
+			return;
+		}
+
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.WriteConnectorSecrets)
+		{
+			writer.Write("ClusterPrivilege.WriteConnectorSecrets");
+			return;
+		}
+
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.WriteFleetSecrets)
+		{
+			writer.Write("ClusterPrivilege.WriteFleetSecrets");
+			return;
+		}
+
+		writer.Write("new ClusterPrivilege(\"");
+		writer.Write(Value);
+		writer.Write("\")");
 	}
 }

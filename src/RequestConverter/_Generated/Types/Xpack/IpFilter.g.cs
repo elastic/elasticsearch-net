@@ -25,26 +25,19 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 
 public partial class IpFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Http = ");
-			sb.Append(instance.Http ? "true" : "false");
+			__init.Property("Http");
+			writer.WriteValue(Http);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Transport = ");
-			sb.Append(instance.Transport ? "true" : "false");
+			__init.Property("Transport");
+			writer.WriteValue(Transport);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

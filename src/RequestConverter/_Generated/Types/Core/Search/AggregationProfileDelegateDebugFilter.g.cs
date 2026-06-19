@@ -25,48 +25,33 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public partial class AggregationProfileDelegateDebugFilter : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Query is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Query is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Query = ");
-			sb.Append("\"");
-			sb.Append(instance.Query);
-			sb.Append("\"");
+			__init.Property("Query");
+			writer.WriteString(Query);
 		}
 
-		if (instance.ResultsFromMetadata is not null)
+		if (ResultsFromMetadata is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ResultsFromMetadata = ");
-			sb.Append(instance.ResultsFromMetadata.Value);
+			__init.Property("ResultsFromMetadata");
+			writer.WriteValue(ResultsFromMetadata.Value);
 		}
 
-		if (instance.SegmentsCountedInConstantTime is not null)
+		if (SegmentsCountedInConstantTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SegmentsCountedInConstantTime = ");
-			sb.Append(instance.SegmentsCountedInConstantTime.Value);
+			__init.Property("SegmentsCountedInConstantTime");
+			writer.WriteValue(SegmentsCountedInConstantTime.Value);
 		}
 
-		if (instance.SpecializedFor is not null)
+		if (SpecializedFor is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SpecializedFor = ");
-			sb.Append("\"");
-			sb.Append(instance.SpecializedFor);
-			sb.Append("\"");
+			__init.Property("SpecializedFor");
+			writer.WriteString(SpecializedFor);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

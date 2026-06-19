@@ -25,28 +25,21 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class MergeScheduler : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.MaxMergeCount is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (MaxMergeCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxMergeCount = ");
-			sb.Append(instance.MaxMergeCount.Value);
+			__init.Property("MaxMergeCount");
+			writer.WriteValue(MaxMergeCount.Value);
 		}
 
-		if (instance.MaxThreadCount is not null)
+		if (MaxThreadCount is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxThreadCount = ");
-			sb.Append(instance.MaxThreadCount.Value);
+			__init.Property("MaxThreadCount");
+			writer.WriteValue(MaxThreadCount.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

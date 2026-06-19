@@ -25,37 +25,26 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class ShardRetentionLeases : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Leases = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Leases, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Leases");
+			writer.WriteInlineList(Leases, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PrimaryTerm = ");
-			sb.Append(instance.PrimaryTerm);
-			sb.Append("L");
+			__init.Property("PrimaryTerm");
+			writer.WriteValue(PrimaryTerm);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append(instance.Version);
-			sb.Append("L");
+			__init.Property("Version");
+			writer.WriteValue(Version);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

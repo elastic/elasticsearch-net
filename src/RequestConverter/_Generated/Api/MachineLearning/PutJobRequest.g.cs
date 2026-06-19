@@ -25,179 +25,130 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class PutJobRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("JobId = ");
-			instance.JobId.FormatCode(sb);
+			__init.Property("JobId");
+			JobId.FormatCode(writer);
 		}
 
-		if (instance.AllowNoIndices is not null)
+		if (AllowNoIndices is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowNoIndices = ");
-			sb.Append(instance.AllowNoIndices.Value ? "true" : "false");
+			__init.Property("AllowNoIndices");
+			writer.WriteValue(AllowNoIndices.Value);
 		}
 
-		if (instance.ExpandWildcards is not null)
+		if (ExpandWildcards is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ExpandWildcards = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.ExpandWildcards, (item, sb) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, sb); }, sb);
-			sb.Append("]");
+			__init.Property("ExpandWildcards");
+			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
 		}
 #pragma warning disable CS0618
-		if (instance.IgnoreThrottled is not null)
+		if (IgnoreThrottled is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreThrottled = ");
-			sb.Append(instance.IgnoreThrottled.Value ? "true" : "false");
+			__init.Property("IgnoreThrottled");
+			writer.WriteValue(IgnoreThrottled.Value);
 		}
 #pragma warning restore CS0618
-		if (instance.IgnoreUnavailable is not null)
+		if (IgnoreUnavailable is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IgnoreUnavailable = ");
-			sb.Append(instance.IgnoreUnavailable.Value ? "true" : "false");
+			__init.Property("IgnoreUnavailable");
+			writer.WriteValue(IgnoreUnavailable.Value);
 		}
 
-		if (instance.AllowLazyOpen is not null)
+		if (AllowLazyOpen is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllowLazyOpen = ");
-			sb.Append(instance.AllowLazyOpen.Value ? "true" : "false");
+			__init.Property("AllowLazyOpen");
+			writer.WriteValue(AllowLazyOpen.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AnalysisConfig = ");
-			instance.AnalysisConfig.FormatCode(sb);
+			__init.Property("AnalysisConfig");
+			AnalysisConfig.FormatCode(writer);
 		}
 
-		if (instance.AnalysisLimits is not null)
+		if (AnalysisLimits is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AnalysisLimits = ");
-			instance.AnalysisLimits.FormatCode(sb);
+			__init.Property("AnalysisLimits");
+			AnalysisLimits.FormatCode(writer);
 		}
 
-		if (instance.BackgroundPersistInterval is not null)
+		if (BackgroundPersistInterval is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BackgroundPersistInterval = ");
-			instance.BackgroundPersistInterval.FormatCode(sb);
+			__init.Property("BackgroundPersistInterval");
+			BackgroundPersistInterval.FormatCode(writer);
 		}
 
-		if (instance.CustomSettings is not null)
+		if (CustomSettings is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CustomSettings = ");
-			RequestConverter.CodeFormatter.FormatCode(instance.CustomSettings, sb);
+			__init.Property("CustomSettings");
+			writer.WriteValue(CustomSettings);
 		}
 
-		if (instance.DailyModelSnapshotRetentionAfterDays is not null)
+		if (DailyModelSnapshotRetentionAfterDays is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DailyModelSnapshotRetentionAfterDays = ");
-			sb.Append(instance.DailyModelSnapshotRetentionAfterDays.Value);
-			sb.Append("L");
+			__init.Property("DailyModelSnapshotRetentionAfterDays");
+			writer.WriteValue(DailyModelSnapshotRetentionAfterDays.Value);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DataDescription = ");
-			instance.DataDescription.FormatCode(sb);
+			__init.Property("DataDescription");
+			DataDescription.FormatCode(writer);
 		}
 
-		if (instance.DatafeedConfig is not null)
+		if (DatafeedConfig is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DatafeedConfig = ");
-			instance.DatafeedConfig.FormatCode(sb);
+			__init.Property("DatafeedConfig");
+			DatafeedConfig.FormatCode(writer);
 		}
 
-		if (instance.Description is not null)
+		if (Description is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Description = ");
-			sb.Append("\"");
-			sb.Append(instance.Description);
-			sb.Append("\"");
+			__init.Property("Description");
+			writer.WriteString(Description);
 		}
 
-		if (instance.Groups is not null)
+		if (Groups is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Groups = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Groups, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Groups");
+			writer.WriteInlineList(Groups, (w, item) => { w.WriteString(item); });
 		}
 
-		if (instance.ModelPlotConfig is not null)
+		if (ModelPlotConfig is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelPlotConfig = ");
-			instance.ModelPlotConfig.FormatCode(sb);
+			__init.Property("ModelPlotConfig");
+			ModelPlotConfig.FormatCode(writer);
 		}
 
-		if (instance.ModelSnapshotRetentionDays is not null)
+		if (ModelSnapshotRetentionDays is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelSnapshotRetentionDays = ");
-			sb.Append(instance.ModelSnapshotRetentionDays.Value);
-			sb.Append("L");
+			__init.Property("ModelSnapshotRetentionDays");
+			writer.WriteValue(ModelSnapshotRetentionDays.Value);
+			writer.Write("L");
 		}
 
-		if (instance.RenormalizationWindowDays is not null)
+		if (RenormalizationWindowDays is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RenormalizationWindowDays = ");
-			sb.Append(instance.RenormalizationWindowDays.Value);
-			sb.Append("L");
+			__init.Property("RenormalizationWindowDays");
+			writer.WriteValue(RenormalizationWindowDays.Value);
+			writer.Write("L");
 		}
 
-		if (instance.ResultsIndexName is not null)
+		if (ResultsIndexName is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ResultsIndexName = ");
-			instance.ResultsIndexName.FormatCode(sb);
+			__init.Property("ResultsIndexName");
+			ResultsIndexName.FormatCode(writer);
 		}
 
-		if (instance.ResultsRetentionDays is not null)
+		if (ResultsRetentionDays is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ResultsRetentionDays = ");
-			sb.Append(instance.ResultsRetentionDays.Value);
-			sb.Append("L");
+			__init.Property("ResultsRetentionDays");
+			writer.WriteValue(ResultsRetentionDays.Value);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

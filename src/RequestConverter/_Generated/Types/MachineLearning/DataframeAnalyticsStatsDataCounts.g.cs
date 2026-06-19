@@ -25,33 +25,24 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class DataframeAnalyticsStatsDataCounts : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SkippedDocsCount = ");
-			sb.Append(instance.SkippedDocsCount);
+			__init.Property("SkippedDocsCount");
+			writer.WriteValue(SkippedDocsCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TestDocsCount = ");
-			sb.Append(instance.TestDocsCount);
+			__init.Property("TestDocsCount");
+			writer.WriteValue(TestDocsCount);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TrainingDocsCount = ");
-			sb.Append(instance.TrainingDocsCount);
+			__init.Property("TrainingDocsCount");
+			writer.WriteValue(TrainingDocsCount);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

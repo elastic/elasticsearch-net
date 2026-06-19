@@ -25,148 +25,111 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class IndexingStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DeleteCurrent = ");
-			sb.Append(instance.DeleteCurrent);
-			sb.Append("L");
+			__init.Property("DeleteCurrent");
+			writer.WriteValue(DeleteCurrent);
+			writer.Write("L");
 		}
 
-		if (instance.DeleteTime is not null)
+		if (DeleteTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DeleteTime = ");
-			instance.DeleteTime.FormatCode(sb);
+			__init.Property("DeleteTime");
+			DeleteTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DeleteTimeInMillis = ");
-			sb.Append(instance.DeleteTimeInMillis);
+			__init.Property("DeleteTimeInMillis");
+			writer.WriteValue(DeleteTimeInMillis);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DeleteTotal = ");
-			sb.Append(instance.DeleteTotal);
-			sb.Append("L");
+			__init.Property("DeleteTotal");
+			writer.WriteValue(DeleteTotal);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexCurrent = ");
-			sb.Append(instance.IndexCurrent);
-			sb.Append("L");
+			__init.Property("IndexCurrent");
+			writer.WriteValue(IndexCurrent);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexFailed = ");
-			sb.Append(instance.IndexFailed);
-			sb.Append("L");
+			__init.Property("IndexFailed");
+			writer.WriteValue(IndexFailed);
+			writer.Write("L");
 		}
 
-		if (instance.IndexTime is not null)
+		if (IndexTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexTime = ");
-			instance.IndexTime.FormatCode(sb);
+			__init.Property("IndexTime");
+			IndexTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexTimeInMillis = ");
-			sb.Append(instance.IndexTimeInMillis);
+			__init.Property("IndexTimeInMillis");
+			writer.WriteValue(IndexTimeInMillis);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexTotal = ");
-			sb.Append(instance.IndexTotal);
-			sb.Append("L");
+			__init.Property("IndexTotal");
+			writer.WriteValue(IndexTotal);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IsThrottled = ");
-			sb.Append(instance.IsThrottled ? "true" : "false");
+			__init.Property("IsThrottled");
+			writer.WriteValue(IsThrottled);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NoopUpdateTotal = ");
-			sb.Append(instance.NoopUpdateTotal);
-			sb.Append("L");
+			__init.Property("NoopUpdateTotal");
+			writer.WriteValue(NoopUpdateTotal);
+			writer.Write("L");
 		}
 
-		if (instance.PeakWriteLoad is not null)
+		if (PeakWriteLoad is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PeakWriteLoad = ");
-			sb.Append(instance.PeakWriteLoad.Value);
-			sb.Append("d");
+			__init.Property("PeakWriteLoad");
+			writer.WriteValue(PeakWriteLoad.Value);
+			writer.Write("d");
 		}
 
-		if (instance.RecentWriteLoad is not null)
+		if (RecentWriteLoad is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RecentWriteLoad = ");
-			sb.Append(instance.RecentWriteLoad.Value);
-			sb.Append("d");
+			__init.Property("RecentWriteLoad");
+			writer.WriteValue(RecentWriteLoad.Value);
+			writer.Write("d");
 		}
 
-		if (instance.ThrottleTime is not null)
+		if (ThrottleTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ThrottleTime = ");
-			instance.ThrottleTime.FormatCode(sb);
+			__init.Property("ThrottleTime");
+			ThrottleTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ThrottleTimeInMillis = ");
-			sb.Append(instance.ThrottleTimeInMillis);
+			__init.Property("ThrottleTimeInMillis");
+			writer.WriteValue(ThrottleTimeInMillis);
 		}
 
-		if (instance.Types is not null)
+		if (Types is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Types = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.Types, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { v.FormatCode(sb); }, sb);
+			__init.Property("Types");
+			writer.Write("new() ");
+			writer.WriteInlineList(Types, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.WriteLoad is not null)
+		if (WriteLoad is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("WriteLoad = ");
-			sb.Append(instance.WriteLoad.Value);
-			sb.Append("d");
+			__init.Property("WriteLoad");
+			writer.WriteValue(WriteLoad.Value);
+			writer.Write("d");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

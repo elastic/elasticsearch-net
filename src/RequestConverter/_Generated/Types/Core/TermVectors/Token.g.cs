@@ -25,45 +25,32 @@ namespace Elastic.Clients.Elasticsearch.Core.TermVectors;
 
 public partial class Token : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.EndOffset is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (EndOffset is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EndOffset = ");
-			sb.Append(instance.EndOffset.Value);
+			__init.Property("EndOffset");
+			writer.WriteValue(EndOffset.Value);
 		}
 
-		if (instance.Payload is not null)
+		if (Payload is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Payload = ");
-			sb.Append("\"");
-			sb.Append(instance.Payload);
-			sb.Append("\"");
+			__init.Property("Payload");
+			writer.WriteString(Payload);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Position = ");
-			sb.Append(instance.Position);
+			__init.Property("Position");
+			writer.WriteValue(Position);
 		}
 
-		if (instance.StartOffset is not null)
+		if (StartOffset is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("StartOffset = ");
-			sb.Append(instance.StartOffset.Value);
+			__init.Property("StartOffset");
+			writer.WriteValue(StartOffset.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

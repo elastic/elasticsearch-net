@@ -21,23 +21,30 @@ using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
 
-namespace Elastic.Clients.Elasticsearch.Security;
+namespace Elastic.Clients.Elasticsearch;
 
-public static class ApiKeyManagedByCodeFormatter
+public partial class Embedding : RequestConverter.ICodeFormattable
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Security.ApiKeyManagedBy instance, System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		switch (instance)
+		var __init = writer.BeginObjectInitializer();
+		if (InferenceId is not null)
 		{
-			case Elastic.Clients.Elasticsearch.Security.ApiKeyManagedBy.Cloud:
-				sb.Append("ApiKeyManagedBy.Cloud");
-				break;
-			case Elastic.Clients.Elasticsearch.Security.ApiKeyManagedBy.Elasticsearch:
-				sb.Append("ApiKeyManagedBy.Elasticsearch");
-				break;
-			default:
-				sb.Append(instance.ToString());
-				break;
+			__init.Property("InferenceId");
+			writer.WriteString(InferenceId);
 		}
+
+		{
+			__init.Property("Input");
+			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.InferenceString>>(Input, writer);
+		}
+
+		if (Timeout is not null)
+		{
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
+		}
+
+		__init.Dispose();
 	}
 }

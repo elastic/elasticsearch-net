@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public static class ShardStoreAllocationCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation.Primary:
-				sb.Append("ShardStoreAllocation.Primary");
+				writer.Write("ShardStoreAllocation.Primary");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation.Replica:
-				sb.Append("ShardStoreAllocation.Replica");
+				writer.Write("ShardStoreAllocation.Replica");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation.Unused:
-				sb.Append("ShardStoreAllocation.Unused");
+				writer.Write("ShardStoreAllocation.Unused");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

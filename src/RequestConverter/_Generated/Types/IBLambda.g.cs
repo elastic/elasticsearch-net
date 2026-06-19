@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class IBLambdaCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.IBLambda instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.IBLambda instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IBLambda.Df:
-				sb.Append("IBLambda.Df");
+				writer.Write("IBLambda.Df");
 				break;
 			case Elastic.Clients.Elasticsearch.IBLambda.Ttf:
-				sb.Append("IBLambda.Ttf");
+				writer.Write("IBLambda.Ttf");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

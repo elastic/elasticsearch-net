@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public static class GeoOrientationCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.GeoOrientation instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Mapping.GeoOrientation instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.GeoOrientation.Left:
-				sb.Append("GeoOrientation.Left");
+				writer.Write("GeoOrientation.Left");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.GeoOrientation.Right:
-				sb.Append("GeoOrientation.Right");
+				writer.Write("GeoOrientation.Right");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

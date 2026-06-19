@@ -25,28 +25,19 @@ namespace Elastic.Clients.Elasticsearch.Rollup;
 
 public partial class FieldMetric : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Field = ");
-			instance.Field.FormatCode(sb);
+			__init.Property("Field");
+			Field.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Metrics = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Metrics, (item, sb) => { Elastic.Clients.Elasticsearch.Rollup.MetricCodeFormatter.FormatCode(item, sb); }, sb);
-			sb.Append("]");
+			__init.Property("Metrics");
+			writer.WriteInlineList(Metrics, (w, item) => { Elastic.Clients.Elasticsearch.Rollup.MetricCodeFormatter.FormatCode(item, w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

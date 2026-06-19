@@ -25,33 +25,24 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class SettingsSimilarityIb : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Distribution = ");
-			Elastic.Clients.Elasticsearch.IBDistributionCodeFormatter.FormatCode(instance.Distribution, sb);
+			__init.Property("Distribution");
+			Elastic.Clients.Elasticsearch.IBDistributionCodeFormatter.FormatCode(Distribution, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Lambda = ");
-			Elastic.Clients.Elasticsearch.IBLambdaCodeFormatter.FormatCode(instance.Lambda, sb);
+			__init.Property("Lambda");
+			Elastic.Clients.Elasticsearch.IBLambdaCodeFormatter.FormatCode(Lambda, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Normalization = ");
-			Elastic.Clients.Elasticsearch.NormalizationCodeFormatter.FormatCode(instance.Normalization, sb);
+			__init.Property("Normalization");
+			Elastic.Clients.Elasticsearch.NormalizationCodeFormatter.FormatCode(Normalization, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

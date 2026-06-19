@@ -25,29 +25,28 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public readonly partial struct HighlighterType : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		if (instance == Elastic.Clients.Elasticsearch.Core.Search.HighlighterType.FastVector)
+		if (this == Elastic.Clients.Elasticsearch.Core.Search.HighlighterType.FastVector)
 		{
-			sb.Append("HighlighterType.FastVector");
+			writer.Write("HighlighterType.FastVector");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Core.Search.HighlighterType.Plain)
+		if (this == Elastic.Clients.Elasticsearch.Core.Search.HighlighterType.Plain)
 		{
-			sb.Append("HighlighterType.Plain");
+			writer.Write("HighlighterType.Plain");
 			return;
 		}
 
-		if (instance == Elastic.Clients.Elasticsearch.Core.Search.HighlighterType.Unified)
+		if (this == Elastic.Clients.Elasticsearch.Core.Search.HighlighterType.Unified)
 		{
-			sb.Append("HighlighterType.Unified");
+			writer.Write("HighlighterType.Unified");
 			return;
 		}
 
-		sb.Append("new HighlighterType(\"");
-		sb.Append(instance.Value);
-		sb.Append("\")");
+		writer.Write("new HighlighterType(\"");
+		writer.Write(Value);
+		writer.Write("\")");
 	}
 }

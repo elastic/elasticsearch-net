@@ -25,20 +25,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class SettingsHighlight : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.MaxAnalyzedOffset is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (MaxAnalyzedOffset is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxAnalyzedOffset = ");
-			sb.Append(instance.MaxAnalyzedOffset.Value);
+			__init.Property("MaxAnalyzedOffset");
+			writer.WriteValue(MaxAnalyzedOffset.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

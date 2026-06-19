@@ -25,67 +25,66 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public partial class AzureOpenAIServiceSettings : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ApiKey is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ApiKey is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ApiKey = ");
-			sb.Append("\"");
-			sb.Append(instance.ApiKey);
-			sb.Append("\"");
+			__init.Property("ApiKey");
+			writer.WriteString(ApiKey);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ApiVersion = ");
-			sb.Append("\"");
-			sb.Append(instance.ApiVersion);
-			sb.Append("\"");
+			__init.Property("ApiVersion");
+			writer.WriteString(ApiVersion);
+		}
+
+		if (ClientId is not null)
+		{
+			__init.Property("ClientId");
+			writer.WriteString(ClientId);
+		}
+
+		if (ClientSecret is not null)
+		{
+			__init.Property("ClientSecret");
+			writer.WriteString(ClientSecret);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DeploymentId = ");
-			sb.Append("\"");
-			sb.Append(instance.DeploymentId);
-			sb.Append("\"");
+			__init.Property("DeploymentId");
+			writer.WriteString(DeploymentId);
 		}
 
-		if (instance.EntraId is not null)
+		if (EntraId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EntraId = ");
-			sb.Append("\"");
-			sb.Append(instance.EntraId);
-			sb.Append("\"");
+			__init.Property("EntraId");
+			writer.WriteString(EntraId);
 		}
 
-		if (instance.RateLimit is not null)
+		if (RateLimit is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RateLimit = ");
-			instance.RateLimit.FormatCode(sb);
+			__init.Property("RateLimit");
+			RateLimit.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ResourceName = ");
-			sb.Append("\"");
-			sb.Append(instance.ResourceName);
-			sb.Append("\"");
+			__init.Property("ResourceName");
+			writer.WriteString(ResourceName);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		if (Scopes is not null)
+		{
+			__init.Property("Scopes");
+			writer.WriteInlineList(Scopes, (w, item) => { w.WriteString(item); });
+		}
+
+		if (TenantId is not null)
+		{
+			__init.Property("TenantId");
+			writer.WriteString(TenantId);
+		}
+
+		__init.Dispose();
 	}
 }

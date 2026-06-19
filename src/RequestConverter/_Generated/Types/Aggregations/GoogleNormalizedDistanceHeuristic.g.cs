@@ -25,20 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class GoogleNormalizedDistanceHeuristic : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.BackgroundIsSuperset is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (BackgroundIsSuperset is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BackgroundIsSuperset = ");
-			sb.Append(instance.BackgroundIsSuperset.Value ? "true" : "false");
+			__init.Property("BackgroundIsSuperset");
+			writer.WriteValue(BackgroundIsSuperset.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

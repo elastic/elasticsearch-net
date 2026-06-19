@@ -25,37 +25,26 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class StatusInProgress : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			sb.Append("\"");
-			sb.Append(instance.Index);
-			sb.Append("\"");
+			__init.Property("Index");
+			writer.WriteString(Index);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ReindexedDocCount = ");
-			sb.Append(instance.ReindexedDocCount);
-			sb.Append("L");
+			__init.Property("ReindexedDocCount");
+			writer.WriteValue(ReindexedDocCount);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalDocCount = ");
-			sb.Append(instance.TotalDocCount);
-			sb.Append("L");
+			__init.Property("TotalDocCount");
+			writer.WriteValue(TotalDocCount);
+			writer.Write("L");
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

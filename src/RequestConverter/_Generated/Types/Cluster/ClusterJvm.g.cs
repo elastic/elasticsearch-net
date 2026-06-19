@@ -25,51 +25,36 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class ClusterJvm : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.MaxUptime is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (MaxUptime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxUptime = ");
-			instance.MaxUptime.FormatCode(sb);
+			__init.Property("MaxUptime");
+			MaxUptime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("MaxUptimeInMillis = ");
-			sb.Append(instance.MaxUptimeInMillis);
+			__init.Property("MaxUptimeInMillis");
+			writer.WriteValue(MaxUptimeInMillis);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Mem = ");
-			instance.Mem.FormatCode(sb);
+			__init.Property("Mem");
+			Mem.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Threads = ");
-			sb.Append(instance.Threads);
-			sb.Append("L");
+			__init.Property("Threads");
+			writer.WriteValue(Threads);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Versions = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Versions, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Versions");
+			writer.WriteInlineList(Versions, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

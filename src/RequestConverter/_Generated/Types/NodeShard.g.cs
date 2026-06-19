@@ -25,96 +25,67 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class NodeShard : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.AllocationId is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (AllocationId is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("AllocationId = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.AllocationId, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("\""); sb.Append(v); sb.Append("\""); }, sb);
+			__init.Property("AllocationId");
+			writer.Write("new() ");
+			writer.WriteInlineList(AllocationId, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Index = ");
-			sb.Append("\"");
-			sb.Append(instance.Index);
-			sb.Append("\"");
+			__init.Property("Index");
+			writer.WriteString(Index);
 		}
 
-		if (instance.Node is not null)
+		if (Node is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Node = ");
-			sb.Append("\"");
-			sb.Append(instance.Node);
-			sb.Append("\"");
+			__init.Property("Node");
+			writer.WriteString(Node);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Primary = ");
-			sb.Append(instance.Primary ? "true" : "false");
+			__init.Property("Primary");
+			writer.WriteValue(Primary);
 		}
 
-		if (instance.RecoverySource is not null)
+		if (RecoverySource is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RecoverySource = ");
-			sb.Append("new()");
-			RequestConverter.CodeFormatter.FormatCode(instance.RecoverySource, (k, sb) => { sb.Append("\""); sb.Append(k); sb.Append("\""); }, (v, sb) => { sb.Append("\""); sb.Append(v); sb.Append("\""); }, sb);
+			__init.Property("RecoverySource");
+			writer.Write("new() ");
+			writer.WriteInlineList(RecoverySource, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		if (instance.RelocatingNode is not null)
+		if (RelocatingNode is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RelocatingNode = ");
-			sb.Append("\"");
-			sb.Append(instance.RelocatingNode);
-			sb.Append("\"");
+			__init.Property("RelocatingNode");
+			writer.WriteString(RelocatingNode);
 		}
 
-		if (instance.RelocationFailureInfo is not null)
+		if (RelocationFailureInfo is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RelocationFailureInfo = ");
-			instance.RelocationFailureInfo.FormatCode(sb);
+			__init.Property("RelocationFailureInfo");
+			RelocationFailureInfo.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Shard = ");
-			sb.Append(instance.Shard);
+			__init.Property("Shard");
+			writer.WriteValue(Shard);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("State = ");
-			Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingStateCodeFormatter.FormatCode(instance.State, sb);
+			__init.Property("State");
+			Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingStateCodeFormatter.FormatCode(State, writer);
 		}
 
-		if (instance.UnassignedInfo is not null)
+		if (UnassignedInfo is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UnassignedInfo = ");
-			instance.UnassignedInfo.FormatCode(sb);
+			__init.Property("UnassignedInfo");
+			UnassignedInfo.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

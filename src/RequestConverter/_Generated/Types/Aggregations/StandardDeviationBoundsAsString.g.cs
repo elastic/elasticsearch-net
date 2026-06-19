@@ -25,66 +25,39 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class StandardDeviationBoundsAsString : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Lower = ");
-			sb.Append("\"");
-			sb.Append(instance.Lower);
-			sb.Append("\"");
+			__init.Property("Lower");
+			writer.WriteString(Lower);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LowerPopulation = ");
-			sb.Append("\"");
-			sb.Append(instance.LowerPopulation);
-			sb.Append("\"");
+			__init.Property("LowerPopulation");
+			writer.WriteString(LowerPopulation);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("LowerSampling = ");
-			sb.Append("\"");
-			sb.Append(instance.LowerSampling);
-			sb.Append("\"");
+			__init.Property("LowerSampling");
+			writer.WriteString(LowerSampling);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Upper = ");
-			sb.Append("\"");
-			sb.Append(instance.Upper);
-			sb.Append("\"");
+			__init.Property("Upper");
+			writer.WriteString(Upper);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UpperPopulation = ");
-			sb.Append("\"");
-			sb.Append(instance.UpperPopulation);
-			sb.Append("\"");
+			__init.Property("UpperPopulation");
+			writer.WriteString(UpperPopulation);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("UpperSampling = ");
-			sb.Append("\"");
-			sb.Append(instance.UpperSampling);
-			sb.Append("\"");
+			__init.Property("UpperSampling");
+			writer.WriteString(UpperSampling);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

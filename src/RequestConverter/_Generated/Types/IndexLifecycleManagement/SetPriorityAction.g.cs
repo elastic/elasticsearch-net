@@ -25,20 +25,15 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
 public partial class SetPriorityAction : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.Priority is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (Priority is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Priority = ");
-			sb.Append(instance.Priority.Value);
+			__init.Property("Priority");
+			writer.WriteValue(Priority.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

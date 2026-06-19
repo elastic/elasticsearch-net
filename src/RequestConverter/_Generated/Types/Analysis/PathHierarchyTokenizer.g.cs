@@ -25,66 +25,45 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public partial class PathHierarchyTokenizer : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.BufferSize is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (BufferSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BufferSize = ");
-			sb.Append(instance.BufferSize.Value);
+			__init.Property("BufferSize");
+			writer.WriteValue(BufferSize.Value);
 		}
 
-		if (instance.Delimiter is not null)
+		if (Delimiter is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Delimiter = ");
-			sb.Append("\"");
-			sb.Append(instance.Delimiter);
-			sb.Append("\"");
+			__init.Property("Delimiter");
+			writer.WriteString(Delimiter);
 		}
 
-		if (instance.Replacement is not null)
+		if (Replacement is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Replacement = ");
-			sb.Append("\"");
-			sb.Append(instance.Replacement);
-			sb.Append("\"");
+			__init.Property("Replacement");
+			writer.WriteString(Replacement);
 		}
 
-		if (instance.Reverse is not null)
+		if (Reverse is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Reverse = ");
-			sb.Append(instance.Reverse.Value ? "true" : "false");
+			__init.Property("Reverse");
+			writer.WriteValue(Reverse.Value);
 		}
 
-		if (instance.Skip is not null)
+		if (Skip is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Skip = ");
-			sb.Append(instance.Skip.Value);
+			__init.Property("Skip");
+			writer.WriteValue(Skip.Value);
 		}
 
-		if (instance.Version is not null)
+		if (Version is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Version = ");
-			sb.Append("\"");
-			sb.Append(instance.Version);
-			sb.Append("\"");
+			__init.Property("Version");
+			writer.WriteString(Version);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

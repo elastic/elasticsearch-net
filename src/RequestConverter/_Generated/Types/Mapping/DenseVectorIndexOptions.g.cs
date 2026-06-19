@@ -25,60 +25,51 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public partial class DenseVectorIndexOptions : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.ConfidenceInterval is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (ConfidenceInterval is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ConfidenceInterval = ");
-			sb.Append(instance.ConfidenceInterval.Value);
-			sb.Append("f");
+			__init.Property("ConfidenceInterval");
+			writer.WriteValue(ConfidenceInterval.Value);
+			writer.Write("f");
 		}
 
-		if (instance.EfConstruction is not null)
+		if (EfConstruction is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("EfConstruction = ");
-			sb.Append(instance.EfConstruction.Value);
+			__init.Property("EfConstruction");
+			writer.WriteValue(EfConstruction.Value);
 		}
 
-		if (instance.M is not null)
+		if (FlatIndexThreshold is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("M = ");
-			sb.Append(instance.M.Value);
+			__init.Property("FlatIndexThreshold");
+			writer.WriteValue(FlatIndexThreshold.Value);
 		}
 
-		if (instance.OnDiskRescore is not null)
+		if (M is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OnDiskRescore = ");
-			sb.Append(instance.OnDiskRescore.Value ? "true" : "false");
+			__init.Property("M");
+			writer.WriteValue(M.Value);
 		}
 
-		if (instance.RescoreVector is not null)
+		if (OnDiskRescore is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RescoreVector = ");
-			instance.RescoreVector.FormatCode(sb);
+			__init.Property("OnDiskRescore");
+			writer.WriteValue(OnDiskRescore.Value);
+		}
+
+		if (RescoreVector is not null)
+		{
+			__init.Property("RescoreVector");
+			RescoreVector.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsTypeCodeFormatter.FormatCode(instance.Type, sb);
+			__init.Property("Type");
+			Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsTypeCodeFormatter.FormatCode(Type, writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

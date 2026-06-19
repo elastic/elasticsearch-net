@@ -25,143 +25,102 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class MergesStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Current = ");
-			sb.Append(instance.Current);
-			sb.Append("L");
+			__init.Property("Current");
+			writer.WriteValue(Current);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CurrentDocs = ");
-			sb.Append(instance.CurrentDocs);
-			sb.Append("L");
+			__init.Property("CurrentDocs");
+			writer.WriteValue(CurrentDocs);
+			writer.Write("L");
 		}
 
-		if (instance.CurrentSize is not null)
+		if (CurrentSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CurrentSize = ");
-			sb.Append("\"");
-			sb.Append(instance.CurrentSize);
-			sb.Append("\"");
+			__init.Property("CurrentSize");
+			writer.WriteString(CurrentSize);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CurrentSizeInBytes = ");
-			sb.Append(instance.CurrentSizeInBytes);
-			sb.Append("L");
+			__init.Property("CurrentSizeInBytes");
+			writer.WriteValue(CurrentSizeInBytes);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Total = ");
-			sb.Append(instance.Total);
-			sb.Append("L");
+			__init.Property("Total");
+			writer.WriteValue(Total);
+			writer.Write("L");
 		}
 
-		if (instance.TotalAutoThrottle is not null)
+		if (TotalAutoThrottle is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalAutoThrottle = ");
-			sb.Append("\"");
-			sb.Append(instance.TotalAutoThrottle);
-			sb.Append("\"");
+			__init.Property("TotalAutoThrottle");
+			writer.WriteString(TotalAutoThrottle);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalAutoThrottleInBytes = ");
-			sb.Append(instance.TotalAutoThrottleInBytes);
-			sb.Append("L");
+			__init.Property("TotalAutoThrottleInBytes");
+			writer.WriteValue(TotalAutoThrottleInBytes);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalDocs = ");
-			sb.Append(instance.TotalDocs);
-			sb.Append("L");
+			__init.Property("TotalDocs");
+			writer.WriteValue(TotalDocs);
+			writer.Write("L");
 		}
 
-		if (instance.TotalSize is not null)
+		if (TotalSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalSize = ");
-			sb.Append("\"");
-			sb.Append(instance.TotalSize);
-			sb.Append("\"");
+			__init.Property("TotalSize");
+			writer.WriteString(TotalSize);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalSizeInBytes = ");
-			sb.Append(instance.TotalSizeInBytes);
-			sb.Append("L");
+			__init.Property("TotalSizeInBytes");
+			writer.WriteValue(TotalSizeInBytes);
+			writer.Write("L");
 		}
 
-		if (instance.TotalStoppedTime is not null)
+		if (TotalStoppedTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalStoppedTime = ");
-			instance.TotalStoppedTime.FormatCode(sb);
+			__init.Property("TotalStoppedTime");
+			TotalStoppedTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalStoppedTimeInMillis = ");
-			sb.Append(instance.TotalStoppedTimeInMillis);
+			__init.Property("TotalStoppedTimeInMillis");
+			writer.WriteValue(TotalStoppedTimeInMillis);
 		}
 
-		if (instance.TotalThrottledTime is not null)
+		if (TotalThrottledTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalThrottledTime = ");
-			instance.TotalThrottledTime.FormatCode(sb);
+			__init.Property("TotalThrottledTime");
+			TotalThrottledTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalThrottledTimeInMillis = ");
-			sb.Append(instance.TotalThrottledTimeInMillis);
+			__init.Property("TotalThrottledTimeInMillis");
+			writer.WriteValue(TotalThrottledTimeInMillis);
 		}
 
-		if (instance.TotalTime is not null)
+		if (TotalTime is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalTime = ");
-			instance.TotalTime.FormatCode(sb);
+			__init.Property("TotalTime");
+			TotalTime.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("TotalTimeInMillis = ");
-			sb.Append(instance.TotalTimeInMillis);
+			__init.Property("TotalTimeInMillis");
+			writer.WriteValue(TotalTimeInMillis);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

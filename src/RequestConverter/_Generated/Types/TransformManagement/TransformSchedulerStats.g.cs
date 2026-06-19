@@ -25,29 +25,20 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
 public partial class TransformSchedulerStats : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.PeekTransform is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (PeekTransform is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PeekTransform = ");
-			sb.Append("\"");
-			sb.Append(instance.PeekTransform);
-			sb.Append("\"");
+			__init.Property("PeekTransform");
+			writer.WriteString(PeekTransform);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RegisteredTransformCount = ");
-			sb.Append(instance.RegisteredTransformCount);
+			__init.Property("RegisteredTransformCount");
+			writer.WriteValue(RegisteredTransformCount);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

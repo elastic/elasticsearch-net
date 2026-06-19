@@ -25,26 +25,19 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public partial class ClusterProcess : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Cpu = ");
-			instance.Cpu.FormatCode(sb);
+			__init.Property("Cpu");
+			Cpu.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OpenFileDescriptors = ");
-			instance.OpenFileDescriptors.FormatCode(sb);
+			__init.Property("OpenFileDescriptors");
+			OpenFileDescriptors.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,30 +25,30 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public static class FunctionBoostModeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Avg:
-				sb.Append("FunctionBoostMode.Avg");
+				writer.Write("FunctionBoostMode.Avg");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Max:
-				sb.Append("FunctionBoostMode.Max");
+				writer.Write("FunctionBoostMode.Max");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Min:
-				sb.Append("FunctionBoostMode.Min");
+				writer.Write("FunctionBoostMode.Min");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Multiply:
-				sb.Append("FunctionBoostMode.Multiply");
+				writer.Write("FunctionBoostMode.Multiply");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Replace:
-				sb.Append("FunctionBoostMode.Replace");
+				writer.Write("FunctionBoostMode.Replace");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Sum:
-				sb.Append("FunctionBoostMode.Sum");
+				writer.Write("FunctionBoostMode.Sum");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

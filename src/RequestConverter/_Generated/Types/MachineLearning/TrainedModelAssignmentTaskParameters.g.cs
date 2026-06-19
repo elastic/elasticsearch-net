@@ -25,87 +25,60 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public partial class TrainedModelAssignmentTaskParameters : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
-		if (instance.CacheSize is not null)
+		var __init = writer.BeginObjectInitializer();
+		if (CacheSize is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("CacheSize = ");
-			instance.CacheSize.FormatCode(sb);
+			__init.Property("CacheSize");
+			CacheSize.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DeploymentId = ");
-			sb.Append("\"");
-			sb.Append(instance.DeploymentId);
-			sb.Append("\"");
+			__init.Property("DeploymentId");
+			writer.WriteString(DeploymentId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelBytes = ");
-			instance.ModelBytes.FormatCode(sb);
+			__init.Property("ModelBytes");
+			ModelBytes.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ModelId = ");
-			sb.Append("\"");
-			sb.Append(instance.ModelId);
-			sb.Append("\"");
+			__init.Property("ModelId");
+			writer.WriteString(ModelId);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("NumberOfAllocations = ");
-			sb.Append(instance.NumberOfAllocations);
+			__init.Property("NumberOfAllocations");
+			writer.WriteValue(NumberOfAllocations);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PerAllocationMemoryBytes = ");
-			instance.PerAllocationMemoryBytes.FormatCode(sb);
+			__init.Property("PerAllocationMemoryBytes");
+			PerAllocationMemoryBytes.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PerDeploymentMemoryBytes = ");
-			instance.PerDeploymentMemoryBytes.FormatCode(sb);
+			__init.Property("PerDeploymentMemoryBytes");
+			PerDeploymentMemoryBytes.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Priority = ");
-			Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriorityCodeFormatter.FormatCode(instance.Priority, sb);
+			__init.Property("Priority");
+			Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriorityCodeFormatter.FormatCode(Priority, writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("QueueCapacity = ");
-			sb.Append(instance.QueueCapacity);
+			__init.Property("QueueCapacity");
+			writer.WriteValue(QueueCapacity);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("ThreadsPerAllocation = ");
-			sb.Append(instance.ThreadsPerAllocation);
+			__init.Property("ThreadsPerAllocation");
+			writer.WriteValue(ThreadsPerAllocation);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

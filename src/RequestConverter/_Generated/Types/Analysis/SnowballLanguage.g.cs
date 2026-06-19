@@ -25,93 +25,93 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public static class SnowballLanguageCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Arabic:
-				sb.Append("SnowballLanguage.Arabic");
+				writer.Write("SnowballLanguage.Arabic");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Armenian:
-				sb.Append("SnowballLanguage.Armenian");
+				writer.Write("SnowballLanguage.Armenian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Basque:
-				sb.Append("SnowballLanguage.Basque");
+				writer.Write("SnowballLanguage.Basque");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Catalan:
-				sb.Append("SnowballLanguage.Catalan");
+				writer.Write("SnowballLanguage.Catalan");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Danish:
-				sb.Append("SnowballLanguage.Danish");
+				writer.Write("SnowballLanguage.Danish");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Dutch:
-				sb.Append("SnowballLanguage.Dutch");
+				writer.Write("SnowballLanguage.Dutch");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.English:
-				sb.Append("SnowballLanguage.English");
+				writer.Write("SnowballLanguage.English");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Estonian:
-				sb.Append("SnowballLanguage.Estonian");
+				writer.Write("SnowballLanguage.Estonian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Finnish:
-				sb.Append("SnowballLanguage.Finnish");
+				writer.Write("SnowballLanguage.Finnish");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.French:
-				sb.Append("SnowballLanguage.French");
+				writer.Write("SnowballLanguage.French");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.German:
-				sb.Append("SnowballLanguage.German");
+				writer.Write("SnowballLanguage.German");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.German2:
-				sb.Append("SnowballLanguage.German2");
+				writer.Write("SnowballLanguage.German2");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Hungarian:
-				sb.Append("SnowballLanguage.Hungarian");
+				writer.Write("SnowballLanguage.Hungarian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Irish:
-				sb.Append("SnowballLanguage.Irish");
+				writer.Write("SnowballLanguage.Irish");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Italian:
-				sb.Append("SnowballLanguage.Italian");
+				writer.Write("SnowballLanguage.Italian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Kp:
-				sb.Append("SnowballLanguage.Kp");
+				writer.Write("SnowballLanguage.Kp");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Lithuanian:
-				sb.Append("SnowballLanguage.Lithuanian");
+				writer.Write("SnowballLanguage.Lithuanian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Lovins:
-				sb.Append("SnowballLanguage.Lovins");
+				writer.Write("SnowballLanguage.Lovins");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Norwegian:
-				sb.Append("SnowballLanguage.Norwegian");
+				writer.Write("SnowballLanguage.Norwegian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Porter:
-				sb.Append("SnowballLanguage.Porter");
+				writer.Write("SnowballLanguage.Porter");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Portuguese:
-				sb.Append("SnowballLanguage.Portuguese");
+				writer.Write("SnowballLanguage.Portuguese");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Romanian:
-				sb.Append("SnowballLanguage.Romanian");
+				writer.Write("SnowballLanguage.Romanian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Russian:
-				sb.Append("SnowballLanguage.Russian");
+				writer.Write("SnowballLanguage.Russian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Serbian:
-				sb.Append("SnowballLanguage.Serbian");
+				writer.Write("SnowballLanguage.Serbian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Spanish:
-				sb.Append("SnowballLanguage.Spanish");
+				writer.Write("SnowballLanguage.Spanish");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Swedish:
-				sb.Append("SnowballLanguage.Swedish");
+				writer.Write("SnowballLanguage.Swedish");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Turkish:
-				sb.Append("SnowballLanguage.Turkish");
+				writer.Write("SnowballLanguage.Turkish");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

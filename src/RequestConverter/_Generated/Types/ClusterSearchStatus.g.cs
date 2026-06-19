@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch;
 
 public static class ClusterSearchStatusCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.ClusterSearchStatus instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.ClusterSearchStatus instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.ClusterSearchStatus.Failed:
-				sb.Append("ClusterSearchStatus.Failed");
+				writer.Write("ClusterSearchStatus.Failed");
 				break;
 			case Elastic.Clients.Elasticsearch.ClusterSearchStatus.Partial:
-				sb.Append("ClusterSearchStatus.Partial");
+				writer.Write("ClusterSearchStatus.Partial");
 				break;
 			case Elastic.Clients.Elasticsearch.ClusterSearchStatus.Running:
-				sb.Append("ClusterSearchStatus.Running");
+				writer.Write("ClusterSearchStatus.Running");
 				break;
 			case Elastic.Clients.Elasticsearch.ClusterSearchStatus.Skipped:
-				sb.Append("ClusterSearchStatus.Skipped");
+				writer.Write("ClusterSearchStatus.Skipped");
 				break;
 			case Elastic.Clients.Elasticsearch.ClusterSearchStatus.Successful:
-				sb.Append("ClusterSearchStatus.Successful");
+				writer.Write("ClusterSearchStatus.Successful");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

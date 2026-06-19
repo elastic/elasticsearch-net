@@ -25,19 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class FoundStatus : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Found = ");
-			sb.Append(instance.Found ? "true" : "false");
+			__init.Property("Found");
+			writer.WriteValue(Found);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

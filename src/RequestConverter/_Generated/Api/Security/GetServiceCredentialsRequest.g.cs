@@ -25,28 +25,19 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class GetServiceCredentialsRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Namespace = ");
-			sb.Append("\"");
-			sb.Append(instance.Namespace);
-			sb.Append("\"");
+			__init.Property("Namespace");
+			writer.WriteString(Namespace);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Service = ");
-			instance.Service.FormatCode(sb);
+			__init.Property("Service");
+			Service.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

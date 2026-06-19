@@ -25,79 +25,50 @@ namespace Elastic.Clients.Elasticsearch.Rollup;
 
 public partial class RollupJobConfiguration : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Cron = ");
-			sb.Append("\"");
-			sb.Append(instance.Cron);
-			sb.Append("\"");
+			__init.Property("Cron");
+			writer.WriteString(Cron);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Groups = ");
-			instance.Groups.FormatCode(sb);
+			__init.Property("Groups");
+			Groups.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			sb.Append("\"");
-			sb.Append(instance.Id);
-			sb.Append("\"");
+			__init.Property("Id");
+			writer.WriteString(Id);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IndexPattern = ");
-			sb.Append("\"");
-			sb.Append(instance.IndexPattern);
-			sb.Append("\"");
+			__init.Property("IndexPattern");
+			writer.WriteString(IndexPattern);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Metrics = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Metrics, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("Metrics");
+			writer.WriteInlineList(Metrics, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("PageSize = ");
-			sb.Append(instance.PageSize);
-			sb.Append("L");
+			__init.Property("PageSize");
+			writer.WriteValue(PageSize);
+			writer.Write("L");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("RollupIndex = ");
-			sb.Append("\"");
-			sb.Append(instance.RollupIndex);
-			sb.Append("\"");
+			__init.Property("RollupIndex");
+			writer.WriteString(RollupIndex);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Timeout = ");
-			instance.Timeout.FormatCode(sb);
+			__init.Property("Timeout");
+			Timeout.FormatCode(writer);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

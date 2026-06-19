@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public static class SuggestSortCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.Search.SuggestSort instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Core.Search.SuggestSort instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.Search.SuggestSort.Frequency:
-				sb.Append("SuggestSort.Frequency");
+				writer.Write("SuggestSort.Frequency");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.SuggestSort.Score:
-				sb.Append("SuggestSort.Score");
+				writer.Write("SuggestSort.Score");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

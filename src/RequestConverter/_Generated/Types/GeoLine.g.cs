@@ -25,30 +25,19 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class GeoLine : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Coordinates = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Coordinates, (item, sb) => { sb.Append("["); RequestConverter.CodeFormatter.FormatCode(item, (item, sb) => { sb.Append(item); sb.Append("d"); }, sb); sb.Append("]"); }, sb);
-			sb.Append("]");
+			__init.Property("Coordinates");
+			writer.WriteInlineList(Coordinates, (w, item) => { w.WriteInlineList(item, (w, item) => { w.WriteValue(item); w.Write("d"); }); });
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Type = ");
-			sb.Append("\"");
-			sb.Append(instance.Type);
-			sb.Append("\"");
+			__init.Property("Type");
+			writer.WriteString(Type);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

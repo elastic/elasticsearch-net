@@ -25,36 +25,31 @@ namespace Elastic.Clients.Elasticsearch.Synonyms;
 
 public partial class PutSynonymRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			instance.Id.FormatCode(sb);
+			__init.Property("Id");
+			Id.FormatCode(writer);
 		}
 
-		if (instance.Refresh is not null)
+		if (Append is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Refresh = ");
-			sb.Append(instance.Refresh.Value ? "true" : "false");
+			__init.Property("Append");
+			writer.WriteValue(Append.Value);
+		}
+
+		if (Refresh is not null)
+		{
+			__init.Property("Refresh");
+			writer.WriteValue(Refresh.Value);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("SynonymsSet = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.SynonymsSet, (item, sb) => { item.FormatCode(sb); }, sb);
-			sb.Append("]");
+			__init.Property("SynonymsSet");
+			writer.WriteInlineList(SynonymsSet, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,26 +25,19 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class ChiSquareHeuristic : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("BackgroundIsSuperset = ");
-			sb.Append(instance.BackgroundIsSuperset ? "true" : "false");
+			__init.Property("BackgroundIsSuperset");
+			writer.WriteValue(BackgroundIsSuperset);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("IncludeNegatives = ");
-			sb.Append(instance.IncludeNegatives ? "true" : "false");
+			__init.Property("IncludeNegatives");
+			writer.WriteValue(IncludeNegatives);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

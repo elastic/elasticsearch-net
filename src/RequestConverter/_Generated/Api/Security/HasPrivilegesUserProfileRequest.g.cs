@@ -25,28 +25,19 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public partial class HasPrivilegesUserProfileRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Privileges = ");
-			instance.Privileges.FormatCode(sb);
+			__init.Property("Privileges");
+			Privileges.FormatCode(writer);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Uids = ");
-			sb.Append("[");
-			RequestConverter.CodeFormatter.FormatCode(instance.Uids, (item, sb) => { sb.Append("\""); sb.Append(item); sb.Append("\""); }, sb);
-			sb.Append("]");
+			__init.Property("Uids");
+			writer.WriteInlineList(Uids, (w, item) => { w.WriteString(item); });
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

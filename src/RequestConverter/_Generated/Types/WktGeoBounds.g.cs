@@ -25,21 +25,14 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class WktGeoBounds : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Wkt = ");
-			sb.Append("\"");
-			sb.Append(instance.Wkt);
-			sb.Append("\"");
+			__init.Property("Wkt");
+			writer.WriteString(Wkt);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

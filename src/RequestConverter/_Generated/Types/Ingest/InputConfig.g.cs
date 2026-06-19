@@ -25,30 +25,19 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public partial class InputConfig : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("InputField = ");
-			sb.Append("\"");
-			sb.Append(instance.InputField);
-			sb.Append("\"");
+			__init.Property("InputField");
+			writer.WriteString(InputField);
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("OutputField = ");
-			sb.Append("\"");
-			sb.Append(instance.OutputField);
-			sb.Append("\"");
+			__init.Property("OutputField");
+			writer.WriteString(OutputField);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

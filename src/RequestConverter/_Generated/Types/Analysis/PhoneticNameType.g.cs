@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public static class PhoneticNameTypeCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType.Ashkenazi:
-				sb.Append("PhoneticNameType.Ashkenazi");
+				writer.Write("PhoneticNameType.Ashkenazi");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType.Generic:
-				sb.Append("PhoneticNameType.Generic");
+				writer.Write("PhoneticNameType.Generic");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType.Sephardic:
-				sb.Append("PhoneticNameType.Sephardic");
+				writer.Write("PhoneticNameType.Sephardic");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}

@@ -25,27 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Esql;
 
 public partial class AsyncQueryStopRequest : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(System.Text.StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var instance = this;
-		sb.Append("new()");
-		var hasProps = false;
+		var __init = writer.BeginObjectInitializer();
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("Id = ");
-			instance.Id.FormatCode(sb);
+			__init.Property("Id");
+			Id.FormatCode(writer);
 		}
 
-		if (instance.DropNullColumns is not null)
+		if (DropNullColumns is not null)
 		{
-			sb.Append(hasProps ? ", " : " { ");
-			hasProps = true;
-			sb.Append("DropNullColumns = ");
-			sb.Append(instance.DropNullColumns.Value ? "true" : "false");
+			__init.Property("DropNullColumns");
+			writer.WriteValue(DropNullColumns.Value);
 		}
 
-		if (hasProps)
-			sb.Append(" }");
+		__init.Dispose();
 	}
 }

@@ -25,36 +25,36 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public static class CalendarIntervalCodeFormatter
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval instance, System.Text.StringBuilder sb)
+	public static void FormatCode(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval instance, RequestConverter.CodeWriter writer)
 	{
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Day:
-				sb.Append("CalendarInterval.Day");
+				writer.Write("CalendarInterval.Day");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Hour:
-				sb.Append("CalendarInterval.Hour");
+				writer.Write("CalendarInterval.Hour");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Minute:
-				sb.Append("CalendarInterval.Minute");
+				writer.Write("CalendarInterval.Minute");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Month:
-				sb.Append("CalendarInterval.Month");
+				writer.Write("CalendarInterval.Month");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Quarter:
-				sb.Append("CalendarInterval.Quarter");
+				writer.Write("CalendarInterval.Quarter");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Second:
-				sb.Append("CalendarInterval.Second");
+				writer.Write("CalendarInterval.Second");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Week:
-				sb.Append("CalendarInterval.Week");
+				writer.Write("CalendarInterval.Week");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Year:
-				sb.Append("CalendarInterval.Year");
+				writer.Write("CalendarInterval.Year");
 				break;
 			default:
-				sb.Append(instance.ToString());
+				writer.Write(instance.ToString());
 				break;
 		}
 	}
