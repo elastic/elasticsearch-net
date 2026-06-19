@@ -27,7 +27,7 @@ public partial class DataframeEvaluationClassification : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DataframeEvaluationClassification");
 		{
 			__init.Property("ActualField");
 			ActualField.FormatCode(writer);

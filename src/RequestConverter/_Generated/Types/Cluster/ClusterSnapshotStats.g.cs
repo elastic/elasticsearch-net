@@ -27,7 +27,7 @@ public partial class ClusterSnapshotStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ClusterSnapshotStats");
 		{
 			__init.Property("CurrentCounts");
 			CurrentCounts.FormatCode(writer);

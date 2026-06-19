@@ -27,7 +27,7 @@ public partial class TypeFieldMappings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("TypeFieldMappings");
 		{
 			__init.Property("Mappings");
 			writer.Write("new() ");

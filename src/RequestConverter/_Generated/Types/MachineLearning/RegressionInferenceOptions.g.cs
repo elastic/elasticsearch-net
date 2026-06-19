@@ -27,7 +27,7 @@ public partial class RegressionInferenceOptions : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("RegressionInferenceOptions");
 		if (NumTopFeatureImportanceValues is not null)
 		{
 			__init.Property("NumTopFeatureImportanceValues");

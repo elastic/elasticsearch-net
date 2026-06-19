@@ -27,7 +27,7 @@ public partial class ModelSnapshotUpgrade : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ModelSnapshotUpgrade");
 		{
 			__init.Property("AssignmentExplanation");
 			writer.WriteString(AssignmentExplanation);

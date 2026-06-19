@@ -27,7 +27,7 @@ public partial class ResolveClusterInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ResolveClusterInfo");
 		{
 			__init.Property("Connected");
 			writer.WriteValue(Connected);

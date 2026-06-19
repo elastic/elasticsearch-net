@@ -27,7 +27,7 @@ public partial class RankEvalMetricDiscountedCumulativeGain : RequestConverter.I
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("RankEvalMetricDiscountedCumulativeGain");
 		if (K is not null)
 		{
 			__init.Property("K");

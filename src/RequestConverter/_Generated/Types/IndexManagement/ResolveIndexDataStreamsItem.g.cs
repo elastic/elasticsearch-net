@@ -27,7 +27,7 @@ public partial class ResolveIndexDataStreamsItem : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ResolveIndexDataStreamsItem");
 		{
 			__init.Property("BackingIndices");
 			writer.WriteInlineList(BackingIndices, (w, item) => { w.WriteString(item); });

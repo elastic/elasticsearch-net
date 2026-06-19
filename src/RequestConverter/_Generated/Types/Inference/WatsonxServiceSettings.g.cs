@@ -27,7 +27,7 @@ public partial class WatsonxServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("WatsonxServiceSettings");
 		{
 			__init.Property("ApiKey");
 			writer.WriteString(ApiKey);

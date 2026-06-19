@@ -27,7 +27,7 @@ public partial class NodeInfoXpackSecurityAuthc : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("NodeInfoXpackSecurityAuthc");
 		if (Realms is not null)
 		{
 			__init.Property("Realms");

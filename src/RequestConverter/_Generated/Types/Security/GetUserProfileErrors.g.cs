@@ -27,7 +27,7 @@ public partial class GetUserProfileErrors : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("GetUserProfileErrors");
 		{
 			__init.Property("Count");
 			writer.WriteValue(Count);

@@ -27,7 +27,7 @@ public partial class AsyncSearch<TDocument> : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("AsyncSearch<TDocument>");
 		if (Aggregations is not null)
 		{
 			__init.Property("Aggregations");

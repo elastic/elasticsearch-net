@@ -27,7 +27,7 @@ public partial class PutGooglevertexaiRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("PutGooglevertexaiRequest");
 		{
 			__init.Property("GooglevertexaiInferenceId");
 			GooglevertexaiInferenceId.FormatCode(writer);

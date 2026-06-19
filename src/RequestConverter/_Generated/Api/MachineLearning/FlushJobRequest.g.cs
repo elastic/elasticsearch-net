@@ -27,7 +27,7 @@ public partial class FlushJobRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("FlushJobRequest");
 		{
 			__init.Property("JobId");
 			JobId.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class AnomalyDetectors : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("AnomalyDetectors");
 		{
 			__init.Property("CategorizationAnalyzer");
 			CategorizationAnalyzer.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class DataframeRegressionSummary : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DataframeRegressionSummary");
 		if (Huber is not null)
 		{
 			__init.Property("Huber");

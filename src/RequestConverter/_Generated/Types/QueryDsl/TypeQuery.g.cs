@@ -27,7 +27,7 @@ public partial class TypeQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("TypeQuery");
 		if (Boost is not null)
 		{
 			__init.Property("Boost");

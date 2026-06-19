@@ -27,7 +27,7 @@ public partial class IndexAndDataStreamAction : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("IndexAndDataStreamAction");
 		{
 			__init.Property("DataStream");
 			DataStream.FormatCode(writer);

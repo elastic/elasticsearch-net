@@ -27,7 +27,7 @@ public partial class Cgroup : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("Cgroup");
 		if (Cpu is not null)
 		{
 			__init.Property("Cpu");

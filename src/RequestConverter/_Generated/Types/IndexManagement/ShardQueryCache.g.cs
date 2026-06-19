@@ -27,7 +27,7 @@ public partial class ShardQueryCache : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ShardQueryCache");
 		{
 			__init.Property("CacheCount");
 			writer.WriteValue(CacheCount);

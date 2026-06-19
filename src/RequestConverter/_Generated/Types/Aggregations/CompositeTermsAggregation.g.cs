@@ -27,7 +27,7 @@ public partial class CompositeTermsAggregation : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("CompositeTermsAggregation");
 		if (Field is not null)
 		{
 			__init.Property("Field");

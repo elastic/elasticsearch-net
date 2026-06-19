@@ -27,7 +27,7 @@ public partial class FrequentItemSetsAggregate : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("FrequentItemSetsAggregate");
 		{
 			__init.Property("Buckets");
 			writer.WriteInlineList(Buckets, (w, item) => { item.FormatCode(w); });

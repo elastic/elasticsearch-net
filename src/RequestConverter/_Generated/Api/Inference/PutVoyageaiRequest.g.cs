@@ -27,7 +27,7 @@ public partial class PutVoyageaiRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("PutVoyageaiRequest");
 		{
 			__init.Property("TaskType");
 			Elastic.Clients.Elasticsearch.Inference.VoyageAITaskTypeCodeFormatter.FormatCode(TaskType, writer);

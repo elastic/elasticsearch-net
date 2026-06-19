@@ -27,7 +27,7 @@ public partial class Ingest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("Ingest");
 		if (Pipeline is not null)
 		{
 			__init.Property("Pipeline");

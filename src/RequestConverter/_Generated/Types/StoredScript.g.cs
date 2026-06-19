@@ -27,7 +27,7 @@ public partial class StoredScript : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("StoredScript");
 		{
 			__init.Property("Language");
 			Language.FormatCode(writer);

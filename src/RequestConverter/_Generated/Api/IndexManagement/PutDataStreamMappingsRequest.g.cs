@@ -27,7 +27,7 @@ public partial class PutDataStreamMappingsRequest : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("PutDataStreamMappingsRequest");
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

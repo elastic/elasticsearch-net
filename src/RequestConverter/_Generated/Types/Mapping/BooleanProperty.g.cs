@@ -27,7 +27,7 @@ public partial class BooleanProperty : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("BooleanProperty");
 		if (Boost is not null)
 		{
 			__init.Property("Boost");

@@ -27,7 +27,7 @@ public partial class QueryUserRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("QueryUserRequest");
 		if (WithProfileUid is not null)
 		{
 			__init.Property("WithProfileUid");

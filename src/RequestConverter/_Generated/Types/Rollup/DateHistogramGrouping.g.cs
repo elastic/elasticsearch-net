@@ -27,7 +27,7 @@ public partial class DateHistogramGrouping : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DateHistogramGrouping");
 		if (CalendarInterval is not null)
 		{
 			__init.Property("CalendarInterval");

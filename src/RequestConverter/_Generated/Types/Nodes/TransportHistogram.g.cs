@@ -27,7 +27,7 @@ public partial class TransportHistogram : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("TransportHistogram");
 		if (Count is not null)
 		{
 			__init.Property("Count");

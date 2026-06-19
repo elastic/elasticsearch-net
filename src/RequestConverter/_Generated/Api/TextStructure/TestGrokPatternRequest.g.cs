@@ -27,7 +27,7 @@ public partial class TestGrokPatternRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("TestGrokPatternRequest");
 		if (EcsCompatibility is not null)
 		{
 			__init.Property("EcsCompatibility");

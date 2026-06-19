@@ -27,7 +27,7 @@ public partial class ShardsCapacityIndicatorDetails : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ShardsCapacityIndicatorDetails");
 		{
 			__init.Property("Data");
 			Data.FormatCode(writer);

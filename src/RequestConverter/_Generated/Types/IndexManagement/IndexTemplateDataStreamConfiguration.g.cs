@@ -27,7 +27,7 @@ public partial class IndexTemplateDataStreamConfiguration : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("IndexTemplateDataStreamConfiguration");
 		if (AllowCustomRouting is not null)
 		{
 			__init.Property("AllowCustomRouting");

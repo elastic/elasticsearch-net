@@ -27,7 +27,7 @@ public partial class QueryRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("QueryRequest");
 		if (Format is not null)
 		{
 			__init.Property("Format");

@@ -27,7 +27,7 @@ public partial class CCSUsageTimeValue : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("CCSUsageTimeValue");
 		{
 			__init.Property("Avg");
 			writer.WriteValue(Avg);

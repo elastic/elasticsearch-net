@@ -27,7 +27,7 @@ public partial class MappingLimitSettingsDepth : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("MappingLimitSettingsDepth");
 		if (Limit is not null)
 		{
 			__init.Property("Limit");

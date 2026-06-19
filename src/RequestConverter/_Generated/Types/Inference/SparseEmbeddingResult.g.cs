@@ -27,7 +27,7 @@ public partial class SparseEmbeddingResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SparseEmbeddingResult");
 		{
 			__init.Property("Embedding");
 			writer.Write("new() ");

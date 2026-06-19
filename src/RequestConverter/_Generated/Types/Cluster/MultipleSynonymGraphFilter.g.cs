@@ -27,7 +27,7 @@ public partial class MultipleSynonymGraphFilter : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("MultipleSynonymGraphFilter");
 		if (AnalyzerCount is not null)
 		{
 			__init.Property("AnalyzerCount");

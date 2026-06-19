@@ -27,7 +27,7 @@ public partial class PutTrainedModelAliasRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("PutTrainedModelAliasRequest");
 		{
 			__init.Property("ModelAlias");
 			ModelAlias.FormatCode(writer);

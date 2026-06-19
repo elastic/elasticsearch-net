@@ -27,7 +27,7 @@ public partial class CancelReindexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("CancelReindexRequest");
 		{
 			__init.Property("TaskId");
 			TaskId.FormatCode(writer);

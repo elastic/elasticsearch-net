@@ -27,7 +27,7 @@ public partial class NodeInfoSettingsTransport : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("NodeInfoSettingsTransport");
 		if (Features is not null)
 		{
 			__init.Property("Features");

@@ -27,7 +27,7 @@ public partial class ClusterProcessCpu : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ClusterProcessCpu");
 		{
 			__init.Property("Percent");
 			writer.WriteValue(Percent);

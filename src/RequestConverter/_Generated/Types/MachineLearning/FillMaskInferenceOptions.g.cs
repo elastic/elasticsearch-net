@@ -27,7 +27,7 @@ public partial class FillMaskInferenceOptions : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("FillMaskInferenceOptions");
 		if (MaskToken is not null)
 		{
 			__init.Property("MaskToken");

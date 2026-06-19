@@ -27,7 +27,7 @@ public partial class ParentAggregate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ParentAggregate");
 		if (Aggregations is not null)
 		{
 			__init.Property("Aggregations");

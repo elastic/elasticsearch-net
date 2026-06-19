@@ -27,7 +27,7 @@ public partial class ParentReindexStatus : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ParentReindexStatus");
 		{
 			__init.Property("Batches");
 			writer.WriteValue(Batches);

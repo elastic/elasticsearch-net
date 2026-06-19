@@ -27,7 +27,7 @@ public partial class PutGeoipDatabaseRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("PutGeoipDatabaseRequest");
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class DataframeClassificationSummary : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DataframeClassificationSummary");
 		if (Accuracy is not null)
 		{
 			__init.Property("Accuracy");

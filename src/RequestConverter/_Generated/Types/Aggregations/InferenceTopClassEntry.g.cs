@@ -27,7 +27,7 @@ public partial class InferenceTopClassEntry : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("InferenceTopClassEntry");
 		{
 			__init.Property("ClassName");
 			ClassName.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class GeoLinePoint : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("GeoLinePoint");
 		{
 			__init.Property("Field");
 			Field.FormatCode(writer);

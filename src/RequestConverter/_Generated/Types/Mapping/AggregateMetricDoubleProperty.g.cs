@@ -27,7 +27,7 @@ public partial class AggregateMetricDoubleProperty : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("AggregateMetricDoubleProperty");
 		{
 			__init.Property("DefaultMetric");
 			writer.WriteString(DefaultMetric);

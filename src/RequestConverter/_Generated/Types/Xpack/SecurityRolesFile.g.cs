@@ -27,7 +27,7 @@ public partial class SecurityRolesFile : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SecurityRolesFile");
 		{
 			__init.Property("Dls");
 			writer.WriteValue(Dls);

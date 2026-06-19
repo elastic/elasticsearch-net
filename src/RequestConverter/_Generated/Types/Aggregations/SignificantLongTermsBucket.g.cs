@@ -27,7 +27,7 @@ public partial class SignificantLongTermsBucket : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SignificantLongTermsBucket");
 		if (Aggregations is not null)
 		{
 			__init.Property("Aggregations");

@@ -27,7 +27,7 @@ public partial class TrainedModelAssignmentTaskParameters : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("TrainedModelAssignmentTaskParameters");
 		if (CacheSize is not null)
 		{
 			__init.Property("CacheSize");

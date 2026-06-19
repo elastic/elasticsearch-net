@@ -27,7 +27,7 @@ public partial class MlInferenceIngestProcessor : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("MlInferenceIngestProcessor");
 		{
 			__init.Property("NumDocsProcessed");
 			NumDocsProcessed.FormatCode(writer);

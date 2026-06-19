@@ -27,7 +27,7 @@ public partial class ModifyDataStreamRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ModifyDataStreamRequest");
 		{
 			__init.Property("Actions");
 			writer.WriteInlineList(Actions, (w, item) => { item.FormatCode(w); });

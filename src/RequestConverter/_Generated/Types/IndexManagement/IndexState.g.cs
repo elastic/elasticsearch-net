@@ -27,7 +27,7 @@ public partial class IndexState : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("IndexState");
 		if (Aliases is not null)
 		{
 			__init.Property("Aliases");

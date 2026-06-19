@@ -27,7 +27,7 @@ public partial class Hit<TDocument> : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("Hit<TDocument>");
 		if (Explanation is not null)
 		{
 			__init.Property("Explanation");

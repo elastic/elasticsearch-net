@@ -27,7 +27,7 @@ public partial class InfoFeatureState : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("InfoFeatureState");
 		{
 			__init.Property("FeatureName");
 			writer.WriteString(FeatureName);

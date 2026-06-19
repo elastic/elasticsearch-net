@@ -27,7 +27,7 @@ public partial class DataStreamsStatsItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DataStreamsStatsItem");
 		{
 			__init.Property("BackingIndices");
 			writer.WriteValue(BackingIndices);

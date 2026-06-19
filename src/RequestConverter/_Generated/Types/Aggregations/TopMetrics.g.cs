@@ -27,7 +27,7 @@ public partial class TopMetrics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("TopMetrics");
 		{
 			__init.Property("Metrics");
 			writer.Write("new() ");

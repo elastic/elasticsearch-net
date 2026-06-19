@@ -27,7 +27,7 @@ public partial class EqlFeatures : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("EqlFeatures");
 		{
 			__init.Property("Event");
 			writer.WriteValue(Event);

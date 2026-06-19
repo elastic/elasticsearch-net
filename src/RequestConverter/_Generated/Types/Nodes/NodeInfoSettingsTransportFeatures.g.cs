@@ -27,7 +27,7 @@ public partial class NodeInfoSettingsTransportFeatures : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("NodeInfoSettingsTransportFeatures");
 		{
 			__init.Property("XPack");
 			writer.WriteString(XPack);

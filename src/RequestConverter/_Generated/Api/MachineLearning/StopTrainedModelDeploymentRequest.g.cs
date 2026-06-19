@@ -27,7 +27,7 @@ public partial class StopTrainedModelDeploymentRequest : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("StopTrainedModelDeploymentRequest");
 		{
 			__init.Property("ModelId");
 			ModelId.FormatCode(writer);

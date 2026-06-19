@@ -27,7 +27,7 @@ public partial class InferenceResponseResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("InferenceResponseResult");
 		if (Entities is not null)
 		{
 			__init.Property("Entities");

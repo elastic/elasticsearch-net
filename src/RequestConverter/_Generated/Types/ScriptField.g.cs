@@ -27,7 +27,7 @@ public partial class ScriptField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ScriptField");
 		if (IgnoreFailure is not null)
 		{
 			__init.Property("IgnoreFailure");

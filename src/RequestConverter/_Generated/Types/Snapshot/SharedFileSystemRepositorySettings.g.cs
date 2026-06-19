@@ -27,7 +27,7 @@ public partial class SharedFileSystemRepositorySettings : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SharedFileSystemRepositorySettings");
 		if (ChunkSize is not null)
 		{
 			__init.Property("ChunkSize");

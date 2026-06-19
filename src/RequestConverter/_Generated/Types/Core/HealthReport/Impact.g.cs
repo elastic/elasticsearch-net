@@ -27,7 +27,7 @@ public partial class Impact : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("Impact");
 		{
 			__init.Property("Description");
 			writer.WriteString(Description);

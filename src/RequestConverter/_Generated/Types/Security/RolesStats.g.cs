@@ -27,7 +27,7 @@ public partial class RolesStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("RolesStats");
 		{
 			__init.Property("Dls");
 			Dls.FormatCode(writer);

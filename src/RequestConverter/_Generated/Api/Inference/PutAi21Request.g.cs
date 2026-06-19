@@ -27,7 +27,7 @@ public partial class PutAi21Request : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("PutAi21Request");
 		{
 			__init.Property("Ai21InferenceId");
 			Ai21InferenceId.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class IngestStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("IngestStats");
 		{
 			__init.Property("Count");
 			writer.WriteValue(Count);

@@ -27,7 +27,7 @@ public partial class RankEvalMetricDetail : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("RankEvalMetricDetail");
 		{
 			__init.Property("Hits");
 			writer.WriteInlineList(Hits, (w, item) => { item.FormatCode(w); });

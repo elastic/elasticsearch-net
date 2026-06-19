@@ -27,7 +27,7 @@ public partial class WordDelimiterTokenFilter : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("WordDelimiterTokenFilter");
 		if (CatenateAll is not null)
 		{
 			__init.Property("CatenateAll");

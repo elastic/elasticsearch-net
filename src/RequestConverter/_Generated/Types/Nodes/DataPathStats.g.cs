@@ -27,7 +27,7 @@ public partial class DataPathStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DataPathStats");
 		if (Available is not null)
 		{
 			__init.Property("Available");

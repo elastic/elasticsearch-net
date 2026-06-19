@@ -27,7 +27,7 @@ public partial class OpenShiftAiServiceSettings : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("OpenShiftAiServiceSettings");
 		{
 			__init.Property("ApiKey");
 			writer.WriteString(ApiKey);

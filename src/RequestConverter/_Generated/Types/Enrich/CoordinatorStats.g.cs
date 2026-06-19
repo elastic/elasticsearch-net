@@ -27,7 +27,7 @@ public partial class CoordinatorStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("CoordinatorStats");
 		{
 			__init.Property("ExecutedSearchesTotal");
 			writer.WriteValue(ExecutedSearchesTotal);

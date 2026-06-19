@@ -27,7 +27,7 @@ public partial class Reasoning : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("Reasoning");
 		if (Effort is not null)
 		{
 			__init.Property("Effort");

@@ -27,7 +27,7 @@ public partial class IndexSettingBlocks : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("IndexSettingBlocks");
 		if (Metadata is not null)
 		{
 			__init.Property("Metadata");

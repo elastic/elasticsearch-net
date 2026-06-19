@@ -27,7 +27,7 @@ public partial class ScandinavianFoldingTokenFilter : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ScandinavianFoldingTokenFilter");
 		if (Version is not null)
 		{
 			__init.Property("Version");

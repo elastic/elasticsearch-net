@@ -27,7 +27,7 @@ public partial class FillMaskInferenceUpdateOptions : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("FillMaskInferenceUpdateOptions");
 		if (NumTopClasses is not null)
 		{
 			__init.Property("NumTopClasses");

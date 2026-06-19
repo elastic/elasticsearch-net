@@ -27,7 +27,7 @@ public partial class DecimalDigitTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DecimalDigitTokenFilter");
 		if (Version is not null)
 		{
 			__init.Property("Version");

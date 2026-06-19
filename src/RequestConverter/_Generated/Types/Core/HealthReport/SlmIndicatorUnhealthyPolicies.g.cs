@@ -27,7 +27,7 @@ public partial class SlmIndicatorUnhealthyPolicies : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SlmIndicatorUnhealthyPolicies");
 		{
 			__init.Property("Count");
 			writer.WriteValue(Count);

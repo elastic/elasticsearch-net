@@ -27,7 +27,7 @@ public partial class KnnQueryProfileBreakdown : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("KnnQueryProfileBreakdown");
 		{
 			__init.Property("Advance");
 			writer.WriteValue(Advance);

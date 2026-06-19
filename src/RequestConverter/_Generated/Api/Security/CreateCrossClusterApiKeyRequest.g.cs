@@ -27,7 +27,7 @@ public partial class CreateCrossClusterApiKeyRequest : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("CreateCrossClusterApiKeyRequest");
 		{
 			__init.Property("Access");
 			Access.FormatCode(writer);

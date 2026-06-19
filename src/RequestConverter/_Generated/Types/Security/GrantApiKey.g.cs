@@ -27,7 +27,7 @@ public partial class GrantApiKey : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("GrantApiKey");
 		if (Expiration is not null)
 		{
 			__init.Property("Expiration");

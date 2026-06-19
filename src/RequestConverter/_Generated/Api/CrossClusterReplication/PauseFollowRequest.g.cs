@@ -27,7 +27,7 @@ public partial class PauseFollowRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("PauseFollowRequest");
 		{
 			__init.Property("Index");
 			Index.FormatCode(writer);

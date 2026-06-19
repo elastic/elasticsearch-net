@@ -27,7 +27,7 @@ public partial class EvaluateDataFrameRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("EvaluateDataFrameRequest");
 		{
 			__init.Property("Evaluation");
 			Evaluation.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class DeleteBehavioralAnalyticsRequest : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DeleteBehavioralAnalyticsRequest");
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

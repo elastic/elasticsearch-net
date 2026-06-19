@@ -27,7 +27,7 @@ public partial class NodeInfoXpackSecurityAuthcRealmsStatus : RequestConverter.I
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("NodeInfoXpackSecurityAuthcRealmsStatus");
 		if (Enabled is not null)
 		{
 			__init.Property("Enabled");

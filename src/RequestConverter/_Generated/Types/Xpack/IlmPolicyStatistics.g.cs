@@ -27,7 +27,7 @@ public partial class IlmPolicyStatistics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("IlmPolicyStatistics");
 		{
 			__init.Property("IndicesManaged");
 			writer.WriteValue(IndicesManaged);

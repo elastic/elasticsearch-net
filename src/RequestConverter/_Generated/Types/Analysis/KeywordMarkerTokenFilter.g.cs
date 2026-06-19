@@ -27,7 +27,7 @@ public partial class KeywordMarkerTokenFilter : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("KeywordMarkerTokenFilter");
 		if (IgnoreCase is not null)
 		{
 			__init.Property("IgnoreCase");

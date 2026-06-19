@@ -27,7 +27,7 @@ public partial class GoogleVertexAIServiceSettings : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("GoogleVertexAIServiceSettings");
 		if (Dimensions is not null)
 		{
 			__init.Property("Dimensions");

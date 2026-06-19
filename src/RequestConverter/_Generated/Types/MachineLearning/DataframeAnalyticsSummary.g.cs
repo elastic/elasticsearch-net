@@ -27,7 +27,7 @@ public partial class DataframeAnalyticsSummary : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DataframeAnalyticsSummary");
 		if (AllowLazyStart is not null)
 		{
 			__init.Property("AllowLazyStart");

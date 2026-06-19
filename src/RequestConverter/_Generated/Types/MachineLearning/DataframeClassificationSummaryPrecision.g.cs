@@ -27,7 +27,7 @@ public partial class DataframeClassificationSummaryPrecision : RequestConverter.
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DataframeClassificationSummaryPrecision");
 		{
 			__init.Property("AvgPrecision");
 			writer.WriteValue(AvgPrecision);

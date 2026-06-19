@@ -27,7 +27,7 @@ public partial class TrainedModelDeploymentAllocationStatus : RequestConverter.I
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("TrainedModelDeploymentAllocationStatus");
 		{
 			__init.Property("AllocationCount");
 			writer.WriteValue(AllocationCount);

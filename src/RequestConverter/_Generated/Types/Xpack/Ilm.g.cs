@@ -27,7 +27,7 @@ public partial class Ilm : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("Ilm");
 		{
 			__init.Property("PolicyCount");
 			writer.WriteValue(PolicyCount);

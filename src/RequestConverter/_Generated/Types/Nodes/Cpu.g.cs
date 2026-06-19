@@ -27,7 +27,7 @@ public partial class Cpu : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("Cpu");
 		if (LoadAverage is not null)
 		{
 			__init.Property("LoadAverage");

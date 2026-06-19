@@ -27,7 +27,7 @@ public partial class NodeStatistics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("NodeStatistics");
 		{
 			__init.Property("Failed");
 			writer.WriteValue(Failed);

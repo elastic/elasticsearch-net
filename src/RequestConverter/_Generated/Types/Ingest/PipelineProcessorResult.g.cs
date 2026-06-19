@@ -27,7 +27,7 @@ public partial class PipelineProcessorResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("PipelineProcessorResult");
 		if (Description is not null)
 		{
 			__init.Property("Description");

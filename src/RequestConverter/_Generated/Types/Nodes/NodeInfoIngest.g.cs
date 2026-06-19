@@ -27,7 +27,7 @@ public partial class NodeInfoIngest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("NodeInfoIngest");
 		{
 			__init.Property("Processors");
 			writer.WriteInlineList(Processors, (w, item) => { item.FormatCode(w); });

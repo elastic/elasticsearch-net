@@ -27,7 +27,7 @@ public partial class Memory : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("Memory");
 		{
 			__init.Property("Attributes");
 			writer.Write("new() ");

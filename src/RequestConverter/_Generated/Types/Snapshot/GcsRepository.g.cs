@@ -27,7 +27,7 @@ public partial class GcsRepository : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("GcsRepository");
 		{
 			__init.Property("Settings");
 			Settings.FormatCode(writer);

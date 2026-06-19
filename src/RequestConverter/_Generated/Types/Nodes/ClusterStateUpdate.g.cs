@@ -27,7 +27,7 @@ public partial class ClusterStateUpdate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ClusterStateUpdate");
 		if (CommitTime is not null)
 		{
 			__init.Property("CommitTime");

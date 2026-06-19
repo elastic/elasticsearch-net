@@ -27,7 +27,7 @@ public partial class RankedDocument : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("RankedDocument");
 		{
 			__init.Property("Index");
 			writer.WriteValue(Index);

@@ -27,7 +27,7 @@ public partial class LookupQueryVectorBuilder : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("LookupQueryVectorBuilder");
 		{
 			__init.Property("Id");
 			writer.WriteString(Id);

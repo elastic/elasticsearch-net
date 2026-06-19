@@ -27,7 +27,7 @@ public partial class IndexDetails : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("IndexDetails");
 		{
 			__init.Property("MaxSegmentsPerShard");
 			writer.WriteValue(MaxSegmentsPerShard);

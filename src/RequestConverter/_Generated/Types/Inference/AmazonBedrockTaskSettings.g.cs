@@ -27,7 +27,7 @@ public partial class AmazonBedrockTaskSettings : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("AmazonBedrockTaskSettings");
 		if (MaxNewTokens is not null)
 		{
 			__init.Property("MaxNewTokens");

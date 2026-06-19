@@ -27,7 +27,7 @@ public partial class DeleteGeoipDatabaseRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DeleteGeoipDatabaseRequest");
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class RealmCache : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("RealmCache");
 		{
 			__init.Property("Size");
 			writer.WriteValue(Size);

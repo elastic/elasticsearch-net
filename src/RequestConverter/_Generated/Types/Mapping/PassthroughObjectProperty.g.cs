@@ -27,7 +27,7 @@ public partial class PassthroughObjectProperty : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("PassthroughObjectProperty");
 		if (CopyTo is not null)
 		{
 			__init.Property("CopyTo");

@@ -27,7 +27,7 @@ public partial class Context : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("Context");
 		{
 			__init.Property("Methods");
 			writer.WriteInlineList(Methods, (w, item) => { item.FormatCode(w); });

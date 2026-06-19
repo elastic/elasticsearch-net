@@ -27,7 +27,7 @@ public partial class RequestEmbedding : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("RequestEmbedding");
 		{
 			__init.Property("Input");
 			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<System.Collections.Generic.ICollection<string>, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObject>>(Input, writer);

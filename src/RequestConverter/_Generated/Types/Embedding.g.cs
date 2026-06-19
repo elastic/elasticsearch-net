@@ -27,7 +27,7 @@ public partial class Embedding : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("Embedding");
 		if (InferenceId is not null)
 		{
 			__init.Property("InferenceId");

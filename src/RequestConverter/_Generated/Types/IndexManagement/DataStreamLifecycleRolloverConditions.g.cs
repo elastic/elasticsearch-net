@@ -27,7 +27,7 @@ public partial class DataStreamLifecycleRolloverConditions : RequestConverter.IC
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DataStreamLifecycleRolloverConditions");
 		if (MaxAge is not null)
 		{
 			__init.Property("MaxAge");

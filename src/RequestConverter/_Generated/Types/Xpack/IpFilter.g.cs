@@ -27,7 +27,7 @@ public partial class IpFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("IpFilter");
 		{
 			__init.Property("Http");
 			writer.WriteValue(Http);

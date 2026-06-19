@@ -27,7 +27,7 @@ public partial class CCSUsageStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("CCSUsageStats");
 		{
 			__init.Property("Clients");
 			writer.Write("new() ");

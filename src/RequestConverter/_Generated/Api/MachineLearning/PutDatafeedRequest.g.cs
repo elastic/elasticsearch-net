@@ -27,7 +27,7 @@ public partial class PutDatafeedRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("PutDatafeedRequest");
 		{
 			__init.Property("DatafeedId");
 			DatafeedId.FormatCode(writer);

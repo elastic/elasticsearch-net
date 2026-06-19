@@ -27,7 +27,7 @@ public partial class StupidBackoffSmoothingModel : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("StupidBackoffSmoothingModel");
 		{
 			__init.Property("Discount");
 			writer.WriteValue(Discount);

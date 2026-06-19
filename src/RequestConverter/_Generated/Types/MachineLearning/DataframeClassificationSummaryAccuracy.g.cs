@@ -27,7 +27,7 @@ public partial class DataframeClassificationSummaryAccuracy : RequestConverter.I
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DataframeClassificationSummaryAccuracy");
 		{
 			__init.Property("Classes");
 			writer.WriteInlineList(Classes, (w, item) => { item.FormatCode(w); });

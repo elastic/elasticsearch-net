@@ -27,7 +27,7 @@ public partial class DenseEmbeddingByteResult : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DenseEmbeddingByteResult");
 		{
 			__init.Property("Embedding");
 			writer.WriteInlineList(Embedding, (w, item) => { w.WriteValue(item); });

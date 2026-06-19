@@ -27,7 +27,7 @@ public partial class SparseVectorProperty : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SparseVectorProperty");
 		if (Dynamic is not null)
 		{
 			__init.Property("Dynamic");

@@ -27,7 +27,7 @@ public partial class RemoveDuplicatesTokenFilter : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("RemoveDuplicatesTokenFilter");
 		if (Version is not null)
 		{
 			__init.Property("Version");

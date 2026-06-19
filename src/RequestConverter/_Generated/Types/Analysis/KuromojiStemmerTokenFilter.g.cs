@@ -27,7 +27,7 @@ public partial class KuromojiStemmerTokenFilter : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("KuromojiStemmerTokenFilter");
 		{
 			__init.Property("MinimumLength");
 			writer.WriteValue(MinimumLength);

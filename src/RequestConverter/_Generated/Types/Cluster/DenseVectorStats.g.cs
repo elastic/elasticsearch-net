@@ -27,7 +27,7 @@ public partial class DenseVectorStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DenseVectorStats");
 		if (OffHeap is not null)
 		{
 			__init.Property("OffHeap");

@@ -27,7 +27,7 @@ public partial class Scripting : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("Scripting");
 		if (CacheEvictions is not null)
 		{
 			__init.Property("CacheEvictions");

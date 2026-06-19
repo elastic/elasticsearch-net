@@ -27,7 +27,7 @@ public partial class AutoDateHistogramAggregation : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("AutoDateHistogramAggregation");
 		if (Buckets is not null)
 		{
 			__init.Property("Buckets");

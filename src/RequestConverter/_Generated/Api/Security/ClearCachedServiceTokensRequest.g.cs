@@ -27,7 +27,7 @@ public partial class ClearCachedServiceTokensRequest : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ClearCachedServiceTokensRequest");
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

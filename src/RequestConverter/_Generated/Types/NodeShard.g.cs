@@ -27,7 +27,7 @@ public partial class NodeShard : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("NodeShard");
 		if (AllocationId is not null)
 		{
 			__init.Property("AllocationId");

@@ -27,7 +27,7 @@ public partial class DataframeEvaluationRegressionMetrics : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DataframeEvaluationRegressionMetrics");
 		if (Huber is not null)
 		{
 			__init.Property("Huber");

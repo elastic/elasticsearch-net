@@ -27,7 +27,7 @@ public partial class IpProperty : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("IpProperty");
 		if (Boost is not null)
 		{
 			__init.Property("Boost");

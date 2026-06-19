@@ -27,7 +27,7 @@ public partial class GarbageCollector : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("GarbageCollector");
 		if (Collectors is not null)
 		{
 			__init.Property("Collectors");

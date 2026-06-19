@@ -27,7 +27,7 @@ public partial class MultiTermVectorsOperation : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("MultiTermVectorsOperation");
 		if (Doc is not null)
 		{
 			__init.Property("Doc");

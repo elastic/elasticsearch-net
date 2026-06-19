@@ -27,7 +27,7 @@ public partial class UpdateUserProfileDataRequest : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("UpdateUserProfileDataRequest");
 		{
 			__init.Property("Uid");
 			writer.WriteString(Uid);

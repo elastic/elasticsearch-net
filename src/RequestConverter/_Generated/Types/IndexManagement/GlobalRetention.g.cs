@@ -27,7 +27,7 @@ public partial class GlobalRetention : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("GlobalRetention");
 		if (DefaultRetention is not null)
 		{
 			__init.Property("DefaultRetention");

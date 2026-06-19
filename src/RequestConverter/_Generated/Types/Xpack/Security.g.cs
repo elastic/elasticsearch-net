@@ -27,7 +27,7 @@ public partial class Security : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("Security");
 		{
 			__init.Property("Anonymous");
 			Anonymous.FormatCode(writer);

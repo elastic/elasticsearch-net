@@ -27,7 +27,7 @@ public partial class IndicesStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("IndicesStats");
 		if (Health is not null)
 		{
 			__init.Property("Health");

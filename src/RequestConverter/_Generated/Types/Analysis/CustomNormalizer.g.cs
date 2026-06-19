@@ -27,7 +27,7 @@ public partial class CustomNormalizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("CustomNormalizer");
 		if (CharFilter is not null)
 		{
 			__init.Property("CharFilter");

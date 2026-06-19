@@ -27,7 +27,7 @@ public partial class ChangePointAggregate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ChangePointAggregate");
 		if (Bucket is not null)
 		{
 			__init.Property("Bucket");

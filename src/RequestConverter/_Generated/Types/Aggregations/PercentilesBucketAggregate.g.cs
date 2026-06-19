@@ -27,7 +27,7 @@ public partial class PercentilesBucketAggregate : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("PercentilesBucketAggregate");
 		if (Meta is not null)
 		{
 			__init.Property("Meta");

@@ -27,7 +27,7 @@ public partial class NodeInfoSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("NodeInfoSettings");
 		if (Action is not null)
 		{
 			__init.Property("Action");

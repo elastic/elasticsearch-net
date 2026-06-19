@@ -27,7 +27,7 @@ public partial class IndexHealthStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("IndexHealthStats");
 		{
 			__init.Property("ActivePrimaryShards");
 			writer.WriteValue(ActivePrimaryShards);

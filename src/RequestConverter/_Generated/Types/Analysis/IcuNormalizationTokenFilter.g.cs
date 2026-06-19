@@ -27,7 +27,7 @@ public partial class IcuNormalizationTokenFilter : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("IcuNormalizationTokenFilter");
 		{
 			__init.Property("Name");
 			Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTypeCodeFormatter.FormatCode(Name, writer);

@@ -27,7 +27,7 @@ public partial class DataframeEvaluationRegression : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DataframeEvaluationRegression");
 		{
 			__init.Property("ActualField");
 			ActualField.FormatCode(writer);

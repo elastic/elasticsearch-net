@@ -27,7 +27,7 @@ public partial class GoogleVertexAITaskSettings : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("GoogleVertexAITaskSettings");
 		if (AutoTruncate is not null)
 		{
 			__init.Property("AutoTruncate");

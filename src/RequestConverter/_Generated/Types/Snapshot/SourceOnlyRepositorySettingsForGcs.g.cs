@@ -27,7 +27,7 @@ public partial class SourceOnlyRepositorySettingsForGcs : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SourceOnlyRepositorySettingsForGcs");
 #pragma warning disable CS0618
 		if (ApplicationName is not null)
 		{

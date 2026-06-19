@@ -27,7 +27,7 @@ public partial class SuggestFuzziness : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SuggestFuzziness");
 		if (Fuzziness is not null)
 		{
 			__init.Property("Fuzziness");

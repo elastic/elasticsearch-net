@@ -27,7 +27,7 @@ public partial class IndexMappingRecord : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("IndexMappingRecord");
 		if (Item is not null)
 		{
 			__init.Property("Item");

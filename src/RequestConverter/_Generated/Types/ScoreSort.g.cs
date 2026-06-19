@@ -27,7 +27,7 @@ public partial class ScoreSort : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ScoreSort");
 		if (Order is not null)
 		{
 			__init.Property("Order");

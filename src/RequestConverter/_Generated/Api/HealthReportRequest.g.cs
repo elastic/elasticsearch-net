@@ -27,7 +27,7 @@ public partial class HealthReportRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("HealthReportRequest");
 		if (Feature is not null)
 		{
 			__init.Property("Feature");

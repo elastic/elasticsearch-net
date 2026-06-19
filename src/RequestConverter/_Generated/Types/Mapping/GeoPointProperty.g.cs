@@ -27,7 +27,7 @@ public partial class GeoPointProperty : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("GeoPointProperty");
 		if (CopyTo is not null)
 		{
 			__init.Property("CopyTo");

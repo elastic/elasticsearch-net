@@ -27,7 +27,7 @@ public partial class IcuAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("IcuAnalyzer");
 		{
 			__init.Property("Method");
 			Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTypeCodeFormatter.FormatCode(Method, writer);

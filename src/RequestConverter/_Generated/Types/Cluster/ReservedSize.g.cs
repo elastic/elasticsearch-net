@@ -27,7 +27,7 @@ public partial class ReservedSize : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ReservedSize");
 		{
 			__init.Property("NodeId");
 			writer.WriteString(NodeId);

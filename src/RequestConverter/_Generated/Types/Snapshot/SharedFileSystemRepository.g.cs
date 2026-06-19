@@ -27,7 +27,7 @@ public partial class SharedFileSystemRepository : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SharedFileSystemRepository");
 		{
 			__init.Property("Settings");
 			Settings.FormatCode(writer);

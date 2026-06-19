@@ -27,7 +27,7 @@ public partial class ScandinavianNormalizationTokenFilter : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ScandinavianNormalizationTokenFilter");
 		if (Version is not null)
 		{
 			__init.Property("Version");

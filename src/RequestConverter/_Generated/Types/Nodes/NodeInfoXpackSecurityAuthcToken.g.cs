@@ -27,7 +27,7 @@ public partial class NodeInfoXpackSecurityAuthcToken : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("NodeInfoXpackSecurityAuthcToken");
 		{
 			__init.Property("Enabled");
 			writer.WriteString(Enabled);

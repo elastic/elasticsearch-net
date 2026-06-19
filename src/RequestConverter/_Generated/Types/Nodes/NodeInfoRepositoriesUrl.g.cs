@@ -27,7 +27,7 @@ public partial class NodeInfoRepositoriesUrl : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("NodeInfoRepositoriesUrl");
 		{
 			__init.Property("AllowedUrls");
 			writer.WriteString(AllowedUrls);

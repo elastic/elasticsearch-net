@@ -27,7 +27,7 @@ public partial class SlmConfiguration : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SlmConfiguration");
 		if (FeatureStates is not null)
 		{
 			__init.Property("FeatureStates");

@@ -27,7 +27,7 @@ public partial class IlmIndicatorDetails : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("IlmIndicatorDetails");
 		{
 			__init.Property("IlmStatus");
 			Elastic.Clients.Elasticsearch.LifecycleOperationModeCodeFormatter.FormatCode(IlmStatus, writer);

@@ -27,7 +27,7 @@ public partial class FetchProfile : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("FetchProfile");
 		{
 			__init.Property("Breakdown");
 			Breakdown.FormatCode(writer);

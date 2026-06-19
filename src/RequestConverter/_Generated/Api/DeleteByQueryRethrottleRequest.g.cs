@@ -27,7 +27,7 @@ public partial class DeleteByQueryRethrottleRequest : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DeleteByQueryRethrottleRequest");
 		{
 			__init.Property("TaskId");
 			TaskId.FormatCode(writer);

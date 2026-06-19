@@ -27,7 +27,7 @@ public partial class ModelPackageConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ModelPackageConfig");
 		if (CreateTime is not null)
 		{
 			__init.Property("CreateTime");

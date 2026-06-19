@@ -27,7 +27,7 @@ public partial class DataframeAnalyticsFieldSelection : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DataframeAnalyticsFieldSelection");
 		if (FeatureType is not null)
 		{
 			__init.Property("FeatureType");

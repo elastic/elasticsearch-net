@@ -27,7 +27,7 @@ public partial class RenderSearchTemplateRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("RenderSearchTemplateRequest");
 		if (File is not null)
 		{
 			__init.Property("File");

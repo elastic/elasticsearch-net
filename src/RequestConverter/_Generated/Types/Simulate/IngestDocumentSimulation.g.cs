@@ -27,7 +27,7 @@ public partial class IngestDocumentSimulation : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("IngestDocumentSimulation");
 		if (EffectiveMapping is not null)
 		{
 			__init.Property("EffectiveMapping");

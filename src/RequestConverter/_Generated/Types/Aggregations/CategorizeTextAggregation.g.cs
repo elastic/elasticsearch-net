@@ -27,7 +27,7 @@ public partial class CategorizeTextAggregation : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("CategorizeTextAggregation");
 		if (CategorizationAnalyzer is not null)
 		{
 			__init.Property("CategorizationAnalyzer");

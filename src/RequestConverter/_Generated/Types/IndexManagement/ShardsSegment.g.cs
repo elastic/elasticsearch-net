@@ -27,7 +27,7 @@ public partial class ShardsSegment : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ShardsSegment");
 		{
 			__init.Property("NumCommittedSegments");
 			writer.WriteValue(NumCommittedSegments);

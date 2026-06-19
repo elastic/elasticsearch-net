@@ -27,7 +27,7 @@ public partial class ComponentTemplateSummary : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ComponentTemplateSummary");
 		if (Aliases is not null)
 		{
 			__init.Property("Aliases");

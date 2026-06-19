@@ -27,7 +27,7 @@ public partial class GetTransformStatsRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("GetTransformStatsRequest");
 		{
 			__init.Property("TransformId");
 			TransformId.FormatCode(writer);

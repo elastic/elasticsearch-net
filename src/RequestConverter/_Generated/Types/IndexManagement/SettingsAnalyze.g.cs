@@ -27,7 +27,7 @@ public partial class SettingsAnalyze : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SettingsAnalyze");
 		if (MaxTokenCount is not null)
 		{
 			__init.Property("MaxTokenCount");

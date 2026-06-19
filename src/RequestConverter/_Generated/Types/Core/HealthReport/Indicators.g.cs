@@ -27,7 +27,7 @@ public partial class Indicators : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("Indicators");
 		if (DataStreamLifecycle is not null)
 		{
 			__init.Property("DataStreamLifecycle");

@@ -27,7 +27,7 @@ public partial class NodeInfoXpackLicense : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("NodeInfoXpackLicense");
 		{
 			__init.Property("SelfGenerated");
 			SelfGenerated.FormatCode(writer);

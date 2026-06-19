@@ -27,7 +27,7 @@ public partial class CartesianBoundsAggregate : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("CartesianBoundsAggregate");
 		if (Bounds is not null)
 		{
 			__init.Property("Bounds");

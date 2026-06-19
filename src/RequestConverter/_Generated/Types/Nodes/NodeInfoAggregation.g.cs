@@ -27,7 +27,7 @@ public partial class NodeInfoAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("NodeInfoAggregation");
 		{
 			__init.Property("Types");
 			writer.WriteInlineList(Types, (w, item) => { w.WriteString(item); });

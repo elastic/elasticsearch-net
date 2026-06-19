@@ -27,7 +27,7 @@ public partial class ListReindexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ListReindexRequest");
 		if (Detailed is not null)
 		{
 			__init.Property("Detailed");

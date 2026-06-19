@@ -27,7 +27,7 @@ public partial class IndexTemplateSummaryWithRollover : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("IndexTemplateSummaryWithRollover");
 		if (Aliases is not null)
 		{
 			__init.Property("Aliases");

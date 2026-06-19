@@ -27,7 +27,7 @@ public partial class SourceOnlyRepositorySettingsForSharedFileSystem : RequestCo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SourceOnlyRepositorySettingsForSharedFileSystem");
 		{
 			__init.Property("Location");
 			writer.WriteString(Location);

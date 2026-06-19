@@ -27,7 +27,7 @@ public partial class IndicNormalizationTokenFilter : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("IndicNormalizationTokenFilter");
 		if (Version is not null)
 		{
 			__init.Property("Version");

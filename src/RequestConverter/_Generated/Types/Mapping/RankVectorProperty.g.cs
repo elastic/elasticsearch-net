@@ -27,7 +27,7 @@ public partial class RankVectorProperty : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("RankVectorProperty");
 		if (Dims is not null)
 		{
 			__init.Property("Dims");

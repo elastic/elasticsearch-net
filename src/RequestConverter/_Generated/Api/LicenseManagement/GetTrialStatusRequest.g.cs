@@ -27,7 +27,7 @@ public partial class GetTrialStatusRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("GetTrialStatusRequest");
 		__init.Dispose();
 	}
 }

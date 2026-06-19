@@ -27,7 +27,7 @@ public partial class SnapshotShardFailure : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SnapshotShardFailure");
 		{
 			__init.Property("Index");
 			writer.WriteString(Index);

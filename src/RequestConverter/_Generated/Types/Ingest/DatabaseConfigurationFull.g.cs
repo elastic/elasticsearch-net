@@ -27,7 +27,7 @@ public partial class DatabaseConfigurationFull : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DatabaseConfigurationFull");
 		{
 			__init.Property("Name");
 			writer.WriteString(Name);

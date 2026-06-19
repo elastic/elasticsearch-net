@@ -27,7 +27,7 @@ public partial class NodeAllocationExplanation : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("NodeAllocationExplanation");
 		if (Deciders is not null)
 		{
 			__init.Property("Deciders");

@@ -27,7 +27,7 @@ public partial class DataframeEvaluationClassificationMetrics : RequestConverter
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DataframeEvaluationClassificationMetrics");
 		if (Accuracy is not null)
 		{
 			__init.Property("Accuracy");

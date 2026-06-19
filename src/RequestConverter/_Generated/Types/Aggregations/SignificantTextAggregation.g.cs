@@ -27,7 +27,7 @@ public partial class SignificantTextAggregation : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SignificantTextAggregation");
 		if (BackgroundFilter is not null)
 		{
 			__init.Property("BackgroundFilter");

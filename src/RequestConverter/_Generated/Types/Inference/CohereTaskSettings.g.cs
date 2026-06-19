@@ -27,7 +27,7 @@ public partial class CohereTaskSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("CohereTaskSettings");
 		{
 			__init.Property("InputType");
 			Elastic.Clients.Elasticsearch.Inference.CohereInputTypeCodeFormatter.FormatCode(InputType, writer);

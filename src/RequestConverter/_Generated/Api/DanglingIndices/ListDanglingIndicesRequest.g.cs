@@ -27,7 +27,7 @@ public partial class ListDanglingIndicesRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ListDanglingIndicesRequest");
 		__init.Dispose();
 	}
 }

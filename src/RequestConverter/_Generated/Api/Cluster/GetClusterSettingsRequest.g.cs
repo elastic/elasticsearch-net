@@ -27,7 +27,7 @@ public partial class GetClusterSettingsRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("GetClusterSettingsRequest");
 		if (FlatSettings is not null)
 		{
 			__init.Property("FlatSettings");

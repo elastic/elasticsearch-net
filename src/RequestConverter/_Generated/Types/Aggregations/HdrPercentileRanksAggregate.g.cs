@@ -27,7 +27,7 @@ public partial class HdrPercentileRanksAggregate : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("HdrPercentileRanksAggregate");
 		if (Meta is not null)
 		{
 			__init.Property("Meta");

@@ -27,7 +27,7 @@ public partial class IndexRoutingAllocationDisk : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("IndexRoutingAllocationDisk");
 		if (ThresholdEnabled is not null)
 		{
 			__init.Property("ThresholdEnabled");

@@ -27,7 +27,7 @@ public partial class GroqServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("GroqServiceSettings");
 		if (ApiKey is not null)
 		{
 			__init.Property("ApiKey");

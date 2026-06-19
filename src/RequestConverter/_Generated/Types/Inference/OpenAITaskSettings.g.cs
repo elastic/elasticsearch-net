@@ -27,7 +27,7 @@ public partial class OpenAITaskSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("OpenAITaskSettings");
 		if (Headers is not null)
 		{
 			__init.Property("Headers");

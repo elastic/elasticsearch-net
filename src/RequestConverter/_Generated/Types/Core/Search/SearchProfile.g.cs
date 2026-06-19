@@ -27,7 +27,7 @@ public partial class SearchProfile : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SearchProfile");
 		{
 			__init.Property("Collector");
 			writer.WriteInlineList(Collector, (w, item) => { item.FormatCode(w); });

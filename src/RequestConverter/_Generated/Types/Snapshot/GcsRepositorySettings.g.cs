@@ -27,7 +27,7 @@ public partial class GcsRepositorySettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("GcsRepositorySettings");
 #pragma warning disable CS0618
 		if (ApplicationName is not null)
 		{

@@ -27,7 +27,7 @@ public partial class NerInferenceUpdateOptions : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("NerInferenceUpdateOptions");
 		if (ResultsField is not null)
 		{
 			__init.Property("ResultsField");

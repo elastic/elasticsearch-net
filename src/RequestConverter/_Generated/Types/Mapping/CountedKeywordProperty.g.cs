@@ -27,7 +27,7 @@ public partial class CountedKeywordProperty : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("CountedKeywordProperty");
 		if (Dynamic is not null)
 		{
 			__init.Property("Dynamic");

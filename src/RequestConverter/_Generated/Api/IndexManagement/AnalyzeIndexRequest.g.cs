@@ -27,7 +27,7 @@ public partial class AnalyzeIndexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("AnalyzeIndexRequest");
 		if (Index is not null)
 		{
 			__init.Property("Index");

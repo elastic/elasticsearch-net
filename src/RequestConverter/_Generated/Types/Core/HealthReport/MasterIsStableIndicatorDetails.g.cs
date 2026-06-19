@@ -27,7 +27,7 @@ public partial class MasterIsStableIndicatorDetails : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("MasterIsStableIndicatorDetails");
 		if (ClusterFormation is not null)
 		{
 			__init.Property("ClusterFormation");

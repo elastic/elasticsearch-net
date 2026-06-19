@@ -27,7 +27,7 @@ public partial class InferTrainedModelRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("InferTrainedModelRequest");
 		{
 			__init.Property("ModelId");
 			ModelId.FormatCode(writer);

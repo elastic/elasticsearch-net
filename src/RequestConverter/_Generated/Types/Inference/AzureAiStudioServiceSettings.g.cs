@@ -27,7 +27,7 @@ public partial class AzureAiStudioServiceSettings : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("AzureAiStudioServiceSettings");
 		{
 			__init.Property("ApiKey");
 			writer.WriteString(ApiKey);

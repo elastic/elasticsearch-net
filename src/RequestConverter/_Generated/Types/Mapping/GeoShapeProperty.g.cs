@@ -27,7 +27,7 @@ public partial class GeoShapeProperty : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("GeoShapeProperty");
 		if (Coerce is not null)
 		{
 			__init.Property("Coerce");

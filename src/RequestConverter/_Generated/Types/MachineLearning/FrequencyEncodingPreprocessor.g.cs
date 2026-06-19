@@ -27,7 +27,7 @@ public partial class FrequencyEncodingPreprocessor : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("FrequencyEncodingPreprocessor");
 		{
 			__init.Property("FeatureName");
 			writer.WriteString(FeatureName);

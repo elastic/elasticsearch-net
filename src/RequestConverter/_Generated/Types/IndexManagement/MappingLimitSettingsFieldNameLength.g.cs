@@ -27,7 +27,7 @@ public partial class MappingLimitSettingsFieldNameLength : RequestConverter.ICod
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("MappingLimitSettingsFieldNameLength");
 		if (Limit is not null)
 		{
 			__init.Property("Limit");

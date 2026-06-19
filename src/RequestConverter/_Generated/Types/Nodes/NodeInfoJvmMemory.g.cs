@@ -27,7 +27,7 @@ public partial class NodeInfoJvmMemory : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("NodeInfoJvmMemory");
 		if (DirectMax is not null)
 		{
 			__init.Property("DirectMax");

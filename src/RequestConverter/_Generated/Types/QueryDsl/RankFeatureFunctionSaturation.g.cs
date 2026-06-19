@@ -27,7 +27,7 @@ public partial class RankFeatureFunctionSaturation : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("RankFeatureFunctionSaturation");
 		if (Pivot is not null)
 		{
 			__init.Property("Pivot");

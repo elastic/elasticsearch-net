@@ -27,7 +27,7 @@ public partial class UpdatedDataStreamSettings : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("UpdatedDataStreamSettings");
 		{
 			__init.Property("AppliedToDataStream");
 			writer.WriteValue(AppliedToDataStream);

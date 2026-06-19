@@ -27,7 +27,7 @@ public partial class WarmerStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("WarmerStats");
 		{
 			__init.Property("Current");
 			writer.WriteValue(Current);

@@ -27,7 +27,7 @@ public partial class MinHashTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("MinHashTokenFilter");
 		if (BucketCount is not null)
 		{
 			__init.Property("BucketCount");

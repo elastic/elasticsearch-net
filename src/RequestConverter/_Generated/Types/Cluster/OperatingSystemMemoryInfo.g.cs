@@ -27,7 +27,7 @@ public partial class OperatingSystemMemoryInfo : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("OperatingSystemMemoryInfo");
 		if (AdjustedTotal is not null)
 		{
 			__init.Property("AdjustedTotal");

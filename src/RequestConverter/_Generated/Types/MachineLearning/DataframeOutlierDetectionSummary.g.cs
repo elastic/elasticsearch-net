@@ -27,7 +27,7 @@ public partial class DataframeOutlierDetectionSummary : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DataframeOutlierDetectionSummary");
 		if (AucRoc is not null)
 		{
 			__init.Property("AucRoc");

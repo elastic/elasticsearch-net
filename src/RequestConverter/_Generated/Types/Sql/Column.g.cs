@@ -27,7 +27,7 @@ public partial class Column : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("Column");
 		{
 			__init.Property("Name");
 			writer.WriteString(Name);

@@ -27,7 +27,7 @@ public partial class CompletionToolChoiceFunction : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("CompletionToolChoiceFunction");
 		{
 			__init.Property("Name");
 			writer.WriteString(Name);

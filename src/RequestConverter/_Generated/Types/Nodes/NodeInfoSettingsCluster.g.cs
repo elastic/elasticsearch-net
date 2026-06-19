@@ -27,7 +27,7 @@ public partial class NodeInfoSettingsCluster : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("NodeInfoSettingsCluster");
 		if (DeprecationIndexing is not null)
 		{
 			__init.Property("DeprecationIndexing");

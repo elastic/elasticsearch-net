@@ -27,7 +27,7 @@ public partial class DataframeAnalysisOutlierDetection : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DataframeAnalysisOutlierDetection");
 		if (ComputeFeatureInfluence is not null)
 		{
 			__init.Property("ComputeFeatureInfluence");

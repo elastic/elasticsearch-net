@@ -27,7 +27,7 @@ public partial class TDigestPercentileRanksAggregate : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("TDigestPercentileRanksAggregate");
 		if (Meta is not null)
 		{
 			__init.Property("Meta");

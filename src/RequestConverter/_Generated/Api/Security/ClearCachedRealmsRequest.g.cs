@@ -27,7 +27,7 @@ public partial class ClearCachedRealmsRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ClearCachedRealmsRequest");
 		{
 			__init.Property("Realms");
 			Realms.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class ScriptRescore : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ScriptRescore");
 		{
 			__init.Property("Script");
 			Script.FormatCode(writer);

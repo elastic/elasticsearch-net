@@ -27,7 +27,7 @@ public partial class DeleteDataStreamOptionsRequest : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DeleteDataStreamOptionsRequest");
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

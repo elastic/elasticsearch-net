@@ -27,7 +27,7 @@ public partial class RepositoryMeteringInformation : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("RepositoryMeteringInformation");
 		{
 			__init.Property("Archived");
 			writer.WriteValue(Archived);

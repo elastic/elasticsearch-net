@@ -27,7 +27,7 @@ public partial class TaskFailure : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("TaskFailure");
 		{
 			__init.Property("NodeId");
 			writer.WriteString(NodeId);

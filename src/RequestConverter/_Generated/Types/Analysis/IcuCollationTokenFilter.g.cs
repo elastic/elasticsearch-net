@@ -27,7 +27,7 @@ public partial class IcuCollationTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("IcuCollationTokenFilter");
 		if (Alternate is not null)
 		{
 			__init.Property("Alternate");

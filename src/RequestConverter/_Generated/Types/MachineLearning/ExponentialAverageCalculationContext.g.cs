@@ -27,7 +27,7 @@ public partial class ExponentialAverageCalculationContext : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ExponentialAverageCalculationContext");
 		{
 			__init.Property("IncrementalMetricValueMs");
 			writer.WriteValue(IncrementalMetricValueMs);

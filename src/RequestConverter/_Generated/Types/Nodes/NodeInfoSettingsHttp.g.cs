@@ -27,7 +27,7 @@ public partial class NodeInfoSettingsHttp : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("NodeInfoSettingsHttp");
 		if (Compression is not null)
 		{
 			__init.Property("Compression");

@@ -27,7 +27,7 @@ public partial class DataStreamIndex : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DataStreamIndex");
 		if (IlmPolicy is not null)
 		{
 			__init.Property("IlmPolicy");

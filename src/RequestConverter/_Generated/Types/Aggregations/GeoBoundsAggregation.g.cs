@@ -27,7 +27,7 @@ public partial class GeoBoundsAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("GeoBoundsAggregation");
 		if (Field is not null)
 		{
 			__init.Property("Field");

@@ -27,7 +27,7 @@ public partial class GetFieldMappingRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("GetFieldMappingRequest");
 		{
 			__init.Property("Fields");
 			Fields.FormatCode(writer);

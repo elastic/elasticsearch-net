@@ -27,7 +27,7 @@ public partial class MemMlStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("MemMlStats");
 		if (AnomalyDetectors is not null)
 		{
 			__init.Property("AnomalyDetectors");

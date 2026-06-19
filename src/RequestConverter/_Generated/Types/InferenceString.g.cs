@@ -27,7 +27,7 @@ public partial class InferenceString : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("InferenceString");
 		if (Format is not null)
 		{
 			__init.Property("Format");

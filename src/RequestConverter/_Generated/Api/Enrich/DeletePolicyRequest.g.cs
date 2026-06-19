@@ -27,7 +27,7 @@ public partial class DeletePolicyRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DeletePolicyRequest");
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

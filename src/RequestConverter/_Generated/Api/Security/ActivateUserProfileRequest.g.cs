@@ -27,7 +27,7 @@ public partial class ActivateUserProfileRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ActivateUserProfileRequest");
 		if (AccessToken is not null)
 		{
 			__init.Property("AccessToken");

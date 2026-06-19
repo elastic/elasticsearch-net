@@ -27,7 +27,7 @@ public partial class MlInferenceTrainedModels : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("MlInferenceTrainedModels");
 		{
 			__init.Property("All");
 			All.FormatCode(writer);

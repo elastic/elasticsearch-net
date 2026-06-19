@@ -27,7 +27,7 @@ public partial class ManageUserPrivileges : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ManageUserPrivileges");
 		{
 			__init.Property("Applications");
 			writer.WriteInlineList(Applications, (w, item) => { w.WriteString(item); });

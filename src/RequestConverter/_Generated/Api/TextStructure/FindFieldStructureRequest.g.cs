@@ -27,7 +27,7 @@ public partial class FindFieldStructureRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("FindFieldStructureRequest");
 		if (ColumnNames is not null)
 		{
 			__init.Property("ColumnNames");

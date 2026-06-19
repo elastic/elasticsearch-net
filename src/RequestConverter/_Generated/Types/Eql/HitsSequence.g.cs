@@ -27,7 +27,7 @@ public partial class HitsSequence<TEvent> : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("HitsSequence<TEvent>");
 		{
 			__init.Property("Events");
 			writer.WriteInlineList(Events, (w, item) => { item.FormatCode(w); });

@@ -27,7 +27,7 @@ public partial class TermVectorsRequest<TDocument> : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("TermVectorsRequest<TDocument>");
 		if (Id is not null)
 		{
 			__init.Property("Id");

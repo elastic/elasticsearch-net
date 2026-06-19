@@ -27,7 +27,7 @@ public partial class TransformAuthorization : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("TransformAuthorization");
 		if (ApiKey is not null)
 		{
 			__init.Property("ApiKey");

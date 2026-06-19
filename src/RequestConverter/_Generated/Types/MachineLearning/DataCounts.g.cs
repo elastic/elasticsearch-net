@@ -27,7 +27,7 @@ public partial class DataCounts : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DataCounts");
 		{
 			__init.Property("BucketCount");
 			writer.WriteValue(BucketCount);

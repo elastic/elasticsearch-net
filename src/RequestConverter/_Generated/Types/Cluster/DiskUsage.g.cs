@@ -27,7 +27,7 @@ public partial class DiskUsage : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DiskUsage");
 		{
 			__init.Property("FreeBytes");
 			writer.WriteValue(FreeBytes);

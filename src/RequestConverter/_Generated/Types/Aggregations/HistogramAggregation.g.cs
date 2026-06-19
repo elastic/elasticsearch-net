@@ -27,7 +27,7 @@ public partial class HistogramAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("HistogramAggregation");
 		if (ExtendedBounds is not null)
 		{
 			__init.Property("ExtendedBounds");

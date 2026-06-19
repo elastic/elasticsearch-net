@@ -27,7 +27,7 @@ public partial class NodeAttributes : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("NodeAttributes");
 		{
 			__init.Property("Attributes");
 			writer.Write("new() ");

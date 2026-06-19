@@ -27,7 +27,7 @@ public partial class ShardsCapacityIndicatorTierDetail : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ShardsCapacityIndicatorTierDetail");
 		if (CurrentUsedShards is not null)
 		{
 			__init.Property("CurrentUsedShards");

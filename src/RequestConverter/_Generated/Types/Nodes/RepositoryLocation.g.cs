@@ -27,7 +27,7 @@ public partial class RepositoryLocation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("RepositoryLocation");
 		{
 			__init.Property("BasePath");
 			writer.WriteString(BasePath);

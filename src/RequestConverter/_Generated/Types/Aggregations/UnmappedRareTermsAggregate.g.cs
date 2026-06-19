@@ -27,7 +27,7 @@ public partial class UnmappedRareTermsAggregate : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("UnmappedRareTermsAggregate");
 		{
 			__init.Property("Buckets");
 			writer.WriteInlineList(Buckets, (w, item) => { w.WriteValue(item); });

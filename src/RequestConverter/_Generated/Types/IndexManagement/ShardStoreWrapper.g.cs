@@ -27,7 +27,7 @@ public partial class ShardStoreWrapper : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ShardStoreWrapper");
 		{
 			__init.Property("Stores");
 			writer.WriteInlineList(Stores, (w, item) => { item.FormatCode(w); });

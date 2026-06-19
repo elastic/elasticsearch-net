@@ -27,7 +27,7 @@ public partial class SnapshotShardsStatus : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SnapshotShardsStatus");
 		{
 			__init.Property("Stage");
 			Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStageCodeFormatter.FormatCode(Stage, writer);

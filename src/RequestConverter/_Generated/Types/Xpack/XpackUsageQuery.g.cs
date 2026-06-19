@@ -27,7 +27,7 @@ public partial class XpackUsageQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("XpackUsageQuery");
 		if (Count is not null)
 		{
 			__init.Property("Count");

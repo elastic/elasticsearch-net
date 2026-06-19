@@ -27,7 +27,7 @@ public partial class StandardAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("StandardAnalyzer");
 		if (MaxTokenLength is not null)
 		{
 			__init.Property("MaxTokenLength");

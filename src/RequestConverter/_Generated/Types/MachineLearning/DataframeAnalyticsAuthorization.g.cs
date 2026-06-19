@@ -27,7 +27,7 @@ public partial class DataframeAnalyticsAuthorization : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DataframeAnalyticsAuthorization");
 		if (ApiKey is not null)
 		{
 			__init.Property("ApiKey");

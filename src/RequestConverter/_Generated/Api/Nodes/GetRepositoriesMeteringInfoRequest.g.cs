@@ -27,7 +27,7 @@ public partial class GetRepositoriesMeteringInfoRequest : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("GetRepositoriesMeteringInfoRequest");
 		{
 			__init.Property("NodeId");
 			NodeId.FormatCode(writer);

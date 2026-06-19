@@ -27,7 +27,7 @@ public partial class KeywordAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("KeywordAnalyzer");
 #pragma warning disable CS0618
 		if (Version is not null)
 		{

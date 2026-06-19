@@ -27,7 +27,7 @@ public partial class NativeCode : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("NativeCode");
 		{
 			__init.Property("BuildHash");
 			writer.WriteString(BuildHash);

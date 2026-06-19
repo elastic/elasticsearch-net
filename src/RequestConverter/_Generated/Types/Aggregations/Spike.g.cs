@@ -27,7 +27,7 @@ public partial class Spike : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("Spike");
 		{
 			__init.Property("ChangePoint");
 			writer.WriteValue(ChangePoint);

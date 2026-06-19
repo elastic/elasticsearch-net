@@ -27,7 +27,7 @@ public partial class CumulativeCardinalityAggregation : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("CumulativeCardinalityAggregation");
 		if (BucketsPath is not null)
 		{
 			__init.Property("BucketsPath");

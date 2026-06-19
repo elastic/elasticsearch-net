@@ -27,7 +27,7 @@ public partial class HuggingFaceTaskSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("HuggingFaceTaskSettings");
 		if (ReturnDocuments is not null)
 		{
 			__init.Property("ReturnDocuments");

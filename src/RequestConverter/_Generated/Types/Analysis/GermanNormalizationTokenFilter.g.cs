@@ -27,7 +27,7 @@ public partial class GermanNormalizationTokenFilter : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("GermanNormalizationTokenFilter");
 		if (Version is not null)
 		{
 			__init.Property("Version");

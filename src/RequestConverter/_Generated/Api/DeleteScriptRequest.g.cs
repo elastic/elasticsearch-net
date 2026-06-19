@@ -27,7 +27,7 @@ public partial class DeleteScriptRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DeleteScriptRequest");
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);

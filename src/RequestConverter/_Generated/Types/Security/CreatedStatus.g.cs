@@ -27,7 +27,7 @@ public partial class CreatedStatus : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("CreatedStatus");
 		{
 			__init.Property("Created");
 			writer.WriteValue(Created);

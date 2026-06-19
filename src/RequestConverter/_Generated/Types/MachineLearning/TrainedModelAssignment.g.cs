@@ -27,7 +27,7 @@ public partial class TrainedModelAssignment : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("TrainedModelAssignment");
 		if (AdaptiveAllocations is not null)
 		{
 			__init.Property("AdaptiveAllocations");

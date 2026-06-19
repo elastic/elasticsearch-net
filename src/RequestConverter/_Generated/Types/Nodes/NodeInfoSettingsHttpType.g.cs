@@ -27,7 +27,7 @@ public partial class NodeInfoSettingsHttpType : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("NodeInfoSettingsHttpType");
 		{
 			__init.Property("Default");
 			writer.WriteString(Default);

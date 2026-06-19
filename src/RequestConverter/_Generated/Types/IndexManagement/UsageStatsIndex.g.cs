@@ -27,7 +27,7 @@ public partial class UsageStatsIndex : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("UsageStatsIndex");
 		{
 			__init.Property("Shards");
 			writer.WriteInlineList(Shards, (w, item) => { item.FormatCode(w); });

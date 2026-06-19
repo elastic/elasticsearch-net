@@ -27,7 +27,7 @@ public partial class ClearCacheRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ClearCacheRequest");
 		if (Indices is not null)
 		{
 			__init.Property("Indices");

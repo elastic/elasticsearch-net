@@ -27,7 +27,7 @@ public partial class NodeInfoXpackMl : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("NodeInfoXpackMl");
 		if (UseAutoMachineMemoryPercent is not null)
 		{
 			__init.Property("UseAutoMachineMemoryPercent");

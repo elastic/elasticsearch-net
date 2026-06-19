@@ -27,7 +27,7 @@ public partial class SearchUsageStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SearchUsageStats");
 		{
 			__init.Property("Extended");
 			Extended.FormatCode(writer);

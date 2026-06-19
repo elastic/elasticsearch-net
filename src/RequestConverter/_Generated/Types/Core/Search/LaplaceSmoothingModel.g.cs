@@ -27,7 +27,7 @@ public partial class LaplaceSmoothingModel : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("LaplaceSmoothingModel");
 		{
 			__init.Property("Alpha");
 			writer.WriteValue(Alpha);

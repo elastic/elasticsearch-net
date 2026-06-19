@@ -27,7 +27,7 @@ public partial class SemanticQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SemanticQuery");
 		if (Boost is not null)
 		{
 			__init.Property("Boost");

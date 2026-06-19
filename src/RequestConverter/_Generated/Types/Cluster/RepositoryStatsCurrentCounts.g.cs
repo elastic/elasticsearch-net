@@ -27,7 +27,7 @@ public partial class RepositoryStatsCurrentCounts : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("RepositoryStatsCurrentCounts");
 		{
 			__init.Property("ActiveDeletions");
 			writer.WriteValue(ActiveDeletions);

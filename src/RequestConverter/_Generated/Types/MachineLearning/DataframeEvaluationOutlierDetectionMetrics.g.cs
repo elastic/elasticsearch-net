@@ -27,7 +27,7 @@ public partial class DataframeEvaluationOutlierDetectionMetrics : RequestConvert
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DataframeEvaluationOutlierDetectionMetrics");
 		if (AucRoc is not null)
 		{
 			__init.Property("AucRoc");

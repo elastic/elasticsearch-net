@@ -27,7 +27,7 @@ public partial class ShardLease : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ShardLease");
 		{
 			__init.Property("Id");
 			writer.WriteString(Id);

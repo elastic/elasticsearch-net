@@ -27,7 +27,7 @@ public partial class Retention : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("Retention");
 		{
 			__init.Property("ExpireAfter");
 			ExpireAfter.FormatCode(writer);

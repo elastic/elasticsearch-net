@@ -27,7 +27,7 @@ public partial class TrainedModelAssignmentRoutingStateAndReason : RequestConver
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("TrainedModelAssignmentRoutingStateAndReason");
 		if (Reason is not null)
 		{
 			__init.Property("Reason");

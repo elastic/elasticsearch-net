@@ -27,7 +27,7 @@ public partial class PutLifecycleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("PutLifecycleRequest");
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class LongNumberProperty : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("LongNumberProperty");
 		if (Boost is not null)
 		{
 			__init.Property("Boost");

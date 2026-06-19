@@ -27,7 +27,7 @@ public partial class UpdateByQueryRethrottleNode : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("UpdateByQueryRethrottleNode");
 		{
 			__init.Property("Attributes");
 			writer.Write("new() ");

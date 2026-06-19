@@ -27,7 +27,7 @@ public partial class ScrollRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ScrollRequest");
 		if (RestTotalHitsAsInt is not null)
 		{
 			__init.Property("RestTotalHitsAsInt");

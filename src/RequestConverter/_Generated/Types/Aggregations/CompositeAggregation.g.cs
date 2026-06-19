@@ -27,7 +27,7 @@ public partial class CompositeAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("CompositeAggregation");
 		if (After is not null)
 		{
 			__init.Property("After");

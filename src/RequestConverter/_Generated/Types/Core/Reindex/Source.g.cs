@@ -27,7 +27,7 @@ public partial class Source : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("Source");
 		{
 			__init.Property("Indices");
 			Indices.FormatCode(writer);

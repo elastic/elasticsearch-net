@@ -27,7 +27,7 @@ public partial class PhoneticTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("PhoneticTokenFilter");
 		{
 			__init.Property("Encoder");
 			Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoderCodeFormatter.FormatCode(Encoder, writer);

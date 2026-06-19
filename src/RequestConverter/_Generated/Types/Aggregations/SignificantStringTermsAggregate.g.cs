@@ -27,7 +27,7 @@ public partial class SignificantStringTermsAggregate : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SignificantStringTermsAggregate");
 		if (BgCount is not null)
 		{
 			__init.Property("BgCount");

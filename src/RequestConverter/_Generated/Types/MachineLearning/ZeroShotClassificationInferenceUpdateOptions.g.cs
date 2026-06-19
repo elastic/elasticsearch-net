@@ -27,7 +27,7 @@ public partial class ZeroShotClassificationInferenceUpdateOptions : RequestConve
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ZeroShotClassificationInferenceUpdateOptions");
 		{
 			__init.Property("Labels");
 			writer.WriteInlineList(Labels, (w, item) => { w.WriteString(item); });

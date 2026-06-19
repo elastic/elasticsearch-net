@@ -27,7 +27,7 @@ public partial class SearchableSnapshotsStatsRequest : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SearchableSnapshotsStatsRequest");
 		if (Indices is not null)
 		{
 			__init.Property("Indices");

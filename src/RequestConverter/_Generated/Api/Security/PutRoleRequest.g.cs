@@ -27,7 +27,7 @@ public partial class PutRoleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("PutRoleRequest");
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

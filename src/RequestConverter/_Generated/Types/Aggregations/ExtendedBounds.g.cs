@@ -27,7 +27,7 @@ public partial class ExtendedBounds<T> : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ExtendedBounds<T>");
 		if (Max is not null)
 		{
 			__init.Property("Max");

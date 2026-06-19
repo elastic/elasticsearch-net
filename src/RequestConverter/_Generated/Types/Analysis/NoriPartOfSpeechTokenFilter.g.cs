@@ -27,7 +27,7 @@ public partial class NoriPartOfSpeechTokenFilter : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("NoriPartOfSpeechTokenFilter");
 		if (Stoptags is not null)
 		{
 			__init.Property("Stoptags");

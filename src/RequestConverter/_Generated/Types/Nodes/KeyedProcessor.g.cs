@@ -27,7 +27,7 @@ public partial class KeyedProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("KeyedProcessor");
 		if (Stats is not null)
 		{
 			__init.Property("Stats");

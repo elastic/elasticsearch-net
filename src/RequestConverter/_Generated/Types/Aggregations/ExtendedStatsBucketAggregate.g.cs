@@ -27,7 +27,7 @@ public partial class ExtendedStatsBucketAggregate : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ExtendedStatsBucketAggregate");
 		{
 			__init.Property("Avg");
 			writer.WriteValue(Avg.Value);

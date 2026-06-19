@@ -27,7 +27,7 @@ public partial class VariableWidthHistogramBucket : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("VariableWidthHistogramBucket");
 		if (Aggregations is not null)
 		{
 			__init.Property("Aggregations");

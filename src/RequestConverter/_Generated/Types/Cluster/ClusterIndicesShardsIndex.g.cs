@@ -27,7 +27,7 @@ public partial class ClusterIndicesShardsIndex : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ClusterIndicesShardsIndex");
 		{
 			__init.Property("Primaries");
 			Primaries.FormatCode(writer);

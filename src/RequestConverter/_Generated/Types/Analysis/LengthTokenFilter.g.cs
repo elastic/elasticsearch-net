@@ -27,7 +27,7 @@ public partial class LengthTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("LengthTokenFilter");
 		if (Max is not null)
 		{
 			__init.Property("Max");

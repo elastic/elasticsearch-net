@@ -27,7 +27,7 @@ public partial class GetBuiltinPrivilegesRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("GetBuiltinPrivilegesRequest");
 		__init.Dispose();
 	}
 }

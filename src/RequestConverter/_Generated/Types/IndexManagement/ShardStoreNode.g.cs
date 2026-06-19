@@ -27,7 +27,7 @@ public partial class ShardStoreNode : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ShardStoreNode");
 		{
 			__init.Property("Attributes");
 			writer.Write("new() ");

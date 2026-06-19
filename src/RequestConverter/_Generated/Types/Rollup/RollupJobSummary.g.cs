@@ -27,7 +27,7 @@ public partial class RollupJobSummary : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("RollupJobSummary");
 		{
 			__init.Property("Fields");
 			writer.Write("new() ");

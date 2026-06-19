@@ -27,7 +27,7 @@ public partial class GeoLineAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("GeoLineAggregation");
 		if (IncludeSort is not null)
 		{
 			__init.Property("IncludeSort");

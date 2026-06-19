@@ -27,7 +27,7 @@ public partial class CloseIndexResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("CloseIndexResult");
 		{
 			__init.Property("Closed");
 			writer.WriteValue(Closed);

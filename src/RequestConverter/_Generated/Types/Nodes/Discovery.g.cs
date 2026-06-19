@@ -27,7 +27,7 @@ public partial class Discovery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("Discovery");
 		if (ClusterApplierStats is not null)
 		{
 			__init.Property("ClusterApplierStats");

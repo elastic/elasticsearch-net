@@ -27,7 +27,7 @@ public partial class GetModelSnapshotUpgradeStatsRequest : RequestConverter.ICod
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("GetModelSnapshotUpgradeStatsRequest");
 		{
 			__init.Property("JobId");
 			JobId.FormatCode(writer);

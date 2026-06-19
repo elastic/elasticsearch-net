@@ -27,7 +27,7 @@ public partial class IndexSettingsLifecycle : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("IndexSettingsLifecycle");
 		if (IndexingComplete is not null)
 		{
 			__init.Property("IndexingComplete");

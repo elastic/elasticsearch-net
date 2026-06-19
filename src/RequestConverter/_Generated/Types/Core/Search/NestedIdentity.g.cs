@@ -27,7 +27,7 @@ public partial class NestedIdentity : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("NestedIdentity");
 		{
 			__init.Property("Field");
 			writer.WriteString(Field);

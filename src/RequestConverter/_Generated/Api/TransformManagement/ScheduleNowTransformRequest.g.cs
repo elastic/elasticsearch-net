@@ -27,7 +27,7 @@ public partial class ScheduleNowTransformRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ScheduleNowTransformRequest");
 		{
 			__init.Property("TransformId");
 			TransformId.FormatCode(writer);

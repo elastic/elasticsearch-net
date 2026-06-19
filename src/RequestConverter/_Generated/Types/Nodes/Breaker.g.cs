@@ -27,7 +27,7 @@ public partial class Breaker : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("Breaker");
 		if (EstimatedSize is not null)
 		{
 			__init.Property("EstimatedSize");

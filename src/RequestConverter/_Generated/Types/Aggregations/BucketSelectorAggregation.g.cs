@@ -27,7 +27,7 @@ public partial class BucketSelectorAggregation : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("BucketSelectorAggregation");
 		if (BucketsPath is not null)
 		{
 			__init.Property("BucketsPath");

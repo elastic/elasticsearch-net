@@ -27,7 +27,7 @@ public partial class Recording : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("Recording");
 		if (CumulativeExecutionCount is not null)
 		{
 			__init.Property("CumulativeExecutionCount");

@@ -27,7 +27,7 @@ public partial class OidcLogoutRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("OidcLogoutRequest");
 		if (RefreshToken is not null)
 		{
 			__init.Property("RefreshToken");

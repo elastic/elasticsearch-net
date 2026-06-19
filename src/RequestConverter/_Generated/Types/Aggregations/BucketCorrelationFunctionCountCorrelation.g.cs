@@ -27,7 +27,7 @@ public partial class BucketCorrelationFunctionCountCorrelation : RequestConverte
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("BucketCorrelationFunctionCountCorrelation");
 		{
 			__init.Property("Indicator");
 			Indicator.FormatCode(writer);

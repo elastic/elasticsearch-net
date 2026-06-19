@@ -27,7 +27,7 @@ public partial class WatcherWatch : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("WatcherWatch");
 		if (Action is not null)
 		{
 			__init.Property("Action");

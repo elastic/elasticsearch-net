@@ -27,7 +27,7 @@ public partial class RescoreQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("RescoreQuery");
 		{
 			__init.Property("Query");
 			Query.FormatCode(writer);

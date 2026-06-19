@@ -27,7 +27,7 @@ public partial class ClusterOperatingSystem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ClusterOperatingSystem");
 		{
 			__init.Property("AllocatedProcessors");
 			writer.WriteValue(AllocatedProcessors);

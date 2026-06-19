@@ -27,7 +27,7 @@ public partial class MatrixStatsAggregate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("MatrixStatsAggregate");
 		{
 			__init.Property("DocCount");
 			writer.WriteValue(DocCount);

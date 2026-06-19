@@ -27,7 +27,7 @@ public partial class SearchShardsNodeAttributes : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SearchShardsNodeAttributes");
 		{
 			__init.Property("Attributes");
 			writer.Write("new() ");

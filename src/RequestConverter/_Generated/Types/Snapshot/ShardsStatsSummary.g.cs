@@ -27,7 +27,7 @@ public partial class ShardsStatsSummary : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ShardsStatsSummary");
 		{
 			__init.Property("Incremental");
 			Incremental.FormatCode(writer);

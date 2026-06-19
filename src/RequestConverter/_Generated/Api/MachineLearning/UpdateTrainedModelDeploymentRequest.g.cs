@@ -27,7 +27,7 @@ public partial class UpdateTrainedModelDeploymentRequest : RequestConverter.ICod
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("UpdateTrainedModelDeploymentRequest");
 		{
 			__init.Property("ModelId");
 			ModelId.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class SlmPolicy : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SlmPolicy");
 		if (Config is not null)
 		{
 			__init.Property("Config");

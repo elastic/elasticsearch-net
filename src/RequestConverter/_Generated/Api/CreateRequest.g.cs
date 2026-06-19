@@ -27,7 +27,7 @@ public partial class CreateRequest<TDocument> : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("CreateRequest<TDocument>");
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);

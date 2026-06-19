@@ -27,7 +27,7 @@ public partial class EmbeddingContentObjectItem : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("EmbeddingContentObjectItem");
 		if (Format is not null)
 		{
 			__init.Property("Format");

@@ -27,7 +27,7 @@ public partial class DiversifiedSamplerAggregation : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DiversifiedSamplerAggregation");
 		if (ExecutionHint is not null)
 		{
 			__init.Property("ExecutionHint");

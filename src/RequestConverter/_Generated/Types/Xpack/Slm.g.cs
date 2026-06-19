@@ -27,7 +27,7 @@ public partial class Slm : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("Slm");
 		{
 			__init.Property("Available");
 			writer.WriteValue(Available);

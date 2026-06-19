@@ -27,7 +27,7 @@ public partial class Translog : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("Translog");
 		if (Durability is not null)
 		{
 			__init.Property("Durability");

@@ -27,7 +27,7 @@ public partial class TokenCountProperty : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("TokenCountProperty");
 		if (Analyzer is not null)
 		{
 			__init.Property("Analyzer");

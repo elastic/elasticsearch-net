@@ -27,7 +27,7 @@ public partial class DecayPlacement<TOrigin, TScale> : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DecayPlacement<TOrigin, TScale>");
 		if (Decay is not null)
 		{
 			__init.Property("Decay");

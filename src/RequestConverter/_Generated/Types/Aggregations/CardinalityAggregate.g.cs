@@ -27,7 +27,7 @@ public partial class CardinalityAggregate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("CardinalityAggregate");
 		if (Meta is not null)
 		{
 			__init.Property("Meta");

@@ -27,7 +27,7 @@ public partial class HasPrivilegesUserProfileRequest : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("HasPrivilegesUserProfileRequest");
 		{
 			__init.Property("Privileges");
 			Privileges.FormatCode(writer);

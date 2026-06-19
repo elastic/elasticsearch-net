@@ -27,7 +27,7 @@ public partial class QuestionAnsweringInferenceUpdateOptions : RequestConverter.
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("QuestionAnsweringInferenceUpdateOptions");
 		if (MaxAnswerLength is not null)
 		{
 			__init.Property("MaxAnswerLength");

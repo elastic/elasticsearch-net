@@ -27,7 +27,7 @@ public partial class SynonymRule : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SynonymRule");
 		if (Id is not null)
 		{
 			__init.Property("Id");

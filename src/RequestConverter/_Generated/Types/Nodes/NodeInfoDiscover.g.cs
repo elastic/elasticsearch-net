@@ -27,7 +27,7 @@ public partial class NodeInfoDiscover : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("NodeInfoDiscover");
 		if (SeedHosts is not null)
 		{
 			__init.Property("SeedHosts");

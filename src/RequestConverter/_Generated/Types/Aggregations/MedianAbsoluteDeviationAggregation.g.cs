@@ -27,7 +27,7 @@ public partial class MedianAbsoluteDeviationAggregation : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("MedianAbsoluteDeviationAggregation");
 		if (Compression is not null)
 		{
 			__init.Property("Compression");

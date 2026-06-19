@@ -27,7 +27,7 @@ public partial class EncryptedReasoningDetail : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("EncryptedReasoningDetail");
 		{
 			__init.Property("Data");
 			writer.WriteString(Data);

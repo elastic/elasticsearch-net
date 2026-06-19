@@ -27,7 +27,7 @@ public partial class ReindexRethrottleRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ReindexRethrottleRequest");
 		{
 			__init.Property("TaskId");
 			TaskId.FormatCode(writer);

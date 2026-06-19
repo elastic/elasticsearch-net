@@ -27,7 +27,7 @@ public partial class DataStreamLifecycleIndicator : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DataStreamLifecycleIndicator");
 		if (Details is not null)
 		{
 			__init.Property("Details");

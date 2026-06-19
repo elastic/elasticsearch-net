@@ -27,7 +27,7 @@ public partial class ExplainRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ExplainRequest");
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);

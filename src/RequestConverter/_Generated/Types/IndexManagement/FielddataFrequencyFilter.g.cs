@@ -27,7 +27,7 @@ public partial class FielddataFrequencyFilter : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("FielddataFrequencyFilter");
 		{
 			__init.Property("Max");
 			writer.WriteValue(Max);

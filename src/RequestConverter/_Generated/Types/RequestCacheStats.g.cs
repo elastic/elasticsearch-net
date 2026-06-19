@@ -27,7 +27,7 @@ public partial class RequestCacheStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("RequestCacheStats");
 		{
 			__init.Property("Evictions");
 			writer.WriteValue(Evictions);

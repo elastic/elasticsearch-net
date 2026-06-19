@@ -27,7 +27,7 @@ public partial class ListRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ListRequest");
 		if (Actions is not null)
 		{
 			__init.Property("Actions");

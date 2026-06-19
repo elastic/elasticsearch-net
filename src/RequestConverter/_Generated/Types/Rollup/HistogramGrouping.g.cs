@@ -27,7 +27,7 @@ public partial class HistogramGrouping : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("HistogramGrouping");
 		{
 			__init.Property("Fields");
 			Fields.FormatCode(writer);

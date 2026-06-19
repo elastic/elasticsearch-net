@@ -27,7 +27,7 @@ public partial class IndexModifyDataStreamAction : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("IndexModifyDataStreamAction");
 		if (AddBackingIndex is not null)
 		{
 			__init.Property("AddBackingIndex");

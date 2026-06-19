@@ -27,7 +27,7 @@ public partial class PutComponentTemplateRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("PutComponentTemplateRequest");
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

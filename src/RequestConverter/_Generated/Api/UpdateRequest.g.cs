@@ -27,7 +27,7 @@ public partial class UpdateRequest<TDocument, TPartialDocument> : RequestConvert
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("UpdateRequest<TDocument, TPartialDocument>");
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class AzureOpenAIServiceSettings : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("AzureOpenAIServiceSettings");
 		if (ApiKey is not null)
 		{
 			__init.Property("ApiKey");

@@ -27,7 +27,7 @@ public partial class TrainedModelConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("TrainedModelConfig");
 		if (CompressedDefinition is not null)
 		{
 			__init.Property("CompressedDefinition");

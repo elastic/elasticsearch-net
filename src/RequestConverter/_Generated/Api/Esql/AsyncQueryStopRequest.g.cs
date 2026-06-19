@@ -27,7 +27,7 @@ public partial class AsyncQueryStopRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("AsyncQueryStopRequest");
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);

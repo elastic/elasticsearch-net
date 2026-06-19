@@ -27,7 +27,7 @@ public partial class IndexRequest<TDocument> : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("IndexRequest<TDocument>");
 		if (Id is not null)
 		{
 			__init.Property("Id");

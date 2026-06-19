@@ -27,7 +27,7 @@ public partial class ToolCall : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ToolCall");
 		{
 			__init.Property("Function");
 			Function.FormatCode(writer);

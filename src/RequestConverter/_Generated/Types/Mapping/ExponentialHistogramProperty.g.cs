@@ -27,7 +27,7 @@ public partial class ExponentialHistogramProperty : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ExponentialHistogramProperty");
 		if (Dynamic is not null)
 		{
 			__init.Property("Dynamic");

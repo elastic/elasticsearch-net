@@ -27,7 +27,7 @@ public partial class DeleteIpLocationDatabaseRequest : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DeleteIpLocationDatabaseRequest");
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class Features : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("Features");
 		{
 			__init.Property("AggregateMetric");
 			AggregateMetric.FormatCode(writer);

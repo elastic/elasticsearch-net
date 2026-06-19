@@ -27,7 +27,7 @@ public partial class DataStreamTimestampField : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DataStreamTimestampField");
 		{
 			__init.Property("Name");
 			writer.WriteString(Name);

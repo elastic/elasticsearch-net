@@ -27,7 +27,7 @@ public partial class NodesCredentials : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("NodesCredentials");
 		{
 			__init.Property("FileTokens");
 			writer.Write("new() ");

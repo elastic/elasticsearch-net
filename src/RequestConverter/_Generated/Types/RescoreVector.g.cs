@@ -27,7 +27,7 @@ public partial class RescoreVector : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("RescoreVector");
 		{
 			__init.Property("Oversample");
 			writer.WriteValue(Oversample);

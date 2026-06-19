@@ -27,7 +27,7 @@ public partial class InnerRetriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("InnerRetriever");
 		{
 			__init.Property("Normalizer");
 			Elastic.Clients.Elasticsearch.ScoreNormalizerCodeFormatter.FormatCode(Normalizer, writer);

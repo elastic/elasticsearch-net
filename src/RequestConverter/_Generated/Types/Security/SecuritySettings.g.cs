@@ -27,7 +27,7 @@ public partial class SecuritySettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SecuritySettings");
 		if (Index is not null)
 		{
 			__init.Property("Index");

@@ -27,7 +27,7 @@ public partial class EqlFeaturesPipes : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("EqlFeaturesPipes");
 		{
 			__init.Property("PipeHead");
 			writer.WriteValue(PipeHead);

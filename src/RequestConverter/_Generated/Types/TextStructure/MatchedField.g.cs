@@ -27,7 +27,7 @@ public partial class MatchedField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("MatchedField");
 		{
 			__init.Property("Length");
 			writer.WriteValue(Length);

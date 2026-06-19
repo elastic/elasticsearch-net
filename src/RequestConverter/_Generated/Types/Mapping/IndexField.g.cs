@@ -27,7 +27,7 @@ public partial class IndexField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("IndexField");
 		{
 			__init.Property("Enabled");
 			writer.WriteValue(Enabled);

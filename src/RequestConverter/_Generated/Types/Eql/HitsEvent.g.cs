@@ -27,7 +27,7 @@ public partial class HitsEvent<TEvent> : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("HitsEvent<TEvent>");
 		if (Fields is not null)
 		{
 			__init.Property("Fields");

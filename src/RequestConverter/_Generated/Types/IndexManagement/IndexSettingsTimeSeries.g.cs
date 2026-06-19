@@ -27,7 +27,7 @@ public partial class IndexSettingsTimeSeries : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("IndexSettingsTimeSeries");
 		if (EndTime is not null)
 		{
 			__init.Property("EndTime");

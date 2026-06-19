@@ -27,7 +27,7 @@ public partial class CharFilterDetail : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("CharFilterDetail");
 		{
 			__init.Property("FilteredText");
 			writer.WriteInlineList(FilteredText, (w, item) => { w.WriteString(item); });

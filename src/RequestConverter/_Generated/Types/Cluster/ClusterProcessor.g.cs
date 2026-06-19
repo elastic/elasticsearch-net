@@ -27,7 +27,7 @@ public partial class ClusterProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ClusterProcessor");
 		{
 			__init.Property("Count");
 			writer.WriteValue(Count);

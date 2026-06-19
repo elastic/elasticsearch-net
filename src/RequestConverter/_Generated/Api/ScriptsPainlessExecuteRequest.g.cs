@@ -27,7 +27,7 @@ public partial class ScriptsPainlessExecuteRequest : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ScriptsPainlessExecuteRequest");
 		if (Context is not null)
 		{
 			__init.Property("Context");

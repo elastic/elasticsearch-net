@@ -27,7 +27,7 @@ public partial class ResolveIndexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ResolveIndexRequest");
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

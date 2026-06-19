@@ -27,7 +27,7 @@ public partial class TrainedModelInferenceStats : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("TrainedModelInferenceStats");
 		{
 			__init.Property("CacheMissCount");
 			writer.WriteValue(CacheMissCount);

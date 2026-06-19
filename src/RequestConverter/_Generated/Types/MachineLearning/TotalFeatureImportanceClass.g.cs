@@ -27,7 +27,7 @@ public partial class TotalFeatureImportanceClass : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("TotalFeatureImportanceClass");
 		{
 			__init.Property("ClassName");
 			writer.WriteString(ClassName);

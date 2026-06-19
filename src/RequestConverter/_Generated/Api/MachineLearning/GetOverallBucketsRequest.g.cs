@@ -27,7 +27,7 @@ public partial class GetOverallBucketsRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("GetOverallBucketsRequest");
 		{
 			__init.Property("JobId");
 			JobId.FormatCode(writer);

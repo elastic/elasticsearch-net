@@ -27,7 +27,7 @@ public partial class SignificantLongTermsAggregate : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SignificantLongTermsAggregate");
 		if (BgCount is not null)
 		{
 			__init.Property("BgCount");

@@ -27,7 +27,7 @@ public partial class JvmMemoryStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("JvmMemoryStats");
 		if (HeapCommittedInBytes is not null)
 		{
 			__init.Property("HeapCommittedInBytes");

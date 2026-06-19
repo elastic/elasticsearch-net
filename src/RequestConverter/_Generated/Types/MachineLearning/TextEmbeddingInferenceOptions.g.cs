@@ -27,7 +27,7 @@ public partial class TextEmbeddingInferenceOptions : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("TextEmbeddingInferenceOptions");
 		if (EmbeddingSize is not null)
 		{
 			__init.Property("EmbeddingSize");

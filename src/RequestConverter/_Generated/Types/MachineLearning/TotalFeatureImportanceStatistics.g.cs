@@ -27,7 +27,7 @@ public partial class TotalFeatureImportanceStatistics : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("TotalFeatureImportanceStatistics");
 		{
 			__init.Property("Max");
 			writer.WriteValue(Max);

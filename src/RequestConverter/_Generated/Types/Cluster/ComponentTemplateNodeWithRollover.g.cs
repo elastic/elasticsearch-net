@@ -27,7 +27,7 @@ public partial class ComponentTemplateNodeWithRollover : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ComponentTemplateNodeWithRollover");
 		if (CreatedDate is not null)
 		{
 			__init.Property("CreatedDate");

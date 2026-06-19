@@ -27,7 +27,7 @@ public partial class CapabilitiesRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("CapabilitiesRequest");
 		if (Capabilities is not null)
 		{
 			__init.Property("Capabilities");

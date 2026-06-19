@@ -27,7 +27,7 @@ public partial class SampleDiversity : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SampleDiversity");
 		{
 			__init.Property("Field");
 			Field.FormatCode(writer);

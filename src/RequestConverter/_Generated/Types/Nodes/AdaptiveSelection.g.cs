@@ -27,7 +27,7 @@ public partial class AdaptiveSelection : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("AdaptiveSelection");
 		if (AvgQueueSize is not null)
 		{
 			__init.Property("AvgQueueSize");

@@ -27,7 +27,7 @@ public partial class Overlapping : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("Overlapping");
 		{
 			__init.Property("IndexPatterns");
 			writer.WriteInlineList(IndexPatterns, (w, item) => { w.WriteString(item); });

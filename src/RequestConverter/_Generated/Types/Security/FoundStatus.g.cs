@@ -27,7 +27,7 @@ public partial class FoundStatus : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("FoundStatus");
 		{
 			__init.Property("Found");
 			writer.WriteValue(Found);

@@ -27,7 +27,7 @@ public partial class StopAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("StopAnalyzer");
 		if (Stopwords is not null)
 		{
 			__init.Property("Stopwords");

@@ -27,7 +27,7 @@ public partial class SnowballAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SnowballAnalyzer");
 		{
 			__init.Property("Language");
 			Elastic.Clients.Elasticsearch.Analysis.SnowballLanguageCodeFormatter.FormatCode(Language, writer);

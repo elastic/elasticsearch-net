@@ -27,7 +27,7 @@ public partial class PromoteDataStreamRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("PromoteDataStreamRequest");
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

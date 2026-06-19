@@ -27,7 +27,7 @@ public partial class SerbianNormalizationTokenFilter : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SerbianNormalizationTokenFilter");
 		if (Version is not null)
 		{
 			__init.Property("Version");

@@ -27,7 +27,7 @@ public partial class EstimateModelMemoryRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("EstimateModelMemoryRequest");
 		if (AnalysisConfig is not null)
 		{
 			__init.Property("AnalysisConfig");

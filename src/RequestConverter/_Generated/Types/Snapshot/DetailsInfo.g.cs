@@ -27,7 +27,7 @@ public partial class DetailsInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DetailsInfo");
 		{
 			__init.Property("Blob");
 			Blob.FormatCode(writer);

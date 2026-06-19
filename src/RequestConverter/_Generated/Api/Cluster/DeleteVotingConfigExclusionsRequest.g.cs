@@ -27,7 +27,7 @@ public partial class DeleteVotingConfigExclusionsRequest : RequestConverter.ICod
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DeleteVotingConfigExclusionsRequest");
 		if (MasterTimeout is not null)
 		{
 			__init.Property("MasterTimeout");

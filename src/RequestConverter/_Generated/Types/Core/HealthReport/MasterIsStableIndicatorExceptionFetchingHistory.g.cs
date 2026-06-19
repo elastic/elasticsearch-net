@@ -27,7 +27,7 @@ public partial class MasterIsStableIndicatorExceptionFetchingHistory : RequestCo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("MasterIsStableIndicatorExceptionFetchingHistory");
 		{
 			__init.Property("Message");
 			writer.WriteString(Message);

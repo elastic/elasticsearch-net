@@ -27,7 +27,7 @@ public partial class SearchApplicationTemplate : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SearchApplicationTemplate");
 		{
 			__init.Property("Script");
 			Script.FormatCode(writer);

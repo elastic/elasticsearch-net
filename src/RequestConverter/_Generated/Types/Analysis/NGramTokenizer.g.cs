@@ -27,7 +27,7 @@ public partial class NGramTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("NGramTokenizer");
 		if (CustomTokenChars is not null)
 		{
 			__init.Property("CustomTokenChars");

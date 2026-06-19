@@ -27,7 +27,7 @@ public partial class TransformProgress : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("TransformProgress");
 		{
 			__init.Property("DocsIndexed");
 			writer.WriteValue(DocsIndexed);

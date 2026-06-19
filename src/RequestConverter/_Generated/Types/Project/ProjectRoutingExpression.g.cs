@@ -27,7 +27,7 @@ public partial class ProjectRoutingExpression : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ProjectRoutingExpression");
 		{
 			__init.Property("Expression");
 			writer.WriteString(Expression);

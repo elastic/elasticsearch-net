@@ -27,7 +27,7 @@ public partial class PutDeepseekRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("PutDeepseekRequest");
 		{
 			__init.Property("DeepseekInferenceId");
 			DeepseekInferenceId.FormatCode(writer);

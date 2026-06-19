@@ -27,7 +27,7 @@ public partial class GeoLineAggregate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("GeoLineAggregate");
 		{
 			__init.Property("Geometry");
 			Geometry.FormatCode(writer);

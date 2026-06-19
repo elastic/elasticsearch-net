@@ -27,7 +27,7 @@ public partial class TermVector : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("TermVector");
 		if (FieldStatistics is not null)
 		{
 			__init.Property("FieldStatistics");

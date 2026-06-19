@@ -27,7 +27,7 @@ public partial class Token : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("Token");
 		if (EndOffset is not null)
 		{
 			__init.Property("EndOffset");

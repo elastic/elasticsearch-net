@@ -27,7 +27,7 @@ public partial class TextIndexPrefixes : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("TextIndexPrefixes");
 		{
 			__init.Property("MaxChars");
 			writer.WriteValue(MaxChars);

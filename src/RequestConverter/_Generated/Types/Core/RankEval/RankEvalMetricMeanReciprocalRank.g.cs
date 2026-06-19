@@ -27,7 +27,7 @@ public partial class RankEvalMetricMeanReciprocalRank : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("RankEvalMetricMeanReciprocalRank");
 		if (K is not null)
 		{
 			__init.Property("K");

@@ -27,7 +27,7 @@ public partial class SetSecurityUserProcessor : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SetSecurityUserProcessor");
 		if (Description is not null)
 		{
 			__init.Property("Description");

@@ -27,7 +27,7 @@ public partial class QueryRulesetListItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("QueryRulesetListItem");
 		{
 			__init.Property("RuleCriteriaTypesCounts");
 			writer.Write("new() ");

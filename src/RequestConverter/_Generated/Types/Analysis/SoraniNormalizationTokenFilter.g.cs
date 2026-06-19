@@ -27,7 +27,7 @@ public partial class SoraniNormalizationTokenFilter : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("SoraniNormalizationTokenFilter");
 		if (Version is not null)
 		{
 			__init.Property("Version");

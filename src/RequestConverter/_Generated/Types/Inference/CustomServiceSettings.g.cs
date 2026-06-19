@@ -27,7 +27,7 @@ public partial class CustomServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("CustomServiceSettings");
 		if (BatchSize is not null)
 		{
 			__init.Property("BatchSize");

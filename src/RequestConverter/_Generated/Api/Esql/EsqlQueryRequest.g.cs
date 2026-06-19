@@ -27,7 +27,7 @@ public partial class EsqlQueryRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("EsqlQueryRequest");
 		if (AllowPartialResults is not null)
 		{
 			__init.Property("AllowPartialResults");

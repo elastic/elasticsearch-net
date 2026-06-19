@@ -27,7 +27,7 @@ public partial class Counter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("Counter");
 		{
 			__init.Property("Active");
 			writer.WriteValue(Active);

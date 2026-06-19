@@ -27,7 +27,7 @@ public partial class ScriptedMetricAggregation : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ScriptedMetricAggregation");
 		if (CombineScript is not null)
 		{
 			__init.Property("CombineScript");

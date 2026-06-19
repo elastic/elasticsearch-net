@@ -27,7 +27,7 @@ public partial class CartesianCentroidAggregate : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("CartesianCentroidAggregate");
 		{
 			__init.Property("Count");
 			writer.WriteValue(Count);

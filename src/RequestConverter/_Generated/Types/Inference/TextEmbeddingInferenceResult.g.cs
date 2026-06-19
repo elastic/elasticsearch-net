@@ -27,7 +27,7 @@ public partial class TextEmbeddingInferenceResult : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("TextEmbeddingInferenceResult");
 		if (TextEmbedding is not null)
 		{
 			__init.Property("TextEmbedding");

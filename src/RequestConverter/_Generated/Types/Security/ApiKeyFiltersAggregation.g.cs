@@ -27,7 +27,7 @@ public partial class ApiKeyFiltersAggregation : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ApiKeyFiltersAggregation");
 		if (Filters is not null)
 		{
 			__init.Property("Filters");

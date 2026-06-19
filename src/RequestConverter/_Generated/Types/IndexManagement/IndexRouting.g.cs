@@ -27,7 +27,7 @@ public partial class IndexRouting : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("IndexRouting");
 		if (Allocation is not null)
 		{
 			__init.Property("Allocation");

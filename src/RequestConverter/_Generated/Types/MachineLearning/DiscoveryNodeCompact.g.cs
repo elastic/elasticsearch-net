@@ -27,7 +27,7 @@ public partial class DiscoveryNodeCompact : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("DiscoveryNodeCompact");
 		{
 			__init.Property("Attributes");
 			writer.Write("new() ");

@@ -27,7 +27,7 @@ public partial class AdjacencyMatrixAggregation : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("AdjacencyMatrixAggregation");
 		if (Filters is not null)
 		{
 			__init.Property("Filters");

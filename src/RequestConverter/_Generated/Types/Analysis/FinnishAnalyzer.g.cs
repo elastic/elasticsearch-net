@@ -27,7 +27,7 @@ public partial class FinnishAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("FinnishAnalyzer");
 		if (StemExclusion is not null)
 		{
 			__init.Property("StemExclusion");

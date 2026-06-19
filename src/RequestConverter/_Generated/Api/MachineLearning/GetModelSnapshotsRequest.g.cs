@@ -27,7 +27,7 @@ public partial class GetModelSnapshotsRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("GetModelSnapshotsRequest");
 		{
 			__init.Property("JobId");
 			JobId.FormatCode(writer);

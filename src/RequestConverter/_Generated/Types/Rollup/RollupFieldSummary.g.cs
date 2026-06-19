@@ -27,7 +27,7 @@ public partial class RollupFieldSummary : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("RollupFieldSummary");
 		{
 			__init.Property("Agg");
 			writer.WriteString(Agg);

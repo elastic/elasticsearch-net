@@ -27,7 +27,7 @@ public partial class GoogleAiStudioServiceSettings : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("GoogleAiStudioServiceSettings");
 		{
 			__init.Property("ApiKey");
 			writer.WriteString(ApiKey);

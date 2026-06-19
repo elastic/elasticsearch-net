@@ -27,7 +27,7 @@ public partial class ConvertProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("ConvertProcessor");
 		if (Description is not null)
 		{
 			__init.Property("Description");

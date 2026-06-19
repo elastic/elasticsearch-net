@@ -27,7 +27,7 @@ public partial class PutOpenshiftAiRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer();
+		var __init = writer.BeginObjectInitializer("PutOpenshiftAiRequest");
 		{
 			__init.Property("OpenshiftaiInferenceId");
 			OpenshiftaiInferenceId.FormatCode(writer);
