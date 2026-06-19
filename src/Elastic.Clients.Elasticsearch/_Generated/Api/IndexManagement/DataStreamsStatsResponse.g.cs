@@ -37,46 +37,21 @@ public sealed partial class DataStreamsStatsResponse : Elastic.Transport.Product
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Total number of backing indices for the selected data streams.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamsStatsResponse.g.xml" path="doc/member[@key='indices.data_streams_stats.Response#backing_indices']/*"/>
 	public required int BackingIndices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of selected data streams.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamsStatsResponse.g.xml" path="doc/member[@key='indices.data_streams_stats.Response#data_stream_count']/*"/>
 	public required int DataStreamCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics for the selected data streams.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamsStatsResponse.g.xml" path="doc/member[@key='indices.data_streams_stats.Response#data_streams']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsItem> DataStreams { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains information about shards that attempted to execute the request.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamsStatsResponse.g.xml" path="doc/member[@key='indices.data_streams_stats.Response#_shards']/*"/>
 	public required Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total size, in bytes, of all shards for the selected data streams.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamsStatsResponse.g.xml" path="doc/member[@key='indices.data_streams_stats.Response#total_store_size_bytes']/*"/>
 	public required long TotalStoreSizeBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total size of all shards for the selected data streams.
-	/// This property is included only if the <c>human</c> query parameter is <c>true</c>
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamsStatsResponse.g.xml" path="doc/member[@key='indices.data_streams_stats.Response#total_store_sizes']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? TotalStoreSizes { get; set; }
 }

@@ -17,29 +17,25 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Esql;
 
+/// <include file="DeleteViewRequest.g.xml" path="doc/member[@key='esql.delete_view.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.delete_view.Request']/*"/>
 public sealed partial class DeleteViewRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Delete an ES|QL view.
-/// </para>
-/// <para>
-/// Deletes a stored ES|QL view.
-/// </para>
-/// </summary>
+/// <include file="DeleteViewRequest.g.xml" path="doc/member[@key='esql.delete_view.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.delete_view.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Esql.Json.DeleteViewRequestConverter))]
 public sealed partial class DeleteViewRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public DeleteViewRequest(Elastic.Clients.Elasticsearch.Id name) : base(r => r.Required("name", name))
+	public DeleteViewRequest(Elastic.Clients.Elasticsearch.Ids name) : base(r => r.Required("name", name))
 	{
 	}
 
@@ -61,22 +57,12 @@ public sealed partial class DeleteViewRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "esql.delete_view";
 
-	/// <summary>
-	/// <para>
-	/// The view name to remove.
-	/// </para>
-	/// </summary>
-	public required Elastic.Clients.Elasticsearch.Id Name { get => P<Elastic.Clients.Elasticsearch.Id>("name"); set => PR("name", value); }
+	/// <include file="DeleteViewRequest.g.xml" path="doc/member[@key='esql.delete_view.Request#name']/*"/>
+	public required Elastic.Clients.Elasticsearch.Ids Name { get => P<Elastic.Clients.Elasticsearch.Ids>("name"); set => PR("name", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete an ES|QL view.
-/// </para>
-/// <para>
-/// Deletes a stored ES|QL view.
-/// </para>
-/// </summary>
+/// <include file="DeleteViewRequest.g.xml" path="doc/member[@key='esql.delete_view.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.delete_view.Request']/*"/>
 public readonly partial struct DeleteViewRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Esql.DeleteViewRequest Instance { get; init; }
@@ -87,7 +73,7 @@ public readonly partial struct DeleteViewRequestDescriptor
 		Instance = instance;
 	}
 
-	public DeleteViewRequestDescriptor(Elastic.Clients.Elasticsearch.Id name)
+	public DeleteViewRequestDescriptor(Elastic.Clients.Elasticsearch.Ids name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Esql.DeleteViewRequest(name);
 	}
@@ -101,12 +87,8 @@ public readonly partial struct DeleteViewRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestDescriptor(Elastic.Clients.Elasticsearch.Esql.DeleteViewRequest instance) => new Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Esql.DeleteViewRequest(Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The view name to remove.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestDescriptor Name(Elastic.Clients.Elasticsearch.Id value)
+	/// <include file="DeleteViewRequest.g.xml" path="doc/member[@key='esql.delete_view.Request#name']/*"/>
+	public Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestDescriptor Name(Elastic.Clients.Elasticsearch.Ids value)
 	{
 		Instance.Name = value;
 		return this;

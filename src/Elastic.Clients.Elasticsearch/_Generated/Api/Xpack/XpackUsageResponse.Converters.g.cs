@@ -36,6 +36,7 @@ public sealed partial class XpackUsageResponseConverter : System.Text.Json.Seria
 	private static readonly System.Text.Json.JsonEncodedText PropEnrich = System.Text.Json.JsonEncodedText.Encode("enrich"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropEql = System.Text.Json.JsonEncodedText.Encode("eql"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropFlattened = System.Text.Json.JsonEncodedText.Encode("flattened"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGpuVectorIndexing = System.Text.Json.JsonEncodedText.Encode("gpu_vector_indexing"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropGraph = System.Text.Json.JsonEncodedText.Encode("graph"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropHealthApi = System.Text.Json.JsonEncodedText.Encode("health_api"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIlm = System.Text.Json.JsonEncodedText.Encode("ilm"u8);
@@ -68,6 +69,7 @@ public sealed partial class XpackUsageResponseConverter : System.Text.Json.Seria
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Base?> propEnrich = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Eql> propEql = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Flattened?> propFlattened = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.GpuVectorIndexing?> propGpuVectorIndexing = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Base> propGraph = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.HealthStatistics?> propHealthApi = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Ilm> propIlm = default;
@@ -138,6 +140,11 @@ public sealed partial class XpackUsageResponseConverter : System.Text.Json.Seria
 			}
 
 			if (propFlattened.TryReadProperty(ref reader, options, PropFlattened, null))
+			{
+				continue;
+			}
+
+			if (propGpuVectorIndexing.TryReadProperty(ref reader, options, PropGpuVectorIndexing, null))
 			{
 				continue;
 			}
@@ -250,6 +257,7 @@ public sealed partial class XpackUsageResponseConverter : System.Text.Json.Seria
 			Enrich = propEnrich.Value,
 			Eql = propEql.Value,
 			Flattened = propFlattened.Value,
+			GpuVectorIndexing = propGpuVectorIndexing.Value,
 			Graph = propGraph.Value,
 			HealthApi = propHealthApi.Value,
 			Ilm = propIlm.Value,
@@ -284,6 +292,7 @@ public sealed partial class XpackUsageResponseConverter : System.Text.Json.Seria
 		writer.WriteProperty(options, PropEnrich, value.Enrich, null, null);
 		writer.WriteProperty(options, PropEql, value.Eql, null, null);
 		writer.WriteProperty(options, PropFlattened, value.Flattened, null, null);
+		writer.WriteProperty(options, PropGpuVectorIndexing, value.GpuVectorIndexing, null, null);
 		writer.WriteProperty(options, PropGraph, value.Graph, null, null);
 		writer.WriteProperty(options, PropHealthApi, value.HealthApi, null, null);
 		writer.WriteProperty(options, PropIlm, value.Ilm, null, null);

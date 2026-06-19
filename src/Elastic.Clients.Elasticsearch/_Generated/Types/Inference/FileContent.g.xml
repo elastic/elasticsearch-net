@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.FileContent#file_data"><summary><para>
+The base64 encoded file data
+</para></summary></member>
+  <member key="inference._types.FileContent#filename"><summary><para>
+The name of the file
+</para></summary></member>
+</doc>

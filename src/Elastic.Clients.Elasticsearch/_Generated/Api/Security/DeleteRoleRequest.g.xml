@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.delete_role.Request"><summary><para>
+Delete roles.
+</para>
+<para>
+Delete roles in the native realm.
+The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+The delete roles API cannot remove roles that are defined in roles files.
+</para></summary></member>
+  <member key="security.delete_role.Request#name"><summary><para>
+The name of the role.
+</para></summary></member>
+  <member key="security.delete_role.Request#refresh"><summary><para>
+If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
+</para></summary></member>
+</doc>

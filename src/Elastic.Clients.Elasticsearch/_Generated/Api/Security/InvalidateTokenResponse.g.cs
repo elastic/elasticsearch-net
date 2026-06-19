@@ -37,32 +37,15 @@ public sealed partial class InvalidateTokenResponse : Elastic.Transport.Products
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of errors that were encountered when invalidating the tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="InvalidateTokenResponse.g.xml" path="doc/member[@key='security.invalidate_token.Response#error_count']/*"/>
 	public required long ErrorCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Details about the errors.
-	/// This field is not present in the response when <c>error_count</c> is <c>0</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InvalidateTokenResponse.g.xml" path="doc/member[@key='security.invalidate_token.Response#error_details']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? ErrorDetails { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of the tokens that were invalidated as part of this request.
-	/// </para>
-	/// </summary>
+	/// <include file="InvalidateTokenResponse.g.xml" path="doc/member[@key='security.invalidate_token.Response#invalidated_tokens']/*"/>
 	public required long InvalidatedTokens { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of tokens that were already invalidated.
-	/// </para>
-	/// </summary>
+	/// <include file="InvalidateTokenResponse.g.xml" path="doc/member[@key='security.invalidate_token.Response#previously_invalidated_tokens']/*"/>
 	public required long PreviouslyInvalidatedTokens { get; set; }
 }

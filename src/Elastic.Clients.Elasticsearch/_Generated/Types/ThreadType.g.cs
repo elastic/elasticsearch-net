@@ -26,14 +26,19 @@ namespace Elastic.Clients.Elasticsearch;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ThreadTypeConverter))]
 public enum ThreadType
 {
+	/// <include file="ThreadType.g.xml" path="doc/member[@key='_types.ThreadType#block']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "block")]
 	Block,
+	/// <include file="ThreadType.g.xml" path="doc/member[@key='_types.ThreadType#cpu']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "cpu")]
 	Cpu,
+	/// <include file="ThreadType.g.xml" path="doc/member[@key='_types.ThreadType#gpu']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "gpu")]
 	Gpu,
+	/// <include file="ThreadType.g.xml" path="doc/member[@key='_types.ThreadType#mem']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "mem")]
 	Mem,
+	/// <include file="ThreadType.g.xml" path="doc/member[@key='_types.ThreadType#wait']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "wait")]
 	Wait
 }

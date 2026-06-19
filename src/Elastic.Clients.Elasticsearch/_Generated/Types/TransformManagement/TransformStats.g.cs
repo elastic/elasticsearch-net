@@ -23,6 +23,7 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.get_transform_stats.TransformStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.TransformStatsConverter))]
 public sealed partial class TransformStats
 {

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.mapping.ShapeProperty"><summary><para>
+The <c>shape</c> data type facilitates the indexing of and searching with arbitrary <c>x, y</c> cartesian shapes such as
+rectangles and polygons.
+</para><para><see href="https://www.elastic.co/docs/reference/elasticsearch/mapping-reference/shape">Learn more about this API in the Elasticsearch documentation.</see></para></summary></member>
+  <member key="_types.mapping.ShapeProperty#meta"><summary><para>
+Metadata about the field.
+</para></summary></member>
+</doc>

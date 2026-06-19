@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="esql.list_queries.Request"><summary><para>
+Get running ES|QL queries information.
+</para>
+<para>
+Returns an object containing IDs and other information about the running ES|QL queries.
+</para></summary></member>
+</doc>

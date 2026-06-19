@@ -26,14 +26,21 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 public sealed partial class GetDataLifecycleResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleResponse>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropDataStreams = System.Text.Json.JsonEncodedText.Encode("data_streams"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGlobalRetention = System.Text.Json.JsonEncodedText.Encode("global_retention"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamWithLifecycle>> propDataStreams = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.GlobalRetention> propGlobalRetention = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propDataStreams.TryReadProperty(ref reader, options, PropDataStreams, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamWithLifecycle> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamWithLifecycle>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propGlobalRetention.TryReadProperty(ref reader, options, PropGlobalRetention, null))
 			{
 				continue;
 			}
@@ -50,7 +57,8 @@ public sealed partial class GetDataLifecycleResponseConverter : System.Text.Json
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			DataStreams = propDataStreams.Value
+			DataStreams = propDataStreams.Value,
+			GlobalRetention = propGlobalRetention.Value
 		};
 	}
 
@@ -58,6 +66,7 @@ public sealed partial class GetDataLifecycleResponseConverter : System.Text.Json
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDataStreams, value.DataStreams, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamWithLifecycle> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamWithLifecycle>(o, v, null));
+		writer.WriteProperty(options, PropGlobalRetention, value.GlobalRetention, null, null);
 		writer.WriteEndObject();
 	}
 }

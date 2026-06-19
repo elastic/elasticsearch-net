@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.SumAggregate"><summary><para>
+Sum aggregation result. <c>value</c> is always present and is zero if there were no values to process.
+</para></summary></member>
+  <member key="_types.aggregations.SumAggregate#value"><summary><para>
+The metric value. A missing value generally means that there was no data to aggregate,
+unless specified otherwise.
+</para></summary></member>
+</doc>

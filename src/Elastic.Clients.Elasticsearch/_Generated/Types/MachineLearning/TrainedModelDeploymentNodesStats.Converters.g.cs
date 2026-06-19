@@ -25,6 +25,7 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class TrainedModelDeploymentNodesStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentNodesStats>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropAverageInferenceProcessMemoryRssBytes = System.Text.Json.JsonEncodedText.Encode("average_inference_process_memory_rss_bytes"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropAverageInferenceTimeMs = System.Text.Json.JsonEncodedText.Encode("average_inference_time_ms"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropAverageInferenceTimeMsExcludingCacheHits = System.Text.Json.JsonEncodedText.Encode("average_inference_time_ms_excluding_cache_hits"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropAverageInferenceTimeMsLastMinute = System.Text.Json.JsonEncodedText.Encode("average_inference_time_ms_last_minute"u8);
@@ -47,6 +48,7 @@ public sealed partial class TrainedModelDeploymentNodesStatsConverter : System.T
 	public override Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentNodesStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propAverageInferenceProcessMemoryRssBytes = default;
 		LocalJsonValue<System.TimeSpan?> propAverageInferenceTimeMs = default;
 		LocalJsonValue<System.TimeSpan?> propAverageInferenceTimeMsExcludingCacheHits = default;
 		LocalJsonValue<System.TimeSpan?> propAverageInferenceTimeMsLastMinute = default;
@@ -67,6 +69,11 @@ public sealed partial class TrainedModelDeploymentNodesStatsConverter : System.T
 		LocalJsonValue<int?> propTimeoutCount = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propAverageInferenceProcessMemoryRssBytes.TryReadProperty(ref reader, options, PropAverageInferenceProcessMemoryRssBytes, null))
+			{
+				continue;
+			}
+
 			if (propAverageInferenceTimeMs.TryReadProperty(ref reader, options, PropAverageInferenceTimeMs, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
@@ -169,6 +176,7 @@ public sealed partial class TrainedModelDeploymentNodesStatsConverter : System.T
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentNodesStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			AverageInferenceProcessMemoryRssBytes = propAverageInferenceProcessMemoryRssBytes.Value,
 			AverageInferenceTimeMs = propAverageInferenceTimeMs.Value,
 			AverageInferenceTimeMsExcludingCacheHits = propAverageInferenceTimeMsExcludingCacheHits.Value,
 			AverageInferenceTimeMsLastMinute = propAverageInferenceTimeMsLastMinute.Value,
@@ -193,6 +201,7 @@ public sealed partial class TrainedModelDeploymentNodesStatsConverter : System.T
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentNodesStats value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAverageInferenceProcessMemoryRssBytes, value.AverageInferenceProcessMemoryRssBytes, null, null);
 		writer.WriteProperty(options, PropAverageInferenceTimeMs, value.AverageInferenceTimeMs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteNullableValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteProperty(options, PropAverageInferenceTimeMsExcludingCacheHits, value.AverageInferenceTimeMsExcludingCacheHits, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteNullableValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteProperty(options, PropAverageInferenceTimeMsLastMinute, value.AverageInferenceTimeMsLastMinute, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteNullableValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));

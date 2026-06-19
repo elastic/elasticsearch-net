@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ilm.move_to_step.StepKey#action"><summary><para>
+The optional action to which the index will be moved.
+</para></summary></member>
+  <member key="ilm.move_to_step.StepKey#name"><summary><para>
+The optional step name to which the index will be moved.
+</para></summary></member>
+</doc>

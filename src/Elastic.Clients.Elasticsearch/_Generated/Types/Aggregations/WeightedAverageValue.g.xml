@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.WeightedAverageValue#field"><summary><para>
+The field from which to extract the values or weights.
+</para></summary></member>
+  <member key="_types.aggregations.WeightedAverageValue#missing"><summary><para>
+A value or weight to use if the field is missing.
+</para></summary></member>
+</doc>

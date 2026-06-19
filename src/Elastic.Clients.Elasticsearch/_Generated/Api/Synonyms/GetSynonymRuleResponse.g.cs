@@ -37,17 +37,9 @@ public sealed partial class GetSynonymRuleResponse : Elastic.Transport.Products.
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Synonym Rule identifier
-	/// </para>
-	/// </summary>
+	/// <include file="GetSynonymRuleResponse.g.xml" path="doc/member[@key='synonyms.get_synonym_rule.Response#id']/*"/>
 	public required string Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Synonyms, in Solr format, that conform the synonym rule.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSynonymRuleResponse.g.xml" path="doc/member[@key='synonyms.get_synonym_rule.Response#synonyms']/*"/>
 	public required string Synonyms { get; set; }
 }

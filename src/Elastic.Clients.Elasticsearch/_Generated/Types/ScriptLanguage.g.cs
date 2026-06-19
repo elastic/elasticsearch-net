@@ -34,32 +34,16 @@ public readonly partial struct ScriptLanguage : Elastic.Clients.Elasticsearch.Se
 #endif
 	public readonly string Value { get; }
 
-	/// <summary>
-	/// <para>
-	/// Lucene’s expressions language, compiles a JavaScript expression to bytecode.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptLanguage.g.xml" path="doc/member[@key='_types.ScriptLanguage#expression']/*"/>
 	public static ScriptLanguage Expression { get; } = new ScriptLanguage("expression");
 
-	/// <summary>
-	/// <para>
-	/// Expert Java API
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptLanguage.g.xml" path="doc/member[@key='_types.ScriptLanguage#java']/*"/>
 	public static ScriptLanguage Java { get; } = new ScriptLanguage("java");
 
-	/// <summary>
-	/// <para>
-	/// Mustache templated, used for templates.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptLanguage.g.xml" path="doc/member[@key='_types.ScriptLanguage#mustache']/*"/>
 	public static ScriptLanguage Mustache { get; } = new ScriptLanguage("mustache");
 
-	/// <summary>
-	/// <para>
-	/// Painless scripting language, purpose-built for Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptLanguage.g.xml" path="doc/member[@key='_types.ScriptLanguage#painless']/*"/>
 	public static ScriptLanguage Painless { get; } = new ScriptLanguage("painless");
 
 	public override string ToString() => Value ?? string.Empty;

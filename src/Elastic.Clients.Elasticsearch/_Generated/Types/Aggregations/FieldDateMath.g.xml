@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.FieldDateMath"><summary><para>
+A date range limit, represented either as a DateMath expression or a number expressed
+according to the target field's precision.
+</para></summary></member>
+</doc>

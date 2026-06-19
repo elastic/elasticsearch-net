@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.Filter#description"><summary><para>
+A description of the filter.
+</para></summary></member>
+  <member key="ml._types.Filter#filter_id"><summary><para>
+A string that uniquely identifies a filter.
+</para></summary></member>
+  <member key="ml._types.Filter#items"><summary><para>
+An array of strings which is the filter item list.
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.evaluate_data_frame.DataframeClassificationSummaryAccuracy']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeClassificationSummaryAccuracyConverter))]
 public sealed partial class DataframeClassificationSummaryAccuracy
 {

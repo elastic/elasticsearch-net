@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="transform.delete_transform.Request"><summary><para>
+Delete a transform.
+</para></summary></member>
+  <member key="transform.delete_transform.Request#delete_dest_index"><summary><para>
+If this value is true, the destination index is deleted together with the transform. If false, the destination
+index will not be deleted
+</para></summary></member>
+  <member key="transform.delete_transform.Request#force"><summary><para>
+If this value is false, the transform must be stopped before it can be deleted. If true, the transform is
+deleted regardless of its current state.
+</para></summary></member>
+  <member key="transform.delete_transform.Request#timeout"><summary><para>
+Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="transform.delete_transform.Request#transform_id"><summary><para>
+Identifier for the transform.
+</para></summary></member>
+</doc>

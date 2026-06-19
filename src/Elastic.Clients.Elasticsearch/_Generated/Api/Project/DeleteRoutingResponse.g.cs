@@ -17,9 +17,9 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Project;
 
@@ -37,10 +37,6 @@ public sealed partial class DeleteRoutingResponse : Elastic.Transport.Products.E
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRoutingResponse.g.xml" path="doc/member[@key='project.delete_routing.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

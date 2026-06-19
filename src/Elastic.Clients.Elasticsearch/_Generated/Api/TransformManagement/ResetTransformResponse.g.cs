@@ -37,10 +37,6 @@ public sealed partial class ResetTransformResponse : Elastic.Transport.Products.
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="ResetTransformResponse.g.xml" path="doc/member[@key='transform.reset_transform.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

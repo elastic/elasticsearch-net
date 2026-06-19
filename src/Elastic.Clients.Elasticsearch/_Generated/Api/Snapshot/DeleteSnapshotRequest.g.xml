@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="snapshot.delete.Request"><summary><para>
+Delete snapshots.
+</para></summary></member>
+  <member key="snapshot.delete.Request#master_timeout"><summary><para>
+The period to wait for the master node.
+If the master node is not available before the timeout expires, the request fails and returns an error.
+To indicate that the request should never timeout, set it to <c>-1</c>.
+</para></summary></member>
+  <member key="snapshot.delete.Request#repository"><summary><para>
+The name of the repository to delete a snapshot from.
+</para></summary></member>
+  <member key="snapshot.delete.Request#snapshot"><summary><para>
+A comma-separated list of snapshot names to delete.
+It also accepts wildcards (<c>*</c>).
+</para></summary></member>
+  <member key="snapshot.delete.Request#wait_for_completion"><summary><para>
+If <c>true</c>, the request returns a response when the matching snapshots are all deleted.
+If <c>false</c>, the request returns a response as soon as the deletes are scheduled.
+</para></summary></member>
+</doc>

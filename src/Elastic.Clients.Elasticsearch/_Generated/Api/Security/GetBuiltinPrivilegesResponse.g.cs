@@ -37,24 +37,12 @@ public sealed partial class GetBuiltinPrivilegesResponse : Elastic.Transport.Pro
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The list of cluster privileges that are understood by this version of Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBuiltinPrivilegesResponse.g.xml" path="doc/member[@key='security.get_builtin_privileges.Response#cluster']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege> Cluster { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The list of index privileges that are understood by this version of Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBuiltinPrivilegesResponse.g.xml" path="doc/member[@key='security.get_builtin_privileges.Response#index']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<string> Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The list of remote_cluster privileges that are understood by this version of Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBuiltinPrivilegesResponse.g.xml" path="doc/member[@key='security.get_builtin_privileges.Response#remote_cluster']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege>? RemoteCluster { get; set; }
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.FillMaskInferenceUpdateOptions#num_top_classes"><summary><para>
+Specifies the number of top class predictions to return. Defaults to 0.
+</para></summary></member>
+  <member key="ml._types.FillMaskInferenceUpdateOptions#results_field"><summary><para>
+The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+</para></summary></member>
+  <member key="ml._types.FillMaskInferenceUpdateOptions#tokenization"><summary><para>
+The tokenization options to update when inferring
+</para></summary></member>
+</doc>

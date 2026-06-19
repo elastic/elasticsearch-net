@@ -37,11 +37,6 @@ public sealed partial class DeleteUserResponse : Elastic.Transport.Products.Elas
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If the user is successfully deleted, the request returns <c>{"found": true}</c>.
-	/// Otherwise, <c>found</c> is set to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteUserResponse.g.xml" path="doc/member[@key='security.delete_user.Response#found']/*"/>
 	public required bool Found { get; set; }
 }

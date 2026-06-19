@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.get_user_profile.Request"><summary><para>
+Get a user profile.
+</para>
+<para>
+Get a user's profile using the unique profile ID.
+</para>
+<para>
+NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
+Individual users and external applications should not call this API directly.
+Elastic reserves the right to change or remove this feature in future releases without prior notice.
+</para></summary></member>
+  <member key="security.get_user_profile.Request#data"><summary><para>
+A comma-separated list of filters for the <c>data</c> field of the profile document.
+To return all content use <c>data=*</c>.
+To return a subset of content use <c>data=&lt;key></c> to retrieve content nested under the specified <c>&lt;key></c>.
+By default returns no <c>data</c> content.
+</para></summary></member>
+  <member key="security.get_user_profile.Request#uid"><summary><para>
+A unique identifier for the user profile.
+</para></summary></member>
+</doc>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="tasks._types.GroupBy#nodes"><summary><para>
+Group tasks by node ID.
+</para></summary></member>
+  <member key="tasks._types.GroupBy#none"><summary><para>
+Do not group tasks.
+</para></summary></member>
+  <member key="tasks._types.GroupBy#parents"><summary><para>
+Group tasks by parent task ID.
+</para></summary></member>
+</doc>

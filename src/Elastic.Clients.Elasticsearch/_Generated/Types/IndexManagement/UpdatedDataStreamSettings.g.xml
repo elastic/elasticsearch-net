@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.put_data_stream_settings.UpdatedDataStreamSettings#applied_to_data_stream"><summary><para>
+If the settings were successfully applied to the data stream (or would have been, if running in <c>dry_run</c>
+mode), it is <c>true</c>. If an error occurred, it is <c>false</c>.
+</para></summary></member>
+  <member key="indices.put_data_stream_settings.UpdatedDataStreamSettings#effective_settings"><summary><para>
+The settings that are effective on this data stream, taking into account the settings from the matching index
+template and the settings specific to this data stream.
+</para></summary></member>
+  <member key="indices.put_data_stream_settings.UpdatedDataStreamSettings#error"><summary><para>
+A message explaining why the settings could not be applied to the data stream.
+</para></summary></member>
+  <member key="indices.put_data_stream_settings.UpdatedDataStreamSettings#index_settings_results"><summary><para>
+Information about whether and where each setting was applied.
+</para></summary></member>
+  <member key="indices.put_data_stream_settings.UpdatedDataStreamSettings#name"><summary><para>
+The data stream name.
+</para></summary></member>
+  <member key="indices.put_data_stream_settings.UpdatedDataStreamSettings#settings"><summary><para>
+The settings that are specfic to this data stream that will override any settings from the matching index template.
+</para></summary></member>
+</doc>

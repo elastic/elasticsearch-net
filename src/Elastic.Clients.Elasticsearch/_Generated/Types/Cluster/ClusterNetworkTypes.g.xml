@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.stats.ClusterNetworkTypes#http_types"><summary><para>
+Contains statistics about the HTTP network types used by selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterNetworkTypes#transport_types"><summary><para>
+Contains statistics about the transport network types used by selected nodes.
+</para></summary></member>
+</doc>

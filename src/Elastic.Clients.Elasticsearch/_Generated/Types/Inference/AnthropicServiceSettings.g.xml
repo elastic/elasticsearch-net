@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.AnthropicServiceSettings#api_key"><summary><para>
+A valid API key for the Anthropic API.
+</para></summary></member>
+  <member key="inference._types.AnthropicServiceSettings#model_id"><summary><para>
+The name of the model to use for the inference task.
+Refer to the Anthropic documentation for the list of supported models.
+</para></summary></member>
+  <member key="inference._types.AnthropicServiceSettings#rate_limit"><summary><para>
+This setting helps to minimize the number of rate limit errors returned from Anthropic.
+By default, the <c>anthropic</c> service sets the number of requests allowed per minute to 50.
+</para></summary></member>
+</doc>

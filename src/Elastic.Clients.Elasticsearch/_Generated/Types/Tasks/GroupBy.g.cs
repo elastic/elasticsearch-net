@@ -26,25 +26,13 @@ namespace Elastic.Clients.Elasticsearch.Tasks;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Tasks.Json.GroupByConverter))]
 public enum GroupBy
 {
-	/// <summary>
-	/// <para>
-	/// Group tasks by node ID.
-	/// </para>
-	/// </summary>
+	/// <include file="GroupBy.g.xml" path="doc/member[@key='tasks._types.GroupBy#nodes']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "nodes")]
 	Nodes,
-	/// <summary>
-	/// <para>
-	/// Do not group tasks.
-	/// </para>
-	/// </summary>
+	/// <include file="GroupBy.g.xml" path="doc/member[@key='tasks._types.GroupBy#none']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "none")]
 	None,
-	/// <summary>
-	/// <para>
-	/// Group tasks by parent task ID.
-	/// </para>
-	/// </summary>
+	/// <include file="GroupBy.g.xml" path="doc/member[@key='tasks._types.GroupBy#parents']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "parents")]
 	Parents
 }

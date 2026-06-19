@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.ExtendedStatsBucketAggregation#buckets_path"><summary><para>
+Path to the buckets that contain one set of values to correlate.
+</para></summary></member>
+  <member key="_types.aggregations.ExtendedStatsBucketAggregation#format"><summary><para>
+<c>DecimalFormat</c> pattern for the output value.
+If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
+</para></summary></member>
+  <member key="_types.aggregations.ExtendedStatsBucketAggregation#gap_policy"><summary><para>
+Policy to apply when gaps are found in the data.
+</para></summary></member>
+  <member key="_types.aggregations.ExtendedStatsBucketAggregation#sigma"><summary><para>
+The number of standard deviations above/below the mean to display.
+</para></summary></member>
+</doc>

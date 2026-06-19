@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.IngestTotal#count"><summary><para>
+Total number of documents ingested during the lifetime of this node.
+</para></summary></member>
+  <member key="nodes._types.IngestTotal#current"><summary><para>
+Total number of documents currently being ingested.
+</para></summary></member>
+  <member key="nodes._types.IngestTotal#failed"><summary><para>
+Total number of failed ingest operations during the lifetime of this node.
+</para></summary></member>
+  <member key="nodes._types.IngestTotal#time_in_millis"><summary><para>
+Total time, in milliseconds, spent preprocessing ingest documents during the lifetime of this node.
+</para></summary></member>
+</doc>

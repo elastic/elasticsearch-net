@@ -39,10 +39,6 @@ public sealed partial class GetOverallBucketsResponse : Elastic.Transport.Produc
 
 	public required long Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array of overall bucket objects
-	/// </para>
-	/// </summary>
+	/// <include file="GetOverallBucketsResponse.g.xml" path="doc/member[@key='ml.get_overall_buckets.Response#overall_buckets']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.OverallBucket> OverallBuckets { get; set; }
 }

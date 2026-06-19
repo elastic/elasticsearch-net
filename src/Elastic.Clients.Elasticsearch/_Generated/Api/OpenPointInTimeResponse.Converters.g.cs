@@ -25,16 +25,23 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class OpenPointInTimeResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.OpenPointInTimeResponse>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropClusters = System.Text.Json.JsonEncodedText.Encode("_clusters"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("_shards"u8);
 
 	public override Elastic.Clients.Elasticsearch.OpenPointInTimeResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ClusterStatistics?> propClusters = default;
 		LocalJsonValue<string> propId = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ShardStatistics> propShards = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propClusters.TryReadProperty(ref reader, options, PropClusters, null))
+			{
+				continue;
+			}
+
 			if (propId.TryReadProperty(ref reader, options, PropId, null))
 			{
 				continue;
@@ -57,6 +64,7 @@ public sealed partial class OpenPointInTimeResponseConverter : System.Text.Json.
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.OpenPointInTimeResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			Clusters = propClusters.Value,
 			Id = propId.Value,
 			Shards = propShards.Value
 		};
@@ -65,6 +73,7 @@ public sealed partial class OpenPointInTimeResponseConverter : System.Text.Json.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.OpenPointInTimeResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropClusters, value.Clusters, null, null);
 		writer.WriteProperty(options, PropId, value.Id, null, null);
 		writer.WriteProperty(options, PropShards, value.Shards, null, null);
 		writer.WriteEndObject();

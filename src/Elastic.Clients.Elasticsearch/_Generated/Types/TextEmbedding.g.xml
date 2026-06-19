@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.TextEmbedding#model_id"><summary><para>
+Model ID is required for all dense_vector fields but
+may be inferred for semantic_text fields
+</para></summary></member>
+  <member key="_types.TextEmbedding#model_text"><summary><para>
+The text to be converted into a vector by the specified model
+</para></summary></member>
+</doc>

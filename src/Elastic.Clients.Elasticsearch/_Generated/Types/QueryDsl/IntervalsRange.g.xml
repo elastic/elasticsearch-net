@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.IntervalsRange#analyzer"><summary><para>
+Analyzer used to analyze the <c>prefix</c>.
+</para></summary></member>
+  <member key="_types.query_dsl.IntervalsRange#gt"><summary><para>
+Lower term, either gte or gt must be provided.
+</para></summary></member>
+  <member key="_types.query_dsl.IntervalsRange#gte"><summary><para>
+Lower term, either gte or gt must be provided.
+</para></summary></member>
+  <member key="_types.query_dsl.IntervalsRange#lt"><summary><para>
+Upper term, either lte or lt must be provided.
+</para></summary></member>
+  <member key="_types.query_dsl.IntervalsRange#lte"><summary><para>
+Upper term, either lte or lt must be provided.
+</para></summary></member>
+  <member key="_types.query_dsl.IntervalsRange#use_field"><summary><para>
+If specified, match intervals from this field rather than the top-level field.
+The <c>prefix</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
+</para></summary></member>
+</doc>

@@ -37,10 +37,6 @@ public sealed partial class DeleteDataFrameAnalyticsResponse : Elastic.Transport
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataFrameAnalyticsResponse.g.xml" path="doc/member[@key='ml.delete_data_frame_analytics.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

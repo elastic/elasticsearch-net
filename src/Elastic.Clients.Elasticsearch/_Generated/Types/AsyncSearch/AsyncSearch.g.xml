@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="async_search._types.AsyncSearch#_shards"><summary><para>
+Indicates how many shards have run the query.
+Note that in order for shard results to be included in the search response, they need to be reduced first.
+</para></summary></member>
+  <member key="async_search._types.AsyncSearch#aggregations"><summary><para>
+Partial aggregations results, coming from the shards that have already completed running the query.
+</para></summary></member>
+  <member key="async_search._types.AsyncSearch#num_reduce_phases"><summary><para>
+Indicates how many reductions of the results have been performed.
+If this number increases compared to the last retrieved results for a get asynch search request, you can expect additional results included in the search response.
+</para></summary></member>
+</doc>

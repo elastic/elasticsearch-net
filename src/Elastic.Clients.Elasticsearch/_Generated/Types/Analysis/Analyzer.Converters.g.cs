@@ -94,7 +94,7 @@ public sealed partial class IAnalyzerConverter : System.Text.Json.Serialization.
 			"thai" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ThaiAnalyzer>(options, null),
 			"turkish" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.TurkishAnalyzer>(options, null),
 			"whitespace" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.WhitespaceAnalyzer>(options, null),
-			_ => throw new System.Text.Json.JsonException($"Variant '{discriminator}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Analysis.IAnalyzer)}'.")
+			_ => ReadCustomVariant(ref reader, options, discriminator!)
 		};
 	}
 
@@ -250,7 +250,34 @@ public sealed partial class IAnalyzerConverter : System.Text.Json.Serialization.
 				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.WhitespaceAnalyzer)value, null);
 				break;
 			default:
-				throw new System.Text.Json.JsonException($"Variant '{value.Type}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Analysis.IAnalyzer)}'.");
+				if (value is Elastic.Clients.Elasticsearch.Analysis.UnknownAnalyzer custom)
+				{
+					writer.WriteValue(options, custom, null);
+					break;
+				}
+
+				if (options.TryGetContext<Elastic.Clients.Elasticsearch.IElasticsearchClientSettings>(out var settings) && settings.Variants.TryGetWriter<Elastic.Clients.Elasticsearch.Analysis.IAnalyzer>(value.GetType(), out var variantWriter))
+				{
+					if (!string.Equals(value.Type, variantWriter.Discriminator, System.StringComparison.Ordinal))
+					{
+						throw new System.Text.Json.JsonException($"Variant of runtime type '{value.GetType().Name}' is registered for discriminator '{variantWriter.Discriminator}' but reports '{value.Type}' for type '{nameof(Elastic.Clients.Elasticsearch.Analysis.IAnalyzer)}'.");
+					}
+
+					variantWriter.Write(writer, value, options);
+					break;
+				}
+
+				throw new System.Text.Json.JsonException($"Variant of runtime type '{value.GetType().Name}' with discriminator '{value.Type}' is not registered. Call settings.Variants.Register<{nameof(Elastic.Clients.Elasticsearch.Analysis.IAnalyzer)}, T>(\"{value.Type}\") at startup.");
 		}
+	}
+
+	private static Elastic.Clients.Elasticsearch.Analysis.IAnalyzer ReadCustomVariant(ref System.Text.Json.Utf8JsonReader reader, System.Text.Json.JsonSerializerOptions options, string discriminator)
+	{
+		if (options.TryGetContext<Elastic.Clients.Elasticsearch.IElasticsearchClientSettings>(out var settings) && settings.Variants.TryGetReader<Elastic.Clients.Elasticsearch.Analysis.IAnalyzer>(discriminator, out var variantReader))
+		{
+			return variantReader(ref reader, options)!;
+		}
+
+		return reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.UnknownAnalyzer>(options)!;
 	}
 }

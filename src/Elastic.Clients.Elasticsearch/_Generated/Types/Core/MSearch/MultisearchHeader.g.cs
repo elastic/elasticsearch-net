@@ -23,11 +23,8 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.Core.MSearch;
 
-/// <summary>
-/// <para>
-/// Contains parameters used to limit or change the subsequent search body request.
-/// </para>
-/// </summary>
+/// <include file="MultisearchHeader.g.xml" path="doc/member[@key='_global.msearch.MultisearchHeader']/*"/>
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.msearch.MultisearchHeader']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.MSearch.Json.MultisearchHeaderConverter))]
 public sealed partial class MultisearchHeader
 {
@@ -41,25 +38,30 @@ public sealed partial class MultisearchHeader
 		_ = sentinel;
 	}
 
+	/// <include file="MultisearchHeader.g.xml" path="doc/member[@key='_global.msearch.MultisearchHeader#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get; set; }
 	public bool? AllowPartialSearchResults { get; set; }
 	public bool? CcsMinimizeRoundtrips { get; set; }
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get; set; }
 	public bool? IgnoreThrottled { get; set; }
+
+	/// <include file="MultisearchHeader.g.xml" path="doc/member[@key='_global.msearch.MultisearchHeader#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get; set; }
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
 	public string? Preference { get; set; }
 	public string? ProjectRouting { get; set; }
 	public bool? RequestCache { get; set; }
+
+	/// <include file="MultisearchHeader.g.xml" path="doc/member[@key='_global.msearch.MultisearchHeader#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get; set; }
+
+	/// <include file="MultisearchHeader.g.xml" path="doc/member[@key='_global.msearch.MultisearchHeader#_slice']/*"/>
+	public string? Slice { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Contains parameters used to limit or change the subsequent search body request.
-/// </para>
-/// </summary>
+/// <include file="MultisearchHeader.g.xml" path="doc/member[@key='_global.msearch.MultisearchHeader']/*"/>
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.msearch.MultisearchHeader']/*"/>
 public readonly partial struct MultisearchHeaderDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader Instance { get; init; }
@@ -79,6 +81,7 @@ public readonly partial struct MultisearchHeaderDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor(Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader instance) => new Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader(Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor descriptor) => descriptor.Instance;
 
+	/// <include file="MultisearchHeader.g.xml" path="doc/member[@key='_global.msearch.MultisearchHeader#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
@@ -115,6 +118,7 @@ public readonly partial struct MultisearchHeaderDescriptor
 		return this;
 	}
 
+	/// <include file="MultisearchHeader.g.xml" path="doc/member[@key='_global.msearch.MultisearchHeader#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
@@ -145,6 +149,7 @@ public readonly partial struct MultisearchHeaderDescriptor
 		return this;
 	}
 
+	/// <include file="MultisearchHeader.g.xml" path="doc/member[@key='_global.msearch.MultisearchHeader#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
@@ -154,6 +159,13 @@ public readonly partial struct MultisearchHeaderDescriptor
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
 	{
 		Instance.SearchType = value;
+		return this;
+	}
+
+	/// <include file="MultisearchHeader.g.xml" path="doc/member[@key='_global.msearch.MultisearchHeader#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor Slice(string? value)
+	{
+		Instance.Slice = value;
 		return this;
 	}
 

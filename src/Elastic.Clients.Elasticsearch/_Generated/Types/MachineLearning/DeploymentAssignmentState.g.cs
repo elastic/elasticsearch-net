@@ -26,32 +26,16 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DeploymentAssignmentStateConverter))]
 public enum DeploymentAssignmentState
 {
-	/// <summary>
-	/// <para>
-	/// The deployment is on a failed state and must be re-deployed.
-	/// </para>
-	/// </summary>
+	/// <include file="DeploymentAssignmentState.g.xml" path="doc/member[@key='ml._types.DeploymentAssignmentState#failed']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "failed")]
 	Failed,
-	/// <summary>
-	/// <para>
-	/// The deployment is usable; at least one node has the model allocated.
-	/// </para>
-	/// </summary>
+	/// <include file="DeploymentAssignmentState.g.xml" path="doc/member[@key='ml._types.DeploymentAssignmentState#started']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "started")]
 	Started,
-	/// <summary>
-	/// <para>
-	/// The deployment has recently started but is not yet usable; the model is not allocated on any nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="DeploymentAssignmentState.g.xml" path="doc/member[@key='ml._types.DeploymentAssignmentState#starting']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "starting")]
 	Starting,
-	/// <summary>
-	/// <para>
-	/// The deployment is preparing to stop and deallocate the model from the relevant nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="DeploymentAssignmentState.g.xml" path="doc/member[@key='ml._types.DeploymentAssignmentState#stopping']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "stopping")]
 	Stopping
 }

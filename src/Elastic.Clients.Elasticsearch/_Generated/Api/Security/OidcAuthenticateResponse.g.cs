@@ -37,31 +37,15 @@ public sealed partial class OidcAuthenticateResponse : Elastic.Transport.Product
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch access token.
-	/// </para>
-	/// </summary>
+	/// <include file="OidcAuthenticateResponse.g.xml" path="doc/member[@key='security.oidc_authenticate.Response#access_token']/*"/>
 	public required string AccessToken { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The duration (in seconds) of the tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="OidcAuthenticateResponse.g.xml" path="doc/member[@key='security.oidc_authenticate.Response#expires_in']/*"/>
 	public required int ExpiresIn { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch refresh token.
-	/// </para>
-	/// </summary>
+	/// <include file="OidcAuthenticateResponse.g.xml" path="doc/member[@key='security.oidc_authenticate.Response#refresh_token']/*"/>
 	public required string RefreshToken { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of token.
-	/// </para>
-	/// </summary>
+	/// <include file="OidcAuthenticateResponse.g.xml" path="doc/member[@key='security.oidc_authenticate.Response#type']/*"/>
 	public required string Type { get; set; }
 }

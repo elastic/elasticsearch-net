@@ -23,6 +23,7 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.Synonyms;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='synonyms._types.SynonymRuleRead']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Synonyms.Json.SynonymRuleReadConverter))]
 public sealed partial class SynonymRuleRead
 {
@@ -43,17 +44,9 @@ public sealed partial class SynonymRuleRead
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Synonym Rule identifier
-	/// </para>
-	/// </summary>
+	/// <include file="SynonymRuleRead.g.xml" path="doc/member[@key='synonyms._types.SynonymRuleRead#id']/*"/>
 	public required string Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Synonyms, in Solr format, that conform the synonym rule.
-	/// </para>
-	/// </summary>
+	/// <include file="SynonymRuleRead.g.xml" path="doc/member[@key='synonyms._types.SynonymRuleRead#synonyms']/*"/>
 	public required string Synonyms { get; set; }
 }

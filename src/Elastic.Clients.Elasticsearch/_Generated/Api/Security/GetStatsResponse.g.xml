@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.get_stats.Response#nodes"><summary><para>
+A map of node IDs to security statistics for that node.
+</para></summary></member>
+</doc>

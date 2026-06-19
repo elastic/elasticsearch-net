@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.OverallBucket#bucket_span"><summary><para>
+The length of the bucket in seconds. Matches the job with the longest bucket_span value.
+</para></summary></member>
+  <member key="ml._types.OverallBucket#is_interim"><summary><para>
+If true, this is an interim result. In other words, the results are calculated based on partial input data.
+</para></summary></member>
+  <member key="ml._types.OverallBucket#jobs"><summary><para>
+An array of objects that contain the max_anomaly_score per job_id.
+</para></summary></member>
+  <member key="ml._types.OverallBucket#overall_score"><summary><para>
+The top_n average of the maximum bucket anomaly_score per job.
+</para></summary></member>
+  <member key="ml._types.OverallBucket#result_type"><summary><para>
+Internal. This is always set to overall_bucket.
+</para></summary></member>
+  <member key="ml._types.OverallBucket#timestamp"><summary><para>
+The start time of the bucket for which these results were calculated.
+</para></summary></member>
+  <member key="ml._types.OverallBucket#timestamp_string"><summary><para>
+The start time of the bucket for which these results were calculated.
+</para></summary></member>
+</doc>

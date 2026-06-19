@@ -37,10 +37,6 @@ public sealed partial class RetryResponse : Elastic.Transport.Products.Elasticse
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="RetryResponse.g.xml" path="doc/member[@key='ilm.retry.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

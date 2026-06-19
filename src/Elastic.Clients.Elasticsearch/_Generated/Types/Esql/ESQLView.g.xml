@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="esql._types.ESQLView"><summary><para>
+A non-materialized ES|QL view.
+</para></summary></member>
+  <member key="esql._types.ESQLView#name"><summary><para>
+The name of the ES|QL view
+</para></summary></member>
+  <member key="esql._types.ESQLView#query"><summary><para>
+The ES|QL query
+</para></summary></member>
+</doc>

@@ -37,10 +37,6 @@ public sealed partial class GetStatsResponse : Elastic.Transport.Products.Elasti
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A map of node IDs to security statistics for that node.
-	/// </para>
-	/// </summary>
+	/// <include file="GetStatsResponse.g.xml" path="doc/member[@key='security.get_stats.Response#nodes']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.NodeSecurityStats> Nodes { get; set; }
 }

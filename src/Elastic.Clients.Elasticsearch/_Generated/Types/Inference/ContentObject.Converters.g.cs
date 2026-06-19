@@ -25,16 +25,30 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class ContentObjectConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.ContentObject>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropFile = System.Text.Json.JsonEncodedText.Encode("file"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropImageUrl = System.Text.Json.JsonEncodedText.Encode("image_url"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.ContentObject Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.FileContent> propFile = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.ImageUrl> propImageUrl = default;
 		LocalJsonValue<string> propText = default;
-		LocalJsonValue<string> propType = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.ContentType> propType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propFile.TryReadProperty(ref reader, options, PropFile, null))
+			{
+				continue;
+			}
+
+			if (propImageUrl.TryReadProperty(ref reader, options, PropImageUrl, null))
+			{
+				continue;
+			}
+
 			if (propText.TryReadProperty(ref reader, options, PropText, null))
 			{
 				continue;
@@ -57,6 +71,8 @@ public sealed partial class ContentObjectConverter : System.Text.Json.Serializat
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Inference.ContentObject(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			File = propFile.Value,
+			ImageUrl = propImageUrl.Value,
 			Text = propText.Value,
 			Type = propType.Value
 		};
@@ -65,6 +81,8 @@ public sealed partial class ContentObjectConverter : System.Text.Json.Serializat
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.ContentObject value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFile, value.File, null, null);
+		writer.WriteProperty(options, PropImageUrl, value.ImageUrl, null, null);
 		writer.WriteProperty(options, PropText, value.Text, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();

@@ -37,61 +37,28 @@ public sealed partial class IndexResponse : Elastic.Transport.Products.Elasticse
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The role of the failure store in this document response
-	/// </para>
-	/// </summary>
+	/// <include file="IndexResponse.g.xml" path="doc/member[@key='_global.index.Response#failure_store']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus? FailureStore { get; set; }
 	public bool? ForcedRefresh { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier for the added document.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexResponse.g.xml" path="doc/member[@key='_global.index.Response#_id']/*"/>
 	public required string Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the index the document was added to.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexResponse.g.xml" path="doc/member[@key='_global.index.Response#_index']/*"/>
 	public required string Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The primary term assigned to the document for the indexing operation.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexResponse.g.xml" path="doc/member[@key='_global.index.Response#_primary_term']/*"/>
 	public long? PrimaryTerm { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The result of the indexing operation: <c>created</c> or <c>updated</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexResponse.g.xml" path="doc/member[@key='_global.index.Response#result']/*"/>
 	public required Elastic.Clients.Elasticsearch.Result Result { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The sequence number assigned to the document for the indexing operation.
-	/// Sequence numbers are used to ensure an older version of a document doesn't overwrite a newer version.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexResponse.g.xml" path="doc/member[@key='_global.index.Response#_seq_no']/*"/>
 	public long? SeqNo { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Information about the replication process of the operation.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexResponse.g.xml" path="doc/member[@key='_global.index.Response#_shards']/*"/>
 	public required Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The document version, which is incremented each time the document is updated.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexResponse.g.xml" path="doc/member[@key='_global.index.Response#_version']/*"/>
 	public required long Version { get; set; }
 }

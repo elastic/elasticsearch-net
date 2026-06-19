@@ -86,7 +86,7 @@ public sealed partial class SuggestDictionaryConverter<TDocument> : System.Text.
 				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.TermSuggest> v) => w.WritePropertyName<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.TermSuggest>>(o, v));
 				break;
 			default:
-				throw new System.Text.Json.JsonException($"Variant '{0}' is not supported for type '{nameof(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.ISuggest>)}'.");
+				throw new System.Text.Json.JsonException($"Variant key '{key}' is not supported for type '{nameof(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.ISuggest>)}'.");
 		}
 	}
 }

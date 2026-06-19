@@ -39,23 +39,7 @@ public sealed partial class IndexModifyDataStreamAction
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Adds an existing index as a backing index for a data stream.
-	/// The index is hidden as part of this operation.
-	/// WARNING: Adding indices with the <c>add_backing_index</c> action can potentially result in improper data stream behavior.
-	/// This should be considered an expert level API.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction? AddBackingIndex { get => GetVariant<Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction>("add_backing_index"); set => SetVariant("add_backing_index", value); }
-
-	/// <summary>
-	/// <para>
-	/// Removes a backing index from a data stream.
-	/// The index is unhidden as part of this operation.
-	/// A data stream’s write index cannot be removed.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction? RemoveBackingIndex { get => GetVariant<Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction>("remove_backing_index"); set => SetVariant("remove_backing_index", value); }
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -96,54 +80,24 @@ public readonly partial struct IndexModifyDataStreamActionDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamActionDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamActionDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction(Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamActionDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Adds an existing index as a backing index for a data stream.
-	/// The index is hidden as part of this operation.
-	/// WARNING: Adding indices with the <c>add_backing_index</c> action can potentially result in improper data stream behavior.
-	/// This should be considered an expert level API.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamActionDescriptor AddBackingIndex(Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction? value)
 	{
 		Instance.AddBackingIndex = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Adds an existing index as a backing index for a data stream.
-	/// The index is hidden as part of this operation.
-	/// WARNING: Adding indices with the <c>add_backing_index</c> action can potentially result in improper data stream behavior.
-	/// This should be considered an expert level API.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamActionDescriptor AddBackingIndex(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamActionDescriptor> action)
 	{
 		Instance.AddBackingIndex = Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamActionDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes a backing index from a data stream.
-	/// The index is unhidden as part of this operation.
-	/// A data stream’s write index cannot be removed.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamActionDescriptor RemoveBackingIndex(Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction? value)
 	{
 		Instance.RemoveBackingIndex = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes a backing index from a data stream.
-	/// The index is unhidden as part of this operation.
-	/// A data stream’s write index cannot be removed.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamActionDescriptor RemoveBackingIndex(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamActionDescriptor> action)
 	{
 		Instance.RemoveBackingIndex = Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamActionDescriptor.Build(action);

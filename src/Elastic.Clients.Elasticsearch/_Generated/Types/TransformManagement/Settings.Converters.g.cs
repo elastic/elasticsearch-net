@@ -30,6 +30,7 @@ public sealed partial class SettingsConverter : System.Text.Json.Serialization.J
 	private static readonly System.Text.Json.JsonEncodedText PropDeduceMappings = System.Text.Json.JsonEncodedText.Encode("deduce_mappings"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDocsPerSecond = System.Text.Json.JsonEncodedText.Encode("docs_per_second"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMaxPageSearchSize = System.Text.Json.JsonEncodedText.Encode("max_page_search_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumFailureRetries = System.Text.Json.JsonEncodedText.Encode("num_failure_retries"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropUnattended = System.Text.Json.JsonEncodedText.Encode("unattended"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropUsePointInTime = System.Text.Json.JsonEncodedText.Encode("use_point_in_time"u8);
 
@@ -41,6 +42,7 @@ public sealed partial class SettingsConverter : System.Text.Json.Serialization.J
 		LocalJsonValue<bool?> propDeduceMappings = default;
 		LocalJsonValue<float?> propDocsPerSecond = default;
 		LocalJsonValue<int?> propMaxPageSearchSize = default;
+		LocalJsonValue<int?> propNumFailureRetries = default;
 		LocalJsonValue<bool?> propUnattended = default;
 		LocalJsonValue<bool?> propUsePointInTime = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -66,6 +68,11 @@ public sealed partial class SettingsConverter : System.Text.Json.Serialization.J
 			}
 
 			if (propMaxPageSearchSize.TryReadProperty(ref reader, options, PropMaxPageSearchSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
+			{
+				continue;
+			}
+
+			if (propNumFailureRetries.TryReadProperty(ref reader, options, PropNumFailureRetries, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -97,6 +104,7 @@ public sealed partial class SettingsConverter : System.Text.Json.Serialization.J
 			DeduceMappings = propDeduceMappings.Value,
 			DocsPerSecond = propDocsPerSecond.Value,
 			MaxPageSearchSize = propMaxPageSearchSize.Value,
+			NumFailureRetries = propNumFailureRetries.Value,
 			Unattended = propUnattended.Value,
 			UsePointInTime = propUsePointInTime.Value
 		};
@@ -110,6 +118,7 @@ public sealed partial class SettingsConverter : System.Text.Json.Serialization.J
 		writer.WriteProperty(options, PropDeduceMappings, value.DeduceMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropDocsPerSecond, value.DocsPerSecond, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropMaxPageSearchSize, value.MaxPageSearchSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropNumFailureRetries, value.NumFailureRetries, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropUnattended, value.Unattended, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropUsePointInTime, value.UsePointInTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();

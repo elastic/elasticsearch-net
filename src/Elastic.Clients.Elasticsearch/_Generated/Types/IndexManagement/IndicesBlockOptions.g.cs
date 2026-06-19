@@ -26,32 +26,16 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndicesBlockOptionsConverter))]
 public enum IndicesBlockOptions
 {
-	/// <summary>
-	/// <para>
-	/// Disable metadata changes, such as closing the index.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesBlockOptions.g.xml" path="doc/member[@key='indices._types.IndicesBlockOptions#metadata']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "metadata")]
 	Metadata,
-	/// <summary>
-	/// <para>
-	/// Disable read operations.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesBlockOptions.g.xml" path="doc/member[@key='indices._types.IndicesBlockOptions#read']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "read")]
 	Read,
-	/// <summary>
-	/// <para>
-	/// Disable write operations and metadata changes.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesBlockOptions.g.xml" path="doc/member[@key='indices._types.IndicesBlockOptions#read_only']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "read_only")]
 	ReadOnly,
-	/// <summary>
-	/// <para>
-	/// Disable write operations. However, metadata changes are still allowed.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesBlockOptions.g.xml" path="doc/member[@key='indices._types.IndicesBlockOptions#write']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "write")]
 	Write
 }

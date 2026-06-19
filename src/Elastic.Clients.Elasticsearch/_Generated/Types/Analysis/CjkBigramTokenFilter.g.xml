@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.CjkBigramTokenFilter#ignored_scripts"><summary><para>
+Array of character scripts for which to disable bigrams.
+</para></summary></member>
+  <member key="_types.analysis.CjkBigramTokenFilter#output_unigrams"><summary><para>
+If <c>true</c>, emit tokens in both bigram and unigram form. If <c>false</c>, a CJK character is output in unigram form when it has no adjacent characters. Defaults to <c>false</c>.
+</para></summary></member>
+</doc>

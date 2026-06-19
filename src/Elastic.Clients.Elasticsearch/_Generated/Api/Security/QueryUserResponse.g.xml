@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.query_user.Response#count"><summary><para>
+The number of users returned in the response.
+</para></summary></member>
+  <member key="security.query_user.Response#total"><summary><para>
+The total number of users found.
+</para></summary></member>
+  <member key="security.query_user.Response#users"><summary><para>
+A list of users that match the query.
+</para></summary></member>
+</doc>

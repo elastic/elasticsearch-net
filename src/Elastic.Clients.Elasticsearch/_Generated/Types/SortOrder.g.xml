@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.SortOrder#asc"><summary><para>
+Ascending (smallest to largest)
+</para></summary></member>
+  <member key="_types.SortOrder#desc"><summary><para>
+Descending (largest to smallest)
+</para></summary></member>
+</doc>

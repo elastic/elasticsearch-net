@@ -39,27 +39,8 @@ public sealed partial class IndexUpdateAliasesAction
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Adds a data stream or index to an alias.
-	/// If the alias doesn’t exist, the <c>add</c> action creates it.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddAction? Add { get => GetVariant<Elastic.Clients.Elasticsearch.IndexManagement.AddAction>("add"); set => SetVariant("add", value); }
-
-	/// <summary>
-	/// <para>
-	/// Removes a data stream or index from an alias.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction? Remove { get => GetVariant<Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction>("remove"); set => SetVariant("remove", value); }
-
-	/// <summary>
-	/// <para>
-	/// Deletes an index.
-	/// You cannot use this action on aliases or data streams.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction? RemoveIndex { get => GetVariant<Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction>("remove_index"); set => SetVariant("remove_index", value); }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction(Elastic.Clients.Elasticsearch.IndexManagement.AddAction value) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction { Add = value };
@@ -104,105 +85,54 @@ public readonly partial struct IndexUpdateAliasesActionDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction(Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Adds a data stream or index to an alias.
-	/// If the alias doesn’t exist, the <c>add</c> action creates it.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument> Add(Elastic.Clients.Elasticsearch.IndexManagement.AddAction? value)
 	{
 		Instance.Add = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Adds a data stream or index to an alias.
-	/// If the alias doesn’t exist, the <c>add</c> action creates it.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument> Add()
 	{
 		Instance.Add = Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Adds a data stream or index to an alias.
-	/// If the alias doesn’t exist, the <c>add</c> action creates it.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument> Add(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument>>? action)
 	{
 		Instance.Add = Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes a data stream or index from an alias.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument> Remove(Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction? value)
 	{
 		Instance.Remove = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes a data stream or index from an alias.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument> Remove()
 	{
 		Instance.Remove = Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes a data stream or index from an alias.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument> Remove(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor>? action)
 	{
 		Instance.Remove = Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes an index.
-	/// You cannot use this action on aliases or data streams.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument> RemoveIndex(Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction? value)
 	{
 		Instance.RemoveIndex = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes an index.
-	/// You cannot use this action on aliases or data streams.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument> RemoveIndex()
 	{
 		Instance.RemoveIndex = Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexActionDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes an index.
-	/// You cannot use this action on aliases or data streams.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument> RemoveIndex(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexActionDescriptor>? action)
 	{
 		Instance.RemoveIndex = Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexActionDescriptor.Build(action);
@@ -237,117 +167,60 @@ public readonly partial struct IndexUpdateAliasesActionDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction(Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Adds a data stream or index to an alias.
-	/// If the alias doesn’t exist, the <c>add</c> action creates it.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor Add(Elastic.Clients.Elasticsearch.IndexManagement.AddAction? value)
 	{
 		Instance.Add = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Adds a data stream or index to an alias.
-	/// If the alias doesn’t exist, the <c>add</c> action creates it.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor Add()
 	{
 		Instance.Add = Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Adds a data stream or index to an alias.
-	/// If the alias doesn’t exist, the <c>add</c> action creates it.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor Add(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor>? action)
 	{
 		Instance.Add = Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Adds a data stream or index to an alias.
-	/// If the alias doesn’t exist, the <c>add</c> action creates it.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor Add<T>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<T>>? action)
 	{
 		Instance.Add = Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes a data stream or index from an alias.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor Remove(Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction? value)
 	{
 		Instance.Remove = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes a data stream or index from an alias.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor Remove()
 	{
 		Instance.Remove = Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes a data stream or index from an alias.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor Remove(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor>? action)
 	{
 		Instance.Remove = Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes an index.
-	/// You cannot use this action on aliases or data streams.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor RemoveIndex(Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction? value)
 	{
 		Instance.RemoveIndex = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes an index.
-	/// You cannot use this action on aliases or data streams.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor RemoveIndex()
 	{
 		Instance.RemoveIndex = Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexActionDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes an index.
-	/// You cannot use this action on aliases or data streams.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor RemoveIndex(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexActionDescriptor>? action)
 	{
 		Instance.RemoveIndex = Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexActionDescriptor.Build(action);

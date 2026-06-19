@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.TermsAggregationCollectMode#breadth_first"><summary><para>
+Caches the set of documents that fall into the uppermost buckets for subsequent replay.
+</para></summary></member>
+  <member key="_types.aggregations.TermsAggregationCollectMode#depth_first"><summary><para>
+Expands all branches of the aggregation tree in one depth-first pass, before any pruning occurs.
+</para></summary></member>
+</doc>

@@ -37,17 +37,9 @@ public sealed partial class ExplainDataFrameAnalyticsResponse : Elastic.Transpor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of objects that explain selection for each field, sorted by the field names.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainDataFrameAnalyticsResponse.g.xml" path="doc/member[@key='ml.explain_data_frame_analytics.Response#field_selection']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsFieldSelection> FieldSelection { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of objects that explain selection for each field, sorted by the field names.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainDataFrameAnalyticsResponse.g.xml" path="doc/member[@key='ml.explain_data_frame_analytics.Response#memory_estimation']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsMemoryEstimation MemoryEstimation { get; set; }
 }

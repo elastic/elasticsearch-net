@@ -26,9 +26,7 @@ namespace Elastic.Clients.Elasticsearch.DanglingIndices;
 public partial class DanglingIndicesNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>
-	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndicesNamespacedClient"/> class for mocking.
-	/// </para>
+	/// Initializes a new instance of the <cref:Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndicesNamespacedClient> class for mocking.
 	/// </summary>
 	protected DanglingIndicesNamespacedClient() : base()
 	{
@@ -38,12 +36,16 @@ public partial class DanglingIndicesNamespacedClient : Elastic.Clients.Elasticse
 	{
 	}
 
+	/// <include file="../Api/DanglingIndices/ListDanglingIndicesRequest.g.xml" path="doc/member[@key='dangling_indices.list_dangling_indices.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='dangling_indices.list_dangling_indices.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse ListDanglingIndices(Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestParameters>(request);
 	}
 
+	/// <include file="../Api/DanglingIndices/ListDanglingIndicesRequest.g.xml" path="doc/member[@key='dangling_indices.list_dangling_indices.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='dangling_indices.list_dangling_indices.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse ListDanglingIndices()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestDescriptor();
@@ -52,6 +54,8 @@ public partial class DanglingIndicesNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestParameters>(request);
 	}
 
+	/// <include file="../Api/DanglingIndices/ListDanglingIndicesRequest.g.xml" path="doc/member[@key='dangling_indices.list_dangling_indices.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='dangling_indices.list_dangling_indices.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse ListDanglingIndices(System.Action<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestDescriptor();
@@ -61,12 +65,16 @@ public partial class DanglingIndicesNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestParameters>(request);
 	}
 
+	/// <include file="../Api/DanglingIndices/ListDanglingIndicesRequest.g.xml" path="doc/member[@key='dangling_indices.list_dangling_indices.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='dangling_indices.list_dangling_indices.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse> ListDanglingIndicesAsync(Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/DanglingIndices/ListDanglingIndicesRequest.g.xml" path="doc/member[@key='dangling_indices.list_dangling_indices.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='dangling_indices.list_dangling_indices.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse> ListDanglingIndicesAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestDescriptor();
@@ -75,6 +83,8 @@ public partial class DanglingIndicesNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/DanglingIndices/ListDanglingIndicesRequest.g.xml" path="doc/member[@key='dangling_indices.list_dangling_indices.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='dangling_indices.list_dangling_indices.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse> ListDanglingIndicesAsync(System.Action<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestDescriptor();

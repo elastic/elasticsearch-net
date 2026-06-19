@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="snapshot._types.SnapshotState#FAILED"><summary><para>
+The snapshot failed.
+</para></summary></member>
+  <member key="snapshot._types.SnapshotState#INCOMPATIBLE"><summary><para>
+The snapshot is incompatible with the current version of the cluster.
+</para></summary></member>
+  <member key="snapshot._types.SnapshotState#IN_PROGRESS"><summary><para>
+The snapshot process has started.
+</para></summary></member>
+  <member key="snapshot._types.SnapshotState#PARTIAL"><summary><para>
+The snapshot was partially successful.
+</para></summary></member>
+  <member key="snapshot._types.SnapshotState#SUCCESS"><summary><para>
+The snapshot process completed successfully.
+</para></summary></member>
+</doc>

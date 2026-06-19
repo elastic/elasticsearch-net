@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.disable_user_profile.Request"><summary><para>
+Disable a user profile.
+</para>
+<para>
+Disable user profiles so that they are not visible in user profile searches.
+</para>
+<para>
+NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
+Individual users and external applications should not call this API directly.
+Elastic reserves the right to change or remove this feature in future releases without prior notice.
+</para>
+<para>
+When you activate a user profile, its automatically enabled and visible in user profile searches. You can use the disable user profile API to disable a user profile so it’s not visible in these searches.
+To re-enable a disabled user profile, use the enable user profile API .
+</para></summary></member>
+  <member key="security.disable_user_profile.Request#refresh"><summary><para>
+If 'true', Elasticsearch refreshes the affected shards to make this operation visible to search.
+If 'wait_for', it waits for a refresh to make this operation visible to search.
+If 'false', it does nothing with refreshes.
+</para></summary></member>
+  <member key="security.disable_user_profile.Request#uid"><summary><para>
+Unique identifier for the user profile.
+</para></summary></member>
+</doc>

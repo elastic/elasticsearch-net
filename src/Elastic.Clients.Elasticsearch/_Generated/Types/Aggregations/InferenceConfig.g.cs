@@ -39,18 +39,7 @@ public sealed partial class InferenceConfig
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Classification configuration for inference.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions? Classification { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions>("classification"); set => SetVariant("classification", value); }
-
-	/// <summary>
-	/// <para>
-	/// Regression configuration for inference.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions? Regression { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions>("regression"); set => SetVariant("regression", value); }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig(Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions value) => new Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig { Classification = value };
@@ -94,66 +83,36 @@ public readonly partial struct InferenceConfigDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig instance) => new Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Classification configuration for inference.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor<TDocument> Classification(Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions? value)
 	{
 		Instance.Classification = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Classification configuration for inference.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor<TDocument> Classification()
 	{
 		Instance.Classification = Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Classification configuration for inference.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor<TDocument> Classification(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor>? action)
 	{
 		Instance.Classification = Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Regression configuration for inference.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor<TDocument> Regression(Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions? value)
 	{
 		Instance.Regression = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Regression configuration for inference.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor<TDocument> Regression()
 	{
 		Instance.Regression = Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Regression configuration for inference.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor<TDocument> Regression(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor<TDocument>>? action)
 	{
 		Instance.Regression = Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor<TDocument>.Build(action);
@@ -188,77 +147,42 @@ public readonly partial struct InferenceConfigDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig instance) => new Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Classification configuration for inference.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor Classification(Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions? value)
 	{
 		Instance.Classification = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Classification configuration for inference.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor Classification()
 	{
 		Instance.Classification = Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Classification configuration for inference.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor Classification(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor>? action)
 	{
 		Instance.Classification = Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Regression configuration for inference.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor Regression(Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions? value)
 	{
 		Instance.Regression = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Regression configuration for inference.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor Regression()
 	{
 		Instance.Regression = Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Regression configuration for inference.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor Regression(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor>? action)
 	{
 		Instance.Regression = Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Regression configuration for inference.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor Regression<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor<T>>? action)
 	{
 		Instance.Regression = Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor<T>.Build(action);

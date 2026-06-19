@@ -26,18 +26,10 @@ namespace Elastic.Clients.Elasticsearch;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.SortOrderConverter))]
 public enum SortOrder
 {
-	/// <summary>
-	/// <para>
-	/// Ascending (smallest to largest)
-	/// </para>
-	/// </summary>
+	/// <include file="SortOrder.g.xml" path="doc/member[@key='_types.SortOrder#asc']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "asc")]
 	Asc,
-	/// <summary>
-	/// <para>
-	/// Descending (largest to smallest)
-	/// </para>
-	/// </summary>
+	/// <include file="SortOrder.g.xml" path="doc/member[@key='_types.SortOrder#desc']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "desc")]
 	Desc
 }

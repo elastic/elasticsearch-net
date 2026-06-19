@@ -39,12 +39,6 @@ public sealed partial class GetUserProfileResponse : Elastic.Transport.Products.
 
 	public Elastic.Clients.Elasticsearch.Security.GetUserProfileErrors? Errors { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A successful call returns the JSON representation of the user profile and its internal versioning numbers.
-	/// The API returns an empty object if no profile document is found for the provided <c>uid</c>.
-	/// The content of the data field is not returned by default to avoid deserializing a potential large payload.
-	/// </para>
-	/// </summary>
+	/// <include file="GetUserProfileResponse.g.xml" path="doc/member[@key='security.get_user_profile.Response#profiles']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserProfileWithMetadata> Profiles { get; set; }
 }

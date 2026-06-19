@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.get_builtin_privileges.Response#cluster"><summary><para>
+The list of cluster privileges that are understood by this version of Elasticsearch.
+</para></summary></member>
+  <member key="security.get_builtin_privileges.Response#index"><summary><para>
+The list of index privileges that are understood by this version of Elasticsearch.
+</para></summary></member>
+  <member key="security.get_builtin_privileges.Response#remote_cluster"><summary><para>
+The list of remote_cluster privileges that are understood by this version of Elasticsearch.
+</para></summary></member>
+</doc>

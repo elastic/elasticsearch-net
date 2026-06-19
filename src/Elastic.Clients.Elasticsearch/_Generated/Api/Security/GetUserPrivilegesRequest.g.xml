@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.get_user_privileges.Request"><summary><para>
+Get user privileges.
+</para>
+<para>
+Get the security privileges for the logged in user.
+All users can use this API, but only to determine their own privileges.
+To check the privileges of other users, you must use the run as feature.
+To check whether a user has a specific list of privileges, use the has privileges API.
+</para></summary></member>
+</doc>

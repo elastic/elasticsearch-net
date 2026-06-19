@@ -37,10 +37,6 @@ public sealed partial class ValidateResponse : Elastic.Transport.Products.Elasti
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateResponse.g.xml" path="doc/member[@key='ml.validate.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

@@ -37,32 +37,15 @@ public sealed partial class GetDataLifecycleStatsResponse : Elastic.Transport.Pr
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The count of data streams currently being managed by the data stream lifecycle.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataLifecycleStatsResponse.g.xml" path="doc/member[@key='indices.get_data_lifecycle_stats.Response#data_stream_count']/*"/>
 	public required int DataStreamCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Information about the data streams that are managed by the data stream lifecycle.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataLifecycleStatsResponse.g.xml" path="doc/member[@key='indices.get_data_lifecycle_stats.Response#data_streams']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamStats> DataStreams { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The duration of the last data stream lifecycle execution.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataLifecycleStatsResponse.g.xml" path="doc/member[@key='indices.get_data_lifecycle_stats.Response#last_run_duration_in_millis']/*"/>
 	public System.TimeSpan? LastRunDurationInMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The time that passed between the start of the last two data stream lifecycle executions.
-	/// This value should amount approximately to <c>data_streams.lifecycle.poll_interval</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataLifecycleStatsResponse.g.xml" path="doc/member[@key='indices.get_data_lifecycle_stats.Response#time_between_starts_in_millis']/*"/>
 	public System.TimeSpan? TimeBetweenStartsInMillis { get; set; }
 }

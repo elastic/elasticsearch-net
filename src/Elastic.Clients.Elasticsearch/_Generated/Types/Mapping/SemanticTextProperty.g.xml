@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.mapping.SemanticTextProperty#chunking_settings"><summary><para>
+Settings for chunking text into smaller passages. If specified, these will override the
+chunking settings sent in the inference endpoint associated with inference_id. If chunking settings are updated,
+they will not be applied to existing documents until they are reindexed.
+</para></summary></member>
+  <member key="_types.mapping.SemanticTextProperty#fields"><summary><para>
+Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
+field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
+</para></summary></member>
+  <member key="_types.mapping.SemanticTextProperty#index_options"><summary><para>
+Settings for index_options that override any defaults used by semantic_text, for example
+specific quantization settings.
+</para></summary></member>
+  <member key="_types.mapping.SemanticTextProperty#inference_id"><summary><para>
+Inference endpoint that will be used to generate embeddings for the field.
+This parameter cannot be updated. Use the Create inference API to create the endpoint.
+If <c>search_inference_id</c> is specified, the inference endpoint will only be used at index time.
+</para></summary></member>
+  <member key="_types.mapping.SemanticTextProperty#search_inference_id"><summary><para>
+Inference endpoint that will be used to generate embeddings at query time.
+You can update this parameter by using the Update mapping API. Use the Create inference API to create the endpoint.
+If not specified, the inference endpoint defined by inference_id will be used at both index and query time.
+</para></summary></member>
+</doc>

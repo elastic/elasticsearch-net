@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.VoyageAITaskSettings#input_type"><summary><para>
+Type of the input text.
+Permitted values: <c>ingest</c> (maps to <c>document</c> in the VoyageAI documentation), <c>search</c> (maps to <c>query</c> in the VoyageAI documentation).
+Only for the <c>text_embedding</c> task type.
+</para></summary></member>
+  <member key="inference._types.VoyageAITaskSettings#return_documents"><summary><para>
+Whether to return the source documents in the response.
+Only for the <c>rerank</c> task type.
+</para></summary></member>
+  <member key="inference._types.VoyageAITaskSettings#top_k"><summary><para>
+The number of most relevant documents to return.
+If not specified, the reranking results of all documents will be returned.
+Only for the <c>rerank</c> task type.
+</para></summary></member>
+  <member key="inference._types.VoyageAITaskSettings#truncation"><summary><para>
+Whether to truncate the input texts to fit within the context length.
+</para></summary></member>
+</doc>

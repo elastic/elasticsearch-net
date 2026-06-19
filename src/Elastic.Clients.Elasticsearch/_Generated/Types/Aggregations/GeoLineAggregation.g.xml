@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.GeoLineAggregation#include_sort"><summary><para>
+When <c>true</c>, returns an additional array of the sort values in the feature properties.
+</para></summary></member>
+  <member key="_types.aggregations.GeoLineAggregation#point"><summary><para>
+The name of the geo_point field.
+</para></summary></member>
+  <member key="_types.aggregations.GeoLineAggregation#size"><summary><para>
+The maximum length of the line represented in the aggregation.
+Valid sizes are between 1 and 10000.
+</para></summary></member>
+  <member key="_types.aggregations.GeoLineAggregation#sort"><summary><para>
+The name of the numeric field to use as the sort key for ordering the points.
+When the <c>geo_line</c> aggregation is nested inside a <c>time_series</c> aggregation, this field defaults to <c>@timestamp</c>, and any other value will result in error.
+</para></summary></member>
+  <member key="_types.aggregations.GeoLineAggregation#sort_order"><summary><para>
+The order in which the line is sorted (ascending or descending).
+</para></summary></member>
+</doc>

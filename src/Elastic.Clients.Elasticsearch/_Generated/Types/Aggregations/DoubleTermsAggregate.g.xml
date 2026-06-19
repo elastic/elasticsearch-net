@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.DoubleTermsAggregate"><summary><para>
+Result of a <c>terms</c> aggregation when the field is some kind of decimal number like a float, double, or distance.
+</para></summary></member>
+</doc>

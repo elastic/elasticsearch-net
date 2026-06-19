@@ -37,10 +37,6 @@ public sealed partial class CloneSnapshotResponse : Elastic.Transport.Products.E
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneSnapshotResponse.g.xml" path="doc/member[@key='snapshot.clone.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

@@ -44,13 +44,13 @@ public sealed partial class AddActionConverter : System.Text.Json.Serialization.
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexAlias>?> propAliases = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propFilter = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName?> propIndex = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propIndexRouting = default;
+		LocalJsonValue<string?> propIndexRouting = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Indices?> propIndices = default;
 		LocalJsonValue<bool?> propIsHidden = default;
 		LocalJsonValue<bool?> propIsWriteIndex = default;
 		LocalJsonValue<bool?> propMustExist = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propRouting = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propSearchRouting = default;
+		LocalJsonValue<string?> propRouting = default;
+		LocalJsonValue<string?> propSearchRouting = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propAlias.TryReadProperty(ref reader, options, PropAlias, null))

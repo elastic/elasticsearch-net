@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.BucketCorrelationAggregation"><summary><para>
+A sibling pipeline aggregation which executes a correlation function on the configured sibling multi-bucket aggregation.
+</para></summary></member>
+  <member key="_types.aggregations.BucketCorrelationAggregation#buckets_path"><summary><para>
+Path to the buckets that contain one set of values to correlate.
+</para></summary></member>
+  <member key="_types.aggregations.BucketCorrelationAggregation#function"><summary><para>
+The correlation function to execute.
+</para></summary></member>
+</doc>

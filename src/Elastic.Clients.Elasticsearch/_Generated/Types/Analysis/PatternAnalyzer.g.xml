@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.PatternAnalyzer#flags"><summary><para>
+Java regular expression flags. Flags should be pipe-separated, eg "CASE_INSENSITIVE|COMMENTS".
+</para></summary></member>
+  <member key="_types.analysis.PatternAnalyzer#lowercase"><summary><para>
+Should terms be lowercased or not.
+Defaults to <c>true</c>.
+</para></summary></member>
+  <member key="_types.analysis.PatternAnalyzer#pattern"><summary><para>
+A Java regular expression.
+Defaults to <c>\W+</c>.
+</para></summary></member>
+  <member key="_types.analysis.PatternAnalyzer#stopwords"><summary><para>
+A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
+Defaults to <c>_none_</c>.
+</para></summary></member>
+  <member key="_types.analysis.PatternAnalyzer#stopwords_path"><summary><para>
+The path to a file containing stop words.
+</para></summary></member>
+</doc>

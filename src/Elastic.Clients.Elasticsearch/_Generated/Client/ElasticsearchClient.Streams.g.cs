@@ -26,9 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Streams;
 public partial class StreamsNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>
-	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.Streams.StreamsNamespacedClient"/> class for mocking.
-	/// </para>
+	/// Initializes a new instance of the <cref:Elastic.Clients.Elasticsearch.Streams.StreamsNamespacedClient> class for mocking.
 	/// </summary>
 	protected StreamsNamespacedClient() : base()
 	{
@@ -38,104 +36,132 @@ public partial class StreamsNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 	{
 	}
 
+	/// <include file="../Api/Streams/LogsDisableRequest.g.xml" path="doc/member[@key='streams.logs_disable.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='streams.logs_disable.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse LogsDisable(Elastic.Clients.Elasticsearch.Streams.LogsDisableRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Streams.LogsDisableRequest, Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse, Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse LogsDisable()
+	/// <include file="../Api/Streams/LogsDisableRequest.g.xml" path="doc/member[@key='streams.logs_disable.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='streams.logs_disable.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse LogsDisable(Elastic.Clients.Elasticsearch.Streams.StreamType name)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor();
+		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor(name);
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Streams.LogsDisableRequest, Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse, Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse LogsDisable(System.Action<Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor> action)
+	/// <include file="../Api/Streams/LogsDisableRequest.g.xml" path="doc/member[@key='streams.logs_disable.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='streams.logs_disable.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse LogsDisable(Elastic.Clients.Elasticsearch.Streams.StreamType name, System.Action<Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor();
+		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor(name);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Streams.LogsDisableRequest, Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse, Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Streams/LogsDisableRequest.g.xml" path="doc/member[@key='streams.logs_disable.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='streams.logs_disable.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse> LogsDisableAsync(Elastic.Clients.Elasticsearch.Streams.LogsDisableRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Streams.LogsDisableRequest, Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse, Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse> LogsDisableAsync(System.Threading.CancellationToken cancellationToken = default)
+	/// <include file="../Api/Streams/LogsDisableRequest.g.xml" path="doc/member[@key='streams.logs_disable.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='streams.logs_disable.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse> LogsDisableAsync(Elastic.Clients.Elasticsearch.Streams.StreamType name, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor();
+		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor(name);
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Streams.LogsDisableRequest, Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse, Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse> LogsDisableAsync(System.Action<Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	/// <include file="../Api/Streams/LogsDisableRequest.g.xml" path="doc/member[@key='streams.logs_disable.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='streams.logs_disable.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse> LogsDisableAsync(Elastic.Clients.Elasticsearch.Streams.StreamType name, System.Action<Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor();
+		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor(name);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Streams.LogsDisableRequest, Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse, Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Streams/LogsEnableRequest.g.xml" path="doc/member[@key='streams.logs_enable.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='streams.logs_enable.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse LogsEnable(Elastic.Clients.Elasticsearch.Streams.LogsEnableRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Streams.LogsEnableRequest, Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse, Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse LogsEnable()
+	/// <include file="../Api/Streams/LogsEnableRequest.g.xml" path="doc/member[@key='streams.logs_enable.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='streams.logs_enable.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse LogsEnable(Elastic.Clients.Elasticsearch.Streams.StreamType name)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor();
+		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor(name);
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Streams.LogsEnableRequest, Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse, Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse LogsEnable(System.Action<Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor> action)
+	/// <include file="../Api/Streams/LogsEnableRequest.g.xml" path="doc/member[@key='streams.logs_enable.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='streams.logs_enable.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse LogsEnable(Elastic.Clients.Elasticsearch.Streams.StreamType name, System.Action<Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor();
+		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor(name);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Streams.LogsEnableRequest, Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse, Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Streams/LogsEnableRequest.g.xml" path="doc/member[@key='streams.logs_enable.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='streams.logs_enable.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse> LogsEnableAsync(Elastic.Clients.Elasticsearch.Streams.LogsEnableRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Streams.LogsEnableRequest, Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse, Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse> LogsEnableAsync(System.Threading.CancellationToken cancellationToken = default)
+	/// <include file="../Api/Streams/LogsEnableRequest.g.xml" path="doc/member[@key='streams.logs_enable.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='streams.logs_enable.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse> LogsEnableAsync(Elastic.Clients.Elasticsearch.Streams.StreamType name, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor();
+		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor(name);
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Streams.LogsEnableRequest, Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse, Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse> LogsEnableAsync(System.Action<Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	/// <include file="../Api/Streams/LogsEnableRequest.g.xml" path="doc/member[@key='streams.logs_enable.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='streams.logs_enable.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse> LogsEnableAsync(Elastic.Clients.Elasticsearch.Streams.StreamType name, System.Action<Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor();
+		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor(name);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Streams.LogsEnableRequest, Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse, Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Streams/StreamsStatusRequest.g.xml" path="doc/member[@key='streams.status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='streams.status.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Streams.StreamsStatusResponse Status(Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequest, Elastic.Clients.Elasticsearch.Streams.StreamsStatusResponse, Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Streams/StreamsStatusRequest.g.xml" path="doc/member[@key='streams.status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='streams.status.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Streams.StreamsStatusResponse Status()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequestDescriptor();
@@ -144,6 +170,8 @@ public partial class StreamsNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequest, Elastic.Clients.Elasticsearch.Streams.StreamsStatusResponse, Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Streams/StreamsStatusRequest.g.xml" path="doc/member[@key='streams.status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='streams.status.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Streams.StreamsStatusResponse Status(System.Action<Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequestDescriptor();
@@ -153,12 +181,16 @@ public partial class StreamsNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequest, Elastic.Clients.Elasticsearch.Streams.StreamsStatusResponse, Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Streams/StreamsStatusRequest.g.xml" path="doc/member[@key='streams.status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='streams.status.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Streams.StreamsStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequest, Elastic.Clients.Elasticsearch.Streams.StreamsStatusResponse, Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Streams/StreamsStatusRequest.g.xml" path="doc/member[@key='streams.status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='streams.status.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Streams.StreamsStatusResponse> StatusAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequestDescriptor();
@@ -167,6 +199,8 @@ public partial class StreamsNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequest, Elastic.Clients.Elasticsearch.Streams.StreamsStatusResponse, Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Streams/StreamsStatusRequest.g.xml" path="doc/member[@key='streams.status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='streams.status.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Streams.StreamsStatusResponse> StatusAsync(System.Action<Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequestDescriptor();

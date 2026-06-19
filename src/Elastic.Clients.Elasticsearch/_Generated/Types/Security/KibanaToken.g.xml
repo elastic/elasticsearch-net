@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.enroll_kibana.KibanaToken#name"><summary><para>
+The name of the bearer token for the <c>elastic/kibana</c> service account.
+</para></summary></member>
+  <member key="security.enroll_kibana.KibanaToken#value"><summary><para>
+The value of the bearer token for the <c>elastic/kibana</c> service account.
+Use this value to authenticate the service account with Elasticsearch.
+</para></summary></member>
+</doc>

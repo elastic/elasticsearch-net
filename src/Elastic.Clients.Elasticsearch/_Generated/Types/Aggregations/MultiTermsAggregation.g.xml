@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.MultiTermsAggregation#collect_mode"><summary><para>
+Specifies the strategy for data collection.
+</para></summary></member>
+  <member key="_types.aggregations.MultiTermsAggregation#min_doc_count"><summary><para>
+The minimum number of documents in a bucket for it to be returned.
+</para></summary></member>
+  <member key="_types.aggregations.MultiTermsAggregation#order"><summary><para>
+Specifies the sort order of the buckets.
+Defaults to sorting by descending document count.
+</para></summary></member>
+  <member key="_types.aggregations.MultiTermsAggregation#shard_min_doc_count"><summary><para>
+The minimum number of documents in a bucket on each shard for it to be returned.
+</para></summary></member>
+  <member key="_types.aggregations.MultiTermsAggregation#shard_size"><summary><para>
+The number of candidate terms produced by each shard.
+By default, <c>shard_size</c> will be automatically estimated based on the number of shards and the <c>size</c> parameter.
+</para></summary></member>
+  <member key="_types.aggregations.MultiTermsAggregation#show_term_doc_count_error"><summary><para>
+Calculates the doc count error on per term basis.
+</para></summary></member>
+  <member key="_types.aggregations.MultiTermsAggregation#size"><summary><para>
+The number of term buckets should be returned out of the overall terms list.
+</para></summary></member>
+  <member key="_types.aggregations.MultiTermsAggregation#terms"><summary><para>
+The field from which to generate sets of terms.
+</para></summary></member>
+</doc>

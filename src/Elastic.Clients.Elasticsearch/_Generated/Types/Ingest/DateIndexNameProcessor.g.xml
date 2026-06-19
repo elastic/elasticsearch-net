@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.DateIndexNameProcessor#date_formats"><summary><para>
+An array of the expected date formats for parsing dates / timestamps in the document being preprocessed.
+Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.
+</para></summary></member>
+  <member key="ingest._types.DateIndexNameProcessor#date_rounding"><summary><para>
+How to round the date when formatting the date into the index name. Valid values are:
+<c>y</c> (year), <c>M</c> (month), <c>w</c> (week), <c>d</c> (day), <c>h</c> (hour), <c>m</c> (minute) and <c>s</c> (second).
+Supports template snippets.
+</para></summary></member>
+  <member key="ingest._types.DateIndexNameProcessor#description"><summary><para>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</para></summary></member>
+  <member key="ingest._types.DateIndexNameProcessor#field"><summary><para>
+The field to get the date or timestamp from.
+</para></summary></member>
+  <member key="ingest._types.DateIndexNameProcessor#if"><summary><para>
+Conditionally execute the processor.
+</para></summary></member>
+  <member key="ingest._types.DateIndexNameProcessor#ignore_failure"><summary><para>
+Ignore failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.DateIndexNameProcessor#index_name_format"><summary><para>
+The format to be used when printing the parsed date into the index name.
+A valid java time pattern is expected here.
+Supports template snippets.
+</para></summary></member>
+  <member key="ingest._types.DateIndexNameProcessor#index_name_prefix"><summary><para>
+A prefix of the index name to be prepended before the printed date.
+Supports template snippets.
+</para></summary></member>
+  <member key="ingest._types.DateIndexNameProcessor#locale"><summary><para>
+The locale to use when parsing the date from the document being preprocessed, relevant when parsing month names or week days.
+</para></summary></member>
+  <member key="ingest._types.DateIndexNameProcessor#on_failure"><summary><para>
+Handle failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.DateIndexNameProcessor#tag"><summary><para>
+Identifier for the processor.
+Useful for debugging and metrics.
+</para></summary></member>
+  <member key="ingest._types.DateIndexNameProcessor#timezone"><summary><para>
+The timezone to use when parsing the date and when date math index supports resolves expressions into concrete index names.
+</para></summary></member>
+</doc>

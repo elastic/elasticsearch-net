@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search._types.RegexOptions#flags"><summary><para>
+Optional operators for the regular expression.
+</para></summary></member>
+  <member key="_global.search._types.RegexOptions#max_determinized_states"><summary><para>
+Maximum number of automaton states required for the query.
+</para></summary></member>
+</doc>

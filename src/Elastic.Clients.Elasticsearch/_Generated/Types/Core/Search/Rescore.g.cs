@@ -65,6 +65,20 @@ public sealed partial class Rescore
 		VariantType = type;
 		Variant = value;
 	}
+
+	public string? VariantName { get => VariantType; }
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	public T? GetCustomVariant<T>(string variantName)
+	{
+		return GetVariant<T>(variantName);
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	public void SetCustomVariant<T>(string variantName, T? value)
+	{
+		SetVariant<T>(variantName, value);
+	}
 }
 
 public readonly partial struct RescoreDescriptor<TDocument>
@@ -125,6 +139,13 @@ public readonly partial struct RescoreDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument> WindowSize(int? value)
 	{
 		Instance.WindowSize = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument> CustomVariant<T>(string variantName, T? value)
+	{
+		Instance.SetCustomVariant<T>(variantName, value);
 		return this;
 	}
 
@@ -201,6 +222,13 @@ public readonly partial struct RescoreDescriptor
 	public Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor WindowSize(int? value)
 	{
 		Instance.WindowSize = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor CustomVariant<T>(string variantName, T? value)
+	{
+		Instance.SetCustomVariant<T>(variantName, value);
 		return this;
 	}
 

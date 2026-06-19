@@ -37,73 +37,33 @@ public sealed partial class ClusterStatsResponse : Elastic.Transport.Products.El
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Cross-cluster stats
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStatsResponse.g.xml" path="doc/member[@key='cluster.stats.Response#ccs']/*"/>
 	public required Elastic.Clients.Elasticsearch.Cluster.CCSStats Ccs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Name of the cluster, based on the cluster name setting.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStatsResponse.g.xml" path="doc/member[@key='cluster.stats.Response#cluster_name']/*"/>
 	public required string ClusterName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Unique identifier for the cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStatsResponse.g.xml" path="doc/member[@key='cluster.stats.Response#cluster_uuid']/*"/>
 	public required string ClusterUuid { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about indices with shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStatsResponse.g.xml" path="doc/member[@key='cluster.stats.Response#indices']/*"/>
 	public required Elastic.Clients.Elasticsearch.Cluster.ClusterIndices Indices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about nodes selected by the request’s node filters.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStatsResponse.g.xml" path="doc/member[@key='cluster.stats.Response#nodes']/*"/>
 	public required Elastic.Clients.Elasticsearch.Cluster.ClusterNodes Nodes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about the number of nodes selected by the request’s node filters.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStatsResponse.g.xml" path="doc/member[@key='cluster.stats.Response#_nodes']/*"/>
 	public Elastic.Clients.Elasticsearch.NodeStatistics? NodeStats { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains stats on repository feature usage exposed in cluster stats for telemetry.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStatsResponse.g.xml" path="doc/member[@key='cluster.stats.Response#repositories']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, long>> Repositories { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains stats cluster snapshots.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStatsResponse.g.xml" path="doc/member[@key='cluster.stats.Response#snapshots']/*"/>
 	public required Elastic.Clients.Elasticsearch.Cluster.ClusterSnapshotStats Snapshots { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Health status of the cluster, based on the state of its primary and replica shards.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStatsResponse.g.xml" path="doc/member[@key='cluster.stats.Response#status']/*"/>
 	public Elastic.Clients.Elasticsearch.HealthStatus? Status { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Unix timestamp, in milliseconds, for the last time the cluster statistics were refreshed.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStatsResponse.g.xml" path="doc/member[@key='cluster.stats.Response#timestamp']/*"/>
 	public required long Timestamp { get; set; }
 }

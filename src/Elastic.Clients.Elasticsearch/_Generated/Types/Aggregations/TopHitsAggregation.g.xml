@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.TopHitsAggregation#_source"><summary><para>
+Selects the fields of the source that are returned.
+</para></summary></member>
+  <member key="_types.aggregations.TopHitsAggregation#docvalue_fields"><summary><para>
+Fields for which to return doc values.
+</para></summary></member>
+  <member key="_types.aggregations.TopHitsAggregation#explain"><summary><para>
+If <c>true</c>, returns detailed information about score computation as part of a hit.
+</para></summary></member>
+  <member key="_types.aggregations.TopHitsAggregation#field"><summary><para>
+The field on which to run the aggregation.
+</para></summary></member>
+  <member key="_types.aggregations.TopHitsAggregation#fields"><summary><para>
+Array of wildcard (*) patterns. The request returns values for field names
+matching these patterns in the hits.fields property of the response.
+</para></summary></member>
+  <member key="_types.aggregations.TopHitsAggregation#from"><summary><para>
+Starting document offset.
+</para></summary></member>
+  <member key="_types.aggregations.TopHitsAggregation#highlight"><summary><para>
+Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in the search results.
+</para></summary></member>
+  <member key="_types.aggregations.TopHitsAggregation#missing"><summary><para>
+The value to apply to documents that do not have a value.
+By default, documents without a value are ignored.
+</para></summary></member>
+  <member key="_types.aggregations.TopHitsAggregation#script_fields"><summary><para>
+Returns the result of one or more script evaluations for each hit.
+</para></summary></member>
+  <member key="_types.aggregations.TopHitsAggregation#seq_no_primary_term"><summary><para>
+If <c>true</c>, returns sequence number and primary term of the last modification of each hit.
+</para></summary></member>
+  <member key="_types.aggregations.TopHitsAggregation#size"><summary><para>
+The maximum number of top matching hits to return per bucket.
+</para></summary></member>
+  <member key="_types.aggregations.TopHitsAggregation#sort"><summary><para>
+Sort order of the top matching hits.
+By default, the hits are sorted by the score of the main query.
+</para></summary></member>
+  <member key="_types.aggregations.TopHitsAggregation#stored_fields"><summary><para>
+Returns values for the specified stored fields (fields that use the <c>store</c> mapping option).
+</para></summary></member>
+  <member key="_types.aggregations.TopHitsAggregation#track_scores"><summary><para>
+If <c>true</c>, calculates and returns document scores, even if the scores are not used for sorting.
+</para></summary></member>
+  <member key="_types.aggregations.TopHitsAggregation#version"><summary><para>
+If <c>true</c>, returns document version as part of a hit.
+</para></summary></member>
+</doc>

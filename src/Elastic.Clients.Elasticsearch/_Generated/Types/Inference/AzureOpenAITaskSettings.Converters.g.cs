@@ -25,14 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class AzureOpenAITaskSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskSettings>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropHeaders = System.Text.Json.JsonEncodedText.Encode("headers"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropUser = System.Text.Json.JsonEncodedText.Encode("user"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, string>?> propHeaders = default;
 		LocalJsonValue<string?> propUser = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propHeaders.TryReadProperty(ref reader, options, PropHeaders, static System.Collections.Generic.IDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
+			{
+				continue;
+			}
+
 			if (propUser.TryReadProperty(ref reader, options, PropUser, null))
 			{
 				continue;
@@ -50,6 +57,7 @@ public sealed partial class AzureOpenAITaskSettingsConverter : System.Text.Json.
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			Headers = propHeaders.Value,
 			User = propUser.Value
 		};
 	}
@@ -57,6 +65,7 @@ public sealed partial class AzureOpenAITaskSettingsConverter : System.Text.Json.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskSettings value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropHeaders, value.Headers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
 		writer.WriteProperty(options, PropUser, value.User, null, null);
 		writer.WriteEndObject();
 	}

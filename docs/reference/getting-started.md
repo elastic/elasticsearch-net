@@ -24,13 +24,21 @@ Refer to the [*Installation*](/reference/installation.md) page to learn more.
 
 ### Connecting [_connecting]
 
-You can connect to the Elastic Cloud using an API key and the Elasticsearch endpoint.
+You can connect to Elastic Cloud using an API key and your deployment’s Elasticsearch endpoint URL.
 
 ```csharp
-var client = new ElasticsearchClient("<CLOUD_ID>", new ApiKey("<API_KEY>"));
+using Elastic.Clients.Elasticsearch;
+using Elastic.Transport;
+
+var settings = new ElasticsearchClientSettings(new Uri("<ELASTICSEARCH_ENDPOINT>"))
+    .Authentication(new ApiKey("<API_KEY>"));
+
+var client = new ElasticsearchClient(settings);
 ```
 
-Your Elasticsearch endpoint can be found on the **My deployment** page of your deployment:
+Replace `<ELASTICSEARCH_ENDPOINT>` with the URL shown for Elasticsearch on the deployment page (for example, the value you get when you choose **Copy endpoint** or **Copy as curl**). Replace `<API_KEY>` with an API key that your application is allowed to use.
+
+In the Elastic Cloud console, open **Deployments**, select your deployment, and locate the Elasticsearch endpoint URL in the connection details:
 
 ![Finding Elasticsearch endpoint](images/es-endpoint.jpg)
 

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.GeoDistanceAggregate"><summary><para>
+Result of a <c>geo_distance</c> aggregation. The unit for <c>from</c> and <c>to</c> is meters by default.
+</para></summary></member>
+</doc>

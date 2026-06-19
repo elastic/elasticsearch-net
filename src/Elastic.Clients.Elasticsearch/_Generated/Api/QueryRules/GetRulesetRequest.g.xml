@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="query_rules.get_ruleset.Request"><summary><para>
+Get a query ruleset.
+</para>
+<para>
+Get details about a query ruleset.
+</para></summary></member>
+  <member key="query_rules.get_ruleset.Request#ruleset_id"><summary><para>
+The unique identifier of the query ruleset
+</para></summary></member>
+</doc>

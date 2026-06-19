@@ -37,10 +37,6 @@ public sealed partial class DeleteGeoipDatabaseResponse : Elastic.Transport.Prod
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteGeoipDatabaseResponse.g.xml" path="doc/member[@key='ingest.delete_geoip_database.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

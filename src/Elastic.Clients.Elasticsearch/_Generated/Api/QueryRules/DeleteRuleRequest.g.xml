@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="query_rules.delete_rule.Request"><summary><para>
+Delete a query rule.
+</para>
+<para>
+Delete a query rule within a query ruleset.
+This is a destructive action that is only recoverable by re-adding the same rule with the create or update query rule API.
+</para></summary></member>
+  <member key="query_rules.delete_rule.Request#rule_id"><summary><para>
+The unique identifier of the query rule within the specified ruleset to delete
+</para></summary></member>
+  <member key="query_rules.delete_rule.Request#ruleset_id"><summary><para>
+The unique identifier of the query ruleset containing the rule to delete
+</para></summary></member>
+</doc>

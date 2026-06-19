@@ -37,40 +37,18 @@ public sealed partial class CreateCrossClusterApiKeyResponse : Elastic.Transport
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Generated API key.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyResponse.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Response#api_key']/*"/>
 	public required string ApiKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// API key credentials which is the base64-encoding of
-	/// the UTF-8 representation of <c>id</c> and <c>api_key</c> joined
-	/// by a colon (<c>:</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyResponse.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Response#encoded']/*"/>
 	public required string Encoded { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Expiration in milliseconds for the API key.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyResponse.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Response#expiration']/*"/>
 	public System.TimeSpan? Expiration { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Unique ID for this API key.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyResponse.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Response#id']/*"/>
 	public required string Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the name for this API key.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyResponse.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Response#name']/*"/>
 	public required string Name { get; set; }
 }

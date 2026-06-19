@@ -23,6 +23,7 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.Enrich;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='enrich.stats.ExecutingPolicy']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Enrich.Json.ExecutingPolicyConverter))]
 public sealed partial class ExecutingPolicy
 {

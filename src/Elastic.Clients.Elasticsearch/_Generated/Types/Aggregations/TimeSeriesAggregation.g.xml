@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.TimeSeriesAggregation#keyed"><summary><para>
+Set to <c>true</c> to associate a unique string key with each bucket and returns the ranges as a hash rather than an array.
+</para></summary></member>
+  <member key="_types.aggregations.TimeSeriesAggregation#size"><summary><para>
+The maximum number of results to return.
+</para></summary></member>
+</doc>

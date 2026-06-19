@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.get_migrate_reindex_status.Request"><summary><para>
+Get the migration reindexing status.
+</para>
+<para>
+Get the status of a migration reindex attempt for a data stream or index.
+</para></summary></member>
+  <member key="indices.get_migrate_reindex_status.Request#index"><summary><para>
+The index or data stream name.
+</para></summary></member>
+</doc>

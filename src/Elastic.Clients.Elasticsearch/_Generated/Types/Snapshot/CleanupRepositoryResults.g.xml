@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="snapshot.cleanup_repository.CleanupRepositoryResults#deleted_blobs"><summary><para>
+The number of binary large objects (blobs) removed from the snapshot repository during cleanup operations.
+A non-zero value indicates that unreferenced blobs were found and subsequently cleaned up.
+</para></summary></member>
+  <member key="snapshot.cleanup_repository.CleanupRepositoryResults#deleted_bytes"><summary><para>
+The number of bytes freed by cleanup operations.
+</para></summary></member>
+</doc>

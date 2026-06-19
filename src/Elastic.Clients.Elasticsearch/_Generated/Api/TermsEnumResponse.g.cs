@@ -37,12 +37,7 @@ public sealed partial class TermsEnumResponse : Elastic.Transport.Products.Elast
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the returned terms set may be incomplete and should be treated as approximate.
-	/// This can occur due to a few reasons, such as a request timeout or a node error.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumResponse.g.xml" path="doc/member[@key='_global.terms_enum.Response#complete']/*"/>
 	public required bool Complete { get; set; }
 	public required Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
 	public required System.Collections.Generic.IReadOnlyCollection<string> Terms { get; set; }

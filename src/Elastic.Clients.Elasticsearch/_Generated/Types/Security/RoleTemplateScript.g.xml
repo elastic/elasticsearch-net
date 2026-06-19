@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security._types.RoleTemplateScript#id"><summary><para>
+The <c>id</c> for a stored script.
+</para></summary></member>
+  <member key="security._types.RoleTemplateScript#lang"><summary><para>
+Specifies the language the script is written in.
+</para></summary></member>
+  <member key="security._types.RoleTemplateScript#params"><summary><para>
+Specifies any named parameters that are passed into the script as variables.
+Use parameters instead of hard-coded values to decrease compile time.
+</para></summary></member>
+</doc>

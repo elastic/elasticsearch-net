@@ -39,46 +39,21 @@ public sealed partial class MigrateToDataTiersResponse : Elastic.Transport.Produ
 
 	public required bool DryRun { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The component templates that were updated to not contain custom routing settings for the provided data attribute.
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateToDataTiersResponse.g.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Response#migrated_component_templates']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<string> MigratedComponentTemplates { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The composable index templates that were updated to not contain custom routing settings for the provided data attribute.
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateToDataTiersResponse.g.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Response#migrated_composable_templates']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<string> MigratedComposableTemplates { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The ILM policies that were updated.
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateToDataTiersResponse.g.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Response#migrated_ilm_policies']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<string> MigratedIlmPolicies { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The indices that were migrated to tier preference routing.
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateToDataTiersResponse.g.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Response#migrated_indices']/*"/>
 	public required System.Collections.Generic.ICollection<string> MigratedIndices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The legacy index templates that were updated to not contain custom routing settings for the provided data attribute.
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateToDataTiersResponse.g.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Response#migrated_legacy_templates']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<string> MigratedLegacyTemplates { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the legacy index template that was deleted.
-	/// This information is missing if no legacy index templates were deleted.
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateToDataTiersResponse.g.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Response#removed_legacy_template']/*"/>
 	public required string RemovedLegacyTemplate { get; set; }
 }

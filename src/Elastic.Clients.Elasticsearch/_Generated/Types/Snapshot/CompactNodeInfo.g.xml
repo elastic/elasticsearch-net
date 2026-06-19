@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="snapshot.verify_repository.CompactNodeInfo#name"><summary><para>
+A human-readable name for the node.
+You can set this name using the <c>node.name</c> property in <c>elasticsearch.yml</c>.
+The default value is the machine's hostname.
+</para></summary></member>
+</doc>

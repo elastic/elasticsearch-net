@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.JsonProcessorConflictStrategy#merge"><summary><para>
+Conflicting fields will be merged.
+</para></summary></member>
+  <member key="ingest._types.JsonProcessorConflictStrategy#replace"><summary><para>
+Root fields that conflict with fields from the parsed JSON will be overridden.
+</para></summary></member>
+</doc>

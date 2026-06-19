@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="streams.logs_enable.Request"><summary><para>
+Enable a named stream.
+</para>
+<para>
+Turn on the named stream feature for this cluster.
+</para>
+<para>
+NOTE: To protect existing data, this feature can be turned on only if the cluster does not have
+existing indices or data streams that match the pattern <c>&lt;name>|&lt;name>.*</c> for the enabled stream
+type name. If those indices or data streams exist, a <c>409 - Conflict</c> response and error is
+returned.
+</para></summary></member>
+  <member key="streams.logs_enable.Request#master_timeout"><summary><para>
+The period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="streams.logs_enable.Request#name"><summary><para>
+The stream type to enable.
+</para></summary></member>
+  <member key="streams.logs_enable.Request#timeout"><summary><para>
+The period to wait for a response.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

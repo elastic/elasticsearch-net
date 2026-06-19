@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="enrich.stats.Response#cache_stats"><summary><para>
+Objects containing information about the enrich cache stats on each ingest node.
+</para></summary></member>
+  <member key="enrich.stats.Response#coordinator_stats"><summary><para>
+Objects containing information about each coordinating ingest node for configured enrich processors.
+</para></summary></member>
+  <member key="enrich.stats.Response#executing_policies"><summary><para>
+Objects containing information about each enrich policy that is currently executing.
+</para></summary></member>
+</doc>

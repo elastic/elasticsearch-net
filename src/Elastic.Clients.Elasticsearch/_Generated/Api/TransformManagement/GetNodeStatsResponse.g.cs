@@ -37,11 +37,6 @@ public sealed partial class GetNodeStatsResponse : Elastic.Transport.Products.El
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Per node statistics
-	/// </para>
-	/// </summary>
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.TransformNodeStats>? Nodes { get; set; }
 	public required Elastic.Clients.Elasticsearch.TransformManagement.TransformNodeStats Total { get; set; }
 }

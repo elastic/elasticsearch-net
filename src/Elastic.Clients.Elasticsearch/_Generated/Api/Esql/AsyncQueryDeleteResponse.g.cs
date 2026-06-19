@@ -37,10 +37,6 @@ public sealed partial class AsyncQueryDeleteResponse : Elastic.Transport.Product
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryDeleteResponse.g.xml" path="doc/member[@key='esql.async_query_delete.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

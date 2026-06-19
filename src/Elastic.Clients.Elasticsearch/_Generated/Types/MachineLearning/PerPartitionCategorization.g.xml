@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.PerPartitionCategorization#enabled"><summary><para>
+To enable this setting, you must also set the <c>partition_field_name</c> property to the same value in every detector that uses the keyword <c>mlcategory</c>. Otherwise, job creation fails.
+</para></summary></member>
+  <member key="ml._types.PerPartitionCategorization#stop_on_warn"><summary><para>
+This setting can be set to true only if per-partition categorization is enabled. If true, both categorization and subsequent anomaly detection stops for partitions where the categorization status changes to warn. This setting makes it viable to have a job where it is expected that categorization works well for some partitions but not others; you do not pay the cost of bad categorization forever in the partitions where it works badly.
+</para></summary></member>
+</doc>

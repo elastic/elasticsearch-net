@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices._types.IndexState#defaults"><summary><para>
+Default settings, included when the request's <c>include_default</c> is <c>true</c>.
+</para></summary></member>
+  <member key="indices._types.IndexState#lifecycle"><summary><para>
+Data stream lifecycle applicable if this is a data stream.
+</para></summary></member>
+</doc>

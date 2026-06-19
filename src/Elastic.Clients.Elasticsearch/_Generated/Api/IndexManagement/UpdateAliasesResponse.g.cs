@@ -37,10 +37,6 @@ public sealed partial class UpdateAliasesResponse : Elastic.Transport.Products.E
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateAliasesResponse.g.xml" path="doc/member[@key='indices.update_aliases.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

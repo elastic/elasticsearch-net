@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.MovingFunctionAggregation#buckets_path"><summary><para>
+Path to the buckets that contain one set of values to correlate.
+</para></summary></member>
+  <member key="_types.aggregations.MovingFunctionAggregation#format"><summary><para>
+<c>DecimalFormat</c> pattern for the output value.
+If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
+</para></summary></member>
+  <member key="_types.aggregations.MovingFunctionAggregation#gap_policy"><summary><para>
+Policy to apply when gaps are found in the data.
+</para></summary></member>
+  <member key="_types.aggregations.MovingFunctionAggregation#script"><summary><para>
+The script that should be executed on each window of data.
+</para></summary></member>
+  <member key="_types.aggregations.MovingFunctionAggregation#shift"><summary><para>
+By default, the window consists of the last n values excluding the current bucket.
+Increasing <c>shift</c> by 1, moves the starting window position by 1 to the right.
+</para></summary></member>
+  <member key="_types.aggregations.MovingFunctionAggregation#window"><summary><para>
+The size of window to "slide" across the histogram.
+</para></summary></member>
+</doc>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.ZeroShotClassificationInferenceOptions"><summary><para>
+Zero shot classification configuration options
+</para></summary></member>
+  <member key="ml._types.ZeroShotClassificationInferenceOptions#classification_labels"><summary><para>
+The zero shot classification labels indicating entailment, neutral, and contradiction
+Must contain exactly and only entailment, neutral, and contradiction
+</para></summary></member>
+  <member key="ml._types.ZeroShotClassificationInferenceOptions#hypothesis_template"><summary><para>
+Hypothesis template used when tokenizing labels for prediction
+</para></summary></member>
+  <member key="ml._types.ZeroShotClassificationInferenceOptions#labels"><summary><para>
+The labels to predict.
+</para></summary></member>
+  <member key="ml._types.ZeroShotClassificationInferenceOptions#multi_label"><summary><para>
+Indicates if more than one true label exists.
+</para></summary></member>
+  <member key="ml._types.ZeroShotClassificationInferenceOptions#results_field"><summary><para>
+The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+</para></summary></member>
+  <member key="ml._types.ZeroShotClassificationInferenceOptions#tokenization"><summary><para>
+The tokenization options to update when inferring
+</para></summary></member>
+</doc>

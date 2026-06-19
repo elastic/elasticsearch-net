@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.MutualInformationHeuristic#background_is_superset"><summary><para>
+Set to <c>false</c> if you defined a custom background filter that represents a different set of documents that you want to compare to.
+</para></summary></member>
+  <member key="_types.aggregations.MutualInformationHeuristic#include_negatives"><summary><para>
+Set to <c>false</c> to filter out the terms that appear less often in the subset than in documents outside the subset.
+</para></summary></member>
+</doc>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search._types.SourceFilter#exclude_vectors"><summary><para>
+If <c>true</c>, vector fields are excluded from the returned source.
+</para>
+<para>
+This option takes precedence over <c>includes</c>: any vector field will
+remain excluded even if it matches an <c>includes</c> rule.
+</para></summary></member>
+  <member key="_global.search._types.SourceFilter#excludes"><summary><para>
+A list of fields to exclude from the returned source.
+</para></summary></member>
+  <member key="_global.search._types.SourceFilter#includes"><summary><para>
+A list of fields to include in the returned source.
+</para></summary></member>
+</doc>

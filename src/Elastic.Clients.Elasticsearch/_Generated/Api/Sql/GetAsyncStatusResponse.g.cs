@@ -37,50 +37,21 @@ public sealed partial class GetAsyncStatusResponse : Elastic.Transport.Products.
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The HTTP status code for the search.
-	/// The API returns this property only for completed searches.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncStatusResponse.g.xml" path="doc/member[@key='sql.get_async_status.Response#completion_status']/*"/>
 	public int? CompletionStatus { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The timestamp, in milliseconds since the Unix epoch, when Elasticsearch will delete the search and its results, even if the search is still running.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncStatusResponse.g.xml" path="doc/member[@key='sql.get_async_status.Response#expiration_time_in_millis']/*"/>
 	public required System.DateTimeOffset ExpirationTimeInMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The identifier for the search.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncStatusResponse.g.xml" path="doc/member[@key='sql.get_async_status.Response#id']/*"/>
 	public required string Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response does not contain complete search results.
-	/// If <c>is_partial</c> is <c>true</c> and <c>is_running</c> is <c>true</c>, the search is still running.
-	/// If <c>is_partial</c> is <c>true</c> but <c>is_running</c> is <c>false</c>, the results are partial due to a failure or timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncStatusResponse.g.xml" path="doc/member[@key='sql.get_async_status.Response#is_partial']/*"/>
 	public required bool IsPartial { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the search is still running.
-	/// If <c>false</c>, the search has finished.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncStatusResponse.g.xml" path="doc/member[@key='sql.get_async_status.Response#is_running']/*"/>
 	public required bool IsRunning { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The timestamp, in milliseconds since the Unix epoch, when the search started.
-	/// The API returns this property only for running searches.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncStatusResponse.g.xml" path="doc/member[@key='sql.get_async_status.Response#start_time_in_millis']/*"/>
 	public required System.DateTimeOffset StartTimeInMillis { get; set; }
 }

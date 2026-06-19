@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.IntervalsWildcard#analyzer"><summary><para>
+Analyzer used to analyze the <c>pattern</c>.
+Defaults to the top-level field's analyzer.
+</para></summary></member>
+  <member key="_types.query_dsl.IntervalsWildcard#pattern"><summary><para>
+Wildcard pattern used to find matching terms.
+</para></summary></member>
+  <member key="_types.query_dsl.IntervalsWildcard#use_field"><summary><para>
+If specified, match intervals from this field rather than the top-level field.
+The <c>pattern</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
+</para></summary></member>
+</doc>

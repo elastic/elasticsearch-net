@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="snapshot._types.AzureRepository#settings"><summary><para>
+The repository settings.
+</para></summary></member>
+  <member key="snapshot._types.AzureRepository#type"><summary><para>
+The Azure repository type.
+</para></summary></member>
+</doc>

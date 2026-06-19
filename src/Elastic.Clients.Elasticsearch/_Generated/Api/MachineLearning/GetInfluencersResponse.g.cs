@@ -39,10 +39,6 @@ public sealed partial class GetInfluencersResponse : Elastic.Transport.Products.
 
 	public required long Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array of influencer objects
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersResponse.g.xml" path="doc/member[@key='ml.get_influencers.Response#influencers']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Influencer> Influencers { get; set; }
 }

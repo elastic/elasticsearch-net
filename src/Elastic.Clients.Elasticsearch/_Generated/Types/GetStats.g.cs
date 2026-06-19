@@ -23,6 +23,7 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.GetStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.GetStatsConverter))]
 public sealed partial class GetStats
 {

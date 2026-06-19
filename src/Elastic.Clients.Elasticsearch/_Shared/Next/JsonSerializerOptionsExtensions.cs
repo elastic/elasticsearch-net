@@ -40,4 +40,12 @@ internal static partial class JsonSerializerOptionsExtensions
 	{
 		return ContextProvider<TContext>.GetContext(options);
 	}
+
+	[UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
+	[UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static bool TryGetContext<TContext>(this JsonSerializerOptions options, [MaybeNullWhen(false)] out TContext context)
+	{
+		return ContextProvider<TContext>.TryGetContext(options, out context);
+	}
 }

@@ -39,68 +39,14 @@ public sealed partial class IntervalsFilter
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that follow an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Intervals? After { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>("after"); set => SetVariant("after", value); }
-
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that occur before an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Intervals? Before { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>("before"); set => SetVariant("before", value); }
-
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals contained by an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Intervals? ContainedBy { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>("contained_by"); set => SetVariant("contained_by", value); }
-
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that contain an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Intervals? Containing { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>("containing"); set => SetVariant("containing", value); }
-
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that are <strong>not</strong> contained by an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Intervals? NotContainedBy { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>("not_contained_by"); set => SetVariant("not_contained_by", value); }
-
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that do <strong>not</strong> contain an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Intervals? NotContaining { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>("not_containing"); set => SetVariant("not_containing", value); }
-
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that do <strong>not</strong> overlap with an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Intervals? NotOverlapping { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>("not_overlapping"); set => SetVariant("not_overlapping", value); }
-
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that overlap with an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Intervals? Overlapping { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>("overlapping"); set => SetVariant("overlapping", value); }
-
-	/// <summary>
-	/// <para>
-	/// Script used to return matching documents.
-	/// This script must return a boolean value: <c>true</c> or <c>false</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Script? Script { get => GetVariant<Elastic.Clients.Elasticsearch.Script>("script"); set => SetVariant("script", value); }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter(Elastic.Clients.Elasticsearch.Script value) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter { Script = value };
@@ -143,212 +89,114 @@ public readonly partial struct IntervalsFilterDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that follow an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> After(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
 	{
 		Instance.After = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that follow an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> After(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> action)
 	{
 		Instance.After = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that occur before an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> Before(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
 	{
 		Instance.Before = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that occur before an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> Before(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> action)
 	{
 		Instance.Before = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals contained by an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> ContainedBy(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
 	{
 		Instance.ContainedBy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals contained by an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> ContainedBy(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> action)
 	{
 		Instance.ContainedBy = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that contain an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> Containing(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
 	{
 		Instance.Containing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that contain an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> Containing(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> action)
 	{
 		Instance.Containing = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that are <strong>not</strong> contained by an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> NotContainedBy(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
 	{
 		Instance.NotContainedBy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that are <strong>not</strong> contained by an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> NotContainedBy(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> action)
 	{
 		Instance.NotContainedBy = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that do <strong>not</strong> contain an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> NotContaining(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
 	{
 		Instance.NotContaining = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that do <strong>not</strong> contain an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> NotContaining(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> action)
 	{
 		Instance.NotContaining = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that do <strong>not</strong> overlap with an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> NotOverlapping(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
 	{
 		Instance.NotOverlapping = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that do <strong>not</strong> overlap with an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> NotOverlapping(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> action)
 	{
 		Instance.NotOverlapping = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that overlap with an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> Overlapping(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
 	{
 		Instance.Overlapping = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that overlap with an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> Overlapping(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> action)
 	{
 		Instance.Overlapping = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Script used to return matching documents.
-	/// This script must return a boolean value: <c>true</c> or <c>false</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Script used to return matching documents.
-	/// This script must return a boolean value: <c>true</c> or <c>false</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Script used to return matching documents.
-	/// This script must return a boolean value: <c>true</c> or <c>false</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
@@ -383,300 +231,162 @@ public readonly partial struct IntervalsFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that follow an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor After(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
 	{
 		Instance.After = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that follow an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor After(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> action)
 	{
 		Instance.After = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that follow an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor After<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>> action)
 	{
 		Instance.After = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that occur before an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor Before(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
 	{
 		Instance.Before = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that occur before an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor Before(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> action)
 	{
 		Instance.Before = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that occur before an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor Before<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>> action)
 	{
 		Instance.Before = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals contained by an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor ContainedBy(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
 	{
 		Instance.ContainedBy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals contained by an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor ContainedBy(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> action)
 	{
 		Instance.ContainedBy = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals contained by an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor ContainedBy<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>> action)
 	{
 		Instance.ContainedBy = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that contain an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor Containing(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
 	{
 		Instance.Containing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that contain an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor Containing(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> action)
 	{
 		Instance.Containing = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that contain an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor Containing<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>> action)
 	{
 		Instance.Containing = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that are <strong>not</strong> contained by an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor NotContainedBy(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
 	{
 		Instance.NotContainedBy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that are <strong>not</strong> contained by an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor NotContainedBy(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> action)
 	{
 		Instance.NotContainedBy = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that are <strong>not</strong> contained by an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor NotContainedBy<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>> action)
 	{
 		Instance.NotContainedBy = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that do <strong>not</strong> contain an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor NotContaining(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
 	{
 		Instance.NotContaining = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that do <strong>not</strong> contain an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor NotContaining(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> action)
 	{
 		Instance.NotContaining = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that do <strong>not</strong> contain an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor NotContaining<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>> action)
 	{
 		Instance.NotContaining = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that do <strong>not</strong> overlap with an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor NotOverlapping(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
 	{
 		Instance.NotOverlapping = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that do <strong>not</strong> overlap with an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor NotOverlapping(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> action)
 	{
 		Instance.NotOverlapping = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that do <strong>not</strong> overlap with an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor NotOverlapping<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>> action)
 	{
 		Instance.NotOverlapping = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that overlap with an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor Overlapping(Elastic.Clients.Elasticsearch.QueryDsl.Intervals? value)
 	{
 		Instance.Overlapping = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that overlap with an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor Overlapping(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> action)
 	{
 		Instance.Overlapping = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return intervals that overlap with an interval from the <c>filter</c> rule.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor Overlapping<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>> action)
 	{
 		Instance.Overlapping = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Script used to return matching documents.
-	/// This script must return a boolean value: <c>true</c> or <c>false</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Script used to return matching documents.
-	/// This script must return a boolean value: <c>true</c> or <c>false</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Script used to return matching documents.
-	/// This script must return a boolean value: <c>true</c> or <c>false</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);

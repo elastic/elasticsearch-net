@@ -40,10 +40,6 @@ public sealed partial class ReloadSecureSettingsResponse : Elastic.Transport.Pro
 	public required string ClusterName { get; set; }
 	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeReloadResult> Nodes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about the number of nodes selected by the request’s node filters.
-	/// </para>
-	/// </summary>
+	/// <include file="ReloadSecureSettingsResponse.g.xml" path="doc/member[@key='nodes.reload_secure_settings.Response#_nodes']/*"/>
 	public Elastic.Clients.Elasticsearch.NodeStatistics? NodeStats { get; set; }
 }

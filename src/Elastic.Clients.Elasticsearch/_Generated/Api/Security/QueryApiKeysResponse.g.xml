@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.query_api_keys.Response#aggregations"><summary><para>
+The aggregations result, if requested.
+</para></summary></member>
+  <member key="security.query_api_keys.Response#api_keys"><summary><para>
+A list of API key information.
+</para></summary></member>
+  <member key="security.query_api_keys.Response#count"><summary><para>
+The number of API keys returned in the response.
+</para></summary></member>
+  <member key="security.query_api_keys.Response#total"><summary><para>
+The total number of API keys found.
+</para></summary></member>
+</doc>

@@ -37,17 +37,9 @@ public sealed partial class CcrStatsResponse : Elastic.Transport.Products.Elasti
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Statistics for the auto-follow coordinator.
-	/// </para>
-	/// </summary>
+	/// <include file="CcrStatsResponse.g.xml" path="doc/member[@key='ccr.stats.Response#auto_follow_stats']/*"/>
 	public required Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowStats AutoFollowStats { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Shard-level statistics for follower indices.
-	/// </para>
-	/// </summary>
+	/// <include file="CcrStatsResponse.g.xml" path="doc/member[@key='ccr.stats.Response#follow_stats']/*"/>
 	public required Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStats FollowStats { get; set; }
 }

@@ -32,7 +32,7 @@ public sealed partial class SourceOnlyRepositoryConverter : System.Text.Json.Ser
 	public override Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings> propSettings = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings> propSettings = default;
 		LocalJsonValue<string?> propUuid = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{

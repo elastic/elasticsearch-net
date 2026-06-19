@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.DocumentSimulation"><summary><para>
+The simulated document, with optional metadata.
+</para></summary></member>
+  <member key="ingest._types.DocumentSimulation#_id"><summary><para>
+Unique identifier for the document. This ID must be unique within the <c>_index</c>.
+</para></summary></member>
+  <member key="ingest._types.DocumentSimulation#_index"><summary><para>
+Name of the index containing the document.
+</para></summary></member>
+  <member key="ingest._types.DocumentSimulation#_routing"><summary><para>
+Value used to send the document to a specific primary shard.
+</para></summary></member>
+  <member key="ingest._types.DocumentSimulation#_source"><summary><para>
+JSON body for the document.
+</para></summary></member>
+</doc>

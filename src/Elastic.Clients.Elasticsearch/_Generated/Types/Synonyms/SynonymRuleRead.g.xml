@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="synonyms._types.SynonymRuleRead#id"><summary><para>
+The identifier for the synonym rule.
+If you do not specify a synonym rule ID when you create a rule, an identifier is created automatically by Elasticsearch.
+</para></summary></member>
+  <member key="synonyms._types.SynonymRuleRead#synonyms"><summary><para>
+The synonyms that conform the synonym rule in Solr format.
+</para></summary></member>
+</doc>

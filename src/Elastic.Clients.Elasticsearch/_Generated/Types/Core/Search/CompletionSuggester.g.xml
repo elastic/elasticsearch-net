@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search._types.CompletionSuggester#analyzer"><summary><para>
+The analyzer to analyze the suggest text with.
+Defaults to the search analyzer of the suggest field.
+</para></summary></member>
+  <member key="_global.search._types.CompletionSuggester#contexts"><summary><para>
+A value, geo point object, or a geo hash string to filter or boost the suggestion on.
+</para></summary></member>
+  <member key="_global.search._types.CompletionSuggester#field"><summary><para>
+The field to fetch the candidate suggestions from.
+Needs to be set globally or per suggestion.
+</para></summary></member>
+  <member key="_global.search._types.CompletionSuggester#fuzzy"><summary><para>
+Enables fuzziness, meaning you can have a typo in your search and still get results back.
+</para></summary></member>
+  <member key="_global.search._types.CompletionSuggester#regex"><summary><para>
+A regex query that expresses a prefix as a regular expression.
+</para></summary></member>
+  <member key="_global.search._types.CompletionSuggester#size"><summary><para>
+The maximum corrections to be returned per suggest text token.
+</para></summary></member>
+  <member key="_global.search._types.CompletionSuggester#skip_duplicates"><summary><para>
+Whether duplicate suggestions should be filtered out.
+</para></summary></member>
+</doc>

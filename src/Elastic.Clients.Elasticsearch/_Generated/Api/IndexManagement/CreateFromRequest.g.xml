@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.create_from.Request"><summary><para>
+Create an index from a source index.
+</para>
+<para>
+Copy the mappings and settings from the source index to a destination index while allowing request settings and mappings to override the source values.
+</para></summary></member>
+  <member key="indices.create_from.Request#dest"><summary><para>
+The destination index or data stream name
+</para></summary></member>
+  <member key="indices.create_from.Request#source"><summary><para>
+The source index or data stream name
+</para></summary></member>
+</doc>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="eql.get.Request"><summary><para>
+Get async EQL search results.
+</para>
+<para>
+Get the current status and available results for an async EQL search or a stored synchronous EQL search.
+</para></summary></member>
+  <member key="eql.get.Request#id"><summary><para>
+Identifier for the search.
+</para></summary></member>
+  <member key="eql.get.Request#keep_alive"><summary><para>
+Period for which the search and its results are stored on the cluster.
+Defaults to the keep_alive value set by the search’s EQL search API request.
+</para></summary></member>
+  <member key="eql.get.Request#wait_for_completion_timeout"><summary><para>
+Timeout duration to wait for the request to finish.
+Defaults to no timeout, meaning the request waits for complete search results.
+</para></summary></member>
+</doc>

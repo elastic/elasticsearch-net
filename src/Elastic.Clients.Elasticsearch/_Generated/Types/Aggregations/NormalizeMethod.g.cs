@@ -26,46 +26,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.NormalizeMethodConverter))]
 public enum NormalizeMethod
 {
-	/// <summary>
-	/// <para>
-	/// This method normalizes such that each value is normalized by how much it differs from the average.
-	/// </para>
-	/// </summary>
+	/// <include file="NormalizeMethod.g.xml" path="doc/member[@key='_types.aggregations.NormalizeMethod#mean']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "mean")]
 	Mean,
-	/// <summary>
-	/// <para>
-	/// This method normalizes each value so that it represents a percentage of the total sum it attributes to.
-	/// </para>
-	/// </summary>
+	/// <include file="NormalizeMethod.g.xml" path="doc/member[@key='_types.aggregations.NormalizeMethod#percent_of_sum']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "percent_of_sum")]
 	PercentOfSum,
-	/// <summary>
-	/// <para>
-	/// This method rescales the data such that the minimum number is 0, and the maximum number is 1, with the rest normalized linearly in-between.
-	/// </para>
-	/// </summary>
+	/// <include file="NormalizeMethod.g.xml" path="doc/member[@key='_types.aggregations.NormalizeMethod#rescale_0_1']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "rescale_0_1")]
 	Rescale01,
-	/// <summary>
-	/// <para>
-	/// This method rescales the data such that the minimum number is 0, and the maximum number is 100, with the rest normalized linearly in-between.
-	/// </para>
-	/// </summary>
+	/// <include file="NormalizeMethod.g.xml" path="doc/member[@key='_types.aggregations.NormalizeMethod#rescale_0_100']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "rescale_0_100")]
 	Rescale0100,
-	/// <summary>
-	/// <para>
-	/// This method normalizes such that each value is exponentiated and relative to the sum of the exponents of the original values.
-	/// </para>
-	/// </summary>
+	/// <include file="NormalizeMethod.g.xml" path="doc/member[@key='_types.aggregations.NormalizeMethod#softmax']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "softmax")]
 	Softmax,
-	/// <summary>
-	/// <para>
-	/// This method normalizes such that each value represents how far it is from the mean relative to the standard deviation.
-	/// </para>
-	/// </summary>
+	/// <include file="NormalizeMethod.g.xml" path="doc/member[@key='_types.aggregations.NormalizeMethod#z-score']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "z-score")]
 	ZScore
 }

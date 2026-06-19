@@ -34,7 +34,9 @@ public sealed partial class AsyncQueryRequestConverter : System.Text.Json.Serial
 	private static readonly System.Text.Json.JsonEncodedText PropLocale = System.Text.Json.JsonEncodedText.Encode("locale"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropProfile = System.Text.Json.JsonEncodedText.Encode("profile"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProjectRouting = System.Text.Json.JsonEncodedText.Encode("project_routing"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeZone = System.Text.Json.JsonEncodedText.Encode("time_zone"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropWaitForCompletionTimeout = System.Text.Json.JsonEncodedText.Encode("wait_for_completion_timeout"u8);
 
 	public override Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -47,9 +49,11 @@ public sealed partial class AsyncQueryRequestConverter : System.Text.Json.Serial
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propKeepAlive = default;
 		LocalJsonValue<bool?> propKeepOnCompletion = default;
 		LocalJsonValue<string?> propLocale = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>?> propParams = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>>?> propParams = default;
 		LocalJsonValue<bool?> propProfile = default;
+		LocalJsonValue<string?> propProjectRouting = default;
 		LocalJsonValue<string> propQuery = default;
+		LocalJsonValue<string?> propTimeZone = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propWaitForCompletionTimeout = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -88,7 +92,7 @@ public sealed partial class AsyncQueryRequestConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propParams.TryReadProperty(ref reader, options, PropParams, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, null)))
+			if (propParams.TryReadProperty(ref reader, options, PropParams, static Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>>(o, static (ref System.Text.Json.Utf8JsonReader _reader, System.Text.Json.JsonSerializerOptions _options) => 1, static System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(o, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, null)!)!, static System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>(o, static System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadKeyValuePairValue<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(o, null, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, null)!))!)))
 			{
 				continue;
 			}
@@ -98,7 +102,17 @@ public sealed partial class AsyncQueryRequestConverter : System.Text.Json.Serial
 				continue;
 			}
 
+			if (propProjectRouting.TryReadProperty(ref reader, options, PropProjectRouting, null))
+			{
+				continue;
+			}
+
 			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propTimeZone.TryReadProperty(ref reader, options, PropTimeZone, null))
 			{
 				continue;
 			}
@@ -129,7 +143,9 @@ public sealed partial class AsyncQueryRequestConverter : System.Text.Json.Serial
 			Locale = propLocale.Value,
 			Params = propParams.Value,
 			Profile = propProfile.Value,
+			ProjectRouting = propProjectRouting.Value,
 			Query = propQuery.Value,
+			TimeZone = propTimeZone.Value,
 			WaitForCompletionTimeout = propWaitForCompletionTimeout.Value
 		};
 	}
@@ -144,9 +160,11 @@ public sealed partial class AsyncQueryRequestConverter : System.Text.Json.Serial
 		writer.WriteProperty(options, PropKeepAlive, value.KeepAlive, null, null);
 		writer.WriteProperty(options, PropKeepOnCompletion, value.KeepOnCompletion, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropLocale, value.Locale, null, null);
-		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, v, null));
+		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>>? v) => w.WriteUnionValue<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>> v) => w.WriteCollectionValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, v, null)), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>> v) => w.WriteCollectionValue<System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>> v) => w.WriteKeyValuePairValue<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, v, null)))));
 		writer.WriteProperty(options, PropProfile, value.Profile, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropProjectRouting, value.ProjectRouting, null, null);
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropTimeZone, value.TimeZone, null, null);
 		writer.WriteProperty(options, PropWaitForCompletionTimeout, value.WaitForCompletionTimeout, null, null);
 		writer.WriteEndObject();
 	}

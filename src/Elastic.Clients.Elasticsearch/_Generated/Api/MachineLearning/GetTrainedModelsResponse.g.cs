@@ -39,10 +39,6 @@ public sealed partial class GetTrainedModelsResponse : Elastic.Transport.Product
 
 	public required int Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of trained model resources, which are sorted by the model_id value in ascending order.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTrainedModelsResponse.g.xml" path="doc/member[@key='ml.get_trained_models.Response#trained_model_configs']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelConfig> TrainedModelConfigs { get; set; }
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.msearch_template.TemplateConfig#explain"><summary><para>
+If <c>true</c>, returns detailed information about score calculation as part of each hit.
+</para></summary></member>
+  <member key="_global.msearch_template.TemplateConfig#id"><summary><para>
+The ID of the search template to use. If no <c>source</c> is specified,
+this parameter is required.
+</para></summary></member>
+  <member key="_global.msearch_template.TemplateConfig#params"><summary><para>
+Key-value pairs used to replace Mustache variables in the template.
+The key is the variable name.
+The value is the variable value.
+</para></summary></member>
+  <member key="_global.msearch_template.TemplateConfig#profile"><summary><para>
+If <c>true</c>, the query execution is profiled.
+</para></summary></member>
+  <member key="_global.msearch_template.TemplateConfig#source"><summary><para>
+An inline search template. Supports the same parameters as the search API's
+request body. It also supports Mustache variables. If no <c>id</c> is specified, this
+parameter is required.
+</para></summary></member>
+</doc>

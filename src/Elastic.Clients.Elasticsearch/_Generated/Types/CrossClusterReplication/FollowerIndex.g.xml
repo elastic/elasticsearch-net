@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ccr.follow_info.FollowerIndex#follower_index"><summary><para>
+The name of the follower index.
+</para></summary></member>
+  <member key="ccr.follow_info.FollowerIndex#leader_index"><summary><para>
+The name of the index in the leader cluster that is followed.
+</para></summary></member>
+  <member key="ccr.follow_info.FollowerIndex#parameters"><summary><para>
+An object that encapsulates cross-cluster replication parameters. If the follower index's status is paused, this object is omitted.
+</para></summary></member>
+  <member key="ccr.follow_info.FollowerIndex#remote_cluster"><summary><para>
+The remote cluster that contains the leader index.
+</para></summary></member>
+  <member key="ccr.follow_info.FollowerIndex#status"><summary><para>
+The status of the index following: <c>active</c> or <c>paused</c>.
+</para></summary></member>
+</doc>

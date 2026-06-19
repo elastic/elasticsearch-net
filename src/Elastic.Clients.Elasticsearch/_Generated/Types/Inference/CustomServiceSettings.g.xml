@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.CustomServiceSettings#batch_size"><summary><para>
+Specifies the batch size used for the semantic_text field. If the field is not provided, the default is 10.
+The batch size is the maximum number of inputs in a single request to the upstream service.
+The chunk within the batch are controlled by the selected chunking strategy for the semantic_text field.
+</para></summary></member>
+  <member key="inference._types.CustomServiceSettings#headers"><summary><para>
+Specifies the HTTP header parameters – such as <c>Authentication</c> or <c>Content-Type</c> – that are required to access the custom service.
+For example:
+</para>
+<code>
+"headers": {
+  "Authorization": "Bearer ${api_key}",
+  "Content-Type": "application/json;charset=utf-8"
+}
+</code></summary></member>
+  <member key="inference._types.CustomServiceSettings#input_type"><summary><para>
+Specifies the input type translation values that are used to replace the <c>${input_type}</c> template in the request body.
+For example:
+</para>
+<code>
+"input_type": {
+  "translation": {
+    "ingest": "do_ingest",
+    "search": "do_search"
+  },
+  "default": "a_default"
+},
+</code>
+<para>
+If the subsequent inference requests come from a search context, the <c>search</c> key will be used and the template will be replaced with <c>do_search</c>.
+If it comes from the ingest context <c>do_ingest</c> is used. If it's a different context that is not specified, the default value will be used. If no default is specified an empty string is used.
+<c>translation</c> can be:
+</para>
+<list type="bullet">
+<item>
+<para>
+<c>classification</c>
+</para>
+</item>
+<item>
+<para>
+<c>clustering</c>
+</para>
+</item>
+<item>
+<para>
+<c>ingest</c>
+</para>
+</item>
+<item>
+<para>
+<c>search</c>
+</para>
+</item>
+</list></summary></member>
+  <member key="inference._types.CustomServiceSettings#query_parameters"><summary><para>
+Specifies the query parameters as a list of tuples. The arrays inside the <c>query_parameters</c> must have two items, a key and a value.
+For example:
+</para>
+<code>
+"query_parameters":[
+  ["param_key", "some_value"],
+  ["param_key", "another_value"],
+  ["other_key", "other_value"]
+]
+</code>
+<para>
+If the base url is <c>https://www.elastic.co</c> it results in: <c>https://www.elastic.co?param_key=some_value&amp;param_key=another_value&amp;other_key=other_value</c>.
+</para></summary></member>
+  <member key="inference._types.CustomServiceSettings#request"><summary><para>
+The request configuration object.
+</para></summary></member>
+  <member key="inference._types.CustomServiceSettings#response"><summary><para>
+The response configuration object.
+</para></summary></member>
+  <member key="inference._types.CustomServiceSettings#secret_parameters"><summary><para>
+Specifies secret parameters, like <c>api_key</c> or <c>api_token</c>, that are required to access the custom service.
+For example:
+</para>
+<code>
+"secret_parameters":{
+  "api_key":"&lt;api_key>"
+}
+</code></summary></member>
+  <member key="inference._types.CustomServiceSettings#url"><summary><para>
+The URL endpoint to use for the requests.
+</para></summary></member>
+</doc>

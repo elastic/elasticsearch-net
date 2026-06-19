@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="query_rules._types.QueryRule#actions"><summary><para>
+The actions to take when the rule is matched.
+The format of this action depends on the rule type.
+</para></summary></member>
+  <member key="query_rules._types.QueryRule#criteria"><summary><para>
+The criteria that must be met for the rule to be applied.
+If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
+</para></summary></member>
+  <member key="query_rules._types.QueryRule#rule_id"><summary><para>
+A unique identifier for the rule.
+</para></summary></member>
+  <member key="query_rules._types.QueryRule#type"><summary><para>
+The type of rule.
+<c>pinned</c> will identify and pin specific documents to the top of search results.
+<c>exclude</c> will exclude specific documents from search results.
+</para></summary></member>
+</doc>

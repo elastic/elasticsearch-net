@@ -26,44 +26,19 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.IncludeConverter))]
 public enum Include
 {
-	/// <summary>
-	/// <para>
-	/// Includes the model definition.
-	/// </para>
-	/// </summary>
+	/// <include file="Include.g.xml" path="doc/member[@key='ml._types.Include#definition']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "definition")]
 	Definition,
-	/// <summary>
-	/// <para>
-	/// Includes the model definition status.
-	/// </para>
-	/// </summary>
+	/// <include file="Include.g.xml" path="doc/member[@key='ml._types.Include#definition_status']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "definition_status")]
 	DefinitionStatus,
-	/// <summary>
-	/// <para>
-	/// Includes the baseline for feature importance values.
-	/// </para>
-	/// </summary>
+	/// <include file="Include.g.xml" path="doc/member[@key='ml._types.Include#feature_importance_baseline']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "feature_importance_baseline")]
 	FeatureImportanceBaseline,
-	/// <summary>
-	/// <para>
-	/// Includes the information about hyperparameters used to train the model.
-	/// This information consists of the value, the absolute and relative
-	/// importance of the hyperparameter as well as an indicator of whether it was
-	/// specified by the user or tuned during hyperparameter optimization.
-	/// </para>
-	/// </summary>
+	/// <include file="Include.g.xml" path="doc/member[@key='ml._types.Include#hyperparameters']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "hyperparameters")]
 	Hyperparameters,
-	/// <summary>
-	/// <para>
-	/// Includes the total feature importance for the training data set. The
-	/// baseline and total feature importance values are returned in the metadata
-	/// field in the response body.
-	/// </para>
-	/// </summary>
+	/// <include file="Include.g.xml" path="doc/member[@key='ml._types.Include#total_feature_importance']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "total_feature_importance")]
 	TotalFeatureImportance
 }

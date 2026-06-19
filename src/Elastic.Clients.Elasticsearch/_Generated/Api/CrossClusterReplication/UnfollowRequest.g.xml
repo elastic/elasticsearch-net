@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ccr.unfollow.Request"><summary><para>
+Unfollow an index.
+</para>
+<para>
+Convert a cross-cluster replication follower index to a regular index.
+The API stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
+The follower index must be paused and closed before you call the unfollow API.
+</para>
+<para>
+info
+Currently cross-cluster replication does not support converting an existing regular index to a follower index. Converting a follower index to a regular index is an irreversible operation.
+</para></summary></member>
+  <member key="ccr.unfollow.Request#index"><summary><para>
+The name of the follower index.
+</para></summary></member>
+  <member key="ccr.unfollow.Request#master_timeout"><summary><para>
+The period to wait for a connection to the master node.
+If the master node is not available before the timeout expires, the request fails and returns an error.
+It can also be set to <c>-1</c> to indicate that the request should never timeout.
+</para></summary></member>
+</doc>

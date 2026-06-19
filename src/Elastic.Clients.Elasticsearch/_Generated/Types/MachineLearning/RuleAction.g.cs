@@ -26,18 +26,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.RuleActionConverter))]
 public enum RuleAction
 {
-	/// <summary>
-	/// <para>
-	/// The value for that series will not be used to update the model. Unless you also specify <c>skip_result</c>, the results will be created as usual. This action is suitable when certain values are expected to be consistently anomalous and they affect the model in a way that negatively impacts the rest of the results.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleAction.g.xml" path="doc/member[@key='ml._types.RuleAction#skip_model_update']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "skip_model_update")]
 	SkipModelUpdate,
-	/// <summary>
-	/// <para>
-	/// The result will not be created. Unless you also specify <c>skip_model_update</c>, the model will be updated as usual with the corresponding series value.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleAction.g.xml" path="doc/member[@key='ml._types.RuleAction#skip_result']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "skip_result")]
 	SkipResult
 }

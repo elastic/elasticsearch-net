@@ -23,6 +23,7 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='xpack.usage.MlInference']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.Json.MlInferenceConverter))]
 public sealed partial class MlInference
 {

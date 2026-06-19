@@ -37,6 +37,9 @@ public sealed partial class IRangeQueryConverter : System.Text.Json.Serializatio
 			case Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery v:
 				writer.WriteValue(options, v, null);
 				break;
+			case Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQuery v:
+				writer.WriteValue(options, v, null);
+				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery v:
 				writer.WriteValue(options, v, null);
 				break;

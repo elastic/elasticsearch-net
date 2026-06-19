@@ -121,5 +121,7 @@ public enum FieldType
 	[System.Runtime.Serialization.EnumMember(Value = "token_count")]
 	TokenCount,
 	[System.Runtime.Serialization.EnumMember(Value = "version")]
-	Version
+	Version,
+	[System.Runtime.Serialization.EnumMember(Value = "wildcard")]
+	Wildcard
 }

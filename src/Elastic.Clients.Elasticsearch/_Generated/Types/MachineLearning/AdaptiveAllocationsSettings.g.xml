@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.AdaptiveAllocationsSettings#enabled"><summary><para>
+If true, adaptive_allocations is enabled
+</para></summary></member>
+  <member key="ml._types.AdaptiveAllocationsSettings#max_number_of_allocations"><summary><para>
+Specifies the maximum number of allocations to scale to.
+If set, it must be greater than or equal to min_number_of_allocations.
+</para></summary></member>
+  <member key="ml._types.AdaptiveAllocationsSettings#min_number_of_allocations"><summary><para>
+Specifies the minimum number of allocations to scale to.
+If set, it must be greater than or equal to 0.
+If not defined, the deployment scales to 0.
+</para></summary></member>
+</doc>

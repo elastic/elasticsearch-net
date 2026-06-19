@@ -26,9 +26,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 public partial class TransformManagementNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>
-	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient"/> class for mocking.
-	/// </para>
+	/// Initializes a new instance of the <cref:Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient> class for mocking.
 	/// </summary>
 	protected TransformManagementNamespacedClient() : base()
 	{
@@ -38,12 +36,16 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 	{
 	}
 
+	/// <include file="../Api/TransformManagement/DeleteTransformRequest.g.xml" path="doc/member[@key='transform.delete_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.delete_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse DeleteTransform(Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/DeleteTransformRequest.g.xml" path="doc/member[@key='transform.delete_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.delete_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse DeleteTransform(Elastic.Clients.Elasticsearch.Id transformId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestDescriptor(transformId);
@@ -52,6 +54,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/DeleteTransformRequest.g.xml" path="doc/member[@key='transform.delete_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.delete_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse DeleteTransform(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestDescriptor(transformId);
@@ -61,12 +65,16 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/DeleteTransformRequest.g.xml" path="doc/member[@key='transform.delete_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.delete_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse> DeleteTransformAsync(Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/DeleteTransformRequest.g.xml" path="doc/member[@key='transform.delete_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.delete_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse> DeleteTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestDescriptor(transformId);
@@ -75,6 +83,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/DeleteTransformRequest.g.xml" path="doc/member[@key='transform.delete_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.delete_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse> DeleteTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestDescriptor(transformId);
@@ -84,12 +94,16 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/GetNodeStatsRequest.g.xml" path="doc/member[@key='transform.get_node_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.get_node_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsResponse GetNodeStats(Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/GetNodeStatsRequest.g.xml" path="doc/member[@key='transform.get_node_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.get_node_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsResponse GetNodeStats()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequestDescriptor();
@@ -98,6 +112,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/GetNodeStatsRequest.g.xml" path="doc/member[@key='transform.get_node_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.get_node_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsResponse GetNodeStats(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequestDescriptor();
@@ -107,12 +123,16 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/GetNodeStatsRequest.g.xml" path="doc/member[@key='transform.get_node_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.get_node_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsResponse> GetNodeStatsAsync(Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/GetNodeStatsRequest.g.xml" path="doc/member[@key='transform.get_node_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.get_node_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsResponse> GetNodeStatsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequestDescriptor();
@@ -121,6 +141,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/GetNodeStatsRequest.g.xml" path="doc/member[@key='transform.get_node_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.get_node_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsResponse> GetNodeStatsAsync(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequestDescriptor();
@@ -130,12 +152,16 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/GetTransformRequest.g.xml" path="doc/member[@key='transform.get_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.get_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse GetTransform(Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/GetTransformRequest.g.xml" path="doc/member[@key='transform.get_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.get_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse GetTransform()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor();
@@ -144,6 +170,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/GetTransformRequest.g.xml" path="doc/member[@key='transform.get_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.get_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse GetTransform(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor();
@@ -153,6 +181,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/GetTransformRequest.g.xml" path="doc/member[@key='transform.get_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.get_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse GetTransform(Elastic.Clients.Elasticsearch.Names? transformId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor(transformId);
@@ -161,6 +191,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/GetTransformRequest.g.xml" path="doc/member[@key='transform.get_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.get_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse GetTransform(Elastic.Clients.Elasticsearch.Names? transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor(transformId);
@@ -170,12 +202,16 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/GetTransformRequest.g.xml" path="doc/member[@key='transform.get_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.get_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse> GetTransformAsync(Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/GetTransformRequest.g.xml" path="doc/member[@key='transform.get_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.get_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse> GetTransformAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor();
@@ -184,6 +220,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/GetTransformRequest.g.xml" path="doc/member[@key='transform.get_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.get_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse> GetTransformAsync(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor();
@@ -193,6 +231,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/GetTransformRequest.g.xml" path="doc/member[@key='transform.get_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.get_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse> GetTransformAsync(Elastic.Clients.Elasticsearch.Names? transformId, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor(transformId);
@@ -201,6 +241,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/GetTransformRequest.g.xml" path="doc/member[@key='transform.get_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.get_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse> GetTransformAsync(Elastic.Clients.Elasticsearch.Names? transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor(transformId);
@@ -210,12 +252,16 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.get_transform_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse GetTransformStats(Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.get_transform_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse GetTransformStats(Elastic.Clients.Elasticsearch.Names transformId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor(transformId);
@@ -224,6 +270,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.get_transform_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse GetTransformStats(Elastic.Clients.Elasticsearch.Names transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor(transformId);
@@ -233,12 +281,16 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.get_transform_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse> GetTransformStatsAsync(Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.get_transform_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse> GetTransformStatsAsync(Elastic.Clients.Elasticsearch.Names transformId, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor(transformId);
@@ -247,6 +299,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.get_transform_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse> GetTransformStatsAsync(Elastic.Clients.Elasticsearch.Names transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor(transformId);
@@ -256,12 +310,16 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform> PreviewTransform<TTransform>(Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform> PreviewTransform<TDocument, TTransform>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>();
@@ -270,6 +328,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform> PreviewTransform<TDocument, TTransform>(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>();
@@ -279,6 +339,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform> PreviewTransform<TDocument, TTransform>(Elastic.Clients.Elasticsearch.Id? transformId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>(transformId);
@@ -287,6 +349,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform> PreviewTransform<TDocument, TTransform>(Elastic.Clients.Elasticsearch.Id? transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>(transformId);
@@ -296,12 +360,16 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>> PreviewTransformAsync<TTransform>(Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>> PreviewTransformAsync<TDocument, TTransform>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>();
@@ -310,6 +378,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>> PreviewTransformAsync<TDocument, TTransform>(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>();
@@ -319,6 +389,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>> PreviewTransformAsync<TDocument, TTransform>(Elastic.Clients.Elasticsearch.Id? transformId, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>(transformId);
@@ -327,6 +399,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>> PreviewTransformAsync<TDocument, TTransform>(Elastic.Clients.Elasticsearch.Id? transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>(transformId);
@@ -336,12 +410,16 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.put_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse PutTransform(Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.put_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse PutTransform(Elastic.Clients.Elasticsearch.Id transformId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor(transformId);
@@ -350,6 +428,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.put_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse PutTransform(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor(transformId);
@@ -359,6 +439,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.put_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse PutTransform<TDocument>(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument>(transformId);
@@ -368,12 +450,16 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.put_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse> PutTransformAsync(Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.put_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse> PutTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor(transformId);
@@ -382,6 +468,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.put_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse> PutTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor(transformId);
@@ -391,6 +479,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.put_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse> PutTransformAsync<TDocument>(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument>(transformId);
@@ -400,12 +490,16 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/ResetTransformRequest.g.xml" path="doc/member[@key='transform.reset_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.reset_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse ResetTransform(Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/ResetTransformRequest.g.xml" path="doc/member[@key='transform.reset_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.reset_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse ResetTransform(Elastic.Clients.Elasticsearch.Id transformId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor(transformId);
@@ -414,6 +508,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/ResetTransformRequest.g.xml" path="doc/member[@key='transform.reset_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.reset_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse ResetTransform(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor(transformId);
@@ -423,12 +519,16 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/ResetTransformRequest.g.xml" path="doc/member[@key='transform.reset_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.reset_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse> ResetTransformAsync(Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/ResetTransformRequest.g.xml" path="doc/member[@key='transform.reset_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.reset_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse> ResetTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor(transformId);
@@ -437,6 +537,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/ResetTransformRequest.g.xml" path="doc/member[@key='transform.reset_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.reset_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse> ResetTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor(transformId);
@@ -446,12 +548,16 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/ScheduleNowTransformRequest.g.xml" path="doc/member[@key='transform.schedule_now_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.schedule_now_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse ScheduleNowTransform(Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/ScheduleNowTransformRequest.g.xml" path="doc/member[@key='transform.schedule_now_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.schedule_now_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse ScheduleNowTransform(Elastic.Clients.Elasticsearch.Id transformId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor(transformId);
@@ -460,6 +566,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/ScheduleNowTransformRequest.g.xml" path="doc/member[@key='transform.schedule_now_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.schedule_now_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse ScheduleNowTransform(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor(transformId);
@@ -469,12 +577,16 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/ScheduleNowTransformRequest.g.xml" path="doc/member[@key='transform.schedule_now_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.schedule_now_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse> ScheduleNowTransformAsync(Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/ScheduleNowTransformRequest.g.xml" path="doc/member[@key='transform.schedule_now_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.schedule_now_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse> ScheduleNowTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor(transformId);
@@ -483,6 +595,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/ScheduleNowTransformRequest.g.xml" path="doc/member[@key='transform.schedule_now_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.schedule_now_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse> ScheduleNowTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor(transformId);
@@ -492,12 +606,16 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/SetUpgradeModeRequest.g.xml" path="doc/member[@key='transform.set_upgrade_mode.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.set_upgrade_mode.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeResponse SetUpgradeMode(Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequest, Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeResponse, Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/SetUpgradeModeRequest.g.xml" path="doc/member[@key='transform.set_upgrade_mode.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.set_upgrade_mode.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeResponse SetUpgradeMode()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestDescriptor();
@@ -506,6 +624,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequest, Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeResponse, Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/SetUpgradeModeRequest.g.xml" path="doc/member[@key='transform.set_upgrade_mode.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.set_upgrade_mode.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeResponse SetUpgradeMode(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestDescriptor();
@@ -515,12 +635,16 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequest, Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeResponse, Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/SetUpgradeModeRequest.g.xml" path="doc/member[@key='transform.set_upgrade_mode.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.set_upgrade_mode.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeResponse> SetUpgradeModeAsync(Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequest, Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeResponse, Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/SetUpgradeModeRequest.g.xml" path="doc/member[@key='transform.set_upgrade_mode.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.set_upgrade_mode.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeResponse> SetUpgradeModeAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestDescriptor();
@@ -529,6 +653,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequest, Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeResponse, Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/SetUpgradeModeRequest.g.xml" path="doc/member[@key='transform.set_upgrade_mode.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.set_upgrade_mode.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeResponse> SetUpgradeModeAsync(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestDescriptor();
@@ -538,12 +664,16 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequest, Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeResponse, Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/StartTransformRequest.g.xml" path="doc/member[@key='transform.start_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.start_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse StartTransform(Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/StartTransformRequest.g.xml" path="doc/member[@key='transform.start_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.start_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse StartTransform(Elastic.Clients.Elasticsearch.Id transformId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestDescriptor(transformId);
@@ -552,6 +682,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/StartTransformRequest.g.xml" path="doc/member[@key='transform.start_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.start_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse StartTransform(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestDescriptor(transformId);
@@ -561,12 +693,16 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/StartTransformRequest.g.xml" path="doc/member[@key='transform.start_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.start_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse> StartTransformAsync(Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/StartTransformRequest.g.xml" path="doc/member[@key='transform.start_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.start_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse> StartTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestDescriptor(transformId);
@@ -575,6 +711,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/StartTransformRequest.g.xml" path="doc/member[@key='transform.start_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.start_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse> StartTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestDescriptor(transformId);
@@ -584,12 +722,16 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/StopTransformRequest.g.xml" path="doc/member[@key='transform.stop_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.stop_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse StopTransform(Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/StopTransformRequest.g.xml" path="doc/member[@key='transform.stop_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.stop_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse StopTransform(Elastic.Clients.Elasticsearch.Name transformId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor(transformId);
@@ -598,6 +740,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/StopTransformRequest.g.xml" path="doc/member[@key='transform.stop_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.stop_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse StopTransform(Elastic.Clients.Elasticsearch.Name transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor(transformId);
@@ -607,12 +751,16 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/StopTransformRequest.g.xml" path="doc/member[@key='transform.stop_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.stop_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse> StopTransformAsync(Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/StopTransformRequest.g.xml" path="doc/member[@key='transform.stop_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.stop_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse> StopTransformAsync(Elastic.Clients.Elasticsearch.Name transformId, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor(transformId);
@@ -621,6 +769,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/StopTransformRequest.g.xml" path="doc/member[@key='transform.stop_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.stop_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse> StopTransformAsync(Elastic.Clients.Elasticsearch.Name transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor(transformId);
@@ -630,12 +780,16 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.update_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse UpdateTransform(Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.update_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse UpdateTransform(Elastic.Clients.Elasticsearch.Id transformId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor(transformId);
@@ -644,6 +798,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.update_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse UpdateTransform(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor(transformId);
@@ -653,6 +809,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.update_transform.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse UpdateTransform<TDocument>(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument>(transformId);
@@ -662,12 +820,16 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.update_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse> UpdateTransformAsync(Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.update_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse> UpdateTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor(transformId);
@@ -676,6 +838,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.update_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse> UpdateTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor(transformId);
@@ -685,6 +849,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.update_transform.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse> UpdateTransformAsync<TDocument>(Elastic.Clients.Elasticsearch.Id transformId, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument>(transformId);
@@ -694,12 +860,16 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/UpgradeTransformsRequest.g.xml" path="doc/member[@key='transform.upgrade_transforms.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.upgrade_transforms.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse UpgradeTransforms(Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest, Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse, Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/UpgradeTransformsRequest.g.xml" path="doc/member[@key='transform.upgrade_transforms.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.upgrade_transforms.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse UpgradeTransforms()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor();
@@ -708,6 +878,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest, Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse, Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/UpgradeTransformsRequest.g.xml" path="doc/member[@key='transform.upgrade_transforms.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.upgrade_transforms.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse UpgradeTransforms(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor();
@@ -717,12 +889,16 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest, Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse, Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TransformManagement/UpgradeTransformsRequest.g.xml" path="doc/member[@key='transform.upgrade_transforms.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.upgrade_transforms.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse> UpgradeTransformsAsync(Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest, Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse, Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/UpgradeTransformsRequest.g.xml" path="doc/member[@key='transform.upgrade_transforms.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.upgrade_transforms.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse> UpgradeTransformsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor();
@@ -731,6 +907,8 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest, Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse, Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TransformManagement/UpgradeTransformsRequest.g.xml" path="doc/member[@key='transform.upgrade_transforms.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='transform.upgrade_transforms.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse> UpgradeTransformsAsync(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor();

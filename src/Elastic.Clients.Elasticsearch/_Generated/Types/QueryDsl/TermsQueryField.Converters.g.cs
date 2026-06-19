@@ -30,8 +30,8 @@ public sealed partial class TermsQueryFieldConverter : System.Text.Json.Serializ
 		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartArray, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartObject);
 		return selector(ref reader, options) switch
 		{
-			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField(reader.ReadValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(options, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, null)!)),
-			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField(reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup>(options, null)),
+			1 => new Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField(reader.ReadValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(options, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, null)!)),
+			2 => new Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField(reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup>(options, null)),
 			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField)}")
 		};
 	}

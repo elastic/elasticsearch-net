@@ -30,10 +30,10 @@ public sealed partial class CustomTaskSettingsConverter : System.Text.Json.Seria
 	public override Elastic.Clients.Elasticsearch.Inference.CustomTaskSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<object?> propParameters = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propParameters = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propParameters.TryReadProperty(ref reader, options, PropParameters, static object? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>))))
+			if (propParameters.TryReadProperty(ref reader, options, PropParameters, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, static object (ref System.Text.Json.Utf8JsonReader reader, System.Text.Json.JsonSerializerOptions options) => reader.ReadUnionValue<string, int, double, float, bool>(options, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.Match(ref r, o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.MatchTokenTypes(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, static (ref System.Text.Json.Utf8JsonReader _reader, System.Text.Json.JsonSerializerOptions _options) => 1), static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.Match(ref r, o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.MatchTokenTypes(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.True | Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.False, static (ref System.Text.Json.Utf8JsonReader _reader, System.Text.Json.JsonSerializerOptions _options) => 5), static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.Match(ref r, o, static (ref System.Text.Json.Utf8JsonReader _reader, System.Text.Json.JsonSerializerOptions _options) => 2, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.Match(ref r, o, static (ref System.Text.Json.Utf8JsonReader _reader, System.Text.Json.JsonSerializerOptions _options) => 3, static (ref System.Text.Json.Utf8JsonReader _reader, System.Text.Json.JsonSerializerOptions _options) => 4)))), null, null, null, null, null))))
 			{
 				continue;
 			}
@@ -57,7 +57,7 @@ public sealed partial class CustomTaskSettingsConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.CustomTaskSettings value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropParameters, value.Parameters, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object? v) => w.WriteValueEx<object?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>)));
+		writer.WriteProperty(options, PropParameters, value.Parameters, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
 		writer.WriteEndObject();
 	}
 }

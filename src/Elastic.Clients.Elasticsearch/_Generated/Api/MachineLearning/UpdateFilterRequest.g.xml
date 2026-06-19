@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.update_filter.Request"><summary><para>
+Update a filter.
+</para>
+<para>
+Updates the description of a filter, adds items, or removes items from the list.
+</para></summary></member>
+  <member key="ml.update_filter.Request#add_items"><summary><para>
+The items to add to the filter.
+</para></summary></member>
+  <member key="ml.update_filter.Request#description"><summary><para>
+A description for the filter.
+</para></summary></member>
+  <member key="ml.update_filter.Request#filter_id"><summary><para>
+A string that uniquely identifies a filter.
+</para></summary></member>
+  <member key="ml.update_filter.Request#remove_items"><summary><para>
+The items to remove from the filter.
+</para></summary></member>
+</doc>

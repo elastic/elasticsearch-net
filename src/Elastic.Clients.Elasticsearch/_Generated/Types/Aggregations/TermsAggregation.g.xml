@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.TermsAggregation#collect_mode"><summary><para>
+Determines how child aggregations should be calculated: breadth-first or depth-first.
+</para></summary></member>
+  <member key="_types.aggregations.TermsAggregation#exclude"><summary><para>
+Values to exclude.
+Accepts regular expressions and partitions.
+</para></summary></member>
+  <member key="_types.aggregations.TermsAggregation#execution_hint"><summary><para>
+Determines whether the aggregation will use field values directly or global ordinals.
+</para></summary></member>
+  <member key="_types.aggregations.TermsAggregation#field"><summary><para>
+The field from which to return terms.
+</para></summary></member>
+  <member key="_types.aggregations.TermsAggregation#include"><summary><para>
+Values to include.
+Accepts regular expressions and partitions.
+</para></summary></member>
+  <member key="_types.aggregations.TermsAggregation#min_doc_count"><summary><para>
+Only return values that are found in more than <c>min_doc_count</c> hits.
+</para></summary></member>
+  <member key="_types.aggregations.TermsAggregation#missing"><summary><para>
+The value to apply to documents that do not have a value.
+By default, documents without a value are ignored.
+</para></summary></member>
+  <member key="_types.aggregations.TermsAggregation#order"><summary><para>
+Specifies the sort order of the buckets.
+Defaults to sorting by descending document count.
+</para></summary></member>
+  <member key="_types.aggregations.TermsAggregation#shard_min_doc_count"><summary><para>
+Regulates the certainty a shard has if the term should actually be added to the candidate list or not with respect to the <c>min_doc_count</c>.
+Terms will only be considered if their local shard frequency within the set is higher than the <c>shard_min_doc_count</c>.
+</para></summary></member>
+  <member key="_types.aggregations.TermsAggregation#shard_size"><summary><para>
+The number of candidate terms produced by each shard.
+By default, <c>shard_size</c> will be automatically estimated based on the number of shards and the <c>size</c> parameter.
+</para></summary></member>
+  <member key="_types.aggregations.TermsAggregation#show_term_doc_count_error"><summary><para>
+Set to <c>true</c> to return the <c>doc_count_error_upper_bound</c>, which is an upper bound to the error on the <c>doc_count</c> returned by each shard.
+</para></summary></member>
+  <member key="_types.aggregations.TermsAggregation#size"><summary><para>
+The number of buckets returned out of the overall terms list.
+</para></summary></member>
+  <member key="_types.aggregations.TermsAggregation#value_type"><summary><para>
+Coerced unmapped fields into the specified type.
+</para></summary></member>
+</doc>

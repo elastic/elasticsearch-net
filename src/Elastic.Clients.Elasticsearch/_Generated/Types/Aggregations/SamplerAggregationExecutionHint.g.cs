@@ -26,25 +26,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.SamplerAggregationExecutionHintConverter))]
 public enum SamplerAggregationExecutionHint
 {
-	/// <summary>
-	/// <para>
-	/// Hold hashes of the field values - with potential for hash collisions.
-	/// </para>
-	/// </summary>
+	/// <include file="SamplerAggregationExecutionHint.g.xml" path="doc/member[@key='_types.aggregations.SamplerAggregationExecutionHint#bytes_hash']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "bytes_hash")]
 	BytesHash,
-	/// <summary>
-	/// <para>
-	/// Hold ordinals of the field as determined by the Lucene index.
-	/// </para>
-	/// </summary>
+	/// <include file="SamplerAggregationExecutionHint.g.xml" path="doc/member[@key='_types.aggregations.SamplerAggregationExecutionHint#global_ordinals']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "global_ordinals")]
 	GlobalOrdinals,
-	/// <summary>
-	/// <para>
-	/// Hold field values directly.
-	/// </para>
-	/// </summary>
+	/// <include file="SamplerAggregationExecutionHint.g.xml" path="doc/member[@key='_types.aggregations.SamplerAggregationExecutionHint#map']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "map")]
 	Map
 }

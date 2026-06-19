@@ -37,24 +37,12 @@ public sealed partial class EnrichStatsResponse : Elastic.Transport.Products.Ela
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Objects containing information about the enrich cache stats on each ingest node.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichStatsResponse.g.xml" path="doc/member[@key='enrich.stats.Response#cache_stats']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.CacheStats>? CacheStats { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Objects containing information about each coordinating ingest node for configured enrich processors.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichStatsResponse.g.xml" path="doc/member[@key='enrich.stats.Response#coordinator_stats']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.CoordinatorStats> CoordinatorStats { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Objects containing information about each enrich policy that is currently executing.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichStatsResponse.g.xml" path="doc/member[@key='enrich.stats.Response#executing_policies']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.ExecutingPolicy> ExecutingPolicies { get; set; }
 }

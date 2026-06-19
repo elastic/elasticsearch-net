@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.TransportHistogram#count"><summary><para>
+The number of times a transport thread took a period of time within the bounds of this bucket to handle an inbound message.
+</para></summary></member>
+  <member key="nodes._types.TransportHistogram#ge_millis"><summary><para>
+The inclusive lower bound of the bucket in milliseconds. May be omitted on the first bucket if this bucket has no lower bound.
+</para></summary></member>
+  <member key="nodes._types.TransportHistogram#lt_millis"><summary><para>
+The exclusive upper bound of the bucket in milliseconds.
+May be omitted on the last bucket if this bucket has no upper bound.
+</para></summary></member>
+</doc>

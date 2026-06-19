@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="slm.delete_lifecycle.Request"><summary><para>
+Delete a policy.
+</para>
+<para>
+Delete a snapshot lifecycle policy definition.
+This operation prevents any future snapshots from being taken but does not cancel in-progress snapshots or remove previously-taken snapshots.
+</para></summary></member>
+  <member key="slm.delete_lifecycle.Request#master_timeout"><summary><para>
+The period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="slm.delete_lifecycle.Request#policy_id"><summary><para>
+The id of the snapshot lifecycle policy to remove
+</para></summary></member>
+  <member key="slm.delete_lifecycle.Request#timeout"><summary><para>
+The period to wait for a response.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

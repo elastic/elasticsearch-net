@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.GeohexGridAggregation#bounds"><summary><para>
+Bounding box used to filter the geo-points in each bucket.
+</para></summary></member>
+  <member key="_types.aggregations.GeohexGridAggregation#field"><summary><para>
+Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
+If the field contains an array, <c>geohex_grid</c> aggregates all array values.
+</para></summary></member>
+  <member key="_types.aggregations.GeohexGridAggregation#precision"><summary><para>
+Integer zoom of the key used to defined cells or buckets
+in the results. Value should be between 0-15.
+</para></summary></member>
+  <member key="_types.aggregations.GeohexGridAggregation#shard_size"><summary><para>
+Number of buckets returned from each shard.
+</para></summary></member>
+  <member key="_types.aggregations.GeohexGridAggregation#size"><summary><para>
+Maximum number of buckets to return.
+</para></summary></member>
+</doc>

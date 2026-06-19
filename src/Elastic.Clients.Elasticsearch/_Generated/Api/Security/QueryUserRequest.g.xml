@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.query_user.Request"><summary><para>
+Find users with a query.
+</para>
+<para>
+Get information for users in a paginated manner.
+You can optionally filter the results with a query.
+</para>
+<para>
+NOTE: As opposed to the get user API, built-in users are excluded from the result.
+This API is only for native users.
+</para></summary></member>
+  <member key="security.query_user.Request#from"><summary><para>
+The starting document offset.
+It must not be negative.
+By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
+To page through more hits, use the <c>search_after</c> parameter.
+</para></summary></member>
+  <member key="security.query_user.Request#query"><summary><para>
+A query to filter which users to return.
+If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
+The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
+<c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
+You can query the following information associated with user: <c>username</c>, <c>roles</c>, <c>enabled</c>, <c>full_name</c>, and <c>email</c>.
+</para></summary></member>
+  <member key="security.query_user.Request#search_after"><summary><para>
+The search after definition
+</para></summary></member>
+  <member key="security.query_user.Request#size"><summary><para>
+The number of hits to return.
+It must not be negative.
+By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
+To page through more hits, use the <c>search_after</c> parameter.
+</para></summary></member>
+  <member key="security.query_user.Request#sort"><summary><para>
+The sort definition.
+Fields eligible for sorting are: <c>username</c>, <c>roles</c>, <c>enabled</c>.
+In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+</para></summary></member>
+  <member key="security.query_user.Request#with_profile_uid"><summary><para>
+Determines whether to retrieve the user profile UID, if it exists, for the users.
+</para></summary></member>
+</doc>

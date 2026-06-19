@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.StandardAnalyzer#max_token_length"><summary><para>
+The maximum token length. If a token is seen that exceeds this length then it is split at <c>max_token_length</c> intervals.
+Defaults to <c>255</c>.
+</para></summary></member>
+  <member key="_types.analysis.StandardAnalyzer#stopwords"><summary><para>
+A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
+Defaults to <c>_none_</c>.
+</para></summary></member>
+  <member key="_types.analysis.StandardAnalyzer#stopwords_path"><summary><para>
+The path to a file containing stop words.
+</para></summary></member>
+</doc>

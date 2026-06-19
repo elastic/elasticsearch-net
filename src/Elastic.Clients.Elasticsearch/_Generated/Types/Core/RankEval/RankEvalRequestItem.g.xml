@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.rank_eval.RankEvalRequestItem#id"><summary><para>
+The search request’s ID, used to group result details later.
+</para></summary></member>
+  <member key="_global.rank_eval.RankEvalRequestItem#params"><summary><para>
+The search template parameters.
+</para></summary></member>
+  <member key="_global.rank_eval.RankEvalRequestItem#ratings"><summary><para>
+List of document ratings
+</para></summary></member>
+  <member key="_global.rank_eval.RankEvalRequestItem#request"><summary><para>
+The query being evaluated.
+</para></summary></member>
+  <member key="_global.rank_eval.RankEvalRequestItem#template_id"><summary><para>
+The search template Id
+</para></summary></member>
+</doc>

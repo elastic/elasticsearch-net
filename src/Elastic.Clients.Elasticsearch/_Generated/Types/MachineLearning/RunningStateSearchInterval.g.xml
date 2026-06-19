@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.RunningStateSearchInterval#end"><summary><para>
+The end time.
+</para></summary></member>
+  <member key="ml._types.RunningStateSearchInterval#end_ms"><summary><para>
+The end time as an epoch in milliseconds.
+</para></summary></member>
+  <member key="ml._types.RunningStateSearchInterval#start"><summary><para>
+The start time.
+</para></summary></member>
+  <member key="ml._types.RunningStateSearchInterval#start_ms"><summary><para>
+The start time as an epoch in milliseconds.
+</para></summary></member>
+</doc>

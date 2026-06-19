@@ -26,27 +26,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.GapPolicyConverter))]
 public enum GapPolicy
 {
-	/// <summary>
-	/// <para>
-	/// Replace missing values with a zero (0) and pipeline aggregation computation will proceed as normal.
-	/// </para>
-	/// </summary>
+	/// <include file="GapPolicy.g.xml" path="doc/member[@key='_types.aggregations.GapPolicy#insert_zeros']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "insert_zeros")]
 	InsertZeros,
-	/// <summary>
-	/// <para>
-	/// Similar to skip, except if the metric provides a non-null, non-NaN value this value is used,
-	/// otherwise the empty bucket is skipped.
-	/// </para>
-	/// </summary>
+	/// <include file="GapPolicy.g.xml" path="doc/member[@key='_types.aggregations.GapPolicy#keep_values']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "keep_values")]
 	KeepValues,
-	/// <summary>
-	/// <para>
-	/// Treats missing data as if the bucket does not exist. It will skip the bucket and
-	/// continue calculating using the next available value.
-	/// </para>
-	/// </summary>
+	/// <include file="GapPolicy.g.xml" path="doc/member[@key='_types.aggregations.GapPolicy#skip']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "skip")]
 	Skip
 }

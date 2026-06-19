@@ -27,20 +27,28 @@ public sealed partial class AzureOpenAIServiceSettingsConverter : System.Text.Js
 {
 	private static readonly System.Text.Json.JsonEncodedText PropApiKey = System.Text.Json.JsonEncodedText.Encode("api_key"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropApiVersion = System.Text.Json.JsonEncodedText.Encode("api_version"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropClientId = System.Text.Json.JsonEncodedText.Encode("client_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropClientSecret = System.Text.Json.JsonEncodedText.Encode("client_secret"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDeploymentId = System.Text.Json.JsonEncodedText.Encode("deployment_id"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropEntraId = System.Text.Json.JsonEncodedText.Encode("entra_id"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRateLimit = System.Text.Json.JsonEncodedText.Encode("rate_limit"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropResourceName = System.Text.Json.JsonEncodedText.Encode("resource_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScopes = System.Text.Json.JsonEncodedText.Encode("scopes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTenantId = System.Text.Json.JsonEncodedText.Encode("tenant_id"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.AzureOpenAIServiceSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string?> propApiKey = default;
 		LocalJsonValue<string> propApiVersion = default;
+		LocalJsonValue<string?> propClientId = default;
+		LocalJsonValue<string?> propClientSecret = default;
 		LocalJsonValue<string> propDeploymentId = default;
 		LocalJsonValue<string?> propEntraId = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.RateLimitSetting?> propRateLimit = default;
 		LocalJsonValue<string> propResourceName = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propScopes = default;
+		LocalJsonValue<string?> propTenantId = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propApiKey.TryReadProperty(ref reader, options, PropApiKey, null))
@@ -49,6 +57,16 @@ public sealed partial class AzureOpenAIServiceSettingsConverter : System.Text.Js
 			}
 
 			if (propApiVersion.TryReadProperty(ref reader, options, PropApiVersion, null))
+			{
+				continue;
+			}
+
+			if (propClientId.TryReadProperty(ref reader, options, PropClientId, null))
+			{
+				continue;
+			}
+
+			if (propClientSecret.TryReadProperty(ref reader, options, PropClientSecret, null))
 			{
 				continue;
 			}
@@ -73,6 +91,16 @@ public sealed partial class AzureOpenAIServiceSettingsConverter : System.Text.Js
 				continue;
 			}
 
+			if (propScopes.TryReadProperty(ref reader, options, PropScopes, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propTenantId.TryReadProperty(ref reader, options, PropTenantId, null))
+			{
+				continue;
+			}
+
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
 				reader.SafeSkip();
@@ -87,10 +115,14 @@ public sealed partial class AzureOpenAIServiceSettingsConverter : System.Text.Js
 		{
 			ApiKey = propApiKey.Value,
 			ApiVersion = propApiVersion.Value,
+			ClientId = propClientId.Value,
+			ClientSecret = propClientSecret.Value,
 			DeploymentId = propDeploymentId.Value,
 			EntraId = propEntraId.Value,
 			RateLimit = propRateLimit.Value,
-			ResourceName = propResourceName.Value
+			ResourceName = propResourceName.Value,
+			Scopes = propScopes.Value,
+			TenantId = propTenantId.Value
 		};
 	}
 
@@ -99,10 +131,14 @@ public sealed partial class AzureOpenAIServiceSettingsConverter : System.Text.Js
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropApiKey, value.ApiKey, null, null);
 		writer.WriteProperty(options, PropApiVersion, value.ApiVersion, null, null);
+		writer.WriteProperty(options, PropClientId, value.ClientId, null, null);
+		writer.WriteProperty(options, PropClientSecret, value.ClientSecret, null, null);
 		writer.WriteProperty(options, PropDeploymentId, value.DeploymentId, null, null);
 		writer.WriteProperty(options, PropEntraId, value.EntraId, null, null);
 		writer.WriteProperty(options, PropRateLimit, value.RateLimit, null, null);
 		writer.WriteProperty(options, PropResourceName, value.ResourceName, null, null);
+		writer.WriteProperty(options, PropScopes, value.Scopes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropTenantId, value.TenantId, null, null);
 		writer.WriteEndObject();
 	}
 }

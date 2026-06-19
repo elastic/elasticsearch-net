@@ -23,6 +23,7 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='xpack.usage.Counter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.Json.CounterConverter))]
 public sealed partial class Counter
 {

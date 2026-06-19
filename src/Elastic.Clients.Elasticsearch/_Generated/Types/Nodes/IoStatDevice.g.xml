@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.IoStatDevice#device_name"><summary><para>
+The Linux device name.
+</para></summary></member>
+  <member key="nodes._types.IoStatDevice#operations"><summary><para>
+The total number of read and write operations for the device completed since starting Elasticsearch.
+</para></summary></member>
+  <member key="nodes._types.IoStatDevice#read_kilobytes"><summary><para>
+The total number of kilobytes read for the device since starting Elasticsearch.
+</para></summary></member>
+  <member key="nodes._types.IoStatDevice#read_operations"><summary><para>
+The total number of read operations for the device completed since starting Elasticsearch.
+</para></summary></member>
+  <member key="nodes._types.IoStatDevice#write_kilobytes"><summary><para>
+The total number of kilobytes written for the device since starting Elasticsearch.
+</para></summary></member>
+  <member key="nodes._types.IoStatDevice#write_operations"><summary><para>
+The total number of write operations for the device completed since starting Elasticsearch.
+</para></summary></member>
+</doc>

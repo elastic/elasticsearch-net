@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.forecast.Request"><summary><para>
+Predict future behavior of a time series.
+</para>
+<para>
+Forecasts are not supported for jobs that perform population analysis; an
+error occurs if you try to create a forecast for a job that has an
+<c>over_field_name</c> in its configuration. Forcasts predict future behavior
+based on historical data.
+</para></summary></member>
+  <member key="ml.forecast.Request#duration"><summary><para>
+Refer to the description for the <c>duration</c> query parameter.
+</para></summary></member>
+  <member key="ml.forecast.Request#expires_in"><summary><para>
+Refer to the description for the <c>expires_in</c> query parameter.
+</para></summary></member>
+  <member key="ml.forecast.Request#job_id"><summary><para>
+Identifier for the anomaly detection job. The job must be open when you
+create a forecast; otherwise, an error occurs.
+</para></summary></member>
+  <member key="ml.forecast.Request#max_model_memory"><summary><para>
+Refer to the description for the <c>max_model_memory</c> query parameter.
+</para></summary></member>
+</doc>

@@ -37,10 +37,6 @@ public sealed partial class DeleteRulesetResponse : Elastic.Transport.Products.E
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRulesetResponse.g.xml" path="doc/member[@key='query_rules.delete_ruleset.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

@@ -23,6 +23,7 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AzureOpenAITaskSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.AzureOpenAITaskSettingsConverter))]
 public sealed partial class AzureOpenAITaskSettings
 {
@@ -36,15 +37,14 @@ public sealed partial class AzureOpenAITaskSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c>, <c>chat_completion</c> or <c>text_embedding</c> task, specify the user issuing the request.
-	/// This information can be used for abuse detection.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureOpenAITaskSettings.g.xml" path="doc/member[@key='inference._types.AzureOpenAITaskSettings#headers']/*"/>
+	public System.Collections.Generic.IDictionary<string, string>? Headers { get; set; }
+
+	/// <include file="AzureOpenAITaskSettings.g.xml" path="doc/member[@key='inference._types.AzureOpenAITaskSettings#user']/*"/>
 	public string? User { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AzureOpenAITaskSettings']/*"/>
 public readonly partial struct AzureOpenAiTaskSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskSettings Instance { get; init; }
@@ -64,12 +64,35 @@ public readonly partial struct AzureOpenAiTaskSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.AzureOpenAiTaskSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskSettings instance) => new Elastic.Clients.Elasticsearch.Inference.AzureOpenAiTaskSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskSettings(Elastic.Clients.Elasticsearch.Inference.AzureOpenAiTaskSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c>, <c>chat_completion</c> or <c>text_embedding</c> task, specify the user issuing the request.
-	/// This information can be used for abuse detection.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureOpenAITaskSettings.g.xml" path="doc/member[@key='inference._types.AzureOpenAITaskSettings#headers']/*"/>
+	public Elastic.Clients.Elasticsearch.Inference.AzureOpenAiTaskSettingsDescriptor Headers(System.Collections.Generic.IDictionary<string, string>? value)
+	{
+		Instance.Headers = value;
+		return this;
+	}
+
+	/// <include file="AzureOpenAITaskSettings.g.xml" path="doc/member[@key='inference._types.AzureOpenAITaskSettings#headers']/*"/>
+	public Elastic.Clients.Elasticsearch.Inference.AzureOpenAiTaskSettingsDescriptor Headers()
+	{
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
+		return this;
+	}
+
+	/// <include file="AzureOpenAITaskSettings.g.xml" path="doc/member[@key='inference._types.AzureOpenAITaskSettings#headers']/*"/>
+	public Elastic.Clients.Elasticsearch.Inference.AzureOpenAiTaskSettingsDescriptor Headers(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
+	{
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.AzureOpenAiTaskSettingsDescriptor AddHeader(string key, string value)
+	{
+		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.Headers.Add(key, value);
+		return this;
+	}
+
+	/// <include file="AzureOpenAITaskSettings.g.xml" path="doc/member[@key='inference._types.AzureOpenAITaskSettings#user']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureOpenAiTaskSettingsDescriptor User(string? value)
 	{
 		Instance.User = value;

@@ -23,6 +23,7 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.Esql;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.list_queries.EsqlQueryInfo']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Esql.Json.EsqlQueryInfoConverter))]
 public sealed partial class EsqlQueryInfo
 {

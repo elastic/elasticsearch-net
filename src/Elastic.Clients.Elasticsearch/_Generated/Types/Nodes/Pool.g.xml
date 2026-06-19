@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.Pool#max_in_bytes"><summary><para>
+Maximum amount of memory, in bytes, available for use by the heap.
+</para></summary></member>
+  <member key="nodes._types.Pool#peak_max_in_bytes"><summary><para>
+Largest amount of memory, in bytes, historically used by the heap.
+</para></summary></member>
+  <member key="nodes._types.Pool#peak_used_in_bytes"><summary><para>
+Largest amount of memory, in bytes, historically used by the heap.
+</para></summary></member>
+  <member key="nodes._types.Pool#used_in_bytes"><summary><para>
+Memory, in bytes, used by the heap.
+</para></summary></member>
+</doc>

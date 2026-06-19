@@ -23,6 +23,7 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.segments.ShardSegmentRouting']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.ShardSegmentRoutingConverter))]
 public sealed partial class ShardSegmentRouting
 {
@@ -44,7 +45,12 @@ public sealed partial class ShardSegmentRouting
 		_ = sentinel;
 	}
 
+	/// <include file="ShardSegmentRouting.g.xml" path="doc/member[@key='indices.segments.ShardSegmentRouting#node']/*"/>
 	public required string Node { get; set; }
+
+	/// <include file="ShardSegmentRouting.g.xml" path="doc/member[@key='indices.segments.ShardSegmentRouting#primary']/*"/>
 	public required bool Primary { get; set; }
+
+	/// <include file="ShardSegmentRouting.g.xml" path="doc/member[@key='indices.segments.ShardSegmentRouting#state']/*"/>
 	public required string State { get; set; }
 }

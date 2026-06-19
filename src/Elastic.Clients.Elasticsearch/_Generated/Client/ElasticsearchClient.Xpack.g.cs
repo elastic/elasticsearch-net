@@ -26,9 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 public partial class XpackNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>
-	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.Xpack.XpackNamespacedClient"/> class for mocking.
-	/// </para>
+	/// Initializes a new instance of the <cref:Elastic.Clients.Elasticsearch.Xpack.XpackNamespacedClient> class for mocking.
 	/// </summary>
 	protected XpackNamespacedClient() : base()
 	{
@@ -38,12 +36,16 @@ public partial class XpackNamespacedClient : Elastic.Clients.Elasticsearch.Names
 	{
 	}
 
+	/// <include file="../Api/Xpack/XpackInfoRequest.g.xml" path="doc/member[@key='xpack.info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='xpack.info.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse Info(Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest, Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse, Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Xpack/XpackInfoRequest.g.xml" path="doc/member[@key='xpack.info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='xpack.info.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse Info()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor();
@@ -52,6 +54,8 @@ public partial class XpackNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest, Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse, Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Xpack/XpackInfoRequest.g.xml" path="doc/member[@key='xpack.info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='xpack.info.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse Info(System.Action<Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor();
@@ -61,12 +65,16 @@ public partial class XpackNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest, Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse, Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Xpack/XpackInfoRequest.g.xml" path="doc/member[@key='xpack.info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='xpack.info.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest, Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse, Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Xpack/XpackInfoRequest.g.xml" path="doc/member[@key='xpack.info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='xpack.info.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse> InfoAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor();
@@ -75,6 +83,8 @@ public partial class XpackNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest, Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse, Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Xpack/XpackInfoRequest.g.xml" path="doc/member[@key='xpack.info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='xpack.info.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse> InfoAsync(System.Action<Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor();
@@ -84,12 +94,16 @@ public partial class XpackNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest, Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse, Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Xpack/XpackUsageRequest.g.xml" path="doc/member[@key='xpack.usage.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='xpack.usage.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse Usage(Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequest, Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse, Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Xpack/XpackUsageRequest.g.xml" path="doc/member[@key='xpack.usage.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='xpack.usage.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse Usage()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestDescriptor();
@@ -98,6 +112,8 @@ public partial class XpackNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequest, Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse, Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Xpack/XpackUsageRequest.g.xml" path="doc/member[@key='xpack.usage.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='xpack.usage.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse Usage(System.Action<Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestDescriptor();
@@ -107,12 +123,16 @@ public partial class XpackNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequest, Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse, Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Xpack/XpackUsageRequest.g.xml" path="doc/member[@key='xpack.usage.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='xpack.usage.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequest, Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse, Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Xpack/XpackUsageRequest.g.xml" path="doc/member[@key='xpack.usage.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='xpack.usage.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse> UsageAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestDescriptor();
@@ -121,6 +141,8 @@ public partial class XpackNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequest, Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse, Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Xpack/XpackUsageRequest.g.xml" path="doc/member[@key='xpack.usage.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='xpack.usage.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse> UsageAsync(System.Action<Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestDescriptor();

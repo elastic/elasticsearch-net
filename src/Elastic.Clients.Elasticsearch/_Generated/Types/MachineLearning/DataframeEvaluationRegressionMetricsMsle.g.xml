@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.DataframeEvaluationRegressionMetricsMsle#offset"><summary><para>
+Defines the transition point at which you switch from minimizing quadratic error to minimizing quadratic log error. Defaults to 1.
+</para></summary></member>
+</doc>

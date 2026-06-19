@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.KnnQuery#boost"><summary><para>
+Floating point number used to decrease or increase the relevance scores of the query.
+Boost values are relative to the default value of 1.0.
+A boost value between 0 and 1.0 decreases the relevance score.
+A value greater than 1.0 increases the relevance score.
+</para></summary></member>
+  <member key="_types.KnnQuery#field"><summary><para>
+The name of the vector field to search against
+</para></summary></member>
+  <member key="_types.KnnQuery#filter"><summary><para>
+Filters for the kNN search query
+</para></summary></member>
+  <member key="_types.KnnQuery#k"><summary><para>
+The final number of nearest neighbors to return as top hits
+</para></summary></member>
+  <member key="_types.KnnQuery#num_candidates"><summary><para>
+The number of nearest neighbor candidates to consider per shard
+</para></summary></member>
+  <member key="_types.KnnQuery#query_vector"><summary><para>
+The query vector
+</para></summary></member>
+  <member key="_types.KnnQuery#query_vector_builder"><summary><para>
+The query vector builder. You must provide a query_vector_builder or query_vector, but not both.
+</para></summary></member>
+  <member key="_types.KnnQuery#rescore_vector"><summary><para>
+Apply oversampling and rescoring to quantized vectors
+</para></summary></member>
+  <member key="_types.KnnQuery#similarity"><summary><para>
+The minimum similarity for a vector to be considered a match
+</para></summary></member>
+  <member key="_types.KnnQuery#visit_percentage"><summary><para>
+The percentage of vectors to explore per shard while doing knn search with bbq_disk
+</para></summary></member>
+</doc>

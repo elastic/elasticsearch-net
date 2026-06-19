@@ -37,10 +37,6 @@ public sealed partial class PutScriptResponse : Elastic.Transport.Products.Elast
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="PutScriptResponse.g.xml" path="doc/member[@key='_global.put_script.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.get_component_template.Request"><summary><para>
+Get component templates.
+</para>
+<para>
+Get information about component templates.
+</para></summary></member>
+  <member key="cluster.get_component_template.Request#flat_settings"><summary><para>
+If <c>true</c>, returns settings in flat format.
+</para></summary></member>
+  <member key="cluster.get_component_template.Request#include_defaults"><summary><para>
+Return all default configurations for the component template
+</para></summary></member>
+  <member key="cluster.get_component_template.Request#local"><summary><para>
+If <c>true</c>, the request retrieves information from the local node only.
+If <c>false</c>, information is retrieved from the master node.
+</para></summary></member>
+  <member key="cluster.get_component_template.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="cluster.get_component_template.Request#name"><summary><para>
+Name of component template to retrieve. Wildcard (<c>*</c>) expressions are supported.
+</para></summary></member>
+  <member key="cluster.get_component_template.Request#settings_filter"><summary><para>
+Filter out results, for example to filter out sensitive information. Supports wildcards or full settings keys
+</para></summary></member>
+</doc>

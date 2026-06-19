@@ -103,17 +103,55 @@ public abstract class BulkOperation :
 	/// <param name="settings">The <see cref="IElasticsearchClientSettings"/> for the current client instance.</param>
 	protected abstract Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings);
 
+	private IndexName? _bulkRequestIndex;
+
 	void IBulkOperation.PrepareIndex(IndexName? bulkRequestIndex)
 	{
-		Index ??= bulkRequestIndex ?? ClrType;
+		_bulkRequestIndex = bulkRequestIndex;
+	}
 
-		if (bulkRequestIndex is not null && (Index?.Equals(bulkRequestIndex) ?? false))
-			Index = null;
+	private void ResolveIndex(IElasticsearchClientSettings settings)
+	{
+		// Index resolution follows a strict hierarchy:
+		//   1. Explicit per-operation Index (highest priority)
+		//   2. Bulk request URL-level index
+		//   3. CLR type inference via DefaultMappingFor<T> / DefaultIndex (lowest priority)
+
+		// When no bulk request index exists, fall back to CLR type inference
+		// so the operation can resolve its index from settings (DefaultMappingFor / DefaultIndex).
+		if (_bulkRequestIndex is null)
+		{
+			Index ??= ClrType;
+			return;
+		}
+
+		// When a bulk request index is set but the operation has no explicit index,
+		// the bulk request index takes precedence — leave Index null so the
+		// URL-level index applies. Do not infer from ClrType here, as that would
+		// allow DefaultIndex to override the explicit bulk request index.
+		if (Index is null)
+			return;
+
+		// When the operation has an explicit index, resolve both to compare.
+		// If they match, clear the per-operation index to avoid redundancy in the
+		// serialized body. If they differ, keep the per-operation override.
+		var resolvedBulkIndex = settings.Inferrer.IndexName(_bulkRequestIndex);
+		var resolvedIndex = settings.Inferrer.IndexName(Index);
+
+		Index = resolvedIndex == resolvedBulkIndex ? null : resolvedIndex;
 	}
 
 	/// <inheritdoc />
-	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting) => Serialize(stream, settings);
+	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	{
+		ResolveIndex(settings);
+		Serialize(stream, settings);
+	}
 
 	/// <inheritdoc />
-	Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting) => SerializeAsync(stream, settings);
+	Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	{
+		ResolveIndex(settings);
+		return SerializeAsync(stream, settings);
+	}
 }

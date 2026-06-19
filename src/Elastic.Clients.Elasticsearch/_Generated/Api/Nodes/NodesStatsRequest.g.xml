@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes.stats.Request"><summary><para>
+Get node statistics.
+</para>
+<para>
+Get statistics for nodes in a cluster.
+By default, all stats are returned. You can limit the returned information by using metrics.
+</para></summary></member>
+  <member key="nodes.stats.Request#completion_fields"><summary><para>
+Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.
+</para></summary></member>
+  <member key="nodes.stats.Request#fielddata_fields"><summary><para>
+Comma-separated list or wildcard expressions of fields to include in fielddata statistics.
+</para></summary></member>
+  <member key="nodes.stats.Request#fields"><summary><para>
+Comma-separated list or wildcard expressions of fields to include in the statistics.
+</para></summary></member>
+  <member key="nodes.stats.Request#groups"><summary><para>
+Comma-separated list of search groups to include in the search statistics.
+</para></summary></member>
+  <member key="nodes.stats.Request#include_segment_file_sizes"><summary><para>
+If true, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested).
+</para></summary></member>
+  <member key="nodes.stats.Request#include_unloaded_segments"><summary><para>
+If <c>true</c>, the response includes information from segments that are not loaded into memory.
+</para></summary></member>
+  <member key="nodes.stats.Request#index_metric"><summary><para>
+Limit the information returned for indices metric to the specific index metrics. It can be used only if indices (or all) metric is specified.
+</para></summary></member>
+  <member key="nodes.stats.Request#level"><summary><para>
+Indicates whether statistics are aggregated at the node, indices, or shards level.
+</para></summary></member>
+  <member key="nodes.stats.Request#metric"><summary><para>
+Limits the information returned to the specific metrics.
+</para></summary></member>
+  <member key="nodes.stats.Request#node_id"><summary><para>
+Comma-separated list of node IDs or names used to limit returned information.
+</para></summary></member>
+  <member key="nodes.stats.Request#timeout"><summary><para>
+Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="nodes.stats.Request#types"><summary><para>
+A comma-separated list of document types for the indexing index metric.
+</para></summary></member>
+</doc>

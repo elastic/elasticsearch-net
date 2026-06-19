@@ -37,10 +37,6 @@ public sealed partial class CreateRoutingResponse : Elastic.Transport.Products.E
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateRoutingResponse.g.xml" path="doc/member[@key='project.create_routing.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

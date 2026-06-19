@@ -37,10 +37,6 @@ public sealed partial class StopTransformResponse : Elastic.Transport.Products.E
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTransformResponse.g.xml" path="doc/member[@key='transform.stop_transform.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

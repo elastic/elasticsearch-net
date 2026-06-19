@@ -36,7 +36,7 @@ public sealed partial class TermsLookupConverter : System.Text.Json.Serializatio
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Id> propId = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName> propIndex = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propPath = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propRouting = default;
+		LocalJsonValue<string?> propRouting = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propId.TryReadProperty(ref reader, options, PropId, null))

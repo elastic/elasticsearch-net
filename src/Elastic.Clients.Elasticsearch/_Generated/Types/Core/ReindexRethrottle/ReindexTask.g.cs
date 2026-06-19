@@ -17,17 +17,18 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.ReindexRethrottle;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.reindex_rethrottle.ReindexTask']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.Json.ReindexTaskConverter))]
 public sealed partial class ReindexTask
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ReindexTask(string action, bool cancellable, bool cancelled, string description, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.ICollection<string>> headers, long id, string node, System.TimeSpan runningTimeInNanos, System.DateTimeOffset startTimeInMillis, Elastic.Clients.Elasticsearch.ReindexStatus status, string type)
+	public ReindexTask(string action, bool cancellable, bool cancelled, string description, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.ICollection<string>> headers, long id, string node, System.TimeSpan runningTimeInNanos, System.DateTimeOffset startTimeInMillis, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ParentReindexStatus status, string type)
 	{
 		Action = action;
 		Cancellable = cancellable;
@@ -61,6 +62,6 @@ public sealed partial class ReindexTask
 	public required string Node { get; set; }
 	public required System.TimeSpan RunningTimeInNanos { get; set; }
 	public required System.DateTimeOffset StartTimeInMillis { get; set; }
-	public required Elastic.Clients.Elasticsearch.ReindexStatus Status { get; set; }
+	public required Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ParentReindexStatus Status { get; set; }
 	public required string Type { get; set; }
 }

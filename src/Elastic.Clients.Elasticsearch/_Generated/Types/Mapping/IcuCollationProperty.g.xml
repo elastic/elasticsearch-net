@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.mapping.IcuCollationProperty#index"><summary><para>
+Should the field be searchable?
+</para></summary></member>
+  <member key="_types.mapping.IcuCollationProperty#meta"><summary><para>
+Metadata about the field.
+</para></summary></member>
+  <member key="_types.mapping.IcuCollationProperty#null_value"><summary><para>
+Accepts a string value which is substituted for any explicit null values. Defaults to null, which means the field is treated as missing.
+</para></summary></member>
+</doc>

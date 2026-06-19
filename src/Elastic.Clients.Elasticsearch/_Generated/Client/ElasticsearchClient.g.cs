@@ -94,12 +94,16 @@ public partial class ElasticsearchClient
 		Xpack = new Elastic.Clients.Elasticsearch.Xpack.XpackNamespacedClient(this);
 	}
 
+	/// <include file="../Api/BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.BulkResponse Bulk(Elastic.Clients.Elasticsearch.BulkRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.BulkRequest, Elastic.Clients.Elasticsearch.BulkResponse, Elastic.Clients.Elasticsearch.BulkRequestParameters>(request);
 	}
 
+	/// <include file="../Api/BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.BulkResponse Bulk()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.BulkRequestDescriptor();
@@ -108,6 +112,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.BulkRequest, Elastic.Clients.Elasticsearch.BulkResponse, Elastic.Clients.Elasticsearch.BulkRequestParameters>(request);
 	}
 
+	/// <include file="../Api/BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.BulkResponse Bulk(System.Action<Elastic.Clients.Elasticsearch.BulkRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.BulkRequestDescriptor();
@@ -117,6 +123,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.BulkRequest, Elastic.Clients.Elasticsearch.BulkResponse, Elastic.Clients.Elasticsearch.BulkRequestParameters>(request);
 	}
 
+	/// <include file="../Api/BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.BulkResponse Bulk(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.BulkRequestDescriptor(index);
@@ -125,6 +133,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.BulkRequest, Elastic.Clients.Elasticsearch.BulkResponse, Elastic.Clients.Elasticsearch.BulkRequestParameters>(request);
 	}
 
+	/// <include file="../Api/BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.BulkResponse Bulk(Elastic.Clients.Elasticsearch.IndexName? index, System.Action<Elastic.Clients.Elasticsearch.BulkRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.BulkRequestDescriptor(index);
@@ -134,6 +144,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.BulkRequest, Elastic.Clients.Elasticsearch.BulkResponse, Elastic.Clients.Elasticsearch.BulkRequestParameters>(request);
 	}
 
+	/// <include file="../Api/BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.BulkResponse Bulk<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument>();
@@ -142,6 +154,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.BulkRequest, Elastic.Clients.Elasticsearch.BulkResponse, Elastic.Clients.Elasticsearch.BulkRequestParameters>(request);
 	}
 
+	/// <include file="../Api/BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.BulkResponse Bulk<TDocument>(System.Action<Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument>();
@@ -151,6 +165,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.BulkRequest, Elastic.Clients.Elasticsearch.BulkResponse, Elastic.Clients.Elasticsearch.BulkRequestParameters>(request);
 	}
 
+	/// <include file="../Api/BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.BulkResponse Bulk<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, System.Action<Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument>(index);
@@ -160,12 +176,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.BulkRequest, Elastic.Clients.Elasticsearch.BulkResponse, Elastic.Clients.Elasticsearch.BulkRequestParameters>(request);
 	}
 
+	/// <include file="../Api/BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.BulkResponse> BulkAsync(Elastic.Clients.Elasticsearch.BulkRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.BulkRequest, Elastic.Clients.Elasticsearch.BulkResponse, Elastic.Clients.Elasticsearch.BulkRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.BulkResponse> BulkAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.BulkRequestDescriptor();
@@ -174,6 +194,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.BulkRequest, Elastic.Clients.Elasticsearch.BulkResponse, Elastic.Clients.Elasticsearch.BulkRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.BulkResponse> BulkAsync(System.Action<Elastic.Clients.Elasticsearch.BulkRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.BulkRequestDescriptor();
@@ -183,6 +205,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.BulkRequest, Elastic.Clients.Elasticsearch.BulkResponse, Elastic.Clients.Elasticsearch.BulkRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.BulkResponse> BulkAsync(Elastic.Clients.Elasticsearch.IndexName? index, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.BulkRequestDescriptor(index);
@@ -191,6 +215,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.BulkRequest, Elastic.Clients.Elasticsearch.BulkResponse, Elastic.Clients.Elasticsearch.BulkRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.BulkResponse> BulkAsync(Elastic.Clients.Elasticsearch.IndexName? index, System.Action<Elastic.Clients.Elasticsearch.BulkRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.BulkRequestDescriptor(index);
@@ -200,6 +226,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.BulkRequest, Elastic.Clients.Elasticsearch.BulkResponse, Elastic.Clients.Elasticsearch.BulkRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.BulkResponse> BulkAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument>();
@@ -208,6 +236,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.BulkRequest, Elastic.Clients.Elasticsearch.BulkResponse, Elastic.Clients.Elasticsearch.BulkRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.BulkResponse> BulkAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument>();
@@ -217,6 +247,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.BulkRequest, Elastic.Clients.Elasticsearch.BulkResponse, Elastic.Clients.Elasticsearch.BulkRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.bulk.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.BulkResponse> BulkAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, System.Action<Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument>(index);
@@ -226,12 +258,74 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.BulkRequest, Elastic.Clients.Elasticsearch.BulkResponse, Elastic.Clients.Elasticsearch.BulkRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CancelReindexRequest.g.xml" path="doc/member[@key='_global.cancel_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.cancel_reindex.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.CancelReindexResponse CancelReindex(Elastic.Clients.Elasticsearch.CancelReindexRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.CancelReindexRequest, Elastic.Clients.Elasticsearch.CancelReindexResponse, Elastic.Clients.Elasticsearch.CancelReindexRequestParameters>(request);
+	}
+
+	/// <include file="../Api/CancelReindexRequest.g.xml" path="doc/member[@key='_global.cancel_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.cancel_reindex.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.CancelReindexResponse CancelReindex(Elastic.Clients.Elasticsearch.TaskId taskId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.CancelReindexRequestDescriptor(taskId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.CancelReindexRequest, Elastic.Clients.Elasticsearch.CancelReindexResponse, Elastic.Clients.Elasticsearch.CancelReindexRequestParameters>(request);
+	}
+
+	/// <include file="../Api/CancelReindexRequest.g.xml" path="doc/member[@key='_global.cancel_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.cancel_reindex.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.CancelReindexResponse CancelReindex(Elastic.Clients.Elasticsearch.TaskId taskId, System.Action<Elastic.Clients.Elasticsearch.CancelReindexRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.CancelReindexRequestDescriptor(taskId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.CancelReindexRequest, Elastic.Clients.Elasticsearch.CancelReindexResponse, Elastic.Clients.Elasticsearch.CancelReindexRequestParameters>(request);
+	}
+
+	/// <include file="../Api/CancelReindexRequest.g.xml" path="doc/member[@key='_global.cancel_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.cancel_reindex.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CancelReindexResponse> CancelReindexAsync(Elastic.Clients.Elasticsearch.CancelReindexRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.CancelReindexRequest, Elastic.Clients.Elasticsearch.CancelReindexResponse, Elastic.Clients.Elasticsearch.CancelReindexRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/CancelReindexRequest.g.xml" path="doc/member[@key='_global.cancel_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.cancel_reindex.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CancelReindexResponse> CancelReindexAsync(Elastic.Clients.Elasticsearch.TaskId taskId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.CancelReindexRequestDescriptor(taskId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.CancelReindexRequest, Elastic.Clients.Elasticsearch.CancelReindexResponse, Elastic.Clients.Elasticsearch.CancelReindexRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/CancelReindexRequest.g.xml" path="doc/member[@key='_global.cancel_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.cancel_reindex.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CancelReindexResponse> CancelReindexAsync(Elastic.Clients.Elasticsearch.TaskId taskId, System.Action<Elastic.Clients.Elasticsearch.CancelReindexRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.CancelReindexRequestDescriptor(taskId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.CancelReindexRequest, Elastic.Clients.Elasticsearch.CancelReindexResponse, Elastic.Clients.Elasticsearch.CancelReindexRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.capabilities.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CapabilitiesResponse Capabilities(Elastic.Clients.Elasticsearch.CapabilitiesRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.CapabilitiesRequest, Elastic.Clients.Elasticsearch.CapabilitiesResponse, Elastic.Clients.Elasticsearch.CapabilitiesRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.capabilities.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CapabilitiesResponse Capabilities()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CapabilitiesRequestDescriptor();
@@ -240,6 +334,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.CapabilitiesRequest, Elastic.Clients.Elasticsearch.CapabilitiesResponse, Elastic.Clients.Elasticsearch.CapabilitiesRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.capabilities.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CapabilitiesResponse Capabilities(System.Action<Elastic.Clients.Elasticsearch.CapabilitiesRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CapabilitiesRequestDescriptor();
@@ -249,12 +345,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.CapabilitiesRequest, Elastic.Clients.Elasticsearch.CapabilitiesResponse, Elastic.Clients.Elasticsearch.CapabilitiesRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.capabilities.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CapabilitiesResponse> CapabilitiesAsync(Elastic.Clients.Elasticsearch.CapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CapabilitiesRequest, Elastic.Clients.Elasticsearch.CapabilitiesResponse, Elastic.Clients.Elasticsearch.CapabilitiesRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.capabilities.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CapabilitiesResponse> CapabilitiesAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CapabilitiesRequestDescriptor();
@@ -263,6 +363,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CapabilitiesRequest, Elastic.Clients.Elasticsearch.CapabilitiesResponse, Elastic.Clients.Elasticsearch.CapabilitiesRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.capabilities.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CapabilitiesResponse> CapabilitiesAsync(System.Action<Elastic.Clients.Elasticsearch.CapabilitiesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CapabilitiesRequestDescriptor();
@@ -272,12 +374,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CapabilitiesRequest, Elastic.Clients.Elasticsearch.CapabilitiesResponse, Elastic.Clients.Elasticsearch.CapabilitiesRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ClearScrollRequest.g.xml" path="doc/member[@key='_global.clear_scroll.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.clear_scroll.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ClearScrollResponse ClearScroll(Elastic.Clients.Elasticsearch.ClearScrollRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.ClearScrollRequest, Elastic.Clients.Elasticsearch.ClearScrollResponse, Elastic.Clients.Elasticsearch.ClearScrollRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ClearScrollRequest.g.xml" path="doc/member[@key='_global.clear_scroll.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.clear_scroll.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ClearScrollResponse ClearScroll()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ClearScrollRequestDescriptor();
@@ -286,6 +392,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ClearScrollRequest, Elastic.Clients.Elasticsearch.ClearScrollResponse, Elastic.Clients.Elasticsearch.ClearScrollRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ClearScrollRequest.g.xml" path="doc/member[@key='_global.clear_scroll.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.clear_scroll.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ClearScrollResponse ClearScroll(System.Action<Elastic.Clients.Elasticsearch.ClearScrollRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ClearScrollRequestDescriptor();
@@ -295,12 +403,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ClearScrollRequest, Elastic.Clients.Elasticsearch.ClearScrollResponse, Elastic.Clients.Elasticsearch.ClearScrollRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ClearScrollRequest.g.xml" path="doc/member[@key='_global.clear_scroll.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.clear_scroll.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ClearScrollResponse> ClearScrollAsync(Elastic.Clients.Elasticsearch.ClearScrollRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ClearScrollRequest, Elastic.Clients.Elasticsearch.ClearScrollResponse, Elastic.Clients.Elasticsearch.ClearScrollRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ClearScrollRequest.g.xml" path="doc/member[@key='_global.clear_scroll.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.clear_scroll.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ClearScrollResponse> ClearScrollAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ClearScrollRequestDescriptor();
@@ -309,6 +421,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ClearScrollRequest, Elastic.Clients.Elasticsearch.ClearScrollResponse, Elastic.Clients.Elasticsearch.ClearScrollRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ClearScrollRequest.g.xml" path="doc/member[@key='_global.clear_scroll.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.clear_scroll.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ClearScrollResponse> ClearScrollAsync(System.Action<Elastic.Clients.Elasticsearch.ClearScrollRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ClearScrollRequestDescriptor();
@@ -318,12 +432,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ClearScrollRequest, Elastic.Clients.Elasticsearch.ClearScrollResponse, Elastic.Clients.Elasticsearch.ClearScrollRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ClosePointInTimeRequest.g.xml" path="doc/member[@key='_global.close_point_in_time.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.close_point_in_time.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ClosePointInTimeResponse ClosePointInTime(Elastic.Clients.Elasticsearch.ClosePointInTimeRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.ClosePointInTimeRequest, Elastic.Clients.Elasticsearch.ClosePointInTimeResponse, Elastic.Clients.Elasticsearch.ClosePointInTimeRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ClosePointInTimeRequest.g.xml" path="doc/member[@key='_global.close_point_in_time.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.close_point_in_time.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ClosePointInTimeResponse ClosePointInTime(System.Action<Elastic.Clients.Elasticsearch.ClosePointInTimeRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ClosePointInTimeRequestDescriptor();
@@ -333,12 +451,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ClosePointInTimeRequest, Elastic.Clients.Elasticsearch.ClosePointInTimeResponse, Elastic.Clients.Elasticsearch.ClosePointInTimeRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ClosePointInTimeRequest.g.xml" path="doc/member[@key='_global.close_point_in_time.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.close_point_in_time.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ClosePointInTimeResponse> ClosePointInTimeAsync(Elastic.Clients.Elasticsearch.ClosePointInTimeRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ClosePointInTimeRequest, Elastic.Clients.Elasticsearch.ClosePointInTimeResponse, Elastic.Clients.Elasticsearch.ClosePointInTimeRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ClosePointInTimeRequest.g.xml" path="doc/member[@key='_global.close_point_in_time.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.close_point_in_time.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ClosePointInTimeResponse> ClosePointInTimeAsync(System.Action<Elastic.Clients.Elasticsearch.ClosePointInTimeRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ClosePointInTimeRequestDescriptor();
@@ -348,12 +470,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ClosePointInTimeRequest, Elastic.Clients.Elasticsearch.ClosePointInTimeResponse, Elastic.Clients.Elasticsearch.ClosePointInTimeRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CountRequest.g.xml" path="doc/member[@key='_global.count.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.count.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CountResponse Count(Elastic.Clients.Elasticsearch.CountRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.CountRequest, Elastic.Clients.Elasticsearch.CountResponse, Elastic.Clients.Elasticsearch.CountRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CountRequest.g.xml" path="doc/member[@key='_global.count.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.count.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CountResponse Count()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CountRequestDescriptor();
@@ -362,6 +488,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.CountRequest, Elastic.Clients.Elasticsearch.CountResponse, Elastic.Clients.Elasticsearch.CountRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CountRequest.g.xml" path="doc/member[@key='_global.count.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.count.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CountResponse Count(System.Action<Elastic.Clients.Elasticsearch.CountRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CountRequestDescriptor();
@@ -371,6 +499,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.CountRequest, Elastic.Clients.Elasticsearch.CountResponse, Elastic.Clients.Elasticsearch.CountRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CountRequest.g.xml" path="doc/member[@key='_global.count.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.count.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CountResponse Count(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CountRequestDescriptor(indices);
@@ -379,6 +509,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.CountRequest, Elastic.Clients.Elasticsearch.CountResponse, Elastic.Clients.Elasticsearch.CountRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CountRequest.g.xml" path="doc/member[@key='_global.count.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.count.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CountResponse Count(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.CountRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CountRequestDescriptor(indices);
@@ -388,6 +520,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.CountRequest, Elastic.Clients.Elasticsearch.CountResponse, Elastic.Clients.Elasticsearch.CountRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CountRequest.g.xml" path="doc/member[@key='_global.count.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.count.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CountResponse Count<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument>();
@@ -396,6 +530,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.CountRequest, Elastic.Clients.Elasticsearch.CountResponse, Elastic.Clients.Elasticsearch.CountRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CountRequest.g.xml" path="doc/member[@key='_global.count.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.count.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CountResponse Count<TDocument>(System.Action<Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument>();
@@ -405,6 +541,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.CountRequest, Elastic.Clients.Elasticsearch.CountResponse, Elastic.Clients.Elasticsearch.CountRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CountRequest.g.xml" path="doc/member[@key='_global.count.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.count.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CountResponse Count<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument>(indices);
@@ -414,12 +552,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.CountRequest, Elastic.Clients.Elasticsearch.CountResponse, Elastic.Clients.Elasticsearch.CountRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CountRequest.g.xml" path="doc/member[@key='_global.count.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.count.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CountResponse> CountAsync(Elastic.Clients.Elasticsearch.CountRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CountRequest, Elastic.Clients.Elasticsearch.CountResponse, Elastic.Clients.Elasticsearch.CountRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CountRequest.g.xml" path="doc/member[@key='_global.count.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.count.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CountResponse> CountAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CountRequestDescriptor();
@@ -428,6 +570,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CountRequest, Elastic.Clients.Elasticsearch.CountResponse, Elastic.Clients.Elasticsearch.CountRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CountRequest.g.xml" path="doc/member[@key='_global.count.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.count.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CountResponse> CountAsync(System.Action<Elastic.Clients.Elasticsearch.CountRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CountRequestDescriptor();
@@ -437,6 +581,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CountRequest, Elastic.Clients.Elasticsearch.CountResponse, Elastic.Clients.Elasticsearch.CountRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CountRequest.g.xml" path="doc/member[@key='_global.count.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.count.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CountResponse> CountAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CountRequestDescriptor(indices);
@@ -445,6 +591,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CountRequest, Elastic.Clients.Elasticsearch.CountResponse, Elastic.Clients.Elasticsearch.CountRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CountRequest.g.xml" path="doc/member[@key='_global.count.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.count.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CountResponse> CountAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.CountRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CountRequestDescriptor(indices);
@@ -454,6 +602,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CountRequest, Elastic.Clients.Elasticsearch.CountResponse, Elastic.Clients.Elasticsearch.CountRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CountRequest.g.xml" path="doc/member[@key='_global.count.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.count.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CountResponse> CountAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument>();
@@ -462,6 +612,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CountRequest, Elastic.Clients.Elasticsearch.CountResponse, Elastic.Clients.Elasticsearch.CountRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CountRequest.g.xml" path="doc/member[@key='_global.count.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.count.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CountResponse> CountAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument>();
@@ -471,6 +623,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CountRequest, Elastic.Clients.Elasticsearch.CountResponse, Elastic.Clients.Elasticsearch.CountRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CountRequest.g.xml" path="doc/member[@key='_global.count.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.count.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CountResponse> CountAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument>(indices);
@@ -480,12 +634,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CountRequest, Elastic.Clients.Elasticsearch.CountResponse, Elastic.Clients.Elasticsearch.CountRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CreateRequest.g.xml" path="doc/member[@key='_global.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.create.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CreateResponse Create<TDocument>(Elastic.Clients.Elasticsearch.CreateRequest<TDocument> request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.CreateRequest<TDocument>, Elastic.Clients.Elasticsearch.CreateResponse, Elastic.Clients.Elasticsearch.CreateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CreateRequest.g.xml" path="doc/member[@key='_global.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.create.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CreateResponse Create<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument>(document, index, id);
@@ -494,6 +652,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.CreateRequest<TDocument>, Elastic.Clients.Elasticsearch.CreateResponse, Elastic.Clients.Elasticsearch.CreateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CreateRequest.g.xml" path="doc/member[@key='_global.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.create.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CreateResponse Create<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument>(document, index, id);
@@ -503,6 +663,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.CreateRequest<TDocument>, Elastic.Clients.Elasticsearch.CreateResponse, Elastic.Clients.Elasticsearch.CreateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CreateRequest.g.xml" path="doc/member[@key='_global.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.create.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CreateResponse Create<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument>(document, id);
@@ -511,6 +673,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.CreateRequest<TDocument>, Elastic.Clients.Elasticsearch.CreateResponse, Elastic.Clients.Elasticsearch.CreateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CreateRequest.g.xml" path="doc/member[@key='_global.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.create.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CreateResponse Create<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument>(document, id);
@@ -520,6 +684,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.CreateRequest<TDocument>, Elastic.Clients.Elasticsearch.CreateResponse, Elastic.Clients.Elasticsearch.CreateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CreateRequest.g.xml" path="doc/member[@key='_global.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.create.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CreateResponse Create<TDocument>(TDocument document)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument>(document);
@@ -528,6 +694,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.CreateRequest<TDocument>, Elastic.Clients.Elasticsearch.CreateResponse, Elastic.Clients.Elasticsearch.CreateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CreateRequest.g.xml" path="doc/member[@key='_global.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.create.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CreateResponse Create<TDocument>(TDocument document, System.Action<Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument>(document);
@@ -537,12 +705,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.CreateRequest<TDocument>, Elastic.Clients.Elasticsearch.CreateResponse, Elastic.Clients.Elasticsearch.CreateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CreateRequest.g.xml" path="doc/member[@key='_global.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.create.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CreateResponse> CreateAsync<TDocument>(Elastic.Clients.Elasticsearch.CreateRequest<TDocument> request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CreateRequest<TDocument>, Elastic.Clients.Elasticsearch.CreateResponse, Elastic.Clients.Elasticsearch.CreateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CreateRequest.g.xml" path="doc/member[@key='_global.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.create.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CreateResponse> CreateAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument>(document, index, id);
@@ -551,6 +723,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CreateRequest<TDocument>, Elastic.Clients.Elasticsearch.CreateResponse, Elastic.Clients.Elasticsearch.CreateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CreateRequest.g.xml" path="doc/member[@key='_global.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.create.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CreateResponse> CreateAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument>(document, index, id);
@@ -560,6 +734,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CreateRequest<TDocument>, Elastic.Clients.Elasticsearch.CreateResponse, Elastic.Clients.Elasticsearch.CreateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CreateRequest.g.xml" path="doc/member[@key='_global.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.create.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CreateResponse> CreateAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument>(document, id);
@@ -568,6 +744,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CreateRequest<TDocument>, Elastic.Clients.Elasticsearch.CreateResponse, Elastic.Clients.Elasticsearch.CreateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CreateRequest.g.xml" path="doc/member[@key='_global.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.create.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CreateResponse> CreateAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument>(document, id);
@@ -577,6 +755,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CreateRequest<TDocument>, Elastic.Clients.Elasticsearch.CreateResponse, Elastic.Clients.Elasticsearch.CreateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CreateRequest.g.xml" path="doc/member[@key='_global.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.create.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CreateResponse> CreateAsync<TDocument>(TDocument document, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument>(document);
@@ -585,6 +765,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CreateRequest<TDocument>, Elastic.Clients.Elasticsearch.CreateResponse, Elastic.Clients.Elasticsearch.CreateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CreateRequest.g.xml" path="doc/member[@key='_global.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.create.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CreateResponse> CreateAsync<TDocument>(TDocument document, System.Action<Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument>(document);
@@ -594,12 +776,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CreateRequest<TDocument>, Elastic.Clients.Elasticsearch.CreateResponse, Elastic.Clients.Elasticsearch.CreateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DeleteResponse Delete(Elastic.Clients.Elasticsearch.DeleteRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.DeleteRequest, Elastic.Clients.Elasticsearch.DeleteResponse, Elastic.Clients.Elasticsearch.DeleteRequestParameters>(request);
 	}
 
+	/// <include file="../Api/DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DeleteResponse Delete(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteRequestDescriptor(index, id);
@@ -608,6 +794,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.DeleteRequest, Elastic.Clients.Elasticsearch.DeleteResponse, Elastic.Clients.Elasticsearch.DeleteRequestParameters>(request);
 	}
 
+	/// <include file="../Api/DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DeleteResponse Delete(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.DeleteRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteRequestDescriptor(index, id);
@@ -617,6 +805,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.DeleteRequest, Elastic.Clients.Elasticsearch.DeleteResponse, Elastic.Clients.Elasticsearch.DeleteRequestParameters>(request);
 	}
 
+	/// <include file="../Api/DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DeleteResponse Delete(string index, Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteRequestDescriptor(index, id);
@@ -625,6 +815,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.DeleteRequest, Elastic.Clients.Elasticsearch.DeleteResponse, Elastic.Clients.Elasticsearch.DeleteRequestParameters>(request);
 	}
 
+	/// <include file="../Api/DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DeleteResponse Delete(string index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.DeleteRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteRequestDescriptor(index, id);
@@ -634,6 +826,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.DeleteRequest, Elastic.Clients.Elasticsearch.DeleteResponse, Elastic.Clients.Elasticsearch.DeleteRequestParameters>(request);
 	}
 
+	/// <include file="../Api/DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DeleteResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument>(index, id);
@@ -643,6 +837,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.DeleteRequest, Elastic.Clients.Elasticsearch.DeleteResponse, Elastic.Clients.Elasticsearch.DeleteRequestParameters>(request);
 	}
 
+	/// <include file="../Api/DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DeleteResponse Delete<TDocument>(TDocument document)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument>(document);
@@ -651,6 +847,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.DeleteRequest, Elastic.Clients.Elasticsearch.DeleteResponse, Elastic.Clients.Elasticsearch.DeleteRequestParameters>(request);
 	}
 
+	/// <include file="../Api/DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DeleteResponse Delete<TDocument>(TDocument document, System.Action<Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument>(document);
@@ -660,6 +858,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.DeleteRequest, Elastic.Clients.Elasticsearch.DeleteResponse, Elastic.Clients.Elasticsearch.DeleteRequestParameters>(request);
 	}
 
+	/// <include file="../Api/DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DeleteResponse Delete<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument>(document, id);
@@ -668,6 +868,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.DeleteRequest, Elastic.Clients.Elasticsearch.DeleteResponse, Elastic.Clients.Elasticsearch.DeleteRequestParameters>(request);
 	}
 
+	/// <include file="../Api/DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DeleteResponse Delete<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument>(document, id);
@@ -677,6 +879,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.DeleteRequest, Elastic.Clients.Elasticsearch.DeleteResponse, Elastic.Clients.Elasticsearch.DeleteRequestParameters>(request);
 	}
 
+	/// <include file="../Api/DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DeleteResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument>(id);
@@ -685,6 +889,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.DeleteRequest, Elastic.Clients.Elasticsearch.DeleteResponse, Elastic.Clients.Elasticsearch.DeleteRequestParameters>(request);
 	}
 
+	/// <include file="../Api/DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DeleteResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument>(id);
@@ -694,12 +900,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.DeleteRequest, Elastic.Clients.Elasticsearch.DeleteResponse, Elastic.Clients.Elasticsearch.DeleteRequestParameters>(request);
 	}
 
+	/// <include file="../Api/DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.DeleteRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.DeleteRequest, Elastic.Clients.Elasticsearch.DeleteResponse, Elastic.Clients.Elasticsearch.DeleteRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteRequestDescriptor(index, id);
@@ -708,6 +918,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.DeleteRequest, Elastic.Clients.Elasticsearch.DeleteResponse, Elastic.Clients.Elasticsearch.DeleteRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.DeleteRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteRequestDescriptor(index, id);
@@ -717,6 +929,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.DeleteRequest, Elastic.Clients.Elasticsearch.DeleteResponse, Elastic.Clients.Elasticsearch.DeleteRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DeleteResponse> DeleteAsync(string index, Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteRequestDescriptor(index, id);
@@ -725,6 +939,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.DeleteRequest, Elastic.Clients.Elasticsearch.DeleteResponse, Elastic.Clients.Elasticsearch.DeleteRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DeleteResponse> DeleteAsync(string index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.DeleteRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteRequestDescriptor(index, id);
@@ -734,6 +950,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.DeleteRequest, Elastic.Clients.Elasticsearch.DeleteResponse, Elastic.Clients.Elasticsearch.DeleteRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DeleteResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument>(index, id);
@@ -743,6 +961,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.DeleteRequest, Elastic.Clients.Elasticsearch.DeleteResponse, Elastic.Clients.Elasticsearch.DeleteRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DeleteResponse> DeleteAsync<TDocument>(TDocument document, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument>(document);
@@ -751,6 +971,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.DeleteRequest, Elastic.Clients.Elasticsearch.DeleteResponse, Elastic.Clients.Elasticsearch.DeleteRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DeleteResponse> DeleteAsync<TDocument>(TDocument document, System.Action<Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument>(document);
@@ -760,6 +982,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.DeleteRequest, Elastic.Clients.Elasticsearch.DeleteResponse, Elastic.Clients.Elasticsearch.DeleteRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DeleteResponse> DeleteAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument>(document, id);
@@ -768,6 +992,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.DeleteRequest, Elastic.Clients.Elasticsearch.DeleteResponse, Elastic.Clients.Elasticsearch.DeleteRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DeleteResponse> DeleteAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument>(document, id);
@@ -777,6 +1003,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.DeleteRequest, Elastic.Clients.Elasticsearch.DeleteResponse, Elastic.Clients.Elasticsearch.DeleteRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DeleteResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument>(id);
@@ -785,6 +1013,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.DeleteRequest, Elastic.Clients.Elasticsearch.DeleteResponse, Elastic.Clients.Elasticsearch.DeleteRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DeleteResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument>(id);
@@ -794,12 +1024,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.DeleteRequest, Elastic.Clients.Elasticsearch.DeleteResponse, Elastic.Clients.Elasticsearch.DeleteRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DeleteByQueryResponse DeleteByQuery(Elastic.Clients.Elasticsearch.DeleteByQueryRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.DeleteByQueryRequest, Elastic.Clients.Elasticsearch.DeleteByQueryResponse, Elastic.Clients.Elasticsearch.DeleteByQueryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DeleteByQueryResponse DeleteByQuery(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor(indices);
@@ -808,6 +1042,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.DeleteByQueryRequest, Elastic.Clients.Elasticsearch.DeleteByQueryResponse, Elastic.Clients.Elasticsearch.DeleteByQueryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DeleteByQueryResponse DeleteByQuery(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor(indices);
@@ -817,6 +1053,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.DeleteByQueryRequest, Elastic.Clients.Elasticsearch.DeleteByQueryResponse, Elastic.Clients.Elasticsearch.DeleteByQueryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DeleteByQueryResponse DeleteByQuery<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument>();
@@ -825,6 +1063,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.DeleteByQueryRequest, Elastic.Clients.Elasticsearch.DeleteByQueryResponse, Elastic.Clients.Elasticsearch.DeleteByQueryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DeleteByQueryResponse DeleteByQuery<TDocument>(System.Action<Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument>();
@@ -834,6 +1074,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.DeleteByQueryRequest, Elastic.Clients.Elasticsearch.DeleteByQueryResponse, Elastic.Clients.Elasticsearch.DeleteByQueryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DeleteByQueryResponse DeleteByQuery<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument>(indices);
@@ -843,12 +1085,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.DeleteByQueryRequest, Elastic.Clients.Elasticsearch.DeleteByQueryResponse, Elastic.Clients.Elasticsearch.DeleteByQueryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DeleteByQueryResponse> DeleteByQueryAsync(Elastic.Clients.Elasticsearch.DeleteByQueryRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.DeleteByQueryRequest, Elastic.Clients.Elasticsearch.DeleteByQueryResponse, Elastic.Clients.Elasticsearch.DeleteByQueryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DeleteByQueryResponse> DeleteByQueryAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor(indices);
@@ -857,6 +1103,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.DeleteByQueryRequest, Elastic.Clients.Elasticsearch.DeleteByQueryResponse, Elastic.Clients.Elasticsearch.DeleteByQueryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DeleteByQueryResponse> DeleteByQueryAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor(indices);
@@ -866,6 +1114,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.DeleteByQueryRequest, Elastic.Clients.Elasticsearch.DeleteByQueryResponse, Elastic.Clients.Elasticsearch.DeleteByQueryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DeleteByQueryResponse> DeleteByQueryAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument>();
@@ -874,6 +1124,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.DeleteByQueryRequest, Elastic.Clients.Elasticsearch.DeleteByQueryResponse, Elastic.Clients.Elasticsearch.DeleteByQueryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DeleteByQueryResponse> DeleteByQueryAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument>();
@@ -883,6 +1135,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.DeleteByQueryRequest, Elastic.Clients.Elasticsearch.DeleteByQueryResponse, Elastic.Clients.Elasticsearch.DeleteByQueryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DeleteByQueryResponse> DeleteByQueryAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument>(indices);
@@ -892,12 +1146,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.DeleteByQueryRequest, Elastic.Clients.Elasticsearch.DeleteByQueryResponse, Elastic.Clients.Elasticsearch.DeleteByQueryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/DeleteByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.delete_by_query_rethrottle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_by_query_rethrottle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleResponse DeleteByQueryRethrottle(Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest, Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleResponse, Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/DeleteByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.delete_by_query_rethrottle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_by_query_rethrottle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleResponse DeleteByQueryRethrottle(Elastic.Clients.Elasticsearch.TaskId taskId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestDescriptor(taskId);
@@ -906,6 +1164,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest, Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleResponse, Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/DeleteByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.delete_by_query_rethrottle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_by_query_rethrottle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleResponse DeleteByQueryRethrottle(Elastic.Clients.Elasticsearch.TaskId taskId, System.Action<Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestDescriptor(taskId);
@@ -915,12 +1175,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest, Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleResponse, Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/DeleteByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.delete_by_query_rethrottle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_by_query_rethrottle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleResponse> DeleteByQueryRethrottleAsync(Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest, Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleResponse, Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/DeleteByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.delete_by_query_rethrottle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_by_query_rethrottle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleResponse> DeleteByQueryRethrottleAsync(Elastic.Clients.Elasticsearch.TaskId taskId, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestDescriptor(taskId);
@@ -929,6 +1193,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest, Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleResponse, Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/DeleteByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.delete_by_query_rethrottle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_by_query_rethrottle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleResponse> DeleteByQueryRethrottleAsync(Elastic.Clients.Elasticsearch.TaskId taskId, System.Action<Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestDescriptor(taskId);
@@ -938,12 +1204,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest, Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleResponse, Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/DeleteScriptRequest.g.xml" path="doc/member[@key='_global.delete_script.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_script.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DeleteScriptResponse DeleteScript(Elastic.Clients.Elasticsearch.DeleteScriptRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.DeleteScriptRequest, Elastic.Clients.Elasticsearch.DeleteScriptResponse, Elastic.Clients.Elasticsearch.DeleteScriptRequestParameters>(request);
 	}
 
+	/// <include file="../Api/DeleteScriptRequest.g.xml" path="doc/member[@key='_global.delete_script.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_script.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DeleteScriptResponse DeleteScript(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteScriptRequestDescriptor(id);
@@ -952,6 +1222,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.DeleteScriptRequest, Elastic.Clients.Elasticsearch.DeleteScriptResponse, Elastic.Clients.Elasticsearch.DeleteScriptRequestParameters>(request);
 	}
 
+	/// <include file="../Api/DeleteScriptRequest.g.xml" path="doc/member[@key='_global.delete_script.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_script.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DeleteScriptResponse DeleteScript(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.DeleteScriptRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteScriptRequestDescriptor(id);
@@ -961,12 +1233,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.DeleteScriptRequest, Elastic.Clients.Elasticsearch.DeleteScriptResponse, Elastic.Clients.Elasticsearch.DeleteScriptRequestParameters>(request);
 	}
 
+	/// <include file="../Api/DeleteScriptRequest.g.xml" path="doc/member[@key='_global.delete_script.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_script.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DeleteScriptResponse> DeleteScriptAsync(Elastic.Clients.Elasticsearch.DeleteScriptRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.DeleteScriptRequest, Elastic.Clients.Elasticsearch.DeleteScriptResponse, Elastic.Clients.Elasticsearch.DeleteScriptRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/DeleteScriptRequest.g.xml" path="doc/member[@key='_global.delete_script.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_script.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DeleteScriptResponse> DeleteScriptAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteScriptRequestDescriptor(id);
@@ -975,6 +1251,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.DeleteScriptRequest, Elastic.Clients.Elasticsearch.DeleteScriptResponse, Elastic.Clients.Elasticsearch.DeleteScriptRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/DeleteScriptRequest.g.xml" path="doc/member[@key='_global.delete_script.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_script.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DeleteScriptResponse> DeleteScriptAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.DeleteScriptRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.DeleteScriptRequestDescriptor(id);
@@ -984,12 +1262,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.DeleteScriptRequest, Elastic.Clients.Elasticsearch.DeleteScriptResponse, Elastic.Clients.Elasticsearch.DeleteScriptRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExistsResponse Exists(Elastic.Clients.Elasticsearch.ExistsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.ExistsRequest, Elastic.Clients.Elasticsearch.ExistsResponse, Elastic.Clients.Elasticsearch.ExistsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExistsResponse Exists(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsRequestDescriptor(index, id);
@@ -998,6 +1280,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExistsRequest, Elastic.Clients.Elasticsearch.ExistsResponse, Elastic.Clients.Elasticsearch.ExistsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExistsResponse Exists(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExistsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsRequestDescriptor(index, id);
@@ -1007,6 +1291,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExistsRequest, Elastic.Clients.Elasticsearch.ExistsResponse, Elastic.Clients.Elasticsearch.ExistsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExistsResponse Exists(string index, Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsRequestDescriptor(index, id);
@@ -1015,6 +1301,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExistsRequest, Elastic.Clients.Elasticsearch.ExistsResponse, Elastic.Clients.Elasticsearch.ExistsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExistsResponse Exists(string index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExistsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsRequestDescriptor(index, id);
@@ -1024,6 +1312,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExistsRequest, Elastic.Clients.Elasticsearch.ExistsResponse, Elastic.Clients.Elasticsearch.ExistsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExistsResponse Exists<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument>(index, id);
@@ -1033,6 +1323,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExistsRequest, Elastic.Clients.Elasticsearch.ExistsResponse, Elastic.Clients.Elasticsearch.ExistsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExistsResponse Exists<TDocument>(TDocument document)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument>(document);
@@ -1041,6 +1333,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExistsRequest, Elastic.Clients.Elasticsearch.ExistsResponse, Elastic.Clients.Elasticsearch.ExistsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExistsResponse Exists<TDocument>(TDocument document, System.Action<Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument>(document);
@@ -1050,6 +1344,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExistsRequest, Elastic.Clients.Elasticsearch.ExistsResponse, Elastic.Clients.Elasticsearch.ExistsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExistsResponse Exists<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument>(document, id);
@@ -1058,6 +1354,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExistsRequest, Elastic.Clients.Elasticsearch.ExistsResponse, Elastic.Clients.Elasticsearch.ExistsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExistsResponse Exists<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument>(document, id);
@@ -1067,6 +1365,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExistsRequest, Elastic.Clients.Elasticsearch.ExistsResponse, Elastic.Clients.Elasticsearch.ExistsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExistsResponse Exists<TDocument>(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument>(id);
@@ -1075,6 +1375,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExistsRequest, Elastic.Clients.Elasticsearch.ExistsResponse, Elastic.Clients.Elasticsearch.ExistsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExistsResponse Exists<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument>(id);
@@ -1084,12 +1386,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExistsRequest, Elastic.Clients.Elasticsearch.ExistsResponse, Elastic.Clients.Elasticsearch.ExistsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExistsResponse> ExistsAsync(Elastic.Clients.Elasticsearch.ExistsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExistsRequest, Elastic.Clients.Elasticsearch.ExistsResponse, Elastic.Clients.Elasticsearch.ExistsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExistsResponse> ExistsAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsRequestDescriptor(index, id);
@@ -1098,6 +1404,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExistsRequest, Elastic.Clients.Elasticsearch.ExistsResponse, Elastic.Clients.Elasticsearch.ExistsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExistsResponse> ExistsAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExistsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsRequestDescriptor(index, id);
@@ -1107,6 +1415,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExistsRequest, Elastic.Clients.Elasticsearch.ExistsResponse, Elastic.Clients.Elasticsearch.ExistsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExistsResponse> ExistsAsync(string index, Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsRequestDescriptor(index, id);
@@ -1115,6 +1425,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExistsRequest, Elastic.Clients.Elasticsearch.ExistsResponse, Elastic.Clients.Elasticsearch.ExistsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExistsResponse> ExistsAsync(string index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExistsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsRequestDescriptor(index, id);
@@ -1124,6 +1436,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExistsRequest, Elastic.Clients.Elasticsearch.ExistsResponse, Elastic.Clients.Elasticsearch.ExistsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExistsResponse> ExistsAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument>(index, id);
@@ -1133,6 +1447,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExistsRequest, Elastic.Clients.Elasticsearch.ExistsResponse, Elastic.Clients.Elasticsearch.ExistsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExistsResponse> ExistsAsync<TDocument>(TDocument document, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument>(document);
@@ -1141,6 +1457,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExistsRequest, Elastic.Clients.Elasticsearch.ExistsResponse, Elastic.Clients.Elasticsearch.ExistsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExistsResponse> ExistsAsync<TDocument>(TDocument document, System.Action<Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument>(document);
@@ -1150,6 +1468,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExistsRequest, Elastic.Clients.Elasticsearch.ExistsResponse, Elastic.Clients.Elasticsearch.ExistsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExistsResponse> ExistsAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument>(document, id);
@@ -1158,6 +1478,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExistsRequest, Elastic.Clients.Elasticsearch.ExistsResponse, Elastic.Clients.Elasticsearch.ExistsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExistsResponse> ExistsAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument>(document, id);
@@ -1167,6 +1489,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExistsRequest, Elastic.Clients.Elasticsearch.ExistsResponse, Elastic.Clients.Elasticsearch.ExistsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExistsResponse> ExistsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument>(id);
@@ -1175,6 +1499,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExistsRequest, Elastic.Clients.Elasticsearch.ExistsResponse, Elastic.Clients.Elasticsearch.ExistsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExistsResponse> ExistsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument>(id);
@@ -1184,12 +1510,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExistsRequest, Elastic.Clients.Elasticsearch.ExistsResponse, Elastic.Clients.Elasticsearch.ExistsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExistsSourceRequest.g.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExistsSourceResponse ExistsSource(Elastic.Clients.Elasticsearch.ExistsSourceRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.ExistsSourceRequest, Elastic.Clients.Elasticsearch.ExistsSourceResponse, Elastic.Clients.Elasticsearch.ExistsSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExistsSourceRequest.g.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExistsSourceResponse ExistsSource(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor(index, id);
@@ -1198,6 +1528,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExistsSourceRequest, Elastic.Clients.Elasticsearch.ExistsSourceResponse, Elastic.Clients.Elasticsearch.ExistsSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExistsSourceRequest.g.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExistsSourceResponse ExistsSource(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor(index, id);
@@ -1207,6 +1539,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExistsSourceRequest, Elastic.Clients.Elasticsearch.ExistsSourceResponse, Elastic.Clients.Elasticsearch.ExistsSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExistsSourceRequest.g.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExistsSourceResponse ExistsSource(string index, Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor(index, id);
@@ -1215,6 +1549,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExistsSourceRequest, Elastic.Clients.Elasticsearch.ExistsSourceResponse, Elastic.Clients.Elasticsearch.ExistsSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExistsSourceRequest.g.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExistsSourceResponse ExistsSource(string index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor(index, id);
@@ -1224,6 +1560,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExistsSourceRequest, Elastic.Clients.Elasticsearch.ExistsSourceResponse, Elastic.Clients.Elasticsearch.ExistsSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExistsSourceRequest.g.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExistsSourceResponse ExistsSource<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor<TDocument>(index, id);
@@ -1233,6 +1571,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExistsSourceRequest, Elastic.Clients.Elasticsearch.ExistsSourceResponse, Elastic.Clients.Elasticsearch.ExistsSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExistsSourceRequest.g.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExistsSourceResponse ExistsSource<TDocument>(TDocument document)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor<TDocument>(document);
@@ -1241,6 +1581,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExistsSourceRequest, Elastic.Clients.Elasticsearch.ExistsSourceResponse, Elastic.Clients.Elasticsearch.ExistsSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExistsSourceRequest.g.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExistsSourceResponse ExistsSource<TDocument>(TDocument document, System.Action<Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor<TDocument>(document);
@@ -1250,6 +1592,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExistsSourceRequest, Elastic.Clients.Elasticsearch.ExistsSourceResponse, Elastic.Clients.Elasticsearch.ExistsSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExistsSourceRequest.g.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExistsSourceResponse ExistsSource<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor<TDocument>(document, id);
@@ -1258,6 +1602,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExistsSourceRequest, Elastic.Clients.Elasticsearch.ExistsSourceResponse, Elastic.Clients.Elasticsearch.ExistsSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExistsSourceRequest.g.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExistsSourceResponse ExistsSource<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor<TDocument>(document, id);
@@ -1267,6 +1613,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExistsSourceRequest, Elastic.Clients.Elasticsearch.ExistsSourceResponse, Elastic.Clients.Elasticsearch.ExistsSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExistsSourceRequest.g.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExistsSourceResponse ExistsSource<TDocument>(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor<TDocument>(id);
@@ -1275,6 +1623,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExistsSourceRequest, Elastic.Clients.Elasticsearch.ExistsSourceResponse, Elastic.Clients.Elasticsearch.ExistsSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExistsSourceRequest.g.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExistsSourceResponse ExistsSource<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor<TDocument>(id);
@@ -1284,12 +1634,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExistsSourceRequest, Elastic.Clients.Elasticsearch.ExistsSourceResponse, Elastic.Clients.Elasticsearch.ExistsSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExistsSourceRequest.g.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExistsSourceResponse> ExistsSourceAsync(Elastic.Clients.Elasticsearch.ExistsSourceRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExistsSourceRequest, Elastic.Clients.Elasticsearch.ExistsSourceResponse, Elastic.Clients.Elasticsearch.ExistsSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExistsSourceRequest.g.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExistsSourceResponse> ExistsSourceAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor(index, id);
@@ -1298,6 +1652,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExistsSourceRequest, Elastic.Clients.Elasticsearch.ExistsSourceResponse, Elastic.Clients.Elasticsearch.ExistsSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExistsSourceRequest.g.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExistsSourceResponse> ExistsSourceAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor(index, id);
@@ -1307,6 +1663,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExistsSourceRequest, Elastic.Clients.Elasticsearch.ExistsSourceResponse, Elastic.Clients.Elasticsearch.ExistsSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExistsSourceRequest.g.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExistsSourceResponse> ExistsSourceAsync(string index, Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor(index, id);
@@ -1315,6 +1673,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExistsSourceRequest, Elastic.Clients.Elasticsearch.ExistsSourceResponse, Elastic.Clients.Elasticsearch.ExistsSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExistsSourceRequest.g.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExistsSourceResponse> ExistsSourceAsync(string index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor(index, id);
@@ -1324,6 +1684,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExistsSourceRequest, Elastic.Clients.Elasticsearch.ExistsSourceResponse, Elastic.Clients.Elasticsearch.ExistsSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExistsSourceRequest.g.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExistsSourceResponse> ExistsSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor<TDocument>(index, id);
@@ -1333,6 +1695,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExistsSourceRequest, Elastic.Clients.Elasticsearch.ExistsSourceResponse, Elastic.Clients.Elasticsearch.ExistsSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExistsSourceRequest.g.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExistsSourceResponse> ExistsSourceAsync<TDocument>(TDocument document, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor<TDocument>(document);
@@ -1341,6 +1705,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExistsSourceRequest, Elastic.Clients.Elasticsearch.ExistsSourceResponse, Elastic.Clients.Elasticsearch.ExistsSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExistsSourceRequest.g.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExistsSourceResponse> ExistsSourceAsync<TDocument>(TDocument document, System.Action<Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor<TDocument>(document);
@@ -1350,6 +1716,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExistsSourceRequest, Elastic.Clients.Elasticsearch.ExistsSourceResponse, Elastic.Clients.Elasticsearch.ExistsSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExistsSourceRequest.g.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExistsSourceResponse> ExistsSourceAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor<TDocument>(document, id);
@@ -1358,6 +1726,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExistsSourceRequest, Elastic.Clients.Elasticsearch.ExistsSourceResponse, Elastic.Clients.Elasticsearch.ExistsSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExistsSourceRequest.g.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExistsSourceResponse> ExistsSourceAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor<TDocument>(document, id);
@@ -1367,6 +1737,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExistsSourceRequest, Elastic.Clients.Elasticsearch.ExistsSourceResponse, Elastic.Clients.Elasticsearch.ExistsSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExistsSourceRequest.g.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExistsSourceResponse> ExistsSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor<TDocument>(id);
@@ -1375,6 +1747,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExistsSourceRequest, Elastic.Clients.Elasticsearch.ExistsSourceResponse, Elastic.Clients.Elasticsearch.ExistsSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExistsSourceRequest.g.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExistsSourceResponse> ExistsSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExistsSourceRequestDescriptor<TDocument>(id);
@@ -1384,12 +1758,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExistsSourceRequest, Elastic.Clients.Elasticsearch.ExistsSourceResponse, Elastic.Clients.Elasticsearch.ExistsSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExplainResponse<TDocument> Explain<TDocument>(Elastic.Clients.Elasticsearch.ExplainRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExplainResponse<TDocument> Explain<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(index, id);
@@ -1398,6 +1776,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExplainResponse<TDocument> Explain<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(index, id);
@@ -1407,6 +1787,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExplainResponse<TDocument> Explain<TDocument>(TDocument document)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(document);
@@ -1415,6 +1797,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExplainResponse<TDocument> Explain<TDocument>(TDocument document, System.Action<Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(document);
@@ -1424,6 +1808,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExplainResponse<TDocument> Explain<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(document, id);
@@ -1432,6 +1818,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExplainResponse<TDocument> Explain<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(document, id);
@@ -1441,6 +1829,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExplainResponse<TDocument> Explain<TDocument>(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(id);
@@ -1449,6 +1839,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExplainResponse<TDocument> Explain<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(id);
@@ -1458,6 +1850,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse> Explain<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(index, id);
@@ -1466,6 +1860,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse> Explain<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(index, id);
@@ -1475,6 +1871,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse> Explain<TDocument, TDocumentResponse>(TDocument document)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(document);
@@ -1483,6 +1881,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse> Explain<TDocument, TDocumentResponse>(TDocument document, System.Action<Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(document);
@@ -1492,6 +1892,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse> Explain<TDocument, TDocumentResponse>(TDocument document, Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(document, id);
@@ -1500,6 +1902,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse> Explain<TDocument, TDocumentResponse>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(document, id);
@@ -1509,6 +1913,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse> Explain<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(id);
@@ -1517,6 +1923,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse> Explain<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(id);
@@ -1526,12 +1934,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>> ExplainAsync<TDocument>(Elastic.Clients.Elasticsearch.ExplainRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>> ExplainAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(index, id);
@@ -1540,6 +1952,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>> ExplainAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(index, id);
@@ -1549,6 +1963,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>> ExplainAsync<TDocument>(TDocument document, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(document);
@@ -1557,6 +1973,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>> ExplainAsync<TDocument>(TDocument document, System.Action<Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(document);
@@ -1566,6 +1984,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>> ExplainAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(document, id);
@@ -1574,6 +1994,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>> ExplainAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(document, id);
@@ -1583,6 +2005,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>> ExplainAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(id);
@@ -1591,6 +2015,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>> ExplainAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(id);
@@ -1600,6 +2026,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse>> ExplainAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(index, id);
@@ -1608,6 +2036,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse>> ExplainAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(index, id);
@@ -1617,6 +2047,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse>> ExplainAsync<TDocument, TDocumentResponse>(TDocument document, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(document);
@@ -1625,6 +2057,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse>> ExplainAsync<TDocument, TDocumentResponse>(TDocument document, System.Action<Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(document);
@@ -1634,6 +2068,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse>> ExplainAsync<TDocument, TDocumentResponse>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(document, id);
@@ -1642,6 +2078,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse>> ExplainAsync<TDocument, TDocumentResponse>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(document, id);
@@ -1651,6 +2089,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse>> ExplainAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(id);
@@ -1659,6 +2099,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse>> ExplainAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(id);
@@ -1668,12 +2110,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ExplainRequest, Elastic.Clients.Elasticsearch.ExplainResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.ExplainRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.FieldCapsResponse FieldCaps(Elastic.Clients.Elasticsearch.FieldCapsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.FieldCapsRequest, Elastic.Clients.Elasticsearch.FieldCapsResponse, Elastic.Clients.Elasticsearch.FieldCapsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.FieldCapsResponse FieldCaps()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor();
@@ -1682,6 +2128,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.FieldCapsRequest, Elastic.Clients.Elasticsearch.FieldCapsResponse, Elastic.Clients.Elasticsearch.FieldCapsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.FieldCapsResponse FieldCaps(System.Action<Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor();
@@ -1691,6 +2139,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.FieldCapsRequest, Elastic.Clients.Elasticsearch.FieldCapsResponse, Elastic.Clients.Elasticsearch.FieldCapsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.FieldCapsResponse FieldCaps(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor(indices);
@@ -1699,6 +2149,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.FieldCapsRequest, Elastic.Clients.Elasticsearch.FieldCapsResponse, Elastic.Clients.Elasticsearch.FieldCapsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.FieldCapsResponse FieldCaps(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor(indices);
@@ -1708,6 +2160,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.FieldCapsRequest, Elastic.Clients.Elasticsearch.FieldCapsResponse, Elastic.Clients.Elasticsearch.FieldCapsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.FieldCapsResponse FieldCaps<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument>();
@@ -1716,6 +2170,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.FieldCapsRequest, Elastic.Clients.Elasticsearch.FieldCapsResponse, Elastic.Clients.Elasticsearch.FieldCapsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.FieldCapsResponse FieldCaps<TDocument>(System.Action<Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument>();
@@ -1725,6 +2181,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.FieldCapsRequest, Elastic.Clients.Elasticsearch.FieldCapsResponse, Elastic.Clients.Elasticsearch.FieldCapsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.FieldCapsResponse FieldCaps<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument>(indices);
@@ -1734,12 +2192,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.FieldCapsRequest, Elastic.Clients.Elasticsearch.FieldCapsResponse, Elastic.Clients.Elasticsearch.FieldCapsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.FieldCapsResponse> FieldCapsAsync(Elastic.Clients.Elasticsearch.FieldCapsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.FieldCapsRequest, Elastic.Clients.Elasticsearch.FieldCapsResponse, Elastic.Clients.Elasticsearch.FieldCapsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.FieldCapsResponse> FieldCapsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor();
@@ -1748,6 +2210,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.FieldCapsRequest, Elastic.Clients.Elasticsearch.FieldCapsResponse, Elastic.Clients.Elasticsearch.FieldCapsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.FieldCapsResponse> FieldCapsAsync(System.Action<Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor();
@@ -1757,6 +2221,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.FieldCapsRequest, Elastic.Clients.Elasticsearch.FieldCapsResponse, Elastic.Clients.Elasticsearch.FieldCapsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.FieldCapsResponse> FieldCapsAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor(indices);
@@ -1765,6 +2231,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.FieldCapsRequest, Elastic.Clients.Elasticsearch.FieldCapsResponse, Elastic.Clients.Elasticsearch.FieldCapsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.FieldCapsResponse> FieldCapsAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor(indices);
@@ -1774,6 +2242,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.FieldCapsRequest, Elastic.Clients.Elasticsearch.FieldCapsResponse, Elastic.Clients.Elasticsearch.FieldCapsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.FieldCapsResponse> FieldCapsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument>();
@@ -1782,6 +2252,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.FieldCapsRequest, Elastic.Clients.Elasticsearch.FieldCapsResponse, Elastic.Clients.Elasticsearch.FieldCapsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.FieldCapsResponse> FieldCapsAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument>();
@@ -1791,6 +2263,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.FieldCapsRequest, Elastic.Clients.Elasticsearch.FieldCapsResponse, Elastic.Clients.Elasticsearch.FieldCapsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.FieldCapsResponse> FieldCapsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument>(indices);
@@ -1800,12 +2274,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.FieldCapsRequest, Elastic.Clients.Elasticsearch.FieldCapsResponse, Elastic.Clients.Elasticsearch.FieldCapsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetResponse<TDocument> Get<TDocument>(Elastic.Clients.Elasticsearch.GetRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocument>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetResponse<TDocument> Get<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(index, id);
@@ -1814,6 +2292,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocument>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetResponse<TDocument> Get<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(index, id);
@@ -1823,6 +2303,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocument>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetResponse<TDocument> Get<TDocument>(TDocument document)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(document);
@@ -1831,6 +2313,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocument>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetResponse<TDocument> Get<TDocument>(TDocument document, System.Action<Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(document);
@@ -1840,6 +2324,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocument>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetResponse<TDocument> Get<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(document, id);
@@ -1848,6 +2334,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocument>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetResponse<TDocument> Get<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(document, id);
@@ -1857,6 +2345,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocument>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetResponse<TDocument> Get<TDocument>(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(id);
@@ -1865,6 +2355,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocument>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetResponse<TDocument> Get<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(id);
@@ -1874,6 +2366,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocument>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse> Get<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(index, id);
@@ -1882,6 +2376,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse> Get<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(index, id);
@@ -1891,6 +2387,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse> Get<TDocument, TDocumentResponse>(TDocument document)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(document);
@@ -1899,6 +2397,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse> Get<TDocument, TDocumentResponse>(TDocument document, System.Action<Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(document);
@@ -1908,6 +2408,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse> Get<TDocument, TDocumentResponse>(TDocument document, Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(document, id);
@@ -1916,6 +2418,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse> Get<TDocument, TDocumentResponse>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(document, id);
@@ -1925,6 +2429,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse> Get<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(id);
@@ -1933,6 +2439,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse> Get<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(id);
@@ -1942,12 +2450,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.GetRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocument>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(index, id);
@@ -1956,6 +2468,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocument>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(index, id);
@@ -1965,6 +2479,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocument>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetResponse<TDocument>> GetAsync<TDocument>(TDocument document, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(document);
@@ -1973,6 +2489,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocument>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetResponse<TDocument>> GetAsync<TDocument>(TDocument document, System.Action<Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(document);
@@ -1982,6 +2500,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocument>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetResponse<TDocument>> GetAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(document, id);
@@ -1990,6 +2510,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocument>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetResponse<TDocument>> GetAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(document, id);
@@ -1999,6 +2521,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocument>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(id);
@@ -2007,6 +2531,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocument>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(id);
@@ -2016,6 +2542,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocument>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse>> GetAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(index, id);
@@ -2024,6 +2552,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse>> GetAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(index, id);
@@ -2033,6 +2563,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse>> GetAsync<TDocument, TDocumentResponse>(TDocument document, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(document);
@@ -2041,6 +2573,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse>> GetAsync<TDocument, TDocumentResponse>(TDocument document, System.Action<Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(document);
@@ -2050,6 +2584,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse>> GetAsync<TDocument, TDocumentResponse>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(document, id);
@@ -2058,6 +2594,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse>> GetAsync<TDocument, TDocumentResponse>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(document, id);
@@ -2067,6 +2605,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse>> GetAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(id);
@@ -2075,6 +2615,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetRequest.g.xml" path="doc/member[@key='_global.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse>> GetAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>(id);
@@ -2084,12 +2626,74 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetReindexRequest.g.xml" path="doc/member[@key='_global.get_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_reindex.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.GetReindexResponse GetReindex(Elastic.Clients.Elasticsearch.GetReindexRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.GetReindexRequest, Elastic.Clients.Elasticsearch.GetReindexResponse, Elastic.Clients.Elasticsearch.GetReindexRequestParameters>(request);
+	}
+
+	/// <include file="../Api/GetReindexRequest.g.xml" path="doc/member[@key='_global.get_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_reindex.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.GetReindexResponse GetReindex(Elastic.Clients.Elasticsearch.TaskId taskId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.GetReindexRequestDescriptor(taskId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.GetReindexRequest, Elastic.Clients.Elasticsearch.GetReindexResponse, Elastic.Clients.Elasticsearch.GetReindexRequestParameters>(request);
+	}
+
+	/// <include file="../Api/GetReindexRequest.g.xml" path="doc/member[@key='_global.get_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_reindex.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.GetReindexResponse GetReindex(Elastic.Clients.Elasticsearch.TaskId taskId, System.Action<Elastic.Clients.Elasticsearch.GetReindexRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.GetReindexRequestDescriptor(taskId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.GetReindexRequest, Elastic.Clients.Elasticsearch.GetReindexResponse, Elastic.Clients.Elasticsearch.GetReindexRequestParameters>(request);
+	}
+
+	/// <include file="../Api/GetReindexRequest.g.xml" path="doc/member[@key='_global.get_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_reindex.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetReindexResponse> GetReindexAsync(Elastic.Clients.Elasticsearch.GetReindexRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetReindexRequest, Elastic.Clients.Elasticsearch.GetReindexResponse, Elastic.Clients.Elasticsearch.GetReindexRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/GetReindexRequest.g.xml" path="doc/member[@key='_global.get_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_reindex.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetReindexResponse> GetReindexAsync(Elastic.Clients.Elasticsearch.TaskId taskId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.GetReindexRequestDescriptor(taskId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetReindexRequest, Elastic.Clients.Elasticsearch.GetReindexResponse, Elastic.Clients.Elasticsearch.GetReindexRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/GetReindexRequest.g.xml" path="doc/member[@key='_global.get_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_reindex.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetReindexResponse> GetReindexAsync(Elastic.Clients.Elasticsearch.TaskId taskId, System.Action<Elastic.Clients.Elasticsearch.GetReindexRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.GetReindexRequestDescriptor(taskId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetReindexRequest, Elastic.Clients.Elasticsearch.GetReindexResponse, Elastic.Clients.Elasticsearch.GetReindexRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/GetScriptRequest.g.xml" path="doc/member[@key='_global.get_script.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_script.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetScriptResponse GetScript(Elastic.Clients.Elasticsearch.GetScriptRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.GetScriptRequest, Elastic.Clients.Elasticsearch.GetScriptResponse, Elastic.Clients.Elasticsearch.GetScriptRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetScriptRequest.g.xml" path="doc/member[@key='_global.get_script.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_script.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetScriptResponse GetScript(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetScriptRequestDescriptor(id);
@@ -2098,6 +2702,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetScriptRequest, Elastic.Clients.Elasticsearch.GetScriptResponse, Elastic.Clients.Elasticsearch.GetScriptRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetScriptRequest.g.xml" path="doc/member[@key='_global.get_script.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_script.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetScriptResponse GetScript(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.GetScriptRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetScriptRequestDescriptor(id);
@@ -2107,12 +2713,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetScriptRequest, Elastic.Clients.Elasticsearch.GetScriptResponse, Elastic.Clients.Elasticsearch.GetScriptRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetScriptRequest.g.xml" path="doc/member[@key='_global.get_script.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_script.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetScriptResponse> GetScriptAsync(Elastic.Clients.Elasticsearch.GetScriptRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetScriptRequest, Elastic.Clients.Elasticsearch.GetScriptResponse, Elastic.Clients.Elasticsearch.GetScriptRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetScriptRequest.g.xml" path="doc/member[@key='_global.get_script.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_script.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetScriptResponse> GetScriptAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetScriptRequestDescriptor(id);
@@ -2121,6 +2731,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetScriptRequest, Elastic.Clients.Elasticsearch.GetScriptResponse, Elastic.Clients.Elasticsearch.GetScriptRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetScriptRequest.g.xml" path="doc/member[@key='_global.get_script.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_script.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetScriptResponse> GetScriptAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.GetScriptRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetScriptRequestDescriptor(id);
@@ -2130,12 +2742,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetScriptRequest, Elastic.Clients.Elasticsearch.GetScriptResponse, Elastic.Clients.Elasticsearch.GetScriptRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetScriptContextRequest.g.xml" path="doc/member[@key='_global.get_script_context.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_script_context.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetScriptContextResponse GetScriptContext(Elastic.Clients.Elasticsearch.GetScriptContextRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.GetScriptContextRequest, Elastic.Clients.Elasticsearch.GetScriptContextResponse, Elastic.Clients.Elasticsearch.GetScriptContextRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetScriptContextRequest.g.xml" path="doc/member[@key='_global.get_script_context.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_script_context.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetScriptContextResponse GetScriptContext()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetScriptContextRequestDescriptor();
@@ -2144,6 +2760,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetScriptContextRequest, Elastic.Clients.Elasticsearch.GetScriptContextResponse, Elastic.Clients.Elasticsearch.GetScriptContextRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetScriptContextRequest.g.xml" path="doc/member[@key='_global.get_script_context.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_script_context.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetScriptContextResponse GetScriptContext(System.Action<Elastic.Clients.Elasticsearch.GetScriptContextRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetScriptContextRequestDescriptor();
@@ -2153,12 +2771,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetScriptContextRequest, Elastic.Clients.Elasticsearch.GetScriptContextResponse, Elastic.Clients.Elasticsearch.GetScriptContextRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetScriptContextRequest.g.xml" path="doc/member[@key='_global.get_script_context.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_script_context.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetScriptContextResponse> GetScriptContextAsync(Elastic.Clients.Elasticsearch.GetScriptContextRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetScriptContextRequest, Elastic.Clients.Elasticsearch.GetScriptContextResponse, Elastic.Clients.Elasticsearch.GetScriptContextRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetScriptContextRequest.g.xml" path="doc/member[@key='_global.get_script_context.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_script_context.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetScriptContextResponse> GetScriptContextAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetScriptContextRequestDescriptor();
@@ -2167,6 +2789,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetScriptContextRequest, Elastic.Clients.Elasticsearch.GetScriptContextResponse, Elastic.Clients.Elasticsearch.GetScriptContextRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetScriptContextRequest.g.xml" path="doc/member[@key='_global.get_script_context.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_script_context.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetScriptContextResponse> GetScriptContextAsync(System.Action<Elastic.Clients.Elasticsearch.GetScriptContextRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetScriptContextRequestDescriptor();
@@ -2176,12 +2800,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetScriptContextRequest, Elastic.Clients.Elasticsearch.GetScriptContextResponse, Elastic.Clients.Elasticsearch.GetScriptContextRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetScriptLanguagesRequest.g.xml" path="doc/member[@key='_global.get_script_languages.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_script_languages.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetScriptLanguagesResponse GetScriptLanguages(Elastic.Clients.Elasticsearch.GetScriptLanguagesRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.GetScriptLanguagesRequest, Elastic.Clients.Elasticsearch.GetScriptLanguagesResponse, Elastic.Clients.Elasticsearch.GetScriptLanguagesRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetScriptLanguagesRequest.g.xml" path="doc/member[@key='_global.get_script_languages.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_script_languages.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetScriptLanguagesResponse GetScriptLanguages()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetScriptLanguagesRequestDescriptor();
@@ -2190,6 +2818,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetScriptLanguagesRequest, Elastic.Clients.Elasticsearch.GetScriptLanguagesResponse, Elastic.Clients.Elasticsearch.GetScriptLanguagesRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetScriptLanguagesRequest.g.xml" path="doc/member[@key='_global.get_script_languages.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_script_languages.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetScriptLanguagesResponse GetScriptLanguages(System.Action<Elastic.Clients.Elasticsearch.GetScriptLanguagesRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetScriptLanguagesRequestDescriptor();
@@ -2199,12 +2829,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetScriptLanguagesRequest, Elastic.Clients.Elasticsearch.GetScriptLanguagesResponse, Elastic.Clients.Elasticsearch.GetScriptLanguagesRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetScriptLanguagesRequest.g.xml" path="doc/member[@key='_global.get_script_languages.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_script_languages.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetScriptLanguagesResponse> GetScriptLanguagesAsync(Elastic.Clients.Elasticsearch.GetScriptLanguagesRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetScriptLanguagesRequest, Elastic.Clients.Elasticsearch.GetScriptLanguagesResponse, Elastic.Clients.Elasticsearch.GetScriptLanguagesRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetScriptLanguagesRequest.g.xml" path="doc/member[@key='_global.get_script_languages.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_script_languages.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetScriptLanguagesResponse> GetScriptLanguagesAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetScriptLanguagesRequestDescriptor();
@@ -2213,6 +2847,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetScriptLanguagesRequest, Elastic.Clients.Elasticsearch.GetScriptLanguagesResponse, Elastic.Clients.Elasticsearch.GetScriptLanguagesRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetScriptLanguagesRequest.g.xml" path="doc/member[@key='_global.get_script_languages.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_script_languages.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetScriptLanguagesResponse> GetScriptLanguagesAsync(System.Action<Elastic.Clients.Elasticsearch.GetScriptLanguagesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetScriptLanguagesRequestDescriptor();
@@ -2222,12 +2858,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetScriptLanguagesRequest, Elastic.Clients.Elasticsearch.GetScriptLanguagesResponse, Elastic.Clients.Elasticsearch.GetScriptLanguagesRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument> GetSource<TDocument>(Elastic.Clients.Elasticsearch.GetSourceRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument> GetSource<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(index, id);
@@ -2236,6 +2876,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument> GetSource<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(index, id);
@@ -2245,6 +2887,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument> GetSource<TDocument>(TDocument document)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(document);
@@ -2253,6 +2897,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument> GetSource<TDocument>(TDocument document, System.Action<Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(document);
@@ -2262,6 +2908,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument> GetSource<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(document, id);
@@ -2270,6 +2918,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument> GetSource<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(document, id);
@@ -2279,6 +2929,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument> GetSource<TDocument>(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(id);
@@ -2287,6 +2939,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument> GetSource<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(id);
@@ -2296,6 +2950,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse> GetSource<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(index, id);
@@ -2304,6 +2960,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse> GetSource<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(index, id);
@@ -2313,6 +2971,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse> GetSource<TDocument, TDocumentResponse>(TDocument document)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(document);
@@ -2321,6 +2981,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse> GetSource<TDocument, TDocumentResponse>(TDocument document, System.Action<Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(document);
@@ -2330,6 +2992,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse> GetSource<TDocument, TDocumentResponse>(TDocument document, Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(document, id);
@@ -2338,6 +3002,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse> GetSource<TDocument, TDocumentResponse>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(document, id);
@@ -2347,6 +3013,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse> GetSource<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(id);
@@ -2355,6 +3023,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse> GetSource<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(id);
@@ -2364,12 +3034,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.GetSourceRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(index, id);
@@ -2378,6 +3052,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(index, id);
@@ -2387,6 +3063,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(TDocument document, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(document);
@@ -2395,6 +3073,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(TDocument document, System.Action<Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(document);
@@ -2404,6 +3084,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(document, id);
@@ -2412,6 +3094,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(document, id);
@@ -2421,6 +3105,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(id);
@@ -2429,6 +3115,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(id);
@@ -2438,6 +3126,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocument>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse>> GetSourceAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(index, id);
@@ -2446,6 +3136,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse>> GetSourceAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(index, id);
@@ -2455,6 +3147,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse>> GetSourceAsync<TDocument, TDocumentResponse>(TDocument document, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(document);
@@ -2463,6 +3157,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse>> GetSourceAsync<TDocument, TDocumentResponse>(TDocument document, System.Action<Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(document);
@@ -2472,6 +3168,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse>> GetSourceAsync<TDocument, TDocumentResponse>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(document, id);
@@ -2480,6 +3178,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse>> GetSourceAsync<TDocument, TDocumentResponse>(TDocument document, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(document, id);
@@ -2489,6 +3189,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse>> GetSourceAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(id);
@@ -2497,6 +3199,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse>> GetSourceAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(id);
@@ -2506,12 +3210,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetSourceRequest, Elastic.Clients.Elasticsearch.GetSourceResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetSourceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/HealthReportRequest.g.xml" path="doc/member[@key='_global.health_report.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.health_report.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.HealthReportResponse HealthReport(Elastic.Clients.Elasticsearch.HealthReportRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.HealthReportRequest, Elastic.Clients.Elasticsearch.HealthReportResponse, Elastic.Clients.Elasticsearch.HealthReportRequestParameters>(request);
 	}
 
+	/// <include file="../Api/HealthReportRequest.g.xml" path="doc/member[@key='_global.health_report.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.health_report.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.HealthReportResponse HealthReport()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor();
@@ -2520,6 +3228,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.HealthReportRequest, Elastic.Clients.Elasticsearch.HealthReportResponse, Elastic.Clients.Elasticsearch.HealthReportRequestParameters>(request);
 	}
 
+	/// <include file="../Api/HealthReportRequest.g.xml" path="doc/member[@key='_global.health_report.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.health_report.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.HealthReportResponse HealthReport(System.Action<Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor();
@@ -2529,6 +3239,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.HealthReportRequest, Elastic.Clients.Elasticsearch.HealthReportResponse, Elastic.Clients.Elasticsearch.HealthReportRequestParameters>(request);
 	}
 
+	/// <include file="../Api/HealthReportRequest.g.xml" path="doc/member[@key='_global.health_report.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.health_report.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.HealthReportResponse HealthReport(System.Collections.Generic.ICollection<string>? feature)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor(feature);
@@ -2537,6 +3249,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.HealthReportRequest, Elastic.Clients.Elasticsearch.HealthReportResponse, Elastic.Clients.Elasticsearch.HealthReportRequestParameters>(request);
 	}
 
+	/// <include file="../Api/HealthReportRequest.g.xml" path="doc/member[@key='_global.health_report.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.health_report.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.HealthReportResponse HealthReport(System.Collections.Generic.ICollection<string>? feature, System.Action<Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor(feature);
@@ -2546,12 +3260,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.HealthReportRequest, Elastic.Clients.Elasticsearch.HealthReportResponse, Elastic.Clients.Elasticsearch.HealthReportRequestParameters>(request);
 	}
 
+	/// <include file="../Api/HealthReportRequest.g.xml" path="doc/member[@key='_global.health_report.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.health_report.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.HealthReportResponse> HealthReportAsync(Elastic.Clients.Elasticsearch.HealthReportRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.HealthReportRequest, Elastic.Clients.Elasticsearch.HealthReportResponse, Elastic.Clients.Elasticsearch.HealthReportRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/HealthReportRequest.g.xml" path="doc/member[@key='_global.health_report.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.health_report.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.HealthReportResponse> HealthReportAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor();
@@ -2560,6 +3278,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.HealthReportRequest, Elastic.Clients.Elasticsearch.HealthReportResponse, Elastic.Clients.Elasticsearch.HealthReportRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/HealthReportRequest.g.xml" path="doc/member[@key='_global.health_report.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.health_report.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.HealthReportResponse> HealthReportAsync(System.Action<Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor();
@@ -2569,6 +3289,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.HealthReportRequest, Elastic.Clients.Elasticsearch.HealthReportResponse, Elastic.Clients.Elasticsearch.HealthReportRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/HealthReportRequest.g.xml" path="doc/member[@key='_global.health_report.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.health_report.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.HealthReportResponse> HealthReportAsync(System.Collections.Generic.ICollection<string>? feature, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor(feature);
@@ -2577,6 +3299,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.HealthReportRequest, Elastic.Clients.Elasticsearch.HealthReportResponse, Elastic.Clients.Elasticsearch.HealthReportRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/HealthReportRequest.g.xml" path="doc/member[@key='_global.health_report.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.health_report.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.HealthReportResponse> HealthReportAsync(System.Collections.Generic.ICollection<string>? feature, System.Action<Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor(feature);
@@ -2586,12 +3310,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.HealthReportRequest, Elastic.Clients.Elasticsearch.HealthReportResponse, Elastic.Clients.Elasticsearch.HealthReportRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexRequest.g.xml" path="doc/member[@key='_global.index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.index.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexResponse Index<TDocument>(Elastic.Clients.Elasticsearch.IndexRequest<TDocument> request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexRequest<TDocument>, Elastic.Clients.Elasticsearch.IndexResponse, Elastic.Clients.Elasticsearch.IndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexRequest.g.xml" path="doc/member[@key='_global.index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.index.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexResponse Index<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument>(document, index, id);
@@ -2600,6 +3328,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexRequest<TDocument>, Elastic.Clients.Elasticsearch.IndexResponse, Elastic.Clients.Elasticsearch.IndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexRequest.g.xml" path="doc/member[@key='_global.index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.index.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexResponse Index<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument>(document, index, id);
@@ -2609,6 +3339,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexRequest<TDocument>, Elastic.Clients.Elasticsearch.IndexResponse, Elastic.Clients.Elasticsearch.IndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexRequest.g.xml" path="doc/member[@key='_global.index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.index.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexResponse Index<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id? id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument>(document, id);
@@ -2617,6 +3349,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexRequest<TDocument>, Elastic.Clients.Elasticsearch.IndexResponse, Elastic.Clients.Elasticsearch.IndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexRequest.g.xml" path="doc/member[@key='_global.index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.index.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexResponse Index<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument>(document, id);
@@ -2626,6 +3360,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexRequest<TDocument>, Elastic.Clients.Elasticsearch.IndexResponse, Elastic.Clients.Elasticsearch.IndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexRequest.g.xml" path="doc/member[@key='_global.index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.index.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexResponse Index<TDocument>(TDocument document)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument>(document);
@@ -2634,6 +3370,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexRequest<TDocument>, Elastic.Clients.Elasticsearch.IndexResponse, Elastic.Clients.Elasticsearch.IndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexRequest.g.xml" path="doc/member[@key='_global.index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.index.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexResponse Index<TDocument>(TDocument document, System.Action<Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument>(document);
@@ -2643,12 +3381,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexRequest<TDocument>, Elastic.Clients.Elasticsearch.IndexResponse, Elastic.Clients.Elasticsearch.IndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexRequest.g.xml" path="doc/member[@key='_global.index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.index.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexResponse> IndexAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexRequest<TDocument> request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexRequest<TDocument>, Elastic.Clients.Elasticsearch.IndexResponse, Elastic.Clients.Elasticsearch.IndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexRequest.g.xml" path="doc/member[@key='_global.index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.index.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexResponse> IndexAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument>(document, index, id);
@@ -2657,6 +3399,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexRequest<TDocument>, Elastic.Clients.Elasticsearch.IndexResponse, Elastic.Clients.Elasticsearch.IndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexRequest.g.xml" path="doc/member[@key='_global.index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.index.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexResponse> IndexAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument>(document, index, id);
@@ -2666,6 +3410,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexRequest<TDocument>, Elastic.Clients.Elasticsearch.IndexResponse, Elastic.Clients.Elasticsearch.IndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexRequest.g.xml" path="doc/member[@key='_global.index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.index.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexResponse> IndexAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id? id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument>(document, id);
@@ -2674,6 +3420,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexRequest<TDocument>, Elastic.Clients.Elasticsearch.IndexResponse, Elastic.Clients.Elasticsearch.IndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexRequest.g.xml" path="doc/member[@key='_global.index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.index.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexResponse> IndexAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument>(document, id);
@@ -2683,6 +3431,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexRequest<TDocument>, Elastic.Clients.Elasticsearch.IndexResponse, Elastic.Clients.Elasticsearch.IndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexRequest.g.xml" path="doc/member[@key='_global.index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.index.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexResponse> IndexAsync<TDocument>(TDocument document, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument>(document);
@@ -2691,6 +3441,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexRequest<TDocument>, Elastic.Clients.Elasticsearch.IndexResponse, Elastic.Clients.Elasticsearch.IndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexRequest.g.xml" path="doc/member[@key='_global.index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.index.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexResponse> IndexAsync<TDocument>(TDocument document, System.Action<Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument>(document);
@@ -2700,12 +3452,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexRequest<TDocument>, Elastic.Clients.Elasticsearch.IndexResponse, Elastic.Clients.Elasticsearch.IndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/InfoRequest.g.xml" path="doc/member[@key='_global.info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.info.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.InfoResponse Info(Elastic.Clients.Elasticsearch.InfoRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.InfoRequest, Elastic.Clients.Elasticsearch.InfoResponse, Elastic.Clients.Elasticsearch.InfoRequestParameters>(request);
 	}
 
+	/// <include file="../Api/InfoRequest.g.xml" path="doc/member[@key='_global.info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.info.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.InfoResponse Info()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.InfoRequestDescriptor();
@@ -2714,6 +3470,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.InfoRequest, Elastic.Clients.Elasticsearch.InfoResponse, Elastic.Clients.Elasticsearch.InfoRequestParameters>(request);
 	}
 
+	/// <include file="../Api/InfoRequest.g.xml" path="doc/member[@key='_global.info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.info.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.InfoResponse Info(System.Action<Elastic.Clients.Elasticsearch.InfoRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.InfoRequestDescriptor();
@@ -2723,12 +3481,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.InfoRequest, Elastic.Clients.Elasticsearch.InfoResponse, Elastic.Clients.Elasticsearch.InfoRequestParameters>(request);
 	}
 
+	/// <include file="../Api/InfoRequest.g.xml" path="doc/member[@key='_global.info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.info.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.InfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.InfoRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.InfoRequest, Elastic.Clients.Elasticsearch.InfoResponse, Elastic.Clients.Elasticsearch.InfoRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/InfoRequest.g.xml" path="doc/member[@key='_global.info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.info.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.InfoResponse> InfoAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.InfoRequestDescriptor();
@@ -2737,6 +3499,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.InfoRequest, Elastic.Clients.Elasticsearch.InfoResponse, Elastic.Clients.Elasticsearch.InfoRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/InfoRequest.g.xml" path="doc/member[@key='_global.info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.info.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.InfoResponse> InfoAsync(System.Action<Elastic.Clients.Elasticsearch.InfoRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.InfoRequestDescriptor();
@@ -2746,12 +3510,74 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.InfoRequest, Elastic.Clients.Elasticsearch.InfoResponse, Elastic.Clients.Elasticsearch.InfoRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ListReindexRequest.g.xml" path="doc/member[@key='_global.list_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.list_reindex.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.ListReindexResponse ListReindex(Elastic.Clients.Elasticsearch.ListReindexRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.ListReindexRequest, Elastic.Clients.Elasticsearch.ListReindexResponse, Elastic.Clients.Elasticsearch.ListReindexRequestParameters>(request);
+	}
+
+	/// <include file="../Api/ListReindexRequest.g.xml" path="doc/member[@key='_global.list_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.list_reindex.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.ListReindexResponse ListReindex()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.ListReindexRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.ListReindexRequest, Elastic.Clients.Elasticsearch.ListReindexResponse, Elastic.Clients.Elasticsearch.ListReindexRequestParameters>(request);
+	}
+
+	/// <include file="../Api/ListReindexRequest.g.xml" path="doc/member[@key='_global.list_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.list_reindex.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.ListReindexResponse ListReindex(System.Action<Elastic.Clients.Elasticsearch.ListReindexRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.ListReindexRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.ListReindexRequest, Elastic.Clients.Elasticsearch.ListReindexResponse, Elastic.Clients.Elasticsearch.ListReindexRequestParameters>(request);
+	}
+
+	/// <include file="../Api/ListReindexRequest.g.xml" path="doc/member[@key='_global.list_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.list_reindex.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ListReindexResponse> ListReindexAsync(Elastic.Clients.Elasticsearch.ListReindexRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.ListReindexRequest, Elastic.Clients.Elasticsearch.ListReindexResponse, Elastic.Clients.Elasticsearch.ListReindexRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/ListReindexRequest.g.xml" path="doc/member[@key='_global.list_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.list_reindex.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ListReindexResponse> ListReindexAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.ListReindexRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.ListReindexRequest, Elastic.Clients.Elasticsearch.ListReindexResponse, Elastic.Clients.Elasticsearch.ListReindexRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/ListReindexRequest.g.xml" path="doc/member[@key='_global.list_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.list_reindex.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ListReindexResponse> ListReindexAsync(System.Action<Elastic.Clients.Elasticsearch.ListReindexRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.ListReindexRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.ListReindexRequest, Elastic.Clients.Elasticsearch.ListReindexResponse, Elastic.Clients.Elasticsearch.ListReindexRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiTermVectorsResponse Mtermvectors(Elastic.Clients.Elasticsearch.MultiTermVectorsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiTermVectorsRequest, Elastic.Clients.Elasticsearch.MultiTermVectorsResponse, Elastic.Clients.Elasticsearch.MultiTermVectorsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiTermVectorsResponse Mtermvectors()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor();
@@ -2760,6 +3586,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiTermVectorsRequest, Elastic.Clients.Elasticsearch.MultiTermVectorsResponse, Elastic.Clients.Elasticsearch.MultiTermVectorsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiTermVectorsResponse Mtermvectors(System.Action<Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor();
@@ -2769,6 +3597,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiTermVectorsRequest, Elastic.Clients.Elasticsearch.MultiTermVectorsResponse, Elastic.Clients.Elasticsearch.MultiTermVectorsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiTermVectorsResponse Mtermvectors(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor(index);
@@ -2777,6 +3607,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiTermVectorsRequest, Elastic.Clients.Elasticsearch.MultiTermVectorsResponse, Elastic.Clients.Elasticsearch.MultiTermVectorsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiTermVectorsResponse Mtermvectors(Elastic.Clients.Elasticsearch.IndexName? index, System.Action<Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor(index);
@@ -2786,6 +3618,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiTermVectorsRequest, Elastic.Clients.Elasticsearch.MultiTermVectorsResponse, Elastic.Clients.Elasticsearch.MultiTermVectorsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiTermVectorsResponse Mtermvectors<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument>();
@@ -2794,6 +3628,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiTermVectorsRequest, Elastic.Clients.Elasticsearch.MultiTermVectorsResponse, Elastic.Clients.Elasticsearch.MultiTermVectorsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiTermVectorsResponse Mtermvectors<TDocument>(System.Action<Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument>();
@@ -2803,6 +3639,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiTermVectorsRequest, Elastic.Clients.Elasticsearch.MultiTermVectorsResponse, Elastic.Clients.Elasticsearch.MultiTermVectorsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiTermVectorsResponse Mtermvectors<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, System.Action<Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument>(index);
@@ -2812,12 +3650,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiTermVectorsRequest, Elastic.Clients.Elasticsearch.MultiTermVectorsResponse, Elastic.Clients.Elasticsearch.MultiTermVectorsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiTermVectorsResponse> MtermvectorsAsync(Elastic.Clients.Elasticsearch.MultiTermVectorsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiTermVectorsRequest, Elastic.Clients.Elasticsearch.MultiTermVectorsResponse, Elastic.Clients.Elasticsearch.MultiTermVectorsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiTermVectorsResponse> MtermvectorsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor();
@@ -2826,6 +3668,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiTermVectorsRequest, Elastic.Clients.Elasticsearch.MultiTermVectorsResponse, Elastic.Clients.Elasticsearch.MultiTermVectorsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiTermVectorsResponse> MtermvectorsAsync(System.Action<Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor();
@@ -2835,6 +3679,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiTermVectorsRequest, Elastic.Clients.Elasticsearch.MultiTermVectorsResponse, Elastic.Clients.Elasticsearch.MultiTermVectorsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiTermVectorsResponse> MtermvectorsAsync(Elastic.Clients.Elasticsearch.IndexName? index, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor(index);
@@ -2843,6 +3689,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiTermVectorsRequest, Elastic.Clients.Elasticsearch.MultiTermVectorsResponse, Elastic.Clients.Elasticsearch.MultiTermVectorsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiTermVectorsResponse> MtermvectorsAsync(Elastic.Clients.Elasticsearch.IndexName? index, System.Action<Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor(index);
@@ -2852,6 +3700,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiTermVectorsRequest, Elastic.Clients.Elasticsearch.MultiTermVectorsResponse, Elastic.Clients.Elasticsearch.MultiTermVectorsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiTermVectorsResponse> MtermvectorsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument>();
@@ -2860,6 +3710,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiTermVectorsRequest, Elastic.Clients.Elasticsearch.MultiTermVectorsResponse, Elastic.Clients.Elasticsearch.MultiTermVectorsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiTermVectorsResponse> MtermvectorsAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument>();
@@ -2869,6 +3721,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiTermVectorsRequest, Elastic.Clients.Elasticsearch.MultiTermVectorsResponse, Elastic.Clients.Elasticsearch.MultiTermVectorsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiTermVectorsResponse> MtermvectorsAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, System.Action<Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument>(index);
@@ -2878,12 +3732,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiTermVectorsRequest, Elastic.Clients.Elasticsearch.MultiTermVectorsResponse, Elastic.Clients.Elasticsearch.MultiTermVectorsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mget.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiGetResponse<TDocument> MultiGet<TDocument>(Elastic.Clients.Elasticsearch.MultiGetRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiGetRequest, Elastic.Clients.Elasticsearch.MultiGetResponse<TDocument>, Elastic.Clients.Elasticsearch.MultiGetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mget.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiGetResponse<TDocument> MultiGet<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>();
@@ -2892,6 +3750,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiGetRequest, Elastic.Clients.Elasticsearch.MultiGetResponse<TDocument>, Elastic.Clients.Elasticsearch.MultiGetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mget.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiGetResponse<TDocument> MultiGet<TDocument>(System.Action<Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>();
@@ -2901,6 +3761,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiGetRequest, Elastic.Clients.Elasticsearch.MultiGetResponse<TDocument>, Elastic.Clients.Elasticsearch.MultiGetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mget.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiGetResponse<TDocument> MultiGet<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>(index);
@@ -2909,6 +3771,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiGetRequest, Elastic.Clients.Elasticsearch.MultiGetResponse<TDocument>, Elastic.Clients.Elasticsearch.MultiGetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mget.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiGetResponse<TDocument> MultiGet<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, System.Action<Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>(index);
@@ -2918,6 +3782,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiGetRequest, Elastic.Clients.Elasticsearch.MultiGetResponse<TDocument>, Elastic.Clients.Elasticsearch.MultiGetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mget.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiGetResponse<TDocumentResponse> MultiGet<TDocument, TDocumentResponse>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>();
@@ -2926,6 +3792,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiGetRequest, Elastic.Clients.Elasticsearch.MultiGetResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MultiGetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mget.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiGetResponse<TDocumentResponse> MultiGet<TDocument, TDocumentResponse>(System.Action<Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>();
@@ -2935,6 +3803,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiGetRequest, Elastic.Clients.Elasticsearch.MultiGetResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MultiGetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mget.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiGetResponse<TDocumentResponse> MultiGet<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>(index);
@@ -2943,6 +3813,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiGetRequest, Elastic.Clients.Elasticsearch.MultiGetResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MultiGetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mget.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiGetResponse<TDocumentResponse> MultiGet<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.IndexName? index, System.Action<Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>(index);
@@ -2952,12 +3824,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiGetRequest, Elastic.Clients.Elasticsearch.MultiGetResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MultiGetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mget.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiGetResponse<TDocument>> MultiGetAsync<TDocument>(Elastic.Clients.Elasticsearch.MultiGetRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiGetRequest, Elastic.Clients.Elasticsearch.MultiGetResponse<TDocument>, Elastic.Clients.Elasticsearch.MultiGetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mget.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiGetResponse<TDocument>> MultiGetAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>();
@@ -2966,6 +3842,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiGetRequest, Elastic.Clients.Elasticsearch.MultiGetResponse<TDocument>, Elastic.Clients.Elasticsearch.MultiGetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mget.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiGetResponse<TDocument>> MultiGetAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>();
@@ -2975,6 +3853,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiGetRequest, Elastic.Clients.Elasticsearch.MultiGetResponse<TDocument>, Elastic.Clients.Elasticsearch.MultiGetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mget.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiGetResponse<TDocument>> MultiGetAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>(index);
@@ -2983,6 +3863,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiGetRequest, Elastic.Clients.Elasticsearch.MultiGetResponse<TDocument>, Elastic.Clients.Elasticsearch.MultiGetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mget.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiGetResponse<TDocument>> MultiGetAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, System.Action<Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>(index);
@@ -2992,6 +3874,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiGetRequest, Elastic.Clients.Elasticsearch.MultiGetResponse<TDocument>, Elastic.Clients.Elasticsearch.MultiGetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mget.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiGetResponse<TDocumentResponse>> MultiGetAsync<TDocument, TDocumentResponse>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>();
@@ -3000,6 +3884,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiGetRequest, Elastic.Clients.Elasticsearch.MultiGetResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MultiGetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mget.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiGetResponse<TDocumentResponse>> MultiGetAsync<TDocument, TDocumentResponse>(System.Action<Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>();
@@ -3009,6 +3895,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiGetRequest, Elastic.Clients.Elasticsearch.MultiGetResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MultiGetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mget.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiGetResponse<TDocumentResponse>> MultiGetAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.IndexName? index, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>(index);
@@ -3017,6 +3905,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiGetRequest, Elastic.Clients.Elasticsearch.MultiGetResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MultiGetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mget.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiGetResponse<TDocumentResponse>> MultiGetAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.IndexName? index, System.Action<Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>(index);
@@ -3026,12 +3916,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiGetRequest, Elastic.Clients.Elasticsearch.MultiGetResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MultiGetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocument> MultiSearch<TDocument>(Elastic.Clients.Elasticsearch.MultiSearchRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiSearchRequest, Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.MultiSearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocument> MultiSearch<TDocument>(System.Action<Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>();
@@ -3041,6 +3935,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiSearchRequest, Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.MultiSearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocument> MultiSearch<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>(indices);
@@ -3049,6 +3945,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiSearchRequest, Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.MultiSearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocument> MultiSearch<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>(indices);
@@ -3058,6 +3956,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiSearchRequest, Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.MultiSearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocumentResponse> MultiSearch<TDocument, TDocumentResponse>(System.Action<Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>();
@@ -3067,6 +3967,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiSearchRequest, Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MultiSearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocumentResponse> MultiSearch<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>(indices);
@@ -3075,6 +3977,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiSearchRequest, Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MultiSearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocumentResponse> MultiSearch<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>(indices);
@@ -3084,12 +3988,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiSearchRequest, Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MultiSearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocument>> MultiSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.MultiSearchRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiSearchRequest, Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.MultiSearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocument>> MultiSearchAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>();
@@ -3099,6 +4007,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiSearchRequest, Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.MultiSearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocument>> MultiSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>(indices);
@@ -3107,6 +4017,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiSearchRequest, Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.MultiSearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocument>> MultiSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>(indices);
@@ -3116,6 +4028,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiSearchRequest, Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.MultiSearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocumentResponse>> MultiSearchAsync<TDocument, TDocumentResponse>(System.Action<Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>();
@@ -3125,6 +4039,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiSearchRequest, Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MultiSearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocumentResponse>> MultiSearchAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>(indices);
@@ -3133,6 +4049,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiSearchRequest, Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MultiSearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocumentResponse>> MultiSearchAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>(indices);
@@ -3142,12 +4060,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiSearchRequest, Elastic.Clients.Elasticsearch.MultiSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MultiSearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocument> MultiSearchTemplate<TDocument>(Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest, Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocument>, Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocument> MultiSearchTemplate<TDocument>(System.Action<Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>();
@@ -3157,6 +4079,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest, Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocument>, Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocument> MultiSearchTemplate<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>(indices);
@@ -3165,6 +4089,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest, Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocument>, Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocument> MultiSearchTemplate<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>(indices);
@@ -3174,6 +4100,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest, Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocument>, Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocumentResponse> MultiSearchTemplate<TDocument, TDocumentResponse>(System.Action<Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>();
@@ -3183,6 +4111,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest, Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocumentResponse> MultiSearchTemplate<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>(indices);
@@ -3191,6 +4121,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest, Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocumentResponse> MultiSearchTemplate<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>(indices);
@@ -3200,12 +4132,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest, Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocument>> MultiSearchTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest, Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocument>, Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocument>> MultiSearchTemplateAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>();
@@ -3215,6 +4151,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest, Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocument>, Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocument>> MultiSearchTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>(indices);
@@ -3223,6 +4161,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest, Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocument>, Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocument>> MultiSearchTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>(indices);
@@ -3232,6 +4172,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest, Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocument>, Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocumentResponse>> MultiSearchTemplateAsync<TDocument, TDocumentResponse>(System.Action<Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>();
@@ -3241,6 +4183,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest, Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocumentResponse>> MultiSearchTemplateAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>(indices);
@@ -3249,6 +4193,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest, Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocumentResponse>> MultiSearchTemplateAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>(indices);
@@ -3258,12 +4204,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest, Elastic.Clients.Elasticsearch.MultiSearchTemplateResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/OpenPointInTimeRequest.g.xml" path="doc/member[@key='_global.open_point_in_time.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.open_point_in_time.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.OpenPointInTimeResponse OpenPointInTime(Elastic.Clients.Elasticsearch.OpenPointInTimeRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.OpenPointInTimeRequest, Elastic.Clients.Elasticsearch.OpenPointInTimeResponse, Elastic.Clients.Elasticsearch.OpenPointInTimeRequestParameters>(request);
 	}
 
+	/// <include file="../Api/OpenPointInTimeRequest.g.xml" path="doc/member[@key='_global.open_point_in_time.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.open_point_in_time.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.OpenPointInTimeResponse OpenPointInTime(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor(indices);
@@ -3272,6 +4222,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.OpenPointInTimeRequest, Elastic.Clients.Elasticsearch.OpenPointInTimeResponse, Elastic.Clients.Elasticsearch.OpenPointInTimeRequestParameters>(request);
 	}
 
+	/// <include file="../Api/OpenPointInTimeRequest.g.xml" path="doc/member[@key='_global.open_point_in_time.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.open_point_in_time.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.OpenPointInTimeResponse OpenPointInTime(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor(indices);
@@ -3281,6 +4233,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.OpenPointInTimeRequest, Elastic.Clients.Elasticsearch.OpenPointInTimeResponse, Elastic.Clients.Elasticsearch.OpenPointInTimeRequestParameters>(request);
 	}
 
+	/// <include file="../Api/OpenPointInTimeRequest.g.xml" path="doc/member[@key='_global.open_point_in_time.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.open_point_in_time.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.OpenPointInTimeResponse OpenPointInTime<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument>();
@@ -3289,6 +4243,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.OpenPointInTimeRequest, Elastic.Clients.Elasticsearch.OpenPointInTimeResponse, Elastic.Clients.Elasticsearch.OpenPointInTimeRequestParameters>(request);
 	}
 
+	/// <include file="../Api/OpenPointInTimeRequest.g.xml" path="doc/member[@key='_global.open_point_in_time.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.open_point_in_time.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.OpenPointInTimeResponse OpenPointInTime<TDocument>(System.Action<Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument>();
@@ -3298,6 +4254,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.OpenPointInTimeRequest, Elastic.Clients.Elasticsearch.OpenPointInTimeResponse, Elastic.Clients.Elasticsearch.OpenPointInTimeRequestParameters>(request);
 	}
 
+	/// <include file="../Api/OpenPointInTimeRequest.g.xml" path="doc/member[@key='_global.open_point_in_time.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.open_point_in_time.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.OpenPointInTimeResponse OpenPointInTime<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument>(indices);
@@ -3307,12 +4265,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.OpenPointInTimeRequest, Elastic.Clients.Elasticsearch.OpenPointInTimeResponse, Elastic.Clients.Elasticsearch.OpenPointInTimeRequestParameters>(request);
 	}
 
+	/// <include file="../Api/OpenPointInTimeRequest.g.xml" path="doc/member[@key='_global.open_point_in_time.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.open_point_in_time.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.OpenPointInTimeResponse> OpenPointInTimeAsync(Elastic.Clients.Elasticsearch.OpenPointInTimeRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.OpenPointInTimeRequest, Elastic.Clients.Elasticsearch.OpenPointInTimeResponse, Elastic.Clients.Elasticsearch.OpenPointInTimeRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/OpenPointInTimeRequest.g.xml" path="doc/member[@key='_global.open_point_in_time.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.open_point_in_time.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.OpenPointInTimeResponse> OpenPointInTimeAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor(indices);
@@ -3321,6 +4283,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.OpenPointInTimeRequest, Elastic.Clients.Elasticsearch.OpenPointInTimeResponse, Elastic.Clients.Elasticsearch.OpenPointInTimeRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/OpenPointInTimeRequest.g.xml" path="doc/member[@key='_global.open_point_in_time.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.open_point_in_time.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.OpenPointInTimeResponse> OpenPointInTimeAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor(indices);
@@ -3330,6 +4294,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.OpenPointInTimeRequest, Elastic.Clients.Elasticsearch.OpenPointInTimeResponse, Elastic.Clients.Elasticsearch.OpenPointInTimeRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/OpenPointInTimeRequest.g.xml" path="doc/member[@key='_global.open_point_in_time.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.open_point_in_time.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument>();
@@ -3338,6 +4304,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.OpenPointInTimeRequest, Elastic.Clients.Elasticsearch.OpenPointInTimeResponse, Elastic.Clients.Elasticsearch.OpenPointInTimeRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/OpenPointInTimeRequest.g.xml" path="doc/member[@key='_global.open_point_in_time.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.open_point_in_time.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument>();
@@ -3347,6 +4315,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.OpenPointInTimeRequest, Elastic.Clients.Elasticsearch.OpenPointInTimeResponse, Elastic.Clients.Elasticsearch.OpenPointInTimeRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/OpenPointInTimeRequest.g.xml" path="doc/member[@key='_global.open_point_in_time.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.open_point_in_time.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument>(indices);
@@ -3356,12 +4326,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.OpenPointInTimeRequest, Elastic.Clients.Elasticsearch.OpenPointInTimeResponse, Elastic.Clients.Elasticsearch.OpenPointInTimeRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/PingRequest.g.xml" path="doc/member[@key='_global.ping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.ping.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.PingResponse Ping(Elastic.Clients.Elasticsearch.PingRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.PingRequest, Elastic.Clients.Elasticsearch.PingResponse, Elastic.Clients.Elasticsearch.PingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/PingRequest.g.xml" path="doc/member[@key='_global.ping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.ping.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.PingResponse Ping()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.PingRequestDescriptor();
@@ -3370,6 +4344,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.PingRequest, Elastic.Clients.Elasticsearch.PingResponse, Elastic.Clients.Elasticsearch.PingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/PingRequest.g.xml" path="doc/member[@key='_global.ping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.ping.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.PingResponse Ping(System.Action<Elastic.Clients.Elasticsearch.PingRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.PingRequestDescriptor();
@@ -3379,12 +4355,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.PingRequest, Elastic.Clients.Elasticsearch.PingResponse, Elastic.Clients.Elasticsearch.PingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/PingRequest.g.xml" path="doc/member[@key='_global.ping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.ping.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.PingResponse> PingAsync(Elastic.Clients.Elasticsearch.PingRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.PingRequest, Elastic.Clients.Elasticsearch.PingResponse, Elastic.Clients.Elasticsearch.PingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/PingRequest.g.xml" path="doc/member[@key='_global.ping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.ping.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.PingResponse> PingAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.PingRequestDescriptor();
@@ -3393,6 +4373,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.PingRequest, Elastic.Clients.Elasticsearch.PingResponse, Elastic.Clients.Elasticsearch.PingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/PingRequest.g.xml" path="doc/member[@key='_global.ping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.ping.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.PingResponse> PingAsync(System.Action<Elastic.Clients.Elasticsearch.PingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.PingRequestDescriptor();
@@ -3402,12 +4384,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.PingRequest, Elastic.Clients.Elasticsearch.PingResponse, Elastic.Clients.Elasticsearch.PingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/PutScriptRequest.g.xml" path="doc/member[@key='_global.put_script.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.put_script.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.PutScriptResponse PutScript(Elastic.Clients.Elasticsearch.PutScriptRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.PutScriptRequest, Elastic.Clients.Elasticsearch.PutScriptResponse, Elastic.Clients.Elasticsearch.PutScriptRequestParameters>(request);
 	}
 
+	/// <include file="../Api/PutScriptRequest.g.xml" path="doc/member[@key='_global.put_script.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.put_script.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.PutScriptResponse PutScript(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor(id);
@@ -3416,6 +4402,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.PutScriptRequest, Elastic.Clients.Elasticsearch.PutScriptResponse, Elastic.Clients.Elasticsearch.PutScriptRequestParameters>(request);
 	}
 
+	/// <include file="../Api/PutScriptRequest.g.xml" path="doc/member[@key='_global.put_script.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.put_script.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.PutScriptResponse PutScript(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor(id);
@@ -3425,6 +4413,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.PutScriptRequest, Elastic.Clients.Elasticsearch.PutScriptResponse, Elastic.Clients.Elasticsearch.PutScriptRequestParameters>(request);
 	}
 
+	/// <include file="../Api/PutScriptRequest.g.xml" path="doc/member[@key='_global.put_script.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.put_script.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.PutScriptResponse PutScript(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.Name? context)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor(id, context);
@@ -3433,6 +4423,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.PutScriptRequest, Elastic.Clients.Elasticsearch.PutScriptResponse, Elastic.Clients.Elasticsearch.PutScriptRequestParameters>(request);
 	}
 
+	/// <include file="../Api/PutScriptRequest.g.xml" path="doc/member[@key='_global.put_script.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.put_script.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.PutScriptResponse PutScript(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.Name? context, System.Action<Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor(id, context);
@@ -3442,12 +4434,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.PutScriptRequest, Elastic.Clients.Elasticsearch.PutScriptResponse, Elastic.Clients.Elasticsearch.PutScriptRequestParameters>(request);
 	}
 
+	/// <include file="../Api/PutScriptRequest.g.xml" path="doc/member[@key='_global.put_script.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.put_script.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.PutScriptResponse> PutScriptAsync(Elastic.Clients.Elasticsearch.PutScriptRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.PutScriptRequest, Elastic.Clients.Elasticsearch.PutScriptResponse, Elastic.Clients.Elasticsearch.PutScriptRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/PutScriptRequest.g.xml" path="doc/member[@key='_global.put_script.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.put_script.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.PutScriptResponse> PutScriptAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor(id);
@@ -3456,6 +4452,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.PutScriptRequest, Elastic.Clients.Elasticsearch.PutScriptResponse, Elastic.Clients.Elasticsearch.PutScriptRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/PutScriptRequest.g.xml" path="doc/member[@key='_global.put_script.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.put_script.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.PutScriptResponse> PutScriptAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor(id);
@@ -3465,6 +4463,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.PutScriptRequest, Elastic.Clients.Elasticsearch.PutScriptResponse, Elastic.Clients.Elasticsearch.PutScriptRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/PutScriptRequest.g.xml" path="doc/member[@key='_global.put_script.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.put_script.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.PutScriptResponse> PutScriptAsync(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.Name? context, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor(id, context);
@@ -3473,6 +4473,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.PutScriptRequest, Elastic.Clients.Elasticsearch.PutScriptResponse, Elastic.Clients.Elasticsearch.PutScriptRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/PutScriptRequest.g.xml" path="doc/member[@key='_global.put_script.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.put_script.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.PutScriptResponse> PutScriptAsync(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.Name? context, System.Action<Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor(id, context);
@@ -3482,12 +4484,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.PutScriptRequest, Elastic.Clients.Elasticsearch.PutScriptResponse, Elastic.Clients.Elasticsearch.PutScriptRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.RankEvalResponse RankEval(Elastic.Clients.Elasticsearch.RankEvalRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.RankEvalRequest, Elastic.Clients.Elasticsearch.RankEvalResponse, Elastic.Clients.Elasticsearch.RankEvalRequestParameters>(request);
 	}
 
+	/// <include file="../Api/RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.RankEvalResponse RankEval(System.Action<Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor();
@@ -3497,6 +4503,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.RankEvalRequest, Elastic.Clients.Elasticsearch.RankEvalResponse, Elastic.Clients.Elasticsearch.RankEvalRequestParameters>(request);
 	}
 
+	/// <include file="../Api/RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.RankEvalResponse RankEval(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor(indices);
@@ -3505,6 +4513,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.RankEvalRequest, Elastic.Clients.Elasticsearch.RankEvalResponse, Elastic.Clients.Elasticsearch.RankEvalRequestParameters>(request);
 	}
 
+	/// <include file="../Api/RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.RankEvalResponse RankEval(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor(indices);
@@ -3514,6 +4524,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.RankEvalRequest, Elastic.Clients.Elasticsearch.RankEvalResponse, Elastic.Clients.Elasticsearch.RankEvalRequestParameters>(request);
 	}
 
+	/// <include file="../Api/RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.RankEvalResponse RankEval<TDocument>(System.Action<Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument>();
@@ -3523,6 +4535,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.RankEvalRequest, Elastic.Clients.Elasticsearch.RankEvalResponse, Elastic.Clients.Elasticsearch.RankEvalRequestParameters>(request);
 	}
 
+	/// <include file="../Api/RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.RankEvalResponse RankEval<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument>(indices);
@@ -3532,12 +4546,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.RankEvalRequest, Elastic.Clients.Elasticsearch.RankEvalResponse, Elastic.Clients.Elasticsearch.RankEvalRequestParameters>(request);
 	}
 
+	/// <include file="../Api/RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.RankEvalResponse> RankEvalAsync(Elastic.Clients.Elasticsearch.RankEvalRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.RankEvalRequest, Elastic.Clients.Elasticsearch.RankEvalResponse, Elastic.Clients.Elasticsearch.RankEvalRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.RankEvalResponse> RankEvalAsync(System.Action<Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor();
@@ -3547,6 +4565,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.RankEvalRequest, Elastic.Clients.Elasticsearch.RankEvalResponse, Elastic.Clients.Elasticsearch.RankEvalRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.RankEvalResponse> RankEvalAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor(indices);
@@ -3555,6 +4575,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.RankEvalRequest, Elastic.Clients.Elasticsearch.RankEvalResponse, Elastic.Clients.Elasticsearch.RankEvalRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.RankEvalResponse> RankEvalAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor(indices);
@@ -3564,6 +4586,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.RankEvalRequest, Elastic.Clients.Elasticsearch.RankEvalResponse, Elastic.Clients.Elasticsearch.RankEvalRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.RankEvalResponse> RankEvalAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument>();
@@ -3573,6 +4597,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.RankEvalRequest, Elastic.Clients.Elasticsearch.RankEvalResponse, Elastic.Clients.Elasticsearch.RankEvalRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.RankEvalResponse> RankEvalAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument>(indices);
@@ -3582,12 +4608,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.RankEvalRequest, Elastic.Clients.Elasticsearch.RankEvalResponse, Elastic.Clients.Elasticsearch.RankEvalRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ReindexRequest.g.xml" path="doc/member[@key='_global.reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.reindex.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ReindexResponse Reindex(Elastic.Clients.Elasticsearch.ReindexRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.ReindexRequest, Elastic.Clients.Elasticsearch.ReindexResponse, Elastic.Clients.Elasticsearch.ReindexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ReindexRequest.g.xml" path="doc/member[@key='_global.reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.reindex.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ReindexResponse Reindex(System.Action<Elastic.Clients.Elasticsearch.ReindexRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ReindexRequestDescriptor();
@@ -3597,6 +4627,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ReindexRequest, Elastic.Clients.Elasticsearch.ReindexResponse, Elastic.Clients.Elasticsearch.ReindexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ReindexRequest.g.xml" path="doc/member[@key='_global.reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.reindex.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ReindexResponse Reindex<TDocument>(System.Action<Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument>();
@@ -3606,12 +4638,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ReindexRequest, Elastic.Clients.Elasticsearch.ReindexResponse, Elastic.Clients.Elasticsearch.ReindexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ReindexRequest.g.xml" path="doc/member[@key='_global.reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.reindex.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ReindexResponse> ReindexAsync(Elastic.Clients.Elasticsearch.ReindexRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ReindexRequest, Elastic.Clients.Elasticsearch.ReindexResponse, Elastic.Clients.Elasticsearch.ReindexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ReindexRequest.g.xml" path="doc/member[@key='_global.reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.reindex.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ReindexResponse> ReindexAsync(System.Action<Elastic.Clients.Elasticsearch.ReindexRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ReindexRequestDescriptor();
@@ -3621,6 +4657,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ReindexRequest, Elastic.Clients.Elasticsearch.ReindexResponse, Elastic.Clients.Elasticsearch.ReindexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ReindexRequest.g.xml" path="doc/member[@key='_global.reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.reindex.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ReindexResponse> ReindexAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument>();
@@ -3630,12 +4668,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ReindexRequest, Elastic.Clients.Elasticsearch.ReindexResponse, Elastic.Clients.Elasticsearch.ReindexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ReindexRethrottleRequest.g.xml" path="doc/member[@key='_global.reindex_rethrottle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.reindex_rethrottle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ReindexRethrottleResponse ReindexRethrottle(Elastic.Clients.Elasticsearch.ReindexRethrottleRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.ReindexRethrottleRequest, Elastic.Clients.Elasticsearch.ReindexRethrottleResponse, Elastic.Clients.Elasticsearch.ReindexRethrottleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ReindexRethrottleRequest.g.xml" path="doc/member[@key='_global.reindex_rethrottle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.reindex_rethrottle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ReindexRethrottleResponse ReindexRethrottle(Elastic.Clients.Elasticsearch.Id taskId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor(taskId);
@@ -3644,6 +4686,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ReindexRethrottleRequest, Elastic.Clients.Elasticsearch.ReindexRethrottleResponse, Elastic.Clients.Elasticsearch.ReindexRethrottleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ReindexRethrottleRequest.g.xml" path="doc/member[@key='_global.reindex_rethrottle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.reindex_rethrottle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ReindexRethrottleResponse ReindexRethrottle(Elastic.Clients.Elasticsearch.Id taskId, System.Action<Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor(taskId);
@@ -3653,12 +4697,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ReindexRethrottleRequest, Elastic.Clients.Elasticsearch.ReindexRethrottleResponse, Elastic.Clients.Elasticsearch.ReindexRethrottleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ReindexRethrottleRequest.g.xml" path="doc/member[@key='_global.reindex_rethrottle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.reindex_rethrottle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ReindexRethrottleResponse> ReindexRethrottleAsync(Elastic.Clients.Elasticsearch.ReindexRethrottleRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ReindexRethrottleRequest, Elastic.Clients.Elasticsearch.ReindexRethrottleResponse, Elastic.Clients.Elasticsearch.ReindexRethrottleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ReindexRethrottleRequest.g.xml" path="doc/member[@key='_global.reindex_rethrottle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.reindex_rethrottle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ReindexRethrottleResponse> ReindexRethrottleAsync(Elastic.Clients.Elasticsearch.Id taskId, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor(taskId);
@@ -3667,6 +4715,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ReindexRethrottleRequest, Elastic.Clients.Elasticsearch.ReindexRethrottleResponse, Elastic.Clients.Elasticsearch.ReindexRethrottleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ReindexRethrottleRequest.g.xml" path="doc/member[@key='_global.reindex_rethrottle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.reindex_rethrottle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ReindexRethrottleResponse> ReindexRethrottleAsync(Elastic.Clients.Elasticsearch.Id taskId, System.Action<Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor(taskId);
@@ -3676,12 +4726,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ReindexRethrottleRequest, Elastic.Clients.Elasticsearch.ReindexRethrottleResponse, Elastic.Clients.Elasticsearch.ReindexRethrottleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/RenderSearchTemplateRequest.g.xml" path="doc/member[@key='_global.render_search_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.render_search_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.RenderSearchTemplateResponse RenderSearchTemplate(Elastic.Clients.Elasticsearch.RenderSearchTemplateRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.RenderSearchTemplateRequest, Elastic.Clients.Elasticsearch.RenderSearchTemplateResponse, Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/RenderSearchTemplateRequest.g.xml" path="doc/member[@key='_global.render_search_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.render_search_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.RenderSearchTemplateResponse RenderSearchTemplate()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor();
@@ -3690,6 +4744,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.RenderSearchTemplateRequest, Elastic.Clients.Elasticsearch.RenderSearchTemplateResponse, Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/RenderSearchTemplateRequest.g.xml" path="doc/member[@key='_global.render_search_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.render_search_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.RenderSearchTemplateResponse RenderSearchTemplate(System.Action<Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor();
@@ -3699,12 +4755,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.RenderSearchTemplateRequest, Elastic.Clients.Elasticsearch.RenderSearchTemplateResponse, Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/RenderSearchTemplateRequest.g.xml" path="doc/member[@key='_global.render_search_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.render_search_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.RenderSearchTemplateResponse> RenderSearchTemplateAsync(Elastic.Clients.Elasticsearch.RenderSearchTemplateRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.RenderSearchTemplateRequest, Elastic.Clients.Elasticsearch.RenderSearchTemplateResponse, Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/RenderSearchTemplateRequest.g.xml" path="doc/member[@key='_global.render_search_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.render_search_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.RenderSearchTemplateResponse> RenderSearchTemplateAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor();
@@ -3713,6 +4773,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.RenderSearchTemplateRequest, Elastic.Clients.Elasticsearch.RenderSearchTemplateResponse, Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/RenderSearchTemplateRequest.g.xml" path="doc/member[@key='_global.render_search_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.render_search_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.RenderSearchTemplateResponse> RenderSearchTemplateAsync(System.Action<Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor();
@@ -3722,12 +4784,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.RenderSearchTemplateRequest, Elastic.Clients.Elasticsearch.RenderSearchTemplateResponse, Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ScriptsPainlessExecuteRequest.g.xml" path="doc/member[@key='_global.scripts_painless_execute.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.scripts_painless_execute.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteResponse<TResult> ScriptsPainlessExecute<TResult>(Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest, Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteResponse<TResult>, Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ScriptsPainlessExecuteRequest.g.xml" path="doc/member[@key='_global.scripts_painless_execute.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.scripts_painless_execute.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteResponse<TResult> ScriptsPainlessExecute<TDocument, TResult>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument>();
@@ -3736,6 +4802,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest, Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteResponse<TResult>, Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ScriptsPainlessExecuteRequest.g.xml" path="doc/member[@key='_global.scripts_painless_execute.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.scripts_painless_execute.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteResponse<TResult> ScriptsPainlessExecute<TDocument, TResult>(System.Action<Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument>();
@@ -3745,12 +4813,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest, Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteResponse<TResult>, Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ScriptsPainlessExecuteRequest.g.xml" path="doc/member[@key='_global.scripts_painless_execute.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.scripts_painless_execute.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteResponse<TResult>> ScriptsPainlessExecuteAsync<TResult>(Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest, Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteResponse<TResult>, Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ScriptsPainlessExecuteRequest.g.xml" path="doc/member[@key='_global.scripts_painless_execute.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.scripts_painless_execute.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteResponse<TResult>> ScriptsPainlessExecuteAsync<TDocument, TResult>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument>();
@@ -3759,6 +4831,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest, Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteResponse<TResult>, Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ScriptsPainlessExecuteRequest.g.xml" path="doc/member[@key='_global.scripts_painless_execute.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.scripts_painless_execute.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteResponse<TResult>> ScriptsPainlessExecuteAsync<TDocument, TResult>(System.Action<Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument>();
@@ -3768,12 +4842,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest, Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteResponse<TResult>, Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ScrollRequest.g.xml" path="doc/member[@key='_global.scroll.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.scroll.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ScrollResponse<TDocument> Scroll<TDocument>(Elastic.Clients.Elasticsearch.ScrollRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.ScrollRequest, Elastic.Clients.Elasticsearch.ScrollResponse<TDocument>, Elastic.Clients.Elasticsearch.ScrollRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ScrollRequest.g.xml" path="doc/member[@key='_global.scroll.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.scroll.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.ScrollResponse<TDocument> Scroll<TDocument>(System.Action<Elastic.Clients.Elasticsearch.ScrollRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ScrollRequestDescriptor();
@@ -3783,12 +4861,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.ScrollRequest, Elastic.Clients.Elasticsearch.ScrollResponse<TDocument>, Elastic.Clients.Elasticsearch.ScrollRequestParameters>(request);
 	}
 
+	/// <include file="../Api/ScrollRequest.g.xml" path="doc/member[@key='_global.scroll.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.scroll.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ScrollResponse<TDocument>> ScrollAsync<TDocument>(Elastic.Clients.Elasticsearch.ScrollRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ScrollRequest, Elastic.Clients.Elasticsearch.ScrollResponse<TDocument>, Elastic.Clients.Elasticsearch.ScrollRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/ScrollRequest.g.xml" path="doc/member[@key='_global.scroll.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.scroll.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ScrollResponse<TDocument>> ScrollAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.ScrollRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.ScrollRequestDescriptor();
@@ -3798,12 +4880,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.ScrollRequest, Elastic.Clients.Elasticsearch.ScrollResponse<TDocument>, Elastic.Clients.Elasticsearch.ScrollRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchRequest.g.xml" path="doc/member[@key='_global.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchResponse<TDocument> Search<TDocument>(Elastic.Clients.Elasticsearch.SearchRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchRequest, Elastic.Clients.Elasticsearch.SearchResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchRequest.g.xml" path="doc/member[@key='_global.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchResponse<TDocument> Search<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument>();
@@ -3812,6 +4898,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchRequest, Elastic.Clients.Elasticsearch.SearchResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchRequest.g.xml" path="doc/member[@key='_global.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchResponse<TDocument> Search<TDocument>(System.Action<Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument>();
@@ -3821,6 +4909,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchRequest, Elastic.Clients.Elasticsearch.SearchResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchRequest.g.xml" path="doc/member[@key='_global.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchResponse<TDocument> Search<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument>(indices);
@@ -3829,6 +4919,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchRequest, Elastic.Clients.Elasticsearch.SearchResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchRequest.g.xml" path="doc/member[@key='_global.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchResponse<TDocument> Search<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument>(indices);
@@ -3838,6 +4930,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchRequest, Elastic.Clients.Elasticsearch.SearchResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchRequest.g.xml" path="doc/member[@key='_global.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchResponse<TDocumentResponse> Search<TDocument, TDocumentResponse>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument>();
@@ -3846,6 +4940,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchRequest, Elastic.Clients.Elasticsearch.SearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.SearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchRequest.g.xml" path="doc/member[@key='_global.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchResponse<TDocumentResponse> Search<TDocument, TDocumentResponse>(System.Action<Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument>();
@@ -3855,6 +4951,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchRequest, Elastic.Clients.Elasticsearch.SearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.SearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchRequest.g.xml" path="doc/member[@key='_global.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchResponse<TDocumentResponse> Search<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument>(indices);
@@ -3863,6 +4961,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchRequest, Elastic.Clients.Elasticsearch.SearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.SearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchRequest.g.xml" path="doc/member[@key='_global.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchResponse<TDocumentResponse> Search<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument>(indices);
@@ -3872,12 +4972,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchRequest, Elastic.Clients.Elasticsearch.SearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.SearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchRequest.g.xml" path="doc/member[@key='_global.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchResponse<TDocument>> SearchAsync<TDocument>(Elastic.Clients.Elasticsearch.SearchRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchRequest, Elastic.Clients.Elasticsearch.SearchResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchRequest.g.xml" path="doc/member[@key='_global.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchResponse<TDocument>> SearchAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument>();
@@ -3886,6 +4990,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchRequest, Elastic.Clients.Elasticsearch.SearchResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchRequest.g.xml" path="doc/member[@key='_global.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchResponse<TDocument>> SearchAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument>();
@@ -3895,6 +5001,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchRequest, Elastic.Clients.Elasticsearch.SearchResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchRequest.g.xml" path="doc/member[@key='_global.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchResponse<TDocument>> SearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument>(indices);
@@ -3903,6 +5011,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchRequest, Elastic.Clients.Elasticsearch.SearchResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchRequest.g.xml" path="doc/member[@key='_global.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchResponse<TDocument>> SearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument>(indices);
@@ -3912,6 +5022,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchRequest, Elastic.Clients.Elasticsearch.SearchResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchRequest.g.xml" path="doc/member[@key='_global.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchResponse<TDocumentResponse>> SearchAsync<TDocument, TDocumentResponse>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument>();
@@ -3920,6 +5032,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchRequest, Elastic.Clients.Elasticsearch.SearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.SearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchRequest.g.xml" path="doc/member[@key='_global.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchResponse<TDocumentResponse>> SearchAsync<TDocument, TDocumentResponse>(System.Action<Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument>();
@@ -3929,6 +5043,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchRequest, Elastic.Clients.Elasticsearch.SearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.SearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchRequest.g.xml" path="doc/member[@key='_global.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchResponse<TDocumentResponse>> SearchAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument>(indices);
@@ -3937,6 +5053,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchRequest, Elastic.Clients.Elasticsearch.SearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.SearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchRequest.g.xml" path="doc/member[@key='_global.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchResponse<TDocumentResponse>> SearchAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument>(indices);
@@ -3946,76 +5064,96 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchRequest, Elastic.Clients.Elasticsearch.SearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.SearchRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.SearchMvtResponse SearchMvt(Elastic.Clients.Elasticsearch.SearchMvtRequest request)
+	/// <include file="../Api/SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_mvt.Request']/*"/>
+	public virtual Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse SearchMvt(Elastic.Clients.Elasticsearch.SearchMvtRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Clients.Elasticsearch.SearchMvtResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.SearchMvtResponse SearchMvt(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y)
+	/// <include file="../Api/SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_mvt.Request']/*"/>
+	public virtual Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse SearchMvt(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor(indices, field, zoom, x, y);
 		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Clients.Elasticsearch.SearchMvtResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.SearchMvtResponse SearchMvt(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, System.Action<Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor> action)
+	/// <include file="../Api/SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_mvt.Request']/*"/>
+	public virtual Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse SearchMvt(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, System.Action<Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor(indices, field, zoom, x, y);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Clients.Elasticsearch.SearchMvtResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.SearchMvtResponse SearchMvt<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, System.Action<Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument>> action)
+	/// <include file="../Api/SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_mvt.Request']/*"/>
+	public virtual Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse SearchMvt<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, System.Action<Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument>(indices, field, zoom, x, y);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Clients.Elasticsearch.SearchMvtResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchMvtResponse> SearchMvtAsync(Elastic.Clients.Elasticsearch.SearchMvtRequest request, System.Threading.CancellationToken cancellationToken = default)
+	/// <include file="../Api/SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_mvt.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse> SearchMvtAsync(Elastic.Clients.Elasticsearch.SearchMvtRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Clients.Elasticsearch.SearchMvtResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchMvtResponse> SearchMvtAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, System.Threading.CancellationToken cancellationToken = default)
+	/// <include file="../Api/SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_mvt.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse> SearchMvtAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor(indices, field, zoom, x, y);
 		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Clients.Elasticsearch.SearchMvtResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchMvtResponse> SearchMvtAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, System.Action<Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	/// <include file="../Api/SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_mvt.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse> SearchMvtAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, System.Action<Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor(indices, field, zoom, x, y);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Clients.Elasticsearch.SearchMvtResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchMvtResponse> SearchMvtAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, System.Action<Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	/// <include file="../Api/SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_mvt.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse> SearchMvtAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, System.Action<Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument>(indices, field, zoom, x, y);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Clients.Elasticsearch.SearchMvtResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchShardsResponse SearchShards(Elastic.Clients.Elasticsearch.SearchShardsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchShardsRequest, Elastic.Clients.Elasticsearch.SearchShardsResponse, Elastic.Clients.Elasticsearch.SearchShardsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchShardsResponse SearchShards()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor();
@@ -4024,6 +5162,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchShardsRequest, Elastic.Clients.Elasticsearch.SearchShardsResponse, Elastic.Clients.Elasticsearch.SearchShardsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchShardsResponse SearchShards(System.Action<Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor();
@@ -4033,6 +5173,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchShardsRequest, Elastic.Clients.Elasticsearch.SearchShardsResponse, Elastic.Clients.Elasticsearch.SearchShardsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchShardsResponse SearchShards(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor(indices);
@@ -4041,6 +5183,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchShardsRequest, Elastic.Clients.Elasticsearch.SearchShardsResponse, Elastic.Clients.Elasticsearch.SearchShardsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchShardsResponse SearchShards(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor(indices);
@@ -4050,6 +5194,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchShardsRequest, Elastic.Clients.Elasticsearch.SearchShardsResponse, Elastic.Clients.Elasticsearch.SearchShardsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchShardsResponse SearchShards<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument>();
@@ -4058,6 +5204,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchShardsRequest, Elastic.Clients.Elasticsearch.SearchShardsResponse, Elastic.Clients.Elasticsearch.SearchShardsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchShardsResponse SearchShards<TDocument>(System.Action<Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument>();
@@ -4067,6 +5215,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchShardsRequest, Elastic.Clients.Elasticsearch.SearchShardsResponse, Elastic.Clients.Elasticsearch.SearchShardsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchShardsResponse SearchShards<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument>(indices);
@@ -4076,12 +5226,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchShardsRequest, Elastic.Clients.Elasticsearch.SearchShardsResponse, Elastic.Clients.Elasticsearch.SearchShardsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchShardsResponse> SearchShardsAsync(Elastic.Clients.Elasticsearch.SearchShardsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchShardsRequest, Elastic.Clients.Elasticsearch.SearchShardsResponse, Elastic.Clients.Elasticsearch.SearchShardsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchShardsResponse> SearchShardsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor();
@@ -4090,6 +5244,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchShardsRequest, Elastic.Clients.Elasticsearch.SearchShardsResponse, Elastic.Clients.Elasticsearch.SearchShardsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchShardsResponse> SearchShardsAsync(System.Action<Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor();
@@ -4099,6 +5255,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchShardsRequest, Elastic.Clients.Elasticsearch.SearchShardsResponse, Elastic.Clients.Elasticsearch.SearchShardsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchShardsResponse> SearchShardsAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor(indices);
@@ -4107,6 +5265,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchShardsRequest, Elastic.Clients.Elasticsearch.SearchShardsResponse, Elastic.Clients.Elasticsearch.SearchShardsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchShardsResponse> SearchShardsAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor(indices);
@@ -4116,6 +5276,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchShardsRequest, Elastic.Clients.Elasticsearch.SearchShardsResponse, Elastic.Clients.Elasticsearch.SearchShardsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchShardsResponse> SearchShardsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument>();
@@ -4124,6 +5286,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchShardsRequest, Elastic.Clients.Elasticsearch.SearchShardsResponse, Elastic.Clients.Elasticsearch.SearchShardsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchShardsResponse> SearchShardsAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument>();
@@ -4133,6 +5297,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchShardsRequest, Elastic.Clients.Elasticsearch.SearchShardsResponse, Elastic.Clients.Elasticsearch.SearchShardsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchShardsResponse> SearchShardsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument>(indices);
@@ -4142,12 +5308,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchShardsRequest, Elastic.Clients.Elasticsearch.SearchShardsResponse, Elastic.Clients.Elasticsearch.SearchShardsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocument> SearchTemplate<TDocument>(Elastic.Clients.Elasticsearch.SearchTemplateRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchTemplateRequest, Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocument> SearchTemplate<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>();
@@ -4156,6 +5326,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchTemplateRequest, Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocument> SearchTemplate<TDocument>(System.Action<Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>();
@@ -4165,6 +5337,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchTemplateRequest, Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocument> SearchTemplate<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>(indices);
@@ -4173,6 +5347,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchTemplateRequest, Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocument> SearchTemplate<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>(indices);
@@ -4182,6 +5358,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchTemplateRequest, Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocumentResponse> SearchTemplate<TDocument, TDocumentResponse>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>();
@@ -4190,6 +5368,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchTemplateRequest, Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.SearchTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocumentResponse> SearchTemplate<TDocument, TDocumentResponse>(System.Action<Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>();
@@ -4199,6 +5379,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchTemplateRequest, Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.SearchTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocumentResponse> SearchTemplate<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>(indices);
@@ -4207,6 +5389,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchTemplateRequest, Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.SearchTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocumentResponse> SearchTemplate<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>(indices);
@@ -4216,12 +5400,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchTemplateRequest, Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.SearchTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocument>> SearchTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.SearchTemplateRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchTemplateRequest, Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocument>> SearchTemplateAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>();
@@ -4230,6 +5418,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchTemplateRequest, Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocument>> SearchTemplateAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>();
@@ -4239,6 +5429,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchTemplateRequest, Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocument>> SearchTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>(indices);
@@ -4247,6 +5439,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchTemplateRequest, Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocument>> SearchTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>(indices);
@@ -4256,6 +5450,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchTemplateRequest, Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocumentResponse>> SearchTemplateAsync<TDocument, TDocumentResponse>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>();
@@ -4264,6 +5460,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchTemplateRequest, Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.SearchTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocumentResponse>> SearchTemplateAsync<TDocument, TDocumentResponse>(System.Action<Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>();
@@ -4273,6 +5471,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchTemplateRequest, Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.SearchTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocumentResponse>> SearchTemplateAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>(indices);
@@ -4281,6 +5481,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchTemplateRequest, Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.SearchTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocumentResponse>> SearchTemplateAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>(indices);
@@ -4290,12 +5492,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchTemplateRequest, Elastic.Clients.Elasticsearch.SearchTemplateResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.SearchTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TermsEnumResponse TermsEnum(Elastic.Clients.Elasticsearch.TermsEnumRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.TermsEnumRequest, Elastic.Clients.Elasticsearch.TermsEnumResponse, Elastic.Clients.Elasticsearch.TermsEnumRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TermsEnumResponse TermsEnum(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor(indices);
@@ -4304,6 +5510,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.TermsEnumRequest, Elastic.Clients.Elasticsearch.TermsEnumResponse, Elastic.Clients.Elasticsearch.TermsEnumRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TermsEnumResponse TermsEnum(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor(indices);
@@ -4313,6 +5521,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.TermsEnumRequest, Elastic.Clients.Elasticsearch.TermsEnumResponse, Elastic.Clients.Elasticsearch.TermsEnumRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TermsEnumResponse TermsEnum<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument>();
@@ -4321,6 +5531,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.TermsEnumRequest, Elastic.Clients.Elasticsearch.TermsEnumResponse, Elastic.Clients.Elasticsearch.TermsEnumRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TermsEnumResponse TermsEnum<TDocument>(System.Action<Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument>();
@@ -4330,6 +5542,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.TermsEnumRequest, Elastic.Clients.Elasticsearch.TermsEnumResponse, Elastic.Clients.Elasticsearch.TermsEnumRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TermsEnumResponse TermsEnum<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument>(indices);
@@ -4339,12 +5553,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.TermsEnumRequest, Elastic.Clients.Elasticsearch.TermsEnumResponse, Elastic.Clients.Elasticsearch.TermsEnumRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TermsEnumResponse> TermsEnumAsync(Elastic.Clients.Elasticsearch.TermsEnumRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TermsEnumRequest, Elastic.Clients.Elasticsearch.TermsEnumResponse, Elastic.Clients.Elasticsearch.TermsEnumRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TermsEnumResponse> TermsEnumAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor(indices);
@@ -4353,6 +5571,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TermsEnumRequest, Elastic.Clients.Elasticsearch.TermsEnumResponse, Elastic.Clients.Elasticsearch.TermsEnumRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TermsEnumResponse> TermsEnumAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor(indices);
@@ -4362,6 +5582,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TermsEnumRequest, Elastic.Clients.Elasticsearch.TermsEnumResponse, Elastic.Clients.Elasticsearch.TermsEnumRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TermsEnumResponse> TermsEnumAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument>();
@@ -4370,6 +5592,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TermsEnumRequest, Elastic.Clients.Elasticsearch.TermsEnumResponse, Elastic.Clients.Elasticsearch.TermsEnumRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TermsEnumResponse> TermsEnumAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument>();
@@ -4379,6 +5603,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TermsEnumRequest, Elastic.Clients.Elasticsearch.TermsEnumResponse, Elastic.Clients.Elasticsearch.TermsEnumRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TermsEnumResponse> TermsEnumAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument>(indices);
@@ -4388,12 +5614,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TermsEnumRequest, Elastic.Clients.Elasticsearch.TermsEnumResponse, Elastic.Clients.Elasticsearch.TermsEnumRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TermVectorsResponse Termvectors<TDocument>(Elastic.Clients.Elasticsearch.TermVectorsRequest<TDocument> request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.TermVectorsRequest<TDocument>, Elastic.Clients.Elasticsearch.TermVectorsResponse, Elastic.Clients.Elasticsearch.TermVectorsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TermVectorsResponse Termvectors<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument>(index, id);
@@ -4402,6 +5632,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.TermVectorsRequest<TDocument>, Elastic.Clients.Elasticsearch.TermVectorsResponse, Elastic.Clients.Elasticsearch.TermVectorsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TermVectorsResponse Termvectors<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument>(index, id);
@@ -4411,6 +5643,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.TermVectorsRequest<TDocument>, Elastic.Clients.Elasticsearch.TermVectorsResponse, Elastic.Clients.Elasticsearch.TermVectorsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TermVectorsResponse Termvectors<TDocument>(Elastic.Clients.Elasticsearch.IndexName index)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument>(index);
@@ -4419,6 +5653,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.TermVectorsRequest<TDocument>, Elastic.Clients.Elasticsearch.TermVectorsResponse, Elastic.Clients.Elasticsearch.TermVectorsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TermVectorsResponse Termvectors<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument>(index);
@@ -4428,12 +5664,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.TermVectorsRequest<TDocument>, Elastic.Clients.Elasticsearch.TermVectorsResponse, Elastic.Clients.Elasticsearch.TermVectorsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TermVectorsResponse> TermvectorsAsync<TDocument>(Elastic.Clients.Elasticsearch.TermVectorsRequest<TDocument> request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TermVectorsRequest<TDocument>, Elastic.Clients.Elasticsearch.TermVectorsResponse, Elastic.Clients.Elasticsearch.TermVectorsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TermVectorsResponse> TermvectorsAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument>(index, id);
@@ -4442,6 +5682,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TermVectorsRequest<TDocument>, Elastic.Clients.Elasticsearch.TermVectorsResponse, Elastic.Clients.Elasticsearch.TermVectorsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TermVectorsResponse> TermvectorsAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument>(index, id);
@@ -4451,6 +5693,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TermVectorsRequest<TDocument>, Elastic.Clients.Elasticsearch.TermVectorsResponse, Elastic.Clients.Elasticsearch.TermVectorsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TermVectorsResponse> TermvectorsAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument>(index);
@@ -4459,6 +5703,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TermVectorsRequest<TDocument>, Elastic.Clients.Elasticsearch.TermVectorsResponse, Elastic.Clients.Elasticsearch.TermVectorsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TermVectorsResponse> TermvectorsAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument>(index);
@@ -4468,12 +5714,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TermVectorsRequest<TDocument>, Elastic.Clients.Elasticsearch.TermVectorsResponse, Elastic.Clients.Elasticsearch.TermVectorsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(Elastic.Clients.Elasticsearch.UpdateRequest<TDocument, TPartialDocument> request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.UpdateRequest<TDocument, TPartialDocument>, Elastic.Clients.Elasticsearch.UpdateResponse<TDocument>, Elastic.Clients.Elasticsearch.UpdateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument>(index, id);
@@ -4482,6 +5732,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.UpdateRequest<TDocument, TPartialDocument>, Elastic.Clients.Elasticsearch.UpdateResponse<TDocument>, Elastic.Clients.Elasticsearch.UpdateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument>(index, id);
@@ -4491,12 +5743,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.UpdateRequest<TDocument, TPartialDocument>, Elastic.Clients.Elasticsearch.UpdateResponse<TDocument>, Elastic.Clients.Elasticsearch.UpdateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.UpdateResponse<TDocumentResponse> Update<TDocument, TPartialDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.UpdateRequest<TDocument, TPartialDocument> request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.UpdateRequest<TDocument, TPartialDocument>, Elastic.Clients.Elasticsearch.UpdateResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.UpdateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.UpdateResponse<TDocumentResponse> Update<TDocument, TPartialDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument>(index, id);
@@ -4505,6 +5761,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.UpdateRequest<TDocument, TPartialDocument>, Elastic.Clients.Elasticsearch.UpdateResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.UpdateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.UpdateResponse<TDocumentResponse> Update<TDocument, TPartialDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument>(index, id);
@@ -4514,12 +5772,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.UpdateRequest<TDocument, TPartialDocument>, Elastic.Clients.Elasticsearch.UpdateResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.UpdateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(Elastic.Clients.Elasticsearch.UpdateRequest<TDocument, TPartialDocument> request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.UpdateRequest<TDocument, TPartialDocument>, Elastic.Clients.Elasticsearch.UpdateResponse<TDocument>, Elastic.Clients.Elasticsearch.UpdateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument>(index, id);
@@ -4528,6 +5790,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.UpdateRequest<TDocument, TPartialDocument>, Elastic.Clients.Elasticsearch.UpdateResponse<TDocument>, Elastic.Clients.Elasticsearch.UpdateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument>(index, id);
@@ -4537,12 +5801,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.UpdateRequest<TDocument, TPartialDocument>, Elastic.Clients.Elasticsearch.UpdateResponse<TDocument>, Elastic.Clients.Elasticsearch.UpdateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.UpdateResponse<TDocumentResponse>> UpdateAsync<TDocument, TPartialDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.UpdateRequest<TDocument, TPartialDocument> request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.UpdateRequest<TDocument, TPartialDocument>, Elastic.Clients.Elasticsearch.UpdateResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.UpdateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.UpdateResponse<TDocumentResponse>> UpdateAsync<TDocument, TPartialDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument>(index, id);
@@ -4551,6 +5819,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.UpdateRequest<TDocument, TPartialDocument>, Elastic.Clients.Elasticsearch.UpdateResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.UpdateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.UpdateResponse<TDocumentResponse>> UpdateAsync<TDocument, TPartialDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument>(index, id);
@@ -4560,12 +5830,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.UpdateRequest<TDocument, TPartialDocument>, Elastic.Clients.Elasticsearch.UpdateResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.UpdateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.UpdateByQueryResponse UpdateByQuery(Elastic.Clients.Elasticsearch.UpdateByQueryRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.UpdateByQueryRequest, Elastic.Clients.Elasticsearch.UpdateByQueryResponse, Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.UpdateByQueryResponse UpdateByQuery(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor(indices);
@@ -4574,6 +5848,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.UpdateByQueryRequest, Elastic.Clients.Elasticsearch.UpdateByQueryResponse, Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.UpdateByQueryResponse UpdateByQuery(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor(indices);
@@ -4583,6 +5859,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.UpdateByQueryRequest, Elastic.Clients.Elasticsearch.UpdateByQueryResponse, Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.UpdateByQueryResponse UpdateByQuery<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument>();
@@ -4591,6 +5869,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.UpdateByQueryRequest, Elastic.Clients.Elasticsearch.UpdateByQueryResponse, Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.UpdateByQueryResponse UpdateByQuery<TDocument>(System.Action<Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument>();
@@ -4600,6 +5880,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.UpdateByQueryRequest, Elastic.Clients.Elasticsearch.UpdateByQueryResponse, Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.UpdateByQueryResponse UpdateByQuery<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument>(indices);
@@ -4609,12 +5891,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.UpdateByQueryRequest, Elastic.Clients.Elasticsearch.UpdateByQueryResponse, Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.UpdateByQueryResponse> UpdateByQueryAsync(Elastic.Clients.Elasticsearch.UpdateByQueryRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.UpdateByQueryRequest, Elastic.Clients.Elasticsearch.UpdateByQueryResponse, Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.UpdateByQueryResponse> UpdateByQueryAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor(indices);
@@ -4623,6 +5909,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.UpdateByQueryRequest, Elastic.Clients.Elasticsearch.UpdateByQueryResponse, Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.UpdateByQueryResponse> UpdateByQueryAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor(indices);
@@ -4632,6 +5920,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.UpdateByQueryRequest, Elastic.Clients.Elasticsearch.UpdateByQueryResponse, Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.UpdateByQueryResponse> UpdateByQueryAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument>();
@@ -4640,6 +5930,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.UpdateByQueryRequest, Elastic.Clients.Elasticsearch.UpdateByQueryResponse, Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.UpdateByQueryResponse> UpdateByQueryAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument>();
@@ -4649,6 +5941,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.UpdateByQueryRequest, Elastic.Clients.Elasticsearch.UpdateByQueryResponse, Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.UpdateByQueryResponse> UpdateByQueryAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument>(indices);
@@ -4658,12 +5952,16 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.UpdateByQueryRequest, Elastic.Clients.Elasticsearch.UpdateByQueryResponse, Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/UpdateByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.update_by_query_rethrottle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update_by_query_rethrottle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleResponse UpdateByQueryRethrottle(Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequest, Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleResponse, Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/UpdateByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.update_by_query_rethrottle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update_by_query_rethrottle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleResponse UpdateByQueryRethrottle(Elastic.Clients.Elasticsearch.Id taskId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestDescriptor(taskId);
@@ -4672,6 +5970,8 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequest, Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleResponse, Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/UpdateByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.update_by_query_rethrottle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update_by_query_rethrottle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleResponse UpdateByQueryRethrottle(Elastic.Clients.Elasticsearch.Id taskId, System.Action<Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestDescriptor(taskId);
@@ -4681,12 +5981,16 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequest, Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleResponse, Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/UpdateByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.update_by_query_rethrottle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update_by_query_rethrottle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleResponse> UpdateByQueryRethrottleAsync(Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequest, Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleResponse, Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/UpdateByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.update_by_query_rethrottle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update_by_query_rethrottle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleResponse> UpdateByQueryRethrottleAsync(Elastic.Clients.Elasticsearch.Id taskId, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestDescriptor(taskId);
@@ -4695,6 +5999,8 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequest, Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleResponse, Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/UpdateByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.update_by_query_rethrottle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update_by_query_rethrottle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleResponse> UpdateByQueryRethrottleAsync(Elastic.Clients.Elasticsearch.Id taskId, System.Action<Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestDescriptor(taskId);

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ccr._types.FollowIndexStats#index"><summary><para>
+The name of the follower index.
+</para></summary></member>
+  <member key="ccr._types.FollowIndexStats#shards"><summary><para>
+An array of shard-level following task statistics.
+</para></summary></member>
+</doc>

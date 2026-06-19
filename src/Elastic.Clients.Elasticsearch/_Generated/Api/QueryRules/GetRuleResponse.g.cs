@@ -37,36 +37,16 @@ public sealed partial class GetRuleResponse : Elastic.Transport.Products.Elastic
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The actions to take when the rule is matched.
-	/// The format of this action depends on the rule type.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRuleResponse.g.xml" path="doc/member[@key='query_rules.get_rule.Response#actions']/*"/>
 	public required Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions Actions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The criteria that must be met for the rule to be applied.
-	/// If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRuleResponse.g.xml" path="doc/member[@key='query_rules.get_rule.Response#criteria']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> Criteria { get; set; }
 	public int? Priority { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the rule.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRuleResponse.g.xml" path="doc/member[@key='query_rules.get_rule.Response#rule_id']/*"/>
 	public required string RuleId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of rule.
-	/// <c>pinned</c> will identify and pin specific documents to the top of search results.
-	/// <c>exclude</c> will exclude specific documents from search results.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRuleResponse.g.xml" path="doc/member[@key='query_rules.get_rule.Response#type']/*"/>
 	public required Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType Type { get; set; }
 }

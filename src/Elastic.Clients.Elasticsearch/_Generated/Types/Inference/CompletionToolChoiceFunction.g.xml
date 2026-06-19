@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.CompletionToolChoiceFunction"><summary><para>
+The tool choice function.
+</para></summary></member>
+  <member key="inference._types.CompletionToolChoiceFunction#name"><summary><para>
+The name of the function to call.
+</para></summary></member>
+</doc>

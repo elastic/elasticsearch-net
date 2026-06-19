@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.FunctionScoreMode#avg"><summary><para>
+Scores are averaged.
+</para></summary></member>
+  <member key="_types.query_dsl.FunctionScoreMode#first"><summary><para>
+The first function that has a matching filter is applied.
+</para></summary></member>
+  <member key="_types.query_dsl.FunctionScoreMode#max"><summary><para>
+Maximum score is used.
+</para></summary></member>
+  <member key="_types.query_dsl.FunctionScoreMode#min"><summary><para>
+Minimum score is used.
+</para></summary></member>
+  <member key="_types.query_dsl.FunctionScoreMode#multiply"><summary><para>
+Scores are multiplied.
+</para></summary></member>
+  <member key="_types.query_dsl.FunctionScoreMode#sum"><summary><para>
+Scores are summed.
+</para></summary></member>
+</doc>

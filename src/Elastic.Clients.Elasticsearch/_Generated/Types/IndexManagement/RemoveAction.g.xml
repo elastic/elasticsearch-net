@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.update_aliases.RemoveAction#alias"><summary><para>
+Alias for the action.
+Index alias names support date math.
+</para></summary></member>
+  <member key="indices.update_aliases.RemoveAction#aliases"><summary><para>
+Aliases for the action.
+Index alias names support date math.
+</para></summary></member>
+  <member key="indices.update_aliases.RemoveAction#index"><summary><para>
+Data stream or index for the action.
+Supports wildcards (<c>*</c>).
+</para></summary></member>
+  <member key="indices.update_aliases.RemoveAction#indices"><summary><para>
+Data streams or indices for the action.
+Supports wildcards (<c>*</c>).
+</para></summary></member>
+  <member key="indices.update_aliases.RemoveAction#must_exist"><summary><para>
+If <c>true</c>, the alias must exist to perform the action.
+</para></summary></member>
+</doc>

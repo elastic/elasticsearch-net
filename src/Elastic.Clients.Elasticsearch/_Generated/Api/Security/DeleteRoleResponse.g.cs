@@ -37,11 +37,6 @@ public sealed partial class DeleteRoleResponse : Elastic.Transport.Products.Elas
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If the role is successfully deleted, <c>found</c> is <c>true</c>.
-	/// Otherwise, <c>found</c> is <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRoleResponse.g.xml" path="doc/member[@key='security.delete_role.Response#found']/*"/>
 	public required bool Found { get; set; }
 }

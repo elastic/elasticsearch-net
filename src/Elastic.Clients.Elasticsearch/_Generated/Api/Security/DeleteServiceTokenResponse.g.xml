@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.delete_service_token.Response#found"><summary><para>
+If the service account token is successfully deleted, the request returns <c>{"found": true}</c>.
+Otherwise, the response will have status code 404 and <c>found</c> is set to <c>false</c>.
+</para></summary></member>
+</doc>

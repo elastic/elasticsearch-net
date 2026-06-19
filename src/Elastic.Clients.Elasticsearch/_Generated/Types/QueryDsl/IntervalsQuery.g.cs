@@ -45,58 +45,14 @@ public sealed partial class IntervalsQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns matches that span a combination of other rules.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf? AllOf { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf>("all_of"); set => SetVariant("all_of", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns intervals produced by any of its sub-rules.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf? AnyOf { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf>("any_of"); set => SetVariant("any_of", value); }
-
-	/// <summary>
-	/// <para>
-	/// Matches terms that are similar to the provided term, within an edit distance defined by <c>fuzziness</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy? Fuzzy { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy>("fuzzy"); set => SetVariant("fuzzy", value); }
-
-	/// <summary>
-	/// <para>
-	/// Matches analyzed text.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch? Match { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch>("match"); set => SetVariant("match", value); }
-
-	/// <summary>
-	/// <para>
-	/// Matches terms that start with a specified set of characters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix? Prefix { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix>("prefix"); set => SetVariant("prefix", value); }
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRange? Range { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRange>("range"); set => SetVariant("range", value); }
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexp? Regexp { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexp>("regexp"); set => SetVariant("regexp", value); }
-
-	/// <summary>
-	/// <para>
-	/// Matches terms using a wildcard pattern.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard? Wildcard { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard>("wildcard"); set => SetVariant("wildcard", value); }
-
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
 	public float? Boost { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public string? QueryName { get; set; }
@@ -139,110 +95,60 @@ public readonly partial struct IntervalsQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Returns matches that span a combination of other rules.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> AllOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf? value)
 	{
 		Instance.AllOf = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns matches that span a combination of other rules.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> AllOf(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor<TDocument>> action)
 	{
 		Instance.AllOf = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns intervals produced by any of its sub-rules.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> AnyOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf? value)
 	{
 		Instance.AnyOf = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns intervals produced by any of its sub-rules.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> AnyOf(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<TDocument>> action)
 	{
 		Instance.AnyOf = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches terms that are similar to the provided term, within an edit distance defined by <c>fuzziness</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> Fuzzy(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy? value)
 	{
 		Instance.Fuzzy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches terms that are similar to the provided term, within an edit distance defined by <c>fuzziness</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> Fuzzy(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument>> action)
 	{
 		Instance.Fuzzy = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches analyzed text.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch? value)
 	{
 		Instance.Match = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches analyzed text.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> Match(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument>> action)
 	{
 		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches terms that start with a specified set of characters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> Prefix(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix? value)
 	{
 		Instance.Prefix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches terms that start with a specified set of characters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> Prefix(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor<TDocument>> action)
 	{
 		Instance.Prefix = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor<TDocument>.Build(action);
@@ -279,36 +185,18 @@ public readonly partial struct IntervalsQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches terms using a wildcard pattern.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard? value)
 	{
 		Instance.Wildcard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches terms using a wildcard pattern.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> Wildcard(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor<TDocument>> action)
 	{
 		Instance.Wildcard = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -361,165 +249,90 @@ public readonly partial struct IntervalsQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Returns matches that span a combination of other rules.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor AllOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf? value)
 	{
 		Instance.AllOf = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns matches that span a combination of other rules.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor AllOf(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor> action)
 	{
 		Instance.AllOf = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns matches that span a combination of other rules.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor AllOf<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor<T>> action)
 	{
 		Instance.AllOf = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns intervals produced by any of its sub-rules.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor AnyOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf? value)
 	{
 		Instance.AnyOf = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns intervals produced by any of its sub-rules.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor AnyOf(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor> action)
 	{
 		Instance.AnyOf = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns intervals produced by any of its sub-rules.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor AnyOf<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<T>> action)
 	{
 		Instance.AnyOf = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches terms that are similar to the provided term, within an edit distance defined by <c>fuzziness</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Fuzzy(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy? value)
 	{
 		Instance.Fuzzy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches terms that are similar to the provided term, within an edit distance defined by <c>fuzziness</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Fuzzy(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor> action)
 	{
 		Instance.Fuzzy = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches terms that are similar to the provided term, within an edit distance defined by <c>fuzziness</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Fuzzy<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<T>> action)
 	{
 		Instance.Fuzzy = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches analyzed text.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch? value)
 	{
 		Instance.Match = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches analyzed text.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Match(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor> action)
 	{
 		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches analyzed text.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Match<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<T>> action)
 	{
 		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches terms that start with a specified set of characters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Prefix(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix? value)
 	{
 		Instance.Prefix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches terms that start with a specified set of characters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Prefix(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor> action)
 	{
 		Instance.Prefix = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches terms that start with a specified set of characters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Prefix<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor<T>> action)
 	{
 		Instance.Prefix = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor<T>.Build(action);
@@ -568,47 +381,24 @@ public readonly partial struct IntervalsQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches terms using a wildcard pattern.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard? value)
 	{
 		Instance.Wildcard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches terms using a wildcard pattern.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Wildcard(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor> action)
 	{
 		Instance.Wildcard = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches terms using a wildcard pattern.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Wildcard<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor<T>> action)
 	{
 		Instance.Wildcard = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;

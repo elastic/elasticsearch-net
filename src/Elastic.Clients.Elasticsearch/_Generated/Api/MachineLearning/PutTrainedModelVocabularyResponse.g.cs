@@ -37,10 +37,6 @@ public sealed partial class PutTrainedModelVocabularyResponse : Elastic.Transpor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelVocabularyResponse.g.xml" path="doc/member[@key='ml.put_trained_model_vocabulary.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

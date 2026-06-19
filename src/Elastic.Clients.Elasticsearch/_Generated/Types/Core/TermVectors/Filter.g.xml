@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.termvectors.Filter#max_doc_freq"><summary><para>
+Ignore words which occur in more than this many docs.
+Defaults to unbounded.
+</para></summary></member>
+  <member key="_global.termvectors.Filter#max_num_terms"><summary><para>
+The maximum number of terms that must be returned per field.
+</para></summary></member>
+  <member key="_global.termvectors.Filter#max_term_freq"><summary><para>
+Ignore words with more than this frequency in the source doc.
+It defaults to unbounded.
+</para></summary></member>
+  <member key="_global.termvectors.Filter#max_word_length"><summary><para>
+The maximum word length above which words will be ignored.
+Defaults to unbounded.
+</para></summary></member>
+  <member key="_global.termvectors.Filter#min_doc_freq"><summary><para>
+Ignore terms which do not occur in at least this many docs.
+</para></summary></member>
+  <member key="_global.termvectors.Filter#min_term_freq"><summary><para>
+Ignore words with less than this frequency in the source doc.
+</para></summary></member>
+  <member key="_global.termvectors.Filter#min_word_length"><summary><para>
+The minimum word length below which words will be ignored.
+</para></summary></member>
+</doc>

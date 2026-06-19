@@ -37,10 +37,6 @@ public sealed partial class CreateRepositoryResponse : Elastic.Transport.Product
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateRepositoryResponse.g.xml" path="doc/member[@key='snapshot.create_repository.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

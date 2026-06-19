@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security._types.RoleDescriptorRead#applications"><summary><para>
+A list of application privilege entries
+</para></summary></member>
+  <member key="security._types.RoleDescriptorRead#cluster"><summary><para>
+A list of cluster privileges. These privileges define the cluster level actions that API keys are able to execute.
+</para></summary></member>
+  <member key="security._types.RoleDescriptorRead#description"><summary><para>
+Optional description of the role descriptor
+</para></summary></member>
+  <member key="security._types.RoleDescriptorRead#global"><summary><para>
+An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
+</para></summary></member>
+  <member key="security._types.RoleDescriptorRead#indices"><summary><para>
+A list of indices permissions entries.
+</para></summary></member>
+  <member key="security._types.RoleDescriptorRead#metadata"><summary><para>
+Optional meta-data. Within the metadata object, keys that begin with <c>_</c> are reserved for system usage.
+</para></summary></member>
+  <member key="security._types.RoleDescriptorRead#remote_cluster"><summary><para>
+A list of cluster permissions for remote clusters.
+NOTE: This is limited a subset of the cluster permissions.
+</para></summary></member>
+  <member key="security._types.RoleDescriptorRead#remote_indices"><summary><para>
+A list of indices permissions for remote clusters.
+</para></summary></member>
+  <member key="security._types.RoleDescriptorRead#restriction"><summary><para>
+Restriction for when the role descriptor is allowed to be effective.
+</para></summary></member>
+  <member key="security._types.RoleDescriptorRead#run_as"><summary><para>
+A list of users that the API keys can impersonate.
+NOTE: In Elastic Cloud Serverless, the run-as feature is disabled.
+For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
+</para></summary></member>
+</doc>

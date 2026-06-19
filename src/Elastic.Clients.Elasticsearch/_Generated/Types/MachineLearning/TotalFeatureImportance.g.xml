@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.TotalFeatureImportance#classes"><summary><para>
+If the trained model is a classification model, feature importance statistics are gathered per target class value.
+</para></summary></member>
+  <member key="ml._types.TotalFeatureImportance#feature_name"><summary><para>
+The feature for which this importance was calculated.
+</para></summary></member>
+  <member key="ml._types.TotalFeatureImportance#importance"><summary><para>
+A collection of feature importance statistics related to the training data set for this particular feature.
+</para></summary></member>
+</doc>

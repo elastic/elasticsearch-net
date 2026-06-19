@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.get_model_snapshot_upgrade_stats.Request"><summary><para>
+Get anomaly detection job model snapshot upgrade usage info.
+</para></summary></member>
+  <member key="ml.get_model_snapshot_upgrade_stats.Request#allow_no_match"><summary><para>
+Specifies what to do when the request:
+</para>
+<list type="bullet">
+<item>
+<para>
+Contains wildcard expressions and there are no jobs that match.
+</para>
+</item>
+<item>
+<para>
+Contains the _all string or no identifiers and there are no matches.
+</para>
+</item>
+<item>
+<para>
+Contains wildcard expressions and there are only partial matches.
+</para>
+</item>
+</list>
+<para>
+The default value is true, which returns an empty jobs array when there are no matches and the subset of results
+when there are partial matches. If this parameter is false, the request returns a 404 status code when there are
+no matches or only partial matches.
+</para></summary></member>
+  <member key="ml.get_model_snapshot_upgrade_stats.Request#job_id"><summary><para>
+Identifier for the anomaly detection job.
+</para></summary></member>
+  <member key="ml.get_model_snapshot_upgrade_stats.Request#snapshot_id"><summary><para>
+A numerical character string that uniquely identifies the model snapshot. You can get information for multiple
+snapshots by using a comma-separated list or a wildcard expression. You can get all snapshots by using <c>_all</c>,
+by specifying <c>*</c> as the snapshot ID, or by omitting the snapshot ID.
+</para></summary></member>
+</doc>

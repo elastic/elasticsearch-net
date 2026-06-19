@@ -23,11 +23,12 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepository']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.SourceOnlyRepositoryConverter))]
 public sealed partial class SourceOnlyRepository : Elastic.Clients.Elasticsearch.Snapshot.IRepository
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public SourceOnlyRepository(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings settings)
+	public SourceOnlyRepository(Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings settings)
 	{
 		Settings = settings;
 	}
@@ -42,23 +43,16 @@ public sealed partial class SourceOnlyRepository : Elastic.Clients.Elasticsearch
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The repository settings.
-	/// </para>
-	/// </summary>
-	public required Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings Settings { get; set; }
+	/// <include file="SourceOnlyRepository.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepository#settings']/*"/>
+	public required Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings Settings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The source-only repository type.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepository.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepository#type']/*"/>
 	public string Type => "source";
 
 	public string? Uuid { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepository']/*"/>
 public readonly partial struct SourceOnlyRepositoryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository Instance { get; init; }
@@ -78,36 +72,17 @@ public readonly partial struct SourceOnlyRepositoryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository instance) => new Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The repository settings.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor Settings(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings value)
+	/// <include file="SourceOnlyRepository.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepository#settings']/*"/>
+	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor Settings(Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The repository settings.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor Settings()
+	/// <include file="SourceOnlyRepository.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepository#settings']/*"/>
+	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor Settings(System.Func<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsFactory, Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings> action)
 	{
-		Instance.Settings = Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The repository settings.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor>? action)
-	{
-		Instance.Settings = Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor.Build(action);
+		Instance.Settings = Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsFactory.Build(action);
 		return this;
 	}
 

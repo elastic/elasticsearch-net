@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.DataframeAnalyticsMemoryEstimation#expected_memory_with_disk"><summary><para>
+Estimated memory usage under the assumption that overflowing to disk is allowed during data frame analytics. expected_memory_with_disk is usually smaller than expected_memory_without_disk as using disk allows to limit the main memory needed to perform data frame analytics.
+</para></summary></member>
+  <member key="ml._types.DataframeAnalyticsMemoryEstimation#expected_memory_without_disk"><summary><para>
+Estimated memory usage under the assumption that the whole data frame analytics should happen in memory (i.e. without overflowing to disk).
+</para></summary></member>
+</doc>

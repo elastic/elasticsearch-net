@@ -23,7 +23,7 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexSettingsTimeSeriesConverter))]
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexSettingsTimeSeries']/*"/>
 public sealed partial class IndexSettingsTimeSeries
 {
 	public IndexSettingsTimeSeries()
@@ -40,6 +40,7 @@ public sealed partial class IndexSettingsTimeSeries
 	public System.DateTimeOffset? StartTime { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexSettingsTimeSeries']/*"/>
 public readonly partial struct IndexSettingsTimeSeriesDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries Instance { get; init; }

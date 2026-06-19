@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.CohereTaskSettings#input_type"><summary><para>
+For a <c>text_embedding</c> task, the type of input passed to the model.
+Valid values are:
+</para>
+<list type="bullet">
+<item>
+<para>
+<c>classification</c>: Use it for embeddings passed through a text classifier.
+</para>
+</item>
+<item>
+<para>
+<c>clustering</c>: Use it for the embeddings run through a clustering algorithm.
+</para>
+</item>
+<item>
+<para>
+<c>ingest</c>: Use it for storing document embeddings in a vector database.
+</para>
+</item>
+<item>
+<para>
+<c>search</c>: Use it for storing embeddings of search queries run against a vector database to find relevant documents.
+</para>
+</item>
+</list>
+<para>
+IMPORTANT: The <c>input_type</c> field is required when using embedding models <c>v3</c> and higher.
+</para></summary></member>
+  <member key="inference._types.CohereTaskSettings#return_documents"><summary><para>
+For a <c>rerank</c> task, return doc text within the results.
+</para></summary></member>
+  <member key="inference._types.CohereTaskSettings#top_n"><summary><para>
+For a <c>rerank</c> task, the number of most relevant documents to return.
+It defaults to the number of the documents.
+If this inference endpoint is used in a <c>text_similarity_reranker</c> retriever query and <c>top_n</c> is set, it must be greater than or equal to <c>rank_window_size</c> in the query.
+</para></summary></member>
+  <member key="inference._types.CohereTaskSettings#truncate"><summary><para>
+For a <c>text_embedding</c> task, the method to handle inputs longer than the maximum token length.
+Valid values are:
+</para>
+<list type="bullet">
+<item>
+<para>
+<c>END</c>: When the input exceeds the maximum input token length, the end of the input is discarded.
+</para>
+</item>
+<item>
+<para>
+<c>NONE</c>: When the input exceeds the maximum input token length, an error is returned.
+</para>
+</item>
+<item>
+<para>
+<c>START</c>: When the input exceeds the maximum input token length, the start of the input is discarded.
+</para>
+</item>
+</list></summary></member>
+</doc>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.create_service_token.Request"><summary><para>
+Create a service account token.
+</para>
+<para>
+Create a service accounts token for access without requiring basic authentication.
+</para>
+<para>
+NOTE: Service account tokens never expire.
+You must actively delete them if they are no longer needed.
+</para>
+<para>
+IMPORTANT: On Serverless, non-operator users can create tokens for only <c>elastic/fleet-server</c> and <c>elastic/fleet-server-remote</c>.
+Creating tokens for any other service account requires operator privileges.
+</para></summary></member>
+  <member key="security.create_service_token.Request#name"><summary><para>
+The name for the service account token.
+If omitted, a random name will be generated.
+</para>
+<para>
+Token names must be at least one and no more than 256 characters.
+They can contain alphanumeric characters (a-z, A-Z, 0-9), dashes (<c>-</c>), and underscores (<c>_</c>), but cannot begin with an underscore.
+</para>
+<para>
+NOTE: Token names must be unique in the context of the associated service account.
+They must also be globally unique with their fully qualified names, which are comprised of the service account principal and token name, such as <c>&lt;namespace>/&lt;service>/&lt;token-name></c>.
+</para></summary></member>
+  <member key="security.create_service_token.Request#namespace"><summary><para>
+The name of the namespace, which is a top-level grouping of service accounts.
+</para></summary></member>
+  <member key="security.create_service_token.Request#refresh"><summary><para>
+If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
+</para></summary></member>
+  <member key="security.create_service_token.Request#service"><summary><para>
+The name of the service.
+</para></summary></member>
+</doc>

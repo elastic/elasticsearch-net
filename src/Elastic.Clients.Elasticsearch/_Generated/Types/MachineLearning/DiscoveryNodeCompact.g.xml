@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.DiscoveryNodeCompact"><summary><para>
+Alternative representation of DiscoveryNode used in ml.get_job_stats and ml.get_datafeed_stats
+</para></summary></member>
+</doc>

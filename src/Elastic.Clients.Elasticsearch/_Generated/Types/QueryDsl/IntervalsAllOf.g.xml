@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.IntervalsAllOf#filter"><summary><para>
+Rule used to filter returned intervals.
+</para></summary></member>
+  <member key="_types.query_dsl.IntervalsAllOf#intervals"><summary><para>
+An array of rules to combine. All rules must produce a match in a document for the overall source to match.
+</para></summary></member>
+  <member key="_types.query_dsl.IntervalsAllOf#max_gaps"><summary><para>
+Maximum number of positions between the matching terms.
+Intervals produced by the rules further apart than this are not considered matches.
+</para></summary></member>
+  <member key="_types.query_dsl.IntervalsAllOf#ordered"><summary><para>
+If <c>true</c>, intervals produced by the rules should appear in the order in which they are specified.
+</para></summary></member>
+</doc>

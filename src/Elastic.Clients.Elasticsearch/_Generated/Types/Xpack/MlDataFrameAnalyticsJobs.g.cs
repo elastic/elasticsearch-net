@@ -23,6 +23,7 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='xpack.usage.MlDataFrameAnalyticsJobs']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.Json.MlDataFrameAnalyticsJobsConverter))]
 public sealed partial class MlDataFrameAnalyticsJobs
 {

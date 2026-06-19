@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest.delete_geoip_database.Request"><summary><para>
+Delete GeoIP database configurations.
+</para>
+<para>
+Delete one or more IP geolocation database configurations.
+</para></summary></member>
+  <member key="ingest.delete_geoip_database.Request#id"><summary><para>
+A comma-separated list of geoip database configurations to delete
+</para></summary></member>
+  <member key="ingest.delete_geoip_database.Request#master_timeout"><summary><para>
+The period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="ingest.delete_geoip_database.Request#timeout"><summary><para>
+The period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

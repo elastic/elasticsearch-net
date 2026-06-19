@@ -23,6 +23,7 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.SparseVectorStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.SparseVectorStatsConverter))]
 public sealed partial class SparseVectorStats
 {

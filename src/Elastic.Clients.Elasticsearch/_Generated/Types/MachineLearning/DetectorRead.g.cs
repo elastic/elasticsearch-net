@@ -23,6 +23,7 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DetectorRead']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DetectorReadConverter))]
 public sealed partial class DetectorRead
 {
@@ -42,86 +43,33 @@ public sealed partial class DetectorRead
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field used to split the data.
-	/// In particular, this property is used for analyzing the splits with respect to their own history.
-	/// It is used for finding unusual values in the context of the split.
-	/// </para>
-	/// </summary>
+	/// <include file="DetectorRead.g.xml" path="doc/member[@key='ml._types.DetectorRead#by_field_name']/*"/>
 	public string? ByFieldName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of custom rule objects, which enable you to customize the way detectors operate.
-	/// For example, a rule may dictate to the detector conditions under which results should be skipped.
-	/// Kibana refers to custom rules as job rules.
-	/// </para>
-	/// </summary>
+	/// <include file="DetectorRead.g.xml" path="doc/member[@key='ml._types.DetectorRead#custom_rules']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? CustomRules { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A description of the detector.
-	/// </para>
-	/// </summary>
+	/// <include file="DetectorRead.g.xml" path="doc/member[@key='ml._types.DetectorRead#detector_description']/*"/>
 	public string? DetectorDescription { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the detector.
-	/// This identifier is based on the order of the detectors in the <c>analysis_config</c>, starting at zero.
-	/// </para>
-	/// </summary>
+	/// <include file="DetectorRead.g.xml" path="doc/member[@key='ml._types.DetectorRead#detector_index']/*"/>
 	public int? DetectorIndex { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains one of the following values: <c>all</c>, <c>none</c>, <c>by</c>, or <c>over</c>.
-	/// If set, frequent entities are excluded from influencing the anomaly results.
-	/// Entities can be considered frequent over time or frequent in a population.
-	/// If you are working with both over and by fields, then you can set <c>exclude_frequent</c> to all for both fields, or to <c>by</c> or <c>over</c> for those specific fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DetectorRead.g.xml" path="doc/member[@key='ml._types.DetectorRead#exclude_frequent']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent? ExcludeFrequent { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field that the detector uses in the function.
-	/// If you use an event rate function such as <c>count</c> or <c>rare</c>, do not specify this field.
-	/// </para>
-	/// </summary>
+	/// <include file="DetectorRead.g.xml" path="doc/member[@key='ml._types.DetectorRead#field_name']/*"/>
 	public string? FieldName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The analysis function that is used.
-	/// For example, <c>count</c>, <c>rare</c>, <c>mean</c>, <c>min</c>, <c>max</c>, and <c>sum</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DetectorRead.g.xml" path="doc/member[@key='ml._types.DetectorRead#function']/*"/>
 	public required string Function { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field used to split the data.
-	/// In particular, this property is used for analyzing the splits with respect to the history of all splits.
-	/// It is used for finding unusual values in the population of all splits.
-	/// </para>
-	/// </summary>
+	/// <include file="DetectorRead.g.xml" path="doc/member[@key='ml._types.DetectorRead#over_field_name']/*"/>
 	public string? OverFieldName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field used to segment the analysis.
-	/// When you use this property, you have completely independent baselines for each value of this field.
-	/// </para>
-	/// </summary>
+	/// <include file="DetectorRead.g.xml" path="doc/member[@key='ml._types.DetectorRead#partition_field_name']/*"/>
 	public string? PartitionFieldName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines whether a new series is used as the null series when there is no value for the by or partition fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DetectorRead.g.xml" path="doc/member[@key='ml._types.DetectorRead#use_null']/*"/>
 	public bool? UseNull { get; set; }
 }

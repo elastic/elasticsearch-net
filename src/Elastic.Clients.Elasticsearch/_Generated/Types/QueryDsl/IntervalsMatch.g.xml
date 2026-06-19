@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.IntervalsMatch#analyzer"><summary><para>
+Analyzer used to analyze terms in the query.
+</para></summary></member>
+  <member key="_types.query_dsl.IntervalsMatch#filter"><summary><para>
+An optional interval filter.
+</para></summary></member>
+  <member key="_types.query_dsl.IntervalsMatch#max_gaps"><summary><para>
+Maximum number of positions between the matching terms.
+Terms further apart than this are not considered matches.
+</para></summary></member>
+  <member key="_types.query_dsl.IntervalsMatch#ordered"><summary><para>
+If <c>true</c>, matching terms must appear in their specified order.
+</para></summary></member>
+  <member key="_types.query_dsl.IntervalsMatch#query"><summary><para>
+Text you wish to find in the provided field.
+</para></summary></member>
+  <member key="_types.query_dsl.IntervalsMatch#use_field"><summary><para>
+If specified, match intervals from this field rather than the top-level field.
+The <c>term</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
+</para></summary></member>
+</doc>

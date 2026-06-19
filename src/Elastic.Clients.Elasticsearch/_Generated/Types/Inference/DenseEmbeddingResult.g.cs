@@ -17,17 +17,14 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-/// <summary>
-/// <para>
-/// The dense embedding result object for float representation
-/// </para>
-/// </summary>
+/// <include file="DenseEmbeddingResult.g.xml" path="doc/member[@key='inference._types.DenseEmbeddingResult']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.DenseEmbeddingResult']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.DenseEmbeddingResultConverter))]
 public sealed partial class DenseEmbeddingResult
 {

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.HuggingFaceTaskSettings#return_documents"><summary><para>
+For a <c>rerank</c> task, return doc text within the results.
+</para></summary></member>
+  <member key="inference._types.HuggingFaceTaskSettings#top_n"><summary><para>
+For a <c>rerank</c> task, the number of most relevant documents to return.
+It defaults to the number of the documents.
+</para></summary></member>
+</doc>

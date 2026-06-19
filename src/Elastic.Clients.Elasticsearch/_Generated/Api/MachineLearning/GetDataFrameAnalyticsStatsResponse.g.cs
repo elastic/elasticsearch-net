@@ -39,10 +39,6 @@ public sealed partial class GetDataFrameAnalyticsStatsResponse : Elastic.Transpo
 
 	public required long Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of objects that contain usage information for data frame analytics jobs, which are sorted by the id value in ascending order.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsStatsResponse.g.xml" path="doc/member[@key='ml.get_data_frame_analytics_stats.Response#data_frame_analytics']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalytics> DataFrameAnalytics { get; set; }
 }

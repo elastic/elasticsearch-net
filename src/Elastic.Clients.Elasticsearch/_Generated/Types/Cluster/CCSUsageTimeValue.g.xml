@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.stats.CCSUsageTimeValue#avg"><summary><para>
+The average time taken to execute a request, in milliseconds.
+</para></summary></member>
+  <member key="cluster.stats.CCSUsageTimeValue#max"><summary><para>
+The maximum time taken to execute a request, in milliseconds.
+</para></summary></member>
+  <member key="cluster.stats.CCSUsageTimeValue#p90"><summary><para>
+The 90th percentile of the time taken to execute requests, in milliseconds.
+</para></summary></member>
+</doc>

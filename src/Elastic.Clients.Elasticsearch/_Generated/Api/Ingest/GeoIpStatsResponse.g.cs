@@ -37,17 +37,9 @@ public sealed partial class GeoIpStatsResponse : Elastic.Transport.Products.Elas
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Downloaded GeoIP2 databases for each node.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpStatsResponse.g.xml" path="doc/member[@key='ingest.geo_ip_stats.Response#nodes']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabases> Nodes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Download statistics for all GeoIP2 databases.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpStatsResponse.g.xml" path="doc/member[@key='ingest.geo_ip_stats.Response#stats']/*"/>
 	public required Elastic.Clients.Elasticsearch.Ingest.GeoIpDownloadStatistics Stats { get; set; }
 }

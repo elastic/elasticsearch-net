@@ -32,6 +32,7 @@ public sealed partial class CharFilterTypesConverter : System.Text.Json.Serializ
 	private static readonly System.Text.Json.JsonEncodedText PropBuiltInTokenizers = System.Text.Json.JsonEncodedText.Encode("built_in_tokenizers"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropCharFilterTypes2 = System.Text.Json.JsonEncodedText.Encode("char_filter_types"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropFilterTypes = System.Text.Json.JsonEncodedText.Encode("filter_types"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMultipleSynonymGraphFilters = System.Text.Json.JsonEncodedText.Encode("multiple_synonym_graph_filters"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSynonyms = System.Text.Json.JsonEncodedText.Encode("synonyms"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTokenizerTypes = System.Text.Json.JsonEncodedText.Encode("tokenizer_types"u8);
 
@@ -45,6 +46,7 @@ public sealed partial class CharFilterTypesConverter : System.Text.Json.Serializ
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>> propBuiltInTokenizers = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>> propCharFilterTypes2 = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>> propFilterTypes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.MultipleSynonymGraphFilter?> propMultipleSynonymGraphFilters = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.SynonymsStats>> propSynonyms = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>> propTokenizerTypes = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -84,6 +86,11 @@ public sealed partial class CharFilterTypesConverter : System.Text.Json.Serializ
 				continue;
 			}
 
+			if (propMultipleSynonymGraphFilters.TryReadProperty(ref reader, options, PropMultipleSynonymGraphFilters, null))
+			{
+				continue;
+			}
+
 			if (propSynonyms.TryReadProperty(ref reader, options, PropSynonyms, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.SynonymsStats> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Cluster.SynonymsStats>(o, null, null)!))
 			{
 				continue;
@@ -113,6 +120,7 @@ public sealed partial class CharFilterTypesConverter : System.Text.Json.Serializ
 			BuiltInTokenizers = propBuiltInTokenizers.Value,
 			CharFilterTypes2 = propCharFilterTypes2.Value,
 			FilterTypes = propFilterTypes.Value,
+			MultipleSynonymGraphFilters = propMultipleSynonymGraphFilters.Value,
 			Synonyms = propSynonyms.Value,
 			TokenizerTypes = propTokenizerTypes.Value
 		};
@@ -128,6 +136,7 @@ public sealed partial class CharFilterTypesConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropBuiltInTokenizers, value.BuiltInTokenizers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>(o, v, null));
 		writer.WriteProperty(options, PropCharFilterTypes2, value.CharFilterTypes2, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>(o, v, null));
 		writer.WriteProperty(options, PropFilterTypes, value.FilterTypes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>(o, v, null));
+		writer.WriteProperty(options, PropMultipleSynonymGraphFilters, value.MultipleSynonymGraphFilters, null, null);
 		writer.WriteProperty(options, PropSynonyms, value.Synonyms, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.SynonymsStats> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Cluster.SynonymsStats>(o, v, null, null));
 		writer.WriteProperty(options, PropTokenizerTypes, value.TokenizerTypes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>(o, v, null));
 		writer.WriteEndObject();

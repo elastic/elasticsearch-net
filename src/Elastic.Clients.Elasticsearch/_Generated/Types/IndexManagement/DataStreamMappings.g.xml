@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.get_data_stream_mappings.DataStreamMappings#effective_mappings"><summary><para>
+The settings specific to this data stream merged with the settings from its template. These <c>effective_settings</c>
+are the settings that will be used when a new index is created for this data stream.
+</para></summary></member>
+  <member key="indices.get_data_stream_mappings.DataStreamMappings#mappings"><summary><para>
+The settings specific to this data stream
+</para></summary></member>
+  <member key="indices.get_data_stream_mappings.DataStreamMappings#name"><summary><para>
+The name of the data stream.
+</para></summary></member>
+</doc>

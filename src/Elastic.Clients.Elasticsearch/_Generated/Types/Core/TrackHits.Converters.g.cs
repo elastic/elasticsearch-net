@@ -30,8 +30,8 @@ public sealed partial class TrackHitsConverter : System.Text.Json.Serialization.
 		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.True | Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.False, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.Number);
 		return selector(ref reader, options) switch
 		{
-			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Elastic.Clients.Elasticsearch.Core.Search.TrackHits(reader.ReadValue<bool>(options, null)),
-			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Elastic.Clients.Elasticsearch.Core.Search.TrackHits(reader.ReadValue<int>(options, null)),
+			1 => new Elastic.Clients.Elasticsearch.Core.Search.TrackHits(reader.ReadValue<bool>(options, null)),
+			2 => new Elastic.Clients.Elasticsearch.Core.Search.TrackHits(reader.ReadValue<int>(options, null)),
 			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(Elastic.Clients.Elasticsearch.Core.Search.TrackHits)}")
 		};
 	}

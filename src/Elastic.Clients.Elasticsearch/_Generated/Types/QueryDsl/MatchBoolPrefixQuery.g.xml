@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.MatchBoolPrefixQuery#analyzer"><summary><para>
+Analyzer used to convert the text in the query value into tokens.
+</para></summary></member>
+  <member key="_types.query_dsl.MatchBoolPrefixQuery#boost"><summary><para>
+Floating point number used to decrease or increase the relevance scores of the query.
+Boost values are relative to the default value of 1.0.
+A boost value between 0 and 1.0 decreases the relevance score.
+A value greater than 1.0 increases the relevance score.
+</para></summary></member>
+  <member key="_types.query_dsl.MatchBoolPrefixQuery#fuzziness"><summary><para>
+Maximum edit distance allowed for matching.
+Can be applied to the term subqueries constructed for all terms but the final term.
+</para></summary></member>
+  <member key="_types.query_dsl.MatchBoolPrefixQuery#fuzzy_rewrite"><summary><para>
+Method used to rewrite the query.
+Can be applied to the term subqueries constructed for all terms but the final term.
+</para></summary></member>
+  <member key="_types.query_dsl.MatchBoolPrefixQuery#fuzzy_transpositions"><summary><para>
+If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
+Can be applied to the term subqueries constructed for all terms but the final term.
+</para></summary></member>
+  <member key="_types.query_dsl.MatchBoolPrefixQuery#max_expansions"><summary><para>
+Maximum number of terms to which the query will expand.
+Can be applied to the term subqueries constructed for all terms but the final term.
+</para></summary></member>
+  <member key="_types.query_dsl.MatchBoolPrefixQuery#minimum_should_match"><summary><para>
+Minimum number of clauses that must match for a document to be returned.
+Applied to the constructed bool query.
+</para></summary></member>
+  <member key="_types.query_dsl.MatchBoolPrefixQuery#operator"><summary><para>
+Boolean logic used to interpret text in the query value.
+Applied to the constructed bool query.
+</para></summary></member>
+  <member key="_types.query_dsl.MatchBoolPrefixQuery#prefix_length"><summary><para>
+Number of beginning characters left unchanged for fuzzy matching.
+Can be applied to the term subqueries constructed for all terms but the final term.
+</para></summary></member>
+  <member key="_types.query_dsl.MatchBoolPrefixQuery#query"><summary><para>
+Terms you wish to find in the provided field.
+The last term is used in a prefix query.
+</para></summary></member>
+</doc>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.modify_data_stream.Request"><summary><para>
+Update data streams.
+</para>
+<para>
+Performs one or more data stream modification actions in a single atomic operation.
+</para></summary></member>
+  <member key="indices.modify_data_stream.Request#actions"><summary><para>
+Actions to perform.
+</para></summary></member>
+</doc>

@@ -26,6 +26,8 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 public sealed partial class MessageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.Message>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropContent = System.Text.Json.JsonEncodedText.Encode("content"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReasoning = System.Text.Json.JsonEncodedText.Encode("reasoning"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReasoningDetails = System.Text.Json.JsonEncodedText.Encode("reasoning_details"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRole = System.Text.Json.JsonEncodedText.Encode("role"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropToolCallId = System.Text.Json.JsonEncodedText.Encode("tool_call_id"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropToolCalls = System.Text.Json.JsonEncodedText.Encode("tool_calls"u8);
@@ -34,12 +36,24 @@ public sealed partial class MessageConverter : System.Text.Json.Serialization.Js
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.ContentObject>>?> propContent = default;
+		LocalJsonValue<string?> propReasoning = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.IReasoningDetail>?> propReasoningDetails = default;
 		LocalJsonValue<string> propRole = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propToolCallId = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.ToolCall>?> propToolCalls = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propContent.TryReadProperty(ref reader, options, PropContent, static Elastic.Clients.Elasticsearch.Union<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.ContentObject>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.ContentObject>>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartArray), null, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.ContentObject> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Inference.ContentObject>(o, null)!)))
+			{
+				continue;
+			}
+
+			if (propReasoning.TryReadProperty(ref reader, options, PropReasoning, null))
+			{
+				continue;
+			}
+
+			if (propReasoningDetails.TryReadProperty(ref reader, options, PropReasoningDetails, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.IReasoningDetail>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Inference.IReasoningDetail>(o, null)))
 			{
 				continue;
 			}
@@ -72,6 +86,8 @@ public sealed partial class MessageConverter : System.Text.Json.Serialization.Js
 		return new Elastic.Clients.Elasticsearch.Inference.Message(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Content = propContent.Value,
+			Reasoning = propReasoning.Value,
+			ReasoningDetails = propReasoningDetails.Value,
 			Role = propRole.Value,
 			ToolCallId = propToolCallId.Value,
 			ToolCalls = propToolCalls.Value
@@ -82,6 +98,8 @@ public sealed partial class MessageConverter : System.Text.Json.Serialization.Js
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropContent, value.Content, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.ContentObject>>? v) => w.WriteUnionValue<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.ContentObject>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.ContentObject> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Inference.ContentObject>(o, v, null)));
+		writer.WriteProperty(options, PropReasoning, value.Reasoning, null, null);
+		writer.WriteProperty(options, PropReasoningDetails, value.ReasoningDetails, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.IReasoningDetail>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Inference.IReasoningDetail>(o, v, null));
 		writer.WriteProperty(options, PropRole, value.Role, null, null);
 		writer.WriteProperty(options, PropToolCallId, value.ToolCallId, null, null);
 		writer.WriteProperty(options, PropToolCalls, value.ToolCalls, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.ToolCall>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Inference.ToolCall>(o, v, null));

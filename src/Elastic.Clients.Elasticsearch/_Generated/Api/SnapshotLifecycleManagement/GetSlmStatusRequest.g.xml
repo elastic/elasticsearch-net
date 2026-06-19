@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="slm.get_status.Request"><summary><para>
+Get the snapshot lifecycle management status.
+</para></summary></member>
+  <member key="slm.get_status.Request#master_timeout"><summary><para>
+The period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+To indicate that the request should never timeout, set it to <c>-1</c>.
+</para></summary></member>
+  <member key="slm.get_status.Request#timeout"><summary><para>
+The period to wait for a response.
+If no response is received before the timeout expires, the request fails and returns an error.
+To indicate that the request should never timeout, set it to <c>-1</c>.
+</para></summary></member>
+</doc>

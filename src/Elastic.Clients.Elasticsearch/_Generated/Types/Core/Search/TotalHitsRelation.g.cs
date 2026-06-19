@@ -26,18 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.TotalHitsRelationConverter))]
 public enum TotalHitsRelation
 {
-	/// <summary>
-	/// <para>
-	/// Accurate
-	/// </para>
-	/// </summary>
+	/// <include file="TotalHitsRelation.g.xml" path="doc/member[@key='_global.search._types.TotalHitsRelation#eq']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "eq")]
 	Eq,
-	/// <summary>
-	/// <para>
-	/// Lower bound, including returned events or sequences
-	/// </para>
-	/// </summary>
+	/// <include file="TotalHitsRelation.g.xml" path="doc/member[@key='_global.search._types.TotalHitsRelation#gte']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "gte")]
 	Gte
 }

@@ -39,10 +39,6 @@ public sealed partial class FieldCapsResponse : Elastic.Transport.Products.Elast
 
 	public required System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.FieldCaps.FieldCapability>> Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The list of indices where this field has the same type family, or null if all indices have the same type family for the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsResponse.g.xml" path="doc/member[@key='_global.field_caps.Response#indices']/*"/>
 	public required System.Collections.Generic.ICollection<string> Indices { get; set; }
 }

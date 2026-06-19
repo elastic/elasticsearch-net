@@ -26,18 +26,10 @@ namespace Elastic.Clients.Elasticsearch;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ConflictsConverter))]
 public enum Conflicts
 {
-	/// <summary>
-	/// <para>
-	/// Stop reindexing if there are conflicts.
-	/// </para>
-	/// </summary>
+	/// <include file="Conflicts.g.xml" path="doc/member[@key='_types.Conflicts#abort']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "abort")]
 	Abort,
-	/// <summary>
-	/// <para>
-	/// Continue reindexing even if there are conflicts.
-	/// </para>
-	/// </summary>
+	/// <include file="Conflicts.g.xml" path="doc/member[@key='_types.Conflicts#proceed']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "proceed")]
 	Proceed
 }

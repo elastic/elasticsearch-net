@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="query_rules.get_ruleset.Response#rules"><summary><para>
+Rules associated with the query ruleset.
+</para></summary></member>
+  <member key="query_rules.get_ruleset.Response#ruleset_id"><summary><para>
+A unique identifier for the ruleset.
+</para></summary></member>
+</doc>

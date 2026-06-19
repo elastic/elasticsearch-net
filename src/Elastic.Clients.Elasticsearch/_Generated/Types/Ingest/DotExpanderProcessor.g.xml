@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.DotExpanderProcessor#description"><summary><para>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</para></summary></member>
+  <member key="ingest._types.DotExpanderProcessor#field"><summary><para>
+The field to expand into an object field.
+If set to <c>*</c>, all top-level fields will be expanded.
+</para></summary></member>
+  <member key="ingest._types.DotExpanderProcessor#if"><summary><para>
+Conditionally execute the processor.
+</para></summary></member>
+  <member key="ingest._types.DotExpanderProcessor#ignore_failure"><summary><para>
+Ignore failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.DotExpanderProcessor#on_failure"><summary><para>
+Handle failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.DotExpanderProcessor#override"><summary><para>
+Controls the behavior when there is already an existing nested object that conflicts with the expanded field.
+When <c>false</c>, the processor will merge conflicts by combining the old and the new values into an array.
+When <c>true</c>, the value from the expanded field will overwrite the existing value.
+</para></summary></member>
+  <member key="ingest._types.DotExpanderProcessor#path"><summary><para>
+The field that contains the field to expand.
+Only required if the field to expand is part another object field, because the <c>field</c> option can only understand leaf fields.
+</para></summary></member>
+  <member key="ingest._types.DotExpanderProcessor#tag"><summary><para>
+Identifier for the processor.
+Useful for debugging and metrics.
+</para></summary></member>
+</doc>

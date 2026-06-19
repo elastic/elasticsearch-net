@@ -37,12 +37,7 @@ public sealed partial class OpenJobResponse : Elastic.Transport.Products.Elastic
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ID of the node that the job was started on. In serverless this will be the "serverless".
-	/// If the job is allowed to open lazily and has not yet been assigned to a node, this value is an empty string.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenJobResponse.g.xml" path="doc/member[@key='ml.open_job.Response#node']/*"/>
 	public required string Node { get; set; }
 	public required bool Opened { get; set; }
 }

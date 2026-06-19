@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.put_trained_model.Request"><summary><para>
+Create a trained model.
+</para>
+<para>
+Enable you to supply a trained model that is not created by data frame analytics.
+</para></summary></member>
+  <member key="ml.put_trained_model.Request#compressed_definition"><summary><para>
+The compressed (GZipped and Base64 encoded) inference definition of the
+model. If compressed_definition is specified, then definition cannot be
+specified.
+</para></summary></member>
+  <member key="ml.put_trained_model.Request#defer_definition_decompression"><summary><para>
+If set to <c>true</c> and a <c>compressed_definition</c> is provided,
+the request defers definition decompression and skips relevant
+validations.
+</para></summary></member>
+  <member key="ml.put_trained_model.Request#definition"><summary><para>
+The inference definition for the model. If definition is specified, then
+compressed_definition cannot be specified.
+</para></summary></member>
+  <member key="ml.put_trained_model.Request#description"><summary><para>
+A human-readable description of the inference trained model.
+</para></summary></member>
+  <member key="ml.put_trained_model.Request#inference_config"><summary><para>
+The default configuration for inference. This can be either a regression
+or classification configuration. It must match the underlying
+definition.trained_model's target_type. For pre-packaged models such as
+ELSER the config is not required.
+</para></summary></member>
+  <member key="ml.put_trained_model.Request#input"><summary><para>
+The input field names for the model definition.
+</para></summary></member>
+  <member key="ml.put_trained_model.Request#metadata"><summary><para>
+An object map that contains metadata about the model.
+</para></summary></member>
+  <member key="ml.put_trained_model.Request#model_id"><summary><para>
+The unique identifier of the trained model.
+</para></summary></member>
+  <member key="ml.put_trained_model.Request#model_size_bytes"><summary><para>
+The estimated memory usage in bytes to keep the trained model in memory.
+This property is supported only if defer_definition_decompression is true
+or the model definition is not supplied.
+</para></summary></member>
+  <member key="ml.put_trained_model.Request#model_type"><summary><para>
+The model type.
+</para></summary></member>
+  <member key="ml.put_trained_model.Request#platform_architecture"><summary><para>
+The platform architecture (if applicable) of the trained mode. If the model
+only works on one platform, because it is heavily optimized for a particular
+processor architecture and OS combination, then this field specifies which.
+The format of the string must match the platform identifiers used by Elasticsearch,
+so one of, <c>linux-x86_64</c>, <c>linux-aarch64</c>, <c>darwin-x86_64</c>, <c>darwin-aarch64</c>,
+or <c>windows-x86_64</c>. For portable models (those that work independent of processor
+architecture or OS features), leave this field unset.
+</para></summary></member>
+  <member key="ml.put_trained_model.Request#prefix_strings"><summary><para>
+Optional prefix strings applied at inference
+</para></summary></member>
+  <member key="ml.put_trained_model.Request#tags"><summary><para>
+An array of tags to organize the model.
+</para></summary></member>
+  <member key="ml.put_trained_model.Request#wait_for_completion"><summary><para>
+Whether to wait for all child operations (e.g. model download)
+to complete.
+</para></summary></member>
+</doc>

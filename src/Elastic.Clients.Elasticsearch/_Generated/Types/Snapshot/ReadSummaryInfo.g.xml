@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="snapshot.repository_analyze.ReadSummaryInfo#count"><summary><para>
+The number of read operations performed in the test.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.ReadSummaryInfo#max_wait"><summary><para>
+The maximum time spent waiting for the first byte of any read request to be received.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.ReadSummaryInfo#max_wait_nanos"><summary><para>
+The maximum time spent waiting for the first byte of any read request to be received, in nanoseconds.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.ReadSummaryInfo#total_elapsed"><summary><para>
+The total elapsed time spent on reading blobs in the test.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.ReadSummaryInfo#total_elapsed_nanos"><summary><para>
+The total elapsed time spent on reading blobs in the test, in nanoseconds.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.ReadSummaryInfo#total_size"><summary><para>
+The total size of all the blobs or partial blobs read in the test.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.ReadSummaryInfo#total_size_bytes"><summary><para>
+The total size of all the blobs or partial blobs read in the test, in bytes.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.ReadSummaryInfo#total_throttled"><summary><para>
+The total time spent waiting due to the <c>max_restore_bytes_per_sec</c> or <c>indices.recovery.max_bytes_per_sec</c> throttles.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.ReadSummaryInfo#total_throttled_nanos"><summary><para>
+The total time spent waiting due to the <c>max_restore_bytes_per_sec</c> or <c>indices.recovery.max_bytes_per_sec</c> throttles, in nanoseconds.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.ReadSummaryInfo#total_wait"><summary><para>
+The total time spent waiting for the first byte of each read request to be received.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.ReadSummaryInfo#total_wait_nanos"><summary><para>
+The total time spent waiting for the first byte of each read request to be received, in nanoseconds.
+</para></summary></member>
+</doc>

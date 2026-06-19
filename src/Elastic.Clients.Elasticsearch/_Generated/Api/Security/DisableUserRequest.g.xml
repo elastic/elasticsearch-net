@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.disable_user.Request"><summary><para>
+Disable users.
+</para>
+<para>
+Disable users in the native realm.
+By default, when you create users, they are enabled.
+You can use this API to revoke a user's access to Elasticsearch.
+</para></summary></member>
+  <member key="security.disable_user.Request#refresh"><summary><para>
+If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
+</para></summary></member>
+  <member key="security.disable_user.Request#username"><summary><para>
+An identifier for the user.
+</para></summary></member>
+</doc>

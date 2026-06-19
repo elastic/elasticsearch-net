@@ -23,11 +23,12 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_index_template.IndexTemplateItem']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexTemplateItemConverter))]
 public sealed partial class IndexTemplateItem
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public IndexTemplateItem(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate indexTemplate, string name)
+	public IndexTemplateItem(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateWithRollover indexTemplate, string name)
 	{
 		IndexTemplate = indexTemplate;
 		Name = name;
@@ -43,6 +44,6 @@ public sealed partial class IndexTemplateItem
 		_ = sentinel;
 	}
 
-	public required Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate IndexTemplate { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateWithRollover IndexTemplate { get; set; }
 	public required string Name { get; set; }
 }

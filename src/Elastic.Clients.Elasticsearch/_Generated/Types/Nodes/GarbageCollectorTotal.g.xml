@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.GarbageCollectorTotal#collection_count"><summary><para>
+Total number of JVM garbage collectors that collect objects.
+</para></summary></member>
+  <member key="nodes._types.GarbageCollectorTotal#collection_time"><summary><para>
+Total time spent by JVM collecting objects.
+</para></summary></member>
+  <member key="nodes._types.GarbageCollectorTotal#collection_time_in_millis"><summary><para>
+Total time, in milliseconds, spent by JVM collecting objects.
+</para></summary></member>
+</doc>

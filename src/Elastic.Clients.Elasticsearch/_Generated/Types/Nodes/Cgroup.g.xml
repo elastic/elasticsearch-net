@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.Cgroup#cpu"><summary><para>
+Contains statistics about <c>cpu</c> control group for the node.
+</para></summary></member>
+  <member key="nodes._types.Cgroup#cpuacct"><summary><para>
+Contains statistics about <c>cpuacct</c> control group for the node.
+</para></summary></member>
+  <member key="nodes._types.Cgroup#memory"><summary><para>
+Contains statistics about the memory control group for the node.
+</para></summary></member>
+</doc>

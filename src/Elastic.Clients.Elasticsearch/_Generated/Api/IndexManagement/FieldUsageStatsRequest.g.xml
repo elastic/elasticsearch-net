@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.field_usage_stats.Request"><summary><para>
+Get field usage stats.
+</para>
+<para>
+Get field usage information for each shard and field of an index.
+Field usage statistics are automatically captured when queries are running on a cluster.
+A shard-level search request that accesses a given field, even if multiple times during that request, is counted as a single use.
+</para>
+<para>
+The response body reports the per-shard usage count of the data structures that back the fields in the index.
+A given request will increment each count by a maximum value of 1, even if the request accesses the same field multiple times.
+</para></summary></member>
+  <member key="indices.field_usage_stats.Request#allow_no_indices"><summary><para>
+A setting that does two separate checks on the index expression.
+If <c>false</c>, the request returns an error (1) if any wildcard expression
+(including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
+complete set of resolved indices, aliases or data streams is empty after all
+expressions are evaluated. If <c>true</c>, index expressions that resolve to no
+indices are allowed and the request returns an empty result.
+</para></summary></member>
+  <member key="indices.field_usage_stats.Request#expand_wildcards"><summary><para>
+Type of index that wildcard patterns can match.
+If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+Supports comma-separated values, such as <c>open,hidden</c>.
+</para></summary></member>
+  <member key="indices.field_usage_stats.Request#fields"><summary><para>
+Comma-separated list or wildcard expressions of fields to include in the statistics.
+</para></summary></member>
+  <member key="indices.field_usage_stats.Request#ignore_unavailable"><summary><para>
+If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
+index, alias, or data stream that is missing, closed, or otherwise unavailable.
+If <c>true</c>, unavailable concrete targets are silently ignored.
+</para></summary></member>
+  <member key="indices.field_usage_stats.Request#index"><summary><para>
+Comma-separated list or wildcard expression of index names used to limit the request.
+</para></summary></member>
+</doc>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="snapshot.repository_analyze.SummaryInfo#read"><summary><para>
+A collection of statistics that summarise the results of the read operations in the test.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.SummaryInfo#write"><summary><para>
+A collection of statistics that summarise the results of the write operations in the test.
+</para></summary></member>
+</doc>

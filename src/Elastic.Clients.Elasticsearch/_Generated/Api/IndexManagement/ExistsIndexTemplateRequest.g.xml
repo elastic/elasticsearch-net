@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.exists_index_template.Request"><summary><para>
+Check index templates.
+</para>
+<para>
+Check whether index templates exist.
+</para></summary></member>
+  <member key="indices.exists_index_template.Request#flat_settings"><summary><para>
+If true, returns settings in flat format.
+</para></summary></member>
+  <member key="indices.exists_index_template.Request#local"><summary><para>
+If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
+</para></summary></member>
+  <member key="indices.exists_index_template.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="indices.exists_index_template.Request#name"><summary><para>
+Comma-separated list of index template names used to limit the request. Wildcard (*) expressions are supported.
+</para></summary></member>
+</doc>

@@ -26,18 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Eql;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Eql.Json.ResultPositionConverter))]
 public enum ResultPosition
 {
-	/// <summary>
-	/// <para>
-	/// Return the earliest matches, similar to the Unix head command.
-	/// </para>
-	/// </summary>
+	/// <include file="ResultPosition.g.xml" path="doc/member[@key='eql.search.ResultPosition#head']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "head")]
 	Head,
-	/// <summary>
-	/// <para>
-	/// Return the most recent matches, similar to the Unix tail command.
-	/// </para>
-	/// </summary>
+	/// <include file="ResultPosition.g.xml" path="doc/member[@key='eql.search.ResultPosition#tail']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "tail")]
 	Tail
 }

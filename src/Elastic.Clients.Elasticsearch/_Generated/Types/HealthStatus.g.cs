@@ -26,29 +26,17 @@ namespace Elastic.Clients.Elasticsearch;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.HealthStatusConverter))]
 public enum HealthStatus
 {
-	/// <summary>
-	/// <para>
-	/// All shards are assigned.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthStatus.g.xml" path="doc/member[@key='_types.HealthStatus#green']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "green")]
 	Green,
-	/// <summary>
-	/// <para>
-	/// One or more primary shards are unassigned, so some data is unavailable. This can occur briefly during cluster startup as primary shards are assigned.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthStatus.g.xml" path="doc/member[@key='_types.HealthStatus#red']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "red")]
 	Red,
 	[System.Runtime.Serialization.EnumMember(Value = "unavailable")]
 	Unavailable,
 	[System.Runtime.Serialization.EnumMember(Value = "unknown")]
 	Unknown,
-	/// <summary>
-	/// <para>
-	/// All primary shards are assigned, but one or more replica shards are unassigned. If a node in the cluster fails, some data could be unavailable until that node is repaired.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthStatus.g.xml" path="doc/member[@key='_types.HealthStatus#yellow']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "yellow")]
 	Yellow
 }

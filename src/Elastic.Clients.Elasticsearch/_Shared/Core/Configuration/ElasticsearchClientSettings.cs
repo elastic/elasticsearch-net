@@ -113,6 +113,7 @@ public abstract class ElasticsearchClientSettingsBase<TConnectionSettings> :
 	private readonly FluentDictionary<MemberInfo, PropertyMapping> _propertyMappings = new();
 	private readonly FluentDictionary<Type, string> _routeProperties = new();
 	private readonly Serializer _sourceSerializer;
+	private readonly VariantRegistry _variantRegistry = new();
 	private BeforeRequestEvent? _onBeforeRequest;
 	private bool _experimentalEnableSerializeNullInferredValues;
 	private FloatVectorDataEncoding _floatVectorDataEncoding = Serialization.FloatVectorDataEncoding.Base64;
@@ -151,6 +152,9 @@ public abstract class ElasticsearchClientSettingsBase<TConnectionSettings> :
 
 	public Serializer SourceSerializer => _sourceSerializer;
 
+	/// <inheritdoc cref="IElasticsearchClientSettings.Variants" />
+	public VariantRegistry Variants => _variantRegistry;
+
 	bool IElasticsearchClientSettings.DefaultDisableIdInference => _defaultDisableAllInference;
 	Func<string, string> IElasticsearchClientSettings.DefaultFieldNameInferrer => _defaultFieldNameInferrer;
 	string IElasticsearchClientSettings.DefaultIndex => _defaultIndex;
@@ -170,6 +174,7 @@ public abstract class ElasticsearchClientSettingsBase<TConnectionSettings> :
 	FloatVectorDataEncoding IElasticsearchClientSettings.FloatVectorDataEncoding => _floatVectorDataEncoding;
 	ByteVectorDataEncoding IElasticsearchClientSettings.ByteVectorDataEncoding => _byteVectorDataEncoding;
 	ExperimentalSettings IElasticsearchClientSettings.Experimental => _experimentalSettings;
+	VariantRegistry IElasticsearchClientSettings.Variants => _variantRegistry;
 
 	bool IElasticsearchClientSettings.ExperimentalEnableSerializeNullInferredValues => _experimentalEnableSerializeNullInferredValues;
 
@@ -321,6 +326,11 @@ public abstract class ElasticsearchClientSettingsBase<TConnectionSettings> :
 		if (!string.IsNullOrWhiteSpace(inferMapping._idProperty))
 			_idProperties[inferMapping._clrType] = inferMapping._idProperty;
 
+		if (inferMapping._disableIdInference)
+			_disableIdInference.Add(inferMapping._clrType);
+		else
+			_disableIdInference.Remove(inferMapping._clrType);
+
 		return (TConnectionSettings)this;
 	}
 
@@ -340,6 +350,14 @@ public abstract class ElasticsearchClientSettingsBase<TConnectionSettings> :
 
 			if (!inferMapping.RelationName.IsNullOrEmpty())
 				_defaultRelationNames[inferMapping.ClrType] = inferMapping.RelationName;
+
+			if (!string.IsNullOrWhiteSpace(inferMapping.IdPropertyName))
+				_idProperties[inferMapping.ClrType] = inferMapping.IdPropertyName;
+
+			if (inferMapping.DisableIdInference)
+				_disableIdInference.Add(inferMapping.ClrType);
+			else
+				_disableIdInference.Remove(inferMapping.ClrType);
 		}
 
 		return (TConnectionSettings)this;
@@ -423,7 +441,6 @@ public abstract class ConnectionConfigurationBase<TConnectionConfiguration> :
 		: base(nodePool, requestInvoker, serializer, registration ?? new ElasticsearchProductRegistration(typeof(ElasticsearchClient)))
 	{
 		UserAgent(ConnectionConfiguration.DefaultUserAgent);
-		ResponseBuilder(new EsqlResponseBuilder());
 	}
 
 	bool TransportClientConfigurationValues.IncludeServerStackTraceOnError => _includeServerStackTraceOnError;

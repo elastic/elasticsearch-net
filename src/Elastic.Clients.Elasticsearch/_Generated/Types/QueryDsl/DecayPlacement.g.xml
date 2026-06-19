@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.DecayPlacement#decay"><summary><para>
+Defines how documents are scored at the distance given at scale.
+</para></summary></member>
+  <member key="_types.query_dsl.DecayPlacement#offset"><summary><para>
+If defined, the decay function will only compute the decay function for documents with a distance greater than the defined <c>offset</c>.
+</para></summary></member>
+  <member key="_types.query_dsl.DecayPlacement#origin"><summary><para>
+The point of origin used for calculating distance. Must be given as a number for numeric field, date for date fields and geo point for geo fields.
+</para></summary></member>
+  <member key="_types.query_dsl.DecayPlacement#scale"><summary><para>
+Defines the distance from origin + offset at which the computed score will equal <c>decay</c> parameter.
+</para></summary></member>
+</doc>

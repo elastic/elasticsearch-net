@@ -23,6 +23,7 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster._types.ComponentTemplateSummary']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ComponentTemplateSummaryConverter))]
 public sealed partial class ComponentTemplateSummary
 {
@@ -38,13 +39,14 @@ public sealed partial class ComponentTemplateSummary
 
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>? Aliases { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptions? DataStreamOptions { get; set; }
-	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover? Lifecycle { get; set; }
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle? Lifecycle { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 	public System.Collections.Generic.IDictionary<string, object>? Meta { get; set; }
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings>? Settings { get; set; }
 	public long? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster._types.ComponentTemplateSummary']/*"/>
 public readonly partial struct ComponentTemplateSummaryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummary Instance { get; init; }
@@ -139,7 +141,7 @@ public readonly partial struct ComponentTemplateSummaryDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument> Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover? value)
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument> Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle? value)
 	{
 		Instance.Lifecycle = value;
 		return this;
@@ -147,13 +149,13 @@ public readonly partial struct ComponentTemplateSummaryDescriptor<TDocument>
 
 	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument> Lifecycle()
 	{
-		Instance.Lifecycle = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor.Build(null);
+		Instance.Lifecycle = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument> Lifecycle(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument> Lifecycle(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor>? action)
 	{
-		Instance.Lifecycle = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor.Build(action);
+		Instance.Lifecycle = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor.Build(action);
 		return this;
 	}
 
@@ -277,6 +279,7 @@ public readonly partial struct ComponentTemplateSummaryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster._types.ComponentTemplateSummary']/*"/>
 public readonly partial struct ComponentTemplateSummaryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummary Instance { get; init; }
@@ -384,7 +387,7 @@ public readonly partial struct ComponentTemplateSummaryDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover? value)
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle? value)
 	{
 		Instance.Lifecycle = value;
 		return this;
@@ -392,13 +395,13 @@ public readonly partial struct ComponentTemplateSummaryDescriptor
 
 	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor Lifecycle()
 	{
-		Instance.Lifecycle = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor.Build(null);
+		Instance.Lifecycle = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor Lifecycle(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor Lifecycle(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor>? action)
 	{
-		Instance.Lifecycle = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor.Build(action);
+		Instance.Lifecycle = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor.Build(action);
 		return this;
 	}
 

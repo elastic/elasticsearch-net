@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="eql.search.ResultPosition#head"><summary><para>
+Return the earliest matches, similar to the Unix head command.
+</para></summary></member>
+  <member key="eql.search.ResultPosition#tail"><summary><para>
+Return the most recent matches, similar to the Unix tail command.
+</para></summary></member>
+</doc>

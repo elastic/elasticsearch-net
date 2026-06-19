@@ -137,7 +137,7 @@ public sealed partial class AggregateDictionaryConverter : System.Text.Json.Seri
 			"value_count" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregate>(options, null),
 			"variable_width_histogram" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregate>(options, null),
 			"weighted_avg" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregate>(options, null),
-			_ => throw new System.Text.Json.JsonException($"Variant '{discriminator}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Aggregations.IAggregate)}'.")
+			_ => options.TryGetContext<Elastic.Clients.Elasticsearch.IElasticsearchClientSettings>(out var settings) && settings.Variants.TryGetReader<Elastic.Clients.Elasticsearch.Aggregations.IAggregate>(discriminator!, out var variantReader) ? variantReader(ref reader, options)! : new Elastic.Clients.Elasticsearch.Aggregations.UnknownAggregate(discriminator!, System.Text.Json.JsonElement.ParseValue(ref reader))
 		};
 	}
 
@@ -365,8 +365,24 @@ public sealed partial class AggregateDictionaryConverter : System.Text.Json.Seri
 			case Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregate v:
 				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregate>(o, v));
 				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.UnknownAggregate custom:
+				writer.WritePropertyName(options, key, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v));
+				custom.Content.WriteTo(writer);
+				break;
 			default:
-				throw new System.Text.Json.JsonException($"Variant '{0}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Aggregations.IAggregate)}'.");
+				if (options.TryGetContext<Elastic.Clients.Elasticsearch.IElasticsearchClientSettings>(out var settings) && settings.Variants.TryGetWriter<Elastic.Clients.Elasticsearch.Aggregations.IAggregate>(value.GetType(), out var variantWriter))
+				{
+					if (!string.Equals(value.Type, variantWriter.Discriminator, System.StringComparison.Ordinal))
+					{
+						throw new System.Text.Json.JsonException($"Variant of runtime type '{value.GetType().Name}' is registered for discriminator '{variantWriter.Discriminator}' but reports '{value.Type}' for type '{nameof(Elastic.Clients.Elasticsearch.Aggregations.IAggregate)}'.");
+					}
+
+					writer.WritePropertyName(options, variantWriter.Discriminator + '#' + name, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v));
+					variantWriter.Write(writer, value, options);
+					break;
+				}
+
+				throw new System.Text.Json.JsonException($"Variant of runtime type '{value.GetType().Name}' with discriminator '{value.Type}' is not registered. Call settings.Variants.Register<{nameof(Elastic.Clients.Elasticsearch.Aggregations.IAggregate)}, T>(\"{value.Type}\") at startup.");
 		}
 	}
 }

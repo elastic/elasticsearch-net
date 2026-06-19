@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.mapping.SparseVectorProperty#index_options"><summary><para>
+Additional index options for the sparse vector field that controls the
+token pruning behavior of the sparse vector field.
+</para></summary></member>
+  <member key="_types.mapping.SparseVectorProperty#meta"><summary><para>
+Metadata about the field.
+</para></summary></member>
+</doc>

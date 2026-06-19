@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search._types.SearchRequestCoordinatorMetadata"><summary><para>
+Coordinator snapshot of the original search request, serialized under <c>profile.request</c> when profiling is enabled.
+Introduced in Elasticsearch 9.5; omitted when the cluster contains mixed-version nodes that do not serialize this metadata.
+</para></summary></member>
+  <member key="_global.search._types.SearchRequestCoordinatorMetadata#indices"><summary><para>
+Target index expressions from the request (before index resolution).
+</para></summary></member>
+  <member key="_global.search._types.SearchRequestCoordinatorMetadata#source"><summary><para>
+Original query source from the search request (<c>SearchSourceBuilder</c> as JSON).
+</para></summary></member>
+</doc>

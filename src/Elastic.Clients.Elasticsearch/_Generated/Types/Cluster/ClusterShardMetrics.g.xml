@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.stats.ClusterShardMetrics#avg"><summary><para>
+Mean number of shards in an index, counting only shards assigned to selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterShardMetrics#max"><summary><para>
+Maximum number of shards in an index, counting only shards assigned to selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterShardMetrics#min"><summary><para>
+Minimum number of shards in an index, counting only shards assigned to selected nodes.
+</para></summary></member>
+</doc>

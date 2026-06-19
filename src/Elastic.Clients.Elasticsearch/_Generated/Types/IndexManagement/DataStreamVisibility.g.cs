@@ -23,6 +23,7 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.DataStreamVisibility']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DataStreamVisibilityConverter))]
 public sealed partial class DataStreamVisibility
 {
@@ -37,9 +38,11 @@ public sealed partial class DataStreamVisibility
 	}
 
 	public bool? AllowCustomRouting { get; set; }
+	public bool? FailureStore { get; set; }
 	public bool? Hidden { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.DataStreamVisibility']/*"/>
 public readonly partial struct DataStreamVisibilityDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility Instance { get; init; }
@@ -62,6 +65,12 @@ public readonly partial struct DataStreamVisibilityDescriptor
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor AllowCustomRouting(bool? value = true)
 	{
 		Instance.AllowCustomRouting = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor FailureStore(bool? value = true)
+	{
+		Instance.FailureStore = value;
 		return this;
 	}
 

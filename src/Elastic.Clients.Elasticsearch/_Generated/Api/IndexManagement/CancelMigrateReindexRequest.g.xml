@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.cancel_migrate_reindex.Request"><summary><para>
+Cancel a migration reindex operation.
+</para>
+<para>
+Cancel a migration reindex attempt for a data stream or index.
+</para></summary></member>
+  <member key="indices.cancel_migrate_reindex.Request#index"><summary><para>
+The index or data stream name
+</para></summary></member>
+</doc>

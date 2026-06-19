@@ -37,124 +37,56 @@ public sealed partial class HealthResponse : Elastic.Transport.Products.Elastics
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of active primary shards.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthResponse.g.xml" path="doc/member[@key='cluster.health.Response#active_primary_shards']/*"/>
 	public required int ActivePrimaryShards { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total number of active primary and replica shards.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthResponse.g.xml" path="doc/member[@key='cluster.health.Response#active_shards']/*"/>
 	public required int ActiveShards { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The ratio of active shards in the cluster expressed as a string formatted percentage.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthResponse.g.xml" path="doc/member[@key='cluster.health.Response#active_shards_percent']/*"/>
 	public string? ActiveShardsPercent { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The ratio of active shards in the cluster expressed as a percentage.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthResponse.g.xml" path="doc/member[@key='cluster.health.Response#active_shards_percent_as_number']/*"/>
 	public required double ActiveShardsPercentAsNumber { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthResponse.g.xml" path="doc/member[@key='cluster.health.Response#cluster_name']/*"/>
 	public required string ClusterName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of shards whose allocation has been delayed by the timeout settings.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthResponse.g.xml" path="doc/member[@key='cluster.health.Response#delayed_unassigned_shards']/*"/>
 	public required int DelayedUnassignedShards { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.IndexHealthStats>? Indices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of shards that are under initialization.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthResponse.g.xml" path="doc/member[@key='cluster.health.Response#initializing_shards']/*"/>
 	public required int InitializingShards { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of nodes that are dedicated data nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthResponse.g.xml" path="doc/member[@key='cluster.health.Response#number_of_data_nodes']/*"/>
 	public required int NumberOfDataNodes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of unfinished fetches.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthResponse.g.xml" path="doc/member[@key='cluster.health.Response#number_of_in_flight_fetch']/*"/>
 	public required int NumberOfInFlightFetch { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of nodes within the cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthResponse.g.xml" path="doc/member[@key='cluster.health.Response#number_of_nodes']/*"/>
 	public required int NumberOfNodes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of cluster-level changes that have not yet been executed.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthResponse.g.xml" path="doc/member[@key='cluster.health.Response#number_of_pending_tasks']/*"/>
 	public required int NumberOfPendingTasks { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of shards that are under relocation.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthResponse.g.xml" path="doc/member[@key='cluster.health.Response#relocating_shards']/*"/>
 	public required int RelocatingShards { get; set; }
 	public required Elastic.Clients.Elasticsearch.HealthStatus Status { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The time since the earliest initiated task is waiting for being performed.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthResponse.g.xml" path="doc/member[@key='cluster.health.Response#task_max_waiting_in_queue']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? TaskMaxWaitingInQueue { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The time expressed in milliseconds since the earliest initiated task is waiting for being performed.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthResponse.g.xml" path="doc/member[@key='cluster.health.Response#task_max_waiting_in_queue_millis']/*"/>
 	public required System.TimeSpan TaskMaxWaitingInQueueMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If false the response returned within the period of time that is specified by the timeout parameter (30s by default)
-	/// </para>
-	/// </summary>
+	/// <include file="HealthResponse.g.xml" path="doc/member[@key='cluster.health.Response#timed_out']/*"/>
 	public required bool TimedOut { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of primary shards that are not allocated.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthResponse.g.xml" path="doc/member[@key='cluster.health.Response#unassigned_primary_shards']/*"/>
 	public required int UnassignedPrimaryShards { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of shards that are not allocated.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthResponse.g.xml" path="doc/member[@key='cluster.health.Response#unassigned_shards']/*"/>
 	public required int UnassignedShards { get; set; }
 }

@@ -17,9 +17,9 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Esql;
 
@@ -37,10 +37,6 @@ public sealed partial class DeleteViewResponse : Elastic.Transport.Products.Elas
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteViewResponse.g.xml" path="doc/member[@key='esql.delete_view.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

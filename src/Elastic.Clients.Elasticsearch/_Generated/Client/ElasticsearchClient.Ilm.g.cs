@@ -26,9 +26,7 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>
-	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IndexLifecycleManagementNamespacedClient"/> class for mocking.
-	/// </para>
+	/// Initializes a new instance of the <cref:Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IndexLifecycleManagementNamespacedClient> class for mocking.
 	/// </summary>
 	protected IndexLifecycleManagementNamespacedClient() : base()
 	{
@@ -38,12 +36,16 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 	{
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/DeleteLifecycleRequest.g.xml" path="doc/member[@key='ilm.delete_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.delete_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/DeleteLifecycleRequest.g.xml" path="doc/member[@key='ilm.delete_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.delete_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.Name name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestDescriptor(name);
@@ -52,6 +54,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/DeleteLifecycleRequest.g.xml" path="doc/member[@key='ilm.delete_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.delete_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestDescriptor(name);
@@ -61,12 +65,16 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/DeleteLifecycleRequest.g.xml" path="doc/member[@key='ilm.delete_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.delete_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/DeleteLifecycleRequest.g.xml" path="doc/member[@key='ilm.delete_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.delete_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestDescriptor(name);
@@ -75,6 +83,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/DeleteLifecycleRequest.g.xml" path="doc/member[@key='ilm.delete_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.delete_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestDescriptor(name);
@@ -84,12 +94,16 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/GetLifecycleRequest.g.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/GetLifecycleRequest.g.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse GetLifecycle()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor();
@@ -98,6 +112,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/GetLifecycleRequest.g.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse GetLifecycle(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor();
@@ -107,6 +123,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/GetLifecycleRequest.g.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.Name? name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor(name);
@@ -115,6 +133,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/GetLifecycleRequest.g.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.Name? name, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor(name);
@@ -124,12 +144,16 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/GetLifecycleRequest.g.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/GetLifecycleRequest.g.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor();
@@ -138,6 +162,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/GetLifecycleRequest.g.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor();
@@ -147,6 +173,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/GetLifecycleRequest.g.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.Name? name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor(name);
@@ -155,6 +183,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/GetLifecycleRequest.g.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.Name? name, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor(name);
@@ -164,12 +194,16 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/GetIlmStatusRequest.g.xml" path="doc/member[@key='ilm.get_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.get_status.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse GetStatus(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/GetIlmStatusRequest.g.xml" path="doc/member[@key='ilm.get_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.get_status.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse GetStatus()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestDescriptor();
@@ -178,6 +212,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/GetIlmStatusRequest.g.xml" path="doc/member[@key='ilm.get_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.get_status.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse GetStatus(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestDescriptor();
@@ -187,12 +223,16 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/GetIlmStatusRequest.g.xml" path="doc/member[@key='ilm.get_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.get_status.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse> GetStatusAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/GetIlmStatusRequest.g.xml" path="doc/member[@key='ilm.get_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.get_status.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse> GetStatusAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestDescriptor();
@@ -201,6 +241,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/GetIlmStatusRequest.g.xml" path="doc/member[@key='ilm.get_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.get_status.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse> GetStatusAsync(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestDescriptor();
@@ -210,12 +252,16 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/MigrateToDataTiersRequest.g.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse MigrateToDataTiers(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/MigrateToDataTiersRequest.g.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse MigrateToDataTiers()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor();
@@ -224,6 +270,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/MigrateToDataTiersRequest.g.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse MigrateToDataTiers(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor();
@@ -233,12 +281,16 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/MigrateToDataTiersRequest.g.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse> MigrateToDataTiersAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/MigrateToDataTiersRequest.g.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse> MigrateToDataTiersAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor();
@@ -247,6 +299,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/MigrateToDataTiersRequest.g.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse> MigrateToDataTiersAsync(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor();
@@ -256,12 +310,16 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/MoveToStepRequest.g.xml" path="doc/member[@key='ilm.move_to_step.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.move_to_step.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse MoveToStep(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/MoveToStepRequest.g.xml" path="doc/member[@key='ilm.move_to_step.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.move_to_step.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse MoveToStep(Elastic.Clients.Elasticsearch.IndexName index)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor(index);
@@ -270,6 +328,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/MoveToStepRequest.g.xml" path="doc/member[@key='ilm.move_to_step.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.move_to_step.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse MoveToStep(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor(index);
@@ -279,6 +339,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/MoveToStepRequest.g.xml" path="doc/member[@key='ilm.move_to_step.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.move_to_step.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse MoveToStep<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>();
@@ -287,6 +349,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/MoveToStepRequest.g.xml" path="doc/member[@key='ilm.move_to_step.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.move_to_step.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse MoveToStep<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>();
@@ -296,6 +360,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/MoveToStepRequest.g.xml" path="doc/member[@key='ilm.move_to_step.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.move_to_step.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse MoveToStep<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>(index);
@@ -305,12 +371,16 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/MoveToStepRequest.g.xml" path="doc/member[@key='ilm.move_to_step.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.move_to_step.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse> MoveToStepAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/MoveToStepRequest.g.xml" path="doc/member[@key='ilm.move_to_step.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.move_to_step.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse> MoveToStepAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor(index);
@@ -319,6 +389,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/MoveToStepRequest.g.xml" path="doc/member[@key='ilm.move_to_step.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.move_to_step.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse> MoveToStepAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor(index);
@@ -328,6 +400,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/MoveToStepRequest.g.xml" path="doc/member[@key='ilm.move_to_step.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.move_to_step.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse> MoveToStepAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>();
@@ -336,6 +410,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/MoveToStepRequest.g.xml" path="doc/member[@key='ilm.move_to_step.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.move_to_step.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse> MoveToStepAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>();
@@ -345,6 +421,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/MoveToStepRequest.g.xml" path="doc/member[@key='ilm.move_to_step.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.move_to_step.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse> MoveToStepAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>(index);
@@ -354,12 +432,16 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/PutLifecycleRequest.g.xml" path="doc/member[@key='ilm.put_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.put_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/PutLifecycleRequest.g.xml" path="doc/member[@key='ilm.put_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.put_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.Name name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor(name);
@@ -368,6 +450,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/PutLifecycleRequest.g.xml" path="doc/member[@key='ilm.put_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.put_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor(name);
@@ -377,12 +461,16 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/PutLifecycleRequest.g.xml" path="doc/member[@key='ilm.put_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.put_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/PutLifecycleRequest.g.xml" path="doc/member[@key='ilm.put_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.put_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor(name);
@@ -391,6 +479,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/PutLifecycleRequest.g.xml" path="doc/member[@key='ilm.put_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.put_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor(name);
@@ -400,12 +490,16 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/RemovePolicyRequest.g.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse RemovePolicy(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/RemovePolicyRequest.g.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse RemovePolicy(Elastic.Clients.Elasticsearch.IndexName index)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor(index);
@@ -414,6 +508,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/RemovePolicyRequest.g.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse RemovePolicy(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor(index);
@@ -423,6 +519,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/RemovePolicyRequest.g.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse RemovePolicy<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>();
@@ -431,6 +529,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/RemovePolicyRequest.g.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse RemovePolicy<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>();
@@ -440,6 +540,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/RemovePolicyRequest.g.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse RemovePolicy<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>(index);
@@ -449,12 +551,16 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/RemovePolicyRequest.g.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse> RemovePolicyAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/RemovePolicyRequest.g.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse> RemovePolicyAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor(index);
@@ -463,6 +569,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/RemovePolicyRequest.g.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse> RemovePolicyAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor(index);
@@ -472,6 +580,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/RemovePolicyRequest.g.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse> RemovePolicyAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>();
@@ -480,6 +590,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/RemovePolicyRequest.g.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse> RemovePolicyAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>();
@@ -489,6 +601,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/RemovePolicyRequest.g.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse> RemovePolicyAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>(index);
@@ -498,12 +612,16 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/RetryRequest.g.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse Retry(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/RetryRequest.g.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse Retry(Elastic.Clients.Elasticsearch.IndexName index)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor(index);
@@ -512,6 +630,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/RetryRequest.g.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse Retry(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor(index);
@@ -521,6 +641,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/RetryRequest.g.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse Retry<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>();
@@ -529,6 +651,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/RetryRequest.g.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse Retry<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>();
@@ -538,6 +662,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/RetryRequest.g.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse Retry<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>(index);
@@ -547,12 +673,16 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/RetryRequest.g.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse> RetryAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/RetryRequest.g.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse> RetryAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor(index);
@@ -561,6 +691,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/RetryRequest.g.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse> RetryAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor(index);
@@ -570,6 +702,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/RetryRequest.g.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse> RetryAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>();
@@ -578,6 +712,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/RetryRequest.g.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse> RetryAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>();
@@ -587,6 +723,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/RetryRequest.g.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse> RetryAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>(index);
@@ -596,12 +734,16 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/StartIlmRequest.g.xml" path="doc/member[@key='ilm.start.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.start.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse Start(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/StartIlmRequest.g.xml" path="doc/member[@key='ilm.start.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.start.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse Start()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestDescriptor();
@@ -610,6 +752,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/StartIlmRequest.g.xml" path="doc/member[@key='ilm.start.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.start.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse Start(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestDescriptor();
@@ -619,12 +763,16 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/StartIlmRequest.g.xml" path="doc/member[@key='ilm.start.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.start.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse> StartAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/StartIlmRequest.g.xml" path="doc/member[@key='ilm.start.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.start.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse> StartAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestDescriptor();
@@ -633,6 +781,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/StartIlmRequest.g.xml" path="doc/member[@key='ilm.start.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.start.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse> StartAsync(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestDescriptor();
@@ -642,12 +792,16 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/StopIlmRequest.g.xml" path="doc/member[@key='ilm.stop.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.stop.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse Stop(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/StopIlmRequest.g.xml" path="doc/member[@key='ilm.stop.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.stop.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse Stop()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestDescriptor();
@@ -656,6 +810,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/StopIlmRequest.g.xml" path="doc/member[@key='ilm.stop.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.stop.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse Stop(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestDescriptor();
@@ -665,12 +821,16 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/StopIlmRequest.g.xml" path="doc/member[@key='ilm.stop.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.stop.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse> StopAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/StopIlmRequest.g.xml" path="doc/member[@key='ilm.stop.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.stop.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse> StopAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestDescriptor();
@@ -679,6 +839,8 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/StopIlmRequest.g.xml" path="doc/member[@key='ilm.stop.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.stop.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse> StopAsync(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestDescriptor();

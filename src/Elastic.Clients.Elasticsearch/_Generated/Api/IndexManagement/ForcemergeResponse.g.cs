@@ -39,11 +39,6 @@ public sealed partial class ForcemergeResponse : Elastic.Transport.Products.Elas
 
 	public Elastic.Clients.Elasticsearch.ShardStatistics? Shards { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// task contains a task id returned when wait_for_completion=false,
-	/// you can use the task_id to get the status of the task at _tasks/&lt;task_id>
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeResponse.g.xml" path="doc/member[@key='indices.forcemerge.Response#task']/*"/>
 	public string? Task { get; set; }
 }

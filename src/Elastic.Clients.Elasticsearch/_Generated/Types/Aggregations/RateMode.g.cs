@@ -26,18 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.RateModeConverter))]
 public enum RateMode
 {
-	/// <summary>
-	/// <para>
-	/// Calculates the sum of all values of the field.
-	/// </para>
-	/// </summary>
+	/// <include file="RateMode.g.xml" path="doc/member[@key='_types.aggregations.RateMode#sum']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "sum")]
 	Sum,
-	/// <summary>
-	/// <para>
-	/// Uses the number of values of the field.
-	/// </para>
-	/// </summary>
+	/// <include file="RateMode.g.xml" path="doc/member[@key='_types.aggregations.RateMode#value_count']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "value_count")]
 	ValueCount
 }

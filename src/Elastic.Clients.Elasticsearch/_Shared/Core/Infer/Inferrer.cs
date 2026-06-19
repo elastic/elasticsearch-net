@@ -41,6 +41,8 @@ public sealed class Inferrer
 
 	public string IndexName(IndexName index) => IndexNameResolver.Resolve(index);
 
+	public string? TryIndexName(Type type) => IndexNameResolver.TryResolve(type);
+
 	public string? Id<[DynamicallyAccessedMembers(PublicProperties | NonPublicProperties)] T>(T instance) => IdResolver.Resolve(instance);
 
 	public string? Id([DynamicallyAccessedMembers(PublicProperties | NonPublicProperties)] Type type, object instance) => IdResolver.Resolve(type, instance);

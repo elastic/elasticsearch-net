@@ -30,8 +30,8 @@ public sealed partial class SourceConfigConverter : System.Text.Json.Serializati
 		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.True | Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.False, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String | Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartObject | Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartArray);
 		return selector(ref reader, options) switch
 		{
-			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Elastic.Clients.Elasticsearch.Core.Search.SourceConfig(reader.ReadValue<bool>(options, null)),
-			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Elastic.Clients.Elasticsearch.Core.Search.SourceConfig(reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.SourceFilter>(options, null)),
+			1 => new Elastic.Clients.Elasticsearch.Core.Search.SourceConfig(reader.ReadValue<bool>(options, null)),
+			2 => new Elastic.Clients.Elasticsearch.Core.Search.SourceConfig(reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.SourceFilter>(options, null)),
 			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig)}")
 		};
 	}

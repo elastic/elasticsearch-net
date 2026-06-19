@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.create_cross_cluster_api_key.Request"><summary><para>
+Create a cross-cluster API key.
+</para>
+<para>
+Create an API key of the <c>cross_cluster</c> type for the API key based remote cluster access.
+A <c>cross_cluster</c> API key cannot be used to authenticate through the REST interface.
+</para>
+<para>
+IMPORTANT: To authenticate this request you must use a credential that is not an API key. Even if you use an API key that has the required privilege, the API returns an error.
+</para>
+<para>
+Cross-cluster API keys are created by the Elasticsearch API key service, which is automatically enabled.
+</para>
+<para>
+NOTE: Unlike REST API keys, a cross-cluster API key does not capture permissions of the authenticated user. The API key’s effective permission is exactly as specified with the <c>access</c> property.
+</para>
+<para>
+A successful request returns a JSON structure that contains the API key, its unique ID, and its name. If applicable, it also returns expiration information for the API key in milliseconds.
+</para>
+<para>
+By default, API keys never expire. You can specify expiration information when you create the API keys.
+</para>
+<para>
+Cross-cluster API keys can only be updated with the update cross-cluster API key API.
+Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
+</para></summary></member>
+  <member key="security.create_cross_cluster_api_key.Request#access"><summary><para>
+The access to be granted to this API key.
+The access is composed of permissions for cross-cluster search and cross-cluster replication.
+At least one of them must be specified.
+</para>
+<para>
+NOTE: No explicit privileges should be specified for either search or replication access.
+The creation process automatically converts the access specification to a role descriptor which has relevant privileges assigned accordingly.
+</para></summary></member>
+  <member key="security.create_cross_cluster_api_key.Request#certificate_identity"><summary><para>
+The certificate identity to associate with this API key.
+This field is used to restrict the API key to connections authenticated by a specific TLS certificate.
+The value should match the certificate's distinguished name (DN) pattern.
+</para></summary></member>
+  <member key="security.create_cross_cluster_api_key.Request#expiration"><summary><para>
+Expiration time for the API key.
+By default, API keys never expire.
+</para></summary></member>
+  <member key="security.create_cross_cluster_api_key.Request#metadata"><summary><para>
+Arbitrary metadata that you want to associate with the API key.
+It supports nested data structure.
+Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
+</para></summary></member>
+  <member key="security.create_cross_cluster_api_key.Request#name"><summary><para>
+Specifies the name for this API key.
+</para></summary></member>
+</doc>

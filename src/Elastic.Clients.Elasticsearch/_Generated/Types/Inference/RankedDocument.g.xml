@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.RankedDocument"><summary><para>
+The rerank result object representing a single ranked document
+id: the original index of the document in the request
+relevance_score: the relevance_score of the document relative to the query
+text: Optional, the text of the document, if requested
+</para></summary></member>
+</doc>

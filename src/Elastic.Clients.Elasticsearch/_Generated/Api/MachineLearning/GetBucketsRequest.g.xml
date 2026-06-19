@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.get_buckets.Request"><summary><para>
+Get anomaly detection job results for buckets.
+</para>
+<para>
+The API presents a chronological view of the records, grouped by bucket.
+</para></summary></member>
+  <member key="ml.get_buckets.Request#anomaly_score"><summary><para>
+Refer to the description for the <c>anomaly_score</c> query parameter.
+</para></summary></member>
+  <member key="ml.get_buckets.Request#desc"><summary><para>
+Refer to the description for the <c>desc</c> query parameter.
+</para></summary></member>
+  <member key="ml.get_buckets.Request#end"><summary><para>
+Refer to the description for the <c>end</c> query parameter.
+</para></summary></member>
+  <member key="ml.get_buckets.Request#exclude_interim"><summary><para>
+Refer to the description for the <c>exclude_interim</c> query parameter.
+</para></summary></member>
+  <member key="ml.get_buckets.Request#expand"><summary><para>
+Refer to the description for the <c>expand</c> query parameter.
+</para></summary></member>
+  <member key="ml.get_buckets.Request#from"><summary><para>
+Skips the specified number of buckets.
+</para></summary></member>
+  <member key="ml.get_buckets.Request#job_id"><summary><para>
+Identifier for the anomaly detection job.
+</para></summary></member>
+  <member key="ml.get_buckets.Request#size"><summary><para>
+Specifies the maximum number of buckets to obtain.
+</para></summary></member>
+  <member key="ml.get_buckets.Request#sort"><summary><para>
+Refer to the desription for the <c>sort</c> query parameter.
+</para></summary></member>
+  <member key="ml.get_buckets.Request#start"><summary><para>
+Refer to the description for the <c>start</c> query parameter.
+</para></summary></member>
+  <member key="ml.get_buckets.Request#timestamp"><summary><para>
+The timestamp of a single bucket result. If you do not specify this
+parameter, the API returns information about all buckets.
+</para></summary></member>
+</doc>

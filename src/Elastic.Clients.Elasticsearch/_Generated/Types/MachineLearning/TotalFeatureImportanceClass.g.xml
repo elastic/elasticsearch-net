@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.TotalFeatureImportanceClass#class_name"><summary><para>
+The target class value. Could be a string, boolean, or number.
+</para></summary></member>
+  <member key="ml._types.TotalFeatureImportanceClass#importance"><summary><para>
+A collection of feature importance statistics related to the training data set for this particular feature.
+</para></summary></member>
+</doc>

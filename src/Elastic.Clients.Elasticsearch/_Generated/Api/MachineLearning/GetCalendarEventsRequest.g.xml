@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.get_calendar_events.Request"><summary><para>
+Get info about events in calendars.
+</para></summary></member>
+  <member key="ml.get_calendar_events.Request#calendar_id"><summary><para>
+A string that uniquely identifies a calendar. You can get information for multiple calendars by using a comma-separated list of ids or a wildcard expression. You can get information for all calendars by using <c>_all</c> or <c>*</c> or by omitting the calendar identifier.
+</para></summary></member>
+  <member key="ml.get_calendar_events.Request#end"><summary><para>
+Specifies to get events with timestamps earlier than this time.
+</para></summary></member>
+  <member key="ml.get_calendar_events.Request#from"><summary><para>
+Skips the specified number of events.
+</para></summary></member>
+  <member key="ml.get_calendar_events.Request#job_id"><summary><para>
+Specifies to get events for a specific anomaly detection job identifier or job group. It must be used with a calendar identifier of <c>_all</c> or <c>*</c>.
+</para></summary></member>
+  <member key="ml.get_calendar_events.Request#size"><summary><para>
+Specifies the maximum number of events to obtain.
+</para></summary></member>
+  <member key="ml.get_calendar_events.Request#start"><summary><para>
+Specifies to get events with timestamps after this time.
+</para></summary></member>
+</doc>

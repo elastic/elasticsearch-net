@@ -37,24 +37,12 @@ public sealed partial class GetClusterSettingsResponse : Elastic.Transport.Produ
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default setting values.
-	/// </para>
-	/// </summary>
+	/// <include file="GetClusterSettingsResponse.g.xml" path="doc/member[@key='cluster.get_settings.Response#defaults']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Defaults { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The settings that persist after the cluster restarts.
-	/// </para>
-	/// </summary>
+	/// <include file="GetClusterSettingsResponse.g.xml" path="doc/member[@key='cluster.get_settings.Response#persistent']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Persistent { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The settings that do not persist after the cluster restarts.
-	/// </para>
-	/// </summary>
+	/// <include file="GetClusterSettingsResponse.g.xml" path="doc/member[@key='cluster.get_settings.Response#transient']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Transient { get; set; }
 }

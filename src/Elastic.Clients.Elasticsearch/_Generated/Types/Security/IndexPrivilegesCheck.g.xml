@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.has_privileges.IndexPrivilegesCheck#allow_restricted_indices"><summary><para>
+This needs to be set to <c>true</c> (default is <c>false</c>) if using wildcards or regexps for patterns that cover restricted indices.
+Implicitly, restricted indices do not match index patterns because restricted indices usually have limited privileges and including them in pattern tests would render most such tests false.
+If restricted indices are explicitly included in the names list, privileges will be checked against them regardless of the value of <c>allow_restricted_indices</c>.
+</para></summary></member>
+  <member key="security.has_privileges.IndexPrivilegesCheck#names"><summary><para>
+A list of indices.
+</para></summary></member>
+  <member key="security.has_privileges.IndexPrivilegesCheck#privileges"><summary><para>
+A list of the privileges that you want to check for the specified indices.
+</para></summary></member>
+</doc>

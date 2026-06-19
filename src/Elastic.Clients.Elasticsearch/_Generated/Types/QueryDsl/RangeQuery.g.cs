@@ -41,6 +41,16 @@ public readonly partial struct IRangeQueryFactory<TDocument>
 		return Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor<TDocument>.Build(action);
 	}
 
+	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery LongNumber(Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQuery value)
+	{
+		return value;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery LongNumber(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQueryDescriptor<TDocument>> action)
+	{
+		return Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQueryDescriptor<TDocument>.Build(action);
+	}
+
 	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery Number(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery value)
 	{
 		return value;
@@ -94,6 +104,21 @@ public readonly partial struct IRangeQueryFactory
 	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery Date<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor<T>> action)
 	{
 		return Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor<T>.Build(action);
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery LongNumber(Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQuery value)
+	{
+		return value;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery LongNumber(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQueryDescriptor> action)
+	{
+		return Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQueryDescriptor.Build(action);
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery LongNumber<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQueryDescriptor<T>> action)
+	{
+		return Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQueryDescriptor<T>.Build(action);
 	}
 
 	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery Number(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery value)

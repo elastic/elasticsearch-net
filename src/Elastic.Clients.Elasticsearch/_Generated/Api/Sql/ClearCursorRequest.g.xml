@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="sql.clear_cursor.Request"><summary><para>
+Clear an SQL search cursor.
+</para></summary></member>
+  <member key="sql.clear_cursor.Request#cursor"><summary><para>
+Cursor to clear.
+</para></summary></member>
+</doc>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.CompletionTool"><summary><para>
+A list of tools that the model can call.
+</para></summary></member>
+  <member key="inference._types.CompletionTool#function"><summary><para>
+The function definition.
+</para></summary></member>
+  <member key="inference._types.CompletionTool#type"><summary><para>
+The type of tool.
+</para></summary></member>
+</doc>

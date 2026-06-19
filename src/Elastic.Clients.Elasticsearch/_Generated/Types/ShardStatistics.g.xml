@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.ShardStatistics#failed"><summary><para>
+The number of shards the operation or search attempted to run on but failed.
+</para></summary></member>
+  <member key="_types.ShardStatistics#successful"><summary><para>
+The number of shards the operation or search succeeded on.
+</para></summary></member>
+  <member key="_types.ShardStatistics#total"><summary><para>
+The number of shards the operation or search will run on overall.
+</para></summary></member>
+</doc>

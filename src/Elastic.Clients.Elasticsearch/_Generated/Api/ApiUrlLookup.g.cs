@@ -17,9 +17,9 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Requests;
 
@@ -103,7 +103,6 @@ internal static class ApiUrlLookup
 	internal static ApiUrls IndexManagementDeleteDataStream = new ApiUrls(new[] { "_data_stream/{name}" });
 	internal static ApiUrls IndexManagementDeleteDataStreamOptions = new ApiUrls(new[] { "_data_stream/{name}/_options" });
 	internal static ApiUrls IndexManagementDeleteIndexTemplate = new ApiUrls(new[] { "_index_template/{name}" });
-	internal static ApiUrls IndexManagementDeleteSampleConfiguration = new ApiUrls(new[] { "{index}/_sample/config" });
 	internal static ApiUrls IndexManagementDeleteTemplate = new ApiUrls(new[] { "_template/{name}" });
 	internal static ApiUrls IndexManagementDiskUsage = new ApiUrls(new[] { "{index}/_disk_usage" });
 	internal static ApiUrls IndexManagementDownsample = new ApiUrls(new[] { "{index}/_downsample/{target_index}" });
@@ -117,7 +116,6 @@ internal static class ApiUrlLookup
 	internal static ApiUrls IndexManagementForcemerge = new ApiUrls(new[] { "_forcemerge", "{index}/_forcemerge" });
 	internal static ApiUrls IndexManagementGet = new ApiUrls(new[] { "{index}" });
 	internal static ApiUrls IndexManagementGetAlias = new ApiUrls(new[] { "_alias", "_alias/{name}", "{index}/_alias/{name}", "{index}/_alias" });
-	internal static ApiUrls IndexManagementGetAllSampleConfiguration = new ApiUrls(new[] { "_sample/config" });
 	internal static ApiUrls IndexManagementGetDataLifecycle = new ApiUrls(new[] { "_data_stream/{name}/_lifecycle" });
 	internal static ApiUrls IndexManagementGetDataLifecycleStats = new ApiUrls(new[] { "_lifecycle/stats" });
 	internal static ApiUrls IndexManagementGetDataStream = new ApiUrls(new[] { "_data_stream", "_data_stream/{name}" });
@@ -128,9 +126,6 @@ internal static class ApiUrlLookup
 	internal static ApiUrls IndexManagementGetIndexTemplate = new ApiUrls(new[] { "_index_template", "_index_template/{name}" });
 	internal static ApiUrls IndexManagementGetMapping = new ApiUrls(new[] { "_mapping", "{index}/_mapping" });
 	internal static ApiUrls IndexManagementGetMigrateReindexStatus = new ApiUrls(new[] { "_migration/reindex/{index}/_status" });
-	internal static ApiUrls IndexManagementGetSample = new ApiUrls(new[] { "{index}/_sample" });
-	internal static ApiUrls IndexManagementGetSampleConfiguration = new ApiUrls(new[] { "{index}/_sample/config" });
-	internal static ApiUrls IndexManagementGetSampleStats = new ApiUrls(new[] { "{index}/_sample/stats" });
 	internal static ApiUrls IndexManagementGetSettings = new ApiUrls(new[] { "_settings", "{index}/_settings", "{index}/_settings/{name}", "_settings/{name}" });
 	internal static ApiUrls IndexManagementGetTemplate = new ApiUrls(new[] { "_template", "_template/{name}" });
 	internal static ApiUrls IndexManagementMigrateReindex = new ApiUrls(new[] { "_migration/reindex" });
@@ -145,7 +140,6 @@ internal static class ApiUrlLookup
 	internal static ApiUrls IndexManagementPutDataStreamSettings = new ApiUrls(new[] { "_data_stream/{name}/_settings" });
 	internal static ApiUrls IndexManagementPutIndexTemplate = new ApiUrls(new[] { "_index_template/{name}" });
 	internal static ApiUrls IndexManagementPutMapping = new ApiUrls(new[] { "{index}/_mapping" });
-	internal static ApiUrls IndexManagementPutSampleConfiguration = new ApiUrls(new[] { "{index}/_sample/config" });
 	internal static ApiUrls IndexManagementPutSettings = new ApiUrls(new[] { "_settings", "{index}/_settings" });
 	internal static ApiUrls IndexManagementPutTemplate = new ApiUrls(new[] { "_template/{name}" });
 	internal static ApiUrls IndexManagementRecovery = new ApiUrls(new[] { "_recovery", "{index}/_recovery" });
@@ -168,7 +162,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls InferenceCompletion = new ApiUrls(new[] { "_inference/completion/{inference_id}" });
 	internal static ApiUrls InferenceDelete = new ApiUrls(new[] { "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
 	internal static ApiUrls InferenceEmbedding = new ApiUrls(new[] { "_inference/embedding/{inference_id}" });
-	internal static ApiUrls InferenceGet = new ApiUrls(new[] { "_inference", "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
+	internal static ApiUrls InferenceGet = new ApiUrls(new[] { "_inference", "_inference/{inference_id}", "_inference/{task_type}/{inference_id}", "_inference/{task_type}/_all" });
 	internal static ApiUrls InferenceInference = new ApiUrls(new[] { "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
 	internal static ApiUrls InferencePut = new ApiUrls(new[] { "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
 	internal static ApiUrls InferencePutAi21 = new ApiUrls(new[] { "_inference/{task_type}/{ai21_inference_id}" });
@@ -184,6 +178,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls InferencePutDeepseek = new ApiUrls(new[] { "_inference/{task_type}/{deepseek_inference_id}" });
 	internal static ApiUrls InferencePutElasticsearch = new ApiUrls(new[] { "_inference/{task_type}/{elasticsearch_inference_id}" });
 	internal static ApiUrls InferencePutElser = new ApiUrls(new[] { "_inference/{task_type}/{elser_inference_id}" });
+	internal static ApiUrls InferencePutFireworksai = new ApiUrls(new[] { "_inference/{task_type}/{fireworksai_inference_id}" });
 	internal static ApiUrls InferencePutGoogleaistudio = new ApiUrls(new[] { "_inference/{task_type}/{googleaistudio_inference_id}" });
 	internal static ApiUrls InferencePutGooglevertexai = new ApiUrls(new[] { "_inference/{task_type}/{googlevertexai_inference_id}" });
 	internal static ApiUrls InferencePutGroq = new ApiUrls(new[] { "_inference/{task_type}/{groq_inference_id}" });
@@ -299,6 +294,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls NodesStats = new ApiUrls(new[] { "_nodes/stats", "_nodes/{node_id}/stats", "_nodes/stats/{metric}", "_nodes/{node_id}/stats/{metric}", "_nodes/stats/{metric}/{index_metric}", "_nodes/{node_id}/stats/{metric}/{index_metric}" });
 	internal static ApiUrls NodesUsage = new ApiUrls(new[] { "_nodes/usage", "_nodes/{node_id}/usage", "_nodes/usage/{metric}", "_nodes/{node_id}/usage/{metric}" });
 	internal static ApiUrls NoNamespaceBulk = new ApiUrls(new[] { "_bulk", "{index}/_bulk" });
+	internal static ApiUrls NoNamespaceCancelReindex = new ApiUrls(new[] { "_reindex/{task_id}/_cancel" });
 	internal static ApiUrls NoNamespaceCapabilities = new ApiUrls(new[] { "_capabilities" });
 	internal static ApiUrls NoNamespaceClearScroll = new ApiUrls(new[] { "_search/scroll" });
 	internal static ApiUrls NoNamespaceClosePointInTime = new ApiUrls(new[] { "_pit" });
@@ -313,6 +309,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls NoNamespaceExplain = new ApiUrls(new[] { "{index}/_explain/{id}" });
 	internal static ApiUrls NoNamespaceFieldCaps = new ApiUrls(new[] { "_field_caps", "{index}/_field_caps" });
 	internal static ApiUrls NoNamespaceGet = new ApiUrls(new[] { "{index}/_doc/{id}" });
+	internal static ApiUrls NoNamespaceGetReindex = new ApiUrls(new[] { "_reindex/{task_id}" });
 	internal static ApiUrls NoNamespaceGetScript = new ApiUrls(new[] { "_scripts/{id}" });
 	internal static ApiUrls NoNamespaceGetScriptContext = new ApiUrls(new[] { "_script_context" });
 	internal static ApiUrls NoNamespaceGetScriptLanguages = new ApiUrls(new[] { "_script_language" });
@@ -320,6 +317,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls NoNamespaceHealthReport = new ApiUrls(new[] { "_health_report", "_health_report/{feature}" });
 	internal static ApiUrls NoNamespaceIndex = new ApiUrls(new[] { "{index}/_doc/{id}", "{index}/_doc" });
 	internal static ApiUrls NoNamespaceInfo = new ApiUrls(new[] { "" });
+	internal static ApiUrls NoNamespaceListReindex = new ApiUrls(new[] { "_reindex" });
 	internal static ApiUrls NoNamespaceMtermvectors = new ApiUrls(new[] { "_mtermvectors", "{index}/_mtermvectors" });
 	internal static ApiUrls NoNamespaceMultiGet = new ApiUrls(new[] { "_mget", "{index}/_mget" });
 	internal static ApiUrls NoNamespaceMultiSearch = new ApiUrls(new[] { "_msearch", "{index}/_msearch" });
@@ -389,6 +387,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls SecurityClearCachedRealms = new ApiUrls(new[] { "_security/realm/{realms}/_clear_cache" });
 	internal static ApiUrls SecurityClearCachedRoles = new ApiUrls(new[] { "_security/role/{name}/_clear_cache" });
 	internal static ApiUrls SecurityClearCachedServiceTokens = new ApiUrls(new[] { "_security/service/{namespace}/{service}/credential/token/{name}/_clear_cache" });
+	internal static ApiUrls SecurityCloneApiKey = new ApiUrls(new[] { "_security/api_key/clone" });
 	internal static ApiUrls SecurityCreateApiKey = new ApiUrls(new[] { "_security/api_key" });
 	internal static ApiUrls SecurityCreateCrossClusterApiKey = new ApiUrls(new[] { "_security/cross_cluster/api_key" });
 	internal static ApiUrls SecurityCreateServiceToken = new ApiUrls(new[] { "_security/service/{namespace}/{service}/credential/token/{name}", "_security/service/{namespace}/{service}/credential/token" });
@@ -472,8 +471,8 @@ internal static class ApiUrlLookup
 	internal static ApiUrls SqlGetAsyncStatus = new ApiUrls(new[] { "_sql/async/status/{id}" });
 	internal static ApiUrls SqlQuery = new ApiUrls(new[] { "_sql" });
 	internal static ApiUrls SqlTranslate = new ApiUrls(new[] { "_sql/translate" });
-	internal static ApiUrls StreamsLogsDisable = new ApiUrls(new[] { "_streams/logs/_disable" });
-	internal static ApiUrls StreamsLogsEnable = new ApiUrls(new[] { "_streams/logs/_enable" });
+	internal static ApiUrls StreamsLogsDisable = new ApiUrls(new[] { "_streams/{name}/_disable" });
+	internal static ApiUrls StreamsLogsEnable = new ApiUrls(new[] { "_streams/{name}/_enable" });
 	internal static ApiUrls StreamsStatus = new ApiUrls(new[] { "_streams/status" });
 	internal static ApiUrls SynonymsDeleteSynonym = new ApiUrls(new[] { "_synonyms/{id}" });
 	internal static ApiUrls SynonymsDeleteSynonymRule = new ApiUrls(new[] { "_synonyms/{set_id}/{rule_id}" });

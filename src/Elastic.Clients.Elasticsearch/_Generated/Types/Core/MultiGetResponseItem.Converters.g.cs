@@ -30,8 +30,8 @@ public sealed partial class MultiGetResponseItemConverter<TDocument> : System.Te
 		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByPropertyOfT1(ref r, o, "found");
 		return selector(ref reader, options) switch
 		{
-			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument>(reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Get.GetResult<TDocument>>(options, null)),
-			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument>(reader.ReadValue<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetError>(options, null)),
+			1 => new Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument>(reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Get.GetResult<TDocument>>(options, null)),
+			2 => new Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument>(reader.ReadValue<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetError>(options, null)),
 			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument>)}")
 		};
 	}

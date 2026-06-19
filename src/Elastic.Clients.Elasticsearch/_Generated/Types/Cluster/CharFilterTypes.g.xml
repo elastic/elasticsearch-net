@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.stats.CharFilterTypes#analyzer_types"><summary><para>
+Contains statistics about analyzer types used in selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.CharFilterTypes#built_in_analyzers"><summary><para>
+Contains statistics about built-in analyzers used in selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.CharFilterTypes#built_in_char_filters"><summary><para>
+Contains statistics about built-in character filters used in selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.CharFilterTypes#built_in_filters"><summary><para>
+Contains statistics about built-in token filters used in selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.CharFilterTypes#built_in_tokenizers"><summary><para>
+Contains statistics about built-in tokenizers used in selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.CharFilterTypes#char_filter_types"><summary><para>
+Contains statistics about character filter types used in selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.CharFilterTypes#filter_types"><summary><para>
+Contains statistics about token filter types used in selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.CharFilterTypes#synonyms"><summary><para>
+Contains statistics about synonyms types used in selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.CharFilterTypes#tokenizer_types"><summary><para>
+Contains statistics about tokenizer types used in selected nodes.
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.health_report.DiskIndicatorDetails']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.Json.DiskIndicatorDetailsConverter))]
 public sealed partial class DiskIndicatorDetails
 {

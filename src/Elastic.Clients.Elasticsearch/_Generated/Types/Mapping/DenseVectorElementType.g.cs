@@ -26,36 +26,16 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.DenseVectorElementTypeConverter))]
 public enum DenseVectorElementType
 {
-	/// <summary>
-	/// <para>
-	/// Indexes a 2-byte floating-point value per dimension.
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorElementType.g.xml" path="doc/member[@key='_types.mapping.DenseVectorElementType#bfloat16']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "bfloat16")]
 	Bfloat16,
-	/// <summary>
-	/// <para>
-	/// Indexes a single bit per dimension. Useful for very high-dimensional vectors or models that specifically support
-	/// bit vectors.
-	/// </para>
-	/// <para>
-	/// NOTE: when using <c>bit</c>, the number of dimensions must be a multiple of <c>8</c> and must represent the number of bits.
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorElementType.g.xml" path="doc/member[@key='_types.mapping.DenseVectorElementType#bit']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "bit")]
 	Bit,
-	/// <summary>
-	/// <para>
-	/// Indexes a 1-byte integer value per dimension.
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorElementType.g.xml" path="doc/member[@key='_types.mapping.DenseVectorElementType#byte']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "byte")]
 	Byte,
-	/// <summary>
-	/// <para>
-	/// Indexes a 4-byte floating-point value per dimension.
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorElementType.g.xml" path="doc/member[@key='_types.mapping.DenseVectorElementType#float']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "float")]
 	Float
 }

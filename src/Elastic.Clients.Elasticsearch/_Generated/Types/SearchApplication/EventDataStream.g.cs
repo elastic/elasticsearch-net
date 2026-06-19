@@ -23,6 +23,7 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application._types.EventDataStream']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.Json.EventDataStreamConverter))]
 public sealed partial class EventDataStream
 {

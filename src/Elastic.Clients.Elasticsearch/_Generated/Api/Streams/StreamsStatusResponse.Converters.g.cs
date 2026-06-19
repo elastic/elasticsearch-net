@@ -26,14 +26,28 @@ namespace Elastic.Clients.Elasticsearch.Streams.Json;
 public sealed partial class StreamsStatusResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Streams.StreamsStatusResponse>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropLogs = System.Text.Json.JsonEncodedText.Encode("logs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLogsEcs = System.Text.Json.JsonEncodedText.Encode("logs.ecs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLogsOtel = System.Text.Json.JsonEncodedText.Encode("logs.otel"u8);
 
 	public override Elastic.Clients.Elasticsearch.Streams.StreamsStatusResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Streams.LogsStatus> propLogs = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Streams.StreamStatus> propLogs = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Streams.StreamStatus> propLogsEcs = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Streams.StreamStatus> propLogsOtel = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propLogs.TryReadProperty(ref reader, options, PropLogs, null))
+			{
+				continue;
+			}
+
+			if (propLogsEcs.TryReadProperty(ref reader, options, PropLogsEcs, null))
+			{
+				continue;
+			}
+
+			if (propLogsOtel.TryReadProperty(ref reader, options, PropLogsOtel, null))
 			{
 				continue;
 			}
@@ -50,7 +64,9 @@ public sealed partial class StreamsStatusResponseConverter : System.Text.Json.Se
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Streams.StreamsStatusResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			Logs = propLogs.Value
+			Logs = propLogs.Value,
+			LogsEcs = propLogsEcs.Value,
+			LogsOtel = propLogsOtel.Value
 		};
 	}
 
@@ -58,6 +74,8 @@ public sealed partial class StreamsStatusResponseConverter : System.Text.Json.Se
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropLogs, value.Logs, null, null);
+		writer.WriteProperty(options, PropLogsEcs, value.LogsEcs, null, null);
+		writer.WriteProperty(options, PropLogsOtel, value.LogsOtel, null, null);
 		writer.WriteEndObject();
 	}
 }

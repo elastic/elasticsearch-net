@@ -35,7 +35,7 @@ public sealed partial class AuthenticateApiKeyConverter : System.Text.Json.Seria
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string> propId = default;
 		LocalJsonValue<bool?> propInternal = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.ApiKeyManagedBy> propManagedBy = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.CredentialManagedBy> propManagedBy = default;
 		LocalJsonValue<string?> propName = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{

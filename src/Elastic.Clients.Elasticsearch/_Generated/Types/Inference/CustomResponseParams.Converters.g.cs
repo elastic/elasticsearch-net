@@ -30,10 +30,10 @@ public sealed partial class CustomResponseParamsConverter : System.Text.Json.Ser
 	public override Elastic.Clients.Elasticsearch.Inference.CustomResponseParams Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<object> propJsonParser = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, string>> propJsonParser = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propJsonParser.TryReadProperty(ref reader, options, PropJsonParser, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!))
+			if (propJsonParser.TryReadProperty(ref reader, options, PropJsonParser, static System.Collections.Generic.IDictionary<string, string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)!))
 			{
 				continue;
 			}
@@ -57,7 +57,7 @@ public sealed partial class CustomResponseParamsConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.CustomResponseParams value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropJsonParser, value.JsonParser, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>)));
+		writer.WriteProperty(options, PropJsonParser, value.JsonParser, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string> v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
 		writer.WriteEndObject();
 	}
 }

@@ -29,10 +29,12 @@ public sealed partial class AmazonSageMakerServiceSettingsConverter : System.Tex
 	private static readonly System.Text.Json.JsonEncodedText PropApi = System.Text.Json.JsonEncodedText.Encode("api"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropBatchSize = System.Text.Json.JsonEncodedText.Encode("batch_size"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDimensions = System.Text.Json.JsonEncodedText.Encode("dimensions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropElementType = System.Text.Json.JsonEncodedText.Encode("element_type"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropEndpointName = System.Text.Json.JsonEncodedText.Encode("endpoint_name"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropInferenceComponentName = System.Text.Json.JsonEncodedText.Encode("inference_component_name"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRegion = System.Text.Json.JsonEncodedText.Encode("region"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSecretKey = System.Text.Json.JsonEncodedText.Encode("secret_key"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSimilarity = System.Text.Json.JsonEncodedText.Encode("similarity"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTargetContainerHostname = System.Text.Json.JsonEncodedText.Encode("target_container_hostname"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTargetModel = System.Text.Json.JsonEncodedText.Encode("target_model"u8);
 
@@ -43,10 +45,12 @@ public sealed partial class AmazonSageMakerServiceSettingsConverter : System.Tex
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerApi> propApi = default;
 		LocalJsonValue<int?> propBatchSize = default;
 		LocalJsonValue<int?> propDimensions = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerElementType?> propElementType = default;
 		LocalJsonValue<string> propEndpointName = default;
 		LocalJsonValue<string?> propInferenceComponentName = default;
 		LocalJsonValue<string> propRegion = default;
 		LocalJsonValue<string> propSecretKey = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerSimilarity?> propSimilarity = default;
 		LocalJsonValue<string?> propTargetContainerHostname = default;
 		LocalJsonValue<string?> propTargetModel = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -71,6 +75,11 @@ public sealed partial class AmazonSageMakerServiceSettingsConverter : System.Tex
 				continue;
 			}
 
+			if (propElementType.TryReadProperty(ref reader, options, PropElementType, static Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerElementType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerElementType>(o)))
+			{
+				continue;
+			}
+
 			if (propEndpointName.TryReadProperty(ref reader, options, PropEndpointName, null))
 			{
 				continue;
@@ -87,6 +96,11 @@ public sealed partial class AmazonSageMakerServiceSettingsConverter : System.Tex
 			}
 
 			if (propSecretKey.TryReadProperty(ref reader, options, PropSecretKey, null))
+			{
+				continue;
+			}
+
+			if (propSimilarity.TryReadProperty(ref reader, options, PropSimilarity, static Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerSimilarity? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerSimilarity>(o)))
 			{
 				continue;
 			}
@@ -117,10 +131,12 @@ public sealed partial class AmazonSageMakerServiceSettingsConverter : System.Tex
 			Api = propApi.Value,
 			BatchSize = propBatchSize.Value,
 			Dimensions = propDimensions.Value,
+			ElementType = propElementType.Value,
 			EndpointName = propEndpointName.Value,
 			InferenceComponentName = propInferenceComponentName.Value,
 			Region = propRegion.Value,
 			SecretKey = propSecretKey.Value,
+			Similarity = propSimilarity.Value,
 			TargetContainerHostname = propTargetContainerHostname.Value,
 			TargetModel = propTargetModel.Value
 		};
@@ -133,10 +149,12 @@ public sealed partial class AmazonSageMakerServiceSettingsConverter : System.Tex
 		writer.WriteProperty(options, PropApi, value.Api, null, null);
 		writer.WriteProperty(options, PropBatchSize, value.BatchSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropDimensions, value.Dimensions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropElementType, value.ElementType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerElementType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerElementType>(o, v));
 		writer.WriteProperty(options, PropEndpointName, value.EndpointName, null, null);
 		writer.WriteProperty(options, PropInferenceComponentName, value.InferenceComponentName, null, null);
 		writer.WriteProperty(options, PropRegion, value.Region, null, null);
 		writer.WriteProperty(options, PropSecretKey, value.SecretKey, null, null);
+		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerSimilarity? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerSimilarity>(o, v));
 		writer.WriteProperty(options, PropTargetContainerHostname, value.TargetContainerHostname, null, null);
 		writer.WriteProperty(options, PropTargetModel, value.TargetModel, null, null);
 		writer.WriteEndObject();

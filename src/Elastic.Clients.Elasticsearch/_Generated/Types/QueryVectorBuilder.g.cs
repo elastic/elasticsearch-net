@@ -39,8 +39,12 @@ public sealed partial class QueryVectorBuilder
 		_ = sentinel;
 	}
 
+	public Elastic.Clients.Elasticsearch.Embedding? Embedding { get => GetVariant<Elastic.Clients.Elasticsearch.Embedding>("embedding"); set => SetVariant("embedding", value); }
+	public Elastic.Clients.Elasticsearch.LookupQueryVectorBuilder? Lookup { get => GetVariant<Elastic.Clients.Elasticsearch.LookupQueryVectorBuilder>("lookup"); set => SetVariant("lookup", value); }
 	public Elastic.Clients.Elasticsearch.TextEmbedding? TextEmbedding { get => GetVariant<Elastic.Clients.Elasticsearch.TextEmbedding>("text_embedding"); set => SetVariant("text_embedding", value); }
 
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryVectorBuilder(Elastic.Clients.Elasticsearch.Embedding value) => new Elastic.Clients.Elasticsearch.QueryVectorBuilder { Embedding = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryVectorBuilder(Elastic.Clients.Elasticsearch.LookupQueryVectorBuilder value) => new Elastic.Clients.Elasticsearch.QueryVectorBuilder { Lookup = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryVectorBuilder(Elastic.Clients.Elasticsearch.TextEmbedding value) => new Elastic.Clients.Elasticsearch.QueryVectorBuilder { TextEmbedding = value };
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -80,6 +84,30 @@ public readonly partial struct QueryVectorBuilderDescriptor
 
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor(Elastic.Clients.Elasticsearch.QueryVectorBuilder instance) => new Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryVectorBuilder(Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor Embedding(Elastic.Clients.Elasticsearch.Embedding? value)
+	{
+		Instance.Embedding = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor Embedding(System.Action<Elastic.Clients.Elasticsearch.EmbeddingDescriptor> action)
+	{
+		Instance.Embedding = Elastic.Clients.Elasticsearch.EmbeddingDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor Lookup(Elastic.Clients.Elasticsearch.LookupQueryVectorBuilder? value)
+	{
+		Instance.Lookup = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor Lookup(System.Action<Elastic.Clients.Elasticsearch.LookupQueryVectorBuilderDescriptor> action)
+	{
+		Instance.Lookup = Elastic.Clients.Elasticsearch.LookupQueryVectorBuilderDescriptor.Build(action);
+		return this;
+	}
 
 	public Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor TextEmbedding(Elastic.Clients.Elasticsearch.TextEmbedding? value)
 	{

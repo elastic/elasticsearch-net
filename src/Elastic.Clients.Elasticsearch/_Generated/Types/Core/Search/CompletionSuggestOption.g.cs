@@ -23,6 +23,7 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.CompletionSuggestOption']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.CompletionSuggestOptionConverterFactory))]
 public sealed partial class CompletionSuggestOption<TDocument>
 {
@@ -47,7 +48,7 @@ public sealed partial class CompletionSuggestOption<TDocument>
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Fields { get; set; }
 	public string? Id { get; set; }
 	public string? Index { get; set; }
-	public System.Collections.Generic.ICollection<string>? Routing { get; set; }
+	public string? Routing { get; set; }
 	public double? Score { get; set; }
 	public double? Score0 { get; set; }
 	public TDocument? Source { get; set; }

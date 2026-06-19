@@ -26,25 +26,13 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DeploymentAllocationStateConverter))]
 public enum DeploymentAllocationState
 {
-	/// <summary>
-	/// <para>
-	/// Trained model deployment has started on all valid nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="DeploymentAllocationState.g.xml" path="doc/member[@key='ml._types.DeploymentAllocationState#fully_allocated']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "fully_allocated")]
 	FullyAllocated,
-	/// <summary>
-	/// <para>
-	/// The trained model is started on at least one node.
-	/// </para>
-	/// </summary>
+	/// <include file="DeploymentAllocationState.g.xml" path="doc/member[@key='ml._types.DeploymentAllocationState#started']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "started")]
 	Started,
-	/// <summary>
-	/// <para>
-	/// Trained model deployment is starting but it is not yet deployed on any nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="DeploymentAllocationState.g.xml" path="doc/member[@key='ml._types.DeploymentAllocationState#starting']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "starting")]
 	Starting
 }

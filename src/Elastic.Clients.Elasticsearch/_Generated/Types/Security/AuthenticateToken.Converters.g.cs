@@ -25,16 +25,23 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class AuthenticateTokenConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.AuthenticateToken>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropManagedBy = System.Text.Json.JsonEncodedText.Encode("managed_by"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.AuthenticateToken Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string> propName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.CredentialManagedBy?> propManagedBy = default;
+		LocalJsonValue<string?> propName = default;
 		LocalJsonValue<string?> propType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propManagedBy.TryReadProperty(ref reader, options, PropManagedBy, static Elastic.Clients.Elasticsearch.Security.CredentialManagedBy? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Security.CredentialManagedBy>(o)))
+			{
+				continue;
+			}
+
 			if (propName.TryReadProperty(ref reader, options, PropName, null))
 			{
 				continue;
@@ -57,6 +64,7 @@ public sealed partial class AuthenticateTokenConverter : System.Text.Json.Serial
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Security.AuthenticateToken(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			ManagedBy = propManagedBy.Value,
 			Name = propName.Value,
 			Type = propType.Value
 		};
@@ -65,6 +73,7 @@ public sealed partial class AuthenticateTokenConverter : System.Text.Json.Serial
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.AuthenticateToken value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropManagedBy, value.ManagedBy, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Security.CredentialManagedBy? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Security.CredentialManagedBy>(o, v));
 		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();

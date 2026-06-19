@@ -73,6 +73,7 @@ public sealed partial class FieldTypeConverter : System.Text.Json.Serialization.
 	private static readonly System.Text.Json.JsonEncodedText MemberText = System.Text.Json.JsonEncodedText.Encode("text"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberTokenCount = System.Text.Json.JsonEncodedText.Encode("token_count"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberWildcard = System.Text.Json.JsonEncodedText.Encode("wildcard"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.FieldType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
@@ -316,6 +317,11 @@ public sealed partial class FieldTypeConverter : System.Text.Json.Serialization.
 			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Version;
 		}
 
+		if (reader.ValueTextEquals(MemberWildcard))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Wildcard;
+		}
+
 		var value = reader.GetString()!;
 		if (string.Equals(value, MemberAggregateMetricDouble.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
@@ -557,6 +563,11 @@ public sealed partial class FieldTypeConverter : System.Text.Json.Serialization.
 			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Version;
 		}
 
+		if (string.Equals(value, MemberWildcard.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.FieldType.Wildcard;
+		}
+
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Mapping.FieldType)}'.");
 	}
 
@@ -707,6 +718,9 @@ public sealed partial class FieldTypeConverter : System.Text.Json.Serialization.
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Version:
 				writer.WriteStringValue(MemberVersion);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.FieldType.Wildcard:
+				writer.WriteStringValue(MemberWildcard);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Mapping.FieldType)}'.");

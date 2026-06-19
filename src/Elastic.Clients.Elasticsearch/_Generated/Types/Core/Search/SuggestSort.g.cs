@@ -26,18 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.SuggestSortConverter))]
 public enum SuggestSort
 {
-	/// <summary>
-	/// <para>
-	/// Sort by document frequency first, then similarity score and then the term itself.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestSort.g.xml" path="doc/member[@key='_global.search._types.SuggestSort#frequency']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "frequency")]
 	Frequency,
-	/// <summary>
-	/// <para>
-	/// Sort by score first, then document frequency and then the term itself.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestSort.g.xml" path="doc/member[@key='_global.search._types.SuggestSort#score']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "score")]
 	Score
 }

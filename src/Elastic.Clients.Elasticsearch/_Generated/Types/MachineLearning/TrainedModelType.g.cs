@@ -26,26 +26,13 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TrainedModelTypeConverter))]
 public enum TrainedModelType
 {
-	/// <summary>
-	/// <para>
-	/// A special type reserved for language identification models.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelType.g.xml" path="doc/member[@key='ml._types.TrainedModelType#lang_ident']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "lang_ident")]
 	LangIdent,
-	/// <summary>
-	/// <para>
-	/// The stored definition is a PyTorch (specifically a TorchScript) model.
-	/// Currently only NLP models are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelType.g.xml" path="doc/member[@key='ml._types.TrainedModelType#pytorch']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "pytorch")]
 	Pytorch,
-	/// <summary>
-	/// <para>
-	/// The model definition is an ensemble model of decision trees.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelType.g.xml" path="doc/member[@key='ml._types.TrainedModelType#tree_ensemble']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "tree_ensemble")]
 	TreeEnsemble
 }

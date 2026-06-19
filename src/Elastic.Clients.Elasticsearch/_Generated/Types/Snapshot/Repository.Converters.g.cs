@@ -51,7 +51,7 @@ public sealed partial class IRepositoryConverter : System.Text.Json.Serializatio
 			"s3" => reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.S3Repository>(options, null),
 			"source" => reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository>(options, null),
 			"url" => reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepository>(options, null),
-			_ => throw new System.Text.Json.JsonException($"Variant '{discriminator}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Snapshot.IRepository)}'.")
+			_ => ReadCustomVariant(ref reader, options, discriminator!)
 		};
 	}
 
@@ -78,7 +78,34 @@ public sealed partial class IRepositoryConverter : System.Text.Json.Serializatio
 				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepository)value, null);
 				break;
 			default:
-				throw new System.Text.Json.JsonException($"Variant '{value.Type}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Snapshot.IRepository)}'.");
+				if (value is Elastic.Clients.Elasticsearch.Snapshot.UnknownRepository custom)
+				{
+					writer.WriteValue(options, custom, null);
+					break;
+				}
+
+				if (options.TryGetContext<Elastic.Clients.Elasticsearch.IElasticsearchClientSettings>(out var settings) && settings.Variants.TryGetWriter<Elastic.Clients.Elasticsearch.Snapshot.IRepository>(value.GetType(), out var variantWriter))
+				{
+					if (!string.Equals(value.Type, variantWriter.Discriminator, System.StringComparison.Ordinal))
+					{
+						throw new System.Text.Json.JsonException($"Variant of runtime type '{value.GetType().Name}' is registered for discriminator '{variantWriter.Discriminator}' but reports '{value.Type}' for type '{nameof(Elastic.Clients.Elasticsearch.Snapshot.IRepository)}'.");
+					}
+
+					variantWriter.Write(writer, value, options);
+					break;
+				}
+
+				throw new System.Text.Json.JsonException($"Variant of runtime type '{value.GetType().Name}' with discriminator '{value.Type}' is not registered. Call settings.Variants.Register<{nameof(Elastic.Clients.Elasticsearch.Snapshot.IRepository)}, T>(\"{value.Type}\") at startup.");
 		}
+	}
+
+	private static Elastic.Clients.Elasticsearch.Snapshot.IRepository ReadCustomVariant(ref System.Text.Json.Utf8JsonReader reader, System.Text.Json.JsonSerializerOptions options, string discriminator)
+	{
+		if (options.TryGetContext<Elastic.Clients.Elasticsearch.IElasticsearchClientSettings>(out var settings) && settings.Variants.TryGetReader<Elastic.Clients.Elasticsearch.Snapshot.IRepository>(discriminator, out var variantReader))
+		{
+			return variantReader(ref reader, options)!;
+		}
+
+		return reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.UnknownRepository>(options)!;
 	}
 }

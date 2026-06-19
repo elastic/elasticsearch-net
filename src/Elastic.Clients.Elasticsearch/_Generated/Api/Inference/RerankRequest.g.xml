@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.rerank.Request"><summary><para>
+Perform reranking inference on the service.
+</para></summary></member>
+  <member key="inference.rerank.Request#inference_id"><summary><para>
+The unique identifier for the inference endpoint.
+</para></summary></member>
+  <member key="inference.rerank.Request#input"><summary><para>
+The documents to rank.
+</para></summary></member>
+  <member key="inference.rerank.Request#query"><summary><para>
+Query input.
+</para></summary></member>
+  <member key="inference.rerank.Request#return_documents"><summary><para>
+Include the document text in the response.
+</para></summary></member>
+  <member key="inference.rerank.Request#task_settings"><summary><para>
+Task settings for the individual inference request.
+These settings are specific to the task type you specified and override the task settings specified when initializing the service.
+</para></summary></member>
+  <member key="inference.rerank.Request#timeout"><summary><para>
+The amount of time to wait for the inference request to complete.
+</para></summary></member>
+  <member key="inference.rerank.Request#top_n"><summary><para>
+Limit the response to the top N documents.
+</para></summary></member>
+</doc>

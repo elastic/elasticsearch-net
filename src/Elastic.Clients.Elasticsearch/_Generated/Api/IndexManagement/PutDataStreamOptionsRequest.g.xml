@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.put_data_stream_options.Request"><summary><para>
+Update data stream options.
+</para>
+<para>
+Update the data stream options of the specified data streams.
+</para></summary></member>
+  <member key="indices.put_data_stream_options.Request#expand_wildcards"><summary><para>
+Type of data stream that wildcard patterns can match.
+Supports comma-separated values, such as <c>open,hidden</c>.
+</para></summary></member>
+  <member key="indices.put_data_stream_options.Request#failure_store"><summary><para>
+If defined, it will update the failure store configuration of every data stream resolved by the name expression.
+</para></summary></member>
+  <member key="indices.put_data_stream_options.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node. If no response is
+received before the timeout expires, the request fails and returns an
+error.
+</para></summary></member>
+  <member key="indices.put_data_stream_options.Request#name"><summary><para>
+Comma-separated list of data streams used to limit the request.
+Supports wildcards (<c>*</c>).
+To target all data streams use <c>*</c> or <c>_all</c>.
+</para></summary></member>
+  <member key="indices.put_data_stream_options.Request#timeout"><summary><para>
+Period to wait for a response.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

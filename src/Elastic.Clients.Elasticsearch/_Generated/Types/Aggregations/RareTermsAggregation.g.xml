@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.RareTermsAggregation#exclude"><summary><para>
+Terms that should be excluded from the aggregation.
+</para></summary></member>
+  <member key="_types.aggregations.RareTermsAggregation#field"><summary><para>
+The field from which to return rare terms.
+</para></summary></member>
+  <member key="_types.aggregations.RareTermsAggregation#include"><summary><para>
+Terms that should be included in the aggregation.
+</para></summary></member>
+  <member key="_types.aggregations.RareTermsAggregation#max_doc_count"><summary><para>
+The maximum number of documents a term should appear in.
+</para></summary></member>
+  <member key="_types.aggregations.RareTermsAggregation#missing"><summary><para>
+The value to apply to documents that do not have a value.
+By default, documents without a value are ignored.
+</para></summary></member>
+  <member key="_types.aggregations.RareTermsAggregation#precision"><summary><para>
+The precision of the internal CuckooFilters.
+Smaller precision leads to better approximation, but higher memory usage.
+</para></summary></member>
+</doc>

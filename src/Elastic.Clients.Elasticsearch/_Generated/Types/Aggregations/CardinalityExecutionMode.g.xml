@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.CardinalityExecutionMode#direct"><summary><para>
+Run the aggregation by using field values directly.
+</para></summary></member>
+  <member key="_types.aggregations.CardinalityExecutionMode#global_ordinals"><summary><para>
+Run the aggregation by using global ordinals of the field and resolving those values after finishing a shard.
+</para></summary></member>
+  <member key="_types.aggregations.CardinalityExecutionMode#save_memory_heuristic"><summary><para>
+Heuristic-based mode, default in Elasticsearch 8.3 and earlier.
+</para></summary></member>
+  <member key="_types.aggregations.CardinalityExecutionMode#save_time_heuristic"><summary><para>
+Heuristic-based mode, default in Elasticsearch 8.4 and later.
+</para></summary></member>
+  <member key="_types.aggregations.CardinalityExecutionMode#segment_ordinals"><summary><para>
+Run the aggregation by using segment ordinal values and resolving those values after each segment.
+</para></summary></member>
+</doc>

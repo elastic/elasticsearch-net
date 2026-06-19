@@ -26,9 +26,7 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>
-	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.CrossClusterReplication.CrossClusterReplicationNamespacedClient"/> class for mocking.
-	/// </para>
+	/// Initializes a new instance of the <cref:Elastic.Clients.Elasticsearch.CrossClusterReplication.CrossClusterReplicationNamespacedClient> class for mocking.
 	/// </summary>
 	protected CrossClusterReplicationNamespacedClient() : base()
 	{
@@ -38,12 +36,16 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 	{
 	}
 
+	/// <include file="../Api/CrossClusterReplication/DeleteAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.delete_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.delete_auto_follow_pattern.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternResponse DeleteAutoFollowPattern(Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/DeleteAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.delete_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.delete_auto_follow_pattern.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternResponse DeleteAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequestDescriptor(name);
@@ -52,6 +54,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/DeleteAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.delete_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.delete_auto_follow_pattern.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternResponse DeleteAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequestDescriptor(name);
@@ -61,12 +65,16 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/DeleteAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.delete_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.delete_auto_follow_pattern.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/DeleteAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.delete_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.delete_auto_follow_pattern.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequestDescriptor(name);
@@ -75,6 +83,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/DeleteAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.delete_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.delete_auto_follow_pattern.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternResponse> DeleteAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequestDescriptor(name);
@@ -84,12 +94,16 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse Follow(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse Follow(Elastic.Clients.Elasticsearch.IndexName index)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor(index);
@@ -98,6 +112,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse Follow(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor(index);
@@ -107,6 +123,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse Follow<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument>();
@@ -115,6 +133,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse Follow<TDocument>(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument>();
@@ -124,6 +144,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse Follow<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument>(index);
@@ -133,12 +155,16 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse> FollowAsync(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse> FollowAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor(index);
@@ -147,6 +173,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse> FollowAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor(index);
@@ -156,6 +184,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse> FollowAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument>();
@@ -164,6 +194,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse> FollowAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument>();
@@ -173,6 +205,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse> FollowAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument>(index);
@@ -182,12 +216,16 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowInfoRequest.g.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoResponse FollowInfo(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowInfoRequest.g.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoResponse FollowInfo(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestDescriptor(indices);
@@ -196,6 +234,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowInfoRequest.g.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoResponse FollowInfo(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestDescriptor(indices);
@@ -205,6 +245,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowInfoRequest.g.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoResponse FollowInfo<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestDescriptor<TDocument>();
@@ -213,6 +255,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowInfoRequest.g.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoResponse FollowInfo<TDocument>(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestDescriptor<TDocument>();
@@ -222,6 +266,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowInfoRequest.g.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoResponse FollowInfo<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestDescriptor<TDocument>(indices);
@@ -231,12 +277,16 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowInfoRequest.g.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoResponse> FollowInfoAsync(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowInfoRequest.g.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoResponse> FollowInfoAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestDescriptor(indices);
@@ -245,6 +295,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowInfoRequest.g.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoResponse> FollowInfoAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestDescriptor(indices);
@@ -254,6 +306,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowInfoRequest.g.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoResponse> FollowInfoAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestDescriptor<TDocument>();
@@ -262,6 +316,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowInfoRequest.g.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoResponse> FollowInfoAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestDescriptor<TDocument>();
@@ -271,6 +327,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowInfoRequest.g.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoResponse> FollowInfoAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestDescriptor<TDocument>(indices);
@@ -280,12 +338,16 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowStatsRequest.g.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsResponse FollowStats(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowStatsRequest.g.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsResponse FollowStats(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor(indices);
@@ -294,6 +356,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowStatsRequest.g.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsResponse FollowStats(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor(indices);
@@ -303,6 +367,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowStatsRequest.g.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsResponse FollowStats<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument>();
@@ -311,6 +377,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowStatsRequest.g.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsResponse FollowStats<TDocument>(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument>();
@@ -320,6 +388,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowStatsRequest.g.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsResponse FollowStats<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument>(indices);
@@ -329,12 +399,16 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowStatsRequest.g.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsResponse> FollowStatsAsync(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowStatsRequest.g.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsResponse> FollowStatsAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor(indices);
@@ -343,6 +417,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowStatsRequest.g.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsResponse> FollowStatsAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor(indices);
@@ -352,6 +428,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowStatsRequest.g.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsResponse> FollowStatsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument>();
@@ -360,6 +438,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowStatsRequest.g.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsResponse> FollowStatsAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument>();
@@ -369,6 +449,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/FollowStatsRequest.g.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsResponse> FollowStatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument>(indices);
@@ -378,12 +460,16 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ForgetFollowerRequest.g.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerResponse ForgetFollower(Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ForgetFollowerRequest.g.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerResponse ForgetFollower(Elastic.Clients.Elasticsearch.IndexName index)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor(index);
@@ -392,6 +478,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ForgetFollowerRequest.g.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerResponse ForgetFollower(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor(index);
@@ -401,6 +489,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ForgetFollowerRequest.g.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerResponse ForgetFollower<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument>();
@@ -409,6 +499,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ForgetFollowerRequest.g.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerResponse ForgetFollower<TDocument>(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument>();
@@ -418,6 +510,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ForgetFollowerRequest.g.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerResponse ForgetFollower<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument>(index);
@@ -427,12 +521,16 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ForgetFollowerRequest.g.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerResponse> ForgetFollowerAsync(Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ForgetFollowerRequest.g.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerResponse> ForgetFollowerAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor(index);
@@ -441,6 +539,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ForgetFollowerRequest.g.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerResponse> ForgetFollowerAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor(index);
@@ -450,6 +550,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ForgetFollowerRequest.g.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerResponse> ForgetFollowerAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument>();
@@ -458,6 +560,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ForgetFollowerRequest.g.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerResponse> ForgetFollowerAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument>();
@@ -467,6 +571,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ForgetFollowerRequest.g.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerResponse> ForgetFollowerAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument>(index);
@@ -476,12 +582,16 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/GetAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternResponse GetAutoFollowPattern(Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/GetAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternResponse GetAutoFollowPattern()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor();
@@ -490,6 +600,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/GetAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternResponse GetAutoFollowPattern(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor();
@@ -499,6 +611,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/GetAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternResponse GetAutoFollowPattern(Elastic.Clients.Elasticsearch.Name? name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor(name);
@@ -507,6 +621,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/GetAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternResponse GetAutoFollowPattern(Elastic.Clients.Elasticsearch.Name? name, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor(name);
@@ -516,12 +632,16 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/GetAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternResponse> GetAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/GetAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternResponse> GetAutoFollowPatternAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor();
@@ -530,6 +650,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/GetAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternResponse> GetAutoFollowPatternAsync(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor();
@@ -539,6 +661,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/GetAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternResponse> GetAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name? name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor(name);
@@ -547,6 +671,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/GetAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternResponse> GetAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name? name, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor(name);
@@ -556,12 +682,16 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/PauseAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.pause_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.pause_auto_follow_pattern.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternResponse PauseAutoFollowPattern(Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/PauseAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.pause_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.pause_auto_follow_pattern.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternResponse PauseAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternRequestDescriptor(name);
@@ -570,6 +700,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/PauseAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.pause_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.pause_auto_follow_pattern.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternResponse PauseAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternRequestDescriptor(name);
@@ -579,12 +711,16 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/PauseAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.pause_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.pause_auto_follow_pattern.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternResponse> PauseAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/PauseAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.pause_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.pause_auto_follow_pattern.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternResponse> PauseAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternRequestDescriptor(name);
@@ -593,6 +729,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/PauseAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.pause_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.pause_auto_follow_pattern.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternResponse> PauseAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternRequestDescriptor(name);
@@ -602,12 +740,16 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/PauseFollowRequest.g.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowResponse PauseFollow(Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/PauseFollowRequest.g.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowResponse PauseFollow(Elastic.Clients.Elasticsearch.IndexName index)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor(index);
@@ -616,6 +758,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/PauseFollowRequest.g.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowResponse PauseFollow(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor(index);
@@ -625,6 +769,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/PauseFollowRequest.g.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowResponse PauseFollow<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument>();
@@ -633,6 +779,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/PauseFollowRequest.g.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowResponse PauseFollow<TDocument>(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument>();
@@ -642,6 +790,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/PauseFollowRequest.g.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowResponse PauseFollow<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument>(index);
@@ -651,12 +801,16 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/PauseFollowRequest.g.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowResponse> PauseFollowAsync(Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/PauseFollowRequest.g.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowResponse> PauseFollowAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor(index);
@@ -665,6 +819,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/PauseFollowRequest.g.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowResponse> PauseFollowAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor(index);
@@ -674,6 +830,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/PauseFollowRequest.g.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowResponse> PauseFollowAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument>();
@@ -682,6 +840,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/PauseFollowRequest.g.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowResponse> PauseFollowAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument>();
@@ -691,6 +851,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/PauseFollowRequest.g.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowResponse> PauseFollowAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument>(index);
@@ -700,12 +862,16 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternResponse PutAutoFollowPattern(Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternResponse PutAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor(name);
@@ -714,6 +880,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternResponse PutAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor(name);
@@ -723,12 +891,16 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternResponse> PutAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternResponse> PutAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor(name);
@@ -737,6 +909,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternResponse> PutAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor(name);
@@ -746,12 +920,16 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ResumeAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.resume_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.resume_auto_follow_pattern.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternResponse ResumeAutoFollowPattern(Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ResumeAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.resume_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.resume_auto_follow_pattern.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternResponse ResumeAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequestDescriptor(name);
@@ -760,6 +938,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ResumeAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.resume_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.resume_auto_follow_pattern.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternResponse ResumeAutoFollowPattern(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequestDescriptor(name);
@@ -769,12 +949,16 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ResumeAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.resume_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.resume_auto_follow_pattern.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternResponse> ResumeAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ResumeAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.resume_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.resume_auto_follow_pattern.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternResponse> ResumeAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequestDescriptor(name);
@@ -783,6 +967,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ResumeAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.resume_auto_follow_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.resume_auto_follow_pattern.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternResponse> ResumeAutoFollowPatternAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequestDescriptor(name);
@@ -792,12 +978,16 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ResumeFollowRequest.g.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowResponse ResumeFollow(Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ResumeFollowRequest.g.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowResponse ResumeFollow(Elastic.Clients.Elasticsearch.IndexName index)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor(index);
@@ -806,6 +996,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ResumeFollowRequest.g.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowResponse ResumeFollow(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor(index);
@@ -815,6 +1007,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ResumeFollowRequest.g.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowResponse ResumeFollow<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument>();
@@ -823,6 +1017,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ResumeFollowRequest.g.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowResponse ResumeFollow<TDocument>(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument>();
@@ -832,6 +1028,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ResumeFollowRequest.g.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowResponse ResumeFollow<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument>(index);
@@ -841,12 +1039,16 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ResumeFollowRequest.g.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowResponse> ResumeFollowAsync(Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ResumeFollowRequest.g.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowResponse> ResumeFollowAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor(index);
@@ -855,6 +1057,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ResumeFollowRequest.g.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowResponse> ResumeFollowAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor(index);
@@ -864,6 +1068,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ResumeFollowRequest.g.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowResponse> ResumeFollowAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument>();
@@ -872,6 +1078,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ResumeFollowRequest.g.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowResponse> ResumeFollowAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument>();
@@ -881,6 +1089,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/ResumeFollowRequest.g.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowResponse> ResumeFollowAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument>(index);
@@ -890,12 +1100,16 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/CcrStatsRequest.g.xml" path="doc/member[@key='ccr.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsResponse Stats(Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/CcrStatsRequest.g.xml" path="doc/member[@key='ccr.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsResponse Stats()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequestDescriptor();
@@ -904,6 +1118,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/CcrStatsRequest.g.xml" path="doc/member[@key='ccr.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsResponse Stats(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequestDescriptor();
@@ -913,12 +1129,16 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/CcrStatsRequest.g.xml" path="doc/member[@key='ccr.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/CcrStatsRequest.g.xml" path="doc/member[@key='ccr.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsResponse> StatsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequestDescriptor();
@@ -927,6 +1147,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/CcrStatsRequest.g.xml" path="doc/member[@key='ccr.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsResponse> StatsAsync(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequestDescriptor();
@@ -936,12 +1158,16 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/UnfollowRequest.g.xml" path="doc/member[@key='ccr.unfollow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.unfollow.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowResponse Unfollow(Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/UnfollowRequest.g.xml" path="doc/member[@key='ccr.unfollow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.unfollow.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowResponse Unfollow(Elastic.Clients.Elasticsearch.IndexName index)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor(index);
@@ -950,6 +1176,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/UnfollowRequest.g.xml" path="doc/member[@key='ccr.unfollow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.unfollow.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowResponse Unfollow(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor(index);
@@ -959,6 +1187,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/UnfollowRequest.g.xml" path="doc/member[@key='ccr.unfollow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.unfollow.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowResponse Unfollow<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor<TDocument>();
@@ -967,6 +1197,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/UnfollowRequest.g.xml" path="doc/member[@key='ccr.unfollow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.unfollow.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowResponse Unfollow<TDocument>(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor<TDocument>();
@@ -976,6 +1208,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/UnfollowRequest.g.xml" path="doc/member[@key='ccr.unfollow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.unfollow.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowResponse Unfollow<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor<TDocument>(index);
@@ -985,12 +1219,16 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestParameters>(request);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/UnfollowRequest.g.xml" path="doc/member[@key='ccr.unfollow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.unfollow.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowResponse> UnfollowAsync(Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/UnfollowRequest.g.xml" path="doc/member[@key='ccr.unfollow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.unfollow.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowResponse> UnfollowAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor(index);
@@ -999,6 +1237,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/UnfollowRequest.g.xml" path="doc/member[@key='ccr.unfollow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.unfollow.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowResponse> UnfollowAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor(index);
@@ -1008,6 +1248,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/UnfollowRequest.g.xml" path="doc/member[@key='ccr.unfollow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.unfollow.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowResponse> UnfollowAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor<TDocument>();
@@ -1016,6 +1258,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/UnfollowRequest.g.xml" path="doc/member[@key='ccr.unfollow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.unfollow.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowResponse> UnfollowAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor<TDocument>();
@@ -1025,6 +1269,8 @@ public partial class CrossClusterReplicationNamespacedClient : Elastic.Clients.E
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequest, Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowResponse, Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/CrossClusterReplication/UnfollowRequest.g.xml" path="doc/member[@key='ccr.unfollow.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ccr.unfollow.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowResponse> UnfollowAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequestDescriptor<TDocument>(index);

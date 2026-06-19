@@ -23,6 +23,7 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='xpack.info.Features']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.Json.FeaturesConverter))]
 public sealed partial class Features
 {
@@ -73,6 +74,7 @@ public sealed partial class Features
 	public Elastic.Clients.Elasticsearch.Xpack.Feature? EnterpriseSearch { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Feature Eql { get; set; }
 	public Elastic.Clients.Elasticsearch.Xpack.Feature? Esql { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.Feature? GpuVectorIndexing { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Feature Graph { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Feature Ilm { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Feature Logsdb { get; set; }

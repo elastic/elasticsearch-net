@@ -26,9 +26,7 @@ namespace Elastic.Clients.Elasticsearch.SearchApplication;
 public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>
-	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient"/> class for mocking.
-	/// </para>
+	/// Initializes a new instance of the <cref:Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient> class for mocking.
 	/// </summary>
 	protected SearchApplicationNamespacedClient() : base()
 	{
@@ -38,12 +36,16 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 	{
 	}
 
+	/// <include file="../Api/SearchApplication/DeleteSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse Delete(Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/DeleteSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse Delete(Elastic.Clients.Elasticsearch.Name name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestDescriptor(name);
@@ -52,6 +54,8 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/DeleteSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse Delete(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestDescriptor(name);
@@ -61,12 +65,16 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/DeleteSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.delete.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse> DeleteAsync(Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/DeleteSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.delete.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestDescriptor(name);
@@ -75,6 +83,8 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/DeleteSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.delete.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestDescriptor(name);
@@ -84,12 +94,16 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/DeleteBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.delete_behavioral_analytics.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.delete_behavioral_analytics.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse DeleteBehavioralAnalytics(Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/DeleteBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.delete_behavioral_analytics.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.delete_behavioral_analytics.Request']/*"/>
 	[System.Obsolete("Deprecated in '9.0.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse DeleteBehavioralAnalytics(Elastic.Clients.Elasticsearch.Name name)
 	{
@@ -99,6 +113,8 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/DeleteBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.delete_behavioral_analytics.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.delete_behavioral_analytics.Request']/*"/>
 	[System.Obsolete("Deprecated in '9.0.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse DeleteBehavioralAnalytics(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor> action)
 	{
@@ -109,12 +125,16 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/DeleteBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.delete_behavioral_analytics.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.delete_behavioral_analytics.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse> DeleteBehavioralAnalyticsAsync(Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/DeleteBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.delete_behavioral_analytics.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.delete_behavioral_analytics.Request']/*"/>
 	[System.Obsolete("Deprecated in '9.0.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse> DeleteBehavioralAnalyticsAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -124,6 +144,8 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/DeleteBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.delete_behavioral_analytics.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.delete_behavioral_analytics.Request']/*"/>
 	[System.Obsolete("Deprecated in '9.0.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse> DeleteBehavioralAnalyticsAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -134,12 +156,16 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/GetSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse Get(Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/GetSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse Get(Elastic.Clients.Elasticsearch.Name name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestDescriptor(name);
@@ -148,6 +174,8 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/GetSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse Get(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestDescriptor(name);
@@ -157,12 +185,16 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/GetSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse> GetAsync(Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/GetSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse> GetAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestDescriptor(name);
@@ -171,6 +203,8 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/GetSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse> GetAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestDescriptor(name);
@@ -180,12 +214,16 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/GetBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse GetBehavioralAnalytics(Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/GetBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request']/*"/>
 	[System.Obsolete("Deprecated in '9.0.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse GetBehavioralAnalytics()
 	{
@@ -195,6 +233,8 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/GetBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request']/*"/>
 	[System.Obsolete("Deprecated in '9.0.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse GetBehavioralAnalytics(System.Action<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor> action)
 	{
@@ -205,6 +245,8 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/GetBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request']/*"/>
 	[System.Obsolete("Deprecated in '9.0.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse GetBehavioralAnalytics(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? name)
 	{
@@ -214,6 +256,8 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/GetBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request']/*"/>
 	[System.Obsolete("Deprecated in '9.0.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse GetBehavioralAnalytics(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor> action)
 	{
@@ -224,12 +268,16 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/GetBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse> GetBehavioralAnalyticsAsync(Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/GetBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request']/*"/>
 	[System.Obsolete("Deprecated in '9.0.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse> GetBehavioralAnalyticsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -239,6 +287,8 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/GetBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request']/*"/>
 	[System.Obsolete("Deprecated in '9.0.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse> GetBehavioralAnalyticsAsync(System.Action<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -249,6 +299,8 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/GetBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request']/*"/>
 	[System.Obsolete("Deprecated in '9.0.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse> GetBehavioralAnalyticsAsync(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? name, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -258,6 +310,8 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/GetBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request']/*"/>
 	[System.Obsolete("Deprecated in '9.0.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse> GetBehavioralAnalyticsAsync(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -268,12 +322,16 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/ListRequest.g.xml" path="doc/member[@key='search_application.list.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.list.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.ListResponse List(Elastic.Clients.Elasticsearch.SearchApplication.ListRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.ListRequest, Elastic.Clients.Elasticsearch.SearchApplication.ListResponse, Elastic.Clients.Elasticsearch.SearchApplication.ListRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/ListRequest.g.xml" path="doc/member[@key='search_application.list.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.list.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.ListResponse List()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.ListRequestDescriptor();
@@ -282,6 +340,8 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.ListRequest, Elastic.Clients.Elasticsearch.SearchApplication.ListResponse, Elastic.Clients.Elasticsearch.SearchApplication.ListRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/ListRequest.g.xml" path="doc/member[@key='search_application.list.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.list.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.ListResponse List(System.Action<Elastic.Clients.Elasticsearch.SearchApplication.ListRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.ListRequestDescriptor();
@@ -291,12 +351,16 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.ListRequest, Elastic.Clients.Elasticsearch.SearchApplication.ListResponse, Elastic.Clients.Elasticsearch.SearchApplication.ListRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/ListRequest.g.xml" path="doc/member[@key='search_application.list.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.list.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.ListResponse> ListAsync(Elastic.Clients.Elasticsearch.SearchApplication.ListRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.ListRequest, Elastic.Clients.Elasticsearch.SearchApplication.ListResponse, Elastic.Clients.Elasticsearch.SearchApplication.ListRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/ListRequest.g.xml" path="doc/member[@key='search_application.list.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.list.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.ListResponse> ListAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.ListRequestDescriptor();
@@ -305,6 +369,8 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.ListRequest, Elastic.Clients.Elasticsearch.SearchApplication.ListResponse, Elastic.Clients.Elasticsearch.SearchApplication.ListRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/ListRequest.g.xml" path="doc/member[@key='search_application.list.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.list.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.ListResponse> ListAsync(System.Action<Elastic.Clients.Elasticsearch.SearchApplication.ListRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.ListRequestDescriptor();
@@ -314,12 +380,16 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.ListRequest, Elastic.Clients.Elasticsearch.SearchApplication.ListResponse, Elastic.Clients.Elasticsearch.SearchApplication.ListRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/PostBehavioralAnalyticsEventRequest.g.xml" path="doc/member[@key='search_application.post_behavioral_analytics_event.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.post_behavioral_analytics_event.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse PostBehavioralAnalyticsEvent(Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest, Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse, Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/PostBehavioralAnalyticsEventRequest.g.xml" path="doc/member[@key='search_application.post_behavioral_analytics_event.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.post_behavioral_analytics_event.Request']/*"/>
 	[System.Obsolete("Deprecated in '9.0.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse PostBehavioralAnalyticsEvent(Elastic.Clients.Elasticsearch.Name collectionName, Elastic.Clients.Elasticsearch.SearchApplication.EventType eventType)
 	{
@@ -329,6 +399,8 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest, Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse, Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/PostBehavioralAnalyticsEventRequest.g.xml" path="doc/member[@key='search_application.post_behavioral_analytics_event.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.post_behavioral_analytics_event.Request']/*"/>
 	[System.Obsolete("Deprecated in '9.0.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse PostBehavioralAnalyticsEvent(Elastic.Clients.Elasticsearch.Name collectionName, Elastic.Clients.Elasticsearch.SearchApplication.EventType eventType, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor> action)
 	{
@@ -339,12 +411,16 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest, Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse, Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/PostBehavioralAnalyticsEventRequest.g.xml" path="doc/member[@key='search_application.post_behavioral_analytics_event.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.post_behavioral_analytics_event.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse> PostBehavioralAnalyticsEventAsync(Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest, Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse, Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/PostBehavioralAnalyticsEventRequest.g.xml" path="doc/member[@key='search_application.post_behavioral_analytics_event.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.post_behavioral_analytics_event.Request']/*"/>
 	[System.Obsolete("Deprecated in '9.0.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse> PostBehavioralAnalyticsEventAsync(Elastic.Clients.Elasticsearch.Name collectionName, Elastic.Clients.Elasticsearch.SearchApplication.EventType eventType, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -354,6 +430,8 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest, Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse, Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/PostBehavioralAnalyticsEventRequest.g.xml" path="doc/member[@key='search_application.post_behavioral_analytics_event.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.post_behavioral_analytics_event.Request']/*"/>
 	[System.Obsolete("Deprecated in '9.0.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse> PostBehavioralAnalyticsEventAsync(Elastic.Clients.Elasticsearch.Name collectionName, Elastic.Clients.Elasticsearch.SearchApplication.EventType eventType, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -364,12 +442,16 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest, Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse, Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/PutSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.put.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.put.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse Put(Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/PutSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.put.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.put.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse Put(Elastic.Clients.Elasticsearch.Name name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor(name);
@@ -378,6 +460,8 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/PutSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.put.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.put.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse Put(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor(name);
@@ -387,12 +471,16 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/PutSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.put.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.put.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse> PutAsync(Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/PutSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.put.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.put.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse> PutAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor(name);
@@ -401,6 +489,8 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/PutSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.put.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.put.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse> PutAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor(name);
@@ -410,12 +500,16 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/PutBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.put_behavioral_analytics.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.put_behavioral_analytics.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse PutBehavioralAnalytics(Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/PutBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.put_behavioral_analytics.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.put_behavioral_analytics.Request']/*"/>
 	[System.Obsolete("Deprecated in '9.0.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse PutBehavioralAnalytics(Elastic.Clients.Elasticsearch.Name name)
 	{
@@ -425,6 +519,8 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/PutBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.put_behavioral_analytics.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.put_behavioral_analytics.Request']/*"/>
 	[System.Obsolete("Deprecated in '9.0.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse PutBehavioralAnalytics(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestDescriptor> action)
 	{
@@ -435,12 +531,16 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/PutBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.put_behavioral_analytics.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.put_behavioral_analytics.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse> PutBehavioralAnalyticsAsync(Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/PutBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.put_behavioral_analytics.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.put_behavioral_analytics.Request']/*"/>
 	[System.Obsolete("Deprecated in '9.0.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse> PutBehavioralAnalyticsAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -450,6 +550,8 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/PutBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.put_behavioral_analytics.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.put_behavioral_analytics.Request']/*"/>
 	[System.Obsolete("Deprecated in '9.0.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse> PutBehavioralAnalyticsAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -460,12 +562,16 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/RenderQueryRequest.g.xml" path="doc/member[@key='search_application.render_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.render_query.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse RenderQuery(Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/RenderQueryRequest.g.xml" path="doc/member[@key='search_application.render_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.render_query.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse RenderQuery(Elastic.Clients.Elasticsearch.Name name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor(name);
@@ -474,6 +580,8 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/RenderQueryRequest.g.xml" path="doc/member[@key='search_application.render_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.render_query.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse RenderQuery(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor(name);
@@ -483,12 +591,16 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/RenderQueryRequest.g.xml" path="doc/member[@key='search_application.render_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.render_query.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse> RenderQueryAsync(Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/RenderQueryRequest.g.xml" path="doc/member[@key='search_application.render_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.render_query.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse> RenderQueryAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor(name);
@@ -497,6 +609,8 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/RenderQueryRequest.g.xml" path="doc/member[@key='search_application.render_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.render_query.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse> RenderQueryAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor(name);
@@ -506,12 +620,16 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/SearchApplicationSearchRequest.g.xml" path="doc/member[@key='search_application.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.search.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument> Search<TDocument>(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/SearchApplicationSearchRequest.g.xml" path="doc/member[@key='search_application.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.search.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument> Search<TDocument>(Elastic.Clients.Elasticsearch.Name name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor(name);
@@ -520,6 +638,8 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/SearchApplicationSearchRequest.g.xml" path="doc/member[@key='search_application.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.search.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument> Search<TDocument>(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor(name);
@@ -529,12 +649,16 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchApplication/SearchApplicationSearchRequest.g.xml" path="doc/member[@key='search_application.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.search.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument>> SearchAsync<TDocument>(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/SearchApplicationSearchRequest.g.xml" path="doc/member[@key='search_application.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.search.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument>> SearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor(name);
@@ -543,6 +667,8 @@ public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elastic
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchApplication/SearchApplicationSearchRequest.g.xml" path="doc/member[@key='search_application.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='search_application.search.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument>> SearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor(name);

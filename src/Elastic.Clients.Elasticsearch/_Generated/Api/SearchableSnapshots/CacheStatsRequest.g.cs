@@ -23,19 +23,14 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.SearchableSnapshots;
 
+/// <include file="CacheStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request']/*"/>
 public sealed partial class CacheStatsRequestParameters : Elastic.Transport.RequestParameters
 {
-	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get cache statistics.
-/// </para>
-/// <para>
-/// Get statistics about the shared cache for partially mounted indices.
-/// </para>
-/// </summary>
+/// <include file="CacheStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchableSnapshots.Json.CacheStatsRequestConverter))]
 public sealed partial class CacheStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestParameters>
 {
@@ -61,23 +56,12 @@ public sealed partial class CacheStatsRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "searchable_snapshots.cache_stats";
 
-	/// <summary>
-	/// <para>
-	/// The names of the nodes in the cluster to target.
-	/// </para>
-	/// </summary>
+	/// <include file="CacheStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request#node_id']/*"/>
 	public Elastic.Clients.Elasticsearch.NodeIds? NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds?>("node_id"); set => PO("node_id", value); }
-	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get cache statistics.
-/// </para>
-/// <para>
-/// Get statistics about the shared cache for partially mounted indices.
-/// </para>
-/// </summary>
+/// <include file="CacheStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request']/*"/>
 public readonly partial struct CacheStatsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest Instance { get; init; }
@@ -101,20 +85,10 @@ public readonly partial struct CacheStatsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor(Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest instance) => new Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest(Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The names of the nodes in the cluster to target.
-	/// </para>
-	/// </summary>
+	/// <include file="CacheStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request#node_id']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.NodeIds? value)
 	{
 		Instance.NodeId = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
-	{
-		Instance.MasterTimeout = value;
 		return this;
 	}
 

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.TruncateTokenFilter#length"><summary><para>
+Character limit for each token. Tokens exceeding this limit are truncated. Defaults to <c>10</c>.
+</para></summary></member>
+</doc>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices._types.SoftDeletes#enabled"><summary><para>
+Indicates whether soft deletes are enabled on the index.
+</para></summary></member>
+  <member key="indices._types.SoftDeletes#retention_lease"><summary><para>
+The maximum period to retain a shard history retention lease before it is considered expired.
+Shard history retention leases ensure that soft deletes are retained during merges on the Lucene
+index. If a soft delete is merged away before it can be replicated to a follower the following
+process will fail due to incomplete history on the leader.
+</para></summary></member>
+</doc>

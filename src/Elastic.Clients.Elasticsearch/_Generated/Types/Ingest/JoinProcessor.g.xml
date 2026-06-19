@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.JoinProcessor#description"><summary><para>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</para></summary></member>
+  <member key="ingest._types.JoinProcessor#field"><summary><para>
+Field containing array values to join.
+</para></summary></member>
+  <member key="ingest._types.JoinProcessor#if"><summary><para>
+Conditionally execute the processor.
+</para></summary></member>
+  <member key="ingest._types.JoinProcessor#ignore_failure"><summary><para>
+Ignore failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.JoinProcessor#on_failure"><summary><para>
+Handle failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.JoinProcessor#separator"><summary><para>
+The separator character.
+</para></summary></member>
+  <member key="ingest._types.JoinProcessor#tag"><summary><para>
+Identifier for the processor.
+Useful for debugging and metrics.
+</para></summary></member>
+  <member key="ingest._types.JoinProcessor#target_field"><summary><para>
+The field to assign the joined value to.
+By default, the field is updated in-place.
+</para></summary></member>
+</doc>

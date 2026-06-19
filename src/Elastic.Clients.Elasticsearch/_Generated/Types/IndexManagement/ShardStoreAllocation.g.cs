@@ -26,10 +26,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.ShardStoreAllocationConverter))]
 public enum ShardStoreAllocation
 {
+	/// <include file="ShardStoreAllocation.g.xml" path="doc/member[@key='indices.shard_stores.ShardStoreAllocation#primary']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "primary")]
 	Primary,
+	/// <include file="ShardStoreAllocation.g.xml" path="doc/member[@key='indices.shard_stores.ShardStoreAllocation#replica']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "replica")]
 	Replica,
+	/// <include file="ShardStoreAllocation.g.xml" path="doc/member[@key='indices.shard_stores.ShardStoreAllocation#unused']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "unused")]
 	Unused
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search._types.RescoreQuery#query_weight"><summary><para>
+Relative importance of the original query versus the rescore query.
+</para></summary></member>
+  <member key="_global.search._types.RescoreQuery#rescore_query"><summary><para>
+The query to use for rescoring.
+This query is only run on the Top-K results returned by the <c>query</c> and <c>post_filter</c> phases.
+</para></summary></member>
+  <member key="_global.search._types.RescoreQuery#rescore_query_weight"><summary><para>
+Relative importance of the rescore query versus the original query.
+</para></summary></member>
+  <member key="_global.search._types.RescoreQuery#score_mode"><summary><para>
+Determines how scores are combined.
+</para></summary></member>
+</doc>

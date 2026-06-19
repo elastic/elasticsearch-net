@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security._types.RemoteClusterPrivileges"><summary><para>
+The subset of cluster level privileges that can be defined for remote clusters.
+</para></summary></member>
+  <member key="security._types.RemoteClusterPrivileges#clusters"><summary><para>
+A list of cluster aliases to which the permissions in this entry apply.
+</para></summary></member>
+  <member key="security._types.RemoteClusterPrivileges#privileges"><summary><para>
+The cluster level privileges that owners of the role have on the remote cluster.
+</para></summary></member>
+</doc>

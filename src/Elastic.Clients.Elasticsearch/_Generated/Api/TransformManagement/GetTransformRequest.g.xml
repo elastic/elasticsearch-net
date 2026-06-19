@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="transform.get_transform.Request"><summary><para>
+Get transforms.
+</para>
+<para>
+Get configuration information for transforms.
+</para></summary></member>
+  <member key="transform.get_transform.Request#allow_no_match"><summary><para>
+Specifies what to do when the request:
+</para>
+<list type="number">
+<item>
+<para>
+Contains wildcard expressions and there are no transforms that match.
+</para>
+</item>
+<item>
+<para>
+Contains the _all string or no identifiers and there are no matches.
+</para>
+</item>
+<item>
+<para>
+Contains wildcard expressions and there are only partial matches.
+</para>
+</item>
+</list>
+<para>
+If this parameter is false, the request returns a 404 status code when
+there are no matches or only partial matches.
+</para></summary></member>
+  <member key="transform.get_transform.Request#exclude_generated"><summary><para>
+Excludes fields that were automatically added when creating the
+transform. This allows the configuration to be in an acceptable format to
+be retrieved and then added to another cluster.
+</para></summary></member>
+  <member key="transform.get_transform.Request#from"><summary><para>
+Skips the specified number of transforms.
+</para></summary></member>
+  <member key="transform.get_transform.Request#size"><summary><para>
+Specifies the maximum number of transforms to obtain.
+</para></summary></member>
+  <member key="transform.get_transform.Request#transform_id"><summary><para>
+Identifier for the transform. It can be a transform identifier or a
+wildcard expression. You can get information for all transforms by using
+<c>_all</c>, by specifying <c>*</c> as the <c>&lt;transform_id></c>, or by omitting the
+<c>&lt;transform_id></c>.
+</para></summary></member>
+</doc>

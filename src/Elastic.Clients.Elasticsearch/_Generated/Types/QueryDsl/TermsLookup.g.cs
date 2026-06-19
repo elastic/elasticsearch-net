@@ -23,6 +23,7 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.TermsLookup']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.TermsLookupConverter))]
 public sealed partial class TermsLookup
 {
@@ -47,9 +48,10 @@ public sealed partial class TermsLookup
 	public required Elastic.Clients.Elasticsearch.Id Id { get; set; }
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Path { get; set; }
-	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
+	public string? Routing { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.TermsLookup']/*"/>
 public readonly partial struct TermsLookupDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup Instance { get; init; }
@@ -93,7 +95,7 @@ public readonly partial struct TermsLookupDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.QueryDsl.TermsLookupDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.TermsLookupDescriptor<TDocument> Routing(string? value)
 	{
 		Instance.Routing = value;
 		return this;
@@ -108,6 +110,7 @@ public readonly partial struct TermsLookupDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.TermsLookup']/*"/>
 public readonly partial struct TermsLookupDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup Instance { get; init; }
@@ -151,7 +154,7 @@ public readonly partial struct TermsLookupDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.QueryDsl.TermsLookupDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.TermsLookupDescriptor Routing(string? value)
 	{
 		Instance.Routing = value;
 		return this;

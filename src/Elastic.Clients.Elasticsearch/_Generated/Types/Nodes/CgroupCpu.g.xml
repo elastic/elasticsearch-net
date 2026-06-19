@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.CgroupCpu#cfs_period_micros"><summary><para>
+The period of time, in microseconds, for how regularly all tasks in the same cgroup as the Elasticsearch process should have their access to CPU resources reallocated.
+</para></summary></member>
+  <member key="nodes._types.CgroupCpu#cfs_quota_micros"><summary><para>
+The total amount of time, in microseconds, for which all tasks in the same cgroup as the Elasticsearch process can run during one period <c>cfs_period_micros</c>.
+</para></summary></member>
+  <member key="nodes._types.CgroupCpu#control_group"><summary><para>
+The <c>cpu</c> control group to which the Elasticsearch process belongs.
+</para></summary></member>
+  <member key="nodes._types.CgroupCpu#stat"><summary><para>
+Contains CPU statistics for the node.
+</para></summary></member>
+</doc>

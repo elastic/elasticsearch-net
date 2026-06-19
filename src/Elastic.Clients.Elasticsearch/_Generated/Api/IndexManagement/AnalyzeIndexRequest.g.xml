@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.analyze.Request"><summary><para>
+Get tokens from text analysis.
+</para>
+<para>
+The analyze API performs analysis on a text string and returns the resulting tokens.
+</para>
+<para>
+Generating excessive amount of tokens may cause a node to run out of memory.
+The <c>index.analyze.max_token_count</c> setting enables you to limit the number of tokens that can be produced.
+If more than this limit of tokens gets generated, an error occurs.
+The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
+</para></summary></member>
+  <member key="indices.analyze.Request#analyzer"><summary><para>
+The name of the analyzer that should be applied to the provided <c>text</c>.
+This could be a built-in analyzer, or an analyzer that’s been configured in the index.
+</para></summary></member>
+  <member key="indices.analyze.Request#attributes"><summary><para>
+Array of token attributes used to filter the output of the <c>explain</c> parameter.
+</para></summary></member>
+  <member key="indices.analyze.Request#char_filter"><summary><para>
+Array of character filters used to preprocess characters before the tokenizer.
+</para></summary></member>
+  <member key="indices.analyze.Request#explain"><summary><para>
+If <c>true</c>, the response includes token attributes and additional details.
+</para></summary></member>
+  <member key="indices.analyze.Request#field"><summary><para>
+Field used to derive the analyzer.
+To use this parameter, you must specify an index.
+If specified, the <c>analyzer</c> parameter overrides this value.
+</para></summary></member>
+  <member key="indices.analyze.Request#filter"><summary><para>
+Array of token filters used to apply after the tokenizer.
+</para></summary></member>
+  <member key="indices.analyze.Request#index"><summary><para>
+Index used to derive the analyzer.
+If specified, the <c>analyzer</c> or field parameter overrides this value.
+If no index is specified or the index does not have a default analyzer, the analyze API uses the standard analyzer.
+</para></summary></member>
+  <member key="indices.analyze.Request#normalizer"><summary><para>
+Normalizer to use to convert text into a single token.
+</para></summary></member>
+  <member key="indices.analyze.Request#text"><summary><para>
+Text to analyze.
+If an array of strings is provided, it is analyzed as a multi-value field.
+</para></summary></member>
+  <member key="indices.analyze.Request#tokenizer"><summary><para>
+Tokenizer to use to convert text into tokens.
+</para></summary></member>
+</doc>

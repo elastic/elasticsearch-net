@@ -25,15 +25,36 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class ReindexRethrottleResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ReindexRethrottleResponse>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropNodeFailures = System.Text.Json.JsonEncodedText.Encode("node_failures"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropNodes = System.Text.Json.JsonEncodedText.Encode("nodes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTaskFailures = System.Text.Json.JsonEncodedText.Encode("task_failures"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTasks = System.Text.Json.JsonEncodedText.Encode("tasks"u8);
 
 	public override Elastic.Clients.Elasticsearch.ReindexRethrottleResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexNode>> propNodes = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>?> propNodeFailures = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexNode>?> propNodes = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.TaskFailure>?> propTaskFailures = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexTask>, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ParentReindexTask>>?> propTasks = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propNodes.TryReadProperty(ref reader, options, PropNodes, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexNode> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexNode>(o, null, null)!))
+			if (propNodeFailures.TryReadProperty(ref reader, options, PropNodeFailures, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.ErrorCause>(o, null)))
+			{
+				continue;
+			}
+
+			if (propNodes.TryReadProperty(ref reader, options, PropNodes, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexNode>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexNode>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propTaskFailures.TryReadProperty(ref reader, options, PropTaskFailures, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.TaskFailure>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.TaskFailure>(o, null)))
+			{
+				continue;
+			}
+
+			if (propTasks.TryReadProperty(ref reader, options, PropTasks, static Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexTask>, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ParentReindexTask>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexTask>, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ParentReindexTask>>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartArray, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartObject), static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexTask> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexTask>(o, null)!, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ParentReindexTask> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ParentReindexTask>(o, null, null)!)))
 			{
 				continue;
 			}
@@ -50,14 +71,20 @@ public sealed partial class ReindexRethrottleResponseConverter : System.Text.Jso
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.ReindexRethrottleResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			Nodes = propNodes.Value
+			NodeFailures = propNodeFailures.Value,
+			Nodes = propNodes.Value,
+			TaskFailures = propTaskFailures.Value,
+			Tasks = propTasks.Value
 		};
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.ReindexRethrottleResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropNodes, value.Nodes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexNode> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexNode>(o, v, null, null));
+		writer.WriteProperty(options, PropNodeFailures, value.NodeFailures, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.ErrorCause>(o, v, null));
+		writer.WriteProperty(options, PropNodes, value.Nodes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexNode>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexNode>(o, v, null, null));
+		writer.WriteProperty(options, PropTaskFailures, value.TaskFailures, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.TaskFailure>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.TaskFailure>(o, v, null));
+		writer.WriteProperty(options, PropTasks, value.Tasks, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexTask>, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ParentReindexTask>>? v) => w.WriteUnionValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexTask>, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ParentReindexTask>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexTask> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexTask>(o, v, null), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ParentReindexTask> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ParentReindexTask>(o, v, null, null)));
 		writer.WriteEndObject();
 	}
 }

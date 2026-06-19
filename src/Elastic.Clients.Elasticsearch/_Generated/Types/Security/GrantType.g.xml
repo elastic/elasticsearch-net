@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security._types.GrantType#access_token"><summary><para>
+In this type of grant, you must supply an access token that was created by the Elasticsearch token service.
+If you are activating a user profile, you can alternatively supply a JWT (either a JWT <c>access_token</c> or a JWT <c>id_token</c>).
+</para></summary></member>
+  <member key="security._types.GrantType#password"><summary><para>
+In this type of grant, you must supply the user ID and password for which you want to create the API key.
+</para></summary></member>
+</doc>

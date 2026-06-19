@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="transform.get_transform_stats.TransformHealthIssue#count"><summary><para>
+Number of times this issue has occurred since it started
+</para></summary></member>
+  <member key="transform.get_transform_stats.TransformHealthIssue#details"><summary><para>
+Details about the issue
+</para></summary></member>
+  <member key="transform.get_transform_stats.TransformHealthIssue#first_occurrence"><summary><para>
+The timestamp this issue occurred for for the first time
+</para></summary></member>
+  <member key="transform.get_transform_stats.TransformHealthIssue#issue"><summary><para>
+A description of the issue
+</para></summary></member>
+  <member key="transform.get_transform_stats.TransformHealthIssue#type"><summary><para>
+The type of the issue
+</para></summary></member>
+</doc>

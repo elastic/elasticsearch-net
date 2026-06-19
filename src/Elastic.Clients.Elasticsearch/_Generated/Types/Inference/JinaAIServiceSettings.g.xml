@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.JinaAIServiceSettings#api_key"><summary><para>
+A valid API key of your JinaAI account.
+</para>
+<para>
+IMPORTANT: You need to provide the API key only once, during the inference model creation.
+The get inference endpoint API does not retrieve your API key.
+</para></summary></member>
+  <member key="inference._types.JinaAIServiceSettings#dimensions"><summary><para>
+For an <c>embedding</c> or <c>text_embedding</c> task, the number of dimensions the resulting output embeddings should have.
+By default, the model's standard output dimension is used.
+Refer to the Jina documentation for more information.
+</para></summary></member>
+  <member key="inference._types.JinaAIServiceSettings#element_type"><summary><para>
+For an <c>embedding</c> or <c>text_embedding</c> task, the data type returned by the model.
+Use <c>bit</c> for binary embeddings, which are encoded as bytes with signed int8 precision.
+Use <c>binary</c> for binary embeddings, which are encoded as bytes with signed int8 precision (this is a synonym of <c>bit</c>).
+Use <c>float</c> for the default float embeddings.
+</para></summary></member>
+  <member key="inference._types.JinaAIServiceSettings#model_id"><summary><para>
+The name of the model to use for the inference task.
+</para></summary></member>
+  <member key="inference._types.JinaAIServiceSettings#multimodal_model"><summary><para>
+For the <c>embedding</c> task, whether the model supports multimodal inputs. If true, requests sent to the Jina model
+will use the multimodal request format (a list of objects). If false, requests sent to the model will use the same
+format as the <c>text_embedding</c> task (a list of strings). Setting this to <c>false</c> allows the <c>embedding</c> task to be
+used with models that do not support multimodal requests.
+</para></summary></member>
+  <member key="inference._types.JinaAIServiceSettings#rate_limit"><summary><para>
+This setting helps to minimize the number of rate limit errors returned from JinaAI.
+By default, the <c>jinaai</c> service sets the number of requests allowed per minute to 2000 for all task types.
+</para></summary></member>
+  <member key="inference._types.JinaAIServiceSettings#similarity"><summary><para>
+For an <c>embedding</c> or <c>text_embedding</c> task, the similarity measure. One of cosine, dot_product, l2_norm.
+The default values varies with the embedding type.
+For example, a float embedding type uses a <c>dot_product</c> similarity measure by default.
+</para></summary></member>
+</doc>

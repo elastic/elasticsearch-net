@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.bulk_put_role.Response#created"><summary><para>
+Array of created roles
+</para></summary></member>
+  <member key="security.bulk_put_role.Response#errors"><summary><para>
+Present if any updates resulted in errors
+</para></summary></member>
+  <member key="security.bulk_put_role.Response#noop"><summary><para>
+Array of role names without any changes
+</para></summary></member>
+  <member key="security.bulk_put_role.Response#updated"><summary><para>
+Array of updated roles
+</para></summary></member>
+</doc>

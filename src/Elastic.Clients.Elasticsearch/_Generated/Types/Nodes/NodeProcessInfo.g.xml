@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes.info.NodeProcessInfo#id"><summary><para>
+Process identifier (PID)
+</para></summary></member>
+  <member key="nodes.info.NodeProcessInfo#mlockall"><summary><para>
+Indicates if the process address space has been successfully locked in memory
+</para></summary></member>
+  <member key="nodes.info.NodeProcessInfo#refresh_interval_in_millis"><summary><para>
+Refresh interval for the process statistics
+</para></summary></member>
+</doc>

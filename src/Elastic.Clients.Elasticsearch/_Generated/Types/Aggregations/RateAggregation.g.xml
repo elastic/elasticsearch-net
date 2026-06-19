@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.RateAggregation#field"><summary><para>
+The field on which to run the aggregation.
+</para></summary></member>
+  <member key="_types.aggregations.RateAggregation#missing"><summary><para>
+The value to apply to documents that do not have a value.
+By default, documents without a value are ignored.
+</para></summary></member>
+  <member key="_types.aggregations.RateAggregation#mode"><summary><para>
+How the rate is calculated.
+</para></summary></member>
+  <member key="_types.aggregations.RateAggregation#unit"><summary><para>
+The interval used to calculate the rate.
+By default, the interval of the <c>date_histogram</c> is used.
+</para></summary></member>
+</doc>

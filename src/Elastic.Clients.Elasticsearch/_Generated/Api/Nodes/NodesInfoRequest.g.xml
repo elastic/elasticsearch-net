@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes.info.Request"><summary><para>
+Get node information.
+</para>
+<para>
+By default, the API returns all attributes and core settings for cluster nodes.
+</para></summary></member>
+  <member key="nodes.info.Request#flat_settings"><summary><para>
+If true, returns settings in flat format.
+</para></summary></member>
+  <member key="nodes.info.Request#metric"><summary><para>
+Limits the information returned to the specific metrics. Supports a comma-separated list, such as http,ingest.
+</para></summary></member>
+  <member key="nodes.info.Request#node_id"><summary><para>
+Comma-separated list of node IDs or names used to limit returned information.
+</para></summary></member>
+  <member key="nodes.info.Request#timeout"><summary><para>
+Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

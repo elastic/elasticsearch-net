@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="dangling_indices.list_dangling_indices.Request"><summary><para>
+Get the dangling indices.
+</para>
+<para>
+If Elasticsearch encounters index data that is absent from the current cluster state, those indices are considered to be dangling.
+For example, this can happen if you delete more than <c>cluster.indices.tombstones.size</c> indices while an Elasticsearch node is offline.
+</para>
+<para>
+Use this API to list dangling indices, which you can then import or delete.
+</para></summary></member>
+</doc>

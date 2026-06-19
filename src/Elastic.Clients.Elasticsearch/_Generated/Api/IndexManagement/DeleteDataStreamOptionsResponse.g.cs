@@ -37,10 +37,6 @@ public sealed partial class DeleteDataStreamOptionsResponse : Elastic.Transport.
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataStreamOptionsResponse.g.xml" path="doc/member[@key='indices.delete_data_stream_options.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

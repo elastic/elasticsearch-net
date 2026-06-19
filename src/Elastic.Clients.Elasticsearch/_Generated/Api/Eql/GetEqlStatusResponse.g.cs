@@ -37,45 +37,21 @@ public sealed partial class GetEqlStatusResponse : Elastic.Transport.Products.El
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a completed search shows the http status code of the completed search.
-	/// </para>
-	/// </summary>
+	/// <include file="GetEqlStatusResponse.g.xml" path="doc/member[@key='eql.get_status.Response#completion_status']/*"/>
 	public int? CompletionStatus { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Shows a timestamp when the eql search will be expired, in milliseconds since the Unix epoch. When this time is reached, the search and its results are deleted, even if the search is still ongoing.
-	/// </para>
-	/// </summary>
+	/// <include file="GetEqlStatusResponse.g.xml" path="doc/member[@key='eql.get_status.Response#expiration_time_in_millis']/*"/>
 	public System.DateTimeOffset? ExpirationTimeInMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the search.
-	/// </para>
-	/// </summary>
+	/// <include file="GetEqlStatusResponse.g.xml" path="doc/member[@key='eql.get_status.Response#id']/*"/>
 	public required string Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true, the search request is still executing. If false, the search is completed.
-	/// </para>
-	/// </summary>
+	/// <include file="GetEqlStatusResponse.g.xml" path="doc/member[@key='eql.get_status.Response#is_partial']/*"/>
 	public required bool IsPartial { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true, the response does not contain complete search results. This could be because either the search is still running (is_running status is false), or because it is already completed (is_running status is true) and results are partial due to failures or timeouts.
-	/// </para>
-	/// </summary>
+	/// <include file="GetEqlStatusResponse.g.xml" path="doc/member[@key='eql.get_status.Response#is_running']/*"/>
 	public required bool IsRunning { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a running search shows a timestamp when the eql search started, in milliseconds since the Unix epoch.
-	/// </para>
-	/// </summary>
+	/// <include file="GetEqlStatusResponse.g.xml" path="doc/member[@key='eql.get_status.Response#start_time_in_millis']/*"/>
 	public System.DateTimeOffset? StartTimeInMillis { get; set; }
 }

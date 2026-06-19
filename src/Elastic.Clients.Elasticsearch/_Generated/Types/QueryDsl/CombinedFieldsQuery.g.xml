@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.CombinedFieldsQuery#auto_generate_synonyms_phrase_query"><summary><para>
+If true, match phrase queries are automatically created for multi-term synonyms.
+</para></summary></member>
+  <member key="_types.query_dsl.CombinedFieldsQuery#boost"><summary><para>
+Floating point number used to decrease or increase the relevance scores of the query.
+Boost values are relative to the default value of 1.0.
+A boost value between 0 and 1.0 decreases the relevance score.
+A value greater than 1.0 increases the relevance score.
+</para></summary></member>
+  <member key="_types.query_dsl.CombinedFieldsQuery#fields"><summary><para>
+List of fields to search. Field wildcard patterns are allowed. Only <c>text</c> fields are supported, and they must all have the same search <c>analyzer</c>.
+</para></summary></member>
+  <member key="_types.query_dsl.CombinedFieldsQuery#minimum_should_match"><summary><para>
+Minimum number of clauses that must match for a document to be returned.
+</para></summary></member>
+  <member key="_types.query_dsl.CombinedFieldsQuery#operator"><summary><para>
+Boolean logic used to interpret text in the query value.
+</para></summary></member>
+  <member key="_types.query_dsl.CombinedFieldsQuery#query"><summary><para>
+Text to search for in the provided <c>fields</c>.
+The <c>combined_fields</c> query analyzes the provided text before performing a search.
+</para></summary></member>
+  <member key="_types.query_dsl.CombinedFieldsQuery#zero_terms_query"><summary><para>
+Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a <c>stop</c> filter.
+</para></summary></member>
+</doc>

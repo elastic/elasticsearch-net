@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices._types.MappingLimitSettingsNestedObjects#limit"><summary><para>
+The maximum number of nested JSON objects that a single document can contain across all nested types. This limit helps
+to prevent out of memory errors when a document contains too many nested objects.
+</para></summary></member>
+</doc>

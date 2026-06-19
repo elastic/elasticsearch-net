@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.reindex_rethrottle.Response#node_failures"><summary><para>
+Node-level failures encountered while applying the rethrottle request.
+Will return a <c>failed_node_exception</c> wrapping a <c>no_such_node_exception</c>,
+if a node handling the task either never existed, or has left the cluster, and one of the following is true:
+</para>
+<list type="number">
+<item>
+<para>
+The task has completed.
+</para>
+</item>
+<item>
+<para>
+The task cannot be found.
+</para>
+</item>
+</list>
+<para>
+Note: Rethrottle handles relocations, so it should succeed if the task can be found and has not completed.
+</para></summary></member>
+  <member key="_global.reindex_rethrottle.Response#nodes"><summary><para>
+Tasks grouped by node, returned only when <c>group_by=nodes</c> (the default).
+</para></summary></member>
+  <member key="_global.reindex_rethrottle.Response#task_failures"><summary><para>
+Per-task failures encountered while applying the rethrottle.
+If a rethrottle is attempted during a relocation handoff, the failure object reports <c>status: SERVICE_UNAVAILABLE</c> (the HTTP response itself is still <c>200 OK</c>).
+In this case, the request can be retried until success.
+</para></summary></member>
+  <member key="_global.reindex_rethrottle.Response#tasks"><summary><para>
+The tasks that were successfully rethrottled.
+Always returned in serverless.
+Returned with <c>group_by=none</c> or <c>group_by=parents</c> in stack.
+</para></summary></member>
+</doc>

@@ -39,19 +39,10 @@ public sealed partial class DeleteByQueryRethrottleResponse : Elastic.Transport.
 
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? NodeFailures { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Task information grouped by node, if <c>group_by</c> was set to <c>node</c> (the default).
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRethrottleResponse.g.xml" path="doc/member[@key='_global.delete_by_query_rethrottle.Response#nodes']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Tasks.NodeTasks>? Nodes { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.TaskFailure>? TaskFailures { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Either a flat list of tasks if <c>group_by</c> was set to <c>none</c>, or grouped by parents if
-	/// <c>group_by</c> was set to <c>parents</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRethrottleResponse.g.xml" path="doc/member[@key='_global.delete_by_query_rethrottle.Response#tasks']/*"/>
 	public Elastic.Clients.Elasticsearch.Tasks.TaskInfos? Tasks { get; set; }
 }

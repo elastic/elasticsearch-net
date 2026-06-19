@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.FiltersAggregation#filters"><summary><para>
+Collection of queries from which to build buckets.
+</para></summary></member>
+  <member key="_types.aggregations.FiltersAggregation#keyed"><summary><para>
+By default, the named filters aggregation returns the buckets as an object.
+Set to <c>false</c> to return the buckets as an array of objects.
+</para></summary></member>
+  <member key="_types.aggregations.FiltersAggregation#other_bucket"><summary><para>
+Set to <c>true</c> to add a bucket to the response which will contain all documents that do not match any of the given filters.
+</para></summary></member>
+  <member key="_types.aggregations.FiltersAggregation#other_bucket_key"><summary><para>
+The key with which the other bucket is returned.
+</para></summary></member>
+</doc>

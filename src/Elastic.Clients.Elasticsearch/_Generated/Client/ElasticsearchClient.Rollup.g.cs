@@ -26,9 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup;
 public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>
-	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient"/> class for mocking.
-	/// </para>
+	/// Initializes a new instance of the <cref:Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient> class for mocking.
 	/// </summary>
 	protected RollupNamespacedClient() : base()
 	{
@@ -38,12 +36,16 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 	{
 	}
 
+	/// <include file="../Api/Rollup/DeleteJobRequest.g.xml" path="doc/member[@key='rollup.delete_job.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.delete_job.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse DeleteJob(Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest, Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse, Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/DeleteJobRequest.g.xml" path="doc/member[@key='rollup.delete_job.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.delete_job.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse DeleteJob(Elastic.Clients.Elasticsearch.Id id)
 	{
@@ -53,6 +55,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest, Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse, Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/DeleteJobRequest.g.xml" path="doc/member[@key='rollup.delete_job.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.delete_job.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse DeleteJob(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor> action)
 	{
@@ -63,12 +67,16 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest, Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse, Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/DeleteJobRequest.g.xml" path="doc/member[@key='rollup.delete_job.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.delete_job.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse> DeleteJobAsync(Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest, Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse, Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/DeleteJobRequest.g.xml" path="doc/member[@key='rollup.delete_job.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.delete_job.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse> DeleteJobAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -78,6 +86,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest, Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse, Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/DeleteJobRequest.g.xml" path="doc/member[@key='rollup.delete_job.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.delete_job.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse> DeleteJobAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -88,12 +98,16 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest, Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse, Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/GetJobsRequest.g.xml" path="doc/member[@key='rollup.get_jobs.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.get_jobs.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse GetJobs(Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest, Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse, Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/GetJobsRequest.g.xml" path="doc/member[@key='rollup.get_jobs.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.get_jobs.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse GetJobs()
 	{
@@ -103,6 +117,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest, Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse, Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/GetJobsRequest.g.xml" path="doc/member[@key='rollup.get_jobs.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.get_jobs.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse GetJobs(System.Action<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor> action)
 	{
@@ -113,6 +129,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest, Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse, Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/GetJobsRequest.g.xml" path="doc/member[@key='rollup.get_jobs.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.get_jobs.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse GetJobs(Elastic.Clients.Elasticsearch.Id? id)
 	{
@@ -122,6 +140,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest, Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse, Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/GetJobsRequest.g.xml" path="doc/member[@key='rollup.get_jobs.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.get_jobs.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse GetJobs(Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor> action)
 	{
@@ -132,12 +152,16 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest, Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse, Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/GetJobsRequest.g.xml" path="doc/member[@key='rollup.get_jobs.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.get_jobs.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse> GetJobsAsync(Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest, Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse, Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/GetJobsRequest.g.xml" path="doc/member[@key='rollup.get_jobs.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.get_jobs.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse> GetJobsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -147,6 +171,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest, Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse, Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/GetJobsRequest.g.xml" path="doc/member[@key='rollup.get_jobs.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.get_jobs.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse> GetJobsAsync(System.Action<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -157,6 +183,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest, Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse, Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/GetJobsRequest.g.xml" path="doc/member[@key='rollup.get_jobs.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.get_jobs.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse> GetJobsAsync(Elastic.Clients.Elasticsearch.Id? id, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -166,6 +194,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest, Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse, Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/GetJobsRequest.g.xml" path="doc/member[@key='rollup.get_jobs.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.get_jobs.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse> GetJobsAsync(Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -176,12 +206,16 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest, Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse, Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/GetRollupCapsRequest.g.xml" path="doc/member[@key='rollup.get_rollup_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.get_rollup_caps.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse GetRollupCaps(Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/GetRollupCapsRequest.g.xml" path="doc/member[@key='rollup.get_rollup_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.get_rollup_caps.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse GetRollupCaps()
 	{
@@ -191,6 +225,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/GetRollupCapsRequest.g.xml" path="doc/member[@key='rollup.get_rollup_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.get_rollup_caps.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse GetRollupCaps(System.Action<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor> action)
 	{
@@ -201,6 +237,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/GetRollupCapsRequest.g.xml" path="doc/member[@key='rollup.get_rollup_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.get_rollup_caps.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse GetRollupCaps(Elastic.Clients.Elasticsearch.Id? id)
 	{
@@ -210,6 +248,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/GetRollupCapsRequest.g.xml" path="doc/member[@key='rollup.get_rollup_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.get_rollup_caps.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse GetRollupCaps(Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor> action)
 	{
@@ -220,12 +260,16 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/GetRollupCapsRequest.g.xml" path="doc/member[@key='rollup.get_rollup_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.get_rollup_caps.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse> GetRollupCapsAsync(Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/GetRollupCapsRequest.g.xml" path="doc/member[@key='rollup.get_rollup_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.get_rollup_caps.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse> GetRollupCapsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -235,6 +279,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/GetRollupCapsRequest.g.xml" path="doc/member[@key='rollup.get_rollup_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.get_rollup_caps.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse> GetRollupCapsAsync(System.Action<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -245,6 +291,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/GetRollupCapsRequest.g.xml" path="doc/member[@key='rollup.get_rollup_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.get_rollup_caps.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse> GetRollupCapsAsync(Elastic.Clients.Elasticsearch.Id? id, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -254,6 +302,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/GetRollupCapsRequest.g.xml" path="doc/member[@key='rollup.get_rollup_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.get_rollup_caps.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse> GetRollupCapsAsync(Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -264,12 +314,16 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/GetRollupIndexCapsRequest.g.xml" path="doc/member[@key='rollup.get_rollup_index_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.get_rollup_index_caps.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse GetRollupIndexCaps(Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/GetRollupIndexCapsRequest.g.xml" path="doc/member[@key='rollup.get_rollup_index_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.get_rollup_index_caps.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse GetRollupIndexCaps(Elastic.Clients.Elasticsearch.Ids index)
 	{
@@ -279,6 +333,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/GetRollupIndexCapsRequest.g.xml" path="doc/member[@key='rollup.get_rollup_index_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.get_rollup_index_caps.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse GetRollupIndexCaps(Elastic.Clients.Elasticsearch.Ids index, System.Action<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestDescriptor> action)
 	{
@@ -289,12 +345,16 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/GetRollupIndexCapsRequest.g.xml" path="doc/member[@key='rollup.get_rollup_index_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.get_rollup_index_caps.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse> GetRollupIndexCapsAsync(Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/GetRollupIndexCapsRequest.g.xml" path="doc/member[@key='rollup.get_rollup_index_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.get_rollup_index_caps.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse> GetRollupIndexCapsAsync(Elastic.Clients.Elasticsearch.Ids index, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -304,6 +364,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/GetRollupIndexCapsRequest.g.xml" path="doc/member[@key='rollup.get_rollup_index_caps.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.get_rollup_index_caps.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse> GetRollupIndexCapsAsync(Elastic.Clients.Elasticsearch.Ids index, System.Action<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -314,12 +376,16 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest, Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse, Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/PutJobRequest.g.xml" path="doc/member[@key='rollup.put_job.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.put_job.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Rollup.PutJobResponse PutJob(Elastic.Clients.Elasticsearch.Rollup.PutJobRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.PutJobRequest, Elastic.Clients.Elasticsearch.Rollup.PutJobResponse, Elastic.Clients.Elasticsearch.Rollup.PutJobRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/PutJobRequest.g.xml" path="doc/member[@key='rollup.put_job.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.put_job.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.PutJobResponse PutJob(Elastic.Clients.Elasticsearch.Id id)
 	{
@@ -329,6 +395,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.PutJobRequest, Elastic.Clients.Elasticsearch.Rollup.PutJobResponse, Elastic.Clients.Elasticsearch.Rollup.PutJobRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/PutJobRequest.g.xml" path="doc/member[@key='rollup.put_job.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.put_job.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.PutJobResponse PutJob(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor> action)
 	{
@@ -339,6 +407,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.PutJobRequest, Elastic.Clients.Elasticsearch.Rollup.PutJobResponse, Elastic.Clients.Elasticsearch.Rollup.PutJobRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/PutJobRequest.g.xml" path="doc/member[@key='rollup.put_job.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.put_job.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.PutJobResponse PutJob<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument>> action)
 	{
@@ -349,12 +419,16 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.PutJobRequest, Elastic.Clients.Elasticsearch.Rollup.PutJobResponse, Elastic.Clients.Elasticsearch.Rollup.PutJobRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/PutJobRequest.g.xml" path="doc/member[@key='rollup.put_job.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.put_job.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.PutJobResponse> PutJobAsync(Elastic.Clients.Elasticsearch.Rollup.PutJobRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.PutJobRequest, Elastic.Clients.Elasticsearch.Rollup.PutJobResponse, Elastic.Clients.Elasticsearch.Rollup.PutJobRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/PutJobRequest.g.xml" path="doc/member[@key='rollup.put_job.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.put_job.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.PutJobResponse> PutJobAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -364,6 +438,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.PutJobRequest, Elastic.Clients.Elasticsearch.Rollup.PutJobResponse, Elastic.Clients.Elasticsearch.Rollup.PutJobRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/PutJobRequest.g.xml" path="doc/member[@key='rollup.put_job.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.put_job.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.PutJobResponse> PutJobAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -374,6 +450,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.PutJobRequest, Elastic.Clients.Elasticsearch.Rollup.PutJobResponse, Elastic.Clients.Elasticsearch.Rollup.PutJobRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/PutJobRequest.g.xml" path="doc/member[@key='rollup.put_job.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.put_job.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.PutJobResponse> PutJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -384,12 +462,16 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.PutJobRequest, Elastic.Clients.Elasticsearch.Rollup.PutJobResponse, Elastic.Clients.Elasticsearch.Rollup.PutJobRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument> RollupSearch<TDocument>(Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument> RollupSearch<TDocument>()
 	{
@@ -399,6 +481,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument> RollupSearch<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>> action)
 	{
@@ -409,6 +493,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument> RollupSearch<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
 	{
@@ -418,6 +504,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument> RollupSearch<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>> action)
 	{
@@ -428,6 +516,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse> RollupSearch<TDocument, TDocumentResponse>()
 	{
@@ -437,6 +527,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse> RollupSearch<TDocument, TDocumentResponse>(System.Action<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>> action)
 	{
@@ -447,6 +539,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse> RollupSearch<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices indices)
 	{
@@ -456,6 +550,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse> RollupSearch<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>> action)
 	{
@@ -466,12 +562,16 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -481,6 +581,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -491,6 +593,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -500,6 +604,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -510,6 +616,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>> RollupSearchAsync<TDocument, TDocumentResponse>(System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -519,6 +627,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>> RollupSearchAsync<TDocument, TDocumentResponse>(System.Action<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -529,6 +639,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>> RollupSearchAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -538,6 +650,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>> RollupSearchAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -548,12 +662,16 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest, Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/StartJobRequest.g.xml" path="doc/member[@key='rollup.start_job.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.start_job.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Rollup.StartJobResponse StartJob(Elastic.Clients.Elasticsearch.Rollup.StartJobRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.StartJobRequest, Elastic.Clients.Elasticsearch.Rollup.StartJobResponse, Elastic.Clients.Elasticsearch.Rollup.StartJobRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/StartJobRequest.g.xml" path="doc/member[@key='rollup.start_job.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.start_job.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.StartJobResponse StartJob(Elastic.Clients.Elasticsearch.Id id)
 	{
@@ -563,6 +681,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.StartJobRequest, Elastic.Clients.Elasticsearch.Rollup.StartJobResponse, Elastic.Clients.Elasticsearch.Rollup.StartJobRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/StartJobRequest.g.xml" path="doc/member[@key='rollup.start_job.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.start_job.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.StartJobResponse StartJob(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Rollup.StartJobRequestDescriptor> action)
 	{
@@ -573,12 +693,16 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.StartJobRequest, Elastic.Clients.Elasticsearch.Rollup.StartJobResponse, Elastic.Clients.Elasticsearch.Rollup.StartJobRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/StartJobRequest.g.xml" path="doc/member[@key='rollup.start_job.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.start_job.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.StartJobResponse> StartJobAsync(Elastic.Clients.Elasticsearch.Rollup.StartJobRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.StartJobRequest, Elastic.Clients.Elasticsearch.Rollup.StartJobResponse, Elastic.Clients.Elasticsearch.Rollup.StartJobRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/StartJobRequest.g.xml" path="doc/member[@key='rollup.start_job.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.start_job.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.StartJobResponse> StartJobAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -588,6 +712,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.StartJobRequest, Elastic.Clients.Elasticsearch.Rollup.StartJobResponse, Elastic.Clients.Elasticsearch.Rollup.StartJobRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/StartJobRequest.g.xml" path="doc/member[@key='rollup.start_job.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.start_job.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.StartJobResponse> StartJobAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Rollup.StartJobRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -598,12 +724,16 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.StartJobRequest, Elastic.Clients.Elasticsearch.Rollup.StartJobResponse, Elastic.Clients.Elasticsearch.Rollup.StartJobRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/StopJobRequest.g.xml" path="doc/member[@key='rollup.stop_job.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.stop_job.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Rollup.StopJobResponse StopJob(Elastic.Clients.Elasticsearch.Rollup.StopJobRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.StopJobRequest, Elastic.Clients.Elasticsearch.Rollup.StopJobResponse, Elastic.Clients.Elasticsearch.Rollup.StopJobRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/StopJobRequest.g.xml" path="doc/member[@key='rollup.stop_job.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.stop_job.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.StopJobResponse StopJob(Elastic.Clients.Elasticsearch.Id id)
 	{
@@ -613,6 +743,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.StopJobRequest, Elastic.Clients.Elasticsearch.Rollup.StopJobResponse, Elastic.Clients.Elasticsearch.Rollup.StopJobRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/StopJobRequest.g.xml" path="doc/member[@key='rollup.stop_job.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.stop_job.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.Rollup.StopJobResponse StopJob(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Rollup.StopJobRequestDescriptor> action)
 	{
@@ -623,12 +755,16 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequest<Elastic.Clients.Elasticsearch.Rollup.StopJobRequest, Elastic.Clients.Elasticsearch.Rollup.StopJobResponse, Elastic.Clients.Elasticsearch.Rollup.StopJobRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Rollup/StopJobRequest.g.xml" path="doc/member[@key='rollup.stop_job.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.stop_job.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.StopJobResponse> StopJobAsync(Elastic.Clients.Elasticsearch.Rollup.StopJobRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.StopJobRequest, Elastic.Clients.Elasticsearch.Rollup.StopJobResponse, Elastic.Clients.Elasticsearch.Rollup.StopJobRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/StopJobRequest.g.xml" path="doc/member[@key='rollup.stop_job.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.stop_job.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.StopJobResponse> StopJobAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -638,6 +774,8 @@ public partial class RollupNamespacedClient : Elastic.Clients.Elasticsearch.Name
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Rollup.StopJobRequest, Elastic.Clients.Elasticsearch.Rollup.StopJobResponse, Elastic.Clients.Elasticsearch.Rollup.StopJobRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Rollup/StopJobRequest.g.xml" path="doc/member[@key='rollup.stop_job.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='rollup.stop_job.Request']/*"/>
 	[System.Obsolete("Deprecated in '8.11.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Rollup.StopJobResponse> StopJobAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Rollup.StopJobRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{

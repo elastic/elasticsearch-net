@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.msearch.MultisearchBody#_source"><summary><para>
+The source fields that are returned for matching documents.
+These fields are returned in the <c>hits._source</c> property of the search response.
+If the <c>stored_fields</c> property is specified, the <c>_source</c> property defaults to <c>false</c>.
+Otherwise, it defaults to <c>true</c>.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#aggregations"><summary><para>
+Defines the aggregations that are run as part of the search request.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#collapse"><summary><para>
+Collapses search results the values of the specified field.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#docvalue_fields"><summary><para>
+An array of wildcard (<c>*</c>) field patterns.
+The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#explain"><summary><para>
+If <c>true</c>, the request returns detailed information about score computation as part of a hit.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#ext"><summary><para>
+Configuration of search extensions defined by Elasticsearch plugins.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#fields"><summary><para>
+An array of wildcard (<c>*</c>) field patterns.
+The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#from"><summary><para>
+The starting document offset, which must be non-negative.
+By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
+To page through more hits, use the <c>search_after</c> parameter.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#highlight"><summary><para>
+Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in your search results.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#indices_boost"><summary><para>
+Boost the <c>_score</c> of documents from specified indices.
+The boost value is the factor by which scores are multiplied.
+A boost value greater than <c>1.0</c> increases the score.
+A boost value between <c>0</c> and <c>1.0</c> decreases the score.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#knn"><summary><para>
+The approximate kNN search to run.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#min_score"><summary><para>
+The minimum <c>_score</c> for matching documents.
+Documents with a lower <c>_score</c> are not included in search results or results collected by aggregations.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#pit"><summary><para>
+Limit the search to a point in time (PIT).
+If you provide a PIT, you cannot specify an <c>&lt;index></c> in the request path.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#post_filter"><summary><para>
+Use the <c>post_filter</c> parameter to filter search results.
+The search hits are filtered after the aggregations are calculated.
+A post filter has no impact on the aggregation results.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#profile"><summary><para>
+Set to <c>true</c> to return detailed timing information about the execution of individual components in a search request.
+NOTE: This is a debugging tool and adds significant overhead to search execution.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#query"><summary><para>
+The search definition using the Query DSL.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#rank"><summary><para>
+The Reciprocal Rank Fusion (RRF) to use.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#rescore"><summary><para>
+Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#retriever"><summary><para>
+A retriever is a specification to describe top documents returned from a search.
+A retriever replaces other elements of the search API that also return top documents such as <c>query</c> and <c>knn</c>.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#runtime_mappings"><summary><para>
+One or more runtime fields in the search request.
+These fields take precedence over mapped fields with the same name.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#script_fields"><summary><para>
+Retrieve a script evaluation (based on different fields) for each hit.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#search_after"><summary><para>
+Used to retrieve the next page of hits using a set of sort values from the previous page.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#seq_no_primary_term"><summary><para>
+If <c>true</c>, the request returns sequence number and primary term of the last modification of each hit.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#size"><summary><para>
+The number of hits to return, which must not be negative.
+By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
+To page through more hits, use the <c>search_after</c> property.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#slice"><summary><para>
+Split a scrolled search into multiple slices that can be consumed independently.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#sort"><summary><para>
+A comma-separated list of &lt;field>:&lt;direction> pairs.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#stats"><summary><para>
+The stats groups to associate with the search.
+Each group maintains a statistics aggregation for its associated searches.
+You can retrieve these stats using the indices stats API.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#stored_fields"><summary><para>
+A comma-separated list of stored fields to return as part of a hit.
+If no fields are specified, no stored fields are included in the response.
+If this field is specified, the <c>_source</c> property defaults to <c>false</c>.
+You can pass <c>_source: true</c> to return both source fields and stored fields in the search response.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#suggest"><summary><para>
+Defines a suggester that provides similar looking terms based on a provided text.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#terminate_after"><summary><para>
+The maximum number of documents to collect for each shard.
+If a query reaches this limit, Elasticsearch terminates the query early.
+Elasticsearch collects documents before sorting.
+</para>
+<para>
+IMPORTANT: Use with caution.
+Elasticsearch applies this property to each shard handling the request.
+When possible, let Elasticsearch perform early termination automatically.
+Avoid specifying this property for requests that target data streams with backing indices across multiple data tiers.
+</para>
+<para>
+If set to <c>0</c> (default), the query does not terminate early.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#timeout"><summary><para>
+The period of time to wait for a response from each shard.
+If no response is received before the timeout expires, the request fails and returns an error.
+Defaults to no timeout.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#track_scores"><summary><para>
+If <c>true</c>, calculate and return document scores, even if the scores are not used for sorting.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#track_total_hits"><summary><para>
+Number of hits matching the query to count accurately.
+If <c>true</c>, the exact number of hits is returned at the cost of some performance.
+If <c>false</c>, the  response does not include the total number of hits matching the query.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchBody#version"><summary><para>
+If <c>true</c>, the request returns the document version as part of a hit.
+</para></summary></member>
+</doc>

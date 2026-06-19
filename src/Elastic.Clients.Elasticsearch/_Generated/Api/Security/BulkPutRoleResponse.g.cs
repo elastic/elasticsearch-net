@@ -37,31 +37,15 @@ public sealed partial class BulkPutRoleResponse : Elastic.Transport.Products.Ela
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of created roles
-	/// </para>
-	/// </summary>
+	/// <include file="BulkPutRoleResponse.g.xml" path="doc/member[@key='security.bulk_put_role.Response#created']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<string>? Created { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Present if any updates resulted in errors
-	/// </para>
-	/// </summary>
+	/// <include file="BulkPutRoleResponse.g.xml" path="doc/member[@key='security.bulk_put_role.Response#errors']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.BulkError? Errors { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array of role names without any changes
-	/// </para>
-	/// </summary>
+	/// <include file="BulkPutRoleResponse.g.xml" path="doc/member[@key='security.bulk_put_role.Response#noop']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<string>? Noop { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array of updated roles
-	/// </para>
-	/// </summary>
+	/// <include file="BulkPutRoleResponse.g.xml" path="doc/member[@key='security.bulk_put_role.Response#updated']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<string>? Updated { get; set; }
 }

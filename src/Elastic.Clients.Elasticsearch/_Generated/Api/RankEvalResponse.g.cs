@@ -37,18 +37,10 @@ public sealed partial class RankEvalResponse : Elastic.Transport.Products.Elasti
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The details section contains one entry for every query in the original requests section, keyed by the search request id
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalResponse.g.xml" path="doc/member[@key='_global.rank_eval.Response#details']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDetail> Details { get; set; }
 	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Failures { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The overall evaluation quality calculated by the defined metric
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalResponse.g.xml" path="doc/member[@key='_global.rank_eval.Response#metric_score']/*"/>
 	public required double MetricScore { get; set; }
 }

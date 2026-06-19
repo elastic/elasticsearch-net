@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="xpack.info.Request"><summary><para>
+Get information.
+</para>
+<para>
+The information provided by the API includes:
+</para>
+<list type="bullet">
+<item>
+<para>
+Build information including the build number and timestamp.
+</para>
+</item>
+<item>
+<para>
+License information about the currently installed license.
+</para>
+</item>
+<item>
+<para>
+Feature information for the features that are currently enabled and available under the current license.
+</para>
+</item>
+</list></summary></member>
+  <member key="xpack.info.Request#accept_enterprise"><summary><para>
+If used, this otherwise ignored parameter must be set to true
+</para></summary></member>
+  <member key="xpack.info.Request#categories"><summary><para>
+A comma-separated list of the information categories to include in the response.
+For example, <c>build,license,features</c>.
+</para></summary></member>
+</doc>

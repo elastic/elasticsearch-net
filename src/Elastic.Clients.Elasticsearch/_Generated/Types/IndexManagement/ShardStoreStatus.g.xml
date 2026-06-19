@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.shard_stores.ShardStoreStatus#all"><summary><para>
+Return all shards, regardless of health status.
+</para></summary></member>
+  <member key="indices.shard_stores.ShardStoreStatus#green"><summary><para>
+The primary shard and all replica shards are assigned.
+</para></summary></member>
+  <member key="indices.shard_stores.ShardStoreStatus#red"><summary><para>
+The primary shard is unassigned.
+</para></summary></member>
+  <member key="indices.shard_stores.ShardStoreStatus#yellow"><summary><para>
+One or more replica shards are unassigned.
+</para></summary></member>
+</doc>

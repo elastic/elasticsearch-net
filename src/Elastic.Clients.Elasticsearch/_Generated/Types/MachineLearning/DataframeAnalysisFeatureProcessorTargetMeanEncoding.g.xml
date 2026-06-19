@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.DataframeAnalysisFeatureProcessorTargetMeanEncoding#default_value"><summary><para>
+The default value if field value is not found in the target_map.
+</para></summary></member>
+  <member key="ml._types.DataframeAnalysisFeatureProcessorTargetMeanEncoding#feature_name"><summary><para>
+The resulting feature name.
+</para></summary></member>
+  <member key="ml._types.DataframeAnalysisFeatureProcessorTargetMeanEncoding#field"><summary><para>
+The name of the field to encode.
+</para></summary></member>
+  <member key="ml._types.DataframeAnalysisFeatureProcessorTargetMeanEncoding#target_map"><summary><para>
+The field value to target mean transition map.
+</para></summary></member>
+</doc>

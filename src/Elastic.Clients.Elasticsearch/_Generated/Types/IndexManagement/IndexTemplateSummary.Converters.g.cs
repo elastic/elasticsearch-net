@@ -36,7 +36,7 @@ public sealed partial class IndexTemplateSummaryConverter : System.Text.Json.Ser
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>?> propAliases = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptions?> propDataStreamOptions = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover?> propLifecycle = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle?> propLifecycle = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.TypeMapping?> propMappings = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings?> propSettings = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)

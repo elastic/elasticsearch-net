@@ -37,10 +37,6 @@ public sealed partial class SamlServiceProviderMetadataResponse : Elastic.Transp
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An XML string that contains a SAML Service Provider's metadata for the realm.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlServiceProviderMetadataResponse.g.xml" path="doc/member[@key='security.saml_service_provider_metadata.Response#metadata']/*"/>
 	public required string Metadata { get; set; }
 }

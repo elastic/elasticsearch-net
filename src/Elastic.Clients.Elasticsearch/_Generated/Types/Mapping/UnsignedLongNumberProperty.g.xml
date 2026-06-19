@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.mapping.UnsignedLongNumberProperty#meta"><summary><para>
+Metadata about the field.
+</para></summary></member>
+  <member key="_types.mapping.UnsignedLongNumberProperty#time_series_dimension"><summary><para>
+For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
+</para></summary></member>
+  <member key="_types.mapping.UnsignedLongNumberProperty#time_series_metric"><summary><para>
+For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
+</para></summary></member>
+</doc>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.explain_data_frame_analytics.Request"><summary><para>
+Explain data frame analytics config.
+</para>
+<para>
+This API provides explanations for a data frame analytics config that either
+exists already or one that has not been created yet. The following
+explanations are provided:
+</para>
+<list type="bullet">
+<item>
+<para>
+which fields are included or not in the analysis and why,
+</para>
+</item>
+<item>
+<para>
+how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.
+If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.
+</para>
+</item>
+</list></summary></member>
+  <member key="ml.explain_data_frame_analytics.Request#allow_lazy_start"><summary><para>
+Specifies whether this job can start when there is insufficient machine
+learning node capacity for it to be immediately assigned to a node.
+</para></summary></member>
+  <member key="ml.explain_data_frame_analytics.Request#analysis"><summary><para>
+The analysis configuration, which contains the information necessary to
+perform one of the following types of analysis: classification, outlier
+detection, or regression.
+</para></summary></member>
+  <member key="ml.explain_data_frame_analytics.Request#analyzed_fields"><summary><para>
+Specify includes and/or excludes patterns to select which fields will be
+included in the analysis. The patterns specified in excludes are applied
+last, therefore excludes takes precedence. In other words, if the same
+field is specified in both includes and excludes, then the field will not
+be included in the analysis.
+</para></summary></member>
+  <member key="ml.explain_data_frame_analytics.Request#description"><summary><para>
+A description of the job.
+</para></summary></member>
+  <member key="ml.explain_data_frame_analytics.Request#dest"><summary><para>
+The destination configuration, consisting of index and optionally
+results_field (ml by default).
+</para></summary></member>
+  <member key="ml.explain_data_frame_analytics.Request#id"><summary><para>
+Identifier for the data frame analytics job. This identifier can contain
+lowercase alphanumeric characters (a-z and 0-9), hyphens, and
+underscores. It must start and end with alphanumeric characters.
+</para></summary></member>
+  <member key="ml.explain_data_frame_analytics.Request#max_num_threads"><summary><para>
+The maximum number of threads to be used by the analysis. Using more
+threads may decrease the time necessary to complete the analysis at the
+cost of using more CPU. Note that the process may use additional threads
+for operational functionality other than the analysis itself.
+</para></summary></member>
+  <member key="ml.explain_data_frame_analytics.Request#model_memory_limit"><summary><para>
+The approximate maximum amount of memory resources that are permitted for
+analytical processing. If your <c>elasticsearch.yml</c> file contains an
+<c>xpack.ml.max_model_memory_limit</c> setting, an error occurs when you try to
+create data frame analytics jobs that have <c>model_memory_limit</c> values
+greater than that setting.
+</para></summary></member>
+  <member key="ml.explain_data_frame_analytics.Request#source"><summary><para>
+The configuration of how to source the analysis data. It requires an
+index. Optionally, query and _source may be specified.
+</para></summary></member>
+</doc>

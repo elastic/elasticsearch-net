@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.TTestAggregation#a"><summary><para>
+Test population A.
+</para></summary></member>
+  <member key="_types.aggregations.TTestAggregation#b"><summary><para>
+Test population B.
+</para></summary></member>
+  <member key="_types.aggregations.TTestAggregation#type"><summary><para>
+The type of test.
+</para></summary></member>
+</doc>

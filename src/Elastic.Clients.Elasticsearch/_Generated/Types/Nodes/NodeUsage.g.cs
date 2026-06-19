@@ -23,6 +23,7 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.usage.NodeUsage']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.NodeUsageConverter))]
 public sealed partial class NodeUsage
 {
@@ -45,8 +46,15 @@ public sealed partial class NodeUsage
 		_ = sentinel;
 	}
 
+	/// <include file="NodeUsage.g.xml" path="doc/member[@key='nodes.usage.NodeUsage#aggregations']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Aggregations { get; set; }
+
+	/// <include file="NodeUsage.g.xml" path="doc/member[@key='nodes.usage.NodeUsage#rest_actions']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, int> RestActions { get; set; }
+
+	/// <include file="NodeUsage.g.xml" path="doc/member[@key='nodes.usage.NodeUsage#since']/*"/>
 	public required System.DateTimeOffset Since { get; set; }
+
+	/// <include file="NodeUsage.g.xml" path="doc/member[@key='nodes.usage.NodeUsage#timestamp']/*"/>
 	public required System.DateTimeOffset Timestamp { get; set; }
 }

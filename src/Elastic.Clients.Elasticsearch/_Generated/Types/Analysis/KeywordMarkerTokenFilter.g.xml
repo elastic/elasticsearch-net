@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.KeywordMarkerTokenFilter#ignore_case"><summary><para>
+If <c>true</c>, matching for the <c>keywords</c> and <c>keywords_path</c> parameters ignores letter case. Defaults to <c>false</c>.
+</para></summary></member>
+  <member key="_types.analysis.KeywordMarkerTokenFilter#keywords"><summary><para>
+Array of keywords. Tokens that match these keywords are not stemmed.
+This parameter, <c>keywords_path</c>, or <c>keywords_pattern</c> must be specified. You cannot specify this parameter and <c>keywords_pattern</c>.
+</para></summary></member>
+  <member key="_types.analysis.KeywordMarkerTokenFilter#keywords_path"><summary><para>
+Path to a file that contains a list of keywords. Tokens that match these keywords are not stemmed.
+This path must be absolute or relative to the <c>config</c> location, and the file must be UTF-8 encoded. Each word in the file must be separated by a line break.
+This parameter, <c>keywords</c>, or <c>keywords_pattern</c> must be specified. You cannot specify this parameter and <c>keywords_pattern</c>.
+</para></summary></member>
+  <member key="_types.analysis.KeywordMarkerTokenFilter#keywords_pattern"><summary><para>
+Java regular expression used to match tokens. Tokens that match this expression are marked as keywords and not stemmed.
+This parameter, <c>keywords</c>, or <c>keywords_path</c> must be specified. You cannot specify this parameter and <c>keywords</c> or <c>keywords_pattern</c>.
+</para></summary></member>
+</doc>

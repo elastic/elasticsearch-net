@@ -37,52 +37,24 @@ public sealed partial class EqlSearchResponse<TEvent> : Elastic.Transport.Produc
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains matching events and sequences. Also contains related metadata.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchResponse.g.xml" path="doc/member[@key='eql.search.Response#hits']/*"/>
 	public required Elastic.Clients.Elasticsearch.Eql.EqlHits<TEvent> Hits { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the search.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchResponse.g.xml" path="doc/member[@key='eql.search.Response#id']/*"/>
 	public string? Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true, the response does not contain complete search results.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchResponse.g.xml" path="doc/member[@key='eql.search.Response#is_partial']/*"/>
 	public bool? IsPartial { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true, the search request is still executing.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchResponse.g.xml" path="doc/member[@key='eql.search.Response#is_running']/*"/>
 	public bool? IsRunning { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains information about shard failures (if any), in case allow_partial_search_results=true
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchResponse.g.xml" path="doc/member[@key='eql.search.Response#shard_failures']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure>? ShardFailures { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true, the request timed out before completion.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchResponse.g.xml" path="doc/member[@key='eql.search.Response#timed_out']/*"/>
 	public bool? TimedOut { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Milliseconds it took Elasticsearch to execute the request.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchResponse.g.xml" path="doc/member[@key='eql.search.Response#took']/*"/>
 	public System.TimeSpan? Took { get; set; }
 }

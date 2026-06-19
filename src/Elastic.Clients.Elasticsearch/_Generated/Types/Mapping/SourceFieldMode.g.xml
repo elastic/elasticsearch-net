@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.mapping.SourceFieldMode#synthetic"><summary><para>
+Instead of storing source documents on disk exactly as you send them,
+Elasticsearch can reconstruct source content on the fly upon retrieval.
+</para></summary></member>
+</doc>

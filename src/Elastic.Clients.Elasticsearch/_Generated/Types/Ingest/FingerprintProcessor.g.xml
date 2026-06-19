@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.FingerprintProcessor#description"><summary><para>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</para></summary></member>
+  <member key="ingest._types.FingerprintProcessor#fields"><summary><para>
+Array of fields to include in the fingerprint. For objects, the processor
+hashes both the field key and value. For other fields, the processor hashes
+only the field value.
+</para></summary></member>
+  <member key="ingest._types.FingerprintProcessor#if"><summary><para>
+Conditionally execute the processor.
+</para></summary></member>
+  <member key="ingest._types.FingerprintProcessor#ignore_failure"><summary><para>
+Ignore failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.FingerprintProcessor#ignore_missing"><summary><para>
+If true, the processor ignores any missing fields. If all fields are
+missing, the processor silently exits without modifying the document.
+</para></summary></member>
+  <member key="ingest._types.FingerprintProcessor#method"><summary><para>
+The hash method used to compute the fingerprint. Must be one of MD5, SHA-1,
+SHA-256, SHA-512, or MurmurHash3.
+</para></summary></member>
+  <member key="ingest._types.FingerprintProcessor#on_failure"><summary><para>
+Handle failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.FingerprintProcessor#salt"><summary><para>
+Salt value for the hash function.
+</para></summary></member>
+  <member key="ingest._types.FingerprintProcessor#tag"><summary><para>
+Identifier for the processor.
+Useful for debugging and metrics.
+</para></summary></member>
+  <member key="ingest._types.FingerprintProcessor#target_field"><summary><para>
+Output field for the fingerprint.
+</para></summary></member>
+</doc>

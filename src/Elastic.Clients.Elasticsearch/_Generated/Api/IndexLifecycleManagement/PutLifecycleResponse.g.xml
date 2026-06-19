@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ilm.put_lifecycle.Response#acknowledged"><summary><para>
+For a successful response, this value is always true. On failure, an exception is returned instead.
+</para></summary></member>
+</doc>

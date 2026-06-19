@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.CsvProcessor#description"><summary><para>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</para></summary></member>
+  <member key="ingest._types.CsvProcessor#empty_value"><summary><para>
+Value used to fill empty fields.
+Empty fields are skipped if this is not provided.
+An empty field is one with no value (2 consecutive separators) or empty quotes (<c>""</c>).
+</para></summary></member>
+  <member key="ingest._types.CsvProcessor#field"><summary><para>
+The field to extract data from.
+</para></summary></member>
+  <member key="ingest._types.CsvProcessor#if"><summary><para>
+Conditionally execute the processor.
+</para></summary></member>
+  <member key="ingest._types.CsvProcessor#ignore_failure"><summary><para>
+Ignore failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.CsvProcessor#ignore_missing"><summary><para>
+If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
+</para></summary></member>
+  <member key="ingest._types.CsvProcessor#on_failure"><summary><para>
+Handle failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.CsvProcessor#quote"><summary><para>
+Quote used in CSV, has to be single character string.
+</para></summary></member>
+  <member key="ingest._types.CsvProcessor#separator"><summary><para>
+Separator used in CSV, has to be single character string.
+</para></summary></member>
+  <member key="ingest._types.CsvProcessor#tag"><summary><para>
+Identifier for the processor.
+Useful for debugging and metrics.
+</para></summary></member>
+  <member key="ingest._types.CsvProcessor#target_fields"><summary><para>
+The array of fields to assign extracted values to.
+</para></summary></member>
+  <member key="ingest._types.CsvProcessor#trim"><summary><para>
+Trim whitespaces in unquoted fields.
+</para></summary></member>
+</doc>

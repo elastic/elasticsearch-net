@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.RateMode#sum"><summary><para>
+Calculates the sum of all values of the field.
+</para></summary></member>
+  <member key="_types.aggregations.RateMode#value_count"><summary><para>
+Uses the number of values of the field.
+</para></summary></member>
+</doc>

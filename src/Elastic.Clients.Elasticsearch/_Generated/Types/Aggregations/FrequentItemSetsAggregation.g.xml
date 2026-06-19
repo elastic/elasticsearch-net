@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.FrequentItemSetsAggregation#fields"><summary><para>
+Fields to analyze.
+</para></summary></member>
+  <member key="_types.aggregations.FrequentItemSetsAggregation#filter"><summary><para>
+Query that filters documents from analysis.
+</para></summary></member>
+  <member key="_types.aggregations.FrequentItemSetsAggregation#minimum_set_size"><summary><para>
+The minimum size of one item set.
+</para></summary></member>
+  <member key="_types.aggregations.FrequentItemSetsAggregation#minimum_support"><summary><para>
+The minimum support of one item set.
+</para></summary></member>
+  <member key="_types.aggregations.FrequentItemSetsAggregation#size"><summary><para>
+The number of top item sets to return.
+</para></summary></member>
+</doc>

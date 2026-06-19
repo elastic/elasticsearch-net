@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.explain_data_frame_analytics.Response#field_selection"><summary><para>
+An array of objects that explain selection for each field, sorted by the field names.
+</para></summary></member>
+  <member key="ml.explain_data_frame_analytics.Response#memory_estimation"><summary><para>
+An array of objects that explain selection for each field, sorted by the field names.
+</para></summary></member>
+</doc>

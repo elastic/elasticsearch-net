@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <PackageId>Elastic.Clients.Elasticsearch</PackageId>
@@ -31,7 +31,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Elastic.Transport" Version="0.10.2" />
+    <PackageReference Include="Elastic.Esql" Version="0.11.0" />
+    <PackageReference Include="Elastic.Transport" Version="0.17.1" />
     <PackageReference Include="PolySharp" Version="1.15.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

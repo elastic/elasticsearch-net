@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.RepositoryMeteringInformation#archived"><summary><para>
+A flag that tells whether or not this object has been archived. When a repository is closed or updated the
+repository metering information is archived and kept for a certain period of time. This allows retrieving the
+repository metering information of previous repository instantiations.
+</para></summary></member>
+  <member key="nodes._types.RepositoryMeteringInformation#cluster_version"><summary><para>
+The cluster state version when this object was archived, this field can be used as a logical timestamp to delete
+all the archived metrics up to an observed version. This field is only present for archived repository metering
+information objects. The main purpose of this field is to avoid possible race conditions during repository metering
+information deletions, i.e. deleting archived repositories metering information that we haven’t observed yet.
+</para></summary></member>
+  <member key="nodes._types.RepositoryMeteringInformation#repository_ephemeral_id"><summary><para>
+An identifier that changes every time the repository is updated.
+</para></summary></member>
+  <member key="nodes._types.RepositoryMeteringInformation#repository_location"><summary><para>
+Represents an unique location within the repository.
+</para></summary></member>
+  <member key="nodes._types.RepositoryMeteringInformation#repository_name"><summary><para>
+Repository name.
+</para></summary></member>
+  <member key="nodes._types.RepositoryMeteringInformation#repository_started_at"><summary><para>
+Time the repository was created or updated. Recorded in milliseconds since the Unix Epoch.
+</para></summary></member>
+  <member key="nodes._types.RepositoryMeteringInformation#repository_stopped_at"><summary><para>
+Time the repository was deleted or updated. Recorded in milliseconds since the Unix Epoch.
+</para></summary></member>
+  <member key="nodes._types.RepositoryMeteringInformation#repository_type"><summary><para>
+Repository type.
+</para></summary></member>
+  <member key="nodes._types.RepositoryMeteringInformation#request_counts"><summary><para>
+An object with the number of request performed against the repository grouped by request type.
+</para></summary></member>
+</doc>

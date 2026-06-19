@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes.info.Response#_nodes"><summary><para>
+Contains statistics about the number of nodes selected by the request’s node filters.
+</para></summary></member>
+</doc>

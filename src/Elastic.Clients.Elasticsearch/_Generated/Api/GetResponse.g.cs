@@ -37,69 +37,31 @@ public sealed partial class GetResponse<TDocument> : Elastic.Transport.Products.
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If the <c>stored_fields</c> parameter is set to <c>true</c> and <c>found</c> is <c>true</c>, it contains the document fields stored in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="GetResponse.g.xml" path="doc/member[@key='_global.get.Response#fields']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether the document exists.
-	/// </para>
-	/// </summary>
+	/// <include file="GetResponse.g.xml" path="doc/member[@key='_global.get.Response#found']/*"/>
 	public required bool Found { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier for the document.
-	/// </para>
-	/// </summary>
+	/// <include file="GetResponse.g.xml" path="doc/member[@key='_global.get.Response#_id']/*"/>
 	public required string Id { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<string>? Ignored { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the index the document belongs to.
-	/// </para>
-	/// </summary>
+	/// <include file="GetResponse.g.xml" path="doc/member[@key='_global.get.Response#_index']/*"/>
 	public required string Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The primary term assigned to the document for the indexing operation.
-	/// </para>
-	/// </summary>
+	/// <include file="GetResponse.g.xml" path="doc/member[@key='_global.get.Response#_primary_term']/*"/>
 	public long? PrimaryTerm { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The explicit routing, if set.
-	/// </para>
-	/// </summary>
+	/// <include file="GetResponse.g.xml" path="doc/member[@key='_global.get.Response#_routing']/*"/>
 	public string? Routing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The sequence number assigned to the document for the indexing operation.
-	/// Sequence numbers are used to ensure an older version of a document doesn't overwrite a newer version.
-	/// </para>
-	/// </summary>
+	/// <include file="GetResponse.g.xml" path="doc/member[@key='_global.get.Response#_seq_no']/*"/>
 	public long? SeqNo { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>found</c> is <c>true</c>, it contains the document data formatted in JSON.
-	/// If the <c>_source</c> parameter is set to <c>false</c> or the <c>stored_fields</c> parameter is set to <c>true</c>, it is excluded.
-	/// </para>
-	/// </summary>
+	/// <include file="GetResponse.g.xml" path="doc/member[@key='_global.get.Response#_source']/*"/>
 	public TDocument? Source { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The document version, which is ncremented each time the document is updated.
-	/// </para>
-	/// </summary>
+	/// <include file="GetResponse.g.xml" path="doc/member[@key='_global.get.Response#_version']/*"/>
 	public long? Version { get; set; }
 }

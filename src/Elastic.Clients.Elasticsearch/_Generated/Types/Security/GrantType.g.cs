@@ -26,19 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Security;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.GrantTypeConverter))]
 public enum GrantType
 {
-	/// <summary>
-	/// <para>
-	/// In this type of grant, you must supply an access token that was created by the Elasticsearch token service.
-	/// If you are activating a user profile, you can alternatively supply a JWT (either a JWT <c>access_token</c> or a JWT <c>id_token</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="GrantType.g.xml" path="doc/member[@key='security._types.GrantType#access_token']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "access_token")]
 	AccessToken,
-	/// <summary>
-	/// <para>
-	/// In this type of grant, you must supply the user ID and password for which you want to create the API key.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantType.g.xml" path="doc/member[@key='security._types.GrantType#password']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "password")]
 	Password
 }

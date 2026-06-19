@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="license.get.LicenseInformation#expiry_date"><summary><para>
+The date and time the license expires in ISO 8601 format.
+</para></summary></member>
+  <member key="license.get.LicenseInformation#expiry_date_in_millis"><summary><para>
+The date and time the license expires in milliseconds since the Unix epoch.
+</para></summary></member>
+  <member key="license.get.LicenseInformation#issue_date"><summary><para>
+The date and time the license was issued in ISO 8601 format.
+</para></summary></member>
+  <member key="license.get.LicenseInformation#issue_date_in_millis"><summary><para>
+The date and time the license was issued in milliseconds since the Unix epoch.
+</para></summary></member>
+  <member key="license.get.LicenseInformation#issued_to"><summary><para>
+The name of the customer or organization that received the license.
+</para></summary></member>
+  <member key="license.get.LicenseInformation#issuer"><summary><para>
+The name of the organization that issued the license.
+</para></summary></member>
+  <member key="license.get.LicenseInformation#max_nodes"><summary><para>
+The maximum number of nodes the license allows.
+</para></summary></member>
+  <member key="license.get.LicenseInformation#max_resource_units"><summary><para>
+The maximum number of resource units the license allows (for enterprise licenses only).
+</para></summary></member>
+  <member key="license.get.LicenseInformation#start_date_in_millis"><summary><para>
+The date and time the license was started in milliseconds since the Unix epoch.
+</para></summary></member>
+  <member key="license.get.LicenseInformation#status"><summary><para>
+The status of the license. For example,active, valid, invalid, or expired.
+</para></summary></member>
+  <member key="license.get.LicenseInformation#type"><summary><para>
+The type of the license. For example, trial, basic, gold, platinum, or enterprise.
+</para></summary></member>
+  <member key="license.get.LicenseInformation#uid"><summary><para>
+The unique identifier of the license.
+</para></summary></member>
+</doc>

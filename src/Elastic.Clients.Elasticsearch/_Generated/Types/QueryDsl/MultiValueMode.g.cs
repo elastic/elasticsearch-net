@@ -26,32 +26,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.MultiValueModeConverter))]
 public enum MultiValueMode
 {
-	/// <summary>
-	/// <para>
-	/// Distance is the average distance.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiValueMode.g.xml" path="doc/member[@key='_types.query_dsl.MultiValueMode#avg']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "avg")]
 	Avg,
-	/// <summary>
-	/// <para>
-	/// Distance is the maximum distance.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiValueMode.g.xml" path="doc/member[@key='_types.query_dsl.MultiValueMode#max']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "max")]
 	Max,
-	/// <summary>
-	/// <para>
-	/// Distance is the minimum distance.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiValueMode.g.xml" path="doc/member[@key='_types.query_dsl.MultiValueMode#min']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "min")]
 	Min,
-	/// <summary>
-	/// <para>
-	/// Distance is the sum of all distances.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiValueMode.g.xml" path="doc/member[@key='_types.query_dsl.MultiValueMode#sum']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "sum")]
 	Sum
 }

@@ -23,6 +23,7 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.FieldSizeUsage']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.FieldSizeUsageConverter))]
 public sealed partial class FieldSizeUsage
 {

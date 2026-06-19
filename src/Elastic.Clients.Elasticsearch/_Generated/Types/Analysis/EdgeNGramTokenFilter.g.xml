@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.EdgeNGramTokenFilter#max_gram"><summary><para>
+Maximum character length of a gram. For custom token filters, defaults to <c>2</c>. For the built-in edge_ngram filter, defaults to <c>1</c>.
+</para></summary></member>
+  <member key="_types.analysis.EdgeNGramTokenFilter#min_gram"><summary><para>
+Minimum character length of a gram. Defaults to <c>1</c>.
+</para></summary></member>
+  <member key="_types.analysis.EdgeNGramTokenFilter#preserve_original"><summary><para>
+Emits original token when set to <c>true</c>. Defaults to <c>false</c>.
+</para></summary></member>
+  <member key="_types.analysis.EdgeNGramTokenFilter#side"><summary><para>
+Indicates whether to truncate tokens from the <c>front</c> or <c>back</c>. Defaults to <c>front</c>.
+</para></summary></member>
+</doc>

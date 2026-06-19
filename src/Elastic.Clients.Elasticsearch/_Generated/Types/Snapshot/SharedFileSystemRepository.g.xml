@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="snapshot._types.SharedFileSystemRepository#settings"><summary><para>
+The repository settings.
+</para></summary></member>
+  <member key="snapshot._types.SharedFileSystemRepository#type"><summary><para>
+The shared file system repository type.
+</para></summary></member>
+</doc>

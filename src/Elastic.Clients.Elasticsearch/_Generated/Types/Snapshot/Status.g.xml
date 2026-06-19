@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="snapshot._types.Status#include_global_state"><summary><para>
+Indicates whether the current cluster state is included in the snapshot.
+</para></summary></member>
+  <member key="snapshot._types.Status#repository"><summary><para>
+The name of the repository that includes the snapshot.
+</para></summary></member>
+  <member key="snapshot._types.Status#shards_stats"><summary><para>
+Statistics for the shards in the snapshot.
+</para></summary></member>
+  <member key="snapshot._types.Status#snapshot"><summary><para>
+The name of the snapshot.
+</para></summary></member>
+  <member key="snapshot._types.Status#state"><summary><para>
+The current snapshot state:
+</para>
+<list type="bullet">
+<item>
+<para>
+<c>FAILED</c>: The snapshot finished with an error and failed to store any data.
+</para>
+</item>
+<item>
+<para>
+<c>STARTED</c>: The snapshot is currently running.
+</para>
+</item>
+<item>
+<para>
+<c>SUCCESS</c>: The snapshot completed.
+</para>
+</item>
+</list></summary></member>
+  <member key="snapshot._types.Status#stats"><summary><para>
+Details about the number (<c>file_count</c>) and size (<c>size_in_bytes</c>) of files included in the snapshot.
+</para></summary></member>
+  <member key="snapshot._types.Status#uuid"><summary><para>
+The universally unique identifier (UUID) for the snapshot.
+</para></summary></member>
+</doc>

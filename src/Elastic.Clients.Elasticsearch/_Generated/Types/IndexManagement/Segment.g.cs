@@ -23,6 +23,7 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.segments.Segment']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SegmentConverter))]
 public sealed partial class Segment
 {
@@ -50,13 +51,30 @@ public sealed partial class Segment
 		_ = sentinel;
 	}
 
+	/// <include file="Segment.g.xml" path="doc/member[@key='indices.segments.Segment#attributes']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, string> Attributes { get; set; }
+
+	/// <include file="Segment.g.xml" path="doc/member[@key='indices.segments.Segment#committed']/*"/>
 	public required bool Committed { get; set; }
+
+	/// <include file="Segment.g.xml" path="doc/member[@key='indices.segments.Segment#compound']/*"/>
 	public required bool Compound { get; set; }
+
+	/// <include file="Segment.g.xml" path="doc/member[@key='indices.segments.Segment#deleted_docs']/*"/>
 	public required long DeletedDocs { get; set; }
+
+	/// <include file="Segment.g.xml" path="doc/member[@key='indices.segments.Segment#generation']/*"/>
 	public required int Generation { get; set; }
+
+	/// <include file="Segment.g.xml" path="doc/member[@key='indices.segments.Segment#num_docs']/*"/>
 	public required long NumDocs { get; set; }
+
+	/// <include file="Segment.g.xml" path="doc/member[@key='indices.segments.Segment#search']/*"/>
 	public required bool Search { get; set; }
+
+	/// <include file="Segment.g.xml" path="doc/member[@key='indices.segments.Segment#size_in_bytes']/*"/>
 	public required double SizeInBytes { get; set; }
+
+	/// <include file="Segment.g.xml" path="doc/member[@key='indices.segments.Segment#version']/*"/>
 	public required string Version { get; set; }
 }

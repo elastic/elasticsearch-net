@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="transform._types.RetentionPolicy#field"><summary><para>
+The date field that is used to calculate the age of the document.
+</para></summary></member>
+  <member key="transform._types.RetentionPolicy#max_age"><summary><para>
+Specifies the maximum age of a document in the destination index. Documents that are older than the configured
+value are removed from the destination index.
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='license.get.LicenseInformation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.LicenseManagement.Json.LicenseInformationConverter))]
 public sealed partial class LicenseInformation
 {
@@ -50,16 +51,39 @@ public sealed partial class LicenseInformation
 		_ = sentinel;
 	}
 
+	/// <include file="LicenseInformation.g.xml" path="doc/member[@key='license.get.LicenseInformation#expiry_date']/*"/>
 	public System.DateTimeOffset? ExpiryDate { get; set; }
+
+	/// <include file="LicenseInformation.g.xml" path="doc/member[@key='license.get.LicenseInformation#expiry_date_in_millis']/*"/>
 	public System.DateTimeOffset? ExpiryDateInMillis { get; set; }
+
+	/// <include file="LicenseInformation.g.xml" path="doc/member[@key='license.get.LicenseInformation#issue_date']/*"/>
 	public required System.DateTimeOffset IssueDate { get; set; }
+
+	/// <include file="LicenseInformation.g.xml" path="doc/member[@key='license.get.LicenseInformation#issue_date_in_millis']/*"/>
 	public required System.DateTimeOffset IssueDateInMillis { get; set; }
+
+	/// <include file="LicenseInformation.g.xml" path="doc/member[@key='license.get.LicenseInformation#issued_to']/*"/>
 	public required string IssuedTo { get; set; }
+
+	/// <include file="LicenseInformation.g.xml" path="doc/member[@key='license.get.LicenseInformation#issuer']/*"/>
 	public required string Issuer { get; set; }
+
+	/// <include file="LicenseInformation.g.xml" path="doc/member[@key='license.get.LicenseInformation#max_nodes']/*"/>
 	public required long? MaxNodes { get; set; }
+
+	/// <include file="LicenseInformation.g.xml" path="doc/member[@key='license.get.LicenseInformation#max_resource_units']/*"/>
 	public int? MaxResourceUnits { get; set; }
+
+	/// <include file="LicenseInformation.g.xml" path="doc/member[@key='license.get.LicenseInformation#start_date_in_millis']/*"/>
 	public required System.DateTimeOffset StartDateInMillis { get; set; }
+
+	/// <include file="LicenseInformation.g.xml" path="doc/member[@key='license.get.LicenseInformation#status']/*"/>
 	public required Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus Status { get; set; }
+
+	/// <include file="LicenseInformation.g.xml" path="doc/member[@key='license.get.LicenseInformation#type']/*"/>
 	public required Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType Type { get; set; }
+
+	/// <include file="LicenseInformation.g.xml" path="doc/member[@key='license.get.LicenseInformation#uid']/*"/>
 	public required string Uid { get; set; }
 }

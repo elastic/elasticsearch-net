@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security._types.BulkError#count"><summary><para>
+The number of errors
+</para></summary></member>
+  <member key="security._types.BulkError#details"><summary><para>
+Details about the errors, keyed by role name
+</para></summary></member>
+</doc>

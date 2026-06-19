@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.open_point_in_time.Request"><summary><para>
+Open a point in time.
+</para>
+<para>
+A search request by default runs against the most recent visible data of the target indices,
+which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
+state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
+search requests using the same point in time. For example, if refreshes happen between
+<c>search_after</c> requests, then the results of those requests might not be consistent as changes happening
+between searches are only visible to the more recent point in time.
+</para>
+<para>
+A point in time must be opened explicitly before being used in search requests.
+</para>
+<para>
+A subsequent search request with the <c>pit</c> parameter must not specify <c>index</c>, <c>routing</c>, or <c>preference</c> values as these parameters are copied from the point in time.
+</para>
+<para>
+Just like regular searches, you can use <c>from</c> and <c>size</c> to page through point in time search results, up to the first 10,000 hits.
+If you want to retrieve more hits, use PIT with <c>search_after</c>.
+</para>
+<para>
+IMPORTANT: The open point in time request and each subsequent search request can return different identifiers; always use the most recently received ID for the next search request.
+</para>
+<para>
+When a PIT that contains shard failures is used in a search request, the missing are always reported in the search response as a <c>NoShardAvailableActionException</c> exception.
+To get rid of these exceptions, a new PIT needs to be created so that shards missing from the previous PIT can be handled, assuming they become available in the meantime.
+</para>
+<para>
+<strong>Keeping point in time alive</strong>
+</para>
+<para>
+The <c>keep_alive</c> parameter, which is passed to a open point in time request and search request, extends the time to live of the corresponding point in time.
+The value does not need to be long enough to process all data — it just needs to be long enough for the next request.
+</para>
+<para>
+Normally, the background merge process optimizes the index by merging together smaller segments to create new, bigger segments.
+Once the smaller segments are no longer needed they are deleted.
+However, open point-in-times prevent the old segments from being deleted since they are still in use.
+</para>
+<para>
+TIP: Keeping older segments alive means that more disk space and file handles are needed.
+Ensure that you have configured your nodes to have ample free file handles.
+</para>
+<para>
+Additionally, if a segment contains deleted or updated documents then the point in time must keep track of whether each document in the segment was live at the time of the initial search request.
+Ensure that your nodes have sufficient heap space if you have many open point-in-times on an index that is subject to ongoing deletes or updates.
+Note that a point-in-time doesn't prevent its associated indices from being deleted.
+You can check how many point-in-times (that is, search contexts) are open with the nodes stats API.
+</para></summary></member>
+  <member key="_global.open_point_in_time.Request#allow_partial_search_results"><summary><para>
+Indicates whether the point in time tolerates unavailable shards or shard failures when initially creating the PIT.
+If <c>false</c>, creating a point in time request when a shard is missing or unavailable will throw an exception.
+If <c>true</c>, the point in time will contain all the shards that are available at the time of the request.
+</para></summary></member>
+  <member key="_global.open_point_in_time.Request#expand_wildcards"><summary><para>
+The type of index that wildcard patterns can match.
+If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+It supports comma-separated values, such as <c>open,hidden</c>.
+</para></summary></member>
+  <member key="_global.open_point_in_time.Request#ignore_unavailable"><summary><para>
+If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
+index, alias, or data stream that is missing, closed, or otherwise unavailable.
+If <c>true</c>, unavailable concrete targets are silently ignored.
+</para></summary></member>
+  <member key="_global.open_point_in_time.Request#index"><summary><para>
+A comma-separated list of index names to open point in time; use <c>_all</c> or empty string to perform the operation on all indices
+</para></summary></member>
+  <member key="_global.open_point_in_time.Request#index_filter"><summary><para>
+Filter indices if the provided query rewrites to <c>match_none</c> on every shard.
+</para></summary></member>
+  <member key="_global.open_point_in_time.Request#keep_alive"><summary><para>
+Extend the length of time that the point in time persists.
+</para></summary></member>
+  <member key="_global.open_point_in_time.Request#max_concurrent_shard_requests"><summary><para>
+Maximum number of concurrent shard requests that each sub-search request executes per node.
+</para></summary></member>
+  <member key="_global.open_point_in_time.Request#preference"><summary><para>
+The node or shard the operation should be performed on.
+By default, it is random.
+</para></summary></member>
+  <member key="_global.open_point_in_time.Request#project_routing"><summary><para>
+Specifies a subset of projects to target for the PIT request using project
+metadata tags in a subset of Lucene query syntax.
+Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+Examples:
+_alias:my-project
+_alias:_origin
+_alias:<em>pr</em>
+Supported in serverless only.
+</para></summary></member>
+  <member key="_global.open_point_in_time.Request#routing"><summary><para>
+A custom value that is used to route operations to a specific shard.
+</para></summary></member>
+</doc>

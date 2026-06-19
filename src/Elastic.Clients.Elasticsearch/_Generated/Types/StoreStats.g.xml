@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.StoreStats#reserved"><summary><para>
+A prediction of how much larger the shard stores will eventually grow due to ongoing peer recoveries, restoring snapshots, and similar activities.
+</para></summary></member>
+  <member key="_types.StoreStats#reserved_in_bytes"><summary><para>
+A prediction, in bytes, of how much larger the shard stores will eventually grow due to ongoing peer recoveries, restoring snapshots, and similar activities.
+</para></summary></member>
+  <member key="_types.StoreStats#size"><summary><para>
+Total size of all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.StoreStats#size_in_bytes"><summary><para>
+Total size, in bytes, of all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.StoreStats#total_data_set_size"><summary><para>
+Total data set size of all shards assigned to selected nodes.
+This includes the size of shards not stored fully on the nodes, such as the cache for partially mounted indices.
+</para></summary></member>
+  <member key="_types.StoreStats#total_data_set_size_in_bytes"><summary><para>
+Total data set size, in bytes, of all shards assigned to selected nodes.
+This includes the size of shards not stored fully on the nodes, such as the cache for partially mounted indices.
+</para></summary></member>
+</doc>

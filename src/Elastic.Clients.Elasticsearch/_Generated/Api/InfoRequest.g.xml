@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.info.Request"><summary><para>
+Get cluster info.
+</para>
+<para>
+Get basic build, version, and cluster information.
+::: In Serverless, <c>version.number</c> always reports the next target Elasticsearch release version at the time of the request. Serverless does not track to a traditional release versioning model; it is continuously updated. The version number is provided to maintain compatibility with existing clients, but it is not meaningful for assessing feature availability. Clients should detect a Serverless environment by checking for <c>build_flavor: serverless</c>.
+</para></summary></member>
+</doc>
