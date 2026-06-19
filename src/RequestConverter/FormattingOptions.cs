@@ -20,6 +20,21 @@ public sealed record FormattingOptions
 
 	/// <summary>Which C# syntax flavor to emit. Only <see cref="SyntaxMode.ObjectInitializer"/> is implemented today.</summary>
 	public SyntaxMode SyntaxMode { get; init; } = SyntaxMode.ObjectInitializer;
+
+	/// <summary>How object initializers name their constructor. Defaults to target-typed <c>new()</c>.</summary>
+	public ConstructorStyle ConstructorStyle { get; init; } = ConstructorStyle.TargetTyped;
+}
+
+/// <summary>
+/// Controls how <see cref="CodeWriter.BeginObjectInitializer(string)"/> renders the constructor.
+/// </summary>
+public enum ConstructorStyle
+{
+	/// <summary>Target-typed, e.g. <c>new() { ... }</c> (relies on the assignment target's type).</summary>
+	TargetTyped = 0,
+
+	/// <summary>Explicit, e.g. <c>new SearchRequest() { ... }</c> (self-contained, given the right usings).</summary>
+	Explicit = 1
 }
 
 /// <summary>

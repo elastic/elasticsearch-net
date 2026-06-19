@@ -125,11 +125,24 @@ public sealed class CodeWriter
 				formattable.FormatCode(this);
 				return this;
 			case JsonElement jsonElement:
-				return WriteJsonElement(jsonElement);
+				// Arbitrary JSON can't be represented as a C# anonymous object (keys may be C#
+				// keywords or non-identifiers, and the target is a JsonElement). Parse the raw JSON,
+				// which compiles and round-trips exactly.
+				return Write("global::System.Text.Json.JsonSerializer.Deserialize<global::System.Text.Json.JsonElement>(")
+					.WriteString(jsonElement.GetRawText())
+					.Write(")");
 			case string s:
 				return WriteString(s);
 			case bool b:
 				return Write(b ? "true" : "false");
+			case DateTimeOffset dateTimeOffset:
+				return Write("global::System.DateTimeOffset.Parse(")
+					.WriteString(dateTimeOffset.ToString("O", CultureInfo.InvariantCulture))
+					.Write(", global::System.Globalization.CultureInfo.InvariantCulture, global::System.Globalization.DateTimeStyles.RoundtripKind)");
+			case DateTime dateTime:
+				return Write("global::System.DateTime.Parse(")
+					.WriteString(dateTime.ToString("O", CultureInfo.InvariantCulture))
+					.Write(", global::System.Globalization.CultureInfo.InvariantCulture, global::System.Globalization.DateTimeStyles.RoundtripKind)");
 			default:
 				return WritePrimitive(value);
 		}
@@ -154,9 +167,17 @@ public sealed class CodeWriter
 	/// <see cref="ObjectInitializer"/> to add properties; the brace block and indentation are only
 	/// emitted once a property is added, so a property-less object renders as just the constructor.
 	/// </summary>
-	public ObjectInitializer BeginObjectInitializer(string constructor = "new()")
+	public ObjectInitializer BeginObjectInitializer(string? typeName = null)
 	{
-		Write(constructor);
+		if (Options.ConstructorStyle == ConstructorStyle.Explicit && !string.IsNullOrEmpty(typeName))
+		{
+			Write("new ").Write(typeName).Write("()");
+		}
+		else
+		{
+			Write("new()");
+		}
+
 		return new ObjectInitializer(this);
 	}
 
@@ -200,56 +221,6 @@ public sealed class CodeWriter
 				case '\t': _builder.Append("\\t"); break;
 				default: _builder.Append(c); break;
 			}
-		}
-	}
-
-	private CodeWriter WriteJsonElement(JsonElement element)
-	{
-		switch (element.ValueKind)
-		{
-			case JsonValueKind.Object:
-			{
-				WriteLine("new");
-				WriteLine("{");
-				using (Indent())
-				{
-					foreach (var property in element.EnumerateObject())
-					{
-						Write(property.Name).Write(" = ");
-						WriteJsonElement(property.Value);
-						WriteLine(",");
-					}
-				}
-
-				return Write("}");
-			}
-			case JsonValueKind.Array:
-			{
-				WriteLine("new[]");
-				WriteLine("{");
-				using (Indent())
-				{
-					foreach (var item in element.EnumerateArray())
-					{
-						WriteJsonElement(item);
-						WriteLine(",");
-					}
-				}
-
-				return Write("}");
-			}
-			case JsonValueKind.String:
-				return WriteString(element.GetString());
-			case JsonValueKind.Number:
-				return Write(element.GetRawText());
-			case JsonValueKind.True:
-				return Write("true");
-			case JsonValueKind.False:
-				return Write("false");
-			case JsonValueKind.Null:
-				return Write("null");
-			default:
-				throw new NotSupportedException($"JSON value kind '{element.ValueKind}' is not supported.");
 		}
 	}
 

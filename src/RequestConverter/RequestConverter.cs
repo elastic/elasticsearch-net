@@ -18,6 +18,20 @@ public sealed class RequestConverter
 		IReadOnlyDictionary<string, string>? queryParameters,
 		string? body,
 		FormattingOptions? options = null)
+		=> ConvertWithType(requestResponseSerializer, id, pathParameters, queryParameters, body, options).Code;
+
+	/// <summary>
+	/// Materializes the request and returns its runtime CLR type alongside the generated code.
+	/// Test-only: the round-trip test needs the concrete request type to compile the target-typed
+	/// (<c>new() { ... }</c>) snippet it produces.
+	/// </summary>
+	internal static (Type RequestType, string Code) ConvertWithType(
+		Serializer requestResponseSerializer,
+		string id,
+		IReadOnlyDictionary<string, string>? pathParameters,
+		IReadOnlyDictionary<string, string>? queryParameters,
+		string? body,
+		FormattingOptions? options = null)
 	{
 		var request = RequestFactory.Materialize(requestResponseSerializer, id, queryParameters, pathParameters, body ?? "{}");
 		if (request is null)
@@ -32,6 +46,6 @@ public sealed class RequestConverter
 
 		var writer = new CodeWriter(options);
 		formattable.FormatCode(writer);
-		return writer.ToString();
+		return (request.GetType(), writer.ToString());
 	}
 }

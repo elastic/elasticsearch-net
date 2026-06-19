@@ -15,6 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <InternalsVisibleTo Include="RequestConverter.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="..\Elastic.Clients.Elasticsearch\**\*.cs" Exclude="**\bin\**;**\obj\**" LinkBase="Client" />
   </ItemGroup>
 
