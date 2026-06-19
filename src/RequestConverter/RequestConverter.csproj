@@ -5,10 +5,13 @@
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>annotations</Nullable>
     <AllowMissingPrunePackageData>true</AllowMissingPrunePackageData>
+    <!-- The request converter intentionally references deprecated API to faithfully convert any request. -->
+    <NoWarn>$(NoWarn);CS0618</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Elastic.Transport" Version="0.10.2" />
+    <PackageReference Include="Elastic.Esql" Version="0.11.0" />
+    <PackageReference Include="Elastic.Transport" Version="0.17.1" />
   </ItemGroup>
 
   <ItemGroup>

@@ -235,8 +235,6 @@ internal class Program
 
 	public static void Main(string[] args)
 	{
-		var converter = new RequestConverter();
-
 		using var file = File.OpenRead("D:\\elastic\\elasticsearch-net\\alternatives_report.json");
 
 		var total = 0;
@@ -282,7 +280,7 @@ internal class Program
 
 				try
 				{
-					var code = converter.Convert(
+					var code = RequestConverter.Convert(
 						RequestConverter.DefaultSerializer,
 						source.Api,
 						source.PathParameters,
