@@ -5,18 +5,18 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class Id : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
 		if (LongValue.HasValue)
 		{
-			sb.Append(LongValue.Value);
-			sb.Append("L");
+			writer.Append(LongValue.Value);
+			writer.Append("L");
 		}
 		else
 		{
-			sb.Append("\"");
-			sb.Append(StringOrLongValue);
-			sb.Append("\"");
+			writer.Append("\"");
+			writer.Append(StringOrLongValue);
+			writer.Append("\"");
 		}
 	}
 }

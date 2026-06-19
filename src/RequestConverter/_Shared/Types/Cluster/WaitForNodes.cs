@@ -4,10 +4,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public readonly partial struct WaitForNodes : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		sb.Append("\"");
-		sb.Append(Condition switch
+		writer.Append("\"");
+		writer.Append(Condition switch
 		{
 			WaitForNodesCondition.EqualTo => Nodes.ToString(),
 			WaitForNodesCondition.LessThan => $"<{Nodes}",
@@ -16,6 +16,6 @@ public readonly partial struct WaitForNodes : RequestConverter.ICodeFormattable
 			WaitForNodesCondition.GreaterThanOrEqualTo => $">={Nodes}",
 			_ => Nodes.ToString()
 		});
-		sb.Append("\"");
+		writer.Append("\"");
 	}
 }

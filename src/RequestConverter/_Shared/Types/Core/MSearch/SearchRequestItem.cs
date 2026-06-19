@@ -4,8 +4,8 @@ namespace Elastic.Clients.Elasticsearch.Core.MSearch;
 
 public sealed partial class SearchRequestItem : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		sb.Append(ToString());
+		writer.Append(ToString());
 	}
 }

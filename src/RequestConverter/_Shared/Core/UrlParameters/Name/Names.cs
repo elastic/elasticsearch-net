@@ -4,17 +4,17 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed partial class Names : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		sb.Append("[");
+		writer.Append("[");
 		var first = true;
 		foreach (var name in Values)
 		{
 			if (!first)
-				sb.Append(", ");
+				writer.Append(", ");
 			first = false;
-			((RequestConverter.ICodeFormattable)name).FormatCode(sb);
+			((RequestConverter.ICodeFormattable)name).FormatCode(writer);
 		}
-		sb.Append("]");
+		writer.Append("]");
 	}
 }

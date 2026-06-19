@@ -5,30 +5,30 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public sealed partial class PercentilesItem : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		sb.Append("new()");
+		writer.Append("new()");
 		var hasProps = false;
 		{
-			sb.Append(hasProps ? ", " : " { ");
+			writer.Append(hasProps ? ", " : " { ");
 			hasProps = true;
-			sb.Append("Key = ");
-			sb.Append("\"");
-			sb.Append(Key);
-			sb.Append("\"");
+			writer.Append("Key = ");
+			writer.Append("\"");
+			writer.Append(Key);
+			writer.Append("\"");
 		}
 
 		{
-			sb.Append(hasProps ? ", " : " { ");
+			writer.Append(hasProps ? ", " : " { ");
 			hasProps = true;
-			sb.Append("Value = ");
+			writer.Append("Value = ");
 			if (Value.HasValue)
-				sb.Append(Value.Value.ToString(CultureInfo.InvariantCulture));
+				writer.Append(Value.Value.ToString(CultureInfo.InvariantCulture));
 			else
-				sb.Append("null");
+				writer.Append("null");
 		}
 
 		if (hasProps)
-			sb.Append(" }");
+			writer.Append(" }");
 	}
 }

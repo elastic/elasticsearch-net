@@ -4,17 +4,17 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed partial class ScrollIds : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		sb.Append("[");
+		writer.Append("[");
 		var first = true;
 		foreach (var id in this)
 		{
 			if (!first)
-				sb.Append(", ");
+				writer.Append(", ");
 			first = false;
-			((RequestConverter.ICodeFormattable)id).FormatCode(sb);
+			((RequestConverter.ICodeFormattable)id).FormatCode(writer);
 		}
-		sb.Append("]");
+		writer.Append("]");
 	}
 }

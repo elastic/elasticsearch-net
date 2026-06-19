@@ -4,28 +4,28 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public sealed partial class TermsExclude : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
 		if (RegexPattern is not null)
 		{
-			sb.Append("new TermsExclude(\"");
-			sb.Append(RegexPattern);
-			sb.Append("\")");
+			writer.Append("new TermsExclude(\"");
+			writer.Append(RegexPattern);
+			writer.Append("\")");
 		}
 		else if (Values is not null)
 		{
-			sb.Append("new TermsExclude(new[] { ");
+			writer.Append("new TermsExclude(new[] { ");
 			var first = true;
 			foreach (var value in Values)
 			{
 				if (!first)
-					sb.Append(", ");
+					writer.Append(", ");
 				first = false;
-				sb.Append("\"");
-				sb.Append(value);
-				sb.Append("\"");
+				writer.Append("\"");
+				writer.Append(value);
+				writer.Append("\"");
 			}
-			sb.Append(" })");
+			writer.Append(" })");
 		}
 	}
 }

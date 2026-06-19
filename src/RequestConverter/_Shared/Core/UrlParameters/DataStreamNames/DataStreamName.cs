@@ -4,10 +4,10 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed partial class DataStreamName : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		sb.Append("\"");
-		sb.Append(Name);
-		sb.Append("\"");
+		writer.Append("\"");
+		writer.Append(Name);
+		writer.Append("\"");
 	}
 }

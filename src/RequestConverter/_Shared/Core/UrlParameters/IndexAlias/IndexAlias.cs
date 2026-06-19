@@ -4,10 +4,10 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class IndexAlias : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		sb.Append("\"");
-		sb.Append(Alias);
-		sb.Append("\"");
+		writer.Append("\"");
+		writer.Append(Alias);
+		writer.Append("\"");
 	}
 }

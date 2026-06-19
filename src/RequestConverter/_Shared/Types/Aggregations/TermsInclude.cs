@@ -1,39 +1,22 @@
-using System.Text;
-
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public partial class TermsInclude : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
 		if (RegexPattern is not null)
 		{
-			sb.Append("new TermsInclude(\"");
-			sb.Append(RegexPattern);
-			sb.Append("\")");
+			writer.Write("new TermsInclude(").WriteString(RegexPattern).Write(")");
 		}
 		else if (Values is not null)
 		{
-			sb.Append("new TermsInclude(new[] { ");
-			var first = true;
-			foreach (var value in Values)
-			{
-				if (!first)
-					sb.Append(", ");
-				first = false;
-				sb.Append("\"");
-				sb.Append(value);
-				sb.Append("\"");
-			}
-			sb.Append(" })");
+			writer.Write("new TermsInclude(new[] ");
+			writer.WriteInlineList(Values, static (w, value) => w.WriteString(value), open: "{ ", close: " }");
+			writer.Write(")");
 		}
 		else if (Partition.HasValue && NumberOfPartitions.HasValue)
 		{
-			sb.Append("new TermsInclude(");
-			sb.Append(Partition.Value);
-			sb.Append("L, ");
-			sb.Append(NumberOfPartitions.Value);
-			sb.Append("L)");
+			writer.Write("new TermsInclude(").WriteValue(Partition.Value).Write("L, ").WriteValue(NumberOfPartitions.Value).Write("L)");
 		}
 	}
 }

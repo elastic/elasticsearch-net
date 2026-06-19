@@ -5,27 +5,27 @@ namespace Elastic.Clients.Elasticsearch;
 
 public readonly partial struct FieldValue : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
 		switch (Kind)
 		{
 			case ValueKind.Null:
-				sb.Append("null");
+				writer.Append("null");
 				break;
 			case ValueKind.Boolean:
-				sb.Append((bool)Value! ? "true" : "false");
+				writer.Append((bool)Value! ? "true" : "false");
 				break;
 			case ValueKind.Long:
-				sb.Append(((long)Value!).ToString(CultureInfo.InvariantCulture));
-				sb.Append("L");
+				writer.Append(((long)Value!).ToString(CultureInfo.InvariantCulture));
+				writer.Append("L");
 				break;
 			case ValueKind.Double:
-				sb.Append(((double)Value!).ToString(CultureInfo.InvariantCulture));
+				writer.Append(((double)Value!).ToString(CultureInfo.InvariantCulture));
 				break;
 			case ValueKind.String:
-				sb.Append("\"");
-				sb.Append((string)Value!);
-				sb.Append("\"");
+				writer.Append("\"");
+				writer.Append((string)Value!);
+				writer.Append("\"");
 				break;
 		}
 	}

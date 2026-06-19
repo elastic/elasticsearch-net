@@ -16,7 +16,8 @@ public sealed class RequestConverter
 		string id,
 		IReadOnlyDictionary<string, string>? pathParameters,
 		IReadOnlyDictionary<string, string>? queryParameters,
-		string? body)
+		string? body,
+		FormattingOptions? options = null)
 	{
 		var request = RequestFactory.Materialize(requestResponseSerializer, id, queryParameters, pathParameters, body ?? "{}");
 		if (request is null)
@@ -29,6 +30,8 @@ public sealed class RequestConverter
 			throw new NotSupportedException($"Request for endpoint '{id}' does not implement '{nameof(ICodeFormattable)}'.");
 		}
 
-		return CodeFormatter.FormatCode(formattable);
+		var writer = new CodeWriter(options);
+		formattable.FormatCode(writer);
+		return writer.ToString();
 	}
 }

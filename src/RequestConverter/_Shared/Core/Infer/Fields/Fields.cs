@@ -1,20 +1,9 @@
-using System.Text;
-
 namespace Elastic.Clients.Elasticsearch;
 
 public sealed partial class Fields : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		sb.Append("[");
-		var first = true;
-		foreach (var field in ListOfFields)
-		{
-			if (!first)
-				sb.Append(", ");
-			first = false;
-			((RequestConverter.ICodeFormattable)field).FormatCode(sb);
-		}
-		sb.Append("]");
+		writer.WriteInlineList(ListOfFields, static (w, field) => w.WriteValue(field));
 	}
 }

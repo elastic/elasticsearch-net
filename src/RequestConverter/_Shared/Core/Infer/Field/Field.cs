@@ -1,13 +1,9 @@
-using System.Text;
-
 namespace Elastic.Clients.Elasticsearch;
 
 public sealed partial class Field : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		sb.Append("\"");
-		sb.Append(Name ?? Expression?.ToString() ?? Property?.Name);
-		sb.Append("\"");
+		writer.WriteString(Name ?? Expression?.ToString() ?? Property?.Name);
 	}
 }

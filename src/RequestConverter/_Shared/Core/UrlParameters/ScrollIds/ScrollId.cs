@@ -4,10 +4,10 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed partial class ScrollId : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		sb.Append("\"");
-		sb.Append(Id);
-		sb.Append("\"");
+		writer.Append("\"");
+		writer.Append(Id);
+		writer.Append("\"");
 	}
 }

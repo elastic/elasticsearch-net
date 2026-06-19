@@ -4,10 +4,10 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class Routing : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		sb.Append("\"");
-		sb.Append(StringOrLongValue);
-		sb.Append("\"");
+		writer.Append("\"");
+		writer.Append(StringOrLongValue);
+		writer.Append("\"");
 	}
 }

@@ -4,10 +4,10 @@ namespace Elastic.Clients.Elasticsearch;
 
 public abstract partial class DateMath : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(StringBuilder sb)
+	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		sb.Append("\"");
-		sb.Append(ToString());
-		sb.Append("\"");
+		writer.Append("\"");
+		writer.Append(ToString());
+		writer.Append("\"");
 	}
 }
