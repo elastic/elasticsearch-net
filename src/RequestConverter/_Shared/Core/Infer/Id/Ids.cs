@@ -4,17 +4,6 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class Ids : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(RequestConverter.CodeWriter writer)
-	{
-		writer.Append("[");
-		var first = true;
-		foreach (var id in _ids)
-		{
-			if (!first)
-				writer.Append(", ");
-			first = false;
-			((RequestConverter.ICodeFormattable)id).FormatCode(writer);
-		}
-		writer.Append("]");
-	}
+	public void FormatCode(RequestConverter.CodeWriter writer) =>
+		writer.WriteImplicitArray(_ids, static (w, id) => ((RequestConverter.ICodeFormattable)id).FormatCode(w));
 }

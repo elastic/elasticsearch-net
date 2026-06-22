@@ -4,6 +4,6 @@ public sealed partial class Fields : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		writer.WriteInlineList(ListOfFields, static (w, field) => w.WriteValue(field));
+		writer.WriteImplicitArray(ListOfFields, static (w, field) => w.WriteValue(field));
 	}
 }

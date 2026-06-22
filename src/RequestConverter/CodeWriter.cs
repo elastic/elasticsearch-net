@@ -143,13 +143,41 @@ public sealed class CodeWriter
 				return Write("global::System.DateTime.Parse(")
 					.WriteString(dateTime.ToString("O", CultureInfo.InvariantCulture))
 					.Write(", global::System.Globalization.CultureInfo.InvariantCulture, global::System.Globalization.DateTimeStyles.RoundtripKind)");
+			case Enum enumValue:
+				// Reached only via runtime dispatch (e.g. a union arm); statically-typed enum properties
+				// use a generated static formatter. Render fully-qualified member access (valid C#).
+				return Write("global::")
+					.Write((enumValue.GetType().FullName ?? enumValue.GetType().Name).Replace('+', '.'))
+					.Write(".")
+					.Write(enumValue.ToString());
+			case System.Collections.IEnumerable enumerable:
+				// A collection reached via runtime dispatch (e.g. a union arm); render as an array literal
+				// so a target type with an implicit array conversion accepts it.
+				return WriteImplicitArray(AsObjects(enumerable), static (w, item) => w.WriteValue(item));
 			default:
 				return WritePrimitive(value);
 		}
 	}
 
+	private static IEnumerable<object?> AsObjects(System.Collections.IEnumerable source)
+	{
+		foreach (var item in source)
+			yield return item;
+	}
+
 	/// <inheritdoc cref="WriteValue(object?)"/>
 	public CodeWriter WriteValue<T>(T value) => WriteValue((object?)value);
+
+	/// <summary>
+	/// Whether <paramref name="value"/> should be rendered as a property assignment. Filters out
+	/// <c>null</c> and the "Undefined" <see cref="JsonElement"/> (<c>default(JsonElement)</c>), which
+	/// arises for an unset open-generic value-type property — e.g. a generic request's
+	/// <c>TDocument</c>/<c>TPartialDocument</c> materialized as <see cref="JsonElement"/>, where the
+	/// nullable annotation is erased so the unset value is a non-null default that would throw on
+	/// <see cref="JsonElement.GetRawText"/>.
+	/// </summary>
+	public static bool ShouldFormat(object? value) =>
+		value is not null && value is not JsonElement { ValueKind: JsonValueKind.Undefined };
 
 	private CodeWriter WritePrimitive(object value)
 	{
@@ -166,10 +194,15 @@ public sealed class CodeWriter
 	/// Begins an object-initializer block (e.g. <c>new() { ... }</c>). Use the returned
 	/// <see cref="ObjectInitializer"/> to add properties; the brace block and indentation are only
 	/// emitted once a property is added, so a property-less object renders as just the constructor.
+	/// Renders <c>new <paramref name="typeName"/>()</c> when <paramref name="forceExplicitConstructor"/>
+	/// is set (e.g. for variant members assigned through an interface, where a target-typed
+	/// <c>new()</c> cannot resolve) or when <see cref="FormattingOptions.ConstructorStyle"/> is
+	/// <see cref="ConstructorStyle.Explicit"/>; otherwise the target-typed <c>new()</c>.
 	/// </summary>
-	public ObjectInitializer BeginObjectInitializer(string? typeName = null)
+	public ObjectInitializer BeginObjectInitializer(string? typeName = null, bool forceExplicitConstructor = false)
 	{
-		if (Options.ConstructorStyle == ConstructorStyle.Explicit && !string.IsNullOrEmpty(typeName))
+		var explicitConstructor = forceExplicitConstructor || Options.ConstructorStyle == ConstructorStyle.Explicit;
+		if (explicitConstructor && !string.IsNullOrEmpty(typeName))
 		{
 			Write("new ").Write(typeName).Write("()");
 		}
@@ -204,6 +237,71 @@ public sealed class CodeWriter
 		}
 
 		return Write(close);
+	}
+
+	/// <summary>
+	/// Writes an array-creation expression (<c>new[] { a, b }</c>) for the "single or many" infer
+	/// wrapper types (<c>Indices</c>, <c>Fields</c>, <c>Names</c>, ...). Those types are not
+	/// collection-expression constructible but define implicit conversions from arrays, so a real
+	/// array literal assigns to them. Emits a typed empty array when there are no items so the
+	/// expression always compiles (and infers an element type).
+	/// </summary>
+	public CodeWriter WriteImplicitArray<T>(IEnumerable<T> items, Action<CodeWriter, T> writeItem)
+	{
+		using var enumerator = items.GetEnumerator();
+		if (!enumerator.MoveNext())
+			return Write("global::System.Array.Empty<string>()");
+
+		Write("new[] { ");
+		writeItem(this, enumerator.Current);
+		while (enumerator.MoveNext())
+		{
+			Write(", ");
+			writeItem(this, enumerator.Current);
+		}
+
+		return Write(" }");
+	}
+
+	/// <summary>
+	/// Writes a fully-qualified (<c>global::</c>) C# type name for a runtime <see cref="Type"/>,
+	/// recursing into generic arguments. Used to render the concrete type argument of an open generic
+	/// (e.g. <c>Buckets&lt;TBucket&gt;</c> whose <c>TBucket</c> is only known at runtime). AOT-safe:
+	/// uses only <see cref="Type.FullName"/> / <see cref="Type.GetGenericArguments"/>.
+	/// </summary>
+	public CodeWriter WriteTypeName(Type type)
+	{
+		WriteIndentIfNeeded();
+		AppendTypeName(type);
+		return this;
+	}
+
+	private void AppendTypeName(Type type)
+	{
+		if (type.IsGenericType)
+		{
+			var definition = type.GetGenericTypeDefinition();
+			var raw = definition.FullName ?? definition.Name;
+			var tick = raw.IndexOf('`');
+			if (tick >= 0)
+				raw = raw[..tick];
+
+			_builder.Append("global::").Append(raw.Replace('+', '.')).Append('<');
+			var args = type.GetGenericArguments();
+			for (var i = 0; i < args.Length; i++)
+			{
+				if (i > 0)
+					_builder.Append(", ");
+
+				AppendTypeName(args[i]);
+			}
+
+			_builder.Append('>');
+		}
+		else
+		{
+			_builder.Append("global::").Append((type.FullName ?? type.Name).Replace('+', '.'));
+		}
 	}
 
 	public override string ToString() => _builder.ToString();

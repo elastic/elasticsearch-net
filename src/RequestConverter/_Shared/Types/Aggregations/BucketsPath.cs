@@ -12,10 +12,10 @@ public sealed partial class BucketsPath : RequestConverter.ICodeFormattable
 				writer.WriteString((string)_value);
 				break;
 			case Kind.Array:
-				writer.WriteInlineList((string[])_value, static (w, item) => w.WriteString(item));
+				writer.WriteImplicitArray((string[])_value, static (w, item) => w.WriteString(item));
 				break;
 			case Kind.Dictionary:
-				writer.Write("new() ");
+				writer.Write("new global::System.Collections.Generic.Dictionary<string, string>() ");
 				writer.WriteInlineList(
 					(Dictionary<string, string>)_value,
 					static (w, kvp) => w.Write("[").WriteString(kvp.Key).Write("] = ").WriteString(kvp.Value),
