@@ -56,7 +56,14 @@ public partial class IndexSettingsLifecycle : RequestConverter.ICodeFormattable
 		if (PreferIlm is not null)
 		{
 			__init.Property("PreferIlm");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<bool, string>(PreferIlm, writer);
+			if (PreferIlm.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				writer.WriteValue(PreferIlm.Value1);
+			}
+			else
+			{
+				writer.WriteString(PreferIlm.Value2);
+			}
 		}
 
 		if (RolloverAlias is not null)

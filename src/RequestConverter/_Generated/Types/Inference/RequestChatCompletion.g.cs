@@ -68,7 +68,14 @@ public partial class RequestChatCompletion : RequestConverter.ICodeFormattable
 		if (ToolChoice is not null)
 		{
 			__init.Property("ToolChoice");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<string, Elastic.Clients.Elasticsearch.Inference.CompletionToolChoice>(ToolChoice, writer);
+			if (ToolChoice.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				writer.WriteString(ToolChoice.Value1);
+			}
+			else
+			{
+				ToolChoice.Value2.FormatCode(writer);
+			}
 		}
 
 		if (Tools is not null)

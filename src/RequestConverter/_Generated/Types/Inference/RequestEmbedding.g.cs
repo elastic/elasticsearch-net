@@ -30,7 +30,16 @@ public partial class RequestEmbedding : RequestConverter.ICodeFormattable
 		var __init = writer.BeginObjectInitializer("RequestEmbedding", false);
 		{
 			__init.Property("Input");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<System.Collections.Generic.ICollection<string>, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObject>>(Input, writer);
+			if (Input.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				writer.Write("new string[] ");
+				writer.WriteInlineList(Input.Value1, (w, item) => { w.WriteString(item); }, "{ ", " }", ", ");
+			}
+			else
+			{
+				writer.Write("new Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObject[] ");
+				writer.WriteInlineList(Input.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", ");
+			}
 		}
 
 		if (InputType is not null)

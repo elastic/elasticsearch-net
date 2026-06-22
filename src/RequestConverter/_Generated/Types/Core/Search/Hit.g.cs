@@ -97,7 +97,20 @@ public partial class Hit<TDocument> : RequestConverter.ICodeFormattable
 		if (MatchedQueries is not null)
 		{
 			__init.Property("MatchedQueries");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<System.Collections.Generic.IReadOnlyCollection<string>, System.Collections.Generic.IReadOnlyDictionary<string, double>>(MatchedQueries, writer);
+			if (MatchedQueries.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				writer.Write("new string[] ");
+				writer.WriteInlineList(MatchedQueries.Value1, (w, item) => { w.WriteString(item); }, "{ ", " }", ", ");
+			}
+			else
+			{
+				writer.Write("new global::System.Collections.Generic.Dictionary<");
+				writer.Write("string");
+				writer.Write(", ");
+				writer.Write("double");
+				writer.Write(">() ");
+				writer.WriteInlineList(MatchedQueries.Value2, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); }, "{ ", " }", ", ");
+			}
 		}
 
 		if (Nested is not null)

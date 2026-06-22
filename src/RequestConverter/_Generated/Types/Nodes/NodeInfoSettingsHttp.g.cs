@@ -31,13 +31,27 @@ public partial class NodeInfoSettingsHttp : RequestConverter.ICodeFormattable
 		if (Compression is not null)
 		{
 			__init.Property("Compression");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<bool, string>(Compression, writer);
+			if (Compression.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				writer.WriteValue(Compression.Value1);
+			}
+			else
+			{
+				writer.WriteString(Compression.Value2);
+			}
 		}
 
 		if (Port is not null)
 		{
 			__init.Property("Port");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<int, string>(Port, writer);
+			if (Port.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				writer.WriteValue(Port.Value1);
+			}
+			else
+			{
+				writer.WriteString(Port.Value2);
+			}
 		}
 
 		{

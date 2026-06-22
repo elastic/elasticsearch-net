@@ -31,7 +31,14 @@ public partial class IndexRoutingAllocationDisk : RequestConverter.ICodeFormatta
 		if (ThresholdEnabled is not null)
 		{
 			__init.Property("ThresholdEnabled");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<bool, string>(ThresholdEnabled, writer);
+			if (ThresholdEnabled.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				writer.WriteValue(ThresholdEnabled.Value1);
+			}
+			else
+			{
+				writer.WriteString(ThresholdEnabled.Value2);
+			}
 		}
 
 		__init.Dispose();

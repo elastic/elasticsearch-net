@@ -42,7 +42,14 @@ public partial class SuggestContext : RequestConverter.ICodeFormattable
 		if (Precision is not null)
 		{
 			__init.Property("Precision");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<int, string>(Precision, writer);
+			if (Precision.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				writer.WriteValue(Precision.Value1);
+			}
+			else
+			{
+				writer.WriteString(Precision.Value2);
+			}
 		}
 
 		{

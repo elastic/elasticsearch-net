@@ -97,7 +97,16 @@ public partial class AsyncQueryRequest : RequestConverter.ICodeFormattable
 		if (Params is not null)
 		{
 			__init.Property("Params");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>>(Params, writer);
+			if (Params.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				writer.Write("new System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>[] ");
+				writer.WriteInlineList(Params.Value1, (w, item) => { w.Write("new Elastic.Clients.Elasticsearch.FieldValue[] "); w.WriteInlineList(item, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", "); }, "{ ", " }", ", ");
+			}
+			else
+			{
+				writer.Write("new System.Collections.Generic.KeyValuePair<string,System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>[] ");
+				writer.WriteInlineList(Params.Value2, (w, item) => { w.Write("new("); w.WriteString(item.Key); w.Write(", "); w.WriteInlineList(item.Value, (w, item) => { item.FormatCode(w); }); w.Write(")"); }, "{ ", " }", ", ");
+			}
 		}
 
 		if (Profile is not null)

@@ -73,7 +73,7 @@ public partial class RRFRetriever : RequestConverter.ICodeFormattable
 
 		{
 			__init.Property("Retrievers");
-			writer.WriteInlineList(Retrievers, (w, item) => { Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<Elastic.Clients.Elasticsearch.Retriever, Elastic.Clients.Elasticsearch.RRFRetrieverComponent>(item, w); });
+			writer.WriteInlineList(Retrievers, (w, item) => { if (item.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { item.Value1.FormatCode(w); } else { item.Value2.FormatCode(w); } });
 		}
 
 		__init.Dispose();

@@ -31,7 +31,15 @@ public partial class Message : RequestConverter.ICodeFormattable
 		if (Content is not null)
 		{
 			__init.Property("Content");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.ContentObject>>(Content, writer);
+			if (Content.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				writer.WriteString(Content.Value1);
+			}
+			else
+			{
+				writer.Write("new Elastic.Clients.Elasticsearch.Inference.ContentObject[] ");
+				writer.WriteInlineList(Content.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", ");
+			}
 		}
 
 		if (Reasoning is not null)

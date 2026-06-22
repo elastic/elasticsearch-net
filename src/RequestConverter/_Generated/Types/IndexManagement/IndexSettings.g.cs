@@ -91,7 +91,14 @@ public partial class IndexSettings : RequestConverter.ICodeFormattable
 		if (Format is not null)
 		{
 			__init.Property("Format");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<string, int>(Format, writer);
+			if (Format.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				writer.WriteString(Format.Value1);
+			}
+			else
+			{
+				writer.WriteValue(Format.Value2);
+			}
 		}
 
 		if (GcDeletes is not null)
@@ -103,7 +110,14 @@ public partial class IndexSettings : RequestConverter.ICodeFormattable
 		if (Hidden is not null)
 		{
 			__init.Property("Hidden");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<bool, string>(Hidden, writer);
+			if (Hidden.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				writer.WriteValue(Hidden.Value1);
+			}
+			else
+			{
+				writer.WriteString(Hidden.Value2);
+			}
 		}
 
 		if (Highlight is not null)
@@ -229,7 +243,14 @@ public partial class IndexSettings : RequestConverter.ICodeFormattable
 		if (NumberOfReplicas is not null)
 		{
 			__init.Property("NumberOfReplicas");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<int, string>(NumberOfReplicas, writer);
+			if (NumberOfReplicas.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				writer.WriteValue(NumberOfReplicas.Value1);
+			}
+			else
+			{
+				writer.WriteString(NumberOfReplicas.Value2);
+			}
 		}
 
 		if (NumberOfRoutingShards is not null)
@@ -241,7 +262,14 @@ public partial class IndexSettings : RequestConverter.ICodeFormattable
 		if (NumberOfShards is not null)
 		{
 			__init.Property("NumberOfShards");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<int, string>(NumberOfShards, writer);
+			if (NumberOfShards.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				writer.WriteValue(NumberOfShards.Value1);
+			}
+			else
+			{
+				writer.WriteString(NumberOfShards.Value2);
+			}
 		}
 
 		if (OtherSettings is not null)
@@ -258,7 +286,14 @@ public partial class IndexSettings : RequestConverter.ICodeFormattable
 		if (Priority is not null)
 		{
 			__init.Property("Priority");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<int, string>(Priority, writer);
+			if (Priority.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				writer.WriteValue(Priority.Value1);
+			}
+			else
+			{
+				writer.WriteString(Priority.Value2);
+			}
 		}
 
 		if (ProvidedName is not null)
@@ -366,7 +401,14 @@ public partial class IndexSettings : RequestConverter.ICodeFormattable
 		if (VerifiedBeforeClose is not null)
 		{
 			__init.Property("VerifiedBeforeClose");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<bool, string>(VerifiedBeforeClose, writer);
+			if (VerifiedBeforeClose.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				writer.WriteValue(VerifiedBeforeClose.Value1);
+			}
+			else
+			{
+				writer.WriteString(VerifiedBeforeClose.Value2);
+			}
 		}
 
 		if (Version is not null)

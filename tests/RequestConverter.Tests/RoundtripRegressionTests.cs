@@ -492,11 +492,6 @@ public sealed class RoundtripRegressionTests
 		"b0fe9a7c8e519995258786be4bef36c4",
 
 		// --- Known converter gaps (documented; tracked for follow-up) ---
-		// ES|QL `params` is a nested Union<ICollection<ICollection<FieldValue>>, ...>. The scalars render
-		// raw (long/string), so the arrays infer long[]/string[] rather than FieldValue[]; rendering needs
-		// FieldValue[] element typing threaded through the nested collections.
-		"927b20a221f975b75d1227b67d0eb7e2",
-		"9de4edafd22a8b9cb557632b2c8779cd",
 		// Short type name is ambiguous across namespaces (Feature, Context). The converter emits short
 		// names by design; this only collides under the test's all-namespace global usings (a real
 		// consumer with targeted usings is unaffected). A targeted-FQN emission would resolve it.

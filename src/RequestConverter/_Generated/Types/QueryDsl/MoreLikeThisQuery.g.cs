@@ -128,7 +128,15 @@ public partial class MoreLikeThisQuery : RequestConverter.ICodeFormattable
 		if (StopWords is not null)
 		{
 			__init.Property("StopWords");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(StopWords, writer);
+			if (StopWords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(StopWords.Value1, writer);
+			}
+			else
+			{
+				writer.Write("new string[] ");
+				writer.WriteInlineList(StopWords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", ");
+			}
 		}
 
 		if (Unlike is not null)

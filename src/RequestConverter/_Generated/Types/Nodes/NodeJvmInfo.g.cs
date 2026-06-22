@@ -66,7 +66,14 @@ public partial class NodeJvmInfo : RequestConverter.ICodeFormattable
 		if (UsingCompressedOrdinaryObjectPointers is not null)
 		{
 			__init.Property("UsingCompressedOrdinaryObjectPointers");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<bool, string>(UsingCompressedOrdinaryObjectPointers, writer);
+			if (UsingCompressedOrdinaryObjectPointers.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				writer.WriteValue(UsingCompressedOrdinaryObjectPointers.Value1);
+			}
+			else
+			{
+				writer.WriteString(UsingCompressedOrdinaryObjectPointers.Value2);
+			}
 		}
 
 		{

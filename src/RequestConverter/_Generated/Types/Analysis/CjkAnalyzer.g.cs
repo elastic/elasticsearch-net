@@ -31,7 +31,15 @@ public partial class CjkAnalyzer : RequestConverter.ICodeFormattable
 		if (Stopwords is not null)
 		{
 			__init.Property("Stopwords");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(Stopwords, writer);
+			if (Stopwords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(Stopwords.Value1, writer);
+			}
+			else
+			{
+				writer.Write("new string[] ");
+				writer.WriteInlineList(Stopwords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", ");
+			}
 		}
 
 		if (StopwordsPath is not null)

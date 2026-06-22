@@ -36,7 +36,15 @@ public partial class Embedding : RequestConverter.ICodeFormattable
 
 		{
 			__init.Property("Input");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.InferenceString>>(Input, writer);
+			if (Input.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				writer.WriteString(Input.Value1);
+			}
+			else
+			{
+				writer.Write("new Elastic.Clients.Elasticsearch.InferenceString[] ");
+				writer.WriteInlineList(Input.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", ");
+			}
 		}
 
 		if (Timeout is not null)

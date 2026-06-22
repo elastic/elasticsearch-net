@@ -31,13 +31,28 @@ public partial class MappingLimitSettingsTotalFields : RequestConverter.ICodeFor
 		if (IgnoreDynamicBeyondLimit is not null)
 		{
 			__init.Property("IgnoreDynamicBeyondLimit");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<bool, string>(IgnoreDynamicBeyondLimit, writer);
+			if (IgnoreDynamicBeyondLimit.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				writer.WriteValue(IgnoreDynamicBeyondLimit.Value1);
+			}
+			else
+			{
+				writer.WriteString(IgnoreDynamicBeyondLimit.Value2);
+			}
 		}
 
 		if (Limit is not null)
 		{
 			__init.Property("Limit");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<long, string>(Limit, writer);
+			if (Limit.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				writer.WriteValue(Limit.Value1);
+				writer.Write("L");
+			}
+			else
+			{
+				writer.WriteString(Limit.Value2);
+			}
 		}
 
 		__init.Dispose();

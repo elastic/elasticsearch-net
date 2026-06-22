@@ -31,7 +31,14 @@ public partial class RegexOptions : RequestConverter.ICodeFormattable
 		if (Flags is not null)
 		{
 			__init.Property("Flags");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<int, string>(Flags, writer);
+			if (Flags.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				writer.WriteValue(Flags.Value1);
+			}
+			else
+			{
+				writer.WriteString(Flags.Value2);
+			}
 		}
 
 		if (MaxDeterminizedStates is not null)

@@ -43,7 +43,15 @@ public partial class HitsMetadata<T> : RequestConverter.ICodeFormattable
 		if (Total is not null)
 		{
 			__init.Property("Total");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<Elastic.Clients.Elasticsearch.Core.Search.TotalHits, long>(Total, writer);
+			if (Total.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				Total.Value1.FormatCode(writer);
+			}
+			else
+			{
+				writer.WriteValue(Total.Value2);
+				writer.Write("L");
+			}
 		}
 
 		__init.Dispose();

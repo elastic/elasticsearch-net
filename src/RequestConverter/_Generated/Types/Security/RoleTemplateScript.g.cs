@@ -65,7 +65,14 @@ public partial class RoleTemplateScript : RequestConverter.ICodeFormattable
 		if (Source is not null)
 		{
 			__init.Property("Source");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<string, Elastic.Clients.Elasticsearch.QueryDsl.Query>(Source, writer);
+			if (Source.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				writer.WriteString(Source.Value1);
+			}
+			else
+			{
+				Source.Value2.FormatCode(writer);
+			}
 		}
 
 		__init.Dispose();

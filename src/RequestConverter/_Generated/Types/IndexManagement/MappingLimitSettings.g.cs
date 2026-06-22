@@ -55,7 +55,14 @@ public partial class MappingLimitSettings : RequestConverter.ICodeFormattable
 		if (IgnoreMalformed is not null)
 		{
 			__init.Property("IgnoreMalformed");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<bool, string>(IgnoreMalformed, writer);
+			if (IgnoreMalformed.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				writer.WriteValue(IgnoreMalformed.Value1);
+			}
+			else
+			{
+				writer.WriteString(IgnoreMalformed.Value2);
+			}
 		}
 
 		if (NestedFields is not null)

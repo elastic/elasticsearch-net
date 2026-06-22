@@ -30,7 +30,14 @@ public partial class DeprecationIndexing : RequestConverter.ICodeFormattable
 		var __init = writer.BeginObjectInitializer("DeprecationIndexing", false);
 		{
 			__init.Property("Enabled");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<bool, string>(Enabled, writer);
+			if (Enabled.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				writer.WriteValue(Enabled.Value1);
+			}
+			else
+			{
+				writer.WriteString(Enabled.Value2);
+			}
 		}
 
 		__init.Dispose();

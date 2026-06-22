@@ -37,7 +37,15 @@ public partial class RandomScoreFunction : RequestConverter.ICodeFormattable
 		if (Seed is not null)
 		{
 			__init.Property("Seed");
-			Elastic.Clients.Elasticsearch.UnionExtensions.FormatCode<long, string>(Seed, writer);
+			if (Seed.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			{
+				writer.WriteValue(Seed.Value1);
+				writer.Write("L");
+			}
+			else
+			{
+				writer.WriteString(Seed.Value2);
+			}
 		}
 
 		__init.Dispose();
