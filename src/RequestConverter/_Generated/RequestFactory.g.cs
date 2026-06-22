@@ -550,7 +550,7 @@ internal static partial class RequestFactory
 					throw new System.InvalidOperationException("Body is required.");
 				}
 
-				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.CreateRequest<System.Text.Json.JsonElement>>(serializer, body);
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.CreateRequest<System.Text.Json.JsonElement?>>(serializer, body);
 				if (pathParameters is not null)
 				{
 					foreach (var parameter in pathParameters)
@@ -2304,7 +2304,7 @@ internal static partial class RequestFactory
 					throw new System.InvalidOperationException("Body is required.");
 				}
 
-				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexRequest<System.Text.Json.JsonElement>>(serializer, body);
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexRequest<System.Text.Json.JsonElement?>>(serializer, body);
 				if (pathParameters is not null)
 				{
 					foreach (var parameter in pathParameters)
@@ -4352,7 +4352,7 @@ internal static partial class RequestFactory
 			"termvectors",
 			(serializer, pathParameters, queryParameters, body) =>
 			{
-				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.TermVectorsRequest<System.Text.Json.JsonElement>>(serializer, body);
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.TermVectorsRequest<System.Text.Json.JsonElement?>>(serializer, body);
 				if (pathParameters is not null)
 				{
 					foreach (var parameter in pathParameters)
@@ -4414,7 +4414,7 @@ internal static partial class RequestFactory
 			"update",
 			(serializer, pathParameters, queryParameters, body) =>
 			{
-				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.UpdateRequest<System.Text.Json.JsonElement, System.Text.Json.JsonElement>>(serializer, body);
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.UpdateRequest<System.Text.Json.JsonElement?, System.Text.Json.JsonElement?>>(serializer, body);
 				if (pathParameters is not null)
 				{
 					foreach (var parameter in pathParameters)
