@@ -27,7 +27,7 @@ public partial class ClusterStateQueue : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterStateQueue");
+		var __init = writer.BeginObjectInitializer("ClusterStateQueue", false);
 		if (Committed is not null)
 		{
 			__init.Property("Committed");

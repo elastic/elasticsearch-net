@@ -27,7 +27,7 @@ public partial class ArabicNormalizationTokenFilter : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ArabicNormalizationTokenFilter");
+		var __init = writer.BeginObjectInitializer("ArabicNormalizationTokenFilter", true);
 		if (Version is not null)
 		{
 			__init.Property("Version");

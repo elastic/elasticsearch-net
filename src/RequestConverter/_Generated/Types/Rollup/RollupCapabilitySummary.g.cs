@@ -27,10 +27,14 @@ public partial class RollupCapabilitySummary : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RollupCapabilitySummary");
+		var __init = writer.BeginObjectInitializer("RollupCapabilitySummary", false);
 		{
 			__init.Property("Fields");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.RollupFieldSummary>");
+			writer.Write(">() ");
 			writer.WriteInlineList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { item.FormatCode(w); }); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

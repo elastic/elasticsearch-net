@@ -27,7 +27,7 @@ public partial class ResetJobRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ResetJobRequest");
+		var __init = writer.BeginObjectInitializer("ResetJobRequest", false);
 		{
 			__init.Property("JobId");
 			JobId.FormatCode(writer);

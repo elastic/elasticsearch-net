@@ -27,7 +27,7 @@ public partial class TestPopulation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TestPopulation");
+		var __init = writer.BeginObjectInitializer("TestPopulation", false);
 		{
 			__init.Property("Field");
 			Field.FormatCode(writer);

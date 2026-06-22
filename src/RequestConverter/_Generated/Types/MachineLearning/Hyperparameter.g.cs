@@ -27,7 +27,7 @@ public partial class Hyperparameter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Hyperparameter");
+		var __init = writer.BeginObjectInitializer("Hyperparameter", false);
 		if (AbsoluteImportance is not null)
 		{
 			__init.Property("AbsoluteImportance");

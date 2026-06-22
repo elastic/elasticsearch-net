@@ -27,7 +27,7 @@ public partial class GeoDecayFunction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoDecayFunction");
+		var __init = writer.BeginObjectInitializer("GeoDecayFunction", true);
 		{
 			__init.Property("Field");
 			Field.FormatCode(writer);

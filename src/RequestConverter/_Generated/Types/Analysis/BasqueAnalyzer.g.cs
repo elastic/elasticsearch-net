@@ -27,7 +27,7 @@ public partial class BasqueAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BasqueAnalyzer");
+		var __init = writer.BeginObjectInitializer("BasqueAnalyzer", true);
 		if (StemExclusion is not null)
 		{
 			__init.Property("StemExclusion");

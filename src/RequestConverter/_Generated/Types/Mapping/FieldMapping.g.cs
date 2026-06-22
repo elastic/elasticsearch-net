@@ -27,7 +27,7 @@ public partial class FieldMapping : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldMapping");
+		var __init = writer.BeginObjectInitializer("FieldMapping", false);
 		{
 			__init.Property("FullName");
 			writer.WriteString(FullName);

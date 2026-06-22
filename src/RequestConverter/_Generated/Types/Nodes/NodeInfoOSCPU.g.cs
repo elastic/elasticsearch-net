@@ -27,7 +27,7 @@ public partial class NodeInfoOSCPU : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoOSCPU");
+		var __init = writer.BeginObjectInitializer("NodeInfoOSCPU", false);
 		{
 			__init.Property("CacheSize");
 			writer.WriteString(CacheSize);

@@ -27,7 +27,7 @@ public partial class MemoryStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MemoryStats");
+		var __init = writer.BeginObjectInitializer("MemoryStats", false);
 		if (AdjustedTotalInBytes is not null)
 		{
 			__init.Property("AdjustedTotalInBytes");

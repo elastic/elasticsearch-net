@@ -27,7 +27,7 @@ public partial class NodeInfoXpack : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoXpack");
+		var __init = writer.BeginObjectInitializer("NodeInfoXpack", false);
 		if (License is not null)
 		{
 			__init.Property("License");
@@ -43,7 +43,11 @@ public partial class NodeInfoXpack : RequestConverter.ICodeFormattable
 		if (Notification is not null)
 		{
 			__init.Property("Notification");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Notification, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

@@ -27,7 +27,7 @@ public partial class AutoFollowPatternSummary : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AutoFollowPatternSummary");
+		var __init = writer.BeginObjectInitializer("AutoFollowPatternSummary", false);
 		{
 			__init.Property("Active");
 			writer.WriteValue(Active);

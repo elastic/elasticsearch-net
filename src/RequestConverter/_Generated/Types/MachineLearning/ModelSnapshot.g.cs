@@ -27,7 +27,7 @@ public partial class ModelSnapshot : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ModelSnapshot");
+		var __init = writer.BeginObjectInitializer("ModelSnapshot", false);
 		if (Description is not null)
 		{
 			__init.Property("Description");

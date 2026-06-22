@@ -27,10 +27,14 @@ public partial class RollupJobSummary : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RollupJobSummary");
+		var __init = writer.BeginObjectInitializer("RollupJobSummary", false);
 		{
 			__init.Property("Fields");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.RollupJobSummaryField>");
+			writer.Write(">() ");
 			writer.WriteInlineList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { item.FormatCode(w); }); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

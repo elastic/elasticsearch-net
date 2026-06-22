@@ -27,7 +27,7 @@ public partial class Eql : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Eql");
+		var __init = writer.BeginObjectInitializer("Eql", false);
 		{
 			__init.Property("Available");
 			writer.WriteValue(Available);
@@ -45,7 +45,11 @@ public partial class Eql : RequestConverter.ICodeFormattable
 
 		{
 			__init.Property("Queries");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Xpack.XpackUsageQuery");
+			writer.Write(">() ");
 			writer.WriteInlineList(Queries, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

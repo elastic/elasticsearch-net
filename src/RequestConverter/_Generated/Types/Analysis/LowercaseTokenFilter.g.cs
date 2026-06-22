@@ -27,7 +27,7 @@ public partial class LowercaseTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("LowercaseTokenFilter");
+		var __init = writer.BeginObjectInitializer("LowercaseTokenFilter", true);
 		if (Language is not null)
 		{
 			__init.Property("Language");

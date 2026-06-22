@@ -27,7 +27,7 @@ public partial class FollowInfoRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FollowInfoRequest");
+		var __init = writer.BeginObjectInitializer("FollowInfoRequest", false);
 		{
 			__init.Property("Indices");
 			Indices.FormatCode(writer);

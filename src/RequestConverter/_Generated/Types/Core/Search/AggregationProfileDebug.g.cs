@@ -27,7 +27,7 @@ public partial class AggregationProfileDebug : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AggregationProfileDebug");
+		var __init = writer.BeginObjectInitializer("AggregationProfileDebug", false);
 		if (BruteForceUsed is not null)
 		{
 			__init.Property("BruteForceUsed");

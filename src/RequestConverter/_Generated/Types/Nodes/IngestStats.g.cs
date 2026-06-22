@@ -27,7 +27,7 @@ public partial class IngestStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IngestStats");
+		var __init = writer.BeginObjectInitializer("IngestStats", false);
 		{
 			__init.Property("Count");
 			writer.WriteValue(Count);
@@ -54,7 +54,7 @@ public partial class IngestStats : RequestConverter.ICodeFormattable
 
 		{
 			__init.Property("Processors");
-			writer.WriteInlineList(Processors, (w, item) => { w.Write("new() "); w.WriteInlineList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", "); });
+			writer.WriteInlineList(Processors, (w, item) => { w.Write("new global::System.Collections.Generic.Dictionary<"); w.Write("string"); w.Write(", "); w.Write("Elastic.Clients.Elasticsearch.Nodes.KeyedProcessor"); w.Write(">() "); w.WriteInlineList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", "); });
 		}
 
 		{

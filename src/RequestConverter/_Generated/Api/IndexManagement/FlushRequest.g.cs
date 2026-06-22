@@ -27,7 +27,7 @@ public partial class FlushRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FlushRequest");
+		var __init = writer.BeginObjectInitializer("FlushRequest", false);
 		if (Indices is not null)
 		{
 			__init.Property("Indices");

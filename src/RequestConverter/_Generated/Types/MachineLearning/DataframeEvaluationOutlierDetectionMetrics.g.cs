@@ -27,7 +27,7 @@ public partial class DataframeEvaluationOutlierDetectionMetrics : RequestConvert
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeEvaluationOutlierDetectionMetrics");
+		var __init = writer.BeginObjectInitializer("DataframeEvaluationOutlierDetectionMetrics", false);
 		if (AucRoc is not null)
 		{
 			__init.Property("AucRoc");
@@ -37,21 +37,33 @@ public partial class DataframeEvaluationOutlierDetectionMetrics : RequestConvert
 		if (ConfusionMatrix is not null)
 		{
 			__init.Property("ConfusionMatrix");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(ConfusionMatrix, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		if (Precision is not null)
 		{
 			__init.Property("Precision");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Precision, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		if (Recall is not null)
 		{
 			__init.Property("Recall");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Recall, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

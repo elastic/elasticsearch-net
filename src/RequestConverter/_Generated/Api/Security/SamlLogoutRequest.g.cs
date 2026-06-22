@@ -27,7 +27,7 @@ public partial class SamlLogoutRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SamlLogoutRequest");
+		var __init = writer.BeginObjectInitializer("SamlLogoutRequest", false);
 		if (RefreshToken is not null)
 		{
 			__init.Property("RefreshToken");

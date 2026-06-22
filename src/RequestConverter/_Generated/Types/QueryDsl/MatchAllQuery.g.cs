@@ -27,7 +27,7 @@ public partial class MatchAllQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MatchAllQuery");
+		var __init = writer.BeginObjectInitializer("MatchAllQuery", false);
 		if (Boost is not null)
 		{
 			__init.Property("Boost");

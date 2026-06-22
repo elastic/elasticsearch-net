@@ -27,7 +27,7 @@ public partial class NvidiaTaskSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NvidiaTaskSettings");
+		var __init = writer.BeginObjectInitializer("NvidiaTaskSettings", false);
 		if (InputType is not null)
 		{
 			__init.Property("InputType");

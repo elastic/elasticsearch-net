@@ -27,7 +27,7 @@ public partial class IndexSettingResults : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexSettingResults");
+		var __init = writer.BeginObjectInitializer("IndexSettingResults", false);
 		{
 			__init.Property("AppliedToDataStreamAndBackingIndices");
 			writer.WriteInlineList(AppliedToDataStreamAndBackingIndices, (w, item) => { w.WriteString(item); });

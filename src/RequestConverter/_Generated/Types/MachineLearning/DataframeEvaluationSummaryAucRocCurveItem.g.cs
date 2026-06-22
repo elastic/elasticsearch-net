@@ -27,7 +27,7 @@ public partial class DataframeEvaluationSummaryAucRocCurveItem : RequestConverte
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeEvaluationSummaryAucRocCurveItem");
+		var __init = writer.BeginObjectInitializer("DataframeEvaluationSummaryAucRocCurveItem", false);
 		{
 			__init.Property("Fpr");
 			writer.WriteValue(Fpr);

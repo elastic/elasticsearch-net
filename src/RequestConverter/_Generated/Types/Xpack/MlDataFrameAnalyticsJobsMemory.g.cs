@@ -27,7 +27,7 @@ public partial class MlDataFrameAnalyticsJobsMemory : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MlDataFrameAnalyticsJobsMemory");
+		var __init = writer.BeginObjectInitializer("MlDataFrameAnalyticsJobsMemory", false);
 		{
 			__init.Property("PeakUsageBytes");
 			PeakUsageBytes.FormatCode(writer);

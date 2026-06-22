@@ -27,7 +27,7 @@ public partial class Retries : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Retries");
+		var __init = writer.BeginObjectInitializer("Retries", false);
 		{
 			__init.Property("Bulk");
 			writer.WriteValue(Bulk);

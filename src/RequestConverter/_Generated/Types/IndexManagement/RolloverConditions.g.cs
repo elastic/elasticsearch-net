@@ -27,7 +27,7 @@ public partial class RolloverConditions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RolloverConditions");
+		var __init = writer.BeginObjectInitializer("RolloverConditions", false);
 		if (MaxAge is not null)
 		{
 			__init.Property("MaxAge");

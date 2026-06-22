@@ -27,7 +27,7 @@ public partial class Phase : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Phase");
+		var __init = writer.BeginObjectInitializer("Phase", false);
 		{
 			__init.Property("Actions");
 			writer.WriteInlineList(Actions, (w, item) => { w.WriteString(item); });

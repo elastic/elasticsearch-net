@@ -27,7 +27,7 @@ public partial class ClusterShardMetrics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterShardMetrics");
+		var __init = writer.BeginObjectInitializer("ClusterShardMetrics", false);
 		{
 			__init.Property("Avg");
 			writer.WriteValue(Avg);

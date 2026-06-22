@@ -27,7 +27,7 @@ public partial class PutCohereRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutCohereRequest");
+		var __init = writer.BeginObjectInitializer("PutCohereRequest", false);
 		{
 			__init.Property("CohereInferenceId");
 			CohereInferenceId.FormatCode(writer);

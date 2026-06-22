@@ -27,7 +27,7 @@ public partial class CleanupRepositoryResults : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CleanupRepositoryResults");
+		var __init = writer.BeginObjectInitializer("CleanupRepositoryResults", false);
 		{
 			__init.Property("DeletedBlobs");
 			writer.WriteValue(DeletedBlobs);

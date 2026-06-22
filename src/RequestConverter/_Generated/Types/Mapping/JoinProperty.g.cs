@@ -27,7 +27,7 @@ public partial class JoinProperty : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("JoinProperty");
+		var __init = writer.BeginObjectInitializer("JoinProperty", true);
 		if (Dynamic is not null)
 		{
 			__init.Property("Dynamic");
@@ -55,7 +55,11 @@ public partial class JoinProperty : RequestConverter.ICodeFormattable
 		if (Meta is not null)
 		{
 			__init.Property("Meta");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("string");
+			writer.Write(">() ");
 			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
@@ -68,7 +72,11 @@ public partial class JoinProperty : RequestConverter.ICodeFormattable
 		if (Relations is not null)
 		{
 			__init.Property("Relations");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("System.Collections.Generic.ICollection<string>");
+			writer.Write(">() ");
 			writer.WriteInlineList(Relations, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteString(item); }); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

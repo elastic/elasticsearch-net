@@ -27,25 +27,37 @@ public partial class Stats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Stats");
+		var __init = writer.BeginObjectInitializer("Stats", false);
 		if (AdaptiveSelection is not null)
 		{
 			__init.Property("AdaptiveSelection");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection");
+			writer.Write(">() ");
 			writer.WriteInlineList(AdaptiveSelection, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		if (Attributes is not null)
 		{
 			__init.Property("Attributes");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("string");
+			writer.Write(">() ");
 			writer.WriteInlineList(Attributes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		if (Breakers is not null)
 		{
 			__init.Property("Breakers");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Nodes.Breaker");
+			writer.Write(">() ");
 			writer.WriteInlineList(Breakers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
@@ -136,14 +148,22 @@ public partial class Stats : RequestConverter.ICodeFormattable
 		if (ScriptCache is not null)
 		{
 			__init.Property("ScriptCache");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>");
+			writer.Write(">() ");
 			writer.WriteInlineList(ScriptCache, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { item.FormatCode(w); }); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		if (ThreadPool is not null)
 		{
 			__init.Property("ThreadPool");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Nodes.ThreadCount");
+			writer.Write(">() ");
 			writer.WriteInlineList(ThreadPool, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

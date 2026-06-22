@@ -27,7 +27,7 @@ public partial class LimitTokenCountTokenFilter : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("LimitTokenCountTokenFilter");
+		var __init = writer.BeginObjectInitializer("LimitTokenCountTokenFilter", true);
 		if (ConsumeAllTokens is not null)
 		{
 			__init.Property("ConsumeAllTokens");

@@ -27,7 +27,7 @@ public partial class PublishedClusterStates : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PublishedClusterStates");
+		var __init = writer.BeginObjectInitializer("PublishedClusterStates", false);
 		if (CompatibleDiffs is not null)
 		{
 			__init.Property("CompatibleDiffs");

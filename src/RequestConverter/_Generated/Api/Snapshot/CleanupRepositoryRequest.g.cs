@@ -27,7 +27,7 @@ public partial class CleanupRepositoryRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CleanupRepositoryRequest");
+		var __init = writer.BeginObjectInitializer("CleanupRepositoryRequest", false);
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class TrimTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrimTokenFilter");
+		var __init = writer.BeginObjectInitializer("TrimTokenFilter", true);
 		if (Version is not null)
 		{
 			__init.Property("Version");

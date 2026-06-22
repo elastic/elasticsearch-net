@@ -27,7 +27,7 @@ public partial class Category : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Category");
+		var __init = writer.BeginObjectInitializer("Category", false);
 		{
 			__init.Property("CategoryId");
 			writer.WriteValue(CategoryId);

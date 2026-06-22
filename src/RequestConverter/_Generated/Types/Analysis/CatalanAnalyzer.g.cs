@@ -27,7 +27,7 @@ public partial class CatalanAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CatalanAnalyzer");
+		var __init = writer.BeginObjectInitializer("CatalanAnalyzer", true);
 		if (StemExclusion is not null)
 		{
 			__init.Property("StemExclusion");

@@ -27,7 +27,7 @@ public partial class MemStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MemStats");
+		var __init = writer.BeginObjectInitializer("MemStats", false);
 		if (AdjustedTotal is not null)
 		{
 			__init.Property("AdjustedTotal");

@@ -27,7 +27,7 @@ public partial class DeleteAsyncRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteAsyncRequest");
+		var __init = writer.BeginObjectInitializer("DeleteAsyncRequest", false);
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);

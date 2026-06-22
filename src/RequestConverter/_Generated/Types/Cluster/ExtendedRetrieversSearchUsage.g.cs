@@ -27,7 +27,7 @@ public partial class ExtendedRetrieversSearchUsage : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExtendedRetrieversSearchUsage");
+		var __init = writer.BeginObjectInitializer("ExtendedRetrieversSearchUsage", false);
 		if (TextSimilarityReranker is not null)
 		{
 			__init.Property("TextSimilarityReranker");

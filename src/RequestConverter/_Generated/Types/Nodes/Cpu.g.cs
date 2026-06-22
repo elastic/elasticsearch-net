@@ -27,11 +27,15 @@ public partial class Cpu : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Cpu");
+		var __init = writer.BeginObjectInitializer("Cpu", false);
 		if (LoadAverage is not null)
 		{
 			__init.Property("LoadAverage");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("double");
+			writer.Write(">() ");
 			writer.WriteInlineList(LoadAverage, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

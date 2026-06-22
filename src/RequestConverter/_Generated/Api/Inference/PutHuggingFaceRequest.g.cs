@@ -27,7 +27,7 @@ public partial class PutHuggingFaceRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutHuggingFaceRequest");
+		var __init = writer.BeginObjectInitializer("PutHuggingFaceRequest", false);
 		{
 			__init.Property("HuggingfaceInferenceId");
 			HuggingfaceInferenceId.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class GetUserProfileRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetUserProfileRequest");
+		var __init = writer.BeginObjectInitializer("GetUserProfileRequest", false);
 		{
 			__init.Property("Uid");
 			writer.WriteInlineList(Uid, (w, item) => { w.WriteString(item); });

@@ -27,7 +27,7 @@ public partial class SourceField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SourceField");
+		var __init = writer.BeginObjectInitializer("SourceField", false);
 		if (Compress is not null)
 		{
 			__init.Property("Compress");

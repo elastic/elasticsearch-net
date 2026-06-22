@@ -27,7 +27,7 @@ public partial class HistogramBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("HistogramBucket");
+		var __init = writer.BeginObjectInitializer("HistogramBucket", false);
 		if (Aggregations is not null)
 		{
 			__init.Property("Aggregations");

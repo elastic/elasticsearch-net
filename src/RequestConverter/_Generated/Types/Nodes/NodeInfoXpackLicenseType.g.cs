@@ -27,7 +27,7 @@ public partial class NodeInfoXpackLicenseType : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoXpackLicenseType");
+		var __init = writer.BeginObjectInitializer("NodeInfoXpackLicenseType", false);
 		{
 			__init.Property("Type");
 			writer.WriteString(Type);

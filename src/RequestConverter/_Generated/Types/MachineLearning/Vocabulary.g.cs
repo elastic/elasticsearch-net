@@ -27,7 +27,7 @@ public partial class Vocabulary : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Vocabulary");
+		var __init = writer.BeginObjectInitializer("Vocabulary", false);
 		{
 			__init.Property("Index");
 			Index.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class PutCalendarRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutCalendarRequest");
+		var __init = writer.BeginObjectInitializer("PutCalendarRequest", false);
 		{
 			__init.Property("CalendarId");
 			CalendarId.FormatCode(writer);

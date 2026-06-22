@@ -27,7 +27,7 @@ public partial class MergesStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MergesStats");
+		var __init = writer.BeginObjectInitializer("MergesStats", false);
 		{
 			__init.Property("Current");
 			writer.WriteValue(Current);

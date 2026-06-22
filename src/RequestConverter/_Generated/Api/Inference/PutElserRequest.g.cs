@@ -27,7 +27,7 @@ public partial class PutElserRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutElserRequest");
+		var __init = writer.BeginObjectInitializer("PutElserRequest", false);
 		{
 			__init.Property("ElserInferenceId");
 			ElserInferenceId.FormatCode(writer);

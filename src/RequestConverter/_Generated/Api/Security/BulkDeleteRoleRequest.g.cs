@@ -27,7 +27,7 @@ public partial class BulkDeleteRoleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BulkDeleteRoleRequest");
+		var __init = writer.BeginObjectInitializer("BulkDeleteRoleRequest", false);
 		if (Refresh is not null)
 		{
 			__init.Property("Refresh");

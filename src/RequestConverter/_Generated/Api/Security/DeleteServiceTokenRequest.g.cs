@@ -27,7 +27,7 @@ public partial class DeleteServiceTokenRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteServiceTokenRequest");
+		var __init = writer.BeginObjectInitializer("DeleteServiceTokenRequest", false);
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

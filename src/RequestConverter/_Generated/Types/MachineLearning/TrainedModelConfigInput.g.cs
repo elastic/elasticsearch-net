@@ -27,7 +27,7 @@ public partial class TrainedModelConfigInput : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelConfigInput");
+		var __init = writer.BeginObjectInitializer("TrainedModelConfigInput", false);
 		{
 			__init.Property("FieldNames");
 			FieldNames.FormatCode(writer);

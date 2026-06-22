@@ -27,7 +27,7 @@ public partial class TrainedModelDeploymentStats : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelDeploymentStats");
+		var __init = writer.BeginObjectInitializer("TrainedModelDeploymentStats", false);
 		if (AdaptiveAllocations is not null)
 		{
 			__init.Property("AdaptiveAllocations");

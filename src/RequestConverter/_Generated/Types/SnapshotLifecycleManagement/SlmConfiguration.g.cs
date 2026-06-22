@@ -27,7 +27,7 @@ public partial class SlmConfiguration : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SlmConfiguration");
+		var __init = writer.BeginObjectInitializer("SlmConfiguration", false);
 		if (FeatureStates is not null)
 		{
 			__init.Property("FeatureStates");
@@ -55,7 +55,11 @@ public partial class SlmConfiguration : RequestConverter.ICodeFormattable
 		if (Metadata is not null)
 		{
 			__init.Property("Metadata");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

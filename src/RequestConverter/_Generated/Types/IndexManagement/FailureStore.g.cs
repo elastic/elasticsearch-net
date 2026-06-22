@@ -27,7 +27,7 @@ public partial class FailureStore : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FailureStore");
+		var __init = writer.BeginObjectInitializer("FailureStore", false);
 		{
 			__init.Property("Enabled");
 			writer.WriteValue(Enabled);

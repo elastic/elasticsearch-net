@@ -27,7 +27,7 @@ public partial class SamlServiceProviderMetadataRequest : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SamlServiceProviderMetadataRequest");
+		var __init = writer.BeginObjectInitializer("SamlServiceProviderMetadataRequest", false);
 		{
 			__init.Property("RealmName");
 			RealmName.FormatCode(writer);

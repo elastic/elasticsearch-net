@@ -27,7 +27,7 @@ public partial class DeleteForecastRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteForecastRequest");
+		var __init = writer.BeginObjectInitializer("DeleteForecastRequest", false);
 		if (ForecastId is not null)
 		{
 			__init.Property("ForecastId");

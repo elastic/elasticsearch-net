@@ -27,7 +27,7 @@ public partial class ConfusionMatrixItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ConfusionMatrixItem");
+		var __init = writer.BeginObjectInitializer("ConfusionMatrixItem", false);
 		{
 			__init.Property("ActualClass");
 			writer.WriteString(ActualClass);

@@ -27,7 +27,7 @@ public partial class AnthropicServiceSettings : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AnthropicServiceSettings");
+		var __init = writer.BeginObjectInitializer("AnthropicServiceSettings", false);
 		{
 			__init.Property("ApiKey");
 			writer.WriteString(ApiKey);

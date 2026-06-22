@@ -27,7 +27,7 @@ public partial class DateHistogramBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DateHistogramBucket");
+		var __init = writer.BeginObjectInitializer("DateHistogramBucket", false);
 		if (Aggregations is not null)
 		{
 			__init.Property("Aggregations");

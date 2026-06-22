@@ -27,7 +27,7 @@ public partial class ClusterSnapshotStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterSnapshotStats");
+		var __init = writer.BeginObjectInitializer("ClusterSnapshotStats", false);
 		{
 			__init.Property("CurrentCounts");
 			CurrentCounts.FormatCode(writer);
@@ -35,7 +35,11 @@ public partial class ClusterSnapshotStats : RequestConverter.ICodeFormattable
 
 		{
 			__init.Property("Repositories");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Cluster.PerRepositoryStats");
+			writer.Write(">() ");
 			writer.WriteInlineList(Repositories, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

@@ -27,7 +27,7 @@ public partial class ShardStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardStats");
+		var __init = writer.BeginObjectInitializer("ShardStats", false);
 		if (Bulk is not null)
 		{
 			__init.Property("Bulk");
@@ -157,7 +157,11 @@ public partial class ShardStats : RequestConverter.ICodeFormattable
 		if (Shards is not null)
 		{
 			__init.Property("Shards");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Shards, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

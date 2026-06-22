@@ -27,7 +27,7 @@ public partial class PutPrivilegesRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutPrivilegesRequest");
+		var __init = writer.BeginObjectInitializer("PutPrivilegesRequest", false);
 		if (Refresh is not null)
 		{
 			__init.Property("Refresh");
@@ -36,8 +36,12 @@ public partial class PutPrivilegesRequest : RequestConverter.ICodeFormattable
 
 		{
 			__init.Property("Privileges");
-			writer.Write("new() ");
-			writer.WriteInlineList(Privileges, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.Write("new() "); w.WriteInlineList(kvp.Value, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", "); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("System.Collections.Generic.IDictionary<string,Elastic.Clients.Elasticsearch.Security.PrivilegeActions>");
+			writer.Write(">() ");
+			writer.WriteInlineList(Privileges, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.Write("new global::System.Collections.Generic.Dictionary<"); w.Write("string"); w.Write(", "); w.Write("Elastic.Clients.Elasticsearch.Security.PrivilegeActions"); w.Write(">() "); w.WriteInlineList(kvp.Value, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", "); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		__init.Dispose();

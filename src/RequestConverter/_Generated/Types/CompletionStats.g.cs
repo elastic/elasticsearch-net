@@ -27,11 +27,15 @@ public partial class CompletionStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CompletionStats");
+		var __init = writer.BeginObjectInitializer("CompletionStats", false);
 		if (Fields is not null)
 		{
 			__init.Property("Fields");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.FieldSizeUsage");
+			writer.Write(">() ");
 			writer.WriteInlineList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

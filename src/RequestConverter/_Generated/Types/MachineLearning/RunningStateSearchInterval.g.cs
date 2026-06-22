@@ -27,7 +27,7 @@ public partial class RunningStateSearchInterval : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RunningStateSearchInterval");
+		var __init = writer.BeginObjectInitializer("RunningStateSearchInterval", false);
 		if (End is not null)
 		{
 			__init.Property("End");

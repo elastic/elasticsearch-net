@@ -27,7 +27,7 @@ public partial class MatrixStatsAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MatrixStatsAggregation");
+		var __init = writer.BeginObjectInitializer("MatrixStatsAggregation", false);
 		if (Fields is not null)
 		{
 			__init.Property("Fields");
@@ -37,7 +37,11 @@ public partial class MatrixStatsAggregation : RequestConverter.ICodeFormattable
 		if (Missing is not null)
 		{
 			__init.Property("Missing");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("Elastic.Clients.Elasticsearch.Field");
+			writer.Write(", ");
+			writer.Write("double");
+			writer.Write(">() ");
 			writer.WriteInlineList(Missing, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

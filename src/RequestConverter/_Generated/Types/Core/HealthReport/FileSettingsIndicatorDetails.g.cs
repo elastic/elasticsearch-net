@@ -27,7 +27,7 @@ public partial class FileSettingsIndicatorDetails : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FileSettingsIndicatorDetails");
+		var __init = writer.BeginObjectInitializer("FileSettingsIndicatorDetails", false);
 		{
 			__init.Property("FailureStreak");
 			writer.WriteValue(FailureStreak);

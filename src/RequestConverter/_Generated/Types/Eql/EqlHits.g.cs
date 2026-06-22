@@ -27,7 +27,7 @@ public partial class EqlHits<TEvent> : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EqlHits<TEvent>");
+		var __init = writer.BeginObjectInitializer("EqlHits<TEvent>", false);
 		if (Events is not null)
 		{
 			__init.Property("Events");

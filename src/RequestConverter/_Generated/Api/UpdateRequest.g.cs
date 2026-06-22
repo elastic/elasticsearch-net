@@ -27,7 +27,7 @@ public partial class UpdateRequest<TDocument, TPartialDocument> : RequestConvert
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UpdateRequest<TDocument, TPartialDocument>");
+		var __init = writer.BeginObjectInitializer("UpdateRequest<TDocument, TPartialDocument>", false);
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);
@@ -118,7 +118,7 @@ public partial class UpdateRequest<TDocument, TPartialDocument> : RequestConvert
 			writer.WriteValue(DetectNoop.Value);
 		}
 
-		if (Doc is not null)
+		if (RequestConverter.CodeWriter.ShouldFormat(Doc))
 		{
 			__init.Property("Doc");
 			writer.WriteValue(Doc);
@@ -148,7 +148,7 @@ public partial class UpdateRequest<TDocument, TPartialDocument> : RequestConvert
 			Source.FormatCode(writer);
 		}
 
-		if (Upsert is not null)
+		if (RequestConverter.CodeWriter.ShouldFormat(Upsert))
 		{
 			__init.Property("Upsert");
 			writer.WriteValue(Upsert);

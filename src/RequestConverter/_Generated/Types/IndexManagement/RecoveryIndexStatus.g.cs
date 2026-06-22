@@ -27,7 +27,7 @@ public partial class RecoveryIndexStatus : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RecoveryIndexStatus");
+		var __init = writer.BeginObjectInitializer("RecoveryIndexStatus", false);
 		if (Bytes is not null)
 		{
 			__init.Property("Bytes");

@@ -27,7 +27,7 @@ public partial class SwedishAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SwedishAnalyzer");
+		var __init = writer.BeginObjectInitializer("SwedishAnalyzer", true);
 		if (StemExclusion is not null)
 		{
 			__init.Property("StemExclusion");

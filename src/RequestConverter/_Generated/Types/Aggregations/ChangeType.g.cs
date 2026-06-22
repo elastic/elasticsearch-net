@@ -27,7 +27,7 @@ public partial class ChangeType : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ChangeType");
+		var __init = writer.BeginObjectInitializer("ChangeType", false);
 		if (Dip is not null)
 		{
 			__init.Property("Dip");

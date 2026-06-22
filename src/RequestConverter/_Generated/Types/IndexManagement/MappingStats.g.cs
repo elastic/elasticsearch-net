@@ -27,7 +27,7 @@ public partial class MappingStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MappingStats");
+		var __init = writer.BeginObjectInitializer("MappingStats", false);
 		{
 			__init.Property("TotalCount");
 			writer.WriteValue(TotalCount);

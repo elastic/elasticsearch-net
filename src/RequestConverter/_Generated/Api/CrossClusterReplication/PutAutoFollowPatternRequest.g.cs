@@ -27,7 +27,7 @@ public partial class PutAutoFollowPatternRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutAutoFollowPatternRequest");
+		var __init = writer.BeginObjectInitializer("PutAutoFollowPatternRequest", false);
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);
@@ -125,7 +125,11 @@ public partial class PutAutoFollowPatternRequest : RequestConverter.ICodeFormatt
 		if (Settings is not null)
 		{
 			__init.Property("Settings");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Settings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

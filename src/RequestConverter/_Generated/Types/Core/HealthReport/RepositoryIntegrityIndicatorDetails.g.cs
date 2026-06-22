@@ -27,7 +27,7 @@ public partial class RepositoryIntegrityIndicatorDetails : RequestConverter.ICod
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RepositoryIntegrityIndicatorDetails");
+		var __init = writer.BeginObjectInitializer("RepositoryIntegrityIndicatorDetails", false);
 		if (Corrupted is not null)
 		{
 			__init.Property("Corrupted");

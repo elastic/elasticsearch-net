@@ -27,7 +27,7 @@ public partial class ExploreControls : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExploreControls");
+		var __init = writer.BeginObjectInitializer("ExploreControls", false);
 		if (SampleDiversity is not null)
 		{
 			__init.Property("SampleDiversity");

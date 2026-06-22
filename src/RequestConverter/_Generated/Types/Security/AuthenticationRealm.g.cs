@@ -27,7 +27,7 @@ public partial class AuthenticationRealm : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AuthenticationRealm");
+		var __init = writer.BeginObjectInitializer("AuthenticationRealm", false);
 		if (Domain is not null)
 		{
 			__init.Property("Domain");

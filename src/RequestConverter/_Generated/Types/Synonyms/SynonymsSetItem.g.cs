@@ -27,7 +27,7 @@ public partial class SynonymsSetItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SynonymsSetItem");
+		var __init = writer.BeginObjectInitializer("SynonymsSetItem", false);
 		{
 			__init.Property("Count");
 			writer.WriteValue(Count);

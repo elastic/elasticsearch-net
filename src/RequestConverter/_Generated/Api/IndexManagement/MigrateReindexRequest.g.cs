@@ -27,7 +27,7 @@ public partial class MigrateReindexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MigrateReindexRequest");
+		var __init = writer.BeginObjectInitializer("MigrateReindexRequest", false);
 		{
 			__init.Property("Reindex");
 			Reindex.FormatCode(writer);

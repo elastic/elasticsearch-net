@@ -27,7 +27,7 @@ public partial class ClearCursorRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClearCursorRequest");
+		var __init = writer.BeginObjectInitializer("ClearCursorRequest", false);
 		{
 			__init.Property("Cursor");
 			writer.WriteString(Cursor);

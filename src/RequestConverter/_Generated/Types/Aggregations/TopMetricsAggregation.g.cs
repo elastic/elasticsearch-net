@@ -27,7 +27,7 @@ public partial class TopMetricsAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TopMetricsAggregation");
+		var __init = writer.BeginObjectInitializer("TopMetricsAggregation", false);
 		if (Field is not null)
 		{
 			__init.Property("Field");

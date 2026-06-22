@@ -27,7 +27,7 @@ public partial class UnfollowRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UnfollowRequest");
+		var __init = writer.BeginObjectInitializer("UnfollowRequest", false);
 		{
 			__init.Property("Index");
 			Index.FormatCode(writer);

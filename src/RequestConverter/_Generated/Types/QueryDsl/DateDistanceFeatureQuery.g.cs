@@ -27,7 +27,7 @@ public partial class DateDistanceFeatureQuery : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DateDistanceFeatureQuery");
+		var __init = writer.BeginObjectInitializer("DateDistanceFeatureQuery", true);
 		if (Boost is not null)
 		{
 			__init.Property("Boost");

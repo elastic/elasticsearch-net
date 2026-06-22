@@ -27,7 +27,7 @@ public partial class SoraniAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SoraniAnalyzer");
+		var __init = writer.BeginObjectInitializer("SoraniAnalyzer", true);
 		if (StemExclusion is not null)
 		{
 			__init.Property("StemExclusion");

@@ -27,7 +27,7 @@ public partial class DataframeAnalysisAnalyzedFields : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeAnalysisAnalyzedFields");
+		var __init = writer.BeginObjectInitializer("DataframeAnalysisAnalyzedFields", false);
 		if (Excludes is not null)
 		{
 			__init.Property("Excludes");

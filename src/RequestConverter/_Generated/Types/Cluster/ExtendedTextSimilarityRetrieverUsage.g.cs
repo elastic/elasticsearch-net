@@ -27,7 +27,7 @@ public partial class ExtendedTextSimilarityRetrieverUsage : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExtendedTextSimilarityRetrieverUsage");
+		var __init = writer.BeginObjectInitializer("ExtendedTextSimilarityRetrieverUsage", false);
 		if (ChunkRescorer is not null)
 		{
 			__init.Property("ChunkRescorer");

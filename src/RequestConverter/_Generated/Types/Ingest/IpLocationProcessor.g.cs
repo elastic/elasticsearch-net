@@ -27,7 +27,7 @@ public partial class IpLocationProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IpLocationProcessor");
+		var __init = writer.BeginObjectInitializer("IpLocationProcessor", false);
 		if (DatabaseFile is not null)
 		{
 			__init.Property("DatabaseFile");

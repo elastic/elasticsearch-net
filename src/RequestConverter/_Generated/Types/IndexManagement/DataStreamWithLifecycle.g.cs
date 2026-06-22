@@ -27,7 +27,7 @@ public partial class DataStreamWithLifecycle : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataStreamWithLifecycle");
+		var __init = writer.BeginObjectInitializer("DataStreamWithLifecycle", false);
 		if (Lifecycle is not null)
 		{
 			__init.Property("Lifecycle");

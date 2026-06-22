@@ -27,7 +27,7 @@ public partial class ResponseItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ResponseItem");
+		var __init = writer.BeginObjectInitializer("ResponseItem", false);
 		if (Error is not null)
 		{
 			__init.Property("Error");

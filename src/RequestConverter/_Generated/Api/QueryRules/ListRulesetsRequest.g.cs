@@ -27,7 +27,7 @@ public partial class ListRulesetsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ListRulesetsRequest");
+		var __init = writer.BeginObjectInitializer("ListRulesetsRequest", false);
 		if (From is not null)
 		{
 			__init.Property("From");

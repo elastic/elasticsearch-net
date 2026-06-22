@@ -27,7 +27,7 @@ public partial class PhraseSuggestHighlight : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PhraseSuggestHighlight");
+		var __init = writer.BeginObjectInitializer("PhraseSuggestHighlight", false);
 		{
 			__init.Property("PostTag");
 			writer.WriteString(PostTag);

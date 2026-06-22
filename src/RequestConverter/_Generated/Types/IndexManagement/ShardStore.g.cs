@@ -27,7 +27,7 @@ public partial class ShardStore : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardStore");
+		var __init = writer.BeginObjectInitializer("ShardStore", false);
 		{
 			__init.Property("Allocation");
 			Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocationCodeFormatter.FormatCode(Allocation, writer);

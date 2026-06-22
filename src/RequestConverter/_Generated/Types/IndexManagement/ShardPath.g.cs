@@ -27,7 +27,7 @@ public partial class ShardPath : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardPath");
+		var __init = writer.BeginObjectInitializer("ShardPath", false);
 		{
 			__init.Property("DataPath");
 			writer.WriteString(DataPath);

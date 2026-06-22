@@ -27,11 +27,15 @@ public partial class CompositeAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CompositeAggregation");
+		var __init = writer.BeginObjectInitializer("CompositeAggregation", false);
 		if (After is not null)
 		{
 			__init.Property("After");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("Elastic.Clients.Elasticsearch.Field");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.FieldValue");
+			writer.Write(">() ");
 			writer.WriteInlineList(After, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

@@ -27,7 +27,7 @@ public partial class RrfRank : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RrfRank");
+		var __init = writer.BeginObjectInitializer("RrfRank", false);
 		if (RankConstant is not null)
 		{
 			__init.Property("RankConstant");

@@ -27,7 +27,7 @@ public partial class StreamStatus : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StreamStatus");
+		var __init = writer.BeginObjectInitializer("StreamStatus", false);
 		{
 			__init.Property("Enabled");
 			writer.WriteValue(Enabled);

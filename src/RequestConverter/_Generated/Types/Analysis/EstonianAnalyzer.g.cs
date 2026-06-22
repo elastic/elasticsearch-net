@@ -27,7 +27,7 @@ public partial class EstonianAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EstonianAnalyzer");
+		var __init = writer.BeginObjectInitializer("EstonianAnalyzer", true);
 		if (Stopwords is not null)
 		{
 			__init.Property("Stopwords");

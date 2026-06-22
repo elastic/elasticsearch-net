@@ -27,7 +27,7 @@ public partial class DataframeEvaluationClassificationMetricsAucRoc : RequestCon
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeEvaluationClassificationMetricsAucRoc");
+		var __init = writer.BeginObjectInitializer("DataframeEvaluationClassificationMetricsAucRoc", false);
 		if (ClassName is not null)
 		{
 			__init.Property("ClassName");

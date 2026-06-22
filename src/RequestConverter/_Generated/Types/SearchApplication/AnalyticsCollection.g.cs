@@ -27,7 +27,7 @@ public partial class AnalyticsCollection : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AnalyticsCollection");
+		var __init = writer.BeginObjectInitializer("AnalyticsCollection", false);
 		{
 			__init.Property("EventDataStream");
 			EventDataStream.FormatCode(writer);

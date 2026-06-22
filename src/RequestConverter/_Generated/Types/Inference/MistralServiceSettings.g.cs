@@ -27,7 +27,7 @@ public partial class MistralServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MistralServiceSettings");
+		var __init = writer.BeginObjectInitializer("MistralServiceSettings", false);
 		{
 			__init.Property("ApiKey");
 			writer.WriteString(ApiKey);

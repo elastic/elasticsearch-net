@@ -27,7 +27,7 @@ public partial class Datafeeds : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Datafeeds");
+		var __init = writer.BeginObjectInitializer("Datafeeds", false);
 		{
 			__init.Property("ScrollSize");
 			writer.WriteValue(ScrollSize);

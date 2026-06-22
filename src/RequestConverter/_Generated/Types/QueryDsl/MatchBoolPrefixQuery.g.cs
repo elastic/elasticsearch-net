@@ -27,7 +27,7 @@ public partial class MatchBoolPrefixQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MatchBoolPrefixQuery");
+		var __init = writer.BeginObjectInitializer("MatchBoolPrefixQuery", false);
 		if (Analyzer is not null)
 		{
 			__init.Property("Analyzer");

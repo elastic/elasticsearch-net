@@ -27,7 +27,7 @@ public partial class BoostingQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BoostingQuery");
+		var __init = writer.BeginObjectInitializer("BoostingQuery", false);
 		if (Boost is not null)
 		{
 			__init.Property("Boost");

@@ -27,7 +27,7 @@ public partial class GeoPolygonPoints : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoPolygonPoints");
+		var __init = writer.BeginObjectInitializer("GeoPolygonPoints", false);
 		{
 			__init.Property("Points");
 			writer.WriteInlineList(Points, (w, item) => { item.FormatCode(w); });

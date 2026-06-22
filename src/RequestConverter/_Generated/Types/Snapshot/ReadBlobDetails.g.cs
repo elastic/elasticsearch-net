@@ -27,7 +27,7 @@ public partial class ReadBlobDetails : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ReadBlobDetails");
+		var __init = writer.BeginObjectInitializer("ReadBlobDetails", false);
 		if (BeforeWriteComplete is not null)
 		{
 			__init.Property("BeforeWriteComplete");

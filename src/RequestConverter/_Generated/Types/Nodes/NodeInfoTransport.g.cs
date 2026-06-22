@@ -27,7 +27,7 @@ public partial class NodeInfoTransport : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoTransport");
+		var __init = writer.BeginObjectInitializer("NodeInfoTransport", false);
 		{
 			__init.Property("BoundAddress");
 			writer.WriteInlineList(BoundAddress, (w, item) => { w.WriteString(item); });
@@ -35,7 +35,11 @@ public partial class NodeInfoTransport : RequestConverter.ICodeFormattable
 
 		{
 			__init.Property("Profiles");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("string");
+			writer.Write(">() ");
 			writer.WriteInlineList(Profiles, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

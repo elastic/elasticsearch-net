@@ -27,7 +27,7 @@ public partial class XlmRobertaTokenizationConfig : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("XlmRobertaTokenizationConfig");
+		var __init = writer.BeginObjectInitializer("XlmRobertaTokenizationConfig", false);
 		if (DoLowerCase is not null)
 		{
 			__init.Property("DoLowerCase");

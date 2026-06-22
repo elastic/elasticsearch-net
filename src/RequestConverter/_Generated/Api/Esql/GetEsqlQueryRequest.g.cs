@@ -27,7 +27,7 @@ public partial class GetEsqlQueryRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetEsqlQueryRequest");
+		var __init = writer.BeginObjectInitializer("GetEsqlQueryRequest", false);
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);

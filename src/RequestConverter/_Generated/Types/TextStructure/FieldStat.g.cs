@@ -27,7 +27,7 @@ public partial class FieldStat : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldStat");
+		var __init = writer.BeginObjectInitializer("FieldStat", false);
 		{
 			__init.Property("Cardinality");
 			writer.WriteValue(Cardinality);

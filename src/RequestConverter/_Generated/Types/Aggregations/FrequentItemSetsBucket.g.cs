@@ -27,7 +27,7 @@ public partial class FrequentItemSetsBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FrequentItemSetsBucket");
+		var __init = writer.BeginObjectInitializer("FrequentItemSetsBucket", false);
 		if (Aggregations is not null)
 		{
 			__init.Property("Aggregations");
@@ -42,7 +42,11 @@ public partial class FrequentItemSetsBucket : RequestConverter.ICodeFormattable
 
 		{
 			__init.Property("Key");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("System.Collections.Generic.IReadOnlyCollection<string>");
+			writer.Write(">() ");
 			writer.WriteInlineList(Key, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteString(item); }); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

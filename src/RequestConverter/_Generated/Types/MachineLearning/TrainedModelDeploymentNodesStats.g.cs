@@ -27,7 +27,7 @@ public partial class TrainedModelDeploymentNodesStats : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelDeploymentNodesStats");
+		var __init = writer.BeginObjectInitializer("TrainedModelDeploymentNodesStats", false);
 		if (AverageInferenceProcessMemoryRssBytes is not null)
 		{
 			__init.Property("AverageInferenceProcessMemoryRssBytes");

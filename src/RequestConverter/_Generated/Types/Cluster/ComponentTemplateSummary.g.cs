@@ -27,11 +27,15 @@ public partial class ComponentTemplateSummary : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ComponentTemplateSummary");
+		var __init = writer.BeginObjectInitializer("ComponentTemplateSummary", false);
 		if (Aliases is not null)
 		{
 			__init.Property("Aliases");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition");
+			writer.Write(">() ");
 			writer.WriteInlineList(Aliases, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
@@ -56,14 +60,22 @@ public partial class ComponentTemplateSummary : RequestConverter.ICodeFormattabl
 		if (Meta is not null)
 		{
 			__init.Property("Meta");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		if (Settings is not null)
 		{
 			__init.Property("Settings");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("Elastic.Clients.Elasticsearch.IndexName");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings");
+			writer.Write(">() ");
 			writer.WriteInlineList(Settings, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

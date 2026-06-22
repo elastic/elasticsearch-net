@@ -27,7 +27,7 @@ public partial class Explanation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Explanation");
+		var __init = writer.BeginObjectInitializer("Explanation", false);
 		{
 			__init.Property("Description");
 			writer.WriteString(Description);

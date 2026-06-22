@@ -27,7 +27,7 @@ public partial class SlicedScroll : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SlicedScroll");
+		var __init = writer.BeginObjectInitializer("SlicedScroll", false);
 		if (Field is not null)
 		{
 			__init.Property("Field");

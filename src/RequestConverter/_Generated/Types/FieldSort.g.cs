@@ -27,7 +27,7 @@ public partial class FieldSort : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldSort");
+		var __init = writer.BeginObjectInitializer("FieldSort", false);
 		{
 			__init.Property("Field");
 			Field.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class EmbeddingContentObject : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EmbeddingContentObject");
+		var __init = writer.BeginObjectInitializer("EmbeddingContentObject", false);
 		{
 			__init.Property("Content");
 			writer.WriteInlineList(Content, (w, item) => { item.FormatCode(w); });

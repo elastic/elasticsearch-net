@@ -27,7 +27,7 @@ public partial class Rank : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Rank");
+		var __init = writer.BeginObjectInitializer("Rank", false);
 		if (Rrf is not null)
 		{
 			__init.Property("Rrf");

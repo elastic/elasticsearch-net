@@ -27,7 +27,7 @@ public partial class IcuTransformTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IcuTransformTokenFilter");
+		var __init = writer.BeginObjectInitializer("IcuTransformTokenFilter", true);
 		if (Dir is not null)
 		{
 			__init.Property("Dir");

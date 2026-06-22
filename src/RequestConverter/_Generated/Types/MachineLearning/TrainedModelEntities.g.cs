@@ -27,7 +27,7 @@ public partial class TrainedModelEntities : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelEntities");
+		var __init = writer.BeginObjectInitializer("TrainedModelEntities", false);
 		{
 			__init.Property("ClassName");
 			writer.WriteString(ClassName);

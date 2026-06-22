@@ -27,7 +27,7 @@ public partial class ForcemergeRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ForcemergeRequest");
+		var __init = writer.BeginObjectInitializer("ForcemergeRequest", false);
 		if (Indices is not null)
 		{
 			__init.Property("Indices");

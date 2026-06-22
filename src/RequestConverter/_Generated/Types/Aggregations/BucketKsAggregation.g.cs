@@ -27,7 +27,7 @@ public partial class BucketKsAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BucketKsAggregation");
+		var __init = writer.BeginObjectInitializer("BucketKsAggregation", false);
 		if (Alternative is not null)
 		{
 			__init.Property("Alternative");

@@ -27,7 +27,7 @@ public partial class FieldValueFactorScoreFunction : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldValueFactorScoreFunction");
+		var __init = writer.BeginObjectInitializer("FieldValueFactorScoreFunction", false);
 		if (Factor is not null)
 		{
 			__init.Property("Factor");

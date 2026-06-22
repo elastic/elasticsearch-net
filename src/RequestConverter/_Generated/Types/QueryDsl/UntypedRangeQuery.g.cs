@@ -27,7 +27,7 @@ public partial class UntypedRangeQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UntypedRangeQuery");
+		var __init = writer.BeginObjectInitializer("UntypedRangeQuery", true);
 		if (Boost is not null)
 		{
 			__init.Property("Boost");

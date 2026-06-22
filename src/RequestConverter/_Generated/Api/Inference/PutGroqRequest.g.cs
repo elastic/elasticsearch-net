@@ -27,7 +27,7 @@ public partial class PutGroqRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutGroqRequest");
+		var __init = writer.BeginObjectInitializer("PutGroqRequest", false);
 		{
 			__init.Property("GroqInferenceId");
 			GroqInferenceId.FormatCode(writer);

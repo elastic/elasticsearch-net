@@ -27,7 +27,7 @@ public partial class EsqlQueryInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EsqlQueryInfo");
+		var __init = writer.BeginObjectInitializer("EsqlQueryInfo", false);
 		{
 			__init.Property("Id");
 			writer.WriteValue(Id);

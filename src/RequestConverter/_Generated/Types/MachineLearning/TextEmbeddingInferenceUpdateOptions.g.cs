@@ -27,7 +27,7 @@ public partial class TextEmbeddingInferenceUpdateOptions : RequestConverter.ICod
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TextEmbeddingInferenceUpdateOptions");
+		var __init = writer.BeginObjectInitializer("TextEmbeddingInferenceUpdateOptions", false);
 		if (ResultsField is not null)
 		{
 			__init.Property("ResultsField");

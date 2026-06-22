@@ -27,7 +27,7 @@ public partial class Destination : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Destination");
+		var __init = writer.BeginObjectInitializer("Destination", false);
 		if (Index is not null)
 		{
 			__init.Property("Index");

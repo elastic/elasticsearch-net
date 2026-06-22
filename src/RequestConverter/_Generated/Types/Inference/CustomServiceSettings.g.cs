@@ -27,7 +27,7 @@ public partial class CustomServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CustomServiceSettings");
+		var __init = writer.BeginObjectInitializer("CustomServiceSettings", false);
 		if (BatchSize is not null)
 		{
 			__init.Property("BatchSize");
@@ -37,14 +37,22 @@ public partial class CustomServiceSettings : RequestConverter.ICodeFormattable
 		if (Headers is not null)
 		{
 			__init.Property("Headers");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("string");
+			writer.Write(">() ");
 			writer.WriteInlineList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		if (InputType is not null)
 		{
 			__init.Property("InputType");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("Elastic.Clients.Elasticsearch.Inference.CustomServiceInputType");
+			writer.Write(", ");
+			writer.Write("string");
+			writer.Write(">() ");
 			writer.WriteInlineList(InputType, (w, kvp) => { w.Write("{ "); Elastic.Clients.Elasticsearch.Inference.CustomServiceInputTypeCodeFormatter.FormatCode(kvp.Key, w); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
@@ -66,7 +74,11 @@ public partial class CustomServiceSettings : RequestConverter.ICodeFormattable
 
 		{
 			__init.Property("SecretParameters");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("string");
+			writer.Write(">() ");
 			writer.WriteInlineList(SecretParameters, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

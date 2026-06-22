@@ -27,7 +27,7 @@ public partial class DataStreamFailureStore : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataStreamFailureStore");
+		var __init = writer.BeginObjectInitializer("DataStreamFailureStore", false);
 		if (Enabled is not null)
 		{
 			__init.Property("Enabled");

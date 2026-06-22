@@ -27,7 +27,7 @@ public partial class SnapshotCurrentCounts : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SnapshotCurrentCounts");
+		var __init = writer.BeginObjectInitializer("SnapshotCurrentCounts", false);
 		{
 			__init.Property("Cleanups");
 			writer.WriteValue(Cleanups);

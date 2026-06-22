@@ -27,7 +27,7 @@ public partial class IndicesValidationExplanation : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndicesValidationExplanation");
+		var __init = writer.BeginObjectInitializer("IndicesValidationExplanation", false);
 		if (Error is not null)
 		{
 			__init.Property("Error");

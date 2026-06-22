@@ -27,7 +27,7 @@ public partial class OverallBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("OverallBucket");
+		var __init = writer.BeginObjectInitializer("OverallBucket", false);
 		{
 			__init.Property("BucketSpan");
 			writer.WriteValue(BucketSpan);

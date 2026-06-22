@@ -27,7 +27,7 @@ public partial class SimulateIngestDocumentResult : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SimulateIngestDocumentResult");
+		var __init = writer.BeginObjectInitializer("SimulateIngestDocumentResult", false);
 		if (Doc is not null)
 		{
 			__init.Property("Doc");

@@ -27,7 +27,7 @@ public partial class LanguageContext : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("LanguageContext");
+		var __init = writer.BeginObjectInitializer("LanguageContext", false);
 		{
 			__init.Property("Contexts");
 			writer.WriteInlineList(Contexts, (w, item) => { w.WriteString(item); });

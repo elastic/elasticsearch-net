@@ -27,7 +27,7 @@ public partial class NodeInfoSettingsTransportType : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoSettingsTransportType");
+		var __init = writer.BeginObjectInitializer("NodeInfoSettingsTransportType", false);
 		{
 			__init.Property("Default");
 			writer.WriteString(Default);

@@ -27,7 +27,7 @@ public partial class TTestAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TTestAggregation");
+		var __init = writer.BeginObjectInitializer("TTestAggregation", false);
 		if (A is not null)
 		{
 			__init.Property("A");

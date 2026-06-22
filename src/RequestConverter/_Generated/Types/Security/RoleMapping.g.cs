@@ -27,7 +27,7 @@ public partial class RoleMapping : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RoleMapping");
+		var __init = writer.BeginObjectInitializer("RoleMapping", false);
 		{
 			__init.Property("Enabled");
 			writer.WriteValue(Enabled);
@@ -35,7 +35,11 @@ public partial class RoleMapping : RequestConverter.ICodeFormattable
 
 		{
 			__init.Property("Metadata");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

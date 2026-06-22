@@ -27,7 +27,7 @@ public partial class DataframeAnalyticsMemoryEstimation : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeAnalyticsMemoryEstimation");
+		var __init = writer.BeginObjectInitializer("DataframeAnalyticsMemoryEstimation", false);
 		{
 			__init.Property("ExpectedMemoryWithDisk");
 			writer.WriteString(ExpectedMemoryWithDisk);

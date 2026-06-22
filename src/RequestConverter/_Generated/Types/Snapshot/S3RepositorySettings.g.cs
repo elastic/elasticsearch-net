@@ -27,7 +27,7 @@ public partial class S3RepositorySettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("S3RepositorySettings");
+		var __init = writer.BeginObjectInitializer("S3RepositorySettings", false);
 		if (BasePath is not null)
 		{
 			__init.Property("BasePath");

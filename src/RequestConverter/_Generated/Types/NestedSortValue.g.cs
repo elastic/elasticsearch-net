@@ -27,7 +27,7 @@ public partial class NestedSortValue : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NestedSortValue");
+		var __init = writer.BeginObjectInitializer("NestedSortValue", false);
 		if (Filter is not null)
 		{
 			__init.Property("Filter");

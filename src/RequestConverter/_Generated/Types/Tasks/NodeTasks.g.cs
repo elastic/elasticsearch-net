@@ -27,11 +27,15 @@ public partial class NodeTasks : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeTasks");
+		var __init = writer.BeginObjectInitializer("NodeTasks", false);
 		if (Attributes is not null)
 		{
 			__init.Property("Attributes");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("string");
+			writer.Write(">() ");
 			writer.WriteInlineList(Attributes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
@@ -61,7 +65,11 @@ public partial class NodeTasks : RequestConverter.ICodeFormattable
 
 		{
 			__init.Property("Tasks");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("Elastic.Clients.Elasticsearch.TaskId");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Tasks.TaskInfo");
+			writer.Write(">() ");
 			writer.WriteInlineList(Tasks, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

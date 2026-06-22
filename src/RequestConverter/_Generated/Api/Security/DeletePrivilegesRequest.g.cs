@@ -27,7 +27,7 @@ public partial class DeletePrivilegesRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeletePrivilegesRequest");
+		var __init = writer.BeginObjectInitializer("DeletePrivilegesRequest", false);
 		{
 			__init.Property("Application");
 			Application.FormatCode(writer);

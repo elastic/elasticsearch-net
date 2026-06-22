@@ -27,7 +27,7 @@ public partial class Preprocessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Preprocessor");
+		var __init = writer.BeginObjectInitializer("Preprocessor", false);
 		if (FrequencyEncoding is not null)
 		{
 			__init.Property("FrequencyEncoding");

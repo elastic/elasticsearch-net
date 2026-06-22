@@ -27,7 +27,7 @@ public partial class JobUsage : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("JobUsage");
+		var __init = writer.BeginObjectInitializer("JobUsage", false);
 		{
 			__init.Property("Count");
 			writer.WriteValue(Count);
@@ -35,7 +35,11 @@ public partial class JobUsage : RequestConverter.ICodeFormattable
 
 		{
 			__init.Property("CreatedBy");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("long");
+			writer.Write(">() ");
 			writer.WriteInlineList(CreatedBy, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

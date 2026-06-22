@@ -27,7 +27,7 @@ public partial class BucketInfluencer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BucketInfluencer");
+		var __init = writer.BeginObjectInitializer("BucketInfluencer", false);
 		{
 			__init.Property("AnomalyScore");
 			writer.WriteValue(AnomalyScore);

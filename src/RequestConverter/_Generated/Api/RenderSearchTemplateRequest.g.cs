@@ -27,7 +27,7 @@ public partial class RenderSearchTemplateRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RenderSearchTemplateRequest");
+		var __init = writer.BeginObjectInitializer("RenderSearchTemplateRequest", false);
 		if (File is not null)
 		{
 			__init.Property("File");
@@ -43,7 +43,11 @@ public partial class RenderSearchTemplateRequest : RequestConverter.ICodeFormatt
 		if (Params is not null)
 		{
 			__init.Property("Params");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

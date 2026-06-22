@@ -27,7 +27,7 @@ public partial class AnalyzeToken : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AnalyzeToken");
+		var __init = writer.BeginObjectInitializer("AnalyzeToken", false);
 		{
 			__init.Property("EndOffset");
 			writer.WriteValue(EndOffset);

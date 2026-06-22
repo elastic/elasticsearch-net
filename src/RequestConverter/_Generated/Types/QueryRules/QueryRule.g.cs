@@ -27,7 +27,7 @@ public partial class QueryRule : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("QueryRule");
+		var __init = writer.BeginObjectInitializer("QueryRule", false);
 		{
 			__init.Property("Actions");
 			Actions.FormatCode(writer);

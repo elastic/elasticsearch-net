@@ -27,7 +27,7 @@ public partial class Hop : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Hop");
+		var __init = writer.BeginObjectInitializer("Hop", false);
 		if (Connections is not null)
 		{
 			__init.Property("Connections");

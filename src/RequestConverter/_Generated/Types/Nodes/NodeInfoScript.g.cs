@@ -27,7 +27,7 @@ public partial class NodeInfoScript : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoScript");
+		var __init = writer.BeginObjectInitializer("NodeInfoScript", false);
 		{
 			__init.Property("AllowedTypes");
 			writer.WriteString(AllowedTypes);

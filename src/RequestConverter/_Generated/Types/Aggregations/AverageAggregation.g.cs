@@ -27,7 +27,7 @@ public partial class AverageAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AverageAggregation");
+		var __init = writer.BeginObjectInitializer("AverageAggregation", false);
 		if (Field is not null)
 		{
 			__init.Property("Field");

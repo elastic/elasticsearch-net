@@ -27,7 +27,7 @@ public partial class UpgradeJobSnapshotRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UpgradeJobSnapshotRequest");
+		var __init = writer.BeginObjectInitializer("UpgradeJobSnapshotRequest", false);
 		{
 			__init.Property("JobId");
 			JobId.FormatCode(writer);

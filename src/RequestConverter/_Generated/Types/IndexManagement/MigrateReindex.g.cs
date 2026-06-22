@@ -27,7 +27,7 @@ public partial class MigrateReindex : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MigrateReindex");
+		var __init = writer.BeginObjectInitializer("MigrateReindex", false);
 		{
 			__init.Property("Mode");
 			Elastic.Clients.Elasticsearch.IndexManagement.ModeEnumCodeFormatter.FormatCode(Mode, writer);

@@ -27,7 +27,7 @@ public partial class UserRealm : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UserRealm");
+		var __init = writer.BeginObjectInitializer("UserRealm", false);
 		{
 			__init.Property("Name");
 			writer.WriteString(Name);

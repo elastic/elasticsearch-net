@@ -27,7 +27,7 @@ public partial class ClusterProcess : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterProcess");
+		var __init = writer.BeginObjectInitializer("ClusterProcess", false);
 		{
 			__init.Property("Cpu");
 			Cpu.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class ComponentTemplateNodeWithRollover : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ComponentTemplateNodeWithRollover");
+		var __init = writer.BeginObjectInitializer("ComponentTemplateNodeWithRollover", false);
 		if (CreatedDate is not null)
 		{
 			__init.Property("CreatedDate");
@@ -49,7 +49,11 @@ public partial class ComponentTemplateNodeWithRollover : RequestConverter.ICodeF
 		if (Meta is not null)
 		{
 			__init.Property("Meta");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

@@ -27,16 +27,24 @@ public partial class ClusterNetworkTypes : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterNetworkTypes");
+		var __init = writer.BeginObjectInitializer("ClusterNetworkTypes", false);
 		{
 			__init.Property("HttpTypes");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("int");
+			writer.Write(">() ");
 			writer.WriteInlineList(HttpTypes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
 			__init.Property("TransportTypes");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("int");
+			writer.Write(">() ");
 			writer.WriteInlineList(TransportTypes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

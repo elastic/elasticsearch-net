@@ -27,7 +27,7 @@ public partial class PutIpLocationDatabaseRequest : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutIpLocationDatabaseRequest");
+		var __init = writer.BeginObjectInitializer("PutIpLocationDatabaseRequest", false);
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);

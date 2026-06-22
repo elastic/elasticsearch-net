@@ -27,7 +27,7 @@ public partial class DenseVectorIndexOptions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DenseVectorIndexOptions");
+		var __init = writer.BeginObjectInitializer("DenseVectorIndexOptions", false);
 		if (ConfidenceInterval is not null)
 		{
 			__init.Property("ConfidenceInterval");

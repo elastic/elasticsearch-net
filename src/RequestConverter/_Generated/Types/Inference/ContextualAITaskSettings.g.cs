@@ -27,7 +27,7 @@ public partial class ContextualAITaskSettings : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ContextualAITaskSettings");
+		var __init = writer.BeginObjectInitializer("ContextualAITaskSettings", false);
 		if (Instruction is not null)
 		{
 			__init.Property("Instruction");

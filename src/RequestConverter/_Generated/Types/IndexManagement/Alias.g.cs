@@ -27,7 +27,7 @@ public partial class Alias : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Alias");
+		var __init = writer.BeginObjectInitializer("Alias", false);
 		if (Filter is not null)
 		{
 			__init.Property("Filter");

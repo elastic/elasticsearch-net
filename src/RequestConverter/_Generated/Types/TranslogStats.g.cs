@@ -27,7 +27,7 @@ public partial class TranslogStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TranslogStats");
+		var __init = writer.BeginObjectInitializer("TranslogStats", false);
 		{
 			__init.Property("EarliestLastModifiedAge");
 			writer.WriteValue(EarliestLastModifiedAge);

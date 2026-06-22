@@ -27,7 +27,7 @@ public partial class Scripting : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Scripting");
+		var __init = writer.BeginObjectInitializer("Scripting", false);
 		if (CacheEvictions is not null)
 		{
 			__init.Property("CacheEvictions");
@@ -52,7 +52,11 @@ public partial class Scripting : RequestConverter.ICodeFormattable
 		if (CompilationsHistory is not null)
 		{
 			__init.Property("CompilationsHistory");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("long");
+			writer.Write(">() ");
 			writer.WriteInlineList(CompilationsHistory, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

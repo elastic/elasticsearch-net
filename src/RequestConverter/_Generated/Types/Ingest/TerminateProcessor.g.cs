@@ -27,7 +27,7 @@ public partial class TerminateProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TerminateProcessor");
+		var __init = writer.BeginObjectInitializer("TerminateProcessor", false);
 		if (Description is not null)
 		{
 			__init.Property("Description");

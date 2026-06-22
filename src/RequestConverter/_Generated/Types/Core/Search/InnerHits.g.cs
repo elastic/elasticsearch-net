@@ -27,7 +27,7 @@ public partial class InnerHits : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InnerHits");
+		var __init = writer.BeginObjectInitializer("InnerHits", false);
 		if (Collapse is not null)
 		{
 			__init.Property("Collapse");
@@ -85,7 +85,11 @@ public partial class InnerHits : RequestConverter.ICodeFormattable
 		if (ScriptFields is not null)
 		{
 			__init.Property("ScriptFields");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("Elastic.Clients.Elasticsearch.Field");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.ScriptField");
+			writer.Write(">() ");
 			writer.WriteInlineList(ScriptFields, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

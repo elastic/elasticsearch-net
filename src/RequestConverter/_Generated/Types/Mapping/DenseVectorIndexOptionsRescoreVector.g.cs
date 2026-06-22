@@ -27,7 +27,7 @@ public partial class DenseVectorIndexOptionsRescoreVector : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DenseVectorIndexOptionsRescoreVector");
+		var __init = writer.BeginObjectInitializer("DenseVectorIndexOptionsRescoreVector", false);
 		{
 			__init.Property("Oversample");
 			writer.WriteValue(Oversample);

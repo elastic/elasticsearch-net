@@ -27,7 +27,7 @@ public partial class PutTrainedModelVocabularyRequest : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutTrainedModelVocabularyRequest");
+		var __init = writer.BeginObjectInitializer("PutTrainedModelVocabularyRequest", false);
 		{
 			__init.Property("ModelId");
 			ModelId.FormatCode(writer);

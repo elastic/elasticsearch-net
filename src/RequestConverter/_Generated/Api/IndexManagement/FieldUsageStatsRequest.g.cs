@@ -27,7 +27,7 @@ public partial class FieldUsageStatsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldUsageStatsRequest");
+		var __init = writer.BeginObjectInitializer("FieldUsageStatsRequest", false);
 		{
 			__init.Property("Indices");
 			Indices.FormatCode(writer);

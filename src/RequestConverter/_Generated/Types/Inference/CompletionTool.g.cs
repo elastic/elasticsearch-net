@@ -27,7 +27,7 @@ public partial class CompletionTool : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CompletionTool");
+		var __init = writer.BeginObjectInitializer("CompletionTool", false);
 		{
 			__init.Property("Function");
 			Function.FormatCode(writer);

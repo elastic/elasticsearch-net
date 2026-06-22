@@ -27,7 +27,7 @@ public partial class CloneApiKeyRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CloneApiKeyRequest");
+		var __init = writer.BeginObjectInitializer("CloneApiKeyRequest", false);
 		if (Refresh is not null)
 		{
 			__init.Property("Refresh");
@@ -48,7 +48,11 @@ public partial class CloneApiKeyRequest : RequestConverter.ICodeFormattable
 		if (Metadata is not null)
 		{
 			__init.Property("Metadata");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

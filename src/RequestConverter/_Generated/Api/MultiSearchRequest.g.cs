@@ -27,7 +27,7 @@ public partial class MultiSearchRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MultiSearchRequest");
+		var __init = writer.BeginObjectInitializer("MultiSearchRequest", false);
 		if (Indices is not null)
 		{
 			__init.Property("Indices");

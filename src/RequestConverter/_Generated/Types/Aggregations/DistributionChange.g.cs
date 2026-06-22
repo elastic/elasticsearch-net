@@ -27,7 +27,7 @@ public partial class DistributionChange : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DistributionChange");
+		var __init = writer.BeginObjectInitializer("DistributionChange", false);
 		{
 			__init.Property("ChangePoint");
 			writer.WriteValue(ChangePoint);

@@ -27,7 +27,7 @@ public partial class ConstantScoreQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ConstantScoreQuery");
+		var __init = writer.BeginObjectInitializer("ConstantScoreQuery", false);
 		if (Boost is not null)
 		{
 			__init.Property("Boost");

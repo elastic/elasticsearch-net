@@ -27,7 +27,7 @@ public partial class QueryVectorBuilder : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("QueryVectorBuilder");
+		var __init = writer.BeginObjectInitializer("QueryVectorBuilder", false);
 		if (Embedding is not null)
 		{
 			__init.Property("Embedding");

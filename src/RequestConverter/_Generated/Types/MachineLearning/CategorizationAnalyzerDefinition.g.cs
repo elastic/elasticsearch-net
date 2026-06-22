@@ -27,7 +27,7 @@ public partial class CategorizationAnalyzerDefinition : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CategorizationAnalyzerDefinition");
+		var __init = writer.BeginObjectInitializer("CategorizationAnalyzerDefinition", true);
 		if (CharFilter is not null)
 		{
 			__init.Property("CharFilter");

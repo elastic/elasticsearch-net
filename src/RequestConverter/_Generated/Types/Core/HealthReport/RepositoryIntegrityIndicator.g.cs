@@ -27,7 +27,7 @@ public partial class RepositoryIntegrityIndicator : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RepositoryIntegrityIndicator");
+		var __init = writer.BeginObjectInitializer("RepositoryIntegrityIndicator", false);
 		if (Details is not null)
 		{
 			__init.Property("Details");

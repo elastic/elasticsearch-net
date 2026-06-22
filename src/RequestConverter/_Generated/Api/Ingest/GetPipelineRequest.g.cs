@@ -27,7 +27,7 @@ public partial class GetPipelineRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetPipelineRequest");
+		var __init = writer.BeginObjectInitializer("GetPipelineRequest", false);
 		if (Id is not null)
 		{
 			__init.Property("Id");

@@ -27,7 +27,7 @@ public partial class Term : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Term");
+		var __init = writer.BeginObjectInitializer("Term", false);
 		if (DocFreq is not null)
 		{
 			__init.Property("DocFreq");

@@ -27,7 +27,7 @@ public partial class DataframeAnalysisFeatureProcessorNGramEncoding : RequestCon
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeAnalysisFeatureProcessorNGramEncoding");
+		var __init = writer.BeginObjectInitializer("DataframeAnalysisFeatureProcessorNGramEncoding", false);
 		if (Custom is not null)
 		{
 			__init.Property("Custom");

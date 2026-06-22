@@ -27,7 +27,7 @@ public partial class SpanishAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SpanishAnalyzer");
+		var __init = writer.BeginObjectInitializer("SpanishAnalyzer", true);
 		if (StemExclusion is not null)
 		{
 			__init.Property("StemExclusion");

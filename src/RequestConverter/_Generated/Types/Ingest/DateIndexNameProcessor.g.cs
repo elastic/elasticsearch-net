@@ -27,7 +27,7 @@ public partial class DateIndexNameProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DateIndexNameProcessor");
+		var __init = writer.BeginObjectInitializer("DateIndexNameProcessor", false);
 		if (DateFormats is not null)
 		{
 			__init.Property("DateFormats");

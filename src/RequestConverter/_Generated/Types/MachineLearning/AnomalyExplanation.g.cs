@@ -27,7 +27,7 @@ public partial class AnomalyExplanation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AnomalyExplanation");
+		var __init = writer.BeginObjectInitializer("AnomalyExplanation", false);
 		if (AnomalyCharacteristicsImpact is not null)
 		{
 			__init.Property("AnomalyCharacteristicsImpact");

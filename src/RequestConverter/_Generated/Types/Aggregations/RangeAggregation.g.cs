@@ -27,7 +27,7 @@ public partial class RangeAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RangeAggregation");
+		var __init = writer.BeginObjectInitializer("RangeAggregation", false);
 		if (Field is not null)
 		{
 			__init.Property("Field");

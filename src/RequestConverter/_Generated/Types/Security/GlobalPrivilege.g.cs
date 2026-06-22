@@ -27,7 +27,7 @@ public partial class GlobalPrivilege : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GlobalPrivilege");
+		var __init = writer.BeginObjectInitializer("GlobalPrivilege", false);
 		{
 			__init.Property("Application");
 			Application.FormatCode(writer);

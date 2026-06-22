@@ -27,7 +27,7 @@ public partial class SerializedClusterState : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SerializedClusterState");
+		var __init = writer.BeginObjectInitializer("SerializedClusterState", false);
 		if (Diffs is not null)
 		{
 			__init.Property("Diffs");

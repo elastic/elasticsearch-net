@@ -27,7 +27,7 @@ public partial class DeleteUserRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteUserRequest");
+		var __init = writer.BeginObjectInitializer("DeleteUserRequest", false);
 		{
 			__init.Property("Username");
 			Username.FormatCode(writer);

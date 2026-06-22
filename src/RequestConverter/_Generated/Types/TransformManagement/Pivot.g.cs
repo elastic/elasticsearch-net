@@ -27,18 +27,26 @@ public partial class Pivot : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Pivot");
+		var __init = writer.BeginObjectInitializer("Pivot", false);
 		if (Aggregations is not null)
 		{
 			__init.Property("Aggregations");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Aggregations.Aggregation");
+			writer.Write(">() ");
 			writer.WriteInlineList(Aggregations, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		if (GroupBy is not null)
 		{
 			__init.Property("GroupBy");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy");
+			writer.Write(">() ");
 			writer.WriteInlineList(GroupBy, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

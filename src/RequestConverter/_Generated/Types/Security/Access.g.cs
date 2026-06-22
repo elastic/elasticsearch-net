@@ -27,7 +27,7 @@ public partial class Access : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Access");
+		var __init = writer.BeginObjectInitializer("Access", false);
 		if (Replication is not null)
 		{
 			__init.Property("Replication");

@@ -27,7 +27,7 @@ public partial class GetAsyncSearchRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetAsyncSearchRequest");
+		var __init = writer.BeginObjectInitializer("GetAsyncSearchRequest", false);
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);

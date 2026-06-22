@@ -27,7 +27,7 @@ public partial class ClusterProcessOpenFileDescriptors : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterProcessOpenFileDescriptors");
+		var __init = writer.BeginObjectInitializer("ClusterProcessOpenFileDescriptors", false);
 		{
 			__init.Property("Avg");
 			writer.WriteValue(Avg);

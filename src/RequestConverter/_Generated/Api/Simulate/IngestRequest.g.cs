@@ -27,7 +27,7 @@ public partial class IngestRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IngestRequest");
+		var __init = writer.BeginObjectInitializer("IngestRequest", false);
 		if (Index is not null)
 		{
 			__init.Property("Index");
@@ -49,7 +49,11 @@ public partial class IngestRequest : RequestConverter.ICodeFormattable
 		if (ComponentTemplateSubstitutions is not null)
 		{
 			__init.Property("ComponentTemplateSubstitutions");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode");
+			writer.Write(">() ");
 			writer.WriteInlineList(ComponentTemplateSubstitutions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
@@ -61,7 +65,11 @@ public partial class IngestRequest : RequestConverter.ICodeFormattable
 		if (IndexTemplateSubstitutions is not null)
 		{
 			__init.Property("IndexTemplateSubstitutions");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate");
+			writer.Write(">() ");
 			writer.WriteInlineList(IndexTemplateSubstitutions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
@@ -74,7 +82,11 @@ public partial class IngestRequest : RequestConverter.ICodeFormattable
 		if (PipelineSubstitutions is not null)
 		{
 			__init.Property("PipelineSubstitutions");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Ingest.Pipeline");
+			writer.Write(">() ");
 			writer.WriteInlineList(PipelineSubstitutions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

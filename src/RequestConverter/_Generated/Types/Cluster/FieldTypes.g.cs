@@ -27,7 +27,7 @@ public partial class FieldTypes : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldTypes");
+		var __init = writer.BeginObjectInitializer("FieldTypes", false);
 		{
 			__init.Property("Count");
 			writer.WriteValue(Count);
@@ -70,21 +70,33 @@ public partial class FieldTypes : RequestConverter.ICodeFormattable
 		if (VectorElementTypeCount is not null)
 		{
 			__init.Property("VectorElementTypeCount");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("int");
+			writer.Write(">() ");
 			writer.WriteInlineList(VectorElementTypeCount, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		if (VectorIndexTypeCount is not null)
 		{
 			__init.Property("VectorIndexTypeCount");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("int");
+			writer.Write(">() ");
 			writer.WriteInlineList(VectorIndexTypeCount, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		if (VectorSimilarityTypeCount is not null)
 		{
 			__init.Property("VectorSimilarityTypeCount");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("int");
+			writer.Write(">() ");
 			writer.WriteInlineList(VectorSimilarityTypeCount, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

@@ -27,7 +27,7 @@ public partial class MlInferenceIngestProcessorCount : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MlInferenceIngestProcessorCount");
+		var __init = writer.BeginObjectInitializer("MlInferenceIngestProcessorCount", false);
 		{
 			__init.Property("Max");
 			writer.WriteValue(Max);

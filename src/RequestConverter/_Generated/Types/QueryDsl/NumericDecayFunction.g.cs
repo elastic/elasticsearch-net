@@ -27,7 +27,7 @@ public partial class NumericDecayFunction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NumericDecayFunction");
+		var __init = writer.BeginObjectInitializer("NumericDecayFunction", true);
 		{
 			__init.Property("Field");
 			Field.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class DeleteCalendarEventRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteCalendarEventRequest");
+		var __init = writer.BeginObjectInitializer("DeleteCalendarEventRequest", false);
 		{
 			__init.Property("CalendarId");
 			CalendarId.FormatCode(writer);

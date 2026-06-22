@@ -27,7 +27,7 @@ public partial class SpanWithinQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SpanWithinQuery");
+		var __init = writer.BeginObjectInitializer("SpanWithinQuery", false);
 		{
 			__init.Property("Big");
 			Big.FormatCode(writer);

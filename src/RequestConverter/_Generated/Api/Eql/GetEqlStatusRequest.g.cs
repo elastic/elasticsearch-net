@@ -27,7 +27,7 @@ public partial class GetEqlStatusRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetEqlStatusRequest");
+		var __init = writer.BeginObjectInitializer("GetEqlStatusRequest", false);
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);

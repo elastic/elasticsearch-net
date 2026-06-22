@@ -27,7 +27,7 @@ public partial class Ccr : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Ccr");
+		var __init = writer.BeginObjectInitializer("Ccr", false);
 		{
 			__init.Property("AutoFollowPatternsCount");
 			writer.WriteValue(AutoFollowPatternsCount);

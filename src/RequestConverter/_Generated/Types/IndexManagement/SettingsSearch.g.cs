@@ -27,7 +27,7 @@ public partial class SettingsSearch : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SettingsSearch");
+		var __init = writer.BeginObjectInitializer("SettingsSearch", false);
 		if (Idle is not null)
 		{
 			__init.Property("Idle");

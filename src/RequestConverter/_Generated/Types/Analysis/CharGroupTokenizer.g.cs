@@ -27,7 +27,7 @@ public partial class CharGroupTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CharGroupTokenizer");
+		var __init = writer.BeginObjectInitializer("CharGroupTokenizer", true);
 		if (MaxTokenLength is not null)
 		{
 			__init.Property("MaxTokenLength");

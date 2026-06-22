@@ -27,7 +27,7 @@ public partial class ResolveClusterRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ResolveClusterRequest");
+		var __init = writer.BeginObjectInitializer("ResolveClusterRequest", false);
 		if (Name is not null)
 		{
 			__init.Property("Name");

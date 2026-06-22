@@ -27,7 +27,7 @@ public partial class Client : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Client");
+		var __init = writer.BeginObjectInitializer("Client", false);
 		if (Agent is not null)
 		{
 			__init.Property("Agent");

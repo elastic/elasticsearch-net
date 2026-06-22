@@ -27,7 +27,7 @@ public partial class GeohexGridAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeohexGridAggregation");
+		var __init = writer.BeginObjectInitializer("GeohexGridAggregation", false);
 		if (Bounds is not null)
 		{
 			__init.Property("Bounds");

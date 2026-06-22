@@ -27,7 +27,7 @@ public partial class InferenceProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InferenceProcessor");
+		var __init = writer.BeginObjectInitializer("InferenceProcessor", false);
 		if (Description is not null)
 		{
 			__init.Property("Description");
@@ -37,7 +37,11 @@ public partial class InferenceProcessor : RequestConverter.ICodeFormattable
 		if (FieldMap is not null)
 		{
 			__init.Property("FieldMap");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("Elastic.Clients.Elasticsearch.Field");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(FieldMap, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

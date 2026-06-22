@@ -27,7 +27,7 @@ public partial class EqlFeaturesJoin : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EqlFeaturesJoin");
+		var __init = writer.BeginObjectInitializer("EqlFeaturesJoin", false);
 		{
 			__init.Property("JoinQueriesFiveOrMore");
 			writer.WriteValue(JoinQueriesFiveOrMore);

@@ -27,7 +27,7 @@ public partial class AllField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AllField");
+		var __init = writer.BeginObjectInitializer("AllField", false);
 		{
 			__init.Property("Analyzer");
 			writer.WriteString(Analyzer);

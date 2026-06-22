@@ -27,7 +27,7 @@ public partial class PutMistralRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutMistralRequest");
+		var __init = writer.BeginObjectInitializer("PutMistralRequest", false);
 		{
 			__init.Property("MistralInferenceId");
 			MistralInferenceId.FormatCode(writer);

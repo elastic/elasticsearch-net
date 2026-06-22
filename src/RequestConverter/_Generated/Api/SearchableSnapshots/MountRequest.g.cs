@@ -27,7 +27,7 @@ public partial class MountRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MountRequest");
+		var __init = writer.BeginObjectInitializer("MountRequest", false);
 		{
 			__init.Property("Repository");
 			Repository.FormatCode(writer);
@@ -70,7 +70,11 @@ public partial class MountRequest : RequestConverter.ICodeFormattable
 		if (IndexSettings is not null)
 		{
 			__init.Property("IndexSettings");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(IndexSettings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

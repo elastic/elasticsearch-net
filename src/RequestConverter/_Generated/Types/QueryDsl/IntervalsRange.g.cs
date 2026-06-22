@@ -27,7 +27,7 @@ public partial class IntervalsRange : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IntervalsRange");
+		var __init = writer.BeginObjectInitializer("IntervalsRange", false);
 		if (Analyzer is not null)
 		{
 			__init.Property("Analyzer");

@@ -27,7 +27,7 @@ public partial class Profile : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Profile");
+		var __init = writer.BeginObjectInitializer("Profile", false);
 		if (Request is not null)
 		{
 			__init.Property("Request");

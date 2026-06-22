@@ -27,7 +27,7 @@ public partial class ExplainDataLifecycleRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExplainDataLifecycleRequest");
+		var __init = writer.BeginObjectInitializer("ExplainDataLifecycleRequest", false);
 		{
 			__init.Property("Indices");
 			Indices.FormatCode(writer);

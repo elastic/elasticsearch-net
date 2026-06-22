@@ -27,7 +27,7 @@ public partial class RangeBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RangeBucket");
+		var __init = writer.BeginObjectInitializer("RangeBucket", false);
 		if (Aggregations is not null)
 		{
 			__init.Property("Aggregations");

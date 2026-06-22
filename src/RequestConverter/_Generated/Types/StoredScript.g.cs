@@ -27,7 +27,7 @@ public partial class StoredScript : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StoredScript");
+		var __init = writer.BeginObjectInitializer("StoredScript", false);
 		{
 			__init.Property("Language");
 			Language.FormatCode(writer);
@@ -36,7 +36,11 @@ public partial class StoredScript : RequestConverter.ICodeFormattable
 		if (Options is not null)
 		{
 			__init.Property("Options");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("string");
+			writer.Write(">() ");
 			writer.WriteInlineList(Options, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

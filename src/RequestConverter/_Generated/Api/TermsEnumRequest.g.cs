@@ -27,7 +27,7 @@ public partial class TermsEnumRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TermsEnumRequest");
+		var __init = writer.BeginObjectInitializer("TermsEnumRequest", false);
 		{
 			__init.Property("Indices");
 			Indices.FormatCode(writer);

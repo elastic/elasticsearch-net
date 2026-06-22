@@ -27,7 +27,7 @@ public partial class TrimProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrimProcessor");
+		var __init = writer.BeginObjectInitializer("TrimProcessor", false);
 		if (Description is not null)
 		{
 			__init.Property("Description");

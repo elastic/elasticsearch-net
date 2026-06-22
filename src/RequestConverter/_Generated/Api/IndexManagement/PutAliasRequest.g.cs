@@ -27,7 +27,7 @@ public partial class PutAliasRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutAliasRequest");
+		var __init = writer.BeginObjectInitializer("PutAliasRequest", false);
 		{
 			__init.Property("Indices");
 			Indices.FormatCode(writer);

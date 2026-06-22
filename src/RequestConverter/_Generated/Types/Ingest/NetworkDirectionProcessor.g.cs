@@ -27,7 +27,7 @@ public partial class NetworkDirectionProcessor : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NetworkDirectionProcessor");
+		var __init = writer.BeginObjectInitializer("NetworkDirectionProcessor", false);
 		if (Description is not null)
 		{
 			__init.Property("Description");

@@ -27,7 +27,7 @@ public partial class EmptyObject : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EmptyObject");
+		var __init = writer.BeginObjectInitializer("EmptyObject", false);
 		__init.Dispose();
 	}
 }

@@ -27,7 +27,7 @@ public partial class GetSourceRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetSourceRequest");
+		var __init = writer.BeginObjectInitializer("GetSourceRequest", false);
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);

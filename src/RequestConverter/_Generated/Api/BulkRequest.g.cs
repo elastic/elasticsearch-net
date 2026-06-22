@@ -27,7 +27,7 @@ public partial class BulkRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BulkRequest");
+		var __init = writer.BeginObjectInitializer("BulkRequest", false);
 		if (Index is not null)
 		{
 			__init.Property("Index");

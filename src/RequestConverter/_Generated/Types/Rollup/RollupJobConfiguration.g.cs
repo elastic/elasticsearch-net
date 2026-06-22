@@ -27,7 +27,7 @@ public partial class RollupJobConfiguration : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RollupJobConfiguration");
+		var __init = writer.BeginObjectInitializer("RollupJobConfiguration", false);
 		{
 			__init.Property("Cron");
 			writer.WriteString(Cron);

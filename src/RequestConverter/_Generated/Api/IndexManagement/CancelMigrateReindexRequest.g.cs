@@ -27,7 +27,7 @@ public partial class CancelMigrateReindexRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CancelMigrateReindexRequest");
+		var __init = writer.BeginObjectInitializer("CancelMigrateReindexRequest", false);
 		{
 			__init.Property("Indices");
 			Indices.FormatCode(writer);

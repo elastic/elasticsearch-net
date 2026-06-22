@@ -27,7 +27,7 @@ public partial class PutElasticsearchRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutElasticsearchRequest");
+		var __init = writer.BeginObjectInitializer("PutElasticsearchRequest", false);
 		{
 			__init.Property("ElasticsearchInferenceId");
 			ElasticsearchInferenceId.FormatCode(writer);

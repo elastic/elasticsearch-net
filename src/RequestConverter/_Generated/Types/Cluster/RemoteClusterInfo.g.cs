@@ -27,7 +27,7 @@ public partial class RemoteClusterInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RemoteClusterInfo");
+		var __init = writer.BeginObjectInitializer("RemoteClusterInfo", false);
 		{
 			__init.Property("ClusterUuid");
 			writer.WriteString(ClusterUuid);

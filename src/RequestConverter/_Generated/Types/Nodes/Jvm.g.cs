@@ -27,11 +27,15 @@ public partial class Jvm : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Jvm");
+		var __init = writer.BeginObjectInitializer("Jvm", false);
 		if (BufferPools is not null)
 		{
 			__init.Property("BufferPools");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Nodes.NodeBufferPool");
+			writer.Write(">() ");
 			writer.WriteInlineList(BufferPools, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

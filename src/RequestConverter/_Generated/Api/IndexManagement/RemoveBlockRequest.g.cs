@@ -27,7 +27,7 @@ public partial class RemoveBlockRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RemoveBlockRequest");
+		var __init = writer.BeginObjectInitializer("RemoveBlockRequest", false);
 		{
 			__init.Property("Block");
 			Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptionsCodeFormatter.FormatCode(Block, writer);

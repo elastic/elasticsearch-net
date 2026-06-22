@@ -27,7 +27,7 @@ public partial class GetComponentTemplateRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetComponentTemplateRequest");
+		var __init = writer.BeginObjectInitializer("GetComponentTemplateRequest", false);
 		if (Name is not null)
 		{
 			__init.Property("Name");

@@ -27,7 +27,7 @@ public partial class SearchableSnapshotAction : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SearchableSnapshotAction");
+		var __init = writer.BeginObjectInitializer("SearchableSnapshotAction", false);
 		if (ForceMergeIndex is not null)
 		{
 			__init.Property("ForceMergeIndex");

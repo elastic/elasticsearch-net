@@ -27,7 +27,7 @@ public partial class PutContextualaiRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutContextualaiRequest");
+		var __init = writer.BeginObjectInitializer("PutContextualaiRequest", false);
 		{
 			__init.Property("ContextualaiInferenceId");
 			ContextualaiInferenceId.FormatCode(writer);

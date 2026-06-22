@@ -27,7 +27,7 @@ public partial class SpanNotQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SpanNotQuery");
+		var __init = writer.BeginObjectInitializer("SpanNotQuery", false);
 		if (Boost is not null)
 		{
 			__init.Property("Boost");

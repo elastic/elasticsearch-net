@@ -27,7 +27,7 @@ public partial class NormalizeAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NormalizeAggregation");
+		var __init = writer.BeginObjectInitializer("NormalizeAggregation", false);
 		if (BucketsPath is not null)
 		{
 			__init.Property("BucketsPath");

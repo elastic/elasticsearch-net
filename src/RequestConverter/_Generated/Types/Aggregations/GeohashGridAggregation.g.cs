@@ -27,7 +27,7 @@ public partial class GeohashGridAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeohashGridAggregation");
+		var __init = writer.BeginObjectInitializer("GeohashGridAggregation", false);
 		if (Bounds is not null)
 		{
 			__init.Property("Bounds");

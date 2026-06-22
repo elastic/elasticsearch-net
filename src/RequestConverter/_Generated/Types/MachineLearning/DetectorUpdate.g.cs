@@ -27,7 +27,7 @@ public partial class DetectorUpdate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DetectorUpdate");
+		var __init = writer.BeginObjectInitializer("DetectorUpdate", false);
 		if (CustomRules is not null)
 		{
 			__init.Property("CustomRules");

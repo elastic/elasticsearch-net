@@ -27,7 +27,7 @@ public partial class CartesianCentroidAggregation : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CartesianCentroidAggregation");
+		var __init = writer.BeginObjectInitializer("CartesianCentroidAggregation", false);
 		if (Field is not null)
 		{
 			__init.Property("Field");

@@ -27,7 +27,7 @@ public partial class GeoIpStatsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoIpStatsRequest");
+		var __init = writer.BeginObjectInitializer("GeoIpStatsRequest", false);
 		__init.Dispose();
 	}
 }

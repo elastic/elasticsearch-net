@@ -27,7 +27,7 @@ public partial class PutJobRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutJobRequest");
+		var __init = writer.BeginObjectInitializer("PutJobRequest", false);
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);
@@ -46,7 +46,11 @@ public partial class PutJobRequest : RequestConverter.ICodeFormattable
 		if (Headers is not null)
 		{
 			__init.Property("Headers");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("System.Collections.Generic.ICollection<string>");
+			writer.Write(">() ");
 			writer.WriteInlineList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteString(item); }); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

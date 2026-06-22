@@ -27,7 +27,7 @@ public partial class UpdateUserProfileDataRequest : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UpdateUserProfileDataRequest");
+		var __init = writer.BeginObjectInitializer("UpdateUserProfileDataRequest", false);
 		{
 			__init.Property("Uid");
 			writer.WriteString(Uid);
@@ -56,14 +56,22 @@ public partial class UpdateUserProfileDataRequest : RequestConverter.ICodeFormat
 		if (Data is not null)
 		{
 			__init.Property("Data");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Data, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		if (Labels is not null)
 		{
 			__init.Property("Labels");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Labels, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

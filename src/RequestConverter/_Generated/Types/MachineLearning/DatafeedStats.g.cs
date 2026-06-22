@@ -27,7 +27,7 @@ public partial class DatafeedStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DatafeedStats");
+		var __init = writer.BeginObjectInitializer("DatafeedStats", false);
 		if (AssignmentExplanation is not null)
 		{
 			__init.Property("AssignmentExplanation");

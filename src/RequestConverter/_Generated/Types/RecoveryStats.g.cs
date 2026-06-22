@@ -27,7 +27,7 @@ public partial class RecoveryStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RecoveryStats");
+		var __init = writer.BeginObjectInitializer("RecoveryStats", false);
 		{
 			__init.Property("CurrentAsSource");
 			writer.WriteValue(CurrentAsSource);

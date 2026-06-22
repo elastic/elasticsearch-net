@@ -27,11 +27,15 @@ public partial class GetResult<TDocument> : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetResult<TDocument>");
+		var __init = writer.BeginObjectInitializer("GetResult<TDocument>", true);
 		if (Fields is not null)
 		{
 			__init.Property("Fields");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
@@ -76,7 +80,7 @@ public partial class GetResult<TDocument> : RequestConverter.ICodeFormattable
 			writer.Write("L");
 		}
 
-		if (Source is not null)
+		if (RequestConverter.CodeWriter.ShouldFormat(Source))
 		{
 			__init.Property("Source");
 			writer.WriteValue(Source);

@@ -27,7 +27,7 @@ public partial class SortProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SortProcessor");
+		var __init = writer.BeginObjectInitializer("SortProcessor", false);
 		if (Description is not null)
 		{
 			__init.Property("Description");

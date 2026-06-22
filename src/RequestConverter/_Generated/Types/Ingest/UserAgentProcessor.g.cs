@@ -27,7 +27,7 @@ public partial class UserAgentProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UserAgentProcessor");
+		var __init = writer.BeginObjectInitializer("UserAgentProcessor", false);
 		if (Description is not null)
 		{
 			__init.Property("Description");

@@ -27,7 +27,7 @@ public partial class DeleteViewRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteViewRequest");
+		var __init = writer.BeginObjectInitializer("DeleteViewRequest", false);
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

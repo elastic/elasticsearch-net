@@ -27,7 +27,7 @@ public partial class IrishAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IrishAnalyzer");
+		var __init = writer.BeginObjectInitializer("IrishAnalyzer", true);
 		if (StemExclusion is not null)
 		{
 			__init.Property("StemExclusion");

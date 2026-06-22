@@ -27,7 +27,7 @@ public partial class GalicianAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GalicianAnalyzer");
+		var __init = writer.BeginObjectInitializer("GalicianAnalyzer", true);
 		if (StemExclusion is not null)
 		{
 			__init.Property("StemExclusion");

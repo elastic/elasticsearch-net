@@ -27,7 +27,7 @@ public partial class TypeMapping : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TypeMapping");
+		var __init = writer.BeginObjectInitializer("TypeMapping", false);
 		if (AllField is not null)
 		{
 			__init.Property("AllField");
@@ -85,7 +85,11 @@ public partial class TypeMapping : RequestConverter.ICodeFormattable
 		if (Meta is not null)
 		{
 			__init.Property("Meta");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
@@ -110,7 +114,11 @@ public partial class TypeMapping : RequestConverter.ICodeFormattable
 		if (Runtime is not null)
 		{
 			__init.Property("Runtime");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Mapping.RuntimeField");
+			writer.Write(">() ");
 			writer.WriteInlineList(Runtime, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

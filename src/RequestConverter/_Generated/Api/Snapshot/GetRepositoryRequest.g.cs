@@ -27,7 +27,7 @@ public partial class GetRepositoryRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetRepositoryRequest");
+		var __init = writer.BeginObjectInitializer("GetRepositoryRequest", false);
 		if (Name is not null)
 		{
 			__init.Property("Name");

@@ -27,7 +27,7 @@ public partial class NodeInfoXpackSecurity : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoXpackSecurity");
+		var __init = writer.BeginObjectInitializer("NodeInfoXpackSecurity", false);
 		if (Authc is not null)
 		{
 			__init.Property("Authc");

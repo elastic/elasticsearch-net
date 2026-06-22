@@ -27,7 +27,7 @@ public partial class Groupings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Groupings");
+		var __init = writer.BeginObjectInitializer("Groupings", false);
 		if (DateHistogram is not null)
 		{
 			__init.Property("DateHistogram");

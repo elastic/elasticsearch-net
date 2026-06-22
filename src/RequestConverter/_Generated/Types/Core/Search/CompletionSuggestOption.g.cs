@@ -27,7 +27,7 @@ public partial class CompletionSuggestOption<TDocument> : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CompletionSuggestOption<TDocument>");
+		var __init = writer.BeginObjectInitializer("CompletionSuggestOption<TDocument>", false);
 		if (CollateMatch is not null)
 		{
 			__init.Property("CollateMatch");
@@ -37,14 +37,22 @@ public partial class CompletionSuggestOption<TDocument> : RequestConverter.ICode
 		if (Contexts is not null)
 		{
 			__init.Property("Contexts");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Context>");
+			writer.Write(">() ");
 			writer.WriteInlineList(Contexts, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { item.FormatCode(w); }); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		if (Fields is not null)
 		{
 			__init.Property("Fields");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
@@ -80,7 +88,7 @@ public partial class CompletionSuggestOption<TDocument> : RequestConverter.ICode
 			writer.Write("d");
 		}
 
-		if (Source is not null)
+		if (RequestConverter.CodeWriter.ShouldFormat(Source))
 		{
 			__init.Property("Source");
 			writer.WriteValue(Source);

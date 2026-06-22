@@ -27,7 +27,7 @@ public partial class GeoCentroidAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoCentroidAggregation");
+		var __init = writer.BeginObjectInitializer("GeoCentroidAggregation", false);
 		if (Count is not null)
 		{
 			__init.Property("Count");

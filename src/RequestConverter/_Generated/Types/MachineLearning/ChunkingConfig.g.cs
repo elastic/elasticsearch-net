@@ -27,7 +27,7 @@ public partial class ChunkingConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ChunkingConfig");
+		var __init = writer.BeginObjectInitializer("ChunkingConfig", false);
 		{
 			__init.Property("Mode");
 			Elastic.Clients.Elasticsearch.MachineLearning.ChunkingModeCodeFormatter.FormatCode(Mode, writer);

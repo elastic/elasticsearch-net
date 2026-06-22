@@ -27,7 +27,7 @@ public partial class Defaults : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Defaults");
+		var __init = writer.BeginObjectInitializer("Defaults", false);
 		{
 			__init.Property("AnomalyDetectors");
 			AnomalyDetectors.FormatCode(writer);

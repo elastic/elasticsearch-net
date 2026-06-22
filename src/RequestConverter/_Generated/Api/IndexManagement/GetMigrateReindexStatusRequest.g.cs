@@ -27,7 +27,7 @@ public partial class GetMigrateReindexStatusRequest : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetMigrateReindexStatusRequest");
+		var __init = writer.BeginObjectInitializer("GetMigrateReindexStatusRequest", false);
 		{
 			__init.Property("Indices");
 			Indices.FormatCode(writer);

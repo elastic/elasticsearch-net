@@ -27,7 +27,7 @@ public partial class AmazonSageMakerTaskSettings : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AmazonSageMakerTaskSettings");
+		var __init = writer.BeginObjectInitializer("AmazonSageMakerTaskSettings", false);
 		if (CustomAttributes is not null)
 		{
 			__init.Property("CustomAttributes");

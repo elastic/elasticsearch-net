@@ -27,7 +27,7 @@ public partial class StopJobRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StopJobRequest");
+		var __init = writer.BeginObjectInitializer("StopJobRequest", false);
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);

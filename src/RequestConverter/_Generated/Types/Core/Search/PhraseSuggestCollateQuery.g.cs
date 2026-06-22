@@ -27,7 +27,7 @@ public partial class PhraseSuggestCollateQuery : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PhraseSuggestCollateQuery");
+		var __init = writer.BeginObjectInitializer("PhraseSuggestCollateQuery", false);
 		if (Id is not null)
 		{
 			__init.Property("Id");

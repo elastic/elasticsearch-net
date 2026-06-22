@@ -27,7 +27,7 @@ public partial class SettingsSimilarityBm25 : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SettingsSimilarityBm25");
+		var __init = writer.BeginObjectInitializer("SettingsSimilarityBm25", true);
 		if (B is not null)
 		{
 			__init.Property("B");

@@ -27,7 +27,7 @@ public partial class StartDataFrameAnalyticsRequest : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StartDataFrameAnalyticsRequest");
+		var __init = writer.BeginObjectInitializer("StartDataFrameAnalyticsRequest", false);
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);

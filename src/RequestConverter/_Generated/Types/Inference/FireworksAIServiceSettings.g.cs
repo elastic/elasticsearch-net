@@ -27,7 +27,7 @@ public partial class FireworksAIServiceSettings : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FireworksAIServiceSettings");
+		var __init = writer.BeginObjectInitializer("FireworksAIServiceSettings", false);
 		{
 			__init.Property("ApiKey");
 			writer.WriteString(ApiKey);

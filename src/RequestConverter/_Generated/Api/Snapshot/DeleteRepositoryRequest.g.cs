@@ -27,7 +27,7 @@ public partial class DeleteRepositoryRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteRepositoryRequest");
+		var __init = writer.BeginObjectInitializer("DeleteRepositoryRequest", false);
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

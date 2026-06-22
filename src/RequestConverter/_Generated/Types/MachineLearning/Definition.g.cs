@@ -27,7 +27,7 @@ public partial class Definition : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Definition");
+		var __init = writer.BeginObjectInitializer("Definition", false);
 		if (Preprocessors is not null)
 		{
 			__init.Property("Preprocessors");

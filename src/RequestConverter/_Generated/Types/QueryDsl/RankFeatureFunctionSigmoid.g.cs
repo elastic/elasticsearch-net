@@ -27,7 +27,7 @@ public partial class RankFeatureFunctionSigmoid : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RankFeatureFunctionSigmoid");
+		var __init = writer.BeginObjectInitializer("RankFeatureFunctionSigmoid", false);
 		{
 			__init.Property("Exponent");
 			writer.WriteValue(Exponent);

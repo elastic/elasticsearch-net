@@ -27,7 +27,7 @@ public partial class ReloadSearchAnalyzersRequest : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ReloadSearchAnalyzersRequest");
+		var __init = writer.BeginObjectInitializer("ReloadSearchAnalyzersRequest", false);
 		{
 			__init.Property("Indices");
 			Indices.FormatCode(writer);

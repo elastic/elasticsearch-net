@@ -27,7 +27,7 @@ public partial class WeightedAverageValue : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("WeightedAverageValue");
+		var __init = writer.BeginObjectInitializer("WeightedAverageValue", false);
 		if (Field is not null)
 		{
 			__init.Property("Field");

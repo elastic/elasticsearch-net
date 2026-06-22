@@ -27,7 +27,7 @@ public partial class CloneSnapshotRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CloneSnapshotRequest");
+		var __init = writer.BeginObjectInitializer("CloneSnapshotRequest", false);
 		{
 			__init.Property("Repository");
 			Repository.FormatCode(writer);

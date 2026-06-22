@@ -27,7 +27,7 @@ public partial class ThreadCount : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ThreadCount");
+		var __init = writer.BeginObjectInitializer("ThreadCount", false);
 		if (Active is not null)
 		{
 			__init.Property("Active");

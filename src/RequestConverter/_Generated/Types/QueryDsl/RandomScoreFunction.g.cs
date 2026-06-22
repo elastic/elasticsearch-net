@@ -27,7 +27,7 @@ public partial class RandomScoreFunction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RandomScoreFunction");
+		var __init = writer.BeginObjectInitializer("RandomScoreFunction", false);
 		if (Field is not null)
 		{
 			__init.Property("Field");

@@ -27,7 +27,7 @@ public partial class KeepTypesTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("KeepTypesTokenFilter");
+		var __init = writer.BeginObjectInitializer("KeepTypesTokenFilter", true);
 		if (Mode is not null)
 		{
 			__init.Property("Mode");

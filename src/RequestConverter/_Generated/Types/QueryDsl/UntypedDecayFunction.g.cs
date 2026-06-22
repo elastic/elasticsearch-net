@@ -27,7 +27,7 @@ public partial class UntypedDecayFunction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UntypedDecayFunction");
+		var __init = writer.BeginObjectInitializer("UntypedDecayFunction", true);
 		{
 			__init.Property("Field");
 			Field.FormatCode(writer);

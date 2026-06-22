@@ -27,7 +27,7 @@ public partial class ExistsIndexTemplateRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExistsIndexTemplateRequest");
+		var __init = writer.BeginObjectInitializer("ExistsIndexTemplateRequest", false);
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

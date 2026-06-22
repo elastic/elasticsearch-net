@@ -27,7 +27,7 @@ public partial class ShardsAvailabilityIndicatorDetails : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardsAvailabilityIndicatorDetails");
+		var __init = writer.BeginObjectInitializer("ShardsAvailabilityIndicatorDetails", false);
 		{
 			__init.Property("CreatingPrimaries");
 			writer.WriteValue(CreatingPrimaries);

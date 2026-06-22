@@ -27,7 +27,7 @@ public partial class ShardStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardStats");
+		var __init = writer.BeginObjectInitializer("ShardStats", false);
 		{
 			__init.Property("BytesRead");
 			writer.WriteValue(BytesRead);

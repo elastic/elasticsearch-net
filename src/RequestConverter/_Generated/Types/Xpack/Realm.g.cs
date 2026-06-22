@@ -27,7 +27,7 @@ public partial class Realm : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Realm");
+		var __init = writer.BeginObjectInitializer("Realm", false);
 		{
 			__init.Property("Available");
 			writer.WriteValue(Available);

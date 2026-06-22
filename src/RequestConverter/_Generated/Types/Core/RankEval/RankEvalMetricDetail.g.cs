@@ -27,7 +27,7 @@ public partial class RankEvalMetricDetail : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RankEvalMetricDetail");
+		var __init = writer.BeginObjectInitializer("RankEvalMetricDetail", false);
 		{
 			__init.Property("Hits");
 			writer.WriteInlineList(Hits, (w, item) => { item.FormatCode(w); });
@@ -35,8 +35,12 @@ public partial class RankEvalMetricDetail : RequestConverter.ICodeFormattable
 
 		{
 			__init.Property("MetricDetails");
-			writer.Write("new() ");
-			writer.WriteInlineList(MetricDetails, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.Write("new() "); w.WriteInlineList(kvp.Value, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", "); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("System.Collections.Generic.IReadOnlyDictionary<string,object>");
+			writer.Write(">() ");
+			writer.WriteInlineList(MetricDetails, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.Write("new global::System.Collections.Generic.Dictionary<"); w.Write("string"); w.Write(", "); w.Write("object"); w.Write(">() "); w.WriteInlineList(kvp.Value, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", "); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{

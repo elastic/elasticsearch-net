@@ -27,7 +27,7 @@ public partial class DateRangeQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DateRangeQuery");
+		var __init = writer.BeginObjectInitializer("DateRangeQuery", true);
 		if (Boost is not null)
 		{
 			__init.Property("Boost");

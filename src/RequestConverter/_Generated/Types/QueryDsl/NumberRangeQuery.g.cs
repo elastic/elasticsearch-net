@@ -27,7 +27,7 @@ public partial class NumberRangeQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NumberRangeQuery");
+		var __init = writer.BeginObjectInitializer("NumberRangeQuery", true);
 		if (Boost is not null)
 		{
 			__init.Property("Boost");

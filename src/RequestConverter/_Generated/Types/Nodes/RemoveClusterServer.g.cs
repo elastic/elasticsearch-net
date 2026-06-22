@@ -27,7 +27,7 @@ public partial class RemoveClusterServer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RemoveClusterServer");
+		var __init = writer.BeginObjectInitializer("RemoveClusterServer", false);
 		{
 			__init.Property("BoundAddress");
 			writer.WriteInlineList(BoundAddress, (w, item) => { w.WriteString(item); });

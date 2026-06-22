@@ -27,7 +27,7 @@ public partial class RescorerRetriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RescorerRetriever");
+		var __init = writer.BeginObjectInitializer("RescorerRetriever", false);
 		if (Filter is not null)
 		{
 			__init.Property("Filter");

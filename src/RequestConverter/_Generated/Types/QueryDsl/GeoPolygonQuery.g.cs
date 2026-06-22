@@ -27,7 +27,7 @@ public partial class GeoPolygonQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoPolygonQuery");
+		var __init = writer.BeginObjectInitializer("GeoPolygonQuery", false);
 		if (Boost is not null)
 		{
 			__init.Property("Boost");

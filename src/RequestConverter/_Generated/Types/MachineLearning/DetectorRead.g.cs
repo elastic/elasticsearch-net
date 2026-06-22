@@ -27,7 +27,7 @@ public partial class DetectorRead : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DetectorRead");
+		var __init = writer.BeginObjectInitializer("DetectorRead", false);
 		if (ByFieldName is not null)
 		{
 			__init.Property("ByFieldName");

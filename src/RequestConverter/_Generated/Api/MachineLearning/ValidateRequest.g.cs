@@ -27,7 +27,7 @@ public partial class ValidateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ValidateRequest");
+		var __init = writer.BeginObjectInitializer("ValidateRequest", false);
 		if (AnalysisConfig is not null)
 		{
 			__init.Property("AnalysisConfig");

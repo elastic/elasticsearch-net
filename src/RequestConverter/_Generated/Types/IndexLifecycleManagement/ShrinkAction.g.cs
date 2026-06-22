@@ -27,7 +27,7 @@ public partial class ShrinkAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShrinkAction");
+		var __init = writer.BeginObjectInitializer("ShrinkAction", false);
 		if (AllowWriteAfterShrink is not null)
 		{
 			__init.Property("AllowWriteAfterShrink");

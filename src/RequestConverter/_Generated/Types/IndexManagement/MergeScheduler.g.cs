@@ -27,7 +27,7 @@ public partial class MergeScheduler : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MergeScheduler");
+		var __init = writer.BeginObjectInitializer("MergeScheduler", false);
 		if (MaxMergeCount is not null)
 		{
 			__init.Property("MaxMergeCount");

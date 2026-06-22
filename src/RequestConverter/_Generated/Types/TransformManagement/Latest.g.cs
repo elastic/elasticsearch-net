@@ -27,7 +27,7 @@ public partial class Latest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Latest");
+		var __init = writer.BeginObjectInitializer("Latest", false);
 		{
 			__init.Property("Sort");
 			Sort.FormatCode(writer);

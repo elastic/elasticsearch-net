@@ -27,7 +27,7 @@ public partial class ParentAggregate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ParentAggregate");
+		var __init = writer.BeginObjectInitializer("ParentAggregate", true);
 		if (Aggregations is not null)
 		{
 			__init.Property("Aggregations");
@@ -43,7 +43,11 @@ public partial class ParentAggregate : RequestConverter.ICodeFormattable
 		if (Meta is not null)
 		{
 			__init.Property("Meta");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

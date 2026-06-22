@@ -27,7 +27,7 @@ public partial class SuggestUserProfilesRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SuggestUserProfilesRequest");
+		var __init = writer.BeginObjectInitializer("SuggestUserProfilesRequest", false);
 		if (Data is not null)
 		{
 			__init.Property("Data");

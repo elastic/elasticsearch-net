@@ -27,7 +27,7 @@ public partial class RecoveryStatus : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RecoveryStatus");
+		var __init = writer.BeginObjectInitializer("RecoveryStatus", false);
 		{
 			__init.Property("Shards");
 			writer.WriteInlineList(Shards, (w, item) => { item.FormatCode(w); });

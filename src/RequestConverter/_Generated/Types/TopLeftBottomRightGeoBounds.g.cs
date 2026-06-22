@@ -27,7 +27,7 @@ public partial class TopLeftBottomRightGeoBounds : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TopLeftBottomRightGeoBounds");
+		var __init = writer.BeginObjectInitializer("TopLeftBottomRightGeoBounds", true);
 		{
 			__init.Property("BottomRight");
 			BottomRight.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class RandomSamplerAggregation : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RandomSamplerAggregation");
+		var __init = writer.BeginObjectInitializer("RandomSamplerAggregation", false);
 		{
 			__init.Property("Probability");
 			writer.WriteValue(Probability);

@@ -27,7 +27,7 @@ public partial class RuntimeFieldTypes : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RuntimeFieldTypes");
+		var __init = writer.BeginObjectInitializer("RuntimeFieldTypes", false);
 		{
 			__init.Property("CharsMax");
 			writer.WriteValue(CharsMax);

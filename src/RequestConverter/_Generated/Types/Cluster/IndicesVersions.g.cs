@@ -27,7 +27,7 @@ public partial class IndicesVersions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndicesVersions");
+		var __init = writer.BeginObjectInitializer("IndicesVersions", false);
 		{
 			__init.Property("IndexCount");
 			writer.WriteValue(IndexCount);

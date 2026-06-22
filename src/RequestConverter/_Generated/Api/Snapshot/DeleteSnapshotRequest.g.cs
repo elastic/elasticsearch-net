@@ -27,7 +27,7 @@ public partial class DeleteSnapshotRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteSnapshotRequest");
+		var __init = writer.BeginObjectInitializer("DeleteSnapshotRequest", false);
 		{
 			__init.Property("Repository");
 			Repository.FormatCode(writer);

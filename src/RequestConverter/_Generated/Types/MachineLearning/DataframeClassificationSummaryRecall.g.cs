@@ -27,7 +27,7 @@ public partial class DataframeClassificationSummaryRecall : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeClassificationSummaryRecall");
+		var __init = writer.BeginObjectInitializer("DataframeClassificationSummaryRecall", false);
 		{
 			__init.Property("AvgRecall");
 			writer.WriteValue(AvgRecall);

@@ -27,7 +27,7 @@ public partial class ExecutingPolicy : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExecutingPolicy");
+		var __init = writer.BeginObjectInitializer("ExecutingPolicy", false);
 		{
 			__init.Property("Name");
 			writer.WriteString(Name);

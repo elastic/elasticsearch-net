@@ -27,7 +27,7 @@ public partial class CloseIndexResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CloseIndexResult");
+		var __init = writer.BeginObjectInitializer("CloseIndexResult", false);
 		{
 			__init.Property("Closed");
 			writer.WriteValue(Closed);
@@ -36,7 +36,11 @@ public partial class CloseIndexResult : RequestConverter.ICodeFormattable
 		if (Shards is not null)
 		{
 			__init.Property("Shards");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.IndexManagement.CloseShardResult");
+			writer.Write(">() ");
 			writer.WriteInlineList(Shards, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

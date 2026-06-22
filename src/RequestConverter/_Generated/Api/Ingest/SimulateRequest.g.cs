@@ -27,7 +27,7 @@ public partial class SimulateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SimulateRequest");
+		var __init = writer.BeginObjectInitializer("SimulateRequest", false);
 		if (Id is not null)
 		{
 			__init.Property("Id");

@@ -27,7 +27,7 @@ public partial class Pool : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Pool");
+		var __init = writer.BeginObjectInitializer("Pool", false);
 		if (MaxInBytes is not null)
 		{
 			__init.Property("MaxInBytes");

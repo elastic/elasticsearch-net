@@ -27,7 +27,7 @@ public partial class FieldCollapse : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldCollapse");
+		var __init = writer.BeginObjectInitializer("FieldCollapse", false);
 		if (Collapse is not null)
 		{
 			__init.Property("Collapse");

@@ -27,7 +27,7 @@ public partial class FieldSummary : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldSummary");
+		var __init = writer.BeginObjectInitializer("FieldSummary", false);
 		{
 			__init.Property("Any");
 			writer.WriteValue(Any);

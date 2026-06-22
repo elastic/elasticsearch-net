@@ -27,7 +27,7 @@ public partial class FindMessageStructureRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FindMessageStructureRequest");
+		var __init = writer.BeginObjectInitializer("FindMessageStructureRequest", false);
 		if (ColumnNames is not null)
 		{
 			__init.Property("ColumnNames");

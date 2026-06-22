@@ -27,7 +27,7 @@ public partial class ModelPlotConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ModelPlotConfig");
+		var __init = writer.BeginObjectInitializer("ModelPlotConfig", false);
 		if (AnnotationsEnabled is not null)
 		{
 			__init.Property("AnnotationsEnabled");

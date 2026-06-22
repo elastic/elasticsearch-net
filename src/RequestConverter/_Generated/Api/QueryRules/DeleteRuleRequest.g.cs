@@ -27,7 +27,7 @@ public partial class DeleteRuleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteRuleRequest");
+		var __init = writer.BeginObjectInitializer("DeleteRuleRequest", false);
 		{
 			__init.Property("RuleId");
 			RuleId.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class GetCalendarEventsRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetCalendarEventsRequest");
+		var __init = writer.BeginObjectInitializer("GetCalendarEventsRequest", false);
 		{
 			__init.Property("CalendarId");
 			CalendarId.FormatCode(writer);

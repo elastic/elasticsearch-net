@@ -27,7 +27,7 @@ public partial class PressureMemory : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PressureMemory");
+		var __init = writer.BeginObjectInitializer("PressureMemory", false);
 		if (All is not null)
 		{
 			__init.Property("All");

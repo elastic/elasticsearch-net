@@ -27,7 +27,7 @@ public partial class LowercaseProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("LowercaseProcessor");
+		var __init = writer.BeginObjectInitializer("LowercaseProcessor", false);
 		if (Description is not null)
 		{
 			__init.Property("Description");

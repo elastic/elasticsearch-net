@@ -27,7 +27,7 @@ public partial class GetDataStreamRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetDataStreamRequest");
+		var __init = writer.BeginObjectInitializer("GetDataStreamRequest", false);
 		if (Name is not null)
 		{
 			__init.Property("Name");

@@ -27,7 +27,7 @@ public partial class DataframeAnalysisFeatureProcessor : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeAnalysisFeatureProcessor");
+		var __init = writer.BeginObjectInitializer("DataframeAnalysisFeatureProcessor", false);
 		if (FrequencyEncoding is not null)
 		{
 			__init.Property("FrequencyEncoding");

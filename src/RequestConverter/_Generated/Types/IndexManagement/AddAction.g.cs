@@ -27,7 +27,7 @@ public partial class AddAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AddAction");
+		var __init = writer.BeginObjectInitializer("AddAction", false);
 		if (Alias is not null)
 		{
 			__init.Property("Alias");

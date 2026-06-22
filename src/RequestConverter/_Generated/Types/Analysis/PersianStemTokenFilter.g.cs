@@ -27,7 +27,7 @@ public partial class PersianStemTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PersianStemTokenFilter");
+		var __init = writer.BeginObjectInitializer("PersianStemTokenFilter", true);
 		if (Version is not null)
 		{
 			__init.Property("Version");

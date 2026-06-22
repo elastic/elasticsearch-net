@@ -27,7 +27,7 @@ public partial class ExtendedStatsBucketAggregation : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExtendedStatsBucketAggregation");
+		var __init = writer.BeginObjectInitializer("ExtendedStatsBucketAggregation", false);
 		if (BucketsPath is not null)
 		{
 			__init.Property("BucketsPath");

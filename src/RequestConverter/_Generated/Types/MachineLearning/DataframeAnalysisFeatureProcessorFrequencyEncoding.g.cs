@@ -27,7 +27,7 @@ public partial class DataframeAnalysisFeatureProcessorFrequencyEncoding : Reques
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeAnalysisFeatureProcessorFrequencyEncoding");
+		var __init = writer.BeginObjectInitializer("DataframeAnalysisFeatureProcessorFrequencyEncoding", false);
 		{
 			__init.Property("FeatureName");
 			FeatureName.FormatCode(writer);
@@ -40,7 +40,11 @@ public partial class DataframeAnalysisFeatureProcessorFrequencyEncoding : Reques
 
 		{
 			__init.Property("FrequencyMap");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("double");
+			writer.Write(">() ");
 			writer.WriteInlineList(FrequencyMap, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

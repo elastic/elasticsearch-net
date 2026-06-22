@@ -27,7 +27,7 @@ public partial class CustomCategorizeTextAnalyzer : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CustomCategorizeTextAnalyzer");
+		var __init = writer.BeginObjectInitializer("CustomCategorizeTextAnalyzer", true);
 		if (CharFilter is not null)
 		{
 			__init.Property("CharFilter");

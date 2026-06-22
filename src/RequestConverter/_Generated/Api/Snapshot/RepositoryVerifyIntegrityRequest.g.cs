@@ -27,7 +27,7 @@ public partial class RepositoryVerifyIntegrityRequest : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RepositoryVerifyIntegrityRequest");
+		var __init = writer.BeginObjectInitializer("RepositoryVerifyIntegrityRequest", false);
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class NodePackagingType : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodePackagingType");
+		var __init = writer.BeginObjectInitializer("NodePackagingType", false);
 		{
 			__init.Property("Count");
 			writer.WriteValue(Count);

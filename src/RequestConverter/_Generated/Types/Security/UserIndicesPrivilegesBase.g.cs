@@ -27,7 +27,7 @@ public partial class UserIndicesPrivilegesBase : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UserIndicesPrivilegesBase");
+		var __init = writer.BeginObjectInitializer("UserIndicesPrivilegesBase", false);
 		{
 			__init.Property("AllowRestrictedIndices");
 			writer.WriteValue(AllowRestrictedIndices);

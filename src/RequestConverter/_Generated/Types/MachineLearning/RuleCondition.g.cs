@@ -27,7 +27,7 @@ public partial class RuleCondition : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RuleCondition");
+		var __init = writer.BeginObjectInitializer("RuleCondition", false);
 		{
 			__init.Property("AppliesTo");
 			Elastic.Clients.Elasticsearch.MachineLearning.AppliesToCodeFormatter.FormatCode(AppliesTo, writer);

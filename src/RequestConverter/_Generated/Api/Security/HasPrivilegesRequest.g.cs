@@ -27,7 +27,7 @@ public partial class HasPrivilegesRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("HasPrivilegesRequest");
+		var __init = writer.BeginObjectInitializer("HasPrivilegesRequest", false);
 		if (User is not null)
 		{
 			__init.Property("User");

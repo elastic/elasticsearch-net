@@ -27,7 +27,7 @@ public partial class CompletionContext : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CompletionContext");
+		var __init = writer.BeginObjectInitializer("CompletionContext", false);
 		if (Boost is not null)
 		{
 			__init.Property("Boost");

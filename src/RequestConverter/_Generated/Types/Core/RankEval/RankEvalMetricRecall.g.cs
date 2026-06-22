@@ -27,7 +27,7 @@ public partial class RankEvalMetricRecall : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RankEvalMetricRecall");
+		var __init = writer.BeginObjectInitializer("RankEvalMetricRecall", false);
 		if (K is not null)
 		{
 			__init.Property("K");

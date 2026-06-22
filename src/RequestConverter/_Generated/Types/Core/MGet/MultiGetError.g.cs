@@ -27,7 +27,7 @@ public partial class MultiGetError : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MultiGetError");
+		var __init = writer.BeginObjectInitializer("MultiGetError", true);
 		{
 			__init.Property("Error");
 			Error.FormatCode(writer);

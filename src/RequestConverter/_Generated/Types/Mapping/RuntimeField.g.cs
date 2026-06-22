@@ -27,7 +27,7 @@ public partial class RuntimeField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RuntimeField");
+		var __init = writer.BeginObjectInitializer("RuntimeField", false);
 		if (FetchFields is not null)
 		{
 			__init.Property("FetchFields");
@@ -37,7 +37,11 @@ public partial class RuntimeField : RequestConverter.ICodeFormattable
 		if (Fields is not null)
 		{
 			__init.Property("Fields");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Mapping.CompositeSubField");
+			writer.Write(">() ");
 			writer.WriteInlineList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

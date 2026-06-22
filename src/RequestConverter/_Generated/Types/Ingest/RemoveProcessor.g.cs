@@ -27,7 +27,7 @@ public partial class RemoveProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RemoveProcessor");
+		var __init = writer.BeginObjectInitializer("RemoveProcessor", false);
 		if (Description is not null)
 		{
 			__init.Property("Description");

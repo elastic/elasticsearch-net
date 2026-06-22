@@ -27,7 +27,7 @@ public partial class DeleteTrainedModelAliasRequest : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteTrainedModelAliasRequest");
+		var __init = writer.BeginObjectInitializer("DeleteTrainedModelAliasRequest", false);
 		{
 			__init.Property("ModelAlias");
 			ModelAlias.FormatCode(writer);

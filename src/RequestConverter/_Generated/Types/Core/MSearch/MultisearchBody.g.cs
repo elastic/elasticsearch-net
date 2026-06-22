@@ -27,11 +27,15 @@ public partial class MultisearchBody : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MultisearchBody");
+		var __init = writer.BeginObjectInitializer("MultisearchBody", true);
 		if (Aggregations is not null)
 		{
 			__init.Property("Aggregations");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Aggregations.Aggregation");
+			writer.Write(">() ");
 			writer.WriteInlineList(Aggregations, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
@@ -56,7 +60,11 @@ public partial class MultisearchBody : RequestConverter.ICodeFormattable
 		if (Ext is not null)
 		{
 			__init.Property("Ext");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Ext, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
@@ -142,14 +150,22 @@ public partial class MultisearchBody : RequestConverter.ICodeFormattable
 		if (RuntimeMappings is not null)
 		{
 			__init.Property("RuntimeMappings");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("Elastic.Clients.Elasticsearch.Field");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Mapping.RuntimeField");
+			writer.Write(">() ");
 			writer.WriteInlineList(RuntimeMappings, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		if (ScriptFields is not null)
 		{
 			__init.Property("ScriptFields");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.ScriptField");
+			writer.Write(">() ");
 			writer.WriteInlineList(ScriptFields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

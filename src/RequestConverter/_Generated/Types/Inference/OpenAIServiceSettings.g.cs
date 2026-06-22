@@ -27,7 +27,7 @@ public partial class OpenAIServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("OpenAIServiceSettings");
+		var __init = writer.BeginObjectInitializer("OpenAIServiceSettings", false);
 		{
 			__init.Property("ApiKey");
 			writer.WriteString(ApiKey);

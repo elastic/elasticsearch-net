@@ -27,10 +27,14 @@ public partial class TypeFieldMappings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TypeFieldMappings");
+		var __init = writer.BeginObjectInitializer("TypeFieldMappings", false);
 		{
 			__init.Property("Mappings");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Mapping.FieldMapping");
+			writer.Write(">() ");
 			writer.WriteInlineList(Mappings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

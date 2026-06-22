@@ -27,7 +27,7 @@ public partial class CommunityIDProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CommunityIDProcessor");
+		var __init = writer.BeginObjectInitializer("CommunityIDProcessor", false);
 		if (Description is not null)
 		{
 			__init.Property("Description");

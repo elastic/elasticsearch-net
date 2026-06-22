@@ -27,7 +27,7 @@ public partial class StemmerOverrideTokenFilter : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StemmerOverrideTokenFilter");
+		var __init = writer.BeginObjectInitializer("StemmerOverrideTokenFilter", true);
 		if (Rules is not null)
 		{
 			__init.Property("Rules");

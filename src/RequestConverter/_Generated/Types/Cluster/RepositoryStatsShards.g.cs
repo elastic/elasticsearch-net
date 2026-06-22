@@ -27,7 +27,7 @@ public partial class RepositoryStatsShards : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RepositoryStatsShards");
+		var __init = writer.BeginObjectInitializer("RepositoryStatsShards", false);
 		{
 			__init.Property("Complete");
 			writer.WriteValue(Complete);
@@ -40,7 +40,11 @@ public partial class RepositoryStatsShards : RequestConverter.ICodeFormattable
 
 		{
 			__init.Property("States");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("Elastic.Clients.Elasticsearch.Cluster.ShardState");
+			writer.Write(", ");
+			writer.Write("int");
+			writer.Write(">() ");
 			writer.WriteInlineList(States, (w, kvp) => { w.Write("{ "); Elastic.Clients.Elasticsearch.Cluster.ShardStateCodeFormatter.FormatCode(kvp.Key, w); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

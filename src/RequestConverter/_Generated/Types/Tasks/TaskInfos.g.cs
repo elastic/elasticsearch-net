@@ -38,7 +38,11 @@ public partial class TaskInfos : RequestConverter.ICodeFormattable
 		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T2)
 		{
 			writer.Write("new TaskInfos(");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo");
+			writer.Write(">() ");
 			writer.WriteInlineList(Value2, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 			writer.Write(")");
 			return;

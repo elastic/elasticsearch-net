@@ -27,7 +27,7 @@ public partial class JinaAITaskSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("JinaAITaskSettings");
+		var __init = writer.BeginObjectInitializer("JinaAITaskSettings", false);
 		if (InputType is not null)
 		{
 			__init.Property("InputType");

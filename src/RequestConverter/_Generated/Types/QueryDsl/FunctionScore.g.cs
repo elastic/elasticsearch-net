@@ -27,7 +27,7 @@ public partial class FunctionScore : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FunctionScore");
+		var __init = writer.BeginObjectInitializer("FunctionScore", false);
 		if (Filter is not null)
 		{
 			__init.Property("Filter");

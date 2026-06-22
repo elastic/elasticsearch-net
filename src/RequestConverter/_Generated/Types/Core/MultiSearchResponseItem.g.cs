@@ -29,7 +29,9 @@ public partial class MultiSearchResponseItem<TDocument> : RequestConverter.ICode
 	{
 		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 		{
-			writer.Write("new MultiSearchResponseItem(");
+			writer.Write("new ");
+			writer.WriteTypeName(this.GetType());
+			writer.Write("(");
 			Value1.FormatCode(writer);
 			writer.Write(")");
 			return;
@@ -37,7 +39,9 @@ public partial class MultiSearchResponseItem<TDocument> : RequestConverter.ICode
 
 		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T2)
 		{
-			writer.Write("new MultiSearchResponseItem(");
+			writer.Write("new ");
+			writer.WriteTypeName(this.GetType());
+			writer.Write("(");
 			Value2.FormatCode(writer);
 			writer.Write(")");
 			return;

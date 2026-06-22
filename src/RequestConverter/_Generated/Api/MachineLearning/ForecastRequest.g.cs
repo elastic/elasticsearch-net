@@ -27,7 +27,7 @@ public partial class ForecastRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ForecastRequest");
+		var __init = writer.BeginObjectInitializer("ForecastRequest", false);
 		{
 			__init.Property("JobId");
 			JobId.FormatCode(writer);

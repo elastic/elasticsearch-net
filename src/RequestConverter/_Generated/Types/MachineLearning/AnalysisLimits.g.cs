@@ -27,7 +27,7 @@ public partial class AnalysisLimits : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AnalysisLimits");
+		var __init = writer.BeginObjectInitializer("AnalysisLimits", false);
 		if (CategorizationExamplesLimit is not null)
 		{
 			__init.Property("CategorizationExamplesLimit");

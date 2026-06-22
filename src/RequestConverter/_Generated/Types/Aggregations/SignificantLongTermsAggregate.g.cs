@@ -27,7 +27,7 @@ public partial class SignificantLongTermsAggregate : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SignificantLongTermsAggregate");
+		var __init = writer.BeginObjectInitializer("SignificantLongTermsAggregate", true);
 		if (BgCount is not null)
 		{
 			__init.Property("BgCount");
@@ -50,7 +50,11 @@ public partial class SignificantLongTermsAggregate : RequestConverter.ICodeForma
 		if (Meta is not null)
 		{
 			__init.Property("Meta");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

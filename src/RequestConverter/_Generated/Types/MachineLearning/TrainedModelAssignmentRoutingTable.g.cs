@@ -27,7 +27,7 @@ public partial class TrainedModelAssignmentRoutingTable : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelAssignmentRoutingTable");
+		var __init = writer.BeginObjectInitializer("TrainedModelAssignmentRoutingTable", false);
 		{
 			__init.Property("CurrentAllocations");
 			writer.WriteValue(CurrentAllocations);

@@ -27,7 +27,7 @@ public partial class AggregationBreakdown : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AggregationBreakdown");
+		var __init = writer.BeginObjectInitializer("AggregationBreakdown", false);
 		{
 			__init.Property("BuildAggregation");
 			writer.WriteValue(BuildAggregation);

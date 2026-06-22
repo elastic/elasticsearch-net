@@ -27,7 +27,7 @@ public partial class UpdateModelSnapshotRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UpdateModelSnapshotRequest");
+		var __init = writer.BeginObjectInitializer("UpdateModelSnapshotRequest", false);
 		{
 			__init.Property("JobId");
 			JobId.FormatCode(writer);

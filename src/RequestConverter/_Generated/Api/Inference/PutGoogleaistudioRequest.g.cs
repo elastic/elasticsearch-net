@@ -27,7 +27,7 @@ public partial class PutGoogleaistudioRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutGoogleaistudioRequest");
+		var __init = writer.BeginObjectInitializer("PutGoogleaistudioRequest", false);
 		{
 			__init.Property("GoogleaistudioInferenceId");
 			GoogleaistudioInferenceId.FormatCode(writer);

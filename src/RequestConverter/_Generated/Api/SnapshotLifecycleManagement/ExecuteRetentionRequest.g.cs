@@ -27,7 +27,7 @@ public partial class ExecuteRetentionRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExecuteRetentionRequest");
+		var __init = writer.BeginObjectInitializer("ExecuteRetentionRequest", false);
 		if (MasterTimeout is not null)
 		{
 			__init.Property("MasterTimeout");

@@ -27,7 +27,7 @@ public partial class EmbeddingInferenceResult : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EmbeddingInferenceResult");
+		var __init = writer.BeginObjectInitializer("EmbeddingInferenceResult", false);
 		if (Embeddings is not null)
 		{
 			__init.Property("Embeddings");

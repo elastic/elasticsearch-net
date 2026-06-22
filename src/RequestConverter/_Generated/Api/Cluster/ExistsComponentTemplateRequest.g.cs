@@ -27,7 +27,7 @@ public partial class ExistsComponentTemplateRequest : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExistsComponentTemplateRequest");
+		var __init = writer.BeginObjectInitializer("ExistsComponentTemplateRequest", false);
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

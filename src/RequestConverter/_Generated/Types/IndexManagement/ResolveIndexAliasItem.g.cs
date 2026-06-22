@@ -27,7 +27,7 @@ public partial class ResolveIndexAliasItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ResolveIndexAliasItem");
+		var __init = writer.BeginObjectInitializer("ResolveIndexAliasItem", false);
 		{
 			__init.Property("Indices");
 			writer.WriteInlineList(Indices, (w, item) => { w.WriteString(item); });

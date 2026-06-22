@@ -27,7 +27,7 @@ public partial class KeywordRepeatTokenFilter : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("KeywordRepeatTokenFilter");
+		var __init = writer.BeginObjectInitializer("KeywordRepeatTokenFilter", true);
 		if (Version is not null)
 		{
 			__init.Property("Version");

@@ -27,7 +27,7 @@ public partial class Connection : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Connection");
+		var __init = writer.BeginObjectInitializer("Connection", false);
 		{
 			__init.Property("DocCount");
 			writer.WriteValue(DocCount);

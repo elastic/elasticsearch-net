@@ -27,7 +27,7 @@ public partial class ReplicationAccess : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ReplicationAccess");
+		var __init = writer.BeginObjectInitializer("ReplicationAccess", false);
 		if (AllowRestrictedIndices is not null)
 		{
 			__init.Property("AllowRestrictedIndices");

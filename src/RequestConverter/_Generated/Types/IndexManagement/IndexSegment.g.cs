@@ -27,10 +27,14 @@ public partial class IndexSegment : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexSegment");
+		var __init = writer.BeginObjectInitializer("IndexSegment", false);
 		{
 			__init.Property("Shards");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment>");
+			writer.Write(">() ");
 			writer.WriteInlineList(Shards, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { item.FormatCode(w); }); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

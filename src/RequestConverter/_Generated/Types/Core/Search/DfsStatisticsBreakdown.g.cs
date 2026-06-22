@@ -27,7 +27,7 @@ public partial class DfsStatisticsBreakdown : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DfsStatisticsBreakdown");
+		var __init = writer.BeginObjectInitializer("DfsStatisticsBreakdown", false);
 		{
 			__init.Property("CollectionStatistics");
 			writer.WriteValue(CollectionStatistics);

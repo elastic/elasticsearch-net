@@ -27,7 +27,7 @@ public partial class CsvProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CsvProcessor");
+		var __init = writer.BeginObjectInitializer("CsvProcessor", false);
 		if (Description is not null)
 		{
 			__init.Property("Description");

@@ -27,7 +27,7 @@ public partial class PreviewDataFrameAnalyticsRequest : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PreviewDataFrameAnalyticsRequest");
+		var __init = writer.BeginObjectInitializer("PreviewDataFrameAnalyticsRequest", false);
 		if (Id is not null)
 		{
 			__init.Property("Id");

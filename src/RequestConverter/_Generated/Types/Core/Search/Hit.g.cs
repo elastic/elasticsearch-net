@@ -27,7 +27,7 @@ public partial class Hit<TDocument> : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Hit<TDocument>");
+		var __init = writer.BeginObjectInitializer("Hit<TDocument>", false);
 		if (Explanation is not null)
 		{
 			__init.Property("Explanation");
@@ -37,14 +37,22 @@ public partial class Hit<TDocument> : RequestConverter.ICodeFormattable
 		if (Fields is not null)
 		{
 			__init.Property("Fields");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		if (Highlight is not null)
 		{
 			__init.Property("Highlight");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("System.Collections.Generic.IReadOnlyCollection<string>");
+			writer.Write(">() ");
 			writer.WriteInlineList(Highlight, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteString(item); }); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
@@ -62,7 +70,11 @@ public partial class Hit<TDocument> : RequestConverter.ICodeFormattable
 		if (IgnoredFieldValues is not null)
 		{
 			__init.Property("IgnoredFieldValues");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("System.Collections.Generic.IReadOnlyCollection<object>");
+			writer.Write(">() ");
 			writer.WriteInlineList(IgnoredFieldValues, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteValue(item); }); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
@@ -74,7 +86,11 @@ public partial class Hit<TDocument> : RequestConverter.ICodeFormattable
 		if (InnerHits is not null)
 		{
 			__init.Property("InnerHits");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Core.Search.InnerHitsResult");
+			writer.Write(">() ");
 			writer.WriteInlineList(InnerHits, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
@@ -141,7 +157,7 @@ public partial class Hit<TDocument> : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (Source is not null)
+		if (RequestConverter.CodeWriter.ShouldFormat(Source))
 		{
 			__init.Property("Source");
 			writer.WriteValue(Source);

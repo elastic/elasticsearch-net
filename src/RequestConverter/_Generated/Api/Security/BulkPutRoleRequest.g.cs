@@ -27,7 +27,7 @@ public partial class BulkPutRoleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BulkPutRoleRequest");
+		var __init = writer.BeginObjectInitializer("BulkPutRoleRequest", false);
 		if (Refresh is not null)
 		{
 			__init.Property("Refresh");
@@ -36,7 +36,11 @@ public partial class BulkPutRoleRequest : RequestConverter.ICodeFormattable
 
 		{
 			__init.Property("Roles");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Security.RoleDescriptor");
+			writer.Write(">() ");
 			writer.WriteInlineList(Roles, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

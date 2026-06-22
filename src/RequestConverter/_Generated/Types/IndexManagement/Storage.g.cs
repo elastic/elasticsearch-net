@@ -27,7 +27,7 @@ public partial class Storage : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Storage");
+		var __init = writer.BeginObjectInitializer("Storage", false);
 		if (AllowMmap is not null)
 		{
 			__init.Property("AllowMmap");

@@ -27,7 +27,7 @@ public partial class GetIndexTemplateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetIndexTemplateRequest");
+		var __init = writer.BeginObjectInitializer("GetIndexTemplateRequest", false);
 		if (Name is not null)
 		{
 			__init.Property("Name");

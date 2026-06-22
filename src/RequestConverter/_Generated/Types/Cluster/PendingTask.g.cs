@@ -27,7 +27,7 @@ public partial class PendingTask : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PendingTask");
+		var __init = writer.BeginObjectInitializer("PendingTask", false);
 		{
 			__init.Property("Executing");
 			writer.WriteValue(Executing);

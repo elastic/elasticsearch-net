@@ -27,11 +27,15 @@ public partial class CCSStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CCSStats");
+		var __init = writer.BeginObjectInitializer("CCSStats", false);
 		if (Clusters is not null)
 		{
 			__init.Property("Clusters");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo");
+			writer.Write(">() ");
 			writer.WriteInlineList(Clusters, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

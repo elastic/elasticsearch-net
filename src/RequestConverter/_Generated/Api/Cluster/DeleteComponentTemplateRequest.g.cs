@@ -27,7 +27,7 @@ public partial class DeleteComponentTemplateRequest : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteComponentTemplateRequest");
+		var __init = writer.BeginObjectInitializer("DeleteComponentTemplateRequest", false);
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

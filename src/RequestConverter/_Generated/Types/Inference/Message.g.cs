@@ -27,7 +27,7 @@ public partial class Message : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Message");
+		var __init = writer.BeginObjectInitializer("Message", false);
 		if (Content is not null)
 		{
 			__init.Property("Content");

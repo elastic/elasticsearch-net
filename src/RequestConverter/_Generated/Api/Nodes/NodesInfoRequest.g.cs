@@ -27,7 +27,7 @@ public partial class NodesInfoRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodesInfoRequest");
+		var __init = writer.BeginObjectInitializer("NodesInfoRequest", false);
 		if (Metric is not null)
 		{
 			__init.Property("Metric");

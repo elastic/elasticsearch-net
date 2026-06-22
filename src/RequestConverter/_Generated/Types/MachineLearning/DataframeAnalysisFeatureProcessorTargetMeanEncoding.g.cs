@@ -27,7 +27,7 @@ public partial class DataframeAnalysisFeatureProcessorTargetMeanEncoding : Reque
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeAnalysisFeatureProcessorTargetMeanEncoding");
+		var __init = writer.BeginObjectInitializer("DataframeAnalysisFeatureProcessorTargetMeanEncoding", false);
 		{
 			__init.Property("DefaultValue");
 			writer.WriteValue(DefaultValue);
@@ -45,7 +45,11 @@ public partial class DataframeAnalysisFeatureProcessorTargetMeanEncoding : Reque
 
 		{
 			__init.Property("TargetMap");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(TargetMap, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

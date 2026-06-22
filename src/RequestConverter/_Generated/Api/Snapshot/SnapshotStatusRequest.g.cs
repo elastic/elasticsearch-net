@@ -27,7 +27,7 @@ public partial class SnapshotStatusRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SnapshotStatusRequest");
+		var __init = writer.BeginObjectInitializer("SnapshotStatusRequest", false);
 		if (Repository is not null)
 		{
 			__init.Property("Repository");

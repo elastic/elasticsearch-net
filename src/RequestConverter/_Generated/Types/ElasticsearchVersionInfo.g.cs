@@ -27,7 +27,7 @@ public partial class ElasticsearchVersionInfo : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ElasticsearchVersionInfo");
+		var __init = writer.BeginObjectInitializer("ElasticsearchVersionInfo", false);
 		{
 			__init.Property("BuildDate");
 			writer.WriteValue(BuildDate);

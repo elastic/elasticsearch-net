@@ -27,7 +27,7 @@ public partial class MappingLimitSettingsTotalFields : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MappingLimitSettingsTotalFields");
+		var __init = writer.BeginObjectInitializer("MappingLimitSettingsTotalFields", false);
 		if (IgnoreDynamicBeyondLimit is not null)
 		{
 			__init.Property("IgnoreDynamicBeyondLimit");

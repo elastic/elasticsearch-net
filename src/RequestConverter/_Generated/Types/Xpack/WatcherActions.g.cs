@@ -27,10 +27,14 @@ public partial class WatcherActions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("WatcherActions");
+		var __init = writer.BeginObjectInitializer("WatcherActions", false);
 		{
 			__init.Property("Actions");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Xpack.WatcherActionTotals");
+			writer.Write(">() ");
 			writer.WriteInlineList(Actions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

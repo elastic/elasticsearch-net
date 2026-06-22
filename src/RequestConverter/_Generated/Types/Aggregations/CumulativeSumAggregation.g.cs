@@ -27,7 +27,7 @@ public partial class CumulativeSumAggregation : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CumulativeSumAggregation");
+		var __init = writer.BeginObjectInitializer("CumulativeSumAggregation", false);
 		if (BucketsPath is not null)
 		{
 			__init.Property("BucketsPath");

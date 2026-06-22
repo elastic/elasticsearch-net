@@ -27,7 +27,7 @@ public partial class ExistsSourceRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExistsSourceRequest");
+		var __init = writer.BeginObjectInitializer("ExistsSourceRequest", false);
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);

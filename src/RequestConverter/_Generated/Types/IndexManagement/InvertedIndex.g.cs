@@ -27,7 +27,7 @@ public partial class InvertedIndex : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InvertedIndex");
+		var __init = writer.BeginObjectInitializer("InvertedIndex", false);
 		{
 			__init.Property("Offsets");
 			writer.WriteValue(Offsets);

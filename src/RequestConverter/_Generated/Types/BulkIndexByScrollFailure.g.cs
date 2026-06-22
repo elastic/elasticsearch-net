@@ -27,7 +27,7 @@ public partial class BulkIndexByScrollFailure : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BulkIndexByScrollFailure");
+		var __init = writer.BeginObjectInitializer("BulkIndexByScrollFailure", false);
 		{
 			__init.Property("Cause");
 			Cause.FormatCode(writer);

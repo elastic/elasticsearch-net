@@ -27,7 +27,7 @@ public partial class ScriptedHeuristic : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ScriptedHeuristic");
+		var __init = writer.BeginObjectInitializer("ScriptedHeuristic", false);
 		{
 			__init.Property("Script");
 			Script.FormatCode(writer);

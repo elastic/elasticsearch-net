@@ -27,7 +27,7 @@ public partial class GetLifecycleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetLifecycleRequest");
+		var __init = writer.BeginObjectInitializer("GetLifecycleRequest", false);
 		if (Name is not null)
 		{
 			__init.Property("Name");

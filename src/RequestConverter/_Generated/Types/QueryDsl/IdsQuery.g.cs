@@ -27,7 +27,7 @@ public partial class IdsQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IdsQuery");
+		var __init = writer.BeginObjectInitializer("IdsQuery", false);
 		if (Boost is not null)
 		{
 			__init.Property("Boost");

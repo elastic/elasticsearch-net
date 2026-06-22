@@ -27,7 +27,7 @@ public partial class AlibabaCloudServiceSettings : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AlibabaCloudServiceSettings");
+		var __init = writer.BeginObjectInitializer("AlibabaCloudServiceSettings", false);
 		{
 			__init.Property("ApiKey");
 			writer.WriteString(ApiKey);

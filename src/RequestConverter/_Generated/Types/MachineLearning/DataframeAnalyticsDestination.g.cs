@@ -27,7 +27,7 @@ public partial class DataframeAnalyticsDestination : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeAnalyticsDestination");
+		var __init = writer.BeginObjectInitializer("DataframeAnalyticsDestination", false);
 		{
 			__init.Property("Index");
 			Index.FormatCode(writer);

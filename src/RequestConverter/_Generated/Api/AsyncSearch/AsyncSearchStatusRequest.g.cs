@@ -27,7 +27,7 @@ public partial class AsyncSearchStatusRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AsyncSearchStatusRequest");
+		var __init = writer.BeginObjectInitializer("AsyncSearchStatusRequest", false);
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);

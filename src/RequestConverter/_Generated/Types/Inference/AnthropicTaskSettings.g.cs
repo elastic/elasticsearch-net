@@ -27,7 +27,7 @@ public partial class AnthropicTaskSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AnthropicTaskSettings");
+		var __init = writer.BeginObjectInitializer("AnthropicTaskSettings", false);
 		{
 			__init.Property("MaxTokens");
 			writer.WriteValue(MaxTokens);

@@ -27,7 +27,7 @@ public partial class DataTierPhaseStatistics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataTierPhaseStatistics");
+		var __init = writer.BeginObjectInitializer("DataTierPhaseStatistics", false);
 		{
 			__init.Property("DocCount");
 			writer.WriteValue(DocCount);

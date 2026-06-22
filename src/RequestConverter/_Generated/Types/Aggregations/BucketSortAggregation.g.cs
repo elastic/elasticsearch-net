@@ -27,7 +27,7 @@ public partial class BucketSortAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BucketSortAggregation");
+		var __init = writer.BeginObjectInitializer("BucketSortAggregation", false);
 		if (From is not null)
 		{
 			__init.Property("From");

@@ -27,7 +27,7 @@ public partial class DiagnosisAffectedResources : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DiagnosisAffectedResources");
+		var __init = writer.BeginObjectInitializer("DiagnosisAffectedResources", false);
 		if (FeatureStates is not null)
 		{
 			__init.Property("FeatureStates");

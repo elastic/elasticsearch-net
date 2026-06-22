@@ -27,7 +27,7 @@ public partial class DocumentRating : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DocumentRating");
+		var __init = writer.BeginObjectInitializer("DocumentRating", false);
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class TermSuggestOption : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TermSuggestOption");
+		var __init = writer.BeginObjectInitializer("TermSuggestOption", false);
 		if (CollateMatch is not null)
 		{
 			__init.Property("CollateMatch");

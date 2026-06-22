@@ -27,7 +27,7 @@ public partial class QueryFeatureExtractor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("QueryFeatureExtractor");
+		var __init = writer.BeginObjectInitializer("QueryFeatureExtractor", false);
 		if (DefaultScore is not null)
 		{
 			__init.Property("DefaultScore");

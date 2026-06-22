@@ -27,7 +27,7 @@ public partial class OperatingSystem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("OperatingSystem");
+		var __init = writer.BeginObjectInitializer("OperatingSystem", false);
 		if (Cgroup is not null)
 		{
 			__init.Property("Cgroup");

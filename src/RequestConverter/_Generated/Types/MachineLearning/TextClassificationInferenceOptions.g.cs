@@ -27,7 +27,7 @@ public partial class TextClassificationInferenceOptions : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TextClassificationInferenceOptions");
+		var __init = writer.BeginObjectInitializer("TextClassificationInferenceOptions", false);
 		if (ClassificationLabels is not null)
 		{
 			__init.Property("ClassificationLabels");

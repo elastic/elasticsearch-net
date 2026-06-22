@@ -27,7 +27,7 @@ public partial class StoreStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StoreStats");
+		var __init = writer.BeginObjectInitializer("StoreStats", false);
 		if (Reserved is not null)
 		{
 			__init.Property("Reserved");

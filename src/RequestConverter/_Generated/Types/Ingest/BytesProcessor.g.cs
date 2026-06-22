@@ -27,7 +27,7 @@ public partial class BytesProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BytesProcessor");
+		var __init = writer.BeginObjectInitializer("BytesProcessor", false);
 		if (Description is not null)
 		{
 			__init.Property("Description");

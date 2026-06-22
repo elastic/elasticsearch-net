@@ -27,7 +27,7 @@ public partial class FieldMemoryUsage : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldMemoryUsage");
+		var __init = writer.BeginObjectInitializer("FieldMemoryUsage", false);
 		if (MemorySize is not null)
 		{
 			__init.Property("MemorySize");

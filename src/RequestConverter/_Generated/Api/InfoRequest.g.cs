@@ -27,7 +27,7 @@ public partial class InfoRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InfoRequest");
+		var __init = writer.BeginObjectInitializer("InfoRequest", false);
 		__init.Dispose();
 	}
 }

@@ -27,7 +27,7 @@ public partial class GetMappingRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetMappingRequest");
+		var __init = writer.BeginObjectInitializer("GetMappingRequest", false);
 		if (Indices is not null)
 		{
 			__init.Property("Indices");

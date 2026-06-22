@@ -27,7 +27,7 @@ public partial class NestedAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NestedAggregation");
+		var __init = writer.BeginObjectInitializer("NestedAggregation", false);
 		if (Path is not null)
 		{
 			__init.Property("Path");

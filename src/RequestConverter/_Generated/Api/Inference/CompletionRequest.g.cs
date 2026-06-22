@@ -27,7 +27,7 @@ public partial class CompletionRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CompletionRequest");
+		var __init = writer.BeginObjectInitializer("CompletionRequest", false);
 		{
 			__init.Property("InferenceId");
 			InferenceId.FormatCode(writer);

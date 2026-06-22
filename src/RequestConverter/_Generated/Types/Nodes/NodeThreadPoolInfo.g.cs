@@ -27,7 +27,7 @@ public partial class NodeThreadPoolInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeThreadPoolInfo");
+		var __init = writer.BeginObjectInitializer("NodeThreadPoolInfo", false);
 		if (Core is not null)
 		{
 			__init.Property("Core");

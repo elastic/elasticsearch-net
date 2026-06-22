@@ -27,7 +27,7 @@ public partial class StandardDeviationBounds : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StandardDeviationBounds");
+		var __init = writer.BeginObjectInitializer("StandardDeviationBounds", false);
 		{
 			__init.Property("Lower");
 			writer.WriteValue(Lower.Value);

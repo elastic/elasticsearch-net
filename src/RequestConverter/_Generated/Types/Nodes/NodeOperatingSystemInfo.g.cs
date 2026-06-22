@@ -27,7 +27,7 @@ public partial class NodeOperatingSystemInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeOperatingSystemInfo");
+		var __init = writer.BeginObjectInitializer("NodeOperatingSystemInfo", false);
 		if (AllocatedProcessors is not null)
 		{
 			__init.Property("AllocatedProcessors");

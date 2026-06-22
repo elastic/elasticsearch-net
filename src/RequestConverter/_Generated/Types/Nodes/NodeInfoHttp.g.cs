@@ -27,7 +27,7 @@ public partial class NodeInfoHttp : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoHttp");
+		var __init = writer.BeginObjectInitializer("NodeInfoHttp", false);
 		{
 			__init.Property("BoundAddress");
 			writer.WriteInlineList(BoundAddress, (w, item) => { w.WriteString(item); });

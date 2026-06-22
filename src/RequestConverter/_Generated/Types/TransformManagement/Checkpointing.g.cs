@@ -27,7 +27,7 @@ public partial class Checkpointing : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Checkpointing");
+		var __init = writer.BeginObjectInitializer("Checkpointing", false);
 		if (ChangesLastDetectedAt is not null)
 		{
 			__init.Property("ChangesLastDetectedAt");

@@ -27,7 +27,7 @@ public partial class EventDataStream : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EventDataStream");
+		var __init = writer.BeginObjectInitializer("EventDataStream", false);
 		{
 			__init.Property("Name");
 			writer.WriteString(Name);

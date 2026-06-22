@@ -27,7 +27,7 @@ public partial class StandardTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StandardTokenizer");
+		var __init = writer.BeginObjectInitializer("StandardTokenizer", true);
 		if (MaxTokenLength is not null)
 		{
 			__init.Property("MaxTokenLength");

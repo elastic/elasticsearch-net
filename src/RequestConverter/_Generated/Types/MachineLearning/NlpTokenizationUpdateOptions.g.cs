@@ -27,7 +27,7 @@ public partial class NlpTokenizationUpdateOptions : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NlpTokenizationUpdateOptions");
+		var __init = writer.BeginObjectInitializer("NlpTokenizationUpdateOptions", false);
 		if (Span is not null)
 		{
 			__init.Property("Span");

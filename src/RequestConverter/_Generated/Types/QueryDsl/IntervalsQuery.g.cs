@@ -27,7 +27,7 @@ public partial class IntervalsQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IntervalsQuery");
+		var __init = writer.BeginObjectInitializer("IntervalsQuery", false);
 		if (Boost is not null)
 		{
 			__init.Property("Boost");

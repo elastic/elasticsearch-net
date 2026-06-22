@@ -27,7 +27,7 @@ public partial class CohereServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CohereServiceSettings");
+		var __init = writer.BeginObjectInitializer("CohereServiceSettings", false);
 		{
 			__init.Property("ApiKey");
 			writer.WriteString(ApiKey);

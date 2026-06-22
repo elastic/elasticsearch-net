@@ -27,7 +27,7 @@ public partial class TransformSummary : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TransformSummary");
+		var __init = writer.BeginObjectInitializer("TransformSummary", false);
 		if (Authorization is not null)
 		{
 			__init.Property("Authorization");
@@ -77,7 +77,11 @@ public partial class TransformSummary : RequestConverter.ICodeFormattable
 		if (Meta is not null)
 		{
 			__init.Property("Meta");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

@@ -27,7 +27,7 @@ public partial class DisableUserProfileRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DisableUserProfileRequest");
+		var __init = writer.BeginObjectInitializer("DisableUserProfileRequest", false);
 		{
 			__init.Property("Uid");
 			writer.WriteString(Uid);

@@ -27,7 +27,7 @@ public partial class DeleteDataLifecycleRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteDataLifecycleRequest");
+		var __init = writer.BeginObjectInitializer("DeleteDataLifecycleRequest", false);
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

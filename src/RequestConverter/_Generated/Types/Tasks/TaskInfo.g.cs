@@ -27,7 +27,7 @@ public partial class TaskInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TaskInfo");
+		var __init = writer.BeginObjectInitializer("TaskInfo", false);
 		{
 			__init.Property("Action");
 			writer.WriteString(Action);
@@ -52,7 +52,11 @@ public partial class TaskInfo : RequestConverter.ICodeFormattable
 
 		{
 			__init.Property("Headers");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("string");
+			writer.Write(">() ");
 			writer.WriteInlineList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

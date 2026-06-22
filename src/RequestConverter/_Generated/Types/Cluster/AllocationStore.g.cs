@@ -27,7 +27,7 @@ public partial class AllocationStore : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AllocationStore");
+		var __init = writer.BeginObjectInitializer("AllocationStore", false);
 		{
 			__init.Property("AllocationId");
 			writer.WriteString(AllocationId);

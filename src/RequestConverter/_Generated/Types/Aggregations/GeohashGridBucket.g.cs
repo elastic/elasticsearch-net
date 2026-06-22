@@ -27,7 +27,7 @@ public partial class GeohashGridBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeohashGridBucket");
+		var __init = writer.BeginObjectInitializer("GeohashGridBucket", false);
 		if (Aggregations is not null)
 		{
 			__init.Property("Aggregations");

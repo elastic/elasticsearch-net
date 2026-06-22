@@ -27,7 +27,7 @@ public partial class GetFeaturesRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetFeaturesRequest");
+		var __init = writer.BeginObjectInitializer("GetFeaturesRequest", false);
 		if (MasterTimeout is not null)
 		{
 			__init.Property("MasterTimeout");

@@ -27,7 +27,7 @@ public partial class FollowerIndex : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FollowerIndex");
+		var __init = writer.BeginObjectInitializer("FollowerIndex", false);
 		{
 			__init.Property("FollowerIndexValue");
 			writer.WriteString(FollowerIndexValue);

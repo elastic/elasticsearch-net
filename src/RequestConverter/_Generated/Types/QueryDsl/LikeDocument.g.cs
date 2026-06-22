@@ -27,7 +27,7 @@ public partial class LikeDocument : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("LikeDocument");
+		var __init = writer.BeginObjectInitializer("LikeDocument", true);
 		if (Doc is not null)
 		{
 			__init.Property("Doc");
@@ -55,7 +55,11 @@ public partial class LikeDocument : RequestConverter.ICodeFormattable
 		if (PerFieldAnalyzer is not null)
 		{
 			__init.Property("PerFieldAnalyzer");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("Elastic.Clients.Elasticsearch.Field");
+			writer.Write(", ");
+			writer.Write("string");
+			writer.Write(">() ");
 			writer.WriteInlineList(PerFieldAnalyzer, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

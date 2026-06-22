@@ -27,7 +27,7 @@ public partial class DataStreamLifecycleDetails : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataStreamLifecycleDetails");
+		var __init = writer.BeginObjectInitializer("DataStreamLifecycleDetails", false);
 		if (StagnatingBackingIndices is not null)
 		{
 			__init.Property("StagnatingBackingIndices");

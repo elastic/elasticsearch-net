@@ -27,7 +27,7 @@ public partial class PutAnthropicRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutAnthropicRequest");
+		var __init = writer.BeginObjectInitializer("PutAnthropicRequest", false);
 		{
 			__init.Property("AnthropicInferenceId");
 			AnthropicInferenceId.FormatCode(writer);

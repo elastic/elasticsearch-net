@@ -27,7 +27,7 @@ public partial class Sql : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Sql");
+		var __init = writer.BeginObjectInitializer("Sql", false);
 		{
 			__init.Property("Available");
 			writer.WriteValue(Available);
@@ -40,13 +40,21 @@ public partial class Sql : RequestConverter.ICodeFormattable
 
 		{
 			__init.Property("Features");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("int");
+			writer.Write(">() ");
 			writer.WriteInlineList(Features, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
 			__init.Property("Queries");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Xpack.XpackUsageQuery");
+			writer.Write(">() ");
 			writer.WriteInlineList(Queries, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

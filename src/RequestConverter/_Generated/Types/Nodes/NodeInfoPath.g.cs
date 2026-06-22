@@ -27,7 +27,7 @@ public partial class NodeInfoPath : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoPath");
+		var __init = writer.BeginObjectInitializer("NodeInfoPath", false);
 		if (Data is not null)
 		{
 			__init.Property("Data");

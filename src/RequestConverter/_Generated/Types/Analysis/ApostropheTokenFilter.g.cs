@@ -27,7 +27,7 @@ public partial class ApostropheTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ApostropheTokenFilter");
+		var __init = writer.BeginObjectInitializer("ApostropheTokenFilter", true);
 		if (Version is not null)
 		{
 			__init.Property("Version");

@@ -27,7 +27,7 @@ public partial class FieldNamesField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldNamesField");
+		var __init = writer.BeginObjectInitializer("FieldNamesField", false);
 		{
 			__init.Property("Enabled");
 			writer.WriteValue(Enabled);

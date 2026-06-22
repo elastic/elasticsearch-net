@@ -27,7 +27,7 @@ public partial class OidcPrepareAuthenticationRequest : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("OidcPrepareAuthenticationRequest");
+		var __init = writer.BeginObjectInitializer("OidcPrepareAuthenticationRequest", false);
 		if (Iss is not null)
 		{
 			__init.Property("Iss");

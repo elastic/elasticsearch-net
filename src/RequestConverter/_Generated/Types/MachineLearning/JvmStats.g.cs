@@ -27,7 +27,7 @@ public partial class JvmStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("JvmStats");
+		var __init = writer.BeginObjectInitializer("JvmStats", false);
 		if (HeapMax is not null)
 		{
 			__init.Property("HeapMax");

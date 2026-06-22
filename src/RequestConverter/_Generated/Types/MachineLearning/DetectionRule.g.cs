@@ -27,7 +27,7 @@ public partial class DetectionRule : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DetectionRule");
+		var __init = writer.BeginObjectInitializer("DetectionRule", false);
 		if (Actions is not null)
 		{
 			__init.Property("Actions");
@@ -43,7 +43,11 @@ public partial class DetectionRule : RequestConverter.ICodeFormattable
 		if (Scope is not null)
 		{
 			__init.Property("Scope");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("Elastic.Clients.Elasticsearch.Field");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.MachineLearning.FilterRef");
+			writer.Write(">() ");
 			writer.WriteInlineList(Scope, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

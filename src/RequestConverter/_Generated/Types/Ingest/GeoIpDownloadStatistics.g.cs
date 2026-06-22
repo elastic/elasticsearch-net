@@ -27,7 +27,7 @@ public partial class GeoIpDownloadStatistics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoIpDownloadStatistics");
+		var __init = writer.BeginObjectInitializer("GeoIpDownloadStatistics", false);
 		{
 			__init.Property("DatabasesCount");
 			writer.WriteValue(DatabasesCount);

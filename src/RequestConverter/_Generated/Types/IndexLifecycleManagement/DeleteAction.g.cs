@@ -27,7 +27,7 @@ public partial class DeleteAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteAction");
+		var __init = writer.BeginObjectInitializer("DeleteAction", false);
 		if (DeleteSearchableSnapshot is not null)
 		{
 			__init.Property("DeleteSearchableSnapshot");

@@ -27,7 +27,7 @@ public partial class GetBehavioralAnalyticsRequest : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetBehavioralAnalyticsRequest");
+		var __init = writer.BeginObjectInitializer("GetBehavioralAnalyticsRequest", false);
 		if (Name is not null)
 		{
 			__init.Property("Name");

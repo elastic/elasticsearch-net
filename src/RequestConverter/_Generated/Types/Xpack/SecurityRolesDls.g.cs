@@ -27,7 +27,7 @@ public partial class SecurityRolesDls : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SecurityRolesDls");
+		var __init = writer.BeginObjectInitializer("SecurityRolesDls", false);
 		{
 			__init.Property("BitSetCache");
 			BitSetCache.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class InferenceFeatureImportance : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InferenceFeatureImportance");
+		var __init = writer.BeginObjectInitializer("InferenceFeatureImportance", false);
 		if (Classes is not null)
 		{
 			__init.Property("Classes");

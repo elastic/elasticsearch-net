@@ -27,7 +27,7 @@ public partial class KeyValueProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("KeyValueProcessor");
+		var __init = writer.BeginObjectInitializer("KeyValueProcessor", false);
 		if (Description is not null)
 		{
 			__init.Property("Description");

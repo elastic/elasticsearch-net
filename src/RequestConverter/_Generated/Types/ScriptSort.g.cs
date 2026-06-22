@@ -27,7 +27,7 @@ public partial class ScriptSort : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ScriptSort");
+		var __init = writer.BeginObjectInitializer("ScriptSort", false);
 		if (Mode is not null)
 		{
 			__init.Property("Mode");

@@ -27,7 +27,7 @@ public partial class NodeBufferPool : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeBufferPool");
+		var __init = writer.BeginObjectInitializer("NodeBufferPool", false);
 		if (Count is not null)
 		{
 			__init.Property("Count");

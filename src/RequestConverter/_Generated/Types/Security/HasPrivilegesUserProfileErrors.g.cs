@@ -27,7 +27,7 @@ public partial class HasPrivilegesUserProfileErrors : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("HasPrivilegesUserProfileErrors");
+		var __init = writer.BeginObjectInitializer("HasPrivilegesUserProfileErrors", false);
 		{
 			__init.Property("Count");
 			writer.WriteValue(Count);
@@ -36,7 +36,11 @@ public partial class HasPrivilegesUserProfileErrors : RequestConverter.ICodeForm
 
 		{
 			__init.Property("Details");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.ErrorCause");
+			writer.Write(">() ");
 			writer.WriteInlineList(Details, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

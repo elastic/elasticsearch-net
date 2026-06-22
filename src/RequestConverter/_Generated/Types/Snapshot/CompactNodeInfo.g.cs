@@ -27,7 +27,7 @@ public partial class CompactNodeInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CompactNodeInfo");
+		var __init = writer.BeginObjectInitializer("CompactNodeInfo", false);
 		{
 			__init.Property("Name");
 			writer.WriteString(Name);

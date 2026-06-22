@@ -27,7 +27,7 @@ public partial class CefProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CefProcessor");
+		var __init = writer.BeginObjectInitializer("CefProcessor", false);
 		if (Description is not null)
 		{
 			__init.Property("Description");

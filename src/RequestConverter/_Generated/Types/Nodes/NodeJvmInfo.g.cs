@@ -27,7 +27,7 @@ public partial class NodeJvmInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeJvmInfo");
+		var __init = writer.BeginObjectInitializer("NodeJvmInfo", false);
 		{
 			__init.Property("GcCollectors");
 			writer.WriteInlineList(GcCollectors, (w, item) => { w.WriteString(item); });

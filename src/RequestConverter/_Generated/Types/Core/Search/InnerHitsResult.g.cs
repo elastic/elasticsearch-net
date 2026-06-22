@@ -27,7 +27,7 @@ public partial class InnerHitsResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InnerHitsResult");
+		var __init = writer.BeginObjectInitializer("InnerHitsResult", false);
 		{
 			__init.Property("Hits");
 			Hits.FormatCode(writer);

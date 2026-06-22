@@ -27,7 +27,7 @@ public partial class PutOpenaiRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutOpenaiRequest");
+		var __init = writer.BeginObjectInitializer("PutOpenaiRequest", false);
 		{
 			__init.Property("OpenaiInferenceId");
 			OpenaiInferenceId.FormatCode(writer);

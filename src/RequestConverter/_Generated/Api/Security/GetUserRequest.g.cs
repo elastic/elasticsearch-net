@@ -27,7 +27,7 @@ public partial class GetUserRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetUserRequest");
+		var __init = writer.BeginObjectInitializer("GetUserRequest", false);
 		if (Username is not null)
 		{
 			__init.Property("Username");

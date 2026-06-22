@@ -27,7 +27,7 @@ public partial class BulkUpdateApiKeysRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BulkUpdateApiKeysRequest");
+		var __init = writer.BeginObjectInitializer("BulkUpdateApiKeysRequest", false);
 		if (Expiration is not null)
 		{
 			__init.Property("Expiration");
@@ -42,14 +42,22 @@ public partial class BulkUpdateApiKeysRequest : RequestConverter.ICodeFormattabl
 		if (Metadata is not null)
 		{
 			__init.Property("Metadata");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		if (RoleDescriptors is not null)
 		{
 			__init.Property("RoleDescriptors");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Security.RoleDescriptor");
+			writer.Write(">() ");
 			writer.WriteInlineList(RoleDescriptors, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

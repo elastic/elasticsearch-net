@@ -27,7 +27,7 @@ public partial class StringRareTermsBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StringRareTermsBucket");
+		var __init = writer.BeginObjectInitializer("StringRareTermsBucket", false);
 		if (Aggregations is not null)
 		{
 			__init.Property("Aggregations");

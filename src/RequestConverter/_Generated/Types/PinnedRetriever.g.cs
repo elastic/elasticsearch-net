@@ -27,7 +27,7 @@ public partial class PinnedRetriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PinnedRetriever");
+		var __init = writer.BeginObjectInitializer("PinnedRetriever", false);
 		if (Docs is not null)
 		{
 			__init.Property("Docs");

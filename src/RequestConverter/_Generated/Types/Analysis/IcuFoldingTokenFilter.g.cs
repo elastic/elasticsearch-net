@@ -27,7 +27,7 @@ public partial class IcuFoldingTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IcuFoldingTokenFilter");
+		var __init = writer.BeginObjectInitializer("IcuFoldingTokenFilter", true);
 		{
 			__init.Property("UnicodeSetFilter");
 			writer.WriteString(UnicodeSetFilter);

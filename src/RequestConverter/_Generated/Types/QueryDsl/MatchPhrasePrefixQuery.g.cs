@@ -27,7 +27,7 @@ public partial class MatchPhrasePrefixQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MatchPhrasePrefixQuery");
+		var __init = writer.BeginObjectInitializer("MatchPhrasePrefixQuery", false);
 		if (Analyzer is not null)
 		{
 			__init.Property("Analyzer");

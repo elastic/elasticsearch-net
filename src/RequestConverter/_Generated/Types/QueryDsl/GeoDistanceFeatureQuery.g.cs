@@ -27,7 +27,7 @@ public partial class GeoDistanceFeatureQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoDistanceFeatureQuery");
+		var __init = writer.BeginObjectInitializer("GeoDistanceFeatureQuery", true);
 		if (Boost is not null)
 		{
 			__init.Property("Boost");

@@ -27,7 +27,7 @@ public partial class AuthenticateApiKey : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AuthenticateApiKey");
+		var __init = writer.BeginObjectInitializer("AuthenticateApiKey", false);
 		{
 			__init.Property("Id");
 			writer.WriteString(Id);

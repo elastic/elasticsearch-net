@@ -27,7 +27,7 @@ public partial class ContextualAIServiceSettings : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ContextualAIServiceSettings");
+		var __init = writer.BeginObjectInitializer("ContextualAIServiceSettings", false);
 		{
 			__init.Property("ApiKey");
 			writer.WriteString(ApiKey);

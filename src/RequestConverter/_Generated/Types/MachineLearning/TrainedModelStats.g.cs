@@ -27,7 +27,7 @@ public partial class TrainedModelStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelStats");
+		var __init = writer.BeginObjectInitializer("TrainedModelStats", false);
 		if (DeploymentStats is not null)
 		{
 			__init.Property("DeploymentStats");
@@ -43,7 +43,11 @@ public partial class TrainedModelStats : RequestConverter.ICodeFormattable
 		if (Ingest is not null)
 		{
 			__init.Property("Ingest");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Ingest, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

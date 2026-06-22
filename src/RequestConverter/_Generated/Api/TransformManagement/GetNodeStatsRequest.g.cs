@@ -27,7 +27,7 @@ public partial class GetNodeStatsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetNodeStatsRequest");
+		var __init = writer.BeginObjectInitializer("GetNodeStatsRequest", false);
 		__init.Dispose();
 	}
 }

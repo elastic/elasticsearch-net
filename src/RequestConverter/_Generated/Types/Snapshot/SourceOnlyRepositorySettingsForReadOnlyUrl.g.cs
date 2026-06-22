@@ -27,7 +27,7 @@ public partial class SourceOnlyRepositorySettingsForReadOnlyUrl : RequestConvert
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SourceOnlyRepositorySettingsForReadOnlyUrl");
+		var __init = writer.BeginObjectInitializer("SourceOnlyRepositorySettingsForReadOnlyUrl", true);
 		if (HttpMaxRetries is not null)
 		{
 			__init.Property("HttpMaxRetries");

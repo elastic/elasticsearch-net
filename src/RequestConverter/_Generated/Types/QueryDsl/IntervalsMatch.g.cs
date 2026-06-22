@@ -27,7 +27,7 @@ public partial class IntervalsMatch : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IntervalsMatch");
+		var __init = writer.BeginObjectInitializer("IntervalsMatch", false);
 		if (Analyzer is not null)
 		{
 			__init.Property("Analyzer");

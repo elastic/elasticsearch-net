@@ -27,7 +27,7 @@ public partial class UnknownCharFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UnknownCharFilter");
+		var __init = writer.BeginObjectInitializer("UnknownCharFilter", false);
 		__init.Dispose();
 	}
 }

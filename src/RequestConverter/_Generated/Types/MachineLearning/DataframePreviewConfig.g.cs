@@ -27,7 +27,7 @@ public partial class DataframePreviewConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframePreviewConfig");
+		var __init = writer.BeginObjectInitializer("DataframePreviewConfig", false);
 		{
 			__init.Property("Analysis");
 			Analysis.FormatCode(writer);

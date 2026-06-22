@@ -27,7 +27,7 @@ public partial class HyphenationDecompounderTokenFilter : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("HyphenationDecompounderTokenFilter");
+		var __init = writer.BeginObjectInitializer("HyphenationDecompounderTokenFilter", true);
 		{
 			__init.Property("HyphenationPatternsPath");
 			writer.WriteString(HyphenationPatternsPath);

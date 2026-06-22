@@ -27,7 +27,7 @@ public partial class IoStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IoStats");
+		var __init = writer.BeginObjectInitializer("IoStats", false);
 		if (Devices is not null)
 		{
 			__init.Property("Devices");

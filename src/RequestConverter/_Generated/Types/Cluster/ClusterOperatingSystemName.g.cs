@@ -27,7 +27,7 @@ public partial class ClusterOperatingSystemName : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterOperatingSystemName");
+		var __init = writer.BeginObjectInitializer("ClusterOperatingSystemName", false);
 		{
 			__init.Property("Count");
 			writer.WriteValue(Count);

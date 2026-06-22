@@ -27,7 +27,7 @@ public partial class ShardSequenceNumber : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardSequenceNumber");
+		var __init = writer.BeginObjectInitializer("ShardSequenceNumber", false);
 		{
 			__init.Property("GlobalCheckpoint");
 			writer.WriteValue(GlobalCheckpoint);

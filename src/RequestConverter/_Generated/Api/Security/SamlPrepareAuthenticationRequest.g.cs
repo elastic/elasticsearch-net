@@ -27,7 +27,7 @@ public partial class SamlPrepareAuthenticationRequest : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SamlPrepareAuthenticationRequest");
+		var __init = writer.BeginObjectInitializer("SamlPrepareAuthenticationRequest", false);
 		if (Acs is not null)
 		{
 			__init.Property("Acs");

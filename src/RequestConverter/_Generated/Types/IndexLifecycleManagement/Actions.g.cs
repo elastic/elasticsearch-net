@@ -27,7 +27,7 @@ public partial class Actions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Actions");
+		var __init = writer.BeginObjectInitializer("Actions", false);
 		if (Allocate is not null)
 		{
 			__init.Property("Allocate");

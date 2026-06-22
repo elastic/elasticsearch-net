@@ -27,7 +27,7 @@ public partial class DataframeAnalysisRegression : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeAnalysisRegression");
+		var __init = writer.BeginObjectInitializer("DataframeAnalysisRegression", false);
 		if (Alpha is not null)
 		{
 			__init.Property("Alpha");

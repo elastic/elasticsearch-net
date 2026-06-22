@@ -27,7 +27,7 @@ public partial class CreateFromRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CreateFromRequest");
+		var __init = writer.BeginObjectInitializer("CreateFromRequest", false);
 		{
 			__init.Property("Dest");
 			Dest.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class XpackInfoRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("XpackInfoRequest");
+		var __init = writer.BeginObjectInitializer("XpackInfoRequest", false);
 #pragma warning disable CS0618
 		if (AcceptEnterprise is not null)
 		{

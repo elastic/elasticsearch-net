@@ -27,7 +27,7 @@ public partial class IntervalsWildcard : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IntervalsWildcard");
+		var __init = writer.BeginObjectInitializer("IntervalsWildcard", false);
 		if (Analyzer is not null)
 		{
 			__init.Property("Analyzer");

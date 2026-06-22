@@ -27,7 +27,7 @@ public partial class ClusterStatsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterStatsRequest");
+		var __init = writer.BeginObjectInitializer("ClusterStatsRequest", false);
 		if (NodeId is not null)
 		{
 			__init.Property("NodeId");

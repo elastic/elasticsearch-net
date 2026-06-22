@@ -27,7 +27,7 @@ public partial class GetDataFrameAnalyticsStatsRequest : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetDataFrameAnalyticsStatsRequest");
+		var __init = writer.BeginObjectInitializer("GetDataFrameAnalyticsStatsRequest", false);
 		if (Id is not null)
 		{
 			__init.Property("Id");

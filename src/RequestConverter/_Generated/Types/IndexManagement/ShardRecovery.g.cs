@@ -27,7 +27,7 @@ public partial class ShardRecovery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardRecovery");
+		var __init = writer.BeginObjectInitializer("ShardRecovery", false);
 		{
 			__init.Property("Id");
 			writer.WriteValue(Id);

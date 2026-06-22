@@ -27,7 +27,7 @@ public partial class IntervalsAllOf : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IntervalsAllOf");
+		var __init = writer.BeginObjectInitializer("IntervalsAllOf", false);
 		if (Filter is not null)
 		{
 			__init.Property("Filter");

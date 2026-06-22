@@ -27,7 +27,7 @@ public partial class MovingPercentilesAggregation : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MovingPercentilesAggregation");
+		var __init = writer.BeginObjectInitializer("MovingPercentilesAggregation", false);
 		if (BucketsPath is not null)
 		{
 			__init.Property("BucketsPath");

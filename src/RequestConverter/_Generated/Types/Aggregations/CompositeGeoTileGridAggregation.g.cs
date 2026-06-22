@@ -27,7 +27,7 @@ public partial class CompositeGeoTileGridAggregation : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CompositeGeoTileGridAggregation");
+		var __init = writer.BeginObjectInitializer("CompositeGeoTileGridAggregation", false);
 		if (Bounds is not null)
 		{
 			__init.Property("Bounds");

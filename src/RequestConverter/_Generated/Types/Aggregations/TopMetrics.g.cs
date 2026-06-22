@@ -27,10 +27,14 @@ public partial class TopMetrics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TopMetrics");
+		var __init = writer.BeginObjectInitializer("TopMetrics", false);
 		{
 			__init.Property("Metrics");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.FieldValue?");
+			writer.Write(">() ");
 			writer.WriteInlineList(Metrics, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

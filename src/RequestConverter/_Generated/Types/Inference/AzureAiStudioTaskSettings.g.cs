@@ -27,7 +27,7 @@ public partial class AzureAiStudioTaskSettings : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AzureAiStudioTaskSettings");
+		var __init = writer.BeginObjectInitializer("AzureAiStudioTaskSettings", false);
 		if (DoSample is not null)
 		{
 			__init.Property("DoSample");

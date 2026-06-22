@@ -27,7 +27,7 @@ public partial class ReindexTaskResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ReindexTaskResult");
+		var __init = writer.BeginObjectInitializer("ReindexTaskResult", false);
 		if (Batches is not null)
 		{
 			__init.Property("Batches");

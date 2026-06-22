@@ -27,7 +27,7 @@ public partial class TermsGrouping : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TermsGrouping");
+		var __init = writer.BeginObjectInitializer("TermsGrouping", false);
 		{
 			__init.Property("Fields");
 			Fields.FormatCode(writer);

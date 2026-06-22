@@ -27,7 +27,7 @@ public partial class RemoveAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RemoveAction");
+		var __init = writer.BeginObjectInitializer("RemoveAction", false);
 		if (Alias is not null)
 		{
 			__init.Property("Alias");

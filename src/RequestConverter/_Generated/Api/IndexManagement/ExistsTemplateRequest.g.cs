@@ -27,7 +27,7 @@ public partial class ExistsTemplateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExistsTemplateRequest");
+		var __init = writer.BeginObjectInitializer("ExistsTemplateRequest", false);
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

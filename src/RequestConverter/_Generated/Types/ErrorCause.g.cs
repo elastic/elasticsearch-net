@@ -27,7 +27,7 @@ public partial class ErrorCause : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ErrorCause");
+		var __init = writer.BeginObjectInitializer("ErrorCause", false);
 		if (CausedBy is not null)
 		{
 			__init.Property("CausedBy");
@@ -37,7 +37,11 @@ public partial class ErrorCause : RequestConverter.ICodeFormattable
 		if (Metadata is not null)
 		{
 			__init.Property("Metadata");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

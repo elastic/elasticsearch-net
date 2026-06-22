@@ -27,7 +27,7 @@ public partial class DataframeEvaluation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeEvaluation");
+		var __init = writer.BeginObjectInitializer("DataframeEvaluation", false);
 		if (Classification is not null)
 		{
 			__init.Property("Classification");

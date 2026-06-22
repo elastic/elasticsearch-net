@@ -27,7 +27,7 @@ public partial class SnapshotRestore : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SnapshotRestore");
+		var __init = writer.BeginObjectInitializer("SnapshotRestore", false);
 		{
 			__init.Property("Indices");
 			writer.WriteInlineList(Indices, (w, item) => { w.WriteString(item); });

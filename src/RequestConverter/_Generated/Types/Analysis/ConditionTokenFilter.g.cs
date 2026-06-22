@@ -27,7 +27,7 @@ public partial class ConditionTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ConditionTokenFilter");
+		var __init = writer.BeginObjectInitializer("ConditionTokenFilter", true);
 		{
 			__init.Property("Filter");
 			writer.WriteInlineList(Filter, (w, item) => { w.WriteString(item); });

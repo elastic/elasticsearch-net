@@ -27,7 +27,7 @@ public partial class IndexSettingsLifecycleStep : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexSettingsLifecycleStep");
+		var __init = writer.BeginObjectInitializer("IndexSettingsLifecycleStep", false);
 		if (WaitTimeThreshold is not null)
 		{
 			__init.Property("WaitTimeThreshold");

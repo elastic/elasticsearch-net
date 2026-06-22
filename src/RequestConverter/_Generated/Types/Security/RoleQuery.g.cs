@@ -27,7 +27,7 @@ public partial class RoleQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RoleQuery");
+		var __init = writer.BeginObjectInitializer("RoleQuery", false);
 		if (Bool is not null)
 		{
 			__init.Property("Bool");

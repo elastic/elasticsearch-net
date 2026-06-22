@@ -27,7 +27,7 @@ public partial class BoolQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BoolQuery");
+		var __init = writer.BeginObjectInitializer("BoolQuery", false);
 		if (Boost is not null)
 		{
 			__init.Property("Boost");

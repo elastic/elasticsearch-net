@@ -27,7 +27,7 @@ public partial class MinBucketAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MinBucketAggregation");
+		var __init = writer.BeginObjectInitializer("MinBucketAggregation", false);
 		if (BucketsPath is not null)
 		{
 			__init.Property("BucketsPath");

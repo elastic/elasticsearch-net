@@ -27,7 +27,7 @@ public partial class FiltersAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FiltersAggregation");
+		var __init = writer.BeginObjectInitializer("FiltersAggregation", false);
 		if (Filters is not null)
 		{
 			__init.Property("Filters");

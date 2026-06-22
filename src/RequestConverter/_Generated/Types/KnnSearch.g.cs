@@ -27,7 +27,7 @@ public partial class KnnSearch : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("KnnSearch");
+		var __init = writer.BeginObjectInitializer("KnnSearch", false);
 		if (Boost is not null)
 		{
 			__init.Property("Boost");

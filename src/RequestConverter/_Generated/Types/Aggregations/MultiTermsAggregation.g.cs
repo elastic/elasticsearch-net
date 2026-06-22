@@ -27,7 +27,7 @@ public partial class MultiTermsAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MultiTermsAggregation");
+		var __init = writer.BeginObjectInitializer("MultiTermsAggregation", false);
 		if (CollectMode is not null)
 		{
 			__init.Property("CollectMode");

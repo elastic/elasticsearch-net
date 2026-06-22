@@ -27,7 +27,7 @@ public partial class MlInferenceDeployments : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MlInferenceDeployments");
+		var __init = writer.BeginObjectInitializer("MlInferenceDeployments", false);
 		{
 			__init.Property("Count");
 			writer.WriteValue(Count);

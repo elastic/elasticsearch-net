@@ -27,7 +27,7 @@ public partial class ConfusionMatrixThreshold : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ConfusionMatrixThreshold");
+		var __init = writer.BeginObjectInitializer("ConfusionMatrixThreshold", false);
 		{
 			__init.Property("FalseNegative");
 			writer.WriteValue(FalseNegative);

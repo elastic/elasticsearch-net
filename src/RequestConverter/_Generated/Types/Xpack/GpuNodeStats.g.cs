@@ -27,7 +27,7 @@ public partial class GpuNodeStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GpuNodeStats");
+		var __init = writer.BeginObjectInitializer("GpuNodeStats", false);
 		{
 			__init.Property("Enabled");
 			writer.WriteValue(Enabled);

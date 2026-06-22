@@ -27,7 +27,7 @@ public partial class EqlFeaturesKeys : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EqlFeaturesKeys");
+		var __init = writer.BeginObjectInitializer("EqlFeaturesKeys", false);
 		{
 			__init.Property("JoinKeysFiveOrMore");
 			writer.WriteValue(JoinKeysFiveOrMore);

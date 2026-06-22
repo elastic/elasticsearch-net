@@ -27,7 +27,7 @@ public partial class SnowballTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SnowballTokenFilter");
+		var __init = writer.BeginObjectInitializer("SnowballTokenFilter", true);
 		if (Language is not null)
 		{
 			__init.Property("Language");

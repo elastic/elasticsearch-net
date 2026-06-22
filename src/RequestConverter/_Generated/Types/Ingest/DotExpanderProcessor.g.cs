@@ -27,7 +27,7 @@ public partial class DotExpanderProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DotExpanderProcessor");
+		var __init = writer.BeginObjectInitializer("DotExpanderProcessor", false);
 		if (Description is not null)
 		{
 			__init.Property("Description");

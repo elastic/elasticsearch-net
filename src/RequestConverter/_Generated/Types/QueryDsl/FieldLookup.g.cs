@@ -27,7 +27,7 @@ public partial class FieldLookup : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldLookup");
+		var __init = writer.BeginObjectInitializer("FieldLookup", false);
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);

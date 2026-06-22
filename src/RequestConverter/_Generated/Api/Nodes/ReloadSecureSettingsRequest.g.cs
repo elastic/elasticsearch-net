@@ -27,7 +27,7 @@ public partial class ReloadSecureSettingsRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ReloadSecureSettingsRequest");
+		var __init = writer.BeginObjectInitializer("ReloadSecureSettingsRequest", false);
 		if (NodeId is not null)
 		{
 			__init.Property("NodeId");

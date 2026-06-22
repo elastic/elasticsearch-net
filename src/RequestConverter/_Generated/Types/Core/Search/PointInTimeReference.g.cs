@@ -27,7 +27,7 @@ public partial class PointInTimeReference : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PointInTimeReference");
+		var __init = writer.BeginObjectInitializer("PointInTimeReference", false);
 		{
 			__init.Property("Id");
 			writer.WriteString(Id);

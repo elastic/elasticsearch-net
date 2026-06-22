@@ -27,7 +27,7 @@ public partial class JvmClasses : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("JvmClasses");
+		var __init = writer.BeginObjectInitializer("JvmClasses", false);
 		if (CurrentLoadedCount is not null)
 		{
 			__init.Property("CurrentLoadedCount");

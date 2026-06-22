@@ -27,7 +27,7 @@ public partial class NodeInfoSearch : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoSearch");
+		var __init = writer.BeginObjectInitializer("NodeInfoSearch", false);
 		{
 			__init.Property("Remote");
 			Remote.FormatCode(writer);

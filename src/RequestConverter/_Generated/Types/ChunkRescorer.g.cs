@@ -27,7 +27,7 @@ public partial class ChunkRescorer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ChunkRescorer");
+		var __init = writer.BeginObjectInitializer("ChunkRescorer", false);
 		if (ChunkingSettings is not null)
 		{
 			__init.Property("ChunkingSettings");

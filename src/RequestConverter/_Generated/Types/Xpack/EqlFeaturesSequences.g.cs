@@ -27,7 +27,7 @@ public partial class EqlFeaturesSequences : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EqlFeaturesSequences");
+		var __init = writer.BeginObjectInitializer("EqlFeaturesSequences", false);
 		{
 			__init.Property("SequenceMaxspan");
 			writer.WriteValue(SequenceMaxspan);

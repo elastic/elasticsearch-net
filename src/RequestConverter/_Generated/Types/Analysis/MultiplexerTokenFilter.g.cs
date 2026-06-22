@@ -27,7 +27,7 @@ public partial class MultiplexerTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MultiplexerTokenFilter");
+		var __init = writer.BeginObjectInitializer("MultiplexerTokenFilter", true);
 		{
 			__init.Property("Filters");
 			writer.WriteInlineList(Filters, (w, item) => { w.WriteString(item); });

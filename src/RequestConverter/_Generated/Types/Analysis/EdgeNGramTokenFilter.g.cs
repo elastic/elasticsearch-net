@@ -27,7 +27,7 @@ public partial class EdgeNGramTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EdgeNGramTokenFilter");
+		var __init = writer.BeginObjectInitializer("EdgeNGramTokenFilter", true);
 		if (MaxGram is not null)
 		{
 			__init.Property("MaxGram");

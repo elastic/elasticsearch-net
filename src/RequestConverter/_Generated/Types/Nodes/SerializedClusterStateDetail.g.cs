@@ -27,7 +27,7 @@ public partial class SerializedClusterStateDetail : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SerializedClusterStateDetail");
+		var __init = writer.BeginObjectInitializer("SerializedClusterStateDetail", false);
 		if (CompressedSize is not null)
 		{
 			__init.Property("CompressedSize");

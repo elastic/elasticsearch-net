@@ -27,7 +27,7 @@ public partial class SlowlogTresholds : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SlowlogTresholds");
+		var __init = writer.BeginObjectInitializer("SlowlogTresholds", false);
 		if (Fetch is not null)
 		{
 			__init.Property("Fetch");

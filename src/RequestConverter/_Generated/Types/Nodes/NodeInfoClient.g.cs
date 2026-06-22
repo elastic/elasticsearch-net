@@ -27,7 +27,7 @@ public partial class NodeInfoClient : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoClient");
+		var __init = writer.BeginObjectInitializer("NodeInfoClient", false);
 		{
 			__init.Property("Type");
 			writer.WriteString(Type);

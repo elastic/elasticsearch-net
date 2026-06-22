@@ -27,7 +27,7 @@ public partial class SamlInvalidateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SamlInvalidateRequest");
+		var __init = writer.BeginObjectInitializer("SamlInvalidateRequest", false);
 		if (Acs is not null)
 		{
 			__init.Property("Acs");

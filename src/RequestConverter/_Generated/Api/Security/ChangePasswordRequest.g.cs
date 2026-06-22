@@ -27,7 +27,7 @@ public partial class ChangePasswordRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ChangePasswordRequest");
+		var __init = writer.BeginObjectInitializer("ChangePasswordRequest", false);
 		if (Username is not null)
 		{
 			__init.Property("Username");

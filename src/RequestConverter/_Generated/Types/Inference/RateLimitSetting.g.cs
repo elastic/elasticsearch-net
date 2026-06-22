@@ -27,7 +27,7 @@ public partial class RateLimitSetting : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RateLimitSetting");
+		var __init = writer.BeginObjectInitializer("RateLimitSetting", false);
 		if (RequestsPerMinute is not null)
 		{
 			__init.Property("RequestsPerMinute");

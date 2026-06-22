@@ -27,7 +27,7 @@ public partial class IndexingSlowlogTresholds : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexingSlowlogTresholds");
+		var __init = writer.BeginObjectInitializer("IndexingSlowlogTresholds", false);
 		if (Index is not null)
 		{
 			__init.Property("Index");

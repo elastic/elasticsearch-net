@@ -27,7 +27,7 @@ public partial class FailedNodeException : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FailedNodeException");
+		var __init = writer.BeginObjectInitializer("FailedNodeException", false);
 		{
 			__init.Property("NodeId");
 			writer.WriteString(NodeId);

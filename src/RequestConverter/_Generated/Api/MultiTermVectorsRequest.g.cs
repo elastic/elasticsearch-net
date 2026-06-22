@@ -27,7 +27,7 @@ public partial class MultiTermVectorsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MultiTermVectorsRequest");
+		var __init = writer.BeginObjectInitializer("MultiTermVectorsRequest", false);
 		if (Index is not null)
 		{
 			__init.Property("Index");

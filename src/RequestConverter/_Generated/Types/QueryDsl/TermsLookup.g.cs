@@ -27,7 +27,7 @@ public partial class TermsLookup : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TermsLookup");
+		var __init = writer.BeginObjectInitializer("TermsLookup", true);
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);

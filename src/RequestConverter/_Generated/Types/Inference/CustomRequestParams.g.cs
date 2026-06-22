@@ -27,7 +27,7 @@ public partial class CustomRequestParams : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CustomRequestParams");
+		var __init = writer.BeginObjectInitializer("CustomRequestParams", false);
 		{
 			__init.Property("Content");
 			writer.WriteString(Content);

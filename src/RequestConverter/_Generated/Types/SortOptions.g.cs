@@ -27,7 +27,7 @@ public partial class SortOptions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SortOptions");
+		var __init = writer.BeginObjectInitializer("SortOptions", false);
 		if (Doc is not null)
 		{
 			__init.Property("Doc");

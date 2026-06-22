@@ -27,7 +27,7 @@ public partial class TrainedModelInferenceFeatureImportance : RequestConverter.I
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelInferenceFeatureImportance");
+		var __init = writer.BeginObjectInitializer("TrainedModelInferenceFeatureImportance", false);
 		if (Classes is not null)
 		{
 			__init.Property("Classes");

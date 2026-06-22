@@ -27,7 +27,7 @@ public partial class ReloadResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ReloadResult");
+		var __init = writer.BeginObjectInitializer("ReloadResult", false);
 		{
 			__init.Property("ReloadDetails");
 			writer.WriteInlineList(ReloadDetails, (w, item) => { item.FormatCode(w); });

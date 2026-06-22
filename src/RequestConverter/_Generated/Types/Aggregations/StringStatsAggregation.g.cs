@@ -27,7 +27,7 @@ public partial class StringStatsAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StringStatsAggregation");
+		var __init = writer.BeginObjectInitializer("StringStatsAggregation", false);
 		if (Field is not null)
 		{
 			__init.Property("Field");

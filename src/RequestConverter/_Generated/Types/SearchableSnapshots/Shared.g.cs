@@ -27,7 +27,7 @@ public partial class Shared : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Shared");
+		var __init = writer.BeginObjectInitializer("Shared", false);
 		{
 			__init.Property("BytesReadInBytes");
 			BytesReadInBytes.FormatCode(writer);

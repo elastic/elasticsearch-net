@@ -27,7 +27,7 @@ public partial class SizeHttpHistogram : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SizeHttpHistogram");
+		var __init = writer.BeginObjectInitializer("SizeHttpHistogram", false);
 		{
 			__init.Property("Count");
 			writer.WriteValue(Count);

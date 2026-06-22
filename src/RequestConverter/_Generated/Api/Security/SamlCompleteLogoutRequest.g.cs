@@ -27,7 +27,7 @@ public partial class SamlCompleteLogoutRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SamlCompleteLogoutRequest");
+		var __init = writer.BeginObjectInitializer("SamlCompleteLogoutRequest", false);
 		if (Content is not null)
 		{
 			__init.Property("Content");

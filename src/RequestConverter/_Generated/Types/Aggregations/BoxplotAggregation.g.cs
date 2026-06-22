@@ -27,7 +27,7 @@ public partial class BoxplotAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BoxplotAggregation");
+		var __init = writer.BeginObjectInitializer("BoxplotAggregation", false);
 		if (Compression is not null)
 		{
 			__init.Property("Compression");

@@ -27,7 +27,7 @@ public partial class DataDescription : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataDescription");
+		var __init = writer.BeginObjectInitializer("DataDescription", false);
 		if (FieldDelimiter is not null)
 		{
 			__init.Property("FieldDelimiter");

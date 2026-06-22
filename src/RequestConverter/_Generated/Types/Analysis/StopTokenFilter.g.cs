@@ -27,7 +27,7 @@ public partial class StopTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StopTokenFilter");
+		var __init = writer.BeginObjectInitializer("StopTokenFilter", true);
 		if (IgnoreCase is not null)
 		{
 			__init.Property("IgnoreCase");

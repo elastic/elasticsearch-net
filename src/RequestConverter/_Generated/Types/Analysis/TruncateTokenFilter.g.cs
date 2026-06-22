@@ -27,7 +27,7 @@ public partial class TruncateTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TruncateTokenFilter");
+		var __init = writer.BeginObjectInitializer("TruncateTokenFilter", true);
 		if (Length is not null)
 		{
 			__init.Property("Length");

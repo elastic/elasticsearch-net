@@ -27,7 +27,7 @@ public partial class IngestDocumentSimulation : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IngestDocumentSimulation");
+		var __init = writer.BeginObjectInitializer("IngestDocumentSimulation", false);
 		if (EffectiveMapping is not null)
 		{
 			__init.Property("EffectiveMapping");
@@ -53,7 +53,7 @@ public partial class IngestDocumentSimulation : RequestConverter.ICodeFormattabl
 		if (IgnoredFields is not null)
 		{
 			__init.Property("IgnoredFields");
-			writer.WriteInlineList(IgnoredFields, (w, item) => { w.Write("new() "); w.WriteInlineList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", "); });
+			writer.WriteInlineList(IgnoredFields, (w, item) => { w.Write("new global::System.Collections.Generic.Dictionary<"); w.Write("string"); w.Write(", "); w.Write("string"); w.Write(">() "); w.WriteInlineList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", "); });
 		}
 
 		{
@@ -64,13 +64,21 @@ public partial class IngestDocumentSimulation : RequestConverter.ICodeFormattabl
 		if (Metadata is not null)
 		{
 			__init.Property("Metadata");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("string");
+			writer.Write(">() ");
 			writer.WriteInlineList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		{
 			__init.Property("Source");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Source, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

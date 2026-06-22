@@ -27,7 +27,7 @@ public partial class FieldAndFormat : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldAndFormat");
+		var __init = writer.BeginObjectInitializer("FieldAndFormat", false);
 		{
 			__init.Property("Field");
 			Field.FormatCode(writer);

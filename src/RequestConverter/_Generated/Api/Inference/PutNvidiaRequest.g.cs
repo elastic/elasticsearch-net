@@ -27,7 +27,7 @@ public partial class PutNvidiaRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutNvidiaRequest");
+		var __init = writer.BeginObjectInitializer("PutNvidiaRequest", false);
 		{
 			__init.Property("NvidiaInferenceId");
 			NvidiaInferenceId.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class DataframeEvaluationSummaryAucRoc : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeEvaluationSummaryAucRoc");
+		var __init = writer.BeginObjectInitializer("DataframeEvaluationSummaryAucRoc", false);
 		if (Curve is not null)
 		{
 			__init.Property("Curve");

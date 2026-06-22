@@ -27,7 +27,7 @@ public partial class TranslateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TranslateRequest");
+		var __init = writer.BeginObjectInitializer("TranslateRequest", false);
 		if (FetchSize is not null)
 		{
 			__init.Property("FetchSize");

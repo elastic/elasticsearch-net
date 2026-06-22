@@ -27,7 +27,7 @@ public partial class Ipinfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Ipinfo");
+		var __init = writer.BeginObjectInitializer("Ipinfo", false);
 		__init.Dispose();
 	}
 }

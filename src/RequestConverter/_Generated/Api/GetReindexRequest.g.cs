@@ -27,7 +27,7 @@ public partial class GetReindexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetReindexRequest");
+		var __init = writer.BeginObjectInitializer("GetReindexRequest", false);
 		{
 			__init.Property("TaskId");
 			TaskId.FormatCode(writer);

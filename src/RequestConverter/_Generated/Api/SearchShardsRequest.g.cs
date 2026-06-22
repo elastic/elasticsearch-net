@@ -27,7 +27,7 @@ public partial class SearchShardsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SearchShardsRequest");
+		var __init = writer.BeginObjectInitializer("SearchShardsRequest", false);
 		if (Indices is not null)
 		{
 			__init.Property("Indices");

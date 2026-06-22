@@ -27,7 +27,7 @@ public partial class StatsBucketAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StatsBucketAggregation");
+		var __init = writer.BeginObjectInitializer("StatsBucketAggregation", false);
 		if (BucketsPath is not null)
 		{
 			__init.Property("BucketsPath");

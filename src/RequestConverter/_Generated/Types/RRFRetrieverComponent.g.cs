@@ -27,7 +27,7 @@ public partial class RRFRetrieverComponent : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RRFRetrieverComponent");
+		var __init = writer.BeginObjectInitializer("RRFRetrieverComponent", true);
 		{
 			__init.Property("Retriever");
 			Retriever.FormatCode(writer);

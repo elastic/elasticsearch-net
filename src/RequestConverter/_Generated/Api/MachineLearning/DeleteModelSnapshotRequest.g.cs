@@ -27,7 +27,7 @@ public partial class DeleteModelSnapshotRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteModelSnapshotRequest");
+		var __init = writer.BeginObjectInitializer("DeleteModelSnapshotRequest", false);
 		{
 			__init.Property("JobId");
 			JobId.FormatCode(writer);

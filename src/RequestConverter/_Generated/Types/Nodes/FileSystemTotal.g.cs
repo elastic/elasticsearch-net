@@ -27,7 +27,7 @@ public partial class FileSystemTotal : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FileSystemTotal");
+		var __init = writer.BeginObjectInitializer("FileSystemTotal", false);
 		if (Available is not null)
 		{
 			__init.Property("Available");

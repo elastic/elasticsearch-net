@@ -27,7 +27,7 @@ public partial class SegmentsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SegmentsRequest");
+		var __init = writer.BeginObjectInitializer("SegmentsRequest", false);
 		if (Indices is not null)
 		{
 			__init.Property("Indices");

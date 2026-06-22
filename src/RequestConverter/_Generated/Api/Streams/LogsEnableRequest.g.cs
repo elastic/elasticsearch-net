@@ -27,7 +27,7 @@ public partial class LogsEnableRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("LogsEnableRequest");
+		var __init = writer.BeginObjectInitializer("LogsEnableRequest", false);
 		{
 			__init.Property("Name");
 			Elastic.Clients.Elasticsearch.Streams.StreamTypeCodeFormatter.FormatCode(Name, writer);

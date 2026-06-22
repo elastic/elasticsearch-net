@@ -27,7 +27,7 @@ public partial class CompositeAggregationSource : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CompositeAggregationSource");
+		var __init = writer.BeginObjectInitializer("CompositeAggregationSource", false);
 		if (DateHistogram is not null)
 		{
 			__init.Property("DateHistogram");

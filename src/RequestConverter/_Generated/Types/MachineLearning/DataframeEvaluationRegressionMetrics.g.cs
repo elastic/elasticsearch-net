@@ -27,7 +27,7 @@ public partial class DataframeEvaluationRegressionMetrics : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeEvaluationRegressionMetrics");
+		var __init = writer.BeginObjectInitializer("DataframeEvaluationRegressionMetrics", false);
 		if (Huber is not null)
 		{
 			__init.Property("Huber");
@@ -37,7 +37,11 @@ public partial class DataframeEvaluationRegressionMetrics : RequestConverter.ICo
 		if (Mse is not null)
 		{
 			__init.Property("Mse");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Mse, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
@@ -50,7 +54,11 @@ public partial class DataframeEvaluationRegressionMetrics : RequestConverter.ICo
 		if (RSquared is not null)
 		{
 			__init.Property("RSquared");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(RSquared, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

@@ -27,7 +27,7 @@ public partial class NodeInfoSettingsClusterElection : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoSettingsClusterElection");
+		var __init = writer.BeginObjectInitializer("NodeInfoSettingsClusterElection", false);
 		{
 			__init.Property("Strategy");
 			writer.WriteString(Strategy);

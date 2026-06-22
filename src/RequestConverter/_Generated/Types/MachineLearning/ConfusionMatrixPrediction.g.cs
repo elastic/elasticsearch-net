@@ -27,7 +27,7 @@ public partial class ConfusionMatrixPrediction : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ConfusionMatrixPrediction");
+		var __init = writer.BeginObjectInitializer("ConfusionMatrixPrediction", false);
 		{
 			__init.Property("Count");
 			writer.WriteValue(Count);

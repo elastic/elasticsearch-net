@@ -27,7 +27,7 @@ public partial class SnapshotLifecycle : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SnapshotLifecycle");
+		var __init = writer.BeginObjectInitializer("SnapshotLifecycle", false);
 		if (InProgress is not null)
 		{
 			__init.Property("InProgress");

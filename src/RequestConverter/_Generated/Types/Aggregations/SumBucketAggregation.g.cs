@@ -27,7 +27,7 @@ public partial class SumBucketAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SumBucketAggregation");
+		var __init = writer.BeginObjectInitializer("SumBucketAggregation", false);
 		if (BucketsPath is not null)
 		{
 			__init.Property("BucketsPath");

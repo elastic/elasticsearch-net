@@ -27,7 +27,7 @@ public partial class SlmIndicatorUnhealthyPolicies : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SlmIndicatorUnhealthyPolicies");
+		var __init = writer.BeginObjectInitializer("SlmIndicatorUnhealthyPolicies", false);
 		{
 			__init.Property("Count");
 			writer.WriteValue(Count);
@@ -37,7 +37,11 @@ public partial class SlmIndicatorUnhealthyPolicies : RequestConverter.ICodeForma
 		if (InvocationsSinceLastSuccess is not null)
 		{
 			__init.Property("InvocationsSinceLastSuccess");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("long");
+			writer.Write(">() ");
 			writer.WriteInlineList(InvocationsSinceLastSuccess, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

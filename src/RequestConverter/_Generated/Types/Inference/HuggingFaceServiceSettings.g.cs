@@ -27,7 +27,7 @@ public partial class HuggingFaceServiceSettings : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("HuggingFaceServiceSettings");
+		var __init = writer.BeginObjectInitializer("HuggingFaceServiceSettings", false);
 		{
 			__init.Property("ApiKey");
 			writer.WriteString(ApiKey);

@@ -27,7 +27,7 @@ public partial class SourceOnlyRepositorySettingsForAzure : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SourceOnlyRepositorySettingsForAzure");
+		var __init = writer.BeginObjectInitializer("SourceOnlyRepositorySettingsForAzure", true);
 		if (BasePath is not null)
 		{
 			__init.Property("BasePath");

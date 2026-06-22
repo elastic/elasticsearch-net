@@ -27,7 +27,7 @@ public partial class PostStartBasicRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PostStartBasicRequest");
+		var __init = writer.BeginObjectInitializer("PostStartBasicRequest", false);
 		if (Acknowledge is not null)
 		{
 			__init.Property("Acknowledge");

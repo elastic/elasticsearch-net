@@ -27,7 +27,7 @@ public partial class CCSUsageClusterStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CCSUsageClusterStats");
+		var __init = writer.BeginObjectInitializer("CCSUsageClusterStats", false);
 		{
 			__init.Property("Skipped");
 			writer.WriteValue(Skipped);

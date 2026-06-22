@@ -27,7 +27,7 @@ public partial class NodeInfoAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoAction");
+		var __init = writer.BeginObjectInitializer("NodeInfoAction", false);
 		{
 			__init.Property("DestructiveRequiresName");
 			writer.WriteString(DestructiveRequiresName);

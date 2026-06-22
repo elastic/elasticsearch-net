@@ -27,7 +27,7 @@ public partial class RestoreRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RestoreRequest");
+		var __init = writer.BeginObjectInitializer("RestoreRequest", false);
 		{
 			__init.Property("Repository");
 			Repository.FormatCode(writer);

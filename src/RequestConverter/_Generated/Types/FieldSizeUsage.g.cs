@@ -27,7 +27,7 @@ public partial class FieldSizeUsage : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldSizeUsage");
+		var __init = writer.BeginObjectInitializer("FieldSizeUsage", false);
 		if (Size is not null)
 		{
 			__init.Property("Size");

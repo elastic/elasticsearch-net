@@ -27,7 +27,7 @@ public partial class ExistsAliasRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExistsAliasRequest");
+		var __init = writer.BeginObjectInitializer("ExistsAliasRequest", false);
 		if (Indices is not null)
 		{
 			__init.Property("Indices");

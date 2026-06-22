@@ -27,7 +27,7 @@ public partial class Monitoring : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Monitoring");
+		var __init = writer.BeginObjectInitializer("Monitoring", false);
 		{
 			__init.Property("Available");
 			writer.WriteValue(Available);
@@ -45,7 +45,11 @@ public partial class Monitoring : RequestConverter.ICodeFormattable
 
 		{
 			__init.Property("EnabledExporters");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("long");
+			writer.Write(">() ");
 			writer.WriteInlineList(EnabledExporters, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

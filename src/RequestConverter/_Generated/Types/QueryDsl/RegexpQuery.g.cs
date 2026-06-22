@@ -27,7 +27,7 @@ public partial class RegexpQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RegexpQuery");
+		var __init = writer.BeginObjectInitializer("RegexpQuery", false);
 		if (Boost is not null)
 		{
 			__init.Property("Boost");

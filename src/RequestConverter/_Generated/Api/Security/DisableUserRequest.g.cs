@@ -27,7 +27,7 @@ public partial class DisableUserRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DisableUserRequest");
+		var __init = writer.BeginObjectInitializer("DisableUserRequest", false);
 		{
 			__init.Property("Username");
 			Username.FormatCode(writer);

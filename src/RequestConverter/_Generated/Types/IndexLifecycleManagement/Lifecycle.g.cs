@@ -27,7 +27,7 @@ public partial class Lifecycle : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Lifecycle");
+		var __init = writer.BeginObjectInitializer("Lifecycle", false);
 		{
 			__init.Property("ModifiedDate");
 			writer.WriteValue(ModifiedDate);

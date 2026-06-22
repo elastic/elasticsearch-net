@@ -27,7 +27,7 @@ public partial class CompositeSubField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CompositeSubField");
+		var __init = writer.BeginObjectInitializer("CompositeSubField", false);
 		{
 			__init.Property("Type");
 			Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldTypeCodeFormatter.FormatCode(Type, writer);

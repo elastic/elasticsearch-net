@@ -27,7 +27,7 @@ public partial class PhraseSuggestOption : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PhraseSuggestOption");
+		var __init = writer.BeginObjectInitializer("PhraseSuggestOption", false);
 		if (CollateMatch is not null)
 		{
 			__init.Property("CollateMatch");

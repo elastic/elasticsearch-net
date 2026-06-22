@@ -27,7 +27,7 @@ public partial class TagsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TagsRequest");
+		var __init = writer.BeginObjectInitializer("TagsRequest", false);
 		if (ProjectRouting is not null)
 		{
 			__init.Property("ProjectRouting");

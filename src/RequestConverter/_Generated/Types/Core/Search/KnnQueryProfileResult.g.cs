@@ -27,7 +27,7 @@ public partial class KnnQueryProfileResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("KnnQueryProfileResult");
+		var __init = writer.BeginObjectInitializer("KnnQueryProfileResult", false);
 		{
 			__init.Property("Breakdown");
 			Breakdown.FormatCode(writer);
@@ -42,7 +42,11 @@ public partial class KnnQueryProfileResult : RequestConverter.ICodeFormattable
 		if (Debug is not null)
 		{
 			__init.Property("Debug");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Debug, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

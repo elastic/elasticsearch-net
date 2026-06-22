@@ -27,7 +27,7 @@ public partial class DeleteLifecycleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteLifecycleRequest");
+		var __init = writer.BeginObjectInitializer("DeleteLifecycleRequest", false);
 		{
 			__init.Property("PolicyId");
 			PolicyId.FormatCode(writer);

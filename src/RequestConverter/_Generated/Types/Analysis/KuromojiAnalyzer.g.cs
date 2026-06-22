@@ -27,7 +27,7 @@ public partial class KuromojiAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("KuromojiAnalyzer");
+		var __init = writer.BeginObjectInitializer("KuromojiAnalyzer", true);
 		if (Mode is not null)
 		{
 			__init.Property("Mode");

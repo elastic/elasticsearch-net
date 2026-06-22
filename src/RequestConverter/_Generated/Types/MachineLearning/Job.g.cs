@@ -27,7 +27,7 @@ public partial class Job : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Job");
+		var __init = writer.BeginObjectInitializer("Job", false);
 		{
 			__init.Property("AllowLazyOpen");
 			writer.WriteValue(AllowLazyOpen);

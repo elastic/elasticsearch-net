@@ -27,7 +27,7 @@ public partial class AttachmentProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AttachmentProcessor");
+		var __init = writer.BeginObjectInitializer("AttachmentProcessor", false);
 		if (Description is not null)
 		{
 			__init.Property("Description");

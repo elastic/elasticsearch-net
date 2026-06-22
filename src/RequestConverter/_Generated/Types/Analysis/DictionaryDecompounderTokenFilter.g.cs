@@ -27,7 +27,7 @@ public partial class DictionaryDecompounderTokenFilter : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DictionaryDecompounderTokenFilter");
+		var __init = writer.BeginObjectInitializer("DictionaryDecompounderTokenFilter", true);
 		if (MaxSubwordSize is not null)
 		{
 			__init.Property("MaxSubwordSize");

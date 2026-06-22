@@ -27,7 +27,7 @@ public partial class UserProfileUser : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UserProfileUser");
+		var __init = writer.BeginObjectInitializer("UserProfileUser", false);
 		if (Email is not null)
 		{
 			__init.Property("Email");

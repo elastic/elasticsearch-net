@@ -27,7 +27,7 @@ public partial class SnapshotPolicyStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SnapshotPolicyStats");
+		var __init = writer.BeginObjectInitializer("SnapshotPolicyStats", false);
 		{
 			__init.Property("Policy");
 			writer.WriteString(Policy);

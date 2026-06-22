@@ -27,7 +27,7 @@ public partial class OneHotEncodingPreprocessor : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("OneHotEncodingPreprocessor");
+		var __init = writer.BeginObjectInitializer("OneHotEncodingPreprocessor", false);
 		{
 			__init.Property("Field");
 			writer.WriteString(Field);
@@ -35,7 +35,11 @@ public partial class OneHotEncodingPreprocessor : RequestConverter.ICodeFormatta
 
 		{
 			__init.Property("HotMap");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("string");
+			writer.Write(">() ");
 			writer.WriteInlineList(HotMap, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

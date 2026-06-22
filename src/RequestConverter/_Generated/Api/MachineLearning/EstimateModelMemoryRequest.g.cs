@@ -27,7 +27,7 @@ public partial class EstimateModelMemoryRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EstimateModelMemoryRequest");
+		var __init = writer.BeginObjectInitializer("EstimateModelMemoryRequest", false);
 		if (AnalysisConfig is not null)
 		{
 			__init.Property("AnalysisConfig");
@@ -37,14 +37,22 @@ public partial class EstimateModelMemoryRequest : RequestConverter.ICodeFormatta
 		if (MaxBucketCardinality is not null)
 		{
 			__init.Property("MaxBucketCardinality");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("Elastic.Clients.Elasticsearch.Field");
+			writer.Write(", ");
+			writer.Write("long");
+			writer.Write(">() ");
 			writer.WriteInlineList(MaxBucketCardinality, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		if (OverallCardinality is not null)
 		{
 			__init.Property("OverallCardinality");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("Elastic.Clients.Elasticsearch.Field");
+			writer.Write(", ");
+			writer.Write("long");
+			writer.Write(">() ");
 			writer.WriteInlineList(OverallCardinality, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

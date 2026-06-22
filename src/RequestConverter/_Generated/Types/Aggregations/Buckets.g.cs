@@ -29,8 +29,14 @@ public partial class Buckets<TBucket> : RequestConverter.ICodeFormattable
 	{
 		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 		{
-			writer.Write("new Buckets(");
-			writer.Write("new() ");
+			writer.Write("new ");
+			writer.WriteTypeName(this.GetType());
+			writer.Write("(");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.WriteTypeName(typeof(TBucket));
+			writer.Write(">() ");
 			writer.WriteInlineList(Value1, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 			writer.Write(")");
 			return;
@@ -38,7 +44,9 @@ public partial class Buckets<TBucket> : RequestConverter.ICodeFormattable
 
 		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T2)
 		{
-			writer.Write("new Buckets(");
+			writer.Write("new ");
+			writer.WriteTypeName(this.GetType());
+			writer.Write("(");
 			writer.WriteInlineList(Value2, (w, item) => { w.WriteValue(item); });
 			writer.Write(")");
 			return;

@@ -27,7 +27,7 @@ public partial class NodeReloadResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeReloadResult");
+		var __init = writer.BeginObjectInitializer("NodeReloadResult", false);
 		if (KeystoreDigest is not null)
 		{
 			__init.Property("KeystoreDigest");

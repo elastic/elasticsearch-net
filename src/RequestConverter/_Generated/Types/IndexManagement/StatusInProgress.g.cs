@@ -27,7 +27,7 @@ public partial class StatusInProgress : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StatusInProgress");
+		var __init = writer.BeginObjectInitializer("StatusInProgress", false);
 		{
 			__init.Property("Index");
 			writer.WriteString(Index);

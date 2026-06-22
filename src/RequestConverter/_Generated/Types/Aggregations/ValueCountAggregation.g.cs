@@ -27,7 +27,7 @@ public partial class ValueCountAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ValueCountAggregation");
+		var __init = writer.BeginObjectInitializer("ValueCountAggregation", false);
 		if (Field is not null)
 		{
 			__init.Property("Field");

@@ -27,7 +27,7 @@ public partial class AzureRepository : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AzureRepository");
+		var __init = writer.BeginObjectInitializer("AzureRepository", true);
 		if (Settings is not null)
 		{
 			__init.Property("Settings");

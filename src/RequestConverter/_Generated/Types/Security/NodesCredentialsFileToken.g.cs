@@ -27,7 +27,7 @@ public partial class NodesCredentialsFileToken : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodesCredentialsFileToken");
+		var __init = writer.BeginObjectInitializer("NodesCredentialsFileToken", false);
 		{
 			__init.Property("Nodes");
 			writer.WriteInlineList(Nodes, (w, item) => { w.WriteString(item); });

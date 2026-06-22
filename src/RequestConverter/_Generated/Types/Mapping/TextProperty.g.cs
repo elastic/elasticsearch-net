@@ -27,7 +27,7 @@ public partial class TextProperty : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TextProperty");
+		var __init = writer.BeginObjectInitializer("TextProperty", true);
 		if (Analyzer is not null)
 		{
 			__init.Property("Analyzer");
@@ -110,7 +110,11 @@ public partial class TextProperty : RequestConverter.ICodeFormattable
 		if (Meta is not null)
 		{
 			__init.Property("Meta");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("string");
+			writer.Write(">() ");
 			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

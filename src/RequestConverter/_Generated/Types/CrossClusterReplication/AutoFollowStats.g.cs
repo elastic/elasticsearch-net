@@ -27,7 +27,7 @@ public partial class AutoFollowStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AutoFollowStats");
+		var __init = writer.BeginObjectInitializer("AutoFollowStats", false);
 		{
 			__init.Property("AutoFollowedClusters");
 			writer.WriteInlineList(AutoFollowedClusters, (w, item) => { item.FormatCode(w); });

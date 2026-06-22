@@ -27,7 +27,7 @@ public partial class UpdateAliasesRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UpdateAliasesRequest");
+		var __init = writer.BeginObjectInitializer("UpdateAliasesRequest", false);
 		if (MasterTimeout is not null)
 		{
 			__init.Property("MasterTimeout");

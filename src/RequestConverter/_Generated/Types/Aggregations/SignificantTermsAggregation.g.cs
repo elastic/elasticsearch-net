@@ -27,7 +27,7 @@ public partial class SignificantTermsAggregation : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SignificantTermsAggregation");
+		var __init = writer.BeginObjectInitializer("SignificantTermsAggregation", false);
 		if (BackgroundFilter is not null)
 		{
 			__init.Property("BackgroundFilter");

@@ -27,7 +27,7 @@ public partial class ReverseNestedAggregation : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ReverseNestedAggregation");
+		var __init = writer.BeginObjectInitializer("ReverseNestedAggregation", false);
 		if (Path is not null)
 		{
 			__init.Property("Path");

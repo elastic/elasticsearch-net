@@ -27,7 +27,7 @@ public partial class PutMappingRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutMappingRequest");
+		var __init = writer.BeginObjectInitializer("PutMappingRequest", false);
 		{
 			__init.Property("Indices");
 			Indices.FormatCode(writer);
@@ -102,7 +102,11 @@ public partial class PutMappingRequest : RequestConverter.ICodeFormattable
 		if (Meta is not null)
 		{
 			__init.Property("Meta");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
@@ -127,7 +131,11 @@ public partial class PutMappingRequest : RequestConverter.ICodeFormattable
 		if (Runtime is not null)
 		{
 			__init.Property("Runtime");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("Elastic.Clients.Elasticsearch.Field");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Mapping.RuntimeField");
+			writer.Write(">() ");
 			writer.WriteInlineList(Runtime, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

@@ -27,7 +27,7 @@ public partial class MlDataFrameAnalyticsJobsAnalysis : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MlDataFrameAnalyticsJobsAnalysis");
+		var __init = writer.BeginObjectInitializer("MlDataFrameAnalyticsJobsAnalysis", false);
 		if (Classification is not null)
 		{
 			__init.Property("Classification");

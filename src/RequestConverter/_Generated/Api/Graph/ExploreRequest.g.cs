@@ -27,7 +27,7 @@ public partial class ExploreRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExploreRequest");
+		var __init = writer.BeginObjectInitializer("ExploreRequest", false);
 		{
 			__init.Property("Indices");
 			Indices.FormatCode(writer);

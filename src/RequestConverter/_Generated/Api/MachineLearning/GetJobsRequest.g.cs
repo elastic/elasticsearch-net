@@ -27,7 +27,7 @@ public partial class GetJobsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetJobsRequest");
+		var __init = writer.BeginObjectInitializer("GetJobsRequest", false);
 		if (JobId is not null)
 		{
 			__init.Property("JobId");

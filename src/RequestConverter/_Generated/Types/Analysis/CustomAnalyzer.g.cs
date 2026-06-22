@@ -27,7 +27,7 @@ public partial class CustomAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CustomAnalyzer");
+		var __init = writer.BeginObjectInitializer("CustomAnalyzer", true);
 		if (CharFilter is not null)
 		{
 			__init.Property("CharFilter");

@@ -27,7 +27,7 @@ public partial class CjkBigramTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CjkBigramTokenFilter");
+		var __init = writer.BeginObjectInitializer("CjkBigramTokenFilter", true);
 		if (IgnoredScripts is not null)
 		{
 			__init.Property("IgnoredScripts");

@@ -27,7 +27,7 @@ public partial class GetInfluencersRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetInfluencersRequest");
+		var __init = writer.BeginObjectInitializer("GetInfluencersRequest", false);
 		{
 			__init.Property("JobId");
 			JobId.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class RoleTemplate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RoleTemplate");
+		var __init = writer.BeginObjectInitializer("RoleTemplate", false);
 		if (Format is not null)
 		{
 			__init.Property("Format");

@@ -27,7 +27,7 @@ public partial class Settings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Settings");
+		var __init = writer.BeginObjectInitializer("Settings", false);
 		if (AlignCheckpoints is not null)
 		{
 			__init.Property("AlignCheckpoints");

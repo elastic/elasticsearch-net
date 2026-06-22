@@ -27,7 +27,7 @@ public partial class DeleteDataFrameAnalyticsRequest : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteDataFrameAnalyticsRequest");
+		var __init = writer.BeginObjectInitializer("DeleteDataFrameAnalyticsRequest", false);
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);

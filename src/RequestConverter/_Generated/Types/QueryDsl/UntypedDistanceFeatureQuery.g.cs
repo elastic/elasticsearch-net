@@ -27,7 +27,7 @@ public partial class UntypedDistanceFeatureQuery : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UntypedDistanceFeatureQuery");
+		var __init = writer.BeginObjectInitializer("UntypedDistanceFeatureQuery", true);
 		if (Boost is not null)
 		{
 			__init.Property("Boost");

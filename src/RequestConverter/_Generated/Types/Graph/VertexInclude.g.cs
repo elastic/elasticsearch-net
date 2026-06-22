@@ -27,7 +27,7 @@ public partial class VertexInclude : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("VertexInclude");
+		var __init = writer.BeginObjectInitializer("VertexInclude", false);
 		if (Boost is not null)
 		{
 			__init.Property("Boost");

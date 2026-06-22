@@ -27,7 +27,7 @@ public partial class DataStreams : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataStreams");
+		var __init = writer.BeginObjectInitializer("DataStreams", false);
 		{
 			__init.Property("Available");
 			writer.WriteValue(Available);

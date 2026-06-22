@@ -27,7 +27,7 @@ public partial class OidcAuthenticateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("OidcAuthenticateRequest");
+		var __init = writer.BeginObjectInitializer("OidcAuthenticateRequest", false);
 		{
 			__init.Property("Nonce");
 			writer.WriteString(Nonce);

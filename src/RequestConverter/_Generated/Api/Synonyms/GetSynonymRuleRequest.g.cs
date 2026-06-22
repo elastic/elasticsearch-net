@@ -27,7 +27,7 @@ public partial class GetSynonymRuleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetSynonymRuleRequest");
+		var __init = writer.BeginObjectInitializer("GetSynonymRuleRequest", false);
 		{
 			__init.Property("RuleId");
 			RuleId.FormatCode(writer);

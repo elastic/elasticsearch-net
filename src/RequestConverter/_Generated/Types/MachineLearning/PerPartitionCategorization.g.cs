@@ -27,7 +27,7 @@ public partial class PerPartitionCategorization : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PerPartitionCategorization");
+		var __init = writer.BeginObjectInitializer("PerPartitionCategorization", false);
 		if (Enabled is not null)
 		{
 			__init.Property("Enabled");

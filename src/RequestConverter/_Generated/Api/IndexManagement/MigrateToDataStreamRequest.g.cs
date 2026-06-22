@@ -27,7 +27,7 @@ public partial class MigrateToDataStreamRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MigrateToDataStreamRequest");
+		var __init = writer.BeginObjectInitializer("MigrateToDataStreamRequest", false);
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

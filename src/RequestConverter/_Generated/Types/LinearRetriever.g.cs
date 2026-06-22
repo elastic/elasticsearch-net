@@ -27,7 +27,7 @@ public partial class LinearRetriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("LinearRetriever");
+		var __init = writer.BeginObjectInitializer("LinearRetriever", false);
 		if (Fields is not null)
 		{
 			__init.Property("Fields");

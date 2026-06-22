@@ -27,7 +27,7 @@ public partial class GetApiKeyRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetApiKeyRequest");
+		var __init = writer.BeginObjectInitializer("GetApiKeyRequest", false);
 		if (ActiveOnly is not null)
 		{
 			__init.Property("ActiveOnly");

@@ -27,7 +27,7 @@ public partial class SummaryInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SummaryInfo");
+		var __init = writer.BeginObjectInitializer("SummaryInfo", false);
 		{
 			__init.Property("Read");
 			Read.FormatCode(writer);

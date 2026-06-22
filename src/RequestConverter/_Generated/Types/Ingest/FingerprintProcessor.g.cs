@@ -27,7 +27,7 @@ public partial class FingerprintProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FingerprintProcessor");
+		var __init = writer.BeginObjectInitializer("FingerprintProcessor", false);
 		if (Description is not null)
 		{
 			__init.Property("Description");

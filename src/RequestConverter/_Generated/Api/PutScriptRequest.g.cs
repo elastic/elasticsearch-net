@@ -27,7 +27,7 @@ public partial class PutScriptRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutScriptRequest");
+		var __init = writer.BeginObjectInitializer("PutScriptRequest", false);
 		if (Context is not null)
 		{
 			__init.Property("Context");

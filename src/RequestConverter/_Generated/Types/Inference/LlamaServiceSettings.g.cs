@@ -27,7 +27,7 @@ public partial class LlamaServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("LlamaServiceSettings");
+		var __init = writer.BeginObjectInitializer("LlamaServiceSettings", false);
 		if (MaxInputTokens is not null)
 		{
 			__init.Property("MaxInputTokens");

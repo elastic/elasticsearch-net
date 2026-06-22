@@ -27,7 +27,7 @@ public partial class QueryBreakdown : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("QueryBreakdown");
+		var __init = writer.BeginObjectInitializer("QueryBreakdown", false);
 		{
 			__init.Property("Advance");
 			writer.WriteValue(Advance);

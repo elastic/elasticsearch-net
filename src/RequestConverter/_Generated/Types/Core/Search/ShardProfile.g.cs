@@ -27,7 +27,7 @@ public partial class ShardProfile : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardProfile");
+		var __init = writer.BeginObjectInitializer("ShardProfile", false);
 		{
 			__init.Property("Aggregations");
 			writer.WriteInlineList(Aggregations, (w, item) => { item.FormatCode(w); });

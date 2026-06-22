@@ -27,7 +27,7 @@ public partial class GetMemoryStatsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetMemoryStatsRequest");
+		var __init = writer.BeginObjectInitializer("GetMemoryStatsRequest", false);
 		if (NodeId is not null)
 		{
 			__init.Property("NodeId");

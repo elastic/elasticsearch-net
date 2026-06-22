@@ -27,7 +27,7 @@ public partial class PredicateTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PredicateTokenFilter");
+		var __init = writer.BeginObjectInitializer("PredicateTokenFilter", true);
 		{
 			__init.Property("Script");
 			Script.FormatCode(writer);

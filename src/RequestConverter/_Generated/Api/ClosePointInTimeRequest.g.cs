@@ -27,7 +27,7 @@ public partial class ClosePointInTimeRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClosePointInTimeRequest");
+		var __init = writer.BeginObjectInitializer("ClosePointInTimeRequest", false);
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);

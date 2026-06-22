@@ -27,7 +27,7 @@ public partial class FeatureToggle : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FeatureToggle");
+		var __init = writer.BeginObjectInitializer("FeatureToggle", false);
 		{
 			__init.Property("Enabled");
 			writer.WriteValue(Enabled);

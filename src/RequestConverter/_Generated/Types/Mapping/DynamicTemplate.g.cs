@@ -27,7 +27,7 @@ public partial class DynamicTemplate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DynamicTemplate");
+		var __init = writer.BeginObjectInitializer("DynamicTemplate", false);
 		if (Match is not null)
 		{
 			__init.Property("Match");

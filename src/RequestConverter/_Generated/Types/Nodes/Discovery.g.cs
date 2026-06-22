@@ -27,7 +27,7 @@ public partial class Discovery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Discovery");
+		var __init = writer.BeginObjectInitializer("Discovery", false);
 		if (ClusterApplierStats is not null)
 		{
 			__init.Property("ClusterApplierStats");
@@ -43,7 +43,11 @@ public partial class Discovery : RequestConverter.ICodeFormattable
 		if (ClusterStateUpdate is not null)
 		{
 			__init.Property("ClusterStateUpdate");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Nodes.ClusterStateUpdate");
+			writer.Write(">() ");
 			writer.WriteInlineList(ClusterStateUpdate, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

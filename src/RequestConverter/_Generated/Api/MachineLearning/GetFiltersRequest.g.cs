@@ -27,7 +27,7 @@ public partial class GetFiltersRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetFiltersRequest");
+		var __init = writer.BeginObjectInitializer("GetFiltersRequest", false);
 		if (FilterId is not null)
 		{
 			__init.Property("FilterId");

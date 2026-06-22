@@ -27,7 +27,7 @@ public partial class ShardsStatsSummaryItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardsStatsSummaryItem");
+		var __init = writer.BeginObjectInitializer("ShardsStatsSummaryItem", false);
 		{
 			__init.Property("FileCount");
 			writer.WriteValue(FileCount);

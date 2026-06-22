@@ -27,7 +27,7 @@ public partial class WatcherWatchTriggerSchedule : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("WatcherWatchTriggerSchedule");
+		var __init = writer.BeginObjectInitializer("WatcherWatchTriggerSchedule", false);
 		{
 			__init.Property("Active");
 			writer.WriteValue(Active);

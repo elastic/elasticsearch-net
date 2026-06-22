@@ -27,7 +27,7 @@ public partial class DataframeAnalyticsStatsMemoryUsage : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeAnalyticsStatsMemoryUsage");
+		var __init = writer.BeginObjectInitializer("DataframeAnalyticsStatsMemoryUsage", false);
 		if (MemoryReestimateBytes is not null)
 		{
 			__init.Property("MemoryReestimateBytes");

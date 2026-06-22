@@ -27,7 +27,7 @@ public partial class SimpleAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SimpleAnalyzer");
+		var __init = writer.BeginObjectInitializer("SimpleAnalyzer", true);
 #pragma warning disable CS0618
 		if (Version is not null)
 		{

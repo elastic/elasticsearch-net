@@ -27,7 +27,7 @@ public partial class CgroupCpuStat : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CgroupCpuStat");
+		var __init = writer.BeginObjectInitializer("CgroupCpuStat", false);
 		if (NumberOfElapsedPeriods is not null)
 		{
 			__init.Property("NumberOfElapsedPeriods");

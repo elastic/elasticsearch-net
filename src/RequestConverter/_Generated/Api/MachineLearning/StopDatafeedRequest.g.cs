@@ -27,7 +27,7 @@ public partial class StopDatafeedRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StopDatafeedRequest");
+		var __init = writer.BeginObjectInitializer("StopDatafeedRequest", false);
 		{
 			__init.Property("DatafeedId");
 			DatafeedId.FormatCode(writer);

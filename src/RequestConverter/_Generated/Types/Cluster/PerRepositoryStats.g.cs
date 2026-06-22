@@ -27,7 +27,7 @@ public partial class PerRepositoryStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PerRepositoryStats");
+		var __init = writer.BeginObjectInitializer("PerRepositoryStats", false);
 		{
 			__init.Property("CurrentCounts");
 			CurrentCounts.FormatCode(writer);

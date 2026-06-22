@@ -27,7 +27,7 @@ public partial class ZeroShotClassificationInferenceOptions : RequestConverter.I
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ZeroShotClassificationInferenceOptions");
+		var __init = writer.BeginObjectInitializer("ZeroShotClassificationInferenceOptions", false);
 		{
 			__init.Property("ClassificationLabels");
 			writer.WriteInlineList(ClassificationLabels, (w, item) => { w.WriteString(item); });

@@ -27,7 +27,7 @@ public partial class BucketSummary : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BucketSummary");
+		var __init = writer.BeginObjectInitializer("BucketSummary", false);
 		{
 			__init.Property("AnomalyScore");
 			writer.WriteValue(AnomalyScore);

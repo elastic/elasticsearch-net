@@ -27,7 +27,7 @@ public partial class DeleteIndexTemplateRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteIndexTemplateRequest");
+		var __init = writer.BeginObjectInitializer("DeleteIndexTemplateRequest", false);
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

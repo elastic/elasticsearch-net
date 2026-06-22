@@ -27,7 +27,7 @@ public partial class FingerprintTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FingerprintTokenFilter");
+		var __init = writer.BeginObjectInitializer("FingerprintTokenFilter", true);
 		if (MaxOutputSize is not null)
 		{
 			__init.Property("MaxOutputSize");

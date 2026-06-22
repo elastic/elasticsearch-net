@@ -27,7 +27,7 @@ public partial class RollupSearchRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RollupSearchRequest");
+		var __init = writer.BeginObjectInitializer("RollupSearchRequest", false);
 		{
 			__init.Property("Indices");
 			Indices.FormatCode(writer);
@@ -48,7 +48,11 @@ public partial class RollupSearchRequest : RequestConverter.ICodeFormattable
 		if (Aggregations is not null)
 		{
 			__init.Property("Aggregations");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Aggregations.Aggregation");
+			writer.Write(">() ");
 			writer.WriteInlineList(Aggregations, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

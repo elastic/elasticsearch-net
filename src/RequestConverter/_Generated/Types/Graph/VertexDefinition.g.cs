@@ -27,7 +27,7 @@ public partial class VertexDefinition : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("VertexDefinition");
+		var __init = writer.BeginObjectInitializer("VertexDefinition", false);
 		if (Exclude is not null)
 		{
 			__init.Property("Exclude");

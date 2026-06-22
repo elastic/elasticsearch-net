@@ -27,7 +27,7 @@ public partial class TermsAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TermsAggregation");
+		var __init = writer.BeginObjectInitializer("TermsAggregation", false);
 		if (CollectMode is not null)
 		{
 			__init.Property("CollectMode");

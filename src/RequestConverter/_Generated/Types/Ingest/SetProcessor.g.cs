@@ -27,7 +27,7 @@ public partial class SetProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SetProcessor");
+		var __init = writer.BeginObjectInitializer("SetProcessor", false);
 		if (CopyFrom is not null)
 		{
 			__init.Property("CopyFrom");

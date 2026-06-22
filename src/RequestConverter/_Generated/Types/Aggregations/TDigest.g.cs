@@ -27,7 +27,7 @@ public partial class TDigest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TDigest");
+		var __init = writer.BeginObjectInitializer("TDigest", false);
 		if (Compression is not null)
 		{
 			__init.Property("Compression");

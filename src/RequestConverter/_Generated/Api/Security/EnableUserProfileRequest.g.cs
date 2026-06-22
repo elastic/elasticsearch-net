@@ -27,7 +27,7 @@ public partial class EnableUserProfileRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EnableUserProfileRequest");
+		var __init = writer.BeginObjectInitializer("EnableUserProfileRequest", false);
 		{
 			__init.Property("Uid");
 			writer.WriteString(Uid);

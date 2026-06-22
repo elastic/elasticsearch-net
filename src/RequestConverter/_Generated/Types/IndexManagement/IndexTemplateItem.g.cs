@@ -27,7 +27,7 @@ public partial class IndexTemplateItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexTemplateItem");
+		var __init = writer.BeginObjectInitializer("IndexTemplateItem", false);
 		{
 			__init.Property("IndexTemplate");
 			IndexTemplate.FormatCode(writer);

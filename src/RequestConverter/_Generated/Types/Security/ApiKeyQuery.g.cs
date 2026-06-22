@@ -27,7 +27,7 @@ public partial class ApiKeyQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ApiKeyQuery");
+		var __init = writer.BeginObjectInitializer("ApiKeyQuery", false);
 		if (Bool is not null)
 		{
 			__init.Property("Bool");

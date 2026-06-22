@@ -27,7 +27,7 @@ public partial class IndexRoutingAllocationInitialRecovery : RequestConverter.IC
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexRoutingAllocationInitialRecovery");
+		var __init = writer.BeginObjectInitializer("IndexRoutingAllocationInitialRecovery", false);
 		if (Id is not null)
 		{
 			__init.Property("Id");

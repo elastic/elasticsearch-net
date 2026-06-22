@@ -27,7 +27,7 @@ public partial class TrainedModelConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelConfig");
+		var __init = writer.BeginObjectInitializer("TrainedModelConfig", false);
 		if (CompressedDefinition is not null)
 		{
 			__init.Property("CompressedDefinition");
@@ -49,7 +49,11 @@ public partial class TrainedModelConfig : RequestConverter.ICodeFormattable
 		if (DefaultFieldMap is not null)
 		{
 			__init.Property("DefaultFieldMap");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("string");
+			writer.Write(">() ");
 			writer.WriteInlineList(DefaultFieldMap, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

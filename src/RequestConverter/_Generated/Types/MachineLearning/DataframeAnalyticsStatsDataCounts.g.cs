@@ -27,7 +27,7 @@ public partial class DataframeAnalyticsStatsDataCounts : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeAnalyticsStatsDataCounts");
+		var __init = writer.BeginObjectInitializer("DataframeAnalyticsStatsDataCounts", false);
 		{
 			__init.Property("SkippedDocsCount");
 			writer.WriteValue(SkippedDocsCount);

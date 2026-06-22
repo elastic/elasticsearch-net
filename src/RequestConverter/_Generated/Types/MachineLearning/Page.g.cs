@@ -27,7 +27,7 @@ public partial class Page : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Page");
+		var __init = writer.BeginObjectInitializer("Page", false);
 		if (From is not null)
 		{
 			__init.Property("From");

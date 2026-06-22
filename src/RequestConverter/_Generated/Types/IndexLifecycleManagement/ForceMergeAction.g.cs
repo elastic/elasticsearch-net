@@ -27,7 +27,7 @@ public partial class ForceMergeAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ForceMergeAction");
+		var __init = writer.BeginObjectInitializer("ForceMergeAction", false);
 		if (IndexCodec is not null)
 		{
 			__init.Property("IndexCodec");

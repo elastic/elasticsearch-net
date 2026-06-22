@@ -27,7 +27,7 @@ public partial class MlCounter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MlCounter");
+		var __init = writer.BeginObjectInitializer("MlCounter", false);
 		{
 			__init.Property("Count");
 			writer.WriteValue(Count);

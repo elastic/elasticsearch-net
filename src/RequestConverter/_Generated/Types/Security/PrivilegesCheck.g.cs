@@ -27,7 +27,7 @@ public partial class PrivilegesCheck : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PrivilegesCheck");
+		var __init = writer.BeginObjectInitializer("PrivilegesCheck", false);
 		if (Application is not null)
 		{
 			__init.Property("Application");

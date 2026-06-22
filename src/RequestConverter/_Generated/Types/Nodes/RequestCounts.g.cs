@@ -27,7 +27,7 @@ public partial class RequestCounts : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RequestCounts");
+		var __init = writer.BeginObjectInitializer("RequestCounts", false);
 		if (GetBlob is not null)
 		{
 			__init.Property("GetBlob");

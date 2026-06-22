@@ -27,7 +27,7 @@ public partial class DateRangeExpression : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DateRangeExpression");
+		var __init = writer.BeginObjectInitializer("DateRangeExpression", false);
 		if (From is not null)
 		{
 			__init.Property("From");

@@ -27,7 +27,7 @@ public partial class DeleteSynonymRuleRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteSynonymRuleRequest");
+		var __init = writer.BeginObjectInitializer("DeleteSynonymRuleRequest", false);
 		{
 			__init.Property("RuleId");
 			RuleId.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class TransformHealthIssue : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TransformHealthIssue");
+		var __init = writer.BeginObjectInitializer("TransformHealthIssue", false);
 		{
 			__init.Property("Count");
 			writer.WriteValue(Count);

@@ -27,7 +27,7 @@ public partial class TokenDetail : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TokenDetail");
+		var __init = writer.BeginObjectInitializer("TokenDetail", false);
 		{
 			__init.Property("Name");
 			writer.WriteString(Name);

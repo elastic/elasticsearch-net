@@ -27,7 +27,7 @@ public partial class CheckpointStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CheckpointStats");
+		var __init = writer.BeginObjectInitializer("CheckpointStats", false);
 		{
 			__init.Property("Checkpoint");
 			writer.WriteValue(Checkpoint);

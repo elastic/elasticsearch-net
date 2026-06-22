@@ -27,7 +27,7 @@ public partial class RoleMapping : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RoleMapping");
+		var __init = writer.BeginObjectInitializer("RoleMapping", false);
 		{
 			__init.Property("Enabled");
 			writer.WriteValue(Enabled);

@@ -27,7 +27,7 @@ public partial class VerifyIndex : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("VerifyIndex");
+		var __init = writer.BeginObjectInitializer("VerifyIndex", false);
 		if (CheckIndexTime is not null)
 		{
 			__init.Property("CheckIndexTime");

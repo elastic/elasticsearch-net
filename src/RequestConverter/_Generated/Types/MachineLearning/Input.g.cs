@@ -27,7 +27,7 @@ public partial class Input : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Input");
+		var __init = writer.BeginObjectInitializer("Input", false);
 		{
 			__init.Property("FieldNames");
 			FieldNames.FormatCode(writer);

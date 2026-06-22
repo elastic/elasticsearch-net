@@ -27,7 +27,7 @@ public partial class LetterTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("LetterTokenizer");
+		var __init = writer.BeginObjectInitializer("LetterTokenizer", true);
 		if (Version is not null)
 		{
 			__init.Property("Version");

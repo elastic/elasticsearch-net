@@ -27,7 +27,7 @@ public partial class InferenceConfigRegression : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InferenceConfigRegression");
+		var __init = writer.BeginObjectInitializer("InferenceConfigRegression", false);
 		if (NumTopFeatureImportanceValues is not null)
 		{
 			__init.Property("NumTopFeatureImportanceValues");

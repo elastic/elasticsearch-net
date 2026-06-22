@@ -27,7 +27,7 @@ public partial class UrlDecodeProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UrlDecodeProcessor");
+		var __init = writer.BeginObjectInitializer("UrlDecodeProcessor", false);
 		if (Description is not null)
 		{
 			__init.Property("Description");

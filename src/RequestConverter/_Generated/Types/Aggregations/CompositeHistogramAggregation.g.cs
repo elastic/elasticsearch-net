@@ -27,7 +27,7 @@ public partial class CompositeHistogramAggregation : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CompositeHistogramAggregation");
+		var __init = writer.BeginObjectInitializer("CompositeHistogramAggregation", false);
 		if (Field is not null)
 		{
 			__init.Property("Field");

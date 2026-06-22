@@ -27,7 +27,7 @@ public partial class StandardRetriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StandardRetriever");
+		var __init = writer.BeginObjectInitializer("StandardRetriever", false);
 		if (Collapse is not null)
 		{
 			__init.Property("Collapse");

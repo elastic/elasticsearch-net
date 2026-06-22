@@ -27,7 +27,7 @@ public partial class MissingAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MissingAggregation");
+		var __init = writer.BeginObjectInitializer("MissingAggregation", false);
 		if (Field is not null)
 		{
 			__init.Property("Field");

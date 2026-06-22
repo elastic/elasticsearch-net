@@ -27,7 +27,7 @@ public partial class TrainedModelTreeNode : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelTreeNode");
+		var __init = writer.BeginObjectInitializer("TrainedModelTreeNode", false);
 		if (DecisionType is not null)
 		{
 			__init.Property("DecisionType");

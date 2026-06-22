@@ -27,7 +27,7 @@ public partial class AverageBucketAggregation : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AverageBucketAggregation");
+		var __init = writer.BeginObjectInitializer("AverageBucketAggregation", false);
 		if (BucketsPath is not null)
 		{
 			__init.Property("BucketsPath");

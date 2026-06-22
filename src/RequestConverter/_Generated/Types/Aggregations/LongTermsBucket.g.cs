@@ -27,7 +27,7 @@ public partial class LongTermsBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("LongTermsBucket");
+		var __init = writer.BeginObjectInitializer("LongTermsBucket", false);
 		if (Aggregations is not null)
 		{
 			__init.Property("Aggregations");

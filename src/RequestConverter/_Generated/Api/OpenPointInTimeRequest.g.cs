@@ -27,7 +27,7 @@ public partial class OpenPointInTimeRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("OpenPointInTimeRequest");
+		var __init = writer.BeginObjectInitializer("OpenPointInTimeRequest", false);
 		{
 			__init.Property("Indices");
 			Indices.FormatCode(writer);

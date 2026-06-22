@@ -27,7 +27,7 @@ public partial class ClusterOperatingSystemArchitecture : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterOperatingSystemArchitecture");
+		var __init = writer.BeginObjectInitializer("ClusterOperatingSystemArchitecture", false);
 		{
 			__init.Property("Arch");
 			writer.WriteString(Arch);

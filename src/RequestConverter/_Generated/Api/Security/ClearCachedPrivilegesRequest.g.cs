@@ -27,7 +27,7 @@ public partial class ClearCachedPrivilegesRequest : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClearCachedPrivilegesRequest");
+		var __init = writer.BeginObjectInitializer("ClearCachedPrivilegesRequest", false);
 		{
 			__init.Property("Application");
 			Application.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class GetTrainedModelsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetTrainedModelsRequest");
+		var __init = writer.BeginObjectInitializer("GetTrainedModelsRequest", false);
 		if (ModelId is not null)
 		{
 			__init.Property("ModelId");

@@ -27,7 +27,7 @@ public partial class CircleProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CircleProcessor");
+		var __init = writer.BeginObjectInitializer("CircleProcessor", false);
 		if (Description is not null)
 		{
 			__init.Property("Description");

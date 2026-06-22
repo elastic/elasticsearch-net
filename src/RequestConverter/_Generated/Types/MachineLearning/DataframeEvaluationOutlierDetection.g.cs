@@ -27,7 +27,7 @@ public partial class DataframeEvaluationOutlierDetection : RequestConverter.ICod
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeEvaluationOutlierDetection");
+		var __init = writer.BeginObjectInitializer("DataframeEvaluationOutlierDetection", false);
 		{
 			__init.Property("ActualField");
 			ActualField.FormatCode(writer);

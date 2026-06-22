@@ -27,7 +27,7 @@ public partial class RepositoryAnalyzeRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RepositoryAnalyzeRequest");
+		var __init = writer.BeginObjectInitializer("RepositoryAnalyzeRequest", false);
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

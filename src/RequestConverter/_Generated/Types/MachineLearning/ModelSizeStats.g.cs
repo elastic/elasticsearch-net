@@ -27,7 +27,7 @@ public partial class ModelSizeStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ModelSizeStats");
+		var __init = writer.BeginObjectInitializer("ModelSizeStats", false);
 		if (AssignmentMemoryBasis is not null)
 		{
 			__init.Property("AssignmentMemoryBasis");

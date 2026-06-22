@@ -27,7 +27,7 @@ public partial class IndexingPressureMemory : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexingPressureMemory");
+		var __init = writer.BeginObjectInitializer("IndexingPressureMemory", false);
 		if (Limit is not null)
 		{
 			__init.Property("Limit");

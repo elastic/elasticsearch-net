@@ -27,7 +27,7 @@ public partial class AmazonBedrockServiceSettings : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AmazonBedrockServiceSettings");
+		var __init = writer.BeginObjectInitializer("AmazonBedrockServiceSettings", false);
 		{
 			__init.Property("AccessKey");
 			writer.WriteString(AccessKey);

@@ -27,7 +27,7 @@ public partial class BuildInformation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BuildInformation");
+		var __init = writer.BeginObjectInitializer("BuildInformation", false);
 		{
 			__init.Property("Date");
 			writer.WriteValue(Date);

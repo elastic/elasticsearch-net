@@ -27,7 +27,7 @@ public partial class AnalysisConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AnalysisConfig");
+		var __init = writer.BeginObjectInitializer("AnalysisConfig", false);
 		if (BucketSpan is not null)
 		{
 			__init.Property("BucketSpan");

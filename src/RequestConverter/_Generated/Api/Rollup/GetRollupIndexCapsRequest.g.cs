@@ -27,7 +27,7 @@ public partial class GetRollupIndexCapsRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetRollupIndexCapsRequest");
+		var __init = writer.BeginObjectInitializer("GetRollupIndexCapsRequest", false);
 		{
 			__init.Property("Index");
 			Index.FormatCode(writer);

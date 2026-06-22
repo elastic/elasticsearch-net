@@ -27,7 +27,7 @@ public partial class PluginStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PluginStats");
+		var __init = writer.BeginObjectInitializer("PluginStats", false);
 		{
 			__init.Property("Classname");
 			writer.WriteString(Classname);

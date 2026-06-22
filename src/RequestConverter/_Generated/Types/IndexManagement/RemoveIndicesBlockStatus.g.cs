@@ -27,7 +27,7 @@ public partial class RemoveIndicesBlockStatus : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RemoveIndicesBlockStatus");
+		var __init = writer.BeginObjectInitializer("RemoveIndicesBlockStatus", false);
 		if (Exception is not null)
 		{
 			__init.Property("Exception");

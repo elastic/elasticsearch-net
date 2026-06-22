@@ -27,7 +27,7 @@ public partial class DataTiers : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataTiers");
+		var __init = writer.BeginObjectInitializer("DataTiers", false);
 		{
 			__init.Property("Available");
 			writer.WriteValue(Available);

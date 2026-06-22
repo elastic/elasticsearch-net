@@ -27,7 +27,7 @@ public partial class CloseIndexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CloseIndexRequest");
+		var __init = writer.BeginObjectInitializer("CloseIndexRequest", false);
 		{
 			__init.Property("Indices");
 			Indices.FormatCode(writer);

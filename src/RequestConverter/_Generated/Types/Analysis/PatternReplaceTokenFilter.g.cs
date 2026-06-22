@@ -27,7 +27,7 @@ public partial class PatternReplaceTokenFilter : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PatternReplaceTokenFilter");
+		var __init = writer.BeginObjectInitializer("PatternReplaceTokenFilter", true);
 		if (All is not null)
 		{
 			__init.Property("All");

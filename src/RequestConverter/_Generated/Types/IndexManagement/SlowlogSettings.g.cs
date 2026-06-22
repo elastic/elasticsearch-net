@@ -27,7 +27,7 @@ public partial class SlowlogSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SlowlogSettings");
+		var __init = writer.BeginObjectInitializer("SlowlogSettings", false);
 		if (Level is not null)
 		{
 			__init.Property("Level");

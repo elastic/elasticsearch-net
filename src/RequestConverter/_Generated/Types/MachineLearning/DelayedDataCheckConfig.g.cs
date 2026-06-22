@@ -27,7 +27,7 @@ public partial class DelayedDataCheckConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DelayedDataCheckConfig");
+		var __init = writer.BeginObjectInitializer("DelayedDataCheckConfig", false);
 		if (CheckWindow is not null)
 		{
 			__init.Property("CheckWindow");

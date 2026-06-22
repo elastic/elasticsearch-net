@@ -27,7 +27,7 @@ public partial class SparseVectorQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SparseVectorQuery");
+		var __init = writer.BeginObjectInitializer("SparseVectorQuery", false);
 		if (Boost is not null)
 		{
 			__init.Property("Boost");
@@ -73,7 +73,11 @@ public partial class SparseVectorQuery : RequestConverter.ICodeFormattable
 		if (QueryVector is not null)
 		{
 			__init.Property("QueryVector");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("float");
+			writer.Write(">() ");
 			writer.WriteInlineList(QueryVector, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("f"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

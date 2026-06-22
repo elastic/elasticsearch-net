@@ -27,7 +27,7 @@ public partial class DelegatePkiRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DelegatePkiRequest");
+		var __init = writer.BeginObjectInitializer("DelegatePkiRequest", false);
 		{
 			__init.Property("X509CertificateChain");
 			writer.WriteInlineList(X509CertificateChain, (w, item) => { w.WriteString(item); });

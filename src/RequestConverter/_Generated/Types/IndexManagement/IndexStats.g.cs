@@ -27,7 +27,7 @@ public partial class IndexStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexStats");
+		var __init = writer.BeginObjectInitializer("IndexStats", false);
 		if (Bulk is not null)
 		{
 			__init.Property("Bulk");

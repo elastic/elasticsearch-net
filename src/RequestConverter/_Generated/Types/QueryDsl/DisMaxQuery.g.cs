@@ -27,7 +27,7 @@ public partial class DisMaxQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DisMaxQuery");
+		var __init = writer.BeginObjectInitializer("DisMaxQuery", false);
 		if (Boost is not null)
 		{
 			__init.Property("Boost");

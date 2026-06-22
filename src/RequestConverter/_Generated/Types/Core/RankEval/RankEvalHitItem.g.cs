@@ -27,7 +27,7 @@ public partial class RankEvalHitItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RankEvalHitItem");
+		var __init = writer.BeginObjectInitializer("RankEvalHitItem", false);
 		{
 			__init.Property("Hit");
 			Hit.FormatCode(writer);

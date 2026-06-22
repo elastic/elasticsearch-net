@@ -27,7 +27,7 @@ public partial class ReadException : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ReadException");
+		var __init = writer.BeginObjectInitializer("ReadException", false);
 		{
 			__init.Property("Exception");
 			Exception.FormatCode(writer);

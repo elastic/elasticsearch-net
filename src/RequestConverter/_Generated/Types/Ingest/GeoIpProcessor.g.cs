@@ -27,7 +27,7 @@ public partial class GeoIpProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoIpProcessor");
+		var __init = writer.BeginObjectInitializer("GeoIpProcessor", false);
 		if (DatabaseFile is not null)
 		{
 			__init.Property("DatabaseFile");

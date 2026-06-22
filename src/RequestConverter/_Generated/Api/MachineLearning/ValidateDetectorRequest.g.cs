@@ -27,7 +27,7 @@ public partial class ValidateDetectorRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ValidateDetectorRequest");
+		var __init = writer.BeginObjectInitializer("ValidateDetectorRequest", false);
 		{
 			__init.Property("Detector");
 			Detector.FormatCode(writer);

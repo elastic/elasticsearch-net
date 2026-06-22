@@ -27,7 +27,7 @@ public partial class SpanQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SpanQuery");
+		var __init = writer.BeginObjectInitializer("SpanQuery", false);
 		if (SpanContaining is not null)
 		{
 			__init.Property("SpanContaining");

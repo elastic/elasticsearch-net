@@ -27,7 +27,7 @@ public partial class StepKey : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StepKey");
+		var __init = writer.BeginObjectInitializer("StepKey", false);
 		if (Action is not null)
 		{
 			__init.Property("Action");

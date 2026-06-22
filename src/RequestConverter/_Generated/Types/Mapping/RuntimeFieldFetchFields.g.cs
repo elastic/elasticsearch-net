@@ -27,7 +27,7 @@ public partial class RuntimeFieldFetchFields : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RuntimeFieldFetchFields");
+		var __init = writer.BeginObjectInitializer("RuntimeFieldFetchFields", false);
 		{
 			__init.Property("Field");
 			Field.FormatCode(writer);

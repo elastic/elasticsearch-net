@@ -27,7 +27,7 @@ public partial class Datafeed : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Datafeed");
+		var __init = writer.BeginObjectInitializer("Datafeed", false);
 		{
 			__init.Property("Count");
 			writer.WriteValue(Count);

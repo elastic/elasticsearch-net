@@ -27,7 +27,7 @@ public partial class AzureRepositorySettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AzureRepositorySettings");
+		var __init = writer.BeginObjectInitializer("AzureRepositorySettings", false);
 		if (BasePath is not null)
 		{
 			__init.Property("BasePath");

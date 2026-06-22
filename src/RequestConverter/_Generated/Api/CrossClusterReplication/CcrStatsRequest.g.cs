@@ -27,7 +27,7 @@ public partial class CcrStatsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CcrStatsRequest");
+		var __init = writer.BeginObjectInitializer("CcrStatsRequest", false);
 		if (MasterTimeout is not null)
 		{
 			__init.Property("MasterTimeout");

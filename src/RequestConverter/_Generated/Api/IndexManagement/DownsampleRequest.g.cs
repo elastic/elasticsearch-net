@@ -27,7 +27,7 @@ public partial class DownsampleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DownsampleRequest");
+		var __init = writer.BeginObjectInitializer("DownsampleRequest", false);
 		{
 			__init.Property("Index");
 			Index.FormatCode(writer);

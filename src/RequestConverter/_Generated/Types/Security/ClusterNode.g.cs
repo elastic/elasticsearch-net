@@ -27,7 +27,7 @@ public partial class ClusterNode : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterNode");
+		var __init = writer.BeginObjectInitializer("ClusterNode", false);
 		{
 			__init.Property("Name");
 			writer.WriteString(Name);

@@ -27,7 +27,7 @@ public partial class PutTrainedModelDefinitionPartRequest : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutTrainedModelDefinitionPartRequest");
+		var __init = writer.BeginObjectInitializer("PutTrainedModelDefinitionPartRequest", false);
 		{
 			__init.Property("ModelId");
 			ModelId.FormatCode(writer);

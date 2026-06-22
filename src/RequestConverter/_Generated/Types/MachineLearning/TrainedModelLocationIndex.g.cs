@@ -27,7 +27,7 @@ public partial class TrainedModelLocationIndex : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelLocationIndex");
+		var __init = writer.BeginObjectInitializer("TrainedModelLocationIndex", false);
 		{
 			__init.Property("Name");
 			writer.WriteString(Name);

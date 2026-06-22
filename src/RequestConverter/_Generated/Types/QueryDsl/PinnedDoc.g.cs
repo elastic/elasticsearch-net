@@ -27,7 +27,7 @@ public partial class PinnedDoc : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PinnedDoc");
+		var __init = writer.BeginObjectInitializer("PinnedDoc", false);
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);

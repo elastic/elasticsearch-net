@@ -27,7 +27,7 @@ public partial class DeleteLicenseRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteLicenseRequest");
+		var __init = writer.BeginObjectInitializer("DeleteLicenseRequest", false);
 		if (MasterTimeout is not null)
 		{
 			__init.Property("MasterTimeout");

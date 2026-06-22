@@ -27,7 +27,7 @@ public partial class TargetMeanEncodingPreprocessor : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TargetMeanEncodingPreprocessor");
+		var __init = writer.BeginObjectInitializer("TargetMeanEncodingPreprocessor", false);
 		{
 			__init.Property("DefaultValue");
 			writer.WriteValue(DefaultValue);
@@ -46,7 +46,11 @@ public partial class TargetMeanEncodingPreprocessor : RequestConverter.ICodeForm
 
 		{
 			__init.Property("TargetMap");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("double");
+			writer.Write(">() ");
 			writer.WriteInlineList(TargetMap, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

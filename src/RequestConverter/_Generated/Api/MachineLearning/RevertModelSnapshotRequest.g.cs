@@ -27,7 +27,7 @@ public partial class RevertModelSnapshotRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RevertModelSnapshotRequest");
+		var __init = writer.BeginObjectInitializer("RevertModelSnapshotRequest", false);
 		{
 			__init.Property("JobId");
 			JobId.FormatCode(writer);

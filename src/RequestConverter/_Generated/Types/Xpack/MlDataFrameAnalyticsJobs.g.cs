@@ -27,7 +27,7 @@ public partial class MlDataFrameAnalyticsJobs : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MlDataFrameAnalyticsJobs");
+		var __init = writer.BeginObjectInitializer("MlDataFrameAnalyticsJobs", false);
 		{
 			__init.Property("All");
 			All.FormatCode(writer);

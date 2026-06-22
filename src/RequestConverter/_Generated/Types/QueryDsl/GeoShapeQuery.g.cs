@@ -27,7 +27,7 @@ public partial class GeoShapeQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoShapeQuery");
+		var __init = writer.BeginObjectInitializer("GeoShapeQuery", false);
 		if (Boost is not null)
 		{
 			__init.Property("Boost");

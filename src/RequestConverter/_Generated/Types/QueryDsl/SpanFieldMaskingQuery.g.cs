@@ -27,7 +27,7 @@ public partial class SpanFieldMaskingQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SpanFieldMaskingQuery");
+		var __init = writer.BeginObjectInitializer("SpanFieldMaskingQuery", false);
 		if (Boost is not null)
 		{
 			__init.Property("Boost");

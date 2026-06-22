@@ -27,7 +27,7 @@ public partial class DropProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DropProcessor");
+		var __init = writer.BeginObjectInitializer("DropProcessor", false);
 		if (Description is not null)
 		{
 			__init.Property("Description");

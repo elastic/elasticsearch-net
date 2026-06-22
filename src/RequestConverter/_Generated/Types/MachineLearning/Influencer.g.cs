@@ -27,7 +27,7 @@ public partial class Influencer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Influencer");
+		var __init = writer.BeginObjectInitializer("Influencer", false);
 		{
 			__init.Property("BucketSpan");
 			writer.WriteValue(BucketSpan);

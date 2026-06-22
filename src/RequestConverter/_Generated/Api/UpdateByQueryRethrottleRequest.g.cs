@@ -27,7 +27,7 @@ public partial class UpdateByQueryRethrottleRequest : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UpdateByQueryRethrottleRequest");
+		var __init = writer.BeginObjectInitializer("UpdateByQueryRethrottleRequest", false);
 		{
 			__init.Property("TaskId");
 			TaskId.FormatCode(writer);

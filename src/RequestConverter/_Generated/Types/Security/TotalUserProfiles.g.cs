@@ -27,7 +27,7 @@ public partial class TotalUserProfiles : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TotalUserProfiles");
+		var __init = writer.BeginObjectInitializer("TotalUserProfiles", false);
 		{
 			__init.Property("Relation");
 			writer.WriteString(Relation);

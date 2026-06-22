@@ -27,7 +27,7 @@ public partial class IndexRoutingAllocationInclude : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexRoutingAllocationInclude");
+		var __init = writer.BeginObjectInitializer("IndexRoutingAllocationInclude", false);
 		if (Id is not null)
 		{
 			__init.Property("Id");

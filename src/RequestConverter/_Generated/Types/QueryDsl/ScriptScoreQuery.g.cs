@@ -27,7 +27,7 @@ public partial class ScriptScoreQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ScriptScoreQuery");
+		var __init = writer.BeginObjectInitializer("ScriptScoreQuery", false);
 		if (Boost is not null)
 		{
 			__init.Property("Boost");

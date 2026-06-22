@@ -27,7 +27,7 @@ public partial class InferenceEndpoint : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InferenceEndpoint");
+		var __init = writer.BeginObjectInitializer("InferenceEndpoint", false);
 		if (ChunkingSettings is not null)
 		{
 			__init.Property("ChunkingSettings");

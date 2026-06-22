@@ -42,7 +42,7 @@ public sealed partial class SpanQuery
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery? SpanContaining { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery>("span_containing"); set => SetVariant("span_containing", value); }
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery? SpanFieldMasking { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery>("span_field_masking"); set => SetVariant("span_field_masking", value); }
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery? SpanFirst { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery>("span_first"); set => SetVariant("span_first", value); }
-	public System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, int>? SpanGap { get => GetVariant<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, int>>("span_gap"); set => SetVariant("span_gap", value); }
+	public System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, int>? SpanGap { get => GetVariantValue<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, int>>("span_gap"); set => SetVariant("span_gap", value); }
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery? SpanMulti { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery>("span_multi"); set => SetVariant("span_multi", value); }
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery? SpanNear { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery>("span_near"); set => SetVariant("span_near", value); }
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery? SpanNot { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery>("span_not"); set => SetVariant("span_not", value); }
@@ -63,6 +63,17 @@ public sealed partial class SpanQuery
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 	private T? GetVariant<T>(string type)
+	{
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
+		{
+			return result;
+		}
+
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariantValue<T>(string type) where T : struct
 	{
 		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{

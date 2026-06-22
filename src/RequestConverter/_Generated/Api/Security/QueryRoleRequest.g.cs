@@ -27,7 +27,7 @@ public partial class QueryRoleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("QueryRoleRequest");
+		var __init = writer.BeginObjectInitializer("QueryRoleRequest", false);
 		if (From is not null)
 		{
 			__init.Property("From");

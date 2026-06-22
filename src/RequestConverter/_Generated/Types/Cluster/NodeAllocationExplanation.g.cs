@@ -27,7 +27,7 @@ public partial class NodeAllocationExplanation : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeAllocationExplanation");
+		var __init = writer.BeginObjectInitializer("NodeAllocationExplanation", false);
 		if (Deciders is not null)
 		{
 			__init.Property("Deciders");
@@ -36,7 +36,11 @@ public partial class NodeAllocationExplanation : RequestConverter.ICodeFormattab
 
 		{
 			__init.Property("NodeAttributes");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("string");
+			writer.Write(">() ");
 			writer.WriteInlineList(NodeAttributes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

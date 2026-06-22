@@ -27,7 +27,7 @@ public partial class QueryRuleActions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("QueryRuleActions");
+		var __init = writer.BeginObjectInitializer("QueryRuleActions", false);
 		if (Docs is not null)
 		{
 			__init.Property("Docs");

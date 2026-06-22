@@ -27,7 +27,7 @@ public partial class GetScriptRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetScriptRequest");
+		var __init = writer.BeginObjectInitializer("GetScriptRequest", false);
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);

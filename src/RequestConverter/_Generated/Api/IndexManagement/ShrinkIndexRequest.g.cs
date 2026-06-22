@@ -27,7 +27,7 @@ public partial class ShrinkIndexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShrinkIndexRequest");
+		var __init = writer.BeginObjectInitializer("ShrinkIndexRequest", false);
 		{
 			__init.Property("Index");
 			Index.FormatCode(writer);
@@ -59,14 +59,22 @@ public partial class ShrinkIndexRequest : RequestConverter.ICodeFormattable
 		if (Aliases is not null)
 		{
 			__init.Property("Aliases");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("Elastic.Clients.Elasticsearch.IndexName");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.IndexManagement.Alias");
+			writer.Write(">() ");
 			writer.WriteInlineList(Aliases, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
 		if (Settings is not null)
 		{
 			__init.Property("Settings");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Settings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

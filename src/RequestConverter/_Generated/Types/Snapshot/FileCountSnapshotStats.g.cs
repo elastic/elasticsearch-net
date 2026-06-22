@@ -27,7 +27,7 @@ public partial class FileCountSnapshotStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FileCountSnapshotStats");
+		var __init = writer.BeginObjectInitializer("FileCountSnapshotStats", false);
 		{
 			__init.Property("FileCount");
 			writer.WriteValue(FileCount);

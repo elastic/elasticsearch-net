@@ -27,7 +27,7 @@ public partial class ClearRepositoriesMeteringArchiveRequest : RequestConverter.
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClearRepositoriesMeteringArchiveRequest");
+		var __init = writer.BeginObjectInitializer("ClearRepositoriesMeteringArchiveRequest", false);
 		{
 			__init.Property("MaxArchiveVersion");
 			writer.WriteValue(MaxArchiveVersion);

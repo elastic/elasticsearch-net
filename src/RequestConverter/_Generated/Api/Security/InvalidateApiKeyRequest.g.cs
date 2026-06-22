@@ -27,7 +27,7 @@ public partial class InvalidateApiKeyRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InvalidateApiKeyRequest");
+		var __init = writer.BeginObjectInitializer("InvalidateApiKeyRequest", false);
 		if (Id is not null)
 		{
 			__init.Property("Id");

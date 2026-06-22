@@ -27,7 +27,7 @@ public partial class DataframeAnalyticsStatsProgress : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeAnalyticsStatsProgress");
+		var __init = writer.BeginObjectInitializer("DataframeAnalyticsStatsProgress", false);
 		{
 			__init.Property("Phase");
 			writer.WriteString(Phase);

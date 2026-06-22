@@ -27,7 +27,7 @@ public partial class ChunkingSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ChunkingSettings");
+		var __init = writer.BeginObjectInitializer("ChunkingSettings", false);
 		{
 			__init.Property("MaxChunkSize");
 			writer.WriteValue(MaxChunkSize);

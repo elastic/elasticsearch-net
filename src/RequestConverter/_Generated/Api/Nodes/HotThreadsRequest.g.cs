@@ -27,7 +27,7 @@ public partial class HotThreadsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("HotThreadsRequest");
+		var __init = writer.BeginObjectInitializer("HotThreadsRequest", false);
 		if (NodeId is not null)
 		{
 			__init.Property("NodeId");

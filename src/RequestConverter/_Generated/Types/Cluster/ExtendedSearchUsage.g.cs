@@ -27,7 +27,7 @@ public partial class ExtendedSearchUsage : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExtendedSearchUsage");
+		var __init = writer.BeginObjectInitializer("ExtendedSearchUsage", false);
 		if (Retrievers is not null)
 		{
 			__init.Property("Retrievers");

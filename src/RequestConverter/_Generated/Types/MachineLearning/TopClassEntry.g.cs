@@ -27,7 +27,7 @@ public partial class TopClassEntry : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TopClassEntry");
+		var __init = writer.BeginObjectInitializer("TopClassEntry", false);
 		{
 			__init.Property("ClassName");
 			writer.WriteString(ClassName);

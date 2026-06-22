@@ -27,7 +27,7 @@ public partial class GetIlmStatusRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetIlmStatusRequest");
+		var __init = writer.BeginObjectInitializer("GetIlmStatusRequest", false);
 		__init.Dispose();
 	}
 }

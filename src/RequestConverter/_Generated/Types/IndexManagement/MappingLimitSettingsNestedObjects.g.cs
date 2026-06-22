@@ -27,7 +27,7 @@ public partial class MappingLimitSettingsNestedObjects : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MappingLimitSettingsNestedObjects");
+		var __init = writer.BeginObjectInitializer("MappingLimitSettingsNestedObjects", false);
 		if (Limit is not null)
 		{
 			__init.Property("Limit");

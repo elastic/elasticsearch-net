@@ -27,7 +27,7 @@ public partial class MatchPhraseQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MatchPhraseQuery");
+		var __init = writer.BeginObjectInitializer("MatchPhraseQuery", false);
 		if (Analyzer is not null)
 		{
 			__init.Property("Analyzer");

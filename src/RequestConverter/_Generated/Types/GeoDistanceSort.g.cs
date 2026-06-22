@@ -27,7 +27,7 @@ public partial class GeoDistanceSort : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoDistanceSort");
+		var __init = writer.BeginObjectInitializer("GeoDistanceSort", false);
 		if (DistanceType is not null)
 		{
 			__init.Property("DistanceType");

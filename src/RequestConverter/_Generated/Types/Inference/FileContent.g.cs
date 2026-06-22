@@ -27,7 +27,7 @@ public partial class FileContent : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FileContent");
+		var __init = writer.BeginObjectInitializer("FileContent", false);
 		{
 			__init.Property("FileData");
 			writer.WriteString(FileData);

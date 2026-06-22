@@ -27,7 +27,7 @@ public partial class JobForecastStatistics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("JobForecastStatistics");
+		var __init = writer.BeginObjectInitializer("JobForecastStatistics", false);
 		{
 			__init.Property("ForecastedJobs");
 			writer.WriteValue(ForecastedJobs);
@@ -54,7 +54,11 @@ public partial class JobForecastStatistics : RequestConverter.ICodeFormattable
 		if (Status is not null)
 		{
 			__init.Property("Status");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("long");
+			writer.Write(">() ");
 			writer.WriteInlineList(Status, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

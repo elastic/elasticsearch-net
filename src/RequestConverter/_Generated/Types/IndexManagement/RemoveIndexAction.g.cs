@@ -27,7 +27,7 @@ public partial class RemoveIndexAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RemoveIndexAction");
+		var __init = writer.BeginObjectInitializer("RemoveIndexAction", false);
 		if (Index is not null)
 		{
 			__init.Property("Index");

@@ -27,7 +27,7 @@ public partial class LithuanianAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("LithuanianAnalyzer");
+		var __init = writer.BeginObjectInitializer("LithuanianAnalyzer", true);
 		if (StemExclusion is not null)
 		{
 			__init.Property("StemExclusion");

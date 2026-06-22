@@ -27,7 +27,7 @@ public partial class TranslogStatus : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TranslogStatus");
+		var __init = writer.BeginObjectInitializer("TranslogStatus", false);
 		{
 			__init.Property("Percent");
 			Percent.FormatCode(writer);

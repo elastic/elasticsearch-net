@@ -27,7 +27,7 @@ public partial class DeepSeekServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeepSeekServiceSettings");
+		var __init = writer.BeginObjectInitializer("DeepSeekServiceSettings", false);
 		{
 			__init.Property("ApiKey");
 			writer.WriteString(ApiKey);

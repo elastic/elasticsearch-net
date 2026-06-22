@@ -27,7 +27,7 @@ public partial class BlobDetails : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BlobDetails");
+		var __init = writer.BeginObjectInitializer("BlobDetails", false);
 		{
 			__init.Property("Name");
 			writer.WriteString(Name);

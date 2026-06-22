@@ -27,7 +27,7 @@ public partial class Diagnosis : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Diagnosis");
+		var __init = writer.BeginObjectInitializer("Diagnosis", false);
 		{
 			__init.Property("Action");
 			writer.WriteString(Action);

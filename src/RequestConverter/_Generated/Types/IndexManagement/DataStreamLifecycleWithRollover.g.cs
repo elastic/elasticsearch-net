@@ -27,7 +27,7 @@ public partial class DataStreamLifecycleWithRollover : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataStreamLifecycleWithRollover");
+		var __init = writer.BeginObjectInitializer("DataStreamLifecycleWithRollover", false);
 		if (DataRetention is not null)
 		{
 			__init.Property("DataRetention");

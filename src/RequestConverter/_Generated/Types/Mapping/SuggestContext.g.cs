@@ -27,7 +27,7 @@ public partial class SuggestContext : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SuggestContext");
+		var __init = writer.BeginObjectInitializer("SuggestContext", false);
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

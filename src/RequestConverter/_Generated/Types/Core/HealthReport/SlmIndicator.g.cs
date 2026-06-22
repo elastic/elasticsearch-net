@@ -27,7 +27,7 @@ public partial class SlmIndicator : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SlmIndicator");
+		var __init = writer.BeginObjectInitializer("SlmIndicator", false);
 		if (Details is not null)
 		{
 			__init.Property("Details");

@@ -27,7 +27,7 @@ public partial class DeleteSearchApplicationRequest : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteSearchApplicationRequest");
+		var __init = writer.BeginObjectInitializer("DeleteSearchApplicationRequest", false);
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

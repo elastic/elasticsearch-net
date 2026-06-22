@@ -27,7 +27,7 @@ public partial class DecayPlacement<TOrigin, TScale> : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DecayPlacement<TOrigin, TScale>");
+		var __init = writer.BeginObjectInitializer("DecayPlacement<TOrigin, TScale>", false);
 		if (Decay is not null)
 		{
 			__init.Property("Decay");
@@ -35,19 +35,19 @@ public partial class DecayPlacement<TOrigin, TScale> : RequestConverter.ICodeFor
 			writer.Write("d");
 		}
 
-		if (Offset is not null)
+		if (RequestConverter.CodeWriter.ShouldFormat(Offset))
 		{
 			__init.Property("Offset");
 			writer.WriteValue(Offset);
 		}
 
-		if (Origin is not null)
+		if (RequestConverter.CodeWriter.ShouldFormat(Origin))
 		{
 			__init.Property("Origin");
 			writer.WriteValue(Origin);
 		}
 
-		if (Scale is not null)
+		if (RequestConverter.CodeWriter.ShouldFormat(Scale))
 		{
 			__init.Property("Scale");
 			writer.WriteValue(Scale);

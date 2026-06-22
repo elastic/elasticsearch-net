@@ -27,7 +27,7 @@ public partial class BrazilianStemTokenFilter : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BrazilianStemTokenFilter");
+		var __init = writer.BeginObjectInitializer("BrazilianStemTokenFilter", true);
 		if (Version is not null)
 		{
 			__init.Property("Version");

@@ -27,7 +27,7 @@ public partial class ImageUrl : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ImageUrl");
+		var __init = writer.BeginObjectInitializer("ImageUrl", false);
 		if (Detail is not null)
 		{
 			__init.Property("Detail");

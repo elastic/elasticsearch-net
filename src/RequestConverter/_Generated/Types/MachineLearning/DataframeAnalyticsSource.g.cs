@@ -27,7 +27,7 @@ public partial class DataframeAnalyticsSource : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeAnalyticsSource");
+		var __init = writer.BeginObjectInitializer("DataframeAnalyticsSource", false);
 		{
 			__init.Property("Indices");
 			Indices.FormatCode(writer);
@@ -42,7 +42,11 @@ public partial class DataframeAnalyticsSource : RequestConverter.ICodeFormattabl
 		if (RuntimeMappings is not null)
 		{
 			__init.Property("RuntimeMappings");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("Elastic.Clients.Elasticsearch.Field");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Mapping.RuntimeField");
+			writer.Write(">() ");
 			writer.WriteInlineList(RuntimeMappings, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

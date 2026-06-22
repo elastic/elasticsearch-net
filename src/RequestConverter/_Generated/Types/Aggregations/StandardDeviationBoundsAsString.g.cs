@@ -27,7 +27,7 @@ public partial class StandardDeviationBoundsAsString : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StandardDeviationBoundsAsString");
+		var __init = writer.BeginObjectInitializer("StandardDeviationBoundsAsString", false);
 		{
 			__init.Property("Lower");
 			writer.WriteString(Lower);

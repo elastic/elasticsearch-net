@@ -27,7 +27,7 @@ public partial class DatafeedTimingStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DatafeedTimingStats");
+		var __init = writer.BeginObjectInitializer("DatafeedTimingStats", false);
 		if (AverageSearchTimePerBucketMs is not null)
 		{
 			__init.Property("AverageSearchTimePerBucketMs");

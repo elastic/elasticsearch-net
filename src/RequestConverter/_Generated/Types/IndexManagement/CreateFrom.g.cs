@@ -27,7 +27,7 @@ public partial class CreateFrom : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CreateFrom");
+		var __init = writer.BeginObjectInitializer("CreateFrom", false);
 		if (MappingsOverride is not null)
 		{
 			__init.Property("MappingsOverride");

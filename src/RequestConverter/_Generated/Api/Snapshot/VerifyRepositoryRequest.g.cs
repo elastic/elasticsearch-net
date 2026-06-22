@@ -27,7 +27,7 @@ public partial class VerifyRepositoryRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("VerifyRepositoryRequest");
+		var __init = writer.BeginObjectInitializer("VerifyRepositoryRequest", false);
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

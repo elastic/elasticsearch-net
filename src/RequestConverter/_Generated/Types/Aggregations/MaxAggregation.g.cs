@@ -27,7 +27,7 @@ public partial class MaxAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MaxAggregation");
+		var __init = writer.BeginObjectInitializer("MaxAggregation", false);
 		if (Field is not null)
 		{
 			__init.Property("Field");

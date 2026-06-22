@@ -27,7 +27,7 @@ public partial class NodeInfoIngestDownloader : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoIngestDownloader");
+		var __init = writer.BeginObjectInitializer("NodeInfoIngestDownloader", false);
 		{
 			__init.Property("Enabled");
 			writer.WriteString(Enabled);

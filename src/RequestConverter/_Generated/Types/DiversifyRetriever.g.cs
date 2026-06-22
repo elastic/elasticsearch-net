@@ -27,7 +27,7 @@ public partial class DiversifyRetriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DiversifyRetriever");
+		var __init = writer.BeginObjectInitializer("DiversifyRetriever", false);
 		{
 			__init.Property("Field");
 			writer.WriteString(Field);

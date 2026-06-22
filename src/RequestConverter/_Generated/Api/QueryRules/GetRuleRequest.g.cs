@@ -27,7 +27,7 @@ public partial class GetRuleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetRuleRequest");
+		var __init = writer.BeginObjectInitializer("GetRuleRequest", false);
 		{
 			__init.Property("RuleId");
 			RuleId.FormatCode(writer);

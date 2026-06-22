@@ -27,7 +27,7 @@ public partial class ShardsSegment : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardsSegment");
+		var __init = writer.BeginObjectInitializer("ShardsSegment", false);
 		{
 			__init.Property("NumCommittedSegments");
 			writer.WriteValue(NumCommittedSegments);
@@ -45,7 +45,11 @@ public partial class ShardsSegment : RequestConverter.ICodeFormattable
 
 		{
 			__init.Property("Segments");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.IndexManagement.Segment");
+			writer.Write(">() ");
 			writer.WriteInlineList(Segments, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

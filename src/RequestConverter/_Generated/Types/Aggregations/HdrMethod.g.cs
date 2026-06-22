@@ -27,7 +27,7 @@ public partial class HdrMethod : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("HdrMethod");
+		var __init = writer.BeginObjectInitializer("HdrMethod", false);
 		if (NumberOfSignificantValueDigits is not null)
 		{
 			__init.Property("NumberOfSignificantValueDigits");

@@ -27,7 +27,7 @@ public partial class SynonymRuleRead : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SynonymRuleRead");
+		var __init = writer.BeginObjectInitializer("SynonymRuleRead", false);
 		{
 			__init.Property("Id");
 			writer.WriteString(Id);

@@ -27,7 +27,7 @@ public partial class Merge : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Merge");
+		var __init = writer.BeginObjectInitializer("Merge", false);
 		if (Scheduler is not null)
 		{
 			__init.Property("Scheduler");

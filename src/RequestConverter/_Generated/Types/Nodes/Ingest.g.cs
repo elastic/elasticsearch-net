@@ -27,11 +27,15 @@ public partial class Ingest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Ingest");
+		var __init = writer.BeginObjectInitializer("Ingest", false);
 		if (Pipelines is not null)
 		{
 			__init.Property("Pipelines");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Nodes.IngestStats");
+			writer.Write(">() ");
 			writer.WriteInlineList(Pipelines, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

@@ -27,7 +27,7 @@ public partial class RankEvalRequestItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RankEvalRequestItem");
+		var __init = writer.BeginObjectInitializer("RankEvalRequestItem", false);
 		{
 			__init.Property("Id");
 			Id.FormatCode(writer);
@@ -36,7 +36,11 @@ public partial class RankEvalRequestItem : RequestConverter.ICodeFormattable
 		if (Params is not null)
 		{
 			__init.Property("Params");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

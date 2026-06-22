@@ -27,7 +27,7 @@ public partial class Transport : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Transport");
+		var __init = writer.BeginObjectInitializer("Transport", false);
 		if (InboundHandlingTimeHistogram is not null)
 		{
 			__init.Property("InboundHandlingTimeHistogram");

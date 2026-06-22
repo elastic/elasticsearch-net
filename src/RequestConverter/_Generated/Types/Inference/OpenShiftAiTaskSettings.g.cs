@@ -27,7 +27,7 @@ public partial class OpenShiftAiTaskSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("OpenShiftAiTaskSettings");
+		var __init = writer.BeginObjectInitializer("OpenShiftAiTaskSettings", false);
 		if (ReturnDocuments is not null)
 		{
 			__init.Property("ReturnDocuments");

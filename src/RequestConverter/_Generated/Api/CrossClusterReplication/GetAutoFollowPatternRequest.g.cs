@@ -27,7 +27,7 @@ public partial class GetAutoFollowPatternRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetAutoFollowPatternRequest");
+		var __init = writer.BeginObjectInitializer("GetAutoFollowPatternRequest", false);
 		if (Name is not null)
 		{
 			__init.Property("Name");

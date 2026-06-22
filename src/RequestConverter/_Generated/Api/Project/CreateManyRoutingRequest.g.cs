@@ -27,10 +27,14 @@ public partial class CreateManyRoutingRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CreateManyRoutingRequest");
+		var __init = writer.BeginObjectInitializer("CreateManyRoutingRequest", false);
 		{
 			__init.Property("Expressions");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Project.ProjectRoutingExpression");
+			writer.Write(">() ");
 			writer.WriteInlineList(Expressions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

@@ -27,7 +27,7 @@ public partial class GeoDistanceAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoDistanceAggregation");
+		var __init = writer.BeginObjectInitializer("GeoDistanceAggregation", false);
 		if (DistanceType is not null)
 		{
 			__init.Property("DistanceType");

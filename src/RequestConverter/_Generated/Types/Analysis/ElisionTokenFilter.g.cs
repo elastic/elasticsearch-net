@@ -27,7 +27,7 @@ public partial class ElisionTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ElisionTokenFilter");
+		var __init = writer.BeginObjectInitializer("ElisionTokenFilter", true);
 		if (Articles is not null)
 		{
 			__init.Property("Articles");

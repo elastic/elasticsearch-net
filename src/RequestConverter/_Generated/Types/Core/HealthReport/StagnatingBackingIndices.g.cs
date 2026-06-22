@@ -27,7 +27,7 @@ public partial class StagnatingBackingIndices : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StagnatingBackingIndices");
+		var __init = writer.BeginObjectInitializer("StagnatingBackingIndices", false);
 		{
 			__init.Property("FirstOccurrenceTimestamp");
 			writer.WriteValue(FirstOccurrenceTimestamp);

@@ -27,7 +27,7 @@ public partial class DissectProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DissectProcessor");
+		var __init = writer.BeginObjectInitializer("DissectProcessor", false);
 		if (AppendSeparator is not null)
 		{
 			__init.Property("AppendSeparator");

@@ -27,7 +27,7 @@ public partial class SimulateIndexTemplateRequest : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SimulateIndexTemplateRequest");
+		var __init = writer.BeginObjectInitializer("SimulateIndexTemplateRequest", false);
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

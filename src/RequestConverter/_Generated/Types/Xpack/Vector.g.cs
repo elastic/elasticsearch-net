@@ -27,7 +27,7 @@ public partial class Vector : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Vector");
+		var __init = writer.BeginObjectInitializer("Vector", false);
 		{
 			__init.Property("Available");
 			writer.WriteValue(Available);

@@ -27,7 +27,7 @@ public partial class WatcherWatchTrigger : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("WatcherWatchTrigger");
+		var __init = writer.BeginObjectInitializer("WatcherWatchTrigger", false);
 		{
 			__init.Property("All");
 			All.FormatCode(writer);

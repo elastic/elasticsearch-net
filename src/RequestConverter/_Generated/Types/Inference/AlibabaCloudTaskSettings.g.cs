@@ -27,7 +27,7 @@ public partial class AlibabaCloudTaskSettings : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AlibabaCloudTaskSettings");
+		var __init = writer.BeginObjectInitializer("AlibabaCloudTaskSettings", false);
 		if (InputType is not null)
 		{
 			__init.Property("InputType");

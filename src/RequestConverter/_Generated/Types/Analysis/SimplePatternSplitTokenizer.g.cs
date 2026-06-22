@@ -27,7 +27,7 @@ public partial class SimplePatternSplitTokenizer : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SimplePatternSplitTokenizer");
+		var __init = writer.BeginObjectInitializer("SimplePatternSplitTokenizer", true);
 		if (Pattern is not null)
 		{
 			__init.Property("Pattern");

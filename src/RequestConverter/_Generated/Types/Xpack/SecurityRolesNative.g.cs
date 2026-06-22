@@ -27,7 +27,7 @@ public partial class SecurityRolesNative : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SecurityRolesNative");
+		var __init = writer.BeginObjectInitializer("SecurityRolesNative", false);
 		{
 			__init.Property("Dls");
 			writer.WriteValue(Dls);

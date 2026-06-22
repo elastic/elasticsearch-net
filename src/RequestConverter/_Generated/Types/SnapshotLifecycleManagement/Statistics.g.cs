@@ -27,7 +27,7 @@ public partial class Statistics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Statistics");
+		var __init = writer.BeginObjectInitializer("Statistics", false);
 		if (Policy is not null)
 		{
 			__init.Property("Policy");

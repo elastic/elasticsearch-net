@@ -27,7 +27,7 @@ public partial class MoreLikeThisQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MoreLikeThisQuery");
+		var __init = writer.BeginObjectInitializer("MoreLikeThisQuery", false);
 		if (Analyzer is not null)
 		{
 			__init.Property("Analyzer");

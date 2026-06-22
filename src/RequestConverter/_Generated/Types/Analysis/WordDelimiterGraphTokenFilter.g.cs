@@ -27,7 +27,7 @@ public partial class WordDelimiterGraphTokenFilter : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("WordDelimiterGraphTokenFilter");
+		var __init = writer.BeginObjectInitializer("WordDelimiterGraphTokenFilter", true);
 		if (AdjustOffsets is not null)
 		{
 			__init.Property("AdjustOffsets");

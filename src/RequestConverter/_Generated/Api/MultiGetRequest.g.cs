@@ -27,7 +27,7 @@ public partial class MultiGetRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MultiGetRequest");
+		var __init = writer.BeginObjectInitializer("MultiGetRequest", false);
 		if (Index is not null)
 		{
 			__init.Property("Index");

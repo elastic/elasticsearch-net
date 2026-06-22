@@ -27,7 +27,7 @@ public partial class PutLlamaRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutLlamaRequest");
+		var __init = writer.BeginObjectInitializer("PutLlamaRequest", false);
 		{
 			__init.Property("LlamaInferenceId");
 			LlamaInferenceId.FormatCode(writer);

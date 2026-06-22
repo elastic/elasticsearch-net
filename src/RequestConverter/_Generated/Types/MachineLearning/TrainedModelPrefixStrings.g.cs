@@ -27,7 +27,7 @@ public partial class TrainedModelPrefixStrings : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelPrefixStrings");
+		var __init = writer.BeginObjectInitializer("TrainedModelPrefixStrings", false);
 		if (Ingest is not null)
 		{
 			__init.Property("Ingest");

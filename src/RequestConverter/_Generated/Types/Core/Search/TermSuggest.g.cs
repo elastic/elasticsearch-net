@@ -27,7 +27,7 @@ public partial class TermSuggest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TermSuggest");
+		var __init = writer.BeginObjectInitializer("TermSuggest", true);
 		{
 			__init.Property("Length");
 			writer.WriteValue(Length);

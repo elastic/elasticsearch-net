@@ -27,7 +27,7 @@ public partial class RelocationFailureInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RelocationFailureInfo");
+		var __init = writer.BeginObjectInitializer("RelocationFailureInfo", false);
 		{
 			__init.Property("FailedAttempts");
 			writer.WriteValue(FailedAttempts);

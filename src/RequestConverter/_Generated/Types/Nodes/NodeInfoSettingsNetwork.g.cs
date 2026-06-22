@@ -27,7 +27,7 @@ public partial class NodeInfoSettingsNetwork : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoSettingsNetwork");
+		var __init = writer.BeginObjectInitializer("NodeInfoSettingsNetwork", false);
 		if (Host is not null)
 		{
 			__init.Property("Host");

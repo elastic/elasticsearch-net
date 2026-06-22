@@ -27,7 +27,7 @@ public partial class Rescore : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Rescore");
+		var __init = writer.BeginObjectInitializer("Rescore", false);
 		if (WindowSize is not null)
 		{
 			__init.Property("WindowSize");

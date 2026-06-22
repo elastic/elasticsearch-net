@@ -27,7 +27,7 @@ public partial class DanglingIndex : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DanglingIndex");
+		var __init = writer.BeginObjectInitializer("DanglingIndex", false);
 		{
 			__init.Property("CreationDateMillis");
 			writer.WriteValue(CreationDateMillis);

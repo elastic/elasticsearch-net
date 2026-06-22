@@ -27,7 +27,7 @@ public partial class SearchMvtRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SearchMvtRequest");
+		var __init = writer.BeginObjectInitializer("SearchMvtRequest", false);
 		{
 			__init.Property("Field");
 			Field.FormatCode(writer);
@@ -56,7 +56,11 @@ public partial class SearchMvtRequest : RequestConverter.ICodeFormattable
 		if (Aggs is not null)
 		{
 			__init.Property("Aggs");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Aggregations.Aggregation");
+			writer.Write(">() ");
 			writer.WriteInlineList(Aggs, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
@@ -117,7 +121,11 @@ public partial class SearchMvtRequest : RequestConverter.ICodeFormattable
 		if (RuntimeMappings is not null)
 		{
 			__init.Property("RuntimeMappings");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("Elastic.Clients.Elasticsearch.Field");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Mapping.RuntimeField");
+			writer.Write(">() ");
 			writer.WriteInlineList(RuntimeMappings, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

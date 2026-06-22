@@ -27,7 +27,7 @@ public partial class InferenceChunkingSettings : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InferenceChunkingSettings");
+		var __init = writer.BeginObjectInitializer("InferenceChunkingSettings", false);
 		if (MaxChunkSize is not null)
 		{
 			__init.Property("MaxChunkSize");

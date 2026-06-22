@@ -27,7 +27,7 @@ public partial class TranslogRetention : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TranslogRetention");
+		var __init = writer.BeginObjectInitializer("TranslogRetention", false);
 		if (Age is not null)
 		{
 			__init.Property("Age");

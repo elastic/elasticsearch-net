@@ -27,7 +27,7 @@ public partial class SettingsHighlight : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SettingsHighlight");
+		var __init = writer.BeginObjectInitializer("SettingsHighlight", false);
 		if (MaxAnalyzedOffset is not null)
 		{
 			__init.Property("MaxAnalyzedOffset");

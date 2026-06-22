@@ -27,7 +27,7 @@ public partial class Processor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Processor");
+		var __init = writer.BeginObjectInitializer("Processor", false);
 		if (Count is not null)
 		{
 			__init.Property("Count");

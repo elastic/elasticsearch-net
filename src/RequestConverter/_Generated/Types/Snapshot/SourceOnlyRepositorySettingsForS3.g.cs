@@ -27,7 +27,7 @@ public partial class SourceOnlyRepositorySettingsForS3 : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SourceOnlyRepositorySettingsForS3");
+		var __init = writer.BeginObjectInitializer("SourceOnlyRepositorySettingsForS3", true);
 		if (BasePath is not null)
 		{
 			__init.Property("BasePath");

@@ -27,7 +27,7 @@ public partial class GetLicenseRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetLicenseRequest");
+		var __init = writer.BeginObjectInitializer("GetLicenseRequest", false);
 #pragma warning disable CS0618
 		if (AcceptEnterprise is not null)
 		{

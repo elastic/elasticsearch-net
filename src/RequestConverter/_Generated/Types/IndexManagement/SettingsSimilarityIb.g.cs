@@ -27,7 +27,7 @@ public partial class SettingsSimilarityIb : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SettingsSimilarityIb");
+		var __init = writer.BeginObjectInitializer("SettingsSimilarityIb", true);
 		{
 			__init.Property("Distribution");
 			Elastic.Clients.Elasticsearch.IBDistributionCodeFormatter.FormatCode(Distribution, writer);

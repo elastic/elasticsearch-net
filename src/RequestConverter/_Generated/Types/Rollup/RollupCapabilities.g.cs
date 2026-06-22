@@ -27,7 +27,7 @@ public partial class RollupCapabilities : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RollupCapabilities");
+		var __init = writer.BeginObjectInitializer("RollupCapabilities", false);
 		{
 			__init.Property("RollupJobs");
 			writer.WriteInlineList(RollupJobs, (w, item) => { item.FormatCode(w); });

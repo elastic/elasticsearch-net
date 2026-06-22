@@ -27,7 +27,7 @@ public partial class RankEvalQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RankEvalQuery");
+		var __init = writer.BeginObjectInitializer("RankEvalQuery", false);
 		{
 			__init.Property("Query");
 			Query.FormatCode(writer);

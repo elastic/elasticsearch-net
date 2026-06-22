@@ -27,7 +27,7 @@ public partial class VoyageAIServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("VoyageAIServiceSettings");
+		var __init = writer.BeginObjectInitializer("VoyageAIServiceSettings", false);
 		if (Dimensions is not null)
 		{
 			__init.Property("Dimensions");

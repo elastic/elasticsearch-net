@@ -27,7 +27,7 @@ public partial class SummaryReasoningDetail : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SummaryReasoningDetail");
+		var __init = writer.BeginObjectInitializer("SummaryReasoningDetail", true);
 		if (Format is not null)
 		{
 			__init.Property("Format");

@@ -27,7 +27,7 @@ public partial class RateAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RateAggregation");
+		var __init = writer.BeginObjectInitializer("RateAggregation", false);
 		if (Field is not null)
 		{
 			__init.Property("Field");

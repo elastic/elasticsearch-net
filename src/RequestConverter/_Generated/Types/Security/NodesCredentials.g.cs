@@ -27,10 +27,14 @@ public partial class NodesCredentials : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodesCredentials");
+		var __init = writer.BeginObjectInitializer("NodesCredentials", false);
 		{
 			__init.Property("FileTokens");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.Security.NodesCredentialsFileToken");
+			writer.Write(">() ");
 			writer.WriteInlineList(FileTokens, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

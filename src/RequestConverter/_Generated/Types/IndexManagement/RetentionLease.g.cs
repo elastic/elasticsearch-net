@@ -27,7 +27,7 @@ public partial class RetentionLease : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RetentionLease");
+		var __init = writer.BeginObjectInitializer("RetentionLease", false);
 		{
 			__init.Property("Period");
 			Period.FormatCode(writer);

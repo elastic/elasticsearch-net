@@ -27,7 +27,7 @@ public partial class DatafeedAuthorization : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DatafeedAuthorization");
+		var __init = writer.BeginObjectInitializer("DatafeedAuthorization", false);
 		if (ApiKey is not null)
 		{
 			__init.Property("ApiKey");

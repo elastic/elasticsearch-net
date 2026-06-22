@@ -27,7 +27,7 @@ public partial class DeleteExpiredDataRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteExpiredDataRequest");
+		var __init = writer.BeginObjectInitializer("DeleteExpiredDataRequest", false);
 		if (JobId is not null)
 		{
 			__init.Property("JobId");

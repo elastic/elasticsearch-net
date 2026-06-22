@@ -27,7 +27,7 @@ public partial class MutualInformationHeuristic : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MutualInformationHeuristic");
+		var __init = writer.BeginObjectInitializer("MutualInformationHeuristic", false);
 		if (BackgroundIsSuperset is not null)
 		{
 			__init.Property("BackgroundIsSuperset");

@@ -27,7 +27,7 @@ public partial class IpPrefixAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IpPrefixAggregation");
+		var __init = writer.BeginObjectInitializer("IpPrefixAggregation", false);
 		if (AppendPrefixLength is not null)
 		{
 			__init.Property("AppendPrefixLength");

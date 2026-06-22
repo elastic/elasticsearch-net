@@ -27,7 +27,7 @@ public partial class PercentilesAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PercentilesAggregation");
+		var __init = writer.BeginObjectInitializer("PercentilesAggregation", false);
 		if (Field is not null)
 		{
 			__init.Property("Field");

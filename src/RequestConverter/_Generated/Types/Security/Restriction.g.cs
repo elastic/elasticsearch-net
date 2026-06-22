@@ -27,7 +27,7 @@ public partial class Restriction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Restriction");
+		var __init = writer.BeginObjectInitializer("Restriction", false);
 		{
 			__init.Property("Workflows");
 			writer.WriteInlineList(Workflows, (w, item) => { item.FormatCode(w); });

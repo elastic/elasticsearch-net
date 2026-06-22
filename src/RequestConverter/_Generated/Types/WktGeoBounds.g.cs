@@ -27,7 +27,7 @@ public partial class WktGeoBounds : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("WktGeoBounds");
+		var __init = writer.BeginObjectInitializer("WktGeoBounds", true);
 		{
 			__init.Property("Wkt");
 			writer.WriteString(Wkt);

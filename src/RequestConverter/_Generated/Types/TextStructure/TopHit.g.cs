@@ -27,7 +27,7 @@ public partial class TopHit : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TopHit");
+		var __init = writer.BeginObjectInitializer("TopHit", false);
 		{
 			__init.Property("Count");
 			writer.WriteValue(Count);

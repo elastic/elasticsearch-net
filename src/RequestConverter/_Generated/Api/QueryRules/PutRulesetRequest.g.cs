@@ -27,7 +27,7 @@ public partial class PutRulesetRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutRulesetRequest");
+		var __init = writer.BeginObjectInitializer("PutRulesetRequest", false);
 		{
 			__init.Property("RulesetId");
 			RulesetId.FormatCode(writer);

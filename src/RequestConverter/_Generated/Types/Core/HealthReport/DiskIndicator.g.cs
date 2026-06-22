@@ -27,7 +27,7 @@ public partial class DiskIndicator : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DiskIndicator");
+		var __init = writer.BeginObjectInitializer("DiskIndicator", false);
 		if (Details is not null)
 		{
 			__init.Property("Details");

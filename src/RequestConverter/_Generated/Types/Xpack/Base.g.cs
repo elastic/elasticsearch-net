@@ -27,7 +27,7 @@ public partial class Base : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Base");
+		var __init = writer.BeginObjectInitializer("Base", false);
 		{
 			__init.Property("Available");
 			writer.WriteValue(Available);

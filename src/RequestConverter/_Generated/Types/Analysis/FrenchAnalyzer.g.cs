@@ -27,7 +27,7 @@ public partial class FrenchAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FrenchAnalyzer");
+		var __init = writer.BeginObjectInitializer("FrenchAnalyzer", true);
 		if (StemExclusion is not null)
 		{
 			__init.Property("StemExclusion");

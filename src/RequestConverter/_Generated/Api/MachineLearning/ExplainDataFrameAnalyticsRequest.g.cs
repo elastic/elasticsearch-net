@@ -27,7 +27,7 @@ public partial class ExplainDataFrameAnalyticsRequest : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExplainDataFrameAnalyticsRequest");
+		var __init = writer.BeginObjectInitializer("ExplainDataFrameAnalyticsRequest", false);
 		if (Id is not null)
 		{
 			__init.Property("Id");

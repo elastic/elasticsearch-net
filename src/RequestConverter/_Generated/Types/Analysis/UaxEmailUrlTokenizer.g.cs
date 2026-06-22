@@ -27,7 +27,7 @@ public partial class UaxEmailUrlTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UaxEmailUrlTokenizer");
+		var __init = writer.BeginObjectInitializer("UaxEmailUrlTokenizer", true);
 		if (MaxTokenLength is not null)
 		{
 			__init.Property("MaxTokenLength");

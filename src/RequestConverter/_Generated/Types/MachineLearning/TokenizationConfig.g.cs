@@ -27,7 +27,7 @@ public partial class TokenizationConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TokenizationConfig");
+		var __init = writer.BeginObjectInitializer("TokenizationConfig", false);
 		if (Bert is not null)
 		{
 			__init.Property("Bert");

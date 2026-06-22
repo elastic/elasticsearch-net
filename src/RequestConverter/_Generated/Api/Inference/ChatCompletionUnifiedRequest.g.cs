@@ -27,7 +27,7 @@ public partial class ChatCompletionUnifiedRequest : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ChatCompletionUnifiedRequest");
+		var __init = writer.BeginObjectInitializer("ChatCompletionUnifiedRequest", false);
 		{
 			__init.Property("InferenceId");
 			InferenceId.FormatCode(writer);

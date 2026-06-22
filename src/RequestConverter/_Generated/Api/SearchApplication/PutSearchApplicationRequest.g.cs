@@ -27,7 +27,7 @@ public partial class PutSearchApplicationRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutSearchApplicationRequest");
+		var __init = writer.BeginObjectInitializer("PutSearchApplicationRequest", false);
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

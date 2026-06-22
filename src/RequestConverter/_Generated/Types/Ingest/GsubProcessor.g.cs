@@ -27,7 +27,7 @@ public partial class GsubProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GsubProcessor");
+		var __init = writer.BeginObjectInitializer("GsubProcessor", false);
 		if (Description is not null)
 		{
 			__init.Property("Description");

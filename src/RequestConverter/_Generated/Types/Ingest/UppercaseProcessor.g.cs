@@ -27,7 +27,7 @@ public partial class UppercaseProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UppercaseProcessor");
+		var __init = writer.BeginObjectInitializer("UppercaseProcessor", false);
 		if (Description is not null)
 		{
 			__init.Property("Description");

@@ -27,7 +27,7 @@ public partial class DoubleTermsBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DoubleTermsBucket");
+		var __init = writer.BeginObjectInitializer("DoubleTermsBucket", false);
 		if (Aggregations is not null)
 		{
 			__init.Property("Aggregations");

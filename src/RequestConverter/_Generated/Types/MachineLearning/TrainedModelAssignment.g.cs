@@ -27,7 +27,7 @@ public partial class TrainedModelAssignment : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelAssignment");
+		var __init = writer.BeginObjectInitializer("TrainedModelAssignment", false);
 		if (AdaptiveAllocations is not null)
 		{
 			__init.Property("AdaptiveAllocations");
@@ -53,7 +53,11 @@ public partial class TrainedModelAssignment : RequestConverter.ICodeFormattable
 
 		{
 			__init.Property("RoutingTable");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable");
+			writer.Write(">() ");
 			writer.WriteInlineList(RoutingTable, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

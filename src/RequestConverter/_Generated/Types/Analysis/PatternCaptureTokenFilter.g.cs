@@ -27,7 +27,7 @@ public partial class PatternCaptureTokenFilter : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PatternCaptureTokenFilter");
+		var __init = writer.BeginObjectInitializer("PatternCaptureTokenFilter", true);
 		{
 			__init.Property("Patterns");
 			writer.WriteInlineList(Patterns, (w, item) => { w.WriteString(item); });

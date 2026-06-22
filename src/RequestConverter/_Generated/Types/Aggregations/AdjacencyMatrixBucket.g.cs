@@ -27,7 +27,7 @@ public partial class AdjacencyMatrixBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AdjacencyMatrixBucket");
+		var __init = writer.BeginObjectInitializer("AdjacencyMatrixBucket", false);
 		if (Aggregations is not null)
 		{
 			__init.Property("Aggregations");

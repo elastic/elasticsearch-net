@@ -27,7 +27,7 @@ public partial class UserIndicesPrivileges : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UserIndicesPrivileges");
+		var __init = writer.BeginObjectInitializer("UserIndicesPrivileges", false);
 		{
 			__init.Property("AllowRestrictedIndices");
 			writer.WriteValue(AllowRestrictedIndices);

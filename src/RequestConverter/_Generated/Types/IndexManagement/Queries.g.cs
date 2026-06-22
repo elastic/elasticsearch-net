@@ -27,7 +27,7 @@ public partial class Queries : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Queries");
+		var __init = writer.BeginObjectInitializer("Queries", false);
 		if (Cache is not null)
 		{
 			__init.Property("Cache");

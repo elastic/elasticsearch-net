@@ -27,7 +27,7 @@ public partial class ChunkRescorerChunkingSettings : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ChunkRescorerChunkingSettings");
+		var __init = writer.BeginObjectInitializer("ChunkRescorerChunkingSettings", false);
 		{
 			__init.Property("MaxChunkSize");
 			writer.WriteValue(MaxChunkSize);

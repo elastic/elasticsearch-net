@@ -27,7 +27,7 @@ public partial class Vertex : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Vertex");
+		var __init = writer.BeginObjectInitializer("Vertex", false);
 		{
 			__init.Property("Depth");
 			writer.WriteValue(Depth);

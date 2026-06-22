@@ -27,7 +27,7 @@ public partial class IndexSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexSettings");
+		var __init = writer.BeginObjectInitializer("IndexSettings", false);
 		if (Analysis is not null)
 		{
 			__init.Property("Analysis");
@@ -247,7 +247,11 @@ public partial class IndexSettings : RequestConverter.ICodeFormattable
 		if (OtherSettings is not null)
 		{
 			__init.Property("OtherSettings");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("object");
+			writer.Write(">() ");
 			writer.WriteInlineList(OtherSettings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

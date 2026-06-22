@@ -27,7 +27,7 @@ public partial class GeotileGridAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeotileGridAggregation");
+		var __init = writer.BeginObjectInitializer("GeotileGridAggregation", false);
 		if (Bounds is not null)
 		{
 			__init.Property("Bounds");

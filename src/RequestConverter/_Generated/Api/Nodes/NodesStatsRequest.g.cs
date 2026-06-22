@@ -27,7 +27,7 @@ public partial class NodesStatsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodesStatsRequest");
+		var __init = writer.BeginObjectInitializer("NodesStatsRequest", false);
 		if (IndexMetric is not null)
 		{
 			__init.Property("IndexMetric");

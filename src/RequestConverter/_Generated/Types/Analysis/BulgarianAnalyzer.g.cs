@@ -27,7 +27,7 @@ public partial class BulgarianAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BulgarianAnalyzer");
+		var __init = writer.BeginObjectInitializer("BulgarianAnalyzer", true);
 		if (StemExclusion is not null)
 		{
 			__init.Property("StemExclusion");

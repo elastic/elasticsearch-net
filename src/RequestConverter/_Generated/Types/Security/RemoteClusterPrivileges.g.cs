@@ -27,7 +27,7 @@ public partial class RemoteClusterPrivileges : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RemoteClusterPrivileges");
+		var __init = writer.BeginObjectInitializer("RemoteClusterPrivileges", false);
 		{
 			__init.Property("Clusters");
 			Clusters.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class HttpRouteRequests : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("HttpRouteRequests");
+		var __init = writer.BeginObjectInitializer("HttpRouteRequests", false);
 		{
 			__init.Property("Count");
 			writer.WriteValue(Count);

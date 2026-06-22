@@ -27,10 +27,14 @@ public partial class SparseEmbeddingResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SparseEmbeddingResult");
+		var __init = writer.BeginObjectInitializer("SparseEmbeddingResult", false);
 		{
 			__init.Property("Embedding");
-			writer.Write("new() ");
+			writer.Write("new global::System.Collections.Generic.Dictionary<");
+			writer.Write("string");
+			writer.Write(", ");
+			writer.Write("float");
+			writer.Write(">() ");
 			writer.WriteInlineList(Embedding, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("f"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 

@@ -27,7 +27,7 @@ public partial class TextEmbedding : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TextEmbedding");
+		var __init = writer.BeginObjectInitializer("TextEmbedding", false);
 		if (ModelId is not null)
 		{
 			__init.Property("ModelId");

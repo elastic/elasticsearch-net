@@ -27,7 +27,7 @@ public partial class DeleteInferenceRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteInferenceRequest");
+		var __init = writer.BeginObjectInitializer("DeleteInferenceRequest", false);
 		{
 			__init.Property("InferenceId");
 			InferenceId.FormatCode(writer);

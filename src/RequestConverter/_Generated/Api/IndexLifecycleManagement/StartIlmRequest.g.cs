@@ -27,7 +27,7 @@ public partial class StartIlmRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StartIlmRequest");
+		var __init = writer.BeginObjectInitializer("StartIlmRequest", false);
 		if (MasterTimeout is not null)
 		{
 			__init.Property("MasterTimeout");

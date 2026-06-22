@@ -27,7 +27,7 @@ public partial class CreateServiceTokenRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CreateServiceTokenRequest");
+		var __init = writer.BeginObjectInitializer("CreateServiceTokenRequest", false);
 		if (Name is not null)
 		{
 			__init.Property("Name");

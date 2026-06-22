@@ -27,7 +27,7 @@ public partial class NonStationary : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NonStationary");
+		var __init = writer.BeginObjectInitializer("NonStationary", false);
 		{
 			__init.Property("PValue");
 			writer.WriteValue(PValue);

@@ -27,7 +27,7 @@ public partial class InferenceConfigClassification : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InferenceConfigClassification");
+		var __init = writer.BeginObjectInitializer("InferenceConfigClassification", false);
 		if (NumTopClasses is not null)
 		{
 			__init.Property("NumTopClasses");

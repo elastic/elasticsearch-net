@@ -27,7 +27,7 @@ public partial class PutAmazonsagemakerRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutAmazonsagemakerRequest");
+		var __init = writer.BeginObjectInitializer("PutAmazonsagemakerRequest", false);
 		{
 			__init.Property("AmazonsagemakerInferenceId");
 			AmazonsagemakerInferenceId.FormatCode(writer);

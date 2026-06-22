@@ -27,7 +27,7 @@ public partial class PorterStemTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PorterStemTokenFilter");
+		var __init = writer.BeginObjectInitializer("PorterStemTokenFilter", true);
 		if (Version is not null)
 		{
 			__init.Property("Version");

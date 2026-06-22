@@ -27,7 +27,7 @@ public partial class ClusterDetails : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterDetails");
+		var __init = writer.BeginObjectInitializer("ClusterDetails", false);
 		if (Failures is not null)
 		{
 			__init.Property("Failures");

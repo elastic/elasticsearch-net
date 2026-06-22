@@ -27,7 +27,7 @@ public partial class TermsPartition : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TermsPartition");
+		var __init = writer.BeginObjectInitializer("TermsPartition", false);
 		{
 			__init.Property("NumPartitions");
 			writer.WriteValue(NumPartitions);

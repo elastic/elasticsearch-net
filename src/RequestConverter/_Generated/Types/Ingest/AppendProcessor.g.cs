@@ -27,7 +27,7 @@ public partial class AppendProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AppendProcessor");
+		var __init = writer.BeginObjectInitializer("AppendProcessor", false);
 		if (AllowDuplicates is not null)
 		{
 			__init.Property("AllowDuplicates");

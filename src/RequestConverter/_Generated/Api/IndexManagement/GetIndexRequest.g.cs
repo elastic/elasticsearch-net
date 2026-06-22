@@ -27,7 +27,7 @@ public partial class GetIndexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetIndexRequest");
+		var __init = writer.BeginObjectInitializer("GetIndexRequest", false);
 		{
 			__init.Property("Indices");
 			Indices.FormatCode(writer);

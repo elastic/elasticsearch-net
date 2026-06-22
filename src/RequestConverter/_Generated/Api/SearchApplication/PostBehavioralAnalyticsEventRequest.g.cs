@@ -27,7 +27,7 @@ public partial class PostBehavioralAnalyticsEventRequest : RequestConverter.ICod
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PostBehavioralAnalyticsEventRequest");
+		var __init = writer.BeginObjectInitializer("PostBehavioralAnalyticsEventRequest", false);
 		{
 			__init.Property("CollectionName");
 			CollectionName.FormatCode(writer);

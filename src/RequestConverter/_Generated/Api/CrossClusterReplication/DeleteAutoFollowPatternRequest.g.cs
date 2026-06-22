@@ -27,7 +27,7 @@ public partial class DeleteAutoFollowPatternRequest : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteAutoFollowPatternRequest");
+		var __init = writer.BeginObjectInitializer("DeleteAutoFollowPatternRequest", false);
 		{
 			__init.Property("Name");
 			Name.FormatCode(writer);

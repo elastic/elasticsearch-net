@@ -27,7 +27,7 @@ public partial class DeleteFilterRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteFilterRequest");
+		var __init = writer.BeginObjectInitializer("DeleteFilterRequest", false);
 		{
 			__init.Property("FilterId");
 			FilterId.FormatCode(writer);

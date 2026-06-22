@@ -27,7 +27,7 @@ public partial class AggregationProfile : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AggregationProfile");
+		var __init = writer.BeginObjectInitializer("AggregationProfile", false);
 		{
 			__init.Property("Breakdown");
 			Breakdown.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class DataStreamMappings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataStreamMappings");
+		var __init = writer.BeginObjectInitializer("DataStreamMappings", false);
 		{
 			__init.Property("EffectiveMappings");
 			EffectiveMappings.FormatCode(writer);

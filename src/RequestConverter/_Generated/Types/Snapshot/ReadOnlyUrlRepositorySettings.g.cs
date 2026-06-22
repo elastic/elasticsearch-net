@@ -27,7 +27,7 @@ public partial class ReadOnlyUrlRepositorySettings : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ReadOnlyUrlRepositorySettings");
+		var __init = writer.BeginObjectInitializer("ReadOnlyUrlRepositorySettings", false);
 		if (ChunkSize is not null)
 		{
 			__init.Property("ChunkSize");

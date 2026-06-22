@@ -27,7 +27,7 @@ public partial class TextExpansionInferenceUpdateOptions : RequestConverter.ICod
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TextExpansionInferenceUpdateOptions");
+		var __init = writer.BeginObjectInitializer("TextExpansionInferenceUpdateOptions", false);
 		if (ResultsField is not null)
 		{
 			__init.Property("ResultsField");

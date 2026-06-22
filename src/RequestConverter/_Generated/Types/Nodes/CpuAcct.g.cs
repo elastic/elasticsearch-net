@@ -27,7 +27,7 @@ public partial class CpuAcct : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CpuAcct");
+		var __init = writer.BeginObjectInitializer("CpuAcct", false);
 		if (ControlGroup is not null)
 		{
 			__init.Property("ControlGroup");

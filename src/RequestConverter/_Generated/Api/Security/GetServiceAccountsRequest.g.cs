@@ -27,7 +27,7 @@ public partial class GetServiceAccountsRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetServiceAccountsRequest");
+		var __init = writer.BeginObjectInitializer("GetServiceAccountsRequest", false);
 		if (Namespace is not null)
 		{
 			__init.Property("Namespace");

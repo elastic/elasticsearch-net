@@ -27,7 +27,7 @@ public partial class StopTransformRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StopTransformRequest");
+		var __init = writer.BeginObjectInitializer("StopTransformRequest", false);
 		{
 			__init.Property("TransformId");
 			TransformId.FormatCode(writer);

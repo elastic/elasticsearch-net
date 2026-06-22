@@ -27,7 +27,7 @@ public partial class DatabaseConfigurationMetadata : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DatabaseConfigurationMetadata");
+		var __init = writer.BeginObjectInitializer("DatabaseConfigurationMetadata", false);
 		{
 			__init.Property("Database");
 			Database.FormatCode(writer);

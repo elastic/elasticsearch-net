@@ -27,7 +27,7 @@ public partial class Limits : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Limits");
+		var __init = writer.BeginObjectInitializer("Limits", false);
 		if (EffectiveMaxModelMemoryLimit is not null)
 		{
 			__init.Property("EffectiveMaxModelMemoryLimit");

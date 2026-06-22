@@ -27,7 +27,7 @@ public partial class DocStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DocStats");
+		var __init = writer.BeginObjectInitializer("DocStats", false);
 		{
 			__init.Property("Count");
 			writer.WriteValue(Count);
