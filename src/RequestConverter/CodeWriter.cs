@@ -22,6 +22,11 @@ public sealed class CodeWriter
 	private int _indentLevel;
 	private bool _atLineStart = true;
 
+	// When set, the next BeginObjectInitializer emits an explicit "new T()" instead of a target-typed
+	// "new()". Set by WriteValue when dispatching to an ICodeFormattable through a loosely-typed
+	// (object/interface) context, where a target-typed new() cannot bind to the concrete type.
+	private bool _forceExplicitConstructor;
+
 	public CodeWriter(FormattingOptions? options = null) => Options = options ?? FormattingOptions.Default;
 
 	public FormattingOptions Options { get; }
@@ -122,7 +127,11 @@ public sealed class CodeWriter
 			case null:
 				return Write("null");
 			case ICodeFormattable formattable:
+				// Reached through a loosely-typed (object/interface) context, so a target-typed new() in the
+				// value's own initializer cannot bind to the concrete type. Force its explicit constructor.
+				_forceExplicitConstructor = true;
 				formattable.FormatCode(this);
+				_forceExplicitConstructor = false;
 				return this;
 			case JsonElement jsonElement:
 				// Arbitrary JSON can't be represented as a C# anonymous object (keys may be C#
@@ -201,7 +210,8 @@ public sealed class CodeWriter
 	/// </summary>
 	public ObjectInitializer BeginObjectInitializer(string? typeName = null, bool forceExplicitConstructor = false)
 	{
-		var explicitConstructor = forceExplicitConstructor || Options.ConstructorStyle == ConstructorStyle.Explicit;
+		var explicitConstructor = forceExplicitConstructor || _forceExplicitConstructor || Options.ConstructorStyle == ConstructorStyle.Explicit;
+		_forceExplicitConstructor = false; // consume: applies to this initializer only, not nested ones
 		if (explicitConstructor && !string.IsNullOrEmpty(typeName))
 		{
 			Write("new ").Write(typeName).Write("()");

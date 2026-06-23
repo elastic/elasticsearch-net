@@ -6,8 +6,6 @@ public partial class Routing : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		writer.Append("\"");
-		writer.Append(StringOrLongValue);
-		writer.Append("\"");
+		writer.WriteString(ToString());
 	}
 }

@@ -6,8 +6,6 @@ public sealed partial class DataStreamName : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		writer.Append("\"");
-		writer.Append(Name);
-		writer.Append("\"");
+		writer.WriteString(ToString());
 	}
 }

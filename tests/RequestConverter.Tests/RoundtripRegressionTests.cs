@@ -27,7 +27,7 @@ public sealed class RoundtripRegressionTests
 
 	public RoundtripRegressionTests(ITestOutputHelper output) => _output = output;
 
-	private sealed record Case(string Digest, string Api, Type RequestType, string Code, JsonElement? Body);
+	private sealed record Case(string Digest, string Api, Type RequestType, string Code, JsonElement? Body, Elastic.Clients.Elasticsearch.Requests.Request Materialized);
 
 	[Fact]
 	public void Converted_requests_compile_and_roundtrip()
@@ -59,9 +59,9 @@ public sealed class RoundtripRegressionTests
 				var body = source.Body?.GetRawText();
 				try
 				{
-					var (requestType, code) = global::RequestConverter.RequestConverter.ConvertWithType(
+					var (request, code) = global::RequestConverter.RequestConverter.ConvertWithRequest(
 						serializer, source.Api, source.PathParameters, source.QueryParameters, body);
-					cases.Add(new Case(example.Digest, source.Api, requestType, code, source.Body));
+					cases.Add(new Case(example.Digest, source.Api, request.GetType(), code, source.Body, request));
 				}
 				catch (NotSupportedException)
 				{
@@ -125,12 +125,30 @@ public sealed class RoundtripRegressionTests
 		var roundtripFailures = new List<string>();
 		var roundtripped = 0;
 		var bodiless = 0;
+		var pathQueryFailures = new List<string>();
+		var settings = new Elastic.Clients.Elasticsearch.ElasticsearchClientSettings();
 
 		for (var i = 0; i < cases.Count; i++)
 		{
 			var c = cases[i];
 			var type = assembly.GetType($"Generated.E_{i}")
 				?? throw new InvalidOperationException($"Generated type 'Generated.E_{i}' not found.");
+
+			// Validate path + query reconstruction: resolve both the materialized request (A) and the
+			// request rebuilt by the generated code (B) through the client's own URL + query-string builder,
+			// then compare. Both sides go through the client, so normalization is symmetric and only genuine
+			// emission differences (a dropped or mis-emitted route/query value, or HTTP method) surface.
+			try
+			{
+				var rebuilt = (Elastic.Clients.Elasticsearch.Requests.Request)type.GetMethod("Build")!.Invoke(null, null)!;
+				if (!EndpointEquals(ResolveEndpoint(c.Materialized, settings), ResolveEndpoint(rebuilt, settings), out var endpointDiff))
+					pathQueryFailures.Add($"{c.Api} [{c.Digest}]: {endpointDiff}");
+			}
+			catch (Exception ex)
+			{
+				var inner = ex is TargetInvocationException { InnerException: { } tie } ? tie : ex;
+				pathQueryFailures.Add($"{c.Api} [{c.Digest}]: endpoint resolution threw {inner.GetType().Name}: {inner.Message}");
+			}
 
 			string outputJson;
 			try
@@ -176,13 +194,95 @@ public sealed class RoundtripRegressionTests
 				roundtripFailures.Add($"{c.Api} [{c.Digest}]: body mismatch -> expected={expectedJson} | actual={outputJson}");
 		}
 
-		_output.WriteLine($"roundtripped={roundtripped}, bodiless={bodiless}, roundtrip-failures={roundtripFailures.Count}");
+		_output.WriteLine($"roundtripped={roundtripped}, bodiless={bodiless}, roundtrip-failures={roundtripFailures.Count}, path/query-failures={pathQueryFailures.Count}");
 
-		Assert.True(convertFailures.Count == 0 && roundtripFailures.Count == 0,
+		Assert.True(convertFailures.Count == 0 && roundtripFailures.Count == 0 && pathQueryFailures.Count == 0,
 			$"converted={cases.Count}, roundtripped={roundtripped}, bodiless={bodiless}, skipped(unsupported)={skippedUnsupported}\n" +
 			$"Convert failures ({convertFailures.Count}):\n{string.Join("\n", convertFailures.Take(20))}\n" +
-			$"Roundtrip failures ({roundtripFailures.Count}):\n{string.Join("\n", roundtripFailures.Take(40))}");
+			$"Roundtrip failures ({roundtripFailures.Count}):\n{string.Join("\n", roundtripFailures.Take(40))}\n" +
+			$"Path/query failures ({pathQueryFailures.Count}):\n{string.Join("\n", pathQueryFailures.Take(40))}");
 	}
+
+	/// <summary>
+	/// Resolves a request to its on-the-wire endpoint shape — HTTP method, resolved route values, and
+	/// query-string parameters — using the client's own URL and query-string builder (the same calls the
+	/// client makes in <c>PrepareRequest</c>). <c>RequestParameters</c> is internal and lives on the
+	/// generic <c>Request&lt;TParameters&gt;</c> base, so it is reached reflectively.
+	/// </summary>
+	private static (string Method, IReadOnlyDictionary<string, string> Route, IReadOnlyDictionary<string, string> Query) ResolveEndpoint(
+		Elastic.Clients.Elasticsearch.Requests.Request request, Elastic.Clients.Elasticsearch.IElasticsearchClientSettings settings)
+	{
+		var (resolvedUrl, _, route) = request.GetUrl(settings);
+
+		var requestParameters = (Elastic.Transport.RequestParameters?)request.GetType()
+			.GetProperty("RequestParameters", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
+			?.GetValue(request);
+		var pathAndQuery = requestParameters?.CreatePathWithQueryStrings(resolvedUrl ?? string.Empty, settings) ?? resolvedUrl ?? string.Empty;
+
+		return (request.HttpMethod.ToString(), route ?? new Dictionary<string, string>(), ParseQuery(pathAndQuery));
+	}
+
+	private static IReadOnlyDictionary<string, string> ParseQuery(string pathAndQuery)
+	{
+		var result = new Dictionary<string, string>(StringComparer.Ordinal);
+		var q = pathAndQuery.IndexOf('?');
+		if (q < 0)
+			return result;
+
+		foreach (var pair in pathAndQuery[(q + 1)..].Split('&', StringSplitOptions.RemoveEmptyEntries))
+		{
+			var eq = pair.IndexOf('=');
+			var key = eq < 0 ? pair : pair[..eq];
+			var value = eq < 0 ? string.Empty : pair[(eq + 1)..];
+			result[Uri.UnescapeDataString(key)] = Uri.UnescapeDataString(value);
+		}
+
+		return result;
+	}
+
+	private static bool EndpointEquals(
+		(string Method, IReadOnlyDictionary<string, string> Route, IReadOnlyDictionary<string, string> Query) expected,
+		(string Method, IReadOnlyDictionary<string, string> Route, IReadOnlyDictionary<string, string> Query) actual,
+		out string diff)
+	{
+		if (!string.Equals(expected.Method, actual.Method, StringComparison.Ordinal))
+		{
+			diff = $"method mismatch -> expected={expected.Method} | actual={actual.Method}";
+			return false;
+		}
+
+		if (!DictEquals(expected.Route, actual.Route))
+		{
+			diff = $"route mismatch -> expected={Render(expected.Route)} | actual={Render(actual.Route)}";
+			return false;
+		}
+
+		if (!DictEquals(expected.Query, actual.Query))
+		{
+			diff = $"query mismatch -> expected={Render(expected.Query)} | actual={Render(actual.Query)}";
+			return false;
+		}
+
+		diff = string.Empty;
+		return true;
+	}
+
+	private static bool DictEquals(IReadOnlyDictionary<string, string> a, IReadOnlyDictionary<string, string> b)
+	{
+		if (a.Count != b.Count)
+			return false;
+
+		foreach (var (k, v) in a)
+		{
+			if (!b.TryGetValue(k, out var other) || !string.Equals(v, other, StringComparison.Ordinal))
+				return false;
+		}
+
+		return true;
+	}
+
+	private static string Render(IReadOnlyDictionary<string, string> d) =>
+		"{" + string.Join(", ", d.OrderBy(kv => kv.Key, StringComparer.Ordinal).Select(kv => $"{kv.Key}={kv.Value}")) + "}";
 
 	private static bool IsNdjson(string api) => api is "bulk" or "msearch" or "msearch_template";
 
@@ -196,9 +296,11 @@ public sealed class RoundtripRegressionTests
 
 			public static class E_{{index}}
 			{
+				public static {{typeName}} Build() => {{c.Code}};
+
 				public static string Serialize(global::Elastic.Transport.Serializer serializer)
 				{
-					{{typeName}} request = {{c.Code}};
+					var request = Build();
 					using var stream = new global::System.IO.MemoryStream();
 					serializer.Serialize(request, stream, global::Elastic.Transport.SerializationFormatting.None);
 					return global::System.Text.Encoding.UTF8.GetString(stream.ToArray());

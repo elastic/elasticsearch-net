@@ -6,8 +6,6 @@ public readonly partial struct WaitForActiveShards : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		writer.Append("\"");
-		writer.Append(Value);
-		writer.Append("\"");
+		writer.WriteString(Value);
 	}
 }

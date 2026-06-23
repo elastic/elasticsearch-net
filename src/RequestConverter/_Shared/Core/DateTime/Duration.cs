@@ -6,8 +6,6 @@ public sealed partial class Duration : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		writer.Append("\"");
-		writer.Append(ToString());
-		writer.Append("\"");
+		writer.WriteString(ToString());
 	}
 }
