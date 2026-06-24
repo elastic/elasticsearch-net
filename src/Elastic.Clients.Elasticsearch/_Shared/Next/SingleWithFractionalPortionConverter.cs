@@ -74,9 +74,11 @@ internal sealed class SingleWithFractionalPortionConverter :
 			return reader.GetSingle();
 		}
 
-		Debug.Assert(!reader.HasValueSequence);
+		// Sequence-safe: single round-trip ~16 bytes; 32 with headroom.
+		Span<byte> tmp = stackalloc byte[32];
+		var bytes = tmp[..reader.GetValueBytes(tmp)];
 
-		return Utf8Parser.TryParse(reader.ValueSpan, out float result, out var consumed) && (consumed == reader.ValueSpan.Length)
+		return Utf8Parser.TryParse(bytes, out float result, out var consumed) && (consumed == bytes.Length)
 			? result
 			: throw new JsonException("Unable to convert JSON string value to 'float'.");
 	}
