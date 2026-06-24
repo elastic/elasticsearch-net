@@ -63,11 +63,16 @@ public sealed class IndexSettingsTimeSeriesConverter : JsonConverter<IndexSettin
 		// represented by DateTimeOffset. Clamp to the nearest representable value.
 		if (reader.TokenType is JsonTokenType.String)
 		{
-			var span = reader.ValueSpan;
-			if (span.Length > 0 && span[0] == (byte)'-')
-				return DateTimeOffset.MinValue;
-			if (span.Length > 0 && span[0] == (byte)'+')
-				return DateTimeOffset.MaxValue;
+			// Allocation-free and sequence-safe: for a multi-segment reader the first value byte is in
+			// ValueSequence.FirstSpan; for a single-segment reader it is in ValueSpan.
+			var valueSpan = reader.HasValueSequence ? reader.ValueSequence.First.Span : reader.ValueSpan;
+			if (valueSpan.Length > 0)
+			{
+				if (valueSpan[0] == (byte)'-')
+					return DateTimeOffset.MinValue;
+				if (valueSpan[0] == (byte)'+')
+					return DateTimeOffset.MaxValue;
+			}
 		}
 
 		return reader.ReadNullableValueEx<DateTimeOffset>(options, typeof(DateTimeMarker));
