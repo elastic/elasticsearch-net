@@ -57,6 +57,6 @@ public partial interface ISourceOnlyRepositorySettings : RequestConverter.ICodeF
 			return;
 		}
 
-		writer.Write(ToString());
+		throw new System.InvalidOperationException("Unexpected ISourceOnlyRepositorySettings implementation.");
 	}
 }

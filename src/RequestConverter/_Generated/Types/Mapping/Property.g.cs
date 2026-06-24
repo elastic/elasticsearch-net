@@ -345,6 +345,6 @@ public partial interface IProperty : RequestConverter.ICodeFormattable
 			return;
 		}
 
-		writer.Write(ToString());
+		throw new System.InvalidOperationException("Unexpected IProperty implementation.");
 	}
 }

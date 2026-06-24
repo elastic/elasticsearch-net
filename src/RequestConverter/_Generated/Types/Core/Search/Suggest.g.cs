@@ -39,6 +39,6 @@ public partial interface ISuggest : RequestConverter.ICodeFormattable
 			return;
 		}
 
-		writer.Write(ToString());
+		throw new System.InvalidOperationException("Unexpected ISuggest implementation.");
 	}
 }

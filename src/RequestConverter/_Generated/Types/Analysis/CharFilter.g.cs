@@ -57,6 +57,6 @@ public partial interface ICharFilter : RequestConverter.ICodeFormattable
 			return;
 		}
 
-		writer.Write(ToString());
+		throw new System.InvalidOperationException("Unexpected ICharFilter implementation.");
 	}
 }

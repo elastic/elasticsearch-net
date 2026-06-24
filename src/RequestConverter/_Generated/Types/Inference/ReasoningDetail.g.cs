@@ -45,6 +45,6 @@ public partial interface IReasoningDetail : RequestConverter.ICodeFormattable
 			return;
 		}
 
-		writer.Write(ToString());
+		throw new System.InvalidOperationException("Unexpected IReasoningDetail implementation.");
 	}
 }

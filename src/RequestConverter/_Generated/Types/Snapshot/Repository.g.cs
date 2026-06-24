@@ -63,6 +63,6 @@ public partial interface IRepository : RequestConverter.ICodeFormattable
 			return;
 		}
 
-		writer.Write(ToString());
+		throw new System.InvalidOperationException("Unexpected IRepository implementation.");
 	}
 }

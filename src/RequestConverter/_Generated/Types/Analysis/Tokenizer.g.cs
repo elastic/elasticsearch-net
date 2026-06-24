@@ -135,6 +135,6 @@ public partial interface ITokenizer : RequestConverter.ICodeFormattable
 			return;
 		}
 
-		writer.Write(ToString());
+		throw new System.InvalidOperationException("Unexpected ITokenizer implementation.");
 	}
 }

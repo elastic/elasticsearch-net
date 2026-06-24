@@ -465,6 +465,6 @@ public partial interface IAggregate : RequestConverter.ICodeFormattable
 			return;
 		}
 
-		writer.Write(ToString());
+		throw new System.InvalidOperationException("Unexpected IAggregate implementation.");
 	}
 }

@@ -321,6 +321,6 @@ public partial interface IAnalyzer : RequestConverter.ICodeFormattable
 			return;
 		}
 
-		writer.Write(ToString());
+		throw new System.InvalidOperationException("Unexpected IAnalyzer implementation.");
 	}
 }

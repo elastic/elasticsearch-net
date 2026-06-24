@@ -39,6 +39,6 @@ public partial interface INormalizer : RequestConverter.ICodeFormattable
 			return;
 		}
 
-		writer.Write(ToString());
+		throw new System.InvalidOperationException("Unexpected INormalizer implementation.");
 	}
 }

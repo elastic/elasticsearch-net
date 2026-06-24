@@ -471,6 +471,6 @@ public partial interface ITokenFilter : RequestConverter.ICodeFormattable
 			return;
 		}
 
-		writer.Write(ToString());
+		throw new System.InvalidOperationException("Unexpected ITokenFilter implementation.");
 	}
 }

@@ -57,6 +57,6 @@ public partial interface IRangeQuery : RequestConverter.ICodeFormattable
 			return;
 		}
 
-		writer.Write(ToString());
+		throw new System.InvalidOperationException("Unexpected IRangeQuery implementation.");
 	}
 }
