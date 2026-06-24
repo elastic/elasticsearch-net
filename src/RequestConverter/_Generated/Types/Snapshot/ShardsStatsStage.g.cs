@@ -45,8 +45,7 @@ public static class ShardsStatsStageCodeFormatter
 				writer.Write("ShardsStatsStage.Started");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ShardsStatsStage value.");
 		}
 	}
 }

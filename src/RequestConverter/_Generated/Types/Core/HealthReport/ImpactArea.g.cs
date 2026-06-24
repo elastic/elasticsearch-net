@@ -42,8 +42,7 @@ public static class ImpactAreaCodeFormatter
 				writer.Write("ImpactArea.Search");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ImpactArea value.");
 		}
 	}
 }

@@ -36,8 +36,7 @@ public static class PhoneticRuleTypeCodeFormatter
 				writer.Write("PhoneticRuleType.Exact");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected PhoneticRuleType value.");
 		}
 	}
 }

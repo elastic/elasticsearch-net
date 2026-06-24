@@ -42,8 +42,7 @@ public static class IndexOptionsCodeFormatter
 				writer.Write("IndexOptions.Positions");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IndexOptions value.");
 		}
 	}
 }

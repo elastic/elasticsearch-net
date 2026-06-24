@@ -36,8 +36,7 @@ public static class TaskTypeAnthropicCodeFormatter
 				writer.Write("TaskTypeAnthropic.Completion");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeAnthropic value.");
 		}
 	}
 }

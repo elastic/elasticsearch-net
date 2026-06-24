@@ -36,8 +36,7 @@ public static class CredentialManagedByCodeFormatter
 				writer.Write("CredentialManagedBy.Elasticsearch");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected CredentialManagedBy value.");
 		}
 	}
 }

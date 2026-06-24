@@ -36,8 +36,7 @@ public static class EcsCompatibilityTypeCodeFormatter
 				writer.Write("EcsCompatibilityType.V1");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected EcsCompatibilityType value.");
 		}
 	}
 }

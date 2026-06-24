@@ -42,8 +42,7 @@ public static class JinaAITextEmbeddingTaskCodeFormatter
 				writer.Write("JinaAITextEmbeddingTask.Search");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected JinaAITextEmbeddingTask value.");
 		}
 	}
 }

@@ -36,8 +36,7 @@ public static class RateModeCodeFormatter
 				writer.Write("RateMode.ValueCount");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected RateMode value.");
 		}
 	}
 }

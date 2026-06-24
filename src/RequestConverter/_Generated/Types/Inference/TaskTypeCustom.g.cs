@@ -42,8 +42,7 @@ public static class TaskTypeCustomCodeFormatter
 				writer.Write("TaskTypeCustom.TextEmbedding");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeCustom value.");
 		}
 	}
 }

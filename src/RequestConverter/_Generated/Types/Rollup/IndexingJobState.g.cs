@@ -45,8 +45,7 @@ public static class IndexingJobStateCodeFormatter
 				writer.Write("IndexingJobState.Stopping");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IndexingJobState value.");
 		}
 	}
 }

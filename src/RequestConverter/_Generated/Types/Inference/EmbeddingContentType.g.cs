@@ -45,8 +45,7 @@ public static class EmbeddingContentTypeCodeFormatter
 				writer.Write("EmbeddingContentType.Video");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected EmbeddingContentType value.");
 		}
 	}
 }

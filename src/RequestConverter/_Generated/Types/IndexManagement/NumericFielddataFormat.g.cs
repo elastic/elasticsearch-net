@@ -36,8 +36,7 @@ public static class NumericFielddataFormatCodeFormatter
 				writer.Write("NumericFielddataFormat.Disabled");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected NumericFielddataFormat value.");
 		}
 	}
 }

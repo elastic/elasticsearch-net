@@ -45,8 +45,7 @@ public static class TimeSeriesMetricTypeCodeFormatter
 				writer.Write("TimeSeriesMetricType.Summary");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TimeSeriesMetricType value.");
 		}
 	}
 }

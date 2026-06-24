@@ -39,8 +39,7 @@ public static class JinaAISimilarityTypeCodeFormatter
 				writer.Write("JinaAISimilarityType.L2Norm");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected JinaAISimilarityType value.");
 		}
 	}
 }

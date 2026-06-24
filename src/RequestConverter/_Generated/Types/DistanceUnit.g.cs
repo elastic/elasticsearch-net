@@ -57,8 +57,7 @@ public static class DistanceUnitCodeFormatter
 				writer.Write("DistanceUnit.Yards");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected DistanceUnit value.");
 		}
 	}
 }

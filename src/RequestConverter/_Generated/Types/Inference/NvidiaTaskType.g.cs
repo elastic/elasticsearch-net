@@ -42,8 +42,7 @@ public static class NvidiaTaskTypeCodeFormatter
 				writer.Write("NvidiaTaskType.TextEmbedding");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected NvidiaTaskType value.");
 		}
 	}
 }

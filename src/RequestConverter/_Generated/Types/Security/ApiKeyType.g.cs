@@ -36,8 +36,7 @@ public static class ApiKeyTypeCodeFormatter
 				writer.Write("ApiKeyType.Rest");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ApiKeyType value.");
 		}
 	}
 }

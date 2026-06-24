@@ -39,8 +39,7 @@ public static class DFIIndependenceMeasureCodeFormatter
 				writer.Write("DFIIndependenceMeasure.Standardized");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected DFIIndependenceMeasure value.");
 		}
 	}
 }

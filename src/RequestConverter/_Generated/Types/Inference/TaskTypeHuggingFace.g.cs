@@ -42,8 +42,7 @@ public static class TaskTypeHuggingFaceCodeFormatter
 				writer.Write("TaskTypeHuggingFace.TextEmbedding");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeHuggingFace value.");
 		}
 	}
 }

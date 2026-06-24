@@ -36,8 +36,7 @@ public static class WaitForActiveShardOptionsCodeFormatter
 				writer.Write("WaitForActiveShardOptions.IndexSetting");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected WaitForActiveShardOptions value.");
 		}
 	}
 }

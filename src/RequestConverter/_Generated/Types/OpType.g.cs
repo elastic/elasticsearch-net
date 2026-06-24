@@ -36,8 +36,7 @@ public static class OpTypeCodeFormatter
 				writer.Write("OpType.Index");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected OpType value.");
 		}
 	}
 }

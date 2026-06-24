@@ -39,8 +39,7 @@ public static class MemoryStatusCodeFormatter
 				writer.Write("MemoryStatus.SoftLimit");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected MemoryStatus value.");
 		}
 	}
 }

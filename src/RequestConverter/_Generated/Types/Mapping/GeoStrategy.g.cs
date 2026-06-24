@@ -36,8 +36,7 @@ public static class GeoStrategyCodeFormatter
 				writer.Write("GeoStrategy.Term");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected GeoStrategy value.");
 		}
 	}
 }

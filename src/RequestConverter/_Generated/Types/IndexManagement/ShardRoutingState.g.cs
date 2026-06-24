@@ -42,8 +42,7 @@ public static class ShardRoutingStateCodeFormatter
 				writer.Write("ShardRoutingState.Unassigned");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ShardRoutingState value.");
 		}
 	}
 }

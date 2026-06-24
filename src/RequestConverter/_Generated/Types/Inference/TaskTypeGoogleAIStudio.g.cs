@@ -36,8 +36,7 @@ public static class TaskTypeGoogleAIStudioCodeFormatter
 				writer.Write("TaskTypeGoogleAIStudio.TextEmbedding");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeGoogleAIStudio value.");
 		}
 	}
 }

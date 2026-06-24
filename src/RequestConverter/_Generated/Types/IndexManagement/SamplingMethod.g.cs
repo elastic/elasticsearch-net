@@ -36,8 +36,7 @@ public static class SamplingMethodCodeFormatter
 				writer.Write("SamplingMethod.LastValue");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SamplingMethod value.");
 		}
 	}
 }

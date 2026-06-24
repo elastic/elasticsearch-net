@@ -36,8 +36,7 @@ public static class FieldAccessPatternCodeFormatter
 				writer.Write("FieldAccessPattern.Flexible");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected FieldAccessPattern value.");
 		}
 	}
 }

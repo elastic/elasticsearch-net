@@ -45,8 +45,7 @@ public static class ResultCodeFormatter
 				writer.Write("Result.Updated");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected Result value.");
 		}
 	}
 }

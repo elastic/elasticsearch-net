@@ -42,8 +42,7 @@ public static class CjkBigramIgnoredScriptCodeFormatter
 				writer.Write("CjkBigramIgnoredScript.Katakana");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected CjkBigramIgnoredScript value.");
 		}
 	}
 }

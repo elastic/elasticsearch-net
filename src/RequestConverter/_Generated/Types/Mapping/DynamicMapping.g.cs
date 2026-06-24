@@ -42,8 +42,7 @@ public static class DynamicMappingCodeFormatter
 				writer.Write("DynamicMapping.True");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected DynamicMapping value.");
 		}
 	}
 }

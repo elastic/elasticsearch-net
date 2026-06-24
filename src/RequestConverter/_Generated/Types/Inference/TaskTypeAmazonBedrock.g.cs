@@ -39,8 +39,7 @@ public static class TaskTypeAmazonBedrockCodeFormatter
 				writer.Write("TaskTypeAmazonBedrock.TextEmbedding");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeAmazonBedrock value.");
 		}
 	}
 }

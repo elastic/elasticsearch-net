@@ -42,8 +42,7 @@ public static class ExcludeFrequentCodeFormatter
 				writer.Write("ExcludeFrequent.Over");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ExcludeFrequent value.");
 		}
 	}
 }

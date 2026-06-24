@@ -33,8 +33,7 @@ public static class TaskTypeELSERCodeFormatter
 				writer.Write("TaskTypeELSER.SparseEmbedding");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeELSER value.");
 		}
 	}
 }

@@ -36,8 +36,7 @@ public static class TDigestExecutionHintCodeFormatter
 				writer.Write("TDigestExecutionHint.HighAccuracy");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TDigestExecutionHint value.");
 		}
 	}
 }

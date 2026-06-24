@@ -42,8 +42,7 @@ public static class TermsAggregationExecutionHintCodeFormatter
 				writer.Write("TermsAggregationExecutionHint.Map");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TermsAggregationExecutionHint value.");
 		}
 	}
 }

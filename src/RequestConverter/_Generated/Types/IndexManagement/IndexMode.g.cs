@@ -42,8 +42,7 @@ public static class IndexModeCodeFormatter
 				writer.Write("IndexMode.TimeSeries");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IndexMode value.");
 		}
 	}
 }

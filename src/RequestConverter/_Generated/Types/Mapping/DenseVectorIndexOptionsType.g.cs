@@ -57,8 +57,7 @@ public static class DenseVectorIndexOptionsTypeCodeFormatter
 				writer.Write("DenseVectorIndexOptionsType.Int8Hnsw");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected DenseVectorIndexOptionsType value.");
 		}
 	}
 }

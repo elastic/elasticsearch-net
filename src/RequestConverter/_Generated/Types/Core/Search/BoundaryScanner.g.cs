@@ -39,8 +39,7 @@ public static class BoundaryScannerCodeFormatter
 				writer.Write("BoundaryScanner.Word");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected BoundaryScanner value.");
 		}
 	}
 }

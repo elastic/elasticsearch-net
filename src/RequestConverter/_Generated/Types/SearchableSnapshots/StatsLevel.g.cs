@@ -39,8 +39,7 @@ public static class StatsLevelCodeFormatter
 				writer.Write("StatsLevel.Shards");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected StatsLevel value.");
 		}
 	}
 }

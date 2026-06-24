@@ -36,8 +36,7 @@ public static class IndexMetadataStateCodeFormatter
 				writer.Write("IndexMetadataState.Open");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IndexMetadataState value.");
 		}
 	}
 }

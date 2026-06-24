@@ -42,8 +42,7 @@ public static class IndexRoutingAllocationOptionsCodeFormatter
 				writer.Write("IndexRoutingAllocationOptions.Primaries");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IndexRoutingAllocationOptions value.");
 		}
 	}
 }

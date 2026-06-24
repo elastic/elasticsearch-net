@@ -36,8 +36,7 @@ public static class IBDistributionCodeFormatter
 				writer.Write("IBDistribution.Spl");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IBDistribution value.");
 		}
 	}
 }

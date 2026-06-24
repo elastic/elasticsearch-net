@@ -42,8 +42,7 @@ public static class LicenseStatusCodeFormatter
 				writer.Write("LicenseStatus.Valid");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected LicenseStatus value.");
 		}
 	}
 }

@@ -63,8 +63,7 @@ public static class PainlessContextCodeFormatter
 				writer.Write("PainlessContext.Score");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected PainlessContext value.");
 		}
 	}
 }

@@ -42,8 +42,7 @@ public static class DeploymentAssignmentStateCodeFormatter
 				writer.Write("DeploymentAssignmentState.Stopping");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected DeploymentAssignmentState value.");
 		}
 	}
 }

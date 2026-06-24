@@ -96,8 +96,7 @@ public static class CommonStatsFlagCodeFormatter
 				writer.Write("CommonStatsFlag.Warmer");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected CommonStatsFlag value.");
 		}
 	}
 }

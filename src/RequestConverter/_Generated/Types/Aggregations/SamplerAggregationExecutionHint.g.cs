@@ -39,8 +39,7 @@ public static class SamplerAggregationExecutionHintCodeFormatter
 				writer.Write("SamplerAggregationExecutionHint.Map");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SamplerAggregationExecutionHint value.");
 		}
 	}
 }

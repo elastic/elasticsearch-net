@@ -48,8 +48,7 @@ public static class MinimumIntervalCodeFormatter
 				writer.Write("MinimumInterval.Year");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected MinimumInterval value.");
 		}
 	}
 }

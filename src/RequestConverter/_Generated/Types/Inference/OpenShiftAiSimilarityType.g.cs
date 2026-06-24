@@ -39,8 +39,7 @@ public static class OpenShiftAiSimilarityTypeCodeFormatter
 				writer.Write("OpenShiftAiSimilarityType.L2Norm");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected OpenShiftAiSimilarityType value.");
 		}
 	}
 }

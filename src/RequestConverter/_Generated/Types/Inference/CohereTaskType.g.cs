@@ -39,8 +39,7 @@ public static class CohereTaskTypeCodeFormatter
 				writer.Write("CohereTaskType.TextEmbedding");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected CohereTaskType value.");
 		}
 	}
 }

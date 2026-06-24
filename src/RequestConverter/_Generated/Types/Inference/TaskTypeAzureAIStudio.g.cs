@@ -39,8 +39,7 @@ public static class TaskTypeAzureAIStudioCodeFormatter
 				writer.Write("TaskTypeAzureAIStudio.TextEmbedding");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeAzureAIStudio value.");
 		}
 	}
 }

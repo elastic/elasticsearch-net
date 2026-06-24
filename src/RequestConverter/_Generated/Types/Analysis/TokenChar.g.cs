@@ -48,8 +48,7 @@ public static class TokenCharCodeFormatter
 				writer.Write("TokenChar.Whitespace");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TokenChar value.");
 		}
 	}
 }

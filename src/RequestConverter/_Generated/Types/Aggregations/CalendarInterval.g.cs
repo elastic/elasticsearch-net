@@ -54,8 +54,7 @@ public static class CalendarIntervalCodeFormatter
 				writer.Write("CalendarInterval.Year");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected CalendarInterval value.");
 		}
 	}
 }

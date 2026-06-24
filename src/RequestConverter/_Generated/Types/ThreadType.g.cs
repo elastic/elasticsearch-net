@@ -45,8 +45,7 @@ public static class ThreadTypeCodeFormatter
 				writer.Write("ThreadType.Wait");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ThreadType value.");
 		}
 	}
 }

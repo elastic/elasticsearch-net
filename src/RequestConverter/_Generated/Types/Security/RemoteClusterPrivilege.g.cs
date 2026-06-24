@@ -36,8 +36,7 @@ public static class RemoteClusterPrivilegeCodeFormatter
 				writer.Write("RemoteClusterPrivilege.MonitorStats");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected RemoteClusterPrivilege value.");
 		}
 	}
 }

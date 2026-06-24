@@ -45,8 +45,7 @@ public static class ClusterInfoTargetCodeFormatter
 				writer.Write("ClusterInfoTarget.ThreadPool");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ClusterInfoTarget value.");
 		}
 	}
 }

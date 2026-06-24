@@ -33,8 +33,7 @@ public static class HighlighterOrderCodeFormatter
 				writer.Write("HighlighterOrder.Score");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected HighlighterOrder value.");
 		}
 	}
 }

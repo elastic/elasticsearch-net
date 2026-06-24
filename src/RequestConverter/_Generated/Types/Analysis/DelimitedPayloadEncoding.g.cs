@@ -39,8 +39,7 @@ public static class DelimitedPayloadEncodingCodeFormatter
 				writer.Write("DelimitedPayloadEncoding.Integer");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected DelimitedPayloadEncoding value.");
 		}
 	}
 }

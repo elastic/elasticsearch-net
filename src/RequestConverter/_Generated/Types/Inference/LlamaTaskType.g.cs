@@ -39,8 +39,7 @@ public static class LlamaTaskTypeCodeFormatter
 				writer.Write("LlamaTaskType.TextEmbedding");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected LlamaTaskType value.");
 		}
 	}
 }

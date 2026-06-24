@@ -42,8 +42,7 @@ public static class FormatTypeCodeFormatter
 				writer.Write("FormatType.Xml");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected FormatType value.");
 		}
 	}
 }

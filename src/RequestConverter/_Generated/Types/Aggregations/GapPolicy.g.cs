@@ -39,8 +39,7 @@ public static class GapPolicyCodeFormatter
 				writer.Write("GapPolicy.Skip");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected GapPolicy value.");
 		}
 	}
 }

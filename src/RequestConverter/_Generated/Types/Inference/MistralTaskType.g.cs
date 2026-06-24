@@ -39,8 +39,7 @@ public static class MistralTaskTypeCodeFormatter
 				writer.Write("MistralTaskType.TextEmbedding");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected MistralTaskType value.");
 		}
 	}
 }

@@ -39,8 +39,7 @@ public static class NodesUsageMetricCodeFormatter
 				writer.Write("NodesUsageMetric.RestActions");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected NodesUsageMetric value.");
 		}
 	}
 }

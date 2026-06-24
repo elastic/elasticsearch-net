@@ -36,8 +36,7 @@ public static class ResultPositionCodeFormatter
 				writer.Write("ResultPosition.Tail");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ResultPosition value.");
 		}
 	}
 }

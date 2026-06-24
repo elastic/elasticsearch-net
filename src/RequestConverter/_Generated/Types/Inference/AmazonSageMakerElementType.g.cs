@@ -39,8 +39,7 @@ public static class AmazonSageMakerElementTypeCodeFormatter
 				writer.Write("AmazonSageMakerElementType.Float");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected AmazonSageMakerElementType value.");
 		}
 	}
 }

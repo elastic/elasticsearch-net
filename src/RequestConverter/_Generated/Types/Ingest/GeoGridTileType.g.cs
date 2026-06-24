@@ -39,8 +39,7 @@ public static class GeoGridTileTypeCodeFormatter
 				writer.Write("GeoGridTileType.Geotile");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected GeoGridTileType value.");
 		}
 	}
 }

@@ -39,8 +39,7 @@ public static class OpenAISimilarityTypeCodeFormatter
 				writer.Write("OpenAISimilarityType.L2Norm");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected OpenAISimilarityType value.");
 		}
 	}
 }

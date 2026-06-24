@@ -36,8 +36,7 @@ public static class TrainingPriorityCodeFormatter
 				writer.Write("TrainingPriority.Normal");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TrainingPriority value.");
 		}
 	}
 }

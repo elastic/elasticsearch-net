@@ -54,8 +54,7 @@ public static class EsqlFormatCodeFormatter
 				writer.Write("EsqlFormat.Yaml");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected EsqlFormat value.");
 		}
 	}
 }

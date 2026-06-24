@@ -36,8 +36,7 @@ public static class KeepTypesModeCodeFormatter
 				writer.Write("KeepTypesMode.Include");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected KeepTypesMode value.");
 		}
 	}
 }

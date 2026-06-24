@@ -51,8 +51,7 @@ public static class TimeUnitCodeFormatter
 				writer.Write("TimeUnit.Seconds");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TimeUnit value.");
 		}
 	}
 }

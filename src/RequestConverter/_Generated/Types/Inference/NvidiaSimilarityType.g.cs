@@ -39,8 +39,7 @@ public static class NvidiaSimilarityTypeCodeFormatter
 				writer.Write("NvidiaSimilarityType.L2Norm");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected NvidiaSimilarityType value.");
 		}
 	}
 }

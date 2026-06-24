@@ -60,8 +60,7 @@ public static class FieldValueFactorModifierCodeFormatter
 				writer.Write("FieldValueFactorModifier.Square");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected FieldValueFactorModifier value.");
 		}
 	}
 }

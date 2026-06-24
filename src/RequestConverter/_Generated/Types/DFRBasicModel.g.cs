@@ -51,8 +51,7 @@ public static class DFRBasicModelCodeFormatter
 				writer.Write("DFRBasicModel.P");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected DFRBasicModel value.");
 		}
 	}
 }

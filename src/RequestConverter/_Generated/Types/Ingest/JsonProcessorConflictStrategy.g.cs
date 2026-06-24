@@ -36,8 +36,7 @@ public static class JsonProcessorConflictStrategyCodeFormatter
 				writer.Write("JsonProcessorConflictStrategy.Replace");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected JsonProcessorConflictStrategy value.");
 		}
 	}
 }

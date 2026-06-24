@@ -63,8 +63,7 @@ public static class QueryRuleCriteriaTypeCodeFormatter
 				writer.Write("QueryRuleCriteriaType.Suffix");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected QueryRuleCriteriaType value.");
 		}
 	}
 }

@@ -33,8 +33,7 @@ public static class TaskTypeContextualAICodeFormatter
 				writer.Write("TaskTypeContextualAI.Rerank");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeContextualAI value.");
 		}
 	}
 }

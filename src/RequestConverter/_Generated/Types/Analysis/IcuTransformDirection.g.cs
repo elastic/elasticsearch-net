@@ -36,8 +36,7 @@ public static class IcuTransformDirectionCodeFormatter
 				writer.Write("IcuTransformDirection.Reverse");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IcuTransformDirection value.");
 		}
 	}
 }

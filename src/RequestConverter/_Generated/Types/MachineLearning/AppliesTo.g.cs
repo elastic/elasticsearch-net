@@ -42,8 +42,7 @@ public static class AppliesToCodeFormatter
 				writer.Write("AppliesTo.Typical");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected AppliesTo value.");
 		}
 	}
 }

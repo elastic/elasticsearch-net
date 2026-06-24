@@ -39,8 +39,7 @@ public static class RankVectorElementTypeCodeFormatter
 				writer.Write("RankVectorElementType.Float");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected RankVectorElementType value.");
 		}
 	}
 }

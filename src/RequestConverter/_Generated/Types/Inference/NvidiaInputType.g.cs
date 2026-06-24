@@ -36,8 +36,7 @@ public static class NvidiaInputTypeCodeFormatter
 				writer.Write("NvidiaInputType.Search");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected NvidiaInputType value.");
 		}
 	}
 }

@@ -39,8 +39,7 @@ public static class SourceFieldModeCodeFormatter
 				writer.Write("SourceFieldMode.Synthetic");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SourceFieldMode value.");
 		}
 	}
 }

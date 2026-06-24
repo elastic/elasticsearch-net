@@ -39,8 +39,7 @@ public static class DeploymentAllocationStateCodeFormatter
 				writer.Write("DeploymentAllocationState.Starting");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected DeploymentAllocationState value.");
 		}
 	}
 }

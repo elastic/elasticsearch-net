@@ -45,8 +45,7 @@ public static class IncludeCodeFormatter
 				writer.Write("Include.TotalFeatureImportance");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected Include value.");
 		}
 	}
 }

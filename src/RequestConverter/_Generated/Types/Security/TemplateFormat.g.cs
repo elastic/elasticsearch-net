@@ -36,8 +36,7 @@ public static class TemplateFormatCodeFormatter
 				writer.Write("TemplateFormat.String");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TemplateFormat value.");
 		}
 	}
 }

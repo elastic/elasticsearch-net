@@ -60,8 +60,7 @@ public static class RuntimeFieldTypeCodeFormatter
 				writer.Write("RuntimeFieldType.Lookup");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected RuntimeFieldType value.");
 		}
 	}
 }

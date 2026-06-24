@@ -45,8 +45,7 @@ public static class SortModeCodeFormatter
 				writer.Write("SortMode.Sum");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SortMode value.");
 		}
 	}
 }

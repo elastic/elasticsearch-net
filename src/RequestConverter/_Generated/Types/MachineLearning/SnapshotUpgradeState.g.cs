@@ -42,8 +42,7 @@ public static class SnapshotUpgradeStateCodeFormatter
 				writer.Write("SnapshotUpgradeState.Stopped");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SnapshotUpgradeState value.");
 		}
 	}
 }

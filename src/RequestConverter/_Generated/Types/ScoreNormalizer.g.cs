@@ -39,8 +39,7 @@ public static class ScoreNormalizerCodeFormatter
 				writer.Write("ScoreNormalizer.None");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ScoreNormalizer value.");
 		}
 	}
 }

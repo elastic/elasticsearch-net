@@ -36,8 +36,7 @@ public static class FollowerIndexStatusCodeFormatter
 				writer.Write("FollowerIndexStatus.Paused");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected FollowerIndexStatus value.");
 		}
 	}
 }

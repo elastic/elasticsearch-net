@@ -39,8 +39,7 @@ public static class RangeRelationCodeFormatter
 				writer.Write("RangeRelation.Within");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected RangeRelation value.");
 		}
 	}
 }

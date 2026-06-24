@@ -36,8 +36,7 @@ public static class EdgeNGramSideCodeFormatter
 				writer.Write("EdgeNGramSide.Front");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected EdgeNGramSide value.");
 		}
 	}
 }

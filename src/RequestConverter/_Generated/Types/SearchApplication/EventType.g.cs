@@ -39,8 +39,7 @@ public static class EventTypeCodeFormatter
 				writer.Write("EventType.SearchClick");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected EventType value.");
 		}
 	}
 }

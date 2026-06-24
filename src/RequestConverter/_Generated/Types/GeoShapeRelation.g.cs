@@ -42,8 +42,7 @@ public static class GeoShapeRelationCodeFormatter
 				writer.Write("GeoShapeRelation.Within");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected GeoShapeRelation value.");
 		}
 	}
 }

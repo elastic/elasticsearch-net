@@ -45,8 +45,7 @@ public static class EnrichPolicyPhaseCodeFormatter
 				writer.Write("EnrichPolicyPhase.Scheduled");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected EnrichPolicyPhase value.");
 		}
 	}
 }

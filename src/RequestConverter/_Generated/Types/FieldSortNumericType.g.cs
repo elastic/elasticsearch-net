@@ -42,8 +42,7 @@ public static class FieldSortNumericTypeCodeFormatter
 				writer.Write("FieldSortNumericType.Long");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected FieldSortNumericType value.");
 		}
 	}
 }

@@ -57,8 +57,7 @@ public static class LicenseTypeCodeFormatter
 				writer.Write("LicenseType.Trial");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected LicenseType value.");
 		}
 	}
 }

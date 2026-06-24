@@ -36,8 +36,7 @@ public static class CombinedFieldsZeroTermsCodeFormatter
 				writer.Write("CombinedFieldsZeroTerms.None");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected CombinedFieldsZeroTerms value.");
 		}
 	}
 }

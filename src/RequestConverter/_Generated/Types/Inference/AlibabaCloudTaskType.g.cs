@@ -42,8 +42,7 @@ public static class AlibabaCloudTaskTypeCodeFormatter
 				writer.Write("AlibabaCloudTaskType.TextEmbedding");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected AlibabaCloudTaskType value.");
 		}
 	}
 }

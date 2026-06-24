@@ -36,8 +36,7 @@ public static class SearchTypeCodeFormatter
 				writer.Write("SearchType.QueryThenFetch");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SearchType value.");
 		}
 	}
 }

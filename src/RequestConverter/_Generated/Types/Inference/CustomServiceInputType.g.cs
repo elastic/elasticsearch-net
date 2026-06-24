@@ -42,8 +42,7 @@ public static class CustomServiceInputTypeCodeFormatter
 				writer.Write("CustomServiceInputType.Search");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected CustomServiceInputType value.");
 		}
 	}
 }

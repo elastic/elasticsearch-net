@@ -39,8 +39,7 @@ public static class DFRAfterEffectCodeFormatter
 				writer.Write("DFRAfterEffect.No");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected DFRAfterEffect value.");
 		}
 	}
 }

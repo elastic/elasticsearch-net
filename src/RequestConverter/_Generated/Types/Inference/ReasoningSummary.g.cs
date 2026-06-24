@@ -39,8 +39,7 @@ public static class ReasoningSummaryCodeFormatter
 				writer.Write("ReasoningSummary.Detailed");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ReasoningSummary value.");
 		}
 	}
 }

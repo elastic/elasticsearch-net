@@ -39,8 +39,7 @@ public static class PhoneticNameTypeCodeFormatter
 				writer.Write("PhoneticNameType.Sephardic");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected PhoneticNameType value.");
 		}
 	}
 }

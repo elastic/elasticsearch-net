@@ -39,8 +39,7 @@ public static class TaskTypeWatsonxCodeFormatter
 				writer.Write("TaskTypeWatsonx.TextEmbedding");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeWatsonx value.");
 		}
 	}
 }

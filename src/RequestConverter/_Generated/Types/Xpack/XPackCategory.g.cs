@@ -39,8 +39,7 @@ public static class XPackCategoryCodeFormatter
 				writer.Write("XPackCategory.License");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected XPackCategory value.");
 		}
 	}
 }

@@ -39,8 +39,7 @@ public static class TaskTypeFireworksAICodeFormatter
 				writer.Write("TaskTypeFireworksAI.TextEmbedding");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeFireworksAI value.");
 		}
 	}
 }

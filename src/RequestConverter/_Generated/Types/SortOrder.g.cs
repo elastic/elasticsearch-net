@@ -36,8 +36,7 @@ public static class SortOrderCodeFormatter
 				writer.Write("SortOrder.Desc");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SortOrder value.");
 		}
 	}
 }

@@ -36,8 +36,7 @@ public static class SegmentSortOrderCodeFormatter
 				writer.Write("SegmentSortOrder.Desc");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SegmentSortOrder value.");
 		}
 	}
 }

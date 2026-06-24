@@ -39,8 +39,7 @@ public static class RefreshCodeFormatter
 				writer.Write("Refresh.WaitFor");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected Refresh value.");
 		}
 	}
 }

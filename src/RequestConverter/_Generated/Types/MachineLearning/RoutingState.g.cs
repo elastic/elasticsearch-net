@@ -45,8 +45,7 @@ public static class RoutingStateCodeFormatter
 				writer.Write("RoutingState.Stopping");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected RoutingState value.");
 		}
 	}
 }

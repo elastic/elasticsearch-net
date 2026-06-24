@@ -42,8 +42,7 @@ public static class OperationTypeCodeFormatter
 				writer.Write("OperationType.Update");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected OperationType value.");
 		}
 	}
 }

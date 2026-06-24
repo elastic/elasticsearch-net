@@ -45,8 +45,7 @@ public static class IndicatorHealthStatusCodeFormatter
 				writer.Write("IndicatorHealthStatus.Yellow");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IndicatorHealthStatus value.");
 		}
 	}
 }

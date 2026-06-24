@@ -42,8 +42,7 @@ public static class MultiValueModeCodeFormatter
 				writer.Write("MultiValueMode.Sum");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected MultiValueMode value.");
 		}
 	}
 }

@@ -39,8 +39,7 @@ public static class ChunkingModeCodeFormatter
 				writer.Write("ChunkingMode.Off");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ChunkingMode value.");
 		}
 	}
 }

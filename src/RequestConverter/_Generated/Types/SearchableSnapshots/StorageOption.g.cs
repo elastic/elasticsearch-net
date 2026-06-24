@@ -36,8 +36,7 @@ public static class StorageOptionCodeFormatter
 				writer.Write("StorageOption.SharedCache");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected StorageOption value.");
 		}
 	}
 }

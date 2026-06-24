@@ -36,8 +36,7 @@ public static class GridAggregationTypeCodeFormatter
 				writer.Write("GridAggregationType.Geotile");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected GridAggregationType value.");
 		}
 	}
 }

@@ -39,8 +39,7 @@ public static class NodeStatsLevelCodeFormatter
 				writer.Write("NodeStatsLevel.Shards");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected NodeStatsLevel value.");
 		}
 	}
 }

@@ -36,8 +36,7 @@ public static class AmazonSageMakerApiCodeFormatter
 				writer.Write("AmazonSageMakerApi.Openai");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected AmazonSageMakerApi value.");
 		}
 	}
 }

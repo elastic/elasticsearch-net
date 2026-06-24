@@ -42,8 +42,7 @@ public static class OpenShiftAiTaskTypeCodeFormatter
 				writer.Write("OpenShiftAiTaskType.TextEmbedding");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected OpenShiftAiTaskType value.");
 		}
 	}
 }

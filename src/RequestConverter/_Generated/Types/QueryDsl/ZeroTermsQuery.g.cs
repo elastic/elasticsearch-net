@@ -36,8 +36,7 @@ public static class ZeroTermsQueryCodeFormatter
 				writer.Write("ZeroTermsQuery.None");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ZeroTermsQuery value.");
 		}
 	}
 }

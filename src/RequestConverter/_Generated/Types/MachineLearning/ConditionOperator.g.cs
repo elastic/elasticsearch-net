@@ -42,8 +42,7 @@ public static class ConditionOperatorCodeFormatter
 				writer.Write("ConditionOperator.Lte");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ConditionOperator value.");
 		}
 	}
 }

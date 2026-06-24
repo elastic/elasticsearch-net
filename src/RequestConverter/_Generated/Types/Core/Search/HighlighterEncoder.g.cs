@@ -36,8 +36,7 @@ public static class HighlighterEncoderCodeFormatter
 				writer.Write("HighlighterEncoder.Html");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected HighlighterEncoder value.");
 		}
 	}
 }

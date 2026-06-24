@@ -45,8 +45,7 @@ public static class DataframeStateCodeFormatter
 				writer.Write("DataframeState.Stopping");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected DataframeState value.");
 		}
 	}
 }

@@ -45,8 +45,7 @@ public static class FingerprintDigestCodeFormatter
 				writer.Write("FingerprintDigest.Sha512");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected FingerprintDigest value.");
 		}
 	}
 }

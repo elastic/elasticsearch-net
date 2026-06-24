@@ -36,8 +36,7 @@ public static class ApiKeyGrantTypeCodeFormatter
 				writer.Write("ApiKeyGrantType.Password");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ApiKeyGrantType value.");
 		}
 	}
 }

@@ -36,8 +36,7 @@ public static class IBLambdaCodeFormatter
 				writer.Write("IBLambda.Ttf");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IBLambda value.");
 		}
 	}
 }

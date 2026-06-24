@@ -39,8 +39,7 @@ public static class TokenizationTruncateCodeFormatter
 				writer.Write("TokenizationTruncate.Second");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TokenizationTruncate value.");
 		}
 	}
 }

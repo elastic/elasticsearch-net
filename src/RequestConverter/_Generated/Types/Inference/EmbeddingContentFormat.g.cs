@@ -36,8 +36,7 @@ public static class EmbeddingContentFormatCodeFormatter
 				writer.Write("EmbeddingContentFormat.Text");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected EmbeddingContentFormat value.");
 		}
 	}
 }

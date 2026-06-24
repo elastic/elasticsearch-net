@@ -39,8 +39,7 @@ public static class StreamTypeCodeFormatter
 				writer.Write("StreamType.LogsOtel");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected StreamType value.");
 		}
 	}
 }

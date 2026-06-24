@@ -36,8 +36,7 @@ public static class SynonymFormatCodeFormatter
 				writer.Write("SynonymFormat.Wordnet");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SynonymFormat value.");
 		}
 	}
 }

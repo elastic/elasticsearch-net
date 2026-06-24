@@ -48,8 +48,7 @@ public static class GoogleModelGardenProviderCodeFormatter
 				writer.Write("GoogleModelGardenProvider.Mistral");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected GoogleModelGardenProvider value.");
 		}
 	}
 }

@@ -42,8 +42,7 @@ public static class ShardStoreStatusCodeFormatter
 				writer.Write("ShardStoreStatus.Yellow");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ShardStoreStatus value.");
 		}
 	}
 }

@@ -39,8 +39,7 @@ public static class ImageUrlDetailCodeFormatter
 				writer.Write("ImageUrlDetail.Low");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ImageUrlDetail value.");
 		}
 	}
 }

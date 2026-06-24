@@ -36,8 +36,7 @@ public static class CategorizationStatusCodeFormatter
 				writer.Write("CategorizationStatus.Warn");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected CategorizationStatus value.");
 		}
 	}
 }

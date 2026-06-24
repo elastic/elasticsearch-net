@@ -36,8 +36,7 @@ public static class MergeTypeCodeFormatter
 				writer.Write("MergeType.Template");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected MergeType value.");
 		}
 	}
 }

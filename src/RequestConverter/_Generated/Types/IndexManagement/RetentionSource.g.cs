@@ -42,8 +42,7 @@ public static class RetentionSourceCodeFormatter
 				writer.Write("RetentionSource.MaxGlobalRetention");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected RetentionSource value.");
 		}
 	}
 }

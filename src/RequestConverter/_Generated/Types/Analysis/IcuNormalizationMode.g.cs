@@ -36,8 +36,7 @@ public static class IcuNormalizationModeCodeFormatter
 				writer.Write("IcuNormalizationMode.Decompose");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IcuNormalizationMode value.");
 		}
 	}
 }

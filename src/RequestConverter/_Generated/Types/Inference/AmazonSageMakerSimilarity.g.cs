@@ -39,8 +39,7 @@ public static class AmazonSageMakerSimilarityCodeFormatter
 				writer.Write("AmazonSageMakerSimilarity.L2Norm");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected AmazonSageMakerSimilarity value.");
 		}
 	}
 }

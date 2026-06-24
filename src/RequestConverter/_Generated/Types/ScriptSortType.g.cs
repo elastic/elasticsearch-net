@@ -39,8 +39,7 @@ public static class ScriptSortTypeCodeFormatter
 				writer.Write("ScriptSortType.Version");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ScriptSortType value.");
 		}
 	}
 }

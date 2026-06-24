@@ -51,8 +51,7 @@ public static class SnapshotSortCodeFormatter
 				writer.Write("SnapshotSort.StartTime");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SnapshotSort value.");
 		}
 	}
 }

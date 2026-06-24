@@ -45,8 +45,7 @@ public static class RestMethodCodeFormatter
 				writer.Write("RestMethod.Put");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected RestMethod value.");
 		}
 	}
 }

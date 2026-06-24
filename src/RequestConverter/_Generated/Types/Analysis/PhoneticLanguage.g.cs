@@ -66,8 +66,7 @@ public static class PhoneticLanguageCodeFormatter
 				writer.Write("PhoneticLanguage.Spanish");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected PhoneticLanguage value.");
 		}
 	}
 }

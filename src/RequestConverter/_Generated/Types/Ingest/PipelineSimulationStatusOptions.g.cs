@@ -45,8 +45,7 @@ public static class PipelineSimulationStatusOptionsCodeFormatter
 				writer.Write("PipelineSimulationStatusOptions.Success");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected PipelineSimulationStatusOptions value.");
 		}
 	}
 }

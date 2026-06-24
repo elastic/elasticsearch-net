@@ -45,8 +45,7 @@ public static class StringDistanceCodeFormatter
 				writer.Write("StringDistance.Ngram");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected StringDistance value.");
 		}
 	}
 }

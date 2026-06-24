@@ -36,8 +36,7 @@ public static class MatchTypeCodeFormatter
 				writer.Write("MatchType.Simple");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected MatchType value.");
 		}
 	}
 }

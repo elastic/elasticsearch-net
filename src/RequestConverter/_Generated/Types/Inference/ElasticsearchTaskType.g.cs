@@ -39,8 +39,7 @@ public static class ElasticsearchTaskTypeCodeFormatter
 				writer.Write("ElasticsearchTaskType.TextEmbedding");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ElasticsearchTaskType value.");
 		}
 	}
 }

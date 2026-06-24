@@ -42,8 +42,7 @@ public static class IndexRoutingRebalanceOptionsCodeFormatter
 				writer.Write("IndexRoutingRebalanceOptions.Replicas");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IndexRoutingRebalanceOptions value.");
 		}
 	}
 }

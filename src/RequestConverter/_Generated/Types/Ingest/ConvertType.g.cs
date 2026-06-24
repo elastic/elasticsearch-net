@@ -54,8 +54,7 @@ public static class ConvertTypeCodeFormatter
 				writer.Write("ConvertType.String");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ConvertType value.");
 		}
 	}
 }

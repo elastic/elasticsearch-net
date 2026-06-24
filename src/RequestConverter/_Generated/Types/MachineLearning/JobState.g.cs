@@ -45,8 +45,7 @@ public static class JobStateCodeFormatter
 				writer.Write("JobState.Opening");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected JobState value.");
 		}
 	}
 }

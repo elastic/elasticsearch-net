@@ -42,8 +42,7 @@ public static class AccessTokenGrantTypeCodeFormatter
 				writer.Write("AccessTokenGrantType.RefreshToken");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected AccessTokenGrantType value.");
 		}
 	}
 }

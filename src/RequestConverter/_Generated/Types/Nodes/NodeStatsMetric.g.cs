@@ -87,8 +87,7 @@ public static class NodeStatsMetricCodeFormatter
 				writer.Write("NodeStatsMetric.Transport");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected NodeStatsMetric value.");
 		}
 	}
 }

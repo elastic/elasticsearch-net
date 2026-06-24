@@ -45,8 +45,7 @@ public static class HealthStatusCodeFormatter
 				writer.Write("HealthStatus.Yellow");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected HealthStatus value.");
 		}
 	}
 }

@@ -51,8 +51,7 @@ public static class SqlFormatCodeFormatter
 				writer.Write("SqlFormat.Yaml");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SqlFormat value.");
 		}
 	}
 }

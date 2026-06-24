@@ -33,8 +33,7 @@ public static class SlicesCalculationCodeFormatter
 				writer.Write("SlicesCalculation.Auto");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SlicesCalculation value.");
 		}
 	}
 }

@@ -48,8 +48,7 @@ public static class WaitForEventsCodeFormatter
 				writer.Write("WaitForEvents.Urgent");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected WaitForEvents value.");
 		}
 	}
 }

@@ -42,8 +42,7 @@ public static class TaskTypeOpenShiftAiCodeFormatter
 				writer.Write("TaskTypeOpenShiftAi.TextEmbedding");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeOpenShiftAi value.");
 		}
 	}
 }

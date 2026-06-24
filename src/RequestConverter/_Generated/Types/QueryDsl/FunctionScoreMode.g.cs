@@ -48,8 +48,7 @@ public static class FunctionScoreModeCodeFormatter
 				writer.Write("FunctionScoreMode.Sum");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected FunctionScoreMode value.");
 		}
 	}
 }

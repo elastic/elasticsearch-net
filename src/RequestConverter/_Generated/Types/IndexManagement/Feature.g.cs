@@ -39,8 +39,7 @@ public static class FeatureCodeFormatter
 				writer.Write("Feature.Settings");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected Feature value.");
 		}
 	}
 }

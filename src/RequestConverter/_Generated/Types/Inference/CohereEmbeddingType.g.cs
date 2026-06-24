@@ -45,8 +45,7 @@ public static class CohereEmbeddingTypeCodeFormatter
 				writer.Write("CohereEmbeddingType.Int8");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected CohereEmbeddingType value.");
 		}
 	}
 }

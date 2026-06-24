@@ -39,8 +39,7 @@ public static class NoriDecompoundModeCodeFormatter
 				writer.Write("NoriDecompoundMode.None");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected NoriDecompoundMode value.");
 		}
 	}
 }

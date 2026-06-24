@@ -45,8 +45,7 @@ public static class TaskTypeAmazonSageMakerCodeFormatter
 				writer.Write("TaskTypeAmazonSageMaker.TextEmbedding");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeAmazonSageMaker value.");
 		}
 	}
 }

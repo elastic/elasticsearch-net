@@ -141,8 +141,7 @@ public static class StopWordLanguageCodeFormatter
 				writer.Write("StopWordLanguage.Turkish");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected StopWordLanguage value.");
 		}
 	}
 }

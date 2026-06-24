@@ -45,8 +45,7 @@ public static class NormalizationCodeFormatter
 				writer.Write("Normalization.Z");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected Normalization value.");
 		}
 	}
 }

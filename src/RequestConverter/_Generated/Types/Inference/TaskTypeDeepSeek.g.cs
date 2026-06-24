@@ -36,8 +36,7 @@ public static class TaskTypeDeepSeekCodeFormatter
 				writer.Write("TaskTypeDeepSeek.Completion");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeDeepSeek value.");
 		}
 	}
 }

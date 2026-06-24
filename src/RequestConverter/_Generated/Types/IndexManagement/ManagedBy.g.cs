@@ -39,8 +39,7 @@ public static class ManagedByCodeFormatter
 				writer.Write("ManagedBy.Unmanaged");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ManagedBy value.");
 		}
 	}
 }

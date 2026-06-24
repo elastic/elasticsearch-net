@@ -75,8 +75,7 @@ public static class UnassignedInformationReasonCodeFormatter
 				writer.Write("UnassignedInformationReason.RerouteCancelled");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected UnassignedInformationReason value.");
 		}
 	}
 }

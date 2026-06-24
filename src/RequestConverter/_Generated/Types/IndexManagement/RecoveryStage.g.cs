@@ -48,8 +48,7 @@ public static class RecoveryStageCodeFormatter
 				writer.Write("RecoveryStage.VerifyIndex");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected RecoveryStage value.");
 		}
 	}
 }

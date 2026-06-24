@@ -45,8 +45,7 @@ public static class CardinalityExecutionModeCodeFormatter
 				writer.Write("CardinalityExecutionMode.SegmentOrdinals");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected CardinalityExecutionMode value.");
 		}
 	}
 }

@@ -36,8 +36,7 @@ public static class FilterTypeCodeFormatter
 				writer.Write("FilterType.Include");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected FilterType value.");
 		}
 	}
 }

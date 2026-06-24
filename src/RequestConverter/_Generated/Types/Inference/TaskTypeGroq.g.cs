@@ -33,8 +33,7 @@ public static class TaskTypeGroqCodeFormatter
 				writer.Write("TaskTypeGroq.ChatCompletion");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeGroq value.");
 		}
 	}
 }

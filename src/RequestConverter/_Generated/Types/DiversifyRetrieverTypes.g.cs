@@ -33,8 +33,7 @@ public static class DiversifyRetrieverTypesCodeFormatter
 				writer.Write("DiversifyRetrieverTypes.Mmr");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected DiversifyRetrieverTypes value.");
 		}
 	}
 }

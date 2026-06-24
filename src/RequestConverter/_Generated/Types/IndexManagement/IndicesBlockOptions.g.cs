@@ -42,8 +42,7 @@ public static class IndicesBlockOptionsCodeFormatter
 				writer.Write("IndicesBlockOptions.Write");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IndicesBlockOptions value.");
 		}
 	}
 }

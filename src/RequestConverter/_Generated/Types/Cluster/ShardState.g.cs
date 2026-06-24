@@ -54,8 +54,7 @@ public static class ShardStateCodeFormatter
 				writer.Write("ShardState.Waiting");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ShardState value.");
 		}
 	}
 }

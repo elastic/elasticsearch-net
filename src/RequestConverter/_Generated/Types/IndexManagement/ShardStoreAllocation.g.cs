@@ -39,8 +39,7 @@ public static class ShardStoreAllocationCodeFormatter
 				writer.Write("ShardStoreAllocation.Unused");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ShardStoreAllocation value.");
 		}
 	}
 }

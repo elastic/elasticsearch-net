@@ -177,8 +177,7 @@ public static class FieldTypeCodeFormatter
 				writer.Write("FieldType.Wildcard");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected FieldType value.");
 		}
 	}
 }

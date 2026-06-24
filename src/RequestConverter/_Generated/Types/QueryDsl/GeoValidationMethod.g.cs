@@ -39,8 +39,7 @@ public static class GeoValidationMethodCodeFormatter
 				writer.Write("GeoValidationMethod.Strict");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected GeoValidationMethod value.");
 		}
 	}
 }

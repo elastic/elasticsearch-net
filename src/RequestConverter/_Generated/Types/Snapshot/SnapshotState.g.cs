@@ -45,8 +45,7 @@ public static class SnapshotStateCodeFormatter
 				writer.Write("SnapshotState.Success");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SnapshotState value.");
 		}
 	}
 }

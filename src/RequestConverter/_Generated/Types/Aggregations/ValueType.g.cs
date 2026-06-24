@@ -60,8 +60,7 @@ public static class ValueTypeCodeFormatter
 				writer.Write("ValueType.String");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ValueType value.");
 		}
 	}
 }

@@ -36,8 +36,7 @@ public static class SuggestSortCodeFormatter
 				writer.Write("SuggestSort.Score");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SuggestSort value.");
 		}
 	}
 }

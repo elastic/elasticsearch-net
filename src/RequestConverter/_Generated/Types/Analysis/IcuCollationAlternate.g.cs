@@ -36,8 +36,7 @@ public static class IcuCollationAlternateCodeFormatter
 				writer.Write("IcuCollationAlternate.Shifted");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IcuCollationAlternate value.");
 		}
 	}
 }

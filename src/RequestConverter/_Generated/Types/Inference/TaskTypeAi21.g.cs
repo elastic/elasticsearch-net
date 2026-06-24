@@ -36,8 +36,7 @@ public static class TaskTypeAi21CodeFormatter
 				writer.Write("TaskTypeAi21.Completion");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeAi21 value.");
 		}
 	}
 }

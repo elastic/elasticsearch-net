@@ -45,8 +45,7 @@ public static class RecoveryTypeCodeFormatter
 				writer.Write("RecoveryType.Snapshot");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected RecoveryType value.");
 		}
 	}
 }

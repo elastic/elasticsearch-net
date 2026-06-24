@@ -33,8 +33,7 @@ public static class ModeEnumCodeFormatter
 				writer.Write("ModeEnum.Upgrade");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ModeEnum value.");
 		}
 	}
 }

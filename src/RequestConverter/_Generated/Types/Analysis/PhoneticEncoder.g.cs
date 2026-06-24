@@ -66,8 +66,7 @@ public static class PhoneticEncoderCodeFormatter
 				writer.Write("PhoneticEncoder.Soundex");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected PhoneticEncoder value.");
 		}
 	}
 }

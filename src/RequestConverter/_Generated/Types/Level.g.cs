@@ -39,8 +39,7 @@ public static class LevelCodeFormatter
 				writer.Write("Level.Shards");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected Level value.");
 		}
 	}
 }

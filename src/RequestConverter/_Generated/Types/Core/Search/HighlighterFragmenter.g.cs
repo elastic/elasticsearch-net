@@ -36,8 +36,7 @@ public static class HighlighterFragmenterCodeFormatter
 				writer.Write("HighlighterFragmenter.Span");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected HighlighterFragmenter value.");
 		}
 	}
 }

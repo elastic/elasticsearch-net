@@ -39,8 +39,7 @@ public static class CohereTruncateTypeCodeFormatter
 				writer.Write("CohereTruncateType.Start");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected CohereTruncateType value.");
 		}
 	}
 }

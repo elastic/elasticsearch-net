@@ -36,8 +36,7 @@ public static class SegmentSortModeCodeFormatter
 				writer.Write("SegmentSortMode.Min");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SegmentSortMode value.");
 		}
 	}
 }

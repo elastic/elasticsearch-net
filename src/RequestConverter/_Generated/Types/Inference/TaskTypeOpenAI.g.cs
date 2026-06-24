@@ -42,8 +42,7 @@ public static class TaskTypeOpenAICodeFormatter
 				writer.Write("TaskTypeOpenAI.TextEmbedding");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeOpenAI value.");
 		}
 	}
 }

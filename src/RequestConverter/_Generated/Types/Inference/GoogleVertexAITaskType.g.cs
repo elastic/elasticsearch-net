@@ -42,8 +42,7 @@ public static class GoogleVertexAITaskTypeCodeFormatter
 				writer.Write("GoogleVertexAITaskType.TextEmbedding");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected GoogleVertexAITaskType value.");
 		}
 	}
 }

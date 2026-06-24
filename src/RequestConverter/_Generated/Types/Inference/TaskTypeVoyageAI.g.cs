@@ -36,8 +36,7 @@ public static class TaskTypeVoyageAICodeFormatter
 				writer.Write("TaskTypeVoyageAI.TextEmbedding");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeVoyageAI value.");
 		}
 	}
 }

@@ -36,8 +36,7 @@ public static class GeoOrientationCodeFormatter
 				writer.Write("GeoOrientation.Right");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected GeoOrientation value.");
 		}
 	}
 }

@@ -39,8 +39,7 @@ public static class VersionTypeCodeFormatter
 				writer.Write("VersionType.Internal");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected VersionType value.");
 		}
 	}
 }

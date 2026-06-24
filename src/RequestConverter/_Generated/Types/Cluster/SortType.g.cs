@@ -45,8 +45,7 @@ public static class SortTypeCodeFormatter
 				writer.Write("SortType.FieldSort");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SortType value.");
 		}
 	}
 }

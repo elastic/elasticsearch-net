@@ -111,8 +111,7 @@ public static class SnowballLanguageCodeFormatter
 				writer.Write("SnowballLanguage.Turkish");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SnowballLanguage value.");
 		}
 	}
 }

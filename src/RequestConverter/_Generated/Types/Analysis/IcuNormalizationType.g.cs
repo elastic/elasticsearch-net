@@ -39,8 +39,7 @@ public static class IcuNormalizationTypeCodeFormatter
 				writer.Write("IcuNormalizationType.NfkcCf");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IcuNormalizationType value.");
 		}
 	}
 }

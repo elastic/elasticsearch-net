@@ -45,8 +45,7 @@ public static class IcuCollationStrengthCodeFormatter
 				writer.Write("IcuCollationStrength.Tertiary");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IcuCollationStrength value.");
 		}
 	}
 }

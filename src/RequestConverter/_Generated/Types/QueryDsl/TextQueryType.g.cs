@@ -48,8 +48,7 @@ public static class TextQueryTypeCodeFormatter
 				writer.Write("TextQueryType.PhrasePrefix");
 				break;
 			default:
-				writer.Write(instance.ToString());
-				break;
+				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TextQueryType value.");
 		}
 	}
 }
