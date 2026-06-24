@@ -27,19 +27,19 @@ public partial class GeoResults : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoResults", false);
+		var initializer = writer.BeginObjectInitializer("GeoResults", false);
 		if (ActualPoint is not null)
 		{
-			__init.Property("ActualPoint");
+			initializer.Property("ActualPoint");
 			writer.WriteString(ActualPoint);
 		}
 
 		if (TypicalPoint is not null)
 		{
-			__init.Property("TypicalPoint");
+			initializer.Property("TypicalPoint");
 			writer.WriteString(TypicalPoint);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,31 +27,31 @@ public partial class IcuNormalizationCharFilter : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IcuNormalizationCharFilter", true);
+		var initializer = writer.BeginObjectInitializer("IcuNormalizationCharFilter", true);
 		if (Mode is not null)
 		{
-			__init.Property("Mode");
+			initializer.Property("Mode");
 			Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationModeCodeFormatter.FormatCode(Mode.Value, writer);
 		}
 
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTypeCodeFormatter.FormatCode(Name.Value, writer);
 		}
 
 		if (UnicodeSetFilter is not null)
 		{
-			__init.Property("UnicodeSetFilter");
+			initializer.Property("UnicodeSetFilter");
 			writer.WriteString(UnicodeSetFilter);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,16 +27,16 @@ public partial class SpanishAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SpanishAnalyzer", true);
+		var initializer = writer.BeginObjectInitializer("SpanishAnalyzer", true);
 		if (StemExclusion is not null)
 		{
-			__init.Property("StemExclusion");
+			initializer.Property("StemExclusion");
 			writer.WriteInlineList(StemExclusion, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Stopwords is not null)
 		{
-			__init.Property("Stopwords");
+			initializer.Property("Stopwords");
 			if (Stopwords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(Stopwords.Value1, writer);
@@ -50,10 +50,10 @@ public partial class SpanishAnalyzer : RequestConverter.ICodeFormattable
 
 		if (StopwordsPath is not null)
 		{
-			__init.Property("StopwordsPath");
+			initializer.Property("StopwordsPath");
 			writer.WriteString(StopwordsPath);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

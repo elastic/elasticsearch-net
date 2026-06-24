@@ -27,19 +27,19 @@ public partial class Destination : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Destination", false);
+		var initializer = writer.BeginObjectInitializer("Destination", false);
 		if (Index is not null)
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		if (Pipeline is not null)
 		{
-			__init.Property("Pipeline");
+			initializer.Property("Pipeline");
 			writer.WriteString(Pipeline);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,37 +27,37 @@ public partial class GetDataStreamRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetDataStreamRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetDataStreamRequest", false);
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		if (ExpandWildcards is not null)
 		{
-			__init.Property("ExpandWildcards");
+			initializer.Property("ExpandWildcards");
 			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (IncludeDefaults is not null)
 		{
-			__init.Property("IncludeDefaults");
+			initializer.Property("IncludeDefaults");
 			writer.WriteValue(IncludeDefaults.Value);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (Verbose is not null)
 		{
-			__init.Property("Verbose");
+			initializer.Property("Verbose");
 			writer.WriteValue(Verbose.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

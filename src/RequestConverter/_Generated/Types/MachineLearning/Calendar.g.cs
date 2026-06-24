@@ -27,23 +27,23 @@ public partial class Calendar : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Calendar", false);
+		var initializer = writer.BeginObjectInitializer("Calendar", false);
 		{
-			__init.Property("CalendarId");
+			initializer.Property("CalendarId");
 			writer.WriteString(CalendarId);
 		}
 
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		{
-			__init.Property("JobIds");
+			initializer.Property("JobIds");
 			writer.WriteInlineList(JobIds, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

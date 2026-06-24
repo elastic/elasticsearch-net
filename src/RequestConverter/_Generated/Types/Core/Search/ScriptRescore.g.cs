@@ -27,12 +27,12 @@ public partial class ScriptRescore : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ScriptRescore", false);
+		var initializer = writer.BeginObjectInitializer("ScriptRescore", false);
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

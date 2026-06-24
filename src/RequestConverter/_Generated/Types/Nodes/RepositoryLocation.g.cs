@@ -27,24 +27,24 @@ public partial class RepositoryLocation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RepositoryLocation", false);
+		var initializer = writer.BeginObjectInitializer("RepositoryLocation", false);
 		{
-			__init.Property("BasePath");
+			initializer.Property("BasePath");
 			writer.WriteString(BasePath);
 		}
 
 		if (Bucket is not null)
 		{
-			__init.Property("Bucket");
+			initializer.Property("Bucket");
 			writer.WriteString(Bucket);
 		}
 
 		if (Container is not null)
 		{
-			__init.Property("Container");
+			initializer.Property("Container");
 			writer.WriteString(Container);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

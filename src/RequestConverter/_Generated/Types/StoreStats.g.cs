@@ -27,44 +27,44 @@ public partial class StoreStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StoreStats", false);
+		var initializer = writer.BeginObjectInitializer("StoreStats", false);
 		if (Reserved is not null)
 		{
-			__init.Property("Reserved");
+			initializer.Property("Reserved");
 			Reserved.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ReservedInBytes");
+			initializer.Property("ReservedInBytes");
 			writer.WriteValue(ReservedInBytes);
 			writer.Write("L");
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			Size.FormatCode(writer);
 		}
 
 		{
-			__init.Property("SizeInBytes");
+			initializer.Property("SizeInBytes");
 			writer.WriteValue(SizeInBytes);
 			writer.Write("L");
 		}
 
 		if (TotalDataSetSize is not null)
 		{
-			__init.Property("TotalDataSetSize");
+			initializer.Property("TotalDataSetSize");
 			TotalDataSetSize.FormatCode(writer);
 		}
 
 		if (TotalDataSetSizeInBytes is not null)
 		{
-			__init.Property("TotalDataSetSizeInBytes");
+			initializer.Property("TotalDataSetSizeInBytes");
 			writer.WriteValue(TotalDataSetSizeInBytes.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

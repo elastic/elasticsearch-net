@@ -27,42 +27,42 @@ public partial class InvertedIndex : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InvertedIndex", false);
+		var initializer = writer.BeginObjectInitializer("InvertedIndex", false);
 		{
-			__init.Property("Offsets");
+			initializer.Property("Offsets");
 			writer.WriteValue(Offsets);
 		}
 
 		{
-			__init.Property("Payloads");
+			initializer.Property("Payloads");
 			writer.WriteValue(Payloads);
 		}
 
 		{
-			__init.Property("Positions");
+			initializer.Property("Positions");
 			writer.WriteValue(Positions);
 		}
 
 		{
-			__init.Property("Postings");
+			initializer.Property("Postings");
 			writer.WriteValue(Postings);
 		}
 
 		{
-			__init.Property("Proximity");
+			initializer.Property("Proximity");
 			writer.WriteValue(Proximity);
 		}
 
 		{
-			__init.Property("TermFrequencies");
+			initializer.Property("TermFrequencies");
 			writer.WriteValue(TermFrequencies);
 		}
 
 		{
-			__init.Property("Terms");
+			initializer.Property("Terms");
 			writer.WriteValue(Terms);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

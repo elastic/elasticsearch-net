@@ -27,40 +27,40 @@ public partial class IpPrefixBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IpPrefixBucket", false);
+		var initializer = writer.BeginObjectInitializer("IpPrefixBucket", false);
 		if (Aggregations is not null)
 		{
-			__init.Property("Aggregations");
+			initializer.Property("Aggregations");
 			Aggregations.FormatCode(writer);
 		}
 
 		{
-			__init.Property("DocCount");
+			initializer.Property("DocCount");
 			writer.WriteValue(DocCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("IsIpv6");
+			initializer.Property("IsIpv6");
 			writer.WriteValue(IsIpv6);
 		}
 
 		{
-			__init.Property("Key");
+			initializer.Property("Key");
 			writer.WriteString(Key);
 		}
 
 		if (Netmask is not null)
 		{
-			__init.Property("Netmask");
+			initializer.Property("Netmask");
 			writer.WriteString(Netmask);
 		}
 
 		{
-			__init.Property("PrefixLength");
+			initializer.Property("PrefixLength");
 			writer.WriteValue(PrefixLength);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

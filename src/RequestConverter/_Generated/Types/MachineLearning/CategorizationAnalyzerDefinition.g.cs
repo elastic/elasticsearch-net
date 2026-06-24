@@ -27,25 +27,25 @@ public partial class CategorizationAnalyzerDefinition : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CategorizationAnalyzerDefinition", true);
+		var initializer = writer.BeginObjectInitializer("CategorizationAnalyzerDefinition", true);
 		if (CharFilter is not null)
 		{
-			__init.Property("CharFilter");
+			initializer.Property("CharFilter");
 			writer.WriteInlineList(CharFilter, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Tokenizer is not null)
 		{
-			__init.Property("Tokenizer");
+			initializer.Property("Tokenizer");
 			Tokenizer.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

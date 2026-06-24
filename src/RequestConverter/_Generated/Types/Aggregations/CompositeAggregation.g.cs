@@ -27,10 +27,10 @@ public partial class CompositeAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CompositeAggregation", false);
+		var initializer = writer.BeginObjectInitializer("CompositeAggregation", false);
 		if (After is not null)
 		{
-			__init.Property("After");
+			initializer.Property("After");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("Elastic.Clients.Elasticsearch.Field");
 			writer.Write(", ");
@@ -41,16 +41,16 @@ public partial class CompositeAggregation : RequestConverter.ICodeFormattable
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
 		if (Sources is not null)
 		{
-			__init.Property("Sources");
+			initializer.Property("Sources");
 			writer.WriteInlineList(Sources, (w, item) => { w.Write("new("); w.WriteString(item.Key); w.Write(", "); item.Value.FormatCode(w); w.Write(")"); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

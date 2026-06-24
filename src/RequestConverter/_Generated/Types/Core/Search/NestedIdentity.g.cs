@@ -27,23 +27,23 @@ public partial class NestedIdentity : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NestedIdentity", false);
+		var initializer = writer.BeginObjectInitializer("NestedIdentity", false);
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			writer.WriteString(Field);
 		}
 
 		if (Nested is not null)
 		{
-			__init.Property("Nested");
+			initializer.Property("Nested");
 			Nested.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Offset");
+			initializer.Property("Offset");
 			writer.WriteValue(Offset);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,22 +27,22 @@ public partial class ApplicationPrivilegesCheck : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ApplicationPrivilegesCheck", false);
+		var initializer = writer.BeginObjectInitializer("ApplicationPrivilegesCheck", false);
 		{
-			__init.Property("Application");
+			initializer.Property("Application");
 			writer.WriteString(Application);
 		}
 
 		{
-			__init.Property("Privileges");
+			initializer.Property("Privileges");
 			writer.WriteInlineList(Privileges, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Resources");
+			initializer.Property("Resources");
 			writer.WriteInlineList(Resources, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

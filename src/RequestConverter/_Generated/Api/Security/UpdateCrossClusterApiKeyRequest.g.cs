@@ -27,32 +27,32 @@ public partial class UpdateCrossClusterApiKeyRequest : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UpdateCrossClusterApiKeyRequest", false);
+		var initializer = writer.BeginObjectInitializer("UpdateCrossClusterApiKeyRequest", false);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Access");
+			initializer.Property("Access");
 			Access.FormatCode(writer);
 		}
 
 		if (CertificateIdentity is not null)
 		{
-			__init.Property("CertificateIdentity");
+			initializer.Property("CertificateIdentity");
 			writer.WriteString(CertificateIdentity);
 		}
 
 		if (Expiration is not null)
 		{
-			__init.Property("Expiration");
+			initializer.Property("Expiration");
 			Expiration.FormatCode(writer);
 		}
 
 		if (Metadata is not null)
 		{
-			__init.Property("Metadata");
+			initializer.Property("Metadata");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -61,6 +61,6 @@ public partial class UpdateCrossClusterApiKeyRequest : RequestConverter.ICodeFor
 			writer.WriteInlineList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

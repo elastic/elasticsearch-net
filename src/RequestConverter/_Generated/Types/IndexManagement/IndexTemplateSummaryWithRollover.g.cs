@@ -27,10 +27,10 @@ public partial class IndexTemplateSummaryWithRollover : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexTemplateSummaryWithRollover", false);
+		var initializer = writer.BeginObjectInitializer("IndexTemplateSummaryWithRollover", false);
 		if (Aliases is not null)
 		{
-			__init.Property("Aliases");
+			initializer.Property("Aliases");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -41,28 +41,28 @@ public partial class IndexTemplateSummaryWithRollover : RequestConverter.ICodeFo
 
 		if (DataStreamOptions is not null)
 		{
-			__init.Property("DataStreamOptions");
+			initializer.Property("DataStreamOptions");
 			DataStreamOptions.FormatCode(writer);
 		}
 
 		if (Lifecycle is not null)
 		{
-			__init.Property("Lifecycle");
+			initializer.Property("Lifecycle");
 			Lifecycle.FormatCode(writer);
 		}
 
 		if (Mappings is not null)
 		{
-			__init.Property("Mappings");
+			initializer.Property("Mappings");
 			Mappings.FormatCode(writer);
 		}
 
 		if (Settings is not null)
 		{
-			__init.Property("Settings");
+			initializer.Property("Settings");
 			Settings.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

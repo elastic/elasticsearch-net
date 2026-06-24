@@ -27,10 +27,10 @@ public partial class ScriptedMetricAggregate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ScriptedMetricAggregate", true);
+		var initializer = writer.BeginObjectInitializer("ScriptedMetricAggregate", true);
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -40,10 +40,10 @@ public partial class ScriptedMetricAggregate : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Value");
+			initializer.Property("Value");
 			writer.WriteValue(Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

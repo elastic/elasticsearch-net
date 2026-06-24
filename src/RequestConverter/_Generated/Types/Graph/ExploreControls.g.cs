@@ -27,30 +27,30 @@ public partial class ExploreControls : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExploreControls", false);
+		var initializer = writer.BeginObjectInitializer("ExploreControls", false);
 		if (SampleDiversity is not null)
 		{
-			__init.Property("SampleDiversity");
+			initializer.Property("SampleDiversity");
 			SampleDiversity.FormatCode(writer);
 		}
 
 		if (SampleSize is not null)
 		{
-			__init.Property("SampleSize");
+			initializer.Property("SampleSize");
 			writer.WriteValue(SampleSize.Value);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		{
-			__init.Property("UseSignificance");
+			initializer.Property("UseSignificance");
 			writer.WriteValue(UseSignificance);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

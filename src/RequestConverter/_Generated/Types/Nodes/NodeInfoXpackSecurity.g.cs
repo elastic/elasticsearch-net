@@ -27,30 +27,30 @@ public partial class NodeInfoXpackSecurity : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoXpackSecurity", false);
+		var initializer = writer.BeginObjectInitializer("NodeInfoXpackSecurity", false);
 		if (Authc is not null)
 		{
-			__init.Property("Authc");
+			initializer.Property("Authc");
 			Authc.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteString(Enabled);
 		}
 
 		if (Http is not null)
 		{
-			__init.Property("Http");
+			initializer.Property("Http");
 			Http.FormatCode(writer);
 		}
 
 		if (Transport is not null)
 		{
-			__init.Property("Transport");
+			initializer.Property("Transport");
 			Transport.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

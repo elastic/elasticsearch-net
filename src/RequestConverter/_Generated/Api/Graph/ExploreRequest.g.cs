@@ -27,48 +27,48 @@ public partial class ExploreRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExploreRequest", false);
+		var initializer = writer.BeginObjectInitializer("ExploreRequest", false);
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			Routing.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (Connections is not null)
 		{
-			__init.Property("Connections");
+			initializer.Property("Connections");
 			Connections.FormatCode(writer);
 		}
 
 		if (Controls is not null)
 		{
-			__init.Property("Controls");
+			initializer.Property("Controls");
 			Controls.FormatCode(writer);
 		}
 
 		if (Query is not null)
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			Query.FormatCode(writer);
 		}
 
 		if (Vertices is not null)
 		{
-			__init.Property("Vertices");
+			initializer.Property("Vertices");
 			writer.WriteInlineList(Vertices, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

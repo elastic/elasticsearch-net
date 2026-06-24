@@ -27,7 +27,7 @@ public partial class PingRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PingRequest", false);
-		__init.Dispose();
+		var initializer = writer.BeginObjectInitializer("PingRequest", false);
+		initializer.Dispose();
 	}
 }

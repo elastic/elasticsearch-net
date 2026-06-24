@@ -27,12 +27,12 @@ public partial class IndexField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexField", false);
+		var initializer = writer.BeginObjectInitializer("IndexField", false);
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,41 +27,41 @@ public partial class DatafeedStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DatafeedStats", false);
+		var initializer = writer.BeginObjectInitializer("DatafeedStats", false);
 		if (AssignmentExplanation is not null)
 		{
-			__init.Property("AssignmentExplanation");
+			initializer.Property("AssignmentExplanation");
 			writer.WriteString(AssignmentExplanation);
 		}
 
 		{
-			__init.Property("DatafeedId");
+			initializer.Property("DatafeedId");
 			writer.WriteString(DatafeedId);
 		}
 
 		if (Node is not null)
 		{
-			__init.Property("Node");
+			initializer.Property("Node");
 			Node.FormatCode(writer);
 		}
 
 		if (RunningState is not null)
 		{
-			__init.Property("RunningState");
+			initializer.Property("RunningState");
 			RunningState.FormatCode(writer);
 		}
 
 		{
-			__init.Property("State");
+			initializer.Property("State");
 			Elastic.Clients.Elasticsearch.MachineLearning.DatafeedStateCodeFormatter.FormatCode(State, writer);
 		}
 
 		if (TimingStats is not null)
 		{
-			__init.Property("TimingStats");
+			initializer.Property("TimingStats");
 			TimingStats.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

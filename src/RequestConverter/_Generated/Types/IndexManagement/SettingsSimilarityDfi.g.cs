@@ -27,12 +27,12 @@ public partial class SettingsSimilarityDfi : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SettingsSimilarityDfi", true);
+		var initializer = writer.BeginObjectInitializer("SettingsSimilarityDfi", true);
 		{
-			__init.Property("IndependenceMeasure");
+			initializer.Property("IndependenceMeasure");
 			Elastic.Clients.Elasticsearch.DFIIndependenceMeasureCodeFormatter.FormatCode(IndependenceMeasure, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

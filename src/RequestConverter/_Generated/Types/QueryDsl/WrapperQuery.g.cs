@@ -27,25 +27,25 @@ public partial class WrapperQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("WrapperQuery", false);
+		var initializer = writer.BeginObjectInitializer("WrapperQuery", false);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			writer.WriteString(Query);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,37 +27,37 @@ public partial class Term : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Term", false);
+		var initializer = writer.BeginObjectInitializer("Term", false);
 		if (DocFreq is not null)
 		{
-			__init.Property("DocFreq");
+			initializer.Property("DocFreq");
 			writer.WriteValue(DocFreq.Value);
 		}
 
 		if (Score is not null)
 		{
-			__init.Property("Score");
+			initializer.Property("Score");
 			writer.WriteValue(Score.Value);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("TermFreq");
+			initializer.Property("TermFreq");
 			writer.WriteValue(TermFreq);
 		}
 
 		if (Tokens is not null)
 		{
-			__init.Property("Tokens");
+			initializer.Property("Tokens");
 			writer.WriteInlineList(Tokens, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Ttf is not null)
 		{
-			__init.Property("Ttf");
+			initializer.Property("Ttf");
 			writer.WriteValue(Ttf.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

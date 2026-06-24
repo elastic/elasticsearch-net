@@ -27,37 +27,37 @@ public partial class RequestCacheStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RequestCacheStats", false);
+		var initializer = writer.BeginObjectInitializer("RequestCacheStats", false);
 		{
-			__init.Property("Evictions");
+			initializer.Property("Evictions");
 			writer.WriteValue(Evictions);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("HitCount");
+			initializer.Property("HitCount");
 			writer.WriteValue(HitCount);
 			writer.Write("L");
 		}
 
 		if (MemorySize is not null)
 		{
-			__init.Property("MemorySize");
+			initializer.Property("MemorySize");
 			writer.WriteString(MemorySize);
 		}
 
 		{
-			__init.Property("MemorySizeInBytes");
+			initializer.Property("MemorySizeInBytes");
 			writer.WriteValue(MemorySizeInBytes);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("MissCount");
+			initializer.Property("MissCount");
 			writer.WriteValue(MissCount);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

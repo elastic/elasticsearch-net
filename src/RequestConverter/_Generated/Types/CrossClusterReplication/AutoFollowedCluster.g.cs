@@ -27,23 +27,23 @@ public partial class AutoFollowedCluster : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AutoFollowedCluster", false);
+		var initializer = writer.BeginObjectInitializer("AutoFollowedCluster", false);
 		{
-			__init.Property("ClusterName");
+			initializer.Property("ClusterName");
 			writer.WriteString(ClusterName);
 		}
 
 		{
-			__init.Property("LastSeenMetadataVersion");
+			initializer.Property("LastSeenMetadataVersion");
 			writer.WriteValue(LastSeenMetadataVersion);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("TimeSinceLastCheckMillis");
+			initializer.Property("TimeSinceLastCheckMillis");
 			writer.WriteValue(TimeSinceLastCheckMillis);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,97 +27,97 @@ public partial class AnomalyCause : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AnomalyCause", false);
+		var initializer = writer.BeginObjectInitializer("AnomalyCause", false);
 		if (Actual is not null)
 		{
-			__init.Property("Actual");
+			initializer.Property("Actual");
 			writer.WriteInlineList(Actual, (w, item) => { w.WriteValue(item); w.Write("d"); });
 		}
 
 		if (ByFieldName is not null)
 		{
-			__init.Property("ByFieldName");
+			initializer.Property("ByFieldName");
 			writer.WriteString(ByFieldName);
 		}
 
 		if (ByFieldValue is not null)
 		{
-			__init.Property("ByFieldValue");
+			initializer.Property("ByFieldValue");
 			writer.WriteString(ByFieldValue);
 		}
 
 		if (CorrelatedByFieldValue is not null)
 		{
-			__init.Property("CorrelatedByFieldValue");
+			initializer.Property("CorrelatedByFieldValue");
 			writer.WriteString(CorrelatedByFieldValue);
 		}
 
 		if (FieldName is not null)
 		{
-			__init.Property("FieldName");
+			initializer.Property("FieldName");
 			writer.WriteString(FieldName);
 		}
 
 		if (Function is not null)
 		{
-			__init.Property("Function");
+			initializer.Property("Function");
 			writer.WriteString(Function);
 		}
 
 		if (FunctionDescription is not null)
 		{
-			__init.Property("FunctionDescription");
+			initializer.Property("FunctionDescription");
 			writer.WriteString(FunctionDescription);
 		}
 
 		if (GeoResults is not null)
 		{
-			__init.Property("GeoResults");
+			initializer.Property("GeoResults");
 			GeoResults.FormatCode(writer);
 		}
 
 		if (Influencers is not null)
 		{
-			__init.Property("Influencers");
+			initializer.Property("Influencers");
 			writer.WriteInlineList(Influencers, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (OverFieldName is not null)
 		{
-			__init.Property("OverFieldName");
+			initializer.Property("OverFieldName");
 			writer.WriteString(OverFieldName);
 		}
 
 		if (OverFieldValue is not null)
 		{
-			__init.Property("OverFieldValue");
+			initializer.Property("OverFieldValue");
 			writer.WriteString(OverFieldValue);
 		}
 
 		if (PartitionFieldName is not null)
 		{
-			__init.Property("PartitionFieldName");
+			initializer.Property("PartitionFieldName");
 			writer.WriteString(PartitionFieldName);
 		}
 
 		if (PartitionFieldValue is not null)
 		{
-			__init.Property("PartitionFieldValue");
+			initializer.Property("PartitionFieldValue");
 			writer.WriteString(PartitionFieldValue);
 		}
 
 		{
-			__init.Property("Probability");
+			initializer.Property("Probability");
 			writer.WriteValue(Probability);
 			writer.Write("d");
 		}
 
 		if (Typical is not null)
 		{
-			__init.Property("Typical");
+			initializer.Property("Typical");
 			writer.WriteInlineList(Typical, (w, item) => { w.WriteValue(item); w.Write("d"); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,36 +27,36 @@ public partial class InferenceAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InferenceAggregation", false);
+		var initializer = writer.BeginObjectInitializer("InferenceAggregation", false);
 		if (BucketsPath is not null)
 		{
-			__init.Property("BucketsPath");
+			initializer.Property("BucketsPath");
 			BucketsPath.FormatCode(writer);
 		}
 
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			writer.WriteString(Format);
 		}
 
 		if (GapPolicy is not null)
 		{
-			__init.Property("GapPolicy");
+			initializer.Property("GapPolicy");
 			Elastic.Clients.Elasticsearch.Aggregations.GapPolicyCodeFormatter.FormatCode(GapPolicy.Value, writer);
 		}
 
 		if (InferenceConfig is not null)
 		{
-			__init.Property("InferenceConfig");
+			initializer.Property("InferenceConfig");
 			InferenceConfig.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ModelId");
+			initializer.Property("ModelId");
 			ModelId.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

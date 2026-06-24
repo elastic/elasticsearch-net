@@ -27,97 +27,97 @@ public partial class SimpleQueryStringQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SimpleQueryStringQuery", false);
+		var initializer = writer.BeginObjectInitializer("SimpleQueryStringQuery", false);
 		if (Analyzer is not null)
 		{
-			__init.Property("Analyzer");
+			initializer.Property("Analyzer");
 			writer.WriteString(Analyzer);
 		}
 
 		if (AnalyzeWildcard is not null)
 		{
-			__init.Property("AnalyzeWildcard");
+			initializer.Property("AnalyzeWildcard");
 			writer.WriteValue(AnalyzeWildcard.Value);
 		}
 
 		if (AutoGenerateSynonymsPhraseQuery is not null)
 		{
-			__init.Property("AutoGenerateSynonymsPhraseQuery");
+			initializer.Property("AutoGenerateSynonymsPhraseQuery");
 			writer.WriteValue(AutoGenerateSynonymsPhraseQuery.Value);
 		}
 
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		if (DefaultOperator is not null)
 		{
-			__init.Property("DefaultOperator");
+			initializer.Property("DefaultOperator");
 			Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(DefaultOperator.Value, writer);
 		}
 
 		if (Fields is not null)
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			Fields.FormatCode(writer);
 		}
 
 		if (Flags is not null)
 		{
-			__init.Property("Flags");
+			initializer.Property("Flags");
 			Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlagsCodeFormatter.FormatCode(Flags.Value, writer);
 		}
 
 		if (FuzzyMaxExpansions is not null)
 		{
-			__init.Property("FuzzyMaxExpansions");
+			initializer.Property("FuzzyMaxExpansions");
 			writer.WriteValue(FuzzyMaxExpansions.Value);
 		}
 
 		if (FuzzyPrefixLength is not null)
 		{
-			__init.Property("FuzzyPrefixLength");
+			initializer.Property("FuzzyPrefixLength");
 			writer.WriteValue(FuzzyPrefixLength.Value);
 		}
 
 		if (FuzzyTranspositions is not null)
 		{
-			__init.Property("FuzzyTranspositions");
+			initializer.Property("FuzzyTranspositions");
 			writer.WriteValue(FuzzyTranspositions.Value);
 		}
 
 		if (Lenient is not null)
 		{
-			__init.Property("Lenient");
+			initializer.Property("Lenient");
 			writer.WriteValue(Lenient.Value);
 		}
 
 		if (MinimumShouldMatch is not null)
 		{
-			__init.Property("MinimumShouldMatch");
+			initializer.Property("MinimumShouldMatch");
 			MinimumShouldMatch.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			writer.WriteString(Query);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
 		if (QuoteFieldSuffix is not null)
 		{
-			__init.Property("QuoteFieldSuffix");
+			initializer.Property("QuoteFieldSuffix");
 			writer.WriteString(QuoteFieldSuffix);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

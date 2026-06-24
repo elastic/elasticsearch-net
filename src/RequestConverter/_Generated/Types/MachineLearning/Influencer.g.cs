@@ -27,66 +27,66 @@ public partial class Influencer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Influencer", false);
+		var initializer = writer.BeginObjectInitializer("Influencer", false);
 		{
-			__init.Property("BucketSpan");
+			initializer.Property("BucketSpan");
 			writer.WriteValue(BucketSpan);
 		}
 
 		if (Foo is not null)
 		{
-			__init.Property("Foo");
+			initializer.Property("Foo");
 			writer.WriteString(Foo);
 		}
 
 		{
-			__init.Property("InfluencerFieldName");
+			initializer.Property("InfluencerFieldName");
 			writer.WriteString(InfluencerFieldName);
 		}
 
 		{
-			__init.Property("InfluencerFieldValue");
+			initializer.Property("InfluencerFieldValue");
 			writer.WriteString(InfluencerFieldValue);
 		}
 
 		{
-			__init.Property("InfluencerScore");
+			initializer.Property("InfluencerScore");
 			writer.WriteValue(InfluencerScore);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("InitialInfluencerScore");
+			initializer.Property("InitialInfluencerScore");
 			writer.WriteValue(InitialInfluencerScore);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("IsInterim");
+			initializer.Property("IsInterim");
 			writer.WriteValue(IsInterim);
 		}
 
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			writer.WriteString(JobId);
 		}
 
 		{
-			__init.Property("Probability");
+			initializer.Property("Probability");
 			writer.WriteValue(Probability);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("ResultType");
+			initializer.Property("ResultType");
 			writer.WriteString(ResultType);
 		}
 
 		{
-			__init.Property("Timestamp");
+			initializer.Property("Timestamp");
 			writer.WriteValue(Timestamp);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,42 +27,42 @@ public partial class ResolveIndexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ResolveIndexRequest", false);
+		var initializer = writer.BeginObjectInitializer("ResolveIndexRequest", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		if (AllowNoIndices is not null)
 		{
-			__init.Property("AllowNoIndices");
+			initializer.Property("AllowNoIndices");
 			writer.WriteValue(AllowNoIndices.Value);
 		}
 
 		if (ExpandWildcards is not null)
 		{
-			__init.Property("ExpandWildcards");
+			initializer.Property("ExpandWildcards");
 			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (IgnoreUnavailable is not null)
 		{
-			__init.Property("IgnoreUnavailable");
+			initializer.Property("IgnoreUnavailable");
 			writer.WriteValue(IgnoreUnavailable.Value);
 		}
 
 		if (Mode is not null)
 		{
-			__init.Property("Mode");
+			initializer.Property("Mode");
 			writer.WriteInlineList(Mode, (w, item) => { Elastic.Clients.Elasticsearch.IndexManagement.IndexModeCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (ProjectRouting is not null)
 		{
-			__init.Property("ProjectRouting");
+			initializer.Property("ProjectRouting");
 			writer.WriteString(ProjectRouting);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,42 +27,42 @@ public partial class ShardHealthStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardHealthStats", false);
+		var initializer = writer.BeginObjectInitializer("ShardHealthStats", false);
 		{
-			__init.Property("ActiveShards");
+			initializer.Property("ActiveShards");
 			writer.WriteValue(ActiveShards);
 		}
 
 		{
-			__init.Property("InitializingShards");
+			initializer.Property("InitializingShards");
 			writer.WriteValue(InitializingShards);
 		}
 
 		{
-			__init.Property("PrimaryActive");
+			initializer.Property("PrimaryActive");
 			writer.WriteValue(PrimaryActive);
 		}
 
 		{
-			__init.Property("RelocatingShards");
+			initializer.Property("RelocatingShards");
 			writer.WriteValue(RelocatingShards);
 		}
 
 		{
-			__init.Property("Status");
+			initializer.Property("Status");
 			Elastic.Clients.Elasticsearch.HealthStatusCodeFormatter.FormatCode(Status, writer);
 		}
 
 		{
-			__init.Property("UnassignedPrimaryShards");
+			initializer.Property("UnassignedPrimaryShards");
 			writer.WriteValue(UnassignedPrimaryShards);
 		}
 
 		{
-			__init.Property("UnassignedShards");
+			initializer.Property("UnassignedShards");
 			writer.WriteValue(UnassignedShards);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

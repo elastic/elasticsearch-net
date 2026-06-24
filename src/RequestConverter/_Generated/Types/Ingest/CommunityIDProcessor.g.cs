@@ -27,103 +27,103 @@ public partial class CommunityIDProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CommunityIDProcessor", false);
+		var initializer = writer.BeginObjectInitializer("CommunityIDProcessor", false);
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		if (DestinationIp is not null)
 		{
-			__init.Property("DestinationIp");
+			initializer.Property("DestinationIp");
 			DestinationIp.FormatCode(writer);
 		}
 
 		if (DestinationPort is not null)
 		{
-			__init.Property("DestinationPort");
+			initializer.Property("DestinationPort");
 			DestinationPort.FormatCode(writer);
 		}
 
 		if (IanaNumber is not null)
 		{
-			__init.Property("IanaNumber");
+			initializer.Property("IanaNumber");
 			IanaNumber.FormatCode(writer);
 		}
 
 		if (IcmpCode is not null)
 		{
-			__init.Property("IcmpCode");
+			initializer.Property("IcmpCode");
 			IcmpCode.FormatCode(writer);
 		}
 
 		if (IcmpType is not null)
 		{
-			__init.Property("IcmpType");
+			initializer.Property("IcmpType");
 			IcmpType.FormatCode(writer);
 		}
 
 		if (If is not null)
 		{
-			__init.Property("If");
+			initializer.Property("If");
 			If.FormatCode(writer);
 		}
 
 		if (IgnoreFailure is not null)
 		{
-			__init.Property("IgnoreFailure");
+			initializer.Property("IgnoreFailure");
 			writer.WriteValue(IgnoreFailure.Value);
 		}
 
 		if (IgnoreMissing is not null)
 		{
-			__init.Property("IgnoreMissing");
+			initializer.Property("IgnoreMissing");
 			writer.WriteValue(IgnoreMissing.Value);
 		}
 
 		if (OnFailure is not null)
 		{
-			__init.Property("OnFailure");
+			initializer.Property("OnFailure");
 			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Seed is not null)
 		{
-			__init.Property("Seed");
+			initializer.Property("Seed");
 			writer.WriteValue(Seed.Value);
 		}
 
 		if (SourceIp is not null)
 		{
-			__init.Property("SourceIp");
+			initializer.Property("SourceIp");
 			SourceIp.FormatCode(writer);
 		}
 
 		if (SourcePort is not null)
 		{
-			__init.Property("SourcePort");
+			initializer.Property("SourcePort");
 			SourcePort.FormatCode(writer);
 		}
 
 		if (Tag is not null)
 		{
-			__init.Property("Tag");
+			initializer.Property("Tag");
 			writer.WriteString(Tag);
 		}
 
 		if (TargetField is not null)
 		{
-			__init.Property("TargetField");
+			initializer.Property("TargetField");
 			TargetField.FormatCode(writer);
 		}
 
 		if (Transport is not null)
 		{
-			__init.Property("Transport");
+			initializer.Property("Transport");
 			Transport.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

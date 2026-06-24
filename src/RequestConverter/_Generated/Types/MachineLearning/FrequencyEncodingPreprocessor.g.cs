@@ -27,19 +27,19 @@ public partial class FrequencyEncodingPreprocessor : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FrequencyEncodingPreprocessor", false);
+		var initializer = writer.BeginObjectInitializer("FrequencyEncodingPreprocessor", false);
 		{
-			__init.Property("FeatureName");
+			initializer.Property("FeatureName");
 			writer.WriteString(FeatureName);
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			writer.WriteString(Field);
 		}
 
 		{
-			__init.Property("FrequencyMap");
+			initializer.Property("FrequencyMap");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -48,6 +48,6 @@ public partial class FrequencyEncodingPreprocessor : RequestConverter.ICodeForma
 			writer.WriteInlineList(FrequencyMap, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

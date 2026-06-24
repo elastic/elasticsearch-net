@@ -27,24 +27,24 @@ public partial class RankedDocument : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RankedDocument", false);
+		var initializer = writer.BeginObjectInitializer("RankedDocument", false);
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteValue(Index);
 		}
 
 		{
-			__init.Property("RelevanceScore");
+			initializer.Property("RelevanceScore");
 			writer.WriteValue(RelevanceScore);
 			writer.Write("f");
 		}
 
 		if (Text is not null)
 		{
-			__init.Property("Text");
+			initializer.Property("Text");
 			writer.WriteString(Text);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

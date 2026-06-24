@@ -27,12 +27,12 @@ public partial class NodeInfoSettingsTransportFeatures : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoSettingsTransportFeatures", false);
+		var initializer = writer.BeginObjectInitializer("NodeInfoSettingsTransportFeatures", false);
 		{
-			__init.Property("XPack");
+			initializer.Property("XPack");
 			writer.WriteString(XPack);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

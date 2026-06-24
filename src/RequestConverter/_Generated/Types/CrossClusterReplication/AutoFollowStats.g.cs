@@ -27,35 +27,35 @@ public partial class AutoFollowStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AutoFollowStats", false);
+		var initializer = writer.BeginObjectInitializer("AutoFollowStats", false);
 		{
-			__init.Property("AutoFollowedClusters");
+			initializer.Property("AutoFollowedClusters");
 			writer.WriteInlineList(AutoFollowedClusters, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("NumberOfFailedFollowIndices");
+			initializer.Property("NumberOfFailedFollowIndices");
 			writer.WriteValue(NumberOfFailedFollowIndices);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("NumberOfFailedRemoteClusterStateRequests");
+			initializer.Property("NumberOfFailedRemoteClusterStateRequests");
 			writer.WriteValue(NumberOfFailedRemoteClusterStateRequests);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("NumberOfSuccessfulFollowIndices");
+			initializer.Property("NumberOfSuccessfulFollowIndices");
 			writer.WriteValue(NumberOfSuccessfulFollowIndices);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("RecentAutoFollowErrors");
+			initializer.Property("RecentAutoFollowErrors");
 			writer.WriteInlineList(RecentAutoFollowErrors, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

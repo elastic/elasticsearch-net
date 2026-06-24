@@ -27,24 +27,24 @@ public partial class CharGroupTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CharGroupTokenizer", true);
+		var initializer = writer.BeginObjectInitializer("CharGroupTokenizer", true);
 		if (MaxTokenLength is not null)
 		{
-			__init.Property("MaxTokenLength");
+			initializer.Property("MaxTokenLength");
 			writer.WriteValue(MaxTokenLength.Value);
 		}
 
 		{
-			__init.Property("TokenizeOnChars");
+			initializer.Property("TokenizeOnChars");
 			writer.WriteInlineList(TokenizeOnChars, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,38 +27,38 @@ public partial class PutRuleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutRuleRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutRuleRequest", false);
 		{
-			__init.Property("RuleId");
+			initializer.Property("RuleId");
 			RuleId.FormatCode(writer);
 		}
 
 		{
-			__init.Property("RulesetId");
+			initializer.Property("RulesetId");
 			RulesetId.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Actions");
+			initializer.Property("Actions");
 			Actions.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Criteria");
+			initializer.Property("Criteria");
 			writer.WriteInlineList(Criteria, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Priority is not null)
 		{
-			__init.Property("Priority");
+			initializer.Property("Priority");
 			writer.WriteValue(Priority.Value);
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			Elastic.Clients.Elasticsearch.QueryRules.QueryRuleTypeCodeFormatter.FormatCode(Type, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

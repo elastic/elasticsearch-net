@@ -27,16 +27,16 @@ public partial class RuntimeField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RuntimeField", false);
+		var initializer = writer.BeginObjectInitializer("RuntimeField", false);
 		if (FetchFields is not null)
 		{
-			__init.Property("FetchFields");
+			initializer.Property("FetchFields");
 			writer.WriteInlineList(FetchFields, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Fields is not null)
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -47,39 +47,39 @@ public partial class RuntimeField : RequestConverter.ICodeFormattable
 
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			writer.WriteString(Format);
 		}
 
 		if (InputField is not null)
 		{
-			__init.Property("InputField");
+			initializer.Property("InputField");
 			InputField.FormatCode(writer);
 		}
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
 		if (TargetField is not null)
 		{
-			__init.Property("TargetField");
+			initializer.Property("TargetField");
 			TargetField.FormatCode(writer);
 		}
 
 		if (TargetIndex is not null)
 		{
-			__init.Property("TargetIndex");
+			initializer.Property("TargetIndex");
 			TargetIndex.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldTypeCodeFormatter.FormatCode(Type, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

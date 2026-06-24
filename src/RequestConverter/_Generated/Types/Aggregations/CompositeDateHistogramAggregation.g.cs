@@ -27,73 +27,73 @@ public partial class CompositeDateHistogramAggregation : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CompositeDateHistogramAggregation", false);
+		var initializer = writer.BeginObjectInitializer("CompositeDateHistogramAggregation", false);
 		if (CalendarInterval is not null)
 		{
-			__init.Property("CalendarInterval");
+			initializer.Property("CalendarInterval");
 			writer.WriteString(CalendarInterval);
 		}
 
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (FixedInterval is not null)
 		{
-			__init.Property("FixedInterval");
+			initializer.Property("FixedInterval");
 			writer.WriteString(FixedInterval);
 		}
 
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			writer.WriteString(Format);
 		}
 
 		if (MissingBucket is not null)
 		{
-			__init.Property("MissingBucket");
+			initializer.Property("MissingBucket");
 			writer.WriteValue(MissingBucket.Value);
 		}
 
 		if (MissingOrder is not null)
 		{
-			__init.Property("MissingOrder");
+			initializer.Property("MissingOrder");
 			Elastic.Clients.Elasticsearch.Aggregations.MissingOrderCodeFormatter.FormatCode(MissingOrder.Value, writer);
 		}
 
 		if (Offset is not null)
 		{
-			__init.Property("Offset");
+			initializer.Property("Offset");
 			Offset.FormatCode(writer);
 		}
 
 		if (Order is not null)
 		{
-			__init.Property("Order");
+			initializer.Property("Order");
 			Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, writer);
 		}
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
 		if (TimeZone is not null)
 		{
-			__init.Property("TimeZone");
+			initializer.Property("TimeZone");
 			writer.WriteString(TimeZone);
 		}
 
 		if (ValueType is not null)
 		{
-			__init.Property("ValueType");
+			initializer.Property("ValueType");
 			Elastic.Clients.Elasticsearch.Aggregations.ValueTypeCodeFormatter.FormatCode(ValueType.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

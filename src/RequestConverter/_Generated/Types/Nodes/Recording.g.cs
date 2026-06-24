@@ -27,32 +27,32 @@ public partial class Recording : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Recording", false);
+		var initializer = writer.BeginObjectInitializer("Recording", false);
 		if (CumulativeExecutionCount is not null)
 		{
-			__init.Property("CumulativeExecutionCount");
+			initializer.Property("CumulativeExecutionCount");
 			writer.WriteValue(CumulativeExecutionCount.Value);
 			writer.Write("L");
 		}
 
 		if (CumulativeExecutionTime is not null)
 		{
-			__init.Property("CumulativeExecutionTime");
+			initializer.Property("CumulativeExecutionTime");
 			CumulativeExecutionTime.FormatCode(writer);
 		}
 
 		if (CumulativeExecutionTimeMillis is not null)
 		{
-			__init.Property("CumulativeExecutionTimeMillis");
+			initializer.Property("CumulativeExecutionTimeMillis");
 			writer.WriteValue(CumulativeExecutionTimeMillis.Value);
 		}
 
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

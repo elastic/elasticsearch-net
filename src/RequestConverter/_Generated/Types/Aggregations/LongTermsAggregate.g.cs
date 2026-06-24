@@ -27,22 +27,22 @@ public partial class LongTermsAggregate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("LongTermsAggregate", true);
+		var initializer = writer.BeginObjectInitializer("LongTermsAggregate", true);
 		{
-			__init.Property("Buckets");
+			initializer.Property("Buckets");
 			writer.WriteInlineList(Buckets, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (DocCountErrorUpperBound is not null)
 		{
-			__init.Property("DocCountErrorUpperBound");
+			initializer.Property("DocCountErrorUpperBound");
 			writer.WriteValue(DocCountErrorUpperBound.Value);
 			writer.Write("L");
 		}
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -53,11 +53,11 @@ public partial class LongTermsAggregate : RequestConverter.ICodeFormattable
 
 		if (SumOtherDocCount is not null)
 		{
-			__init.Property("SumOtherDocCount");
+			initializer.Property("SumOtherDocCount");
 			writer.WriteValue(SumOtherDocCount.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

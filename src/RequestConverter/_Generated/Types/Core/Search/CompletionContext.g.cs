@@ -27,37 +27,37 @@ public partial class CompletionContext : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CompletionContext", false);
+		var initializer = writer.BeginObjectInitializer("CompletionContext", false);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Context");
+			initializer.Property("Context");
 			Context.FormatCode(writer);
 		}
 
 		if (Neighbours is not null)
 		{
-			__init.Property("Neighbours");
+			initializer.Property("Neighbours");
 			writer.WriteInlineList(Neighbours, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Precision is not null)
 		{
-			__init.Property("Precision");
+			initializer.Property("Precision");
 			Precision.FormatCode(writer);
 		}
 
 		if (Prefix is not null)
 		{
-			__init.Property("Prefix");
+			initializer.Property("Prefix");
 			writer.WriteValue(Prefix.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

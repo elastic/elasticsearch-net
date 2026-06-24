@@ -27,10 +27,10 @@ public partial class ApiKeyAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ApiKeyAggregation", false);
+		var initializer = writer.BeginObjectInitializer("ApiKeyAggregation", false);
 		if (Aggregations is not null)
 		{
-			__init.Property("Aggregations");
+			initializer.Property("Aggregations");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -41,7 +41,7 @@ public partial class ApiKeyAggregation : RequestConverter.ICodeFormattable
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -52,58 +52,58 @@ public partial class ApiKeyAggregation : RequestConverter.ICodeFormattable
 
 		if (Cardinality is not null)
 		{
-			__init.Property("Cardinality");
+			initializer.Property("Cardinality");
 			Cardinality.FormatCode(writer);
 		}
 
 		if (Composite is not null)
 		{
-			__init.Property("Composite");
+			initializer.Property("Composite");
 			Composite.FormatCode(writer);
 		}
 
 		if (DateRange is not null)
 		{
-			__init.Property("DateRange");
+			initializer.Property("DateRange");
 			DateRange.FormatCode(writer);
 		}
 
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			Filter.FormatCode(writer);
 		}
 
 		if (Filters is not null)
 		{
-			__init.Property("Filters");
+			initializer.Property("Filters");
 			Filters.FormatCode(writer);
 		}
 
 		if (Missing is not null)
 		{
-			__init.Property("Missing");
+			initializer.Property("Missing");
 			Missing.FormatCode(writer);
 		}
 
 		if (Range is not null)
 		{
-			__init.Property("Range");
+			initializer.Property("Range");
 			Range.FormatCode(writer);
 		}
 
 		if (Terms is not null)
 		{
-			__init.Property("Terms");
+			initializer.Property("Terms");
 			Terms.FormatCode(writer);
 		}
 
 		if (ValueCount is not null)
 		{
-			__init.Property("ValueCount");
+			initializer.Property("ValueCount");
 			ValueCount.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

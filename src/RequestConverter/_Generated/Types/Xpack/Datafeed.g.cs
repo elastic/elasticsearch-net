@@ -27,13 +27,13 @@ public partial class Datafeed : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Datafeed", false);
+		var initializer = writer.BeginObjectInitializer("Datafeed", false);
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

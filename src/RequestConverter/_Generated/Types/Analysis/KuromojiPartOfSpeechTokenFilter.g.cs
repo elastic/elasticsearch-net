@@ -27,18 +27,18 @@ public partial class KuromojiPartOfSpeechTokenFilter : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("KuromojiPartOfSpeechTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("KuromojiPartOfSpeechTokenFilter", true);
 		{
-			__init.Property("Stoptags");
+			initializer.Property("Stoptags");
 			writer.WriteInlineList(Stoptags, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

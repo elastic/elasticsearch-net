@@ -27,22 +27,22 @@ public partial class ContextMethod : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ContextMethod", false);
+		var initializer = writer.BeginObjectInitializer("ContextMethod", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("Params");
+			initializer.Property("Params");
 			writer.WriteInlineList(Params, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("ReturnType");
+			initializer.Property("ReturnType");
 			writer.WriteString(ReturnType);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

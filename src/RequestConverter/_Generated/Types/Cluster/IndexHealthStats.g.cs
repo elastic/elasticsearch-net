@@ -27,40 +27,40 @@ public partial class IndexHealthStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexHealthStats", false);
+		var initializer = writer.BeginObjectInitializer("IndexHealthStats", false);
 		{
-			__init.Property("ActivePrimaryShards");
+			initializer.Property("ActivePrimaryShards");
 			writer.WriteValue(ActivePrimaryShards);
 		}
 
 		{
-			__init.Property("ActiveShards");
+			initializer.Property("ActiveShards");
 			writer.WriteValue(ActiveShards);
 		}
 
 		{
-			__init.Property("InitializingShards");
+			initializer.Property("InitializingShards");
 			writer.WriteValue(InitializingShards);
 		}
 
 		{
-			__init.Property("NumberOfReplicas");
+			initializer.Property("NumberOfReplicas");
 			writer.WriteValue(NumberOfReplicas);
 		}
 
 		{
-			__init.Property("NumberOfShards");
+			initializer.Property("NumberOfShards");
 			writer.WriteValue(NumberOfShards);
 		}
 
 		{
-			__init.Property("RelocatingShards");
+			initializer.Property("RelocatingShards");
 			writer.WriteValue(RelocatingShards);
 		}
 
 		if (Shards is not null)
 		{
-			__init.Property("Shards");
+			initializer.Property("Shards");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -70,20 +70,20 @@ public partial class IndexHealthStats : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Status");
+			initializer.Property("Status");
 			Elastic.Clients.Elasticsearch.HealthStatusCodeFormatter.FormatCode(Status, writer);
 		}
 
 		{
-			__init.Property("UnassignedPrimaryShards");
+			initializer.Property("UnassignedPrimaryShards");
 			writer.WriteValue(UnassignedPrimaryShards);
 		}
 
 		{
-			__init.Property("UnassignedShards");
+			initializer.Property("UnassignedShards");
 			writer.WriteValue(UnassignedShards);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

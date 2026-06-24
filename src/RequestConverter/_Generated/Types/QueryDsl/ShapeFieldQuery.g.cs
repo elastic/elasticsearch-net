@@ -27,25 +27,25 @@ public partial class ShapeFieldQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShapeFieldQuery", false);
+		var initializer = writer.BeginObjectInitializer("ShapeFieldQuery", false);
 		if (IndexedShape is not null)
 		{
-			__init.Property("IndexedShape");
+			initializer.Property("IndexedShape");
 			IndexedShape.FormatCode(writer);
 		}
 
 		if (Relation is not null)
 		{
-			__init.Property("Relation");
+			initializer.Property("Relation");
 			Elastic.Clients.Elasticsearch.GeoShapeRelationCodeFormatter.FormatCode(Relation.Value, writer);
 		}
 
 		if (Shape is not null)
 		{
-			__init.Property("Shape");
+			initializer.Property("Shape");
 			writer.WriteValue(Shape);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

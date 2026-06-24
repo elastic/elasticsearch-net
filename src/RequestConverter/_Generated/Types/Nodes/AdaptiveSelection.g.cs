@@ -27,53 +27,53 @@ public partial class AdaptiveSelection : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AdaptiveSelection", false);
+		var initializer = writer.BeginObjectInitializer("AdaptiveSelection", false);
 		if (AvgQueueSize is not null)
 		{
-			__init.Property("AvgQueueSize");
+			initializer.Property("AvgQueueSize");
 			writer.WriteValue(AvgQueueSize.Value);
 			writer.Write("L");
 		}
 
 		if (AvgResponseTime is not null)
 		{
-			__init.Property("AvgResponseTime");
+			initializer.Property("AvgResponseTime");
 			AvgResponseTime.FormatCode(writer);
 		}
 
 		if (AvgResponseTimeNs is not null)
 		{
-			__init.Property("AvgResponseTimeNs");
+			initializer.Property("AvgResponseTimeNs");
 			writer.WriteValue(AvgResponseTimeNs.Value);
 			writer.Write("L");
 		}
 
 		if (AvgServiceTime is not null)
 		{
-			__init.Property("AvgServiceTime");
+			initializer.Property("AvgServiceTime");
 			AvgServiceTime.FormatCode(writer);
 		}
 
 		if (AvgServiceTimeNs is not null)
 		{
-			__init.Property("AvgServiceTimeNs");
+			initializer.Property("AvgServiceTimeNs");
 			writer.WriteValue(AvgServiceTimeNs.Value);
 			writer.Write("L");
 		}
 
 		if (OutgoingSearches is not null)
 		{
-			__init.Property("OutgoingSearches");
+			initializer.Property("OutgoingSearches");
 			writer.WriteValue(OutgoingSearches.Value);
 			writer.Write("L");
 		}
 
 		if (Rank is not null)
 		{
-			__init.Property("Rank");
+			initializer.Property("Rank");
 			writer.WriteString(Rank);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

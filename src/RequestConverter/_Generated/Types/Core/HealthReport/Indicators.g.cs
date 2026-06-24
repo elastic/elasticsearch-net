@@ -27,61 +27,61 @@ public partial class Indicators : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Indicators", false);
+		var initializer = writer.BeginObjectInitializer("Indicators", false);
 		if (DataStreamLifecycle is not null)
 		{
-			__init.Property("DataStreamLifecycle");
+			initializer.Property("DataStreamLifecycle");
 			DataStreamLifecycle.FormatCode(writer);
 		}
 
 		if (Disk is not null)
 		{
-			__init.Property("Disk");
+			initializer.Property("Disk");
 			Disk.FormatCode(writer);
 		}
 
 		if (FileSettings is not null)
 		{
-			__init.Property("FileSettings");
+			initializer.Property("FileSettings");
 			FileSettings.FormatCode(writer);
 		}
 
 		if (Ilm is not null)
 		{
-			__init.Property("Ilm");
+			initializer.Property("Ilm");
 			Ilm.FormatCode(writer);
 		}
 
 		if (MasterIsStable is not null)
 		{
-			__init.Property("MasterIsStable");
+			initializer.Property("MasterIsStable");
 			MasterIsStable.FormatCode(writer);
 		}
 
 		if (RepositoryIntegrity is not null)
 		{
-			__init.Property("RepositoryIntegrity");
+			initializer.Property("RepositoryIntegrity");
 			RepositoryIntegrity.FormatCode(writer);
 		}
 
 		if (ShardsAvailability is not null)
 		{
-			__init.Property("ShardsAvailability");
+			initializer.Property("ShardsAvailability");
 			ShardsAvailability.FormatCode(writer);
 		}
 
 		if (ShardsCapacity is not null)
 		{
-			__init.Property("ShardsCapacity");
+			initializer.Property("ShardsCapacity");
 			ShardsCapacity.FormatCode(writer);
 		}
 
 		if (Slm is not null)
 		{
-			__init.Property("Slm");
+			initializer.Property("Slm");
 			Slm.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

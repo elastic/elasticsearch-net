@@ -27,27 +27,27 @@ public partial class MlInferenceDeployments : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MlInferenceDeployments", false);
+		var initializer = writer.BeginObjectInitializer("MlInferenceDeployments", false);
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 		}
 
 		{
-			__init.Property("InferenceCounts");
+			initializer.Property("InferenceCounts");
 			InferenceCounts.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ModelSizesBytes");
+			initializer.Property("ModelSizesBytes");
 			ModelSizesBytes.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TimeMs");
+			initializer.Property("TimeMs");
 			TimeMs.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

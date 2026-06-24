@@ -27,19 +27,19 @@ public partial class Retries : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Retries", false);
+		var initializer = writer.BeginObjectInitializer("Retries", false);
 		{
-			__init.Property("Bulk");
+			initializer.Property("Bulk");
 			writer.WriteValue(Bulk);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Search");
+			initializer.Property("Search");
 			writer.WriteValue(Search);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,35 +27,35 @@ public partial class ResolveIndexItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ResolveIndexItem", false);
+		var initializer = writer.BeginObjectInitializer("ResolveIndexItem", false);
 		if (Aliases is not null)
 		{
-			__init.Property("Aliases");
+			initializer.Property("Aliases");
 			writer.WriteInlineList(Aliases, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Attributes");
+			initializer.Property("Attributes");
 			writer.WriteInlineList(Attributes, (w, item) => { w.WriteString(item); });
 		}
 
 		if (DataStream is not null)
 		{
-			__init.Property("DataStream");
+			initializer.Property("DataStream");
 			writer.WriteString(DataStream);
 		}
 
 		if (Mode is not null)
 		{
-			__init.Property("Mode");
+			initializer.Property("Mode");
 			Elastic.Clients.Elasticsearch.IndexManagement.IndexModeCodeFormatter.FormatCode(Mode.Value, writer);
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

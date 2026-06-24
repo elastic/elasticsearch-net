@@ -27,19 +27,19 @@ public partial class SetUpgradeModeRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SetUpgradeModeRequest", false);
+		var initializer = writer.BeginObjectInitializer("SetUpgradeModeRequest", false);
 		if (Enabled is not null)
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled.Value);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

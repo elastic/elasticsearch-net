@@ -27,17 +27,17 @@ public partial class DataframeClassificationSummaryMulticlassConfusionMatrix : R
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeClassificationSummaryMulticlassConfusionMatrix", false);
+		var initializer = writer.BeginObjectInitializer("DataframeClassificationSummaryMulticlassConfusionMatrix", false);
 		{
-			__init.Property("ConfusionMatrix");
+			initializer.Property("ConfusionMatrix");
 			writer.WriteInlineList(ConfusionMatrix, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("OtherActualClassCount");
+			initializer.Property("OtherActualClassCount");
 			writer.WriteValue(OtherActualClassCount);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

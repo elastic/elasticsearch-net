@@ -27,101 +27,101 @@ public partial class GetSnapshotRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetSnapshotRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetSnapshotRequest", false);
 		{
-			__init.Property("Repository");
+			initializer.Property("Repository");
 			Repository.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Snapshot");
+			initializer.Property("Snapshot");
 			Snapshot.FormatCode(writer);
 		}
 
 		if (After is not null)
 		{
-			__init.Property("After");
+			initializer.Property("After");
 			writer.WriteString(After);
 		}
 
 		if (FromSortValue is not null)
 		{
-			__init.Property("FromSortValue");
+			initializer.Property("FromSortValue");
 			writer.WriteString(FromSortValue);
 		}
 
 		if (IgnoreUnavailable is not null)
 		{
-			__init.Property("IgnoreUnavailable");
+			initializer.Property("IgnoreUnavailable");
 			writer.WriteValue(IgnoreUnavailable.Value);
 		}
 
 		if (IncludeRepository is not null)
 		{
-			__init.Property("IncludeRepository");
+			initializer.Property("IncludeRepository");
 			writer.WriteValue(IncludeRepository.Value);
 		}
 
 		if (IndexDetails is not null)
 		{
-			__init.Property("IndexDetails");
+			initializer.Property("IndexDetails");
 			writer.WriteValue(IndexDetails.Value);
 		}
 
 		if (IndexNames is not null)
 		{
-			__init.Property("IndexNames");
+			initializer.Property("IndexNames");
 			writer.WriteValue(IndexNames.Value);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (Offset is not null)
 		{
-			__init.Property("Offset");
+			initializer.Property("Offset");
 			writer.WriteValue(Offset.Value);
 		}
 
 		if (Order is not null)
 		{
-			__init.Property("Order");
+			initializer.Property("Order");
 			Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, writer);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
 		if (SlmPolicyFilter is not null)
 		{
-			__init.Property("SlmPolicyFilter");
+			initializer.Property("SlmPolicyFilter");
 			SlmPolicyFilter.FormatCode(writer);
 		}
 
 		if (Sort is not null)
 		{
-			__init.Property("Sort");
+			initializer.Property("Sort");
 			Elastic.Clients.Elasticsearch.Snapshot.SnapshotSortCodeFormatter.FormatCode(Sort.Value, writer);
 		}
 
 		if (State is not null)
 		{
-			__init.Property("State");
+			initializer.Property("State");
 			writer.WriteInlineList(State, (w, item) => { Elastic.Clients.Elasticsearch.Snapshot.SnapshotStateCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (Verbose is not null)
 		{
-			__init.Property("Verbose");
+			initializer.Property("Verbose");
 			writer.WriteValue(Verbose.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

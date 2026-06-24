@@ -27,61 +27,61 @@ public partial class DataStream : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataStream", false);
+		var initializer = writer.BeginObjectInitializer("DataStream", false);
 		if (AllowCustomRouting is not null)
 		{
-			__init.Property("AllowCustomRouting");
+			initializer.Property("AllowCustomRouting");
 			writer.WriteValue(AllowCustomRouting.Value);
 		}
 
 		if (FailureStore is not null)
 		{
-			__init.Property("FailureStore");
+			initializer.Property("FailureStore");
 			FailureStore.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Generation");
+			initializer.Property("Generation");
 			writer.WriteValue(Generation);
 		}
 
 		{
-			__init.Property("Hidden");
+			initializer.Property("Hidden");
 			writer.WriteValue(Hidden);
 		}
 
 		if (IlmPolicy is not null)
 		{
-			__init.Property("IlmPolicy");
+			initializer.Property("IlmPolicy");
 			writer.WriteString(IlmPolicy);
 		}
 
 		if (IndexMode is not null)
 		{
-			__init.Property("IndexMode");
+			initializer.Property("IndexMode");
 			Elastic.Clients.Elasticsearch.IndexManagement.IndexModeCodeFormatter.FormatCode(IndexMode.Value, writer);
 		}
 
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			writer.WriteInlineList(Indices, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Lifecycle is not null)
 		{
-			__init.Property("Lifecycle");
+			initializer.Property("Lifecycle");
 			Lifecycle.FormatCode(writer);
 		}
 
 		if (Mappings is not null)
 		{
-			__init.Property("Mappings");
+			initializer.Property("Mappings");
 			Mappings.FormatCode(writer);
 		}
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -91,57 +91,57 @@ public partial class DataStream : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("NextGenerationManagedBy");
+			initializer.Property("NextGenerationManagedBy");
 			Elastic.Clients.Elasticsearch.IndexManagement.ManagedByCodeFormatter.FormatCode(NextGenerationManagedBy, writer);
 		}
 
 		{
-			__init.Property("PreferIlm");
+			initializer.Property("PreferIlm");
 			writer.WriteValue(PreferIlm);
 		}
 
 		if (Replicated is not null)
 		{
-			__init.Property("Replicated");
+			initializer.Property("Replicated");
 			writer.WriteValue(Replicated.Value);
 		}
 
 		{
-			__init.Property("RolloverOnWrite");
+			initializer.Property("RolloverOnWrite");
 			writer.WriteValue(RolloverOnWrite);
 		}
 
 		{
-			__init.Property("Settings");
+			initializer.Property("Settings");
 			Settings.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Status");
+			initializer.Property("Status");
 			Elastic.Clients.Elasticsearch.HealthStatusCodeFormatter.FormatCode(Status, writer);
 		}
 
 		if (System is not null)
 		{
-			__init.Property("System");
+			initializer.Property("System");
 			writer.WriteValue(System.Value);
 		}
 
 		{
-			__init.Property("Template");
+			initializer.Property("Template");
 			writer.WriteString(Template);
 		}
 
 		{
-			__init.Property("TimestampField");
+			initializer.Property("TimestampField");
 			TimestampField.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,42 +27,42 @@ public partial class DiskUsageRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DiskUsageRequest", false);
+		var initializer = writer.BeginObjectInitializer("DiskUsageRequest", false);
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		if (AllowNoIndices is not null)
 		{
-			__init.Property("AllowNoIndices");
+			initializer.Property("AllowNoIndices");
 			writer.WriteValue(AllowNoIndices.Value);
 		}
 
 		if (ExpandWildcards is not null)
 		{
-			__init.Property("ExpandWildcards");
+			initializer.Property("ExpandWildcards");
 			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (Flush is not null)
 		{
-			__init.Property("Flush");
+			initializer.Property("Flush");
 			writer.WriteValue(Flush.Value);
 		}
 
 		if (IgnoreUnavailable is not null)
 		{
-			__init.Property("IgnoreUnavailable");
+			initializer.Property("IgnoreUnavailable");
 			writer.WriteValue(IgnoreUnavailable.Value);
 		}
 
 		if (RunExpensiveTasks is not null)
 		{
-			__init.Property("RunExpensiveTasks");
+			initializer.Property("RunExpensiveTasks");
 			writer.WriteValue(RunExpensiveTasks.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

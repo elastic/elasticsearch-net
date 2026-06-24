@@ -27,14 +27,14 @@ public partial class ExtendedTextSimilarityRetrieverUsage : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExtendedTextSimilarityRetrieverUsage", false);
+		var initializer = writer.BeginObjectInitializer("ExtendedTextSimilarityRetrieverUsage", false);
 		if (ChunkRescorer is not null)
 		{
-			__init.Property("ChunkRescorer");
+			initializer.Property("ChunkRescorer");
 			writer.WriteValue(ChunkRescorer.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

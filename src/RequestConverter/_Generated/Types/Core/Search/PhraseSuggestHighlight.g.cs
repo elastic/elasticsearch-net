@@ -27,17 +27,17 @@ public partial class PhraseSuggestHighlight : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PhraseSuggestHighlight", false);
+		var initializer = writer.BeginObjectInitializer("PhraseSuggestHighlight", false);
 		{
-			__init.Property("PostTag");
+			initializer.Property("PostTag");
 			writer.WriteString(PostTag);
 		}
 
 		{
-			__init.Property("PreTag");
+			initializer.Property("PreTag");
 			writer.WriteString(PreTag);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

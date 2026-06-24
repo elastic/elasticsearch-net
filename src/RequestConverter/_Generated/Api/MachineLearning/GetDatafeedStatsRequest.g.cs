@@ -27,19 +27,19 @@ public partial class GetDatafeedStatsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetDatafeedStatsRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetDatafeedStatsRequest", false);
 		if (DatafeedId is not null)
 		{
-			__init.Property("DatafeedId");
+			initializer.Property("DatafeedId");
 			DatafeedId.FormatCode(writer);
 		}
 
 		if (AllowNoMatch is not null)
 		{
-			__init.Property("AllowNoMatch");
+			initializer.Property("AllowNoMatch");
 			writer.WriteValue(AllowNoMatch.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

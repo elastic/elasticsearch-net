@@ -27,7 +27,7 @@ public partial class GetStatsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetStatsRequest", false);
-		__init.Dispose();
+		var initializer = writer.BeginObjectInitializer("GetStatsRequest", false);
+		initializer.Dispose();
 	}
 }

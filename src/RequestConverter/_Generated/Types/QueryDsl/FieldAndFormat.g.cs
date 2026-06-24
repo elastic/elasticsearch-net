@@ -27,24 +27,24 @@ public partial class FieldAndFormat : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldAndFormat", false);
+		var initializer = writer.BeginObjectInitializer("FieldAndFormat", false);
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			writer.WriteString(Format);
 		}
 
 		if (IncludeUnmapped is not null)
 		{
-			__init.Property("IncludeUnmapped");
+			initializer.Property("IncludeUnmapped");
 			writer.WriteValue(IncludeUnmapped.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

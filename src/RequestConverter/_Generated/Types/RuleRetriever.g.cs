@@ -27,47 +27,47 @@ public partial class RuleRetriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RuleRetriever", false);
+		var initializer = writer.BeginObjectInitializer("RuleRetriever", false);
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("MatchCriteria");
+			initializer.Property("MatchCriteria");
 			writer.WriteValue(MatchCriteria);
 		}
 
 		if (MinScore is not null)
 		{
-			__init.Property("MinScore");
+			initializer.Property("MinScore");
 			writer.WriteValue(MinScore.Value);
 			writer.Write("f");
 		}
 
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		if (RankWindowSize is not null)
 		{
-			__init.Property("RankWindowSize");
+			initializer.Property("RankWindowSize");
 			writer.WriteValue(RankWindowSize.Value);
 		}
 
 		{
-			__init.Property("Retriever");
+			initializer.Property("Retriever");
 			Retriever.FormatCode(writer);
 		}
 
 		{
-			__init.Property("RulesetIds");
+			initializer.Property("RulesetIds");
 			writer.WriteInlineList(RulesetIds, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

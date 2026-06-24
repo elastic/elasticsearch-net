@@ -27,7 +27,7 @@ public partial class UnknownProperty : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UnknownProperty", false);
-		__init.Dispose();
+		var initializer = writer.BeginObjectInitializer("UnknownProperty", false);
+		initializer.Dispose();
 	}
 }

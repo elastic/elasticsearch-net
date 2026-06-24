@@ -27,18 +27,18 @@ public partial class ImageUrl : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ImageUrl", false);
+		var initializer = writer.BeginObjectInitializer("ImageUrl", false);
 		if (Detail is not null)
 		{
-			__init.Property("Detail");
+			initializer.Property("Detail");
 			Elastic.Clients.Elasticsearch.Inference.ImageUrlDetailCodeFormatter.FormatCode(Detail.Value, writer);
 		}
 
 		{
-			__init.Property("Url");
+			initializer.Property("Url");
 			writer.WriteString(Url);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

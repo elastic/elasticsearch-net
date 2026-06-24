@@ -27,17 +27,17 @@ public partial class QueryRulesetMatchedRule : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("QueryRulesetMatchedRule", false);
+		var initializer = writer.BeginObjectInitializer("QueryRulesetMatchedRule", false);
 		{
-			__init.Property("RuleId");
+			initializer.Property("RuleId");
 			writer.WriteString(RuleId);
 		}
 
 		{
-			__init.Property("RulesetId");
+			initializer.Property("RulesetId");
 			writer.WriteString(RulesetId);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,25 +27,25 @@ public partial class ShardSequenceNumber : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardSequenceNumber", false);
+		var initializer = writer.BeginObjectInitializer("ShardSequenceNumber", false);
 		{
-			__init.Property("GlobalCheckpoint");
+			initializer.Property("GlobalCheckpoint");
 			writer.WriteValue(GlobalCheckpoint);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("LocalCheckpoint");
+			initializer.Property("LocalCheckpoint");
 			writer.WriteValue(LocalCheckpoint);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("MaxSeqNo");
+			initializer.Property("MaxSeqNo");
 			writer.WriteValue(MaxSeqNo);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

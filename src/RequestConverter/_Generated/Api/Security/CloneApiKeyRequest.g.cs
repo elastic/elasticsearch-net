@@ -27,27 +27,27 @@ public partial class CloneApiKeyRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CloneApiKeyRequest", false);
+		var initializer = writer.BeginObjectInitializer("CloneApiKeyRequest", false);
 		if (Refresh is not null)
 		{
-			__init.Property("Refresh");
+			initializer.Property("Refresh");
 			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
 		}
 
 		{
-			__init.Property("ApiKey");
+			initializer.Property("ApiKey");
 			writer.WriteString(ApiKey);
 		}
 
 		if (Expiration is not null)
 		{
-			__init.Property("Expiration");
+			initializer.Property("Expiration");
 			Expiration.FormatCode(writer);
 		}
 
 		if (Metadata is not null)
 		{
-			__init.Property("Metadata");
+			initializer.Property("Metadata");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -58,10 +58,10 @@ public partial class CloneApiKeyRequest : RequestConverter.ICodeFormattable
 
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

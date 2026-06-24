@@ -27,33 +27,33 @@ public partial class Vector : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Vector", false);
+		var initializer = writer.BeginObjectInitializer("Vector", false);
 		{
-			__init.Property("Available");
+			initializer.Property("Available");
 			writer.WriteValue(Available);
 		}
 
 		{
-			__init.Property("DenseVectorDimsAvgCount");
+			initializer.Property("DenseVectorDimsAvgCount");
 			writer.WriteValue(DenseVectorDimsAvgCount);
 		}
 
 		{
-			__init.Property("DenseVectorFieldsCount");
+			initializer.Property("DenseVectorFieldsCount");
 			writer.WriteValue(DenseVectorFieldsCount);
 		}
 
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);
 		}
 
 		if (SparseVectorFieldsCount is not null)
 		{
-			__init.Property("SparseVectorFieldsCount");
+			initializer.Property("SparseVectorFieldsCount");
 			writer.WriteValue(SparseVectorFieldsCount.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

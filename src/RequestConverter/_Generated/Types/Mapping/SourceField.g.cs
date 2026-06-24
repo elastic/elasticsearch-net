@@ -27,43 +27,43 @@ public partial class SourceField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SourceField", false);
+		var initializer = writer.BeginObjectInitializer("SourceField", false);
 		if (Compress is not null)
 		{
-			__init.Property("Compress");
+			initializer.Property("Compress");
 			writer.WriteValue(Compress.Value);
 		}
 
 		if (CompressThreshold is not null)
 		{
-			__init.Property("CompressThreshold");
+			initializer.Property("CompressThreshold");
 			writer.WriteString(CompressThreshold);
 		}
 
 		if (Enabled is not null)
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled.Value);
 		}
 
 		if (Excludes is not null)
 		{
-			__init.Property("Excludes");
+			initializer.Property("Excludes");
 			writer.WriteInlineList(Excludes, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Includes is not null)
 		{
-			__init.Property("Includes");
+			initializer.Property("Includes");
 			writer.WriteInlineList(Includes, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Mode is not null)
 		{
-			__init.Property("Mode");
+			initializer.Property("Mode");
 			Elastic.Clients.Elasticsearch.Mapping.SourceFieldModeCodeFormatter.FormatCode(Mode.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

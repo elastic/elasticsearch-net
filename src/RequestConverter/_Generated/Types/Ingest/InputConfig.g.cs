@@ -27,17 +27,17 @@ public partial class InputConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InputConfig", false);
+		var initializer = writer.BeginObjectInitializer("InputConfig", false);
 		{
-			__init.Property("InputField");
+			initializer.Property("InputField");
 			writer.WriteString(InputField);
 		}
 
 		{
-			__init.Property("OutputField");
+			initializer.Property("OutputField");
 			writer.WriteString(OutputField);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

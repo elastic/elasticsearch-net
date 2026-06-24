@@ -27,27 +27,27 @@ public partial class PutRoleMappingRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutRoleMappingRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutRoleMappingRequest", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		if (Refresh is not null)
 		{
-			__init.Property("Refresh");
+			initializer.Property("Refresh");
 			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
 		}
 
 		if (Enabled is not null)
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled.Value);
 		}
 
 		if (Metadata is not null)
 		{
-			__init.Property("Metadata");
+			initializer.Property("Metadata");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -58,28 +58,28 @@ public partial class PutRoleMappingRequest : RequestConverter.ICodeFormattable
 
 		if (Roles is not null)
 		{
-			__init.Property("Roles");
+			initializer.Property("Roles");
 			writer.WriteInlineList(Roles, (w, item) => { w.WriteString(item); });
 		}
 
 		if (RoleTemplates is not null)
 		{
-			__init.Property("RoleTemplates");
+			initializer.Property("RoleTemplates");
 			writer.WriteInlineList(RoleTemplates, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Rules is not null)
 		{
-			__init.Property("Rules");
+			initializer.Property("Rules");
 			Rules.FormatCode(writer);
 		}
 
 		if (RunAs is not null)
 		{
-			__init.Property("RunAs");
+			initializer.Property("RunAs");
 			writer.WriteInlineList(RunAs, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

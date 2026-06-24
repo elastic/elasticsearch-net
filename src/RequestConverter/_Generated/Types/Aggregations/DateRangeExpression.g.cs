@@ -27,25 +27,25 @@ public partial class DateRangeExpression : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DateRangeExpression", false);
+		var initializer = writer.BeginObjectInitializer("DateRangeExpression", false);
 		if (From is not null)
 		{
-			__init.Property("From");
+			initializer.Property("From");
 			From.FormatCode(writer);
 		}
 
 		if (Key is not null)
 		{
-			__init.Property("Key");
+			initializer.Property("Key");
 			writer.WriteString(Key);
 		}
 
 		if (To is not null)
 		{
-			__init.Property("To");
+			initializer.Property("To");
 			To.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

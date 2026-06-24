@@ -27,31 +27,31 @@ public partial class NGramTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NGramTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("NGramTokenFilter", true);
 		if (MaxGram is not null)
 		{
-			__init.Property("MaxGram");
+			initializer.Property("MaxGram");
 			writer.WriteValue(MaxGram.Value);
 		}
 
 		if (MinGram is not null)
 		{
-			__init.Property("MinGram");
+			initializer.Property("MinGram");
 			writer.WriteValue(MinGram.Value);
 		}
 
 		if (PreserveOriginal is not null)
 		{
-			__init.Property("PreserveOriginal");
+			initializer.Property("PreserveOriginal");
 			writer.WriteValue(PreserveOriginal.Value);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

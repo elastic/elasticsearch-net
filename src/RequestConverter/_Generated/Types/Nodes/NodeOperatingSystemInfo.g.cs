@@ -27,61 +27,61 @@ public partial class NodeOperatingSystemInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeOperatingSystemInfo", false);
+		var initializer = writer.BeginObjectInitializer("NodeOperatingSystemInfo", false);
 		if (AllocatedProcessors is not null)
 		{
-			__init.Property("AllocatedProcessors");
+			initializer.Property("AllocatedProcessors");
 			writer.WriteValue(AllocatedProcessors.Value);
 		}
 
 		{
-			__init.Property("Arch");
+			initializer.Property("Arch");
 			writer.WriteString(Arch);
 		}
 
 		{
-			__init.Property("AvailableProcessors");
+			initializer.Property("AvailableProcessors");
 			writer.WriteValue(AvailableProcessors);
 		}
 
 		if (Cpu is not null)
 		{
-			__init.Property("Cpu");
+			initializer.Property("Cpu");
 			Cpu.FormatCode(writer);
 		}
 
 		if (Mem is not null)
 		{
-			__init.Property("Mem");
+			initializer.Property("Mem");
 			Mem.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("PrettyName");
+			initializer.Property("PrettyName");
 			writer.WriteString(PrettyName);
 		}
 
 		{
-			__init.Property("RefreshIntervalInMillis");
+			initializer.Property("RefreshIntervalInMillis");
 			writer.WriteValue(RefreshIntervalInMillis);
 		}
 
 		if (Swap is not null)
 		{
-			__init.Property("Swap");
+			initializer.Property("Swap");
 			Swap.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

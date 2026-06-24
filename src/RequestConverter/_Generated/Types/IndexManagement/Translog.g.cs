@@ -27,31 +27,31 @@ public partial class Translog : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Translog", false);
+		var initializer = writer.BeginObjectInitializer("Translog", false);
 		if (Durability is not null)
 		{
-			__init.Property("Durability");
+			initializer.Property("Durability");
 			Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurabilityCodeFormatter.FormatCode(Durability.Value, writer);
 		}
 
 		if (FlushThresholdSize is not null)
 		{
-			__init.Property("FlushThresholdSize");
+			initializer.Property("FlushThresholdSize");
 			FlushThresholdSize.FormatCode(writer);
 		}
 
 		if (Retention is not null)
 		{
-			__init.Property("Retention");
+			initializer.Property("Retention");
 			Retention.FormatCode(writer);
 		}
 
 		if (SyncInterval is not null)
 		{
-			__init.Property("SyncInterval");
+			initializer.Property("SyncInterval");
 			SyncInterval.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

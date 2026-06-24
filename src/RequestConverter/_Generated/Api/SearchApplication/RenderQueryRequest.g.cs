@@ -27,15 +27,15 @@ public partial class RenderQueryRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RenderQueryRequest", false);
+		var initializer = writer.BeginObjectInitializer("RenderQueryRequest", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		if (Params is not null)
 		{
-			__init.Property("Params");
+			initializer.Property("Params");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -44,6 +44,6 @@ public partial class RenderQueryRequest : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

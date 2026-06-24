@@ -27,19 +27,19 @@ public partial class MlJobForecasts : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MlJobForecasts", false);
+		var initializer = writer.BeginObjectInitializer("MlJobForecasts", false);
 		{
-			__init.Property("ForecastedJobs");
+			initializer.Property("ForecastedJobs");
 			writer.WriteValue(ForecastedJobs);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteValue(Total);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

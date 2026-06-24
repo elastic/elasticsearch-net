@@ -27,12 +27,12 @@ public partial class GetMigrateReindexStatusRequest : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetMigrateReindexStatusRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetMigrateReindexStatusRequest", false);
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

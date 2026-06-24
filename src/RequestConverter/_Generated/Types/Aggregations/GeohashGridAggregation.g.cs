@@ -27,37 +27,37 @@ public partial class GeohashGridAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeohashGridAggregation", false);
+		var initializer = writer.BeginObjectInitializer("GeohashGridAggregation", false);
 		if (Bounds is not null)
 		{
-			__init.Property("Bounds");
+			initializer.Property("Bounds");
 			Bounds.FormatCode(writer);
 		}
 
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Precision is not null)
 		{
-			__init.Property("Precision");
+			initializer.Property("Precision");
 			Precision.FormatCode(writer);
 		}
 
 		if (ShardSize is not null)
 		{
-			__init.Property("ShardSize");
+			initializer.Property("ShardSize");
 			writer.WriteValue(ShardSize.Value);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

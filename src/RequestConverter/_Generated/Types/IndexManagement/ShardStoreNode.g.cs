@@ -27,9 +27,9 @@ public partial class ShardStoreNode : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardStoreNode", false);
+		var initializer = writer.BeginObjectInitializer("ShardStoreNode", false);
 		{
-			__init.Property("Attributes");
+			initializer.Property("Attributes");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -40,31 +40,31 @@ public partial class ShardStoreNode : RequestConverter.ICodeFormattable
 
 		if (EphemeralId is not null)
 		{
-			__init.Property("EphemeralId");
+			initializer.Property("EphemeralId");
 			writer.WriteString(EphemeralId);
 		}
 
 		if (ExternalId is not null)
 		{
-			__init.Property("ExternalId");
+			initializer.Property("ExternalId");
 			writer.WriteString(ExternalId);
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("Roles");
+			initializer.Property("Roles");
 			writer.WriteInlineList(Roles, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("TransportAddress");
+			initializer.Property("TransportAddress");
 			writer.WriteString(TransportAddress);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

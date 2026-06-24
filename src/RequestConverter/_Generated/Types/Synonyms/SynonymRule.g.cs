@@ -27,18 +27,18 @@ public partial class SynonymRule : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SynonymRule", false);
+		var initializer = writer.BeginObjectInitializer("SynonymRule", false);
 		if (Id is not null)
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Synonyms");
+			initializer.Property("Synonyms");
 			writer.WriteString(Synonyms);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

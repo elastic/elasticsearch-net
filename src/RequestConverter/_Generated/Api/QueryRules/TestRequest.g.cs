@@ -27,14 +27,14 @@ public partial class TestRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TestRequest", false);
+		var initializer = writer.BeginObjectInitializer("TestRequest", false);
 		{
-			__init.Property("RulesetId");
+			initializer.Property("RulesetId");
 			RulesetId.FormatCode(writer);
 		}
 
 		{
-			__init.Property("MatchCriteria");
+			initializer.Property("MatchCriteria");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -43,6 +43,6 @@ public partial class TestRequest : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(MatchCriteria, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

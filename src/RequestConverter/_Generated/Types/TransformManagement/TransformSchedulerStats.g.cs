@@ -27,18 +27,18 @@ public partial class TransformSchedulerStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TransformSchedulerStats", false);
+		var initializer = writer.BeginObjectInitializer("TransformSchedulerStats", false);
 		if (PeekTransform is not null)
 		{
-			__init.Property("PeekTransform");
+			initializer.Property("PeekTransform");
 			writer.WriteString(PeekTransform);
 		}
 
 		{
-			__init.Property("RegisteredTransformCount");
+			initializer.Property("RegisteredTransformCount");
 			writer.WriteValue(RegisteredTransformCount);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

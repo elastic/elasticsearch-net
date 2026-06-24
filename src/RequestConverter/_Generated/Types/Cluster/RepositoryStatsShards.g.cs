@@ -27,19 +27,19 @@ public partial class RepositoryStatsShards : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RepositoryStatsShards", false);
+		var initializer = writer.BeginObjectInitializer("RepositoryStatsShards", false);
 		{
-			__init.Property("Complete");
+			initializer.Property("Complete");
 			writer.WriteValue(Complete);
 		}
 
 		{
-			__init.Property("Incomplete");
+			initializer.Property("Incomplete");
 			writer.WriteValue(Incomplete);
 		}
 
 		{
-			__init.Property("States");
+			initializer.Property("States");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("Elastic.Clients.Elasticsearch.Cluster.ShardState");
 			writer.Write(", ");
@@ -49,10 +49,10 @@ public partial class RepositoryStatsShards : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteValue(Total);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

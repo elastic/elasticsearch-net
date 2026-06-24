@@ -27,9 +27,9 @@ public partial class UpdateByQueryRethrottleNode : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UpdateByQueryRethrottleNode", false);
+		var initializer = writer.BeginObjectInitializer("UpdateByQueryRethrottleNode", false);
 		{
-			__init.Property("Attributes");
+			initializer.Property("Attributes");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -39,28 +39,28 @@ public partial class UpdateByQueryRethrottleNode : RequestConverter.ICodeFormatt
 		}
 
 		{
-			__init.Property("Host");
+			initializer.Property("Host");
 			writer.WriteString(Host);
 		}
 
 		{
-			__init.Property("Ip");
+			initializer.Property("Ip");
 			writer.WriteString(Ip);
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		if (Roles is not null)
 		{
-			__init.Property("Roles");
+			initializer.Property("Roles");
 			writer.WriteInlineList(Roles, (w, item) => { Elastic.Clients.Elasticsearch.NodeRoleCodeFormatter.FormatCode(item, w); });
 		}
 
 		{
-			__init.Property("Tasks");
+			initializer.Property("Tasks");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("Elastic.Clients.Elasticsearch.TaskId");
 			writer.Write(", ");
@@ -70,10 +70,10 @@ public partial class UpdateByQueryRethrottleNode : RequestConverter.ICodeFormatt
 		}
 
 		{
-			__init.Property("TransportAddress");
+			initializer.Property("TransportAddress");
 			writer.WriteString(TransportAddress);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

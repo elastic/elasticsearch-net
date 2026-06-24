@@ -27,18 +27,18 @@ public partial class Definition : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Definition", false);
+		var initializer = writer.BeginObjectInitializer("Definition", false);
 		if (Preprocessors is not null)
 		{
-			__init.Property("Preprocessors");
+			initializer.Property("Preprocessors");
 			writer.WriteInlineList(Preprocessors, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("TrainedModel");
+			initializer.Property("TrainedModel");
 			TrainedModel.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

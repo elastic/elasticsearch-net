@@ -27,38 +27,38 @@ public partial class Process : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Process", false);
+		var initializer = writer.BeginObjectInitializer("Process", false);
 		if (Cpu is not null)
 		{
-			__init.Property("Cpu");
+			initializer.Property("Cpu");
 			Cpu.FormatCode(writer);
 		}
 
 		if (MaxFileDescriptors is not null)
 		{
-			__init.Property("MaxFileDescriptors");
+			initializer.Property("MaxFileDescriptors");
 			writer.WriteValue(MaxFileDescriptors.Value);
 		}
 
 		if (Mem is not null)
 		{
-			__init.Property("Mem");
+			initializer.Property("Mem");
 			Mem.FormatCode(writer);
 		}
 
 		if (OpenFileDescriptors is not null)
 		{
-			__init.Property("OpenFileDescriptors");
+			initializer.Property("OpenFileDescriptors");
 			writer.WriteValue(OpenFileDescriptors.Value);
 		}
 
 		if (Timestamp is not null)
 		{
-			__init.Property("Timestamp");
+			initializer.Property("Timestamp");
 			writer.WriteValue(Timestamp.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

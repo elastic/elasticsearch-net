@@ -27,17 +27,17 @@ public partial class InfoFeatureState : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InfoFeatureState", false);
+		var initializer = writer.BeginObjectInitializer("InfoFeatureState", false);
 		{
-			__init.Property("FeatureName");
+			initializer.Property("FeatureName");
 			writer.WriteString(FeatureName);
 		}
 
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			writer.WriteInlineList(Indices, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

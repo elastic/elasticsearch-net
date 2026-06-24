@@ -27,24 +27,24 @@ public partial class ScheduleNowTransformRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ScheduleNowTransformRequest", false);
+		var initializer = writer.BeginObjectInitializer("ScheduleNowTransformRequest", false);
 		{
-			__init.Property("TransformId");
+			initializer.Property("TransformId");
 			TransformId.FormatCode(writer);
 		}
 
 		if (Defer is not null)
 		{
-			__init.Property("Defer");
+			initializer.Property("Defer");
 			writer.WriteValue(Defer.Value);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,49 +27,49 @@ public partial class PipelineProcessorResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PipelineProcessorResult", false);
+		var initializer = writer.BeginObjectInitializer("PipelineProcessorResult", false);
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		if (Doc is not null)
 		{
-			__init.Property("Doc");
+			initializer.Property("Doc");
 			Doc.FormatCode(writer);
 		}
 
 		if (Error is not null)
 		{
-			__init.Property("Error");
+			initializer.Property("Error");
 			Error.FormatCode(writer);
 		}
 
 		if (IgnoredError is not null)
 		{
-			__init.Property("IgnoredError");
+			initializer.Property("IgnoredError");
 			IgnoredError.FormatCode(writer);
 		}
 
 		if (ProcessorType is not null)
 		{
-			__init.Property("ProcessorType");
+			initializer.Property("ProcessorType");
 			writer.WriteString(ProcessorType);
 		}
 
 		if (Status is not null)
 		{
-			__init.Property("Status");
+			initializer.Property("Status");
 			Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptionsCodeFormatter.FormatCode(Status.Value, writer);
 		}
 
 		if (Tag is not null)
 		{
-			__init.Property("Tag");
+			initializer.Property("Tag");
 			writer.WriteString(Tag);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

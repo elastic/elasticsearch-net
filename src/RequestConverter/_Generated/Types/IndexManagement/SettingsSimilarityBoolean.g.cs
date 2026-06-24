@@ -27,7 +27,7 @@ public partial class SettingsSimilarityBoolean : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SettingsSimilarityBoolean", true);
-		__init.Dispose();
+		var initializer = writer.BeginObjectInitializer("SettingsSimilarityBoolean", true);
+		initializer.Dispose();
 	}
 }

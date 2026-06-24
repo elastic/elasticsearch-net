@@ -27,25 +27,25 @@ public partial class FingerprintTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FingerprintTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("FingerprintTokenFilter", true);
 		if (MaxOutputSize is not null)
 		{
-			__init.Property("MaxOutputSize");
+			initializer.Property("MaxOutputSize");
 			writer.WriteValue(MaxOutputSize.Value);
 		}
 
 		if (Separator is not null)
 		{
-			__init.Property("Separator");
+			initializer.Property("Separator");
 			writer.WriteString(Separator);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

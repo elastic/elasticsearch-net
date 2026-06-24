@@ -27,24 +27,24 @@ public partial class SearchApplicationParameters : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SearchApplicationParameters", false);
+		var initializer = writer.BeginObjectInitializer("SearchApplicationParameters", false);
 		if (AnalyticsCollectionName is not null)
 		{
-			__init.Property("AnalyticsCollectionName");
+			initializer.Property("AnalyticsCollectionName");
 			AnalyticsCollectionName.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			writer.WriteInlineList(Indices, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Template is not null)
 		{
-			__init.Property("Template");
+			initializer.Property("Template");
 			Template.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

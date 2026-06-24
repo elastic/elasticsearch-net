@@ -27,19 +27,19 @@ public partial class DataStreamFailureStore : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataStreamFailureStore", false);
+		var initializer = writer.BeginObjectInitializer("DataStreamFailureStore", false);
 		if (Enabled is not null)
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled.Value);
 		}
 
 		if (Lifecycle is not null)
 		{
-			__init.Property("Lifecycle");
+			initializer.Property("Lifecycle");
 			Lifecycle.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

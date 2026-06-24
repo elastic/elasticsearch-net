@@ -27,16 +27,16 @@ public partial class CustomServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CustomServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("CustomServiceSettings", false);
 		if (BatchSize is not null)
 		{
-			__init.Property("BatchSize");
+			initializer.Property("BatchSize");
 			writer.WriteValue(BatchSize.Value);
 		}
 
 		if (Headers is not null)
 		{
-			__init.Property("Headers");
+			initializer.Property("Headers");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -47,7 +47,7 @@ public partial class CustomServiceSettings : RequestConverter.ICodeFormattable
 
 		if (InputType is not null)
 		{
-			__init.Property("InputType");
+			initializer.Property("InputType");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("Elastic.Clients.Elasticsearch.Inference.CustomServiceInputType");
 			writer.Write(", ");
@@ -58,22 +58,22 @@ public partial class CustomServiceSettings : RequestConverter.ICodeFormattable
 
 		if (QueryParameters is not null)
 		{
-			__init.Property("QueryParameters");
+			initializer.Property("QueryParameters");
 			writer.WriteInlineList(QueryParameters, (w, item) => { w.WriteInlineList(item, (w, item) => { w.WriteString(item); }); });
 		}
 
 		{
-			__init.Property("Request");
+			initializer.Property("Request");
 			Request.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Response");
+			initializer.Property("Response");
 			Response.FormatCode(writer);
 		}
 
 		{
-			__init.Property("SecretParameters");
+			initializer.Property("SecretParameters");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -84,10 +84,10 @@ public partial class CustomServiceSettings : RequestConverter.ICodeFormattable
 
 		if (Url is not null)
 		{
-			__init.Property("Url");
+			initializer.Property("Url");
 			writer.WriteString(Url);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

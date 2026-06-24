@@ -27,55 +27,55 @@ public partial class FetchProfileBreakdown : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FetchProfileBreakdown", false);
+		var initializer = writer.BeginObjectInitializer("FetchProfileBreakdown", false);
 		if (LoadSource is not null)
 		{
-			__init.Property("LoadSource");
+			initializer.Property("LoadSource");
 			writer.WriteValue(LoadSource.Value);
 		}
 
 		if (LoadSourceCount is not null)
 		{
-			__init.Property("LoadSourceCount");
+			initializer.Property("LoadSourceCount");
 			writer.WriteValue(LoadSourceCount.Value);
 		}
 
 		if (LoadStoredFields is not null)
 		{
-			__init.Property("LoadStoredFields");
+			initializer.Property("LoadStoredFields");
 			writer.WriteValue(LoadStoredFields.Value);
 		}
 
 		if (LoadStoredFieldsCount is not null)
 		{
-			__init.Property("LoadStoredFieldsCount");
+			initializer.Property("LoadStoredFieldsCount");
 			writer.WriteValue(LoadStoredFieldsCount.Value);
 		}
 
 		if (NextReader is not null)
 		{
-			__init.Property("NextReader");
+			initializer.Property("NextReader");
 			writer.WriteValue(NextReader.Value);
 		}
 
 		if (NextReaderCount is not null)
 		{
-			__init.Property("NextReaderCount");
+			initializer.Property("NextReaderCount");
 			writer.WriteValue(NextReaderCount.Value);
 		}
 
 		if (Process is not null)
 		{
-			__init.Property("Process");
+			initializer.Property("Process");
 			writer.WriteValue(Process.Value);
 		}
 
 		if (ProcessCount is not null)
 		{
-			__init.Property("ProcessCount");
+			initializer.Property("ProcessCount");
 			writer.WriteValue(ProcessCount.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

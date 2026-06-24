@@ -27,18 +27,18 @@ public partial class ScriptField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ScriptField", false);
+		var initializer = writer.BeginObjectInitializer("ScriptField", false);
 		if (IgnoreFailure is not null)
 		{
-			__init.Property("IgnoreFailure");
+			initializer.Property("IgnoreFailure");
 			writer.WriteValue(IgnoreFailure.Value);
 		}
 
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

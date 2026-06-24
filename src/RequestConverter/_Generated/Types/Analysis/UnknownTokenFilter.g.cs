@@ -27,7 +27,7 @@ public partial class UnknownTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UnknownTokenFilter", false);
-		__init.Dispose();
+		var initializer = writer.BeginObjectInitializer("UnknownTokenFilter", false);
+		initializer.Dispose();
 	}
 }

@@ -27,14 +27,14 @@ public partial class FieldMapping : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldMapping", false);
+		var initializer = writer.BeginObjectInitializer("FieldMapping", false);
 		{
-			__init.Property("FullName");
+			initializer.Property("FullName");
 			writer.WriteString(FullName);
 		}
 
 		{
-			__init.Property("Mapping");
+			initializer.Property("Mapping");
 			writer.Write("new(");
 			writer.WriteString(Mapping.Key);
 			writer.Write(", ");
@@ -42,6 +42,6 @@ public partial class FieldMapping : RequestConverter.ICodeFormattable
 			writer.Write(")");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

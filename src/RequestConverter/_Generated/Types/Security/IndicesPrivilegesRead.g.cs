@@ -27,41 +27,41 @@ public partial class IndicesPrivilegesRead : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndicesPrivilegesRead", false);
+		var initializer = writer.BeginObjectInitializer("IndicesPrivilegesRead", false);
 		if (AllowRestrictedIndices is not null)
 		{
-			__init.Property("AllowRestrictedIndices");
+			initializer.Property("AllowRestrictedIndices");
 			writer.WriteValue(AllowRestrictedIndices.Value);
 		}
 
 		if (FieldSecurity is not null)
 		{
-			__init.Property("FieldSecurity");
+			initializer.Property("FieldSecurity");
 			FieldSecurity.FormatCode(writer);
 		}
 
 		if (ImplicitlyGranted is not null)
 		{
-			__init.Property("ImplicitlyGranted");
+			initializer.Property("ImplicitlyGranted");
 			writer.WriteValue(ImplicitlyGranted.Value);
 		}
 
 		{
-			__init.Property("Names");
+			initializer.Property("Names");
 			writer.WriteInlineList(Names, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Privileges");
+			initializer.Property("Privileges");
 			writer.WriteInlineList(Privileges, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Query is not null)
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			writer.WriteValue(Query);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

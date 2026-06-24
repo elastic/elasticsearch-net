@@ -27,19 +27,19 @@ public partial class IndexTemplateDataStreamConfiguration : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexTemplateDataStreamConfiguration", false);
+		var initializer = writer.BeginObjectInitializer("IndexTemplateDataStreamConfiguration", false);
 		if (AllowCustomRouting is not null)
 		{
-			__init.Property("AllowCustomRouting");
+			initializer.Property("AllowCustomRouting");
 			writer.WriteValue(AllowCustomRouting.Value);
 		}
 
 		if (Hidden is not null)
 		{
-			__init.Property("Hidden");
+			initializer.Property("Hidden");
 			writer.WriteValue(Hidden.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,51 +27,51 @@ public partial class RangeBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RangeBucket", false);
+		var initializer = writer.BeginObjectInitializer("RangeBucket", false);
 		if (Aggregations is not null)
 		{
-			__init.Property("Aggregations");
+			initializer.Property("Aggregations");
 			Aggregations.FormatCode(writer);
 		}
 
 		{
-			__init.Property("DocCount");
+			initializer.Property("DocCount");
 			writer.WriteValue(DocCount);
 			writer.Write("L");
 		}
 
 		if (From is not null)
 		{
-			__init.Property("From");
+			initializer.Property("From");
 			writer.WriteValue(From.Value);
 			writer.Write("d");
 		}
 
 		if (FromAsString is not null)
 		{
-			__init.Property("FromAsString");
+			initializer.Property("FromAsString");
 			writer.WriteString(FromAsString);
 		}
 
 		if (Key is not null)
 		{
-			__init.Property("Key");
+			initializer.Property("Key");
 			writer.WriteString(Key);
 		}
 
 		if (To is not null)
 		{
-			__init.Property("To");
+			initializer.Property("To");
 			writer.WriteValue(To.Value);
 			writer.Write("d");
 		}
 
 		if (ToAsString is not null)
 		{
-			__init.Property("ToAsString");
+			initializer.Property("ToAsString");
 			writer.WriteString(ToAsString);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

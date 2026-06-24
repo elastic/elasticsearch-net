@@ -27,73 +27,73 @@ public partial class IntervalsQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IntervalsQuery", false);
+		var initializer = writer.BeginObjectInitializer("IntervalsQuery", false);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
 		if (AllOf is not null)
 		{
-			__init.Property("AllOf");
+			initializer.Property("AllOf");
 			AllOf.FormatCode(writer);
 		}
 
 		if (AnyOf is not null)
 		{
-			__init.Property("AnyOf");
+			initializer.Property("AnyOf");
 			AnyOf.FormatCode(writer);
 		}
 
 		if (Fuzzy is not null)
 		{
-			__init.Property("Fuzzy");
+			initializer.Property("Fuzzy");
 			Fuzzy.FormatCode(writer);
 		}
 
 		if (Match is not null)
 		{
-			__init.Property("Match");
+			initializer.Property("Match");
 			Match.FormatCode(writer);
 		}
 
 		if (Prefix is not null)
 		{
-			__init.Property("Prefix");
+			initializer.Property("Prefix");
 			Prefix.FormatCode(writer);
 		}
 
 		if (Range is not null)
 		{
-			__init.Property("Range");
+			initializer.Property("Range");
 			Range.FormatCode(writer);
 		}
 
 		if (Regexp is not null)
 		{
-			__init.Property("Regexp");
+			initializer.Property("Regexp");
 			Regexp.FormatCode(writer);
 		}
 
 		if (Wildcard is not null)
 		{
-			__init.Property("Wildcard");
+			initializer.Property("Wildcard");
 			Wildcard.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

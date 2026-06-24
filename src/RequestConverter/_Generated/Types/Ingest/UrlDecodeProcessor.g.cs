@@ -27,54 +27,54 @@ public partial class UrlDecodeProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UrlDecodeProcessor", false);
+		var initializer = writer.BeginObjectInitializer("UrlDecodeProcessor", false);
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (If is not null)
 		{
-			__init.Property("If");
+			initializer.Property("If");
 			If.FormatCode(writer);
 		}
 
 		if (IgnoreFailure is not null)
 		{
-			__init.Property("IgnoreFailure");
+			initializer.Property("IgnoreFailure");
 			writer.WriteValue(IgnoreFailure.Value);
 		}
 
 		if (IgnoreMissing is not null)
 		{
-			__init.Property("IgnoreMissing");
+			initializer.Property("IgnoreMissing");
 			writer.WriteValue(IgnoreMissing.Value);
 		}
 
 		if (OnFailure is not null)
 		{
-			__init.Property("OnFailure");
+			initializer.Property("OnFailure");
 			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Tag is not null)
 		{
-			__init.Property("Tag");
+			initializer.Property("Tag");
 			writer.WriteString(Tag);
 		}
 
 		if (TargetField is not null)
 		{
-			__init.Property("TargetField");
+			initializer.Property("TargetField");
 			TargetField.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

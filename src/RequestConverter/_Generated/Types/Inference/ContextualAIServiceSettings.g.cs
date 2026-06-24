@@ -27,23 +27,23 @@ public partial class ContextualAIServiceSettings : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ContextualAIServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("ContextualAIServiceSettings", false);
 		{
-			__init.Property("ApiKey");
+			initializer.Property("ApiKey");
 			writer.WriteString(ApiKey);
 		}
 
 		{
-			__init.Property("ModelId");
+			initializer.Property("ModelId");
 			writer.WriteString(ModelId);
 		}
 
 		if (RateLimit is not null)
 		{
-			__init.Property("RateLimit");
+			initializer.Property("RateLimit");
 			RateLimit.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

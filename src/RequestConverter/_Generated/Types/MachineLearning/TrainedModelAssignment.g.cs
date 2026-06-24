@@ -27,32 +27,32 @@ public partial class TrainedModelAssignment : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelAssignment", false);
+		var initializer = writer.BeginObjectInitializer("TrainedModelAssignment", false);
 		if (AdaptiveAllocations is not null)
 		{
-			__init.Property("AdaptiveAllocations");
+			initializer.Property("AdaptiveAllocations");
 			AdaptiveAllocations.FormatCode(writer);
 		}
 
 		{
-			__init.Property("AssignmentState");
+			initializer.Property("AssignmentState");
 			Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentStateCodeFormatter.FormatCode(AssignmentState, writer);
 		}
 
 		if (MaxAssignedAllocations is not null)
 		{
-			__init.Property("MaxAssignedAllocations");
+			initializer.Property("MaxAssignedAllocations");
 			writer.WriteValue(MaxAssignedAllocations.Value);
 		}
 
 		if (Reason is not null)
 		{
-			__init.Property("Reason");
+			initializer.Property("Reason");
 			writer.WriteString(Reason);
 		}
 
 		{
-			__init.Property("RoutingTable");
+			initializer.Property("RoutingTable");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -62,15 +62,15 @@ public partial class TrainedModelAssignment : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("StartTime");
+			initializer.Property("StartTime");
 			writer.WriteValue(StartTime);
 		}
 
 		{
-			__init.Property("TaskParameters");
+			initializer.Property("TaskParameters");
 			TaskParameters.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

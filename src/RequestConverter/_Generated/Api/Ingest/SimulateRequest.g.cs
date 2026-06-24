@@ -27,30 +27,30 @@ public partial class SimulateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SimulateRequest", false);
+		var initializer = writer.BeginObjectInitializer("SimulateRequest", false);
 		if (Id is not null)
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		if (Verbose is not null)
 		{
-			__init.Property("Verbose");
+			initializer.Property("Verbose");
 			writer.WriteValue(Verbose.Value);
 		}
 
 		{
-			__init.Property("Docs");
+			initializer.Property("Docs");
 			writer.WriteInlineList(Docs, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Pipeline is not null)
 		{
-			__init.Property("Pipeline");
+			initializer.Property("Pipeline");
 			Pipeline.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

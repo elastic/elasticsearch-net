@@ -27,22 +27,22 @@ public partial class DataStreamMappings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataStreamMappings", false);
+		var initializer = writer.BeginObjectInitializer("DataStreamMappings", false);
 		{
-			__init.Property("EffectiveMappings");
+			initializer.Property("EffectiveMappings");
 			EffectiveMappings.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Mappings");
+			initializer.Property("Mappings");
 			Mappings.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,107 +27,107 @@ public partial class PressureMemory : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PressureMemory", false);
+		var initializer = writer.BeginObjectInitializer("PressureMemory", false);
 		if (All is not null)
 		{
-			__init.Property("All");
+			initializer.Property("All");
 			All.FormatCode(writer);
 		}
 
 		if (AllInBytes is not null)
 		{
-			__init.Property("AllInBytes");
+			initializer.Property("AllInBytes");
 			writer.WriteValue(AllInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (CombinedCoordinatingAndPrimary is not null)
 		{
-			__init.Property("CombinedCoordinatingAndPrimary");
+			initializer.Property("CombinedCoordinatingAndPrimary");
 			CombinedCoordinatingAndPrimary.FormatCode(writer);
 		}
 
 		if (CombinedCoordinatingAndPrimaryInBytes is not null)
 		{
-			__init.Property("CombinedCoordinatingAndPrimaryInBytes");
+			initializer.Property("CombinedCoordinatingAndPrimaryInBytes");
 			writer.WriteValue(CombinedCoordinatingAndPrimaryInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (Coordinating is not null)
 		{
-			__init.Property("Coordinating");
+			initializer.Property("Coordinating");
 			Coordinating.FormatCode(writer);
 		}
 
 		if (CoordinatingInBytes is not null)
 		{
-			__init.Property("CoordinatingInBytes");
+			initializer.Property("CoordinatingInBytes");
 			writer.WriteValue(CoordinatingInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (CoordinatingRejections is not null)
 		{
-			__init.Property("CoordinatingRejections");
+			initializer.Property("CoordinatingRejections");
 			writer.WriteValue(CoordinatingRejections.Value);
 			writer.Write("L");
 		}
 
 		if (LargeOperationRejections is not null)
 		{
-			__init.Property("LargeOperationRejections");
+			initializer.Property("LargeOperationRejections");
 			writer.WriteValue(LargeOperationRejections.Value);
 			writer.Write("L");
 		}
 
 		if (Primary is not null)
 		{
-			__init.Property("Primary");
+			initializer.Property("Primary");
 			Primary.FormatCode(writer);
 		}
 
 		if (PrimaryDocumentRejections is not null)
 		{
-			__init.Property("PrimaryDocumentRejections");
+			initializer.Property("PrimaryDocumentRejections");
 			writer.WriteValue(PrimaryDocumentRejections.Value);
 			writer.Write("L");
 		}
 
 		if (PrimaryInBytes is not null)
 		{
-			__init.Property("PrimaryInBytes");
+			initializer.Property("PrimaryInBytes");
 			writer.WriteValue(PrimaryInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (PrimaryRejections is not null)
 		{
-			__init.Property("PrimaryRejections");
+			initializer.Property("PrimaryRejections");
 			writer.WriteValue(PrimaryRejections.Value);
 			writer.Write("L");
 		}
 
 		if (Replica is not null)
 		{
-			__init.Property("Replica");
+			initializer.Property("Replica");
 			Replica.FormatCode(writer);
 		}
 
 		if (ReplicaInBytes is not null)
 		{
-			__init.Property("ReplicaInBytes");
+			initializer.Property("ReplicaInBytes");
 			writer.WriteValue(ReplicaInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (ReplicaRejections is not null)
 		{
-			__init.Property("ReplicaRejections");
+			initializer.Property("ReplicaRejections");
 			writer.WriteValue(ReplicaRejections.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

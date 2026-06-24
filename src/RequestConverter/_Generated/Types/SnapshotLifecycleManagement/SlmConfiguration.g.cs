@@ -27,34 +27,34 @@ public partial class SlmConfiguration : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SlmConfiguration", false);
+		var initializer = writer.BeginObjectInitializer("SlmConfiguration", false);
 		if (FeatureStates is not null)
 		{
-			__init.Property("FeatureStates");
+			initializer.Property("FeatureStates");
 			writer.WriteInlineList(FeatureStates, (w, item) => { w.WriteString(item); });
 		}
 
 		if (IgnoreUnavailable is not null)
 		{
-			__init.Property("IgnoreUnavailable");
+			initializer.Property("IgnoreUnavailable");
 			writer.WriteValue(IgnoreUnavailable.Value);
 		}
 
 		if (IncludeGlobalState is not null)
 		{
-			__init.Property("IncludeGlobalState");
+			initializer.Property("IncludeGlobalState");
 			writer.WriteValue(IncludeGlobalState.Value);
 		}
 
 		if (Indices is not null)
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		if (Metadata is not null)
 		{
-			__init.Property("Metadata");
+			initializer.Property("Metadata");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -65,10 +65,10 @@ public partial class SlmConfiguration : RequestConverter.ICodeFormattable
 
 		if (Partial is not null)
 		{
-			__init.Property("Partial");
+			initializer.Property("Partial");
 			writer.WriteValue(Partial.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

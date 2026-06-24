@@ -27,59 +27,59 @@ public partial class DataStreamLifecycleExplain : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataStreamLifecycleExplain", false);
+		var initializer = writer.BeginObjectInitializer("DataStreamLifecycleExplain", false);
 		if (Error is not null)
 		{
-			__init.Property("Error");
+			initializer.Property("Error");
 			writer.WriteString(Error);
 		}
 
 		if (GenerationTime is not null)
 		{
-			__init.Property("GenerationTime");
+			initializer.Property("GenerationTime");
 			GenerationTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteString(Index);
 		}
 
 		if (IndexCreationDateMillis is not null)
 		{
-			__init.Property("IndexCreationDateMillis");
+			initializer.Property("IndexCreationDateMillis");
 			writer.WriteValue(IndexCreationDateMillis.Value);
 		}
 
 		if (Lifecycle is not null)
 		{
-			__init.Property("Lifecycle");
+			initializer.Property("Lifecycle");
 			Lifecycle.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ManagedByLifecycle");
+			initializer.Property("ManagedByLifecycle");
 			writer.WriteValue(ManagedByLifecycle);
 		}
 
 		if (RolloverDateMillis is not null)
 		{
-			__init.Property("RolloverDateMillis");
+			initializer.Property("RolloverDateMillis");
 			writer.WriteValue(RolloverDateMillis.Value);
 		}
 
 		if (TimeSinceIndexCreation is not null)
 		{
-			__init.Property("TimeSinceIndexCreation");
+			initializer.Property("TimeSinceIndexCreation");
 			TimeSinceIndexCreation.FormatCode(writer);
 		}
 
 		if (TimeSinceRollover is not null)
 		{
-			__init.Property("TimeSinceRollover");
+			initializer.Property("TimeSinceRollover");
 			TimeSinceRollover.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

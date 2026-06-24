@@ -27,43 +27,43 @@ public partial class PathHierarchyTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PathHierarchyTokenizer", true);
+		var initializer = writer.BeginObjectInitializer("PathHierarchyTokenizer", true);
 		if (BufferSize is not null)
 		{
-			__init.Property("BufferSize");
+			initializer.Property("BufferSize");
 			writer.WriteValue(BufferSize.Value);
 		}
 
 		if (Delimiter is not null)
 		{
-			__init.Property("Delimiter");
+			initializer.Property("Delimiter");
 			writer.WriteString(Delimiter);
 		}
 
 		if (Replacement is not null)
 		{
-			__init.Property("Replacement");
+			initializer.Property("Replacement");
 			writer.WriteString(Replacement);
 		}
 
 		if (Reverse is not null)
 		{
-			__init.Property("Reverse");
+			initializer.Property("Reverse");
 			writer.WriteValue(Reverse.Value);
 		}
 
 		if (Skip is not null)
 		{
-			__init.Property("Skip");
+			initializer.Property("Skip");
 			writer.WriteValue(Skip.Value);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

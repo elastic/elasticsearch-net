@@ -27,36 +27,36 @@ public partial class QuestionAnsweringInferenceUpdateOptions : RequestConverter.
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("QuestionAnsweringInferenceUpdateOptions", false);
+		var initializer = writer.BeginObjectInitializer("QuestionAnsweringInferenceUpdateOptions", false);
 		if (MaxAnswerLength is not null)
 		{
-			__init.Property("MaxAnswerLength");
+			initializer.Property("MaxAnswerLength");
 			writer.WriteValue(MaxAnswerLength.Value);
 		}
 
 		if (NumTopClasses is not null)
 		{
-			__init.Property("NumTopClasses");
+			initializer.Property("NumTopClasses");
 			writer.WriteValue(NumTopClasses.Value);
 		}
 
 		{
-			__init.Property("Question");
+			initializer.Property("Question");
 			writer.WriteString(Question);
 		}
 
 		if (ResultsField is not null)
 		{
-			__init.Property("ResultsField");
+			initializer.Property("ResultsField");
 			writer.WriteString(ResultsField);
 		}
 
 		if (Tokenization is not null)
 		{
-			__init.Property("Tokenization");
+			initializer.Property("Tokenization");
 			Tokenization.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

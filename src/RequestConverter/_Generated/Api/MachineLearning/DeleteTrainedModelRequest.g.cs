@@ -27,24 +27,24 @@ public partial class DeleteTrainedModelRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteTrainedModelRequest", false);
+		var initializer = writer.BeginObjectInitializer("DeleteTrainedModelRequest", false);
 		{
-			__init.Property("ModelId");
+			initializer.Property("ModelId");
 			ModelId.FormatCode(writer);
 		}
 
 		if (Force is not null)
 		{
-			__init.Property("Force");
+			initializer.Property("Force");
 			writer.WriteValue(Force.Value);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

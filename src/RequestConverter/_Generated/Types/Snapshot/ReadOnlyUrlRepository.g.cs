@@ -27,18 +27,18 @@ public partial class ReadOnlyUrlRepository : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ReadOnlyUrlRepository", true);
+		var initializer = writer.BeginObjectInitializer("ReadOnlyUrlRepository", true);
 		{
-			__init.Property("Settings");
+			initializer.Property("Settings");
 			Settings.FormatCode(writer);
 		}
 
 		if (Uuid is not null)
 		{
-			__init.Property("Uuid");
+			initializer.Property("Uuid");
 			writer.WriteString(Uuid);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

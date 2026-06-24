@@ -27,29 +27,29 @@ public partial class UpgradeJobSnapshotRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UpgradeJobSnapshotRequest", false);
+		var initializer = writer.BeginObjectInitializer("UpgradeJobSnapshotRequest", false);
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			JobId.FormatCode(writer);
 		}
 
 		{
-			__init.Property("SnapshotId");
+			initializer.Property("SnapshotId");
 			SnapshotId.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (WaitForCompletion is not null)
 		{
-			__init.Property("WaitForCompletion");
+			initializer.Property("WaitForCompletion");
 			writer.WriteValue(WaitForCompletion.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

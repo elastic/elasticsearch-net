@@ -27,19 +27,19 @@ public partial class TextEmbeddingInferenceUpdateOptions : RequestConverter.ICod
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TextEmbeddingInferenceUpdateOptions", false);
+		var initializer = writer.BeginObjectInitializer("TextEmbeddingInferenceUpdateOptions", false);
 		if (ResultsField is not null)
 		{
-			__init.Property("ResultsField");
+			initializer.Property("ResultsField");
 			writer.WriteString(ResultsField);
 		}
 
 		if (Tokenization is not null)
 		{
-			__init.Property("Tokenization");
+			initializer.Property("Tokenization");
 			Tokenization.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

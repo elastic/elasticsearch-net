@@ -27,57 +27,57 @@ public partial class SnapshotInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SnapshotInfo", false);
+		var initializer = writer.BeginObjectInitializer("SnapshotInfo", false);
 		{
-			__init.Property("DataStreams");
+			initializer.Property("DataStreams");
 			writer.WriteInlineList(DataStreams, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Duration is not null)
 		{
-			__init.Property("Duration");
+			initializer.Property("Duration");
 			Duration.FormatCode(writer);
 		}
 
 		if (DurationInMillis is not null)
 		{
-			__init.Property("DurationInMillis");
+			initializer.Property("DurationInMillis");
 			writer.WriteValue(DurationInMillis.Value);
 		}
 
 		if (EndTime is not null)
 		{
-			__init.Property("EndTime");
+			initializer.Property("EndTime");
 			writer.WriteValue(EndTime.Value);
 		}
 
 		if (EndTimeInMillis is not null)
 		{
-			__init.Property("EndTimeInMillis");
+			initializer.Property("EndTimeInMillis");
 			writer.WriteValue(EndTimeInMillis.Value);
 		}
 
 		if (Failures is not null)
 		{
-			__init.Property("Failures");
+			initializer.Property("Failures");
 			writer.WriteInlineList(Failures, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (FeatureStates is not null)
 		{
-			__init.Property("FeatureStates");
+			initializer.Property("FeatureStates");
 			writer.WriteInlineList(FeatureStates, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (IncludeGlobalState is not null)
 		{
-			__init.Property("IncludeGlobalState");
+			initializer.Property("IncludeGlobalState");
 			writer.WriteValue(IncludeGlobalState.Value);
 		}
 
 		if (IndexDetails is not null)
 		{
-			__init.Property("IndexDetails");
+			initializer.Property("IndexDetails");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -88,13 +88,13 @@ public partial class SnapshotInfo : RequestConverter.ICodeFormattable
 
 		if (Indices is not null)
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			writer.WriteInlineList(Indices, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Metadata is not null)
 		{
-			__init.Property("Metadata");
+			initializer.Property("Metadata");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -105,63 +105,63 @@ public partial class SnapshotInfo : RequestConverter.ICodeFormattable
 
 		if (Reason is not null)
 		{
-			__init.Property("Reason");
+			initializer.Property("Reason");
 			writer.WriteString(Reason);
 		}
 
 		if (Repository is not null)
 		{
-			__init.Property("Repository");
+			initializer.Property("Repository");
 			writer.WriteString(Repository);
 		}
 
 		if (Shards is not null)
 		{
-			__init.Property("Shards");
+			initializer.Property("Shards");
 			Shards.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Snapshot");
+			initializer.Property("Snapshot");
 			writer.WriteString(Snapshot);
 		}
 
 		if (StartTime is not null)
 		{
-			__init.Property("StartTime");
+			initializer.Property("StartTime");
 			writer.WriteValue(StartTime.Value);
 		}
 
 		if (StartTimeInMillis is not null)
 		{
-			__init.Property("StartTimeInMillis");
+			initializer.Property("StartTimeInMillis");
 			writer.WriteValue(StartTimeInMillis.Value);
 		}
 
 		if (State is not null)
 		{
-			__init.Property("State");
+			initializer.Property("State");
 			writer.WriteString(State);
 		}
 
 		{
-			__init.Property("Uuid");
+			initializer.Property("Uuid");
 			writer.WriteString(Uuid);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
 		if (VersionId is not null)
 		{
-			__init.Property("VersionId");
+			initializer.Property("VersionId");
 			writer.WriteValue(VersionId.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

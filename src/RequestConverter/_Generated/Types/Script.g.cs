@@ -27,22 +27,22 @@ public partial class Script : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Script", false);
+		var initializer = writer.BeginObjectInitializer("Script", false);
 		if (Id is not null)
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		if (Lang is not null)
 		{
-			__init.Property("Lang");
+			initializer.Property("Lang");
 			Lang.Value.FormatCode(writer);
 		}
 
 		if (Options is not null)
 		{
-			__init.Property("Options");
+			initializer.Property("Options");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -53,7 +53,7 @@ public partial class Script : RequestConverter.ICodeFormattable
 
 		if (Params is not null)
 		{
-			__init.Property("Params");
+			initializer.Property("Params");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -64,10 +64,10 @@ public partial class Script : RequestConverter.ICodeFormattable
 
 		if (Source is not null)
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			writer.WriteString(Source);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

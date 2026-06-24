@@ -27,25 +27,25 @@ public partial class PostStartTrialRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PostStartTrialRequest", false);
+		var initializer = writer.BeginObjectInitializer("PostStartTrialRequest", false);
 		if (Acknowledge is not null)
 		{
-			__init.Property("Acknowledge");
+			initializer.Property("Acknowledge");
 			writer.WriteValue(Acknowledge.Value);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (Type is not null)
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			writer.WriteString(Type);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

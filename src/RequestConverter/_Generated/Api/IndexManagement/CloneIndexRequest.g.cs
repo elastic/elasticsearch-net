@@ -27,38 +27,38 @@ public partial class CloneIndexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CloneIndexRequest", false);
+		var initializer = writer.BeginObjectInitializer("CloneIndexRequest", false);
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Target");
+			initializer.Property("Target");
 			Target.FormatCode(writer);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (WaitForActiveShards is not null)
 		{
-			__init.Property("WaitForActiveShards");
+			initializer.Property("WaitForActiveShards");
 			WaitForActiveShards.FormatCode(writer);
 		}
 
 		if (Aliases is not null)
 		{
-			__init.Property("Aliases");
+			initializer.Property("Aliases");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("Elastic.Clients.Elasticsearch.IndexName");
 			writer.Write(", ");
@@ -69,7 +69,7 @@ public partial class CloneIndexRequest : RequestConverter.ICodeFormattable
 
 		if (Settings is not null)
 		{
-			__init.Property("Settings");
+			initializer.Property("Settings");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -78,6 +78,6 @@ public partial class CloneIndexRequest : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(Settings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

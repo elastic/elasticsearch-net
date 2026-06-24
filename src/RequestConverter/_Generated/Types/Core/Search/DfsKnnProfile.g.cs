@@ -27,30 +27,30 @@ public partial class DfsKnnProfile : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DfsKnnProfile", false);
+		var initializer = writer.BeginObjectInitializer("DfsKnnProfile", false);
 		{
-			__init.Property("Collector");
+			initializer.Property("Collector");
 			writer.WriteInlineList(Collector, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			writer.WriteInlineList(Query, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("RewriteTime");
+			initializer.Property("RewriteTime");
 			writer.WriteValue(RewriteTime);
 			writer.Write("L");
 		}
 
 		if (VectorOperationsCount is not null)
 		{
-			__init.Property("VectorOperationsCount");
+			initializer.Property("VectorOperationsCount");
 			writer.WriteValue(VectorOperationsCount.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

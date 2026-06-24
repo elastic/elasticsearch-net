@@ -27,27 +27,27 @@ public partial class InProgress : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InProgress", false);
+		var initializer = writer.BeginObjectInitializer("InProgress", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("StartTimeMillis");
+			initializer.Property("StartTimeMillis");
 			writer.WriteValue(StartTimeMillis);
 		}
 
 		{
-			__init.Property("State");
+			initializer.Property("State");
 			writer.WriteString(State);
 		}
 
 		{
-			__init.Property("Uuid");
+			initializer.Property("Uuid");
 			writer.WriteString(Uuid);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

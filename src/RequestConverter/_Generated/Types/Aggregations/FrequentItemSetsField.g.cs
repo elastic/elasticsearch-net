@@ -27,24 +27,24 @@ public partial class FrequentItemSetsField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FrequentItemSetsField", false);
+		var initializer = writer.BeginObjectInitializer("FrequentItemSetsField", false);
 		if (Exclude is not null)
 		{
-			__init.Property("Exclude");
+			initializer.Property("Exclude");
 			Exclude.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Include is not null)
 		{
-			__init.Property("Include");
+			initializer.Property("Include");
 			Include.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

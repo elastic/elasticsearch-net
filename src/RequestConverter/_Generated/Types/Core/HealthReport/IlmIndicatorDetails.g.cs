@@ -27,23 +27,23 @@ public partial class IlmIndicatorDetails : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IlmIndicatorDetails", false);
+		var initializer = writer.BeginObjectInitializer("IlmIndicatorDetails", false);
 		{
-			__init.Property("IlmStatus");
+			initializer.Property("IlmStatus");
 			Elastic.Clients.Elasticsearch.LifecycleOperationModeCodeFormatter.FormatCode(IlmStatus, writer);
 		}
 
 		{
-			__init.Property("Policies");
+			initializer.Property("Policies");
 			writer.WriteValue(Policies);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("StagnatingIndices");
+			initializer.Property("StagnatingIndices");
 			writer.WriteValue(StagnatingIndices);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

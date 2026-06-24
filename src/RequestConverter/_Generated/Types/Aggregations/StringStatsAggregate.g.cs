@@ -27,28 +27,28 @@ public partial class StringStatsAggregate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StringStatsAggregate", true);
+		var initializer = writer.BeginObjectInitializer("StringStatsAggregate", true);
 		{
-			__init.Property("AvgLength");
+			initializer.Property("AvgLength");
 			writer.WriteValue(AvgLength.Value);
 			writer.Write("d");
 		}
 
 		if (AvgLengthAsString is not null)
 		{
-			__init.Property("AvgLengthAsString");
+			initializer.Property("AvgLengthAsString");
 			writer.WriteString(AvgLengthAsString);
 		}
 
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 			writer.Write("L");
 		}
 
 		if (Distribution is not null)
 		{
-			__init.Property("Distribution");
+			initializer.Property("Distribution");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -58,25 +58,25 @@ public partial class StringStatsAggregate : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Entropy");
+			initializer.Property("Entropy");
 			writer.WriteValue(Entropy.Value);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("MaxLength");
+			initializer.Property("MaxLength");
 			writer.WriteValue(MaxLength.Value);
 		}
 
 		if (MaxLengthAsString is not null)
 		{
-			__init.Property("MaxLengthAsString");
+			initializer.Property("MaxLengthAsString");
 			writer.WriteString(MaxLengthAsString);
 		}
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -86,16 +86,16 @@ public partial class StringStatsAggregate : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("MinLength");
+			initializer.Property("MinLength");
 			writer.WriteValue(MinLength.Value);
 		}
 
 		if (MinLengthAsString is not null)
 		{
-			__init.Property("MinLengthAsString");
+			initializer.Property("MinLengthAsString");
 			writer.WriteString(MinLengthAsString);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

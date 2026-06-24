@@ -27,67 +27,67 @@ public partial class DataTierPhaseStatistics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataTierPhaseStatistics", false);
+		var initializer = writer.BeginObjectInitializer("DataTierPhaseStatistics", false);
 		{
-			__init.Property("DocCount");
+			initializer.Property("DocCount");
 			writer.WriteValue(DocCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("IndexCount");
+			initializer.Property("IndexCount");
 			writer.WriteValue(IndexCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("NodeCount");
+			initializer.Property("NodeCount");
 			writer.WriteValue(NodeCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("PrimaryShardCount");
+			initializer.Property("PrimaryShardCount");
 			writer.WriteValue(PrimaryShardCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("PrimaryShardSizeAvgBytes");
+			initializer.Property("PrimaryShardSizeAvgBytes");
 			writer.WriteValue(PrimaryShardSizeAvgBytes);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("PrimaryShardSizeMadBytes");
+			initializer.Property("PrimaryShardSizeMadBytes");
 			writer.WriteValue(PrimaryShardSizeMadBytes);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("PrimaryShardSizeMedianBytes");
+			initializer.Property("PrimaryShardSizeMedianBytes");
 			writer.WriteValue(PrimaryShardSizeMedianBytes);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("PrimarySizeBytes");
+			initializer.Property("PrimarySizeBytes");
 			writer.WriteValue(PrimarySizeBytes);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("TotalShardCount");
+			initializer.Property("TotalShardCount");
 			writer.WriteValue(TotalShardCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("TotalSizeBytes");
+			initializer.Property("TotalSizeBytes");
 			writer.WriteValue(TotalSizeBytes);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,80 +27,80 @@ public partial class ResponseItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ResponseItem", false);
+		var initializer = writer.BeginObjectInitializer("ResponseItem", false);
 		if (Error is not null)
 		{
-			__init.Property("Error");
+			initializer.Property("Error");
 			Error.FormatCode(writer);
 		}
 
 		if (FailureStore is not null)
 		{
-			__init.Property("FailureStore");
+			initializer.Property("FailureStore");
 			Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatusCodeFormatter.FormatCode(FailureStore.Value, writer);
 		}
 
 		if (ForcedRefresh is not null)
 		{
-			__init.Property("ForcedRefresh");
+			initializer.Property("ForcedRefresh");
 			writer.WriteValue(ForcedRefresh.Value);
 		}
 
 		if (Get is not null)
 		{
-			__init.Property("Get");
+			initializer.Property("Get");
 			Get.FormatCode(writer);
 		}
 
 		if (Id is not null)
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteString(Index);
 		}
 
 		if (PrimaryTerm is not null)
 		{
-			__init.Property("PrimaryTerm");
+			initializer.Property("PrimaryTerm");
 			writer.WriteValue(PrimaryTerm.Value);
 			writer.Write("L");
 		}
 
 		if (Result is not null)
 		{
-			__init.Property("Result");
+			initializer.Property("Result");
 			writer.WriteString(Result);
 		}
 
 		if (SeqNo is not null)
 		{
-			__init.Property("SeqNo");
+			initializer.Property("SeqNo");
 			writer.WriteValue(SeqNo.Value);
 			writer.Write("L");
 		}
 
 		if (Shards is not null)
 		{
-			__init.Property("Shards");
+			initializer.Property("Shards");
 			Shards.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Status");
+			initializer.Property("Status");
 			writer.WriteValue(Status);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

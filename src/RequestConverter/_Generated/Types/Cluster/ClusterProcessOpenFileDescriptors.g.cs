@@ -27,25 +27,25 @@ public partial class ClusterProcessOpenFileDescriptors : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterProcessOpenFileDescriptors", false);
+		var initializer = writer.BeginObjectInitializer("ClusterProcessOpenFileDescriptors", false);
 		{
-			__init.Property("Avg");
+			initializer.Property("Avg");
 			writer.WriteValue(Avg);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Max");
+			initializer.Property("Max");
 			writer.WriteValue(Max);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Min");
+			initializer.Property("Min");
 			writer.WriteValue(Min);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

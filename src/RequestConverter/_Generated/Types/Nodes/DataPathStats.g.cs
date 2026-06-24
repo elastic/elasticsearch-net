@@ -27,110 +27,110 @@ public partial class DataPathStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataPathStats", false);
+		var initializer = writer.BeginObjectInitializer("DataPathStats", false);
 		if (Available is not null)
 		{
-			__init.Property("Available");
+			initializer.Property("Available");
 			writer.WriteString(Available);
 		}
 
 		if (AvailableInBytes is not null)
 		{
-			__init.Property("AvailableInBytes");
+			initializer.Property("AvailableInBytes");
 			writer.WriteValue(AvailableInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (DiskQueue is not null)
 		{
-			__init.Property("DiskQueue");
+			initializer.Property("DiskQueue");
 			writer.WriteString(DiskQueue);
 		}
 
 		if (DiskReads is not null)
 		{
-			__init.Property("DiskReads");
+			initializer.Property("DiskReads");
 			writer.WriteValue(DiskReads.Value);
 			writer.Write("L");
 		}
 
 		if (DiskReadSize is not null)
 		{
-			__init.Property("DiskReadSize");
+			initializer.Property("DiskReadSize");
 			writer.WriteString(DiskReadSize);
 		}
 
 		if (DiskReadSizeInBytes is not null)
 		{
-			__init.Property("DiskReadSizeInBytes");
+			initializer.Property("DiskReadSizeInBytes");
 			writer.WriteValue(DiskReadSizeInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (DiskWrites is not null)
 		{
-			__init.Property("DiskWrites");
+			initializer.Property("DiskWrites");
 			writer.WriteValue(DiskWrites.Value);
 			writer.Write("L");
 		}
 
 		if (DiskWriteSize is not null)
 		{
-			__init.Property("DiskWriteSize");
+			initializer.Property("DiskWriteSize");
 			writer.WriteString(DiskWriteSize);
 		}
 
 		if (DiskWriteSizeInBytes is not null)
 		{
-			__init.Property("DiskWriteSizeInBytes");
+			initializer.Property("DiskWriteSizeInBytes");
 			writer.WriteValue(DiskWriteSizeInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (Free is not null)
 		{
-			__init.Property("Free");
+			initializer.Property("Free");
 			writer.WriteString(Free);
 		}
 
 		if (FreeInBytes is not null)
 		{
-			__init.Property("FreeInBytes");
+			initializer.Property("FreeInBytes");
 			writer.WriteValue(FreeInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (Mount is not null)
 		{
-			__init.Property("Mount");
+			initializer.Property("Mount");
 			writer.WriteString(Mount);
 		}
 
 		if (Path is not null)
 		{
-			__init.Property("Path");
+			initializer.Property("Path");
 			writer.WriteString(Path);
 		}
 
 		if (Total is not null)
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteString(Total);
 		}
 
 		if (TotalInBytes is not null)
 		{
-			__init.Property("TotalInBytes");
+			initializer.Property("TotalInBytes");
 			writer.WriteValue(TotalInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (Type is not null)
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			writer.WriteString(Type);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

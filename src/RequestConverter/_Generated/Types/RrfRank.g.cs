@@ -27,21 +27,21 @@ public partial class RrfRank : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RrfRank", false);
+		var initializer = writer.BeginObjectInitializer("RrfRank", false);
 		if (RankConstant is not null)
 		{
-			__init.Property("RankConstant");
+			initializer.Property("RankConstant");
 			writer.WriteValue(RankConstant.Value);
 			writer.Write("L");
 		}
 
 		if (RankWindowSize is not null)
 		{
-			__init.Property("RankWindowSize");
+			initializer.Property("RankWindowSize");
 			writer.WriteValue(RankWindowSize.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

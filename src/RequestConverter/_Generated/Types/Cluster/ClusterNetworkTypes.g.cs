@@ -27,9 +27,9 @@ public partial class ClusterNetworkTypes : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterNetworkTypes", false);
+		var initializer = writer.BeginObjectInitializer("ClusterNetworkTypes", false);
 		{
-			__init.Property("HttpTypes");
+			initializer.Property("HttpTypes");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -39,7 +39,7 @@ public partial class ClusterNetworkTypes : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("TransportTypes");
+			initializer.Property("TransportTypes");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -48,6 +48,6 @@ public partial class ClusterNetworkTypes : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(TransportTypes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,19 +27,19 @@ public partial class ChunkRescorer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ChunkRescorer", false);
+		var initializer = writer.BeginObjectInitializer("ChunkRescorer", false);
 		if (ChunkingSettings is not null)
 		{
-			__init.Property("ChunkingSettings");
+			initializer.Property("ChunkingSettings");
 			ChunkingSettings.FormatCode(writer);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

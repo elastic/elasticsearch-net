@@ -27,33 +27,33 @@ public partial class MultiTermVectorsResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MultiTermVectorsResult", false);
+		var initializer = writer.BeginObjectInitializer("MultiTermVectorsResult", false);
 		if (Error is not null)
 		{
-			__init.Property("Error");
+			initializer.Property("Error");
 			Error.FormatCode(writer);
 		}
 
 		if (Found is not null)
 		{
-			__init.Property("Found");
+			initializer.Property("Found");
 			writer.WriteValue(Found.Value);
 		}
 
 		if (Id is not null)
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteString(Index);
 		}
 
 		if (TermVectors is not null)
 		{
-			__init.Property("TermVectors");
+			initializer.Property("TermVectors");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -64,18 +64,18 @@ public partial class MultiTermVectorsResult : RequestConverter.ICodeFormattable
 
 		if (Took is not null)
 		{
-			__init.Property("Took");
+			initializer.Property("Took");
 			writer.WriteValue(Took.Value);
 			writer.Write("L");
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

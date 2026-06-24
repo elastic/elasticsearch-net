@@ -27,13 +27,13 @@ public partial class DenseVectorIndexOptionsRescoreVector : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DenseVectorIndexOptionsRescoreVector", false);
+		var initializer = writer.BeginObjectInitializer("DenseVectorIndexOptionsRescoreVector", false);
 		{
-			__init.Property("Oversample");
+			initializer.Property("Oversample");
 			writer.WriteValue(Oversample);
 			writer.Write("f");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

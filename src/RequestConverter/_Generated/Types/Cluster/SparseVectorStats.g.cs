@@ -27,13 +27,13 @@ public partial class SparseVectorStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SparseVectorStats", false);
+		var initializer = writer.BeginObjectInitializer("SparseVectorStats", false);
 		{
-			__init.Property("ValueCount");
+			initializer.Property("ValueCount");
 			writer.WriteValue(ValueCount);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

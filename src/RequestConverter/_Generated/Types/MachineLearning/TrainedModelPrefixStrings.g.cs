@@ -27,19 +27,19 @@ public partial class TrainedModelPrefixStrings : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelPrefixStrings", false);
+		var initializer = writer.BeginObjectInitializer("TrainedModelPrefixStrings", false);
 		if (Ingest is not null)
 		{
-			__init.Property("Ingest");
+			initializer.Property("Ingest");
 			writer.WriteString(Ingest);
 		}
 
 		if (Search is not null)
 		{
-			__init.Property("Search");
+			initializer.Property("Search");
 			writer.WriteString(Search);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,36 +27,36 @@ public partial class IpPrefixAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IpPrefixAggregation", false);
+		var initializer = writer.BeginObjectInitializer("IpPrefixAggregation", false);
 		if (AppendPrefixLength is not null)
 		{
-			__init.Property("AppendPrefixLength");
+			initializer.Property("AppendPrefixLength");
 			writer.WriteValue(AppendPrefixLength.Value);
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (IsIpv6 is not null)
 		{
-			__init.Property("IsIpv6");
+			initializer.Property("IsIpv6");
 			writer.WriteValue(IsIpv6.Value);
 		}
 
 		if (MinDocCount is not null)
 		{
-			__init.Property("MinDocCount");
+			initializer.Property("MinDocCount");
 			writer.WriteValue(MinDocCount.Value);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("PrefixLength");
+			initializer.Property("PrefixLength");
 			writer.WriteValue(PrefixLength);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

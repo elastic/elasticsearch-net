@@ -27,23 +27,23 @@ public partial class PutSearchApplicationRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutSearchApplicationRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutSearchApplicationRequest", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		if (Create is not null)
 		{
-			__init.Property("Create");
+			initializer.Property("Create");
 			writer.WriteValue(Create.Value);
 		}
 
 		{
-			__init.Property("SearchApplication");
+			initializer.Property("SearchApplication");
 			SearchApplication.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

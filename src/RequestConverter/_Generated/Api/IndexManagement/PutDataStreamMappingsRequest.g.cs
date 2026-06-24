@@ -27,35 +27,35 @@ public partial class PutDataStreamMappingsRequest : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutDataStreamMappingsRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutDataStreamMappingsRequest", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		if (DryRun is not null)
 		{
-			__init.Property("DryRun");
+			initializer.Property("DryRun");
 			writer.WriteValue(DryRun.Value);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Mappings");
+			initializer.Property("Mappings");
 			Mappings.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

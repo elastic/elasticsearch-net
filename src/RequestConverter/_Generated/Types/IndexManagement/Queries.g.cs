@@ -27,13 +27,13 @@ public partial class Queries : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Queries", false);
+		var initializer = writer.BeginObjectInitializer("Queries", false);
 		if (Cache is not null)
 		{
-			__init.Property("Cache");
+			initializer.Property("Cache");
 			Cache.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,25 +27,25 @@ public partial class SourceFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SourceFilter", true);
+		var initializer = writer.BeginObjectInitializer("SourceFilter", true);
 		if (Excludes is not null)
 		{
-			__init.Property("Excludes");
+			initializer.Property("Excludes");
 			Excludes.FormatCode(writer);
 		}
 
 		if (ExcludeVectors is not null)
 		{
-			__init.Property("ExcludeVectors");
+			initializer.Property("ExcludeVectors");
 			writer.WriteValue(ExcludeVectors.Value);
 		}
 
 		if (Includes is not null)
 		{
-			__init.Property("Includes");
+			initializer.Property("Includes");
 			Includes.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,27 +27,27 @@ public partial class MlInferenceIngestProcessor : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MlInferenceIngestProcessor", false);
+		var initializer = writer.BeginObjectInitializer("MlInferenceIngestProcessor", false);
 		{
-			__init.Property("NumDocsProcessed");
+			initializer.Property("NumDocsProcessed");
 			NumDocsProcessed.FormatCode(writer);
 		}
 
 		{
-			__init.Property("NumFailures");
+			initializer.Property("NumFailures");
 			NumFailures.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Pipelines");
+			initializer.Property("Pipelines");
 			Pipelines.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TimeMs");
+			initializer.Property("TimeMs");
 			TimeMs.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

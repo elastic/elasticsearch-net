@@ -27,12 +27,12 @@ public partial class InnerHitsResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InnerHitsResult", false);
+		var initializer = writer.BeginObjectInitializer("InnerHitsResult", false);
 		{
-			__init.Property("Hits");
+			initializer.Property("Hits");
 			Hits.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

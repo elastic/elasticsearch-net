@@ -27,35 +27,35 @@ public partial class IndexSettingsLifecycle : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexSettingsLifecycle", false);
+		var initializer = writer.BeginObjectInitializer("IndexSettingsLifecycle", false);
 		if (IndexingComplete is not null)
 		{
-			__init.Property("IndexingComplete");
+			initializer.Property("IndexingComplete");
 			writer.WriteValue(IndexingComplete.Value);
 		}
 
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		if (OriginationDate is not null)
 		{
-			__init.Property("OriginationDate");
+			initializer.Property("OriginationDate");
 			writer.WriteValue(OriginationDate.Value);
 			writer.Write("L");
 		}
 
 		if (ParseOriginationDate is not null)
 		{
-			__init.Property("ParseOriginationDate");
+			initializer.Property("ParseOriginationDate");
 			writer.WriteValue(ParseOriginationDate.Value);
 		}
 
 		if (PreferIlm is not null)
 		{
-			__init.Property("PreferIlm");
+			initializer.Property("PreferIlm");
 			if (PreferIlm.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				writer.WriteValue(PreferIlm.Value1);
@@ -68,16 +68,16 @@ public partial class IndexSettingsLifecycle : RequestConverter.ICodeFormattable
 
 		if (RolloverAlias is not null)
 		{
-			__init.Property("RolloverAlias");
+			initializer.Property("RolloverAlias");
 			writer.WriteString(RolloverAlias);
 		}
 
 		if (Step is not null)
 		{
-			__init.Property("Step");
+			initializer.Property("Step");
 			Step.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

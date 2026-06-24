@@ -27,19 +27,19 @@ public partial class LatLonGeoLocation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("LatLonGeoLocation", true);
+		var initializer = writer.BeginObjectInitializer("LatLonGeoLocation", true);
 		{
-			__init.Property("Lat");
+			initializer.Property("Lat");
 			writer.WriteValue(Lat);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Lon");
+			initializer.Property("Lon");
 			writer.WriteValue(Lon);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

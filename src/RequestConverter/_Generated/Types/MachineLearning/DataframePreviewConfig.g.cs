@@ -27,35 +27,35 @@ public partial class DataframePreviewConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframePreviewConfig", false);
+		var initializer = writer.BeginObjectInitializer("DataframePreviewConfig", false);
 		{
-			__init.Property("Analysis");
+			initializer.Property("Analysis");
 			Analysis.FormatCode(writer);
 		}
 
 		if (AnalyzedFields is not null)
 		{
-			__init.Property("AnalyzedFields");
+			initializer.Property("AnalyzedFields");
 			AnalyzedFields.FormatCode(writer);
 		}
 
 		if (MaxNumThreads is not null)
 		{
-			__init.Property("MaxNumThreads");
+			initializer.Property("MaxNumThreads");
 			writer.WriteValue(MaxNumThreads.Value);
 		}
 
 		if (ModelMemoryLimit is not null)
 		{
-			__init.Property("ModelMemoryLimit");
+			initializer.Property("ModelMemoryLimit");
 			writer.WriteString(ModelMemoryLimit);
 		}
 
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			Source.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

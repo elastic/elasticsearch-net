@@ -27,9 +27,9 @@ public partial class Template : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Template", false);
+		var initializer = writer.BeginObjectInitializer("Template", false);
 		{
-			__init.Property("Aliases");
+			initializer.Property("Aliases");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -39,15 +39,15 @@ public partial class Template : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Mappings");
+			initializer.Property("Mappings");
 			Mappings.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Settings");
+			initializer.Property("Settings");
 			Settings.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

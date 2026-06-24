@@ -27,53 +27,53 @@ public partial class TermsEnumRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TermsEnumRequest", false);
+		var initializer = writer.BeginObjectInitializer("TermsEnumRequest", false);
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		if (CaseInsensitive is not null)
 		{
-			__init.Property("CaseInsensitive");
+			initializer.Property("CaseInsensitive");
 			writer.WriteValue(CaseInsensitive.Value);
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (IndexFilter is not null)
 		{
-			__init.Property("IndexFilter");
+			initializer.Property("IndexFilter");
 			IndexFilter.FormatCode(writer);
 		}
 
 		if (SearchAfter is not null)
 		{
-			__init.Property("SearchAfter");
+			initializer.Property("SearchAfter");
 			writer.WriteString(SearchAfter);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
 		if (String is not null)
 		{
-			__init.Property("String");
+			initializer.Property("String");
 			writer.WriteString(String);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

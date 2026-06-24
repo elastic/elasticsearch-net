@@ -27,33 +27,33 @@ public partial class PutTrainedModelDefinitionPartRequest : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutTrainedModelDefinitionPartRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutTrainedModelDefinitionPartRequest", false);
 		{
-			__init.Property("ModelId");
+			initializer.Property("ModelId");
 			ModelId.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Part");
+			initializer.Property("Part");
 			writer.WriteValue(Part);
 		}
 
 		{
-			__init.Property("Definition");
+			initializer.Property("Definition");
 			writer.WriteString(Definition);
 		}
 
 		{
-			__init.Property("TotalDefinitionLength");
+			initializer.Property("TotalDefinitionLength");
 			writer.WriteValue(TotalDefinitionLength);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("TotalParts");
+			initializer.Property("TotalParts");
 			writer.WriteValue(TotalParts);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

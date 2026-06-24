@@ -27,31 +27,31 @@ public partial class Scripting : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Scripting", false);
+		var initializer = writer.BeginObjectInitializer("Scripting", false);
 		if (CacheEvictions is not null)
 		{
-			__init.Property("CacheEvictions");
+			initializer.Property("CacheEvictions");
 			writer.WriteValue(CacheEvictions.Value);
 			writer.Write("L");
 		}
 
 		if (CompilationLimitTriggered is not null)
 		{
-			__init.Property("CompilationLimitTriggered");
+			initializer.Property("CompilationLimitTriggered");
 			writer.WriteValue(CompilationLimitTriggered.Value);
 			writer.Write("L");
 		}
 
 		if (Compilations is not null)
 		{
-			__init.Property("Compilations");
+			initializer.Property("Compilations");
 			writer.WriteValue(Compilations.Value);
 			writer.Write("L");
 		}
 
 		if (CompilationsHistory is not null)
 		{
-			__init.Property("CompilationsHistory");
+			initializer.Property("CompilationsHistory");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -62,10 +62,10 @@ public partial class Scripting : RequestConverter.ICodeFormattable
 
 		if (Contexts is not null)
 		{
-			__init.Property("Contexts");
+			initializer.Property("Contexts");
 			writer.WriteInlineList(Contexts, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

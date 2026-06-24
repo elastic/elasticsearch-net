@@ -27,18 +27,18 @@ public partial class DataframeAnalyticsDestination : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeAnalyticsDestination", false);
+		var initializer = writer.BeginObjectInitializer("DataframeAnalyticsDestination", false);
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		if (ResultsField is not null)
 		{
-			__init.Property("ResultsField");
+			initializer.Property("ResultsField");
 			ResultsField.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

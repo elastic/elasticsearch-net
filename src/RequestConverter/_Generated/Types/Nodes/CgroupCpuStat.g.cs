@@ -27,27 +27,27 @@ public partial class CgroupCpuStat : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CgroupCpuStat", false);
+		var initializer = writer.BeginObjectInitializer("CgroupCpuStat", false);
 		if (NumberOfElapsedPeriods is not null)
 		{
-			__init.Property("NumberOfElapsedPeriods");
+			initializer.Property("NumberOfElapsedPeriods");
 			writer.WriteValue(NumberOfElapsedPeriods.Value);
 			writer.Write("L");
 		}
 
 		if (NumberOfTimesThrottled is not null)
 		{
-			__init.Property("NumberOfTimesThrottled");
+			initializer.Property("NumberOfTimesThrottled");
 			writer.WriteValue(NumberOfTimesThrottled.Value);
 			writer.Write("L");
 		}
 
 		if (TimeThrottledNanos is not null)
 		{
-			__init.Property("TimeThrottledNanos");
+			initializer.Property("TimeThrottledNanos");
 			writer.WriteValue(TimeThrottledNanos.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

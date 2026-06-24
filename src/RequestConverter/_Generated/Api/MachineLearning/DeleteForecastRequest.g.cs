@@ -27,30 +27,30 @@ public partial class DeleteForecastRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteForecastRequest", false);
+		var initializer = writer.BeginObjectInitializer("DeleteForecastRequest", false);
 		if (ForecastId is not null)
 		{
-			__init.Property("ForecastId");
+			initializer.Property("ForecastId");
 			ForecastId.FormatCode(writer);
 		}
 
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			JobId.FormatCode(writer);
 		}
 
 		if (AllowNoForecasts is not null)
 		{
-			__init.Property("AllowNoForecasts");
+			initializer.Property("AllowNoForecasts");
 			writer.WriteValue(AllowNoForecasts.Value);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

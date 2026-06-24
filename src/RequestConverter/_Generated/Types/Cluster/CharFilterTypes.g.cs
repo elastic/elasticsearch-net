@@ -27,50 +27,50 @@ public partial class CharFilterTypes : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CharFilterTypes", false);
+		var initializer = writer.BeginObjectInitializer("CharFilterTypes", false);
 		{
-			__init.Property("AnalyzerTypes");
+			initializer.Property("AnalyzerTypes");
 			writer.WriteInlineList(AnalyzerTypes, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("BuiltInAnalyzers");
+			initializer.Property("BuiltInAnalyzers");
 			writer.WriteInlineList(BuiltInAnalyzers, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("BuiltInCharFilters");
+			initializer.Property("BuiltInCharFilters");
 			writer.WriteInlineList(BuiltInCharFilters, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("BuiltInFilters");
+			initializer.Property("BuiltInFilters");
 			writer.WriteInlineList(BuiltInFilters, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("BuiltInTokenizers");
+			initializer.Property("BuiltInTokenizers");
 			writer.WriteInlineList(BuiltInTokenizers, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("CharFilterTypes2");
+			initializer.Property("CharFilterTypes2");
 			writer.WriteInlineList(CharFilterTypes2, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("FilterTypes");
+			initializer.Property("FilterTypes");
 			writer.WriteInlineList(FilterTypes, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (MultipleSynonymGraphFilters is not null)
 		{
-			__init.Property("MultipleSynonymGraphFilters");
+			initializer.Property("MultipleSynonymGraphFilters");
 			MultipleSynonymGraphFilters.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Synonyms");
+			initializer.Property("Synonyms");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -80,10 +80,10 @@ public partial class CharFilterTypes : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("TokenizerTypes");
+			initializer.Property("TokenizerTypes");
 			writer.WriteInlineList(TokenizerTypes, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

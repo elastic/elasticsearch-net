@@ -27,24 +27,24 @@ public partial class KeepTypesTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("KeepTypesTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("KeepTypesTokenFilter", true);
 		if (Mode is not null)
 		{
-			__init.Property("Mode");
+			initializer.Property("Mode");
 			Elastic.Clients.Elasticsearch.Analysis.KeepTypesModeCodeFormatter.FormatCode(Mode.Value, writer);
 		}
 
 		{
-			__init.Property("Types");
+			initializer.Property("Types");
 			writer.WriteInlineList(Types, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

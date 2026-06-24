@@ -27,59 +27,59 @@ public partial class TextSimilarityReranker : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TextSimilarityReranker", false);
+		var initializer = writer.BeginObjectInitializer("TextSimilarityReranker", false);
 		if (ChunkRescorer is not null)
 		{
-			__init.Property("ChunkRescorer");
+			initializer.Property("ChunkRescorer");
 			ChunkRescorer.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			writer.WriteString(Field);
 		}
 
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (InferenceId is not null)
 		{
-			__init.Property("InferenceId");
+			initializer.Property("InferenceId");
 			writer.WriteString(InferenceId);
 		}
 
 		{
-			__init.Property("InferenceText");
+			initializer.Property("InferenceText");
 			writer.WriteString(InferenceText);
 		}
 
 		if (MinScore is not null)
 		{
-			__init.Property("MinScore");
+			initializer.Property("MinScore");
 			writer.WriteValue(MinScore.Value);
 			writer.Write("f");
 		}
 
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		if (RankWindowSize is not null)
 		{
-			__init.Property("RankWindowSize");
+			initializer.Property("RankWindowSize");
 			writer.WriteValue(RankWindowSize.Value);
 		}
 
 		{
-			__init.Property("Retriever");
+			initializer.Property("Retriever");
 			Retriever.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

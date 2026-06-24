@@ -27,25 +27,25 @@ public partial class Groupings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Groupings", false);
+		var initializer = writer.BeginObjectInitializer("Groupings", false);
 		if (DateHistogram is not null)
 		{
-			__init.Property("DateHistogram");
+			initializer.Property("DateHistogram");
 			DateHistogram.FormatCode(writer);
 		}
 
 		if (Histogram is not null)
 		{
-			__init.Property("Histogram");
+			initializer.Property("Histogram");
 			Histogram.FormatCode(writer);
 		}
 
 		if (Terms is not null)
 		{
-			__init.Property("Terms");
+			initializer.Property("Terms");
 			Terms.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

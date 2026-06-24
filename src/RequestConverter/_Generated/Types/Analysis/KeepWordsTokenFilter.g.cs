@@ -27,31 +27,31 @@ public partial class KeepWordsTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("KeepWordsTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("KeepWordsTokenFilter", true);
 		if (KeepWords is not null)
 		{
-			__init.Property("KeepWords");
+			initializer.Property("KeepWords");
 			writer.WriteInlineList(KeepWords, (w, item) => { w.WriteString(item); });
 		}
 
 		if (KeepWordsCase is not null)
 		{
-			__init.Property("KeepWordsCase");
+			initializer.Property("KeepWordsCase");
 			writer.WriteValue(KeepWordsCase.Value);
 		}
 
 		if (KeepWordsPath is not null)
 		{
-			__init.Property("KeepWordsPath");
+			initializer.Property("KeepWordsPath");
 			writer.WriteString(KeepWordsPath);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

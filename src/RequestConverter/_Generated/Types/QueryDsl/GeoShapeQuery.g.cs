@@ -27,36 +27,36 @@ public partial class GeoShapeQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoShapeQuery", false);
+		var initializer = writer.BeginObjectInitializer("GeoShapeQuery", false);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (IgnoreUnmapped is not null)
 		{
-			__init.Property("IgnoreUnmapped");
+			initializer.Property("IgnoreUnmapped");
 			writer.WriteValue(IgnoreUnmapped.Value);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
 		{
-			__init.Property("Shape");
+			initializer.Property("Shape");
 			Shape.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

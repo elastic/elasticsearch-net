@@ -27,74 +27,74 @@ public partial class MemoryStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MemoryStats", false);
+		var initializer = writer.BeginObjectInitializer("MemoryStats", false);
 		if (AdjustedTotalInBytes is not null)
 		{
-			__init.Property("AdjustedTotalInBytes");
+			initializer.Property("AdjustedTotalInBytes");
 			writer.WriteValue(AdjustedTotalInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (FreeInBytes is not null)
 		{
-			__init.Property("FreeInBytes");
+			initializer.Property("FreeInBytes");
 			writer.WriteValue(FreeInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (Resident is not null)
 		{
-			__init.Property("Resident");
+			initializer.Property("Resident");
 			writer.WriteString(Resident);
 		}
 
 		if (ResidentInBytes is not null)
 		{
-			__init.Property("ResidentInBytes");
+			initializer.Property("ResidentInBytes");
 			writer.WriteValue(ResidentInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (Share is not null)
 		{
-			__init.Property("Share");
+			initializer.Property("Share");
 			writer.WriteString(Share);
 		}
 
 		if (ShareInBytes is not null)
 		{
-			__init.Property("ShareInBytes");
+			initializer.Property("ShareInBytes");
 			writer.WriteValue(ShareInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (TotalInBytes is not null)
 		{
-			__init.Property("TotalInBytes");
+			initializer.Property("TotalInBytes");
 			writer.WriteValue(TotalInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (TotalVirtual is not null)
 		{
-			__init.Property("TotalVirtual");
+			initializer.Property("TotalVirtual");
 			writer.WriteString(TotalVirtual);
 		}
 
 		if (TotalVirtualInBytes is not null)
 		{
-			__init.Property("TotalVirtualInBytes");
+			initializer.Property("TotalVirtualInBytes");
 			writer.WriteValue(TotalVirtualInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (UsedInBytes is not null)
 		{
-			__init.Property("UsedInBytes");
+			initializer.Property("UsedInBytes");
 			writer.WriteValue(UsedInBytes.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

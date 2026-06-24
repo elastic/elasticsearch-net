@@ -27,25 +27,25 @@ public partial class FiltersAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FiltersAggregation", false);
+		var initializer = writer.BeginObjectInitializer("FiltersAggregation", false);
 		if (Filters is not null)
 		{
-			__init.Property("Filters");
+			initializer.Property("Filters");
 			Filters.FormatCode(writer);
 		}
 
 		if (OtherBucket is not null)
 		{
-			__init.Property("OtherBucket");
+			initializer.Property("OtherBucket");
 			writer.WriteValue(OtherBucket.Value);
 		}
 
 		if (OtherBucketKey is not null)
 		{
-			__init.Property("OtherBucketKey");
+			initializer.Property("OtherBucketKey");
 			writer.WriteString(OtherBucketKey);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

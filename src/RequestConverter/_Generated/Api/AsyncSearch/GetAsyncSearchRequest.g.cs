@@ -27,36 +27,36 @@ public partial class GetAsyncSearchRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetAsyncSearchRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetAsyncSearchRequest", false);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		if (KeepAlive is not null)
 		{
-			__init.Property("KeepAlive");
+			initializer.Property("KeepAlive");
 			KeepAlive.FormatCode(writer);
 		}
 
 		if (ReturnIntermediateResults is not null)
 		{
-			__init.Property("ReturnIntermediateResults");
+			initializer.Property("ReturnIntermediateResults");
 			writer.WriteValue(ReturnIntermediateResults.Value);
 		}
 
 		if (TypedKeys is not null)
 		{
-			__init.Property("TypedKeys");
+			initializer.Property("TypedKeys");
 			writer.WriteValue(TypedKeys.Value);
 		}
 
 		if (WaitForCompletionTimeout is not null)
 		{
-			__init.Property("WaitForCompletionTimeout");
+			initializer.Property("WaitForCompletionTimeout");
 			WaitForCompletionTimeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

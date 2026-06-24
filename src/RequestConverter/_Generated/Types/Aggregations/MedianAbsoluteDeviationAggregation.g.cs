@@ -27,44 +27,44 @@ public partial class MedianAbsoluteDeviationAggregation : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MedianAbsoluteDeviationAggregation", false);
+		var initializer = writer.BeginObjectInitializer("MedianAbsoluteDeviationAggregation", false);
 		if (Compression is not null)
 		{
-			__init.Property("Compression");
+			initializer.Property("Compression");
 			writer.WriteValue(Compression.Value);
 			writer.Write("d");
 		}
 
 		if (ExecutionHint is not null)
 		{
-			__init.Property("ExecutionHint");
+			initializer.Property("ExecutionHint");
 			Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, writer);
 		}
 
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			writer.WriteString(Format);
 		}
 
 		if (Missing is not null)
 		{
-			__init.Property("Missing");
+			initializer.Property("Missing");
 			writer.WriteValue(Missing);
 		}
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,49 +27,49 @@ public partial class DetailsInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DetailsInfo", false);
+		var initializer = writer.BeginObjectInitializer("DetailsInfo", false);
 		{
-			__init.Property("Blob");
+			initializer.Property("Blob");
 			Blob.FormatCode(writer);
 		}
 
 		if (OverwriteElapsed is not null)
 		{
-			__init.Property("OverwriteElapsed");
+			initializer.Property("OverwriteElapsed");
 			OverwriteElapsed.FormatCode(writer);
 		}
 
 		if (OverwriteElapsedNanos is not null)
 		{
-			__init.Property("OverwriteElapsedNanos");
+			initializer.Property("OverwriteElapsedNanos");
 			writer.WriteValue(OverwriteElapsedNanos.Value);
 		}
 
 		{
-			__init.Property("WriteElapsed");
+			initializer.Property("WriteElapsed");
 			WriteElapsed.FormatCode(writer);
 		}
 
 		{
-			__init.Property("WriteElapsedNanos");
+			initializer.Property("WriteElapsedNanos");
 			writer.WriteValue(WriteElapsedNanos);
 		}
 
 		{
-			__init.Property("WriterNode");
+			initializer.Property("WriterNode");
 			WriterNode.FormatCode(writer);
 		}
 
 		{
-			__init.Property("WriteThrottled");
+			initializer.Property("WriteThrottled");
 			WriteThrottled.FormatCode(writer);
 		}
 
 		{
-			__init.Property("WriteThrottledNanos");
+			initializer.Property("WriteThrottledNanos");
 			writer.WriteValue(WriteThrottledNanos);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

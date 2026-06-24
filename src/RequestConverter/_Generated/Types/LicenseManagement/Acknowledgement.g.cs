@@ -27,17 +27,17 @@ public partial class Acknowledgement : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Acknowledgement", false);
+		var initializer = writer.BeginObjectInitializer("Acknowledgement", false);
 		{
-			__init.Property("License");
+			initializer.Property("License");
 			writer.WriteInlineList(License, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Message");
+			initializer.Property("Message");
 			writer.WriteString(Message);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

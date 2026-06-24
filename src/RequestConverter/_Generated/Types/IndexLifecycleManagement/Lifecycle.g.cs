@@ -27,23 +27,23 @@ public partial class Lifecycle : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Lifecycle", false);
+		var initializer = writer.BeginObjectInitializer("Lifecycle", false);
 		{
-			__init.Property("ModifiedDate");
+			initializer.Property("ModifiedDate");
 			writer.WriteValue(ModifiedDate);
 		}
 
 		{
-			__init.Property("Policy");
+			initializer.Property("Policy");
 			Policy.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

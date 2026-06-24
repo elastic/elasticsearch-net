@@ -27,22 +27,22 @@ public partial class NodeInfoDiscover : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoDiscover", false);
+		var initializer = writer.BeginObjectInitializer("NodeInfoDiscover", false);
 		if (SeedHosts is not null)
 		{
-			__init.Property("SeedHosts");
+			initializer.Property("SeedHosts");
 			writer.WriteInlineList(SeedHosts, (w, item) => { w.WriteString(item); });
 		}
 
 		if (SeedProviders is not null)
 		{
-			__init.Property("SeedProviders");
+			initializer.Property("SeedProviders");
 			writer.WriteInlineList(SeedProviders, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Settings is not null)
 		{
-			__init.Property("Settings");
+			initializer.Property("Settings");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -53,10 +53,10 @@ public partial class NodeInfoDiscover : RequestConverter.ICodeFormattable
 
 		if (Type is not null)
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			writer.WriteString(Type);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

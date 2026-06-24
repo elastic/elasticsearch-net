@@ -27,103 +27,103 @@ public partial class MatchQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MatchQuery", false);
+		var initializer = writer.BeginObjectInitializer("MatchQuery", false);
 		if (Analyzer is not null)
 		{
-			__init.Property("Analyzer");
+			initializer.Property("Analyzer");
 			writer.WriteString(Analyzer);
 		}
 
 		if (AutoGenerateSynonymsPhraseQuery is not null)
 		{
-			__init.Property("AutoGenerateSynonymsPhraseQuery");
+			initializer.Property("AutoGenerateSynonymsPhraseQuery");
 			writer.WriteValue(AutoGenerateSynonymsPhraseQuery.Value);
 		}
 
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 #pragma warning disable CS0618
 		if (CutoffFrequency is not null)
 		{
-			__init.Property("CutoffFrequency");
+			initializer.Property("CutoffFrequency");
 			writer.WriteValue(CutoffFrequency.Value);
 			writer.Write("d");
 		}
 #pragma warning restore CS0618
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Fuzziness is not null)
 		{
-			__init.Property("Fuzziness");
+			initializer.Property("Fuzziness");
 			Fuzziness.FormatCode(writer);
 		}
 
 		if (FuzzyRewrite is not null)
 		{
-			__init.Property("FuzzyRewrite");
+			initializer.Property("FuzzyRewrite");
 			writer.WriteString(FuzzyRewrite);
 		}
 
 		if (FuzzyTranspositions is not null)
 		{
-			__init.Property("FuzzyTranspositions");
+			initializer.Property("FuzzyTranspositions");
 			writer.WriteValue(FuzzyTranspositions.Value);
 		}
 
 		if (Lenient is not null)
 		{
-			__init.Property("Lenient");
+			initializer.Property("Lenient");
 			writer.WriteValue(Lenient.Value);
 		}
 
 		if (MaxExpansions is not null)
 		{
-			__init.Property("MaxExpansions");
+			initializer.Property("MaxExpansions");
 			writer.WriteValue(MaxExpansions.Value);
 		}
 
 		if (MinimumShouldMatch is not null)
 		{
-			__init.Property("MinimumShouldMatch");
+			initializer.Property("MinimumShouldMatch");
 			MinimumShouldMatch.FormatCode(writer);
 		}
 
 		if (Operator is not null)
 		{
-			__init.Property("Operator");
+			initializer.Property("Operator");
 			Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(Operator.Value, writer);
 		}
 
 		if (PrefixLength is not null)
 		{
-			__init.Property("PrefixLength");
+			initializer.Property("PrefixLength");
 			writer.WriteValue(PrefixLength.Value);
 		}
 
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			writer.WriteValue(Query);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
 		if (ZeroTermsQuery is not null)
 		{
-			__init.Property("ZeroTermsQuery");
+			initializer.Property("ZeroTermsQuery");
 			Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQueryCodeFormatter.FormatCode(ZeroTermsQuery.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

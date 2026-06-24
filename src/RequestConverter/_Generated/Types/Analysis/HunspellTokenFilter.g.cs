@@ -27,36 +27,36 @@ public partial class HunspellTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("HunspellTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("HunspellTokenFilter", true);
 		if (Dedup is not null)
 		{
-			__init.Property("Dedup");
+			initializer.Property("Dedup");
 			writer.WriteValue(Dedup.Value);
 		}
 
 		if (Dictionary is not null)
 		{
-			__init.Property("Dictionary");
+			initializer.Property("Dictionary");
 			writer.WriteString(Dictionary);
 		}
 
 		{
-			__init.Property("Locale");
+			initializer.Property("Locale");
 			writer.WriteString(Locale);
 		}
 
 		if (LongestOnly is not null)
 		{
-			__init.Property("LongestOnly");
+			initializer.Property("LongestOnly");
 			writer.WriteValue(LongestOnly.Value);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

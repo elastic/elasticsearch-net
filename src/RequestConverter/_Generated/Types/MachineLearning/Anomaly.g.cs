@@ -27,145 +27,145 @@ public partial class Anomaly : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Anomaly", false);
+		var initializer = writer.BeginObjectInitializer("Anomaly", false);
 		if (Actual is not null)
 		{
-			__init.Property("Actual");
+			initializer.Property("Actual");
 			writer.WriteInlineList(Actual, (w, item) => { w.WriteValue(item); w.Write("d"); });
 		}
 
 		if (AnomalyScoreExplanation is not null)
 		{
-			__init.Property("AnomalyScoreExplanation");
+			initializer.Property("AnomalyScoreExplanation");
 			AnomalyScoreExplanation.FormatCode(writer);
 		}
 
 		{
-			__init.Property("BucketSpan");
+			initializer.Property("BucketSpan");
 			writer.WriteValue(BucketSpan);
 		}
 
 		if (ByFieldName is not null)
 		{
-			__init.Property("ByFieldName");
+			initializer.Property("ByFieldName");
 			writer.WriteString(ByFieldName);
 		}
 
 		if (ByFieldValue is not null)
 		{
-			__init.Property("ByFieldValue");
+			initializer.Property("ByFieldValue");
 			writer.WriteString(ByFieldValue);
 		}
 
 		if (Causes is not null)
 		{
-			__init.Property("Causes");
+			initializer.Property("Causes");
 			writer.WriteInlineList(Causes, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("DetectorIndex");
+			initializer.Property("DetectorIndex");
 			writer.WriteValue(DetectorIndex);
 		}
 
 		if (FieldName is not null)
 		{
-			__init.Property("FieldName");
+			initializer.Property("FieldName");
 			writer.WriteString(FieldName);
 		}
 
 		if (Function is not null)
 		{
-			__init.Property("Function");
+			initializer.Property("Function");
 			writer.WriteString(Function);
 		}
 
 		if (FunctionDescription is not null)
 		{
-			__init.Property("FunctionDescription");
+			initializer.Property("FunctionDescription");
 			writer.WriteString(FunctionDescription);
 		}
 
 		if (GeoResults is not null)
 		{
-			__init.Property("GeoResults");
+			initializer.Property("GeoResults");
 			GeoResults.FormatCode(writer);
 		}
 
 		if (Influencers is not null)
 		{
-			__init.Property("Influencers");
+			initializer.Property("Influencers");
 			writer.WriteInlineList(Influencers, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("InitialRecordScore");
+			initializer.Property("InitialRecordScore");
 			writer.WriteValue(InitialRecordScore);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("IsInterim");
+			initializer.Property("IsInterim");
 			writer.WriteValue(IsInterim);
 		}
 
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			writer.WriteString(JobId);
 		}
 
 		if (OverFieldName is not null)
 		{
-			__init.Property("OverFieldName");
+			initializer.Property("OverFieldName");
 			writer.WriteString(OverFieldName);
 		}
 
 		if (OverFieldValue is not null)
 		{
-			__init.Property("OverFieldValue");
+			initializer.Property("OverFieldValue");
 			writer.WriteString(OverFieldValue);
 		}
 
 		if (PartitionFieldName is not null)
 		{
-			__init.Property("PartitionFieldName");
+			initializer.Property("PartitionFieldName");
 			writer.WriteString(PartitionFieldName);
 		}
 
 		if (PartitionFieldValue is not null)
 		{
-			__init.Property("PartitionFieldValue");
+			initializer.Property("PartitionFieldValue");
 			writer.WriteString(PartitionFieldValue);
 		}
 
 		{
-			__init.Property("Probability");
+			initializer.Property("Probability");
 			writer.WriteValue(Probability);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("RecordScore");
+			initializer.Property("RecordScore");
 			writer.WriteValue(RecordScore);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("ResultType");
+			initializer.Property("ResultType");
 			writer.WriteString(ResultType);
 		}
 
 		{
-			__init.Property("Timestamp");
+			initializer.Property("Timestamp");
 			writer.WriteValue(Timestamp);
 		}
 
 		if (Typical is not null)
 		{
-			__init.Property("Typical");
+			initializer.Property("Typical");
 			writer.WriteInlineList(Typical, (w, item) => { w.WriteValue(item); w.Write("d"); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

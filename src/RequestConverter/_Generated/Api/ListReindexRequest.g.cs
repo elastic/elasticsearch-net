@@ -27,13 +27,13 @@ public partial class ListReindexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ListReindexRequest", false);
+		var initializer = writer.BeginObjectInitializer("ListReindexRequest", false);
 		if (Detailed is not null)
 		{
-			__init.Property("Detailed");
+			initializer.Property("Detailed");
 			writer.WriteValue(Detailed.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

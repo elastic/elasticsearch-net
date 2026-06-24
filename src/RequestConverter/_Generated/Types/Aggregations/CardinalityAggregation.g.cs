@@ -27,43 +27,43 @@ public partial class CardinalityAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CardinalityAggregation", false);
+		var initializer = writer.BeginObjectInitializer("CardinalityAggregation", false);
 		if (ExecutionHint is not null)
 		{
-			__init.Property("ExecutionHint");
+			initializer.Property("ExecutionHint");
 			Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionModeCodeFormatter.FormatCode(ExecutionHint.Value, writer);
 		}
 
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Missing is not null)
 		{
-			__init.Property("Missing");
+			initializer.Property("Missing");
 			writer.WriteValue(Missing);
 		}
 
 		if (PrecisionThreshold is not null)
 		{
-			__init.Property("PrecisionThreshold");
+			initializer.Property("PrecisionThreshold");
 			writer.WriteValue(PrecisionThreshold.Value);
 		}
 
 		if (Rehash is not null)
 		{
-			__init.Property("Rehash");
+			initializer.Property("Rehash");
 			writer.WriteValue(Rehash.Value);
 		}
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

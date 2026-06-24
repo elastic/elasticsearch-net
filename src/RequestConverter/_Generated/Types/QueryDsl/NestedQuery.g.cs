@@ -27,48 +27,48 @@ public partial class NestedQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NestedQuery", false);
+		var initializer = writer.BeginObjectInitializer("NestedQuery", false);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		if (IgnoreUnmapped is not null)
 		{
-			__init.Property("IgnoreUnmapped");
+			initializer.Property("IgnoreUnmapped");
 			writer.WriteValue(IgnoreUnmapped.Value);
 		}
 
 		if (InnerHits is not null)
 		{
-			__init.Property("InnerHits");
+			initializer.Property("InnerHits");
 			InnerHits.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Path");
+			initializer.Property("Path");
 			Path.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			Query.FormatCode(writer);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
 		if (ScoreMode is not null)
 		{
-			__init.Property("ScoreMode");
+			initializer.Property("ScoreMode");
 			Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreModeCodeFormatter.FormatCode(ScoreMode.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

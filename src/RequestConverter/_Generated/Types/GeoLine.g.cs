@@ -27,17 +27,17 @@ public partial class GeoLine : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoLine", false);
+		var initializer = writer.BeginObjectInitializer("GeoLine", false);
 		{
-			__init.Property("Coordinates");
+			initializer.Property("Coordinates");
 			writer.WriteInlineList(Coordinates, (w, item) => { w.WriteInlineList(item, (w, item) => { w.WriteValue(item); w.Write("d"); }); });
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			writer.WriteString(Type);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

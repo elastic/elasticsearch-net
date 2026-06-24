@@ -27,30 +27,30 @@ public partial class Tags : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Tags", false);
+		var initializer = writer.BeginObjectInitializer("Tags", false);
 		{
-			__init.Property("Alias");
+			initializer.Property("Alias");
 			writer.WriteString(Alias);
 		}
 
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		{
-			__init.Property("Organisation");
+			initializer.Property("Organisation");
 			writer.WriteString(Organisation);
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			writer.WriteString(Type);
 		}
 
 		if (UserDefinedTags is not null)
 		{
-			__init.Property("UserDefinedTags");
+			initializer.Property("UserDefinedTags");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -59,6 +59,6 @@ public partial class Tags : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(UserDefinedTags, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

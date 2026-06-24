@@ -27,19 +27,19 @@ public partial class CustomNormalizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CustomNormalizer", true);
+		var initializer = writer.BeginObjectInitializer("CustomNormalizer", true);
 		if (CharFilter is not null)
 		{
-			__init.Property("CharFilter");
+			initializer.Property("CharFilter");
 			writer.WriteInlineList(CharFilter, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			writer.WriteInlineList(Filter, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,30 +27,30 @@ public partial class StopTrainedModelDeploymentRequest : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StopTrainedModelDeploymentRequest", false);
+		var initializer = writer.BeginObjectInitializer("StopTrainedModelDeploymentRequest", false);
 		{
-			__init.Property("ModelId");
+			initializer.Property("ModelId");
 			ModelId.FormatCode(writer);
 		}
 
 		if (AllowNoMatch is not null)
 		{
-			__init.Property("AllowNoMatch");
+			initializer.Property("AllowNoMatch");
 			writer.WriteValue(AllowNoMatch.Value);
 		}
 
 		if (Force is not null)
 		{
-			__init.Property("Force");
+			initializer.Property("Force");
 			writer.WriteValue(Force.Value);
 		}
 
 		if (Id is not null)
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

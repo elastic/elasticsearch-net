@@ -27,31 +27,31 @@ public partial class GetCalendarsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetCalendarsRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetCalendarsRequest", false);
 		if (CalendarId is not null)
 		{
-			__init.Property("CalendarId");
+			initializer.Property("CalendarId");
 			CalendarId.FormatCode(writer);
 		}
 
 		if (From is not null)
 		{
-			__init.Property("From");
+			initializer.Property("From");
 			writer.WriteValue(From.Value);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
 		if (Page is not null)
 		{
-			__init.Property("Page");
+			initializer.Property("Page");
 			Page.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

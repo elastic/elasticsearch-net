@@ -27,63 +27,63 @@ public partial class InferenceResponseResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InferenceResponseResult", false);
+		var initializer = writer.BeginObjectInitializer("InferenceResponseResult", false);
 		if (Entities is not null)
 		{
-			__init.Property("Entities");
+			initializer.Property("Entities");
 			writer.WriteInlineList(Entities, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (FeatureImportance is not null)
 		{
-			__init.Property("FeatureImportance");
+			initializer.Property("FeatureImportance");
 			writer.WriteInlineList(FeatureImportance, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (IsTruncated is not null)
 		{
-			__init.Property("IsTruncated");
+			initializer.Property("IsTruncated");
 			writer.WriteValue(IsTruncated.Value);
 		}
 
 		if (PredictedValue is not null)
 		{
-			__init.Property("PredictedValue");
+			initializer.Property("PredictedValue");
 			writer.WriteInlineList(PredictedValue, (w, item) => { w.WriteInlineList(item, (w, item) => { item.FormatCode(w); }); });
 		}
 
 		if (PredictedValueSequence is not null)
 		{
-			__init.Property("PredictedValueSequence");
+			initializer.Property("PredictedValueSequence");
 			writer.WriteString(PredictedValueSequence);
 		}
 
 		if (PredictionProbability is not null)
 		{
-			__init.Property("PredictionProbability");
+			initializer.Property("PredictionProbability");
 			writer.WriteValue(PredictionProbability.Value);
 			writer.Write("d");
 		}
 
 		if (PredictionScore is not null)
 		{
-			__init.Property("PredictionScore");
+			initializer.Property("PredictionScore");
 			writer.WriteValue(PredictionScore.Value);
 			writer.Write("d");
 		}
 
 		if (TopClasses is not null)
 		{
-			__init.Property("TopClasses");
+			initializer.Property("TopClasses");
 			writer.WriteInlineList(TopClasses, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Warning is not null)
 		{
-			__init.Property("Warning");
+			initializer.Property("Warning");
 			writer.WriteString(Warning);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

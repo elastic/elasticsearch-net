@@ -27,19 +27,19 @@ public partial class ExtendedSearchUsage : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExtendedSearchUsage", false);
+		var initializer = writer.BeginObjectInitializer("ExtendedSearchUsage", false);
 		if (Retrievers is not null)
 		{
-			__init.Property("Retrievers");
+			initializer.Property("Retrievers");
 			Retrievers.FormatCode(writer);
 		}
 
 		if (Section is not null)
 		{
-			__init.Property("Section");
+			initializer.Property("Section");
 			Section.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

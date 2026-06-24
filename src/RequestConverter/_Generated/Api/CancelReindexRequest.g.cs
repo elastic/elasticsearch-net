@@ -27,18 +27,18 @@ public partial class CancelReindexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CancelReindexRequest", false);
+		var initializer = writer.BeginObjectInitializer("CancelReindexRequest", false);
 		{
-			__init.Property("TaskId");
+			initializer.Property("TaskId");
 			TaskId.FormatCode(writer);
 		}
 
 		if (WaitForCompletion is not null)
 		{
-			__init.Property("WaitForCompletion");
+			initializer.Property("WaitForCompletion");
 			writer.WriteValue(WaitForCompletion.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

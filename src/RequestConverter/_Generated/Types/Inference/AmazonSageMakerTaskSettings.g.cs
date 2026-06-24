@@ -27,37 +27,37 @@ public partial class AmazonSageMakerTaskSettings : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AmazonSageMakerTaskSettings", false);
+		var initializer = writer.BeginObjectInitializer("AmazonSageMakerTaskSettings", false);
 		if (CustomAttributes is not null)
 		{
-			__init.Property("CustomAttributes");
+			initializer.Property("CustomAttributes");
 			writer.WriteString(CustomAttributes);
 		}
 
 		if (EnableExplanations is not null)
 		{
-			__init.Property("EnableExplanations");
+			initializer.Property("EnableExplanations");
 			writer.WriteString(EnableExplanations);
 		}
 
 		if (InferenceId is not null)
 		{
-			__init.Property("InferenceId");
+			initializer.Property("InferenceId");
 			writer.WriteString(InferenceId);
 		}
 
 		if (SessionId is not null)
 		{
-			__init.Property("SessionId");
+			initializer.Property("SessionId");
 			writer.WriteString(SessionId);
 		}
 
 		if (TargetVariant is not null)
 		{
-			__init.Property("TargetVariant");
+			initializer.Property("TargetVariant");
 			writer.WriteString(TargetVariant);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

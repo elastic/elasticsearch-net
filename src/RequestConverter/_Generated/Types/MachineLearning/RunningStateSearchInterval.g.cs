@@ -27,29 +27,29 @@ public partial class RunningStateSearchInterval : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RunningStateSearchInterval", false);
+		var initializer = writer.BeginObjectInitializer("RunningStateSearchInterval", false);
 		if (End is not null)
 		{
-			__init.Property("End");
+			initializer.Property("End");
 			End.FormatCode(writer);
 		}
 
 		{
-			__init.Property("EndMs");
+			initializer.Property("EndMs");
 			writer.WriteValue(EndMs);
 		}
 
 		if (Start is not null)
 		{
-			__init.Property("Start");
+			initializer.Property("Start");
 			Start.FormatCode(writer);
 		}
 
 		{
-			__init.Property("StartMs");
+			initializer.Property("StartMs");
 			writer.WriteValue(StartMs);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

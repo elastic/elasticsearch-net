@@ -27,35 +27,35 @@ public partial class LlamaServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("LlamaServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("LlamaServiceSettings", false);
 		if (MaxInputTokens is not null)
 		{
-			__init.Property("MaxInputTokens");
+			initializer.Property("MaxInputTokens");
 			writer.WriteValue(MaxInputTokens.Value);
 		}
 
 		{
-			__init.Property("ModelId");
+			initializer.Property("ModelId");
 			writer.WriteString(ModelId);
 		}
 
 		if (RateLimit is not null)
 		{
-			__init.Property("RateLimit");
+			initializer.Property("RateLimit");
 			RateLimit.FormatCode(writer);
 		}
 
 		if (Similarity is not null)
 		{
-			__init.Property("Similarity");
+			initializer.Property("Similarity");
 			Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityTypeCodeFormatter.FormatCode(Similarity.Value, writer);
 		}
 
 		{
-			__init.Property("Url");
+			initializer.Property("Url");
 			writer.WriteString(Url);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

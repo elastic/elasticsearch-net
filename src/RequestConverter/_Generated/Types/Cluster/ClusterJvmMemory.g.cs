@@ -27,31 +27,31 @@ public partial class ClusterJvmMemory : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterJvmMemory", false);
+		var initializer = writer.BeginObjectInitializer("ClusterJvmMemory", false);
 		if (HeapMax is not null)
 		{
-			__init.Property("HeapMax");
+			initializer.Property("HeapMax");
 			HeapMax.FormatCode(writer);
 		}
 
 		{
-			__init.Property("HeapMaxInBytes");
+			initializer.Property("HeapMaxInBytes");
 			writer.WriteValue(HeapMaxInBytes);
 			writer.Write("L");
 		}
 
 		if (HeapUsed is not null)
 		{
-			__init.Property("HeapUsed");
+			initializer.Property("HeapUsed");
 			HeapUsed.FormatCode(writer);
 		}
 
 		{
-			__init.Property("HeapUsedInBytes");
+			initializer.Property("HeapUsedInBytes");
 			writer.WriteValue(HeapUsedInBytes);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

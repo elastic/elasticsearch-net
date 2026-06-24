@@ -27,19 +27,19 @@ public partial class IndexRouting : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexRouting", false);
+		var initializer = writer.BeginObjectInitializer("IndexRouting", false);
 		if (Allocation is not null)
 		{
-			__init.Property("Allocation");
+			initializer.Property("Allocation");
 			Allocation.FormatCode(writer);
 		}
 
 		if (Rebalance is not null)
 		{
-			__init.Property("Rebalance");
+			initializer.Property("Rebalance");
 			Rebalance.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

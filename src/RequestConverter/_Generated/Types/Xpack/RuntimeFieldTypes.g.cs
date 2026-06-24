@@ -27,22 +27,22 @@ public partial class RuntimeFieldTypes : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RuntimeFieldTypes", false);
+		var initializer = writer.BeginObjectInitializer("RuntimeFieldTypes", false);
 		{
-			__init.Property("Available");
+			initializer.Property("Available");
 			writer.WriteValue(Available);
 		}
 
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);
 		}
 
 		{
-			__init.Property("FieldTypes");
+			initializer.Property("FieldTypes");
 			writer.WriteInlineList(FieldTypes, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

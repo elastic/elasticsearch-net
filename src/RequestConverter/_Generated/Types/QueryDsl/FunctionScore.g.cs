@@ -27,62 +27,62 @@ public partial class FunctionScore : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FunctionScore", false);
+		var initializer = writer.BeginObjectInitializer("FunctionScore", false);
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			Filter.FormatCode(writer);
 		}
 
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		if (Weight is not null)
 		{
-			__init.Property("Weight");
+			initializer.Property("Weight");
 			writer.WriteValue(Weight.Value);
 			writer.Write("d");
 		}
 
 		if (Exp is not null)
 		{
-			__init.Property("Exp");
+			initializer.Property("Exp");
 			Exp.FormatCode(writer);
 		}
 
 		if (FieldValueFactor is not null)
 		{
-			__init.Property("FieldValueFactor");
+			initializer.Property("FieldValueFactor");
 			FieldValueFactor.FormatCode(writer);
 		}
 
 		if (Gauss is not null)
 		{
-			__init.Property("Gauss");
+			initializer.Property("Gauss");
 			Gauss.FormatCode(writer);
 		}
 
 		if (Linear is not null)
 		{
-			__init.Property("Linear");
+			initializer.Property("Linear");
 			Linear.FormatCode(writer);
 		}
 
 		if (RandomScore is not null)
 		{
-			__init.Property("RandomScore");
+			initializer.Property("RandomScore");
 			RandomScore.FormatCode(writer);
 		}
 
 		if (ScriptScore is not null)
 		{
-			__init.Property("ScriptScore");
+			initializer.Property("ScriptScore");
 			ScriptScore.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

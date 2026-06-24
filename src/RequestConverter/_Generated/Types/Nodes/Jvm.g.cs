@@ -27,10 +27,10 @@ public partial class Jvm : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Jvm", false);
+		var initializer = writer.BeginObjectInitializer("Jvm", false);
 		if (BufferPools is not null)
 		{
-			__init.Property("BufferPools");
+			initializer.Property("BufferPools");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -41,48 +41,48 @@ public partial class Jvm : RequestConverter.ICodeFormattable
 
 		if (Classes is not null)
 		{
-			__init.Property("Classes");
+			initializer.Property("Classes");
 			Classes.FormatCode(writer);
 		}
 
 		if (Gc is not null)
 		{
-			__init.Property("Gc");
+			initializer.Property("Gc");
 			Gc.FormatCode(writer);
 		}
 
 		if (Mem is not null)
 		{
-			__init.Property("Mem");
+			initializer.Property("Mem");
 			Mem.FormatCode(writer);
 		}
 
 		if (Threads is not null)
 		{
-			__init.Property("Threads");
+			initializer.Property("Threads");
 			Threads.FormatCode(writer);
 		}
 
 		if (Timestamp is not null)
 		{
-			__init.Property("Timestamp");
+			initializer.Property("Timestamp");
 			writer.WriteValue(Timestamp.Value);
 			writer.Write("L");
 		}
 
 		if (Uptime is not null)
 		{
-			__init.Property("Uptime");
+			initializer.Property("Uptime");
 			writer.WriteString(Uptime);
 		}
 
 		if (UptimeInMillis is not null)
 		{
-			__init.Property("UptimeInMillis");
+			initializer.Property("UptimeInMillis");
 			writer.WriteValue(UptimeInMillis.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

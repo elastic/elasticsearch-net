@@ -27,56 +27,56 @@ public partial class Settings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Settings", false);
+		var initializer = writer.BeginObjectInitializer("Settings", false);
 		if (AlignCheckpoints is not null)
 		{
-			__init.Property("AlignCheckpoints");
+			initializer.Property("AlignCheckpoints");
 			writer.WriteValue(AlignCheckpoints.Value);
 		}
 
 		if (DatesAsEpochMillis is not null)
 		{
-			__init.Property("DatesAsEpochMillis");
+			initializer.Property("DatesAsEpochMillis");
 			writer.WriteValue(DatesAsEpochMillis.Value);
 		}
 
 		if (DeduceMappings is not null)
 		{
-			__init.Property("DeduceMappings");
+			initializer.Property("DeduceMappings");
 			writer.WriteValue(DeduceMappings.Value);
 		}
 
 		if (DocsPerSecond is not null)
 		{
-			__init.Property("DocsPerSecond");
+			initializer.Property("DocsPerSecond");
 			writer.WriteValue(DocsPerSecond.Value);
 			writer.Write("f");
 		}
 
 		if (MaxPageSearchSize is not null)
 		{
-			__init.Property("MaxPageSearchSize");
+			initializer.Property("MaxPageSearchSize");
 			writer.WriteValue(MaxPageSearchSize.Value);
 		}
 
 		if (NumFailureRetries is not null)
 		{
-			__init.Property("NumFailureRetries");
+			initializer.Property("NumFailureRetries");
 			writer.WriteValue(NumFailureRetries.Value);
 		}
 
 		if (Unattended is not null)
 		{
-			__init.Property("Unattended");
+			initializer.Property("Unattended");
 			writer.WriteValue(Unattended.Value);
 		}
 
 		if (UsePointInTime is not null)
 		{
-			__init.Property("UsePointInTime");
+			initializer.Property("UsePointInTime");
 			writer.WriteValue(UsePointInTime.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,25 +27,25 @@ public partial class StemmerOverrideTokenFilter : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StemmerOverrideTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("StemmerOverrideTokenFilter", true);
 		if (Rules is not null)
 		{
-			__init.Property("Rules");
+			initializer.Property("Rules");
 			writer.WriteInlineList(Rules, (w, item) => { w.WriteString(item); });
 		}
 
 		if (RulesPath is not null)
 		{
-			__init.Property("RulesPath");
+			initializer.Property("RulesPath");
 			writer.WriteString(RulesPath);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,42 +27,42 @@ public partial class EqlFeatures : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EqlFeatures", false);
+		var initializer = writer.BeginObjectInitializer("EqlFeatures", false);
 		{
-			__init.Property("Event");
+			initializer.Property("Event");
 			writer.WriteValue(Event);
 		}
 
 		{
-			__init.Property("Join");
+			initializer.Property("Join");
 			writer.WriteValue(Join);
 		}
 
 		{
-			__init.Property("Joins");
+			initializer.Property("Joins");
 			Joins.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Keys");
+			initializer.Property("Keys");
 			Keys.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Pipes");
+			initializer.Property("Pipes");
 			Pipes.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Sequence");
+			initializer.Property("Sequence");
 			writer.WriteValue(Sequence);
 		}
 
 		{
-			__init.Property("Sequences");
+			initializer.Property("Sequences");
 			Sequences.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

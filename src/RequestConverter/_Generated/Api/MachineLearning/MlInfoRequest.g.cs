@@ -27,7 +27,7 @@ public partial class MlInfoRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MlInfoRequest", false);
-		__init.Dispose();
+		var initializer = writer.BeginObjectInitializer("MlInfoRequest", false);
+		initializer.Dispose();
 	}
 }

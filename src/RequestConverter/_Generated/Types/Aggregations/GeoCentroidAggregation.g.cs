@@ -27,38 +27,38 @@ public partial class GeoCentroidAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoCentroidAggregation", false);
+		var initializer = writer.BeginObjectInitializer("GeoCentroidAggregation", false);
 		if (Count is not null)
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count.Value);
 			writer.Write("L");
 		}
 
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Location is not null)
 		{
-			__init.Property("Location");
+			initializer.Property("Location");
 			Location.FormatCode(writer);
 		}
 
 		if (Missing is not null)
 		{
-			__init.Property("Missing");
+			initializer.Property("Missing");
 			writer.WriteValue(Missing);
 		}
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

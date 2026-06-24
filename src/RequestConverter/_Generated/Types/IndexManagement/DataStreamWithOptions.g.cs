@@ -27,18 +27,18 @@ public partial class DataStreamWithOptions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataStreamWithOptions", false);
+		var initializer = writer.BeginObjectInitializer("DataStreamWithOptions", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		if (Options is not null)
 		{
-			__init.Property("Options");
+			initializer.Property("Options");
 			Options.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

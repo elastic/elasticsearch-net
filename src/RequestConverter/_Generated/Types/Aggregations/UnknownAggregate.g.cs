@@ -27,7 +27,7 @@ public partial class UnknownAggregate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UnknownAggregate", false);
-		__init.Dispose();
+		var initializer = writer.BeginObjectInitializer("UnknownAggregate", false);
+		initializer.Dispose();
 	}
 }

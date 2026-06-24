@@ -27,13 +27,13 @@ public partial class DeleteAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteAction", false);
+		var initializer = writer.BeginObjectInitializer("DeleteAction", false);
 		if (DeleteSearchableSnapshot is not null)
 		{
-			__init.Property("DeleteSearchableSnapshot");
+			initializer.Property("DeleteSearchableSnapshot");
 			writer.WriteValue(DeleteSearchableSnapshot.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

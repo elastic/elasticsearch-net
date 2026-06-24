@@ -27,17 +27,17 @@ public partial class ReloadResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ReloadResult", false);
+		var initializer = writer.BeginObjectInitializer("ReloadResult", false);
 		{
-			__init.Property("ReloadDetails");
+			initializer.Property("ReloadDetails");
 			writer.WriteInlineList(ReloadDetails, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Shards");
+			initializer.Property("Shards");
 			Shards.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

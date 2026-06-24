@@ -27,37 +27,37 @@ public partial class TokenizationConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TokenizationConfig", false);
+		var initializer = writer.BeginObjectInitializer("TokenizationConfig", false);
 		if (Bert is not null)
 		{
-			__init.Property("Bert");
+			initializer.Property("Bert");
 			Bert.FormatCode(writer);
 		}
 
 		if (BertJa is not null)
 		{
-			__init.Property("BertJa");
+			initializer.Property("BertJa");
 			BertJa.FormatCode(writer);
 		}
 
 		if (Mpnet is not null)
 		{
-			__init.Property("Mpnet");
+			initializer.Property("Mpnet");
 			Mpnet.FormatCode(writer);
 		}
 
 		if (Roberta is not null)
 		{
-			__init.Property("Roberta");
+			initializer.Property("Roberta");
 			Roberta.FormatCode(writer);
 		}
 
 		if (XlmRoberta is not null)
 		{
-			__init.Property("XlmRoberta");
+			initializer.Property("XlmRoberta");
 			XlmRoberta.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

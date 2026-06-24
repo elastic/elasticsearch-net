@@ -27,55 +27,55 @@ public partial class GetApiKeyRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetApiKeyRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetApiKeyRequest", false);
 		if (ActiveOnly is not null)
 		{
-			__init.Property("ActiveOnly");
+			initializer.Property("ActiveOnly");
 			writer.WriteValue(ActiveOnly.Value);
 		}
 
 		if (Id is not null)
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		if (Owner is not null)
 		{
-			__init.Property("Owner");
+			initializer.Property("Owner");
 			writer.WriteValue(Owner.Value);
 		}
 
 		if (RealmName is not null)
 		{
-			__init.Property("RealmName");
+			initializer.Property("RealmName");
 			RealmName.FormatCode(writer);
 		}
 
 		if (Username is not null)
 		{
-			__init.Property("Username");
+			initializer.Property("Username");
 			Username.FormatCode(writer);
 		}
 
 		if (WithLimitedBy is not null)
 		{
-			__init.Property("WithLimitedBy");
+			initializer.Property("WithLimitedBy");
 			writer.WriteValue(WithLimitedBy.Value);
 		}
 
 		if (WithProfileUid is not null)
 		{
-			__init.Property("WithProfileUid");
+			initializer.Property("WithProfileUid");
 			writer.WriteValue(WithProfileUid.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

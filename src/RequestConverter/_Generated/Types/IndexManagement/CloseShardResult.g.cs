@@ -27,12 +27,12 @@ public partial class CloseShardResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CloseShardResult", false);
+		var initializer = writer.BeginObjectInitializer("CloseShardResult", false);
 		{
-			__init.Property("Failures");
+			initializer.Property("Failures");
 			writer.WriteInlineList(Failures, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

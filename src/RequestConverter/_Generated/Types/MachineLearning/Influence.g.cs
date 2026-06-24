@@ -27,17 +27,17 @@ public partial class Influence : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Influence", false);
+		var initializer = writer.BeginObjectInitializer("Influence", false);
 		{
-			__init.Property("InfluencerFieldName");
+			initializer.Property("InfluencerFieldName");
 			writer.WriteString(InfluencerFieldName);
 		}
 
 		{
-			__init.Property("InfluencerFieldValues");
+			initializer.Property("InfluencerFieldValues");
 			writer.WriteInlineList(InfluencerFieldValues, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

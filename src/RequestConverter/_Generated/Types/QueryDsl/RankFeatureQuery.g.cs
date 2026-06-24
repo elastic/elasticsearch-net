@@ -27,49 +27,49 @@ public partial class RankFeatureQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RankFeatureQuery", false);
+		var initializer = writer.BeginObjectInitializer("RankFeatureQuery", false);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Linear is not null)
 		{
-			__init.Property("Linear");
+			initializer.Property("Linear");
 			Linear.FormatCode(writer);
 		}
 
 		if (Log is not null)
 		{
-			__init.Property("Log");
+			initializer.Property("Log");
 			Log.FormatCode(writer);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
 		if (Saturation is not null)
 		{
-			__init.Property("Saturation");
+			initializer.Property("Saturation");
 			Saturation.FormatCode(writer);
 		}
 
 		if (Sigmoid is not null)
 		{
-			__init.Property("Sigmoid");
+			initializer.Property("Sigmoid");
 			Sigmoid.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

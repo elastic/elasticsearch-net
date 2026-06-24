@@ -27,31 +27,31 @@ public partial class SlowlogTresholdLevels : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SlowlogTresholdLevels", false);
+		var initializer = writer.BeginObjectInitializer("SlowlogTresholdLevels", false);
 		if (Debug is not null)
 		{
-			__init.Property("Debug");
+			initializer.Property("Debug");
 			Debug.FormatCode(writer);
 		}
 
 		if (Info is not null)
 		{
-			__init.Property("Info");
+			initializer.Property("Info");
 			Info.FormatCode(writer);
 		}
 
 		if (Trace is not null)
 		{
-			__init.Property("Trace");
+			initializer.Property("Trace");
 			Trace.FormatCode(writer);
 		}
 
 		if (Warn is not null)
 		{
-			__init.Property("Warn");
+			initializer.Property("Warn");
 			Warn.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

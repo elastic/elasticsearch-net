@@ -27,19 +27,19 @@ public partial class TruncateTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TruncateTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("TruncateTokenFilter", true);
 		if (Length is not null)
 		{
-			__init.Property("Length");
+			initializer.Property("Length");
 			writer.WriteValue(Length.Value);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

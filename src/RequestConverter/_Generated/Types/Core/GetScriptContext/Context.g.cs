@@ -27,17 +27,17 @@ public partial class Context : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Context", false);
+		var initializer = writer.BeginObjectInitializer("Context", false);
 		{
-			__init.Property("Methods");
+			initializer.Property("Methods");
 			writer.WriteInlineList(Methods, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,23 +27,23 @@ public partial class EvaluateDataFrameRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EvaluateDataFrameRequest", false);
+		var initializer = writer.BeginObjectInitializer("EvaluateDataFrameRequest", false);
 		{
-			__init.Property("Evaluation");
+			initializer.Property("Evaluation");
 			Evaluation.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		if (Query is not null)
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			Query.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,19 +27,19 @@ public partial class SparseVectorIndexOptions : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SparseVectorIndexOptions", false);
+		var initializer = writer.BeginObjectInitializer("SparseVectorIndexOptions", false);
 		if (Prune is not null)
 		{
-			__init.Property("Prune");
+			initializer.Property("Prune");
 			writer.WriteValue(Prune.Value);
 		}
 
 		if (PruningConfig is not null)
 		{
-			__init.Property("PruningConfig");
+			initializer.Property("PruningConfig");
 			PruningConfig.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

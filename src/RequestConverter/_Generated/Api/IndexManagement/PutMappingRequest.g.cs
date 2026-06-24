@@ -27,81 +27,81 @@ public partial class PutMappingRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutMappingRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutMappingRequest", false);
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		if (AllowNoIndices is not null)
 		{
-			__init.Property("AllowNoIndices");
+			initializer.Property("AllowNoIndices");
 			writer.WriteValue(AllowNoIndices.Value);
 		}
 
 		if (ExpandWildcards is not null)
 		{
-			__init.Property("ExpandWildcards");
+			initializer.Property("ExpandWildcards");
 			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (IgnoreUnavailable is not null)
 		{
-			__init.Property("IgnoreUnavailable");
+			initializer.Property("IgnoreUnavailable");
 			writer.WriteValue(IgnoreUnavailable.Value);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (WriteIndexOnly is not null)
 		{
-			__init.Property("WriteIndexOnly");
+			initializer.Property("WriteIndexOnly");
 			writer.WriteValue(WriteIndexOnly.Value);
 		}
 
 		if (DateDetection is not null)
 		{
-			__init.Property("DateDetection");
+			initializer.Property("DateDetection");
 			writer.WriteValue(DateDetection.Value);
 		}
 
 		if (Dynamic is not null)
 		{
-			__init.Property("Dynamic");
+			initializer.Property("Dynamic");
 			Elastic.Clients.Elasticsearch.Mapping.DynamicMappingCodeFormatter.FormatCode(Dynamic.Value, writer);
 		}
 
 		if (DynamicDateFormats is not null)
 		{
-			__init.Property("DynamicDateFormats");
+			initializer.Property("DynamicDateFormats");
 			writer.WriteInlineList(DynamicDateFormats, (w, item) => { w.WriteString(item); });
 		}
 
 		if (DynamicTemplates is not null)
 		{
-			__init.Property("DynamicTemplates");
+			initializer.Property("DynamicTemplates");
 			writer.WriteInlineList(DynamicTemplates, (w, item) => { w.Write("new("); w.WriteString(item.Key); w.Write(", "); item.Value.FormatCode(w); w.Write(")"); });
 		}
 
 		if (FieldNames is not null)
 		{
-			__init.Property("FieldNames");
+			initializer.Property("FieldNames");
 			FieldNames.FormatCode(writer);
 		}
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -112,25 +112,25 @@ public partial class PutMappingRequest : RequestConverter.ICodeFormattable
 
 		if (NumericDetection is not null)
 		{
-			__init.Property("NumericDetection");
+			initializer.Property("NumericDetection");
 			writer.WriteValue(NumericDetection.Value);
 		}
 
 		if (Properties is not null)
 		{
-			__init.Property("Properties");
+			initializer.Property("Properties");
 			Properties.FormatCode(writer);
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			Routing.FormatCode(writer);
 		}
 
 		if (Runtime is not null)
 		{
-			__init.Property("Runtime");
+			initializer.Property("Runtime");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("Elastic.Clients.Elasticsearch.Field");
 			writer.Write(", ");
@@ -141,10 +141,10 @@ public partial class PutMappingRequest : RequestConverter.ICodeFormattable
 
 		if (Source is not null)
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			Source.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,15 +27,15 @@ public partial class CloseIndexResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CloseIndexResult", false);
+		var initializer = writer.BeginObjectInitializer("CloseIndexResult", false);
 		{
-			__init.Property("Closed");
+			initializer.Property("Closed");
 			writer.WriteValue(Closed);
 		}
 
 		if (Shards is not null)
 		{
-			__init.Property("Shards");
+			initializer.Property("Shards");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -44,6 +44,6 @@ public partial class CloseIndexResult : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(Shards, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

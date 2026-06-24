@@ -27,7 +27,7 @@ public partial class GetUserPrivilegesRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetUserPrivilegesRequest", false);
-		__init.Dispose();
+		var initializer = writer.BeginObjectInitializer("GetUserPrivilegesRequest", false);
+		initializer.Dispose();
 	}
 }

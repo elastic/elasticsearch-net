@@ -27,29 +27,29 @@ public partial class PutInferenceRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutInferenceRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutInferenceRequest", false);
 		{
-			__init.Property("InferenceId");
+			initializer.Property("InferenceId");
 			InferenceId.FormatCode(writer);
 		}
 
 		if (TaskType is not null)
 		{
-			__init.Property("TaskType");
+			initializer.Property("TaskType");
 			Elastic.Clients.Elasticsearch.Inference.TaskTypeCodeFormatter.FormatCode(TaskType.Value, writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		{
-			__init.Property("InferenceConfig");
+			initializer.Property("InferenceConfig");
 			InferenceConfig.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

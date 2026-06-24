@@ -27,12 +27,12 @@ public partial class FieldNamesField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldNamesField", false);
+		var initializer = writer.BeginObjectInitializer("FieldNamesField", false);
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

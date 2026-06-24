@@ -27,17 +27,17 @@ public partial class GeoIpNodeDatabases : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoIpNodeDatabases", false);
+		var initializer = writer.BeginObjectInitializer("GeoIpNodeDatabases", false);
 		{
-			__init.Property("Databases");
+			initializer.Property("Databases");
 			writer.WriteInlineList(Databases, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("FilesInTemp");
+			initializer.Property("FilesInTemp");
 			writer.WriteInlineList(FilesInTemp, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

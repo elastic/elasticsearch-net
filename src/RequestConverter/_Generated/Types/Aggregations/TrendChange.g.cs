@@ -27,24 +27,24 @@ public partial class TrendChange : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrendChange", false);
+		var initializer = writer.BeginObjectInitializer("TrendChange", false);
 		{
-			__init.Property("ChangePoint");
+			initializer.Property("ChangePoint");
 			writer.WriteValue(ChangePoint);
 		}
 
 		{
-			__init.Property("PValue");
+			initializer.Property("PValue");
 			writer.WriteValue(PValue);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("RValue");
+			initializer.Property("RValue");
 			writer.WriteValue(RValue);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

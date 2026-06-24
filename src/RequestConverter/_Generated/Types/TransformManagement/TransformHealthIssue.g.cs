@@ -27,40 +27,40 @@ public partial class TransformHealthIssue : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TransformHealthIssue", false);
+		var initializer = writer.BeginObjectInitializer("TransformHealthIssue", false);
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 		}
 
 		if (Details is not null)
 		{
-			__init.Property("Details");
+			initializer.Property("Details");
 			writer.WriteString(Details);
 		}
 
 		if (FirstOccurenceString is not null)
 		{
-			__init.Property("FirstOccurenceString");
+			initializer.Property("FirstOccurenceString");
 			writer.WriteValue(FirstOccurenceString.Value);
 		}
 
 		if (FirstOccurrence is not null)
 		{
-			__init.Property("FirstOccurrence");
+			initializer.Property("FirstOccurrence");
 			writer.WriteValue(FirstOccurrence.Value);
 		}
 
 		{
-			__init.Property("Issue");
+			initializer.Property("Issue");
 			writer.WriteString(Issue);
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			writer.WriteString(Type);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

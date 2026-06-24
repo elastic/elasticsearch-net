@@ -27,45 +27,45 @@ public partial class NodeJvmInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeJvmInfo", false);
+		var initializer = writer.BeginObjectInitializer("NodeJvmInfo", false);
 		{
-			__init.Property("GcCollectors");
+			initializer.Property("GcCollectors");
 			writer.WriteInlineList(GcCollectors, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("InputArguments");
+			initializer.Property("InputArguments");
 			writer.WriteInlineList(InputArguments, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Mem");
+			initializer.Property("Mem");
 			Mem.FormatCode(writer);
 		}
 
 		{
-			__init.Property("MemoryPools");
+			initializer.Property("MemoryPools");
 			writer.WriteInlineList(MemoryPools, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Pid");
+			initializer.Property("Pid");
 			writer.WriteValue(Pid);
 		}
 
 		{
-			__init.Property("StartTimeInMillis");
+			initializer.Property("StartTimeInMillis");
 			writer.WriteValue(StartTimeInMillis);
 		}
 
 		{
-			__init.Property("UsingBundledJdk");
+			initializer.Property("UsingBundledJdk");
 			writer.WriteValue(UsingBundledJdk);
 		}
 
 		if (UsingCompressedOrdinaryObjectPointers is not null)
 		{
-			__init.Property("UsingCompressedOrdinaryObjectPointers");
+			initializer.Property("UsingCompressedOrdinaryObjectPointers");
 			if (UsingCompressedOrdinaryObjectPointers.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				writer.WriteValue(UsingCompressedOrdinaryObjectPointers.Value1);
@@ -77,25 +77,25 @@ public partial class NodeJvmInfo : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
 		{
-			__init.Property("VmName");
+			initializer.Property("VmName");
 			writer.WriteString(VmName);
 		}
 
 		{
-			__init.Property("VmVendor");
+			initializer.Property("VmVendor");
 			writer.WriteString(VmVendor);
 		}
 
 		{
-			__init.Property("VmVersion");
+			initializer.Property("VmVersion");
 			writer.WriteString(VmVersion);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

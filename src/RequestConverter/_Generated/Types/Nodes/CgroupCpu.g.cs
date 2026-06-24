@@ -27,31 +27,31 @@ public partial class CgroupCpu : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CgroupCpu", false);
+		var initializer = writer.BeginObjectInitializer("CgroupCpu", false);
 		if (CfsPeriodMicros is not null)
 		{
-			__init.Property("CfsPeriodMicros");
+			initializer.Property("CfsPeriodMicros");
 			writer.WriteValue(CfsPeriodMicros.Value);
 		}
 
 		if (CfsQuotaMicros is not null)
 		{
-			__init.Property("CfsQuotaMicros");
+			initializer.Property("CfsQuotaMicros");
 			writer.WriteValue(CfsQuotaMicros.Value);
 		}
 
 		if (ControlGroup is not null)
 		{
-			__init.Property("ControlGroup");
+			initializer.Property("ControlGroup");
 			writer.WriteString(ControlGroup);
 		}
 
 		if (Stat is not null)
 		{
-			__init.Property("Stat");
+			initializer.Property("Stat");
 			Stat.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

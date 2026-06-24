@@ -27,72 +27,72 @@ public partial class AppendProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AppendProcessor", false);
+		var initializer = writer.BeginObjectInitializer("AppendProcessor", false);
 		if (AllowDuplicates is not null)
 		{
-			__init.Property("AllowDuplicates");
+			initializer.Property("AllowDuplicates");
 			writer.WriteValue(AllowDuplicates.Value);
 		}
 
 		if (CopyFrom is not null)
 		{
-			__init.Property("CopyFrom");
+			initializer.Property("CopyFrom");
 			CopyFrom.FormatCode(writer);
 		}
 
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (If is not null)
 		{
-			__init.Property("If");
+			initializer.Property("If");
 			If.FormatCode(writer);
 		}
 
 		if (IgnoreEmptyValues is not null)
 		{
-			__init.Property("IgnoreEmptyValues");
+			initializer.Property("IgnoreEmptyValues");
 			writer.WriteValue(IgnoreEmptyValues.Value);
 		}
 
 		if (IgnoreFailure is not null)
 		{
-			__init.Property("IgnoreFailure");
+			initializer.Property("IgnoreFailure");
 			writer.WriteValue(IgnoreFailure.Value);
 		}
 
 		if (MediaType is not null)
 		{
-			__init.Property("MediaType");
+			initializer.Property("MediaType");
 			writer.WriteString(MediaType);
 		}
 
 		if (OnFailure is not null)
 		{
-			__init.Property("OnFailure");
+			initializer.Property("OnFailure");
 			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Tag is not null)
 		{
-			__init.Property("Tag");
+			initializer.Property("Tag");
 			writer.WriteString(Tag);
 		}
 
 		if (Value is not null)
 		{
-			__init.Property("Value");
+			initializer.Property("Value");
 			writer.WriteInlineList(Value, (w, item) => { w.WriteValue(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,14 +27,14 @@ public partial class JobUsage : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("JobUsage", false);
+		var initializer = writer.BeginObjectInitializer("JobUsage", false);
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 		}
 
 		{
-			__init.Property("CreatedBy");
+			initializer.Property("CreatedBy");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -44,20 +44,20 @@ public partial class JobUsage : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Detectors");
+			initializer.Property("Detectors");
 			Detectors.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Forecasts");
+			initializer.Property("Forecasts");
 			Forecasts.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ModelSize");
+			initializer.Property("ModelSize");
 			ModelSize.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

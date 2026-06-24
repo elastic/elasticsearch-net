@@ -27,9 +27,9 @@ public partial class CustomResponseParams : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CustomResponseParams", false);
+		var initializer = writer.BeginObjectInitializer("CustomResponseParams", false);
 		{
-			__init.Property("JsonParser");
+			initializer.Property("JsonParser");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -38,6 +38,6 @@ public partial class CustomResponseParams : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(JsonParser, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

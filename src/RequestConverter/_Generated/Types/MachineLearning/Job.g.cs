@@ -27,143 +27,143 @@ public partial class Job : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Job", false);
+		var initializer = writer.BeginObjectInitializer("Job", false);
 		{
-			__init.Property("AllowLazyOpen");
+			initializer.Property("AllowLazyOpen");
 			writer.WriteValue(AllowLazyOpen);
 		}
 
 		{
-			__init.Property("AnalysisConfig");
+			initializer.Property("AnalysisConfig");
 			AnalysisConfig.FormatCode(writer);
 		}
 
 		if (AnalysisLimits is not null)
 		{
-			__init.Property("AnalysisLimits");
+			initializer.Property("AnalysisLimits");
 			AnalysisLimits.FormatCode(writer);
 		}
 
 		if (BackgroundPersistInterval is not null)
 		{
-			__init.Property("BackgroundPersistInterval");
+			initializer.Property("BackgroundPersistInterval");
 			BackgroundPersistInterval.FormatCode(writer);
 		}
 
 		if (Blocked is not null)
 		{
-			__init.Property("Blocked");
+			initializer.Property("Blocked");
 			Blocked.FormatCode(writer);
 		}
 
 		if (CreateTime is not null)
 		{
-			__init.Property("CreateTime");
+			initializer.Property("CreateTime");
 			writer.WriteValue(CreateTime.Value);
 		}
 
 		if (CustomSettings is not null)
 		{
-			__init.Property("CustomSettings");
+			initializer.Property("CustomSettings");
 			writer.WriteValue(CustomSettings);
 		}
 
 		if (DailyModelSnapshotRetentionAfterDays is not null)
 		{
-			__init.Property("DailyModelSnapshotRetentionAfterDays");
+			initializer.Property("DailyModelSnapshotRetentionAfterDays");
 			writer.WriteValue(DailyModelSnapshotRetentionAfterDays.Value);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("DataDescription");
+			initializer.Property("DataDescription");
 			DataDescription.FormatCode(writer);
 		}
 
 		if (DatafeedConfig is not null)
 		{
-			__init.Property("DatafeedConfig");
+			initializer.Property("DatafeedConfig");
 			DatafeedConfig.FormatCode(writer);
 		}
 
 		if (Deleting is not null)
 		{
-			__init.Property("Deleting");
+			initializer.Property("Deleting");
 			writer.WriteValue(Deleting.Value);
 		}
 
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		if (FinishedTime is not null)
 		{
-			__init.Property("FinishedTime");
+			initializer.Property("FinishedTime");
 			writer.WriteValue(FinishedTime.Value);
 		}
 
 		if (Groups is not null)
 		{
-			__init.Property("Groups");
+			initializer.Property("Groups");
 			writer.WriteInlineList(Groups, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			writer.WriteString(JobId);
 		}
 
 		if (JobType is not null)
 		{
-			__init.Property("JobType");
+			initializer.Property("JobType");
 			writer.WriteString(JobType);
 		}
 
 		if (JobVersion is not null)
 		{
-			__init.Property("JobVersion");
+			initializer.Property("JobVersion");
 			writer.WriteString(JobVersion);
 		}
 
 		if (ModelPlotConfig is not null)
 		{
-			__init.Property("ModelPlotConfig");
+			initializer.Property("ModelPlotConfig");
 			ModelPlotConfig.FormatCode(writer);
 		}
 
 		if (ModelSnapshotId is not null)
 		{
-			__init.Property("ModelSnapshotId");
+			initializer.Property("ModelSnapshotId");
 			writer.WriteString(ModelSnapshotId);
 		}
 
 		{
-			__init.Property("ModelSnapshotRetentionDays");
+			initializer.Property("ModelSnapshotRetentionDays");
 			writer.WriteValue(ModelSnapshotRetentionDays);
 			writer.Write("L");
 		}
 
 		if (RenormalizationWindowDays is not null)
 		{
-			__init.Property("RenormalizationWindowDays");
+			initializer.Property("RenormalizationWindowDays");
 			writer.WriteValue(RenormalizationWindowDays.Value);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("ResultsIndexName");
+			initializer.Property("ResultsIndexName");
 			writer.WriteString(ResultsIndexName);
 		}
 
 		if (ResultsRetentionDays is not null)
 		{
-			__init.Property("ResultsRetentionDays");
+			initializer.Property("ResultsRetentionDays");
 			writer.WriteValue(ResultsRetentionDays.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,31 +27,31 @@ public partial class BucketKsAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BucketKsAggregation", false);
+		var initializer = writer.BeginObjectInitializer("BucketKsAggregation", false);
 		if (Alternative is not null)
 		{
-			__init.Property("Alternative");
+			initializer.Property("Alternative");
 			writer.WriteInlineList(Alternative, (w, item) => { w.WriteString(item); });
 		}
 
 		if (BucketsPath is not null)
 		{
-			__init.Property("BucketsPath");
+			initializer.Property("BucketsPath");
 			BucketsPath.FormatCode(writer);
 		}
 
 		if (Fractions is not null)
 		{
-			__init.Property("Fractions");
+			initializer.Property("Fractions");
 			writer.WriteInlineList(Fractions, (w, item) => { w.WriteValue(item); w.Write("d"); });
 		}
 
 		if (SamplingMethod is not null)
 		{
-			__init.Property("SamplingMethod");
+			initializer.Property("SamplingMethod");
 			writer.WriteString(SamplingMethod);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

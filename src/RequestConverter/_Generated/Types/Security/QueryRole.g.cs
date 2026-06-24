@@ -27,40 +27,40 @@ public partial class QueryRole : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("QueryRole", false);
+		var initializer = writer.BeginObjectInitializer("QueryRole", false);
 		if (Applications is not null)
 		{
-			__init.Property("Applications");
+			initializer.Property("Applications");
 			writer.WriteInlineList(Applications, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Cluster is not null)
 		{
-			__init.Property("Cluster");
+			initializer.Property("Cluster");
 			writer.WriteInlineList(Cluster, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		if (Global is not null)
 		{
-			__init.Property("Global");
+			initializer.Property("Global");
 			writer.WriteInlineList(Global, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Indices is not null)
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			writer.WriteInlineList(Indices, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Metadata is not null)
 		{
-			__init.Property("Metadata");
+			initializer.Property("Metadata");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -70,43 +70,43 @@ public partial class QueryRole : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		if (RemoteCluster is not null)
 		{
-			__init.Property("RemoteCluster");
+			initializer.Property("RemoteCluster");
 			writer.WriteInlineList(RemoteCluster, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (RemoteIndices is not null)
 		{
-			__init.Property("RemoteIndices");
+			initializer.Property("RemoteIndices");
 			writer.WriteInlineList(RemoteIndices, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Restriction is not null)
 		{
-			__init.Property("Restriction");
+			initializer.Property("Restriction");
 			Restriction.FormatCode(writer);
 		}
 
 		if (RunAs is not null)
 		{
-			__init.Property("RunAs");
+			initializer.Property("RunAs");
 			writer.WriteInlineList(RunAs, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Sort is not null)
 		{
-			__init.Property("Sort");
+			initializer.Property("Sort");
 			writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (TransientMetadata is not null)
 		{
-			__init.Property("TransientMetadata");
+			initializer.Property("TransientMetadata");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -115,6 +115,6 @@ public partial class QueryRole : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(TransientMetadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

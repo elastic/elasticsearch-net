@@ -27,30 +27,30 @@ public partial class GetTasksRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetTasksRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetTasksRequest", false);
 		{
-			__init.Property("TaskId");
+			initializer.Property("TaskId");
 			TaskId.FormatCode(writer);
 		}
 
 		if (FollowRelocations is not null)
 		{
-			__init.Property("FollowRelocations");
+			initializer.Property("FollowRelocations");
 			writer.WriteValue(FollowRelocations.Value);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (WaitForCompletion is not null)
 		{
-			__init.Property("WaitForCompletion");
+			initializer.Property("WaitForCompletion");
 			writer.WriteValue(WaitForCompletion.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

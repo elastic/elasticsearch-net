@@ -27,48 +27,48 @@ public partial class CloseIndexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CloseIndexRequest", false);
+		var initializer = writer.BeginObjectInitializer("CloseIndexRequest", false);
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		if (AllowNoIndices is not null)
 		{
-			__init.Property("AllowNoIndices");
+			initializer.Property("AllowNoIndices");
 			writer.WriteValue(AllowNoIndices.Value);
 		}
 
 		if (ExpandWildcards is not null)
 		{
-			__init.Property("ExpandWildcards");
+			initializer.Property("ExpandWildcards");
 			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (IgnoreUnavailable is not null)
 		{
-			__init.Property("IgnoreUnavailable");
+			initializer.Property("IgnoreUnavailable");
 			writer.WriteValue(IgnoreUnavailable.Value);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (WaitForActiveShards is not null)
 		{
-			__init.Property("WaitForActiveShards");
+			initializer.Property("WaitForActiveShards");
 			WaitForActiveShards.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

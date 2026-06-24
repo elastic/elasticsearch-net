@@ -27,91 +27,91 @@ public partial class ValidateQueryRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ValidateQueryRequest", false);
+		var initializer = writer.BeginObjectInitializer("ValidateQueryRequest", false);
 		if (Indices is not null)
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		if (AllowNoIndices is not null)
 		{
-			__init.Property("AllowNoIndices");
+			initializer.Property("AllowNoIndices");
 			writer.WriteValue(AllowNoIndices.Value);
 		}
 
 		if (AllShards is not null)
 		{
-			__init.Property("AllShards");
+			initializer.Property("AllShards");
 			writer.WriteValue(AllShards.Value);
 		}
 
 		if (Analyzer is not null)
 		{
-			__init.Property("Analyzer");
+			initializer.Property("Analyzer");
 			writer.WriteString(Analyzer);
 		}
 
 		if (AnalyzeWildcard is not null)
 		{
-			__init.Property("AnalyzeWildcard");
+			initializer.Property("AnalyzeWildcard");
 			writer.WriteValue(AnalyzeWildcard.Value);
 		}
 
 		if (DefaultOperator is not null)
 		{
-			__init.Property("DefaultOperator");
+			initializer.Property("DefaultOperator");
 			Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(DefaultOperator.Value, writer);
 		}
 
 		if (Df is not null)
 		{
-			__init.Property("Df");
+			initializer.Property("Df");
 			writer.WriteString(Df);
 		}
 
 		if (ExpandWildcards is not null)
 		{
-			__init.Property("ExpandWildcards");
+			initializer.Property("ExpandWildcards");
 			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (Explain is not null)
 		{
-			__init.Property("Explain");
+			initializer.Property("Explain");
 			writer.WriteValue(Explain.Value);
 		}
 
 		if (IgnoreUnavailable is not null)
 		{
-			__init.Property("IgnoreUnavailable");
+			initializer.Property("IgnoreUnavailable");
 			writer.WriteValue(IgnoreUnavailable.Value);
 		}
 
 		if (Lenient is not null)
 		{
-			__init.Property("Lenient");
+			initializer.Property("Lenient");
 			writer.WriteValue(Lenient.Value);
 		}
 
 		if (QueryLuceneSyntax is not null)
 		{
-			__init.Property("QueryLuceneSyntax");
+			initializer.Property("QueryLuceneSyntax");
 			writer.WriteString(QueryLuceneSyntax);
 		}
 
 		if (Rewrite is not null)
 		{
-			__init.Property("Rewrite");
+			initializer.Property("Rewrite");
 			writer.WriteValue(Rewrite.Value);
 		}
 
 		if (Query is not null)
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			Query.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

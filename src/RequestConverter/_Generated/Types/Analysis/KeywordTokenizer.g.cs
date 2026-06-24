@@ -27,19 +27,19 @@ public partial class KeywordTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("KeywordTokenizer", true);
+		var initializer = writer.BeginObjectInitializer("KeywordTokenizer", true);
 		if (BufferSize is not null)
 		{
-			__init.Property("BufferSize");
+			initializer.Property("BufferSize");
 			writer.WriteValue(BufferSize.Value);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

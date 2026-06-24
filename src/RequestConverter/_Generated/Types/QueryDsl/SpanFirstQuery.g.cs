@@ -27,30 +27,30 @@ public partial class SpanFirstQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SpanFirstQuery", false);
+		var initializer = writer.BeginObjectInitializer("SpanFirstQuery", false);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		{
-			__init.Property("End");
+			initializer.Property("End");
 			writer.WriteValue(End);
 		}
 
 		{
-			__init.Property("Match");
+			initializer.Property("Match");
 			Match.FormatCode(writer);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

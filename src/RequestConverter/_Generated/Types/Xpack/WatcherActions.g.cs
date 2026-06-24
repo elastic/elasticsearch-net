@@ -27,9 +27,9 @@ public partial class WatcherActions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("WatcherActions", false);
+		var initializer = writer.BeginObjectInitializer("WatcherActions", false);
 		{
-			__init.Property("Actions");
+			initializer.Property("Actions");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -38,6 +38,6 @@ public partial class WatcherActions : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(Actions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

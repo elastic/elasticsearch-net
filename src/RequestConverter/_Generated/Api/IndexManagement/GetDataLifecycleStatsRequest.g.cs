@@ -27,7 +27,7 @@ public partial class GetDataLifecycleStatsRequest : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetDataLifecycleStatsRequest", false);
-		__init.Dispose();
+		var initializer = writer.BeginObjectInitializer("GetDataLifecycleStatsRequest", false);
+		initializer.Dispose();
 	}
 }

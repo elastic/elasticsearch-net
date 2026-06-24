@@ -27,37 +27,37 @@ public partial class OidcPrepareAuthenticationRequest : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("OidcPrepareAuthenticationRequest", false);
+		var initializer = writer.BeginObjectInitializer("OidcPrepareAuthenticationRequest", false);
 		if (Iss is not null)
 		{
-			__init.Property("Iss");
+			initializer.Property("Iss");
 			writer.WriteString(Iss);
 		}
 
 		if (LoginHint is not null)
 		{
-			__init.Property("LoginHint");
+			initializer.Property("LoginHint");
 			writer.WriteString(LoginHint);
 		}
 
 		if (Nonce is not null)
 		{
-			__init.Property("Nonce");
+			initializer.Property("Nonce");
 			writer.WriteString(Nonce);
 		}
 
 		if (Realm is not null)
 		{
-			__init.Property("Realm");
+			initializer.Property("Realm");
 			writer.WriteString(Realm);
 		}
 
 		if (State is not null)
 		{
-			__init.Property("State");
+			initializer.Property("State");
 			writer.WriteString(State);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

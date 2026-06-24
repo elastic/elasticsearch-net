@@ -27,43 +27,43 @@ public partial class QueryUserRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("QueryUserRequest", false);
+		var initializer = writer.BeginObjectInitializer("QueryUserRequest", false);
 		if (WithProfileUid is not null)
 		{
-			__init.Property("WithProfileUid");
+			initializer.Property("WithProfileUid");
 			writer.WriteValue(WithProfileUid.Value);
 		}
 
 		if (From is not null)
 		{
-			__init.Property("From");
+			initializer.Property("From");
 			writer.WriteValue(From.Value);
 		}
 
 		if (Query is not null)
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			Query.FormatCode(writer);
 		}
 
 		if (SearchAfter is not null)
 		{
-			__init.Property("SearchAfter");
+			initializer.Property("SearchAfter");
 			writer.WriteInlineList(SearchAfter, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
 		if (Sort is not null)
 		{
-			__init.Property("Sort");
+			initializer.Property("Sort");
 			writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

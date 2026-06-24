@@ -27,18 +27,18 @@ public partial class TrainedModelAssignmentRoutingStateAndReason : RequestConver
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelAssignmentRoutingStateAndReason", false);
+		var initializer = writer.BeginObjectInitializer("TrainedModelAssignmentRoutingStateAndReason", false);
 		if (Reason is not null)
 		{
-			__init.Property("Reason");
+			initializer.Property("Reason");
 			writer.WriteString(Reason);
 		}
 
 		{
-			__init.Property("RoutingState");
+			initializer.Property("RoutingState");
 			Elastic.Clients.Elasticsearch.MachineLearning.RoutingStateCodeFormatter.FormatCode(RoutingState, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

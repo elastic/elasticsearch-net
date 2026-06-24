@@ -27,22 +27,22 @@ public partial class TrainedModelDeploymentAllocationStatus : RequestConverter.I
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelDeploymentAllocationStatus", false);
+		var initializer = writer.BeginObjectInitializer("TrainedModelDeploymentAllocationStatus", false);
 		{
-			__init.Property("AllocationCount");
+			initializer.Property("AllocationCount");
 			writer.WriteValue(AllocationCount);
 		}
 
 		{
-			__init.Property("State");
+			initializer.Property("State");
 			Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationStateCodeFormatter.FormatCode(State, writer);
 		}
 
 		{
-			__init.Property("TargetAllocationCount");
+			initializer.Property("TargetAllocationCount");
 			writer.WriteValue(TargetAllocationCount);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

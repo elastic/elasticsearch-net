@@ -27,25 +27,25 @@ public partial class EqlHits<TEvent> : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EqlHits<TEvent>", false);
+		var initializer = writer.BeginObjectInitializer("EqlHits<TEvent>", false);
 		if (Events is not null)
 		{
-			__init.Property("Events");
+			initializer.Property("Events");
 			writer.WriteInlineList(Events, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Sequences is not null)
 		{
-			__init.Property("Sequences");
+			initializer.Property("Sequences");
 			writer.WriteInlineList(Sequences, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Total is not null)
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			Total.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

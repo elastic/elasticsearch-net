@@ -27,25 +27,25 @@ public partial class RandomSamplerAggregation : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RandomSamplerAggregation", false);
+		var initializer = writer.BeginObjectInitializer("RandomSamplerAggregation", false);
 		{
-			__init.Property("Probability");
+			initializer.Property("Probability");
 			writer.WriteValue(Probability);
 			writer.Write("d");
 		}
 
 		if (Seed is not null)
 		{
-			__init.Property("Seed");
+			initializer.Property("Seed");
 			writer.WriteValue(Seed.Value);
 		}
 
 		if (ShardSeed is not null)
 		{
-			__init.Property("ShardSeed");
+			initializer.Property("ShardSeed");
 			writer.WriteValue(ShardSeed.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

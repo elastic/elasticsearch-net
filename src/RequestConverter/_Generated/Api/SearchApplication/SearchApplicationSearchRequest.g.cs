@@ -27,21 +27,21 @@ public partial class SearchApplicationSearchRequest : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SearchApplicationSearchRequest", false);
+		var initializer = writer.BeginObjectInitializer("SearchApplicationSearchRequest", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		if (TypedKeys is not null)
 		{
-			__init.Property("TypedKeys");
+			initializer.Property("TypedKeys");
 			writer.WriteValue(TypedKeys.Value);
 		}
 
 		if (Params is not null)
 		{
-			__init.Property("Params");
+			initializer.Property("Params");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -50,6 +50,6 @@ public partial class SearchApplicationSearchRequest : RequestConverter.ICodeForm
 			writer.WriteInlineList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

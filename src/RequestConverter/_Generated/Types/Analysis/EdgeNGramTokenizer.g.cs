@@ -27,37 +27,37 @@ public partial class EdgeNGramTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EdgeNGramTokenizer", true);
+		var initializer = writer.BeginObjectInitializer("EdgeNGramTokenizer", true);
 		if (CustomTokenChars is not null)
 		{
-			__init.Property("CustomTokenChars");
+			initializer.Property("CustomTokenChars");
 			writer.WriteString(CustomTokenChars);
 		}
 
 		if (MaxGram is not null)
 		{
-			__init.Property("MaxGram");
+			initializer.Property("MaxGram");
 			writer.WriteValue(MaxGram.Value);
 		}
 
 		if (MinGram is not null)
 		{
-			__init.Property("MinGram");
+			initializer.Property("MinGram");
 			writer.WriteValue(MinGram.Value);
 		}
 
 		if (TokenChars is not null)
 		{
-			__init.Property("TokenChars");
+			initializer.Property("TokenChars");
 			writer.WriteInlineList(TokenChars, (w, item) => { Elastic.Clients.Elasticsearch.Analysis.TokenCharCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

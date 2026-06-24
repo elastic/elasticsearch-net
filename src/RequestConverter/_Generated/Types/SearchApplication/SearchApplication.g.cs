@@ -27,34 +27,34 @@ public partial class SearchApplication : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SearchApplication", false);
+		var initializer = writer.BeginObjectInitializer("SearchApplication", false);
 		if (AnalyticsCollectionName is not null)
 		{
-			__init.Property("AnalyticsCollectionName");
+			initializer.Property("AnalyticsCollectionName");
 			writer.WriteString(AnalyticsCollectionName);
 		}
 
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			writer.WriteInlineList(Indices, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		if (Template is not null)
 		{
-			__init.Property("Template");
+			initializer.Property("Template");
 			Template.FormatCode(writer);
 		}
 
 		{
-			__init.Property("UpdatedAtMillis");
+			initializer.Property("UpdatedAtMillis");
 			writer.WriteValue(UpdatedAtMillis);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,19 +27,19 @@ public partial class FailureStoreLifecycle : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FailureStoreLifecycle", false);
+		var initializer = writer.BeginObjectInitializer("FailureStoreLifecycle", false);
 		if (DataRetention is not null)
 		{
-			__init.Property("DataRetention");
+			initializer.Property("DataRetention");
 			DataRetention.FormatCode(writer);
 		}
 
 		if (Enabled is not null)
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

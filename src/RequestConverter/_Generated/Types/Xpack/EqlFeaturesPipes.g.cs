@@ -27,17 +27,17 @@ public partial class EqlFeaturesPipes : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EqlFeaturesPipes", false);
+		var initializer = writer.BeginObjectInitializer("EqlFeaturesPipes", false);
 		{
-			__init.Property("PipeHead");
+			initializer.Property("PipeHead");
 			writer.WriteValue(PipeHead);
 		}
 
 		{
-			__init.Property("PipeTail");
+			initializer.Property("PipeTail");
 			writer.WriteValue(PipeTail);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

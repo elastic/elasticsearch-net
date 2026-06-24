@@ -27,10 +27,10 @@ public partial class NodeInfoXpackSecurityAuthcRealms : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoXpackSecurityAuthcRealms", false);
+		var initializer = writer.BeginObjectInitializer("NodeInfoXpackSecurityAuthcRealms", false);
 		if (File is not null)
 		{
-			__init.Property("File");
+			initializer.Property("File");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -41,7 +41,7 @@ public partial class NodeInfoXpackSecurityAuthcRealms : RequestConverter.ICodeFo
 
 		if (Native is not null)
 		{
-			__init.Property("Native");
+			initializer.Property("Native");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -52,7 +52,7 @@ public partial class NodeInfoXpackSecurityAuthcRealms : RequestConverter.ICodeFo
 
 		if (Pki is not null)
 		{
-			__init.Property("Pki");
+			initializer.Property("Pki");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -61,6 +61,6 @@ public partial class NodeInfoXpackSecurityAuthcRealms : RequestConverter.ICodeFo
 			writer.WriteInlineList(Pki, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

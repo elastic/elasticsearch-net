@@ -27,19 +27,19 @@ public partial class NvidiaTaskSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NvidiaTaskSettings", false);
+		var initializer = writer.BeginObjectInitializer("NvidiaTaskSettings", false);
 		if (InputType is not null)
 		{
-			__init.Property("InputType");
+			initializer.Property("InputType");
 			Elastic.Clients.Elasticsearch.Inference.NvidiaInputTypeCodeFormatter.FormatCode(InputType.Value, writer);
 		}
 
 		if (Truncate is not null)
 		{
-			__init.Property("Truncate");
+			initializer.Property("Truncate");
 			Elastic.Clients.Elasticsearch.Inference.CohereTruncateTypeCodeFormatter.FormatCode(Truncate.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

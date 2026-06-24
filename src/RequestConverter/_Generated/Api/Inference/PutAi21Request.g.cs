@@ -27,28 +27,28 @@ public partial class PutAi21Request : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutAi21Request", false);
+		var initializer = writer.BeginObjectInitializer("PutAi21Request", false);
 		{
-			__init.Property("Ai21InferenceId");
+			initializer.Property("Ai21InferenceId");
 			Ai21InferenceId.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TaskType");
+			initializer.Property("TaskType");
 			Elastic.Clients.Elasticsearch.Inference.Ai21TaskTypeCodeFormatter.FormatCode(TaskType, writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ServiceSettings");
+			initializer.Property("ServiceSettings");
 			ServiceSettings.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

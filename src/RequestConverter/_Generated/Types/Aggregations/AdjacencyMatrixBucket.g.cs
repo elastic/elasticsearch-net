@@ -27,24 +27,24 @@ public partial class AdjacencyMatrixBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AdjacencyMatrixBucket", false);
+		var initializer = writer.BeginObjectInitializer("AdjacencyMatrixBucket", false);
 		if (Aggregations is not null)
 		{
-			__init.Property("Aggregations");
+			initializer.Property("Aggregations");
 			Aggregations.FormatCode(writer);
 		}
 
 		{
-			__init.Property("DocCount");
+			initializer.Property("DocCount");
 			writer.WriteValue(DocCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Key");
+			initializer.Property("Key");
 			writer.WriteString(Key);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

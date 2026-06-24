@@ -27,10 +27,10 @@ public partial class StopAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StopAnalyzer", true);
+		var initializer = writer.BeginObjectInitializer("StopAnalyzer", true);
 		if (Stopwords is not null)
 		{
-			__init.Property("Stopwords");
+			initializer.Property("Stopwords");
 			if (Stopwords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(Stopwords.Value1, writer);
@@ -44,16 +44,16 @@ public partial class StopAnalyzer : RequestConverter.ICodeFormattable
 
 		if (StopwordsPath is not null)
 		{
-			__init.Property("StopwordsPath");
+			initializer.Property("StopwordsPath");
 			writer.WriteString(StopwordsPath);
 		}
 #pragma warning disable CS0618
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 #pragma warning restore CS0618
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,18 +27,18 @@ public partial class ClearRepositoriesMeteringArchiveRequest : RequestConverter.
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClearRepositoriesMeteringArchiveRequest", false);
+		var initializer = writer.BeginObjectInitializer("ClearRepositoriesMeteringArchiveRequest", false);
 		{
-			__init.Property("MaxArchiveVersion");
+			initializer.Property("MaxArchiveVersion");
 			writer.WriteValue(MaxArchiveVersion);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("NodeId");
+			initializer.Property("NodeId");
 			NodeId.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

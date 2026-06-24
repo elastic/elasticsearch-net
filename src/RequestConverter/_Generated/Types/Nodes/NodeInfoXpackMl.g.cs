@@ -27,13 +27,13 @@ public partial class NodeInfoXpackMl : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoXpackMl", false);
+		var initializer = writer.BeginObjectInitializer("NodeInfoXpackMl", false);
 		if (UseAutoMachineMemoryPercent is not null)
 		{
-			__init.Property("UseAutoMachineMemoryPercent");
+			initializer.Property("UseAutoMachineMemoryPercent");
 			writer.WriteValue(UseAutoMachineMemoryPercent.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

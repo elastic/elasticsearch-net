@@ -27,19 +27,19 @@ public partial class FieldMemoryUsage : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldMemoryUsage", false);
+		var initializer = writer.BeginObjectInitializer("FieldMemoryUsage", false);
 		if (MemorySize is not null)
 		{
-			__init.Property("MemorySize");
+			initializer.Property("MemorySize");
 			MemorySize.FormatCode(writer);
 		}
 
 		{
-			__init.Property("MemorySizeInBytes");
+			initializer.Property("MemorySizeInBytes");
 			writer.WriteValue(MemorySizeInBytes);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

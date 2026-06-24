@@ -27,13 +27,13 @@ public partial class NestedAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NestedAggregation", false);
+		var initializer = writer.BeginObjectInitializer("NestedAggregation", false);
 		if (Path is not null)
 		{
-			__init.Property("Path");
+			initializer.Property("Path");
 			Path.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,18 +27,18 @@ public partial class EnableUserRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EnableUserRequest", false);
+		var initializer = writer.BeginObjectInitializer("EnableUserRequest", false);
 		{
-			__init.Property("Username");
+			initializer.Property("Username");
 			Username.FormatCode(writer);
 		}
 
 		if (Refresh is not null)
 		{
-			__init.Property("Refresh");
+			initializer.Property("Refresh");
 			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

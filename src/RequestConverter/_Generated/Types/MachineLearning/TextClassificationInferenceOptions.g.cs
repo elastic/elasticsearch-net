@@ -27,37 +27,37 @@ public partial class TextClassificationInferenceOptions : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TextClassificationInferenceOptions", false);
+		var initializer = writer.BeginObjectInitializer("TextClassificationInferenceOptions", false);
 		if (ClassificationLabels is not null)
 		{
-			__init.Property("ClassificationLabels");
+			initializer.Property("ClassificationLabels");
 			writer.WriteInlineList(ClassificationLabels, (w, item) => { w.WriteString(item); });
 		}
 
 		if (NumTopClasses is not null)
 		{
-			__init.Property("NumTopClasses");
+			initializer.Property("NumTopClasses");
 			writer.WriteValue(NumTopClasses.Value);
 		}
 
 		if (ResultsField is not null)
 		{
-			__init.Property("ResultsField");
+			initializer.Property("ResultsField");
 			writer.WriteString(ResultsField);
 		}
 
 		if (Tokenization is not null)
 		{
-			__init.Property("Tokenization");
+			initializer.Property("Tokenization");
 			Tokenization.FormatCode(writer);
 		}
 
 		if (Vocabulary is not null)
 		{
-			__init.Property("Vocabulary");
+			initializer.Property("Vocabulary");
 			Vocabulary.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

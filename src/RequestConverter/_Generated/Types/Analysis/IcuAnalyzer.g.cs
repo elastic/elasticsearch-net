@@ -27,17 +27,17 @@ public partial class IcuAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IcuAnalyzer", true);
+		var initializer = writer.BeginObjectInitializer("IcuAnalyzer", true);
 		{
-			__init.Property("Method");
+			initializer.Property("Method");
 			Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTypeCodeFormatter.FormatCode(Method, writer);
 		}
 
 		{
-			__init.Property("Mode");
+			initializer.Property("Mode");
 			Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationModeCodeFormatter.FormatCode(Mode, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

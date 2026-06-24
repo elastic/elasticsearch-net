@@ -27,32 +27,32 @@ public partial class TrainedModelInferenceStats : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelInferenceStats", false);
+		var initializer = writer.BeginObjectInitializer("TrainedModelInferenceStats", false);
 		{
-			__init.Property("CacheMissCount");
+			initializer.Property("CacheMissCount");
 			writer.WriteValue(CacheMissCount);
 		}
 
 		{
-			__init.Property("FailureCount");
+			initializer.Property("FailureCount");
 			writer.WriteValue(FailureCount);
 		}
 
 		{
-			__init.Property("InferenceCount");
+			initializer.Property("InferenceCount");
 			writer.WriteValue(InferenceCount);
 		}
 
 		{
-			__init.Property("MissingAllFieldsCount");
+			initializer.Property("MissingAllFieldsCount");
 			writer.WriteValue(MissingAllFieldsCount);
 		}
 
 		{
-			__init.Property("Timestamp");
+			initializer.Property("Timestamp");
 			writer.WriteValue(Timestamp);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

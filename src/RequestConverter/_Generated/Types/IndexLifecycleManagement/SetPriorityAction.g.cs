@@ -27,13 +27,13 @@ public partial class SetPriorityAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SetPriorityAction", false);
+		var initializer = writer.BeginObjectInitializer("SetPriorityAction", false);
 		if (Priority is not null)
 		{
-			__init.Property("Priority");
+			initializer.Property("Priority");
 			writer.WriteValue(Priority.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

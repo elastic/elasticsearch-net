@@ -27,46 +27,46 @@ public partial class DatafeedTimingStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DatafeedTimingStats", false);
+		var initializer = writer.BeginObjectInitializer("DatafeedTimingStats", false);
 		if (AverageSearchTimePerBucketMs is not null)
 		{
-			__init.Property("AverageSearchTimePerBucketMs");
+			initializer.Property("AverageSearchTimePerBucketMs");
 			writer.WriteValue(AverageSearchTimePerBucketMs.Value);
 		}
 
 		{
-			__init.Property("BucketCount");
+			initializer.Property("BucketCount");
 			writer.WriteValue(BucketCount);
 			writer.Write("L");
 		}
 
 		if (ExponentialAverageCalculationContext is not null)
 		{
-			__init.Property("ExponentialAverageCalculationContext");
+			initializer.Property("ExponentialAverageCalculationContext");
 			ExponentialAverageCalculationContext.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ExponentialAverageSearchTimePerHourMs");
+			initializer.Property("ExponentialAverageSearchTimePerHourMs");
 			writer.WriteValue(ExponentialAverageSearchTimePerHourMs);
 		}
 
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			writer.WriteString(JobId);
 		}
 
 		{
-			__init.Property("SearchCount");
+			initializer.Property("SearchCount");
 			writer.WriteValue(SearchCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("TotalSearchTimeMs");
+			initializer.Property("TotalSearchTimeMs");
 			writer.WriteValue(TotalSearchTimeMs);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

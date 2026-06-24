@@ -27,16 +27,16 @@ public partial class Hit<TDocument> : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Hit<TDocument>", false);
+		var initializer = writer.BeginObjectInitializer("Hit<TDocument>", false);
 		if (Explanation is not null)
 		{
-			__init.Property("Explanation");
+			initializer.Property("Explanation");
 			Explanation.FormatCode(writer);
 		}
 
 		if (Fields is not null)
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -47,7 +47,7 @@ public partial class Hit<TDocument> : RequestConverter.ICodeFormattable
 
 		if (Highlight is not null)
 		{
-			__init.Property("Highlight");
+			initializer.Property("Highlight");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -57,19 +57,19 @@ public partial class Hit<TDocument> : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		if (Ignored is not null)
 		{
-			__init.Property("Ignored");
+			initializer.Property("Ignored");
 			writer.WriteInlineList(Ignored, (w, item) => { w.WriteString(item); });
 		}
 
 		if (IgnoredFieldValues is not null)
 		{
-			__init.Property("IgnoredFieldValues");
+			initializer.Property("IgnoredFieldValues");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -79,13 +79,13 @@ public partial class Hit<TDocument> : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteString(Index);
 		}
 
 		if (InnerHits is not null)
 		{
-			__init.Property("InnerHits");
+			initializer.Property("InnerHits");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -96,7 +96,7 @@ public partial class Hit<TDocument> : RequestConverter.ICodeFormattable
 
 		if (MatchedQueries is not null)
 		{
-			__init.Property("MatchedQueries");
+			initializer.Property("MatchedQueries");
 			if (MatchedQueries.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				writer.Write("new string[] ");
@@ -115,74 +115,74 @@ public partial class Hit<TDocument> : RequestConverter.ICodeFormattable
 
 		if (Nested is not null)
 		{
-			__init.Property("Nested");
+			initializer.Property("Nested");
 			Nested.FormatCode(writer);
 		}
 
 		if (Node is not null)
 		{
-			__init.Property("Node");
+			initializer.Property("Node");
 			writer.WriteString(Node);
 		}
 
 		if (PrimaryTerm is not null)
 		{
-			__init.Property("PrimaryTerm");
+			initializer.Property("PrimaryTerm");
 			writer.WriteValue(PrimaryTerm.Value);
 			writer.Write("L");
 		}
 
 		if (Rank is not null)
 		{
-			__init.Property("Rank");
+			initializer.Property("Rank");
 			writer.WriteValue(Rank.Value);
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			writer.WriteString(Routing);
 		}
 
 		if (Score is not null)
 		{
-			__init.Property("Score");
+			initializer.Property("Score");
 			writer.WriteValue(Score.Value);
 			writer.Write("d");
 		}
 
 		if (SeqNo is not null)
 		{
-			__init.Property("SeqNo");
+			initializer.Property("SeqNo");
 			writer.WriteValue(SeqNo.Value);
 			writer.Write("L");
 		}
 
 		if (Shard is not null)
 		{
-			__init.Property("Shard");
+			initializer.Property("Shard");
 			writer.WriteString(Shard);
 		}
 
 		if (Sort is not null)
 		{
-			__init.Property("Sort");
+			initializer.Property("Sort");
 			writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
 		}
 
-		if (RequestConverter.CodeWriter.ShouldFormat(Source))
+		if (Source is not null)
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			writer.WriteValue(Source);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

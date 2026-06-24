@@ -27,58 +27,58 @@ public partial class TrainedModelAssignmentTaskParameters : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelAssignmentTaskParameters", false);
+		var initializer = writer.BeginObjectInitializer("TrainedModelAssignmentTaskParameters", false);
 		if (CacheSize is not null)
 		{
-			__init.Property("CacheSize");
+			initializer.Property("CacheSize");
 			CacheSize.FormatCode(writer);
 		}
 
 		{
-			__init.Property("DeploymentId");
+			initializer.Property("DeploymentId");
 			writer.WriteString(DeploymentId);
 		}
 
 		{
-			__init.Property("ModelBytes");
+			initializer.Property("ModelBytes");
 			ModelBytes.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ModelId");
+			initializer.Property("ModelId");
 			writer.WriteString(ModelId);
 		}
 
 		{
-			__init.Property("NumberOfAllocations");
+			initializer.Property("NumberOfAllocations");
 			writer.WriteValue(NumberOfAllocations);
 		}
 
 		{
-			__init.Property("PerAllocationMemoryBytes");
+			initializer.Property("PerAllocationMemoryBytes");
 			PerAllocationMemoryBytes.FormatCode(writer);
 		}
 
 		{
-			__init.Property("PerDeploymentMemoryBytes");
+			initializer.Property("PerDeploymentMemoryBytes");
 			PerDeploymentMemoryBytes.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Priority");
+			initializer.Property("Priority");
 			Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriorityCodeFormatter.FormatCode(Priority, writer);
 		}
 
 		{
-			__init.Property("QueueCapacity");
+			initializer.Property("QueueCapacity");
 			writer.WriteValue(QueueCapacity);
 		}
 
 		{
-			__init.Property("ThreadsPerAllocation");
+			initializer.Property("ThreadsPerAllocation");
 			writer.WriteValue(ThreadsPerAllocation);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

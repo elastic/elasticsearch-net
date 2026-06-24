@@ -27,43 +27,43 @@ public partial class FieldSuggester : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldSuggester", false);
+		var initializer = writer.BeginObjectInitializer("FieldSuggester", false);
 		if (Prefix is not null)
 		{
-			__init.Property("Prefix");
+			initializer.Property("Prefix");
 			writer.WriteString(Prefix);
 		}
 
 		if (Regex is not null)
 		{
-			__init.Property("Regex");
+			initializer.Property("Regex");
 			writer.WriteString(Regex);
 		}
 
 		if (Text is not null)
 		{
-			__init.Property("Text");
+			initializer.Property("Text");
 			writer.WriteString(Text);
 		}
 
 		if (Completion is not null)
 		{
-			__init.Property("Completion");
+			initializer.Property("Completion");
 			Completion.FormatCode(writer);
 		}
 
 		if (Phrase is not null)
 		{
-			__init.Property("Phrase");
+			initializer.Property("Phrase");
 			Phrase.FormatCode(writer);
 		}
 
 		if (Term is not null)
 		{
-			__init.Property("Term");
+			initializer.Property("Term");
 			Term.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,12 +27,12 @@ public partial class ApplicationGlobalUserPrivileges : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ApplicationGlobalUserPrivileges", false);
+		var initializer = writer.BeginObjectInitializer("ApplicationGlobalUserPrivileges", false);
 		{
-			__init.Property("Manage");
+			initializer.Property("Manage");
 			Manage.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

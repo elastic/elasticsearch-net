@@ -27,18 +27,18 @@ public partial class AsyncQueryStopRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AsyncQueryStopRequest", false);
+		var initializer = writer.BeginObjectInitializer("AsyncQueryStopRequest", false);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		if (DropNullColumns is not null)
 		{
-			__init.Property("DropNullColumns");
+			initializer.Property("DropNullColumns");
 			writer.WriteValue(DropNullColumns.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

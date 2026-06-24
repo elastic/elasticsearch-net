@@ -27,67 +27,67 @@ public partial class NodeInfoJvmMemory : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoJvmMemory", false);
+		var initializer = writer.BeginObjectInitializer("NodeInfoJvmMemory", false);
 		if (DirectMax is not null)
 		{
-			__init.Property("DirectMax");
+			initializer.Property("DirectMax");
 			DirectMax.FormatCode(writer);
 		}
 
 		{
-			__init.Property("DirectMaxInBytes");
+			initializer.Property("DirectMaxInBytes");
 			writer.WriteValue(DirectMaxInBytes);
 			writer.Write("L");
 		}
 
 		if (HeapInit is not null)
 		{
-			__init.Property("HeapInit");
+			initializer.Property("HeapInit");
 			HeapInit.FormatCode(writer);
 		}
 
 		{
-			__init.Property("HeapInitInBytes");
+			initializer.Property("HeapInitInBytes");
 			writer.WriteValue(HeapInitInBytes);
 			writer.Write("L");
 		}
 
 		if (HeapMax is not null)
 		{
-			__init.Property("HeapMax");
+			initializer.Property("HeapMax");
 			HeapMax.FormatCode(writer);
 		}
 
 		{
-			__init.Property("HeapMaxInBytes");
+			initializer.Property("HeapMaxInBytes");
 			writer.WriteValue(HeapMaxInBytes);
 			writer.Write("L");
 		}
 
 		if (NonHeapInit is not null)
 		{
-			__init.Property("NonHeapInit");
+			initializer.Property("NonHeapInit");
 			NonHeapInit.FormatCode(writer);
 		}
 
 		{
-			__init.Property("NonHeapInitInBytes");
+			initializer.Property("NonHeapInitInBytes");
 			writer.WriteValue(NonHeapInitInBytes);
 			writer.Write("L");
 		}
 
 		if (NonHeapMax is not null)
 		{
-			__init.Property("NonHeapMax");
+			initializer.Property("NonHeapMax");
 			NonHeapMax.FormatCode(writer);
 		}
 
 		{
-			__init.Property("NonHeapMaxInBytes");
+			initializer.Property("NonHeapMaxInBytes");
 			writer.WriteValue(NonHeapMaxInBytes);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,17 +27,17 @@ public partial class SynonymsSetItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SynonymsSetItem", false);
+		var initializer = writer.BeginObjectInitializer("SynonymsSetItem", false);
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 		}
 
 		{
-			__init.Property("SynonymsSet");
+			initializer.Property("SynonymsSet");
 			writer.WriteString(SynonymsSet);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

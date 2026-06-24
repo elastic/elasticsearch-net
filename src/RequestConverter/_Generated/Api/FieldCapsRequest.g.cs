@@ -27,76 +27,76 @@ public partial class FieldCapsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldCapsRequest", false);
+		var initializer = writer.BeginObjectInitializer("FieldCapsRequest", false);
 		if (Indices is not null)
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		if (AllowNoIndices is not null)
 		{
-			__init.Property("AllowNoIndices");
+			initializer.Property("AllowNoIndices");
 			writer.WriteValue(AllowNoIndices.Value);
 		}
 
 		if (ExpandWildcards is not null)
 		{
-			__init.Property("ExpandWildcards");
+			initializer.Property("ExpandWildcards");
 			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (Filters is not null)
 		{
-			__init.Property("Filters");
+			initializer.Property("Filters");
 			writer.WriteInlineList(Filters, (w, item) => { w.WriteString(item); });
 		}
 
 		if (IgnoreUnavailable is not null)
 		{
-			__init.Property("IgnoreUnavailable");
+			initializer.Property("IgnoreUnavailable");
 			writer.WriteValue(IgnoreUnavailable.Value);
 		}
 
 		if (IncludeEmptyFields is not null)
 		{
-			__init.Property("IncludeEmptyFields");
+			initializer.Property("IncludeEmptyFields");
 			writer.WriteValue(IncludeEmptyFields.Value);
 		}
 
 		if (IncludeUnmapped is not null)
 		{
-			__init.Property("IncludeUnmapped");
+			initializer.Property("IncludeUnmapped");
 			writer.WriteValue(IncludeUnmapped.Value);
 		}
 
 		if (Types is not null)
 		{
-			__init.Property("Types");
+			initializer.Property("Types");
 			writer.WriteInlineList(Types, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Fields is not null)
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			Fields.FormatCode(writer);
 		}
 
 		if (IndexFilter is not null)
 		{
-			__init.Property("IndexFilter");
+			initializer.Property("IndexFilter");
 			IndexFilter.FormatCode(writer);
 		}
 
 		if (ProjectRouting is not null)
 		{
-			__init.Property("ProjectRouting");
+			initializer.Property("ProjectRouting");
 			writer.WriteString(ProjectRouting);
 		}
 
 		if (RuntimeMappings is not null)
 		{
-			__init.Property("RuntimeMappings");
+			initializer.Property("RuntimeMappings");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("Elastic.Clients.Elasticsearch.Field");
 			writer.Write(", ");
@@ -105,6 +105,6 @@ public partial class FieldCapsRequest : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(RuntimeMappings, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

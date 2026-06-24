@@ -27,85 +27,85 @@ public partial class IcuCollationTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IcuCollationTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("IcuCollationTokenFilter", true);
 		if (Alternate is not null)
 		{
-			__init.Property("Alternate");
+			initializer.Property("Alternate");
 			Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternateCodeFormatter.FormatCode(Alternate.Value, writer);
 		}
 
 		if (CaseFirst is not null)
 		{
-			__init.Property("CaseFirst");
+			initializer.Property("CaseFirst");
 			Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirstCodeFormatter.FormatCode(CaseFirst.Value, writer);
 		}
 
 		if (CaseLevel is not null)
 		{
-			__init.Property("CaseLevel");
+			initializer.Property("CaseLevel");
 			writer.WriteValue(CaseLevel.Value);
 		}
 
 		if (Country is not null)
 		{
-			__init.Property("Country");
+			initializer.Property("Country");
 			writer.WriteString(Country);
 		}
 
 		if (Decomposition is not null)
 		{
-			__init.Property("Decomposition");
+			initializer.Property("Decomposition");
 			Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecompositionCodeFormatter.FormatCode(Decomposition.Value, writer);
 		}
 
 		if (HiraganaQuaternaryMode is not null)
 		{
-			__init.Property("HiraganaQuaternaryMode");
+			initializer.Property("HiraganaQuaternaryMode");
 			writer.WriteValue(HiraganaQuaternaryMode.Value);
 		}
 
 		if (Language is not null)
 		{
-			__init.Property("Language");
+			initializer.Property("Language");
 			writer.WriteString(Language);
 		}
 
 		if (Numeric is not null)
 		{
-			__init.Property("Numeric");
+			initializer.Property("Numeric");
 			writer.WriteValue(Numeric.Value);
 		}
 
 		if (Rules is not null)
 		{
-			__init.Property("Rules");
+			initializer.Property("Rules");
 			writer.WriteString(Rules);
 		}
 
 		if (Strength is not null)
 		{
-			__init.Property("Strength");
+			initializer.Property("Strength");
 			Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrengthCodeFormatter.FormatCode(Strength.Value, writer);
 		}
 
 		if (VariableTop is not null)
 		{
-			__init.Property("VariableTop");
+			initializer.Property("VariableTop");
 			writer.WriteString(VariableTop);
 		}
 
 		if (Variant is not null)
 		{
-			__init.Property("Variant");
+			initializer.Property("Variant");
 			writer.WriteString(Variant);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

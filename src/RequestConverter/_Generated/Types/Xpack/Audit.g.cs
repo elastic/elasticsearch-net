@@ -27,18 +27,18 @@ public partial class Audit : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Audit", false);
+		var initializer = writer.BeginObjectInitializer("Audit", false);
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);
 		}
 
 		if (Outputs is not null)
 		{
-			__init.Property("Outputs");
+			initializer.Property("Outputs");
 			writer.WriteInlineList(Outputs, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

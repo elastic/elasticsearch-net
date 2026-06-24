@@ -27,135 +27,135 @@ public partial class DataframeAnalysisClassification : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeAnalysisClassification", false);
+		var initializer = writer.BeginObjectInitializer("DataframeAnalysisClassification", false);
 		if (Alpha is not null)
 		{
-			__init.Property("Alpha");
+			initializer.Property("Alpha");
 			writer.WriteValue(Alpha.Value);
 			writer.Write("d");
 		}
 
 		if (ClassAssignmentObjective is not null)
 		{
-			__init.Property("ClassAssignmentObjective");
+			initializer.Property("ClassAssignmentObjective");
 			writer.WriteString(ClassAssignmentObjective);
 		}
 
 		{
-			__init.Property("DependentVariable");
+			initializer.Property("DependentVariable");
 			writer.WriteString(DependentVariable);
 		}
 
 		if (DownsampleFactor is not null)
 		{
-			__init.Property("DownsampleFactor");
+			initializer.Property("DownsampleFactor");
 			writer.WriteValue(DownsampleFactor.Value);
 			writer.Write("d");
 		}
 
 		if (EarlyStoppingEnabled is not null)
 		{
-			__init.Property("EarlyStoppingEnabled");
+			initializer.Property("EarlyStoppingEnabled");
 			writer.WriteValue(EarlyStoppingEnabled.Value);
 		}
 
 		if (Eta is not null)
 		{
-			__init.Property("Eta");
+			initializer.Property("Eta");
 			writer.WriteValue(Eta.Value);
 			writer.Write("d");
 		}
 
 		if (EtaGrowthRatePerTree is not null)
 		{
-			__init.Property("EtaGrowthRatePerTree");
+			initializer.Property("EtaGrowthRatePerTree");
 			writer.WriteValue(EtaGrowthRatePerTree.Value);
 			writer.Write("d");
 		}
 
 		if (FeatureBagFraction is not null)
 		{
-			__init.Property("FeatureBagFraction");
+			initializer.Property("FeatureBagFraction");
 			writer.WriteValue(FeatureBagFraction.Value);
 			writer.Write("d");
 		}
 
 		if (FeatureProcessors is not null)
 		{
-			__init.Property("FeatureProcessors");
+			initializer.Property("FeatureProcessors");
 			writer.WriteInlineList(FeatureProcessors, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Gamma is not null)
 		{
-			__init.Property("Gamma");
+			initializer.Property("Gamma");
 			writer.WriteValue(Gamma.Value);
 			writer.Write("d");
 		}
 
 		if (Lambda is not null)
 		{
-			__init.Property("Lambda");
+			initializer.Property("Lambda");
 			writer.WriteValue(Lambda.Value);
 			writer.Write("d");
 		}
 
 		if (MaxOptimizationRoundsPerHyperparameter is not null)
 		{
-			__init.Property("MaxOptimizationRoundsPerHyperparameter");
+			initializer.Property("MaxOptimizationRoundsPerHyperparameter");
 			writer.WriteValue(MaxOptimizationRoundsPerHyperparameter.Value);
 		}
 
 		if (MaxTrees is not null)
 		{
-			__init.Property("MaxTrees");
+			initializer.Property("MaxTrees");
 			writer.WriteValue(MaxTrees.Value);
 		}
 
 		if (NumTopClasses is not null)
 		{
-			__init.Property("NumTopClasses");
+			initializer.Property("NumTopClasses");
 			writer.WriteValue(NumTopClasses.Value);
 		}
 
 		if (NumTopFeatureImportanceValues is not null)
 		{
-			__init.Property("NumTopFeatureImportanceValues");
+			initializer.Property("NumTopFeatureImportanceValues");
 			writer.WriteValue(NumTopFeatureImportanceValues.Value);
 		}
 
 		if (PredictionFieldName is not null)
 		{
-			__init.Property("PredictionFieldName");
+			initializer.Property("PredictionFieldName");
 			PredictionFieldName.FormatCode(writer);
 		}
 
 		if (RandomizeSeed is not null)
 		{
-			__init.Property("RandomizeSeed");
+			initializer.Property("RandomizeSeed");
 			writer.WriteValue(RandomizeSeed.Value);
 			writer.Write("d");
 		}
 
 		if (SoftTreeDepthLimit is not null)
 		{
-			__init.Property("SoftTreeDepthLimit");
+			initializer.Property("SoftTreeDepthLimit");
 			writer.WriteValue(SoftTreeDepthLimit.Value);
 		}
 
 		if (SoftTreeDepthTolerance is not null)
 		{
-			__init.Property("SoftTreeDepthTolerance");
+			initializer.Property("SoftTreeDepthTolerance");
 			writer.WriteValue(SoftTreeDepthTolerance.Value);
 			writer.Write("d");
 		}
 
 		if (TrainingPercent is not null)
 		{
-			__init.Property("TrainingPercent");
+			initializer.Property("TrainingPercent");
 			TrainingPercent.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

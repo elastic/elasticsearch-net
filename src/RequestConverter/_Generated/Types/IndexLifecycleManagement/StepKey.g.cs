@@ -27,24 +27,24 @@ public partial class StepKey : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StepKey", false);
+		var initializer = writer.BeginObjectInitializer("StepKey", false);
 		if (Action is not null)
 		{
-			__init.Property("Action");
+			initializer.Property("Action");
 			writer.WriteString(Action);
 		}
 
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("Phase");
+			initializer.Property("Phase");
 			writer.WriteString(Phase);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

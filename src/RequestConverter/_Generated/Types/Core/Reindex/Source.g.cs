@@ -27,33 +27,33 @@ public partial class Source : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Source", false);
+		var initializer = writer.BeginObjectInitializer("Source", false);
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		if (ProjectRouting is not null)
 		{
-			__init.Property("ProjectRouting");
+			initializer.Property("ProjectRouting");
 			writer.WriteString(ProjectRouting);
 		}
 
 		if (Query is not null)
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			Query.FormatCode(writer);
 		}
 
 		if (Remote is not null)
 		{
-			__init.Property("Remote");
+			initializer.Property("Remote");
 			Remote.FormatCode(writer);
 		}
 
 		if (RuntimeMappings is not null)
 		{
-			__init.Property("RuntimeMappings");
+			initializer.Property("RuntimeMappings");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("Elastic.Clients.Elasticsearch.Field");
 			writer.Write(", ");
@@ -64,28 +64,28 @@ public partial class Source : RequestConverter.ICodeFormattable
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
 		if (Slice is not null)
 		{
-			__init.Property("Slice");
+			initializer.Property("Slice");
 			Slice.FormatCode(writer);
 		}
 #pragma warning disable CS0618
 		if (Sort is not null)
 		{
-			__init.Property("Sort");
+			initializer.Property("Sort");
 			writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
 		}
 #pragma warning restore CS0618
 		if (SourceFields is not null)
 		{
-			__init.Property("SourceFields");
+			initializer.Property("SourceFields");
 			SourceFields.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

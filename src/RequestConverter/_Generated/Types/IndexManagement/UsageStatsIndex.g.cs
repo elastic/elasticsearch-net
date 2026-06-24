@@ -27,12 +27,12 @@ public partial class UsageStatsIndex : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UsageStatsIndex", false);
+		var initializer = writer.BeginObjectInitializer("UsageStatsIndex", false);
 		{
-			__init.Property("Shards");
+			initializer.Property("Shards");
 			writer.WriteInlineList(Shards, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

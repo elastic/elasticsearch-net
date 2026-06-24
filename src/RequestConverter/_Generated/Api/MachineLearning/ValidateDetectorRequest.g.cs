@@ -27,12 +27,12 @@ public partial class ValidateDetectorRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ValidateDetectorRequest", false);
+		var initializer = writer.BeginObjectInitializer("ValidateDetectorRequest", false);
 		{
-			__init.Property("Detector");
+			initializer.Property("Detector");
 			Detector.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,14 +27,14 @@ public partial class MappingLimitSettingsDimensionFields : RequestConverter.ICod
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MappingLimitSettingsDimensionFields", false);
+		var initializer = writer.BeginObjectInitializer("MappingLimitSettingsDimensionFields", false);
 		if (Limit is not null)
 		{
-			__init.Property("Limit");
+			initializer.Property("Limit");
 			writer.WriteValue(Limit.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

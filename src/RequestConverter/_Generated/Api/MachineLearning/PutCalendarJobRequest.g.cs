@@ -27,17 +27,17 @@ public partial class PutCalendarJobRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutCalendarJobRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutCalendarJobRequest", false);
 		{
-			__init.Property("CalendarId");
+			initializer.Property("CalendarId");
 			CalendarId.FormatCode(writer);
 		}
 
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			JobId.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

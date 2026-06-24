@@ -27,19 +27,19 @@ public partial class IndexRoutingAllocationInclude : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexRoutingAllocationInclude", false);
+		var initializer = writer.BeginObjectInitializer("IndexRoutingAllocationInclude", false);
 		if (Id is not null)
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		if (TierPreference is not null)
 		{
-			__init.Property("TierPreference");
+			initializer.Property("TierPreference");
 			writer.WriteString(TierPreference);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

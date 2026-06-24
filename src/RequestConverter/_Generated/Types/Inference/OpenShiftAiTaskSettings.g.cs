@@ -27,19 +27,19 @@ public partial class OpenShiftAiTaskSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("OpenShiftAiTaskSettings", false);
+		var initializer = writer.BeginObjectInitializer("OpenShiftAiTaskSettings", false);
 		if (ReturnDocuments is not null)
 		{
-			__init.Property("ReturnDocuments");
+			initializer.Property("ReturnDocuments");
 			writer.WriteValue(ReturnDocuments.Value);
 		}
 
 		if (TopN is not null)
 		{
-			__init.Property("TopN");
+			initializer.Property("TopN");
 			writer.WriteValue(TopN.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

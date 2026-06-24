@@ -27,40 +27,40 @@ public partial class EnrichPolicy : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EnrichPolicy", false);
+		var initializer = writer.BeginObjectInitializer("EnrichPolicy", false);
 		if (ElasticsearchVersion is not null)
 		{
-			__init.Property("ElasticsearchVersion");
+			initializer.Property("ElasticsearchVersion");
 			writer.WriteString(ElasticsearchVersion);
 		}
 
 		{
-			__init.Property("EnrichFields");
+			initializer.Property("EnrichFields");
 			EnrichFields.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		{
-			__init.Property("MatchField");
+			initializer.Property("MatchField");
 			MatchField.FormatCode(writer);
 		}
 
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		if (Query is not null)
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			Query.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

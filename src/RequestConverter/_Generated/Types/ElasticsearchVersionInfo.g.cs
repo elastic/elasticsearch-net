@@ -27,52 +27,52 @@ public partial class ElasticsearchVersionInfo : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ElasticsearchVersionInfo", false);
+		var initializer = writer.BeginObjectInitializer("ElasticsearchVersionInfo", false);
 		{
-			__init.Property("BuildDate");
+			initializer.Property("BuildDate");
 			writer.WriteValue(BuildDate);
 		}
 
 		{
-			__init.Property("BuildFlavor");
+			initializer.Property("BuildFlavor");
 			writer.WriteString(BuildFlavor);
 		}
 
 		{
-			__init.Property("BuildHash");
+			initializer.Property("BuildHash");
 			writer.WriteString(BuildHash);
 		}
 
 		{
-			__init.Property("BuildSnapshot");
+			initializer.Property("BuildSnapshot");
 			writer.WriteValue(BuildSnapshot);
 		}
 
 		{
-			__init.Property("BuildType");
+			initializer.Property("BuildType");
 			writer.WriteString(BuildType);
 		}
 
 		{
-			__init.Property("LuceneVersion");
+			initializer.Property("LuceneVersion");
 			writer.WriteString(LuceneVersion);
 		}
 
 		{
-			__init.Property("MinimumIndexCompatibilityVersion");
+			initializer.Property("MinimumIndexCompatibilityVersion");
 			writer.WriteString(MinimumIndexCompatibilityVersion);
 		}
 
 		{
-			__init.Property("MinimumWireCompatibilityVersion");
+			initializer.Property("MinimumWireCompatibilityVersion");
 			writer.WriteString(MinimumWireCompatibilityVersion);
 		}
 
 		{
-			__init.Property("Number");
+			initializer.Property("Number");
 			writer.WriteString(Number);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

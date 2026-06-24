@@ -27,42 +27,42 @@ public partial class IntervalsFuzzy : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IntervalsFuzzy", false);
+		var initializer = writer.BeginObjectInitializer("IntervalsFuzzy", false);
 		if (Analyzer is not null)
 		{
-			__init.Property("Analyzer");
+			initializer.Property("Analyzer");
 			writer.WriteString(Analyzer);
 		}
 
 		if (Fuzziness is not null)
 		{
-			__init.Property("Fuzziness");
+			initializer.Property("Fuzziness");
 			Fuzziness.FormatCode(writer);
 		}
 
 		if (PrefixLength is not null)
 		{
-			__init.Property("PrefixLength");
+			initializer.Property("PrefixLength");
 			writer.WriteValue(PrefixLength.Value);
 		}
 
 		{
-			__init.Property("Term");
+			initializer.Property("Term");
 			writer.WriteString(Term);
 		}
 
 		if (Transpositions is not null)
 		{
-			__init.Property("Transpositions");
+			initializer.Property("Transpositions");
 			writer.WriteValue(Transpositions.Value);
 		}
 
 		if (UseField is not null)
 		{
-			__init.Property("UseField");
+			initializer.Property("UseField");
 			UseField.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

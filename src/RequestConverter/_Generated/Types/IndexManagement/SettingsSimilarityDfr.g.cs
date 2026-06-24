@@ -27,22 +27,22 @@ public partial class SettingsSimilarityDfr : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SettingsSimilarityDfr", true);
+		var initializer = writer.BeginObjectInitializer("SettingsSimilarityDfr", true);
 		{
-			__init.Property("AfterEffect");
+			initializer.Property("AfterEffect");
 			Elastic.Clients.Elasticsearch.DFRAfterEffectCodeFormatter.FormatCode(AfterEffect, writer);
 		}
 
 		{
-			__init.Property("BasicModel");
+			initializer.Property("BasicModel");
 			Elastic.Clients.Elasticsearch.DFRBasicModelCodeFormatter.FormatCode(BasicModel, writer);
 		}
 
 		{
-			__init.Property("Normalization");
+			initializer.Property("Normalization");
 			Elastic.Clients.Elasticsearch.NormalizationCodeFormatter.FormatCode(Normalization, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

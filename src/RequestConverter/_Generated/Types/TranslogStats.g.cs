@@ -27,48 +27,48 @@ public partial class TranslogStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TranslogStats", false);
+		var initializer = writer.BeginObjectInitializer("TranslogStats", false);
 		{
-			__init.Property("EarliestLastModifiedAge");
+			initializer.Property("EarliestLastModifiedAge");
 			writer.WriteValue(EarliestLastModifiedAge);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Operations");
+			initializer.Property("Operations");
 			writer.WriteValue(Operations);
 			writer.Write("L");
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteString(Size);
 		}
 
 		{
-			__init.Property("SizeInBytes");
+			initializer.Property("SizeInBytes");
 			writer.WriteValue(SizeInBytes);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("UncommittedOperations");
+			initializer.Property("UncommittedOperations");
 			writer.WriteValue(UncommittedOperations);
 		}
 
 		if (UncommittedSize is not null)
 		{
-			__init.Property("UncommittedSize");
+			initializer.Property("UncommittedSize");
 			writer.WriteString(UncommittedSize);
 		}
 
 		{
-			__init.Property("UncommittedSizeInBytes");
+			initializer.Property("UncommittedSizeInBytes");
 			writer.WriteValue(UncommittedSizeInBytes);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

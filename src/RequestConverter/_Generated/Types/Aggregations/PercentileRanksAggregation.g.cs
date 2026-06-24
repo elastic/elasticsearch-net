@@ -27,49 +27,49 @@ public partial class PercentileRanksAggregation : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PercentileRanksAggregation", false);
+		var initializer = writer.BeginObjectInitializer("PercentileRanksAggregation", false);
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			writer.WriteString(Format);
 		}
 
 		if (Hdr is not null)
 		{
-			__init.Property("Hdr");
+			initializer.Property("Hdr");
 			Hdr.FormatCode(writer);
 		}
 
 		if (Missing is not null)
 		{
-			__init.Property("Missing");
+			initializer.Property("Missing");
 			writer.WriteValue(Missing);
 		}
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
 		if (TDigest is not null)
 		{
-			__init.Property("TDigest");
+			initializer.Property("TDigest");
 			TDigest.FormatCode(writer);
 		}
 
 		if (Values is not null)
 		{
-			__init.Property("Values");
+			initializer.Property("Values");
 			writer.WriteInlineList(Values, (w, item) => { w.WriteValue(item); w.Write("d"); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

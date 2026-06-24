@@ -27,31 +27,31 @@ public partial class DataDescription : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataDescription", false);
+		var initializer = writer.BeginObjectInitializer("DataDescription", false);
 		if (FieldDelimiter is not null)
 		{
-			__init.Property("FieldDelimiter");
+			initializer.Property("FieldDelimiter");
 			writer.WriteString(FieldDelimiter);
 		}
 
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			writer.WriteString(Format);
 		}
 
 		if (TimeField is not null)
 		{
-			__init.Property("TimeField");
+			initializer.Property("TimeField");
 			TimeField.FormatCode(writer);
 		}
 
 		if (TimeFormat is not null)
 		{
-			__init.Property("TimeFormat");
+			initializer.Property("TimeFormat");
 			writer.WriteString(TimeFormat);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

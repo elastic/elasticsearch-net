@@ -27,41 +27,41 @@ public partial class OpenShiftAiServiceSettings : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("OpenShiftAiServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("OpenShiftAiServiceSettings", false);
 		{
-			__init.Property("ApiKey");
+			initializer.Property("ApiKey");
 			writer.WriteString(ApiKey);
 		}
 
 		if (MaxInputTokens is not null)
 		{
-			__init.Property("MaxInputTokens");
+			initializer.Property("MaxInputTokens");
 			writer.WriteValue(MaxInputTokens.Value);
 		}
 
 		if (ModelId is not null)
 		{
-			__init.Property("ModelId");
+			initializer.Property("ModelId");
 			writer.WriteString(ModelId);
 		}
 
 		if (RateLimit is not null)
 		{
-			__init.Property("RateLimit");
+			initializer.Property("RateLimit");
 			RateLimit.FormatCode(writer);
 		}
 
 		if (Similarity is not null)
 		{
-			__init.Property("Similarity");
+			initializer.Property("Similarity");
 			Elastic.Clients.Elasticsearch.Inference.OpenShiftAiSimilarityTypeCodeFormatter.FormatCode(Similarity.Value, writer);
 		}
 
 		{
-			__init.Property("Url");
+			initializer.Property("Url");
 			writer.WriteString(Url);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

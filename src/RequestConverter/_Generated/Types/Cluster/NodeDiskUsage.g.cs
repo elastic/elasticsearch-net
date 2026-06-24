@@ -27,22 +27,22 @@ public partial class NodeDiskUsage : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeDiskUsage", false);
+		var initializer = writer.BeginObjectInitializer("NodeDiskUsage", false);
 		{
-			__init.Property("LeastAvailable");
+			initializer.Property("LeastAvailable");
 			LeastAvailable.FormatCode(writer);
 		}
 
 		{
-			__init.Property("MostAvailable");
+			initializer.Property("MostAvailable");
 			MostAvailable.FormatCode(writer);
 		}
 
 		{
-			__init.Property("NodeName");
+			initializer.Property("NodeName");
 			writer.WriteString(NodeName);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,10 +27,10 @@ public partial class IndexRoutingAllocationDisk : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexRoutingAllocationDisk", false);
+		var initializer = writer.BeginObjectInitializer("IndexRoutingAllocationDisk", false);
 		if (ThresholdEnabled is not null)
 		{
-			__init.Property("ThresholdEnabled");
+			initializer.Property("ThresholdEnabled");
 			if (ThresholdEnabled.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				writer.WriteValue(ThresholdEnabled.Value1);
@@ -41,6 +41,6 @@ public partial class IndexRoutingAllocationDisk : RequestConverter.ICodeFormatta
 			}
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

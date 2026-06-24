@@ -27,28 +27,28 @@ public partial class PublishedClusterStates : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PublishedClusterStates", false);
+		var initializer = writer.BeginObjectInitializer("PublishedClusterStates", false);
 		if (CompatibleDiffs is not null)
 		{
-			__init.Property("CompatibleDiffs");
+			initializer.Property("CompatibleDiffs");
 			writer.WriteValue(CompatibleDiffs.Value);
 			writer.Write("L");
 		}
 
 		if (FullStates is not null)
 		{
-			__init.Property("FullStates");
+			initializer.Property("FullStates");
 			writer.WriteValue(FullStates.Value);
 			writer.Write("L");
 		}
 
 		if (IncompatibleDiffs is not null)
 		{
-			__init.Property("IncompatibleDiffs");
+			initializer.Property("IncompatibleDiffs");
 			writer.WriteValue(IncompatibleDiffs.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

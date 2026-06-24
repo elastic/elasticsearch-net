@@ -27,34 +27,34 @@ public partial class AmazonBedrockTaskSettings : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AmazonBedrockTaskSettings", false);
+		var initializer = writer.BeginObjectInitializer("AmazonBedrockTaskSettings", false);
 		if (MaxNewTokens is not null)
 		{
-			__init.Property("MaxNewTokens");
+			initializer.Property("MaxNewTokens");
 			writer.WriteValue(MaxNewTokens.Value);
 		}
 
 		if (Temperature is not null)
 		{
-			__init.Property("Temperature");
+			initializer.Property("Temperature");
 			writer.WriteValue(Temperature.Value);
 			writer.Write("f");
 		}
 
 		if (TopK is not null)
 		{
-			__init.Property("TopK");
+			initializer.Property("TopK");
 			writer.WriteValue(TopK.Value);
 			writer.Write("f");
 		}
 
 		if (TopP is not null)
 		{
-			__init.Property("TopP");
+			initializer.Property("TopP");
 			writer.WriteValue(TopP.Value);
 			writer.Write("f");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,31 +27,31 @@ public partial class GoogleVertexAITaskSettings : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GoogleVertexAITaskSettings", false);
+		var initializer = writer.BeginObjectInitializer("GoogleVertexAITaskSettings", false);
 		if (AutoTruncate is not null)
 		{
-			__init.Property("AutoTruncate");
+			initializer.Property("AutoTruncate");
 			writer.WriteValue(AutoTruncate.Value);
 		}
 
 		if (MaxTokens is not null)
 		{
-			__init.Property("MaxTokens");
+			initializer.Property("MaxTokens");
 			writer.WriteValue(MaxTokens.Value);
 		}
 
 		if (ThinkingConfig is not null)
 		{
-			__init.Property("ThinkingConfig");
+			initializer.Property("ThinkingConfig");
 			ThinkingConfig.FormatCode(writer);
 		}
 
 		if (TopN is not null)
 		{
-			__init.Property("TopN");
+			initializer.Property("TopN");
 			writer.WriteValue(TopN.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

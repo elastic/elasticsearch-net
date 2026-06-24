@@ -27,28 +27,28 @@ public partial class ShardRouting : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardRouting", false);
+		var initializer = writer.BeginObjectInitializer("ShardRouting", false);
 		{
-			__init.Property("Node");
+			initializer.Property("Node");
 			writer.WriteString(Node);
 		}
 
 		{
-			__init.Property("Primary");
+			initializer.Property("Primary");
 			writer.WriteValue(Primary);
 		}
 
 		if (RelocatingNode is not null)
 		{
-			__init.Property("RelocatingNode");
+			initializer.Property("RelocatingNode");
 			writer.WriteString(RelocatingNode);
 		}
 
 		{
-			__init.Property("State");
+			initializer.Property("State");
 			Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingStateCodeFormatter.FormatCode(State, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

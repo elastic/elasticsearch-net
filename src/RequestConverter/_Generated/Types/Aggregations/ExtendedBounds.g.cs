@@ -27,19 +27,19 @@ public partial class ExtendedBounds<T> : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExtendedBounds<T>", false);
-		if (RequestConverter.CodeWriter.ShouldFormat(Max))
+		var initializer = writer.BeginObjectInitializer("ExtendedBounds<T>", false);
+		if (Max is not null)
 		{
-			__init.Property("Max");
+			initializer.Property("Max");
 			writer.WriteValue(Max);
 		}
 
-		if (RequestConverter.CodeWriter.ShouldFormat(Min))
+		if (Min is not null)
 		{
-			__init.Property("Min");
+			initializer.Property("Min");
 			writer.WriteValue(Min);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

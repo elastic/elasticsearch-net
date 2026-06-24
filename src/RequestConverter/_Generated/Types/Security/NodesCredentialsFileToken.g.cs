@@ -27,12 +27,12 @@ public partial class NodesCredentialsFileToken : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodesCredentialsFileToken", false);
+		var initializer = writer.BeginObjectInitializer("NodesCredentialsFileToken", false);
 		{
-			__init.Property("Nodes");
+			initializer.Property("Nodes");
 			writer.WriteInlineList(Nodes, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

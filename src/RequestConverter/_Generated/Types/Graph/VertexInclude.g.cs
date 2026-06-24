@@ -27,19 +27,19 @@ public partial class VertexInclude : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("VertexInclude", false);
+		var initializer = writer.BeginObjectInitializer("VertexInclude", false);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Term");
+			initializer.Property("Term");
 			writer.WriteString(Term);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

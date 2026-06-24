@@ -27,24 +27,24 @@ public partial class ExponentialAverageCalculationContext : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExponentialAverageCalculationContext", false);
+		var initializer = writer.BeginObjectInitializer("ExponentialAverageCalculationContext", false);
 		{
-			__init.Property("IncrementalMetricValueMs");
+			initializer.Property("IncrementalMetricValueMs");
 			writer.WriteValue(IncrementalMetricValueMs);
 		}
 
 		if (LatestTimestamp is not null)
 		{
-			__init.Property("LatestTimestamp");
+			initializer.Property("LatestTimestamp");
 			writer.WriteValue(LatestTimestamp.Value);
 		}
 
 		if (PreviousExponentialAverageMs is not null)
 		{
-			__init.Property("PreviousExponentialAverageMs");
+			initializer.Property("PreviousExponentialAverageMs");
 			writer.WriteValue(PreviousExponentialAverageMs.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

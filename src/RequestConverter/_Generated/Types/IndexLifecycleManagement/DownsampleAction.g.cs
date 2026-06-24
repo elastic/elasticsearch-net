@@ -27,18 +27,18 @@ public partial class DownsampleAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DownsampleAction", false);
+		var initializer = writer.BeginObjectInitializer("DownsampleAction", false);
 		{
-			__init.Property("FixedInterval");
+			initializer.Property("FixedInterval");
 			writer.WriteString(FixedInterval);
 		}
 
 		if (WaitTimeout is not null)
 		{
-			__init.Property("WaitTimeout");
+			initializer.Property("WaitTimeout");
 			WaitTimeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

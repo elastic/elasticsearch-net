@@ -27,37 +27,37 @@ public partial class GetIndexTemplateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetIndexTemplateRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetIndexTemplateRequest", false);
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		if (FlatSettings is not null)
 		{
-			__init.Property("FlatSettings");
+			initializer.Property("FlatSettings");
 			writer.WriteValue(FlatSettings.Value);
 		}
 
 		if (IncludeDefaults is not null)
 		{
-			__init.Property("IncludeDefaults");
+			initializer.Property("IncludeDefaults");
 			writer.WriteValue(IncludeDefaults.Value);
 		}
 #pragma warning disable CS0618
 		if (Local is not null)
 		{
-			__init.Property("Local");
+			initializer.Property("Local");
 			writer.WriteValue(Local.Value);
 		}
 #pragma warning restore CS0618
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

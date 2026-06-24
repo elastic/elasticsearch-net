@@ -27,27 +27,27 @@ public partial class ElasticsearchVersionMinInfo : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ElasticsearchVersionMinInfo", false);
+		var initializer = writer.BeginObjectInitializer("ElasticsearchVersionMinInfo", false);
 		{
-			__init.Property("BuildFlavor");
+			initializer.Property("BuildFlavor");
 			writer.WriteString(BuildFlavor);
 		}
 
 		{
-			__init.Property("MinimumIndexCompatibilityVersion");
+			initializer.Property("MinimumIndexCompatibilityVersion");
 			writer.WriteString(MinimumIndexCompatibilityVersion);
 		}
 
 		{
-			__init.Property("MinimumWireCompatibilityVersion");
+			initializer.Property("MinimumWireCompatibilityVersion");
 			writer.WriteString(MinimumWireCompatibilityVersion);
 		}
 
 		{
-			__init.Property("Number");
+			initializer.Property("Number");
 			writer.WriteString(Number);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

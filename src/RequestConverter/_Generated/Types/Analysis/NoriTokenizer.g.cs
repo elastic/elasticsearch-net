@@ -27,37 +27,37 @@ public partial class NoriTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NoriTokenizer", true);
+		var initializer = writer.BeginObjectInitializer("NoriTokenizer", true);
 		if (DecompoundMode is not null)
 		{
-			__init.Property("DecompoundMode");
+			initializer.Property("DecompoundMode");
 			Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundModeCodeFormatter.FormatCode(DecompoundMode.Value, writer);
 		}
 
 		if (DiscardPunctuation is not null)
 		{
-			__init.Property("DiscardPunctuation");
+			initializer.Property("DiscardPunctuation");
 			writer.WriteValue(DiscardPunctuation.Value);
 		}
 
 		if (UserDictionary is not null)
 		{
-			__init.Property("UserDictionary");
+			initializer.Property("UserDictionary");
 			writer.WriteString(UserDictionary);
 		}
 
 		if (UserDictionaryRules is not null)
 		{
-			__init.Property("UserDictionaryRules");
+			initializer.Property("UserDictionaryRules");
 			writer.WriteInlineList(UserDictionaryRules, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

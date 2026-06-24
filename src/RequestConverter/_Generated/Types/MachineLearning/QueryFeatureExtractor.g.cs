@@ -27,24 +27,24 @@ public partial class QueryFeatureExtractor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("QueryFeatureExtractor", false);
+		var initializer = writer.BeginObjectInitializer("QueryFeatureExtractor", false);
 		if (DefaultScore is not null)
 		{
-			__init.Property("DefaultScore");
+			initializer.Property("DefaultScore");
 			writer.WriteValue(DefaultScore.Value);
 			writer.Write("f");
 		}
 
 		{
-			__init.Property("FeatureName");
+			initializer.Property("FeatureName");
 			writer.WriteString(FeatureName);
 		}
 
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			Query.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

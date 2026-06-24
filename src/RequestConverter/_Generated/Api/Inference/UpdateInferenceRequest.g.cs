@@ -27,23 +27,23 @@ public partial class UpdateInferenceRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UpdateInferenceRequest", false);
+		var initializer = writer.BeginObjectInitializer("UpdateInferenceRequest", false);
 		{
-			__init.Property("InferenceId");
+			initializer.Property("InferenceId");
 			InferenceId.FormatCode(writer);
 		}
 
 		if (TaskType is not null)
 		{
-			__init.Property("TaskType");
+			initializer.Property("TaskType");
 			Elastic.Clients.Elasticsearch.Inference.TaskTypeCodeFormatter.FormatCode(TaskType.Value, writer);
 		}
 
 		{
-			__init.Property("InferenceConfig");
+			initializer.Property("InferenceConfig");
 			InferenceConfig.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

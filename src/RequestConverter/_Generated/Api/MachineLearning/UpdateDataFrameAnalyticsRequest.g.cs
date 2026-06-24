@@ -27,36 +27,36 @@ public partial class UpdateDataFrameAnalyticsRequest : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UpdateDataFrameAnalyticsRequest", false);
+		var initializer = writer.BeginObjectInitializer("UpdateDataFrameAnalyticsRequest", false);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		if (AllowLazyStart is not null)
 		{
-			__init.Property("AllowLazyStart");
+			initializer.Property("AllowLazyStart");
 			writer.WriteValue(AllowLazyStart.Value);
 		}
 
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		if (MaxNumThreads is not null)
 		{
-			__init.Property("MaxNumThreads");
+			initializer.Property("MaxNumThreads");
 			writer.WriteValue(MaxNumThreads.Value);
 		}
 
 		if (ModelMemoryLimit is not null)
 		{
-			__init.Property("ModelMemoryLimit");
+			initializer.Property("ModelMemoryLimit");
 			writer.WriteString(ModelMemoryLimit);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

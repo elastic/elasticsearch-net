@@ -27,67 +27,67 @@ public partial class BucketInfluencer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BucketInfluencer", false);
+		var initializer = writer.BeginObjectInitializer("BucketInfluencer", false);
 		{
-			__init.Property("AnomalyScore");
+			initializer.Property("AnomalyScore");
 			writer.WriteValue(AnomalyScore);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("BucketSpan");
+			initializer.Property("BucketSpan");
 			writer.WriteValue(BucketSpan);
 		}
 
 		{
-			__init.Property("InfluencerFieldName");
+			initializer.Property("InfluencerFieldName");
 			writer.WriteString(InfluencerFieldName);
 		}
 
 		{
-			__init.Property("InitialAnomalyScore");
+			initializer.Property("InitialAnomalyScore");
 			writer.WriteValue(InitialAnomalyScore);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("IsInterim");
+			initializer.Property("IsInterim");
 			writer.WriteValue(IsInterim);
 		}
 
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			writer.WriteString(JobId);
 		}
 
 		{
-			__init.Property("Probability");
+			initializer.Property("Probability");
 			writer.WriteValue(Probability);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("RawAnomalyScore");
+			initializer.Property("RawAnomalyScore");
 			writer.WriteValue(RawAnomalyScore);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("ResultType");
+			initializer.Property("ResultType");
 			writer.WriteString(ResultType);
 		}
 
 		{
-			__init.Property("Timestamp");
+			initializer.Property("Timestamp");
 			writer.WriteValue(Timestamp);
 		}
 
 		if (TimestampString is not null)
 		{
-			__init.Property("TimestampString");
+			initializer.Property("TimestampString");
 			writer.WriteValue(TimestampString.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,28 +27,28 @@ public partial class IngestRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IngestRequest", false);
+		var initializer = writer.BeginObjectInitializer("IngestRequest", false);
 		if (Index is not null)
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		if (MergeType is not null)
 		{
-			__init.Property("MergeType");
+			initializer.Property("MergeType");
 			Elastic.Clients.Elasticsearch.Simulate.MergeTypeCodeFormatter.FormatCode(MergeType.Value, writer);
 		}
 
 		if (Pipeline is not null)
 		{
-			__init.Property("Pipeline");
+			initializer.Property("Pipeline");
 			writer.WriteString(Pipeline);
 		}
 
 		if (ComponentTemplateSubstitutions is not null)
 		{
-			__init.Property("ComponentTemplateSubstitutions");
+			initializer.Property("ComponentTemplateSubstitutions");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -58,13 +58,13 @@ public partial class IngestRequest : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Docs");
+			initializer.Property("Docs");
 			writer.WriteInlineList(Docs, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (IndexTemplateSubstitutions is not null)
 		{
-			__init.Property("IndexTemplateSubstitutions");
+			initializer.Property("IndexTemplateSubstitutions");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -75,13 +75,13 @@ public partial class IngestRequest : RequestConverter.ICodeFormattable
 
 		if (MappingAddition is not null)
 		{
-			__init.Property("MappingAddition");
+			initializer.Property("MappingAddition");
 			MappingAddition.FormatCode(writer);
 		}
 
 		if (PipelineSubstitutions is not null)
 		{
-			__init.Property("PipelineSubstitutions");
+			initializer.Property("PipelineSubstitutions");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -90,6 +90,6 @@ public partial class IngestRequest : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(PipelineSubstitutions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

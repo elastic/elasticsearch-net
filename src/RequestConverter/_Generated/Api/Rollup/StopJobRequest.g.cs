@@ -27,24 +27,24 @@ public partial class StopJobRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StopJobRequest", false);
+		var initializer = writer.BeginObjectInitializer("StopJobRequest", false);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (WaitForCompletion is not null)
 		{
-			__init.Property("WaitForCompletion");
+			initializer.Property("WaitForCompletion");
 			writer.WriteValue(WaitForCompletion.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,25 +27,25 @@ public partial class TTestAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TTestAggregation", false);
+		var initializer = writer.BeginObjectInitializer("TTestAggregation", false);
 		if (A is not null)
 		{
-			__init.Property("A");
+			initializer.Property("A");
 			A.FormatCode(writer);
 		}
 
 		if (B is not null)
 		{
-			__init.Property("B");
+			initializer.Property("B");
 			B.FormatCode(writer);
 		}
 
 		if (Type is not null)
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			Elastic.Clients.Elasticsearch.Aggregations.TTestTypeCodeFormatter.FormatCode(Type.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

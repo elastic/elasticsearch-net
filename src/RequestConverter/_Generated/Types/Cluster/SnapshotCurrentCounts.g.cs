@@ -27,32 +27,32 @@ public partial class SnapshotCurrentCounts : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SnapshotCurrentCounts", false);
+		var initializer = writer.BeginObjectInitializer("SnapshotCurrentCounts", false);
 		{
-			__init.Property("Cleanups");
+			initializer.Property("Cleanups");
 			writer.WriteValue(Cleanups);
 		}
 
 		{
-			__init.Property("ConcurrentOperations");
+			initializer.Property("ConcurrentOperations");
 			writer.WriteValue(ConcurrentOperations);
 		}
 
 		{
-			__init.Property("ShardSnapshots");
+			initializer.Property("ShardSnapshots");
 			writer.WriteValue(ShardSnapshots);
 		}
 
 		{
-			__init.Property("SnapshotDeletions");
+			initializer.Property("SnapshotDeletions");
 			writer.WriteValue(SnapshotDeletions);
 		}
 
 		{
-			__init.Property("Snapshots");
+			initializer.Property("Snapshots");
 			writer.WriteValue(Snapshots);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

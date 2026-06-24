@@ -27,22 +27,22 @@ public partial class MultiSearchItem<TDocument> : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MultiSearchItem<TDocument>", true);
+		var initializer = writer.BeginObjectInitializer("MultiSearchItem<TDocument>", true);
 		if (Aggregations is not null)
 		{
-			__init.Property("Aggregations");
+			initializer.Property("Aggregations");
 			Aggregations.FormatCode(writer);
 		}
 
 		if (Clusters is not null)
 		{
-			__init.Property("Clusters");
+			initializer.Property("Clusters");
 			Clusters.FormatCode(writer);
 		}
 
 		if (Fields is not null)
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -52,76 +52,76 @@ public partial class MultiSearchItem<TDocument> : RequestConverter.ICodeFormatta
 		}
 
 		{
-			__init.Property("HitsMetadata");
+			initializer.Property("HitsMetadata");
 			HitsMetadata.FormatCode(writer);
 		}
 
 		if (MaxScore is not null)
 		{
-			__init.Property("MaxScore");
+			initializer.Property("MaxScore");
 			writer.WriteValue(MaxScore.Value);
 			writer.Write("d");
 		}
 
 		if (NumReducePhases is not null)
 		{
-			__init.Property("NumReducePhases");
+			initializer.Property("NumReducePhases");
 			writer.WriteValue(NumReducePhases.Value);
 			writer.Write("L");
 		}
 
 		if (PitId is not null)
 		{
-			__init.Property("PitId");
+			initializer.Property("PitId");
 			writer.WriteString(PitId);
 		}
 
 		if (Profile is not null)
 		{
-			__init.Property("Profile");
+			initializer.Property("Profile");
 			Profile.FormatCode(writer);
 		}
 
 		if (ScrollId is not null)
 		{
-			__init.Property("ScrollId");
+			initializer.Property("ScrollId");
 			ScrollId.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Shards");
+			initializer.Property("Shards");
 			Shards.FormatCode(writer);
 		}
 
 		if (Status is not null)
 		{
-			__init.Property("Status");
+			initializer.Property("Status");
 			writer.WriteValue(Status.Value);
 		}
 
 		if (Suggest is not null)
 		{
-			__init.Property("Suggest");
+			initializer.Property("Suggest");
 			Suggest.FormatCode(writer);
 		}
 
 		if (TerminatedEarly is not null)
 		{
-			__init.Property("TerminatedEarly");
+			initializer.Property("TerminatedEarly");
 			writer.WriteValue(TerminatedEarly.Value);
 		}
 
 		{
-			__init.Property("TimedOut");
+			initializer.Property("TimedOut");
 			writer.WriteValue(TimedOut);
 		}
 
 		{
-			__init.Property("Took");
+			initializer.Property("Took");
 			writer.WriteValue(Took);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

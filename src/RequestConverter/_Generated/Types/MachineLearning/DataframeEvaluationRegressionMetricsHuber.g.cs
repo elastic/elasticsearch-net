@@ -27,14 +27,14 @@ public partial class DataframeEvaluationRegressionMetricsHuber : RequestConverte
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeEvaluationRegressionMetricsHuber", false);
+		var initializer = writer.BeginObjectInitializer("DataframeEvaluationRegressionMetricsHuber", false);
 		if (Delta is not null)
 		{
-			__init.Property("Delta");
+			initializer.Property("Delta");
 			writer.WriteValue(Delta.Value);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

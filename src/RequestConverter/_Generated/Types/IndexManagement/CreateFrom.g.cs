@@ -27,25 +27,25 @@ public partial class CreateFrom : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CreateFrom", false);
+		var initializer = writer.BeginObjectInitializer("CreateFrom", false);
 		if (MappingsOverride is not null)
 		{
-			__init.Property("MappingsOverride");
+			initializer.Property("MappingsOverride");
 			MappingsOverride.FormatCode(writer);
 		}
 
 		if (RemoveIndexBlocks is not null)
 		{
-			__init.Property("RemoveIndexBlocks");
+			initializer.Property("RemoveIndexBlocks");
 			writer.WriteValue(RemoveIndexBlocks.Value);
 		}
 
 		if (SettingsOverride is not null)
 		{
-			__init.Property("SettingsOverride");
+			initializer.Property("SettingsOverride");
 			SettingsOverride.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

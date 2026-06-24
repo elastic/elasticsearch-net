@@ -27,100 +27,100 @@ public partial class MergesStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MergesStats", false);
+		var initializer = writer.BeginObjectInitializer("MergesStats", false);
 		{
-			__init.Property("Current");
+			initializer.Property("Current");
 			writer.WriteValue(Current);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("CurrentDocs");
+			initializer.Property("CurrentDocs");
 			writer.WriteValue(CurrentDocs);
 			writer.Write("L");
 		}
 
 		if (CurrentSize is not null)
 		{
-			__init.Property("CurrentSize");
+			initializer.Property("CurrentSize");
 			writer.WriteString(CurrentSize);
 		}
 
 		{
-			__init.Property("CurrentSizeInBytes");
+			initializer.Property("CurrentSizeInBytes");
 			writer.WriteValue(CurrentSizeInBytes);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteValue(Total);
 			writer.Write("L");
 		}
 
 		if (TotalAutoThrottle is not null)
 		{
-			__init.Property("TotalAutoThrottle");
+			initializer.Property("TotalAutoThrottle");
 			writer.WriteString(TotalAutoThrottle);
 		}
 
 		{
-			__init.Property("TotalAutoThrottleInBytes");
+			initializer.Property("TotalAutoThrottleInBytes");
 			writer.WriteValue(TotalAutoThrottleInBytes);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("TotalDocs");
+			initializer.Property("TotalDocs");
 			writer.WriteValue(TotalDocs);
 			writer.Write("L");
 		}
 
 		if (TotalSize is not null)
 		{
-			__init.Property("TotalSize");
+			initializer.Property("TotalSize");
 			writer.WriteString(TotalSize);
 		}
 
 		{
-			__init.Property("TotalSizeInBytes");
+			initializer.Property("TotalSizeInBytes");
 			writer.WriteValue(TotalSizeInBytes);
 			writer.Write("L");
 		}
 
 		if (TotalStoppedTime is not null)
 		{
-			__init.Property("TotalStoppedTime");
+			initializer.Property("TotalStoppedTime");
 			TotalStoppedTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalStoppedTimeInMillis");
+			initializer.Property("TotalStoppedTimeInMillis");
 			writer.WriteValue(TotalStoppedTimeInMillis);
 		}
 
 		if (TotalThrottledTime is not null)
 		{
-			__init.Property("TotalThrottledTime");
+			initializer.Property("TotalThrottledTime");
 			TotalThrottledTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalThrottledTimeInMillis");
+			initializer.Property("TotalThrottledTimeInMillis");
 			writer.WriteValue(TotalThrottledTimeInMillis);
 		}
 
 		if (TotalTime is not null)
 		{
-			__init.Property("TotalTime");
+			initializer.Property("TotalTime");
 			TotalTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalTimeInMillis");
+			initializer.Property("TotalTimeInMillis");
 			writer.WriteValue(TotalTimeInMillis);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

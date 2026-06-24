@@ -27,35 +27,35 @@ public partial class SearchMvtRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SearchMvtRequest", false);
+		var initializer = writer.BeginObjectInitializer("SearchMvtRequest", false);
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		{
-			__init.Property("X");
+			initializer.Property("X");
 			writer.WriteValue(X);
 		}
 
 		{
-			__init.Property("Y");
+			initializer.Property("Y");
 			writer.WriteValue(Y);
 		}
 
 		{
-			__init.Property("Zoom");
+			initializer.Property("Zoom");
 			writer.WriteValue(Zoom);
 		}
 
 		if (Aggs is not null)
 		{
-			__init.Property("Aggs");
+			initializer.Property("Aggs");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -66,61 +66,61 @@ public partial class SearchMvtRequest : RequestConverter.ICodeFormattable
 
 		if (Buffer is not null)
 		{
-			__init.Property("Buffer");
+			initializer.Property("Buffer");
 			writer.WriteValue(Buffer.Value);
 		}
 
 		if (ExactBounds is not null)
 		{
-			__init.Property("ExactBounds");
+			initializer.Property("ExactBounds");
 			writer.WriteValue(ExactBounds.Value);
 		}
 
 		if (Extent is not null)
 		{
-			__init.Property("Extent");
+			initializer.Property("Extent");
 			writer.WriteValue(Extent.Value);
 		}
 
 		if (Fields is not null)
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			Fields.FormatCode(writer);
 		}
 
 		if (GridAgg is not null)
 		{
-			__init.Property("GridAgg");
+			initializer.Property("GridAgg");
 			Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationTypeCodeFormatter.FormatCode(GridAgg.Value, writer);
 		}
 
 		if (GridPrecision is not null)
 		{
-			__init.Property("GridPrecision");
+			initializer.Property("GridPrecision");
 			writer.WriteValue(GridPrecision.Value);
 		}
 
 		if (GridType is not null)
 		{
-			__init.Property("GridType");
+			initializer.Property("GridType");
 			Elastic.Clients.Elasticsearch.Core.SearchMvt.GridTypeCodeFormatter.FormatCode(GridType.Value, writer);
 		}
 
 		if (ProjectRouting is not null)
 		{
-			__init.Property("ProjectRouting");
+			initializer.Property("ProjectRouting");
 			writer.WriteString(ProjectRouting);
 		}
 
 		if (Query is not null)
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			Query.FormatCode(writer);
 		}
 
 		if (RuntimeMappings is not null)
 		{
-			__init.Property("RuntimeMappings");
+			initializer.Property("RuntimeMappings");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("Elastic.Clients.Elasticsearch.Field");
 			writer.Write(", ");
@@ -131,28 +131,28 @@ public partial class SearchMvtRequest : RequestConverter.ICodeFormattable
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
 		if (Sort is not null)
 		{
-			__init.Property("Sort");
+			initializer.Property("Sort");
 			writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (TrackTotalHits is not null)
 		{
-			__init.Property("TrackTotalHits");
+			initializer.Property("TrackTotalHits");
 			TrackTotalHits.FormatCode(writer);
 		}
 
 		if (WithLabels is not null)
 		{
-			__init.Property("WithLabels");
+			initializer.Property("WithLabels");
 			writer.WriteValue(WithLabels.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,12 +27,12 @@ public partial class AnalysisMemoryLimit : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AnalysisMemoryLimit", false);
+		var initializer = writer.BeginObjectInitializer("AnalysisMemoryLimit", false);
 		{
-			__init.Property("ModelMemoryLimit");
+			initializer.Property("ModelMemoryLimit");
 			writer.WriteString(ModelMemoryLimit);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

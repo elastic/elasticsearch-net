@@ -27,25 +27,25 @@ public partial class DataStreamVisibility : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataStreamVisibility", false);
+		var initializer = writer.BeginObjectInitializer("DataStreamVisibility", false);
 		if (AllowCustomRouting is not null)
 		{
-			__init.Property("AllowCustomRouting");
+			initializer.Property("AllowCustomRouting");
 			writer.WriteValue(AllowCustomRouting.Value);
 		}
 
 		if (FailureStore is not null)
 		{
-			__init.Property("FailureStore");
+			initializer.Property("FailureStore");
 			writer.WriteValue(FailureStore.Value);
 		}
 
 		if (Hidden is not null)
 		{
-			__init.Property("Hidden");
+			initializer.Property("Hidden");
 			writer.WriteValue(Hidden.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

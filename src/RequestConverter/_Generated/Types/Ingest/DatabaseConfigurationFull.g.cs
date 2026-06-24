@@ -27,36 +27,36 @@ public partial class DatabaseConfigurationFull : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DatabaseConfigurationFull", false);
+		var initializer = writer.BeginObjectInitializer("DatabaseConfigurationFull", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		if (Ipinfo is not null)
 		{
-			__init.Property("Ipinfo");
+			initializer.Property("Ipinfo");
 			Ipinfo.FormatCode(writer);
 		}
 
 		if (Local is not null)
 		{
-			__init.Property("Local");
+			initializer.Property("Local");
 			Local.FormatCode(writer);
 		}
 
 		if (Maxmind is not null)
 		{
-			__init.Property("Maxmind");
+			initializer.Property("Maxmind");
 			Maxmind.FormatCode(writer);
 		}
 
 		if (Web is not null)
 		{
-			__init.Property("Web");
+			initializer.Property("Web");
 			Web.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

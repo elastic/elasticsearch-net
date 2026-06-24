@@ -27,32 +27,32 @@ public partial class EqlFeaturesKeys : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EqlFeaturesKeys", false);
+		var initializer = writer.BeginObjectInitializer("EqlFeaturesKeys", false);
 		{
-			__init.Property("JoinKeysFiveOrMore");
+			initializer.Property("JoinKeysFiveOrMore");
 			writer.WriteValue(JoinKeysFiveOrMore);
 		}
 
 		{
-			__init.Property("JoinKeysFour");
+			initializer.Property("JoinKeysFour");
 			writer.WriteValue(JoinKeysFour);
 		}
 
 		{
-			__init.Property("JoinKeysOne");
+			initializer.Property("JoinKeysOne");
 			writer.WriteValue(JoinKeysOne);
 		}
 
 		{
-			__init.Property("JoinKeysThree");
+			initializer.Property("JoinKeysThree");
 			writer.WriteValue(JoinKeysThree);
 		}
 
 		{
-			__init.Property("JoinKeysTwo");
+			initializer.Property("JoinKeysTwo");
 			writer.WriteValue(JoinKeysTwo);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

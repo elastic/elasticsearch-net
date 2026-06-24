@@ -27,38 +27,38 @@ public partial class OperatingSystem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("OperatingSystem", false);
+		var initializer = writer.BeginObjectInitializer("OperatingSystem", false);
 		if (Cgroup is not null)
 		{
-			__init.Property("Cgroup");
+			initializer.Property("Cgroup");
 			Cgroup.FormatCode(writer);
 		}
 
 		if (Cpu is not null)
 		{
-			__init.Property("Cpu");
+			initializer.Property("Cpu");
 			Cpu.FormatCode(writer);
 		}
 
 		if (Mem is not null)
 		{
-			__init.Property("Mem");
+			initializer.Property("Mem");
 			Mem.FormatCode(writer);
 		}
 
 		if (Swap is not null)
 		{
-			__init.Property("Swap");
+			initializer.Property("Swap");
 			Swap.FormatCode(writer);
 		}
 
 		if (Timestamp is not null)
 		{
-			__init.Property("Timestamp");
+			initializer.Property("Timestamp");
 			writer.WriteValue(Timestamp.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

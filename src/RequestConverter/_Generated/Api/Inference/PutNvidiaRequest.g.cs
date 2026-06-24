@@ -27,40 +27,40 @@ public partial class PutNvidiaRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutNvidiaRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutNvidiaRequest", false);
 		{
-			__init.Property("NvidiaInferenceId");
+			initializer.Property("NvidiaInferenceId");
 			NvidiaInferenceId.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TaskType");
+			initializer.Property("TaskType");
 			Elastic.Clients.Elasticsearch.Inference.NvidiaTaskTypeCodeFormatter.FormatCode(TaskType, writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (ChunkingSettings is not null)
 		{
-			__init.Property("ChunkingSettings");
+			initializer.Property("ChunkingSettings");
 			ChunkingSettings.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ServiceSettings");
+			initializer.Property("ServiceSettings");
 			ServiceSettings.FormatCode(writer);
 		}
 
 		if (TaskSettings is not null)
 		{
-			__init.Property("TaskSettings");
+			initializer.Property("TaskSettings");
 			TaskSettings.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,49 +27,49 @@ public partial class AllocationExplainRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AllocationExplainRequest", false);
+		var initializer = writer.BeginObjectInitializer("AllocationExplainRequest", false);
 		if (IncludeDiskInfo is not null)
 		{
-			__init.Property("IncludeDiskInfo");
+			initializer.Property("IncludeDiskInfo");
 			writer.WriteValue(IncludeDiskInfo.Value);
 		}
 
 		if (IncludeYesDecisions is not null)
 		{
-			__init.Property("IncludeYesDecisions");
+			initializer.Property("IncludeYesDecisions");
 			writer.WriteValue(IncludeYesDecisions.Value);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (CurrentNode is not null)
 		{
-			__init.Property("CurrentNode");
+			initializer.Property("CurrentNode");
 			writer.WriteString(CurrentNode);
 		}
 
 		if (Index is not null)
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		if (Primary is not null)
 		{
-			__init.Property("Primary");
+			initializer.Property("Primary");
 			writer.WriteValue(Primary.Value);
 		}
 
 		if (Shard is not null)
 		{
-			__init.Property("Shard");
+			initializer.Property("Shard");
 			writer.WriteValue(Shard.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

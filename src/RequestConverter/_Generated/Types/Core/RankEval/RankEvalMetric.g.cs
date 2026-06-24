@@ -27,37 +27,37 @@ public partial class RankEvalMetric : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RankEvalMetric", false);
+		var initializer = writer.BeginObjectInitializer("RankEvalMetric", false);
 		if (Dcg is not null)
 		{
-			__init.Property("Dcg");
+			initializer.Property("Dcg");
 			Dcg.FormatCode(writer);
 		}
 
 		if (ExpectedReciprocalRank is not null)
 		{
-			__init.Property("ExpectedReciprocalRank");
+			initializer.Property("ExpectedReciprocalRank");
 			ExpectedReciprocalRank.FormatCode(writer);
 		}
 
 		if (MeanReciprocalRank is not null)
 		{
-			__init.Property("MeanReciprocalRank");
+			initializer.Property("MeanReciprocalRank");
 			MeanReciprocalRank.FormatCode(writer);
 		}
 
 		if (Precision is not null)
 		{
-			__init.Property("Precision");
+			initializer.Property("Precision");
 			Precision.FormatCode(writer);
 		}
 
 		if (Recall is not null)
 		{
-			__init.Property("Recall");
+			initializer.Property("Recall");
 			Recall.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,10 +27,10 @@ public partial class CumulativeCardinalityAggregate : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CumulativeCardinalityAggregate", true);
+		var initializer = writer.BeginObjectInitializer("CumulativeCardinalityAggregate", true);
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -40,17 +40,17 @@ public partial class CumulativeCardinalityAggregate : RequestConverter.ICodeForm
 		}
 
 		{
-			__init.Property("Value");
+			initializer.Property("Value");
 			writer.WriteValue(Value);
 			writer.Write("L");
 		}
 
 		if (ValueAsString is not null)
 		{
-			__init.Property("ValueAsString");
+			initializer.Property("ValueAsString");
 			writer.WriteString(ValueAsString);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

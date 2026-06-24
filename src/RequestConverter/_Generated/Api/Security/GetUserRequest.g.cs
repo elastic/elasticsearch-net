@@ -27,19 +27,19 @@ public partial class GetUserRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetUserRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetUserRequest", false);
 		if (Username is not null)
 		{
-			__init.Property("Username");
+			initializer.Property("Username");
 			writer.WriteInlineList(Username, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (WithProfileUid is not null)
 		{
-			__init.Property("WithProfileUid");
+			initializer.Property("WithProfileUid");
 			writer.WriteValue(WithProfileUid.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

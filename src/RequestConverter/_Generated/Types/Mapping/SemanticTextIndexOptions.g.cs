@@ -27,19 +27,19 @@ public partial class SemanticTextIndexOptions : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SemanticTextIndexOptions", false);
+		var initializer = writer.BeginObjectInitializer("SemanticTextIndexOptions", false);
 		if (DenseVector is not null)
 		{
-			__init.Property("DenseVector");
+			initializer.Property("DenseVector");
 			DenseVector.FormatCode(writer);
 		}
 
 		if (SparseVector is not null)
 		{
-			__init.Property("SparseVector");
+			initializer.Property("SparseVector");
 			SparseVector.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

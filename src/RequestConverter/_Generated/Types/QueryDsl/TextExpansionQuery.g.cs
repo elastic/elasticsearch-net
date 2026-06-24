@@ -27,41 +27,41 @@ public partial class TextExpansionQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TextExpansionQuery", false);
+		var initializer = writer.BeginObjectInitializer("TextExpansionQuery", false);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ModelId");
+			initializer.Property("ModelId");
 			writer.WriteString(ModelId);
 		}
 
 		{
-			__init.Property("ModelText");
+			initializer.Property("ModelText");
 			writer.WriteString(ModelText);
 		}
 
 		if (PruningConfig is not null)
 		{
-			__init.Property("PruningConfig");
+			initializer.Property("PruningConfig");
 			PruningConfig.FormatCode(writer);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

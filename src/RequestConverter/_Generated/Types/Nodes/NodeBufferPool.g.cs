@@ -27,40 +27,40 @@ public partial class NodeBufferPool : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeBufferPool", false);
+		var initializer = writer.BeginObjectInitializer("NodeBufferPool", false);
 		if (Count is not null)
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count.Value);
 			writer.Write("L");
 		}
 
 		if (TotalCapacity is not null)
 		{
-			__init.Property("TotalCapacity");
+			initializer.Property("TotalCapacity");
 			writer.WriteString(TotalCapacity);
 		}
 
 		if (TotalCapacityInBytes is not null)
 		{
-			__init.Property("TotalCapacityInBytes");
+			initializer.Property("TotalCapacityInBytes");
 			writer.WriteValue(TotalCapacityInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (Used is not null)
 		{
-			__init.Property("Used");
+			initializer.Property("Used");
 			writer.WriteString(Used);
 		}
 
 		if (UsedInBytes is not null)
 		{
-			__init.Property("UsedInBytes");
+			initializer.Property("UsedInBytes");
 			writer.WriteValue(UsedInBytes.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

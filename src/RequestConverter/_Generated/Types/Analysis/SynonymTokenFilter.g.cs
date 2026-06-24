@@ -27,61 +27,61 @@ public partial class SynonymTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SynonymTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("SynonymTokenFilter", true);
 		if (Expand is not null)
 		{
-			__init.Property("Expand");
+			initializer.Property("Expand");
 			writer.WriteValue(Expand.Value);
 		}
 
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			Elastic.Clients.Elasticsearch.Analysis.SynonymFormatCodeFormatter.FormatCode(Format.Value, writer);
 		}
 
 		if (Lenient is not null)
 		{
-			__init.Property("Lenient");
+			initializer.Property("Lenient");
 			writer.WriteValue(Lenient.Value);
 		}
 
 		if (Synonyms is not null)
 		{
-			__init.Property("Synonyms");
+			initializer.Property("Synonyms");
 			writer.WriteInlineList(Synonyms, (w, item) => { w.WriteString(item); });
 		}
 
 		if (SynonymsPath is not null)
 		{
-			__init.Property("SynonymsPath");
+			initializer.Property("SynonymsPath");
 			writer.WriteString(SynonymsPath);
 		}
 
 		if (SynonymsSet is not null)
 		{
-			__init.Property("SynonymsSet");
+			initializer.Property("SynonymsSet");
 			writer.WriteInlineList(SynonymsSet, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Tokenizer is not null)
 		{
-			__init.Property("Tokenizer");
+			initializer.Property("Tokenizer");
 			writer.WriteString(Tokenizer);
 		}
 
 		if (Updateable is not null)
 		{
-			__init.Property("Updateable");
+			initializer.Property("Updateable");
 			writer.WriteValue(Updateable.Value);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

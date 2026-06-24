@@ -27,12 +27,12 @@ public partial class GeoPolygonPoints : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoPolygonPoints", false);
+		var initializer = writer.BeginObjectInitializer("GeoPolygonPoints", false);
 		{
-			__init.Property("Points");
+			initializer.Property("Points");
 			writer.WriteInlineList(Points, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

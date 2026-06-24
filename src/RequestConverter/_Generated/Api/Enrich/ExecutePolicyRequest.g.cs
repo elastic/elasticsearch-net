@@ -27,24 +27,24 @@ public partial class ExecutePolicyRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExecutePolicyRequest", false);
+		var initializer = writer.BeginObjectInitializer("ExecutePolicyRequest", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (WaitForCompletion is not null)
 		{
-			__init.Property("WaitForCompletion");
+			initializer.Property("WaitForCompletion");
 			writer.WriteValue(WaitForCompletion.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

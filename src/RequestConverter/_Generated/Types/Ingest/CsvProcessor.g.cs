@@ -27,77 +27,77 @@ public partial class CsvProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CsvProcessor", false);
+		var initializer = writer.BeginObjectInitializer("CsvProcessor", false);
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		if (EmptyValue is not null)
 		{
-			__init.Property("EmptyValue");
+			initializer.Property("EmptyValue");
 			writer.WriteValue(EmptyValue);
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (If is not null)
 		{
-			__init.Property("If");
+			initializer.Property("If");
 			If.FormatCode(writer);
 		}
 
 		if (IgnoreFailure is not null)
 		{
-			__init.Property("IgnoreFailure");
+			initializer.Property("IgnoreFailure");
 			writer.WriteValue(IgnoreFailure.Value);
 		}
 
 		if (IgnoreMissing is not null)
 		{
-			__init.Property("IgnoreMissing");
+			initializer.Property("IgnoreMissing");
 			writer.WriteValue(IgnoreMissing.Value);
 		}
 
 		if (OnFailure is not null)
 		{
-			__init.Property("OnFailure");
+			initializer.Property("OnFailure");
 			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Quote is not null)
 		{
-			__init.Property("Quote");
+			initializer.Property("Quote");
 			writer.WriteString(Quote);
 		}
 
 		if (Separator is not null)
 		{
-			__init.Property("Separator");
+			initializer.Property("Separator");
 			writer.WriteString(Separator);
 		}
 
 		if (Tag is not null)
 		{
-			__init.Property("Tag");
+			initializer.Property("Tag");
 			writer.WriteString(Tag);
 		}
 
 		{
-			__init.Property("TargetFields");
+			initializer.Property("TargetFields");
 			TargetFields.FormatCode(writer);
 		}
 
 		if (Trim is not null)
 		{
-			__init.Property("Trim");
+			initializer.Property("Trim");
 			writer.WriteValue(Trim.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

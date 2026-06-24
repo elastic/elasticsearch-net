@@ -27,40 +27,40 @@ public partial class ScriptedMetricAggregation : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ScriptedMetricAggregation", false);
+		var initializer = writer.BeginObjectInitializer("ScriptedMetricAggregation", false);
 		if (CombineScript is not null)
 		{
-			__init.Property("CombineScript");
+			initializer.Property("CombineScript");
 			CombineScript.FormatCode(writer);
 		}
 
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (InitScript is not null)
 		{
-			__init.Property("InitScript");
+			initializer.Property("InitScript");
 			InitScript.FormatCode(writer);
 		}
 
 		if (MapScript is not null)
 		{
-			__init.Property("MapScript");
+			initializer.Property("MapScript");
 			MapScript.FormatCode(writer);
 		}
 
 		if (Missing is not null)
 		{
-			__init.Property("Missing");
+			initializer.Property("Missing");
 			writer.WriteValue(Missing);
 		}
 
 		if (Params is not null)
 		{
-			__init.Property("Params");
+			initializer.Property("Params");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -71,16 +71,16 @@ public partial class ScriptedMetricAggregation : RequestConverter.ICodeFormattab
 
 		if (ReduceScript is not null)
 		{
-			__init.Property("ReduceScript");
+			initializer.Property("ReduceScript");
 			ReduceScript.FormatCode(writer);
 		}
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,12 +27,12 @@ public partial class IndexingPressure : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexingPressure", false);
+		var initializer = writer.BeginObjectInitializer("IndexingPressure", false);
 		{
-			__init.Property("Memory");
+			initializer.Property("Memory");
 			Memory.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

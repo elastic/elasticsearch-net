@@ -27,19 +27,19 @@ public partial class SoftDeletes : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SoftDeletes", false);
+		var initializer = writer.BeginObjectInitializer("SoftDeletes", false);
 		if (Enabled is not null)
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled.Value);
 		}
 
 		if (RetentionLease is not null)
 		{
-			__init.Property("RetentionLease");
+			initializer.Property("RetentionLease");
 			RetentionLease.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

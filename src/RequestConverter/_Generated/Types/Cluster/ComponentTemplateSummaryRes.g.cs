@@ -27,10 +27,10 @@ public partial class ComponentTemplateSummaryRes : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ComponentTemplateSummaryRes", false);
+		var initializer = writer.BeginObjectInitializer("ComponentTemplateSummaryRes", false);
 		if (Aliases is not null)
 		{
-			__init.Property("Aliases");
+			initializer.Property("Aliases");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -41,25 +41,25 @@ public partial class ComponentTemplateSummaryRes : RequestConverter.ICodeFormatt
 
 		if (DataStreamOptions is not null)
 		{
-			__init.Property("DataStreamOptions");
+			initializer.Property("DataStreamOptions");
 			DataStreamOptions.FormatCode(writer);
 		}
 
 		if (Lifecycle is not null)
 		{
-			__init.Property("Lifecycle");
+			initializer.Property("Lifecycle");
 			Lifecycle.FormatCode(writer);
 		}
 
 		if (Mappings is not null)
 		{
-			__init.Property("Mappings");
+			initializer.Property("Mappings");
 			Mappings.FormatCode(writer);
 		}
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -70,7 +70,7 @@ public partial class ComponentTemplateSummaryRes : RequestConverter.ICodeFormatt
 
 		if (Settings is not null)
 		{
-			__init.Property("Settings");
+			initializer.Property("Settings");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -81,11 +81,11 @@ public partial class ComponentTemplateSummaryRes : RequestConverter.ICodeFormatt
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,24 +27,24 @@ public partial class FileDetails : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FileDetails", false);
+		var initializer = writer.BeginObjectInitializer("FileDetails", false);
 		{
-			__init.Property("Length");
+			initializer.Property("Length");
 			writer.WriteValue(Length);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("Recovered");
+			initializer.Property("Recovered");
 			writer.WriteValue(Recovered);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

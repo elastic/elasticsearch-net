@@ -27,12 +27,12 @@ public partial class WaitForSnapshotAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("WaitForSnapshotAction", false);
+		var initializer = writer.BeginObjectInitializer("WaitForSnapshotAction", false);
 		{
-			__init.Property("Policy");
+			initializer.Property("Policy");
 			writer.WriteString(Policy);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

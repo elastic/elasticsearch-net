@@ -27,13 +27,13 @@ public partial class RemoveDuplicatesTokenFilter : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RemoveDuplicatesTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("RemoveDuplicatesTokenFilter", true);
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

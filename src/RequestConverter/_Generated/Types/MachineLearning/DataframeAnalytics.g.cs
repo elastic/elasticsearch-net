@@ -27,44 +27,44 @@ public partial class DataframeAnalytics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeAnalytics", false);
+		var initializer = writer.BeginObjectInitializer("DataframeAnalytics", false);
 		if (AssignmentExplanation is not null)
 		{
-			__init.Property("AssignmentExplanation");
+			initializer.Property("AssignmentExplanation");
 			writer.WriteString(AssignmentExplanation);
 		}
 
 		{
-			__init.Property("DataCounts");
+			initializer.Property("DataCounts");
 			DataCounts.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		{
-			__init.Property("MemoryUsage");
+			initializer.Property("MemoryUsage");
 			MemoryUsage.FormatCode(writer);
 		}
 
 		if (Node is not null)
 		{
-			__init.Property("Node");
+			initializer.Property("Node");
 			Node.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Progress");
+			initializer.Property("Progress");
 			writer.WriteInlineList(Progress, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("State");
+			initializer.Property("State");
 			Elastic.Clients.Elasticsearch.MachineLearning.DataframeStateCodeFormatter.FormatCode(State, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

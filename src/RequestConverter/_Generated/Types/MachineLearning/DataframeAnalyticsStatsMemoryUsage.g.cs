@@ -27,31 +27,31 @@ public partial class DataframeAnalyticsStatsMemoryUsage : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeAnalyticsStatsMemoryUsage", false);
+		var initializer = writer.BeginObjectInitializer("DataframeAnalyticsStatsMemoryUsage", false);
 		if (MemoryReestimateBytes is not null)
 		{
-			__init.Property("MemoryReestimateBytes");
+			initializer.Property("MemoryReestimateBytes");
 			writer.WriteValue(MemoryReestimateBytes.Value);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("PeakUsageBytes");
+			initializer.Property("PeakUsageBytes");
 			writer.WriteValue(PeakUsageBytes);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Status");
+			initializer.Property("Status");
 			writer.WriteString(Status);
 		}
 
 		if (Timestamp is not null)
 		{
-			__init.Property("Timestamp");
+			initializer.Property("Timestamp");
 			writer.WriteValue(Timestamp.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

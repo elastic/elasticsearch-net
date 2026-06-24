@@ -27,23 +27,23 @@ public partial class Explanation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Explanation", false);
+		var initializer = writer.BeginObjectInitializer("Explanation", false);
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		{
-			__init.Property("Details");
+			initializer.Property("Details");
 			writer.WriteInlineList(Details, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Value");
+			initializer.Property("Value");
 			writer.WriteValue(Value);
 			writer.Write("f");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

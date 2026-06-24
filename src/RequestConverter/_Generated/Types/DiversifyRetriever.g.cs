@@ -27,72 +27,72 @@ public partial class DiversifyRetriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DiversifyRetriever", false);
+		var initializer = writer.BeginObjectInitializer("DiversifyRetriever", false);
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			writer.WriteString(Field);
 		}
 
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Lambda is not null)
 		{
-			__init.Property("Lambda");
+			initializer.Property("Lambda");
 			writer.WriteValue(Lambda.Value);
 			writer.Write("f");
 		}
 
 		if (MinScore is not null)
 		{
-			__init.Property("MinScore");
+			initializer.Property("MinScore");
 			writer.WriteValue(MinScore.Value);
 			writer.Write("f");
 		}
 
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		if (QueryVector is not null)
 		{
-			__init.Property("QueryVector");
+			initializer.Property("QueryVector");
 			writer.WriteInlineList(QueryVector, (w, item) => { w.WriteValue(item); w.Write("f"); });
 		}
 
 		if (QueryVectorBuilder is not null)
 		{
-			__init.Property("QueryVectorBuilder");
+			initializer.Property("QueryVectorBuilder");
 			QueryVectorBuilder.FormatCode(writer);
 		}
 
 		if (RankWindowSize is not null)
 		{
-			__init.Property("RankWindowSize");
+			initializer.Property("RankWindowSize");
 			writer.WriteValue(RankWindowSize.Value);
 		}
 
 		{
-			__init.Property("Retriever");
+			initializer.Property("Retriever");
 			Retriever.FormatCode(writer);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			Elastic.Clients.Elasticsearch.DiversifyRetrieverTypesCodeFormatter.FormatCode(Type, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

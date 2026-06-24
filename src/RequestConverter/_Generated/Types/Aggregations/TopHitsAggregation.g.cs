@@ -27,58 +27,58 @@ public partial class TopHitsAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TopHitsAggregation", false);
+		var initializer = writer.BeginObjectInitializer("TopHitsAggregation", false);
 		if (DocvalueFields is not null)
 		{
-			__init.Property("DocvalueFields");
+			initializer.Property("DocvalueFields");
 			writer.WriteInlineList(DocvalueFields, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Explain is not null)
 		{
-			__init.Property("Explain");
+			initializer.Property("Explain");
 			writer.WriteValue(Explain.Value);
 		}
 
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Fields is not null)
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			writer.WriteInlineList(Fields, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (From is not null)
 		{
-			__init.Property("From");
+			initializer.Property("From");
 			writer.WriteValue(From.Value);
 		}
 
 		if (Highlight is not null)
 		{
-			__init.Property("Highlight");
+			initializer.Property("Highlight");
 			Highlight.FormatCode(writer);
 		}
 
 		if (Missing is not null)
 		{
-			__init.Property("Missing");
+			initializer.Property("Missing");
 			writer.WriteValue(Missing);
 		}
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
 		if (ScriptFields is not null)
 		{
-			__init.Property("ScriptFields");
+			initializer.Property("ScriptFields");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -89,46 +89,46 @@ public partial class TopHitsAggregation : RequestConverter.ICodeFormattable
 
 		if (SeqNoPrimaryTerm is not null)
 		{
-			__init.Property("SeqNoPrimaryTerm");
+			initializer.Property("SeqNoPrimaryTerm");
 			writer.WriteValue(SeqNoPrimaryTerm.Value);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
 		if (Sort is not null)
 		{
-			__init.Property("Sort");
+			initializer.Property("Sort");
 			writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Source is not null)
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			Source.FormatCode(writer);
 		}
 
 		if (StoredFields is not null)
 		{
-			__init.Property("StoredFields");
+			initializer.Property("StoredFields");
 			StoredFields.FormatCode(writer);
 		}
 
 		if (TrackScores is not null)
 		{
-			__init.Property("TrackScores");
+			initializer.Property("TrackScores");
 			writer.WriteValue(TrackScores.Value);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

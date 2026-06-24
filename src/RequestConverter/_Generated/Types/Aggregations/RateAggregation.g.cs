@@ -27,43 +27,43 @@ public partial class RateAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RateAggregation", false);
+		var initializer = writer.BeginObjectInitializer("RateAggregation", false);
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			writer.WriteString(Format);
 		}
 
 		if (Missing is not null)
 		{
-			__init.Property("Missing");
+			initializer.Property("Missing");
 			writer.WriteValue(Missing);
 		}
 
 		if (Mode is not null)
 		{
-			__init.Property("Mode");
+			initializer.Property("Mode");
 			Elastic.Clients.Elasticsearch.Aggregations.RateModeCodeFormatter.FormatCode(Mode.Value, writer);
 		}
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
 		if (Unit is not null)
 		{
-			__init.Property("Unit");
+			initializer.Property("Unit");
 			Elastic.Clients.Elasticsearch.Aggregations.CalendarIntervalCodeFormatter.FormatCode(Unit.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,30 +27,30 @@ public partial class NodeInfoSettingsTransport : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoSettingsTransport", false);
+		var initializer = writer.BeginObjectInitializer("NodeInfoSettingsTransport", false);
 		if (Features is not null)
 		{
-			__init.Property("Features");
+			initializer.Property("Features");
 			Features.FormatCode(writer);
 		}
 
 		if (IgnoreDeserializationErrors is not null)
 		{
-			__init.Property("IgnoreDeserializationErrors");
+			initializer.Property("IgnoreDeserializationErrors");
 			writer.WriteValue(IgnoreDeserializationErrors.Value);
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			Type.FormatCode(writer);
 		}
 
 		if (TypeDefault is not null)
 		{
-			__init.Property("TypeDefault");
+			initializer.Property("TypeDefault");
 			writer.WriteString(TypeDefault);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

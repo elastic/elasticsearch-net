@@ -27,25 +27,25 @@ public partial class MlInferenceIngestProcessorCount : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MlInferenceIngestProcessorCount", false);
+		var initializer = writer.BeginObjectInitializer("MlInferenceIngestProcessorCount", false);
 		{
-			__init.Property("Max");
+			initializer.Property("Max");
 			writer.WriteValue(Max);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Min");
+			initializer.Property("Min");
 			writer.WriteValue(Min);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Sum");
+			initializer.Property("Sum");
 			writer.WriteValue(Sum);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

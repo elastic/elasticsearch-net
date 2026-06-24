@@ -27,14 +27,14 @@ public partial class BulkError : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BulkError", false);
+		var initializer = writer.BeginObjectInitializer("BulkError", false);
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 		}
 
 		{
-			__init.Property("Details");
+			initializer.Property("Details");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -43,6 +43,6 @@ public partial class BulkError : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(Details, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

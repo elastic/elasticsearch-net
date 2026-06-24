@@ -27,69 +27,69 @@ public partial class PutIndexTemplateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutIndexTemplateRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutIndexTemplateRequest", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		if (Cause is not null)
 		{
-			__init.Property("Cause");
+			initializer.Property("Cause");
 			writer.WriteString(Cause);
 		}
 
 		if (Create is not null)
 		{
-			__init.Property("Create");
+			initializer.Property("Create");
 			writer.WriteValue(Create.Value);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (AllowAutoCreate is not null)
 		{
-			__init.Property("AllowAutoCreate");
+			initializer.Property("AllowAutoCreate");
 			writer.WriteValue(AllowAutoCreate.Value);
 		}
 
 		if (ComposedOf is not null)
 		{
-			__init.Property("ComposedOf");
+			initializer.Property("ComposedOf");
 			writer.WriteInlineList(ComposedOf, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (DataStream is not null)
 		{
-			__init.Property("DataStream");
+			initializer.Property("DataStream");
 			DataStream.FormatCode(writer);
 		}
 
 		if (Deprecated is not null)
 		{
-			__init.Property("Deprecated");
+			initializer.Property("Deprecated");
 			writer.WriteValue(Deprecated.Value);
 		}
 
 		if (IgnoreMissingComponentTemplates is not null)
 		{
-			__init.Property("IgnoreMissingComponentTemplates");
+			initializer.Property("IgnoreMissingComponentTemplates");
 			writer.WriteInlineList(IgnoreMissingComponentTemplates, (w, item) => { w.WriteString(item); });
 		}
 
 		if (IndexPatterns is not null)
 		{
-			__init.Property("IndexPatterns");
+			initializer.Property("IndexPatterns");
 			IndexPatterns.FormatCode(writer);
 		}
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -100,24 +100,24 @@ public partial class PutIndexTemplateRequest : RequestConverter.ICodeFormattable
 
 		if (Priority is not null)
 		{
-			__init.Property("Priority");
+			initializer.Property("Priority");
 			writer.WriteValue(Priority.Value);
 			writer.Write("L");
 		}
 
 		if (Template is not null)
 		{
-			__init.Property("Template");
+			initializer.Property("Template");
 			Template.FormatCode(writer);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,17 +27,17 @@ public partial class DownsamplingRound : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DownsamplingRound", false);
+		var initializer = writer.BeginObjectInitializer("DownsamplingRound", false);
 		{
-			__init.Property("After");
+			initializer.Property("After");
 			After.FormatCode(writer);
 		}
 
 		{
-			__init.Property("FixedInterval");
+			initializer.Property("FixedInterval");
 			writer.WriteString(FixedInterval);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

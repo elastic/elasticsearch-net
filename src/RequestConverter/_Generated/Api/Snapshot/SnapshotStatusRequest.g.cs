@@ -27,31 +27,31 @@ public partial class SnapshotStatusRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SnapshotStatusRequest", false);
+		var initializer = writer.BeginObjectInitializer("SnapshotStatusRequest", false);
 		if (Repository is not null)
 		{
-			__init.Property("Repository");
+			initializer.Property("Repository");
 			Repository.FormatCode(writer);
 		}
 
 		if (Snapshot is not null)
 		{
-			__init.Property("Snapshot");
+			initializer.Property("Snapshot");
 			Snapshot.FormatCode(writer);
 		}
 
 		if (IgnoreUnavailable is not null)
 		{
-			__init.Property("IgnoreUnavailable");
+			initializer.Property("IgnoreUnavailable");
 			writer.WriteValue(IgnoreUnavailable.Value);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

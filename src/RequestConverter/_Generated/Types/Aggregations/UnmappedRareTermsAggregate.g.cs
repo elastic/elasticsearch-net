@@ -27,15 +27,15 @@ public partial class UnmappedRareTermsAggregate : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UnmappedRareTermsAggregate", true);
+		var initializer = writer.BeginObjectInitializer("UnmappedRareTermsAggregate", true);
 		{
-			__init.Property("Buckets");
+			initializer.Property("Buckets");
 			writer.WriteInlineList(Buckets, (w, item) => { w.WriteValue(item); });
 		}
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -44,6 +44,6 @@ public partial class UnmappedRareTermsAggregate : RequestConverter.ICodeFormatta
 			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

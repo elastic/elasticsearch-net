@@ -27,31 +27,31 @@ public partial class StringStatsAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StringStatsAggregation", false);
+		var initializer = writer.BeginObjectInitializer("StringStatsAggregation", false);
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Missing is not null)
 		{
-			__init.Property("Missing");
+			initializer.Property("Missing");
 			writer.WriteValue(Missing);
 		}
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
 		if (ShowDistribution is not null)
 		{
-			__init.Property("ShowDistribution");
+			initializer.Property("ShowDistribution");
 			writer.WriteValue(ShowDistribution.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,14 +27,14 @@ public partial class SettingsSimilarityLmd : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SettingsSimilarityLmd", true);
+		var initializer = writer.BeginObjectInitializer("SettingsSimilarityLmd", true);
 		if (Mu is not null)
 		{
-			__init.Property("Mu");
+			initializer.Property("Mu");
 			writer.WriteValue(Mu.Value);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

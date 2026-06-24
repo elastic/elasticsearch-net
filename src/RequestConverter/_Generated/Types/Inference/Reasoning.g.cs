@@ -27,31 +27,31 @@ public partial class Reasoning : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Reasoning", false);
+		var initializer = writer.BeginObjectInitializer("Reasoning", false);
 		if (Effort is not null)
 		{
-			__init.Property("Effort");
+			initializer.Property("Effort");
 			Elastic.Clients.Elasticsearch.Inference.ReasoningEffortCodeFormatter.FormatCode(Effort.Value, writer);
 		}
 
 		if (Enabled is not null)
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled.Value);
 		}
 
 		if (Exclude is not null)
 		{
-			__init.Property("Exclude");
+			initializer.Property("Exclude");
 			writer.WriteValue(Exclude.Value);
 		}
 
 		if (Summary is not null)
 		{
-			__init.Property("Summary");
+			initializer.Property("Summary");
 			Elastic.Clients.Elasticsearch.Inference.ReasoningSummaryCodeFormatter.FormatCode(Summary.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

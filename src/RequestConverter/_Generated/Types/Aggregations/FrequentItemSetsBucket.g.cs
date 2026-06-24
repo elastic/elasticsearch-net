@@ -27,21 +27,21 @@ public partial class FrequentItemSetsBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FrequentItemSetsBucket", false);
+		var initializer = writer.BeginObjectInitializer("FrequentItemSetsBucket", false);
 		if (Aggregations is not null)
 		{
-			__init.Property("Aggregations");
+			initializer.Property("Aggregations");
 			Aggregations.FormatCode(writer);
 		}
 
 		{
-			__init.Property("DocCount");
+			initializer.Property("DocCount");
 			writer.WriteValue(DocCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Key");
+			initializer.Property("Key");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -51,11 +51,11 @@ public partial class FrequentItemSetsBucket : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Support");
+			initializer.Property("Support");
 			writer.WriteValue(Support);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

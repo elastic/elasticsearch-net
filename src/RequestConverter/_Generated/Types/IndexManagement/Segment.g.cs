@@ -27,9 +27,9 @@ public partial class Segment : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Segment", false);
+		var initializer = writer.BeginObjectInitializer("Segment", false);
 		{
-			__init.Property("Attributes");
+			initializer.Property("Attributes");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -39,48 +39,48 @@ public partial class Segment : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Committed");
+			initializer.Property("Committed");
 			writer.WriteValue(Committed);
 		}
 
 		{
-			__init.Property("Compound");
+			initializer.Property("Compound");
 			writer.WriteValue(Compound);
 		}
 
 		{
-			__init.Property("DeletedDocs");
+			initializer.Property("DeletedDocs");
 			writer.WriteValue(DeletedDocs);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Generation");
+			initializer.Property("Generation");
 			writer.WriteValue(Generation);
 		}
 
 		{
-			__init.Property("NumDocs");
+			initializer.Property("NumDocs");
 			writer.WriteValue(NumDocs);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Search");
+			initializer.Property("Search");
 			writer.WriteValue(Search);
 		}
 
 		{
-			__init.Property("SizeInBytes");
+			initializer.Property("SizeInBytes");
 			writer.WriteValue(SizeInBytes);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

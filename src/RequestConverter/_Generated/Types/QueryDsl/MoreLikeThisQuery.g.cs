@@ -27,107 +27,107 @@ public partial class MoreLikeThisQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MoreLikeThisQuery", false);
+		var initializer = writer.BeginObjectInitializer("MoreLikeThisQuery", false);
 		if (Analyzer is not null)
 		{
-			__init.Property("Analyzer");
+			initializer.Property("Analyzer");
 			writer.WriteString(Analyzer);
 		}
 
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		if (BoostTerms is not null)
 		{
-			__init.Property("BoostTerms");
+			initializer.Property("BoostTerms");
 			writer.WriteValue(BoostTerms.Value);
 			writer.Write("d");
 		}
 
 		if (FailOnUnsupportedField is not null)
 		{
-			__init.Property("FailOnUnsupportedField");
+			initializer.Property("FailOnUnsupportedField");
 			writer.WriteValue(FailOnUnsupportedField.Value);
 		}
 
 		if (Fields is not null)
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			Fields.FormatCode(writer);
 		}
 
 		if (Include is not null)
 		{
-			__init.Property("Include");
+			initializer.Property("Include");
 			writer.WriteValue(Include.Value);
 		}
 
 		{
-			__init.Property("Like");
+			initializer.Property("Like");
 			writer.WriteInlineList(Like, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (MaxDocFreq is not null)
 		{
-			__init.Property("MaxDocFreq");
+			initializer.Property("MaxDocFreq");
 			writer.WriteValue(MaxDocFreq.Value);
 		}
 
 		if (MaxQueryTerms is not null)
 		{
-			__init.Property("MaxQueryTerms");
+			initializer.Property("MaxQueryTerms");
 			writer.WriteValue(MaxQueryTerms.Value);
 		}
 
 		if (MaxWordLength is not null)
 		{
-			__init.Property("MaxWordLength");
+			initializer.Property("MaxWordLength");
 			writer.WriteValue(MaxWordLength.Value);
 		}
 
 		if (MinDocFreq is not null)
 		{
-			__init.Property("MinDocFreq");
+			initializer.Property("MinDocFreq");
 			writer.WriteValue(MinDocFreq.Value);
 		}
 
 		if (MinimumShouldMatch is not null)
 		{
-			__init.Property("MinimumShouldMatch");
+			initializer.Property("MinimumShouldMatch");
 			MinimumShouldMatch.FormatCode(writer);
 		}
 
 		if (MinTermFreq is not null)
 		{
-			__init.Property("MinTermFreq");
+			initializer.Property("MinTermFreq");
 			writer.WriteValue(MinTermFreq.Value);
 		}
 
 		if (MinWordLength is not null)
 		{
-			__init.Property("MinWordLength");
+			initializer.Property("MinWordLength");
 			writer.WriteValue(MinWordLength.Value);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			writer.WriteString(Routing);
 		}
 
 		if (StopWords is not null)
 		{
-			__init.Property("StopWords");
+			initializer.Property("StopWords");
 			if (StopWords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(StopWords.Value1, writer);
@@ -141,23 +141,23 @@ public partial class MoreLikeThisQuery : RequestConverter.ICodeFormattable
 
 		if (Unlike is not null)
 		{
-			__init.Property("Unlike");
+			initializer.Property("Unlike");
 			writer.WriteInlineList(Unlike, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version.Value);
 			writer.Write("L");
 		}
 
 		if (VersionType is not null)
 		{
-			__init.Property("VersionType");
+			initializer.Property("VersionType");
 			Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

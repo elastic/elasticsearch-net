@@ -27,23 +27,23 @@ public partial class DataframeEvaluationOutlierDetection : RequestConverter.ICod
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeEvaluationOutlierDetection", false);
+		var initializer = writer.BeginObjectInitializer("DataframeEvaluationOutlierDetection", false);
 		{
-			__init.Property("ActualField");
+			initializer.Property("ActualField");
 			ActualField.FormatCode(writer);
 		}
 
 		if (Metrics is not null)
 		{
-			__init.Property("Metrics");
+			initializer.Property("Metrics");
 			Metrics.FormatCode(writer);
 		}
 
 		{
-			__init.Property("PredictedProbabilityField");
+			initializer.Property("PredictedProbabilityField");
 			PredictedProbabilityField.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

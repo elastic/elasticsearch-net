@@ -27,14 +27,14 @@ public partial class NodeInfoTransport : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoTransport", false);
+		var initializer = writer.BeginObjectInitializer("NodeInfoTransport", false);
 		{
-			__init.Property("BoundAddress");
+			initializer.Property("BoundAddress");
 			writer.WriteInlineList(BoundAddress, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Profiles");
+			initializer.Property("Profiles");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -44,10 +44,10 @@ public partial class NodeInfoTransport : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("PublishAddress");
+			initializer.Property("PublishAddress");
 			writer.WriteString(PublishAddress);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

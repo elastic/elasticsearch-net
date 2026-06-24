@@ -27,15 +27,15 @@ public partial class NodeAllocationExplanation : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeAllocationExplanation", false);
+		var initializer = writer.BeginObjectInitializer("NodeAllocationExplanation", false);
 		if (Deciders is not null)
 		{
-			__init.Property("Deciders");
+			initializer.Property("Deciders");
 			writer.WriteInlineList(Deciders, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("NodeAttributes");
+			initializer.Property("NodeAttributes");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -45,42 +45,42 @@ public partial class NodeAllocationExplanation : RequestConverter.ICodeFormattab
 		}
 
 		{
-			__init.Property("NodeDecision");
+			initializer.Property("NodeDecision");
 			Elastic.Clients.Elasticsearch.Cluster.DecisionCodeFormatter.FormatCode(NodeDecision, writer);
 		}
 
 		{
-			__init.Property("NodeId");
+			initializer.Property("NodeId");
 			writer.WriteString(NodeId);
 		}
 
 		{
-			__init.Property("NodeName");
+			initializer.Property("NodeName");
 			writer.WriteString(NodeName);
 		}
 
 		{
-			__init.Property("Roles");
+			initializer.Property("Roles");
 			writer.WriteInlineList(Roles, (w, item) => { Elastic.Clients.Elasticsearch.NodeRoleCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (Store is not null)
 		{
-			__init.Property("Store");
+			initializer.Property("Store");
 			Store.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TransportAddress");
+			initializer.Property("TransportAddress");
 			writer.WriteString(TransportAddress);
 		}
 
 		if (WeightRanking is not null)
 		{
-			__init.Property("WeightRanking");
+			initializer.Property("WeightRanking");
 			writer.WriteValue(WeightRanking.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,17 +27,17 @@ public partial class ClusterProcess : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterProcess", false);
+		var initializer = writer.BeginObjectInitializer("ClusterProcess", false);
 		{
-			__init.Property("Cpu");
+			initializer.Property("Cpu");
 			Cpu.FormatCode(writer);
 		}
 
 		{
-			__init.Property("OpenFileDescriptors");
+			initializer.Property("OpenFileDescriptors");
 			OpenFileDescriptors.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

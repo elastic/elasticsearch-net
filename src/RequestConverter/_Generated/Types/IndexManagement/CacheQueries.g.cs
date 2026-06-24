@@ -27,12 +27,12 @@ public partial class CacheQueries : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CacheQueries", false);
+		var initializer = writer.BeginObjectInitializer("CacheQueries", false);
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

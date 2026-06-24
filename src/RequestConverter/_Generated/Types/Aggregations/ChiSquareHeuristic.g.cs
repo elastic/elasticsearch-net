@@ -27,17 +27,17 @@ public partial class ChiSquareHeuristic : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ChiSquareHeuristic", false);
+		var initializer = writer.BeginObjectInitializer("ChiSquareHeuristic", false);
 		{
-			__init.Property("BackgroundIsSuperset");
+			initializer.Property("BackgroundIsSuperset");
 			writer.WriteValue(BackgroundIsSuperset);
 		}
 
 		{
-			__init.Property("IncludeNegatives");
+			initializer.Property("IncludeNegatives");
 			writer.WriteValue(IncludeNegatives);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

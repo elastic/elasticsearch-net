@@ -27,14 +27,14 @@ public partial class RoleMapping : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RoleMapping", false);
+		var initializer = writer.BeginObjectInitializer("RoleMapping", false);
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);
 		}
 
 		{
-			__init.Property("Metadata");
+			initializer.Property("Metadata");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -45,21 +45,21 @@ public partial class RoleMapping : RequestConverter.ICodeFormattable
 
 		if (Roles is not null)
 		{
-			__init.Property("Roles");
+			initializer.Property("Roles");
 			writer.WriteInlineList(Roles, (w, item) => { w.WriteString(item); });
 		}
 
 		if (RoleTemplates is not null)
 		{
-			__init.Property("RoleTemplates");
+			initializer.Property("RoleTemplates");
 			writer.WriteInlineList(RoleTemplates, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Rules");
+			initializer.Property("Rules");
 			Rules.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

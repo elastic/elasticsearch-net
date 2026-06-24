@@ -27,21 +27,21 @@ public partial class PrivilegeActions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PrivilegeActions", false);
+		var initializer = writer.BeginObjectInitializer("PrivilegeActions", false);
 		{
-			__init.Property("Actions");
+			initializer.Property("Actions");
 			writer.WriteInlineList(Actions, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Application is not null)
 		{
-			__init.Property("Application");
+			initializer.Property("Application");
 			writer.WriteString(Application);
 		}
 
 		if (Metadata is not null)
 		{
-			__init.Property("Metadata");
+			initializer.Property("Metadata");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -52,10 +52,10 @@ public partial class PrivilegeActions : RequestConverter.ICodeFormattable
 
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

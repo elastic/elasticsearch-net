@@ -27,9 +27,9 @@ public partial class DiscoveryNodeCompact : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DiscoveryNodeCompact", false);
+		var initializer = writer.BeginObjectInitializer("DiscoveryNodeCompact", false);
 		{
-			__init.Property("Attributes");
+			initializer.Property("Attributes");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -39,25 +39,25 @@ public partial class DiscoveryNodeCompact : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("EphemeralId");
+			initializer.Property("EphemeralId");
 			writer.WriteString(EphemeralId);
 		}
 
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("TransportAddress");
+			initializer.Property("TransportAddress");
 			writer.WriteString(TransportAddress);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

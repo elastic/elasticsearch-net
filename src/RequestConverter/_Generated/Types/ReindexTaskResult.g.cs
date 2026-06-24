@@ -27,99 +27,99 @@ public partial class ReindexTaskResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ReindexTaskResult", false);
+		var initializer = writer.BeginObjectInitializer("ReindexTaskResult", false);
 		if (Batches is not null)
 		{
-			__init.Property("Batches");
+			initializer.Property("Batches");
 			writer.WriteValue(Batches.Value);
 			writer.Write("L");
 		}
 
 		if (Created is not null)
 		{
-			__init.Property("Created");
+			initializer.Property("Created");
 			writer.WriteValue(Created.Value);
 			writer.Write("L");
 		}
 
 		if (Deleted is not null)
 		{
-			__init.Property("Deleted");
+			initializer.Property("Deleted");
 			writer.WriteValue(Deleted.Value);
 			writer.Write("L");
 		}
 
 		if (Failures is not null)
 		{
-			__init.Property("Failures");
+			initializer.Property("Failures");
 			writer.WriteInlineList(Failures, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Noops is not null)
 		{
-			__init.Property("Noops");
+			initializer.Property("Noops");
 			writer.WriteValue(Noops.Value);
 			writer.Write("L");
 		}
 
 		if (RequestsPerSecond is not null)
 		{
-			__init.Property("RequestsPerSecond");
+			initializer.Property("RequestsPerSecond");
 			writer.WriteValue(RequestsPerSecond.Value);
 			writer.Write("f");
 		}
 
 		if (Retries is not null)
 		{
-			__init.Property("Retries");
+			initializer.Property("Retries");
 			Retries.FormatCode(writer);
 		}
 
 		if (ThrottledMillis is not null)
 		{
-			__init.Property("ThrottledMillis");
+			initializer.Property("ThrottledMillis");
 			writer.WriteValue(ThrottledMillis.Value);
 		}
 
 		if (ThrottledUntilMillis is not null)
 		{
-			__init.Property("ThrottledUntilMillis");
+			initializer.Property("ThrottledUntilMillis");
 			writer.WriteValue(ThrottledUntilMillis.Value);
 		}
 
 		if (TimedOut is not null)
 		{
-			__init.Property("TimedOut");
+			initializer.Property("TimedOut");
 			writer.WriteValue(TimedOut.Value);
 		}
 
 		if (Took is not null)
 		{
-			__init.Property("Took");
+			initializer.Property("Took");
 			writer.WriteValue(Took.Value);
 		}
 
 		if (Total is not null)
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteValue(Total.Value);
 			writer.Write("L");
 		}
 
 		if (Updated is not null)
 		{
-			__init.Property("Updated");
+			initializer.Property("Updated");
 			writer.WriteValue(Updated.Value);
 			writer.Write("L");
 		}
 
 		if (VersionConflicts is not null)
 		{
-			__init.Property("VersionConflicts");
+			initializer.Property("VersionConflicts");
 			writer.WriteValue(VersionConflicts.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

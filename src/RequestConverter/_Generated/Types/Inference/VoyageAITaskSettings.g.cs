@@ -27,31 +27,31 @@ public partial class VoyageAITaskSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("VoyageAITaskSettings", false);
+		var initializer = writer.BeginObjectInitializer("VoyageAITaskSettings", false);
 		if (InputType is not null)
 		{
-			__init.Property("InputType");
+			initializer.Property("InputType");
 			writer.WriteString(InputType);
 		}
 
 		if (ReturnDocuments is not null)
 		{
-			__init.Property("ReturnDocuments");
+			initializer.Property("ReturnDocuments");
 			writer.WriteValue(ReturnDocuments.Value);
 		}
 
 		if (TopK is not null)
 		{
-			__init.Property("TopK");
+			initializer.Property("TopK");
 			writer.WriteValue(TopK.Value);
 		}
 
 		if (Truncation is not null)
 		{
-			__init.Property("Truncation");
+			initializer.Property("Truncation");
 			writer.WriteValue(Truncation.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

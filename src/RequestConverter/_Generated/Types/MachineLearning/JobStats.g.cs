@@ -27,61 +27,61 @@ public partial class JobStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("JobStats", false);
+		var initializer = writer.BeginObjectInitializer("JobStats", false);
 		if (AssignmentExplanation is not null)
 		{
-			__init.Property("AssignmentExplanation");
+			initializer.Property("AssignmentExplanation");
 			writer.WriteString(AssignmentExplanation);
 		}
 
 		{
-			__init.Property("DataCounts");
+			initializer.Property("DataCounts");
 			DataCounts.FormatCode(writer);
 		}
 
 		if (Deleting is not null)
 		{
-			__init.Property("Deleting");
+			initializer.Property("Deleting");
 			writer.WriteValue(Deleting.Value);
 		}
 
 		{
-			__init.Property("ForecastsStats");
+			initializer.Property("ForecastsStats");
 			ForecastsStats.FormatCode(writer);
 		}
 
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			writer.WriteString(JobId);
 		}
 
 		{
-			__init.Property("ModelSizeStats");
+			initializer.Property("ModelSizeStats");
 			ModelSizeStats.FormatCode(writer);
 		}
 
 		if (Node is not null)
 		{
-			__init.Property("Node");
+			initializer.Property("Node");
 			Node.FormatCode(writer);
 		}
 
 		if (OpenTime is not null)
 		{
-			__init.Property("OpenTime");
+			initializer.Property("OpenTime");
 			writer.WriteValue(OpenTime.Value);
 		}
 
 		{
-			__init.Property("State");
+			initializer.Property("State");
 			Elastic.Clients.Elasticsearch.MachineLearning.JobStateCodeFormatter.FormatCode(State, writer);
 		}
 
 		{
-			__init.Property("TimingStats");
+			initializer.Property("TimingStats");
 			TimingStats.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

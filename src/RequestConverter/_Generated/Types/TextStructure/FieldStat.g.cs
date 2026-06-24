@@ -27,58 +27,58 @@ public partial class FieldStat : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldStat", false);
+		var initializer = writer.BeginObjectInitializer("FieldStat", false);
 		{
-			__init.Property("Cardinality");
+			initializer.Property("Cardinality");
 			writer.WriteValue(Cardinality);
 		}
 
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 		}
 
 		if (Earliest is not null)
 		{
-			__init.Property("Earliest");
+			initializer.Property("Earliest");
 			writer.WriteString(Earliest);
 		}
 
 		if (Latest is not null)
 		{
-			__init.Property("Latest");
+			initializer.Property("Latest");
 			writer.WriteString(Latest);
 		}
 
 		if (MaxValue is not null)
 		{
-			__init.Property("MaxValue");
+			initializer.Property("MaxValue");
 			writer.WriteValue(MaxValue.Value);
 		}
 
 		if (MeanValue is not null)
 		{
-			__init.Property("MeanValue");
+			initializer.Property("MeanValue");
 			writer.WriteValue(MeanValue.Value);
 		}
 
 		if (MedianValue is not null)
 		{
-			__init.Property("MedianValue");
+			initializer.Property("MedianValue");
 			writer.WriteValue(MedianValue.Value);
 		}
 
 		if (MinValue is not null)
 		{
-			__init.Property("MinValue");
+			initializer.Property("MinValue");
 			writer.WriteValue(MinValue.Value);
 		}
 
 		{
-			__init.Property("TopHits");
+			initializer.Property("TopHits");
 			writer.WriteInlineList(TopHits, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

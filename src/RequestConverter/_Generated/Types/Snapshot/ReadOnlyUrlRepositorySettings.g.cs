@@ -27,54 +27,54 @@ public partial class ReadOnlyUrlRepositorySettings : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ReadOnlyUrlRepositorySettings", false);
+		var initializer = writer.BeginObjectInitializer("ReadOnlyUrlRepositorySettings", false);
 		if (ChunkSize is not null)
 		{
-			__init.Property("ChunkSize");
+			initializer.Property("ChunkSize");
 			ChunkSize.FormatCode(writer);
 		}
 
 		if (Compress is not null)
 		{
-			__init.Property("Compress");
+			initializer.Property("Compress");
 			writer.WriteValue(Compress.Value);
 		}
 
 		if (HttpMaxRetries is not null)
 		{
-			__init.Property("HttpMaxRetries");
+			initializer.Property("HttpMaxRetries");
 			writer.WriteValue(HttpMaxRetries.Value);
 		}
 
 		if (HttpSocketTimeout is not null)
 		{
-			__init.Property("HttpSocketTimeout");
+			initializer.Property("HttpSocketTimeout");
 			HttpSocketTimeout.FormatCode(writer);
 		}
 
 		if (MaxNumberOfSnapshots is not null)
 		{
-			__init.Property("MaxNumberOfSnapshots");
+			initializer.Property("MaxNumberOfSnapshots");
 			writer.WriteValue(MaxNumberOfSnapshots.Value);
 		}
 
 		if (MaxRestoreBytesPerSec is not null)
 		{
-			__init.Property("MaxRestoreBytesPerSec");
+			initializer.Property("MaxRestoreBytesPerSec");
 			MaxRestoreBytesPerSec.FormatCode(writer);
 		}
 
 		if (MaxSnapshotBytesPerSec is not null)
 		{
-			__init.Property("MaxSnapshotBytesPerSec");
+			initializer.Property("MaxSnapshotBytesPerSec");
 			MaxSnapshotBytesPerSec.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Url");
+			initializer.Property("Url");
 			writer.WriteString(Url);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

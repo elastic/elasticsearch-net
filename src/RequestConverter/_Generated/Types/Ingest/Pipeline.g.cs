@@ -27,40 +27,40 @@ public partial class Pipeline : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Pipeline", false);
+		var initializer = writer.BeginObjectInitializer("Pipeline", false);
 		if (CreatedDate is not null)
 		{
-			__init.Property("CreatedDate");
+			initializer.Property("CreatedDate");
 			writer.WriteValue(CreatedDate.Value);
 		}
 
 		if (CreatedDateMillis is not null)
 		{
-			__init.Property("CreatedDateMillis");
+			initializer.Property("CreatedDateMillis");
 			writer.WriteValue(CreatedDateMillis.Value);
 		}
 
 		if (Deprecated is not null)
 		{
-			__init.Property("Deprecated");
+			initializer.Property("Deprecated");
 			writer.WriteValue(Deprecated.Value);
 		}
 
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		if (FieldAccessPattern is not null)
 		{
-			__init.Property("FieldAccessPattern");
+			initializer.Property("FieldAccessPattern");
 			Elastic.Clients.Elasticsearch.Ingest.FieldAccessPatternCodeFormatter.FormatCode(FieldAccessPattern.Value, writer);
 		}
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -71,35 +71,35 @@ public partial class Pipeline : RequestConverter.ICodeFormattable
 
 		if (ModifiedDate is not null)
 		{
-			__init.Property("ModifiedDate");
+			initializer.Property("ModifiedDate");
 			writer.WriteValue(ModifiedDate.Value);
 		}
 
 		if (ModifiedDateMillis is not null)
 		{
-			__init.Property("ModifiedDateMillis");
+			initializer.Property("ModifiedDateMillis");
 			writer.WriteValue(ModifiedDateMillis.Value);
 		}
 
 		if (OnFailure is not null)
 		{
-			__init.Property("OnFailure");
+			initializer.Property("OnFailure");
 			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Processors is not null)
 		{
-			__init.Property("Processors");
+			initializer.Property("Processors");
 			writer.WriteInlineList(Processors, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

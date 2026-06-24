@@ -27,18 +27,18 @@ public partial class HistogramGrouping : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("HistogramGrouping", false);
+		var initializer = writer.BeginObjectInitializer("HistogramGrouping", false);
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			Fields.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Interval");
+			initializer.Property("Interval");
 			writer.WriteValue(Interval);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

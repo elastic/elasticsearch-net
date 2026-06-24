@@ -27,30 +27,30 @@ public partial class ForecastRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ForecastRequest", false);
+		var initializer = writer.BeginObjectInitializer("ForecastRequest", false);
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			JobId.FormatCode(writer);
 		}
 
 		if (Duration is not null)
 		{
-			__init.Property("Duration");
+			initializer.Property("Duration");
 			Duration.FormatCode(writer);
 		}
 
 		if (ExpiresIn is not null)
 		{
-			__init.Property("ExpiresIn");
+			initializer.Property("ExpiresIn");
 			ExpiresIn.FormatCode(writer);
 		}
 
 		if (MaxModelMemory is not null)
 		{
-			__init.Property("MaxModelMemory");
+			initializer.Property("MaxModelMemory");
 			writer.WriteString(MaxModelMemory);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

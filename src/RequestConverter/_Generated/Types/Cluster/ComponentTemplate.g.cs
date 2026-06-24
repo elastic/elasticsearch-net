@@ -27,17 +27,17 @@ public partial class ComponentTemplate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ComponentTemplate", false);
+		var initializer = writer.BeginObjectInitializer("ComponentTemplate", false);
 		{
-			__init.Property("ComponentTemplateNode");
+			initializer.Property("ComponentTemplateNode");
 			ComponentTemplateNode.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

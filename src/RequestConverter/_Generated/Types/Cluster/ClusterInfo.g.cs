@@ -27,9 +27,9 @@ public partial class ClusterInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterInfo", false);
+		var initializer = writer.BeginObjectInitializer("ClusterInfo", false);
 		{
-			__init.Property("Nodes");
+			initializer.Property("Nodes");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -39,13 +39,13 @@ public partial class ClusterInfo : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("ReservedSizes");
+			initializer.Property("ReservedSizes");
 			writer.WriteInlineList(ReservedSizes, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (ShardDataSetSizes is not null)
 		{
-			__init.Property("ShardDataSetSizes");
+			initializer.Property("ShardDataSetSizes");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -55,7 +55,7 @@ public partial class ClusterInfo : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("ShardPaths");
+			initializer.Property("ShardPaths");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -65,7 +65,7 @@ public partial class ClusterInfo : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("ShardSizes");
+			initializer.Property("ShardSizes");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -74,6 +74,6 @@ public partial class ClusterInfo : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(ShardSizes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

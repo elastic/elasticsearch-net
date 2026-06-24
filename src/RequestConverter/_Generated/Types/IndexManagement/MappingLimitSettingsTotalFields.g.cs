@@ -27,10 +27,10 @@ public partial class MappingLimitSettingsTotalFields : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MappingLimitSettingsTotalFields", false);
+		var initializer = writer.BeginObjectInitializer("MappingLimitSettingsTotalFields", false);
 		if (IgnoreDynamicBeyondLimit is not null)
 		{
-			__init.Property("IgnoreDynamicBeyondLimit");
+			initializer.Property("IgnoreDynamicBeyondLimit");
 			if (IgnoreDynamicBeyondLimit.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				writer.WriteValue(IgnoreDynamicBeyondLimit.Value1);
@@ -43,7 +43,7 @@ public partial class MappingLimitSettingsTotalFields : RequestConverter.ICodeFor
 
 		if (Limit is not null)
 		{
-			__init.Property("Limit");
+			initializer.Property("Limit");
 			if (Limit.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				writer.WriteValue(Limit.Value1);
@@ -55,6 +55,6 @@ public partial class MappingLimitSettingsTotalFields : RequestConverter.ICodeFor
 			}
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

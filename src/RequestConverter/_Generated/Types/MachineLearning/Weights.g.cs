@@ -27,13 +27,13 @@ public partial class Weights : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Weights", false);
+		var initializer = writer.BeginObjectInitializer("Weights", false);
 		{
-			__init.Property("WeightsValue");
+			initializer.Property("WeightsValue");
 			writer.WriteValue(WeightsValue);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

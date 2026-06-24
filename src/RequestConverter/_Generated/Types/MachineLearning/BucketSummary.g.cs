@@ -27,66 +27,66 @@ public partial class BucketSummary : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BucketSummary", false);
+		var initializer = writer.BeginObjectInitializer("BucketSummary", false);
 		{
-			__init.Property("AnomalyScore");
+			initializer.Property("AnomalyScore");
 			writer.WriteValue(AnomalyScore);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("BucketInfluencers");
+			initializer.Property("BucketInfluencers");
 			writer.WriteInlineList(BucketInfluencers, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("BucketSpan");
+			initializer.Property("BucketSpan");
 			writer.WriteValue(BucketSpan);
 		}
 
 		{
-			__init.Property("EventCount");
+			initializer.Property("EventCount");
 			writer.WriteValue(EventCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("InitialAnomalyScore");
+			initializer.Property("InitialAnomalyScore");
 			writer.WriteValue(InitialAnomalyScore);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("IsInterim");
+			initializer.Property("IsInterim");
 			writer.WriteValue(IsInterim);
 		}
 
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			writer.WriteString(JobId);
 		}
 
 		{
-			__init.Property("ProcessingTimeMs");
+			initializer.Property("ProcessingTimeMs");
 			writer.WriteValue(ProcessingTimeMs);
 		}
 
 		{
-			__init.Property("ResultType");
+			initializer.Property("ResultType");
 			writer.WriteString(ResultType);
 		}
 
 		{
-			__init.Property("Timestamp");
+			initializer.Property("Timestamp");
 			writer.WriteValue(Timestamp);
 		}
 
 		if (TimestampString is not null)
 		{
-			__init.Property("TimestampString");
+			initializer.Property("TimestampString");
 			writer.WriteValue(TimestampString.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

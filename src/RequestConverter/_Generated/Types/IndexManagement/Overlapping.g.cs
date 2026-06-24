@@ -27,17 +27,17 @@ public partial class Overlapping : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Overlapping", false);
+		var initializer = writer.BeginObjectInitializer("Overlapping", false);
 		{
-			__init.Property("IndexPatterns");
+			initializer.Property("IndexPatterns");
 			writer.WriteInlineList(IndexPatterns, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

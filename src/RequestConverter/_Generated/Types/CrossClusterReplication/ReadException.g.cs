@@ -27,23 +27,23 @@ public partial class ReadException : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ReadException", false);
+		var initializer = writer.BeginObjectInitializer("ReadException", false);
 		{
-			__init.Property("Exception");
+			initializer.Property("Exception");
 			Exception.FormatCode(writer);
 		}
 
 		{
-			__init.Property("FromSeqNo");
+			initializer.Property("FromSeqNo");
 			writer.WriteValue(FromSeqNo);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Retries");
+			initializer.Property("Retries");
 			writer.WriteValue(Retries);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

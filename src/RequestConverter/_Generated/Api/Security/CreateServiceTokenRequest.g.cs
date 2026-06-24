@@ -27,29 +27,29 @@ public partial class CreateServiceTokenRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CreateServiceTokenRequest", false);
+		var initializer = writer.BeginObjectInitializer("CreateServiceTokenRequest", false);
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Namespace");
+			initializer.Property("Namespace");
 			writer.WriteString(Namespace);
 		}
 
 		{
-			__init.Property("Service");
+			initializer.Property("Service");
 			writer.WriteString(Service);
 		}
 
 		if (Refresh is not null)
 		{
-			__init.Property("Refresh");
+			initializer.Property("Refresh");
 			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

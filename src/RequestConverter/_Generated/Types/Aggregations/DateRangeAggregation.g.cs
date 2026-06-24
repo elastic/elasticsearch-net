@@ -27,37 +27,37 @@ public partial class DateRangeAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DateRangeAggregation", false);
+		var initializer = writer.BeginObjectInitializer("DateRangeAggregation", false);
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			writer.WriteString(Format);
 		}
 
 		if (Missing is not null)
 		{
-			__init.Property("Missing");
+			initializer.Property("Missing");
 			writer.WriteValue(Missing);
 		}
 
 		if (Ranges is not null)
 		{
-			__init.Property("Ranges");
+			initializer.Property("Ranges");
 			writer.WriteInlineList(Ranges, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (TimeZone is not null)
 		{
-			__init.Property("TimeZone");
+			initializer.Property("TimeZone");
 			writer.WriteString(TimeZone);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

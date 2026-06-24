@@ -27,40 +27,40 @@ public partial class PutCohereRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutCohereRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutCohereRequest", false);
 		{
-			__init.Property("CohereInferenceId");
+			initializer.Property("CohereInferenceId");
 			CohereInferenceId.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TaskType");
+			initializer.Property("TaskType");
 			Elastic.Clients.Elasticsearch.Inference.CohereTaskTypeCodeFormatter.FormatCode(TaskType, writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (ChunkingSettings is not null)
 		{
-			__init.Property("ChunkingSettings");
+			initializer.Property("ChunkingSettings");
 			ChunkingSettings.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ServiceSettings");
+			initializer.Property("ServiceSettings");
 			ServiceSettings.FormatCode(writer);
 		}
 
 		if (TaskSettings is not null)
 		{
-			__init.Property("TaskSettings");
+			initializer.Property("TaskSettings");
 			TaskSettings.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

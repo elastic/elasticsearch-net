@@ -27,55 +27,55 @@ public partial class DfsStatisticsBreakdown : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DfsStatisticsBreakdown", false);
+		var initializer = writer.BeginObjectInitializer("DfsStatisticsBreakdown", false);
 		{
-			__init.Property("CollectionStatistics");
+			initializer.Property("CollectionStatistics");
 			writer.WriteValue(CollectionStatistics);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("CollectionStatisticsCount");
+			initializer.Property("CollectionStatisticsCount");
 			writer.WriteValue(CollectionStatisticsCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("CreateWeight");
+			initializer.Property("CreateWeight");
 			writer.WriteValue(CreateWeight);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("CreateWeightCount");
+			initializer.Property("CreateWeightCount");
 			writer.WriteValue(CreateWeightCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Rewrite");
+			initializer.Property("Rewrite");
 			writer.WriteValue(Rewrite);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("RewriteCount");
+			initializer.Property("RewriteCount");
 			writer.WriteValue(RewriteCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("TermStatistics");
+			initializer.Property("TermStatistics");
 			writer.WriteValue(TermStatistics);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("TermStatisticsCount");
+			initializer.Property("TermStatisticsCount");
 			writer.WriteValue(TermStatisticsCount);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

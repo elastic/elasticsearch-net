@@ -27,17 +27,17 @@ public partial class RemoveClusterServer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RemoveClusterServer", false);
+		var initializer = writer.BeginObjectInitializer("RemoveClusterServer", false);
 		{
-			__init.Property("BoundAddress");
+			initializer.Property("BoundAddress");
 			writer.WriteInlineList(BoundAddress, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("PublishAddress");
+			initializer.Property("PublishAddress");
 			writer.WriteString(PublishAddress);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

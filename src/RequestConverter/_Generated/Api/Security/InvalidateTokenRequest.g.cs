@@ -27,31 +27,31 @@ public partial class InvalidateTokenRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InvalidateTokenRequest", false);
+		var initializer = writer.BeginObjectInitializer("InvalidateTokenRequest", false);
 		if (RealmName is not null)
 		{
-			__init.Property("RealmName");
+			initializer.Property("RealmName");
 			RealmName.FormatCode(writer);
 		}
 
 		if (RefreshToken is not null)
 		{
-			__init.Property("RefreshToken");
+			initializer.Property("RefreshToken");
 			writer.WriteString(RefreshToken);
 		}
 
 		if (Token is not null)
 		{
-			__init.Property("Token");
+			initializer.Property("Token");
 			writer.WriteString(Token);
 		}
 
 		if (Username is not null)
 		{
-			__init.Property("Username");
+			initializer.Property("Username");
 			Username.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,25 +27,25 @@ public partial class ModelPlotConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ModelPlotConfig", false);
+		var initializer = writer.BeginObjectInitializer("ModelPlotConfig", false);
 		if (AnnotationsEnabled is not null)
 		{
-			__init.Property("AnnotationsEnabled");
+			initializer.Property("AnnotationsEnabled");
 			writer.WriteValue(AnnotationsEnabled.Value);
 		}
 
 		if (Enabled is not null)
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled.Value);
 		}
 
 		if (Terms is not null)
 		{
-			__init.Property("Terms");
+			initializer.Property("Terms");
 			Terms.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

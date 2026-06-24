@@ -27,17 +27,17 @@ public partial class BuildInformation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BuildInformation", false);
+		var initializer = writer.BeginObjectInitializer("BuildInformation", false);
 		{
-			__init.Property("Date");
+			initializer.Property("Date");
 			writer.WriteValue(Date);
 		}
 
 		{
-			__init.Property("Hash");
+			initializer.Property("Hash");
 			writer.WriteString(Hash);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

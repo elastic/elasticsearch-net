@@ -27,31 +27,31 @@ public partial class AggregationProfileDelegateDebugFilter : RequestConverter.IC
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AggregationProfileDelegateDebugFilter", false);
+		var initializer = writer.BeginObjectInitializer("AggregationProfileDelegateDebugFilter", false);
 		if (Query is not null)
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			writer.WriteString(Query);
 		}
 
 		if (ResultsFromMetadata is not null)
 		{
-			__init.Property("ResultsFromMetadata");
+			initializer.Property("ResultsFromMetadata");
 			writer.WriteValue(ResultsFromMetadata.Value);
 		}
 
 		if (SegmentsCountedInConstantTime is not null)
 		{
-			__init.Property("SegmentsCountedInConstantTime");
+			initializer.Property("SegmentsCountedInConstantTime");
 			writer.WriteValue(SegmentsCountedInConstantTime.Value);
 		}
 
 		if (SpecializedFor is not null)
 		{
-			__init.Property("SpecializedFor");
+			initializer.Property("SpecializedFor");
 			writer.WriteString(SpecializedFor);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

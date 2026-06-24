@@ -27,25 +27,25 @@ public partial class SimulateDocumentResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SimulateDocumentResult", false);
+		var initializer = writer.BeginObjectInitializer("SimulateDocumentResult", false);
 		if (Doc is not null)
 		{
-			__init.Property("Doc");
+			initializer.Property("Doc");
 			Doc.FormatCode(writer);
 		}
 
 		if (Error is not null)
 		{
-			__init.Property("Error");
+			initializer.Property("Error");
 			Error.FormatCode(writer);
 		}
 
 		if (ProcessorResults is not null)
 		{
-			__init.Property("ProcessorResults");
+			initializer.Property("ProcessorResults");
 			writer.WriteInlineList(ProcessorResults, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

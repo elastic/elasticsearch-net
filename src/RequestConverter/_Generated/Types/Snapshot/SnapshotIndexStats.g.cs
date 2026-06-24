@@ -27,9 +27,9 @@ public partial class SnapshotIndexStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SnapshotIndexStats", false);
+		var initializer = writer.BeginObjectInitializer("SnapshotIndexStats", false);
 		{
-			__init.Property("Shards");
+			initializer.Property("Shards");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -39,15 +39,15 @@ public partial class SnapshotIndexStats : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("ShardsStats");
+			initializer.Property("ShardsStats");
 			ShardsStats.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Stats");
+			initializer.Property("Stats");
 			Stats.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

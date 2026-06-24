@@ -27,19 +27,19 @@ public partial class TermsPartition : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TermsPartition", false);
+		var initializer = writer.BeginObjectInitializer("TermsPartition", false);
 		{
-			__init.Property("NumPartitions");
+			initializer.Property("NumPartitions");
 			writer.WriteValue(NumPartitions);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Partition");
+			initializer.Property("Partition");
 			writer.WriteValue(Partition);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,20 +27,20 @@ public partial class AutoDateHistogramAggregate : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AutoDateHistogramAggregate", true);
+		var initializer = writer.BeginObjectInitializer("AutoDateHistogramAggregate", true);
 		{
-			__init.Property("Buckets");
+			initializer.Property("Buckets");
 			writer.WriteInlineList(Buckets, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Interval");
+			initializer.Property("Interval");
 			writer.WriteString(Interval);
 		}
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -49,6 +49,6 @@ public partial class AutoDateHistogramAggregate : RequestConverter.ICodeFormatta
 			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

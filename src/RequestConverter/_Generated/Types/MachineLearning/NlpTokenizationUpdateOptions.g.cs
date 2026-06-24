@@ -27,19 +27,19 @@ public partial class NlpTokenizationUpdateOptions : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NlpTokenizationUpdateOptions", false);
+		var initializer = writer.BeginObjectInitializer("NlpTokenizationUpdateOptions", false);
 		if (Span is not null)
 		{
-			__init.Property("Span");
+			initializer.Property("Span");
 			writer.WriteValue(Span.Value);
 		}
 
 		if (Truncate is not null)
 		{
-			__init.Property("Truncate");
+			initializer.Property("Truncate");
 			Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncateCodeFormatter.FormatCode(Truncate.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

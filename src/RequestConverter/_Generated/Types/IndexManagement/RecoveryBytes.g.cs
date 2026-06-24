@@ -27,57 +27,57 @@ public partial class RecoveryBytes : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RecoveryBytes", false);
+		var initializer = writer.BeginObjectInitializer("RecoveryBytes", false);
 		{
-			__init.Property("Percent");
+			initializer.Property("Percent");
 			Percent.FormatCode(writer);
 		}
 
 		if (Recovered is not null)
 		{
-			__init.Property("Recovered");
+			initializer.Property("Recovered");
 			Recovered.FormatCode(writer);
 		}
 
 		if (RecoveredFromSnapshot is not null)
 		{
-			__init.Property("RecoveredFromSnapshot");
+			initializer.Property("RecoveredFromSnapshot");
 			RecoveredFromSnapshot.FormatCode(writer);
 		}
 
 		if (RecoveredFromSnapshotInBytes is not null)
 		{
-			__init.Property("RecoveredFromSnapshotInBytes");
+			initializer.Property("RecoveredFromSnapshotInBytes");
 			RecoveredFromSnapshotInBytes.FormatCode(writer);
 		}
 
 		{
-			__init.Property("RecoveredInBytes");
+			initializer.Property("RecoveredInBytes");
 			RecoveredInBytes.FormatCode(writer);
 		}
 
 		if (Reused is not null)
 		{
-			__init.Property("Reused");
+			initializer.Property("Reused");
 			Reused.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ReusedInBytes");
+			initializer.Property("ReusedInBytes");
 			ReusedInBytes.FormatCode(writer);
 		}
 
 		if (Total is not null)
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			Total.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalInBytes");
+			initializer.Property("TotalInBytes");
 			TotalInBytes.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,34 +27,34 @@ public partial class SemanticTextProperty : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SemanticTextProperty", true);
+		var initializer = writer.BeginObjectInitializer("SemanticTextProperty", true);
 		if (ChunkingSettings is not null)
 		{
-			__init.Property("ChunkingSettings");
+			initializer.Property("ChunkingSettings");
 			ChunkingSettings.FormatCode(writer);
 		}
 
 		if (Fields is not null)
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			Fields.FormatCode(writer);
 		}
 
 		if (IndexOptions is not null)
 		{
-			__init.Property("IndexOptions");
+			initializer.Property("IndexOptions");
 			IndexOptions.FormatCode(writer);
 		}
 
 		if (InferenceId is not null)
 		{
-			__init.Property("InferenceId");
+			initializer.Property("InferenceId");
 			InferenceId.FormatCode(writer);
 		}
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -65,10 +65,10 @@ public partial class SemanticTextProperty : RequestConverter.ICodeFormattable
 
 		if (SearchInferenceId is not null)
 		{
-			__init.Property("SearchInferenceId");
+			initializer.Property("SearchInferenceId");
 			SearchInferenceId.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,35 +27,35 @@ public partial class EsqlQueryInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EsqlQueryInfo", false);
+		var initializer = writer.BeginObjectInitializer("EsqlQueryInfo", false);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteValue(Id);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Node");
+			initializer.Property("Node");
 			writer.WriteString(Node);
 		}
 
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			writer.WriteString(Query);
 		}
 
 		{
-			__init.Property("RunningTimeNanos");
+			initializer.Property("RunningTimeNanos");
 			writer.WriteValue(RunningTimeNanos);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("StartTimeMillis");
+			initializer.Property("StartTimeMillis");
 			writer.WriteValue(StartTimeMillis);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

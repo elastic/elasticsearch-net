@@ -27,10 +27,10 @@ public partial class MinAggregate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MinAggregate", true);
+		var initializer = writer.BeginObjectInitializer("MinAggregate", true);
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -40,17 +40,17 @@ public partial class MinAggregate : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Value");
+			initializer.Property("Value");
 			writer.WriteValue(Value.Value);
 			writer.Write("d");
 		}
 
 		if (ValueAsString is not null)
 		{
-			__init.Property("ValueAsString");
+			initializer.Property("ValueAsString");
 			writer.WriteString(ValueAsString);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

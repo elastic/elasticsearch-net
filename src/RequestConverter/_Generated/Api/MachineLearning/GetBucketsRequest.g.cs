@@ -27,79 +27,79 @@ public partial class GetBucketsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetBucketsRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetBucketsRequest", false);
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			JobId.FormatCode(writer);
 		}
 
 		if (Timestamp is not null)
 		{
-			__init.Property("Timestamp");
+			initializer.Property("Timestamp");
 			writer.WriteValue(Timestamp.Value);
 		}
 
 		if (From is not null)
 		{
-			__init.Property("From");
+			initializer.Property("From");
 			writer.WriteValue(From.Value);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
 		if (AnomalyScore is not null)
 		{
-			__init.Property("AnomalyScore");
+			initializer.Property("AnomalyScore");
 			writer.WriteValue(AnomalyScore.Value);
 			writer.Write("d");
 		}
 
 		if (Desc is not null)
 		{
-			__init.Property("Desc");
+			initializer.Property("Desc");
 			writer.WriteValue(Desc.Value);
 		}
 
 		if (End is not null)
 		{
-			__init.Property("End");
+			initializer.Property("End");
 			writer.WriteValue(End.Value);
 		}
 
 		if (ExcludeInterim is not null)
 		{
-			__init.Property("ExcludeInterim");
+			initializer.Property("ExcludeInterim");
 			writer.WriteValue(ExcludeInterim.Value);
 		}
 
 		if (Expand is not null)
 		{
-			__init.Property("Expand");
+			initializer.Property("Expand");
 			writer.WriteValue(Expand.Value);
 		}
 
 		if (Page is not null)
 		{
-			__init.Property("Page");
+			initializer.Property("Page");
 			Page.FormatCode(writer);
 		}
 
 		if (Sort is not null)
 		{
-			__init.Property("Sort");
+			initializer.Property("Sort");
 			Sort.FormatCode(writer);
 		}
 
 		if (Start is not null)
 		{
-			__init.Property("Start");
+			initializer.Property("Start");
 			writer.WriteValue(Start.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

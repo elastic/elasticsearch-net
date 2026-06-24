@@ -27,28 +27,28 @@ public partial class PatternAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PatternAnalyzer", true);
+		var initializer = writer.BeginObjectInitializer("PatternAnalyzer", true);
 		if (Flags is not null)
 		{
-			__init.Property("Flags");
+			initializer.Property("Flags");
 			writer.WriteString(Flags);
 		}
 
 		if (Lowercase is not null)
 		{
-			__init.Property("Lowercase");
+			initializer.Property("Lowercase");
 			writer.WriteValue(Lowercase.Value);
 		}
 
 		if (Pattern is not null)
 		{
-			__init.Property("Pattern");
+			initializer.Property("Pattern");
 			writer.WriteString(Pattern);
 		}
 
 		if (Stopwords is not null)
 		{
-			__init.Property("Stopwords");
+			initializer.Property("Stopwords");
 			if (Stopwords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(Stopwords.Value1, writer);
@@ -62,16 +62,16 @@ public partial class PatternAnalyzer : RequestConverter.ICodeFormattable
 
 		if (StopwordsPath is not null)
 		{
-			__init.Property("StopwordsPath");
+			initializer.Property("StopwordsPath");
 			writer.WriteString(StopwordsPath);
 		}
 #pragma warning disable CS0618
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 #pragma warning restore CS0618
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

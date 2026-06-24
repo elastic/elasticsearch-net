@@ -27,56 +27,56 @@ public partial class RecoveryIndexStatus : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RecoveryIndexStatus", false);
+		var initializer = writer.BeginObjectInitializer("RecoveryIndexStatus", false);
 		if (Bytes is not null)
 		{
-			__init.Property("Bytes");
+			initializer.Property("Bytes");
 			Bytes.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Files");
+			initializer.Property("Files");
 			Files.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			Size.FormatCode(writer);
 		}
 
 		if (SourceThrottleTime is not null)
 		{
-			__init.Property("SourceThrottleTime");
+			initializer.Property("SourceThrottleTime");
 			SourceThrottleTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("SourceThrottleTimeInMillis");
+			initializer.Property("SourceThrottleTimeInMillis");
 			writer.WriteValue(SourceThrottleTimeInMillis);
 		}
 
 		if (TargetThrottleTime is not null)
 		{
-			__init.Property("TargetThrottleTime");
+			initializer.Property("TargetThrottleTime");
 			TargetThrottleTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TargetThrottleTimeInMillis");
+			initializer.Property("TargetThrottleTimeInMillis");
 			writer.WriteValue(TargetThrottleTimeInMillis);
 		}
 
 		if (TotalTime is not null)
 		{
-			__init.Property("TotalTime");
+			initializer.Property("TotalTime");
 			TotalTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalTimeInMillis");
+			initializer.Property("TotalTimeInMillis");
 			writer.WriteValue(TotalTimeInMillis);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

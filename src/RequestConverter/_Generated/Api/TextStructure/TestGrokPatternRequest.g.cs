@@ -27,23 +27,23 @@ public partial class TestGrokPatternRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TestGrokPatternRequest", false);
+		var initializer = writer.BeginObjectInitializer("TestGrokPatternRequest", false);
 		if (EcsCompatibility is not null)
 		{
-			__init.Property("EcsCompatibility");
+			initializer.Property("EcsCompatibility");
 			writer.WriteString(EcsCompatibility);
 		}
 
 		{
-			__init.Property("GrokPattern");
+			initializer.Property("GrokPattern");
 			writer.WriteString(GrokPattern);
 		}
 
 		{
-			__init.Property("Text");
+			initializer.Property("Text");
 			writer.WriteInlineList(Text, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

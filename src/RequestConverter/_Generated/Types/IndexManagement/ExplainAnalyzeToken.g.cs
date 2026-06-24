@@ -27,10 +27,10 @@ public partial class ExplainAnalyzeToken : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExplainAnalyzeToken", false);
+		var initializer = writer.BeginObjectInitializer("ExplainAnalyzeToken", false);
 		if (Attributes is not null)
 		{
-			__init.Property("Attributes");
+			initializer.Property("Attributes");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -40,56 +40,56 @@ public partial class ExplainAnalyzeToken : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Bytes");
+			initializer.Property("Bytes");
 			writer.WriteString(Bytes);
 		}
 
 		{
-			__init.Property("EndOffset");
+			initializer.Property("EndOffset");
 			writer.WriteValue(EndOffset);
 			writer.Write("L");
 		}
 
 		if (Keyword is not null)
 		{
-			__init.Property("Keyword");
+			initializer.Property("Keyword");
 			writer.WriteValue(Keyword.Value);
 		}
 
 		{
-			__init.Property("Position");
+			initializer.Property("Position");
 			writer.WriteValue(Position);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("PositionLength");
+			initializer.Property("PositionLength");
 			writer.WriteValue(PositionLength);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("StartOffset");
+			initializer.Property("StartOffset");
 			writer.WriteValue(StartOffset);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("TermFrequency");
+			initializer.Property("TermFrequency");
 			writer.WriteValue(TermFrequency);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Token");
+			initializer.Property("Token");
 			writer.WriteString(Token);
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			writer.WriteString(Type);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

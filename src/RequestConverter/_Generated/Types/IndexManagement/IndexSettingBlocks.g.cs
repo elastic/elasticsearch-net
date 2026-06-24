@@ -27,37 +27,37 @@ public partial class IndexSettingBlocks : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexSettingBlocks", false);
+		var initializer = writer.BeginObjectInitializer("IndexSettingBlocks", false);
 		if (Metadata is not null)
 		{
-			__init.Property("Metadata");
+			initializer.Property("Metadata");
 			writer.WriteValue(Metadata.Value);
 		}
 
 		if (Read is not null)
 		{
-			__init.Property("Read");
+			initializer.Property("Read");
 			writer.WriteValue(Read.Value);
 		}
 
 		if (ReadOnly is not null)
 		{
-			__init.Property("ReadOnly");
+			initializer.Property("ReadOnly");
 			writer.WriteValue(ReadOnly.Value);
 		}
 
 		if (ReadOnlyAllowDelete is not null)
 		{
-			__init.Property("ReadOnlyAllowDelete");
+			initializer.Property("ReadOnlyAllowDelete");
 			writer.WriteValue(ReadOnlyAllowDelete.Value);
 		}
 
 		if (Write is not null)
 		{
-			__init.Property("Write");
+			initializer.Property("Write");
 			writer.WriteValue(Write.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

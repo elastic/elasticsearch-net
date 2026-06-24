@@ -27,37 +27,37 @@ public partial class DiversifiedSamplerAggregation : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DiversifiedSamplerAggregation", false);
+		var initializer = writer.BeginObjectInitializer("DiversifiedSamplerAggregation", false);
 		if (ExecutionHint is not null)
 		{
-			__init.Property("ExecutionHint");
+			initializer.Property("ExecutionHint");
 			Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, writer);
 		}
 
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (MaxDocsPerValue is not null)
 		{
-			__init.Property("MaxDocsPerValue");
+			initializer.Property("MaxDocsPerValue");
 			writer.WriteValue(MaxDocsPerValue.Value);
 		}
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
 		if (ShardSize is not null)
 		{
-			__init.Property("ShardSize");
+			initializer.Property("ShardSize");
 			writer.WriteValue(ShardSize.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

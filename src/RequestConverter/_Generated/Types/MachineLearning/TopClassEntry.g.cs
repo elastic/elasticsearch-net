@@ -27,24 +27,24 @@ public partial class TopClassEntry : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TopClassEntry", false);
+		var initializer = writer.BeginObjectInitializer("TopClassEntry", false);
 		{
-			__init.Property("ClassName");
+			initializer.Property("ClassName");
 			writer.WriteString(ClassName);
 		}
 
 		{
-			__init.Property("ClassProbability");
+			initializer.Property("ClassProbability");
 			writer.WriteValue(ClassProbability);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("ClassScore");
+			initializer.Property("ClassScore");
 			writer.WriteValue(ClassScore);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,28 +27,28 @@ public partial class ClusterStateQueue : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterStateQueue", false);
+		var initializer = writer.BeginObjectInitializer("ClusterStateQueue", false);
 		if (Committed is not null)
 		{
-			__init.Property("Committed");
+			initializer.Property("Committed");
 			writer.WriteValue(Committed.Value);
 			writer.Write("L");
 		}
 
 		if (Pending is not null)
 		{
-			__init.Property("Pending");
+			initializer.Property("Pending");
 			writer.WriteValue(Pending.Value);
 			writer.Write("L");
 		}
 
 		if (Total is not null)
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteValue(Total.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

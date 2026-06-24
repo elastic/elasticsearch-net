@@ -27,10 +27,10 @@ public partial class Hint : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Hint", false);
+		var initializer = writer.BeginObjectInitializer("Hint", false);
 		if (Labels is not null)
 		{
-			__init.Property("Labels");
+			initializer.Property("Labels");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -41,10 +41,10 @@ public partial class Hint : RequestConverter.ICodeFormattable
 
 		if (Uids is not null)
 		{
-			__init.Property("Uids");
+			initializer.Property("Uids");
 			writer.WriteInlineList(Uids, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

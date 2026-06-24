@@ -27,9 +27,9 @@ public partial class TopMetrics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TopMetrics", false);
+		var initializer = writer.BeginObjectInitializer("TopMetrics", false);
 		{
-			__init.Property("Metrics");
+			initializer.Property("Metrics");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -39,10 +39,10 @@ public partial class TopMetrics : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Sort");
+			initializer.Property("Sort");
 			writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

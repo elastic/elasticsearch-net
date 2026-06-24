@@ -27,25 +27,25 @@ public partial class UpdateAliasesRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UpdateAliasesRequest", false);
+		var initializer = writer.BeginObjectInitializer("UpdateAliasesRequest", false);
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (Actions is not null)
 		{
-			__init.Property("Actions");
+			initializer.Property("Actions");
 			writer.WriteInlineList(Actions, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

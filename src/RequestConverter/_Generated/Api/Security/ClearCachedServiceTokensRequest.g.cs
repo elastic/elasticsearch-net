@@ -27,22 +27,22 @@ public partial class ClearCachedServiceTokensRequest : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClearCachedServiceTokensRequest", false);
+		var initializer = writer.BeginObjectInitializer("ClearCachedServiceTokensRequest", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Namespace");
+			initializer.Property("Namespace");
 			writer.WriteString(Namespace);
 		}
 
 		{
-			__init.Property("Service");
+			initializer.Property("Service");
 			writer.WriteString(Service);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,59 +27,59 @@ public partial class BulkStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BulkStats", false);
+		var initializer = writer.BeginObjectInitializer("BulkStats", false);
 		if (AvgSize is not null)
 		{
-			__init.Property("AvgSize");
+			initializer.Property("AvgSize");
 			AvgSize.FormatCode(writer);
 		}
 
 		{
-			__init.Property("AvgSizeInBytes");
+			initializer.Property("AvgSizeInBytes");
 			writer.WriteValue(AvgSizeInBytes);
 			writer.Write("L");
 		}
 
 		if (AvgTime is not null)
 		{
-			__init.Property("AvgTime");
+			initializer.Property("AvgTime");
 			AvgTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("AvgTimeInMillis");
+			initializer.Property("AvgTimeInMillis");
 			writer.WriteValue(AvgTimeInMillis);
 		}
 
 		{
-			__init.Property("TotalOperations");
+			initializer.Property("TotalOperations");
 			writer.WriteValue(TotalOperations);
 			writer.Write("L");
 		}
 
 		if (TotalSize is not null)
 		{
-			__init.Property("TotalSize");
+			initializer.Property("TotalSize");
 			TotalSize.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalSizeInBytes");
+			initializer.Property("TotalSizeInBytes");
 			writer.WriteValue(TotalSizeInBytes);
 			writer.Write("L");
 		}
 
 		if (TotalTime is not null)
 		{
-			__init.Property("TotalTime");
+			initializer.Property("TotalTime");
 			TotalTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalTimeInMillis");
+			initializer.Property("TotalTimeInMillis");
 			writer.WriteValue(TotalTimeInMillis);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

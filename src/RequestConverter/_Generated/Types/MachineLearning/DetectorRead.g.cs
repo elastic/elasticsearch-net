@@ -27,66 +27,66 @@ public partial class DetectorRead : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DetectorRead", false);
+		var initializer = writer.BeginObjectInitializer("DetectorRead", false);
 		if (ByFieldName is not null)
 		{
-			__init.Property("ByFieldName");
+			initializer.Property("ByFieldName");
 			writer.WriteString(ByFieldName);
 		}
 
 		if (CustomRules is not null)
 		{
-			__init.Property("CustomRules");
+			initializer.Property("CustomRules");
 			writer.WriteInlineList(CustomRules, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (DetectorDescription is not null)
 		{
-			__init.Property("DetectorDescription");
+			initializer.Property("DetectorDescription");
 			writer.WriteString(DetectorDescription);
 		}
 
 		if (DetectorIndex is not null)
 		{
-			__init.Property("DetectorIndex");
+			initializer.Property("DetectorIndex");
 			writer.WriteValue(DetectorIndex.Value);
 		}
 
 		if (ExcludeFrequent is not null)
 		{
-			__init.Property("ExcludeFrequent");
+			initializer.Property("ExcludeFrequent");
 			Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequentCodeFormatter.FormatCode(ExcludeFrequent.Value, writer);
 		}
 
 		if (FieldName is not null)
 		{
-			__init.Property("FieldName");
+			initializer.Property("FieldName");
 			writer.WriteString(FieldName);
 		}
 
 		{
-			__init.Property("Function");
+			initializer.Property("Function");
 			writer.WriteString(Function);
 		}
 
 		if (OverFieldName is not null)
 		{
-			__init.Property("OverFieldName");
+			initializer.Property("OverFieldName");
 			writer.WriteString(OverFieldName);
 		}
 
 		if (PartitionFieldName is not null)
 		{
-			__init.Property("PartitionFieldName");
+			initializer.Property("PartitionFieldName");
 			writer.WriteString(PartitionFieldName);
 		}
 
 		if (UseNull is not null)
 		{
-			__init.Property("UseNull");
+			initializer.Property("UseNull");
 			writer.WriteValue(UseNull.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

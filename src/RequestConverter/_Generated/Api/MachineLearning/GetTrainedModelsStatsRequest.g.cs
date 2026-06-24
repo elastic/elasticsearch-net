@@ -27,31 +27,31 @@ public partial class GetTrainedModelsStatsRequest : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetTrainedModelsStatsRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetTrainedModelsStatsRequest", false);
 		if (ModelId is not null)
 		{
-			__init.Property("ModelId");
+			initializer.Property("ModelId");
 			ModelId.FormatCode(writer);
 		}
 
 		if (AllowNoMatch is not null)
 		{
-			__init.Property("AllowNoMatch");
+			initializer.Property("AllowNoMatch");
 			writer.WriteValue(AllowNoMatch.Value);
 		}
 
 		if (From is not null)
 		{
-			__init.Property("From");
+			initializer.Property("From");
 			writer.WriteValue(From.Value);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

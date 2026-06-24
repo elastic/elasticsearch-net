@@ -27,64 +27,64 @@ public partial class GeoShapeProperty : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoShapeProperty", true);
+		var initializer = writer.BeginObjectInitializer("GeoShapeProperty", true);
 		if (Coerce is not null)
 		{
-			__init.Property("Coerce");
+			initializer.Property("Coerce");
 			writer.WriteValue(Coerce.Value);
 		}
 
 		if (CopyTo is not null)
 		{
-			__init.Property("CopyTo");
+			initializer.Property("CopyTo");
 			CopyTo.FormatCode(writer);
 		}
 
 		if (DocValues is not null)
 		{
-			__init.Property("DocValues");
+			initializer.Property("DocValues");
 			writer.WriteValue(DocValues.Value);
 		}
 
 		if (Dynamic is not null)
 		{
-			__init.Property("Dynamic");
+			initializer.Property("Dynamic");
 			Elastic.Clients.Elasticsearch.Mapping.DynamicMappingCodeFormatter.FormatCode(Dynamic.Value, writer);
 		}
 
 		if (Fields is not null)
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			Fields.FormatCode(writer);
 		}
 
 		if (IgnoreAbove is not null)
 		{
-			__init.Property("IgnoreAbove");
+			initializer.Property("IgnoreAbove");
 			writer.WriteValue(IgnoreAbove.Value);
 		}
 
 		if (IgnoreMalformed is not null)
 		{
-			__init.Property("IgnoreMalformed");
+			initializer.Property("IgnoreMalformed");
 			writer.WriteValue(IgnoreMalformed.Value);
 		}
 
 		if (IgnoreZValue is not null)
 		{
-			__init.Property("IgnoreZValue");
+			initializer.Property("IgnoreZValue");
 			writer.WriteValue(IgnoreZValue.Value);
 		}
 
 		if (Index is not null)
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteValue(Index.Value);
 		}
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -95,34 +95,34 @@ public partial class GeoShapeProperty : RequestConverter.ICodeFormattable
 
 		if (Orientation is not null)
 		{
-			__init.Property("Orientation");
+			initializer.Property("Orientation");
 			Elastic.Clients.Elasticsearch.Mapping.GeoOrientationCodeFormatter.FormatCode(Orientation.Value, writer);
 		}
 
 		if (Properties is not null)
 		{
-			__init.Property("Properties");
+			initializer.Property("Properties");
 			Properties.FormatCode(writer);
 		}
 
 		if (Store is not null)
 		{
-			__init.Property("Store");
+			initializer.Property("Store");
 			writer.WriteValue(Store.Value);
 		}
 
 		if (Strategy is not null)
 		{
-			__init.Property("Strategy");
+			initializer.Property("Strategy");
 			Elastic.Clients.Elasticsearch.Mapping.GeoStrategyCodeFormatter.FormatCode(Strategy.Value, writer);
 		}
 
 		if (SyntheticSourceKeep is not null)
 		{
-			__init.Property("SyntheticSourceKeep");
+			initializer.Property("SyntheticSourceKeep");
 			Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnumCodeFormatter.FormatCode(SyntheticSourceKeep.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

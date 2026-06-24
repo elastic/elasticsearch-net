@@ -27,31 +27,31 @@ public partial class GetClusterSettingsRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetClusterSettingsRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetClusterSettingsRequest", false);
 		if (FlatSettings is not null)
 		{
-			__init.Property("FlatSettings");
+			initializer.Property("FlatSettings");
 			writer.WriteValue(FlatSettings.Value);
 		}
 
 		if (IncludeDefaults is not null)
 		{
-			__init.Property("IncludeDefaults");
+			initializer.Property("IncludeDefaults");
 			writer.WriteValue(IncludeDefaults.Value);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

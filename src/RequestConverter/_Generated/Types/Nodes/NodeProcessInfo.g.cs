@@ -27,23 +27,23 @@ public partial class NodeProcessInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeProcessInfo", false);
+		var initializer = writer.BeginObjectInitializer("NodeProcessInfo", false);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteValue(Id);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Mlockall");
+			initializer.Property("Mlockall");
 			writer.WriteValue(Mlockall);
 		}
 
 		{
-			__init.Property("RefreshIntervalInMillis");
+			initializer.Property("RefreshIntervalInMillis");
 			writer.WriteValue(RefreshIntervalInMillis);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

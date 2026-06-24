@@ -27,37 +27,37 @@ public partial class KeywordMarkerTokenFilter : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("KeywordMarkerTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("KeywordMarkerTokenFilter", true);
 		if (IgnoreCase is not null)
 		{
-			__init.Property("IgnoreCase");
+			initializer.Property("IgnoreCase");
 			writer.WriteValue(IgnoreCase.Value);
 		}
 
 		if (Keywords is not null)
 		{
-			__init.Property("Keywords");
+			initializer.Property("Keywords");
 			writer.WriteInlineList(Keywords, (w, item) => { w.WriteString(item); });
 		}
 
 		if (KeywordsPath is not null)
 		{
-			__init.Property("KeywordsPath");
+			initializer.Property("KeywordsPath");
 			writer.WriteString(KeywordsPath);
 		}
 
 		if (KeywordsPattern is not null)
 		{
-			__init.Property("KeywordsPattern");
+			initializer.Property("KeywordsPattern");
 			writer.WriteString(KeywordsPattern);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

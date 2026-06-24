@@ -27,24 +27,24 @@ public partial class DeleteDataFrameAnalyticsRequest : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteDataFrameAnalyticsRequest", false);
+		var initializer = writer.BeginObjectInitializer("DeleteDataFrameAnalyticsRequest", false);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		if (Force is not null)
 		{
-			__init.Property("Force");
+			initializer.Property("Force");
 			writer.WriteValue(Force.Value);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

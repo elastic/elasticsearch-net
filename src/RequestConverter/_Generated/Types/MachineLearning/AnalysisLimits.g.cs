@@ -27,20 +27,20 @@ public partial class AnalysisLimits : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AnalysisLimits", false);
+		var initializer = writer.BeginObjectInitializer("AnalysisLimits", false);
 		if (CategorizationExamplesLimit is not null)
 		{
-			__init.Property("CategorizationExamplesLimit");
+			initializer.Property("CategorizationExamplesLimit");
 			writer.WriteValue(CategorizationExamplesLimit.Value);
 			writer.Write("L");
 		}
 
 		if (ModelMemoryLimit is not null)
 		{
-			__init.Property("ModelMemoryLimit");
+			initializer.Property("ModelMemoryLimit");
 			ModelMemoryLimit.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,107 +27,107 @@ public partial class FollowRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FollowRequest", false);
+		var initializer = writer.BeginObjectInitializer("FollowRequest", false);
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (WaitForActiveShards is not null)
 		{
-			__init.Property("WaitForActiveShards");
+			initializer.Property("WaitForActiveShards");
 			WaitForActiveShards.FormatCode(writer);
 		}
 
 		if (DataStreamName is not null)
 		{
-			__init.Property("DataStreamName");
+			initializer.Property("DataStreamName");
 			writer.WriteString(DataStreamName);
 		}
 
 		{
-			__init.Property("LeaderIndex");
+			initializer.Property("LeaderIndex");
 			LeaderIndex.FormatCode(writer);
 		}
 
 		if (MaxOutstandingReadRequests is not null)
 		{
-			__init.Property("MaxOutstandingReadRequests");
+			initializer.Property("MaxOutstandingReadRequests");
 			writer.WriteValue(MaxOutstandingReadRequests.Value);
 			writer.Write("L");
 		}
 
 		if (MaxOutstandingWriteRequests is not null)
 		{
-			__init.Property("MaxOutstandingWriteRequests");
+			initializer.Property("MaxOutstandingWriteRequests");
 			writer.WriteValue(MaxOutstandingWriteRequests.Value);
 		}
 
 		if (MaxReadRequestOperationCount is not null)
 		{
-			__init.Property("MaxReadRequestOperationCount");
+			initializer.Property("MaxReadRequestOperationCount");
 			writer.WriteValue(MaxReadRequestOperationCount.Value);
 		}
 
 		if (MaxReadRequestSize is not null)
 		{
-			__init.Property("MaxReadRequestSize");
+			initializer.Property("MaxReadRequestSize");
 			MaxReadRequestSize.FormatCode(writer);
 		}
 
 		if (MaxRetryDelay is not null)
 		{
-			__init.Property("MaxRetryDelay");
+			initializer.Property("MaxRetryDelay");
 			MaxRetryDelay.FormatCode(writer);
 		}
 
 		if (MaxWriteBufferCount is not null)
 		{
-			__init.Property("MaxWriteBufferCount");
+			initializer.Property("MaxWriteBufferCount");
 			writer.WriteValue(MaxWriteBufferCount.Value);
 		}
 
 		if (MaxWriteBufferSize is not null)
 		{
-			__init.Property("MaxWriteBufferSize");
+			initializer.Property("MaxWriteBufferSize");
 			MaxWriteBufferSize.FormatCode(writer);
 		}
 
 		if (MaxWriteRequestOperationCount is not null)
 		{
-			__init.Property("MaxWriteRequestOperationCount");
+			initializer.Property("MaxWriteRequestOperationCount");
 			writer.WriteValue(MaxWriteRequestOperationCount.Value);
 		}
 
 		if (MaxWriteRequestSize is not null)
 		{
-			__init.Property("MaxWriteRequestSize");
+			initializer.Property("MaxWriteRequestSize");
 			MaxWriteRequestSize.FormatCode(writer);
 		}
 
 		if (ReadPollTimeout is not null)
 		{
-			__init.Property("ReadPollTimeout");
+			initializer.Property("ReadPollTimeout");
 			ReadPollTimeout.FormatCode(writer);
 		}
 
 		{
-			__init.Property("RemoteCluster");
+			initializer.Property("RemoteCluster");
 			writer.WriteString(RemoteCluster);
 		}
 
 		if (Settings is not null)
 		{
-			__init.Property("Settings");
+			initializer.Property("Settings");
 			Settings.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

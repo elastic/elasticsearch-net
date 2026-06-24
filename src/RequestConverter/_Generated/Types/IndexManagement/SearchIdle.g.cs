@@ -27,13 +27,13 @@ public partial class SearchIdle : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SearchIdle", false);
+		var initializer = writer.BeginObjectInitializer("SearchIdle", false);
 		if (After is not null)
 		{
-			__init.Property("After");
+			initializer.Property("After");
 			After.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

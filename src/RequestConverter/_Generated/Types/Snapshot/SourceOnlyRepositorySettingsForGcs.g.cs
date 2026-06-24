@@ -27,37 +27,37 @@ public partial class SourceOnlyRepositorySettingsForGcs : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SourceOnlyRepositorySettingsForGcs", true);
+		var initializer = writer.BeginObjectInitializer("SourceOnlyRepositorySettingsForGcs", true);
 #pragma warning disable CS0618
 		if (ApplicationName is not null)
 		{
-			__init.Property("ApplicationName");
+			initializer.Property("ApplicationName");
 			writer.WriteString(ApplicationName);
 		}
 #pragma warning restore CS0618
 		if (BasePath is not null)
 		{
-			__init.Property("BasePath");
+			initializer.Property("BasePath");
 			writer.WriteString(BasePath);
 		}
 
 		{
-			__init.Property("Bucket");
+			initializer.Property("Bucket");
 			writer.WriteString(Bucket);
 		}
 
 		if (Client is not null)
 		{
-			__init.Property("Client");
+			initializer.Property("Client");
 			writer.WriteString(Client);
 		}
 
 		if (Readonly is not null)
 		{
-			__init.Property("Readonly");
+			initializer.Property("Readonly");
 			writer.WriteValue(Readonly.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

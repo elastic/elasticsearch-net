@@ -27,23 +27,23 @@ public partial class DatafeedRunningState : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DatafeedRunningState", false);
+		var initializer = writer.BeginObjectInitializer("DatafeedRunningState", false);
 		{
-			__init.Property("RealTimeConfigured");
+			initializer.Property("RealTimeConfigured");
 			writer.WriteValue(RealTimeConfigured);
 		}
 
 		{
-			__init.Property("RealTimeRunning");
+			initializer.Property("RealTimeRunning");
 			writer.WriteValue(RealTimeRunning);
 		}
 
 		if (SearchInterval is not null)
 		{
-			__init.Property("SearchInterval");
+			initializer.Property("SearchInterval");
 			SearchInterval.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

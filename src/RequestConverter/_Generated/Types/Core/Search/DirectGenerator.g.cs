@@ -27,75 +27,75 @@ public partial class DirectGenerator : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DirectGenerator", false);
+		var initializer = writer.BeginObjectInitializer("DirectGenerator", false);
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (MaxEdits is not null)
 		{
-			__init.Property("MaxEdits");
+			initializer.Property("MaxEdits");
 			writer.WriteValue(MaxEdits.Value);
 		}
 
 		if (MaxInspections is not null)
 		{
-			__init.Property("MaxInspections");
+			initializer.Property("MaxInspections");
 			writer.WriteValue(MaxInspections.Value);
 			writer.Write("f");
 		}
 
 		if (MaxTermFreq is not null)
 		{
-			__init.Property("MaxTermFreq");
+			initializer.Property("MaxTermFreq");
 			writer.WriteValue(MaxTermFreq.Value);
 			writer.Write("f");
 		}
 
 		if (MinDocFreq is not null)
 		{
-			__init.Property("MinDocFreq");
+			initializer.Property("MinDocFreq");
 			writer.WriteValue(MinDocFreq.Value);
 			writer.Write("f");
 		}
 
 		if (MinWordLength is not null)
 		{
-			__init.Property("MinWordLength");
+			initializer.Property("MinWordLength");
 			writer.WriteValue(MinWordLength.Value);
 		}
 
 		if (PostFilter is not null)
 		{
-			__init.Property("PostFilter");
+			initializer.Property("PostFilter");
 			writer.WriteString(PostFilter);
 		}
 
 		if (PreFilter is not null)
 		{
-			__init.Property("PreFilter");
+			initializer.Property("PreFilter");
 			writer.WriteString(PreFilter);
 		}
 
 		if (PrefixLength is not null)
 		{
-			__init.Property("PrefixLength");
+			initializer.Property("PrefixLength");
 			writer.WriteValue(PrefixLength.Value);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
 		if (SuggestMode is not null)
 		{
-			__init.Property("SuggestMode");
+			initializer.Property("SuggestMode");
 			Elastic.Clients.Elasticsearch.SuggestModeCodeFormatter.FormatCode(SuggestMode.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,25 +27,25 @@ public partial class MappingCharFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MappingCharFilter", true);
+		var initializer = writer.BeginObjectInitializer("MappingCharFilter", true);
 		if (Mappings is not null)
 		{
-			__init.Property("Mappings");
+			initializer.Property("Mappings");
 			writer.WriteInlineList(Mappings, (w, item) => { w.WriteString(item); });
 		}
 
 		if (MappingsPath is not null)
 		{
-			__init.Property("MappingsPath");
+			initializer.Property("MappingsPath");
 			writer.WriteString(MappingsPath);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

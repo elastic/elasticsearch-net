@@ -27,97 +27,97 @@ public partial class FindFieldStructureRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FindFieldStructureRequest", false);
+		var initializer = writer.BeginObjectInitializer("FindFieldStructureRequest", false);
 		if (ColumnNames is not null)
 		{
-			__init.Property("ColumnNames");
+			initializer.Property("ColumnNames");
 			writer.WriteInlineList(ColumnNames, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Delimiter is not null)
 		{
-			__init.Property("Delimiter");
+			initializer.Property("Delimiter");
 			writer.WriteString(Delimiter);
 		}
 
 		if (DocumentsToSample is not null)
 		{
-			__init.Property("DocumentsToSample");
+			initializer.Property("DocumentsToSample");
 			writer.WriteValue(DocumentsToSample.Value);
 		}
 
 		if (EcsCompatibility is not null)
 		{
-			__init.Property("EcsCompatibility");
+			initializer.Property("EcsCompatibility");
 			Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityTypeCodeFormatter.FormatCode(EcsCompatibility.Value, writer);
 		}
 
 		if (Explain is not null)
 		{
-			__init.Property("Explain");
+			initializer.Property("Explain");
 			writer.WriteValue(Explain.Value);
 		}
 
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			Elastic.Clients.Elasticsearch.TextStructure.FormatTypeCodeFormatter.FormatCode(Format.Value, writer);
 		}
 
 		if (GrokPattern is not null)
 		{
-			__init.Property("GrokPattern");
+			initializer.Property("GrokPattern");
 			writer.WriteString(GrokPattern);
 		}
 
 		if (Index is not null)
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		if (Quote is not null)
 		{
-			__init.Property("Quote");
+			initializer.Property("Quote");
 			writer.WriteString(Quote);
 		}
 
 		if (ShouldParseRecursively is not null)
 		{
-			__init.Property("ShouldParseRecursively");
+			initializer.Property("ShouldParseRecursively");
 			writer.WriteValue(ShouldParseRecursively.Value);
 		}
 
 		if (ShouldTrimFields is not null)
 		{
-			__init.Property("ShouldTrimFields");
+			initializer.Property("ShouldTrimFields");
 			writer.WriteValue(ShouldTrimFields.Value);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (TimestampField is not null)
 		{
-			__init.Property("TimestampField");
+			initializer.Property("TimestampField");
 			TimestampField.FormatCode(writer);
 		}
 
 		if (TimestampFormat is not null)
 		{
-			__init.Property("TimestampFormat");
+			initializer.Property("TimestampFormat");
 			writer.WriteString(TimestampFormat);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

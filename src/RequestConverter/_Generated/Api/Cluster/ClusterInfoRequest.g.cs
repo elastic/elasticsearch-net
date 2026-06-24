@@ -27,12 +27,12 @@ public partial class ClusterInfoRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterInfoRequest", false);
+		var initializer = writer.BeginObjectInitializer("ClusterInfoRequest", false);
 		{
-			__init.Property("Target");
+			initializer.Property("Target");
 			writer.WriteInlineList(Target, (w, item) => { Elastic.Clients.Elasticsearch.ClusterInfoTargetCodeFormatter.FormatCode(item, w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

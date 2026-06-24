@@ -27,42 +27,42 @@ public partial class FlushJobRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FlushJobRequest", false);
+		var initializer = writer.BeginObjectInitializer("FlushJobRequest", false);
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			JobId.FormatCode(writer);
 		}
 
 		if (AdvanceTime is not null)
 		{
-			__init.Property("AdvanceTime");
+			initializer.Property("AdvanceTime");
 			writer.WriteValue(AdvanceTime.Value);
 		}
 
 		if (CalcInterim is not null)
 		{
-			__init.Property("CalcInterim");
+			initializer.Property("CalcInterim");
 			writer.WriteValue(CalcInterim.Value);
 		}
 
 		if (End is not null)
 		{
-			__init.Property("End");
+			initializer.Property("End");
 			writer.WriteValue(End.Value);
 		}
 
 		if (SkipTime is not null)
 		{
-			__init.Property("SkipTime");
+			initializer.Property("SkipTime");
 			writer.WriteValue(SkipTime.Value);
 		}
 
 		if (Start is not null)
 		{
-			__init.Property("Start");
+			initializer.Property("Start");
 			writer.WriteValue(Start.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

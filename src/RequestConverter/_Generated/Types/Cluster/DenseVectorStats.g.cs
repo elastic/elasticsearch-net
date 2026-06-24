@@ -27,19 +27,19 @@ public partial class DenseVectorStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DenseVectorStats", false);
+		var initializer = writer.BeginObjectInitializer("DenseVectorStats", false);
 		if (OffHeap is not null)
 		{
-			__init.Property("OffHeap");
+			initializer.Property("OffHeap");
 			OffHeap.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ValueCount");
+			initializer.Property("ValueCount");
 			writer.WriteValue(ValueCount);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

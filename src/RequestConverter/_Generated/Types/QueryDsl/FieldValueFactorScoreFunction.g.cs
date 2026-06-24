@@ -27,32 +27,32 @@ public partial class FieldValueFactorScoreFunction : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldValueFactorScoreFunction", false);
+		var initializer = writer.BeginObjectInitializer("FieldValueFactorScoreFunction", false);
 		if (Factor is not null)
 		{
-			__init.Property("Factor");
+			initializer.Property("Factor");
 			writer.WriteValue(Factor.Value);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Missing is not null)
 		{
-			__init.Property("Missing");
+			initializer.Property("Missing");
 			writer.WriteValue(Missing.Value);
 			writer.Write("d");
 		}
 
 		if (Modifier is not null)
 		{
-			__init.Property("Modifier");
+			initializer.Property("Modifier");
 			Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifierCodeFormatter.FormatCode(Modifier.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

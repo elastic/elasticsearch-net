@@ -27,19 +27,19 @@ public partial class MergeScheduler : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MergeScheduler", false);
+		var initializer = writer.BeginObjectInitializer("MergeScheduler", false);
 		if (MaxMergeCount is not null)
 		{
-			__init.Property("MaxMergeCount");
+			initializer.Property("MaxMergeCount");
 			writer.WriteValue(MaxMergeCount.Value);
 		}
 
 		if (MaxThreadCount is not null)
 		{
-			__init.Property("MaxThreadCount");
+			initializer.Property("MaxThreadCount");
 			writer.WriteValue(MaxThreadCount.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

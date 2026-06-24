@@ -27,71 +27,71 @@ public partial class RolloverAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RolloverAction", false);
+		var initializer = writer.BeginObjectInitializer("RolloverAction", false);
 		if (MaxAge is not null)
 		{
-			__init.Property("MaxAge");
+			initializer.Property("MaxAge");
 			MaxAge.FormatCode(writer);
 		}
 
 		if (MaxDocs is not null)
 		{
-			__init.Property("MaxDocs");
+			initializer.Property("MaxDocs");
 			writer.WriteValue(MaxDocs.Value);
 			writer.Write("L");
 		}
 
 		if (MaxPrimaryShardDocs is not null)
 		{
-			__init.Property("MaxPrimaryShardDocs");
+			initializer.Property("MaxPrimaryShardDocs");
 			writer.WriteValue(MaxPrimaryShardDocs.Value);
 			writer.Write("L");
 		}
 
 		if (MaxPrimaryShardSize is not null)
 		{
-			__init.Property("MaxPrimaryShardSize");
+			initializer.Property("MaxPrimaryShardSize");
 			MaxPrimaryShardSize.FormatCode(writer);
 		}
 #pragma warning disable CS0618
 		if (MaxSize is not null)
 		{
-			__init.Property("MaxSize");
+			initializer.Property("MaxSize");
 			MaxSize.FormatCode(writer);
 		}
 #pragma warning restore CS0618
 		if (MinAge is not null)
 		{
-			__init.Property("MinAge");
+			initializer.Property("MinAge");
 			MinAge.FormatCode(writer);
 		}
 
 		if (MinDocs is not null)
 		{
-			__init.Property("MinDocs");
+			initializer.Property("MinDocs");
 			writer.WriteValue(MinDocs.Value);
 			writer.Write("L");
 		}
 
 		if (MinPrimaryShardDocs is not null)
 		{
-			__init.Property("MinPrimaryShardDocs");
+			initializer.Property("MinPrimaryShardDocs");
 			writer.WriteValue(MinPrimaryShardDocs.Value);
 			writer.Write("L");
 		}
 
 		if (MinPrimaryShardSize is not null)
 		{
-			__init.Property("MinPrimaryShardSize");
+			initializer.Property("MinPrimaryShardSize");
 			MinPrimaryShardSize.FormatCode(writer);
 		}
 
 		if (MinSize is not null)
 		{
-			__init.Property("MinSize");
+			initializer.Property("MinSize");
 			MinSize.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,23 +27,23 @@ public partial class Archive : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Archive", false);
+		var initializer = writer.BeginObjectInitializer("Archive", false);
 		{
-			__init.Property("Available");
+			initializer.Property("Available");
 			writer.WriteValue(Available);
 		}
 
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);
 		}
 
 		{
-			__init.Property("IndicesCount");
+			initializer.Property("IndicesCount");
 			writer.WriteValue(IndicesCount);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

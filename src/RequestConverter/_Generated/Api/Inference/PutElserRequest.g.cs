@@ -27,34 +27,34 @@ public partial class PutElserRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutElserRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutElserRequest", false);
 		{
-			__init.Property("ElserInferenceId");
+			initializer.Property("ElserInferenceId");
 			ElserInferenceId.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TaskType");
+			initializer.Property("TaskType");
 			Elastic.Clients.Elasticsearch.Inference.ElserTaskTypeCodeFormatter.FormatCode(TaskType, writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (ChunkingSettings is not null)
 		{
-			__init.Property("ChunkingSettings");
+			initializer.Property("ChunkingSettings");
 			ChunkingSettings.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ServiceSettings");
+			initializer.Property("ServiceSettings");
 			ServiceSettings.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

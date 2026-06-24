@@ -27,10 +27,10 @@ public partial class NodeInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfo", false);
+		var initializer = writer.BeginObjectInitializer("NodeInfo", false);
 		if (Aggregations is not null)
 		{
-			__init.Property("Aggregations");
+			initializer.Property("Aggregations");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -40,7 +40,7 @@ public partial class NodeInfo : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Attributes");
+			initializer.Property("Attributes");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -50,22 +50,22 @@ public partial class NodeInfo : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("BuildFlavor");
+			initializer.Property("BuildFlavor");
 			writer.WriteString(BuildFlavor);
 		}
 
 		{
-			__init.Property("BuildHash");
+			initializer.Property("BuildHash");
 			writer.WriteString(BuildHash);
 		}
 
 		{
-			__init.Property("BuildType");
+			initializer.Property("BuildType");
 			writer.WriteString(BuildType);
 		}
 
 		{
-			__init.Property("ComponentVersions");
+			initializer.Property("ComponentVersions");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -75,88 +75,88 @@ public partial class NodeInfo : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Host");
+			initializer.Property("Host");
 			writer.WriteString(Host);
 		}
 
 		if (Http is not null)
 		{
-			__init.Property("Http");
+			initializer.Property("Http");
 			Http.FormatCode(writer);
 		}
 
 		{
-			__init.Property("IndexVersion");
+			initializer.Property("IndexVersion");
 			writer.WriteValue(IndexVersion);
 			writer.Write("L");
 		}
 
 		if (Ingest is not null)
 		{
-			__init.Property("Ingest");
+			initializer.Property("Ingest");
 			Ingest.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Ip");
+			initializer.Property("Ip");
 			writer.WriteString(Ip);
 		}
 
 		if (Jvm is not null)
 		{
-			__init.Property("Jvm");
+			initializer.Property("Jvm");
 			Jvm.FormatCode(writer);
 		}
 
 		if (Modules is not null)
 		{
-			__init.Property("Modules");
+			initializer.Property("Modules");
 			writer.WriteInlineList(Modules, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		if (Os is not null)
 		{
-			__init.Property("Os");
+			initializer.Property("Os");
 			Os.FormatCode(writer);
 		}
 
 		if (Plugins is not null)
 		{
-			__init.Property("Plugins");
+			initializer.Property("Plugins");
 			writer.WriteInlineList(Plugins, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Process is not null)
 		{
-			__init.Property("Process");
+			initializer.Property("Process");
 			Process.FormatCode(writer);
 		}
 
 		if (RemoteClusterServer is not null)
 		{
-			__init.Property("RemoteClusterServer");
+			initializer.Property("RemoteClusterServer");
 			RemoteClusterServer.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Roles");
+			initializer.Property("Roles");
 			writer.WriteInlineList(Roles, (w, item) => { Elastic.Clients.Elasticsearch.NodeRoleCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (Settings is not null)
 		{
-			__init.Property("Settings");
+			initializer.Property("Settings");
 			Settings.FormatCode(writer);
 		}
 
 		if (ThreadPool is not null)
 		{
-			__init.Property("ThreadPool");
+			initializer.Property("ThreadPool");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -167,39 +167,39 @@ public partial class NodeInfo : RequestConverter.ICodeFormattable
 
 		if (TotalIndexingBuffer is not null)
 		{
-			__init.Property("TotalIndexingBuffer");
+			initializer.Property("TotalIndexingBuffer");
 			writer.WriteValue(TotalIndexingBuffer.Value);
 			writer.Write("L");
 		}
 
 		if (TotalIndexingBufferInBytes is not null)
 		{
-			__init.Property("TotalIndexingBufferInBytes");
+			initializer.Property("TotalIndexingBufferInBytes");
 			TotalIndexingBufferInBytes.FormatCode(writer);
 		}
 
 		if (Transport is not null)
 		{
-			__init.Property("Transport");
+			initializer.Property("Transport");
 			Transport.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TransportAddress");
+			initializer.Property("TransportAddress");
 			writer.WriteString(TransportAddress);
 		}
 
 		{
-			__init.Property("TransportVersion");
+			initializer.Property("TransportVersion");
 			writer.WriteValue(TransportVersion);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

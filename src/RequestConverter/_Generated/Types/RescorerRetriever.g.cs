@@ -27,36 +27,36 @@ public partial class RescorerRetriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RescorerRetriever", false);
+		var initializer = writer.BeginObjectInitializer("RescorerRetriever", false);
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (MinScore is not null)
 		{
-			__init.Property("MinScore");
+			initializer.Property("MinScore");
 			writer.WriteValue(MinScore.Value);
 			writer.Write("f");
 		}
 
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("Rescore");
+			initializer.Property("Rescore");
 			writer.WriteInlineList(Rescore, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Retriever");
+			initializer.Property("Retriever");
 			Retriever.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

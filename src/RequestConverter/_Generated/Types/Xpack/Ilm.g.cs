@@ -27,17 +27,17 @@ public partial class Ilm : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Ilm", false);
+		var initializer = writer.BeginObjectInitializer("Ilm", false);
 		{
-			__init.Property("PolicyCount");
+			initializer.Property("PolicyCount");
 			writer.WriteValue(PolicyCount);
 		}
 
 		{
-			__init.Property("PolicyStats");
+			initializer.Property("PolicyStats");
 			writer.WriteInlineList(PolicyStats, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

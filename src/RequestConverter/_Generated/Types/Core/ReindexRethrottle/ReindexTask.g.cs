@@ -27,29 +27,29 @@ public partial class ReindexTask : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ReindexTask", false);
+		var initializer = writer.BeginObjectInitializer("ReindexTask", false);
 		{
-			__init.Property("Action");
+			initializer.Property("Action");
 			writer.WriteString(Action);
 		}
 
 		{
-			__init.Property("Cancellable");
+			initializer.Property("Cancellable");
 			writer.WriteValue(Cancellable);
 		}
 
 		{
-			__init.Property("Cancelled");
+			initializer.Property("Cancelled");
 			writer.WriteValue(Cancelled);
 		}
 
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		{
-			__init.Property("Headers");
+			initializer.Property("Headers");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -59,36 +59,36 @@ public partial class ReindexTask : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteValue(Id);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Node");
+			initializer.Property("Node");
 			writer.WriteString(Node);
 		}
 
 		{
-			__init.Property("RunningTimeInNanos");
+			initializer.Property("RunningTimeInNanos");
 			writer.WriteValue(RunningTimeInNanos);
 		}
 
 		{
-			__init.Property("StartTimeInMillis");
+			initializer.Property("StartTimeInMillis");
 			writer.WriteValue(StartTimeInMillis);
 		}
 
 		{
-			__init.Property("Status");
+			initializer.Property("Status");
 			Status.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			writer.WriteString(Type);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

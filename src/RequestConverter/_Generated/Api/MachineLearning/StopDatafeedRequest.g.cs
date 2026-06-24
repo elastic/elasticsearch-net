@@ -27,36 +27,36 @@ public partial class StopDatafeedRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StopDatafeedRequest", false);
+		var initializer = writer.BeginObjectInitializer("StopDatafeedRequest", false);
 		{
-			__init.Property("DatafeedId");
+			initializer.Property("DatafeedId");
 			DatafeedId.FormatCode(writer);
 		}
 
 		if (AllowNoMatch is not null)
 		{
-			__init.Property("AllowNoMatch");
+			initializer.Property("AllowNoMatch");
 			writer.WriteValue(AllowNoMatch.Value);
 		}
 
 		if (CloseJob is not null)
 		{
-			__init.Property("CloseJob");
+			initializer.Property("CloseJob");
 			writer.WriteValue(CloseJob.Value);
 		}
 
 		if (Force is not null)
 		{
-			__init.Property("Force");
+			initializer.Property("Force");
 			writer.WriteValue(Force.Value);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

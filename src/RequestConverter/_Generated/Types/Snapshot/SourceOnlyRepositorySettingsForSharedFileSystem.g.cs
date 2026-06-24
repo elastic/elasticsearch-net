@@ -27,24 +27,24 @@ public partial class SourceOnlyRepositorySettingsForSharedFileSystem : RequestCo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SourceOnlyRepositorySettingsForSharedFileSystem", true);
+		var initializer = writer.BeginObjectInitializer("SourceOnlyRepositorySettingsForSharedFileSystem", true);
 		{
-			__init.Property("Location");
+			initializer.Property("Location");
 			writer.WriteString(Location);
 		}
 
 		if (MaxNumberOfSnapshots is not null)
 		{
-			__init.Property("MaxNumberOfSnapshots");
+			initializer.Property("MaxNumberOfSnapshots");
 			writer.WriteValue(MaxNumberOfSnapshots.Value);
 		}
 
 		if (Readonly is not null)
 		{
-			__init.Property("Readonly");
+			initializer.Property("Readonly");
 			writer.WriteValue(Readonly.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

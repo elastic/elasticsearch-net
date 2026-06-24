@@ -27,10 +27,10 @@ public partial class MatchedText : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MatchedText", false);
+		var initializer = writer.BeginObjectInitializer("MatchedText", false);
 		if (Fields is not null)
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -40,10 +40,10 @@ public partial class MatchedText : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Matched");
+			initializer.Property("Matched");
 			writer.WriteValue(Matched);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

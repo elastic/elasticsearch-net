@@ -27,48 +27,48 @@ public partial class GeoBoundingBoxQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoBoundingBoxQuery", false);
+		var initializer = writer.BeginObjectInitializer("GeoBoundingBoxQuery", false);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		{
-			__init.Property("BoundingBox");
+			initializer.Property("BoundingBox");
 			BoundingBox.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (IgnoreUnmapped is not null)
 		{
-			__init.Property("IgnoreUnmapped");
+			initializer.Property("IgnoreUnmapped");
 			writer.WriteValue(IgnoreUnmapped.Value);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 #pragma warning disable CS0618
 		if (Type is not null)
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			Elastic.Clients.Elasticsearch.QueryDsl.GeoExecutionCodeFormatter.FormatCode(Type.Value, writer);
 		}
 #pragma warning restore CS0618
 		if (ValidationMethod is not null)
 		{
-			__init.Property("ValidationMethod");
+			initializer.Property("ValidationMethod");
 			Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethodCodeFormatter.FormatCode(ValidationMethod.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

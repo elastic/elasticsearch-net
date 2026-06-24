@@ -27,25 +27,25 @@ public partial class DocumentSimulation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DocumentSimulation", false);
+		var initializer = writer.BeginObjectInitializer("DocumentSimulation", false);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteString(Index);
 		}
 
 		{
-			__init.Property("Ingest");
+			initializer.Property("Ingest");
 			Ingest.FormatCode(writer);
 		}
 
 		if (Metadata is not null)
 		{
-			__init.Property("Metadata");
+			initializer.Property("Metadata");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -56,12 +56,12 @@ public partial class DocumentSimulation : RequestConverter.ICodeFormattable
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			writer.WriteString(Routing);
 		}
 
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -72,17 +72,17 @@ public partial class DocumentSimulation : RequestConverter.ICodeFormattable
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version.Value);
 			writer.Write("L");
 		}
 
 		if (VersionType is not null)
 		{
-			__init.Property("VersionType");
+			initializer.Property("VersionType");
 			Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

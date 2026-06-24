@@ -27,37 +27,37 @@ public partial class FillMaskInferenceOptions : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FillMaskInferenceOptions", false);
+		var initializer = writer.BeginObjectInitializer("FillMaskInferenceOptions", false);
 		if (MaskToken is not null)
 		{
-			__init.Property("MaskToken");
+			initializer.Property("MaskToken");
 			writer.WriteString(MaskToken);
 		}
 
 		if (NumTopClasses is not null)
 		{
-			__init.Property("NumTopClasses");
+			initializer.Property("NumTopClasses");
 			writer.WriteValue(NumTopClasses.Value);
 		}
 
 		if (ResultsField is not null)
 		{
-			__init.Property("ResultsField");
+			initializer.Property("ResultsField");
 			writer.WriteString(ResultsField);
 		}
 
 		if (Tokenization is not null)
 		{
-			__init.Property("Tokenization");
+			initializer.Property("Tokenization");
 			Tokenization.FormatCode(writer);
 		}
 
 		if (Vocabulary is not null)
 		{
-			__init.Property("Vocabulary");
+			initializer.Property("Vocabulary");
 			Vocabulary.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

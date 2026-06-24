@@ -27,28 +27,28 @@ public partial class ReservedSize : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ReservedSize", false);
+		var initializer = writer.BeginObjectInitializer("ReservedSize", false);
 		{
-			__init.Property("NodeId");
+			initializer.Property("NodeId");
 			writer.WriteString(NodeId);
 		}
 
 		{
-			__init.Property("Path");
+			initializer.Property("Path");
 			writer.WriteString(Path);
 		}
 
 		{
-			__init.Property("Shards");
+			initializer.Property("Shards");
 			writer.WriteInlineList(Shards, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteValue(Total);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

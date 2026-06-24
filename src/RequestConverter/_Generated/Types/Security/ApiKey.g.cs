@@ -27,54 +27,54 @@ public partial class ApiKey : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ApiKey", false);
+		var initializer = writer.BeginObjectInitializer("ApiKey", false);
 		if (Access is not null)
 		{
-			__init.Property("Access");
+			initializer.Property("Access");
 			Access.FormatCode(writer);
 		}
 
 		if (CertificateIdentity is not null)
 		{
-			__init.Property("CertificateIdentity");
+			initializer.Property("CertificateIdentity");
 			writer.WriteString(CertificateIdentity);
 		}
 
 		{
-			__init.Property("Creation");
+			initializer.Property("Creation");
 			writer.WriteValue(Creation);
 		}
 
 		if (Expiration is not null)
 		{
-			__init.Property("Expiration");
+			initializer.Property("Expiration");
 			writer.WriteValue(Expiration.Value);
 		}
 
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		{
-			__init.Property("Invalidated");
+			initializer.Property("Invalidated");
 			writer.WriteValue(Invalidated);
 		}
 
 		if (Invalidation is not null)
 		{
-			__init.Property("Invalidation");
+			initializer.Property("Invalidation");
 			writer.WriteValue(Invalidation.Value);
 		}
 
 		if (LimitedBy is not null)
 		{
-			__init.Property("LimitedBy");
+			initializer.Property("LimitedBy");
 			writer.WriteInlineList(LimitedBy, (w, item) => { w.Write("new global::System.Collections.Generic.Dictionary<"); w.Write("string"); w.Write(", "); w.Write("Elastic.Clients.Elasticsearch.Security.RoleDescriptor"); w.Write(">() "); w.WriteInlineList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", "); });
 		}
 
 		{
-			__init.Property("Metadata");
+			initializer.Property("Metadata");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -84,30 +84,30 @@ public partial class ApiKey : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		if (ProfileUid is not null)
 		{
-			__init.Property("ProfileUid");
+			initializer.Property("ProfileUid");
 			writer.WriteString(ProfileUid);
 		}
 
 		{
-			__init.Property("Realm");
+			initializer.Property("Realm");
 			writer.WriteString(Realm);
 		}
 
 		if (RealmType is not null)
 		{
-			__init.Property("RealmType");
+			initializer.Property("RealmType");
 			writer.WriteString(RealmType);
 		}
 
 		if (RoleDescriptors is not null)
 		{
-			__init.Property("RoleDescriptors");
+			initializer.Property("RoleDescriptors");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -118,20 +118,20 @@ public partial class ApiKey : RequestConverter.ICodeFormattable
 
 		if (Sort is not null)
 		{
-			__init.Property("Sort");
+			initializer.Property("Sort");
 			writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			Elastic.Clients.Elasticsearch.Security.ApiKeyTypeCodeFormatter.FormatCode(Type, writer);
 		}
 
 		{
-			__init.Property("Username");
+			initializer.Property("Username");
 			writer.WriteString(Username);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,52 +27,52 @@ public partial class JobTimingStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("JobTimingStats", false);
+		var initializer = writer.BeginObjectInitializer("JobTimingStats", false);
 		if (AverageBucketProcessingTimeMs is not null)
 		{
-			__init.Property("AverageBucketProcessingTimeMs");
+			initializer.Property("AverageBucketProcessingTimeMs");
 			writer.WriteValue(AverageBucketProcessingTimeMs.Value);
 		}
 
 		{
-			__init.Property("BucketCount");
+			initializer.Property("BucketCount");
 			writer.WriteValue(BucketCount);
 			writer.Write("L");
 		}
 
 		if (ExponentialAverageBucketProcessingTimeMs is not null)
 		{
-			__init.Property("ExponentialAverageBucketProcessingTimeMs");
+			initializer.Property("ExponentialAverageBucketProcessingTimeMs");
 			writer.WriteValue(ExponentialAverageBucketProcessingTimeMs.Value);
 		}
 
 		{
-			__init.Property("ExponentialAverageBucketProcessingTimePerHourMs");
+			initializer.Property("ExponentialAverageBucketProcessingTimePerHourMs");
 			writer.WriteValue(ExponentialAverageBucketProcessingTimePerHourMs);
 		}
 
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			writer.WriteString(JobId);
 		}
 
 		if (MaximumBucketProcessingTimeMs is not null)
 		{
-			__init.Property("MaximumBucketProcessingTimeMs");
+			initializer.Property("MaximumBucketProcessingTimeMs");
 			writer.WriteValue(MaximumBucketProcessingTimeMs.Value);
 		}
 
 		if (MinimumBucketProcessingTimeMs is not null)
 		{
-			__init.Property("MinimumBucketProcessingTimeMs");
+			initializer.Property("MinimumBucketProcessingTimeMs");
 			writer.WriteValue(MinimumBucketProcessingTimeMs.Value);
 		}
 
 		{
-			__init.Property("TotalBucketProcessingTimeMs");
+			initializer.Property("TotalBucketProcessingTimeMs");
 			writer.WriteValue(TotalBucketProcessingTimeMs);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

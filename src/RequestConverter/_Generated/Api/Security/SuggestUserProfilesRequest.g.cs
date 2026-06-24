@@ -27,32 +27,32 @@ public partial class SuggestUserProfilesRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SuggestUserProfilesRequest", false);
+		var initializer = writer.BeginObjectInitializer("SuggestUserProfilesRequest", false);
 		if (Data is not null)
 		{
-			__init.Property("Data");
+			initializer.Property("Data");
 			writer.WriteInlineList(Data, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Hint is not null)
 		{
-			__init.Property("Hint");
+			initializer.Property("Hint");
 			Hint.FormatCode(writer);
 		}
 
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

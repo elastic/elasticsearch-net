@@ -27,33 +27,33 @@ public partial class QueryProfile : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("QueryProfile", false);
+		var initializer = writer.BeginObjectInitializer("QueryProfile", false);
 		{
-			__init.Property("Breakdown");
+			initializer.Property("Breakdown");
 			Breakdown.FormatCode(writer);
 		}
 
 		if (Children is not null)
 		{
-			__init.Property("Children");
+			initializer.Property("Children");
 			writer.WriteInlineList(Children, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		{
-			__init.Property("TimeInNanos");
+			initializer.Property("TimeInNanos");
 			writer.WriteValue(TimeInNanos);
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			writer.WriteString(Type);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

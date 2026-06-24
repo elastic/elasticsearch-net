@@ -27,10 +27,10 @@ public partial class TrainedModelConfigMetadata : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelConfigMetadata", false);
+		var initializer = writer.BeginObjectInitializer("TrainedModelConfigMetadata", false);
 		if (FeatureImportanceBaseline is not null)
 		{
-			__init.Property("FeatureImportanceBaseline");
+			initializer.Property("FeatureImportanceBaseline");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -41,22 +41,22 @@ public partial class TrainedModelConfigMetadata : RequestConverter.ICodeFormatta
 
 		if (Hyperparameters is not null)
 		{
-			__init.Property("Hyperparameters");
+			initializer.Property("Hyperparameters");
 			writer.WriteInlineList(Hyperparameters, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (ModelAliases is not null)
 		{
-			__init.Property("ModelAliases");
+			initializer.Property("ModelAliases");
 			writer.WriteInlineList(ModelAliases, (w, item) => { w.WriteString(item); });
 		}
 
 		if (TotalFeatureImportance is not null)
 		{
-			__init.Property("TotalFeatureImportance");
+			initializer.Property("TotalFeatureImportance");
 			writer.WriteInlineList(TotalFeatureImportance, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

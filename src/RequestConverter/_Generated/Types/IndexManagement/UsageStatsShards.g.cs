@@ -27,27 +27,27 @@ public partial class UsageStatsShards : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UsageStatsShards", false);
+		var initializer = writer.BeginObjectInitializer("UsageStatsShards", false);
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			Routing.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Stats");
+			initializer.Property("Stats");
 			Stats.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TrackingId");
+			initializer.Property("TrackingId");
 			writer.WriteString(TrackingId);
 		}
 
 		{
-			__init.Property("TrackingStartedAtMillis");
+			initializer.Property("TrackingStartedAtMillis");
 			writer.WriteValue(TrackingStartedAtMillis);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

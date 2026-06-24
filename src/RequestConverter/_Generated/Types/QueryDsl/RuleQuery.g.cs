@@ -27,42 +27,42 @@ public partial class RuleQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RuleQuery", false);
+		var initializer = writer.BeginObjectInitializer("RuleQuery", false);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		{
-			__init.Property("MatchCriteria");
+			initializer.Property("MatchCriteria");
 			writer.WriteValue(MatchCriteria);
 		}
 
 		{
-			__init.Property("Organic");
+			initializer.Property("Organic");
 			Organic.FormatCode(writer);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
 		if (RulesetId is not null)
 		{
-			__init.Property("RulesetId");
+			initializer.Property("RulesetId");
 			writer.WriteString(RulesetId);
 		}
 
 		if (RulesetIds is not null)
 		{
-			__init.Property("RulesetIds");
+			initializer.Property("RulesetIds");
 			writer.WriteInlineList(RulesetIds, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

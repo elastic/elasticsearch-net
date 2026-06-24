@@ -27,28 +27,28 @@ public partial class RoleMappingRule : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RoleMappingRule", false);
+		var initializer = writer.BeginObjectInitializer("RoleMappingRule", false);
 		if (All is not null)
 		{
-			__init.Property("All");
+			initializer.Property("All");
 			writer.WriteInlineList(All, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Any is not null)
 		{
-			__init.Property("Any");
+			initializer.Property("Any");
 			writer.WriteInlineList(Any, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Except is not null)
 		{
-			__init.Property("Except");
+			initializer.Property("Except");
 			Except.FormatCode(writer);
 		}
 
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			writer.Write("new(");
 			Field.Value.Key.FormatCode(writer);
 			writer.Write(", ");
@@ -56,6 +56,6 @@ public partial class RoleMappingRule : RequestConverter.ICodeFormattable
 			writer.Write(")");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

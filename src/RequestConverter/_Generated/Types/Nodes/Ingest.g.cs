@@ -27,10 +27,10 @@ public partial class Ingest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Ingest", false);
+		var initializer = writer.BeginObjectInitializer("Ingest", false);
 		if (Pipelines is not null)
 		{
-			__init.Property("Pipelines");
+			initializer.Property("Pipelines");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -41,10 +41,10 @@ public partial class Ingest : RequestConverter.ICodeFormattable
 
 		if (Total is not null)
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			Total.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

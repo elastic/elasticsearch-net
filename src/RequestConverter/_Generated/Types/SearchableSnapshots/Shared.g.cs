@@ -27,50 +27,50 @@ public partial class Shared : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Shared", false);
+		var initializer = writer.BeginObjectInitializer("Shared", false);
 		{
-			__init.Property("BytesReadInBytes");
+			initializer.Property("BytesReadInBytes");
 			BytesReadInBytes.FormatCode(writer);
 		}
 
 		{
-			__init.Property("BytesWrittenInBytes");
+			initializer.Property("BytesWrittenInBytes");
 			BytesWrittenInBytes.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Evictions");
+			initializer.Property("Evictions");
 			writer.WriteValue(Evictions);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("NumRegions");
+			initializer.Property("NumRegions");
 			writer.WriteValue(NumRegions);
 		}
 
 		{
-			__init.Property("Reads");
+			initializer.Property("Reads");
 			writer.WriteValue(Reads);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("RegionSizeInBytes");
+			initializer.Property("RegionSizeInBytes");
 			RegionSizeInBytes.FormatCode(writer);
 		}
 
 		{
-			__init.Property("SizeInBytes");
+			initializer.Property("SizeInBytes");
 			SizeInBytes.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Writes");
+			initializer.Property("Writes");
 			writer.WriteValue(Writes);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

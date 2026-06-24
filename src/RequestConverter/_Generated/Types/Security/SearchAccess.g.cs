@@ -27,30 +27,30 @@ public partial class SearchAccess : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SearchAccess", false);
+		var initializer = writer.BeginObjectInitializer("SearchAccess", false);
 		if (AllowRestrictedIndices is not null)
 		{
-			__init.Property("AllowRestrictedIndices");
+			initializer.Property("AllowRestrictedIndices");
 			writer.WriteValue(AllowRestrictedIndices.Value);
 		}
 
 		if (FieldSecurity is not null)
 		{
-			__init.Property("FieldSecurity");
+			initializer.Property("FieldSecurity");
 			FieldSecurity.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Names");
+			initializer.Property("Names");
 			writer.WriteInlineList(Names, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Query is not null)
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			writer.WriteValue(Query);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

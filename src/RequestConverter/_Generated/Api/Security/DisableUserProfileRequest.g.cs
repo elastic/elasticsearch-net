@@ -27,18 +27,18 @@ public partial class DisableUserProfileRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DisableUserProfileRequest", false);
+		var initializer = writer.BeginObjectInitializer("DisableUserProfileRequest", false);
 		{
-			__init.Property("Uid");
+			initializer.Property("Uid");
 			writer.WriteString(Uid);
 		}
 
 		if (Refresh is not null)
 		{
-			__init.Property("Refresh");
+			initializer.Property("Refresh");
 			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

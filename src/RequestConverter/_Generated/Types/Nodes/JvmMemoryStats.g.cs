@@ -27,58 +27,58 @@ public partial class JvmMemoryStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("JvmMemoryStats", false);
+		var initializer = writer.BeginObjectInitializer("JvmMemoryStats", false);
 		if (HeapCommittedInBytes is not null)
 		{
-			__init.Property("HeapCommittedInBytes");
+			initializer.Property("HeapCommittedInBytes");
 			writer.WriteValue(HeapCommittedInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (HeapMax is not null)
 		{
-			__init.Property("HeapMax");
+			initializer.Property("HeapMax");
 			HeapMax.FormatCode(writer);
 		}
 
 		if (HeapMaxInBytes is not null)
 		{
-			__init.Property("HeapMaxInBytes");
+			initializer.Property("HeapMaxInBytes");
 			writer.WriteValue(HeapMaxInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (HeapUsedInBytes is not null)
 		{
-			__init.Property("HeapUsedInBytes");
+			initializer.Property("HeapUsedInBytes");
 			writer.WriteValue(HeapUsedInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (HeapUsedPercent is not null)
 		{
-			__init.Property("HeapUsedPercent");
+			initializer.Property("HeapUsedPercent");
 			writer.WriteValue(HeapUsedPercent.Value);
 			writer.Write("L");
 		}
 
 		if (NonHeapCommittedInBytes is not null)
 		{
-			__init.Property("NonHeapCommittedInBytes");
+			initializer.Property("NonHeapCommittedInBytes");
 			writer.WriteValue(NonHeapCommittedInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (NonHeapUsedInBytes is not null)
 		{
-			__init.Property("NonHeapUsedInBytes");
+			initializer.Property("NonHeapUsedInBytes");
 			writer.WriteValue(NonHeapUsedInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (Pools is not null)
 		{
-			__init.Property("Pools");
+			initializer.Property("Pools");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -87,6 +87,6 @@ public partial class JvmMemoryStats : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(Pools, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

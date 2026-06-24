@@ -27,55 +27,55 @@ public partial class TermRangeQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TermRangeQuery", true);
+		var initializer = writer.BeginObjectInitializer("TermRangeQuery", true);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Gt is not null)
 		{
-			__init.Property("Gt");
+			initializer.Property("Gt");
 			writer.WriteString(Gt);
 		}
 
 		if (Gte is not null)
 		{
-			__init.Property("Gte");
+			initializer.Property("Gte");
 			writer.WriteString(Gte);
 		}
 
 		if (Lt is not null)
 		{
-			__init.Property("Lt");
+			initializer.Property("Lt");
 			writer.WriteString(Lt);
 		}
 
 		if (Lte is not null)
 		{
-			__init.Property("Lte");
+			initializer.Property("Lte");
 			writer.WriteString(Lte);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
 		if (Relation is not null)
 		{
-			__init.Property("Relation");
+			initializer.Property("Relation");
 			Elastic.Clients.Elasticsearch.QueryDsl.RangeRelationCodeFormatter.FormatCode(Relation.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

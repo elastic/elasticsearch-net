@@ -27,91 +27,91 @@ public partial class AttachmentProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AttachmentProcessor", false);
+		var initializer = writer.BeginObjectInitializer("AttachmentProcessor", false);
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (If is not null)
 		{
-			__init.Property("If");
+			initializer.Property("If");
 			If.FormatCode(writer);
 		}
 
 		if (IgnoreFailure is not null)
 		{
-			__init.Property("IgnoreFailure");
+			initializer.Property("IgnoreFailure");
 			writer.WriteValue(IgnoreFailure.Value);
 		}
 
 		if (IgnoreMissing is not null)
 		{
-			__init.Property("IgnoreMissing");
+			initializer.Property("IgnoreMissing");
 			writer.WriteValue(IgnoreMissing.Value);
 		}
 
 		if (IndexedChars is not null)
 		{
-			__init.Property("IndexedChars");
+			initializer.Property("IndexedChars");
 			writer.WriteValue(IndexedChars.Value);
 			writer.Write("L");
 		}
 
 		if (IndexedCharsField is not null)
 		{
-			__init.Property("IndexedCharsField");
+			initializer.Property("IndexedCharsField");
 			IndexedCharsField.FormatCode(writer);
 		}
 
 		if (MaxFieldBytes is not null)
 		{
-			__init.Property("MaxFieldBytes");
+			initializer.Property("MaxFieldBytes");
 			MaxFieldBytes.FormatCode(writer);
 		}
 
 		if (OnFailure is not null)
 		{
-			__init.Property("OnFailure");
+			initializer.Property("OnFailure");
 			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Properties is not null)
 		{
-			__init.Property("Properties");
+			initializer.Property("Properties");
 			writer.WriteInlineList(Properties, (w, item) => { w.WriteString(item); });
 		}
 
 		if (RemoveBinary is not null)
 		{
-			__init.Property("RemoveBinary");
+			initializer.Property("RemoveBinary");
 			writer.WriteValue(RemoveBinary.Value);
 		}
 
 		if (ResourceName is not null)
 		{
-			__init.Property("ResourceName");
+			initializer.Property("ResourceName");
 			writer.WriteString(ResourceName);
 		}
 
 		if (Tag is not null)
 		{
-			__init.Property("Tag");
+			initializer.Property("Tag");
 			writer.WriteString(Tag);
 		}
 
 		if (TargetField is not null)
 		{
-			__init.Property("TargetField");
+			initializer.Property("TargetField");
 			TargetField.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

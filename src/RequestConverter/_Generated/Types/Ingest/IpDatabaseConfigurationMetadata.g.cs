@@ -27,35 +27,35 @@ public partial class IpDatabaseConfigurationMetadata : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IpDatabaseConfigurationMetadata", false);
+		var initializer = writer.BeginObjectInitializer("IpDatabaseConfigurationMetadata", false);
 		{
-			__init.Property("Database");
+			initializer.Property("Database");
 			Database.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		if (ModifiedDate is not null)
 		{
-			__init.Property("ModifiedDate");
+			initializer.Property("ModifiedDate");
 			writer.WriteValue(ModifiedDate.Value);
 		}
 
 		if (ModifiedDateMillis is not null)
 		{
-			__init.Property("ModifiedDateMillis");
+			initializer.Property("ModifiedDateMillis");
 			writer.WriteValue(ModifiedDateMillis.Value);
 		}
 
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,30 +27,30 @@ public partial class DeleteInferenceRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteInferenceRequest", false);
+		var initializer = writer.BeginObjectInitializer("DeleteInferenceRequest", false);
 		{
-			__init.Property("InferenceId");
+			initializer.Property("InferenceId");
 			InferenceId.FormatCode(writer);
 		}
 
 		if (TaskType is not null)
 		{
-			__init.Property("TaskType");
+			initializer.Property("TaskType");
 			Elastic.Clients.Elasticsearch.Inference.TaskTypeCodeFormatter.FormatCode(TaskType.Value, writer);
 		}
 
 		if (DryRun is not null)
 		{
-			__init.Property("DryRun");
+			initializer.Property("DryRun");
 			writer.WriteValue(DryRun.Value);
 		}
 
 		if (Force is not null)
 		{
-			__init.Property("Force");
+			initializer.Property("Force");
 			writer.WriteValue(Force.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

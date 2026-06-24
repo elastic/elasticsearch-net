@@ -27,34 +27,34 @@ public partial class MappingLimitSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MappingLimitSettings", false);
+		var initializer = writer.BeginObjectInitializer("MappingLimitSettings", false);
 		if (Coerce is not null)
 		{
-			__init.Property("Coerce");
+			initializer.Property("Coerce");
 			writer.WriteValue(Coerce.Value);
 		}
 
 		if (Depth is not null)
 		{
-			__init.Property("Depth");
+			initializer.Property("Depth");
 			Depth.FormatCode(writer);
 		}
 
 		if (DimensionFields is not null)
 		{
-			__init.Property("DimensionFields");
+			initializer.Property("DimensionFields");
 			DimensionFields.FormatCode(writer);
 		}
 
 		if (FieldNameLength is not null)
 		{
-			__init.Property("FieldNameLength");
+			initializer.Property("FieldNameLength");
 			FieldNameLength.FormatCode(writer);
 		}
 
 		if (IgnoreMalformed is not null)
 		{
-			__init.Property("IgnoreMalformed");
+			initializer.Property("IgnoreMalformed");
 			if (IgnoreMalformed.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				writer.WriteValue(IgnoreMalformed.Value1);
@@ -67,28 +67,28 @@ public partial class MappingLimitSettings : RequestConverter.ICodeFormattable
 
 		if (NestedFields is not null)
 		{
-			__init.Property("NestedFields");
+			initializer.Property("NestedFields");
 			NestedFields.FormatCode(writer);
 		}
 
 		if (NestedObjects is not null)
 		{
-			__init.Property("NestedObjects");
+			initializer.Property("NestedObjects");
 			NestedObjects.FormatCode(writer);
 		}
 
 		if (Source is not null)
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			Source.FormatCode(writer);
 		}
 
 		if (TotalFields is not null)
 		{
-			__init.Property("TotalFields");
+			initializer.Property("TotalFields");
 			TotalFields.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

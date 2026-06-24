@@ -27,17 +27,17 @@ public partial class FieldMetric : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldMetric", false);
+		var initializer = writer.BeginObjectInitializer("FieldMetric", false);
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Metrics");
+			initializer.Property("Metrics");
 			writer.WriteInlineList(Metrics, (w, item) => { Elastic.Clients.Elasticsearch.Rollup.MetricCodeFormatter.FormatCode(item, w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

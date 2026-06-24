@@ -27,19 +27,19 @@ public partial class IndexVersioning : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexVersioning", false);
+		var initializer = writer.BeginObjectInitializer("IndexVersioning", false);
 		if (Created is not null)
 		{
-			__init.Property("Created");
+			initializer.Property("Created");
 			writer.WriteString(Created);
 		}
 
 		if (CreatedString is not null)
 		{
-			__init.Property("CreatedString");
+			initializer.Property("CreatedString");
 			writer.WriteString(CreatedString);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,27 +27,27 @@ public partial class RollupSearchRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RollupSearchRequest", false);
+		var initializer = writer.BeginObjectInitializer("RollupSearchRequest", false);
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		if (RestTotalHitsAsInt is not null)
 		{
-			__init.Property("RestTotalHitsAsInt");
+			initializer.Property("RestTotalHitsAsInt");
 			writer.WriteValue(RestTotalHitsAsInt.Value);
 		}
 
 		if (TypedKeys is not null)
 		{
-			__init.Property("TypedKeys");
+			initializer.Property("TypedKeys");
 			writer.WriteValue(TypedKeys.Value);
 		}
 
 		if (Aggregations is not null)
 		{
-			__init.Property("Aggregations");
+			initializer.Property("Aggregations");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -58,16 +58,16 @@ public partial class RollupSearchRequest : RequestConverter.ICodeFormattable
 
 		if (Query is not null)
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			Query.FormatCode(writer);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

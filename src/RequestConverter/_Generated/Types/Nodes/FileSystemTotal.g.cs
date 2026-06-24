@@ -27,46 +27,46 @@ public partial class FileSystemTotal : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FileSystemTotal", false);
+		var initializer = writer.BeginObjectInitializer("FileSystemTotal", false);
 		if (Available is not null)
 		{
-			__init.Property("Available");
+			initializer.Property("Available");
 			writer.WriteString(Available);
 		}
 
 		if (AvailableInBytes is not null)
 		{
-			__init.Property("AvailableInBytes");
+			initializer.Property("AvailableInBytes");
 			writer.WriteValue(AvailableInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (Free is not null)
 		{
-			__init.Property("Free");
+			initializer.Property("Free");
 			writer.WriteString(Free);
 		}
 
 		if (FreeInBytes is not null)
 		{
-			__init.Property("FreeInBytes");
+			initializer.Property("FreeInBytes");
 			writer.WriteValue(FreeInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (Total is not null)
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteString(Total);
 		}
 
 		if (TotalInBytes is not null)
 		{
-			__init.Property("TotalInBytes");
+			initializer.Property("TotalInBytes");
 			writer.WriteValue(TotalInBytes.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

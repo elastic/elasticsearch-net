@@ -27,34 +27,34 @@ public partial class Context : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Context", false);
+		var initializer = writer.BeginObjectInitializer("Context", false);
 		if (CacheEvictions is not null)
 		{
-			__init.Property("CacheEvictions");
+			initializer.Property("CacheEvictions");
 			writer.WriteValue(CacheEvictions.Value);
 			writer.Write("L");
 		}
 
 		if (CompilationLimitTriggered is not null)
 		{
-			__init.Property("CompilationLimitTriggered");
+			initializer.Property("CompilationLimitTriggered");
 			writer.WriteValue(CompilationLimitTriggered.Value);
 			writer.Write("L");
 		}
 
 		if (Compilations is not null)
 		{
-			__init.Property("Compilations");
+			initializer.Property("Compilations");
 			writer.WriteValue(Compilations.Value);
 			writer.Write("L");
 		}
 
 		if (Context2 is not null)
 		{
-			__init.Property("Context2");
+			initializer.Property("Context2");
 			writer.WriteString(Context2);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,19 +27,19 @@ public partial class SimplePatternTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SimplePatternTokenizer", true);
+		var initializer = writer.BeginObjectInitializer("SimplePatternTokenizer", true);
 		if (Pattern is not null)
 		{
-			__init.Property("Pattern");
+			initializer.Property("Pattern");
 			writer.WriteString(Pattern);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

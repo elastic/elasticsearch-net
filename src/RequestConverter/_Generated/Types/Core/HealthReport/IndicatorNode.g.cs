@@ -27,17 +27,17 @@ public partial class IndicatorNode : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndicatorNode", false);
+		var initializer = writer.BeginObjectInitializer("IndicatorNode", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("NodeId");
+			initializer.Property("NodeId");
 			writer.WriteString(NodeId);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

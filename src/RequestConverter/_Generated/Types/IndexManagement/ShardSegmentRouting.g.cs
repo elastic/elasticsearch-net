@@ -27,22 +27,22 @@ public partial class ShardSegmentRouting : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardSegmentRouting", false);
+		var initializer = writer.BeginObjectInitializer("ShardSegmentRouting", false);
 		{
-			__init.Property("Node");
+			initializer.Property("Node");
 			writer.WriteString(Node);
 		}
 
 		{
-			__init.Property("Primary");
+			initializer.Property("Primary");
 			writer.WriteValue(Primary);
 		}
 
 		{
-			__init.Property("State");
+			initializer.Property("State");
 			writer.WriteString(State);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

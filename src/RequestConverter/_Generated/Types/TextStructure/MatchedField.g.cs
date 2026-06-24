@@ -27,22 +27,22 @@ public partial class MatchedField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MatchedField", false);
+		var initializer = writer.BeginObjectInitializer("MatchedField", false);
 		{
-			__init.Property("Length");
+			initializer.Property("Length");
 			writer.WriteValue(Length);
 		}
 
 		{
-			__init.Property("Match");
+			initializer.Property("Match");
 			writer.WriteString(Match);
 		}
 
 		{
-			__init.Property("Offset");
+			initializer.Property("Offset");
 			writer.WriteValue(Offset);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

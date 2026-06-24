@@ -27,93 +27,93 @@ public partial class NodeInfoSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoSettings", false);
+		var initializer = writer.BeginObjectInitializer("NodeInfoSettings", false);
 		if (Action is not null)
 		{
-			__init.Property("Action");
+			initializer.Property("Action");
 			Action.FormatCode(writer);
 		}
 
 		if (Bootstrap is not null)
 		{
-			__init.Property("Bootstrap");
+			initializer.Property("Bootstrap");
 			Bootstrap.FormatCode(writer);
 		}
 
 		if (Client is not null)
 		{
-			__init.Property("Client");
+			initializer.Property("Client");
 			Client.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Cluster");
+			initializer.Property("Cluster");
 			Cluster.FormatCode(writer);
 		}
 
 		if (Discovery is not null)
 		{
-			__init.Property("Discovery");
+			initializer.Property("Discovery");
 			Discovery.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Http");
+			initializer.Property("Http");
 			Http.FormatCode(writer);
 		}
 
 		if (Ingest is not null)
 		{
-			__init.Property("Ingest");
+			initializer.Property("Ingest");
 			Ingest.FormatCode(writer);
 		}
 
 		if (Network is not null)
 		{
-			__init.Property("Network");
+			initializer.Property("Network");
 			Network.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Node");
+			initializer.Property("Node");
 			Node.FormatCode(writer);
 		}
 
 		if (Path is not null)
 		{
-			__init.Property("Path");
+			initializer.Property("Path");
 			Path.FormatCode(writer);
 		}
 
 		if (Repositories is not null)
 		{
-			__init.Property("Repositories");
+			initializer.Property("Repositories");
 			Repositories.FormatCode(writer);
 		}
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
 		if (Search is not null)
 		{
-			__init.Property("Search");
+			initializer.Property("Search");
 			Search.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Transport");
+			initializer.Property("Transport");
 			Transport.FormatCode(writer);
 		}
 
 		if (Xpack is not null)
 		{
-			__init.Property("Xpack");
+			initializer.Property("Xpack");
 			Xpack.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

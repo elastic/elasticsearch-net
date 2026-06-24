@@ -27,31 +27,31 @@ public partial class ChangePasswordRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ChangePasswordRequest", false);
+		var initializer = writer.BeginObjectInitializer("ChangePasswordRequest", false);
 		if (Username is not null)
 		{
-			__init.Property("Username");
+			initializer.Property("Username");
 			Username.FormatCode(writer);
 		}
 
 		if (Refresh is not null)
 		{
-			__init.Property("Refresh");
+			initializer.Property("Refresh");
 			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
 		}
 
 		if (Password is not null)
 		{
-			__init.Property("Password");
+			initializer.Property("Password");
 			writer.WriteString(Password);
 		}
 
 		if (PasswordHash is not null)
 		{
-			__init.Property("PasswordHash");
+			initializer.Property("PasswordHash");
 			writer.WriteString(PasswordHash);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

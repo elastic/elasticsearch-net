@@ -27,31 +27,31 @@ public partial class Connection : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Connection", false);
+		var initializer = writer.BeginObjectInitializer("Connection", false);
 		{
-			__init.Property("DocCount");
+			initializer.Property("DocCount");
 			writer.WriteValue(DocCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			writer.WriteValue(Source);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Target");
+			initializer.Property("Target");
 			writer.WriteValue(Target);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Weight");
+			initializer.Property("Weight");
 			writer.WriteValue(Weight);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,22 +27,22 @@ public partial class FailureStore : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FailureStore", false);
+		var initializer = writer.BeginObjectInitializer("FailureStore", false);
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);
 		}
 
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			writer.WriteInlineList(Indices, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("RolloverOnWrite");
+			initializer.Property("RolloverOnWrite");
 			writer.WriteValue(RolloverOnWrite);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

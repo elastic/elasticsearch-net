@@ -27,18 +27,18 @@ public partial class JobBlocked : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("JobBlocked", false);
+		var initializer = writer.BeginObjectInitializer("JobBlocked", false);
 		{
-			__init.Property("Reason");
+			initializer.Property("Reason");
 			Elastic.Clients.Elasticsearch.MachineLearning.JobBlockedReasonCodeFormatter.FormatCode(Reason, writer);
 		}
 
 		if (TaskId is not null)
 		{
-			__init.Property("TaskId");
+			initializer.Property("TaskId");
 			TaskId.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

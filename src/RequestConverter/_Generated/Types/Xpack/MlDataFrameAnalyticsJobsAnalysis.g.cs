@@ -27,25 +27,25 @@ public partial class MlDataFrameAnalyticsJobsAnalysis : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MlDataFrameAnalyticsJobsAnalysis", false);
+		var initializer = writer.BeginObjectInitializer("MlDataFrameAnalyticsJobsAnalysis", false);
 		if (Classification is not null)
 		{
-			__init.Property("Classification");
+			initializer.Property("Classification");
 			writer.WriteValue(Classification.Value);
 		}
 
 		if (OutlierDetection is not null)
 		{
-			__init.Property("OutlierDetection");
+			initializer.Property("OutlierDetection");
 			writer.WriteValue(OutlierDetection.Value);
 		}
 
 		if (Regression is not null)
 		{
-			__init.Property("Regression");
+			initializer.Property("Regression");
 			writer.WriteValue(Regression.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

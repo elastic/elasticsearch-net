@@ -27,23 +27,23 @@ public partial class DataframeEvaluationRegression : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeEvaluationRegression", false);
+		var initializer = writer.BeginObjectInitializer("DataframeEvaluationRegression", false);
 		{
-			__init.Property("ActualField");
+			initializer.Property("ActualField");
 			ActualField.FormatCode(writer);
 		}
 
 		if (Metrics is not null)
 		{
-			__init.Property("Metrics");
+			initializer.Property("Metrics");
 			Metrics.FormatCode(writer);
 		}
 
 		{
-			__init.Property("PredictedField");
+			initializer.Property("PredictedField");
 			PredictedField.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

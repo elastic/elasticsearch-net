@@ -27,22 +27,22 @@ public partial class TemplateConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TemplateConfig", true);
+		var initializer = writer.BeginObjectInitializer("TemplateConfig", true);
 		if (Explain is not null)
 		{
-			__init.Property("Explain");
+			initializer.Property("Explain");
 			writer.WriteValue(Explain.Value);
 		}
 
 		if (Id is not null)
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		if (Params is not null)
 		{
-			__init.Property("Params");
+			initializer.Property("Params");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -53,16 +53,16 @@ public partial class TemplateConfig : RequestConverter.ICodeFormattable
 
 		if (Profile is not null)
 		{
-			__init.Property("Profile");
+			initializer.Property("Profile");
 			writer.WriteValue(Profile.Value);
 		}
 
 		if (Source is not null)
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			writer.WriteString(Source);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

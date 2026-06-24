@@ -27,18 +27,18 @@ public partial class SettingsSimilarityScripted : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SettingsSimilarityScripted", true);
+		var initializer = writer.BeginObjectInitializer("SettingsSimilarityScripted", true);
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
 		if (WeightScript is not null)
 		{
-			__init.Property("WeightScript");
+			initializer.Property("WeightScript");
 			WeightScript.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

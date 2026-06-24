@@ -27,63 +27,63 @@ public partial class ReadSummaryInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ReadSummaryInfo", false);
+		var initializer = writer.BeginObjectInitializer("ReadSummaryInfo", false);
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 		}
 
 		{
-			__init.Property("MaxWait");
+			initializer.Property("MaxWait");
 			MaxWait.FormatCode(writer);
 		}
 
 		{
-			__init.Property("MaxWaitNanos");
+			initializer.Property("MaxWaitNanos");
 			writer.WriteValue(MaxWaitNanos);
 		}
 
 		{
-			__init.Property("TotalElapsed");
+			initializer.Property("TotalElapsed");
 			TotalElapsed.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalElapsedNanos");
+			initializer.Property("TotalElapsedNanos");
 			writer.WriteValue(TotalElapsedNanos);
 		}
 
 		{
-			__init.Property("TotalSize");
+			initializer.Property("TotalSize");
 			TotalSize.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalSizeBytes");
+			initializer.Property("TotalSizeBytes");
 			writer.WriteValue(TotalSizeBytes);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("TotalThrottled");
+			initializer.Property("TotalThrottled");
 			TotalThrottled.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalThrottledNanos");
+			initializer.Property("TotalThrottledNanos");
 			writer.WriteValue(TotalThrottledNanos);
 		}
 
 		{
-			__init.Property("TotalWait");
+			initializer.Property("TotalWait");
 			TotalWait.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalWaitNanos");
+			initializer.Property("TotalWaitNanos");
 			writer.WriteValue(TotalWaitNanos);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

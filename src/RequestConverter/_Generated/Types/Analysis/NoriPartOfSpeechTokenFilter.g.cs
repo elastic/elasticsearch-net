@@ -27,19 +27,19 @@ public partial class NoriPartOfSpeechTokenFilter : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NoriPartOfSpeechTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("NoriPartOfSpeechTokenFilter", true);
 		if (Stoptags is not null)
 		{
-			__init.Property("Stoptags");
+			initializer.Property("Stoptags");
 			writer.WriteInlineList(Stoptags, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

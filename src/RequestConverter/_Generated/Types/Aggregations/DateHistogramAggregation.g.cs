@@ -27,76 +27,76 @@ public partial class DateHistogramAggregation : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DateHistogramAggregation", false);
+		var initializer = writer.BeginObjectInitializer("DateHistogramAggregation", false);
 		if (CalendarInterval is not null)
 		{
-			__init.Property("CalendarInterval");
+			initializer.Property("CalendarInterval");
 			Elastic.Clients.Elasticsearch.Aggregations.CalendarIntervalCodeFormatter.FormatCode(CalendarInterval.Value, writer);
 		}
 
 		if (ExtendedBounds is not null)
 		{
-			__init.Property("ExtendedBounds");
+			initializer.Property("ExtendedBounds");
 			ExtendedBounds.FormatCode(writer);
 		}
 
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (FixedInterval is not null)
 		{
-			__init.Property("FixedInterval");
+			initializer.Property("FixedInterval");
 			FixedInterval.FormatCode(writer);
 		}
 
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			writer.WriteString(Format);
 		}
 
 		if (HardBounds is not null)
 		{
-			__init.Property("HardBounds");
+			initializer.Property("HardBounds");
 			HardBounds.FormatCode(writer);
 		}
 #pragma warning disable CS0618
 		if (Interval is not null)
 		{
-			__init.Property("Interval");
+			initializer.Property("Interval");
 			Interval.FormatCode(writer);
 		}
 #pragma warning restore CS0618
 		if (MinDocCount is not null)
 		{
-			__init.Property("MinDocCount");
+			initializer.Property("MinDocCount");
 			writer.WriteValue(MinDocCount.Value);
 		}
 
 		if (Missing is not null)
 		{
-			__init.Property("Missing");
+			initializer.Property("Missing");
 			writer.WriteValue(Missing.Value);
 		}
 
 		if (Offset is not null)
 		{
-			__init.Property("Offset");
+			initializer.Property("Offset");
 			Offset.FormatCode(writer);
 		}
 
 		if (Order is not null)
 		{
-			__init.Property("Order");
+			initializer.Property("Order");
 			writer.WriteInlineList(Order, (w, item) => { w.Write("new("); item.Key.FormatCode(w); w.Write(", "); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(item.Value, w); w.Write(")"); });
 		}
 
 		if (Params is not null)
 		{
-			__init.Property("Params");
+			initializer.Property("Params");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -107,16 +107,16 @@ public partial class DateHistogramAggregation : RequestConverter.ICodeFormattabl
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
 		if (TimeZone is not null)
 		{
-			__init.Property("TimeZone");
+			initializer.Property("TimeZone");
 			writer.WriteString(TimeZone);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

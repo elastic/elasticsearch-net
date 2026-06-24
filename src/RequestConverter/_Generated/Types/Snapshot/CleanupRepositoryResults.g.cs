@@ -27,19 +27,19 @@ public partial class CleanupRepositoryResults : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CleanupRepositoryResults", false);
+		var initializer = writer.BeginObjectInitializer("CleanupRepositoryResults", false);
 		{
-			__init.Property("DeletedBlobs");
+			initializer.Property("DeletedBlobs");
 			writer.WriteValue(DeletedBlobs);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("DeletedBytes");
+			initializer.Property("DeletedBytes");
 			writer.WriteValue(DeletedBytes);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

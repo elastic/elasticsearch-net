@@ -27,24 +27,24 @@ public partial class DataframeAnalysisFeatureProcessorTargetMeanEncoding : Reque
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeAnalysisFeatureProcessorTargetMeanEncoding", false);
+		var initializer = writer.BeginObjectInitializer("DataframeAnalysisFeatureProcessorTargetMeanEncoding", false);
 		{
-			__init.Property("DefaultValue");
+			initializer.Property("DefaultValue");
 			writer.WriteValue(DefaultValue);
 		}
 
 		{
-			__init.Property("FeatureName");
+			initializer.Property("FeatureName");
 			FeatureName.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TargetMap");
+			initializer.Property("TargetMap");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -53,6 +53,6 @@ public partial class DataframeAnalysisFeatureProcessorTargetMeanEncoding : Reque
 			writer.WriteInlineList(TargetMap, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

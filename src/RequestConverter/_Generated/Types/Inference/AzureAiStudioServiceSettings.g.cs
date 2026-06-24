@@ -27,33 +27,33 @@ public partial class AzureAiStudioServiceSettings : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AzureAiStudioServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("AzureAiStudioServiceSettings", false);
 		{
-			__init.Property("ApiKey");
+			initializer.Property("ApiKey");
 			writer.WriteString(ApiKey);
 		}
 
 		{
-			__init.Property("EndpointType");
+			initializer.Property("EndpointType");
 			writer.WriteString(EndpointType);
 		}
 
 		{
-			__init.Property("Provider");
+			initializer.Property("Provider");
 			writer.WriteString(Provider);
 		}
 
 		if (RateLimit is not null)
 		{
-			__init.Property("RateLimit");
+			initializer.Property("RateLimit");
 			RateLimit.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Target");
+			initializer.Property("Target");
 			writer.WriteString(Target);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,19 +27,19 @@ public partial class ShardStoreIndex : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardStoreIndex", false);
+		var initializer = writer.BeginObjectInitializer("ShardStoreIndex", false);
 		if (Aliases is not null)
 		{
-			__init.Property("Aliases");
+			initializer.Property("Aliases");
 			writer.WriteInlineList(Aliases, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			Filter.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

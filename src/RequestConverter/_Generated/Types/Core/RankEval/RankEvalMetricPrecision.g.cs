@@ -27,25 +27,25 @@ public partial class RankEvalMetricPrecision : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RankEvalMetricPrecision", false);
+		var initializer = writer.BeginObjectInitializer("RankEvalMetricPrecision", false);
 		if (IgnoreUnlabeled is not null)
 		{
-			__init.Property("IgnoreUnlabeled");
+			initializer.Property("IgnoreUnlabeled");
 			writer.WriteValue(IgnoreUnlabeled.Value);
 		}
 
 		if (K is not null)
 		{
-			__init.Property("K");
+			initializer.Property("K");
 			writer.WriteValue(K.Value);
 		}
 
 		if (RelevantRatingThreshold is not null)
 		{
-			__init.Property("RelevantRatingThreshold");
+			initializer.Property("RelevantRatingThreshold");
 			writer.WriteValue(RelevantRatingThreshold.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

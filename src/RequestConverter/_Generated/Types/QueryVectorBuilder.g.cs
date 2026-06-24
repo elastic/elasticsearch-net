@@ -27,25 +27,25 @@ public partial class QueryVectorBuilder : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("QueryVectorBuilder", false);
+		var initializer = writer.BeginObjectInitializer("QueryVectorBuilder", false);
 		if (Embedding is not null)
 		{
-			__init.Property("Embedding");
+			initializer.Property("Embedding");
 			Embedding.FormatCode(writer);
 		}
 
 		if (Lookup is not null)
 		{
-			__init.Property("Lookup");
+			initializer.Property("Lookup");
 			Lookup.FormatCode(writer);
 		}
 
 		if (TextEmbedding is not null)
 		{
-			__init.Property("TextEmbedding");
+			initializer.Property("TextEmbedding");
 			TextEmbedding.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

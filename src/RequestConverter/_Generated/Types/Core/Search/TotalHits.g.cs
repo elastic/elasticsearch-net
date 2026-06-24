@@ -27,18 +27,18 @@ public partial class TotalHits : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TotalHits", true);
+		var initializer = writer.BeginObjectInitializer("TotalHits", true);
 		{
-			__init.Property("Relation");
+			initializer.Property("Relation");
 			Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelationCodeFormatter.FormatCode(Relation, writer);
 		}
 
 		{
-			__init.Property("Value");
+			initializer.Property("Value");
 			writer.WriteValue(Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

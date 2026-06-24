@@ -27,55 +27,55 @@ public partial class GetTrainedModelsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetTrainedModelsRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetTrainedModelsRequest", false);
 		if (ModelId is not null)
 		{
-			__init.Property("ModelId");
+			initializer.Property("ModelId");
 			ModelId.FormatCode(writer);
 		}
 
 		if (AllowNoMatch is not null)
 		{
-			__init.Property("AllowNoMatch");
+			initializer.Property("AllowNoMatch");
 			writer.WriteValue(AllowNoMatch.Value);
 		}
 
 		if (DecompressDefinition is not null)
 		{
-			__init.Property("DecompressDefinition");
+			initializer.Property("DecompressDefinition");
 			writer.WriteValue(DecompressDefinition.Value);
 		}
 
 		if (ExcludeGenerated is not null)
 		{
-			__init.Property("ExcludeGenerated");
+			initializer.Property("ExcludeGenerated");
 			writer.WriteValue(ExcludeGenerated.Value);
 		}
 
 		if (From is not null)
 		{
-			__init.Property("From");
+			initializer.Property("From");
 			writer.WriteValue(From.Value);
 		}
 
 		if (Include is not null)
 		{
-			__init.Property("Include");
+			initializer.Property("Include");
 			Elastic.Clients.Elasticsearch.MachineLearning.IncludeCodeFormatter.FormatCode(Include.Value, writer);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
 		if (Tags is not null)
 		{
-			__init.Property("Tags");
+			initializer.Property("Tags");
 			writer.WriteInlineList(Tags, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

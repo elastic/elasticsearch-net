@@ -27,23 +27,23 @@ public partial class GetModelSnapshotUpgradeStatsRequest : RequestConverter.ICod
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetModelSnapshotUpgradeStatsRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetModelSnapshotUpgradeStatsRequest", false);
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			JobId.FormatCode(writer);
 		}
 
 		{
-			__init.Property("SnapshotId");
+			initializer.Property("SnapshotId");
 			SnapshotId.FormatCode(writer);
 		}
 
 		if (AllowNoMatch is not null)
 		{
-			__init.Property("AllowNoMatch");
+			initializer.Property("AllowNoMatch");
 			writer.WriteValue(AllowNoMatch.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

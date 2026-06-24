@@ -27,20 +27,20 @@ public partial class GetLicenseRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetLicenseRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetLicenseRequest", false);
 #pragma warning disable CS0618
 		if (AcceptEnterprise is not null)
 		{
-			__init.Property("AcceptEnterprise");
+			initializer.Property("AcceptEnterprise");
 			writer.WriteValue(AcceptEnterprise.Value);
 		}
 #pragma warning restore CS0618
 		if (Local is not null)
 		{
-			__init.Property("Local");
+			initializer.Property("Local");
 			writer.WriteValue(Local.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

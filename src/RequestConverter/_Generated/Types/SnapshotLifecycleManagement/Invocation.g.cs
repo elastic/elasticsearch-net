@@ -27,17 +27,17 @@ public partial class Invocation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Invocation", false);
+		var initializer = writer.BeginObjectInitializer("Invocation", false);
 		{
-			__init.Property("SnapshotName");
+			initializer.Property("SnapshotName");
 			writer.WriteString(SnapshotName);
 		}
 
 		{
-			__init.Property("Time");
+			initializer.Property("Time");
 			writer.WriteValue(Time);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,15 +27,15 @@ public partial class GetUserProfileErrors : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetUserProfileErrors", false);
+		var initializer = writer.BeginObjectInitializer("GetUserProfileErrors", false);
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Details");
+			initializer.Property("Details");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -44,6 +44,6 @@ public partial class GetUserProfileErrors : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(Details, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

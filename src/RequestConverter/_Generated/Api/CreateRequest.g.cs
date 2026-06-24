@@ -27,83 +27,83 @@ public partial class CreateRequest<TDocument> : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CreateRequest<TDocument>", false);
+		var initializer = writer.BeginObjectInitializer("CreateRequest<TDocument>", false);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		if (IncludeSourceOnError is not null)
 		{
-			__init.Property("IncludeSourceOnError");
+			initializer.Property("IncludeSourceOnError");
 			writer.WriteValue(IncludeSourceOnError.Value);
 		}
 
 		if (Pipeline is not null)
 		{
-			__init.Property("Pipeline");
+			initializer.Property("Pipeline");
 			writer.WriteString(Pipeline);
 		}
 
 		if (Refresh is not null)
 		{
-			__init.Property("Refresh");
+			initializer.Property("Refresh");
 			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
 		}
 
 		if (RequireAlias is not null)
 		{
-			__init.Property("RequireAlias");
+			initializer.Property("RequireAlias");
 			writer.WriteValue(RequireAlias.Value);
 		}
 
 		if (RequireDataStream is not null)
 		{
-			__init.Property("RequireDataStream");
+			initializer.Property("RequireDataStream");
 			writer.WriteValue(RequireDataStream.Value);
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			Routing.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version.Value);
 			writer.Write("L");
 		}
 
 		if (VersionType is not null)
 		{
-			__init.Property("VersionType");
+			initializer.Property("VersionType");
 			Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, writer);
 		}
 
 		if (WaitForActiveShards is not null)
 		{
-			__init.Property("WaitForActiveShards");
+			initializer.Property("WaitForActiveShards");
 			WaitForActiveShards.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Document");
+			initializer.Property("Document");
 			writer.WriteValue(Document);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

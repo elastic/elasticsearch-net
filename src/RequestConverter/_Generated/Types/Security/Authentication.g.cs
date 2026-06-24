@@ -27,10 +27,10 @@ public partial class Authentication : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Authentication", false);
+		var initializer = writer.BeginObjectInitializer("Authentication", false);
 		if (ApiKey is not null)
 		{
-			__init.Property("ApiKey");
+			initializer.Property("ApiKey");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -40,37 +40,37 @@ public partial class Authentication : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("AuthenticationRealm");
+			initializer.Property("AuthenticationRealm");
 			AuthenticationRealm.FormatCode(writer);
 		}
 
 		{
-			__init.Property("AuthenticationType");
+			initializer.Property("AuthenticationType");
 			writer.WriteString(AuthenticationType);
 		}
 
 		{
-			__init.Property("Email");
+			initializer.Property("Email");
 			writer.WriteString(Email);
 		}
 
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);
 		}
 
 		{
-			__init.Property("FullName");
+			initializer.Property("FullName");
 			writer.WriteString(FullName);
 		}
 
 		{
-			__init.Property("LookupRealm");
+			initializer.Property("LookupRealm");
 			LookupRealm.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Metadata");
+			initializer.Property("Metadata");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -80,13 +80,13 @@ public partial class Authentication : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Roles");
+			initializer.Property("Roles");
 			writer.WriteInlineList(Roles, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Token is not null)
 		{
-			__init.Property("Token");
+			initializer.Property("Token");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -96,10 +96,10 @@ public partial class Authentication : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Username");
+			initializer.Property("Username");
 			writer.WriteString(Username);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

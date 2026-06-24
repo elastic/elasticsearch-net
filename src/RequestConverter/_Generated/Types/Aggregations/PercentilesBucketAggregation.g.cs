@@ -27,31 +27,31 @@ public partial class PercentilesBucketAggregation : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PercentilesBucketAggregation", false);
+		var initializer = writer.BeginObjectInitializer("PercentilesBucketAggregation", false);
 		if (BucketsPath is not null)
 		{
-			__init.Property("BucketsPath");
+			initializer.Property("BucketsPath");
 			BucketsPath.FormatCode(writer);
 		}
 
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			writer.WriteString(Format);
 		}
 
 		if (GapPolicy is not null)
 		{
-			__init.Property("GapPolicy");
+			initializer.Property("GapPolicy");
 			Elastic.Clients.Elasticsearch.Aggregations.GapPolicyCodeFormatter.FormatCode(GapPolicy.Value, writer);
 		}
 
 		if (Percents is not null)
 		{
-			__init.Property("Percents");
+			initializer.Property("Percents");
 			writer.WriteInlineList(Percents, (w, item) => { w.WriteValue(item); w.Write("d"); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

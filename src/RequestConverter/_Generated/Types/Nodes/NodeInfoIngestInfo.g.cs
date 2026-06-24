@@ -27,12 +27,12 @@ public partial class NodeInfoIngestInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoIngestInfo", false);
+		var initializer = writer.BeginObjectInitializer("NodeInfoIngestInfo", false);
 		{
-			__init.Property("Downloader");
+			initializer.Property("Downloader");
 			Downloader.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,25 +27,25 @@ public partial class IndexUpdateAliasesAction : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexUpdateAliasesAction", false);
+		var initializer = writer.BeginObjectInitializer("IndexUpdateAliasesAction", false);
 		if (Add is not null)
 		{
-			__init.Property("Add");
+			initializer.Property("Add");
 			Add.FormatCode(writer);
 		}
 
 		if (Remove is not null)
 		{
-			__init.Property("Remove");
+			initializer.Property("Remove");
 			Remove.FormatCode(writer);
 		}
 
 		if (RemoveIndex is not null)
 		{
-			__init.Property("RemoveIndex");
+			initializer.Property("RemoveIndex");
 			RemoveIndex.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

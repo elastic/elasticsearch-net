@@ -27,66 +27,66 @@ public partial class HyphenationDecompounderTokenFilter : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("HyphenationDecompounderTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("HyphenationDecompounderTokenFilter", true);
 		{
-			__init.Property("HyphenationPatternsPath");
+			initializer.Property("HyphenationPatternsPath");
 			writer.WriteString(HyphenationPatternsPath);
 		}
 
 		if (MaxSubwordSize is not null)
 		{
-			__init.Property("MaxSubwordSize");
+			initializer.Property("MaxSubwordSize");
 			writer.WriteValue(MaxSubwordSize.Value);
 		}
 
 		if (MinSubwordSize is not null)
 		{
-			__init.Property("MinSubwordSize");
+			initializer.Property("MinSubwordSize");
 			writer.WriteValue(MinSubwordSize.Value);
 		}
 
 		if (MinWordSize is not null)
 		{
-			__init.Property("MinWordSize");
+			initializer.Property("MinWordSize");
 			writer.WriteValue(MinWordSize.Value);
 		}
 
 		if (NoOverlappingMatches is not null)
 		{
-			__init.Property("NoOverlappingMatches");
+			initializer.Property("NoOverlappingMatches");
 			writer.WriteValue(NoOverlappingMatches.Value);
 		}
 
 		if (NoSubMatches is not null)
 		{
-			__init.Property("NoSubMatches");
+			initializer.Property("NoSubMatches");
 			writer.WriteValue(NoSubMatches.Value);
 		}
 
 		if (OnlyLongestMatch is not null)
 		{
-			__init.Property("OnlyLongestMatch");
+			initializer.Property("OnlyLongestMatch");
 			writer.WriteValue(OnlyLongestMatch.Value);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
 		if (WordList is not null)
 		{
-			__init.Property("WordList");
+			initializer.Property("WordList");
 			writer.WriteInlineList(WordList, (w, item) => { w.WriteString(item); });
 		}
 
 		if (WordListPath is not null)
 		{
-			__init.Property("WordListPath");
+			initializer.Property("WordListPath");
 			writer.WriteString(WordListPath);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

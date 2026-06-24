@@ -27,28 +27,28 @@ public partial class OidcAuthenticateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("OidcAuthenticateRequest", false);
+		var initializer = writer.BeginObjectInitializer("OidcAuthenticateRequest", false);
 		{
-			__init.Property("Nonce");
+			initializer.Property("Nonce");
 			writer.WriteString(Nonce);
 		}
 
 		if (Realm is not null)
 		{
-			__init.Property("Realm");
+			initializer.Property("Realm");
 			writer.WriteString(Realm);
 		}
 
 		{
-			__init.Property("RedirectUri");
+			initializer.Property("RedirectUri");
 			writer.WriteString(RedirectUri);
 		}
 
 		{
-			__init.Property("State");
+			initializer.Property("State");
 			writer.WriteString(State);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

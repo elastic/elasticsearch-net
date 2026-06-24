@@ -27,19 +27,19 @@ public partial class IoStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IoStats", false);
+		var initializer = writer.BeginObjectInitializer("IoStats", false);
 		if (Devices is not null)
 		{
-			__init.Property("Devices");
+			initializer.Property("Devices");
 			writer.WriteInlineList(Devices, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Total is not null)
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			Total.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

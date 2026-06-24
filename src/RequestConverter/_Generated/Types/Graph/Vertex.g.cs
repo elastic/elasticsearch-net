@@ -27,29 +27,29 @@ public partial class Vertex : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Vertex", false);
+		var initializer = writer.BeginObjectInitializer("Vertex", false);
 		{
-			__init.Property("Depth");
+			initializer.Property("Depth");
 			writer.WriteValue(Depth);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			writer.WriteString(Field);
 		}
 
 		{
-			__init.Property("Term");
+			initializer.Property("Term");
 			writer.WriteString(Term);
 		}
 
 		{
-			__init.Property("Weight");
+			initializer.Property("Weight");
 			writer.WriteValue(Weight);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

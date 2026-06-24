@@ -27,25 +27,25 @@ public partial class IpRangeAggregationRange : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IpRangeAggregationRange", false);
+		var initializer = writer.BeginObjectInitializer("IpRangeAggregationRange", false);
 		if (From is not null)
 		{
-			__init.Property("From");
+			initializer.Property("From");
 			writer.WriteString(From);
 		}
 
 		if (Mask is not null)
 		{
-			__init.Property("Mask");
+			initializer.Property("Mask");
 			writer.WriteString(Mask);
 		}
 
 		if (To is not null)
 		{
-			__init.Property("To");
+			initializer.Property("To");
 			writer.WriteString(To);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

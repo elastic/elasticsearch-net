@@ -27,33 +27,33 @@ public partial class AlibabaCloudServiceSettings : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AlibabaCloudServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("AlibabaCloudServiceSettings", false);
 		{
-			__init.Property("ApiKey");
+			initializer.Property("ApiKey");
 			writer.WriteString(ApiKey);
 		}
 
 		{
-			__init.Property("Host");
+			initializer.Property("Host");
 			writer.WriteString(Host);
 		}
 
 		if (RateLimit is not null)
 		{
-			__init.Property("RateLimit");
+			initializer.Property("RateLimit");
 			RateLimit.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ServiceId");
+			initializer.Property("ServiceId");
 			writer.WriteString(ServiceId);
 		}
 
 		{
-			__init.Property("Workspace");
+			initializer.Property("Workspace");
 			writer.WriteString(Workspace);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

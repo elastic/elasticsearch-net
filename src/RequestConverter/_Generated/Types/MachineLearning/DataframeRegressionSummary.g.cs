@@ -27,31 +27,31 @@ public partial class DataframeRegressionSummary : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeRegressionSummary", false);
+		var initializer = writer.BeginObjectInitializer("DataframeRegressionSummary", false);
 		if (Huber is not null)
 		{
-			__init.Property("Huber");
+			initializer.Property("Huber");
 			Huber.FormatCode(writer);
 		}
 
 		if (Mse is not null)
 		{
-			__init.Property("Mse");
+			initializer.Property("Mse");
 			Mse.FormatCode(writer);
 		}
 
 		if (Msle is not null)
 		{
-			__init.Property("Msle");
+			initializer.Property("Msle");
 			Msle.FormatCode(writer);
 		}
 
 		if (RSquared is not null)
 		{
-			__init.Property("RSquared");
+			initializer.Property("RSquared");
 			RSquared.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

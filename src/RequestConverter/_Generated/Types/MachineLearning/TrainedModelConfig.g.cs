@@ -27,28 +27,28 @@ public partial class TrainedModelConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelConfig", false);
+		var initializer = writer.BeginObjectInitializer("TrainedModelConfig", false);
 		if (CompressedDefinition is not null)
 		{
-			__init.Property("CompressedDefinition");
+			initializer.Property("CompressedDefinition");
 			writer.WriteString(CompressedDefinition);
 		}
 
 		if (CreatedBy is not null)
 		{
-			__init.Property("CreatedBy");
+			initializer.Property("CreatedBy");
 			writer.WriteString(CreatedBy);
 		}
 
 		if (CreateTime is not null)
 		{
-			__init.Property("CreateTime");
+			initializer.Property("CreateTime");
 			writer.WriteValue(CreateTime.Value);
 		}
 
 		if (DefaultFieldMap is not null)
 		{
-			__init.Property("DefaultFieldMap");
+			initializer.Property("DefaultFieldMap");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -59,103 +59,103 @@ public partial class TrainedModelConfig : RequestConverter.ICodeFormattable
 
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		if (EstimatedHeapMemoryUsageBytes is not null)
 		{
-			__init.Property("EstimatedHeapMemoryUsageBytes");
+			initializer.Property("EstimatedHeapMemoryUsageBytes");
 			writer.WriteValue(EstimatedHeapMemoryUsageBytes.Value);
 		}
 
 		if (EstimatedOperations is not null)
 		{
-			__init.Property("EstimatedOperations");
+			initializer.Property("EstimatedOperations");
 			writer.WriteValue(EstimatedOperations.Value);
 		}
 
 		if (FullyDefined is not null)
 		{
-			__init.Property("FullyDefined");
+			initializer.Property("FullyDefined");
 			writer.WriteValue(FullyDefined.Value);
 		}
 
 		if (InferenceConfig is not null)
 		{
-			__init.Property("InferenceConfig");
+			initializer.Property("InferenceConfig");
 			InferenceConfig.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Input");
+			initializer.Property("Input");
 			Input.FormatCode(writer);
 		}
 
 		if (LicenseLevel is not null)
 		{
-			__init.Property("LicenseLevel");
+			initializer.Property("LicenseLevel");
 			writer.WriteString(LicenseLevel);
 		}
 
 		if (Location is not null)
 		{
-			__init.Property("Location");
+			initializer.Property("Location");
 			Location.FormatCode(writer);
 		}
 
 		if (Metadata is not null)
 		{
-			__init.Property("Metadata");
+			initializer.Property("Metadata");
 			Metadata.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ModelId");
+			initializer.Property("ModelId");
 			writer.WriteString(ModelId);
 		}
 
 		if (ModelPackage is not null)
 		{
-			__init.Property("ModelPackage");
+			initializer.Property("ModelPackage");
 			ModelPackage.FormatCode(writer);
 		}
 
 		if (ModelSizeBytes is not null)
 		{
-			__init.Property("ModelSizeBytes");
+			initializer.Property("ModelSizeBytes");
 			ModelSizeBytes.FormatCode(writer);
 		}
 
 		if (ModelType is not null)
 		{
-			__init.Property("ModelType");
+			initializer.Property("ModelType");
 			Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTypeCodeFormatter.FormatCode(ModelType.Value, writer);
 		}
 
 		if (PlatformArchitecture is not null)
 		{
-			__init.Property("PlatformArchitecture");
+			initializer.Property("PlatformArchitecture");
 			writer.WriteString(PlatformArchitecture);
 		}
 
 		if (PrefixStrings is not null)
 		{
-			__init.Property("PrefixStrings");
+			initializer.Property("PrefixStrings");
 			PrefixStrings.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Tags");
+			initializer.Property("Tags");
 			writer.WriteInlineList(Tags, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

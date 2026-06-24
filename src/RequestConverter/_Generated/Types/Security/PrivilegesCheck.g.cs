@@ -27,25 +27,25 @@ public partial class PrivilegesCheck : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PrivilegesCheck", false);
+		var initializer = writer.BeginObjectInitializer("PrivilegesCheck", false);
 		if (Application is not null)
 		{
-			__init.Property("Application");
+			initializer.Property("Application");
 			writer.WriteInlineList(Application, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Cluster is not null)
 		{
-			__init.Property("Cluster");
+			initializer.Property("Cluster");
 			writer.WriteInlineList(Cluster, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Index is not null)
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteInlineList(Index, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,67 +27,67 @@ public partial class DateRangeQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DateRangeQuery", true);
+		var initializer = writer.BeginObjectInitializer("DateRangeQuery", true);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			writer.WriteString(Format);
 		}
 
 		if (Gt is not null)
 		{
-			__init.Property("Gt");
+			initializer.Property("Gt");
 			Gt.FormatCode(writer);
 		}
 
 		if (Gte is not null)
 		{
-			__init.Property("Gte");
+			initializer.Property("Gte");
 			Gte.FormatCode(writer);
 		}
 
 		if (Lt is not null)
 		{
-			__init.Property("Lt");
+			initializer.Property("Lt");
 			Lt.FormatCode(writer);
 		}
 
 		if (Lte is not null)
 		{
-			__init.Property("Lte");
+			initializer.Property("Lte");
 			Lte.FormatCode(writer);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
 		if (Relation is not null)
 		{
-			__init.Property("Relation");
+			initializer.Property("Relation");
 			Elastic.Clients.Elasticsearch.QueryDsl.RangeRelationCodeFormatter.FormatCode(Relation.Value, writer);
 		}
 
 		if (TimeZone is not null)
 		{
-			__init.Property("TimeZone");
+			initializer.Property("TimeZone");
 			writer.WriteString(TimeZone);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

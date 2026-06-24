@@ -27,61 +27,61 @@ public partial class CommonTermsQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CommonTermsQuery", false);
+		var initializer = writer.BeginObjectInitializer("CommonTermsQuery", false);
 		if (Analyzer is not null)
 		{
-			__init.Property("Analyzer");
+			initializer.Property("Analyzer");
 			writer.WriteString(Analyzer);
 		}
 
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		if (CutoffFrequency is not null)
 		{
-			__init.Property("CutoffFrequency");
+			initializer.Property("CutoffFrequency");
 			writer.WriteValue(CutoffFrequency.Value);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (HighFreqOperator is not null)
 		{
-			__init.Property("HighFreqOperator");
+			initializer.Property("HighFreqOperator");
 			Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(HighFreqOperator.Value, writer);
 		}
 
 		if (LowFreqOperator is not null)
 		{
-			__init.Property("LowFreqOperator");
+			initializer.Property("LowFreqOperator");
 			Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(LowFreqOperator.Value, writer);
 		}
 
 		if (MinimumShouldMatch is not null)
 		{
-			__init.Property("MinimumShouldMatch");
+			initializer.Property("MinimumShouldMatch");
 			MinimumShouldMatch.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			writer.WriteString(Query);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

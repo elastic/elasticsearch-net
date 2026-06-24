@@ -27,12 +27,12 @@ public partial class SamlServiceProviderMetadataRequest : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SamlServiceProviderMetadataRequest", false);
+		var initializer = writer.BeginObjectInitializer("SamlServiceProviderMetadataRequest", false);
 		{
-			__init.Property("RealmName");
+			initializer.Property("RealmName");
 			RealmName.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

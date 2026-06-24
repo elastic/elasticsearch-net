@@ -27,100 +27,100 @@ public partial class KeyValueProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("KeyValueProcessor", false);
+		var initializer = writer.BeginObjectInitializer("KeyValueProcessor", false);
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		if (ExcludeKeys is not null)
 		{
-			__init.Property("ExcludeKeys");
+			initializer.Property("ExcludeKeys");
 			writer.WriteInlineList(ExcludeKeys, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		{
-			__init.Property("FieldSplit");
+			initializer.Property("FieldSplit");
 			writer.WriteString(FieldSplit);
 		}
 
 		if (If is not null)
 		{
-			__init.Property("If");
+			initializer.Property("If");
 			If.FormatCode(writer);
 		}
 
 		if (IgnoreFailure is not null)
 		{
-			__init.Property("IgnoreFailure");
+			initializer.Property("IgnoreFailure");
 			writer.WriteValue(IgnoreFailure.Value);
 		}
 
 		if (IgnoreMissing is not null)
 		{
-			__init.Property("IgnoreMissing");
+			initializer.Property("IgnoreMissing");
 			writer.WriteValue(IgnoreMissing.Value);
 		}
 
 		if (IncludeKeys is not null)
 		{
-			__init.Property("IncludeKeys");
+			initializer.Property("IncludeKeys");
 			writer.WriteInlineList(IncludeKeys, (w, item) => { w.WriteString(item); });
 		}
 
 		if (OnFailure is not null)
 		{
-			__init.Property("OnFailure");
+			initializer.Property("OnFailure");
 			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Prefix is not null)
 		{
-			__init.Property("Prefix");
+			initializer.Property("Prefix");
 			writer.WriteString(Prefix);
 		}
 
 		if (StripBrackets is not null)
 		{
-			__init.Property("StripBrackets");
+			initializer.Property("StripBrackets");
 			writer.WriteValue(StripBrackets.Value);
 		}
 
 		if (Tag is not null)
 		{
-			__init.Property("Tag");
+			initializer.Property("Tag");
 			writer.WriteString(Tag);
 		}
 
 		if (TargetField is not null)
 		{
-			__init.Property("TargetField");
+			initializer.Property("TargetField");
 			TargetField.FormatCode(writer);
 		}
 
 		if (TrimKey is not null)
 		{
-			__init.Property("TrimKey");
+			initializer.Property("TrimKey");
 			writer.WriteString(TrimKey);
 		}
 
 		if (TrimValue is not null)
 		{
-			__init.Property("TrimValue");
+			initializer.Property("TrimValue");
 			writer.WriteString(TrimValue);
 		}
 
 		{
-			__init.Property("ValueSplit");
+			initializer.Property("ValueSplit");
 			writer.WriteString(ValueSplit);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

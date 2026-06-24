@@ -27,47 +27,47 @@ public partial class JinaAIServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("JinaAIServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("JinaAIServiceSettings", false);
 		{
-			__init.Property("ApiKey");
+			initializer.Property("ApiKey");
 			writer.WriteString(ApiKey);
 		}
 
 		if (Dimensions is not null)
 		{
-			__init.Property("Dimensions");
+			initializer.Property("Dimensions");
 			writer.WriteValue(Dimensions.Value);
 		}
 
 		if (EmbeddingType is not null)
 		{
-			__init.Property("EmbeddingType");
+			initializer.Property("EmbeddingType");
 			Elastic.Clients.Elasticsearch.Inference.JinaAIElementTypeCodeFormatter.FormatCode(EmbeddingType.Value, writer);
 		}
 
 		{
-			__init.Property("ModelId");
+			initializer.Property("ModelId");
 			writer.WriteString(ModelId);
 		}
 
 		if (MultimodalModel is not null)
 		{
-			__init.Property("MultimodalModel");
+			initializer.Property("MultimodalModel");
 			writer.WriteValue(MultimodalModel.Value);
 		}
 
 		if (RateLimit is not null)
 		{
-			__init.Property("RateLimit");
+			initializer.Property("RateLimit");
 			RateLimit.FormatCode(writer);
 		}
 
 		if (Similarity is not null)
 		{
-			__init.Property("Similarity");
+			initializer.Property("Similarity");
 			Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityTypeCodeFormatter.FormatCode(Similarity.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

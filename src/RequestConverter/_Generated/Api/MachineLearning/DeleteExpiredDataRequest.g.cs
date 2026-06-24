@@ -27,26 +27,26 @@ public partial class DeleteExpiredDataRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteExpiredDataRequest", false);
+		var initializer = writer.BeginObjectInitializer("DeleteExpiredDataRequest", false);
 		if (JobId is not null)
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			JobId.FormatCode(writer);
 		}
 
 		if (RequestsPerSecond is not null)
 		{
-			__init.Property("RequestsPerSecond");
+			initializer.Property("RequestsPerSecond");
 			writer.WriteValue(RequestsPerSecond.Value);
 			writer.Write("f");
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

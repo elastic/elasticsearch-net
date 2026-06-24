@@ -27,41 +27,41 @@ public partial class DataframeAnalysisFeatureProcessorNGramEncoding : RequestCon
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeAnalysisFeatureProcessorNGramEncoding", false);
+		var initializer = writer.BeginObjectInitializer("DataframeAnalysisFeatureProcessorNGramEncoding", false);
 		if (Custom is not null)
 		{
-			__init.Property("Custom");
+			initializer.Property("Custom");
 			writer.WriteValue(Custom.Value);
 		}
 
 		if (FeaturePrefix is not null)
 		{
-			__init.Property("FeaturePrefix");
+			initializer.Property("FeaturePrefix");
 			writer.WriteString(FeaturePrefix);
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Length is not null)
 		{
-			__init.Property("Length");
+			initializer.Property("Length");
 			writer.WriteValue(Length.Value);
 		}
 
 		{
-			__init.Property("NGrams");
+			initializer.Property("NGrams");
 			writer.WriteInlineList(NGrams, (w, item) => { w.WriteValue(item); });
 		}
 
 		if (Start is not null)
 		{
-			__init.Property("Start");
+			initializer.Property("Start");
 			writer.WriteValue(Start.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,91 +27,91 @@ public partial class PutTrainedModelRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutTrainedModelRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutTrainedModelRequest", false);
 		{
-			__init.Property("ModelId");
+			initializer.Property("ModelId");
 			ModelId.FormatCode(writer);
 		}
 
 		if (DeferDefinitionDecompression is not null)
 		{
-			__init.Property("DeferDefinitionDecompression");
+			initializer.Property("DeferDefinitionDecompression");
 			writer.WriteValue(DeferDefinitionDecompression.Value);
 		}
 
 		if (WaitForCompletion is not null)
 		{
-			__init.Property("WaitForCompletion");
+			initializer.Property("WaitForCompletion");
 			writer.WriteValue(WaitForCompletion.Value);
 		}
 
 		if (CompressedDefinition is not null)
 		{
-			__init.Property("CompressedDefinition");
+			initializer.Property("CompressedDefinition");
 			writer.WriteString(CompressedDefinition);
 		}
 
 		if (Definition is not null)
 		{
-			__init.Property("Definition");
+			initializer.Property("Definition");
 			Definition.FormatCode(writer);
 		}
 
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		if (InferenceConfig is not null)
 		{
-			__init.Property("InferenceConfig");
+			initializer.Property("InferenceConfig");
 			InferenceConfig.FormatCode(writer);
 		}
 
 		if (Input is not null)
 		{
-			__init.Property("Input");
+			initializer.Property("Input");
 			Input.FormatCode(writer);
 		}
 
 		if (Metadata is not null)
 		{
-			__init.Property("Metadata");
+			initializer.Property("Metadata");
 			writer.WriteValue(Metadata);
 		}
 
 		if (ModelSizeBytes is not null)
 		{
-			__init.Property("ModelSizeBytes");
+			initializer.Property("ModelSizeBytes");
 			writer.WriteValue(ModelSizeBytes.Value);
 			writer.Write("L");
 		}
 
 		if (ModelType is not null)
 		{
-			__init.Property("ModelType");
+			initializer.Property("ModelType");
 			Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTypeCodeFormatter.FormatCode(ModelType.Value, writer);
 		}
 
 		if (PlatformArchitecture is not null)
 		{
-			__init.Property("PlatformArchitecture");
+			initializer.Property("PlatformArchitecture");
 			writer.WriteString(PlatformArchitecture);
 		}
 
 		if (PrefixStrings is not null)
 		{
-			__init.Property("PrefixStrings");
+			initializer.Property("PrefixStrings");
 			PrefixStrings.FormatCode(writer);
 		}
 
 		if (Tags is not null)
 		{
-			__init.Property("Tags");
+			initializer.Property("Tags");
 			writer.WriteInlineList(Tags, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

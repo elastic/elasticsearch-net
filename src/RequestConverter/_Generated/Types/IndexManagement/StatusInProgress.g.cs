@@ -27,24 +27,24 @@ public partial class StatusInProgress : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StatusInProgress", false);
+		var initializer = writer.BeginObjectInitializer("StatusInProgress", false);
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteString(Index);
 		}
 
 		{
-			__init.Property("ReindexedDocCount");
+			initializer.Property("ReindexedDocCount");
 			writer.WriteValue(ReindexedDocCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("TotalDocCount");
+			initializer.Property("TotalDocCount");
 			writer.WriteValue(TotalDocCount);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

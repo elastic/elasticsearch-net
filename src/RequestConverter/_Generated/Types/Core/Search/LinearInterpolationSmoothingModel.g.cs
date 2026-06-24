@@ -27,25 +27,25 @@ public partial class LinearInterpolationSmoothingModel : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("LinearInterpolationSmoothingModel", false);
+		var initializer = writer.BeginObjectInitializer("LinearInterpolationSmoothingModel", false);
 		{
-			__init.Property("BigramLambda");
+			initializer.Property("BigramLambda");
 			writer.WriteValue(BigramLambda);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("TrigramLambda");
+			initializer.Property("TrigramLambda");
 			writer.WriteValue(TrigramLambda);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("UnigramLambda");
+			initializer.Property("UnigramLambda");
 			writer.WriteValue(UnigramLambda);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

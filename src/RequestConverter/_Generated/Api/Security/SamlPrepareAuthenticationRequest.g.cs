@@ -27,25 +27,25 @@ public partial class SamlPrepareAuthenticationRequest : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SamlPrepareAuthenticationRequest", false);
+		var initializer = writer.BeginObjectInitializer("SamlPrepareAuthenticationRequest", false);
 		if (Acs is not null)
 		{
-			__init.Property("Acs");
+			initializer.Property("Acs");
 			writer.WriteString(Acs);
 		}
 
 		if (Realm is not null)
 		{
-			__init.Property("Realm");
+			initializer.Property("Realm");
 			writer.WriteString(Realm);
 		}
 
 		if (RelayState is not null)
 		{
-			__init.Property("RelayState");
+			initializer.Property("RelayState");
 			writer.WriteString(RelayState);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

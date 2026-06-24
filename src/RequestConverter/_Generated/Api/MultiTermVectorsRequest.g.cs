@@ -27,92 +27,92 @@ public partial class MultiTermVectorsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MultiTermVectorsRequest", false);
+		var initializer = writer.BeginObjectInitializer("MultiTermVectorsRequest", false);
 		if (Index is not null)
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		if (Fields is not null)
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			Fields.FormatCode(writer);
 		}
 
 		if (FieldStatistics is not null)
 		{
-			__init.Property("FieldStatistics");
+			initializer.Property("FieldStatistics");
 			writer.WriteValue(FieldStatistics.Value);
 		}
 
 		if (Offsets is not null)
 		{
-			__init.Property("Offsets");
+			initializer.Property("Offsets");
 			writer.WriteValue(Offsets.Value);
 		}
 
 		if (Payloads is not null)
 		{
-			__init.Property("Payloads");
+			initializer.Property("Payloads");
 			writer.WriteValue(Payloads.Value);
 		}
 
 		if (Positions is not null)
 		{
-			__init.Property("Positions");
+			initializer.Property("Positions");
 			writer.WriteValue(Positions.Value);
 		}
 
 		if (Preference is not null)
 		{
-			__init.Property("Preference");
+			initializer.Property("Preference");
 			writer.WriteString(Preference);
 		}
 
 		if (Realtime is not null)
 		{
-			__init.Property("Realtime");
+			initializer.Property("Realtime");
 			writer.WriteValue(Realtime.Value);
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			Routing.FormatCode(writer);
 		}
 
 		if (TermStatistics is not null)
 		{
-			__init.Property("TermStatistics");
+			initializer.Property("TermStatistics");
 			writer.WriteValue(TermStatistics.Value);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version.Value);
 			writer.Write("L");
 		}
 
 		if (VersionType is not null)
 		{
-			__init.Property("VersionType");
+			initializer.Property("VersionType");
 			Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, writer);
 		}
 
 		if (Docs is not null)
 		{
-			__init.Property("Docs");
+			initializer.Property("Docs");
 			writer.WriteInlineList(Docs, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Ids is not null)
 		{
-			__init.Property("Ids");
+			initializer.Property("Ids");
 			writer.WriteInlineList(Ids, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

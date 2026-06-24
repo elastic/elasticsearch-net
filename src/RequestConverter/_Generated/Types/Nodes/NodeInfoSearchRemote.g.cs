@@ -27,12 +27,12 @@ public partial class NodeInfoSearchRemote : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoSearchRemote", false);
+		var initializer = writer.BeginObjectInitializer("NodeInfoSearchRemote", false);
 		{
-			__init.Property("Connect");
+			initializer.Property("Connect");
 			writer.WriteString(Connect);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

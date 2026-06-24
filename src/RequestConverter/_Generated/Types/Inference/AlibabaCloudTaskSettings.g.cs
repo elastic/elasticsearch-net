@@ -27,19 +27,19 @@ public partial class AlibabaCloudTaskSettings : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AlibabaCloudTaskSettings", false);
+		var initializer = writer.BeginObjectInitializer("AlibabaCloudTaskSettings", false);
 		if (InputType is not null)
 		{
-			__init.Property("InputType");
+			initializer.Property("InputType");
 			writer.WriteString(InputType);
 		}
 
 		if (ReturnToken is not null)
 		{
-			__init.Property("ReturnToken");
+			initializer.Property("ReturnToken");
 			writer.WriteValue(ReturnToken.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

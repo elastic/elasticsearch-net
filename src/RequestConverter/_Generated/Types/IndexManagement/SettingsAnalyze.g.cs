@@ -27,13 +27,13 @@ public partial class SettingsAnalyze : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SettingsAnalyze", false);
+		var initializer = writer.BeginObjectInitializer("SettingsAnalyze", false);
 		if (MaxTokenCount is not null)
 		{
-			__init.Property("MaxTokenCount");
+			initializer.Property("MaxTokenCount");
 			writer.WriteValue(MaxTokenCount.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

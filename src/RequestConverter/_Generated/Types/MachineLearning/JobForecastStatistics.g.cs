@@ -27,33 +27,33 @@ public partial class JobForecastStatistics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("JobForecastStatistics", false);
+		var initializer = writer.BeginObjectInitializer("JobForecastStatistics", false);
 		{
-			__init.Property("ForecastedJobs");
+			initializer.Property("ForecastedJobs");
 			writer.WriteValue(ForecastedJobs);
 		}
 
 		if (MemoryBytes is not null)
 		{
-			__init.Property("MemoryBytes");
+			initializer.Property("MemoryBytes");
 			MemoryBytes.FormatCode(writer);
 		}
 
 		if (ProcessingTimeMs is not null)
 		{
-			__init.Property("ProcessingTimeMs");
+			initializer.Property("ProcessingTimeMs");
 			ProcessingTimeMs.FormatCode(writer);
 		}
 
 		if (Records is not null)
 		{
-			__init.Property("Records");
+			initializer.Property("Records");
 			Records.FormatCode(writer);
 		}
 
 		if (Status is not null)
 		{
-			__init.Property("Status");
+			initializer.Property("Status");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -63,11 +63,11 @@ public partial class JobForecastStatistics : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteValue(Total);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,74 +27,74 @@ public partial class Statistics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Statistics", false);
+		var initializer = writer.BeginObjectInitializer("Statistics", false);
 		if (Policy is not null)
 		{
-			__init.Property("Policy");
+			initializer.Property("Policy");
 			writer.WriteString(Policy);
 		}
 
 		if (RetentionDeletionTime is not null)
 		{
-			__init.Property("RetentionDeletionTime");
+			initializer.Property("RetentionDeletionTime");
 			RetentionDeletionTime.FormatCode(writer);
 		}
 
 		if (RetentionDeletionTimeMillis is not null)
 		{
-			__init.Property("RetentionDeletionTimeMillis");
+			initializer.Property("RetentionDeletionTimeMillis");
 			writer.WriteValue(RetentionDeletionTimeMillis.Value);
 		}
 
 		if (RetentionFailed is not null)
 		{
-			__init.Property("RetentionFailed");
+			initializer.Property("RetentionFailed");
 			writer.WriteValue(RetentionFailed.Value);
 			writer.Write("L");
 		}
 
 		if (RetentionRuns is not null)
 		{
-			__init.Property("RetentionRuns");
+			initializer.Property("RetentionRuns");
 			writer.WriteValue(RetentionRuns.Value);
 			writer.Write("L");
 		}
 
 		if (RetentionTimedOut is not null)
 		{
-			__init.Property("RetentionTimedOut");
+			initializer.Property("RetentionTimedOut");
 			writer.WriteValue(RetentionTimedOut.Value);
 			writer.Write("L");
 		}
 
 		if (TotalSnapshotDeletionFailures is not null)
 		{
-			__init.Property("TotalSnapshotDeletionFailures");
+			initializer.Property("TotalSnapshotDeletionFailures");
 			writer.WriteValue(TotalSnapshotDeletionFailures.Value);
 			writer.Write("L");
 		}
 
 		if (TotalSnapshotsDeleted is not null)
 		{
-			__init.Property("TotalSnapshotsDeleted");
+			initializer.Property("TotalSnapshotsDeleted");
 			writer.WriteValue(TotalSnapshotsDeleted.Value);
 			writer.Write("L");
 		}
 
 		if (TotalSnapshotsFailed is not null)
 		{
-			__init.Property("TotalSnapshotsFailed");
+			initializer.Property("TotalSnapshotsFailed");
 			writer.WriteValue(TotalSnapshotsFailed.Value);
 			writer.Write("L");
 		}
 
 		if (TotalSnapshotsTaken is not null)
 		{
-			__init.Property("TotalSnapshotsTaken");
+			initializer.Property("TotalSnapshotsTaken");
 			writer.WriteValue(TotalSnapshotsTaken.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

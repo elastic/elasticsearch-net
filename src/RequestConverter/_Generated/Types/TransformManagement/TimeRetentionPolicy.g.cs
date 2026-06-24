@@ -27,17 +27,17 @@ public partial class TimeRetentionPolicy : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TimeRetentionPolicy", false);
+		var initializer = writer.BeginObjectInitializer("TimeRetentionPolicy", false);
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		{
-			__init.Property("MaxAge");
+			initializer.Property("MaxAge");
 			MaxAge.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

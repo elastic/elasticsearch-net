@@ -27,19 +27,19 @@ public partial class SearchRequestCoordinatorMetadata : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SearchRequestCoordinatorMetadata", false);
+		var initializer = writer.BeginObjectInitializer("SearchRequestCoordinatorMetadata", false);
 		if (Indices is not null)
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			writer.WriteInlineList(Indices, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Source is not null)
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			Source.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

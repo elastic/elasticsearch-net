@@ -27,29 +27,29 @@ public partial class DataStreams : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataStreams", false);
+		var initializer = writer.BeginObjectInitializer("DataStreams", false);
 		{
-			__init.Property("Available");
+			initializer.Property("Available");
 			writer.WriteValue(Available);
 		}
 
 		{
-			__init.Property("DataStreams2");
+			initializer.Property("DataStreams2");
 			writer.WriteValue(DataStreams2);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);
 		}
 
 		{
-			__init.Property("IndicesCount");
+			initializer.Property("IndicesCount");
 			writer.WriteValue(IndicesCount);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

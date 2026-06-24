@@ -27,37 +27,37 @@ public partial class DiskIndicatorDetails : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DiskIndicatorDetails", false);
+		var initializer = writer.BeginObjectInitializer("DiskIndicatorDetails", false);
 		{
-			__init.Property("IndicesWithReadonlyBlock");
+			initializer.Property("IndicesWithReadonlyBlock");
 			writer.WriteValue(IndicesWithReadonlyBlock);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("NodesOverFloodStageWatermark");
+			initializer.Property("NodesOverFloodStageWatermark");
 			writer.WriteValue(NodesOverFloodStageWatermark);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("NodesOverHighWatermark");
+			initializer.Property("NodesOverHighWatermark");
 			writer.WriteValue(NodesOverHighWatermark);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("NodesWithEnoughDiskSpace");
+			initializer.Property("NodesWithEnoughDiskSpace");
 			writer.WriteValue(NodesWithEnoughDiskSpace);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("NodesWithUnknownDiskStatus");
+			initializer.Property("NodesWithUnknownDiskStatus");
 			writer.WriteValue(NodesWithUnknownDiskStatus);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

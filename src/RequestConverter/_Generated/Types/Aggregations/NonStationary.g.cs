@@ -27,24 +27,24 @@ public partial class NonStationary : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NonStationary", false);
+		var initializer = writer.BeginObjectInitializer("NonStationary", false);
 		{
-			__init.Property("PValue");
+			initializer.Property("PValue");
 			writer.WriteValue(PValue);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("RValue");
+			initializer.Property("RValue");
 			writer.WriteValue(RValue);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Trend");
+			initializer.Property("Trend");
 			writer.WriteString(Trend);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

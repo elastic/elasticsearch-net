@@ -27,29 +27,29 @@ public partial class PerRepositoryStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PerRepositoryStats", false);
+		var initializer = writer.BeginObjectInitializer("PerRepositoryStats", false);
 		{
-			__init.Property("CurrentCounts");
+			initializer.Property("CurrentCounts");
 			CurrentCounts.FormatCode(writer);
 		}
 
 		if (OldestStartTime is not null)
 		{
-			__init.Property("OldestStartTime");
+			initializer.Property("OldestStartTime");
 			writer.WriteString(OldestStartTime);
 		}
 
 		{
-			__init.Property("OldestStartTimeMillis");
+			initializer.Property("OldestStartTimeMillis");
 			writer.WriteValue(OldestStartTimeMillis);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			writer.WriteString(Type);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

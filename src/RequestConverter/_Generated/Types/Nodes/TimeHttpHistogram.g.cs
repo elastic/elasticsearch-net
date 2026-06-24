@@ -27,27 +27,27 @@ public partial class TimeHttpHistogram : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TimeHttpHistogram", false);
+		var initializer = writer.BeginObjectInitializer("TimeHttpHistogram", false);
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 			writer.Write("L");
 		}
 
 		if (GeMillis is not null)
 		{
-			__init.Property("GeMillis");
+			initializer.Property("GeMillis");
 			writer.WriteValue(GeMillis.Value);
 			writer.Write("L");
 		}
 
 		if (LtMillis is not null)
 		{
-			__init.Property("LtMillis");
+			initializer.Property("LtMillis");
 			writer.WriteValue(LtMillis.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

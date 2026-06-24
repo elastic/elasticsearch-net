@@ -27,22 +27,22 @@ public partial class RemoteSource : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RemoteSource", false);
+		var initializer = writer.BeginObjectInitializer("RemoteSource", false);
 		if (ApiKey is not null)
 		{
-			__init.Property("ApiKey");
+			initializer.Property("ApiKey");
 			writer.WriteString(ApiKey);
 		}
 
 		if (ConnectTimeout is not null)
 		{
-			__init.Property("ConnectTimeout");
+			initializer.Property("ConnectTimeout");
 			ConnectTimeout.FormatCode(writer);
 		}
 
 		if (Headers is not null)
 		{
-			__init.Property("Headers");
+			initializer.Property("Headers");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -52,28 +52,28 @@ public partial class RemoteSource : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Host");
+			initializer.Property("Host");
 			writer.WriteString(Host);
 		}
 
 		if (Password is not null)
 		{
-			__init.Property("Password");
+			initializer.Property("Password");
 			writer.WriteString(Password);
 		}
 
 		if (SocketTimeout is not null)
 		{
-			__init.Property("SocketTimeout");
+			initializer.Property("SocketTimeout");
 			SocketTimeout.FormatCode(writer);
 		}
 
 		if (Username is not null)
 		{
-			__init.Property("Username");
+			initializer.Property("Username");
 			Username.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,18 +27,18 @@ public partial class RoleTemplate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RoleTemplate", false);
+		var initializer = writer.BeginObjectInitializer("RoleTemplate", false);
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			Elastic.Clients.Elasticsearch.Security.TemplateFormatCodeFormatter.FormatCode(Format.Value, writer);
 		}
 
 		{
-			__init.Property("Template");
+			initializer.Property("Template");
 			Template.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

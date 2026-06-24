@@ -27,19 +27,19 @@ public partial class TimeSeriesAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TimeSeriesAggregation", false);
+		var initializer = writer.BeginObjectInitializer("TimeSeriesAggregation", false);
 		if (Keyed is not null)
 		{
-			__init.Property("Keyed");
+			initializer.Property("Keyed");
 			writer.WriteValue(Keyed.Value);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

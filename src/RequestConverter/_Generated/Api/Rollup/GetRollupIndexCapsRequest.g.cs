@@ -27,12 +27,12 @@ public partial class GetRollupIndexCapsRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetRollupIndexCapsRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetRollupIndexCapsRequest", false);
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

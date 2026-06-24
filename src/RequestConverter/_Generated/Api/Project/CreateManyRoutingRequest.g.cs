@@ -27,9 +27,9 @@ public partial class CreateManyRoutingRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CreateManyRoutingRequest", false);
+		var initializer = writer.BeginObjectInitializer("CreateManyRoutingRequest", false);
 		{
-			__init.Property("Expressions");
+			initializer.Property("Expressions");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -38,6 +38,6 @@ public partial class CreateManyRoutingRequest : RequestConverter.ICodeFormattabl
 			writer.WriteInlineList(Expressions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

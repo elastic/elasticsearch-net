@@ -27,10 +27,10 @@ public partial class DenseVectorOffHeapStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DenseVectorOffHeapStats", false);
+		var initializer = writer.BeginObjectInitializer("DenseVectorOffHeapStats", false);
 		if (Fielddata is not null)
 		{
-			__init.Property("Fielddata");
+			initializer.Property("Fielddata");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -41,88 +41,88 @@ public partial class DenseVectorOffHeapStats : RequestConverter.ICodeFormattable
 
 		if (TotalCenifSize is not null)
 		{
-			__init.Property("TotalCenifSize");
+			initializer.Property("TotalCenifSize");
 			TotalCenifSize.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalCenifSizeBytes");
+			initializer.Property("TotalCenifSizeBytes");
 			writer.WriteValue(TotalCenifSizeBytes);
 			writer.Write("L");
 		}
 
 		if (TotalClivfSize is not null)
 		{
-			__init.Property("TotalClivfSize");
+			initializer.Property("TotalClivfSize");
 			TotalClivfSize.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalClivfSizeBytes");
+			initializer.Property("TotalClivfSizeBytes");
 			writer.WriteValue(TotalClivfSizeBytes);
 			writer.Write("L");
 		}
 
 		if (TotalSize is not null)
 		{
-			__init.Property("TotalSize");
+			initializer.Property("TotalSize");
 			TotalSize.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalSizeBytes");
+			initializer.Property("TotalSizeBytes");
 			writer.WriteValue(TotalSizeBytes);
 			writer.Write("L");
 		}
 
 		if (TotalVebSize is not null)
 		{
-			__init.Property("TotalVebSize");
+			initializer.Property("TotalVebSize");
 			TotalVebSize.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalVebSizeBytes");
+			initializer.Property("TotalVebSizeBytes");
 			writer.WriteValue(TotalVebSizeBytes);
 			writer.Write("L");
 		}
 
 		if (TotalVecSize is not null)
 		{
-			__init.Property("TotalVecSize");
+			initializer.Property("TotalVecSize");
 			TotalVecSize.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalVecSizeBytes");
+			initializer.Property("TotalVecSizeBytes");
 			writer.WriteValue(TotalVecSizeBytes);
 			writer.Write("L");
 		}
 
 		if (TotalVeqSize is not null)
 		{
-			__init.Property("TotalVeqSize");
+			initializer.Property("TotalVeqSize");
 			TotalVeqSize.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalVeqSizeBytes");
+			initializer.Property("TotalVeqSizeBytes");
 			writer.WriteValue(TotalVeqSizeBytes);
 			writer.Write("L");
 		}
 
 		if (TotalVexSize is not null)
 		{
-			__init.Property("TotalVexSize");
+			initializer.Property("TotalVexSize");
 			TotalVexSize.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalVexSizeBytes");
+			initializer.Property("TotalVexSizeBytes");
 			writer.WriteValue(TotalVexSizeBytes);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

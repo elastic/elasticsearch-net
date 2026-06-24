@@ -27,94 +27,94 @@ public partial class SearchTemplateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SearchTemplateRequest", false);
+		var initializer = writer.BeginObjectInitializer("SearchTemplateRequest", false);
 		if (Indices is not null)
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		if (AllowNoIndices is not null)
 		{
-			__init.Property("AllowNoIndices");
+			initializer.Property("AllowNoIndices");
 			writer.WriteValue(AllowNoIndices.Value);
 		}
 
 		if (CcsMinimizeRoundtrips is not null)
 		{
-			__init.Property("CcsMinimizeRoundtrips");
+			initializer.Property("CcsMinimizeRoundtrips");
 			writer.WriteValue(CcsMinimizeRoundtrips.Value);
 		}
 
 		if (ExpandWildcards is not null)
 		{
-			__init.Property("ExpandWildcards");
+			initializer.Property("ExpandWildcards");
 			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
 		}
 #pragma warning disable CS0618
 		if (IgnoreThrottled is not null)
 		{
-			__init.Property("IgnoreThrottled");
+			initializer.Property("IgnoreThrottled");
 			writer.WriteValue(IgnoreThrottled.Value);
 		}
 #pragma warning restore CS0618
 		if (IgnoreUnavailable is not null)
 		{
-			__init.Property("IgnoreUnavailable");
+			initializer.Property("IgnoreUnavailable");
 			writer.WriteValue(IgnoreUnavailable.Value);
 		}
 
 		if (Preference is not null)
 		{
-			__init.Property("Preference");
+			initializer.Property("Preference");
 			writer.WriteString(Preference);
 		}
 
 		if (RestTotalHitsAsInt is not null)
 		{
-			__init.Property("RestTotalHitsAsInt");
+			initializer.Property("RestTotalHitsAsInt");
 			writer.WriteValue(RestTotalHitsAsInt.Value);
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			Routing.FormatCode(writer);
 		}
 
 		if (Scroll is not null)
 		{
-			__init.Property("Scroll");
+			initializer.Property("Scroll");
 			Scroll.FormatCode(writer);
 		}
 
 		if (SearchType is not null)
 		{
-			__init.Property("SearchType");
+			initializer.Property("SearchType");
 			Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(SearchType.Value, writer);
 		}
 
 		if (TypedKeys is not null)
 		{
-			__init.Property("TypedKeys");
+			initializer.Property("TypedKeys");
 			writer.WriteValue(TypedKeys.Value);
 		}
 
 		if (Explain is not null)
 		{
-			__init.Property("Explain");
+			initializer.Property("Explain");
 			writer.WriteValue(Explain.Value);
 		}
 
 		if (Id is not null)
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		if (Params is not null)
 		{
-			__init.Property("Params");
+			initializer.Property("Params");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -125,22 +125,22 @@ public partial class SearchTemplateRequest : RequestConverter.ICodeFormattable
 
 		if (Profile is not null)
 		{
-			__init.Property("Profile");
+			initializer.Property("Profile");
 			writer.WriteValue(Profile.Value);
 		}
 
 		if (ProjectRouting is not null)
 		{
-			__init.Property("ProjectRouting");
+			initializer.Property("ProjectRouting");
 			writer.WriteString(ProjectRouting);
 		}
 
 		if (Source is not null)
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			writer.WriteString(Source);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

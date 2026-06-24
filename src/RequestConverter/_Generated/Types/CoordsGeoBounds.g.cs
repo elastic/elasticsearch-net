@@ -27,31 +27,31 @@ public partial class CoordsGeoBounds : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CoordsGeoBounds", true);
+		var initializer = writer.BeginObjectInitializer("CoordsGeoBounds", true);
 		{
-			__init.Property("Bottom");
+			initializer.Property("Bottom");
 			writer.WriteValue(Bottom);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Left");
+			initializer.Property("Left");
 			writer.WriteValue(Left);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Right");
+			initializer.Property("Right");
 			writer.WriteValue(Right);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Top");
+			initializer.Property("Top");
 			writer.WriteValue(Top);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

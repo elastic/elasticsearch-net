@@ -27,12 +27,12 @@ public partial class AsyncQueryDeleteRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AsyncQueryDeleteRequest", false);
+		var initializer = writer.BeginObjectInitializer("AsyncQueryDeleteRequest", false);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

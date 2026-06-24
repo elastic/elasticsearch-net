@@ -27,10 +27,10 @@ public partial class WatcherWatch : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("WatcherWatch", false);
+		var initializer = writer.BeginObjectInitializer("WatcherWatch", false);
 		if (Action is not null)
 		{
-			__init.Property("Action");
+			initializer.Property("Action");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -41,7 +41,7 @@ public partial class WatcherWatch : RequestConverter.ICodeFormattable
 
 		if (Condition is not null)
 		{
-			__init.Property("Condition");
+			initializer.Property("Condition");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -51,7 +51,7 @@ public partial class WatcherWatch : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Input");
+			initializer.Property("Input");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -61,10 +61,10 @@ public partial class WatcherWatch : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Trigger");
+			initializer.Property("Trigger");
 			Trigger.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

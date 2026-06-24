@@ -27,10 +27,10 @@ public partial class Message : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Message", false);
+		var initializer = writer.BeginObjectInitializer("Message", false);
 		if (Content is not null)
 		{
-			__init.Property("Content");
+			initializer.Property("Content");
 			if (Content.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				writer.WriteString(Content.Value1);
@@ -44,33 +44,33 @@ public partial class Message : RequestConverter.ICodeFormattable
 
 		if (Reasoning is not null)
 		{
-			__init.Property("Reasoning");
+			initializer.Property("Reasoning");
 			writer.WriteString(Reasoning);
 		}
 
 		if (ReasoningDetails is not null)
 		{
-			__init.Property("ReasoningDetails");
+			initializer.Property("ReasoningDetails");
 			writer.WriteInlineList(ReasoningDetails, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Role");
+			initializer.Property("Role");
 			writer.WriteString(Role);
 		}
 
 		if (ToolCallId is not null)
 		{
-			__init.Property("ToolCallId");
+			initializer.Property("ToolCallId");
 			ToolCallId.FormatCode(writer);
 		}
 
 		if (ToolCalls is not null)
 		{
-			__init.Property("ToolCalls");
+			initializer.Property("ToolCalls");
 			writer.WriteInlineList(ToolCalls, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

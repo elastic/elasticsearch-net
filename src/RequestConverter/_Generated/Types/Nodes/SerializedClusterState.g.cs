@@ -27,19 +27,19 @@ public partial class SerializedClusterState : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SerializedClusterState", false);
+		var initializer = writer.BeginObjectInitializer("SerializedClusterState", false);
 		if (Diffs is not null)
 		{
-			__init.Property("Diffs");
+			initializer.Property("Diffs");
 			Diffs.FormatCode(writer);
 		}
 
 		if (FullStates is not null)
 		{
-			__init.Property("FullStates");
+			initializer.Property("FullStates");
 			FullStates.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

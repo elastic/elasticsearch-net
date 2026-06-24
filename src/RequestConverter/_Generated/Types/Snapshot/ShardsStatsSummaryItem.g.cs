@@ -27,19 +27,19 @@ public partial class ShardsStatsSummaryItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardsStatsSummaryItem", false);
+		var initializer = writer.BeginObjectInitializer("ShardsStatsSummaryItem", false);
 		{
-			__init.Property("FileCount");
+			initializer.Property("FileCount");
 			writer.WriteValue(FileCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("SizeInBytes");
+			initializer.Property("SizeInBytes");
 			writer.WriteValue(SizeInBytes);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

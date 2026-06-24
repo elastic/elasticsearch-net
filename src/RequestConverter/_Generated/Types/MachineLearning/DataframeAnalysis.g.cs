@@ -27,25 +27,25 @@ public partial class DataframeAnalysis : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeAnalysis", false);
+		var initializer = writer.BeginObjectInitializer("DataframeAnalysis", false);
 		if (Classification is not null)
 		{
-			__init.Property("Classification");
+			initializer.Property("Classification");
 			Classification.FormatCode(writer);
 		}
 
 		if (OutlierDetection is not null)
 		{
-			__init.Property("OutlierDetection");
+			initializer.Property("OutlierDetection");
 			OutlierDetection.FormatCode(writer);
 		}
 
 		if (Regression is not null)
 		{
-			__init.Property("Regression");
+			initializer.Property("Regression");
 			Regression.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

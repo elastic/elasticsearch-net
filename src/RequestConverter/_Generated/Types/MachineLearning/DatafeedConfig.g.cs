@@ -27,10 +27,10 @@ public partial class DatafeedConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DatafeedConfig", false);
+		var initializer = writer.BeginObjectInitializer("DatafeedConfig", false);
 		if (Aggregations is not null)
 		{
-			__init.Property("Aggregations");
+			initializer.Property("Aggregations");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -41,67 +41,67 @@ public partial class DatafeedConfig : RequestConverter.ICodeFormattable
 
 		if (ChunkingConfig is not null)
 		{
-			__init.Property("ChunkingConfig");
+			initializer.Property("ChunkingConfig");
 			ChunkingConfig.FormatCode(writer);
 		}
 
 		if (DatafeedId is not null)
 		{
-			__init.Property("DatafeedId");
+			initializer.Property("DatafeedId");
 			DatafeedId.FormatCode(writer);
 		}
 
 		if (DelayedDataCheckConfig is not null)
 		{
-			__init.Property("DelayedDataCheckConfig");
+			initializer.Property("DelayedDataCheckConfig");
 			DelayedDataCheckConfig.FormatCode(writer);
 		}
 
 		if (Frequency is not null)
 		{
-			__init.Property("Frequency");
+			initializer.Property("Frequency");
 			Frequency.FormatCode(writer);
 		}
 
 		if (Indices is not null)
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		if (IndicesOptions is not null)
 		{
-			__init.Property("IndicesOptions");
+			initializer.Property("IndicesOptions");
 			IndicesOptions.FormatCode(writer);
 		}
 
 		if (JobId is not null)
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			JobId.FormatCode(writer);
 		}
 
 		if (MaxEmptySearches is not null)
 		{
-			__init.Property("MaxEmptySearches");
+			initializer.Property("MaxEmptySearches");
 			writer.WriteValue(MaxEmptySearches.Value);
 		}
 
 		if (Query is not null)
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			Query.FormatCode(writer);
 		}
 
 		if (QueryDelay is not null)
 		{
-			__init.Property("QueryDelay");
+			initializer.Property("QueryDelay");
 			QueryDelay.FormatCode(writer);
 		}
 
 		if (RuntimeMappings is not null)
 		{
-			__init.Property("RuntimeMappings");
+			initializer.Property("RuntimeMappings");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("Elastic.Clients.Elasticsearch.Field");
 			writer.Write(", ");
@@ -112,7 +112,7 @@ public partial class DatafeedConfig : RequestConverter.ICodeFormattable
 
 		if (ScriptFields is not null)
 		{
-			__init.Property("ScriptFields");
+			initializer.Property("ScriptFields");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -123,10 +123,10 @@ public partial class DatafeedConfig : RequestConverter.ICodeFormattable
 
 		if (ScrollSize is not null)
 		{
-			__init.Property("ScrollSize");
+			initializer.Property("ScrollSize");
 			writer.WriteValue(ScrollSize.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

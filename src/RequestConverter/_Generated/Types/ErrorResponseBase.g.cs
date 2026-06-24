@@ -27,17 +27,17 @@ public partial class ErrorResponseBase : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ErrorResponseBase", true);
+		var initializer = writer.BeginObjectInitializer("ErrorResponseBase", true);
 		{
-			__init.Property("Error");
+			initializer.Property("Error");
 			Error.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Status");
+			initializer.Property("Status");
 			writer.WriteValue(Status);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

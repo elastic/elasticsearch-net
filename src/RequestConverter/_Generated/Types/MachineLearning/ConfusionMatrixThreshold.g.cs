@@ -27,27 +27,27 @@ public partial class ConfusionMatrixThreshold : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ConfusionMatrixThreshold", false);
+		var initializer = writer.BeginObjectInitializer("ConfusionMatrixThreshold", false);
 		{
-			__init.Property("FalseNegative");
+			initializer.Property("FalseNegative");
 			writer.WriteValue(FalseNegative);
 		}
 
 		{
-			__init.Property("FalsePositive");
+			initializer.Property("FalsePositive");
 			writer.WriteValue(FalsePositive);
 		}
 
 		{
-			__init.Property("TrueNegative");
+			initializer.Property("TrueNegative");
 			writer.WriteValue(TrueNegative);
 		}
 
 		{
-			__init.Property("TruePositive");
+			initializer.Property("TruePositive");
 			writer.WriteValue(TruePositive);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

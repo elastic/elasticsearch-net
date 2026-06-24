@@ -27,17 +27,17 @@ public partial class DeleteCalendarJobRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteCalendarJobRequest", false);
+		var initializer = writer.BeginObjectInitializer("DeleteCalendarJobRequest", false);
 		{
-			__init.Property("CalendarId");
+			initializer.Property("CalendarId");
 			CalendarId.FormatCode(writer);
 		}
 
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			JobId.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

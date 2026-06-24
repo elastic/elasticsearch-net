@@ -27,61 +27,61 @@ public partial class DynamicTemplate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DynamicTemplate", false);
+		var initializer = writer.BeginObjectInitializer("DynamicTemplate", false);
 		if (Match is not null)
 		{
-			__init.Property("Match");
+			initializer.Property("Match");
 			writer.WriteInlineList(Match, (w, item) => { w.WriteString(item); });
 		}
 
 		if (MatchMappingType is not null)
 		{
-			__init.Property("MatchMappingType");
+			initializer.Property("MatchMappingType");
 			writer.WriteInlineList(MatchMappingType, (w, item) => { w.WriteString(item); });
 		}
 
 		if (MatchPattern is not null)
 		{
-			__init.Property("MatchPattern");
+			initializer.Property("MatchPattern");
 			Elastic.Clients.Elasticsearch.Mapping.MatchTypeCodeFormatter.FormatCode(MatchPattern.Value, writer);
 		}
 
 		if (PathMatch is not null)
 		{
-			__init.Property("PathMatch");
+			initializer.Property("PathMatch");
 			writer.WriteInlineList(PathMatch, (w, item) => { w.WriteString(item); });
 		}
 
 		if (PathUnmatch is not null)
 		{
-			__init.Property("PathUnmatch");
+			initializer.Property("PathUnmatch");
 			writer.WriteInlineList(PathUnmatch, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Unmatch is not null)
 		{
-			__init.Property("Unmatch");
+			initializer.Property("Unmatch");
 			writer.WriteInlineList(Unmatch, (w, item) => { w.WriteString(item); });
 		}
 
 		if (UnmatchMappingType is not null)
 		{
-			__init.Property("UnmatchMappingType");
+			initializer.Property("UnmatchMappingType");
 			writer.WriteInlineList(UnmatchMappingType, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Mapping is not null)
 		{
-			__init.Property("Mapping");
+			initializer.Property("Mapping");
 			Mapping.FormatCode(writer);
 		}
 
 		if (Runtime is not null)
 		{
-			__init.Property("Runtime");
+			initializer.Property("Runtime");
 			Runtime.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

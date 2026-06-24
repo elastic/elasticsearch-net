@@ -27,24 +27,24 @@ public partial class PutCalendarRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutCalendarRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutCalendarRequest", false);
 		{
-			__init.Property("CalendarId");
+			initializer.Property("CalendarId");
 			CalendarId.FormatCode(writer);
 		}
 
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		if (JobIds is not null)
 		{
-			__init.Property("JobIds");
+			initializer.Property("JobIds");
 			writer.WriteInlineList(JobIds, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

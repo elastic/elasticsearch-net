@@ -27,22 +27,22 @@ public partial class TrainedModelStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelStats", false);
+		var initializer = writer.BeginObjectInitializer("TrainedModelStats", false);
 		if (DeploymentStats is not null)
 		{
-			__init.Property("DeploymentStats");
+			initializer.Property("DeploymentStats");
 			DeploymentStats.FormatCode(writer);
 		}
 
 		if (InferenceStats is not null)
 		{
-			__init.Property("InferenceStats");
+			initializer.Property("InferenceStats");
 			InferenceStats.FormatCode(writer);
 		}
 
 		if (Ingest is not null)
 		{
-			__init.Property("Ingest");
+			initializer.Property("Ingest");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -52,20 +52,20 @@ public partial class TrainedModelStats : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("ModelId");
+			initializer.Property("ModelId");
 			writer.WriteString(ModelId);
 		}
 
 		{
-			__init.Property("ModelSizeStats");
+			initializer.Property("ModelSizeStats");
 			ModelSizeStats.FormatCode(writer);
 		}
 
 		{
-			__init.Property("PipelineCount");
+			initializer.Property("PipelineCount");
 			writer.WriteValue(PipelineCount);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,31 +27,31 @@ public partial class CompositeAggregationSource : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CompositeAggregationSource", false);
+		var initializer = writer.BeginObjectInitializer("CompositeAggregationSource", false);
 		if (DateHistogram is not null)
 		{
-			__init.Property("DateHistogram");
+			initializer.Property("DateHistogram");
 			DateHistogram.FormatCode(writer);
 		}
 
 		if (GeotileGrid is not null)
 		{
-			__init.Property("GeotileGrid");
+			initializer.Property("GeotileGrid");
 			GeotileGrid.FormatCode(writer);
 		}
 
 		if (Histogram is not null)
 		{
-			__init.Property("Histogram");
+			initializer.Property("Histogram");
 			Histogram.FormatCode(writer);
 		}
 
 		if (Terms is not null)
 		{
-			__init.Property("Terms");
+			initializer.Property("Terms");
 			Terms.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

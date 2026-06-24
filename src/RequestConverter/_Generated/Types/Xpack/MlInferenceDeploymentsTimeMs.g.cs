@@ -27,13 +27,13 @@ public partial class MlInferenceDeploymentsTimeMs : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MlInferenceDeploymentsTimeMs", false);
+		var initializer = writer.BeginObjectInitializer("MlInferenceDeploymentsTimeMs", false);
 		{
-			__init.Property("Avg");
+			initializer.Property("Avg");
 			writer.WriteValue(Avg);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

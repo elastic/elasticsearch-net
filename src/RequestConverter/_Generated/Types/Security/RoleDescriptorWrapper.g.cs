@@ -27,12 +27,12 @@ public partial class RoleDescriptorWrapper : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RoleDescriptorWrapper", false);
+		var initializer = writer.BeginObjectInitializer("RoleDescriptorWrapper", false);
 		{
-			__init.Property("RoleDescriptor");
+			initializer.Property("RoleDescriptor");
 			RoleDescriptor.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

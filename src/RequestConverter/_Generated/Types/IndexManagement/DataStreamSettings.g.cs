@@ -27,22 +27,22 @@ public partial class DataStreamSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataStreamSettings", false);
+		var initializer = writer.BeginObjectInitializer("DataStreamSettings", false);
 		{
-			__init.Property("EffectiveSettings");
+			initializer.Property("EffectiveSettings");
 			EffectiveSettings.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("Settings");
+			initializer.Property("Settings");
 			Settings.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

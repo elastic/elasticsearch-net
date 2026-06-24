@@ -27,12 +27,12 @@ public partial class SettingsQueryString : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SettingsQueryString", false);
+		var initializer = writer.BeginObjectInitializer("SettingsQueryString", false);
 		{
-			__init.Property("Lenient");
+			initializer.Property("Lenient");
 			writer.WriteValue(Lenient);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

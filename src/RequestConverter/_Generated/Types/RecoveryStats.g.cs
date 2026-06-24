@@ -27,30 +27,30 @@ public partial class RecoveryStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RecoveryStats", false);
+		var initializer = writer.BeginObjectInitializer("RecoveryStats", false);
 		{
-			__init.Property("CurrentAsSource");
+			initializer.Property("CurrentAsSource");
 			writer.WriteValue(CurrentAsSource);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("CurrentAsTarget");
+			initializer.Property("CurrentAsTarget");
 			writer.WriteValue(CurrentAsTarget);
 			writer.Write("L");
 		}
 
 		if (ThrottleTime is not null)
 		{
-			__init.Property("ThrottleTime");
+			initializer.Property("ThrottleTime");
 			ThrottleTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ThrottleTimeInMillis");
+			initializer.Property("ThrottleTimeInMillis");
 			writer.WriteValue(ThrottleTimeInMillis);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

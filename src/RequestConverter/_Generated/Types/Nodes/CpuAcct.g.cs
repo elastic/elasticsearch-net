@@ -27,19 +27,19 @@ public partial class CpuAcct : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CpuAcct", false);
+		var initializer = writer.BeginObjectInitializer("CpuAcct", false);
 		if (ControlGroup is not null)
 		{
-			__init.Property("ControlGroup");
+			initializer.Property("ControlGroup");
 			writer.WriteString(ControlGroup);
 		}
 
 		if (UsageNanos is not null)
 		{
-			__init.Property("UsageNanos");
+			initializer.Property("UsageNanos");
 			writer.WriteValue(UsageNanos.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

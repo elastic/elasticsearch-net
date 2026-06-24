@@ -27,62 +27,62 @@ public partial class MemMlStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MemMlStats", false);
+		var initializer = writer.BeginObjectInitializer("MemMlStats", false);
 		if (AnomalyDetectors is not null)
 		{
-			__init.Property("AnomalyDetectors");
+			initializer.Property("AnomalyDetectors");
 			AnomalyDetectors.FormatCode(writer);
 		}
 
 		{
-			__init.Property("AnomalyDetectorsInBytes");
+			initializer.Property("AnomalyDetectorsInBytes");
 			writer.WriteValue(AnomalyDetectorsInBytes);
 		}
 
 		if (DataFrameAnalytics is not null)
 		{
-			__init.Property("DataFrameAnalytics");
+			initializer.Property("DataFrameAnalytics");
 			DataFrameAnalytics.FormatCode(writer);
 		}
 
 		{
-			__init.Property("DataFrameAnalyticsInBytes");
+			initializer.Property("DataFrameAnalyticsInBytes");
 			writer.WriteValue(DataFrameAnalyticsInBytes);
 		}
 
 		if (Max is not null)
 		{
-			__init.Property("Max");
+			initializer.Property("Max");
 			Max.FormatCode(writer);
 		}
 
 		{
-			__init.Property("MaxInBytes");
+			initializer.Property("MaxInBytes");
 			writer.WriteValue(MaxInBytes);
 		}
 
 		if (NativeCodeOverhead is not null)
 		{
-			__init.Property("NativeCodeOverhead");
+			initializer.Property("NativeCodeOverhead");
 			NativeCodeOverhead.FormatCode(writer);
 		}
 
 		{
-			__init.Property("NativeCodeOverheadInBytes");
+			initializer.Property("NativeCodeOverheadInBytes");
 			writer.WriteValue(NativeCodeOverheadInBytes);
 		}
 
 		if (NativeInference is not null)
 		{
-			__init.Property("NativeInference");
+			initializer.Property("NativeInference");
 			NativeInference.FormatCode(writer);
 		}
 
 		{
-			__init.Property("NativeInferenceInBytes");
+			initializer.Property("NativeInferenceInBytes");
 			writer.WriteValue(NativeInferenceInBytes);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

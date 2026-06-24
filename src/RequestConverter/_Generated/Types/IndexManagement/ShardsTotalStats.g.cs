@@ -27,13 +27,13 @@ public partial class ShardsTotalStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardsTotalStats", false);
+		var initializer = writer.BeginObjectInitializer("ShardsTotalStats", false);
 		{
-			__init.Property("TotalCount");
+			initializer.Property("TotalCount");
 			writer.WriteValue(TotalCount);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

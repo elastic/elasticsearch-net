@@ -27,62 +27,62 @@ public partial class TrainedModelTreeNode : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelTreeNode", false);
+		var initializer = writer.BeginObjectInitializer("TrainedModelTreeNode", false);
 		if (DecisionType is not null)
 		{
-			__init.Property("DecisionType");
+			initializer.Property("DecisionType");
 			writer.WriteString(DecisionType);
 		}
 
 		if (DefaultLeft is not null)
 		{
-			__init.Property("DefaultLeft");
+			initializer.Property("DefaultLeft");
 			writer.WriteValue(DefaultLeft.Value);
 		}
 
 		if (LeafValue is not null)
 		{
-			__init.Property("LeafValue");
+			initializer.Property("LeafValue");
 			writer.WriteValue(LeafValue.Value);
 			writer.Write("d");
 		}
 
 		if (LeftChild is not null)
 		{
-			__init.Property("LeftChild");
+			initializer.Property("LeftChild");
 			writer.WriteValue(LeftChild.Value);
 		}
 
 		{
-			__init.Property("NodeIndex");
+			initializer.Property("NodeIndex");
 			writer.WriteValue(NodeIndex);
 		}
 
 		if (RightChild is not null)
 		{
-			__init.Property("RightChild");
+			initializer.Property("RightChild");
 			writer.WriteValue(RightChild.Value);
 		}
 
 		if (SplitFeature is not null)
 		{
-			__init.Property("SplitFeature");
+			initializer.Property("SplitFeature");
 			writer.WriteValue(SplitFeature.Value);
 		}
 
 		if (SplitGain is not null)
 		{
-			__init.Property("SplitGain");
+			initializer.Property("SplitGain");
 			writer.WriteValue(SplitGain.Value);
 		}
 
 		if (Threshold is not null)
 		{
-			__init.Property("Threshold");
+			initializer.Property("Threshold");
 			writer.WriteValue(Threshold.Value);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

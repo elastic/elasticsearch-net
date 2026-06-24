@@ -27,56 +27,56 @@ public partial class StandardRetriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StandardRetriever", false);
+		var initializer = writer.BeginObjectInitializer("StandardRetriever", false);
 		if (Collapse is not null)
 		{
-			__init.Property("Collapse");
+			initializer.Property("Collapse");
 			Collapse.FormatCode(writer);
 		}
 
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (MinScore is not null)
 		{
-			__init.Property("MinScore");
+			initializer.Property("MinScore");
 			writer.WriteValue(MinScore.Value);
 			writer.Write("f");
 		}
 
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		if (Query is not null)
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			Query.FormatCode(writer);
 		}
 
 		if (SearchAfter is not null)
 		{
-			__init.Property("SearchAfter");
+			initializer.Property("SearchAfter");
 			writer.WriteInlineList(SearchAfter, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Sort is not null)
 		{
-			__init.Property("Sort");
+			initializer.Property("Sort");
 			writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (TerminateAfter is not null)
 		{
-			__init.Property("TerminateAfter");
+			initializer.Property("TerminateAfter");
 			writer.WriteValue(TerminateAfter.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

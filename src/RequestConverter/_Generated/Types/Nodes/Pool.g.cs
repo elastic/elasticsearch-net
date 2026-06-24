@@ -27,35 +27,35 @@ public partial class Pool : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Pool", false);
+		var initializer = writer.BeginObjectInitializer("Pool", false);
 		if (MaxInBytes is not null)
 		{
-			__init.Property("MaxInBytes");
+			initializer.Property("MaxInBytes");
 			writer.WriteValue(MaxInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (PeakMaxInBytes is not null)
 		{
-			__init.Property("PeakMaxInBytes");
+			initializer.Property("PeakMaxInBytes");
 			writer.WriteValue(PeakMaxInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (PeakUsedInBytes is not null)
 		{
-			__init.Property("PeakUsedInBytes");
+			initializer.Property("PeakUsedInBytes");
 			writer.WriteValue(PeakUsedInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (UsedInBytes is not null)
 		{
-			__init.Property("UsedInBytes");
+			initializer.Property("UsedInBytes");
 			writer.WriteValue(UsedInBytes.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,34 +27,34 @@ public partial class SlmPolicy : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SlmPolicy", false);
+		var initializer = writer.BeginObjectInitializer("SlmPolicy", false);
 		if (Config is not null)
 		{
-			__init.Property("Config");
+			initializer.Property("Config");
 			Config.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("Repository");
+			initializer.Property("Repository");
 			writer.WriteString(Repository);
 		}
 
 		if (Retention is not null)
 		{
-			__init.Property("Retention");
+			initializer.Property("Retention");
 			Retention.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Schedule");
+			initializer.Property("Schedule");
 			writer.WriteString(Schedule);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

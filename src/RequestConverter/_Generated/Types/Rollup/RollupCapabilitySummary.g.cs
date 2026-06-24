@@ -27,9 +27,9 @@ public partial class RollupCapabilitySummary : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RollupCapabilitySummary", false);
+		var initializer = writer.BeginObjectInitializer("RollupCapabilitySummary", false);
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -39,20 +39,20 @@ public partial class RollupCapabilitySummary : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("IndexPattern");
+			initializer.Property("IndexPattern");
 			writer.WriteString(IndexPattern);
 		}
 
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			writer.WriteString(JobId);
 		}
 
 		{
-			__init.Property("RollupIndex");
+			initializer.Property("RollupIndex");
 			writer.WriteString(RollupIndex);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

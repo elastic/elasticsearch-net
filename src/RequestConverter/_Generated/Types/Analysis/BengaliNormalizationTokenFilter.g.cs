@@ -27,13 +27,13 @@ public partial class BengaliNormalizationTokenFilter : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BengaliNormalizationTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("BengaliNormalizationTokenFilter", true);
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,10 +27,10 @@ public partial class RegexOptions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RegexOptions", false);
+		var initializer = writer.BeginObjectInitializer("RegexOptions", false);
 		if (Flags is not null)
 		{
-			__init.Property("Flags");
+			initializer.Property("Flags");
 			if (Flags.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				writer.WriteValue(Flags.Value1);
@@ -43,10 +43,10 @@ public partial class RegexOptions : RequestConverter.ICodeFormattable
 
 		if (MaxDeterminizedStates is not null)
 		{
-			__init.Property("MaxDeterminizedStates");
+			initializer.Property("MaxDeterminizedStates");
 			writer.WriteValue(MaxDeterminizedStates.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

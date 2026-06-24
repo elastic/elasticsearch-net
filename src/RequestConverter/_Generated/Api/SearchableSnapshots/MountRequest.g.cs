@@ -27,49 +27,49 @@ public partial class MountRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MountRequest", false);
+		var initializer = writer.BeginObjectInitializer("MountRequest", false);
 		{
-			__init.Property("Repository");
+			initializer.Property("Repository");
 			Repository.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Snapshot");
+			initializer.Property("Snapshot");
 			Snapshot.FormatCode(writer);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (Storage is not null)
 		{
-			__init.Property("Storage");
+			initializer.Property("Storage");
 			Elastic.Clients.Elasticsearch.SearchableSnapshots.StorageOptionCodeFormatter.FormatCode(Storage.Value, writer);
 		}
 
 		if (WaitForCompletion is not null)
 		{
-			__init.Property("WaitForCompletion");
+			initializer.Property("WaitForCompletion");
 			writer.WriteValue(WaitForCompletion.Value);
 		}
 
 		if (IgnoreIndexSettings is not null)
 		{
-			__init.Property("IgnoreIndexSettings");
+			initializer.Property("IgnoreIndexSettings");
 			writer.WriteInlineList(IgnoreIndexSettings, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		if (IndexSettings is not null)
 		{
-			__init.Property("IndexSettings");
+			initializer.Property("IndexSettings");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -80,10 +80,10 @@ public partial class MountRequest : RequestConverter.ICodeFormattable
 
 		if (RenamedIndex is not null)
 		{
-			__init.Property("RenamedIndex");
+			initializer.Property("RenamedIndex");
 			RenamedIndex.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

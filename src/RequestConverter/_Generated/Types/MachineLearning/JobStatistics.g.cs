@@ -27,31 +27,31 @@ public partial class JobStatistics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("JobStatistics", false);
+		var initializer = writer.BeginObjectInitializer("JobStatistics", false);
 		{
-			__init.Property("Avg");
+			initializer.Property("Avg");
 			writer.WriteValue(Avg);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Max");
+			initializer.Property("Max");
 			writer.WriteValue(Max);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Min");
+			initializer.Property("Min");
 			writer.WriteValue(Min);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteValue(Total);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

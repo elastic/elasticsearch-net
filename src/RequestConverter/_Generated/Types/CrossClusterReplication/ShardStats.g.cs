@@ -27,193 +27,193 @@ public partial class ShardStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardStats", false);
+		var initializer = writer.BeginObjectInitializer("ShardStats", false);
 		{
-			__init.Property("BytesRead");
+			initializer.Property("BytesRead");
 			writer.WriteValue(BytesRead);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("FailedReadRequests");
+			initializer.Property("FailedReadRequests");
 			writer.WriteValue(FailedReadRequests);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("FailedWriteRequests");
+			initializer.Property("FailedWriteRequests");
 			writer.WriteValue(FailedWriteRequests);
 			writer.Write("L");
 		}
 
 		if (FatalException is not null)
 		{
-			__init.Property("FatalException");
+			initializer.Property("FatalException");
 			FatalException.FormatCode(writer);
 		}
 
 		{
-			__init.Property("FollowerAliasesVersion");
+			initializer.Property("FollowerAliasesVersion");
 			writer.WriteValue(FollowerAliasesVersion);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("FollowerGlobalCheckpoint");
+			initializer.Property("FollowerGlobalCheckpoint");
 			writer.WriteValue(FollowerGlobalCheckpoint);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("FollowerIndex");
+			initializer.Property("FollowerIndex");
 			writer.WriteString(FollowerIndex);
 		}
 
 		{
-			__init.Property("FollowerMappingVersion");
+			initializer.Property("FollowerMappingVersion");
 			writer.WriteValue(FollowerMappingVersion);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("FollowerMaxSeqNo");
+			initializer.Property("FollowerMaxSeqNo");
 			writer.WriteValue(FollowerMaxSeqNo);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("FollowerSettingsVersion");
+			initializer.Property("FollowerSettingsVersion");
 			writer.WriteValue(FollowerSettingsVersion);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("LastRequestedSeqNo");
+			initializer.Property("LastRequestedSeqNo");
 			writer.WriteValue(LastRequestedSeqNo);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("LeaderGlobalCheckpoint");
+			initializer.Property("LeaderGlobalCheckpoint");
 			writer.WriteValue(LeaderGlobalCheckpoint);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("LeaderIndex");
+			initializer.Property("LeaderIndex");
 			writer.WriteString(LeaderIndex);
 		}
 
 		{
-			__init.Property("LeaderMaxSeqNo");
+			initializer.Property("LeaderMaxSeqNo");
 			writer.WriteValue(LeaderMaxSeqNo);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("OperationsRead");
+			initializer.Property("OperationsRead");
 			writer.WriteValue(OperationsRead);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("OperationsWritten");
+			initializer.Property("OperationsWritten");
 			writer.WriteValue(OperationsWritten);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("OutstandingReadRequests");
+			initializer.Property("OutstandingReadRequests");
 			writer.WriteValue(OutstandingReadRequests);
 		}
 
 		{
-			__init.Property("OutstandingWriteRequests");
+			initializer.Property("OutstandingWriteRequests");
 			writer.WriteValue(OutstandingWriteRequests);
 		}
 
 		{
-			__init.Property("ReadExceptions");
+			initializer.Property("ReadExceptions");
 			writer.WriteInlineList(ReadExceptions, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("RemoteCluster");
+			initializer.Property("RemoteCluster");
 			writer.WriteString(RemoteCluster);
 		}
 
 		{
-			__init.Property("ShardId");
+			initializer.Property("ShardId");
 			writer.WriteValue(ShardId);
 		}
 
 		{
-			__init.Property("SuccessfulReadRequests");
+			initializer.Property("SuccessfulReadRequests");
 			writer.WriteValue(SuccessfulReadRequests);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("SuccessfulWriteRequests");
+			initializer.Property("SuccessfulWriteRequests");
 			writer.WriteValue(SuccessfulWriteRequests);
 			writer.Write("L");
 		}
 
 		if (TimeSinceLastRead is not null)
 		{
-			__init.Property("TimeSinceLastRead");
+			initializer.Property("TimeSinceLastRead");
 			TimeSinceLastRead.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TimeSinceLastReadMillis");
+			initializer.Property("TimeSinceLastReadMillis");
 			writer.WriteValue(TimeSinceLastReadMillis);
 		}
 
 		if (TotalReadRemoteExecTime is not null)
 		{
-			__init.Property("TotalReadRemoteExecTime");
+			initializer.Property("TotalReadRemoteExecTime");
 			TotalReadRemoteExecTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalReadRemoteExecTimeMillis");
+			initializer.Property("TotalReadRemoteExecTimeMillis");
 			writer.WriteValue(TotalReadRemoteExecTimeMillis);
 		}
 
 		if (TotalReadTime is not null)
 		{
-			__init.Property("TotalReadTime");
+			initializer.Property("TotalReadTime");
 			TotalReadTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalReadTimeMillis");
+			initializer.Property("TotalReadTimeMillis");
 			writer.WriteValue(TotalReadTimeMillis);
 		}
 
 		if (TotalWriteTime is not null)
 		{
-			__init.Property("TotalWriteTime");
+			initializer.Property("TotalWriteTime");
 			TotalWriteTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalWriteTimeMillis");
+			initializer.Property("TotalWriteTimeMillis");
 			writer.WriteValue(TotalWriteTimeMillis);
 		}
 
 		{
-			__init.Property("WriteBufferOperationCount");
+			initializer.Property("WriteBufferOperationCount");
 			writer.WriteValue(WriteBufferOperationCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("WriteBufferSizeInBytes");
+			initializer.Property("WriteBufferSizeInBytes");
 			WriteBufferSizeInBytes.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

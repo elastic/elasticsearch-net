@@ -27,43 +27,43 @@ public partial class GeoGridQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoGridQuery", false);
+		var initializer = writer.BeginObjectInitializer("GeoGridQuery", false);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
 		if (Geohash is not null)
 		{
-			__init.Property("Geohash");
+			initializer.Property("Geohash");
 			writer.WriteString(Geohash);
 		}
 
 		if (Geohex is not null)
 		{
-			__init.Property("Geohex");
+			initializer.Property("Geohex");
 			writer.WriteString(Geohex);
 		}
 
 		if (Geotile is not null)
 		{
-			__init.Property("Geotile");
+			initializer.Property("Geotile");
 			writer.WriteString(Geotile);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

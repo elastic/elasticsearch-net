@@ -27,16 +27,16 @@ public partial class CompletionSuggestOption<TDocument> : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CompletionSuggestOption<TDocument>", false);
+		var initializer = writer.BeginObjectInitializer("CompletionSuggestOption<TDocument>", false);
 		if (CollateMatch is not null)
 		{
-			__init.Property("CollateMatch");
+			initializer.Property("CollateMatch");
 			writer.WriteValue(CollateMatch.Value);
 		}
 
 		if (Contexts is not null)
 		{
-			__init.Property("Contexts");
+			initializer.Property("Contexts");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -47,7 +47,7 @@ public partial class CompletionSuggestOption<TDocument> : RequestConverter.ICode
 
 		if (Fields is not null)
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -58,47 +58,47 @@ public partial class CompletionSuggestOption<TDocument> : RequestConverter.ICode
 
 		if (Id is not null)
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		if (Index is not null)
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteString(Index);
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			writer.WriteString(Routing);
 		}
 
 		if (Score is not null)
 		{
-			__init.Property("Score");
+			initializer.Property("Score");
 			writer.WriteValue(Score.Value);
 			writer.Write("d");
 		}
 
 		if (Score0 is not null)
 		{
-			__init.Property("Score0");
+			initializer.Property("Score0");
 			writer.WriteValue(Score0.Value);
 			writer.Write("d");
 		}
 
-		if (RequestConverter.CodeWriter.ShouldFormat(Source))
+		if (Source is not null)
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			writer.WriteValue(Source);
 		}
 
 		{
-			__init.Property("Text");
+			initializer.Property("Text");
 			writer.WriteString(Text);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

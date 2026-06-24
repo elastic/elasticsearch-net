@@ -27,25 +27,25 @@ public partial class ShrinkAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShrinkAction", false);
+		var initializer = writer.BeginObjectInitializer("ShrinkAction", false);
 		if (AllowWriteAfterShrink is not null)
 		{
-			__init.Property("AllowWriteAfterShrink");
+			initializer.Property("AllowWriteAfterShrink");
 			writer.WriteValue(AllowWriteAfterShrink.Value);
 		}
 
 		if (MaxPrimaryShardSize is not null)
 		{
-			__init.Property("MaxPrimaryShardSize");
+			initializer.Property("MaxPrimaryShardSize");
 			MaxPrimaryShardSize.FormatCode(writer);
 		}
 
 		if (NumberOfShards is not null)
 		{
-			__init.Property("NumberOfShards");
+			initializer.Property("NumberOfShards");
 			writer.WriteValue(NumberOfShards.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

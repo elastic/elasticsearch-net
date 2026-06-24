@@ -27,23 +27,23 @@ public partial class InnerRetriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InnerRetriever", false);
+		var initializer = writer.BeginObjectInitializer("InnerRetriever", false);
 		{
-			__init.Property("Normalizer");
+			initializer.Property("Normalizer");
 			Elastic.Clients.Elasticsearch.ScoreNormalizerCodeFormatter.FormatCode(Normalizer, writer);
 		}
 
 		{
-			__init.Property("Retriever");
+			initializer.Property("Retriever");
 			Retriever.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Weight");
+			initializer.Property("Weight");
 			writer.WriteValue(Weight);
 			writer.Write("f");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

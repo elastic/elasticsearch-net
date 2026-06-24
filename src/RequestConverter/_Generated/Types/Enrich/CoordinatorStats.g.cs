@@ -27,34 +27,34 @@ public partial class CoordinatorStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CoordinatorStats", false);
+		var initializer = writer.BeginObjectInitializer("CoordinatorStats", false);
 		{
-			__init.Property("ExecutedSearchesTotal");
+			initializer.Property("ExecutedSearchesTotal");
 			writer.WriteValue(ExecutedSearchesTotal);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("NodeId");
+			initializer.Property("NodeId");
 			writer.WriteString(NodeId);
 		}
 
 		{
-			__init.Property("QueueSize");
+			initializer.Property("QueueSize");
 			writer.WriteValue(QueueSize);
 		}
 
 		{
-			__init.Property("RemoteRequestsCurrent");
+			initializer.Property("RemoteRequestsCurrent");
 			writer.WriteValue(RemoteRequestsCurrent);
 		}
 
 		{
-			__init.Property("RemoteRequestsTotal");
+			initializer.Property("RemoteRequestsTotal");
 			writer.WriteValue(RemoteRequestsTotal);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

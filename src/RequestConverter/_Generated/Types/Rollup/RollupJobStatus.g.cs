@@ -27,10 +27,10 @@ public partial class RollupJobStatus : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RollupJobStatus", false);
+		var initializer = writer.BeginObjectInitializer("RollupJobStatus", false);
 		if (CurrentPosition is not null)
 		{
-			__init.Property("CurrentPosition");
+			initializer.Property("CurrentPosition");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -40,16 +40,16 @@ public partial class RollupJobStatus : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("JobState");
+			initializer.Property("JobState");
 			Elastic.Clients.Elasticsearch.Rollup.IndexingJobStateCodeFormatter.FormatCode(JobState, writer);
 		}
 
 		if (UpgradedDocId is not null)
 		{
-			__init.Property("UpgradedDocId");
+			initializer.Property("UpgradedDocId");
 			writer.WriteValue(UpgradedDocId.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

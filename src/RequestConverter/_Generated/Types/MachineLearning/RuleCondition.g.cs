@@ -27,23 +27,23 @@ public partial class RuleCondition : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RuleCondition", false);
+		var initializer = writer.BeginObjectInitializer("RuleCondition", false);
 		{
-			__init.Property("AppliesTo");
+			initializer.Property("AppliesTo");
 			Elastic.Clients.Elasticsearch.MachineLearning.AppliesToCodeFormatter.FormatCode(AppliesTo, writer);
 		}
 
 		{
-			__init.Property("Operator");
+			initializer.Property("Operator");
 			Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperatorCodeFormatter.FormatCode(Operator, writer);
 		}
 
 		{
-			__init.Property("Value");
+			initializer.Property("Value");
 			writer.WriteValue(Value);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

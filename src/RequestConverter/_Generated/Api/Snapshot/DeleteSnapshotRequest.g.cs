@@ -27,29 +27,29 @@ public partial class DeleteSnapshotRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteSnapshotRequest", false);
+		var initializer = writer.BeginObjectInitializer("DeleteSnapshotRequest", false);
 		{
-			__init.Property("Repository");
+			initializer.Property("Repository");
 			Repository.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Snapshot");
+			initializer.Property("Snapshot");
 			Snapshot.FormatCode(writer);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (WaitForCompletion is not null)
 		{
-			__init.Property("WaitForCompletion");
+			initializer.Property("WaitForCompletion");
 			writer.WriteValue(WaitForCompletion.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

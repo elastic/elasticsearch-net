@@ -27,29 +27,29 @@ public partial class GpuNodeStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GpuNodeStats", false);
+		var initializer = writer.BeginObjectInitializer("GpuNodeStats", false);
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);
 		}
 
 		{
-			__init.Property("IndexBuildCount");
+			initializer.Property("IndexBuildCount");
 			writer.WriteValue(IndexBuildCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("MemoryInBytes");
+			initializer.Property("MemoryInBytes");
 			writer.WriteValue(MemoryInBytes);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			writer.WriteString(Type);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

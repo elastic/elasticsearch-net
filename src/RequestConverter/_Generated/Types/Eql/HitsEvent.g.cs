@@ -27,10 +27,10 @@ public partial class HitsEvent<TEvent> : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("HitsEvent<TEvent>", false);
+		var initializer = writer.BeginObjectInitializer("HitsEvent<TEvent>", false);
 		if (Fields is not null)
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -40,26 +40,26 @@ public partial class HitsEvent<TEvent> : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteString(Index);
 		}
 
 		if (Missing is not null)
 		{
-			__init.Property("Missing");
+			initializer.Property("Missing");
 			writer.WriteValue(Missing.Value);
 		}
 
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			writer.WriteValue(Source);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

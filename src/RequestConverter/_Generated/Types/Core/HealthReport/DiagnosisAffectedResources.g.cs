@@ -27,37 +27,37 @@ public partial class DiagnosisAffectedResources : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DiagnosisAffectedResources", false);
+		var initializer = writer.BeginObjectInitializer("DiagnosisAffectedResources", false);
 		if (FeatureStates is not null)
 		{
-			__init.Property("FeatureStates");
+			initializer.Property("FeatureStates");
 			writer.WriteInlineList(FeatureStates, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Indices is not null)
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			writer.WriteInlineList(Indices, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Nodes is not null)
 		{
-			__init.Property("Nodes");
+			initializer.Property("Nodes");
 			writer.WriteInlineList(Nodes, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (SlmPolicies is not null)
 		{
-			__init.Property("SlmPolicies");
+			initializer.Property("SlmPolicies");
 			writer.WriteInlineList(SlmPolicies, (w, item) => { w.WriteString(item); });
 		}
 
 		if (SnapshotRepositories is not null)
 		{
-			__init.Property("SnapshotRepositories");
+			initializer.Property("SnapshotRepositories");
 			writer.WriteInlineList(SnapshotRepositories, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

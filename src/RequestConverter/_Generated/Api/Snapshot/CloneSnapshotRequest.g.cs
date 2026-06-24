@@ -27,33 +27,33 @@ public partial class CloneSnapshotRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CloneSnapshotRequest", false);
+		var initializer = writer.BeginObjectInitializer("CloneSnapshotRequest", false);
 		{
-			__init.Property("Repository");
+			initializer.Property("Repository");
 			Repository.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Snapshot");
+			initializer.Property("Snapshot");
 			Snapshot.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TargetSnapshot");
+			initializer.Property("TargetSnapshot");
 			TargetSnapshot.FormatCode(writer);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			writer.WriteString(Indices);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

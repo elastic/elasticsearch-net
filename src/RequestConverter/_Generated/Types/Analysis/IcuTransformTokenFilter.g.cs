@@ -27,24 +27,24 @@ public partial class IcuTransformTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IcuTransformTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("IcuTransformTokenFilter", true);
 		if (Dir is not null)
 		{
-			__init.Property("Dir");
+			initializer.Property("Dir");
 			Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirectionCodeFormatter.FormatCode(Dir.Value, writer);
 		}
 
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

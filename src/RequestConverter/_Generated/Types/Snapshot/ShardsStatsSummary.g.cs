@@ -27,33 +27,33 @@ public partial class ShardsStatsSummary : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardsStatsSummary", false);
+		var initializer = writer.BeginObjectInitializer("ShardsStatsSummary", false);
 		{
-			__init.Property("Incremental");
+			initializer.Property("Incremental");
 			Incremental.FormatCode(writer);
 		}
 
 		{
-			__init.Property("StartTimeInMillis");
+			initializer.Property("StartTimeInMillis");
 			writer.WriteValue(StartTimeInMillis);
 		}
 
 		if (Time is not null)
 		{
-			__init.Property("Time");
+			initializer.Property("Time");
 			Time.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TimeInMillis");
+			initializer.Property("TimeInMillis");
 			writer.WriteValue(TimeInMillis);
 		}
 
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			Total.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

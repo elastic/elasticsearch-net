@@ -27,19 +27,19 @@ public partial class PhraseSuggestCollateQuery : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PhraseSuggestCollateQuery", false);
+		var initializer = writer.BeginObjectInitializer("PhraseSuggestCollateQuery", false);
 		if (Id is not null)
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		if (Source is not null)
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			writer.WriteString(Source);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

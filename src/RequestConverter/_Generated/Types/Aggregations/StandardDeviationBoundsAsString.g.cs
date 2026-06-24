@@ -27,37 +27,37 @@ public partial class StandardDeviationBoundsAsString : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StandardDeviationBoundsAsString", false);
+		var initializer = writer.BeginObjectInitializer("StandardDeviationBoundsAsString", false);
 		{
-			__init.Property("Lower");
+			initializer.Property("Lower");
 			writer.WriteString(Lower);
 		}
 
 		{
-			__init.Property("LowerPopulation");
+			initializer.Property("LowerPopulation");
 			writer.WriteString(LowerPopulation);
 		}
 
 		{
-			__init.Property("LowerSampling");
+			initializer.Property("LowerSampling");
 			writer.WriteString(LowerSampling);
 		}
 
 		{
-			__init.Property("Upper");
+			initializer.Property("Upper");
 			writer.WriteString(Upper);
 		}
 
 		{
-			__init.Property("UpperPopulation");
+			initializer.Property("UpperPopulation");
 			writer.WriteString(UpperPopulation);
 		}
 
 		{
-			__init.Property("UpperSampling");
+			initializer.Property("UpperSampling");
 			writer.WriteString(UpperSampling);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

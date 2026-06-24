@@ -27,32 +27,32 @@ public partial class FileSystem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FileSystem", false);
+		var initializer = writer.BeginObjectInitializer("FileSystem", false);
 		if (Data is not null)
 		{
-			__init.Property("Data");
+			initializer.Property("Data");
 			writer.WriteInlineList(Data, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (IoStats is not null)
 		{
-			__init.Property("IoStats");
+			initializer.Property("IoStats");
 			IoStats.FormatCode(writer);
 		}
 
 		if (Timestamp is not null)
 		{
-			__init.Property("Timestamp");
+			initializer.Property("Timestamp");
 			writer.WriteValue(Timestamp.Value);
 			writer.Write("L");
 		}
 
 		if (Total is not null)
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			Total.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

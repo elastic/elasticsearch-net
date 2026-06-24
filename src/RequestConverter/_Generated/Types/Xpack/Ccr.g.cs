@@ -27,27 +27,27 @@ public partial class Ccr : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Ccr", false);
+		var initializer = writer.BeginObjectInitializer("Ccr", false);
 		{
-			__init.Property("AutoFollowPatternsCount");
+			initializer.Property("AutoFollowPatternsCount");
 			writer.WriteValue(AutoFollowPatternsCount);
 		}
 
 		{
-			__init.Property("Available");
+			initializer.Property("Available");
 			writer.WriteValue(Available);
 		}
 
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);
 		}
 
 		{
-			__init.Property("FollowerIndicesCount");
+			initializer.Property("FollowerIndicesCount");
 			writer.WriteValue(FollowerIndicesCount);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

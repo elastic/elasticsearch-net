@@ -27,48 +27,48 @@ public partial class IoStatDevice : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IoStatDevice", false);
+		var initializer = writer.BeginObjectInitializer("IoStatDevice", false);
 		if (DeviceName is not null)
 		{
-			__init.Property("DeviceName");
+			initializer.Property("DeviceName");
 			writer.WriteString(DeviceName);
 		}
 
 		if (Operations is not null)
 		{
-			__init.Property("Operations");
+			initializer.Property("Operations");
 			writer.WriteValue(Operations.Value);
 			writer.Write("L");
 		}
 
 		if (ReadKilobytes is not null)
 		{
-			__init.Property("ReadKilobytes");
+			initializer.Property("ReadKilobytes");
 			writer.WriteValue(ReadKilobytes.Value);
 			writer.Write("L");
 		}
 
 		if (ReadOperations is not null)
 		{
-			__init.Property("ReadOperations");
+			initializer.Property("ReadOperations");
 			writer.WriteValue(ReadOperations.Value);
 			writer.Write("L");
 		}
 
 		if (WriteKilobytes is not null)
 		{
-			__init.Property("WriteKilobytes");
+			initializer.Property("WriteKilobytes");
 			writer.WriteValue(WriteKilobytes.Value);
 			writer.Write("L");
 		}
 
 		if (WriteOperations is not null)
 		{
-			__init.Property("WriteOperations");
+			initializer.Property("WriteOperations");
 			writer.WriteValue(WriteOperations.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

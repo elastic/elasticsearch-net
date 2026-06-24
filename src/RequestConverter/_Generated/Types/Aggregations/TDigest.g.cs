@@ -27,19 +27,19 @@ public partial class TDigest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TDigest", false);
+		var initializer = writer.BeginObjectInitializer("TDigest", false);
 		if (Compression is not null)
 		{
-			__init.Property("Compression");
+			initializer.Property("Compression");
 			writer.WriteValue(Compression.Value);
 		}
 
 		if (ExecutionHint is not null)
 		{
-			__init.Property("ExecutionHint");
+			initializer.Property("ExecutionHint");
 			Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

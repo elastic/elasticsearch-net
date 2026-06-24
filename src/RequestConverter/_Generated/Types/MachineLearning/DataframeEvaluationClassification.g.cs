@@ -27,30 +27,30 @@ public partial class DataframeEvaluationClassification : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeEvaluationClassification", false);
+		var initializer = writer.BeginObjectInitializer("DataframeEvaluationClassification", false);
 		{
-			__init.Property("ActualField");
+			initializer.Property("ActualField");
 			ActualField.FormatCode(writer);
 		}
 
 		if (Metrics is not null)
 		{
-			__init.Property("Metrics");
+			initializer.Property("Metrics");
 			Metrics.FormatCode(writer);
 		}
 
 		if (PredictedField is not null)
 		{
-			__init.Property("PredictedField");
+			initializer.Property("PredictedField");
 			PredictedField.FormatCode(writer);
 		}
 
 		if (TopClassesField is not null)
 		{
-			__init.Property("TopClassesField");
+			initializer.Property("TopClassesField");
 			TopClassesField.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

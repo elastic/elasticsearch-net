@@ -27,16 +27,16 @@ public partial class ErrorCause : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ErrorCause", false);
+		var initializer = writer.BeginObjectInitializer("ErrorCause", false);
 		if (CausedBy is not null)
 		{
-			__init.Property("CausedBy");
+			initializer.Property("CausedBy");
 			CausedBy.FormatCode(writer);
 		}
 
 		if (Metadata is not null)
 		{
-			__init.Property("Metadata");
+			initializer.Property("Metadata");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -47,33 +47,33 @@ public partial class ErrorCause : RequestConverter.ICodeFormattable
 
 		if (Reason is not null)
 		{
-			__init.Property("Reason");
+			initializer.Property("Reason");
 			writer.WriteString(Reason);
 		}
 
 		if (RootCause is not null)
 		{
-			__init.Property("RootCause");
+			initializer.Property("RootCause");
 			writer.WriteInlineList(RootCause, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (StackTrace is not null)
 		{
-			__init.Property("StackTrace");
+			initializer.Property("StackTrace");
 			writer.WriteString(StackTrace);
 		}
 
 		if (Suppressed is not null)
 		{
-			__init.Property("Suppressed");
+			initializer.Property("Suppressed");
 			writer.WriteInlineList(Suppressed, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			writer.WriteString(Type);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

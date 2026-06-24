@@ -27,31 +27,31 @@ public partial class NoriAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NoriAnalyzer", true);
+		var initializer = writer.BeginObjectInitializer("NoriAnalyzer", true);
 		if (DecompoundMode is not null)
 		{
-			__init.Property("DecompoundMode");
+			initializer.Property("DecompoundMode");
 			Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundModeCodeFormatter.FormatCode(DecompoundMode.Value, writer);
 		}
 
 		if (Stoptags is not null)
 		{
-			__init.Property("Stoptags");
+			initializer.Property("Stoptags");
 			writer.WriteInlineList(Stoptags, (w, item) => { w.WriteString(item); });
 		}
 
 		if (UserDictionary is not null)
 		{
-			__init.Property("UserDictionary");
+			initializer.Property("UserDictionary");
 			writer.WriteString(UserDictionary);
 		}
 #pragma warning disable CS0618
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 #pragma warning restore CS0618
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

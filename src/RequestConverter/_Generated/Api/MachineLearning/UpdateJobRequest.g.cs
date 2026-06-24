@@ -27,39 +27,39 @@ public partial class UpdateJobRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UpdateJobRequest", false);
+		var initializer = writer.BeginObjectInitializer("UpdateJobRequest", false);
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			JobId.FormatCode(writer);
 		}
 
 		if (AllowLazyOpen is not null)
 		{
-			__init.Property("AllowLazyOpen");
+			initializer.Property("AllowLazyOpen");
 			writer.WriteValue(AllowLazyOpen.Value);
 		}
 
 		if (AnalysisLimits is not null)
 		{
-			__init.Property("AnalysisLimits");
+			initializer.Property("AnalysisLimits");
 			AnalysisLimits.FormatCode(writer);
 		}
 
 		if (BackgroundPersistInterval is not null)
 		{
-			__init.Property("BackgroundPersistInterval");
+			initializer.Property("BackgroundPersistInterval");
 			BackgroundPersistInterval.FormatCode(writer);
 		}
 
 		if (CategorizationFilters is not null)
 		{
-			__init.Property("CategorizationFilters");
+			initializer.Property("CategorizationFilters");
 			writer.WriteInlineList(CategorizationFilters, (w, item) => { w.WriteString(item); });
 		}
 
 		if (CustomSettings is not null)
 		{
-			__init.Property("CustomSettings");
+			initializer.Property("CustomSettings");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -70,68 +70,68 @@ public partial class UpdateJobRequest : RequestConverter.ICodeFormattable
 
 		if (DailyModelSnapshotRetentionAfterDays is not null)
 		{
-			__init.Property("DailyModelSnapshotRetentionAfterDays");
+			initializer.Property("DailyModelSnapshotRetentionAfterDays");
 			writer.WriteValue(DailyModelSnapshotRetentionAfterDays.Value);
 			writer.Write("L");
 		}
 
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		if (Detectors is not null)
 		{
-			__init.Property("Detectors");
+			initializer.Property("Detectors");
 			writer.WriteInlineList(Detectors, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Groups is not null)
 		{
-			__init.Property("Groups");
+			initializer.Property("Groups");
 			writer.WriteInlineList(Groups, (w, item) => { w.WriteString(item); });
 		}
 
 		if (ModelPlotConfig is not null)
 		{
-			__init.Property("ModelPlotConfig");
+			initializer.Property("ModelPlotConfig");
 			ModelPlotConfig.FormatCode(writer);
 		}
 
 		if (ModelPruneWindow is not null)
 		{
-			__init.Property("ModelPruneWindow");
+			initializer.Property("ModelPruneWindow");
 			ModelPruneWindow.FormatCode(writer);
 		}
 
 		if (ModelSnapshotRetentionDays is not null)
 		{
-			__init.Property("ModelSnapshotRetentionDays");
+			initializer.Property("ModelSnapshotRetentionDays");
 			writer.WriteValue(ModelSnapshotRetentionDays.Value);
 			writer.Write("L");
 		}
 
 		if (PerPartitionCategorization is not null)
 		{
-			__init.Property("PerPartitionCategorization");
+			initializer.Property("PerPartitionCategorization");
 			PerPartitionCategorization.FormatCode(writer);
 		}
 
 		if (RenormalizationWindowDays is not null)
 		{
-			__init.Property("RenormalizationWindowDays");
+			initializer.Property("RenormalizationWindowDays");
 			writer.WriteValue(RenormalizationWindowDays.Value);
 			writer.Write("L");
 		}
 
 		if (ResultsRetentionDays is not null)
 		{
-			__init.Property("ResultsRetentionDays");
+			initializer.Property("ResultsRetentionDays");
 			writer.WriteValue(ResultsRetentionDays.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

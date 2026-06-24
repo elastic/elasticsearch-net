@@ -27,13 +27,13 @@ public partial class RetentionPolicy : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RetentionPolicy", false);
+		var initializer = writer.BeginObjectInitializer("RetentionPolicy", false);
 		if (Time is not null)
 		{
-			__init.Property("Time");
+			initializer.Property("Time");
 			Time.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

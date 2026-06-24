@@ -27,67 +27,67 @@ public partial class ShardsAvailabilityIndicatorDetails : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardsAvailabilityIndicatorDetails", false);
+		var initializer = writer.BeginObjectInitializer("ShardsAvailabilityIndicatorDetails", false);
 		{
-			__init.Property("CreatingPrimaries");
+			initializer.Property("CreatingPrimaries");
 			writer.WriteValue(CreatingPrimaries);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("CreatingReplicas");
+			initializer.Property("CreatingReplicas");
 			writer.WriteValue(CreatingReplicas);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("InitializingPrimaries");
+			initializer.Property("InitializingPrimaries");
 			writer.WriteValue(InitializingPrimaries);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("InitializingReplicas");
+			initializer.Property("InitializingReplicas");
 			writer.WriteValue(InitializingReplicas);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("RestartingPrimaries");
+			initializer.Property("RestartingPrimaries");
 			writer.WriteValue(RestartingPrimaries);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("RestartingReplicas");
+			initializer.Property("RestartingReplicas");
 			writer.WriteValue(RestartingReplicas);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("StartedPrimaries");
+			initializer.Property("StartedPrimaries");
 			writer.WriteValue(StartedPrimaries);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("StartedReplicas");
+			initializer.Property("StartedReplicas");
 			writer.WriteValue(StartedReplicas);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("UnassignedPrimaries");
+			initializer.Property("UnassignedPrimaries");
 			writer.WriteValue(UnassignedPrimaries);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("UnassignedReplicas");
+			initializer.Property("UnassignedReplicas");
 			writer.WriteValue(UnassignedReplicas);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,106 +27,106 @@ public partial class QueryRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("QueryRequest", false);
+		var initializer = writer.BeginObjectInitializer("QueryRequest", false);
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			Elastic.Clients.Elasticsearch.Sql.SqlFormatCodeFormatter.FormatCode(Format.Value, writer);
 		}
 
 		if (AllowPartialSearchResults is not null)
 		{
-			__init.Property("AllowPartialSearchResults");
+			initializer.Property("AllowPartialSearchResults");
 			writer.WriteValue(AllowPartialSearchResults.Value);
 		}
 
 		if (Catalog is not null)
 		{
-			__init.Property("Catalog");
+			initializer.Property("Catalog");
 			writer.WriteString(Catalog);
 		}
 
 		if (Columnar is not null)
 		{
-			__init.Property("Columnar");
+			initializer.Property("Columnar");
 			writer.WriteValue(Columnar.Value);
 		}
 
 		if (Cursor is not null)
 		{
-			__init.Property("Cursor");
+			initializer.Property("Cursor");
 			writer.WriteString(Cursor);
 		}
 
 		if (FetchSize is not null)
 		{
-			__init.Property("FetchSize");
+			initializer.Property("FetchSize");
 			writer.WriteValue(FetchSize.Value);
 		}
 
 		if (FieldMultiValueLeniency is not null)
 		{
-			__init.Property("FieldMultiValueLeniency");
+			initializer.Property("FieldMultiValueLeniency");
 			writer.WriteValue(FieldMultiValueLeniency.Value);
 		}
 
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			Filter.FormatCode(writer);
 		}
 
 		if (IndexUsingFrozen is not null)
 		{
-			__init.Property("IndexUsingFrozen");
+			initializer.Property("IndexUsingFrozen");
 			writer.WriteValue(IndexUsingFrozen.Value);
 		}
 
 		if (KeepAlive is not null)
 		{
-			__init.Property("KeepAlive");
+			initializer.Property("KeepAlive");
 			KeepAlive.FormatCode(writer);
 		}
 
 		if (KeepOnCompletion is not null)
 		{
-			__init.Property("KeepOnCompletion");
+			initializer.Property("KeepOnCompletion");
 			writer.WriteValue(KeepOnCompletion.Value);
 		}
 
 		if (PageTimeout is not null)
 		{
-			__init.Property("PageTimeout");
+			initializer.Property("PageTimeout");
 			PageTimeout.FormatCode(writer);
 		}
 
 		if (Params is not null)
 		{
-			__init.Property("Params");
+			initializer.Property("Params");
 			writer.WriteInlineList(Params, (w, item) => { w.WriteValue(item); });
 		}
 
 		if (ProjectRouting is not null)
 		{
-			__init.Property("ProjectRouting");
+			initializer.Property("ProjectRouting");
 			writer.WriteString(ProjectRouting);
 		}
 
 		if (Query is not null)
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			writer.WriteString(Query);
 		}
 
 		if (RequestTimeout is not null)
 		{
-			__init.Property("RequestTimeout");
+			initializer.Property("RequestTimeout");
 			RequestTimeout.FormatCode(writer);
 		}
 
 		if (RuntimeMappings is not null)
 		{
-			__init.Property("RuntimeMappings");
+			initializer.Property("RuntimeMappings");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("Elastic.Clients.Elasticsearch.Field");
 			writer.Write(", ");
@@ -137,16 +137,16 @@ public partial class QueryRequest : RequestConverter.ICodeFormattable
 
 		if (TimeZone is not null)
 		{
-			__init.Property("TimeZone");
+			initializer.Property("TimeZone");
 			writer.WriteString(TimeZone);
 		}
 
 		if (WaitForCompletionTimeout is not null)
 		{
-			__init.Property("WaitForCompletionTimeout");
+			initializer.Property("WaitForCompletionTimeout");
 			WaitForCompletionTimeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

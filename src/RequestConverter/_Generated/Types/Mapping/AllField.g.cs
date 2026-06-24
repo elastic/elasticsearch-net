@@ -27,57 +27,57 @@ public partial class AllField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AllField", false);
+		var initializer = writer.BeginObjectInitializer("AllField", false);
 		{
-			__init.Property("Analyzer");
+			initializer.Property("Analyzer");
 			writer.WriteString(Analyzer);
 		}
 
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);
 		}
 
 		{
-			__init.Property("OmitNorms");
+			initializer.Property("OmitNorms");
 			writer.WriteValue(OmitNorms);
 		}
 
 		{
-			__init.Property("SearchAnalyzer");
+			initializer.Property("SearchAnalyzer");
 			writer.WriteString(SearchAnalyzer);
 		}
 
 		{
-			__init.Property("Similarity");
+			initializer.Property("Similarity");
 			writer.WriteString(Similarity);
 		}
 
 		{
-			__init.Property("Store");
+			initializer.Property("Store");
 			writer.WriteValue(Store);
 		}
 
 		{
-			__init.Property("StoreTermVectorOffsets");
+			initializer.Property("StoreTermVectorOffsets");
 			writer.WriteValue(StoreTermVectorOffsets);
 		}
 
 		{
-			__init.Property("StoreTermVectorPayloads");
+			initializer.Property("StoreTermVectorPayloads");
 			writer.WriteValue(StoreTermVectorPayloads);
 		}
 
 		{
-			__init.Property("StoreTermVectorPositions");
+			initializer.Property("StoreTermVectorPositions");
 			writer.WriteValue(StoreTermVectorPositions);
 		}
 
 		{
-			__init.Property("StoreTermVectors");
+			initializer.Property("StoreTermVectors");
 			writer.WriteValue(StoreTermVectors);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,33 +27,33 @@ public partial class GpuVectorIndexing : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GpuVectorIndexing", false);
+		var initializer = writer.BeginObjectInitializer("GpuVectorIndexing", false);
 		{
-			__init.Property("Available");
+			initializer.Property("Available");
 			writer.WriteValue(Available);
 		}
 
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);
 		}
 
 		{
-			__init.Property("IndexBuildCount");
+			initializer.Property("IndexBuildCount");
 			writer.WriteValue(IndexBuildCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Nodes");
+			initializer.Property("Nodes");
 			writer.WriteInlineList(Nodes, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("NodesWithGpu");
+			initializer.Property("NodesWithGpu");
 			writer.WriteValue(NodesWithGpu);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

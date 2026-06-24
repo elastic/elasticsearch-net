@@ -27,9 +27,9 @@ public partial class QueryRulesetListItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("QueryRulesetListItem", false);
+		var initializer = writer.BeginObjectInitializer("QueryRulesetListItem", false);
 		{
-			__init.Property("RuleCriteriaTypesCounts");
+			initializer.Property("RuleCriteriaTypesCounts");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -39,17 +39,17 @@ public partial class QueryRulesetListItem : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("RulesetId");
+			initializer.Property("RulesetId");
 			writer.WriteString(RulesetId);
 		}
 
 		{
-			__init.Property("RuleTotalCount");
+			initializer.Property("RuleTotalCount");
 			writer.WriteValue(RuleTotalCount);
 		}
 
 		{
-			__init.Property("RuleTypeCounts");
+			initializer.Property("RuleTypeCounts");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -58,6 +58,6 @@ public partial class QueryRulesetListItem : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(RuleTypeCounts, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

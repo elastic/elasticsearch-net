@@ -27,13 +27,13 @@ public partial class HdrMethod : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("HdrMethod", false);
+		var initializer = writer.BeginObjectInitializer("HdrMethod", false);
 		if (NumberOfSignificantValueDigits is not null)
 		{
-			__init.Property("NumberOfSignificantValueDigits");
+			initializer.Property("NumberOfSignificantValueDigits");
 			writer.WriteValue(NumberOfSignificantValueDigits.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

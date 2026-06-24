@@ -27,34 +27,34 @@ public partial class PutGoogleaistudioRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutGoogleaistudioRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutGoogleaistudioRequest", false);
 		{
-			__init.Property("GoogleaistudioInferenceId");
+			initializer.Property("GoogleaistudioInferenceId");
 			GoogleaistudioInferenceId.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TaskType");
+			initializer.Property("TaskType");
 			Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskTypeCodeFormatter.FormatCode(TaskType, writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (ChunkingSettings is not null)
 		{
-			__init.Property("ChunkingSettings");
+			initializer.Property("ChunkingSettings");
 			ChunkingSettings.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ServiceSettings");
+			initializer.Property("ServiceSettings");
 			ServiceSettings.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

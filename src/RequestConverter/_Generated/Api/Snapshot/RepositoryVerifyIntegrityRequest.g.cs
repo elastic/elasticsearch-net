@@ -27,60 +27,60 @@ public partial class RepositoryVerifyIntegrityRequest : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RepositoryVerifyIntegrityRequest", false);
+		var initializer = writer.BeginObjectInitializer("RepositoryVerifyIntegrityRequest", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		if (BlobThreadPoolConcurrency is not null)
 		{
-			__init.Property("BlobThreadPoolConcurrency");
+			initializer.Property("BlobThreadPoolConcurrency");
 			writer.WriteValue(BlobThreadPoolConcurrency.Value);
 		}
 
 		if (IndexSnapshotVerificationConcurrency is not null)
 		{
-			__init.Property("IndexSnapshotVerificationConcurrency");
+			initializer.Property("IndexSnapshotVerificationConcurrency");
 			writer.WriteValue(IndexSnapshotVerificationConcurrency.Value);
 		}
 
 		if (IndexVerificationConcurrency is not null)
 		{
-			__init.Property("IndexVerificationConcurrency");
+			initializer.Property("IndexVerificationConcurrency");
 			writer.WriteValue(IndexVerificationConcurrency.Value);
 		}
 
 		if (MaxBytesPerSec is not null)
 		{
-			__init.Property("MaxBytesPerSec");
+			initializer.Property("MaxBytesPerSec");
 			writer.WriteString(MaxBytesPerSec);
 		}
 
 		if (MaxFailedShardSnapshots is not null)
 		{
-			__init.Property("MaxFailedShardSnapshots");
+			initializer.Property("MaxFailedShardSnapshots");
 			writer.WriteValue(MaxFailedShardSnapshots.Value);
 		}
 
 		if (MetaThreadPoolConcurrency is not null)
 		{
-			__init.Property("MetaThreadPoolConcurrency");
+			initializer.Property("MetaThreadPoolConcurrency");
 			writer.WriteValue(MetaThreadPoolConcurrency.Value);
 		}
 
 		if (SnapshotVerificationConcurrency is not null)
 		{
-			__init.Property("SnapshotVerificationConcurrency");
+			initializer.Property("SnapshotVerificationConcurrency");
 			writer.WriteValue(SnapshotVerificationConcurrency.Value);
 		}
 
 		if (VerifyBlobContents is not null)
 		{
-			__init.Property("VerifyBlobContents");
+			initializer.Property("VerifyBlobContents");
 			writer.WriteValue(VerifyBlobContents.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

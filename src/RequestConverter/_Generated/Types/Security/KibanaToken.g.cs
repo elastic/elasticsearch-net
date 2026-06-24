@@ -27,17 +27,17 @@ public partial class KibanaToken : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("KibanaToken", false);
+		var initializer = writer.BeginObjectInitializer("KibanaToken", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("Value");
+			initializer.Property("Value");
 			writer.WriteString(Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

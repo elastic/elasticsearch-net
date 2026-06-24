@@ -27,18 +27,18 @@ public partial class FilterRef : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FilterRef", false);
+		var initializer = writer.BeginObjectInitializer("FilterRef", false);
 		{
-			__init.Property("FilterId");
+			initializer.Property("FilterId");
 			FilterId.FormatCode(writer);
 		}
 
 		if (FilterType is not null)
 		{
-			__init.Property("FilterType");
+			initializer.Property("FilterType");
 			Elastic.Clients.Elasticsearch.MachineLearning.FilterTypeCodeFormatter.FormatCode(FilterType.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

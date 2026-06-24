@@ -27,24 +27,24 @@ public partial class FieldStatistics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldStatistics", false);
+		var initializer = writer.BeginObjectInitializer("FieldStatistics", false);
 		{
-			__init.Property("DocCount");
+			initializer.Property("DocCount");
 			writer.WriteValue(DocCount);
 		}
 
 		{
-			__init.Property("SumDocFreq");
+			initializer.Property("SumDocFreq");
 			writer.WriteValue(SumDocFreq);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("SumTtf");
+			initializer.Property("SumTtf");
 			writer.WriteValue(SumTtf);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

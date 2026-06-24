@@ -27,29 +27,29 @@ public partial class NodeInfoHttp : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoHttp", false);
+		var initializer = writer.BeginObjectInitializer("NodeInfoHttp", false);
 		{
-			__init.Property("BoundAddress");
+			initializer.Property("BoundAddress");
 			writer.WriteInlineList(BoundAddress, (w, item) => { w.WriteString(item); });
 		}
 
 		if (MaxContentLength is not null)
 		{
-			__init.Property("MaxContentLength");
+			initializer.Property("MaxContentLength");
 			MaxContentLength.FormatCode(writer);
 		}
 
 		{
-			__init.Property("MaxContentLengthInBytes");
+			initializer.Property("MaxContentLengthInBytes");
 			writer.WriteValue(MaxContentLengthInBytes);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("PublishAddress");
+			initializer.Property("PublishAddress");
 			writer.WriteString(PublishAddress);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

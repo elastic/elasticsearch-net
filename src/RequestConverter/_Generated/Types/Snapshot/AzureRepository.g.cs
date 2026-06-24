@@ -27,19 +27,19 @@ public partial class AzureRepository : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AzureRepository", true);
+		var initializer = writer.BeginObjectInitializer("AzureRepository", true);
 		if (Settings is not null)
 		{
-			__init.Property("Settings");
+			initializer.Property("Settings");
 			Settings.FormatCode(writer);
 		}
 
 		if (Uuid is not null)
 		{
-			__init.Property("Uuid");
+			initializer.Property("Uuid");
 			writer.WriteString(Uuid);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

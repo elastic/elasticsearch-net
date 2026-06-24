@@ -27,116 +27,116 @@ public partial class ClusterFileSystem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterFileSystem", false);
+		var initializer = writer.BeginObjectInitializer("ClusterFileSystem", false);
 		if (Available is not null)
 		{
-			__init.Property("Available");
+			initializer.Property("Available");
 			Available.FormatCode(writer);
 		}
 
 		if (AvailableInBytes is not null)
 		{
-			__init.Property("AvailableInBytes");
+			initializer.Property("AvailableInBytes");
 			writer.WriteValue(AvailableInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (FloodStageFreeSpace is not null)
 		{
-			__init.Property("FloodStageFreeSpace");
+			initializer.Property("FloodStageFreeSpace");
 			FloodStageFreeSpace.FormatCode(writer);
 		}
 
 		if (FloodStageFreeSpaceInBytes is not null)
 		{
-			__init.Property("FloodStageFreeSpaceInBytes");
+			initializer.Property("FloodStageFreeSpaceInBytes");
 			writer.WriteValue(FloodStageFreeSpaceInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (Free is not null)
 		{
-			__init.Property("Free");
+			initializer.Property("Free");
 			Free.FormatCode(writer);
 		}
 
 		if (FreeInBytes is not null)
 		{
-			__init.Property("FreeInBytes");
+			initializer.Property("FreeInBytes");
 			writer.WriteValue(FreeInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (FrozenFloodStageFreeSpace is not null)
 		{
-			__init.Property("FrozenFloodStageFreeSpace");
+			initializer.Property("FrozenFloodStageFreeSpace");
 			FrozenFloodStageFreeSpace.FormatCode(writer);
 		}
 
 		if (FrozenFloodStageFreeSpaceInBytes is not null)
 		{
-			__init.Property("FrozenFloodStageFreeSpaceInBytes");
+			initializer.Property("FrozenFloodStageFreeSpaceInBytes");
 			writer.WriteValue(FrozenFloodStageFreeSpaceInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (HighWatermarkFreeSpace is not null)
 		{
-			__init.Property("HighWatermarkFreeSpace");
+			initializer.Property("HighWatermarkFreeSpace");
 			HighWatermarkFreeSpace.FormatCode(writer);
 		}
 
 		if (HighWatermarkFreeSpaceInBytes is not null)
 		{
-			__init.Property("HighWatermarkFreeSpaceInBytes");
+			initializer.Property("HighWatermarkFreeSpaceInBytes");
 			writer.WriteValue(HighWatermarkFreeSpaceInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (LowWatermarkFreeSpace is not null)
 		{
-			__init.Property("LowWatermarkFreeSpace");
+			initializer.Property("LowWatermarkFreeSpace");
 			LowWatermarkFreeSpace.FormatCode(writer);
 		}
 
 		if (LowWatermarkFreeSpaceInBytes is not null)
 		{
-			__init.Property("LowWatermarkFreeSpaceInBytes");
+			initializer.Property("LowWatermarkFreeSpaceInBytes");
 			writer.WriteValue(LowWatermarkFreeSpaceInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (Mount is not null)
 		{
-			__init.Property("Mount");
+			initializer.Property("Mount");
 			writer.WriteString(Mount);
 		}
 
 		if (Path is not null)
 		{
-			__init.Property("Path");
+			initializer.Property("Path");
 			writer.WriteString(Path);
 		}
 
 		if (Total is not null)
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			Total.FormatCode(writer);
 		}
 
 		if (TotalInBytes is not null)
 		{
-			__init.Property("TotalInBytes");
+			initializer.Property("TotalInBytes");
 			writer.WriteValue(TotalInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (Type is not null)
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			writer.WriteString(Type);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

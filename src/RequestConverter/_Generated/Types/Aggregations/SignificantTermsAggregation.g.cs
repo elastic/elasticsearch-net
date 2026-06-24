@@ -27,105 +27,105 @@ public partial class SignificantTermsAggregation : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SignificantTermsAggregation", false);
+		var initializer = writer.BeginObjectInitializer("SignificantTermsAggregation", false);
 		if (BackgroundFilter is not null)
 		{
-			__init.Property("BackgroundFilter");
+			initializer.Property("BackgroundFilter");
 			BackgroundFilter.FormatCode(writer);
 		}
 
 		if (ChiSquare is not null)
 		{
-			__init.Property("ChiSquare");
+			initializer.Property("ChiSquare");
 			ChiSquare.FormatCode(writer);
 		}
 
 		if (Exclude is not null)
 		{
-			__init.Property("Exclude");
+			initializer.Property("Exclude");
 			Exclude.FormatCode(writer);
 		}
 
 		if (ExecutionHint is not null)
 		{
-			__init.Property("ExecutionHint");
+			initializer.Property("ExecutionHint");
 			Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, writer);
 		}
 
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Gnd is not null)
 		{
-			__init.Property("Gnd");
+			initializer.Property("Gnd");
 			Gnd.FormatCode(writer);
 		}
 
 		if (Include is not null)
 		{
-			__init.Property("Include");
+			initializer.Property("Include");
 			Include.FormatCode(writer);
 		}
 
 		if (Jlh is not null)
 		{
-			__init.Property("Jlh");
+			initializer.Property("Jlh");
 			Jlh.FormatCode(writer);
 		}
 
 		if (MinDocCount is not null)
 		{
-			__init.Property("MinDocCount");
+			initializer.Property("MinDocCount");
 			writer.WriteValue(MinDocCount.Value);
 			writer.Write("L");
 		}
 
 		if (MutualInformation is not null)
 		{
-			__init.Property("MutualInformation");
+			initializer.Property("MutualInformation");
 			MutualInformation.FormatCode(writer);
 		}
 
 		if (Percentage is not null)
 		{
-			__init.Property("Percentage");
+			initializer.Property("Percentage");
 			Percentage.FormatCode(writer);
 		}
 
 		if (PValue is not null)
 		{
-			__init.Property("PValue");
+			initializer.Property("PValue");
 			PValue.FormatCode(writer);
 		}
 
 		if (ScriptHeuristic is not null)
 		{
-			__init.Property("ScriptHeuristic");
+			initializer.Property("ScriptHeuristic");
 			ScriptHeuristic.FormatCode(writer);
 		}
 
 		if (ShardMinDocCount is not null)
 		{
-			__init.Property("ShardMinDocCount");
+			initializer.Property("ShardMinDocCount");
 			writer.WriteValue(ShardMinDocCount.Value);
 			writer.Write("L");
 		}
 
 		if (ShardSize is not null)
 		{
-			__init.Property("ShardSize");
+			initializer.Property("ShardSize");
 			writer.WriteValue(ShardSize.Value);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

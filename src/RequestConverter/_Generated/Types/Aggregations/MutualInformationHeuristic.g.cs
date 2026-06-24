@@ -27,19 +27,19 @@ public partial class MutualInformationHeuristic : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MutualInformationHeuristic", false);
+		var initializer = writer.BeginObjectInitializer("MutualInformationHeuristic", false);
 		if (BackgroundIsSuperset is not null)
 		{
-			__init.Property("BackgroundIsSuperset");
+			initializer.Property("BackgroundIsSuperset");
 			writer.WriteValue(BackgroundIsSuperset.Value);
 		}
 
 		if (IncludeNegatives is not null)
 		{
-			__init.Property("IncludeNegatives");
+			initializer.Property("IncludeNegatives");
 			writer.WriteValue(IncludeNegatives.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

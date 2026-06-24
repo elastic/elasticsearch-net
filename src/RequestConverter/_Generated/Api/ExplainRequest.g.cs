@@ -27,95 +27,95 @@ public partial class ExplainRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExplainRequest", false);
+		var initializer = writer.BeginObjectInitializer("ExplainRequest", false);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		if (Analyzer is not null)
 		{
-			__init.Property("Analyzer");
+			initializer.Property("Analyzer");
 			writer.WriteString(Analyzer);
 		}
 
 		if (AnalyzeWildcard is not null)
 		{
-			__init.Property("AnalyzeWildcard");
+			initializer.Property("AnalyzeWildcard");
 			writer.WriteValue(AnalyzeWildcard.Value);
 		}
 
 		if (DefaultOperator is not null)
 		{
-			__init.Property("DefaultOperator");
+			initializer.Property("DefaultOperator");
 			Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(DefaultOperator.Value, writer);
 		}
 
 		if (Df is not null)
 		{
-			__init.Property("Df");
+			initializer.Property("Df");
 			writer.WriteString(Df);
 		}
 
 		if (Lenient is not null)
 		{
-			__init.Property("Lenient");
+			initializer.Property("Lenient");
 			writer.WriteValue(Lenient.Value);
 		}
 
 		if (Preference is not null)
 		{
-			__init.Property("Preference");
+			initializer.Property("Preference");
 			writer.WriteString(Preference);
 		}
 
 		if (QueryLuceneSyntax is not null)
 		{
-			__init.Property("QueryLuceneSyntax");
+			initializer.Property("QueryLuceneSyntax");
 			writer.WriteString(QueryLuceneSyntax);
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			Routing.FormatCode(writer);
 		}
 
 		if (Source is not null)
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			Source.FormatCode(writer);
 		}
 
 		if (SourceExcludes is not null)
 		{
-			__init.Property("SourceExcludes");
+			initializer.Property("SourceExcludes");
 			SourceExcludes.FormatCode(writer);
 		}
 
 		if (SourceIncludes is not null)
 		{
-			__init.Property("SourceIncludes");
+			initializer.Property("SourceIncludes");
 			SourceIncludes.FormatCode(writer);
 		}
 
 		if (StoredFields is not null)
 		{
-			__init.Property("StoredFields");
+			initializer.Property("StoredFields");
 			StoredFields.FormatCode(writer);
 		}
 
 		if (Query is not null)
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			Query.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,19 +27,19 @@ public partial class ContextualAITaskSettings : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ContextualAITaskSettings", false);
+		var initializer = writer.BeginObjectInitializer("ContextualAITaskSettings", false);
 		if (Instruction is not null)
 		{
-			__init.Property("Instruction");
+			initializer.Property("Instruction");
 			writer.WriteString(Instruction);
 		}
 
 		if (TopK is not null)
 		{
-			__init.Property("TopK");
+			initializer.Property("TopK");
 			writer.WriteValue(TopK.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

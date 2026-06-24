@@ -27,23 +27,23 @@ public partial class IndexSettingResults : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexSettingResults", false);
+		var initializer = writer.BeginObjectInitializer("IndexSettingResults", false);
 		{
-			__init.Property("AppliedToDataStreamAndBackingIndices");
+			initializer.Property("AppliedToDataStreamAndBackingIndices");
 			writer.WriteInlineList(AppliedToDataStreamAndBackingIndices, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("AppliedToDataStreamOnly");
+			initializer.Property("AppliedToDataStreamOnly");
 			writer.WriteInlineList(AppliedToDataStreamOnly, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Errors is not null)
 		{
-			__init.Property("Errors");
+			initializer.Property("Errors");
 			writer.WriteInlineList(Errors, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

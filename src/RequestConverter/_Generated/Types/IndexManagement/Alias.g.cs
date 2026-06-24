@@ -27,43 +27,43 @@ public partial class Alias : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Alias", false);
+		var initializer = writer.BeginObjectInitializer("Alias", false);
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			Filter.FormatCode(writer);
 		}
 
 		if (IndexRouting is not null)
 		{
-			__init.Property("IndexRouting");
+			initializer.Property("IndexRouting");
 			writer.WriteString(IndexRouting);
 		}
 
 		if (IsHidden is not null)
 		{
-			__init.Property("IsHidden");
+			initializer.Property("IsHidden");
 			writer.WriteValue(IsHidden.Value);
 		}
 
 		if (IsWriteIndex is not null)
 		{
-			__init.Property("IsWriteIndex");
+			initializer.Property("IsWriteIndex");
 			writer.WriteValue(IsWriteIndex.Value);
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			writer.WriteString(Routing);
 		}
 
 		if (SearchRouting is not null)
 		{
-			__init.Property("SearchRouting");
+			initializer.Property("SearchRouting");
 			writer.WriteString(SearchRouting);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

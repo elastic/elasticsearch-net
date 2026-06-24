@@ -27,22 +27,22 @@ public partial class TotalFeatureImportance : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TotalFeatureImportance", false);
+		var initializer = writer.BeginObjectInitializer("TotalFeatureImportance", false);
 		{
-			__init.Property("Classes");
+			initializer.Property("Classes");
 			writer.WriteInlineList(Classes, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("FeatureName");
+			initializer.Property("FeatureName");
 			writer.WriteString(FeatureName);
 		}
 
 		{
-			__init.Property("Importance");
+			initializer.Property("Importance");
 			writer.WriteInlineList(Importance, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,15 +27,15 @@ public partial class RankEvalRequestItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RankEvalRequestItem", false);
+		var initializer = writer.BeginObjectInitializer("RankEvalRequestItem", false);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		if (Params is not null)
 		{
-			__init.Property("Params");
+			initializer.Property("Params");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -45,22 +45,22 @@ public partial class RankEvalRequestItem : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Ratings");
+			initializer.Property("Ratings");
 			writer.WriteInlineList(Ratings, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Request is not null)
 		{
-			__init.Property("Request");
+			initializer.Property("Request");
 			Request.FormatCode(writer);
 		}
 
 		if (TemplateId is not null)
 		{
-			__init.Property("TemplateId");
+			initializer.Property("TemplateId");
 			TemplateId.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

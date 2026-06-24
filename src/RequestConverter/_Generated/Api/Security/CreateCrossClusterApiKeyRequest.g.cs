@@ -27,27 +27,27 @@ public partial class CreateCrossClusterApiKeyRequest : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CreateCrossClusterApiKeyRequest", false);
+		var initializer = writer.BeginObjectInitializer("CreateCrossClusterApiKeyRequest", false);
 		{
-			__init.Property("Access");
+			initializer.Property("Access");
 			Access.FormatCode(writer);
 		}
 
 		if (CertificateIdentity is not null)
 		{
-			__init.Property("CertificateIdentity");
+			initializer.Property("CertificateIdentity");
 			writer.WriteString(CertificateIdentity);
 		}
 
 		if (Expiration is not null)
 		{
-			__init.Property("Expiration");
+			initializer.Property("Expiration");
 			Expiration.FormatCode(writer);
 		}
 
 		if (Metadata is not null)
 		{
-			__init.Property("Metadata");
+			initializer.Property("Metadata");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -57,10 +57,10 @@ public partial class CreateCrossClusterApiKeyRequest : RequestConverter.ICodeFor
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

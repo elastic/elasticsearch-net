@@ -27,18 +27,18 @@ public partial class NodeInfoScript : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoScript", false);
+		var initializer = writer.BeginObjectInitializer("NodeInfoScript", false);
 		{
-			__init.Property("AllowedTypes");
+			initializer.Property("AllowedTypes");
 			writer.WriteString(AllowedTypes);
 		}
 
 		if (DisableMaxCompilationsRate is not null)
 		{
-			__init.Property("DisableMaxCompilationsRate");
+			initializer.Property("DisableMaxCompilationsRate");
 			writer.WriteString(DisableMaxCompilationsRate);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

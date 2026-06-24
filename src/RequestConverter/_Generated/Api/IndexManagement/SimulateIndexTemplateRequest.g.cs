@@ -27,42 +27,42 @@ public partial class SimulateIndexTemplateRequest : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SimulateIndexTemplateRequest", false);
+		var initializer = writer.BeginObjectInitializer("SimulateIndexTemplateRequest", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		if (Cause is not null)
 		{
-			__init.Property("Cause");
+			initializer.Property("Cause");
 			writer.WriteString(Cause);
 		}
 
 		if (Create is not null)
 		{
-			__init.Property("Create");
+			initializer.Property("Create");
 			writer.WriteValue(Create.Value);
 		}
 
 		if (IncludeDefaults is not null)
 		{
-			__init.Property("IncludeDefaults");
+			initializer.Property("IncludeDefaults");
 			writer.WriteValue(IncludeDefaults.Value);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (IndexTemplate is not null)
 		{
-			__init.Property("IndexTemplate");
+			initializer.Property("IndexTemplate");
 			IndexTemplate.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

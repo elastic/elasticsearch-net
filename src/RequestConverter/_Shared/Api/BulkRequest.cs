@@ -14,82 +14,82 @@ public partial class BulkRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BulkRequest", false);
+		var initializer = writer.BeginObjectInitializer("BulkRequest", false);
 		if (Index is not null)
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		if (IncludeSourceOnError is not null)
 		{
-			__init.Property("IncludeSourceOnError");
+			initializer.Property("IncludeSourceOnError");
 			writer.WriteValue(IncludeSourceOnError.Value);
 		}
 
 		if (ListExecutedPipelines is not null)
 		{
-			__init.Property("ListExecutedPipelines");
+			initializer.Property("ListExecutedPipelines");
 			writer.WriteValue(ListExecutedPipelines.Value);
 		}
 
 		if (Pipeline is not null)
 		{
-			__init.Property("Pipeline");
+			initializer.Property("Pipeline");
 			writer.WriteString(Pipeline);
 		}
 
 		if (Refresh is not null)
 		{
-			__init.Property("Refresh");
+			initializer.Property("Refresh");
 			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
 		}
 
 		if (RequireAlias is not null)
 		{
-			__init.Property("RequireAlias");
+			initializer.Property("RequireAlias");
 			writer.WriteValue(RequireAlias.Value);
 		}
 
 		if (RequireDataStream is not null)
 		{
-			__init.Property("RequireDataStream");
+			initializer.Property("RequireDataStream");
 			writer.WriteValue(RequireDataStream.Value);
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			Routing.FormatCode(writer);
 		}
 
 		if (Source is not null)
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			Source.FormatCode(writer);
 		}
 
 		if (SourceExcludes is not null)
 		{
-			__init.Property("SourceExcludes");
+			initializer.Property("SourceExcludes");
 			SourceExcludes.FormatCode(writer);
 		}
 
 		if (SourceIncludes is not null)
 		{
-			__init.Property("SourceIncludes");
+			initializer.Property("SourceIncludes");
 			SourceIncludes.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (WaitForActiveShards is not null)
 		{
-			__init.Property("WaitForActiveShards");
+			initializer.Property("WaitForActiveShards");
 			WaitForActiveShards.FormatCode(writer);
 		}
 
@@ -98,7 +98,7 @@ public partial class BulkRequest : RequestConverter.ICodeFormattable
 		// would not bind to 'BulkOperationsCollection', so an explicit 'new' with a '{ }' block is used.
 		if (Operations is not null)
 		{
-			__init.Property("Operations");
+			initializer.Property("Operations");
 			writer.Write("new global::Elastic.Clients.Elasticsearch.Core.Bulk.BulkOperationsCollection ");
 			writer.WriteInlineList(
 				Operations,
@@ -106,6 +106,6 @@ public partial class BulkRequest : RequestConverter.ICodeFormattable
 				"{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

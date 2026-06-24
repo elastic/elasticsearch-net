@@ -27,37 +27,37 @@ public partial class GeoDistanceAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoDistanceAggregation", false);
+		var initializer = writer.BeginObjectInitializer("GeoDistanceAggregation", false);
 		if (DistanceType is not null)
 		{
-			__init.Property("DistanceType");
+			initializer.Property("DistanceType");
 			Elastic.Clients.Elasticsearch.GeoDistanceTypeCodeFormatter.FormatCode(DistanceType.Value, writer);
 		}
 
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Origin is not null)
 		{
-			__init.Property("Origin");
+			initializer.Property("Origin");
 			Origin.FormatCode(writer);
 		}
 
 		if (Ranges is not null)
 		{
-			__init.Property("Ranges");
+			initializer.Property("Ranges");
 			writer.WriteInlineList(Ranges, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Unit is not null)
 		{
-			__init.Property("Unit");
+			initializer.Property("Unit");
 			Elastic.Clients.Elasticsearch.DistanceUnitCodeFormatter.FormatCode(Unit.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

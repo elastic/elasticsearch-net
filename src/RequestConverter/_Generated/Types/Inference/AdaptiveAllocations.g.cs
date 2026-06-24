@@ -27,25 +27,25 @@ public partial class AdaptiveAllocations : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AdaptiveAllocations", false);
+		var initializer = writer.BeginObjectInitializer("AdaptiveAllocations", false);
 		if (Enabled is not null)
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled.Value);
 		}
 
 		if (MaxNumberOfAllocations is not null)
 		{
-			__init.Property("MaxNumberOfAllocations");
+			initializer.Property("MaxNumberOfAllocations");
 			writer.WriteValue(MaxNumberOfAllocations.Value);
 		}
 
 		if (MinNumberOfAllocations is not null)
 		{
-			__init.Property("MinNumberOfAllocations");
+			initializer.Property("MinNumberOfAllocations");
 			writer.WriteValue(MinNumberOfAllocations.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

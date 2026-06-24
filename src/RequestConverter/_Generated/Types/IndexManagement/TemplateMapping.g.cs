@@ -27,9 +27,9 @@ public partial class TemplateMapping : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TemplateMapping", false);
+		var initializer = writer.BeginObjectInitializer("TemplateMapping", false);
 		{
-			__init.Property("Aliases");
+			initializer.Property("Aliases");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -39,22 +39,22 @@ public partial class TemplateMapping : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("IndexPatterns");
+			initializer.Property("IndexPatterns");
 			writer.WriteInlineList(IndexPatterns, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Mappings");
+			initializer.Property("Mappings");
 			Mappings.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Order");
+			initializer.Property("Order");
 			writer.WriteValue(Order);
 		}
 
 		{
-			__init.Property("Settings");
+			initializer.Property("Settings");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -65,11 +65,11 @@ public partial class TemplateMapping : RequestConverter.ICodeFormattable
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

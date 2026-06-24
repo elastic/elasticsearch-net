@@ -27,9 +27,9 @@ public partial class Memory : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Memory", false);
+		var initializer = writer.BeginObjectInitializer("Memory", false);
 		{
-			__init.Property("Attributes");
+			initializer.Property("Attributes");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -39,35 +39,35 @@ public partial class Memory : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("EphemeralId");
+			initializer.Property("EphemeralId");
 			writer.WriteString(EphemeralId);
 		}
 
 		{
-			__init.Property("Jvm");
+			initializer.Property("Jvm");
 			Jvm.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Mem");
+			initializer.Property("Mem");
 			Mem.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("Roles");
+			initializer.Property("Roles");
 			writer.WriteInlineList(Roles, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("TransportAddress");
+			initializer.Property("TransportAddress");
 			writer.WriteString(TransportAddress);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

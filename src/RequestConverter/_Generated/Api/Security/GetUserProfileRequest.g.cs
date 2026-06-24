@@ -27,18 +27,18 @@ public partial class GetUserProfileRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetUserProfileRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetUserProfileRequest", false);
 		{
-			__init.Property("Uid");
+			initializer.Property("Uid");
 			writer.WriteInlineList(Uid, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Data is not null)
 		{
-			__init.Property("Data");
+			initializer.Property("Data");
 			writer.WriteInlineList(Data, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

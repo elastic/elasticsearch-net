@@ -27,18 +27,18 @@ public partial class StepChange : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StepChange", false);
+		var initializer = writer.BeginObjectInitializer("StepChange", false);
 		{
-			__init.Property("ChangePoint");
+			initializer.Property("ChangePoint");
 			writer.WriteValue(ChangePoint);
 		}
 
 		{
-			__init.Property("PValue");
+			initializer.Property("PValue");
 			writer.WriteValue(PValue);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,37 +27,37 @@ public partial class CancelRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CancelRequest", false);
+		var initializer = writer.BeginObjectInitializer("CancelRequest", false);
 		if (TaskId is not null)
 		{
-			__init.Property("TaskId");
+			initializer.Property("TaskId");
 			TaskId.FormatCode(writer);
 		}
 
 		if (Actions is not null)
 		{
-			__init.Property("Actions");
+			initializer.Property("Actions");
 			writer.WriteInlineList(Actions, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Nodes is not null)
 		{
-			__init.Property("Nodes");
+			initializer.Property("Nodes");
 			writer.WriteInlineList(Nodes, (w, item) => { w.WriteString(item); });
 		}
 
 		if (ParentTaskId is not null)
 		{
-			__init.Property("ParentTaskId");
+			initializer.Property("ParentTaskId");
 			writer.WriteString(ParentTaskId);
 		}
 
 		if (WaitForCompletion is not null)
 		{
-			__init.Property("WaitForCompletion");
+			initializer.Property("WaitForCompletion");
 			writer.WriteValue(WaitForCompletion.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

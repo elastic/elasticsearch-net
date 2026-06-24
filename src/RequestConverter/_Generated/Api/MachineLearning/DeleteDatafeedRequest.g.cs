@@ -27,18 +27,18 @@ public partial class DeleteDatafeedRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteDatafeedRequest", false);
+		var initializer = writer.BeginObjectInitializer("DeleteDatafeedRequest", false);
 		{
-			__init.Property("DatafeedId");
+			initializer.Property("DatafeedId");
 			DatafeedId.FormatCode(writer);
 		}
 
 		if (Force is not null)
 		{
-			__init.Property("Force");
+			initializer.Property("Force");
 			writer.WriteValue(Force.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

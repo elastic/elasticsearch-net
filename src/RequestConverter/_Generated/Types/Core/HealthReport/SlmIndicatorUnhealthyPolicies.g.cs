@@ -27,16 +27,16 @@ public partial class SlmIndicatorUnhealthyPolicies : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SlmIndicatorUnhealthyPolicies", false);
+		var initializer = writer.BeginObjectInitializer("SlmIndicatorUnhealthyPolicies", false);
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 			writer.Write("L");
 		}
 
 		if (InvocationsSinceLastSuccess is not null)
 		{
-			__init.Property("InvocationsSinceLastSuccess");
+			initializer.Property("InvocationsSinceLastSuccess");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -45,6 +45,6 @@ public partial class SlmIndicatorUnhealthyPolicies : RequestConverter.ICodeForma
 			writer.WriteInlineList(InvocationsSinceLastSuccess, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

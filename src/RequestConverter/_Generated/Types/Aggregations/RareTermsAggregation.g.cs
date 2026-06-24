@@ -27,51 +27,51 @@ public partial class RareTermsAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RareTermsAggregation", false);
+		var initializer = writer.BeginObjectInitializer("RareTermsAggregation", false);
 		if (Exclude is not null)
 		{
-			__init.Property("Exclude");
+			initializer.Property("Exclude");
 			Exclude.FormatCode(writer);
 		}
 
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Include is not null)
 		{
-			__init.Property("Include");
+			initializer.Property("Include");
 			Include.FormatCode(writer);
 		}
 
 		if (MaxDocCount is not null)
 		{
-			__init.Property("MaxDocCount");
+			initializer.Property("MaxDocCount");
 			writer.WriteValue(MaxDocCount.Value);
 			writer.Write("L");
 		}
 
 		if (Missing is not null)
 		{
-			__init.Property("Missing");
+			initializer.Property("Missing");
 			writer.WriteValue(Missing);
 		}
 
 		if (Precision is not null)
 		{
-			__init.Property("Precision");
+			initializer.Property("Precision");
 			writer.WriteValue(Precision.Value);
 			writer.Write("d");
 		}
 
 		if (ValueType is not null)
 		{
-			__init.Property("ValueType");
+			initializer.Property("ValueType");
 			writer.WriteString(ValueType);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

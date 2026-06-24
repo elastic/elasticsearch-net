@@ -27,35 +27,35 @@ public partial class NodeInfoSettingsCluster : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoSettingsCluster", false);
+		var initializer = writer.BeginObjectInitializer("NodeInfoSettingsCluster", false);
 		if (DeprecationIndexing is not null)
 		{
-			__init.Property("DeprecationIndexing");
+			initializer.Property("DeprecationIndexing");
 			DeprecationIndexing.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Election");
+			initializer.Property("Election");
 			Election.FormatCode(writer);
 		}
 
 		if (InitialMasterNodes is not null)
 		{
-			__init.Property("InitialMasterNodes");
+			initializer.Property("InitialMasterNodes");
 			writer.WriteInlineList(InitialMasterNodes, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			Routing.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

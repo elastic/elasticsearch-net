@@ -27,58 +27,58 @@ public partial class FunctionScoreQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FunctionScoreQuery", false);
+		var initializer = writer.BeginObjectInitializer("FunctionScoreQuery", false);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		if (BoostMode is not null)
 		{
-			__init.Property("BoostMode");
+			initializer.Property("BoostMode");
 			Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostModeCodeFormatter.FormatCode(BoostMode.Value, writer);
 		}
 
 		if (Functions is not null)
 		{
-			__init.Property("Functions");
+			initializer.Property("Functions");
 			writer.WriteInlineList(Functions, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (MaxBoost is not null)
 		{
-			__init.Property("MaxBoost");
+			initializer.Property("MaxBoost");
 			writer.WriteValue(MaxBoost.Value);
 			writer.Write("d");
 		}
 
 		if (MinScore is not null)
 		{
-			__init.Property("MinScore");
+			initializer.Property("MinScore");
 			writer.WriteValue(MinScore.Value);
 			writer.Write("d");
 		}
 
 		if (Query is not null)
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			Query.FormatCode(writer);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
 		if (ScoreMode is not null)
 		{
-			__init.Property("ScoreMode");
+			initializer.Property("ScoreMode");
 			Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreModeCodeFormatter.FormatCode(ScoreMode.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,49 +27,49 @@ public partial class MultiGetOperation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MultiGetOperation", false);
+		var initializer = writer.BeginObjectInitializer("MultiGetOperation", false);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		if (Index is not null)
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			Routing.FormatCode(writer);
 		}
 
 		if (Source is not null)
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			Source.FormatCode(writer);
 		}
 
 		if (StoredFields is not null)
 		{
-			__init.Property("StoredFields");
+			initializer.Property("StoredFields");
 			StoredFields.FormatCode(writer);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version.Value);
 			writer.Write("L");
 		}
 
 		if (VersionType is not null)
 		{
-			__init.Property("VersionType");
+			initializer.Property("VersionType");
 			Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

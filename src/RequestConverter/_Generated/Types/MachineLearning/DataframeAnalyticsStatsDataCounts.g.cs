@@ -27,22 +27,22 @@ public partial class DataframeAnalyticsStatsDataCounts : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeAnalyticsStatsDataCounts", false);
+		var initializer = writer.BeginObjectInitializer("DataframeAnalyticsStatsDataCounts", false);
 		{
-			__init.Property("SkippedDocsCount");
+			initializer.Property("SkippedDocsCount");
 			writer.WriteValue(SkippedDocsCount);
 		}
 
 		{
-			__init.Property("TestDocsCount");
+			initializer.Property("TestDocsCount");
 			writer.WriteValue(TestDocsCount);
 		}
 
 		{
-			__init.Property("TrainingDocsCount");
+			initializer.Property("TrainingDocsCount");
 			writer.WriteValue(TrainingDocsCount);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

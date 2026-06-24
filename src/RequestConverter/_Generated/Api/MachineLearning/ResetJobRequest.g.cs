@@ -27,24 +27,24 @@ public partial class ResetJobRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ResetJobRequest", false);
+		var initializer = writer.BeginObjectInitializer("ResetJobRequest", false);
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			JobId.FormatCode(writer);
 		}
 
 		if (DeleteUserAnnotations is not null)
 		{
-			__init.Property("DeleteUserAnnotations");
+			initializer.Property("DeleteUserAnnotations");
 			writer.WriteValue(DeleteUserAnnotations.Value);
 		}
 
 		if (WaitForCompletion is not null)
 		{
-			__init.Property("WaitForCompletion");
+			initializer.Property("WaitForCompletion");
 			writer.WriteValue(WaitForCompletion.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

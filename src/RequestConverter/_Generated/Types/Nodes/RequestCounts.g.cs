@@ -27,84 +27,84 @@ public partial class RequestCounts : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RequestCounts", false);
+		var initializer = writer.BeginObjectInitializer("RequestCounts", false);
 		if (GetBlob is not null)
 		{
-			__init.Property("GetBlob");
+			initializer.Property("GetBlob");
 			writer.WriteValue(GetBlob.Value);
 			writer.Write("L");
 		}
 
 		if (GetBlobProperties is not null)
 		{
-			__init.Property("GetBlobProperties");
+			initializer.Property("GetBlobProperties");
 			writer.WriteValue(GetBlobProperties.Value);
 			writer.Write("L");
 		}
 
 		if (GetObject is not null)
 		{
-			__init.Property("GetObject");
+			initializer.Property("GetObject");
 			writer.WriteValue(GetObject.Value);
 			writer.Write("L");
 		}
 
 		if (InsertObject is not null)
 		{
-			__init.Property("InsertObject");
+			initializer.Property("InsertObject");
 			writer.WriteValue(InsertObject.Value);
 			writer.Write("L");
 		}
 
 		if (ListBlobs is not null)
 		{
-			__init.Property("ListBlobs");
+			initializer.Property("ListBlobs");
 			writer.WriteValue(ListBlobs.Value);
 			writer.Write("L");
 		}
 
 		if (ListObjects is not null)
 		{
-			__init.Property("ListObjects");
+			initializer.Property("ListObjects");
 			writer.WriteValue(ListObjects.Value);
 			writer.Write("L");
 		}
 
 		if (PutBlob is not null)
 		{
-			__init.Property("PutBlob");
+			initializer.Property("PutBlob");
 			writer.WriteValue(PutBlob.Value);
 			writer.Write("L");
 		}
 
 		if (PutBlock is not null)
 		{
-			__init.Property("PutBlock");
+			initializer.Property("PutBlock");
 			writer.WriteValue(PutBlock.Value);
 			writer.Write("L");
 		}
 
 		if (PutBlockList is not null)
 		{
-			__init.Property("PutBlockList");
+			initializer.Property("PutBlockList");
 			writer.WriteValue(PutBlockList.Value);
 			writer.Write("L");
 		}
 
 		if (PutMultipartObject is not null)
 		{
-			__init.Property("PutMultipartObject");
+			initializer.Property("PutMultipartObject");
 			writer.WriteValue(PutMultipartObject.Value);
 			writer.Write("L");
 		}
 
 		if (PutObject is not null)
 		{
-			__init.Property("PutObject");
+			initializer.Property("PutObject");
 			writer.WriteValue(PutObject.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

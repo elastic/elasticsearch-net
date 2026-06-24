@@ -27,28 +27,28 @@ public partial class LookupQueryVectorBuilder : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("LookupQueryVectorBuilder", false);
+		var initializer = writer.BeginObjectInitializer("LookupQueryVectorBuilder", false);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteString(Index);
 		}
 
 		{
-			__init.Property("Path");
+			initializer.Property("Path");
 			writer.WriteString(Path);
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			writer.WriteString(Routing);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

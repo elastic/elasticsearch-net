@@ -27,79 +27,79 @@ public partial class Client : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Client", false);
+		var initializer = writer.BeginObjectInitializer("Client", false);
 		if (Agent is not null)
 		{
-			__init.Property("Agent");
+			initializer.Property("Agent");
 			writer.WriteString(Agent);
 		}
 
 		if (ClosedTimeMillis is not null)
 		{
-			__init.Property("ClosedTimeMillis");
+			initializer.Property("ClosedTimeMillis");
 			writer.WriteValue(ClosedTimeMillis.Value);
 			writer.Write("L");
 		}
 
 		if (Id is not null)
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteValue(Id.Value);
 			writer.Write("L");
 		}
 
 		if (LastRequestTimeMillis is not null)
 		{
-			__init.Property("LastRequestTimeMillis");
+			initializer.Property("LastRequestTimeMillis");
 			writer.WriteValue(LastRequestTimeMillis.Value);
 			writer.Write("L");
 		}
 
 		if (LastUri is not null)
 		{
-			__init.Property("LastUri");
+			initializer.Property("LastUri");
 			writer.WriteString(LastUri);
 		}
 
 		if (LocalAddress is not null)
 		{
-			__init.Property("LocalAddress");
+			initializer.Property("LocalAddress");
 			writer.WriteString(LocalAddress);
 		}
 
 		if (OpenedTimeMillis is not null)
 		{
-			__init.Property("OpenedTimeMillis");
+			initializer.Property("OpenedTimeMillis");
 			writer.WriteValue(OpenedTimeMillis.Value);
 			writer.Write("L");
 		}
 
 		if (RemoteAddress is not null)
 		{
-			__init.Property("RemoteAddress");
+			initializer.Property("RemoteAddress");
 			writer.WriteString(RemoteAddress);
 		}
 
 		if (RequestCount is not null)
 		{
-			__init.Property("RequestCount");
+			initializer.Property("RequestCount");
 			writer.WriteValue(RequestCount.Value);
 			writer.Write("L");
 		}
 
 		if (RequestSizeBytes is not null)
 		{
-			__init.Property("RequestSizeBytes");
+			initializer.Property("RequestSizeBytes");
 			writer.WriteValue(RequestSizeBytes.Value);
 			writer.Write("L");
 		}
 
 		if (XOpaqueId is not null)
 		{
-			__init.Property("XOpaqueId");
+			initializer.Property("XOpaqueId");
 			writer.WriteString(XOpaqueId);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

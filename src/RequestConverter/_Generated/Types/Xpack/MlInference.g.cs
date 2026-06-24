@@ -27,15 +27,15 @@ public partial class MlInference : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MlInference", false);
+		var initializer = writer.BeginObjectInitializer("MlInference", false);
 		if (Deployments is not null)
 		{
-			__init.Property("Deployments");
+			initializer.Property("Deployments");
 			Deployments.FormatCode(writer);
 		}
 
 		{
-			__init.Property("IngestProcessors");
+			initializer.Property("IngestProcessors");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -45,10 +45,10 @@ public partial class MlInference : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("TrainedModels");
+			initializer.Property("TrainedModels");
 			TrainedModels.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

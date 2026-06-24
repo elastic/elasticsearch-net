@@ -27,18 +27,18 @@ public partial class NodeInfoMemory : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoMemory", false);
+		var initializer = writer.BeginObjectInitializer("NodeInfoMemory", false);
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteString(Total);
 		}
 
 		{
-			__init.Property("TotalInBytes");
+			initializer.Property("TotalInBytes");
 			writer.WriteValue(TotalInBytes);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,42 +27,42 @@ public partial class DiskUsage : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DiskUsage", false);
+		var initializer = writer.BeginObjectInitializer("DiskUsage", false);
 		{
-			__init.Property("FreeBytes");
+			initializer.Property("FreeBytes");
 			writer.WriteValue(FreeBytes);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("FreeDiskPercent");
+			initializer.Property("FreeDiskPercent");
 			writer.WriteValue(FreeDiskPercent);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Path");
+			initializer.Property("Path");
 			writer.WriteString(Path);
 		}
 
 		{
-			__init.Property("TotalBytes");
+			initializer.Property("TotalBytes");
 			writer.WriteValue(TotalBytes);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("UsedBytes");
+			initializer.Property("UsedBytes");
 			writer.WriteValue(UsedBytes);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("UsedDiskPercent");
+			initializer.Property("UsedDiskPercent");
 			writer.WriteValue(UsedDiskPercent);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,18 +27,18 @@ public partial class DownsampleConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DownsampleConfig", false);
+		var initializer = writer.BeginObjectInitializer("DownsampleConfig", false);
 		{
-			__init.Property("FixedInterval");
+			initializer.Property("FixedInterval");
 			writer.WriteString(FixedInterval);
 		}
 
 		if (SamplingMethod is not null)
 		{
-			__init.Property("SamplingMethod");
+			initializer.Property("SamplingMethod");
 			Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethodCodeFormatter.FormatCode(SamplingMethod.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

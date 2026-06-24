@@ -27,40 +27,40 @@ public partial class BinaryProperty : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BinaryProperty", true);
+		var initializer = writer.BeginObjectInitializer("BinaryProperty", true);
 		if (CopyTo is not null)
 		{
-			__init.Property("CopyTo");
+			initializer.Property("CopyTo");
 			CopyTo.FormatCode(writer);
 		}
 
 		if (DocValues is not null)
 		{
-			__init.Property("DocValues");
+			initializer.Property("DocValues");
 			writer.WriteValue(DocValues.Value);
 		}
 
 		if (Dynamic is not null)
 		{
-			__init.Property("Dynamic");
+			initializer.Property("Dynamic");
 			Elastic.Clients.Elasticsearch.Mapping.DynamicMappingCodeFormatter.FormatCode(Dynamic.Value, writer);
 		}
 
 		if (Fields is not null)
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			Fields.FormatCode(writer);
 		}
 
 		if (IgnoreAbove is not null)
 		{
-			__init.Property("IgnoreAbove");
+			initializer.Property("IgnoreAbove");
 			writer.WriteValue(IgnoreAbove.Value);
 		}
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -71,22 +71,22 @@ public partial class BinaryProperty : RequestConverter.ICodeFormattable
 
 		if (Properties is not null)
 		{
-			__init.Property("Properties");
+			initializer.Property("Properties");
 			Properties.FormatCode(writer);
 		}
 
 		if (Store is not null)
 		{
-			__init.Property("Store");
+			initializer.Property("Store");
 			writer.WriteValue(Store.Value);
 		}
 
 		if (SyntheticSourceKeep is not null)
 		{
-			__init.Property("SyntheticSourceKeep");
+			initializer.Property("SyntheticSourceKeep");
 			Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnumCodeFormatter.FormatCode(SyntheticSourceKeep.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

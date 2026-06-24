@@ -27,18 +27,18 @@ public partial class PointInTimeReference : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PointInTimeReference", false);
+		var initializer = writer.BeginObjectInitializer("PointInTimeReference", false);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		if (KeepAlive is not null)
 		{
-			__init.Property("KeepAlive");
+			initializer.Property("KeepAlive");
 			KeepAlive.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

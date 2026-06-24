@@ -27,110 +27,110 @@ public partial class TermsAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TermsAggregation", false);
+		var initializer = writer.BeginObjectInitializer("TermsAggregation", false);
 		if (CollectMode is not null)
 		{
-			__init.Property("CollectMode");
+			initializer.Property("CollectMode");
 			Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectModeCodeFormatter.FormatCode(CollectMode.Value, writer);
 		}
 
 		if (Exclude is not null)
 		{
-			__init.Property("Exclude");
+			initializer.Property("Exclude");
 			Exclude.FormatCode(writer);
 		}
 
 		if (ExecutionHint is not null)
 		{
-			__init.Property("ExecutionHint");
+			initializer.Property("ExecutionHint");
 			Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, writer);
 		}
 
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			writer.WriteString(Format);
 		}
 
 		if (Include is not null)
 		{
-			__init.Property("Include");
+			initializer.Property("Include");
 			Include.FormatCode(writer);
 		}
 
 		if (MinDocCount is not null)
 		{
-			__init.Property("MinDocCount");
+			initializer.Property("MinDocCount");
 			writer.WriteValue(MinDocCount.Value);
 		}
 
 		if (Missing is not null)
 		{
-			__init.Property("Missing");
+			initializer.Property("Missing");
 			writer.WriteValue(Missing);
 		}
 
 		if (MissingBucket is not null)
 		{
-			__init.Property("MissingBucket");
+			initializer.Property("MissingBucket");
 			writer.WriteValue(MissingBucket.Value);
 		}
 
 		if (MissingOrder is not null)
 		{
-			__init.Property("MissingOrder");
+			initializer.Property("MissingOrder");
 			Elastic.Clients.Elasticsearch.Aggregations.MissingOrderCodeFormatter.FormatCode(MissingOrder.Value, writer);
 		}
 
 		if (Order is not null)
 		{
-			__init.Property("Order");
+			initializer.Property("Order");
 			writer.WriteInlineList(Order, (w, item) => { w.Write("new("); item.Key.FormatCode(w); w.Write(", "); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(item.Value, w); w.Write(")"); });
 		}
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
 		if (ShardMinDocCount is not null)
 		{
-			__init.Property("ShardMinDocCount");
+			initializer.Property("ShardMinDocCount");
 			writer.WriteValue(ShardMinDocCount.Value);
 			writer.Write("L");
 		}
 
 		if (ShardSize is not null)
 		{
-			__init.Property("ShardSize");
+			initializer.Property("ShardSize");
 			writer.WriteValue(ShardSize.Value);
 		}
 
 		if (ShowTermDocCountError is not null)
 		{
-			__init.Property("ShowTermDocCountError");
+			initializer.Property("ShowTermDocCountError");
 			writer.WriteValue(ShowTermDocCountError.Value);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
 		if (ValueType is not null)
 		{
-			__init.Property("ValueType");
+			initializer.Property("ValueType");
 			writer.WriteString(ValueType);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

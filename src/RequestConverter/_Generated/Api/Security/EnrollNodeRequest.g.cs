@@ -27,7 +27,7 @@ public partial class EnrollNodeRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EnrollNodeRequest", false);
-		__init.Dispose();
+		var initializer = writer.BeginObjectInitializer("EnrollNodeRequest", false);
+		initializer.Dispose();
 	}
 }

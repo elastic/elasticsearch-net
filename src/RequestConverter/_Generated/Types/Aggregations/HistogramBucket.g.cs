@@ -27,31 +27,31 @@ public partial class HistogramBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("HistogramBucket", false);
+		var initializer = writer.BeginObjectInitializer("HistogramBucket", false);
 		if (Aggregations is not null)
 		{
-			__init.Property("Aggregations");
+			initializer.Property("Aggregations");
 			Aggregations.FormatCode(writer);
 		}
 
 		{
-			__init.Property("DocCount");
+			initializer.Property("DocCount");
 			writer.WriteValue(DocCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Key");
+			initializer.Property("Key");
 			writer.WriteValue(Key);
 			writer.Write("d");
 		}
 
 		if (KeyAsString is not null)
 		{
-			__init.Property("KeyAsString");
+			initializer.Property("KeyAsString");
 			writer.WriteString(KeyAsString);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

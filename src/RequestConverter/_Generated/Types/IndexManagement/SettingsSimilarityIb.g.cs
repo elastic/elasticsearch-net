@@ -27,22 +27,22 @@ public partial class SettingsSimilarityIb : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SettingsSimilarityIb", true);
+		var initializer = writer.BeginObjectInitializer("SettingsSimilarityIb", true);
 		{
-			__init.Property("Distribution");
+			initializer.Property("Distribution");
 			Elastic.Clients.Elasticsearch.IBDistributionCodeFormatter.FormatCode(Distribution, writer);
 		}
 
 		{
-			__init.Property("Lambda");
+			initializer.Property("Lambda");
 			Elastic.Clients.Elasticsearch.IBLambdaCodeFormatter.FormatCode(Lambda, writer);
 		}
 
 		{
-			__init.Property("Normalization");
+			initializer.Property("Normalization");
 			Elastic.Clients.Elasticsearch.NormalizationCodeFormatter.FormatCode(Normalization, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

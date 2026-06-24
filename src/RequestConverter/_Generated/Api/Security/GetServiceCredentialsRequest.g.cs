@@ -27,17 +27,17 @@ public partial class GetServiceCredentialsRequest : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetServiceCredentialsRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetServiceCredentialsRequest", false);
 		{
-			__init.Property("Namespace");
+			initializer.Property("Namespace");
 			writer.WriteString(Namespace);
 		}
 
 		{
-			__init.Property("Service");
+			initializer.Property("Service");
 			Service.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

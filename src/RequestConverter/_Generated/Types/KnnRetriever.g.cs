@@ -27,73 +27,73 @@ public partial class KnnRetriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("KnnRetriever", false);
+		var initializer = writer.BeginObjectInitializer("KnnRetriever", false);
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			writer.WriteString(Field);
 		}
 
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("K");
+			initializer.Property("K");
 			writer.WriteValue(K);
 		}
 
 		if (MinScore is not null)
 		{
-			__init.Property("MinScore");
+			initializer.Property("MinScore");
 			writer.WriteValue(MinScore.Value);
 			writer.Write("f");
 		}
 
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("NumCandidates");
+			initializer.Property("NumCandidates");
 			writer.WriteValue(NumCandidates);
 		}
 
 		if (QueryVector is not null)
 		{
-			__init.Property("QueryVector");
+			initializer.Property("QueryVector");
 			writer.WriteInlineList(QueryVector, (w, item) => { w.WriteValue(item); w.Write("f"); });
 		}
 
 		if (QueryVectorBuilder is not null)
 		{
-			__init.Property("QueryVectorBuilder");
+			initializer.Property("QueryVectorBuilder");
 			QueryVectorBuilder.FormatCode(writer);
 		}
 
 		if (RescoreVector is not null)
 		{
-			__init.Property("RescoreVector");
+			initializer.Property("RescoreVector");
 			RescoreVector.FormatCode(writer);
 		}
 
 		if (Similarity is not null)
 		{
-			__init.Property("Similarity");
+			initializer.Property("Similarity");
 			writer.WriteValue(Similarity.Value);
 			writer.Write("f");
 		}
 
 		if (VisitPercentage is not null)
 		{
-			__init.Property("VisitPercentage");
+			initializer.Property("VisitPercentage");
 			writer.WriteValue(VisitPercentage.Value);
 			writer.Write("f");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

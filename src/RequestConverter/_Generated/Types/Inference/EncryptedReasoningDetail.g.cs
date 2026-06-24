@@ -27,30 +27,30 @@ public partial class EncryptedReasoningDetail : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EncryptedReasoningDetail", true);
+		var initializer = writer.BeginObjectInitializer("EncryptedReasoningDetail", true);
 		{
-			__init.Property("Data");
+			initializer.Property("Data");
 			writer.WriteString(Data);
 		}
 
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			writer.WriteString(Format);
 		}
 
 		if (Id is not null)
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		if (Index is not null)
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteValue(Index.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

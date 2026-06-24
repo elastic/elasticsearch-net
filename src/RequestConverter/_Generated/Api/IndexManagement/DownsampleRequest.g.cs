@@ -27,22 +27,22 @@ public partial class DownsampleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DownsampleRequest", false);
+		var initializer = writer.BeginObjectInitializer("DownsampleRequest", false);
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TargetIndex");
+			initializer.Property("TargetIndex");
 			TargetIndex.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Config");
+			initializer.Property("Config");
 			Config.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

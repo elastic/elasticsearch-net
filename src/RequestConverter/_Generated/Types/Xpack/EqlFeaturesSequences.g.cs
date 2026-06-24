@@ -27,37 +27,37 @@ public partial class EqlFeaturesSequences : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EqlFeaturesSequences", false);
+		var initializer = writer.BeginObjectInitializer("EqlFeaturesSequences", false);
 		{
-			__init.Property("SequenceMaxspan");
+			initializer.Property("SequenceMaxspan");
 			writer.WriteValue(SequenceMaxspan);
 		}
 
 		{
-			__init.Property("SequenceQueriesFiveOrMore");
+			initializer.Property("SequenceQueriesFiveOrMore");
 			writer.WriteValue(SequenceQueriesFiveOrMore);
 		}
 
 		{
-			__init.Property("SequenceQueriesFour");
+			initializer.Property("SequenceQueriesFour");
 			writer.WriteValue(SequenceQueriesFour);
 		}
 
 		{
-			__init.Property("SequenceQueriesThree");
+			initializer.Property("SequenceQueriesThree");
 			writer.WriteValue(SequenceQueriesThree);
 		}
 
 		{
-			__init.Property("SequenceQueriesTwo");
+			initializer.Property("SequenceQueriesTwo");
 			writer.WriteValue(SequenceQueriesTwo);
 		}
 
 		{
-			__init.Property("SequenceUntil");
+			initializer.Property("SequenceUntil");
 			writer.WriteValue(SequenceUntil);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

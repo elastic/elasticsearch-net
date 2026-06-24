@@ -27,33 +27,33 @@ public partial class TrainedModelEntities : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelEntities", false);
+		var initializer = writer.BeginObjectInitializer("TrainedModelEntities", false);
 		{
-			__init.Property("ClassName");
+			initializer.Property("ClassName");
 			writer.WriteString(ClassName);
 		}
 
 		{
-			__init.Property("ClassProbability");
+			initializer.Property("ClassProbability");
 			writer.WriteValue(ClassProbability);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("EndPos");
+			initializer.Property("EndPos");
 			writer.WriteValue(EndPos);
 		}
 
 		{
-			__init.Property("Entity");
+			initializer.Property("Entity");
 			writer.WriteString(Entity);
 		}
 
 		{
-			__init.Property("StartPos");
+			initializer.Property("StartPos");
 			writer.WriteValue(StartPos);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

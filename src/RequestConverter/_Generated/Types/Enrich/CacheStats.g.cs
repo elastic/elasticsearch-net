@@ -27,48 +27,48 @@ public partial class CacheStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CacheStats", false);
+		var initializer = writer.BeginObjectInitializer("CacheStats", false);
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 		}
 
 		{
-			__init.Property("Evictions");
+			initializer.Property("Evictions");
 			writer.WriteValue(Evictions);
 		}
 
 		{
-			__init.Property("Hits");
+			initializer.Property("Hits");
 			writer.WriteValue(Hits);
 		}
 
 		{
-			__init.Property("HitsTimeInMillis");
+			initializer.Property("HitsTimeInMillis");
 			writer.WriteValue(HitsTimeInMillis);
 		}
 
 		{
-			__init.Property("Misses");
+			initializer.Property("Misses");
 			writer.WriteValue(Misses);
 		}
 
 		{
-			__init.Property("MissesTimeInMillis");
+			initializer.Property("MissesTimeInMillis");
 			writer.WriteValue(MissesTimeInMillis);
 		}
 
 		{
-			__init.Property("NodeId");
+			initializer.Property("NodeId");
 			writer.WriteString(NodeId);
 		}
 
 		{
-			__init.Property("SizeInBytes");
+			initializer.Property("SizeInBytes");
 			writer.WriteValue(SizeInBytes);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

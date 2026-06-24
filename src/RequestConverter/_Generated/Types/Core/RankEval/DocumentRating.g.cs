@@ -27,22 +27,22 @@ public partial class DocumentRating : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DocumentRating", false);
+		var initializer = writer.BeginObjectInitializer("DocumentRating", false);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Rating");
+			initializer.Property("Rating");
 			writer.WriteValue(Rating);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,25 +27,25 @@ public partial class TransformAuthorization : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TransformAuthorization", false);
+		var initializer = writer.BeginObjectInitializer("TransformAuthorization", false);
 		if (ApiKey is not null)
 		{
-			__init.Property("ApiKey");
+			initializer.Property("ApiKey");
 			ApiKey.FormatCode(writer);
 		}
 
 		if (Roles is not null)
 		{
-			__init.Property("Roles");
+			initializer.Property("Roles");
 			writer.WriteInlineList(Roles, (w, item) => { w.WriteString(item); });
 		}
 
 		if (ServiceAccount is not null)
 		{
-			__init.Property("ServiceAccount");
+			initializer.Property("ServiceAccount");
 			writer.WriteString(ServiceAccount);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

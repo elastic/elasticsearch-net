@@ -27,17 +27,17 @@ public partial class MasterIsStableIndicatorExceptionFetchingHistory : RequestCo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MasterIsStableIndicatorExceptionFetchingHistory", false);
+		var initializer = writer.BeginObjectInitializer("MasterIsStableIndicatorExceptionFetchingHistory", false);
 		{
-			__init.Property("Message");
+			initializer.Property("Message");
 			writer.WriteString(Message);
 		}
 
 		{
-			__init.Property("StackTrace");
+			initializer.Property("StackTrace");
 			writer.WriteString(StackTrace);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

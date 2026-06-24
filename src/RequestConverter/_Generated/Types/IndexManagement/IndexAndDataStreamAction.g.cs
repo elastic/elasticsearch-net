@@ -27,17 +27,17 @@ public partial class IndexAndDataStreamAction : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexAndDataStreamAction", false);
+		var initializer = writer.BeginObjectInitializer("IndexAndDataStreamAction", false);
 		{
-			__init.Property("DataStream");
+			initializer.Property("DataStream");
 			DataStream.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

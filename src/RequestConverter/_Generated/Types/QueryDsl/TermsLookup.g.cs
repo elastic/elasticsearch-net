@@ -27,28 +27,28 @@ public partial class TermsLookup : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TermsLookup", true);
+		var initializer = writer.BeginObjectInitializer("TermsLookup", true);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Path");
+			initializer.Property("Path");
 			Path.FormatCode(writer);
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			writer.WriteString(Routing);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,18 +27,18 @@ public partial class DataframeClassificationSummaryPrecision : RequestConverter.
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeClassificationSummaryPrecision", false);
+		var initializer = writer.BeginObjectInitializer("DataframeClassificationSummaryPrecision", false);
 		{
-			__init.Property("AvgPrecision");
+			initializer.Property("AvgPrecision");
 			writer.WriteValue(AvgPrecision);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Classes");
+			initializer.Property("Classes");
 			writer.WriteInlineList(Classes, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

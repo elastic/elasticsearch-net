@@ -27,25 +27,25 @@ public partial class LimitTokenCountTokenFilter : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("LimitTokenCountTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("LimitTokenCountTokenFilter", true);
 		if (ConsumeAllTokens is not null)
 		{
-			__init.Property("ConsumeAllTokens");
+			initializer.Property("ConsumeAllTokens");
 			writer.WriteValue(ConsumeAllTokens.Value);
 		}
 
 		if (MaxTokenCount is not null)
 		{
-			__init.Property("MaxTokenCount");
+			initializer.Property("MaxTokenCount");
 			writer.WriteValue(MaxTokenCount.Value);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

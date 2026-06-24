@@ -27,12 +27,12 @@ public partial class ManageUserPrivileges : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ManageUserPrivileges", false);
+		var initializer = writer.BeginObjectInitializer("ManageUserPrivileges", false);
 		{
-			__init.Property("Applications");
+			initializer.Property("Applications");
 			writer.WriteInlineList(Applications, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

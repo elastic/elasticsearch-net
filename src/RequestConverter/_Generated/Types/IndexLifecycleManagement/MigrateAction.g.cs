@@ -27,13 +27,13 @@ public partial class MigrateAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MigrateAction", false);
+		var initializer = writer.BeginObjectInitializer("MigrateAction", false);
 		if (Enabled is not null)
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

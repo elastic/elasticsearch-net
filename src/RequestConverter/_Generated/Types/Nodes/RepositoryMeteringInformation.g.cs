@@ -27,55 +27,55 @@ public partial class RepositoryMeteringInformation : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RepositoryMeteringInformation", false);
+		var initializer = writer.BeginObjectInitializer("RepositoryMeteringInformation", false);
 		{
-			__init.Property("Archived");
+			initializer.Property("Archived");
 			writer.WriteValue(Archived);
 		}
 
 		if (ClusterVersion is not null)
 		{
-			__init.Property("ClusterVersion");
+			initializer.Property("ClusterVersion");
 			writer.WriteValue(ClusterVersion.Value);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("RepositoryEphemeralId");
+			initializer.Property("RepositoryEphemeralId");
 			writer.WriteString(RepositoryEphemeralId);
 		}
 
 		{
-			__init.Property("RepositoryLocation");
+			initializer.Property("RepositoryLocation");
 			RepositoryLocation.FormatCode(writer);
 		}
 
 		{
-			__init.Property("RepositoryName");
+			initializer.Property("RepositoryName");
 			writer.WriteString(RepositoryName);
 		}
 
 		{
-			__init.Property("RepositoryStartedAt");
+			initializer.Property("RepositoryStartedAt");
 			writer.WriteValue(RepositoryStartedAt);
 		}
 
 		if (RepositoryStoppedAt is not null)
 		{
-			__init.Property("RepositoryStoppedAt");
+			initializer.Property("RepositoryStoppedAt");
 			writer.WriteValue(RepositoryStoppedAt.Value);
 		}
 
 		{
-			__init.Property("RepositoryType");
+			initializer.Property("RepositoryType");
 			writer.WriteString(RepositoryType);
 		}
 
 		{
-			__init.Property("RequestCounts");
+			initializer.Property("RequestCounts");
 			RequestCounts.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

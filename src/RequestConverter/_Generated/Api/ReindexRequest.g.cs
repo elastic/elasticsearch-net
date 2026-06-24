@@ -27,85 +27,85 @@ public partial class ReindexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ReindexRequest", false);
+		var initializer = writer.BeginObjectInitializer("ReindexRequest", false);
 		if (Refresh is not null)
 		{
-			__init.Property("Refresh");
+			initializer.Property("Refresh");
 			writer.WriteValue(Refresh.Value);
 		}
 
 		if (RequestsPerSecond is not null)
 		{
-			__init.Property("RequestsPerSecond");
+			initializer.Property("RequestsPerSecond");
 			writer.WriteValue(RequestsPerSecond.Value);
 			writer.Write("f");
 		}
 
 		if (RequireAlias is not null)
 		{
-			__init.Property("RequireAlias");
+			initializer.Property("RequireAlias");
 			writer.WriteValue(RequireAlias.Value);
 		}
 
 		if (Scroll is not null)
 		{
-			__init.Property("Scroll");
+			initializer.Property("Scroll");
 			Scroll.FormatCode(writer);
 		}
 
 		if (Slices is not null)
 		{
-			__init.Property("Slices");
+			initializer.Property("Slices");
 			Slices.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (WaitForActiveShards is not null)
 		{
-			__init.Property("WaitForActiveShards");
+			initializer.Property("WaitForActiveShards");
 			WaitForActiveShards.FormatCode(writer);
 		}
 
 		if (WaitForCompletion is not null)
 		{
-			__init.Property("WaitForCompletion");
+			initializer.Property("WaitForCompletion");
 			writer.WriteValue(WaitForCompletion.Value);
 		}
 
 		if (Conflicts is not null)
 		{
-			__init.Property("Conflicts");
+			initializer.Property("Conflicts");
 			Elastic.Clients.Elasticsearch.ConflictsCodeFormatter.FormatCode(Conflicts.Value, writer);
 		}
 
 		{
-			__init.Property("Dest");
+			initializer.Property("Dest");
 			Dest.FormatCode(writer);
 		}
 
 		if (MaxDocs is not null)
 		{
-			__init.Property("MaxDocs");
+			initializer.Property("MaxDocs");
 			writer.WriteValue(MaxDocs.Value);
 			writer.Write("L");
 		}
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			Source.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

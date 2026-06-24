@@ -27,55 +27,55 @@ public partial class QueryCacheStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("QueryCacheStats", false);
+		var initializer = writer.BeginObjectInitializer("QueryCacheStats", false);
 		{
-			__init.Property("CacheCount");
+			initializer.Property("CacheCount");
 			writer.WriteValue(CacheCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("CacheSize");
+			initializer.Property("CacheSize");
 			writer.WriteValue(CacheSize);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Evictions");
+			initializer.Property("Evictions");
 			writer.WriteValue(Evictions);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("HitCount");
+			initializer.Property("HitCount");
 			writer.WriteValue(HitCount);
 			writer.Write("L");
 		}
 
 		if (MemorySize is not null)
 		{
-			__init.Property("MemorySize");
+			initializer.Property("MemorySize");
 			MemorySize.FormatCode(writer);
 		}
 
 		{
-			__init.Property("MemorySizeInBytes");
+			initializer.Property("MemorySizeInBytes");
 			writer.WriteValue(MemorySizeInBytes);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("MissCount");
+			initializer.Property("MissCount");
 			writer.WriteValue(MissCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("TotalCount");
+			initializer.Property("TotalCount");
 			writer.WriteValue(TotalCount);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

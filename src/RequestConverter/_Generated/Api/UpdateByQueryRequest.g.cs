@@ -27,221 +27,221 @@ public partial class UpdateByQueryRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UpdateByQueryRequest", false);
+		var initializer = writer.BeginObjectInitializer("UpdateByQueryRequest", false);
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		if (AllowNoIndices is not null)
 		{
-			__init.Property("AllowNoIndices");
+			initializer.Property("AllowNoIndices");
 			writer.WriteValue(AllowNoIndices.Value);
 		}
 
 		if (Analyzer is not null)
 		{
-			__init.Property("Analyzer");
+			initializer.Property("Analyzer");
 			writer.WriteString(Analyzer);
 		}
 
 		if (AnalyzeWildcard is not null)
 		{
-			__init.Property("AnalyzeWildcard");
+			initializer.Property("AnalyzeWildcard");
 			writer.WriteValue(AnalyzeWildcard.Value);
 		}
 
 		if (DefaultOperator is not null)
 		{
-			__init.Property("DefaultOperator");
+			initializer.Property("DefaultOperator");
 			Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(DefaultOperator.Value, writer);
 		}
 
 		if (Df is not null)
 		{
-			__init.Property("Df");
+			initializer.Property("Df");
 			writer.WriteString(Df);
 		}
 
 		if (ExpandWildcards is not null)
 		{
-			__init.Property("ExpandWildcards");
+			initializer.Property("ExpandWildcards");
 			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (From is not null)
 		{
-			__init.Property("From");
+			initializer.Property("From");
 			writer.WriteValue(From.Value);
 			writer.Write("L");
 		}
 
 		if (IgnoreUnavailable is not null)
 		{
-			__init.Property("IgnoreUnavailable");
+			initializer.Property("IgnoreUnavailable");
 			writer.WriteValue(IgnoreUnavailable.Value);
 		}
 
 		if (Lenient is not null)
 		{
-			__init.Property("Lenient");
+			initializer.Property("Lenient");
 			writer.WriteValue(Lenient.Value);
 		}
 
 		if (Pipeline is not null)
 		{
-			__init.Property("Pipeline");
+			initializer.Property("Pipeline");
 			writer.WriteString(Pipeline);
 		}
 
 		if (Preference is not null)
 		{
-			__init.Property("Preference");
+			initializer.Property("Preference");
 			writer.WriteString(Preference);
 		}
 
 		if (QueryLuceneSyntax is not null)
 		{
-			__init.Property("QueryLuceneSyntax");
+			initializer.Property("QueryLuceneSyntax");
 			writer.WriteString(QueryLuceneSyntax);
 		}
 
 		if (Refresh is not null)
 		{
-			__init.Property("Refresh");
+			initializer.Property("Refresh");
 			writer.WriteValue(Refresh.Value);
 		}
 
 		if (RequestCache is not null)
 		{
-			__init.Property("RequestCache");
+			initializer.Property("RequestCache");
 			writer.WriteValue(RequestCache.Value);
 		}
 
 		if (RequestsPerSecond is not null)
 		{
-			__init.Property("RequestsPerSecond");
+			initializer.Property("RequestsPerSecond");
 			writer.WriteValue(RequestsPerSecond.Value);
 			writer.Write("f");
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			Routing.FormatCode(writer);
 		}
 
 		if (Scroll is not null)
 		{
-			__init.Property("Scroll");
+			initializer.Property("Scroll");
 			Scroll.FormatCode(writer);
 		}
 
 		if (ScrollSize is not null)
 		{
-			__init.Property("ScrollSize");
+			initializer.Property("ScrollSize");
 			writer.WriteValue(ScrollSize.Value);
 			writer.Write("L");
 		}
 
 		if (SearchTimeout is not null)
 		{
-			__init.Property("SearchTimeout");
+			initializer.Property("SearchTimeout");
 			SearchTimeout.FormatCode(writer);
 		}
 
 		if (SearchType is not null)
 		{
-			__init.Property("SearchType");
+			initializer.Property("SearchType");
 			Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(SearchType.Value, writer);
 		}
 
 		if (Slices is not null)
 		{
-			__init.Property("Slices");
+			initializer.Property("Slices");
 			Slices.FormatCode(writer);
 		}
 
 		if (Sort is not null)
 		{
-			__init.Property("Sort");
+			initializer.Property("Sort");
 			writer.WriteInlineList(Sort, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Stats is not null)
 		{
-			__init.Property("Stats");
+			initializer.Property("Stats");
 			writer.WriteInlineList(Stats, (w, item) => { w.WriteString(item); });
 		}
 
 		if (TerminateAfter is not null)
 		{
-			__init.Property("TerminateAfter");
+			initializer.Property("TerminateAfter");
 			writer.WriteValue(TerminateAfter.Value);
 			writer.Write("L");
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version.Value);
 		}
 
 		if (VersionType is not null)
 		{
-			__init.Property("VersionType");
+			initializer.Property("VersionType");
 			writer.WriteValue(VersionType.Value);
 		}
 
 		if (WaitForActiveShards is not null)
 		{
-			__init.Property("WaitForActiveShards");
+			initializer.Property("WaitForActiveShards");
 			WaitForActiveShards.FormatCode(writer);
 		}
 
 		if (WaitForCompletion is not null)
 		{
-			__init.Property("WaitForCompletion");
+			initializer.Property("WaitForCompletion");
 			writer.WriteValue(WaitForCompletion.Value);
 		}
 
 		if (Conflicts is not null)
 		{
-			__init.Property("Conflicts");
+			initializer.Property("Conflicts");
 			Elastic.Clients.Elasticsearch.ConflictsCodeFormatter.FormatCode(Conflicts.Value, writer);
 		}
 
 		if (MaxDocs is not null)
 		{
-			__init.Property("MaxDocs");
+			initializer.Property("MaxDocs");
 			writer.WriteValue(MaxDocs.Value);
 			writer.Write("L");
 		}
 
 		if (Query is not null)
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			Query.FormatCode(writer);
 		}
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
 		if (Slice is not null)
 		{
-			__init.Property("Slice");
+			initializer.Property("Slice");
 			Slice.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,39 +27,39 @@ public partial class AggregateMetricDoubleProperty : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AggregateMetricDoubleProperty", true);
+		var initializer = writer.BeginObjectInitializer("AggregateMetricDoubleProperty", true);
 		{
-			__init.Property("DefaultMetric");
+			initializer.Property("DefaultMetric");
 			writer.WriteString(DefaultMetric);
 		}
 
 		if (Dynamic is not null)
 		{
-			__init.Property("Dynamic");
+			initializer.Property("Dynamic");
 			Elastic.Clients.Elasticsearch.Mapping.DynamicMappingCodeFormatter.FormatCode(Dynamic.Value, writer);
 		}
 
 		if (Fields is not null)
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			Fields.FormatCode(writer);
 		}
 
 		if (IgnoreAbove is not null)
 		{
-			__init.Property("IgnoreAbove");
+			initializer.Property("IgnoreAbove");
 			writer.WriteValue(IgnoreAbove.Value);
 		}
 
 		if (IgnoreMalformed is not null)
 		{
-			__init.Property("IgnoreMalformed");
+			initializer.Property("IgnoreMalformed");
 			writer.WriteValue(IgnoreMalformed.Value);
 		}
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -69,28 +69,28 @@ public partial class AggregateMetricDoubleProperty : RequestConverter.ICodeForma
 		}
 
 		{
-			__init.Property("Metrics");
+			initializer.Property("Metrics");
 			writer.WriteInlineList(Metrics, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Properties is not null)
 		{
-			__init.Property("Properties");
+			initializer.Property("Properties");
 			Properties.FormatCode(writer);
 		}
 
 		if (SyntheticSourceKeep is not null)
 		{
-			__init.Property("SyntheticSourceKeep");
+			initializer.Property("SyntheticSourceKeep");
 			Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnumCodeFormatter.FormatCode(SyntheticSourceKeep.Value, writer);
 		}
 
 		if (TimeSeriesMetric is not null)
 		{
-			__init.Property("TimeSeriesMetric");
+			initializer.Property("TimeSeriesMetric");
 			Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricTypeCodeFormatter.FormatCode(TimeSeriesMetric.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

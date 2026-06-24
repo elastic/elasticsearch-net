@@ -27,96 +27,96 @@ public partial class SourceOnlyRepositorySettingsForS3 : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SourceOnlyRepositorySettingsForS3", true);
+		var initializer = writer.BeginObjectInitializer("SourceOnlyRepositorySettingsForS3", true);
 		if (BasePath is not null)
 		{
-			__init.Property("BasePath");
+			initializer.Property("BasePath");
 			writer.WriteString(BasePath);
 		}
 
 		{
-			__init.Property("Bucket");
+			initializer.Property("Bucket");
 			writer.WriteString(Bucket);
 		}
 
 		if (BufferSize is not null)
 		{
-			__init.Property("BufferSize");
+			initializer.Property("BufferSize");
 			BufferSize.FormatCode(writer);
 		}
 
 		if (CannedAcl is not null)
 		{
-			__init.Property("CannedAcl");
+			initializer.Property("CannedAcl");
 			writer.WriteString(CannedAcl);
 		}
 
 		if (Client is not null)
 		{
-			__init.Property("Client");
+			initializer.Property("Client");
 			writer.WriteString(Client);
 		}
 
 		if (DeleteObjectsMaxSize is not null)
 		{
-			__init.Property("DeleteObjectsMaxSize");
+			initializer.Property("DeleteObjectsMaxSize");
 			writer.WriteValue(DeleteObjectsMaxSize.Value);
 		}
 
 		if (GetRegisterRetryDelay is not null)
 		{
-			__init.Property("GetRegisterRetryDelay");
+			initializer.Property("GetRegisterRetryDelay");
 			GetRegisterRetryDelay.FormatCode(writer);
 		}
 
 		if (MaxMultipartParts is not null)
 		{
-			__init.Property("MaxMultipartParts");
+			initializer.Property("MaxMultipartParts");
 			writer.WriteValue(MaxMultipartParts.Value);
 		}
 
 		if (MaxMultipartUploadCleanupSize is not null)
 		{
-			__init.Property("MaxMultipartUploadCleanupSize");
+			initializer.Property("MaxMultipartUploadCleanupSize");
 			writer.WriteValue(MaxMultipartUploadCleanupSize.Value);
 		}
 
 		if (Readonly is not null)
 		{
-			__init.Property("Readonly");
+			initializer.Property("Readonly");
 			writer.WriteValue(Readonly.Value);
 		}
 
 		if (ServerSideEncryption is not null)
 		{
-			__init.Property("ServerSideEncryption");
+			initializer.Property("ServerSideEncryption");
 			writer.WriteValue(ServerSideEncryption.Value);
 		}
 
 		if (StorageClass is not null)
 		{
-			__init.Property("StorageClass");
+			initializer.Property("StorageClass");
 			writer.WriteString(StorageClass);
 		}
 
 		if (ThrottledDeleteRetryDelayIncrement is not null)
 		{
-			__init.Property("ThrottledDeleteRetryDelayIncrement");
+			initializer.Property("ThrottledDeleteRetryDelayIncrement");
 			ThrottledDeleteRetryDelayIncrement.FormatCode(writer);
 		}
 
 		if (ThrottledDeleteRetryMaximumDelay is not null)
 		{
-			__init.Property("ThrottledDeleteRetryMaximumDelay");
+			initializer.Property("ThrottledDeleteRetryMaximumDelay");
 			ThrottledDeleteRetryMaximumDelay.FormatCode(writer);
 		}
 
 		if (ThrottledDeleteRetryMaximumNumberOfRetries is not null)
 		{
-			__init.Property("ThrottledDeleteRetryMaximumNumberOfRetries");
+			initializer.Property("ThrottledDeleteRetryMaximumNumberOfRetries");
 			writer.WriteValue(ThrottledDeleteRetryMaximumNumberOfRetries.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

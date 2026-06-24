@@ -27,27 +27,27 @@ public partial class SettingsSimilarityBm25 : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SettingsSimilarityBm25", true);
+		var initializer = writer.BeginObjectInitializer("SettingsSimilarityBm25", true);
 		if (B is not null)
 		{
-			__init.Property("B");
+			initializer.Property("B");
 			writer.WriteValue(B.Value);
 			writer.Write("d");
 		}
 
 		if (DiscountOverlaps is not null)
 		{
-			__init.Property("DiscountOverlaps");
+			initializer.Property("DiscountOverlaps");
 			writer.WriteValue(DiscountOverlaps.Value);
 		}
 
 		if (K1 is not null)
 		{
-			__init.Property("K1");
+			initializer.Property("K1");
 			writer.WriteValue(K1.Value);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

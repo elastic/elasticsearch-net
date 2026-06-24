@@ -27,79 +27,79 @@ public partial class RecoveryOrigin : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RecoveryOrigin", false);
+		var initializer = writer.BeginObjectInitializer("RecoveryOrigin", false);
 		if (BootstrapNewHistoryUuid is not null)
 		{
-			__init.Property("BootstrapNewHistoryUuid");
+			initializer.Property("BootstrapNewHistoryUuid");
 			writer.WriteValue(BootstrapNewHistoryUuid.Value);
 		}
 
 		if (Host is not null)
 		{
-			__init.Property("Host");
+			initializer.Property("Host");
 			writer.WriteString(Host);
 		}
 
 		if (Hostname is not null)
 		{
-			__init.Property("Hostname");
+			initializer.Property("Hostname");
 			writer.WriteString(Hostname);
 		}
 
 		if (Id is not null)
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		if (Index is not null)
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteString(Index);
 		}
 
 		if (Ip is not null)
 		{
-			__init.Property("Ip");
+			initializer.Property("Ip");
 			writer.WriteString(Ip);
 		}
 
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		if (Repository is not null)
 		{
-			__init.Property("Repository");
+			initializer.Property("Repository");
 			writer.WriteString(Repository);
 		}
 
 		if (RestoreUuid is not null)
 		{
-			__init.Property("RestoreUuid");
+			initializer.Property("RestoreUuid");
 			writer.WriteString(RestoreUuid);
 		}
 
 		if (Snapshot is not null)
 		{
-			__init.Property("Snapshot");
+			initializer.Property("Snapshot");
 			writer.WriteString(Snapshot);
 		}
 
 		if (TransportAddress is not null)
 		{
-			__init.Property("TransportAddress");
+			initializer.Property("TransportAddress");
 			writer.WriteString(TransportAddress);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

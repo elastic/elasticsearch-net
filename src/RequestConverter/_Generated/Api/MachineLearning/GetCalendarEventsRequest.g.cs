@@ -27,42 +27,42 @@ public partial class GetCalendarEventsRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetCalendarEventsRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetCalendarEventsRequest", false);
 		{
-			__init.Property("CalendarId");
+			initializer.Property("CalendarId");
 			CalendarId.FormatCode(writer);
 		}
 
 		if (End is not null)
 		{
-			__init.Property("End");
+			initializer.Property("End");
 			writer.WriteValue(End.Value);
 		}
 
 		if (From is not null)
 		{
-			__init.Property("From");
+			initializer.Property("From");
 			writer.WriteValue(From.Value);
 		}
 
 		if (JobId is not null)
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			JobId.FormatCode(writer);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
 		if (Start is not null)
 		{
-			__init.Property("Start");
+			initializer.Property("Start");
 			writer.WriteValue(Start.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

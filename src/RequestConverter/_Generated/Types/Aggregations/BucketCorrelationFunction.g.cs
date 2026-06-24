@@ -27,12 +27,12 @@ public partial class BucketCorrelationFunction : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BucketCorrelationFunction", false);
+		var initializer = writer.BeginObjectInitializer("BucketCorrelationFunction", false);
 		{
-			__init.Property("CountCorrelation");
+			initializer.Property("CountCorrelation");
 			CountCorrelation.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,19 +27,19 @@ public partial class Access : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Access", false);
+		var initializer = writer.BeginObjectInitializer("Access", false);
 		if (Replication is not null)
 		{
-			__init.Property("Replication");
+			initializer.Property("Replication");
 			writer.WriteInlineList(Replication, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Search is not null)
 		{
-			__init.Property("Search");
+			initializer.Property("Search");
 			writer.WriteInlineList(Search, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,205 +27,205 @@ public partial class SearchRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SearchRequest", false);
+		var initializer = writer.BeginObjectInitializer("SearchRequest", false);
 		if (Indices is not null)
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		if (AllowNoIndices is not null)
 		{
-			__init.Property("AllowNoIndices");
+			initializer.Property("AllowNoIndices");
 			writer.WriteValue(AllowNoIndices.Value);
 		}
 
 		if (AllowPartialSearchResults is not null)
 		{
-			__init.Property("AllowPartialSearchResults");
+			initializer.Property("AllowPartialSearchResults");
 			writer.WriteValue(AllowPartialSearchResults.Value);
 		}
 
 		if (Analyzer is not null)
 		{
-			__init.Property("Analyzer");
+			initializer.Property("Analyzer");
 			writer.WriteString(Analyzer);
 		}
 
 		if (AnalyzeWildcard is not null)
 		{
-			__init.Property("AnalyzeWildcard");
+			initializer.Property("AnalyzeWildcard");
 			writer.WriteValue(AnalyzeWildcard.Value);
 		}
 
 		if (BatchedReduceSize is not null)
 		{
-			__init.Property("BatchedReduceSize");
+			initializer.Property("BatchedReduceSize");
 			writer.WriteValue(BatchedReduceSize.Value);
 			writer.Write("L");
 		}
 
 		if (CcsMinimizeRoundtrips is not null)
 		{
-			__init.Property("CcsMinimizeRoundtrips");
+			initializer.Property("CcsMinimizeRoundtrips");
 			writer.WriteValue(CcsMinimizeRoundtrips.Value);
 		}
 
 		if (DefaultOperator is not null)
 		{
-			__init.Property("DefaultOperator");
+			initializer.Property("DefaultOperator");
 			Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(DefaultOperator.Value, writer);
 		}
 
 		if (Df is not null)
 		{
-			__init.Property("Df");
+			initializer.Property("Df");
 			writer.WriteString(Df);
 		}
 
 		if (ExpandWildcards is not null)
 		{
-			__init.Property("ExpandWildcards");
+			initializer.Property("ExpandWildcards");
 			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (ForceSyntheticSource is not null)
 		{
-			__init.Property("ForceSyntheticSource");
+			initializer.Property("ForceSyntheticSource");
 			writer.WriteValue(ForceSyntheticSource.Value);
 		}
 #pragma warning disable CS0618
 		if (IgnoreThrottled is not null)
 		{
-			__init.Property("IgnoreThrottled");
+			initializer.Property("IgnoreThrottled");
 			writer.WriteValue(IgnoreThrottled.Value);
 		}
 #pragma warning restore CS0618
 		if (IgnoreUnavailable is not null)
 		{
-			__init.Property("IgnoreUnavailable");
+			initializer.Property("IgnoreUnavailable");
 			writer.WriteValue(IgnoreUnavailable.Value);
 		}
 
 		if (IncludeNamedQueriesScore is not null)
 		{
-			__init.Property("IncludeNamedQueriesScore");
+			initializer.Property("IncludeNamedQueriesScore");
 			writer.WriteValue(IncludeNamedQueriesScore.Value);
 		}
 
 		if (Lenient is not null)
 		{
-			__init.Property("Lenient");
+			initializer.Property("Lenient");
 			writer.WriteValue(Lenient.Value);
 		}
 
 		if (MaxConcurrentShardRequests is not null)
 		{
-			__init.Property("MaxConcurrentShardRequests");
+			initializer.Property("MaxConcurrentShardRequests");
 			writer.WriteValue(MaxConcurrentShardRequests.Value);
 		}
 
 		if (Preference is not null)
 		{
-			__init.Property("Preference");
+			initializer.Property("Preference");
 			writer.WriteString(Preference);
 		}
 
 		if (PreFilterShardSize is not null)
 		{
-			__init.Property("PreFilterShardSize");
+			initializer.Property("PreFilterShardSize");
 			writer.WriteValue(PreFilterShardSize.Value);
 			writer.Write("L");
 		}
 
 		if (QueryLuceneSyntax is not null)
 		{
-			__init.Property("QueryLuceneSyntax");
+			initializer.Property("QueryLuceneSyntax");
 			writer.WriteString(QueryLuceneSyntax);
 		}
 
 		if (RequestCache is not null)
 		{
-			__init.Property("RequestCache");
+			initializer.Property("RequestCache");
 			writer.WriteValue(RequestCache.Value);
 		}
 
 		if (RestTotalHitsAsInt is not null)
 		{
-			__init.Property("RestTotalHitsAsInt");
+			initializer.Property("RestTotalHitsAsInt");
 			writer.WriteValue(RestTotalHitsAsInt.Value);
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			Routing.FormatCode(writer);
 		}
 
 		if (Scroll is not null)
 		{
-			__init.Property("Scroll");
+			initializer.Property("Scroll");
 			Scroll.FormatCode(writer);
 		}
 
 		if (SearchType is not null)
 		{
-			__init.Property("SearchType");
+			initializer.Property("SearchType");
 			Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(SearchType.Value, writer);
 		}
 
 		if (SourceExcludes is not null)
 		{
-			__init.Property("SourceExcludes");
+			initializer.Property("SourceExcludes");
 			SourceExcludes.FormatCode(writer);
 		}
 
 		if (SourceExcludeVectors is not null)
 		{
-			__init.Property("SourceExcludeVectors");
+			initializer.Property("SourceExcludeVectors");
 			writer.WriteValue(SourceExcludeVectors.Value);
 		}
 
 		if (SourceIncludes is not null)
 		{
-			__init.Property("SourceIncludes");
+			initializer.Property("SourceIncludes");
 			SourceIncludes.FormatCode(writer);
 		}
 
 		if (SuggestField is not null)
 		{
-			__init.Property("SuggestField");
+			initializer.Property("SuggestField");
 			SuggestField.FormatCode(writer);
 		}
 
 		if (SuggestMode is not null)
 		{
-			__init.Property("SuggestMode");
+			initializer.Property("SuggestMode");
 			Elastic.Clients.Elasticsearch.SuggestModeCodeFormatter.FormatCode(SuggestMode.Value, writer);
 		}
 
 		if (SuggestSize is not null)
 		{
-			__init.Property("SuggestSize");
+			initializer.Property("SuggestSize");
 			writer.WriteValue(SuggestSize.Value);
 			writer.Write("L");
 		}
 
 		if (SuggestText is not null)
 		{
-			__init.Property("SuggestText");
+			initializer.Property("SuggestText");
 			writer.WriteString(SuggestText);
 		}
 
 		if (TypedKeys is not null)
 		{
-			__init.Property("TypedKeys");
+			initializer.Property("TypedKeys");
 			writer.WriteValue(TypedKeys.Value);
 		}
 
 		if (Aggregations is not null)
 		{
-			__init.Property("Aggregations");
+			initializer.Property("Aggregations");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -236,25 +236,25 @@ public partial class SearchRequest : RequestConverter.ICodeFormattable
 
 		if (Collapse is not null)
 		{
-			__init.Property("Collapse");
+			initializer.Property("Collapse");
 			Collapse.FormatCode(writer);
 		}
 
 		if (DocvalueFields is not null)
 		{
-			__init.Property("DocvalueFields");
+			initializer.Property("DocvalueFields");
 			writer.WriteInlineList(DocvalueFields, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Explain is not null)
 		{
-			__init.Property("Explain");
+			initializer.Property("Explain");
 			writer.WriteValue(Explain.Value);
 		}
 
 		if (Ext is not null)
 		{
-			__init.Property("Ext");
+			initializer.Property("Ext");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -265,92 +265,92 @@ public partial class SearchRequest : RequestConverter.ICodeFormattable
 
 		if (Fields is not null)
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			writer.WriteInlineList(Fields, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (From is not null)
 		{
-			__init.Property("From");
+			initializer.Property("From");
 			writer.WriteValue(From.Value);
 		}
 
 		if (Highlight is not null)
 		{
-			__init.Property("Highlight");
+			initializer.Property("Highlight");
 			Highlight.FormatCode(writer);
 		}
 
 		if (IndicesBoost is not null)
 		{
-			__init.Property("IndicesBoost");
+			initializer.Property("IndicesBoost");
 			writer.WriteInlineList(IndicesBoost, (w, item) => { w.Write("new("); item.Key.FormatCode(w); w.Write(", "); w.WriteValue(item.Value); w.Write("d"); w.Write(")"); });
 		}
 
 		if (Knn is not null)
 		{
-			__init.Property("Knn");
+			initializer.Property("Knn");
 			writer.WriteInlineList(Knn, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (MinScore is not null)
 		{
-			__init.Property("MinScore");
+			initializer.Property("MinScore");
 			writer.WriteValue(MinScore.Value);
 			writer.Write("d");
 		}
 
 		if (Pit is not null)
 		{
-			__init.Property("Pit");
+			initializer.Property("Pit");
 			Pit.FormatCode(writer);
 		}
 
 		if (PostFilter is not null)
 		{
-			__init.Property("PostFilter");
+			initializer.Property("PostFilter");
 			PostFilter.FormatCode(writer);
 		}
 
 		if (Profile is not null)
 		{
-			__init.Property("Profile");
+			initializer.Property("Profile");
 			writer.WriteValue(Profile.Value);
 		}
 
 		if (ProjectRouting is not null)
 		{
-			__init.Property("ProjectRouting");
+			initializer.Property("ProjectRouting");
 			writer.WriteString(ProjectRouting);
 		}
 
 		if (Query is not null)
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			Query.FormatCode(writer);
 		}
 
 		if (Rank is not null)
 		{
-			__init.Property("Rank");
+			initializer.Property("Rank");
 			Rank.FormatCode(writer);
 		}
 
 		if (Rescore is not null)
 		{
-			__init.Property("Rescore");
+			initializer.Property("Rescore");
 			writer.WriteInlineList(Rescore, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Retriever is not null)
 		{
-			__init.Property("Retriever");
+			initializer.Property("Retriever");
 			Retriever.FormatCode(writer);
 		}
 
 		if (RuntimeMappings is not null)
 		{
-			__init.Property("RuntimeMappings");
+			initializer.Property("RuntimeMappings");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("Elastic.Clients.Elasticsearch.Field");
 			writer.Write(", ");
@@ -361,7 +361,7 @@ public partial class SearchRequest : RequestConverter.ICodeFormattable
 
 		if (ScriptFields is not null)
 		{
-			__init.Property("ScriptFields");
+			initializer.Property("ScriptFields");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -372,89 +372,89 @@ public partial class SearchRequest : RequestConverter.ICodeFormattable
 
 		if (SearchAfter is not null)
 		{
-			__init.Property("SearchAfter");
+			initializer.Property("SearchAfter");
 			writer.WriteInlineList(SearchAfter, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (SeqNoPrimaryTerm is not null)
 		{
-			__init.Property("SeqNoPrimaryTerm");
+			initializer.Property("SeqNoPrimaryTerm");
 			writer.WriteValue(SeqNoPrimaryTerm.Value);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
 		if (Slice is not null)
 		{
-			__init.Property("Slice");
+			initializer.Property("Slice");
 			Slice.FormatCode(writer);
 		}
 
 		if (Sort is not null)
 		{
-			__init.Property("Sort");
+			initializer.Property("Sort");
 			writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Source is not null)
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			Source.FormatCode(writer);
 		}
 
 		if (Stats is not null)
 		{
-			__init.Property("Stats");
+			initializer.Property("Stats");
 			writer.WriteInlineList(Stats, (w, item) => { w.WriteString(item); });
 		}
 
 		if (StoredFields is not null)
 		{
-			__init.Property("StoredFields");
+			initializer.Property("StoredFields");
 			StoredFields.FormatCode(writer);
 		}
 
 		if (Suggest is not null)
 		{
-			__init.Property("Suggest");
+			initializer.Property("Suggest");
 			Suggest.FormatCode(writer);
 		}
 
 		if (TerminateAfter is not null)
 		{
-			__init.Property("TerminateAfter");
+			initializer.Property("TerminateAfter");
 			writer.WriteValue(TerminateAfter.Value);
 			writer.Write("L");
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			writer.WriteString(Timeout);
 		}
 
 		if (TrackScores is not null)
 		{
-			__init.Property("TrackScores");
+			initializer.Property("TrackScores");
 			writer.WriteValue(TrackScores.Value);
 		}
 
 		if (TrackTotalHits is not null)
 		{
-			__init.Property("TrackTotalHits");
+			initializer.Property("TrackTotalHits");
 			TrackTotalHits.FormatCode(writer);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

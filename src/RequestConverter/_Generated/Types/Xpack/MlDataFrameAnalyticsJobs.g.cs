@@ -27,30 +27,30 @@ public partial class MlDataFrameAnalyticsJobs : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MlDataFrameAnalyticsJobs", false);
+		var initializer = writer.BeginObjectInitializer("MlDataFrameAnalyticsJobs", false);
 		{
-			__init.Property("All");
+			initializer.Property("All");
 			All.FormatCode(writer);
 		}
 
 		if (AnalysisCounts is not null)
 		{
-			__init.Property("AnalysisCounts");
+			initializer.Property("AnalysisCounts");
 			AnalysisCounts.FormatCode(writer);
 		}
 
 		if (MemoryUsage is not null)
 		{
-			__init.Property("MemoryUsage");
+			initializer.Property("MemoryUsage");
 			MemoryUsage.FormatCode(writer);
 		}
 
 		if (Stopped is not null)
 		{
-			__init.Property("Stopped");
+			initializer.Property("Stopped");
 			Stopped.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,49 +27,49 @@ public partial class CompositeHistogramAggregation : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CompositeHistogramAggregation", false);
+		var initializer = writer.BeginObjectInitializer("CompositeHistogramAggregation", false);
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Interval");
+			initializer.Property("Interval");
 			writer.WriteValue(Interval);
 			writer.Write("d");
 		}
 
 		if (MissingBucket is not null)
 		{
-			__init.Property("MissingBucket");
+			initializer.Property("MissingBucket");
 			writer.WriteValue(MissingBucket.Value);
 		}
 
 		if (MissingOrder is not null)
 		{
-			__init.Property("MissingOrder");
+			initializer.Property("MissingOrder");
 			Elastic.Clients.Elasticsearch.Aggregations.MissingOrderCodeFormatter.FormatCode(MissingOrder.Value, writer);
 		}
 
 		if (Order is not null)
 		{
-			__init.Property("Order");
+			initializer.Property("Order");
 			Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, writer);
 		}
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
 		if (ValueType is not null)
 		{
-			__init.Property("ValueType");
+			initializer.Property("ValueType");
 			Elastic.Clients.Elasticsearch.Aggregations.ValueTypeCodeFormatter.FormatCode(ValueType.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

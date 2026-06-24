@@ -27,36 +27,36 @@ public partial class RecoveryFiles : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RecoveryFiles", false);
+		var initializer = writer.BeginObjectInitializer("RecoveryFiles", false);
 		if (Details is not null)
 		{
-			__init.Property("Details");
+			initializer.Property("Details");
 			writer.WriteInlineList(Details, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Percent");
+			initializer.Property("Percent");
 			Percent.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Recovered");
+			initializer.Property("Recovered");
 			writer.WriteValue(Recovered);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Reused");
+			initializer.Property("Reused");
 			writer.WriteValue(Reused);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteValue(Total);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

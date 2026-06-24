@@ -27,17 +27,17 @@ public partial class IndexTemplateItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexTemplateItem", false);
+		var initializer = writer.BeginObjectInitializer("IndexTemplateItem", false);
 		{
-			__init.Property("IndexTemplate");
+			initializer.Property("IndexTemplate");
 			IndexTemplate.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

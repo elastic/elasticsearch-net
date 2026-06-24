@@ -27,22 +27,22 @@ public partial class CreateApiKeyRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CreateApiKeyRequest", false);
+		var initializer = writer.BeginObjectInitializer("CreateApiKeyRequest", false);
 		if (Refresh is not null)
 		{
-			__init.Property("Refresh");
+			initializer.Property("Refresh");
 			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
 		}
 
 		if (Expiration is not null)
 		{
-			__init.Property("Expiration");
+			initializer.Property("Expiration");
 			Expiration.FormatCode(writer);
 		}
 
 		if (Metadata is not null)
 		{
-			__init.Property("Metadata");
+			initializer.Property("Metadata");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -53,13 +53,13 @@ public partial class CreateApiKeyRequest : RequestConverter.ICodeFormattable
 
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		if (RoleDescriptors is not null)
 		{
-			__init.Property("RoleDescriptors");
+			initializer.Property("RoleDescriptors");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -68,6 +68,6 @@ public partial class CreateApiKeyRequest : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(RoleDescriptors, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

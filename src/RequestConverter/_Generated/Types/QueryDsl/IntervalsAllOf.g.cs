@@ -27,30 +27,30 @@ public partial class IntervalsAllOf : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IntervalsAllOf", false);
+		var initializer = writer.BeginObjectInitializer("IntervalsAllOf", false);
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			Filter.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Intervals");
+			initializer.Property("Intervals");
 			writer.WriteInlineList(Intervals, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (MaxGaps is not null)
 		{
-			__init.Property("MaxGaps");
+			initializer.Property("MaxGaps");
 			writer.WriteValue(MaxGaps.Value);
 		}
 
 		if (Ordered is not null)
 		{
-			__init.Property("Ordered");
+			initializer.Property("Ordered");
 			writer.WriteValue(Ordered.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

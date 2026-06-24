@@ -27,27 +27,27 @@ public partial class Impact : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Impact", false);
+		var initializer = writer.BeginObjectInitializer("Impact", false);
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		{
-			__init.Property("ImpactAreas");
+			initializer.Property("ImpactAreas");
 			writer.WriteInlineList(ImpactAreas, (w, item) => { Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactAreaCodeFormatter.FormatCode(item, w); });
 		}
 
 		{
-			__init.Property("Severity");
+			initializer.Property("Severity");
 			writer.WriteValue(Severity);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,34 +27,34 @@ public partial class ShardStatistics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardStatistics", false);
+		var initializer = writer.BeginObjectInitializer("ShardStatistics", false);
 		{
-			__init.Property("Failed");
+			initializer.Property("Failed");
 			writer.WriteValue(Failed);
 		}
 
 		if (Failures is not null)
 		{
-			__init.Property("Failures");
+			initializer.Property("Failures");
 			writer.WriteInlineList(Failures, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Skipped is not null)
 		{
-			__init.Property("Skipped");
+			initializer.Property("Skipped");
 			writer.WriteValue(Skipped.Value);
 		}
 
 		{
-			__init.Property("Successful");
+			initializer.Property("Successful");
 			writer.WriteValue(Successful);
 		}
 
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteValue(Total);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

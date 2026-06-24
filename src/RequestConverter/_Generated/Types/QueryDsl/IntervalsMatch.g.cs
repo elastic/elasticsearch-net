@@ -27,42 +27,42 @@ public partial class IntervalsMatch : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IntervalsMatch", false);
+		var initializer = writer.BeginObjectInitializer("IntervalsMatch", false);
 		if (Analyzer is not null)
 		{
-			__init.Property("Analyzer");
+			initializer.Property("Analyzer");
 			writer.WriteString(Analyzer);
 		}
 
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			Filter.FormatCode(writer);
 		}
 
 		if (MaxGaps is not null)
 		{
-			__init.Property("MaxGaps");
+			initializer.Property("MaxGaps");
 			writer.WriteValue(MaxGaps.Value);
 		}
 
 		if (Ordered is not null)
 		{
-			__init.Property("Ordered");
+			initializer.Property("Ordered");
 			writer.WriteValue(Ordered.Value);
 		}
 
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			writer.WriteString(Query);
 		}
 
 		if (UseField is not null)
 		{
-			__init.Property("UseField");
+			initializer.Property("UseField");
 			UseField.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,153 +27,153 @@ public partial class Features : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Features", false);
+		var initializer = writer.BeginObjectInitializer("Features", false);
 		{
-			__init.Property("AggregateMetric");
+			initializer.Property("AggregateMetric");
 			AggregateMetric.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Analytics");
+			initializer.Property("Analytics");
 			Analytics.FormatCode(writer);
 		}
 
 		if (Archive is not null)
 		{
-			__init.Property("Archive");
+			initializer.Property("Archive");
 			Archive.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Ccr");
+			initializer.Property("Ccr");
 			Ccr.FormatCode(writer);
 		}
 
 		{
-			__init.Property("DataStreams");
+			initializer.Property("DataStreams");
 			DataStreams.FormatCode(writer);
 		}
 
 		{
-			__init.Property("DataTiers");
+			initializer.Property("DataTiers");
 			DataTiers.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Enrich");
+			initializer.Property("Enrich");
 			Enrich.FormatCode(writer);
 		}
 
 		if (EnterpriseSearch is not null)
 		{
-			__init.Property("EnterpriseSearch");
+			initializer.Property("EnterpriseSearch");
 			EnterpriseSearch.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Eql");
+			initializer.Property("Eql");
 			Eql.FormatCode(writer);
 		}
 
 		if (Esql is not null)
 		{
-			__init.Property("Esql");
+			initializer.Property("Esql");
 			Esql.FormatCode(writer);
 		}
 
 		if (GpuVectorIndexing is not null)
 		{
-			__init.Property("GpuVectorIndexing");
+			initializer.Property("GpuVectorIndexing");
 			GpuVectorIndexing.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Graph");
+			initializer.Property("Graph");
 			Graph.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Ilm");
+			initializer.Property("Ilm");
 			Ilm.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Logsdb");
+			initializer.Property("Logsdb");
 			Logsdb.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Logstash");
+			initializer.Property("Logstash");
 			Logstash.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Ml");
+			initializer.Property("Ml");
 			Ml.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Monitoring");
+			initializer.Property("Monitoring");
 			Monitoring.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Rollup");
+			initializer.Property("Rollup");
 			Rollup.FormatCode(writer);
 		}
 
 		if (RuntimeFields is not null)
 		{
-			__init.Property("RuntimeFields");
+			initializer.Property("RuntimeFields");
 			RuntimeFields.FormatCode(writer);
 		}
 
 		{
-			__init.Property("SearchableSnapshots");
+			initializer.Property("SearchableSnapshots");
 			SearchableSnapshots.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Security");
+			initializer.Property("Security");
 			Security.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Slm");
+			initializer.Property("Slm");
 			Slm.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Spatial");
+			initializer.Property("Spatial");
 			Spatial.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Sql");
+			initializer.Property("Sql");
 			Sql.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Transform");
+			initializer.Property("Transform");
 			Transform.FormatCode(writer);
 		}
 
 		if (UniversalProfiling is not null)
 		{
-			__init.Property("UniversalProfiling");
+			initializer.Property("UniversalProfiling");
 			UniversalProfiling.FormatCode(writer);
 		}
 
 		{
-			__init.Property("VotingOnly");
+			initializer.Property("VotingOnly");
 			VotingOnly.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Watcher");
+			initializer.Property("Watcher");
 			Watcher.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

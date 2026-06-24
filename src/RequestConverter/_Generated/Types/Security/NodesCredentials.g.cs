@@ -27,9 +27,9 @@ public partial class NodesCredentials : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodesCredentials", false);
+		var initializer = writer.BeginObjectInitializer("NodesCredentials", false);
 		{
-			__init.Property("FileTokens");
+			initializer.Property("FileTokens");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -39,10 +39,10 @@ public partial class NodesCredentials : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Nodes");
+			initializer.Property("Nodes");
 			Nodes.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,23 +27,23 @@ public partial class BucketCorrelationFunctionCountCorrelationIndicator : Reques
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BucketCorrelationFunctionCountCorrelationIndicator", false);
+		var initializer = writer.BeginObjectInitializer("BucketCorrelationFunctionCountCorrelationIndicator", false);
 		{
-			__init.Property("DocCount");
+			initializer.Property("DocCount");
 			writer.WriteValue(DocCount);
 		}
 
 		{
-			__init.Property("Expectations");
+			initializer.Property("Expectations");
 			writer.WriteInlineList(Expectations, (w, item) => { w.WriteValue(item); w.Write("d"); });
 		}
 
 		if (Fractions is not null)
 		{
-			__init.Property("Fractions");
+			initializer.Property("Fractions");
 			writer.WriteInlineList(Fractions, (w, item) => { w.WriteValue(item); w.Write("d"); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

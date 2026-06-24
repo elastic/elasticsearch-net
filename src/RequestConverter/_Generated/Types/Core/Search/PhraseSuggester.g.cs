@@ -27,99 +27,99 @@ public partial class PhraseSuggester : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PhraseSuggester", false);
+		var initializer = writer.BeginObjectInitializer("PhraseSuggester", false);
 		if (Analyzer is not null)
 		{
-			__init.Property("Analyzer");
+			initializer.Property("Analyzer");
 			writer.WriteString(Analyzer);
 		}
 
 		if (Collate is not null)
 		{
-			__init.Property("Collate");
+			initializer.Property("Collate");
 			Collate.FormatCode(writer);
 		}
 
 		if (Confidence is not null)
 		{
-			__init.Property("Confidence");
+			initializer.Property("Confidence");
 			writer.WriteValue(Confidence.Value);
 			writer.Write("d");
 		}
 
 		if (DirectGenerator is not null)
 		{
-			__init.Property("DirectGenerator");
+			initializer.Property("DirectGenerator");
 			writer.WriteInlineList(DirectGenerator, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (ForceUnigrams is not null)
 		{
-			__init.Property("ForceUnigrams");
+			initializer.Property("ForceUnigrams");
 			writer.WriteValue(ForceUnigrams.Value);
 		}
 
 		if (GramSize is not null)
 		{
-			__init.Property("GramSize");
+			initializer.Property("GramSize");
 			writer.WriteValue(GramSize.Value);
 		}
 
 		if (Highlight is not null)
 		{
-			__init.Property("Highlight");
+			initializer.Property("Highlight");
 			Highlight.FormatCode(writer);
 		}
 
 		if (MaxErrors is not null)
 		{
-			__init.Property("MaxErrors");
+			initializer.Property("MaxErrors");
 			writer.WriteValue(MaxErrors.Value);
 			writer.Write("d");
 		}
 
 		if (RealWordErrorLikelihood is not null)
 		{
-			__init.Property("RealWordErrorLikelihood");
+			initializer.Property("RealWordErrorLikelihood");
 			writer.WriteValue(RealWordErrorLikelihood.Value);
 			writer.Write("d");
 		}
 
 		if (Separator is not null)
 		{
-			__init.Property("Separator");
+			initializer.Property("Separator");
 			writer.WriteString(Separator);
 		}
 
 		if (ShardSize is not null)
 		{
-			__init.Property("ShardSize");
+			initializer.Property("ShardSize");
 			writer.WriteValue(ShardSize.Value);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
 		if (Smoothing is not null)
 		{
-			__init.Property("Smoothing");
+			initializer.Property("Smoothing");
 			Smoothing.FormatCode(writer);
 		}
 
 		if (TokenLimit is not null)
 		{
-			__init.Property("TokenLimit");
+			initializer.Property("TokenLimit");
 			writer.WriteValue(TokenLimit.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

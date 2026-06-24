@@ -27,47 +27,47 @@ public partial class RequestChatCompletion : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RequestChatCompletion", false);
+		var initializer = writer.BeginObjectInitializer("RequestChatCompletion", false);
 		if (MaxCompletionTokens is not null)
 		{
-			__init.Property("MaxCompletionTokens");
+			initializer.Property("MaxCompletionTokens");
 			writer.WriteValue(MaxCompletionTokens.Value);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Messages");
+			initializer.Property("Messages");
 			writer.WriteInlineList(Messages, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Model is not null)
 		{
-			__init.Property("Model");
+			initializer.Property("Model");
 			writer.WriteString(Model);
 		}
 
 		if (Reasoning is not null)
 		{
-			__init.Property("Reasoning");
+			initializer.Property("Reasoning");
 			Reasoning.FormatCode(writer);
 		}
 
 		if (Stop is not null)
 		{
-			__init.Property("Stop");
+			initializer.Property("Stop");
 			writer.WriteInlineList(Stop, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Temperature is not null)
 		{
-			__init.Property("Temperature");
+			initializer.Property("Temperature");
 			writer.WriteValue(Temperature.Value);
 			writer.Write("f");
 		}
 
 		if (ToolChoice is not null)
 		{
-			__init.Property("ToolChoice");
+			initializer.Property("ToolChoice");
 			if (ToolChoice.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				writer.WriteString(ToolChoice.Value1);
@@ -80,17 +80,17 @@ public partial class RequestChatCompletion : RequestConverter.ICodeFormattable
 
 		if (Tools is not null)
 		{
-			__init.Property("Tools");
+			initializer.Property("Tools");
 			writer.WriteInlineList(Tools, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (TopP is not null)
 		{
-			__init.Property("TopP");
+			initializer.Property("TopP");
 			writer.WriteValue(TopP.Value);
 			writer.Write("f");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

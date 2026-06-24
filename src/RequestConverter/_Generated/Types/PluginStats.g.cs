@@ -27,52 +27,52 @@ public partial class PluginStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PluginStats", false);
+		var initializer = writer.BeginObjectInitializer("PluginStats", false);
 		{
-			__init.Property("Classname");
+			initializer.Property("Classname");
 			writer.WriteString(Classname);
 		}
 
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		{
-			__init.Property("ElasticsearchVersion");
+			initializer.Property("ElasticsearchVersion");
 			writer.WriteString(ElasticsearchVersion);
 		}
 
 		{
-			__init.Property("ExtendedPlugins");
+			initializer.Property("ExtendedPlugins");
 			writer.WriteInlineList(ExtendedPlugins, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("HasNativeController");
+			initializer.Property("HasNativeController");
 			writer.WriteValue(HasNativeController);
 		}
 
 		{
-			__init.Property("JavaVersion");
+			initializer.Property("JavaVersion");
 			writer.WriteString(JavaVersion);
 		}
 
 		{
-			__init.Property("Licensed");
+			initializer.Property("Licensed");
 			writer.WriteValue(Licensed);
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,33 +27,33 @@ public partial class PutTemplateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutTemplateRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutTemplateRequest", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		if (Cause is not null)
 		{
-			__init.Property("Cause");
+			initializer.Property("Cause");
 			writer.WriteString(Cause);
 		}
 
 		if (Create is not null)
 		{
-			__init.Property("Create");
+			initializer.Property("Create");
 			writer.WriteValue(Create.Value);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (Aliases is not null)
 		{
-			__init.Property("Aliases");
+			initializer.Property("Aliases");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("Elastic.Clients.Elasticsearch.IndexName");
 			writer.Write(", ");
@@ -64,35 +64,35 @@ public partial class PutTemplateRequest : RequestConverter.ICodeFormattable
 
 		if (IndexPatterns is not null)
 		{
-			__init.Property("IndexPatterns");
+			initializer.Property("IndexPatterns");
 			writer.WriteInlineList(IndexPatterns, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Mappings is not null)
 		{
-			__init.Property("Mappings");
+			initializer.Property("Mappings");
 			Mappings.FormatCode(writer);
 		}
 
 		if (Order is not null)
 		{
-			__init.Property("Order");
+			initializer.Property("Order");
 			writer.WriteValue(Order.Value);
 		}
 
 		if (Settings is not null)
 		{
-			__init.Property("Settings");
+			initializer.Property("Settings");
 			Settings.FormatCode(writer);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

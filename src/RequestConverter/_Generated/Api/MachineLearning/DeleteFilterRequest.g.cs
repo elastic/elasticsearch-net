@@ -27,12 +27,12 @@ public partial class DeleteFilterRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteFilterRequest", false);
+		var initializer = writer.BeginObjectInitializer("DeleteFilterRequest", false);
 		{
-			__init.Property("FilterId");
+			initializer.Property("FilterId");
 			FilterId.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

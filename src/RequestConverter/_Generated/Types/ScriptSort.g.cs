@@ -27,36 +27,36 @@ public partial class ScriptSort : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ScriptSort", false);
+		var initializer = writer.BeginObjectInitializer("ScriptSort", false);
 		if (Mode is not null)
 		{
-			__init.Property("Mode");
+			initializer.Property("Mode");
 			Elastic.Clients.Elasticsearch.SortModeCodeFormatter.FormatCode(Mode.Value, writer);
 		}
 
 		if (Nested is not null)
 		{
-			__init.Property("Nested");
+			initializer.Property("Nested");
 			Nested.FormatCode(writer);
 		}
 
 		if (Order is not null)
 		{
-			__init.Property("Order");
+			initializer.Property("Order");
 			Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, writer);
 		}
 
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
 		if (Type is not null)
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			Elastic.Clients.Elasticsearch.ScriptSortTypeCodeFormatter.FormatCode(Type.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

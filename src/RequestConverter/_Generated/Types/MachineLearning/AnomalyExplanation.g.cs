@@ -27,70 +27,70 @@ public partial class AnomalyExplanation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AnomalyExplanation", false);
+		var initializer = writer.BeginObjectInitializer("AnomalyExplanation", false);
 		if (AnomalyCharacteristicsImpact is not null)
 		{
-			__init.Property("AnomalyCharacteristicsImpact");
+			initializer.Property("AnomalyCharacteristicsImpact");
 			writer.WriteValue(AnomalyCharacteristicsImpact.Value);
 		}
 
 		if (AnomalyLength is not null)
 		{
-			__init.Property("AnomalyLength");
+			initializer.Property("AnomalyLength");
 			writer.WriteValue(AnomalyLength.Value);
 		}
 
 		if (AnomalyType is not null)
 		{
-			__init.Property("AnomalyType");
+			initializer.Property("AnomalyType");
 			writer.WriteString(AnomalyType);
 		}
 
 		if (HighVariancePenalty is not null)
 		{
-			__init.Property("HighVariancePenalty");
+			initializer.Property("HighVariancePenalty");
 			writer.WriteValue(HighVariancePenalty.Value);
 		}
 
 		if (IncompleteBucketPenalty is not null)
 		{
-			__init.Property("IncompleteBucketPenalty");
+			initializer.Property("IncompleteBucketPenalty");
 			writer.WriteValue(IncompleteBucketPenalty.Value);
 		}
 
 		if (LowerConfidenceBound is not null)
 		{
-			__init.Property("LowerConfidenceBound");
+			initializer.Property("LowerConfidenceBound");
 			writer.WriteValue(LowerConfidenceBound.Value);
 			writer.Write("d");
 		}
 
 		if (MultiBucketImpact is not null)
 		{
-			__init.Property("MultiBucketImpact");
+			initializer.Property("MultiBucketImpact");
 			writer.WriteValue(MultiBucketImpact.Value);
 		}
 
 		if (SingleBucketImpact is not null)
 		{
-			__init.Property("SingleBucketImpact");
+			initializer.Property("SingleBucketImpact");
 			writer.WriteValue(SingleBucketImpact.Value);
 		}
 
 		if (TypicalValue is not null)
 		{
-			__init.Property("TypicalValue");
+			initializer.Property("TypicalValue");
 			writer.WriteValue(TypicalValue.Value);
 			writer.Write("d");
 		}
 
 		if (UpperConfidenceBound is not null)
 		{
-			__init.Property("UpperConfidenceBound");
+			initializer.Property("UpperConfidenceBound");
 			writer.WriteValue(UpperConfidenceBound.Value);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

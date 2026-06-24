@@ -27,43 +27,43 @@ public partial class CapabilitiesRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CapabilitiesRequest", false);
+		var initializer = writer.BeginObjectInitializer("CapabilitiesRequest", false);
 		if (Capabilities is not null)
 		{
-			__init.Property("Capabilities");
+			initializer.Property("Capabilities");
 			writer.WriteInlineList(Capabilities, (w, item) => { w.WriteString(item); });
 		}
 
 		if (LocalOnly is not null)
 		{
-			__init.Property("LocalOnly");
+			initializer.Property("LocalOnly");
 			writer.WriteValue(LocalOnly.Value);
 		}
 
 		if (Method is not null)
 		{
-			__init.Property("Method");
+			initializer.Property("Method");
 			Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethodCodeFormatter.FormatCode(Method.Value, writer);
 		}
 
 		if (Parameters is not null)
 		{
-			__init.Property("Parameters");
+			initializer.Property("Parameters");
 			writer.WriteInlineList(Parameters, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Path is not null)
 		{
-			__init.Property("Path");
+			initializer.Property("Path");
 			writer.WriteString(Path);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

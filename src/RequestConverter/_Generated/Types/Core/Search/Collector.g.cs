@@ -27,28 +27,28 @@ public partial class Collector : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Collector", false);
+		var initializer = writer.BeginObjectInitializer("Collector", false);
 		if (Children is not null)
 		{
-			__init.Property("Children");
+			initializer.Property("Children");
 			writer.WriteInlineList(Children, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("Reason");
+			initializer.Property("Reason");
 			writer.WriteString(Reason);
 		}
 
 		{
-			__init.Property("TimeInNanos");
+			initializer.Property("TimeInNanos");
 			writer.WriteValue(TimeInNanos);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

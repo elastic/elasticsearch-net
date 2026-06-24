@@ -27,33 +27,33 @@ public partial class SearchStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SearchStats", false);
+		var initializer = writer.BeginObjectInitializer("SearchStats", false);
 		{
-			__init.Property("FetchCurrent");
+			initializer.Property("FetchCurrent");
 			writer.WriteValue(FetchCurrent);
 			writer.Write("L");
 		}
 
 		if (FetchTime is not null)
 		{
-			__init.Property("FetchTime");
+			initializer.Property("FetchTime");
 			FetchTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("FetchTimeInMillis");
+			initializer.Property("FetchTimeInMillis");
 			writer.WriteValue(FetchTimeInMillis);
 		}
 
 		{
-			__init.Property("FetchTotal");
+			initializer.Property("FetchTotal");
 			writer.WriteValue(FetchTotal);
 			writer.Write("L");
 		}
 
 		if (Groups is not null)
 		{
-			__init.Property("Groups");
+			initializer.Property("Groups");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -64,87 +64,87 @@ public partial class SearchStats : RequestConverter.ICodeFormattable
 
 		if (OpenContexts is not null)
 		{
-			__init.Property("OpenContexts");
+			initializer.Property("OpenContexts");
 			writer.WriteValue(OpenContexts.Value);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("QueryCurrent");
+			initializer.Property("QueryCurrent");
 			writer.WriteValue(QueryCurrent);
 			writer.Write("L");
 		}
 
 		if (QueryTime is not null)
 		{
-			__init.Property("QueryTime");
+			initializer.Property("QueryTime");
 			QueryTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("QueryTimeInMillis");
+			initializer.Property("QueryTimeInMillis");
 			writer.WriteValue(QueryTimeInMillis);
 		}
 
 		{
-			__init.Property("QueryTotal");
+			initializer.Property("QueryTotal");
 			writer.WriteValue(QueryTotal);
 			writer.Write("L");
 		}
 
 		if (RecentSearchLoad is not null)
 		{
-			__init.Property("RecentSearchLoad");
+			initializer.Property("RecentSearchLoad");
 			writer.WriteValue(RecentSearchLoad.Value);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("ScrollCurrent");
+			initializer.Property("ScrollCurrent");
 			writer.WriteValue(ScrollCurrent);
 			writer.Write("L");
 		}
 
 		if (ScrollTime is not null)
 		{
-			__init.Property("ScrollTime");
+			initializer.Property("ScrollTime");
 			ScrollTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ScrollTimeInMillis");
+			initializer.Property("ScrollTimeInMillis");
 			writer.WriteValue(ScrollTimeInMillis);
 		}
 
 		{
-			__init.Property("ScrollTotal");
+			initializer.Property("ScrollTotal");
 			writer.WriteValue(ScrollTotal);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("SuggestCurrent");
+			initializer.Property("SuggestCurrent");
 			writer.WriteValue(SuggestCurrent);
 			writer.Write("L");
 		}
 
 		if (SuggestTime is not null)
 		{
-			__init.Property("SuggestTime");
+			initializer.Property("SuggestTime");
 			SuggestTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("SuggestTimeInMillis");
+			initializer.Property("SuggestTimeInMillis");
 			writer.WriteValue(SuggestTimeInMillis);
 		}
 
 		{
-			__init.Property("SuggestTotal");
+			initializer.Property("SuggestTotal");
 			writer.WriteValue(SuggestTotal);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

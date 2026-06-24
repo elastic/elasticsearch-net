@@ -27,44 +27,44 @@ public partial class VertexDefinition : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("VertexDefinition", false);
+		var initializer = writer.BeginObjectInitializer("VertexDefinition", false);
 		if (Exclude is not null)
 		{
-			__init.Property("Exclude");
+			initializer.Property("Exclude");
 			writer.WriteInlineList(Exclude, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Include is not null)
 		{
-			__init.Property("Include");
+			initializer.Property("Include");
 			writer.WriteInlineList(Include, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (MinDocCount is not null)
 		{
-			__init.Property("MinDocCount");
+			initializer.Property("MinDocCount");
 			writer.WriteValue(MinDocCount.Value);
 			writer.Write("L");
 		}
 
 		if (ShardMinDocCount is not null)
 		{
-			__init.Property("ShardMinDocCount");
+			initializer.Property("ShardMinDocCount");
 			writer.WriteValue(ShardMinDocCount.Value);
 			writer.Write("L");
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

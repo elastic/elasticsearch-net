@@ -27,61 +27,61 @@ public partial class ExplainDataFrameAnalyticsRequest : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExplainDataFrameAnalyticsRequest", false);
+		var initializer = writer.BeginObjectInitializer("ExplainDataFrameAnalyticsRequest", false);
 		if (Id is not null)
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		if (AllowLazyStart is not null)
 		{
-			__init.Property("AllowLazyStart");
+			initializer.Property("AllowLazyStart");
 			writer.WriteValue(AllowLazyStart.Value);
 		}
 
 		if (Analysis is not null)
 		{
-			__init.Property("Analysis");
+			initializer.Property("Analysis");
 			Analysis.FormatCode(writer);
 		}
 
 		if (AnalyzedFields is not null)
 		{
-			__init.Property("AnalyzedFields");
+			initializer.Property("AnalyzedFields");
 			AnalyzedFields.FormatCode(writer);
 		}
 
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		if (Dest is not null)
 		{
-			__init.Property("Dest");
+			initializer.Property("Dest");
 			Dest.FormatCode(writer);
 		}
 
 		if (MaxNumThreads is not null)
 		{
-			__init.Property("MaxNumThreads");
+			initializer.Property("MaxNumThreads");
 			writer.WriteValue(MaxNumThreads.Value);
 		}
 
 		if (ModelMemoryLimit is not null)
 		{
-			__init.Property("ModelMemoryLimit");
+			initializer.Property("ModelMemoryLimit");
 			writer.WriteString(ModelMemoryLimit);
 		}
 
 		if (Source is not null)
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			Source.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

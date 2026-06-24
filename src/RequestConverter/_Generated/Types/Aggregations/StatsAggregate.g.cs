@@ -27,40 +27,40 @@ public partial class StatsAggregate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StatsAggregate", true);
+		var initializer = writer.BeginObjectInitializer("StatsAggregate", true);
 		{
-			__init.Property("Avg");
+			initializer.Property("Avg");
 			writer.WriteValue(Avg.Value);
 			writer.Write("d");
 		}
 
 		if (AvgAsString is not null)
 		{
-			__init.Property("AvgAsString");
+			initializer.Property("AvgAsString");
 			writer.WriteString(AvgAsString);
 		}
 
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Max");
+			initializer.Property("Max");
 			writer.WriteValue(Max.Value);
 			writer.Write("d");
 		}
 
 		if (MaxAsString is not null)
 		{
-			__init.Property("MaxAsString");
+			initializer.Property("MaxAsString");
 			writer.WriteString(MaxAsString);
 		}
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -70,29 +70,29 @@ public partial class StatsAggregate : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Min");
+			initializer.Property("Min");
 			writer.WriteValue(Min.Value);
 			writer.Write("d");
 		}
 
 		if (MinAsString is not null)
 		{
-			__init.Property("MinAsString");
+			initializer.Property("MinAsString");
 			writer.WriteString(MinAsString);
 		}
 
 		{
-			__init.Property("Sum");
+			initializer.Property("Sum");
 			writer.WriteValue(Sum);
 			writer.Write("d");
 		}
 
 		if (SumAsString is not null)
 		{
-			__init.Property("SumAsString");
+			initializer.Property("SumAsString");
 			writer.WriteString(SumAsString);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

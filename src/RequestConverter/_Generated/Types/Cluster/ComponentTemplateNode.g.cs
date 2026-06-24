@@ -27,28 +27,28 @@ public partial class ComponentTemplateNode : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ComponentTemplateNode", false);
+		var initializer = writer.BeginObjectInitializer("ComponentTemplateNode", false);
 		if (CreatedDate is not null)
 		{
-			__init.Property("CreatedDate");
+			initializer.Property("CreatedDate");
 			writer.WriteValue(CreatedDate.Value);
 		}
 
 		if (CreatedDateMillis is not null)
 		{
-			__init.Property("CreatedDateMillis");
+			initializer.Property("CreatedDateMillis");
 			writer.WriteValue(CreatedDateMillis.Value);
 		}
 
 		if (Deprecated is not null)
 		{
-			__init.Property("Deprecated");
+			initializer.Property("Deprecated");
 			writer.WriteValue(Deprecated.Value);
 		}
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -59,28 +59,28 @@ public partial class ComponentTemplateNode : RequestConverter.ICodeFormattable
 
 		if (ModifiedDate is not null)
 		{
-			__init.Property("ModifiedDate");
+			initializer.Property("ModifiedDate");
 			writer.WriteValue(ModifiedDate.Value);
 		}
 
 		if (ModifiedDateMillis is not null)
 		{
-			__init.Property("ModifiedDateMillis");
+			initializer.Property("ModifiedDateMillis");
 			writer.WriteValue(ModifiedDateMillis.Value);
 		}
 
 		{
-			__init.Property("Template");
+			initializer.Property("Template");
 			Template.FormatCode(writer);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

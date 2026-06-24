@@ -27,23 +27,23 @@ public partial class SlicedScroll : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SlicedScroll", false);
+		var initializer = writer.BeginObjectInitializer("SlicedScroll", false);
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Max");
+			initializer.Property("Max");
 			writer.WriteValue(Max);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

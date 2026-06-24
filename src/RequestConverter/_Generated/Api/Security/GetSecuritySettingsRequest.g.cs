@@ -27,13 +27,13 @@ public partial class GetSecuritySettingsRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetSecuritySettingsRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetSecuritySettingsRequest", false);
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

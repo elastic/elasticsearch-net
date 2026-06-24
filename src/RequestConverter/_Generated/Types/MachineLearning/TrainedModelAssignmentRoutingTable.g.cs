@@ -27,28 +27,28 @@ public partial class TrainedModelAssignmentRoutingTable : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelAssignmentRoutingTable", false);
+		var initializer = writer.BeginObjectInitializer("TrainedModelAssignmentRoutingTable", false);
 		{
-			__init.Property("CurrentAllocations");
+			initializer.Property("CurrentAllocations");
 			writer.WriteValue(CurrentAllocations);
 		}
 
 		if (Reason is not null)
 		{
-			__init.Property("Reason");
+			initializer.Property("Reason");
 			writer.WriteString(Reason);
 		}
 
 		{
-			__init.Property("RoutingState");
+			initializer.Property("RoutingState");
 			Elastic.Clients.Elasticsearch.MachineLearning.RoutingStateCodeFormatter.FormatCode(RoutingState, writer);
 		}
 
 		{
-			__init.Property("TargetAllocations");
+			initializer.Property("TargetAllocations");
 			writer.WriteValue(TargetAllocations);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

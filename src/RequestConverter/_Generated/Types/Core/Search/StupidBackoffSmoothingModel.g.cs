@@ -27,13 +27,13 @@ public partial class StupidBackoffSmoothingModel : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StupidBackoffSmoothingModel", false);
+		var initializer = writer.BeginObjectInitializer("StupidBackoffSmoothingModel", false);
 		{
-			__init.Property("Discount");
+			initializer.Property("Discount");
 			writer.WriteValue(Discount);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

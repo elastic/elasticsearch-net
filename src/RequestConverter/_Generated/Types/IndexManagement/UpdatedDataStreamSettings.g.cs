@@ -27,38 +27,38 @@ public partial class UpdatedDataStreamSettings : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UpdatedDataStreamSettings", false);
+		var initializer = writer.BeginObjectInitializer("UpdatedDataStreamSettings", false);
 		{
-			__init.Property("AppliedToDataStream");
+			initializer.Property("AppliedToDataStream");
 			writer.WriteValue(AppliedToDataStream);
 		}
 
 		{
-			__init.Property("EffectiveSettings");
+			initializer.Property("EffectiveSettings");
 			EffectiveSettings.FormatCode(writer);
 		}
 
 		if (Error is not null)
 		{
-			__init.Property("Error");
+			initializer.Property("Error");
 			writer.WriteString(Error);
 		}
 
 		{
-			__init.Property("IndexSettingsResults");
+			initializer.Property("IndexSettingsResults");
 			IndexSettingsResults.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("Settings");
+			initializer.Property("Settings");
 			Settings.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

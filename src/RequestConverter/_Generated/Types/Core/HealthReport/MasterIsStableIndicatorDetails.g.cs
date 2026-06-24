@@ -27,29 +27,29 @@ public partial class MasterIsStableIndicatorDetails : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MasterIsStableIndicatorDetails", false);
+		var initializer = writer.BeginObjectInitializer("MasterIsStableIndicatorDetails", false);
 		if (ClusterFormation is not null)
 		{
-			__init.Property("ClusterFormation");
+			initializer.Property("ClusterFormation");
 			writer.WriteInlineList(ClusterFormation, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("CurrentMaster");
+			initializer.Property("CurrentMaster");
 			CurrentMaster.FormatCode(writer);
 		}
 
 		if (ExceptionFetchingHistory is not null)
 		{
-			__init.Property("ExceptionFetchingHistory");
+			initializer.Property("ExceptionFetchingHistory");
 			ExceptionFetchingHistory.FormatCode(writer);
 		}
 
 		{
-			__init.Property("RecentMasters");
+			initializer.Property("RecentMasters");
 			writer.WriteInlineList(RecentMasters, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

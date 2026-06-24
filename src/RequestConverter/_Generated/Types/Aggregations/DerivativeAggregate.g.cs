@@ -27,10 +27,10 @@ public partial class DerivativeAggregate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DerivativeAggregate", true);
+		var initializer = writer.BeginObjectInitializer("DerivativeAggregate", true);
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -41,29 +41,29 @@ public partial class DerivativeAggregate : RequestConverter.ICodeFormattable
 
 		if (NormalizedValue is not null)
 		{
-			__init.Property("NormalizedValue");
+			initializer.Property("NormalizedValue");
 			writer.WriteValue(NormalizedValue.Value);
 			writer.Write("d");
 		}
 
 		if (NormalizedValueAsString is not null)
 		{
-			__init.Property("NormalizedValueAsString");
+			initializer.Property("NormalizedValueAsString");
 			writer.WriteString(NormalizedValueAsString);
 		}
 
 		{
-			__init.Property("Value");
+			initializer.Property("Value");
 			writer.WriteValue(Value.Value);
 			writer.Write("d");
 		}
 
 		if (ValueAsString is not null)
 		{
-			__init.Property("ValueAsString");
+			initializer.Property("ValueAsString");
 			writer.WriteString(ValueAsString);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

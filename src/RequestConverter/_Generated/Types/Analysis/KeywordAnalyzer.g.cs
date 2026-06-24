@@ -27,14 +27,14 @@ public partial class KeywordAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("KeywordAnalyzer", true);
+		var initializer = writer.BeginObjectInitializer("KeywordAnalyzer", true);
 #pragma warning disable CS0618
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 #pragma warning restore CS0618
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

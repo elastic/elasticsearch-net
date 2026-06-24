@@ -27,90 +27,90 @@ public partial class GetRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetRequest", false);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		if (ForceSyntheticSource is not null)
 		{
-			__init.Property("ForceSyntheticSource");
+			initializer.Property("ForceSyntheticSource");
 			writer.WriteValue(ForceSyntheticSource.Value);
 		}
 
 		if (Preference is not null)
 		{
-			__init.Property("Preference");
+			initializer.Property("Preference");
 			writer.WriteString(Preference);
 		}
 
 		if (Realtime is not null)
 		{
-			__init.Property("Realtime");
+			initializer.Property("Realtime");
 			writer.WriteValue(Realtime.Value);
 		}
 
 		if (Refresh is not null)
 		{
-			__init.Property("Refresh");
+			initializer.Property("Refresh");
 			writer.WriteValue(Refresh.Value);
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			Routing.FormatCode(writer);
 		}
 
 		if (Source is not null)
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			Source.FormatCode(writer);
 		}
 
 		if (SourceExcludes is not null)
 		{
-			__init.Property("SourceExcludes");
+			initializer.Property("SourceExcludes");
 			SourceExcludes.FormatCode(writer);
 		}
 
 		if (SourceExcludeVectors is not null)
 		{
-			__init.Property("SourceExcludeVectors");
+			initializer.Property("SourceExcludeVectors");
 			writer.WriteValue(SourceExcludeVectors.Value);
 		}
 
 		if (SourceIncludes is not null)
 		{
-			__init.Property("SourceIncludes");
+			initializer.Property("SourceIncludes");
 			SourceIncludes.FormatCode(writer);
 		}
 
 		if (StoredFields is not null)
 		{
-			__init.Property("StoredFields");
+			initializer.Property("StoredFields");
 			StoredFields.FormatCode(writer);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version.Value);
 			writer.Write("L");
 		}
 
 		if (VersionType is not null)
 		{
-			__init.Property("VersionType");
+			initializer.Property("VersionType");
 			Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

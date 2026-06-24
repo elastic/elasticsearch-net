@@ -27,32 +27,32 @@ public partial class EqlFeaturesJoin : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EqlFeaturesJoin", false);
+		var initializer = writer.BeginObjectInitializer("EqlFeaturesJoin", false);
 		{
-			__init.Property("JoinQueriesFiveOrMore");
+			initializer.Property("JoinQueriesFiveOrMore");
 			writer.WriteValue(JoinQueriesFiveOrMore);
 		}
 
 		{
-			__init.Property("JoinQueriesFour");
+			initializer.Property("JoinQueriesFour");
 			writer.WriteValue(JoinQueriesFour);
 		}
 
 		{
-			__init.Property("JoinQueriesThree");
+			initializer.Property("JoinQueriesThree");
 			writer.WriteValue(JoinQueriesThree);
 		}
 
 		{
-			__init.Property("JoinQueriesTwo");
+			initializer.Property("JoinQueriesTwo");
 			writer.WriteValue(JoinQueriesTwo);
 		}
 
 		{
-			__init.Property("JoinUntil");
+			initializer.Property("JoinUntil");
 			writer.WriteValue(JoinUntil);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

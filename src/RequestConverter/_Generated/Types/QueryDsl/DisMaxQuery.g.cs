@@ -27,32 +27,32 @@ public partial class DisMaxQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DisMaxQuery", false);
+		var initializer = writer.BeginObjectInitializer("DisMaxQuery", false);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		{
-			__init.Property("Queries");
+			initializer.Property("Queries");
 			writer.WriteInlineList(Queries, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
 		if (TieBreaker is not null)
 		{
-			__init.Property("TieBreaker");
+			initializer.Property("TieBreaker");
 			writer.WriteValue(TieBreaker.Value);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

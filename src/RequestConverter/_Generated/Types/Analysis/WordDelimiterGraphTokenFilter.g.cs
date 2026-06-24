@@ -27,103 +27,103 @@ public partial class WordDelimiterGraphTokenFilter : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("WordDelimiterGraphTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("WordDelimiterGraphTokenFilter", true);
 		if (AdjustOffsets is not null)
 		{
-			__init.Property("AdjustOffsets");
+			initializer.Property("AdjustOffsets");
 			writer.WriteValue(AdjustOffsets.Value);
 		}
 
 		if (CatenateAll is not null)
 		{
-			__init.Property("CatenateAll");
+			initializer.Property("CatenateAll");
 			writer.WriteValue(CatenateAll.Value);
 		}
 
 		if (CatenateNumbers is not null)
 		{
-			__init.Property("CatenateNumbers");
+			initializer.Property("CatenateNumbers");
 			writer.WriteValue(CatenateNumbers.Value);
 		}
 
 		if (CatenateWords is not null)
 		{
-			__init.Property("CatenateWords");
+			initializer.Property("CatenateWords");
 			writer.WriteValue(CatenateWords.Value);
 		}
 
 		if (GenerateNumberParts is not null)
 		{
-			__init.Property("GenerateNumberParts");
+			initializer.Property("GenerateNumberParts");
 			writer.WriteValue(GenerateNumberParts.Value);
 		}
 
 		if (GenerateWordParts is not null)
 		{
-			__init.Property("GenerateWordParts");
+			initializer.Property("GenerateWordParts");
 			writer.WriteValue(GenerateWordParts.Value);
 		}
 
 		if (IgnoreKeywords is not null)
 		{
-			__init.Property("IgnoreKeywords");
+			initializer.Property("IgnoreKeywords");
 			writer.WriteValue(IgnoreKeywords.Value);
 		}
 
 		if (PreserveOriginal is not null)
 		{
-			__init.Property("PreserveOriginal");
+			initializer.Property("PreserveOriginal");
 			writer.WriteValue(PreserveOriginal.Value);
 		}
 
 		if (ProtectedWords is not null)
 		{
-			__init.Property("ProtectedWords");
+			initializer.Property("ProtectedWords");
 			writer.WriteInlineList(ProtectedWords, (w, item) => { w.WriteString(item); });
 		}
 
 		if (ProtectedWordsPath is not null)
 		{
-			__init.Property("ProtectedWordsPath");
+			initializer.Property("ProtectedWordsPath");
 			writer.WriteString(ProtectedWordsPath);
 		}
 
 		if (SplitOnCaseChange is not null)
 		{
-			__init.Property("SplitOnCaseChange");
+			initializer.Property("SplitOnCaseChange");
 			writer.WriteValue(SplitOnCaseChange.Value);
 		}
 
 		if (SplitOnNumerics is not null)
 		{
-			__init.Property("SplitOnNumerics");
+			initializer.Property("SplitOnNumerics");
 			writer.WriteValue(SplitOnNumerics.Value);
 		}
 
 		if (StemEnglishPossessive is not null)
 		{
-			__init.Property("StemEnglishPossessive");
+			initializer.Property("StemEnglishPossessive");
 			writer.WriteValue(StemEnglishPossessive.Value);
 		}
 
 		if (TypeTable is not null)
 		{
-			__init.Property("TypeTable");
+			initializer.Property("TypeTable");
 			writer.WriteInlineList(TypeTable, (w, item) => { w.WriteString(item); });
 		}
 
 		if (TypeTablePath is not null)
 		{
-			__init.Property("TypeTablePath");
+			initializer.Property("TypeTablePath");
 			writer.WriteString(TypeTablePath);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

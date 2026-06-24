@@ -27,19 +27,19 @@ public partial class HtmlStripCharFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("HtmlStripCharFilter", true);
+		var initializer = writer.BeginObjectInitializer("HtmlStripCharFilter", true);
 		if (EscapedTags is not null)
 		{
-			__init.Property("EscapedTags");
+			initializer.Property("EscapedTags");
 			writer.WriteInlineList(EscapedTags, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

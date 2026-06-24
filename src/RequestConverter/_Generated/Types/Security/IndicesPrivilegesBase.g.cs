@@ -27,35 +27,35 @@ public partial class IndicesPrivilegesBase : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndicesPrivilegesBase", false);
+		var initializer = writer.BeginObjectInitializer("IndicesPrivilegesBase", false);
 		if (AllowRestrictedIndices is not null)
 		{
-			__init.Property("AllowRestrictedIndices");
+			initializer.Property("AllowRestrictedIndices");
 			writer.WriteValue(AllowRestrictedIndices.Value);
 		}
 
 		if (FieldSecurity is not null)
 		{
-			__init.Property("FieldSecurity");
+			initializer.Property("FieldSecurity");
 			FieldSecurity.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Names");
+			initializer.Property("Names");
 			writer.WriteInlineList(Names, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Privileges");
+			initializer.Property("Privileges");
 			writer.WriteInlineList(Privileges, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Query is not null)
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			writer.WriteValue(Query);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

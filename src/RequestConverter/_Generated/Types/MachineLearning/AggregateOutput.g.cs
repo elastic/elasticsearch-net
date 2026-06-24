@@ -27,31 +27,31 @@ public partial class AggregateOutput : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AggregateOutput", false);
+		var initializer = writer.BeginObjectInitializer("AggregateOutput", false);
 		if (Exponent is not null)
 		{
-			__init.Property("Exponent");
+			initializer.Property("Exponent");
 			Exponent.FormatCode(writer);
 		}
 
 		if (LogisticRegression is not null)
 		{
-			__init.Property("LogisticRegression");
+			initializer.Property("LogisticRegression");
 			LogisticRegression.FormatCode(writer);
 		}
 
 		if (WeightedMode is not null)
 		{
-			__init.Property("WeightedMode");
+			initializer.Property("WeightedMode");
 			WeightedMode.FormatCode(writer);
 		}
 
 		if (WeightedSum is not null)
 		{
-			__init.Property("WeightedSum");
+			initializer.Property("WeightedSum");
 			WeightedSum.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

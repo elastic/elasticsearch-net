@@ -27,55 +27,55 @@ public partial class Intervals : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Intervals", false);
+		var initializer = writer.BeginObjectInitializer("Intervals", false);
 		if (AllOf is not null)
 		{
-			__init.Property("AllOf");
+			initializer.Property("AllOf");
 			AllOf.FormatCode(writer);
 		}
 
 		if (AnyOf is not null)
 		{
-			__init.Property("AnyOf");
+			initializer.Property("AnyOf");
 			AnyOf.FormatCode(writer);
 		}
 
 		if (Fuzzy is not null)
 		{
-			__init.Property("Fuzzy");
+			initializer.Property("Fuzzy");
 			Fuzzy.FormatCode(writer);
 		}
 
 		if (Match is not null)
 		{
-			__init.Property("Match");
+			initializer.Property("Match");
 			Match.FormatCode(writer);
 		}
 
 		if (Prefix is not null)
 		{
-			__init.Property("Prefix");
+			initializer.Property("Prefix");
 			Prefix.FormatCode(writer);
 		}
 
 		if (Range is not null)
 		{
-			__init.Property("Range");
+			initializer.Property("Range");
 			Range.FormatCode(writer);
 		}
 
 		if (Regexp is not null)
 		{
-			__init.Property("Regexp");
+			initializer.Property("Regexp");
 			Regexp.FormatCode(writer);
 		}
 
 		if (Wildcard is not null)
 		{
-			__init.Property("Wildcard");
+			initializer.Property("Wildcard");
 			Wildcard.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

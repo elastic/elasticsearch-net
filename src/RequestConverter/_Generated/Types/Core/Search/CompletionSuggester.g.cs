@@ -27,16 +27,16 @@ public partial class CompletionSuggester : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CompletionSuggester", false);
+		var initializer = writer.BeginObjectInitializer("CompletionSuggester", false);
 		if (Analyzer is not null)
 		{
-			__init.Property("Analyzer");
+			initializer.Property("Analyzer");
 			writer.WriteString(Analyzer);
 		}
 
 		if (Contexts is not null)
 		{
-			__init.Property("Contexts");
+			initializer.Property("Contexts");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("Elastic.Clients.Elasticsearch.Field");
 			writer.Write(", ");
@@ -46,34 +46,34 @@ public partial class CompletionSuggester : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Fuzzy is not null)
 		{
-			__init.Property("Fuzzy");
+			initializer.Property("Fuzzy");
 			Fuzzy.FormatCode(writer);
 		}
 
 		if (Regex is not null)
 		{
-			__init.Property("Regex");
+			initializer.Property("Regex");
 			Regex.FormatCode(writer);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
 		if (SkipDuplicates is not null)
 		{
-			__init.Property("SkipDuplicates");
+			initializer.Property("SkipDuplicates");
 			writer.WriteValue(SkipDuplicates.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

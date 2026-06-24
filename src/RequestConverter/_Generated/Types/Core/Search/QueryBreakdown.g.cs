@@ -27,127 +27,127 @@ public partial class QueryBreakdown : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("QueryBreakdown", false);
+		var initializer = writer.BeginObjectInitializer("QueryBreakdown", false);
 		{
-			__init.Property("Advance");
+			initializer.Property("Advance");
 			writer.WriteValue(Advance);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("AdvanceCount");
+			initializer.Property("AdvanceCount");
 			writer.WriteValue(AdvanceCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("BuildScorer");
+			initializer.Property("BuildScorer");
 			writer.WriteValue(BuildScorer);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("BuildScorerCount");
+			initializer.Property("BuildScorerCount");
 			writer.WriteValue(BuildScorerCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("ComputeMaxScore");
+			initializer.Property("ComputeMaxScore");
 			writer.WriteValue(ComputeMaxScore);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("ComputeMaxScoreCount");
+			initializer.Property("ComputeMaxScoreCount");
 			writer.WriteValue(ComputeMaxScoreCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("CountWeight");
+			initializer.Property("CountWeight");
 			writer.WriteValue(CountWeight);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("CountWeightCount");
+			initializer.Property("CountWeightCount");
 			writer.WriteValue(CountWeightCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("CreateWeight");
+			initializer.Property("CreateWeight");
 			writer.WriteValue(CreateWeight);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("CreateWeightCount");
+			initializer.Property("CreateWeightCount");
 			writer.WriteValue(CreateWeightCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Match");
+			initializer.Property("Match");
 			writer.WriteValue(Match);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("MatchCount");
+			initializer.Property("MatchCount");
 			writer.WriteValue(MatchCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("NextDoc");
+			initializer.Property("NextDoc");
 			writer.WriteValue(NextDoc);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("NextDocCount");
+			initializer.Property("NextDocCount");
 			writer.WriteValue(NextDocCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Score");
+			initializer.Property("Score");
 			writer.WriteValue(Score);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("ScoreCount");
+			initializer.Property("ScoreCount");
 			writer.WriteValue(ScoreCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("SetMinCompetitiveScore");
+			initializer.Property("SetMinCompetitiveScore");
 			writer.WriteValue(SetMinCompetitiveScore);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("SetMinCompetitiveScoreCount");
+			initializer.Property("SetMinCompetitiveScoreCount");
 			writer.WriteValue(SetMinCompetitiveScoreCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("ShallowAdvance");
+			initializer.Property("ShallowAdvance");
 			writer.WriteValue(ShallowAdvance);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("ShallowAdvanceCount");
+			initializer.Property("ShallowAdvanceCount");
 			writer.WriteValue(ShallowAdvanceCount);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

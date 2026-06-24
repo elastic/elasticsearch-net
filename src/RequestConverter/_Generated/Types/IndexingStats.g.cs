@@ -27,98 +27,98 @@ public partial class IndexingStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexingStats", false);
+		var initializer = writer.BeginObjectInitializer("IndexingStats", false);
 		{
-			__init.Property("DeleteCurrent");
+			initializer.Property("DeleteCurrent");
 			writer.WriteValue(DeleteCurrent);
 			writer.Write("L");
 		}
 
 		if (DeleteTime is not null)
 		{
-			__init.Property("DeleteTime");
+			initializer.Property("DeleteTime");
 			DeleteTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("DeleteTimeInMillis");
+			initializer.Property("DeleteTimeInMillis");
 			writer.WriteValue(DeleteTimeInMillis);
 		}
 
 		{
-			__init.Property("DeleteTotal");
+			initializer.Property("DeleteTotal");
 			writer.WriteValue(DeleteTotal);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("IndexCurrent");
+			initializer.Property("IndexCurrent");
 			writer.WriteValue(IndexCurrent);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("IndexFailed");
+			initializer.Property("IndexFailed");
 			writer.WriteValue(IndexFailed);
 			writer.Write("L");
 		}
 
 		if (IndexTime is not null)
 		{
-			__init.Property("IndexTime");
+			initializer.Property("IndexTime");
 			IndexTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("IndexTimeInMillis");
+			initializer.Property("IndexTimeInMillis");
 			writer.WriteValue(IndexTimeInMillis);
 		}
 
 		{
-			__init.Property("IndexTotal");
+			initializer.Property("IndexTotal");
 			writer.WriteValue(IndexTotal);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("IsThrottled");
+			initializer.Property("IsThrottled");
 			writer.WriteValue(IsThrottled);
 		}
 
 		{
-			__init.Property("NoopUpdateTotal");
+			initializer.Property("NoopUpdateTotal");
 			writer.WriteValue(NoopUpdateTotal);
 			writer.Write("L");
 		}
 
 		if (PeakWriteLoad is not null)
 		{
-			__init.Property("PeakWriteLoad");
+			initializer.Property("PeakWriteLoad");
 			writer.WriteValue(PeakWriteLoad.Value);
 			writer.Write("d");
 		}
 
 		if (RecentWriteLoad is not null)
 		{
-			__init.Property("RecentWriteLoad");
+			initializer.Property("RecentWriteLoad");
 			writer.WriteValue(RecentWriteLoad.Value);
 			writer.Write("d");
 		}
 
 		if (ThrottleTime is not null)
 		{
-			__init.Property("ThrottleTime");
+			initializer.Property("ThrottleTime");
 			ThrottleTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ThrottleTimeInMillis");
+			initializer.Property("ThrottleTimeInMillis");
 			writer.WriteValue(ThrottleTimeInMillis);
 		}
 
 		if (Types is not null)
 		{
-			__init.Property("Types");
+			initializer.Property("Types");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -129,11 +129,11 @@ public partial class IndexingStats : RequestConverter.ICodeFormattable
 
 		if (WriteLoad is not null)
 		{
-			__init.Property("WriteLoad");
+			initializer.Property("WriteLoad");
 			writer.WriteValue(WriteLoad.Value);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

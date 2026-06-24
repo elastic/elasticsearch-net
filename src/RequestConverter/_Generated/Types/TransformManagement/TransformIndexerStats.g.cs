@@ -27,106 +27,106 @@ public partial class TransformIndexerStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TransformIndexerStats", false);
+		var initializer = writer.BeginObjectInitializer("TransformIndexerStats", false);
 		if (DeleteTimeInMs is not null)
 		{
-			__init.Property("DeleteTimeInMs");
+			initializer.Property("DeleteTimeInMs");
 			writer.WriteValue(DeleteTimeInMs.Value);
 		}
 
 		if (DocumentsDeleted is not null)
 		{
-			__init.Property("DocumentsDeleted");
+			initializer.Property("DocumentsDeleted");
 			writer.WriteValue(DocumentsDeleted.Value);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("DocumentsIndexed");
+			initializer.Property("DocumentsIndexed");
 			writer.WriteValue(DocumentsIndexed);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("DocumentsProcessed");
+			initializer.Property("DocumentsProcessed");
 			writer.WriteValue(DocumentsProcessed);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("ExponentialAvgCheckpointDurationMs");
+			initializer.Property("ExponentialAvgCheckpointDurationMs");
 			writer.WriteValue(ExponentialAvgCheckpointDurationMs);
 		}
 
 		{
-			__init.Property("ExponentialAvgDocumentsIndexed");
+			initializer.Property("ExponentialAvgDocumentsIndexed");
 			writer.WriteValue(ExponentialAvgDocumentsIndexed);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("ExponentialAvgDocumentsProcessed");
+			initializer.Property("ExponentialAvgDocumentsProcessed");
 			writer.WriteValue(ExponentialAvgDocumentsProcessed);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("IndexFailures");
+			initializer.Property("IndexFailures");
 			writer.WriteValue(IndexFailures);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("IndexTimeInMs");
+			initializer.Property("IndexTimeInMs");
 			writer.WriteValue(IndexTimeInMs);
 		}
 
 		{
-			__init.Property("IndexTotal");
+			initializer.Property("IndexTotal");
 			writer.WriteValue(IndexTotal);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("PagesProcessed");
+			initializer.Property("PagesProcessed");
 			writer.WriteValue(PagesProcessed);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("ProcessingTimeInMs");
+			initializer.Property("ProcessingTimeInMs");
 			writer.WriteValue(ProcessingTimeInMs);
 		}
 
 		{
-			__init.Property("ProcessingTotal");
+			initializer.Property("ProcessingTotal");
 			writer.WriteValue(ProcessingTotal);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("SearchFailures");
+			initializer.Property("SearchFailures");
 			writer.WriteValue(SearchFailures);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("SearchTimeInMs");
+			initializer.Property("SearchTimeInMs");
 			writer.WriteValue(SearchTimeInMs);
 		}
 
 		{
-			__init.Property("SearchTotal");
+			initializer.Property("SearchTotal");
 			writer.WriteValue(SearchTotal);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("TriggerCount");
+			initializer.Property("TriggerCount");
 			writer.WriteValue(TriggerCount);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

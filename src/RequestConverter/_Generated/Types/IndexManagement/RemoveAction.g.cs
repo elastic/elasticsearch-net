@@ -27,37 +27,37 @@ public partial class RemoveAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RemoveAction", false);
+		var initializer = writer.BeginObjectInitializer("RemoveAction", false);
 		if (Alias is not null)
 		{
-			__init.Property("Alias");
+			initializer.Property("Alias");
 			Alias.FormatCode(writer);
 		}
 
 		if (Aliases is not null)
 		{
-			__init.Property("Aliases");
+			initializer.Property("Aliases");
 			writer.WriteInlineList(Aliases, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Index is not null)
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		if (Indices is not null)
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		if (MustExist is not null)
 		{
-			__init.Property("MustExist");
+			initializer.Property("MustExist");
 			writer.WriteValue(MustExist.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

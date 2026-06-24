@@ -27,19 +27,19 @@ public partial class TranslogRetention : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TranslogRetention", false);
+		var initializer = writer.BeginObjectInitializer("TranslogRetention", false);
 		if (Age is not null)
 		{
-			__init.Property("Age");
+			initializer.Property("Age");
 			Age.FormatCode(writer);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			Size.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

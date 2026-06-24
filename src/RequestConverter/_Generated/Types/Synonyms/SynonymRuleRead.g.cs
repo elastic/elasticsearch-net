@@ -27,17 +27,17 @@ public partial class SynonymRuleRead : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SynonymRuleRead", false);
+		var initializer = writer.BeginObjectInitializer("SynonymRuleRead", false);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		{
-			__init.Property("Synonyms");
+			initializer.Property("Synonyms");
 			writer.WriteString(Synonyms);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,7 +27,7 @@ public partial class Stationary : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Stationary", false);
-		__init.Dispose();
+		var initializer = writer.BeginObjectInitializer("Stationary", false);
+		initializer.Dispose();
 	}
 }

@@ -27,13 +27,13 @@ public partial class FrenchStemTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FrenchStemTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("FrenchStemTokenFilter", true);
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

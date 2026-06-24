@@ -27,10 +27,10 @@ public partial class AzureOpenAITaskSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AzureOpenAITaskSettings", false);
+		var initializer = writer.BeginObjectInitializer("AzureOpenAITaskSettings", false);
 		if (Headers is not null)
 		{
-			__init.Property("Headers");
+			initializer.Property("Headers");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -41,10 +41,10 @@ public partial class AzureOpenAITaskSettings : RequestConverter.ICodeFormattable
 
 		if (User is not null)
 		{
-			__init.Property("User");
+			initializer.Property("User");
 			writer.WriteString(User);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

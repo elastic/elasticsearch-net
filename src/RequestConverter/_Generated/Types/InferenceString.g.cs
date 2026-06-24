@@ -27,23 +27,23 @@ public partial class InferenceString : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InferenceString", false);
+		var initializer = writer.BeginObjectInitializer("InferenceString", false);
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			Elastic.Clients.Elasticsearch.Inference.EmbeddingContentFormatCodeFormatter.FormatCode(Format.Value, writer);
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			Elastic.Clients.Elasticsearch.Inference.EmbeddingContentTypeCodeFormatter.FormatCode(Type, writer);
 		}
 
 		{
-			__init.Property("Value");
+			initializer.Property("Value");
 			writer.WriteString(Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,102 +27,102 @@ public partial class ClusterNodeCount : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterNodeCount", false);
+		var initializer = writer.BeginObjectInitializer("ClusterNodeCount", false);
 		if (CoordinatingOnly is not null)
 		{
-			__init.Property("CoordinatingOnly");
+			initializer.Property("CoordinatingOnly");
 			writer.WriteValue(CoordinatingOnly.Value);
 		}
 
 		if (Data is not null)
 		{
-			__init.Property("Data");
+			initializer.Property("Data");
 			writer.WriteValue(Data.Value);
 		}
 
 		if (DataCold is not null)
 		{
-			__init.Property("DataCold");
+			initializer.Property("DataCold");
 			writer.WriteValue(DataCold.Value);
 		}
 
 		if (DataContent is not null)
 		{
-			__init.Property("DataContent");
+			initializer.Property("DataContent");
 			writer.WriteValue(DataContent.Value);
 		}
 
 		if (DataFrozen is not null)
 		{
-			__init.Property("DataFrozen");
+			initializer.Property("DataFrozen");
 			writer.WriteValue(DataFrozen.Value);
 		}
 
 		if (DataHot is not null)
 		{
-			__init.Property("DataHot");
+			initializer.Property("DataHot");
 			writer.WriteValue(DataHot.Value);
 		}
 
 		if (DataWarm is not null)
 		{
-			__init.Property("DataWarm");
+			initializer.Property("DataWarm");
 			writer.WriteValue(DataWarm.Value);
 		}
 
 		if (Index is not null)
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteValue(Index.Value);
 		}
 
 		if (Ingest is not null)
 		{
-			__init.Property("Ingest");
+			initializer.Property("Ingest");
 			writer.WriteValue(Ingest.Value);
 		}
 
 		if (Master is not null)
 		{
-			__init.Property("Master");
+			initializer.Property("Master");
 			writer.WriteValue(Master.Value);
 		}
 
 		if (Ml is not null)
 		{
-			__init.Property("Ml");
+			initializer.Property("Ml");
 			writer.WriteValue(Ml.Value);
 		}
 
 		if (RemoteClusterClient is not null)
 		{
-			__init.Property("RemoteClusterClient");
+			initializer.Property("RemoteClusterClient");
 			writer.WriteValue(RemoteClusterClient.Value);
 		}
 
 		if (Search is not null)
 		{
-			__init.Property("Search");
+			initializer.Property("Search");
 			writer.WriteValue(Search.Value);
 		}
 
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteValue(Total);
 		}
 
 		if (Transform is not null)
 		{
-			__init.Property("Transform");
+			initializer.Property("Transform");
 			writer.WriteValue(Transform.Value);
 		}
 
 		if (VotingOnly is not null)
 		{
-			__init.Property("VotingOnly");
+			initializer.Property("VotingOnly");
 			writer.WriteValue(VotingOnly.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

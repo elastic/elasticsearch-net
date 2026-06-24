@@ -27,12 +27,12 @@ public partial class NodeInfoSettingsHttpType : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoSettingsHttpType", false);
+		var initializer = writer.BeginObjectInitializer("NodeInfoSettingsHttpType", false);
 		{
-			__init.Property("Default");
+			initializer.Property("Default");
 			writer.WriteString(Default);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

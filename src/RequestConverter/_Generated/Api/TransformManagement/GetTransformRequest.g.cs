@@ -27,37 +27,37 @@ public partial class GetTransformRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetTransformRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetTransformRequest", false);
 		if (TransformId is not null)
 		{
-			__init.Property("TransformId");
+			initializer.Property("TransformId");
 			TransformId.FormatCode(writer);
 		}
 
 		if (AllowNoMatch is not null)
 		{
-			__init.Property("AllowNoMatch");
+			initializer.Property("AllowNoMatch");
 			writer.WriteValue(AllowNoMatch.Value);
 		}
 
 		if (ExcludeGenerated is not null)
 		{
-			__init.Property("ExcludeGenerated");
+			initializer.Property("ExcludeGenerated");
 			writer.WriteValue(ExcludeGenerated.Value);
 		}
 
 		if (From is not null)
 		{
-			__init.Property("From");
+			initializer.Property("From");
 			writer.WriteValue(From.Value);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

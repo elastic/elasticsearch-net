@@ -27,88 +27,88 @@ public partial class RemoteClusterInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RemoteClusterInfo", false);
+		var initializer = writer.BeginObjectInitializer("RemoteClusterInfo", false);
 		{
-			__init.Property("ClusterUuid");
+			initializer.Property("ClusterUuid");
 			writer.WriteString(ClusterUuid);
 		}
 
 		{
-			__init.Property("IndicesCount");
+			initializer.Property("IndicesCount");
 			writer.WriteValue(IndicesCount);
 		}
 
 		if (IndicesTotalSize is not null)
 		{
-			__init.Property("IndicesTotalSize");
+			initializer.Property("IndicesTotalSize");
 			writer.WriteString(IndicesTotalSize);
 		}
 
 		{
-			__init.Property("IndicesTotalSizeInBytes");
+			initializer.Property("IndicesTotalSizeInBytes");
 			writer.WriteValue(IndicesTotalSizeInBytes);
 			writer.Write("L");
 		}
 
 		if (MaxHeap is not null)
 		{
-			__init.Property("MaxHeap");
+			initializer.Property("MaxHeap");
 			writer.WriteString(MaxHeap);
 		}
 
 		{
-			__init.Property("MaxHeapInBytes");
+			initializer.Property("MaxHeapInBytes");
 			writer.WriteValue(MaxHeapInBytes);
 			writer.Write("L");
 		}
 
 		if (MemTotal is not null)
 		{
-			__init.Property("MemTotal");
+			initializer.Property("MemTotal");
 			writer.WriteString(MemTotal);
 		}
 
 		{
-			__init.Property("MemTotalInBytes");
+			initializer.Property("MemTotalInBytes");
 			writer.WriteValue(MemTotalInBytes);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Mode");
+			initializer.Property("Mode");
 			writer.WriteString(Mode);
 		}
 
 		{
-			__init.Property("NodesCount");
+			initializer.Property("NodesCount");
 			writer.WriteValue(NodesCount);
 		}
 
 		{
-			__init.Property("ShardsCount");
+			initializer.Property("ShardsCount");
 			writer.WriteValue(ShardsCount);
 		}
 
 		{
-			__init.Property("SkipUnavailable");
+			initializer.Property("SkipUnavailable");
 			writer.WriteValue(SkipUnavailable);
 		}
 
 		{
-			__init.Property("Status");
+			initializer.Property("Status");
 			Elastic.Clients.Elasticsearch.HealthStatusCodeFormatter.FormatCode(Status, writer);
 		}
 
 		{
-			__init.Property("TransportCompress");
+			initializer.Property("TransportCompress");
 			writer.WriteString(TransportCompress);
 		}
 
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteInlineList(Version, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

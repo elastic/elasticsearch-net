@@ -27,13 +27,13 @@ public partial class IndexingSlowlogTresholds : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexingSlowlogTresholds", false);
+		var initializer = writer.BeginObjectInitializer("IndexingSlowlogTresholds", false);
 		if (Index is not null)
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

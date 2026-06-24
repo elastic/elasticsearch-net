@@ -27,10 +27,10 @@ public partial class AllocateAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AllocateAction", false);
+		var initializer = writer.BeginObjectInitializer("AllocateAction", false);
 		if (Exclude is not null)
 		{
-			__init.Property("Exclude");
+			initializer.Property("Exclude");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -41,7 +41,7 @@ public partial class AllocateAction : RequestConverter.ICodeFormattable
 
 		if (Include is not null)
 		{
-			__init.Property("Include");
+			initializer.Property("Include");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -52,13 +52,13 @@ public partial class AllocateAction : RequestConverter.ICodeFormattable
 
 		if (NumberOfReplicas is not null)
 		{
-			__init.Property("NumberOfReplicas");
+			initializer.Property("NumberOfReplicas");
 			writer.WriteValue(NumberOfReplicas.Value);
 		}
 
 		if (Require is not null)
 		{
-			__init.Property("Require");
+			initializer.Property("Require");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -69,10 +69,10 @@ public partial class AllocateAction : RequestConverter.ICodeFormattable
 
 		if (TotalShardsPerNode is not null)
 		{
-			__init.Property("TotalShardsPerNode");
+			initializer.Property("TotalShardsPerNode");
 			writer.WriteValue(TotalShardsPerNode.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

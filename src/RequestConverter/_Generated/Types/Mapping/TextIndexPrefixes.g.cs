@@ -27,17 +27,17 @@ public partial class TextIndexPrefixes : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TextIndexPrefixes", false);
+		var initializer = writer.BeginObjectInitializer("TextIndexPrefixes", false);
 		{
-			__init.Property("MaxChars");
+			initializer.Property("MaxChars");
 			writer.WriteValue(MaxChars);
 		}
 
 		{
-			__init.Property("MinChars");
+			initializer.Property("MinChars");
 			writer.WriteValue(MinChars);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

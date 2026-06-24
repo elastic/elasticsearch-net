@@ -27,29 +27,29 @@ public partial class WatcherWatchTriggerSchedule : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("WatcherWatchTriggerSchedule", false);
+		var initializer = writer.BeginObjectInitializer("WatcherWatchTriggerSchedule", false);
 		{
-			__init.Property("Active");
+			initializer.Property("Active");
 			writer.WriteValue(Active);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("All");
+			initializer.Property("All");
 			All.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Cron");
+			initializer.Property("Cron");
 			Cron.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteValue(Total);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

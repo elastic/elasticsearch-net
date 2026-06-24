@@ -27,35 +27,35 @@ public partial class CohereServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CohereServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("CohereServiceSettings", false);
 		{
-			__init.Property("ApiKey");
+			initializer.Property("ApiKey");
 			writer.WriteString(ApiKey);
 		}
 
 		if (EmbeddingType is not null)
 		{
-			__init.Property("EmbeddingType");
+			initializer.Property("EmbeddingType");
 			Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingTypeCodeFormatter.FormatCode(EmbeddingType.Value, writer);
 		}
 
 		{
-			__init.Property("ModelId");
+			initializer.Property("ModelId");
 			writer.WriteString(ModelId);
 		}
 
 		if (RateLimit is not null)
 		{
-			__init.Property("RateLimit");
+			initializer.Property("RateLimit");
 			RateLimit.FormatCode(writer);
 		}
 
 		if (Similarity is not null)
 		{
-			__init.Property("Similarity");
+			initializer.Property("Similarity");
 			Elastic.Clients.Elasticsearch.Inference.CohereSimilarityTypeCodeFormatter.FormatCode(Similarity.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

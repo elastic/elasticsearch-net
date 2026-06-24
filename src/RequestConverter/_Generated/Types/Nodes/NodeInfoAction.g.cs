@@ -27,12 +27,12 @@ public partial class NodeInfoAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoAction", false);
+		var initializer = writer.BeginObjectInitializer("NodeInfoAction", false);
 		{
-			__init.Property("DestructiveRequiresName");
+			initializer.Property("DestructiveRequiresName");
 			writer.WriteString(DestructiveRequiresName);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

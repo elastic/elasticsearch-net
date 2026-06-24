@@ -27,69 +27,69 @@ public partial class TermVectorsRequest<TDocument> : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TermVectorsRequest<TDocument>", false);
+		var initializer = writer.BeginObjectInitializer("TermVectorsRequest<TDocument>", false);
 		if (Id is not null)
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		if (Preference is not null)
 		{
-			__init.Property("Preference");
+			initializer.Property("Preference");
 			writer.WriteString(Preference);
 		}
 
 		if (Realtime is not null)
 		{
-			__init.Property("Realtime");
+			initializer.Property("Realtime");
 			writer.WriteValue(Realtime.Value);
 		}
 
-		if (RequestConverter.CodeWriter.ShouldFormat(Doc))
+		if (Doc is not null)
 		{
-			__init.Property("Doc");
+			initializer.Property("Doc");
 			writer.WriteValue(Doc);
 		}
 
 		if (Fields is not null)
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			Fields.FormatCode(writer);
 		}
 
 		if (FieldStatistics is not null)
 		{
-			__init.Property("FieldStatistics");
+			initializer.Property("FieldStatistics");
 			writer.WriteValue(FieldStatistics.Value);
 		}
 
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			Filter.FormatCode(writer);
 		}
 
 		if (Offsets is not null)
 		{
-			__init.Property("Offsets");
+			initializer.Property("Offsets");
 			writer.WriteValue(Offsets.Value);
 		}
 
 		if (Payloads is not null)
 		{
-			__init.Property("Payloads");
+			initializer.Property("Payloads");
 			writer.WriteValue(Payloads.Value);
 		}
 
 		if (PerFieldAnalyzer is not null)
 		{
-			__init.Property("PerFieldAnalyzer");
+			initializer.Property("PerFieldAnalyzer");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("Elastic.Clients.Elasticsearch.Field");
 			writer.Write(", ");
@@ -100,35 +100,35 @@ public partial class TermVectorsRequest<TDocument> : RequestConverter.ICodeForma
 
 		if (Positions is not null)
 		{
-			__init.Property("Positions");
+			initializer.Property("Positions");
 			writer.WriteValue(Positions.Value);
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			Routing.FormatCode(writer);
 		}
 
 		if (TermStatistics is not null)
 		{
-			__init.Property("TermStatistics");
+			initializer.Property("TermStatistics");
 			writer.WriteValue(TermStatistics.Value);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version.Value);
 			writer.Write("L");
 		}
 
 		if (VersionType is not null)
 		{
-			__init.Property("VersionType");
+			initializer.Property("VersionType");
 			Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

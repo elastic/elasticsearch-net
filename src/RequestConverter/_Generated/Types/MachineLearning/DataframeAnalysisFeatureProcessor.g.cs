@@ -27,37 +27,37 @@ public partial class DataframeAnalysisFeatureProcessor : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeAnalysisFeatureProcessor", false);
+		var initializer = writer.BeginObjectInitializer("DataframeAnalysisFeatureProcessor", false);
 		if (FrequencyEncoding is not null)
 		{
-			__init.Property("FrequencyEncoding");
+			initializer.Property("FrequencyEncoding");
 			FrequencyEncoding.FormatCode(writer);
 		}
 
 		if (MultiEncoding is not null)
 		{
-			__init.Property("MultiEncoding");
+			initializer.Property("MultiEncoding");
 			MultiEncoding.FormatCode(writer);
 		}
 
 		if (NGramEncoding is not null)
 		{
-			__init.Property("NGramEncoding");
+			initializer.Property("NGramEncoding");
 			NGramEncoding.FormatCode(writer);
 		}
 
 		if (OneHotEncoding is not null)
 		{
-			__init.Property("OneHotEncoding");
+			initializer.Property("OneHotEncoding");
 			OneHotEncoding.FormatCode(writer);
 		}
 
 		if (TargetMeanEncoding is not null)
 		{
-			__init.Property("TargetMeanEncoding");
+			initializer.Property("TargetMeanEncoding");
 			TargetMeanEncoding.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

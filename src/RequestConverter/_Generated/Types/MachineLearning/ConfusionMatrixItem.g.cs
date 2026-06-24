@@ -27,27 +27,27 @@ public partial class ConfusionMatrixItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ConfusionMatrixItem", false);
+		var initializer = writer.BeginObjectInitializer("ConfusionMatrixItem", false);
 		{
-			__init.Property("ActualClass");
+			initializer.Property("ActualClass");
 			writer.WriteString(ActualClass);
 		}
 
 		{
-			__init.Property("ActualClassDocCount");
+			initializer.Property("ActualClassDocCount");
 			writer.WriteValue(ActualClassDocCount);
 		}
 
 		{
-			__init.Property("OtherPredictedClassDocCount");
+			initializer.Property("OtherPredictedClassDocCount");
 			writer.WriteValue(OtherPredictedClassDocCount);
 		}
 
 		{
-			__init.Property("PredictedClasses");
+			initializer.Property("PredictedClasses");
 			writer.WriteInlineList(PredictedClasses, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

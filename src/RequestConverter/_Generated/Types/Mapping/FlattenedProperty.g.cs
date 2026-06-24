@@ -27,65 +27,65 @@ public partial class FlattenedProperty : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FlattenedProperty", true);
+		var initializer = writer.BeginObjectInitializer("FlattenedProperty", true);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("d");
 		}
 
 		if (DepthLimit is not null)
 		{
-			__init.Property("DepthLimit");
+			initializer.Property("DepthLimit");
 			writer.WriteValue(DepthLimit.Value);
 		}
 
 		if (DocValues is not null)
 		{
-			__init.Property("DocValues");
+			initializer.Property("DocValues");
 			writer.WriteValue(DocValues.Value);
 		}
 
 		if (Dynamic is not null)
 		{
-			__init.Property("Dynamic");
+			initializer.Property("Dynamic");
 			Elastic.Clients.Elasticsearch.Mapping.DynamicMappingCodeFormatter.FormatCode(Dynamic.Value, writer);
 		}
 
 		if (EagerGlobalOrdinals is not null)
 		{
-			__init.Property("EagerGlobalOrdinals");
+			initializer.Property("EagerGlobalOrdinals");
 			writer.WriteValue(EagerGlobalOrdinals.Value);
 		}
 
 		if (Fields is not null)
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			Fields.FormatCode(writer);
 		}
 
 		if (IgnoreAbove is not null)
 		{
-			__init.Property("IgnoreAbove");
+			initializer.Property("IgnoreAbove");
 			writer.WriteValue(IgnoreAbove.Value);
 		}
 
 		if (Index is not null)
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteValue(Index.Value);
 		}
 
 		if (IndexOptions is not null)
 		{
-			__init.Property("IndexOptions");
+			initializer.Property("IndexOptions");
 			Elastic.Clients.Elasticsearch.Mapping.IndexOptionsCodeFormatter.FormatCode(IndexOptions.Value, writer);
 		}
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -96,40 +96,40 @@ public partial class FlattenedProperty : RequestConverter.ICodeFormattable
 
 		if (NullValue is not null)
 		{
-			__init.Property("NullValue");
+			initializer.Property("NullValue");
 			writer.WriteString(NullValue);
 		}
 
 		if (Properties is not null)
 		{
-			__init.Property("Properties");
+			initializer.Property("Properties");
 			Properties.FormatCode(writer);
 		}
 
 		if (Similarity is not null)
 		{
-			__init.Property("Similarity");
+			initializer.Property("Similarity");
 			writer.WriteString(Similarity);
 		}
 
 		if (SplitQueriesOnWhitespace is not null)
 		{
-			__init.Property("SplitQueriesOnWhitespace");
+			initializer.Property("SplitQueriesOnWhitespace");
 			writer.WriteValue(SplitQueriesOnWhitespace.Value);
 		}
 
 		if (SyntheticSourceKeep is not null)
 		{
-			__init.Property("SyntheticSourceKeep");
+			initializer.Property("SyntheticSourceKeep");
 			Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnumCodeFormatter.FormatCode(SyntheticSourceKeep.Value, writer);
 		}
 
 		if (TimeSeriesDimensions is not null)
 		{
-			__init.Property("TimeSeriesDimensions");
+			initializer.Property("TimeSeriesDimensions");
 			writer.WriteInlineList(TimeSeriesDimensions, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

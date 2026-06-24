@@ -27,37 +27,37 @@ public partial class SpanNearQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SpanNearQuery", false);
+		var initializer = writer.BeginObjectInitializer("SpanNearQuery", false);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		{
-			__init.Property("Clauses");
+			initializer.Property("Clauses");
 			writer.WriteInlineList(Clauses, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (InOrder is not null)
 		{
-			__init.Property("InOrder");
+			initializer.Property("InOrder");
 			writer.WriteValue(InOrder.Value);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
 		if (Slop is not null)
 		{
-			__init.Property("Slop");
+			initializer.Property("Slop");
 			writer.WriteValue(Slop.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

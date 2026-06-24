@@ -27,54 +27,54 @@ public partial class PutDataLifecycleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutDataLifecycleRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutDataLifecycleRequest", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		if (ExpandWildcards is not null)
 		{
-			__init.Property("ExpandWildcards");
+			initializer.Property("ExpandWildcards");
 			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (DataRetention is not null)
 		{
-			__init.Property("DataRetention");
+			initializer.Property("DataRetention");
 			DataRetention.FormatCode(writer);
 		}
 
 		if (Downsampling is not null)
 		{
-			__init.Property("Downsampling");
+			initializer.Property("Downsampling");
 			writer.WriteInlineList(Downsampling, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (DownsamplingMethod is not null)
 		{
-			__init.Property("DownsamplingMethod");
+			initializer.Property("DownsamplingMethod");
 			Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethodCodeFormatter.FormatCode(DownsamplingMethod.Value, writer);
 		}
 
 		if (Enabled is not null)
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

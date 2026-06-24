@@ -27,23 +27,23 @@ public partial class Filter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Filter", false);
+		var initializer = writer.BeginObjectInitializer("Filter", false);
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		{
-			__init.Property("FilterId");
+			initializer.Property("FilterId");
 			writer.WriteString(FilterId);
 		}
 
 		{
-			__init.Property("Items");
+			initializer.Property("Items");
 			writer.WriteInlineList(Items, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,16 +27,16 @@ public partial class DataframeEvaluationOutlierDetectionMetrics : RequestConvert
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeEvaluationOutlierDetectionMetrics", false);
+		var initializer = writer.BeginObjectInitializer("DataframeEvaluationOutlierDetectionMetrics", false);
 		if (AucRoc is not null)
 		{
-			__init.Property("AucRoc");
+			initializer.Property("AucRoc");
 			AucRoc.FormatCode(writer);
 		}
 
 		if (ConfusionMatrix is not null)
 		{
-			__init.Property("ConfusionMatrix");
+			initializer.Property("ConfusionMatrix");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -47,7 +47,7 @@ public partial class DataframeEvaluationOutlierDetectionMetrics : RequestConvert
 
 		if (Precision is not null)
 		{
-			__init.Property("Precision");
+			initializer.Property("Precision");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -58,7 +58,7 @@ public partial class DataframeEvaluationOutlierDetectionMetrics : RequestConvert
 
 		if (Recall is not null)
 		{
-			__init.Property("Recall");
+			initializer.Property("Recall");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -67,6 +67,6 @@ public partial class DataframeEvaluationOutlierDetectionMetrics : RequestConvert
 			writer.WriteInlineList(Recall, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

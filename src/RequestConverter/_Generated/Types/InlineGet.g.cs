@@ -27,10 +27,10 @@ public partial class InlineGet<TDocument> : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InlineGet<TDocument>", false);
+		var initializer = writer.BeginObjectInitializer("InlineGet<TDocument>", false);
 		if (Fields is not null)
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -40,13 +40,13 @@ public partial class InlineGet<TDocument> : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Found");
+			initializer.Property("Found");
 			writer.WriteValue(Found);
 		}
 
 		if (Metadata is not null)
 		{
-			__init.Property("Metadata");
+			initializer.Property("Metadata");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -57,30 +57,30 @@ public partial class InlineGet<TDocument> : RequestConverter.ICodeFormattable
 
 		if (PrimaryTerm is not null)
 		{
-			__init.Property("PrimaryTerm");
+			initializer.Property("PrimaryTerm");
 			writer.WriteValue(PrimaryTerm.Value);
 			writer.Write("L");
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			writer.WriteInlineList(Routing, (w, item) => { w.WriteString(item); });
 		}
 
 		if (SeqNo is not null)
 		{
-			__init.Property("SeqNo");
+			initializer.Property("SeqNo");
 			writer.WriteValue(SeqNo.Value);
 			writer.Write("L");
 		}
 
-		if (RequestConverter.CodeWriter.ShouldFormat(Source))
+		if (Source is not null)
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			writer.WriteValue(Source);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

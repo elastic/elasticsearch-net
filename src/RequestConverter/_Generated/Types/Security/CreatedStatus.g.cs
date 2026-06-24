@@ -27,12 +27,12 @@ public partial class CreatedStatus : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CreatedStatus", false);
+		var initializer = writer.BeginObjectInitializer("CreatedStatus", false);
 		{
-			__init.Property("Created");
+			initializer.Property("Created");
 			writer.WriteValue(Created);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

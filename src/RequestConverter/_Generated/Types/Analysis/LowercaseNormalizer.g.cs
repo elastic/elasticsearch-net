@@ -27,7 +27,7 @@ public partial class LowercaseNormalizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("LowercaseNormalizer", true);
-		__init.Dispose();
+		var initializer = writer.BeginObjectInitializer("LowercaseNormalizer", true);
+		initializer.Dispose();
 	}
 }

@@ -27,31 +27,31 @@ public partial class IndexRoutingAllocation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexRoutingAllocation", false);
+		var initializer = writer.BeginObjectInitializer("IndexRoutingAllocation", false);
 		if (Disk is not null)
 		{
-			__init.Property("Disk");
+			initializer.Property("Disk");
 			Disk.FormatCode(writer);
 		}
 
 		if (Enable is not null)
 		{
-			__init.Property("Enable");
+			initializer.Property("Enable");
 			Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptionsCodeFormatter.FormatCode(Enable.Value, writer);
 		}
 
 		if (Include is not null)
 		{
-			__init.Property("Include");
+			initializer.Property("Include");
 			Include.FormatCode(writer);
 		}
 
 		if (InitialRecovery is not null)
 		{
-			__init.Property("InitialRecovery");
+			initializer.Property("InitialRecovery");
 			InitialRecovery.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

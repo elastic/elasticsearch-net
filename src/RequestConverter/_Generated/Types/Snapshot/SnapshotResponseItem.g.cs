@@ -27,24 +27,24 @@ public partial class SnapshotResponseItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SnapshotResponseItem", false);
+		var initializer = writer.BeginObjectInitializer("SnapshotResponseItem", false);
 		if (Error is not null)
 		{
-			__init.Property("Error");
+			initializer.Property("Error");
 			Error.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Repository");
+			initializer.Property("Repository");
 			writer.WriteString(Repository);
 		}
 
 		if (Snapshots is not null)
 		{
-			__init.Property("Snapshots");
+			initializer.Property("Snapshots");
 			writer.WriteInlineList(Snapshots, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

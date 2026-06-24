@@ -27,67 +27,67 @@ public partial class AnalyzeIndexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AnalyzeIndexRequest", false);
+		var initializer = writer.BeginObjectInitializer("AnalyzeIndexRequest", false);
 		if (Index is not null)
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		if (Analyzer is not null)
 		{
-			__init.Property("Analyzer");
+			initializer.Property("Analyzer");
 			writer.WriteString(Analyzer);
 		}
 
 		if (Attributes is not null)
 		{
-			__init.Property("Attributes");
+			initializer.Property("Attributes");
 			writer.WriteInlineList(Attributes, (w, item) => { w.WriteString(item); });
 		}
 
 		if (CharFilter is not null)
 		{
-			__init.Property("CharFilter");
+			initializer.Property("CharFilter");
 			writer.WriteInlineList(CharFilter, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Explain is not null)
 		{
-			__init.Property("Explain");
+			initializer.Property("Explain");
 			writer.WriteValue(Explain.Value);
 		}
 
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Normalizer is not null)
 		{
-			__init.Property("Normalizer");
+			initializer.Property("Normalizer");
 			writer.WriteString(Normalizer);
 		}
 
 		if (Text is not null)
 		{
-			__init.Property("Text");
+			initializer.Property("Text");
 			writer.WriteInlineList(Text, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Tokenizer is not null)
 		{
-			__init.Property("Tokenizer");
+			initializer.Property("Tokenizer");
 			Tokenizer.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

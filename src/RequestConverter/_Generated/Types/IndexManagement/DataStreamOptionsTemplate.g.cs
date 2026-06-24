@@ -27,13 +27,13 @@ public partial class DataStreamOptionsTemplate : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataStreamOptionsTemplate", false);
+		var initializer = writer.BeginObjectInitializer("DataStreamOptionsTemplate", false);
 		if (FailureStore is not null)
 		{
-			__init.Property("FailureStore");
+			initializer.Property("FailureStore");
 			FailureStore.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

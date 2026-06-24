@@ -27,85 +27,85 @@ public partial class Actions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Actions", false);
+		var initializer = writer.BeginObjectInitializer("Actions", false);
 		if (Allocate is not null)
 		{
-			__init.Property("Allocate");
+			initializer.Property("Allocate");
 			Allocate.FormatCode(writer);
 		}
 
 		if (Delete is not null)
 		{
-			__init.Property("Delete");
+			initializer.Property("Delete");
 			Delete.FormatCode(writer);
 		}
 
 		if (Downsample is not null)
 		{
-			__init.Property("Downsample");
+			initializer.Property("Downsample");
 			Downsample.FormatCode(writer);
 		}
 
 		if (Forcemerge is not null)
 		{
-			__init.Property("Forcemerge");
+			initializer.Property("Forcemerge");
 			Forcemerge.FormatCode(writer);
 		}
 #pragma warning disable CS0618
 		if (Freeze is not null)
 		{
-			__init.Property("Freeze");
+			initializer.Property("Freeze");
 			Freeze.FormatCode(writer);
 		}
 #pragma warning restore CS0618
 		if (Migrate is not null)
 		{
-			__init.Property("Migrate");
+			initializer.Property("Migrate");
 			Migrate.FormatCode(writer);
 		}
 
 		if (Readonly is not null)
 		{
-			__init.Property("Readonly");
+			initializer.Property("Readonly");
 			Readonly.FormatCode(writer);
 		}
 
 		if (Rollover is not null)
 		{
-			__init.Property("Rollover");
+			initializer.Property("Rollover");
 			Rollover.FormatCode(writer);
 		}
 
 		if (SearchableSnapshot is not null)
 		{
-			__init.Property("SearchableSnapshot");
+			initializer.Property("SearchableSnapshot");
 			SearchableSnapshot.FormatCode(writer);
 		}
 
 		if (SetPriority is not null)
 		{
-			__init.Property("SetPriority");
+			initializer.Property("SetPriority");
 			SetPriority.FormatCode(writer);
 		}
 
 		if (Shrink is not null)
 		{
-			__init.Property("Shrink");
+			initializer.Property("Shrink");
 			Shrink.FormatCode(writer);
 		}
 
 		if (Unfollow is not null)
 		{
-			__init.Property("Unfollow");
+			initializer.Property("Unfollow");
 			Unfollow.FormatCode(writer);
 		}
 
 		if (WaitForSnapshot is not null)
 		{
-			__init.Property("WaitForSnapshot");
+			initializer.Property("WaitForSnapshot");
 			WaitForSnapshot.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

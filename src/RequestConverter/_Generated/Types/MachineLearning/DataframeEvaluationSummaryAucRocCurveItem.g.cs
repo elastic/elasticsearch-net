@@ -27,25 +27,25 @@ public partial class DataframeEvaluationSummaryAucRocCurveItem : RequestConverte
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeEvaluationSummaryAucRocCurveItem", false);
+		var initializer = writer.BeginObjectInitializer("DataframeEvaluationSummaryAucRocCurveItem", false);
 		{
-			__init.Property("Fpr");
+			initializer.Property("Fpr");
 			writer.WriteValue(Fpr);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Threshold");
+			initializer.Property("Threshold");
 			writer.WriteValue(Threshold);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Tpr");
+			initializer.Property("Tpr");
 			writer.WriteValue(Tpr);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

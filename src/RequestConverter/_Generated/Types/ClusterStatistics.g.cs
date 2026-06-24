@@ -27,10 +27,10 @@ public partial class ClusterStatistics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterStatistics", false);
+		var initializer = writer.BeginObjectInitializer("ClusterStatistics", false);
 		if (Details is not null)
 		{
-			__init.Property("Details");
+			initializer.Property("Details");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -40,35 +40,35 @@ public partial class ClusterStatistics : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Failed");
+			initializer.Property("Failed");
 			writer.WriteValue(Failed);
 		}
 
 		{
-			__init.Property("Partial");
+			initializer.Property("Partial");
 			writer.WriteValue(Partial);
 		}
 
 		{
-			__init.Property("Running");
+			initializer.Property("Running");
 			writer.WriteValue(Running);
 		}
 
 		{
-			__init.Property("Skipped");
+			initializer.Property("Skipped");
 			writer.WriteValue(Skipped);
 		}
 
 		{
-			__init.Property("Successful");
+			initializer.Property("Successful");
 			writer.WriteValue(Successful);
 		}
 
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteValue(Total);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,18 +27,18 @@ public partial class ClearCachedRealmsRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClearCachedRealmsRequest", false);
+		var initializer = writer.BeginObjectInitializer("ClearCachedRealmsRequest", false);
 		{
-			__init.Property("Realms");
+			initializer.Property("Realms");
 			Realms.FormatCode(writer);
 		}
 
 		if (Usernames is not null)
 		{
-			__init.Property("Usernames");
+			initializer.Property("Usernames");
 			writer.WriteInlineList(Usernames, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

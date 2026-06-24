@@ -27,23 +27,23 @@ public partial class PutTrainedModelAliasRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutTrainedModelAliasRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutTrainedModelAliasRequest", false);
 		{
-			__init.Property("ModelAlias");
+			initializer.Property("ModelAlias");
 			ModelAlias.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ModelId");
+			initializer.Property("ModelId");
 			ModelId.FormatCode(writer);
 		}
 
 		if (Reassign is not null)
 		{
-			__init.Property("Reassign");
+			initializer.Property("Reassign");
 			writer.WriteValue(Reassign.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

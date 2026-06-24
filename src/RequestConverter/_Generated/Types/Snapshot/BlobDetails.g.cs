@@ -27,50 +27,50 @@ public partial class BlobDetails : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BlobDetails", false);
+		var initializer = writer.BeginObjectInitializer("BlobDetails", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("Overwritten");
+			initializer.Property("Overwritten");
 			writer.WriteValue(Overwritten);
 		}
 
 		{
-			__init.Property("ReadEarly");
+			initializer.Property("ReadEarly");
 			writer.WriteValue(ReadEarly);
 		}
 
 		{
-			__init.Property("ReadEnd");
+			initializer.Property("ReadEnd");
 			writer.WriteValue(ReadEnd);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Reads");
+			initializer.Property("Reads");
 			Reads.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ReadStart");
+			initializer.Property("ReadStart");
 			writer.WriteValue(ReadStart);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			Size.FormatCode(writer);
 		}
 
 		{
-			__init.Property("SizeBytes");
+			initializer.Property("SizeBytes");
 			writer.WriteValue(SizeBytes);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

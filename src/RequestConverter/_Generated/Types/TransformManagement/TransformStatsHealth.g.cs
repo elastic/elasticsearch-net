@@ -27,18 +27,18 @@ public partial class TransformStatsHealth : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TransformStatsHealth", false);
+		var initializer = writer.BeginObjectInitializer("TransformStatsHealth", false);
 		if (Issues is not null)
 		{
-			__init.Property("Issues");
+			initializer.Property("Issues");
 			writer.WriteInlineList(Issues, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Status");
+			initializer.Property("Status");
 			Elastic.Clients.Elasticsearch.HealthStatusCodeFormatter.FormatCode(Status, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

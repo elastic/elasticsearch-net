@@ -27,30 +27,30 @@ public partial class ExistsTemplateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExistsTemplateRequest", false);
+		var initializer = writer.BeginObjectInitializer("ExistsTemplateRequest", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		if (FlatSettings is not null)
 		{
-			__init.Property("FlatSettings");
+			initializer.Property("FlatSettings");
 			writer.WriteValue(FlatSettings.Value);
 		}
 #pragma warning disable CS0618
 		if (Local is not null)
 		{
-			__init.Property("Local");
+			initializer.Property("Local");
 			writer.WriteValue(Local.Value);
 		}
 #pragma warning restore CS0618
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

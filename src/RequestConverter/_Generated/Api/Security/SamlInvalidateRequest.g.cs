@@ -27,24 +27,24 @@ public partial class SamlInvalidateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SamlInvalidateRequest", false);
+		var initializer = writer.BeginObjectInitializer("SamlInvalidateRequest", false);
 		if (Acs is not null)
 		{
-			__init.Property("Acs");
+			initializer.Property("Acs");
 			writer.WriteString(Acs);
 		}
 
 		{
-			__init.Property("QueryString");
+			initializer.Property("QueryString");
 			writer.WriteString(QueryString);
 		}
 
 		if (Realm is not null)
 		{
-			__init.Property("Realm");
+			initializer.Property("Realm");
 			writer.WriteString(Realm);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

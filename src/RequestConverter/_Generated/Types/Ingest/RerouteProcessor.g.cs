@@ -27,55 +27,55 @@ public partial class RerouteProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RerouteProcessor", false);
+		var initializer = writer.BeginObjectInitializer("RerouteProcessor", false);
 		if (Dataset is not null)
 		{
-			__init.Property("Dataset");
+			initializer.Property("Dataset");
 			writer.WriteInlineList(Dataset, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		if (Destination is not null)
 		{
-			__init.Property("Destination");
+			initializer.Property("Destination");
 			writer.WriteString(Destination);
 		}
 
 		if (If is not null)
 		{
-			__init.Property("If");
+			initializer.Property("If");
 			If.FormatCode(writer);
 		}
 
 		if (IgnoreFailure is not null)
 		{
-			__init.Property("IgnoreFailure");
+			initializer.Property("IgnoreFailure");
 			writer.WriteValue(IgnoreFailure.Value);
 		}
 
 		if (Namespace is not null)
 		{
-			__init.Property("Namespace");
+			initializer.Property("Namespace");
 			writer.WriteInlineList(Namespace, (w, item) => { w.WriteString(item); });
 		}
 
 		if (OnFailure is not null)
 		{
-			__init.Property("OnFailure");
+			initializer.Property("OnFailure");
 			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Tag is not null)
 		{
-			__init.Property("Tag");
+			initializer.Property("Tag");
 			writer.WriteString(Tag);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

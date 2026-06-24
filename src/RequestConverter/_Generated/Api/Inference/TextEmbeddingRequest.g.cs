@@ -27,35 +27,35 @@ public partial class TextEmbeddingRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TextEmbeddingRequest", false);
+		var initializer = writer.BeginObjectInitializer("TextEmbeddingRequest", false);
 		{
-			__init.Property("InferenceId");
+			initializer.Property("InferenceId");
 			InferenceId.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Input");
+			initializer.Property("Input");
 			writer.WriteInlineList(Input, (w, item) => { w.WriteString(item); });
 		}
 
 		if (InputType is not null)
 		{
-			__init.Property("InputType");
+			initializer.Property("InputType");
 			writer.WriteString(InputType);
 		}
 
 		if (TaskSettings is not null)
 		{
-			__init.Property("TaskSettings");
+			initializer.Property("TaskSettings");
 			writer.WriteValue(TaskSettings);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

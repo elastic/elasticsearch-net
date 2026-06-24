@@ -27,36 +27,36 @@ public partial class MlInferenceTrainedModels : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MlInferenceTrainedModels", false);
+		var initializer = writer.BeginObjectInitializer("MlInferenceTrainedModels", false);
 		{
-			__init.Property("All");
+			initializer.Property("All");
 			All.FormatCode(writer);
 		}
 
 		if (Count is not null)
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			Count.FormatCode(writer);
 		}
 
 		if (EstimatedHeapMemoryUsageBytes is not null)
 		{
-			__init.Property("EstimatedHeapMemoryUsageBytes");
+			initializer.Property("EstimatedHeapMemoryUsageBytes");
 			EstimatedHeapMemoryUsageBytes.FormatCode(writer);
 		}
 
 		if (EstimatedOperations is not null)
 		{
-			__init.Property("EstimatedOperations");
+			initializer.Property("EstimatedOperations");
 			EstimatedOperations.FormatCode(writer);
 		}
 
 		if (ModelSizeBytes is not null)
 		{
-			__init.Property("ModelSizeBytes");
+			initializer.Property("ModelSizeBytes");
 			ModelSizeBytes.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

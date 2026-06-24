@@ -27,10 +27,10 @@ public partial class PhraseSuggestCollate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PhraseSuggestCollate", false);
+		var initializer = writer.BeginObjectInitializer("PhraseSuggestCollate", false);
 		if (Params is not null)
 		{
-			__init.Property("Params");
+			initializer.Property("Params");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -41,15 +41,15 @@ public partial class PhraseSuggestCollate : RequestConverter.ICodeFormattable
 
 		if (Prune is not null)
 		{
-			__init.Property("Prune");
+			initializer.Property("Prune");
 			writer.WriteValue(Prune.Value);
 		}
 
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			Query.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

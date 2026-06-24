@@ -27,17 +27,17 @@ public partial class IpFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IpFilter", false);
+		var initializer = writer.BeginObjectInitializer("IpFilter", false);
 		{
-			__init.Property("Http");
+			initializer.Property("Http");
 			writer.WriteValue(Http);
 		}
 
 		{
-			__init.Property("Transport");
+			initializer.Property("Transport");
 			writer.WriteValue(Transport);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

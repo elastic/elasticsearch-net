@@ -27,54 +27,54 @@ public partial class MatchPhrasePrefixQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MatchPhrasePrefixQuery", false);
+		var initializer = writer.BeginObjectInitializer("MatchPhrasePrefixQuery", false);
 		if (Analyzer is not null)
 		{
-			__init.Property("Analyzer");
+			initializer.Property("Analyzer");
 			writer.WriteString(Analyzer);
 		}
 
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (MaxExpansions is not null)
 		{
-			__init.Property("MaxExpansions");
+			initializer.Property("MaxExpansions");
 			writer.WriteValue(MaxExpansions.Value);
 		}
 
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			writer.WriteString(Query);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
 		if (Slop is not null)
 		{
-			__init.Property("Slop");
+			initializer.Property("Slop");
 			writer.WriteValue(Slop.Value);
 		}
 
 		if (ZeroTermsQuery is not null)
 		{
-			__init.Property("ZeroTermsQuery");
+			initializer.Property("ZeroTermsQuery");
 			Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQueryCodeFormatter.FormatCode(ZeroTermsQuery.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

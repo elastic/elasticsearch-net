@@ -27,44 +27,44 @@ public partial class WriteSummaryInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("WriteSummaryInfo", false);
+		var initializer = writer.BeginObjectInitializer("WriteSummaryInfo", false);
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 		}
 
 		{
-			__init.Property("TotalElapsed");
+			initializer.Property("TotalElapsed");
 			TotalElapsed.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalElapsedNanos");
+			initializer.Property("TotalElapsedNanos");
 			writer.WriteValue(TotalElapsedNanos);
 		}
 
 		{
-			__init.Property("TotalSize");
+			initializer.Property("TotalSize");
 			TotalSize.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalSizeBytes");
+			initializer.Property("TotalSizeBytes");
 			writer.WriteValue(TotalSizeBytes);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("TotalThrottled");
+			initializer.Property("TotalThrottled");
 			TotalThrottled.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalThrottledNanos");
+			initializer.Property("TotalThrottledNanos");
 			writer.WriteValue(TotalThrottledNanos);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

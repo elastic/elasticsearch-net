@@ -27,17 +27,17 @@ public partial class TopLeftBottomRightGeoBounds : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TopLeftBottomRightGeoBounds", true);
+		var initializer = writer.BeginObjectInitializer("TopLeftBottomRightGeoBounds", true);
 		{
-			__init.Property("BottomRight");
+			initializer.Property("BottomRight");
 			BottomRight.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TopLeft");
+			initializer.Property("TopLeft");
 			TopLeft.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

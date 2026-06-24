@@ -27,17 +27,17 @@ public partial class NativeCode : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NativeCode", false);
+		var initializer = writer.BeginObjectInitializer("NativeCode", false);
 		{
-			__init.Property("BuildHash");
+			initializer.Property("BuildHash");
 			writer.WriteString(BuildHash);
 		}
 
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

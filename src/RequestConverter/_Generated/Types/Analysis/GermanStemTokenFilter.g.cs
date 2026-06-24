@@ -27,13 +27,13 @@ public partial class GermanStemTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GermanStemTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("GermanStemTokenFilter", true);
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

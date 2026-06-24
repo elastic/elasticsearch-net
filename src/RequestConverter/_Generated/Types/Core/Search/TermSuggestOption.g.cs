@@ -27,36 +27,36 @@ public partial class TermSuggestOption : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TermSuggestOption", false);
+		var initializer = writer.BeginObjectInitializer("TermSuggestOption", false);
 		if (CollateMatch is not null)
 		{
-			__init.Property("CollateMatch");
+			initializer.Property("CollateMatch");
 			writer.WriteValue(CollateMatch.Value);
 		}
 
 		{
-			__init.Property("Freq");
+			initializer.Property("Freq");
 			writer.WriteValue(Freq);
 			writer.Write("L");
 		}
 
 		if (Highlighted is not null)
 		{
-			__init.Property("Highlighted");
+			initializer.Property("Highlighted");
 			writer.WriteString(Highlighted);
 		}
 
 		{
-			__init.Property("Score");
+			initializer.Property("Score");
 			writer.WriteValue(Score);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Text");
+			initializer.Property("Text");
 			writer.WriteString(Text);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

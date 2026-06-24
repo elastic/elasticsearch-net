@@ -27,22 +27,22 @@ public partial class CCSUsageClusterStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CCSUsageClusterStats", false);
+		var initializer = writer.BeginObjectInitializer("CCSUsageClusterStats", false);
 		{
-			__init.Property("Skipped");
+			initializer.Property("Skipped");
 			writer.WriteValue(Skipped);
 		}
 
 		{
-			__init.Property("Took");
+			initializer.Property("Took");
 			Took.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteValue(Total);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,10 +27,10 @@ public partial class Pivot : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Pivot", false);
+		var initializer = writer.BeginObjectInitializer("Pivot", false);
 		if (Aggregations is not null)
 		{
-			__init.Property("Aggregations");
+			initializer.Property("Aggregations");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -41,7 +41,7 @@ public partial class Pivot : RequestConverter.ICodeFormattable
 
 		if (GroupBy is not null)
 		{
-			__init.Property("GroupBy");
+			initializer.Property("GroupBy");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -50,6 +50,6 @@ public partial class Pivot : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(GroupBy, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

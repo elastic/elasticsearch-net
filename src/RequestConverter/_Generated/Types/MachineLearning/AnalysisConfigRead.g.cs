@@ -27,70 +27,70 @@ public partial class AnalysisConfigRead : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AnalysisConfigRead", false);
+		var initializer = writer.BeginObjectInitializer("AnalysisConfigRead", false);
 		{
-			__init.Property("BucketSpan");
+			initializer.Property("BucketSpan");
 			BucketSpan.FormatCode(writer);
 		}
 
 		if (CategorizationAnalyzer is not null)
 		{
-			__init.Property("CategorizationAnalyzer");
+			initializer.Property("CategorizationAnalyzer");
 			CategorizationAnalyzer.FormatCode(writer);
 		}
 
 		if (CategorizationFieldName is not null)
 		{
-			__init.Property("CategorizationFieldName");
+			initializer.Property("CategorizationFieldName");
 			writer.WriteString(CategorizationFieldName);
 		}
 
 		if (CategorizationFilters is not null)
 		{
-			__init.Property("CategorizationFilters");
+			initializer.Property("CategorizationFilters");
 			writer.WriteInlineList(CategorizationFilters, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Detectors");
+			initializer.Property("Detectors");
 			writer.WriteInlineList(Detectors, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Influencers");
+			initializer.Property("Influencers");
 			Influencers.FormatCode(writer);
 		}
 
 		if (Latency is not null)
 		{
-			__init.Property("Latency");
+			initializer.Property("Latency");
 			Latency.FormatCode(writer);
 		}
 
 		if (ModelPruneWindow is not null)
 		{
-			__init.Property("ModelPruneWindow");
+			initializer.Property("ModelPruneWindow");
 			ModelPruneWindow.FormatCode(writer);
 		}
 
 		if (MultivariateByFields is not null)
 		{
-			__init.Property("MultivariateByFields");
+			initializer.Property("MultivariateByFields");
 			writer.WriteValue(MultivariateByFields.Value);
 		}
 
 		if (PerPartitionCategorization is not null)
 		{
-			__init.Property("PerPartitionCategorization");
+			initializer.Property("PerPartitionCategorization");
 			PerPartitionCategorization.FormatCode(writer);
 		}
 
 		if (SummaryCountFieldName is not null)
 		{
-			__init.Property("SummaryCountFieldName");
+			initializer.Property("SummaryCountFieldName");
 			writer.WriteString(SummaryCountFieldName);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

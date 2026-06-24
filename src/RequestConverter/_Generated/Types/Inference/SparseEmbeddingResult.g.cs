@@ -27,9 +27,9 @@ public partial class SparseEmbeddingResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SparseEmbeddingResult", false);
+		var initializer = writer.BeginObjectInitializer("SparseEmbeddingResult", false);
 		{
-			__init.Property("Embedding");
+			initializer.Property("Embedding");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -39,10 +39,10 @@ public partial class SparseEmbeddingResult : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("IsTruncated");
+			initializer.Property("IsTruncated");
 			writer.WriteValue(IsTruncated);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

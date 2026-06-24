@@ -27,76 +27,76 @@ public partial class EnrichProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EnrichProcessor", false);
+		var initializer = writer.BeginObjectInitializer("EnrichProcessor", false);
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (If is not null)
 		{
-			__init.Property("If");
+			initializer.Property("If");
 			If.FormatCode(writer);
 		}
 
 		if (IgnoreFailure is not null)
 		{
-			__init.Property("IgnoreFailure");
+			initializer.Property("IgnoreFailure");
 			writer.WriteValue(IgnoreFailure.Value);
 		}
 
 		if (IgnoreMissing is not null)
 		{
-			__init.Property("IgnoreMissing");
+			initializer.Property("IgnoreMissing");
 			writer.WriteValue(IgnoreMissing.Value);
 		}
 
 		if (MaxMatches is not null)
 		{
-			__init.Property("MaxMatches");
+			initializer.Property("MaxMatches");
 			writer.WriteValue(MaxMatches.Value);
 		}
 
 		if (OnFailure is not null)
 		{
-			__init.Property("OnFailure");
+			initializer.Property("OnFailure");
 			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Override is not null)
 		{
-			__init.Property("Override");
+			initializer.Property("Override");
 			writer.WriteValue(Override.Value);
 		}
 
 		{
-			__init.Property("PolicyName");
+			initializer.Property("PolicyName");
 			writer.WriteString(PolicyName);
 		}
 
 		if (ShapeRelation is not null)
 		{
-			__init.Property("ShapeRelation");
+			initializer.Property("ShapeRelation");
 			Elastic.Clients.Elasticsearch.GeoShapeRelationCodeFormatter.FormatCode(ShapeRelation.Value, writer);
 		}
 
 		if (Tag is not null)
 		{
-			__init.Property("Tag");
+			initializer.Property("Tag");
 			writer.WriteString(Tag);
 		}
 
 		{
-			__init.Property("TargetField");
+			initializer.Property("TargetField");
 			TargetField.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,71 +27,71 @@ public partial class LicenseInformation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("LicenseInformation", false);
+		var initializer = writer.BeginObjectInitializer("LicenseInformation", false);
 		if (ExpiryDate is not null)
 		{
-			__init.Property("ExpiryDate");
+			initializer.Property("ExpiryDate");
 			writer.WriteValue(ExpiryDate.Value);
 		}
 
 		if (ExpiryDateInMillis is not null)
 		{
-			__init.Property("ExpiryDateInMillis");
+			initializer.Property("ExpiryDateInMillis");
 			writer.WriteValue(ExpiryDateInMillis.Value);
 		}
 
 		{
-			__init.Property("IssueDate");
+			initializer.Property("IssueDate");
 			writer.WriteValue(IssueDate);
 		}
 
 		{
-			__init.Property("IssueDateInMillis");
+			initializer.Property("IssueDateInMillis");
 			writer.WriteValue(IssueDateInMillis);
 		}
 
 		{
-			__init.Property("IssuedTo");
+			initializer.Property("IssuedTo");
 			writer.WriteString(IssuedTo);
 		}
 
 		{
-			__init.Property("Issuer");
+			initializer.Property("Issuer");
 			writer.WriteString(Issuer);
 		}
 
 		{
-			__init.Property("MaxNodes");
+			initializer.Property("MaxNodes");
 			writer.WriteValue(MaxNodes.Value);
 			writer.Write("L");
 		}
 
 		if (MaxResourceUnits is not null)
 		{
-			__init.Property("MaxResourceUnits");
+			initializer.Property("MaxResourceUnits");
 			writer.WriteValue(MaxResourceUnits.Value);
 		}
 
 		{
-			__init.Property("StartDateInMillis");
+			initializer.Property("StartDateInMillis");
 			writer.WriteValue(StartDateInMillis);
 		}
 
 		{
-			__init.Property("Status");
+			initializer.Property("Status");
 			Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatusCodeFormatter.FormatCode(Status, writer);
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			Elastic.Clients.Elasticsearch.LicenseManagement.LicenseTypeCodeFormatter.FormatCode(Type, writer);
 		}
 
 		{
-			__init.Property("Uid");
+			initializer.Property("Uid");
 			writer.WriteString(Uid);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

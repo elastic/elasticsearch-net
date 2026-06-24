@@ -27,19 +27,19 @@ public partial class SearchableSnapshotsStatsRequest : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SearchableSnapshotsStatsRequest", false);
+		var initializer = writer.BeginObjectInitializer("SearchableSnapshotsStatsRequest", false);
 		if (Indices is not null)
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		if (Level is not null)
 		{
-			__init.Property("Level");
+			initializer.Property("Level");
 			Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevelCodeFormatter.FormatCode(Level.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

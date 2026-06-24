@@ -27,34 +27,34 @@ public partial class MemStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MemStats", false);
+		var initializer = writer.BeginObjectInitializer("MemStats", false);
 		if (AdjustedTotal is not null)
 		{
-			__init.Property("AdjustedTotal");
+			initializer.Property("AdjustedTotal");
 			AdjustedTotal.FormatCode(writer);
 		}
 
 		{
-			__init.Property("AdjustedTotalInBytes");
+			initializer.Property("AdjustedTotalInBytes");
 			writer.WriteValue(AdjustedTotalInBytes);
 		}
 
 		{
-			__init.Property("Ml");
+			initializer.Property("Ml");
 			Ml.FormatCode(writer);
 		}
 
 		if (Total is not null)
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			Total.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalInBytes");
+			initializer.Property("TotalInBytes");
 			writer.WriteValue(TotalInBytes);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,55 +27,55 @@ public partial class DataStreamLifecycleWithRollover : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataStreamLifecycleWithRollover", false);
+		var initializer = writer.BeginObjectInitializer("DataStreamLifecycleWithRollover", false);
 		if (DataRetention is not null)
 		{
-			__init.Property("DataRetention");
+			initializer.Property("DataRetention");
 			DataRetention.FormatCode(writer);
 		}
 
 		if (Downsampling is not null)
 		{
-			__init.Property("Downsampling");
+			initializer.Property("Downsampling");
 			writer.WriteInlineList(Downsampling, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (DownsamplingMethod is not null)
 		{
-			__init.Property("DownsamplingMethod");
+			initializer.Property("DownsamplingMethod");
 			Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethodCodeFormatter.FormatCode(DownsamplingMethod.Value, writer);
 		}
 
 		if (EffectiveRetention is not null)
 		{
-			__init.Property("EffectiveRetention");
+			initializer.Property("EffectiveRetention");
 			EffectiveRetention.FormatCode(writer);
 		}
 
 		if (Enabled is not null)
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled.Value);
 		}
 
 		if (FrozenAfter is not null)
 		{
-			__init.Property("FrozenAfter");
+			initializer.Property("FrozenAfter");
 			FrozenAfter.FormatCode(writer);
 		}
 
 		if (RetentionDeterminedBy is not null)
 		{
-			__init.Property("RetentionDeterminedBy");
+			initializer.Property("RetentionDeterminedBy");
 			Elastic.Clients.Elasticsearch.IndexManagement.RetentionSourceCodeFormatter.FormatCode(RetentionDeterminedBy.Value, writer);
 		}
 
 		if (Rollover is not null)
 		{
-			__init.Property("Rollover");
+			initializer.Property("Rollover");
 			Rollover.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

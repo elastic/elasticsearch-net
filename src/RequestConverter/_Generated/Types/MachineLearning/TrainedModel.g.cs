@@ -27,25 +27,25 @@ public partial class TrainedModel : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModel", false);
+		var initializer = writer.BeginObjectInitializer("TrainedModel", false);
 		if (Ensemble is not null)
 		{
-			__init.Property("Ensemble");
+			initializer.Property("Ensemble");
 			Ensemble.FormatCode(writer);
 		}
 
 		if (Tree is not null)
 		{
-			__init.Property("Tree");
+			initializer.Property("Tree");
 			Tree.FormatCode(writer);
 		}
 
 		if (TreeNode is not null)
 		{
-			__init.Property("TreeNode");
+			initializer.Property("TreeNode");
 			TreeNode.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

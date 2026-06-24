@@ -27,32 +27,32 @@ public partial class MinimalLicenseInformation : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MinimalLicenseInformation", false);
+		var initializer = writer.BeginObjectInitializer("MinimalLicenseInformation", false);
 		{
-			__init.Property("ExpiryDateInMillis");
+			initializer.Property("ExpiryDateInMillis");
 			writer.WriteValue(ExpiryDateInMillis);
 		}
 
 		{
-			__init.Property("Mode");
+			initializer.Property("Mode");
 			Elastic.Clients.Elasticsearch.LicenseManagement.LicenseTypeCodeFormatter.FormatCode(Mode, writer);
 		}
 
 		{
-			__init.Property("Status");
+			initializer.Property("Status");
 			Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatusCodeFormatter.FormatCode(Status, writer);
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			Elastic.Clients.Elasticsearch.LicenseManagement.LicenseTypeCodeFormatter.FormatCode(Type, writer);
 		}
 
 		{
-			__init.Property("Uid");
+			initializer.Property("Uid");
 			writer.WriteString(Uid);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

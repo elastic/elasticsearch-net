@@ -27,49 +27,49 @@ public partial class ListRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ListRequest", false);
+		var initializer = writer.BeginObjectInitializer("ListRequest", false);
 		if (Actions is not null)
 		{
-			__init.Property("Actions");
+			initializer.Property("Actions");
 			writer.WriteInlineList(Actions, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Detailed is not null)
 		{
-			__init.Property("Detailed");
+			initializer.Property("Detailed");
 			writer.WriteValue(Detailed.Value);
 		}
 
 		if (GroupBy is not null)
 		{
-			__init.Property("GroupBy");
+			initializer.Property("GroupBy");
 			Elastic.Clients.Elasticsearch.Tasks.GroupByCodeFormatter.FormatCode(GroupBy.Value, writer);
 		}
 
 		if (Nodes is not null)
 		{
-			__init.Property("Nodes");
+			initializer.Property("Nodes");
 			Nodes.FormatCode(writer);
 		}
 
 		if (ParentTaskId is not null)
 		{
-			__init.Property("ParentTaskId");
+			initializer.Property("ParentTaskId");
 			ParentTaskId.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (WaitForCompletion is not null)
 		{
-			__init.Property("WaitForCompletion");
+			initializer.Property("WaitForCompletion");
 			writer.WriteValue(WaitForCompletion.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,55 +27,55 @@ public partial class RRFRetriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RRFRetriever", false);
+		var initializer = writer.BeginObjectInitializer("RRFRetriever", false);
 		if (Fields is not null)
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			writer.WriteInlineList(Fields, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (MinScore is not null)
 		{
-			__init.Property("MinScore");
+			initializer.Property("MinScore");
 			writer.WriteValue(MinScore.Value);
 			writer.Write("f");
 		}
 
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		if (Query is not null)
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			writer.WriteString(Query);
 		}
 
 		if (RankConstant is not null)
 		{
-			__init.Property("RankConstant");
+			initializer.Property("RankConstant");
 			writer.WriteValue(RankConstant.Value);
 		}
 
 		if (RankWindowSize is not null)
 		{
-			__init.Property("RankWindowSize");
+			initializer.Property("RankWindowSize");
 			writer.WriteValue(RankWindowSize.Value);
 		}
 
 		{
-			__init.Property("Retrievers");
+			initializer.Property("Retrievers");
 			writer.WriteInlineList(Retrievers, (w, item) => { if (item.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { item.Value1.FormatCode(w); } else { item.Value2.FormatCode(w); } });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

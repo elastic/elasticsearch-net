@@ -27,32 +27,32 @@ public partial class Diagnosis : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Diagnosis", false);
+		var initializer = writer.BeginObjectInitializer("Diagnosis", false);
 		{
-			__init.Property("Action");
+			initializer.Property("Action");
 			writer.WriteString(Action);
 		}
 
 		{
-			__init.Property("AffectedResources");
+			initializer.Property("AffectedResources");
 			AffectedResources.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Cause");
+			initializer.Property("Cause");
 			writer.WriteString(Cause);
 		}
 
 		{
-			__init.Property("HelpUrl");
+			initializer.Property("HelpUrl");
 			writer.WriteString(HelpUrl);
 		}
 
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

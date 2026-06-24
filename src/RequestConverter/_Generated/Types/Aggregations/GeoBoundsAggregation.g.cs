@@ -27,31 +27,31 @@ public partial class GeoBoundsAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoBoundsAggregation", false);
+		var initializer = writer.BeginObjectInitializer("GeoBoundsAggregation", false);
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Missing is not null)
 		{
-			__init.Property("Missing");
+			initializer.Property("Missing");
 			writer.WriteValue(Missing);
 		}
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
 		if (WrapLongitude is not null)
 		{
-			__init.Property("WrapLongitude");
+			initializer.Property("WrapLongitude");
 			writer.WriteValue(WrapLongitude.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

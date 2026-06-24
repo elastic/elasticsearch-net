@@ -27,22 +27,22 @@ public partial class AllocationDecision : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AllocationDecision", false);
+		var initializer = writer.BeginObjectInitializer("AllocationDecision", false);
 		{
-			__init.Property("Decider");
+			initializer.Property("Decider");
 			writer.WriteString(Decider);
 		}
 
 		{
-			__init.Property("Decision");
+			initializer.Property("Decision");
 			Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecisionCodeFormatter.FormatCode(Decision, writer);
 		}
 
 		{
-			__init.Property("Explanation");
+			initializer.Property("Explanation");
 			writer.WriteString(Explanation);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

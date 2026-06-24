@@ -27,19 +27,19 @@ public partial class GetServiceAccountsRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetServiceAccountsRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetServiceAccountsRequest", false);
 		if (Namespace is not null)
 		{
-			__init.Property("Namespace");
+			initializer.Property("Namespace");
 			writer.WriteString(Namespace);
 		}
 
 		if (Service is not null)
 		{
-			__init.Property("Service");
+			initializer.Property("Service");
 			writer.WriteString(Service);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,12 +27,12 @@ public partial class RelocationFailureInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RelocationFailureInfo", false);
+		var initializer = writer.BeginObjectInitializer("RelocationFailureInfo", false);
 		{
-			__init.Property("FailedAttempts");
+			initializer.Property("FailedAttempts");
 			writer.WriteValue(FailedAttempts);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

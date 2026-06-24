@@ -27,15 +27,15 @@ public partial class Embedding : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Embedding", false);
+		var initializer = writer.BeginObjectInitializer("Embedding", false);
 		if (InferenceId is not null)
 		{
-			__init.Property("InferenceId");
+			initializer.Property("InferenceId");
 			writer.WriteString(InferenceId);
 		}
 
 		{
-			__init.Property("Input");
+			initializer.Property("Input");
 			if (Input.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				writer.WriteString(Input.Value1);
@@ -49,10 +49,10 @@ public partial class Embedding : RequestConverter.ICodeFormattable
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

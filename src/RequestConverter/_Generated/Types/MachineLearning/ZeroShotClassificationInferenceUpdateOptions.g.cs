@@ -27,30 +27,30 @@ public partial class ZeroShotClassificationInferenceUpdateOptions : RequestConve
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ZeroShotClassificationInferenceUpdateOptions", false);
+		var initializer = writer.BeginObjectInitializer("ZeroShotClassificationInferenceUpdateOptions", false);
 		{
-			__init.Property("Labels");
+			initializer.Property("Labels");
 			writer.WriteInlineList(Labels, (w, item) => { w.WriteString(item); });
 		}
 
 		if (MultiLabel is not null)
 		{
-			__init.Property("MultiLabel");
+			initializer.Property("MultiLabel");
 			writer.WriteValue(MultiLabel.Value);
 		}
 
 		if (ResultsField is not null)
 		{
-			__init.Property("ResultsField");
+			initializer.Property("ResultsField");
 			writer.WriteString(ResultsField);
 		}
 
 		if (Tokenization is not null)
 		{
-			__init.Property("Tokenization");
+			initializer.Property("Tokenization");
 			Tokenization.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

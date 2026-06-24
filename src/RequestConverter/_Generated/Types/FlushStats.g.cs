@@ -27,30 +27,30 @@ public partial class FlushStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FlushStats", false);
+		var initializer = writer.BeginObjectInitializer("FlushStats", false);
 		{
-			__init.Property("Periodic");
+			initializer.Property("Periodic");
 			writer.WriteValue(Periodic);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteValue(Total);
 			writer.Write("L");
 		}
 
 		if (TotalTime is not null)
 		{
-			__init.Property("TotalTime");
+			initializer.Property("TotalTime");
 			TotalTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalTimeInMillis");
+			initializer.Property("TotalTimeInMillis");
 			writer.WriteValue(TotalTimeInMillis);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

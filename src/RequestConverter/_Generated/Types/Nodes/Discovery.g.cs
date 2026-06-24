@@ -27,22 +27,22 @@ public partial class Discovery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Discovery", false);
+		var initializer = writer.BeginObjectInitializer("Discovery", false);
 		if (ClusterApplierStats is not null)
 		{
-			__init.Property("ClusterApplierStats");
+			initializer.Property("ClusterApplierStats");
 			ClusterApplierStats.FormatCode(writer);
 		}
 
 		if (ClusterStateQueue is not null)
 		{
-			__init.Property("ClusterStateQueue");
+			initializer.Property("ClusterStateQueue");
 			ClusterStateQueue.FormatCode(writer);
 		}
 
 		if (ClusterStateUpdate is not null)
 		{
-			__init.Property("ClusterStateUpdate");
+			initializer.Property("ClusterStateUpdate");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -53,16 +53,16 @@ public partial class Discovery : RequestConverter.ICodeFormattable
 
 		if (PublishedClusterStates is not null)
 		{
-			__init.Property("PublishedClusterStates");
+			initializer.Property("PublishedClusterStates");
 			PublishedClusterStates.FormatCode(writer);
 		}
 
 		if (SerializedClusterStates is not null)
 		{
-			__init.Property("SerializedClusterStates");
+			initializer.Property("SerializedClusterStates");
 			SerializedClusterStates.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

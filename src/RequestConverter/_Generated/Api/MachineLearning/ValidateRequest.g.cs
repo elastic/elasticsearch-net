@@ -27,62 +27,62 @@ public partial class ValidateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ValidateRequest", false);
+		var initializer = writer.BeginObjectInitializer("ValidateRequest", false);
 		if (AnalysisConfig is not null)
 		{
-			__init.Property("AnalysisConfig");
+			initializer.Property("AnalysisConfig");
 			AnalysisConfig.FormatCode(writer);
 		}
 
 		if (AnalysisLimits is not null)
 		{
-			__init.Property("AnalysisLimits");
+			initializer.Property("AnalysisLimits");
 			AnalysisLimits.FormatCode(writer);
 		}
 
 		if (DataDescription is not null)
 		{
-			__init.Property("DataDescription");
+			initializer.Property("DataDescription");
 			DataDescription.FormatCode(writer);
 		}
 
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		if (JobId is not null)
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			JobId.FormatCode(writer);
 		}
 
 		if (ModelPlot is not null)
 		{
-			__init.Property("ModelPlot");
+			initializer.Property("ModelPlot");
 			ModelPlot.FormatCode(writer);
 		}
 
 		if (ModelSnapshotId is not null)
 		{
-			__init.Property("ModelSnapshotId");
+			initializer.Property("ModelSnapshotId");
 			ModelSnapshotId.FormatCode(writer);
 		}
 
 		if (ModelSnapshotRetentionDays is not null)
 		{
-			__init.Property("ModelSnapshotRetentionDays");
+			initializer.Property("ModelSnapshotRetentionDays");
 			writer.WriteValue(ModelSnapshotRetentionDays.Value);
 			writer.Write("L");
 		}
 
 		if (ResultsIndexName is not null)
 		{
-			__init.Property("ResultsIndexName");
+			initializer.Property("ResultsIndexName");
 			ResultsIndexName.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

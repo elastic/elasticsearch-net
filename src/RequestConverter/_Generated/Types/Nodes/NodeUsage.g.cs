@@ -27,9 +27,9 @@ public partial class NodeUsage : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeUsage", false);
+		var initializer = writer.BeginObjectInitializer("NodeUsage", false);
 		{
-			__init.Property("Aggregations");
+			initializer.Property("Aggregations");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -39,7 +39,7 @@ public partial class NodeUsage : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("RestActions");
+			initializer.Property("RestActions");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -49,15 +49,15 @@ public partial class NodeUsage : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Since");
+			initializer.Property("Since");
 			writer.WriteValue(Since);
 		}
 
 		{
-			__init.Property("Timestamp");
+			initializer.Property("Timestamp");
 			writer.WriteValue(Timestamp);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

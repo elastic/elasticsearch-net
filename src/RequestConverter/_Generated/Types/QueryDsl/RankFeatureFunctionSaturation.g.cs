@@ -27,14 +27,14 @@ public partial class RankFeatureFunctionSaturation : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RankFeatureFunctionSaturation", false);
+		var initializer = writer.BeginObjectInitializer("RankFeatureFunctionSaturation", false);
 		if (Pivot is not null)
 		{
-			__init.Property("Pivot");
+			initializer.Property("Pivot");
 			writer.WriteValue(Pivot.Value);
 			writer.Write("f");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

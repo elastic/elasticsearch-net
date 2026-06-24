@@ -27,37 +27,37 @@ public partial class Hyperparameter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Hyperparameter", false);
+		var initializer = writer.BeginObjectInitializer("Hyperparameter", false);
 		if (AbsoluteImportance is not null)
 		{
-			__init.Property("AbsoluteImportance");
+			initializer.Property("AbsoluteImportance");
 			writer.WriteValue(AbsoluteImportance.Value);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		if (RelativeImportance is not null)
 		{
-			__init.Property("RelativeImportance");
+			initializer.Property("RelativeImportance");
 			writer.WriteValue(RelativeImportance.Value);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Supplied");
+			initializer.Property("Supplied");
 			writer.WriteValue(Supplied);
 		}
 
 		{
-			__init.Property("Value");
+			initializer.Property("Value");
 			writer.WriteValue(Value);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,14 +27,14 @@ public partial class ClusterNodes : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterNodes", false);
+		var initializer = writer.BeginObjectInitializer("ClusterNodes", false);
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			Count.FormatCode(writer);
 		}
 
 		{
-			__init.Property("DiscoveryTypes");
+			initializer.Property("DiscoveryTypes");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -44,55 +44,55 @@ public partial class ClusterNodes : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Fs");
+			initializer.Property("Fs");
 			Fs.FormatCode(writer);
 		}
 
 		{
-			__init.Property("IndexingPressure");
+			initializer.Property("IndexingPressure");
 			IndexingPressure.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Ingest");
+			initializer.Property("Ingest");
 			Ingest.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Jvm");
+			initializer.Property("Jvm");
 			Jvm.FormatCode(writer);
 		}
 
 		{
-			__init.Property("NetworkTypes");
+			initializer.Property("NetworkTypes");
 			NetworkTypes.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Os");
+			initializer.Property("Os");
 			Os.FormatCode(writer);
 		}
 
 		{
-			__init.Property("PackagingTypes");
+			initializer.Property("PackagingTypes");
 			writer.WriteInlineList(PackagingTypes, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Plugins");
+			initializer.Property("Plugins");
 			writer.WriteInlineList(Plugins, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Process");
+			initializer.Property("Process");
 			Process.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Versions");
+			initializer.Property("Versions");
 			writer.WriteInlineList(Versions, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

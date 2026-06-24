@@ -27,77 +27,77 @@ public partial class RuntimeFieldTypes : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RuntimeFieldTypes", false);
+		var initializer = writer.BeginObjectInitializer("RuntimeFieldTypes", false);
 		{
-			__init.Property("CharsMax");
+			initializer.Property("CharsMax");
 			writer.WriteValue(CharsMax);
 		}
 
 		{
-			__init.Property("CharsTotal");
+			initializer.Property("CharsTotal");
 			writer.WriteValue(CharsTotal);
 		}
 
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 		}
 
 		{
-			__init.Property("DocMax");
+			initializer.Property("DocMax");
 			writer.WriteValue(DocMax);
 		}
 
 		{
-			__init.Property("DocTotal");
+			initializer.Property("DocTotal");
 			writer.WriteValue(DocTotal);
 		}
 
 		{
-			__init.Property("IndexCount");
+			initializer.Property("IndexCount");
 			writer.WriteValue(IndexCount);
 		}
 
 		{
-			__init.Property("Lang");
+			initializer.Property("Lang");
 			writer.WriteInlineList(Lang, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("LinesMax");
+			initializer.Property("LinesMax");
 			writer.WriteValue(LinesMax);
 		}
 
 		{
-			__init.Property("LinesTotal");
+			initializer.Property("LinesTotal");
 			writer.WriteValue(LinesTotal);
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("ScriptlessCount");
+			initializer.Property("ScriptlessCount");
 			writer.WriteValue(ScriptlessCount);
 		}
 
 		{
-			__init.Property("ShadowedCount");
+			initializer.Property("ShadowedCount");
 			writer.WriteValue(ShadowedCount);
 		}
 
 		{
-			__init.Property("SourceMax");
+			initializer.Property("SourceMax");
 			writer.WriteValue(SourceMax);
 		}
 
 		{
-			__init.Property("SourceTotal");
+			initializer.Property("SourceTotal");
 			writer.WriteValue(SourceTotal);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

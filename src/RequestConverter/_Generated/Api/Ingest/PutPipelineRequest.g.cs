@@ -27,51 +27,51 @@ public partial class PutPipelineRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutPipelineRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutPipelineRequest", false);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		if (IfVersion is not null)
 		{
-			__init.Property("IfVersion");
+			initializer.Property("IfVersion");
 			writer.WriteValue(IfVersion.Value);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (Deprecated is not null)
 		{
-			__init.Property("Deprecated");
+			initializer.Property("Deprecated");
 			writer.WriteValue(Deprecated.Value);
 		}
 
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		if (FieldAccessPattern is not null)
 		{
-			__init.Property("FieldAccessPattern");
+			initializer.Property("FieldAccessPattern");
 			Elastic.Clients.Elasticsearch.Ingest.FieldAccessPatternCodeFormatter.FormatCode(FieldAccessPattern.Value, writer);
 		}
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -82,23 +82,23 @@ public partial class PutPipelineRequest : RequestConverter.ICodeFormattable
 
 		if (OnFailure is not null)
 		{
-			__init.Property("OnFailure");
+			initializer.Property("OnFailure");
 			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Processors is not null)
 		{
-			__init.Property("Processors");
+			initializer.Property("Processors");
 			writer.WriteInlineList(Processors, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

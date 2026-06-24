@@ -27,72 +27,72 @@ public partial class SetProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SetProcessor", false);
+		var initializer = writer.BeginObjectInitializer("SetProcessor", false);
 		if (CopyFrom is not null)
 		{
-			__init.Property("CopyFrom");
+			initializer.Property("CopyFrom");
 			CopyFrom.FormatCode(writer);
 		}
 
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (If is not null)
 		{
-			__init.Property("If");
+			initializer.Property("If");
 			If.FormatCode(writer);
 		}
 
 		if (IgnoreEmptyValue is not null)
 		{
-			__init.Property("IgnoreEmptyValue");
+			initializer.Property("IgnoreEmptyValue");
 			writer.WriteValue(IgnoreEmptyValue.Value);
 		}
 
 		if (IgnoreFailure is not null)
 		{
-			__init.Property("IgnoreFailure");
+			initializer.Property("IgnoreFailure");
 			writer.WriteValue(IgnoreFailure.Value);
 		}
 
 		if (MediaType is not null)
 		{
-			__init.Property("MediaType");
+			initializer.Property("MediaType");
 			writer.WriteString(MediaType);
 		}
 
 		if (OnFailure is not null)
 		{
-			__init.Property("OnFailure");
+			initializer.Property("OnFailure");
 			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Override is not null)
 		{
-			__init.Property("Override");
+			initializer.Property("Override");
 			writer.WriteValue(Override.Value);
 		}
 
 		if (Tag is not null)
 		{
-			__init.Property("Tag");
+			initializer.Property("Tag");
 			writer.WriteString(Tag);
 		}
 
 		if (Value is not null)
 		{
-			__init.Property("Value");
+			initializer.Property("Value");
 			writer.WriteValue(Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

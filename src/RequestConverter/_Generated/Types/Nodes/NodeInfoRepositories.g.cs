@@ -27,12 +27,12 @@ public partial class NodeInfoRepositories : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoRepositories", false);
+		var initializer = writer.BeginObjectInitializer("NodeInfoRepositories", false);
 		{
-			__init.Property("Url");
+			initializer.Property("Url");
 			Url.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

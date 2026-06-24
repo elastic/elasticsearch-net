@@ -27,30 +27,30 @@ public partial class ActivateUserProfileRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ActivateUserProfileRequest", false);
+		var initializer = writer.BeginObjectInitializer("ActivateUserProfileRequest", false);
 		if (AccessToken is not null)
 		{
-			__init.Property("AccessToken");
+			initializer.Property("AccessToken");
 			writer.WriteString(AccessToken);
 		}
 
 		{
-			__init.Property("GrantType");
+			initializer.Property("GrantType");
 			Elastic.Clients.Elasticsearch.Security.GrantTypeCodeFormatter.FormatCode(GrantType, writer);
 		}
 
 		if (Password is not null)
 		{
-			__init.Property("Password");
+			initializer.Property("Password");
 			writer.WriteString(Password);
 		}
 
 		if (Username is not null)
 		{
-			__init.Property("Username");
+			initializer.Property("Username");
 			writer.WriteString(Username);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

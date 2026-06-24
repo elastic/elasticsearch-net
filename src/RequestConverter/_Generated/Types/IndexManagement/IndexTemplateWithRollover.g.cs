@@ -27,56 +27,56 @@ public partial class IndexTemplateWithRollover : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexTemplateWithRollover", false);
+		var initializer = writer.BeginObjectInitializer("IndexTemplateWithRollover", false);
 		if (AllowAutoCreate is not null)
 		{
-			__init.Property("AllowAutoCreate");
+			initializer.Property("AllowAutoCreate");
 			writer.WriteValue(AllowAutoCreate.Value);
 		}
 
 		{
-			__init.Property("ComposedOf");
+			initializer.Property("ComposedOf");
 			writer.WriteInlineList(ComposedOf, (w, item) => { w.WriteString(item); });
 		}
 
 		if (CreatedDate is not null)
 		{
-			__init.Property("CreatedDate");
+			initializer.Property("CreatedDate");
 			writer.WriteValue(CreatedDate.Value);
 		}
 
 		if (CreatedDateMillis is not null)
 		{
-			__init.Property("CreatedDateMillis");
+			initializer.Property("CreatedDateMillis");
 			writer.WriteValue(CreatedDateMillis.Value);
 		}
 
 		if (DataStream is not null)
 		{
-			__init.Property("DataStream");
+			initializer.Property("DataStream");
 			DataStream.FormatCode(writer);
 		}
 
 		if (Deprecated is not null)
 		{
-			__init.Property("Deprecated");
+			initializer.Property("Deprecated");
 			writer.WriteValue(Deprecated.Value);
 		}
 
 		if (IgnoreMissingComponentTemplates is not null)
 		{
-			__init.Property("IgnoreMissingComponentTemplates");
+			initializer.Property("IgnoreMissingComponentTemplates");
 			writer.WriteInlineList(IgnoreMissingComponentTemplates, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("IndexPatterns");
+			initializer.Property("IndexPatterns");
 			writer.WriteInlineList(IndexPatterns, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -87,36 +87,36 @@ public partial class IndexTemplateWithRollover : RequestConverter.ICodeFormattab
 
 		if (ModifiedDate is not null)
 		{
-			__init.Property("ModifiedDate");
+			initializer.Property("ModifiedDate");
 			writer.WriteValue(ModifiedDate.Value);
 		}
 
 		if (ModifiedDateMillis is not null)
 		{
-			__init.Property("ModifiedDateMillis");
+			initializer.Property("ModifiedDateMillis");
 			writer.WriteValue(ModifiedDateMillis.Value);
 		}
 
 		if (Priority is not null)
 		{
-			__init.Property("Priority");
+			initializer.Property("Priority");
 			writer.WriteValue(Priority.Value);
 			writer.Write("L");
 		}
 
 		if (Template is not null)
 		{
-			__init.Property("Template");
+			initializer.Property("Template");
 			Template.FormatCode(writer);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

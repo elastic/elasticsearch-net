@@ -27,31 +27,31 @@ public partial class PostVotingConfigExclusionsRequest : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PostVotingConfigExclusionsRequest", false);
+		var initializer = writer.BeginObjectInitializer("PostVotingConfigExclusionsRequest", false);
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (NodeIds is not null)
 		{
-			__init.Property("NodeIds");
+			initializer.Property("NodeIds");
 			NodeIds.FormatCode(writer);
 		}
 
 		if (NodeNames is not null)
 		{
-			__init.Property("NodeNames");
+			initializer.Property("NodeNames");
 			NodeNames.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

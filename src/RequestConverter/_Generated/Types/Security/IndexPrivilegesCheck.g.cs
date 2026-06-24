@@ -27,23 +27,23 @@ public partial class IndexPrivilegesCheck : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexPrivilegesCheck", false);
+		var initializer = writer.BeginObjectInitializer("IndexPrivilegesCheck", false);
 		if (AllowRestrictedIndices is not null)
 		{
-			__init.Property("AllowRestrictedIndices");
+			initializer.Property("AllowRestrictedIndices");
 			writer.WriteValue(AllowRestrictedIndices.Value);
 		}
 
 		{
-			__init.Property("Names");
+			initializer.Property("Names");
 			Names.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Privileges");
+			initializer.Property("Privileges");
 			writer.WriteInlineList(Privileges, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

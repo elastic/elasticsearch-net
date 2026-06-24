@@ -27,23 +27,23 @@ public partial class StagnatingBackingIndices : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StagnatingBackingIndices", false);
+		var initializer = writer.BeginObjectInitializer("StagnatingBackingIndices", false);
 		{
-			__init.Property("FirstOccurrenceTimestamp");
+			initializer.Property("FirstOccurrenceTimestamp");
 			writer.WriteValue(FirstOccurrenceTimestamp);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("IndexName");
+			initializer.Property("IndexName");
 			writer.WriteString(IndexName);
 		}
 
 		{
-			__init.Property("RetryCount");
+			initializer.Property("RetryCount");
 			writer.WriteValue(RetryCount);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

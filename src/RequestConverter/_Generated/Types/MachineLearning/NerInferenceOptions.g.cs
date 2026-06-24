@@ -27,31 +27,31 @@ public partial class NerInferenceOptions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NerInferenceOptions", false);
+		var initializer = writer.BeginObjectInitializer("NerInferenceOptions", false);
 		if (ClassificationLabels is not null)
 		{
-			__init.Property("ClassificationLabels");
+			initializer.Property("ClassificationLabels");
 			writer.WriteInlineList(ClassificationLabels, (w, item) => { w.WriteString(item); });
 		}
 
 		if (ResultsField is not null)
 		{
-			__init.Property("ResultsField");
+			initializer.Property("ResultsField");
 			writer.WriteString(ResultsField);
 		}
 
 		if (Tokenization is not null)
 		{
-			__init.Property("Tokenization");
+			initializer.Property("Tokenization");
 			Tokenization.FormatCode(writer);
 		}
 
 		if (Vocabulary is not null)
 		{
-			__init.Property("Vocabulary");
+			initializer.Property("Vocabulary");
 			Vocabulary.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

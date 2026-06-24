@@ -27,51 +27,51 @@ public partial class Checkpointing : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Checkpointing", false);
+		var initializer = writer.BeginObjectInitializer("Checkpointing", false);
 		if (ChangesLastDetectedAt is not null)
 		{
-			__init.Property("ChangesLastDetectedAt");
+			initializer.Property("ChangesLastDetectedAt");
 			writer.WriteValue(ChangesLastDetectedAt.Value);
 			writer.Write("L");
 		}
 
 		if (ChangesLastDetectedAtString is not null)
 		{
-			__init.Property("ChangesLastDetectedAtString");
+			initializer.Property("ChangesLastDetectedAtString");
 			writer.WriteValue(ChangesLastDetectedAtString.Value);
 		}
 
 		{
-			__init.Property("Last");
+			initializer.Property("Last");
 			Last.FormatCode(writer);
 		}
 
 		if (LastSearchTime is not null)
 		{
-			__init.Property("LastSearchTime");
+			initializer.Property("LastSearchTime");
 			writer.WriteValue(LastSearchTime.Value);
 			writer.Write("L");
 		}
 
 		if (LastSearchTimeString is not null)
 		{
-			__init.Property("LastSearchTimeString");
+			initializer.Property("LastSearchTimeString");
 			writer.WriteValue(LastSearchTimeString.Value);
 		}
 
 		if (Next is not null)
 		{
-			__init.Property("Next");
+			initializer.Property("Next");
 			Next.FormatCode(writer);
 		}
 
 		if (OperationsBehind is not null)
 		{
-			__init.Property("OperationsBehind");
+			initializer.Property("OperationsBehind");
 			writer.WriteValue(OperationsBehind.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,55 +27,55 @@ public partial class ChangeType : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ChangeType", false);
+		var initializer = writer.BeginObjectInitializer("ChangeType", false);
 		if (Dip is not null)
 		{
-			__init.Property("Dip");
+			initializer.Property("Dip");
 			Dip.FormatCode(writer);
 		}
 
 		if (DistributionChange is not null)
 		{
-			__init.Property("DistributionChange");
+			initializer.Property("DistributionChange");
 			DistributionChange.FormatCode(writer);
 		}
 
 		if (Indeterminable is not null)
 		{
-			__init.Property("Indeterminable");
+			initializer.Property("Indeterminable");
 			Indeterminable.FormatCode(writer);
 		}
 
 		if (NonStationary is not null)
 		{
-			__init.Property("NonStationary");
+			initializer.Property("NonStationary");
 			NonStationary.FormatCode(writer);
 		}
 
 		if (Spike is not null)
 		{
-			__init.Property("Spike");
+			initializer.Property("Spike");
 			Spike.FormatCode(writer);
 		}
 
 		if (Stationary is not null)
 		{
-			__init.Property("Stationary");
+			initializer.Property("Stationary");
 			Stationary.FormatCode(writer);
 		}
 
 		if (StepChange is not null)
 		{
-			__init.Property("StepChange");
+			initializer.Property("StepChange");
 			StepChange.FormatCode(writer);
 		}
 
 		if (TrendChange is not null)
 		{
-			__init.Property("TrendChange");
+			initializer.Property("TrendChange");
 			TrendChange.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

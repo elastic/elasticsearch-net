@@ -27,29 +27,29 @@ public partial class ShardLease : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardLease", false);
+		var initializer = writer.BeginObjectInitializer("ShardLease", false);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		{
-			__init.Property("RetainingSeqNo");
+			initializer.Property("RetainingSeqNo");
 			writer.WriteValue(RetainingSeqNo);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			writer.WriteString(Source);
 		}
 
 		{
-			__init.Property("Timestamp");
+			initializer.Property("Timestamp");
 			writer.WriteValue(Timestamp);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

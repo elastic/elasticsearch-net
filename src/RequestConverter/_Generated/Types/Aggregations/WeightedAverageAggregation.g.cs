@@ -27,31 +27,31 @@ public partial class WeightedAverageAggregation : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("WeightedAverageAggregation", false);
+		var initializer = writer.BeginObjectInitializer("WeightedAverageAggregation", false);
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			writer.WriteString(Format);
 		}
 
 		if (Value is not null)
 		{
-			__init.Property("Value");
+			initializer.Property("Value");
 			Value.FormatCode(writer);
 		}
 
 		if (ValueType is not null)
 		{
-			__init.Property("ValueType");
+			initializer.Property("ValueType");
 			Elastic.Clients.Elasticsearch.Aggregations.ValueTypeCodeFormatter.FormatCode(ValueType.Value, writer);
 		}
 
 		if (Weight is not null)
 		{
-			__init.Property("Weight");
+			initializer.Property("Weight");
 			Weight.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

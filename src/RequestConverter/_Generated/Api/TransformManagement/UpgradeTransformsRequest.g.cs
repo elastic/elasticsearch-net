@@ -27,19 +27,19 @@ public partial class UpgradeTransformsRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UpgradeTransformsRequest", false);
+		var initializer = writer.BeginObjectInitializer("UpgradeTransformsRequest", false);
 		if (DryRun is not null)
 		{
-			__init.Property("DryRun");
+			initializer.Property("DryRun");
 			writer.WriteValue(DryRun.Value);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

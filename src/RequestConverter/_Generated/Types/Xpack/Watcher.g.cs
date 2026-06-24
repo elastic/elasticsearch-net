@@ -27,32 +27,32 @@ public partial class Watcher : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Watcher", false);
+		var initializer = writer.BeginObjectInitializer("Watcher", false);
 		{
-			__init.Property("Available");
+			initializer.Property("Available");
 			writer.WriteValue(Available);
 		}
 
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			Count.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);
 		}
 
 		{
-			__init.Property("Execution");
+			initializer.Property("Execution");
 			Execution.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Watch");
+			initializer.Property("Watch");
 			Watch.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

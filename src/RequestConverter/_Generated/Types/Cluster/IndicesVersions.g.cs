@@ -27,34 +27,34 @@ public partial class IndicesVersions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndicesVersions", false);
+		var initializer = writer.BeginObjectInitializer("IndicesVersions", false);
 		{
-			__init.Property("IndexCount");
+			initializer.Property("IndexCount");
 			writer.WriteValue(IndexCount);
 		}
 
 		{
-			__init.Property("PrimaryShardCount");
+			initializer.Property("PrimaryShardCount");
 			writer.WriteValue(PrimaryShardCount);
 		}
 
 		{
-			__init.Property("TotalPrimaryBytes");
+			initializer.Property("TotalPrimaryBytes");
 			writer.WriteValue(TotalPrimaryBytes);
 			writer.Write("L");
 		}
 
 		if (TotalPrimarySize is not null)
 		{
-			__init.Property("TotalPrimarySize");
+			initializer.Property("TotalPrimarySize");
 			TotalPrimarySize.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

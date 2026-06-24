@@ -27,24 +27,24 @@ public partial class QueryRuleCriteria : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("QueryRuleCriteria", false);
+		var initializer = writer.BeginObjectInitializer("QueryRuleCriteria", false);
 		if (Metadata is not null)
 		{
-			__init.Property("Metadata");
+			initializer.Property("Metadata");
 			writer.WriteString(Metadata);
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaTypeCodeFormatter.FormatCode(Type, writer);
 		}
 
 		if (Values is not null)
 		{
-			__init.Property("Values");
+			initializer.Property("Values");
 			writer.WriteInlineList(Values, (w, item) => { w.WriteValue(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

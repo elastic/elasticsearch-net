@@ -27,29 +27,29 @@ public partial class MistralServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MistralServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("MistralServiceSettings", false);
 		{
-			__init.Property("ApiKey");
+			initializer.Property("ApiKey");
 			writer.WriteString(ApiKey);
 		}
 
 		if (MaxInputTokens is not null)
 		{
-			__init.Property("MaxInputTokens");
+			initializer.Property("MaxInputTokens");
 			writer.WriteValue(MaxInputTokens.Value);
 		}
 
 		{
-			__init.Property("Model");
+			initializer.Property("Model");
 			writer.WriteString(Model);
 		}
 
 		if (RateLimit is not null)
 		{
-			__init.Property("RateLimit");
+			initializer.Property("RateLimit");
 			RateLimit.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

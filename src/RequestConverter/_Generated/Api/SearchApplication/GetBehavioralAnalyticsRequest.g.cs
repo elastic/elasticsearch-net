@@ -27,13 +27,13 @@ public partial class GetBehavioralAnalyticsRequest : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetBehavioralAnalyticsRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetBehavioralAnalyticsRequest", false);
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteInlineList(Name, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

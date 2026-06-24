@@ -27,40 +27,40 @@ public partial class JvmStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("JvmStats", false);
+		var initializer = writer.BeginObjectInitializer("JvmStats", false);
 		if (HeapMax is not null)
 		{
-			__init.Property("HeapMax");
+			initializer.Property("HeapMax");
 			HeapMax.FormatCode(writer);
 		}
 
 		{
-			__init.Property("HeapMaxInBytes");
+			initializer.Property("HeapMaxInBytes");
 			writer.WriteValue(HeapMaxInBytes);
 		}
 
 		if (JavaInference is not null)
 		{
-			__init.Property("JavaInference");
+			initializer.Property("JavaInference");
 			JavaInference.FormatCode(writer);
 		}
 
 		{
-			__init.Property("JavaInferenceInBytes");
+			initializer.Property("JavaInferenceInBytes");
 			writer.WriteValue(JavaInferenceInBytes);
 		}
 
 		if (JavaInferenceMax is not null)
 		{
-			__init.Property("JavaInferenceMax");
+			initializer.Property("JavaInferenceMax");
 			JavaInferenceMax.FormatCode(writer);
 		}
 
 		{
-			__init.Property("JavaInferenceMaxInBytes");
+			initializer.Property("JavaInferenceMaxInBytes");
 			writer.WriteValue(JavaInferenceMaxInBytes);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

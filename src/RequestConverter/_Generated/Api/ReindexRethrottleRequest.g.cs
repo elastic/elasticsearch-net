@@ -27,25 +27,25 @@ public partial class ReindexRethrottleRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ReindexRethrottleRequest", false);
+		var initializer = writer.BeginObjectInitializer("ReindexRethrottleRequest", false);
 		{
-			__init.Property("TaskId");
+			initializer.Property("TaskId");
 			TaskId.FormatCode(writer);
 		}
 
 		if (GroupBy is not null)
 		{
-			__init.Property("GroupBy");
+			initializer.Property("GroupBy");
 			Elastic.Clients.Elasticsearch.Tasks.GroupByCodeFormatter.FormatCode(GroupBy.Value, writer);
 		}
 
 		if (RequestsPerSecond is not null)
 		{
-			__init.Property("RequestsPerSecond");
+			initializer.Property("RequestsPerSecond");
 			writer.WriteValue(RequestsPerSecond.Value);
 			writer.Write("f");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

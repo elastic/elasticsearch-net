@@ -27,29 +27,29 @@ public partial class StreamCompletionRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StreamCompletionRequest", false);
+		var initializer = writer.BeginObjectInitializer("StreamCompletionRequest", false);
 		{
-			__init.Property("InferenceId");
+			initializer.Property("InferenceId");
 			InferenceId.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Input");
+			initializer.Property("Input");
 			writer.WriteInlineList(Input, (w, item) => { w.WriteString(item); });
 		}
 
 		if (TaskSettings is not null)
 		{
-			__init.Property("TaskSettings");
+			initializer.Property("TaskSettings");
 			writer.WriteValue(TaskSettings);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

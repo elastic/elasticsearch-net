@@ -27,42 +27,42 @@ public partial class ShardFailure : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardFailure", false);
+		var initializer = writer.BeginObjectInitializer("ShardFailure", false);
 		if (Index is not null)
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteString(Index);
 		}
 
 		if (Node is not null)
 		{
-			__init.Property("Node");
+			initializer.Property("Node");
 			writer.WriteString(Node);
 		}
 
 		if (Primary is not null)
 		{
-			__init.Property("Primary");
+			initializer.Property("Primary");
 			writer.WriteValue(Primary.Value);
 		}
 
 		{
-			__init.Property("Reason");
+			initializer.Property("Reason");
 			Reason.FormatCode(writer);
 		}
 
 		if (Shard is not null)
 		{
-			__init.Property("Shard");
+			initializer.Property("Shard");
 			writer.WriteValue(Shard.Value);
 		}
 
 		if (Status is not null)
 		{
-			__init.Property("Status");
+			initializer.Property("Status");
 			writer.WriteString(Status);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,28 +27,28 @@ public partial class PostBehavioralAnalyticsEventRequest : RequestConverter.ICod
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PostBehavioralAnalyticsEventRequest", false);
+		var initializer = writer.BeginObjectInitializer("PostBehavioralAnalyticsEventRequest", false);
 		{
-			__init.Property("CollectionName");
+			initializer.Property("CollectionName");
 			CollectionName.FormatCode(writer);
 		}
 
 		{
-			__init.Property("EventType");
+			initializer.Property("EventType");
 			Elastic.Clients.Elasticsearch.SearchApplication.EventTypeCodeFormatter.FormatCode(EventType, writer);
 		}
 
 		if (Debug is not null)
 		{
-			__init.Property("Debug");
+			initializer.Property("Debug");
 			writer.WriteValue(Debug.Value);
 		}
 
 		{
-			__init.Property("Payload");
+			initializer.Property("Payload");
 			writer.WriteValue(Payload);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

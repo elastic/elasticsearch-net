@@ -27,17 +27,17 @@ public partial class DataStreamSettingsError : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataStreamSettingsError", false);
+		var initializer = writer.BeginObjectInitializer("DataStreamSettingsError", false);
 		{
-			__init.Property("Error");
+			initializer.Property("Error");
 			writer.WriteString(Error);
 		}
 
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteString(Index);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

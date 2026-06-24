@@ -27,58 +27,58 @@ public partial class ReadBlobDetails : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ReadBlobDetails", false);
+		var initializer = writer.BeginObjectInitializer("ReadBlobDetails", false);
 		if (BeforeWriteComplete is not null)
 		{
-			__init.Property("BeforeWriteComplete");
+			initializer.Property("BeforeWriteComplete");
 			writer.WriteValue(BeforeWriteComplete.Value);
 		}
 
 		if (Elapsed is not null)
 		{
-			__init.Property("Elapsed");
+			initializer.Property("Elapsed");
 			Elapsed.FormatCode(writer);
 		}
 
 		if (ElapsedNanos is not null)
 		{
-			__init.Property("ElapsedNanos");
+			initializer.Property("ElapsedNanos");
 			writer.WriteValue(ElapsedNanos.Value);
 		}
 
 		if (FirstByteTime is not null)
 		{
-			__init.Property("FirstByteTime");
+			initializer.Property("FirstByteTime");
 			FirstByteTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("FirstByteTimeNanos");
+			initializer.Property("FirstByteTimeNanos");
 			writer.WriteValue(FirstByteTimeNanos);
 		}
 
 		{
-			__init.Property("Found");
+			initializer.Property("Found");
 			writer.WriteValue(Found);
 		}
 
 		{
-			__init.Property("Node");
+			initializer.Property("Node");
 			Node.FormatCode(writer);
 		}
 
 		if (Throttled is not null)
 		{
-			__init.Property("Throttled");
+			initializer.Property("Throttled");
 			Throttled.FormatCode(writer);
 		}
 
 		if (ThrottledNanos is not null)
 		{
-			__init.Property("ThrottledNanos");
+			initializer.Property("ThrottledNanos");
 			writer.WriteValue(ThrottledNanos.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

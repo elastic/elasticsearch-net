@@ -27,29 +27,29 @@ public partial class TrainedModelTree : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelTree", false);
+		var initializer = writer.BeginObjectInitializer("TrainedModelTree", false);
 		if (ClassificationLabels is not null)
 		{
-			__init.Property("ClassificationLabels");
+			initializer.Property("ClassificationLabels");
 			writer.WriteInlineList(ClassificationLabels, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("FeatureNames");
+			initializer.Property("FeatureNames");
 			writer.WriteInlineList(FeatureNames, (w, item) => { w.WriteString(item); });
 		}
 
 		if (TargetType is not null)
 		{
-			__init.Property("TargetType");
+			initializer.Property("TargetType");
 			writer.WriteString(TargetType);
 		}
 
 		{
-			__init.Property("TreeStructure");
+			initializer.Property("TreeStructure");
 			writer.WriteInlineList(TreeStructure, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

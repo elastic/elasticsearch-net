@@ -27,31 +27,31 @@ public partial class NodeInfoPath : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoPath", false);
+		var initializer = writer.BeginObjectInitializer("NodeInfoPath", false);
 		if (Data is not null)
 		{
-			__init.Property("Data");
+			initializer.Property("Data");
 			writer.WriteInlineList(Data, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Home is not null)
 		{
-			__init.Property("Home");
+			initializer.Property("Home");
 			writer.WriteString(Home);
 		}
 
 		if (Logs is not null)
 		{
-			__init.Property("Logs");
+			initializer.Property("Logs");
 			writer.WriteString(Logs);
 		}
 
 		if (Repo is not null)
 		{
-			__init.Property("Repo");
+			initializer.Property("Repo");
 			writer.WriteInlineList(Repo, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

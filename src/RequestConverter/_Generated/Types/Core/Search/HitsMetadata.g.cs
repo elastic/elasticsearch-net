@@ -27,22 +27,22 @@ public partial class HitsMetadata<T> : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("HitsMetadata<T>", false);
+		var initializer = writer.BeginObjectInitializer("HitsMetadata<T>", false);
 		{
-			__init.Property("Hits");
+			initializer.Property("Hits");
 			writer.WriteInlineList(Hits, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (MaxScore is not null)
 		{
-			__init.Property("MaxScore");
+			initializer.Property("MaxScore");
 			writer.WriteValue(MaxScore.Value);
 			writer.Write("d");
 		}
 
 		if (Total is not null)
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			if (Total.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				Total.Value1.FormatCode(writer);
@@ -54,6 +54,6 @@ public partial class HitsMetadata<T> : RequestConverter.ICodeFormattable
 			}
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,28 +27,28 @@ public partial class PutClusterSettingsRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutClusterSettingsRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutClusterSettingsRequest", false);
 		if (FlatSettings is not null)
 		{
-			__init.Property("FlatSettings");
+			initializer.Property("FlatSettings");
 			writer.WriteValue(FlatSettings.Value);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (Persistent is not null)
 		{
-			__init.Property("Persistent");
+			initializer.Property("Persistent");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -59,7 +59,7 @@ public partial class PutClusterSettingsRequest : RequestConverter.ICodeFormattab
 
 		if (Transient is not null)
 		{
-			__init.Property("Transient");
+			initializer.Property("Transient");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -68,6 +68,6 @@ public partial class PutClusterSettingsRequest : RequestConverter.ICodeFormattab
 			writer.WriteInlineList(Transient, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

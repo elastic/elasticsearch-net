@@ -27,10 +27,10 @@ public partial class Cpu : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Cpu", false);
+		var initializer = writer.BeginObjectInitializer("Cpu", false);
 		if (LoadAverage is not null)
 		{
-			__init.Property("LoadAverage");
+			initializer.Property("LoadAverage");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -41,46 +41,46 @@ public partial class Cpu : RequestConverter.ICodeFormattable
 
 		if (Percent is not null)
 		{
-			__init.Property("Percent");
+			initializer.Property("Percent");
 			writer.WriteValue(Percent.Value);
 		}
 
 		if (Sys is not null)
 		{
-			__init.Property("Sys");
+			initializer.Property("Sys");
 			Sys.FormatCode(writer);
 		}
 
 		if (SysInMillis is not null)
 		{
-			__init.Property("SysInMillis");
+			initializer.Property("SysInMillis");
 			writer.WriteValue(SysInMillis.Value);
 		}
 
 		if (Total is not null)
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			Total.FormatCode(writer);
 		}
 
 		if (TotalInMillis is not null)
 		{
-			__init.Property("TotalInMillis");
+			initializer.Property("TotalInMillis");
 			writer.WriteValue(TotalInMillis.Value);
 		}
 
 		if (User is not null)
 		{
-			__init.Property("User");
+			initializer.Property("User");
 			User.FormatCode(writer);
 		}
 
 		if (UserInMillis is not null)
 		{
-			__init.Property("UserInMillis");
+			initializer.Property("UserInMillis");
 			writer.WriteValue(UserInMillis.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

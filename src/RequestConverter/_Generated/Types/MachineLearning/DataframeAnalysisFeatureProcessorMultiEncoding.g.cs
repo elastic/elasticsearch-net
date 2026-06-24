@@ -27,12 +27,12 @@ public partial class DataframeAnalysisFeatureProcessorMultiEncoding : RequestCon
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeAnalysisFeatureProcessorMultiEncoding", false);
+		var initializer = writer.BeginObjectInitializer("DataframeAnalysisFeatureProcessorMultiEncoding", false);
 		{
-			__init.Property("Processors");
+			initializer.Property("Processors");
 			writer.WriteInlineList(Processors, (w, item) => { w.WriteValue(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

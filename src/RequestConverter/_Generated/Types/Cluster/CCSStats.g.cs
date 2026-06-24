@@ -27,10 +27,10 @@ public partial class CCSStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CCSStats", false);
+		var initializer = writer.BeginObjectInitializer("CCSStats", false);
 		if (Clusters is not null)
 		{
-			__init.Property("Clusters");
+			initializer.Property("Clusters");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -41,15 +41,15 @@ public partial class CCSStats : RequestConverter.ICodeFormattable
 
 		if (Esql is not null)
 		{
-			__init.Property("Esql");
+			initializer.Property("Esql");
 			Esql.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Search");
+			initializer.Property("Search");
 			Search.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

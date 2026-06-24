@@ -27,30 +27,30 @@ public partial class SourceOnlyRepositorySettingsForReadOnlyUrl : RequestConvert
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SourceOnlyRepositorySettingsForReadOnlyUrl", true);
+		var initializer = writer.BeginObjectInitializer("SourceOnlyRepositorySettingsForReadOnlyUrl", true);
 		if (HttpMaxRetries is not null)
 		{
-			__init.Property("HttpMaxRetries");
+			initializer.Property("HttpMaxRetries");
 			writer.WriteValue(HttpMaxRetries.Value);
 		}
 
 		if (HttpSocketTimeout is not null)
 		{
-			__init.Property("HttpSocketTimeout");
+			initializer.Property("HttpSocketTimeout");
 			HttpSocketTimeout.FormatCode(writer);
 		}
 
 		if (MaxNumberOfSnapshots is not null)
 		{
-			__init.Property("MaxNumberOfSnapshots");
+			initializer.Property("MaxNumberOfSnapshots");
 			writer.WriteValue(MaxNumberOfSnapshots.Value);
 		}
 
 		{
-			__init.Property("Url");
+			initializer.Property("Url");
 			writer.WriteString(Url);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

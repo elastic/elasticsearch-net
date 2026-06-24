@@ -27,25 +27,25 @@ public partial class PutJobRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutJobRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutJobRequest", false);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Cron");
+			initializer.Property("Cron");
 			writer.WriteString(Cron);
 		}
 
 		{
-			__init.Property("Groups");
+			initializer.Property("Groups");
 			Groups.FormatCode(writer);
 		}
 
 		if (Headers is not null)
 		{
-			__init.Property("Headers");
+			initializer.Property("Headers");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -55,32 +55,32 @@ public partial class PutJobRequest : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("IndexPattern");
+			initializer.Property("IndexPattern");
 			writer.WriteString(IndexPattern);
 		}
 
 		if (Metrics is not null)
 		{
-			__init.Property("Metrics");
+			initializer.Property("Metrics");
 			writer.WriteInlineList(Metrics, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("PageSize");
+			initializer.Property("PageSize");
 			writer.WriteValue(PageSize);
 		}
 
 		{
-			__init.Property("RollupIndex");
+			initializer.Property("RollupIndex");
 			RollupIndex.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

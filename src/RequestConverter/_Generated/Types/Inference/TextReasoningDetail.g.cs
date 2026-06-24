@@ -27,37 +27,37 @@ public partial class TextReasoningDetail : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TextReasoningDetail", true);
+		var initializer = writer.BeginObjectInitializer("TextReasoningDetail", true);
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			writer.WriteString(Format);
 		}
 
 		if (Id is not null)
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		if (Index is not null)
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteValue(Index.Value);
 		}
 
 		if (Signature is not null)
 		{
-			__init.Property("Signature");
+			initializer.Property("Signature");
 			writer.WriteString(Signature);
 		}
 
 		if (Text is not null)
 		{
-			__init.Property("Text");
+			initializer.Property("Text");
 			writer.WriteString(Text);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

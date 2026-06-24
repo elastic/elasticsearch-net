@@ -27,28 +27,28 @@ public partial class QueryApiKeysRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("QueryApiKeysRequest", false);
+		var initializer = writer.BeginObjectInitializer("QueryApiKeysRequest", false);
 		if (TypedKeys is not null)
 		{
-			__init.Property("TypedKeys");
+			initializer.Property("TypedKeys");
 			writer.WriteValue(TypedKeys.Value);
 		}
 
 		if (WithLimitedBy is not null)
 		{
-			__init.Property("WithLimitedBy");
+			initializer.Property("WithLimitedBy");
 			writer.WriteValue(WithLimitedBy.Value);
 		}
 
 		if (WithProfileUid is not null)
 		{
-			__init.Property("WithProfileUid");
+			initializer.Property("WithProfileUid");
 			writer.WriteValue(WithProfileUid.Value);
 		}
 
 		if (Aggregations is not null)
 		{
-			__init.Property("Aggregations");
+			initializer.Property("Aggregations");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -59,34 +59,34 @@ public partial class QueryApiKeysRequest : RequestConverter.ICodeFormattable
 
 		if (From is not null)
 		{
-			__init.Property("From");
+			initializer.Property("From");
 			writer.WriteValue(From.Value);
 		}
 
 		if (Query is not null)
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			Query.FormatCode(writer);
 		}
 
 		if (SearchAfter is not null)
 		{
-			__init.Property("SearchAfter");
+			initializer.Property("SearchAfter");
 			writer.WriteInlineList(SearchAfter, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
 		if (Sort is not null)
 		{
-			__init.Property("Sort");
+			initializer.Property("Sort");
 			writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

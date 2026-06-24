@@ -27,34 +27,34 @@ public partial class ScriptCache : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ScriptCache", false);
+		var initializer = writer.BeginObjectInitializer("ScriptCache", false);
 		if (CacheEvictions is not null)
 		{
-			__init.Property("CacheEvictions");
+			initializer.Property("CacheEvictions");
 			writer.WriteValue(CacheEvictions.Value);
 			writer.Write("L");
 		}
 
 		if (CompilationLimitTriggered is not null)
 		{
-			__init.Property("CompilationLimitTriggered");
+			initializer.Property("CompilationLimitTriggered");
 			writer.WriteValue(CompilationLimitTriggered.Value);
 			writer.Write("L");
 		}
 
 		if (Compilations is not null)
 		{
-			__init.Property("Compilations");
+			initializer.Property("Compilations");
 			writer.WriteValue(Compilations.Value);
 			writer.Write("L");
 		}
 
 		if (Context is not null)
 		{
-			__init.Property("Context");
+			initializer.Property("Context");
 			writer.WriteString(Context);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

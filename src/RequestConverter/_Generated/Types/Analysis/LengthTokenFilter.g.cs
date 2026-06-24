@@ -27,25 +27,25 @@ public partial class LengthTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("LengthTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("LengthTokenFilter", true);
 		if (Max is not null)
 		{
-			__init.Property("Max");
+			initializer.Property("Max");
 			writer.WriteValue(Max.Value);
 		}
 
 		if (Min is not null)
 		{
-			__init.Property("Min");
+			initializer.Property("Min");
 			writer.WriteValue(Min.Value);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

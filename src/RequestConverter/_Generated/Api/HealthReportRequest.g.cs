@@ -27,31 +27,31 @@ public partial class HealthReportRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("HealthReportRequest", false);
+		var initializer = writer.BeginObjectInitializer("HealthReportRequest", false);
 		if (Feature is not null)
 		{
-			__init.Property("Feature");
+			initializer.Property("Feature");
 			writer.WriteInlineList(Feature, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (Verbose is not null)
 		{
-			__init.Property("Verbose");
+			initializer.Property("Verbose");
 			writer.WriteValue(Verbose.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

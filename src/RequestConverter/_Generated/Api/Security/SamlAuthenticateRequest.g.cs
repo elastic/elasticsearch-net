@@ -27,23 +27,23 @@ public partial class SamlAuthenticateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SamlAuthenticateRequest", false);
+		var initializer = writer.BeginObjectInitializer("SamlAuthenticateRequest", false);
 		{
-			__init.Property("Content");
+			initializer.Property("Content");
 			writer.WriteString(Content);
 		}
 
 		{
-			__init.Property("Ids");
+			initializer.Property("Ids");
 			Ids.FormatCode(writer);
 		}
 
 		if (Realm is not null)
 		{
-			__init.Property("Realm");
+			initializer.Property("Realm");
 			writer.WriteString(Realm);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

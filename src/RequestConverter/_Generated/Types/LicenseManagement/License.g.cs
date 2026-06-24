@@ -27,62 +27,62 @@ public partial class License : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("License", false);
+		var initializer = writer.BeginObjectInitializer("License", false);
 		{
-			__init.Property("ExpiryDateInMillis");
+			initializer.Property("ExpiryDateInMillis");
 			writer.WriteValue(ExpiryDateInMillis);
 		}
 
 		{
-			__init.Property("IssueDateInMillis");
+			initializer.Property("IssueDateInMillis");
 			writer.WriteValue(IssueDateInMillis);
 		}
 
 		{
-			__init.Property("IssuedTo");
+			initializer.Property("IssuedTo");
 			writer.WriteString(IssuedTo);
 		}
 
 		{
-			__init.Property("Issuer");
+			initializer.Property("Issuer");
 			writer.WriteString(Issuer);
 		}
 
 		if (MaxNodes is not null)
 		{
-			__init.Property("MaxNodes");
+			initializer.Property("MaxNodes");
 			writer.WriteValue(MaxNodes.Value);
 			writer.Write("L");
 		}
 
 		if (MaxResourceUnits is not null)
 		{
-			__init.Property("MaxResourceUnits");
+			initializer.Property("MaxResourceUnits");
 			writer.WriteValue(MaxResourceUnits.Value);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Signature");
+			initializer.Property("Signature");
 			writer.WriteString(Signature);
 		}
 
 		if (StartDateInMillis is not null)
 		{
-			__init.Property("StartDateInMillis");
+			initializer.Property("StartDateInMillis");
 			writer.WriteValue(StartDateInMillis.Value);
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			Elastic.Clients.Elasticsearch.LicenseManagement.LicenseTypeCodeFormatter.FormatCode(Type, writer);
 		}
 
 		{
-			__init.Property("Uid");
+			initializer.Property("Uid");
 			writer.WriteString(Uid);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,61 +27,61 @@ public partial class Retriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Retriever", true);
+		var initializer = writer.BeginObjectInitializer("Retriever", true);
 		if (Diversify is not null)
 		{
-			__init.Property("Diversify");
+			initializer.Property("Diversify");
 			Diversify.FormatCode(writer);
 		}
 
 		if (Knn is not null)
 		{
-			__init.Property("Knn");
+			initializer.Property("Knn");
 			Knn.FormatCode(writer);
 		}
 
 		if (Linear is not null)
 		{
-			__init.Property("Linear");
+			initializer.Property("Linear");
 			Linear.FormatCode(writer);
 		}
 
 		if (Pinned is not null)
 		{
-			__init.Property("Pinned");
+			initializer.Property("Pinned");
 			Pinned.FormatCode(writer);
 		}
 
 		if (Rescorer is not null)
 		{
-			__init.Property("Rescorer");
+			initializer.Property("Rescorer");
 			Rescorer.FormatCode(writer);
 		}
 
 		if (Rrf is not null)
 		{
-			__init.Property("Rrf");
+			initializer.Property("Rrf");
 			Rrf.FormatCode(writer);
 		}
 
 		if (Rule is not null)
 		{
-			__init.Property("Rule");
+			initializer.Property("Rule");
 			Rule.FormatCode(writer);
 		}
 
 		if (Standard is not null)
 		{
-			__init.Property("Standard");
+			initializer.Property("Standard");
 			Standard.FormatCode(writer);
 		}
 
 		if (TextSimilarityReranker is not null)
 		{
-			__init.Property("TextSimilarityReranker");
+			initializer.Property("TextSimilarityReranker");
 			TextSimilarityReranker.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

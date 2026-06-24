@@ -27,25 +27,25 @@ public partial class TextExpansionInferenceOptions : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TextExpansionInferenceOptions", false);
+		var initializer = writer.BeginObjectInitializer("TextExpansionInferenceOptions", false);
 		if (ResultsField is not null)
 		{
-			__init.Property("ResultsField");
+			initializer.Property("ResultsField");
 			writer.WriteString(ResultsField);
 		}
 
 		if (Tokenization is not null)
 		{
-			__init.Property("Tokenization");
+			initializer.Property("Tokenization");
 			Tokenization.FormatCode(writer);
 		}
 
 		if (Vocabulary is not null)
 		{
-			__init.Property("Vocabulary");
+			initializer.Property("Vocabulary");
 			Vocabulary.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

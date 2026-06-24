@@ -27,29 +27,29 @@ public partial class PutTrainedModelVocabularyRequest : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutTrainedModelVocabularyRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutTrainedModelVocabularyRequest", false);
 		{
-			__init.Property("ModelId");
+			initializer.Property("ModelId");
 			ModelId.FormatCode(writer);
 		}
 
 		if (Merges is not null)
 		{
-			__init.Property("Merges");
+			initializer.Property("Merges");
 			writer.WriteInlineList(Merges, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Scores is not null)
 		{
-			__init.Property("Scores");
+			initializer.Property("Scores");
 			writer.WriteInlineList(Scores, (w, item) => { w.WriteValue(item); w.Write("d"); });
 		}
 
 		{
-			__init.Property("Vocabulary");
+			initializer.Property("Vocabulary");
 			writer.WriteInlineList(Vocabulary, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

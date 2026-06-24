@@ -27,16 +27,16 @@ public partial class DataframeEvaluationRegressionMetrics : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeEvaluationRegressionMetrics", false);
+		var initializer = writer.BeginObjectInitializer("DataframeEvaluationRegressionMetrics", false);
 		if (Huber is not null)
 		{
-			__init.Property("Huber");
+			initializer.Property("Huber");
 			Huber.FormatCode(writer);
 		}
 
 		if (Mse is not null)
 		{
-			__init.Property("Mse");
+			initializer.Property("Mse");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -47,13 +47,13 @@ public partial class DataframeEvaluationRegressionMetrics : RequestConverter.ICo
 
 		if (Msle is not null)
 		{
-			__init.Property("Msle");
+			initializer.Property("Msle");
 			Msle.FormatCode(writer);
 		}
 
 		if (RSquared is not null)
 		{
-			__init.Property("RSquared");
+			initializer.Property("RSquared");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -62,6 +62,6 @@ public partial class DataframeEvaluationRegressionMetrics : RequestConverter.ICo
 			writer.WriteInlineList(RSquared, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

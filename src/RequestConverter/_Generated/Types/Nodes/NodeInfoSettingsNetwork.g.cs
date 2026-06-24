@@ -27,13 +27,13 @@ public partial class NodeInfoSettingsNetwork : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoSettingsNetwork", false);
+		var initializer = writer.BeginObjectInitializer("NodeInfoSettingsNetwork", false);
 		if (Host is not null)
 		{
-			__init.Property("Host");
+			initializer.Property("Host");
 			writer.WriteInlineList(Host, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

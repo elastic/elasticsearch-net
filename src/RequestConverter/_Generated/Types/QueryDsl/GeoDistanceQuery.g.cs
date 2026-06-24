@@ -27,53 +27,53 @@ public partial class GeoDistanceQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoDistanceQuery", false);
+		var initializer = writer.BeginObjectInitializer("GeoDistanceQuery", false);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		{
-			__init.Property("Distance");
+			initializer.Property("Distance");
 			writer.WriteString(Distance);
 		}
 
 		if (DistanceType is not null)
 		{
-			__init.Property("DistanceType");
+			initializer.Property("DistanceType");
 			Elastic.Clients.Elasticsearch.GeoDistanceTypeCodeFormatter.FormatCode(DistanceType.Value, writer);
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (IgnoreUnmapped is not null)
 		{
-			__init.Property("IgnoreUnmapped");
+			initializer.Property("IgnoreUnmapped");
 			writer.WriteValue(IgnoreUnmapped.Value);
 		}
 
 		{
-			__init.Property("Location");
+			initializer.Property("Location");
 			Location.FormatCode(writer);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
 		if (ValidationMethod is not null)
 		{
-			__init.Property("ValidationMethod");
+			initializer.Property("ValidationMethod");
 			Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethodCodeFormatter.FormatCode(ValidationMethod.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

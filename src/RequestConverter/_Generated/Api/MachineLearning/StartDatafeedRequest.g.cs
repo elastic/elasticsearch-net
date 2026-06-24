@@ -27,30 +27,30 @@ public partial class StartDatafeedRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StartDatafeedRequest", false);
+		var initializer = writer.BeginObjectInitializer("StartDatafeedRequest", false);
 		{
-			__init.Property("DatafeedId");
+			initializer.Property("DatafeedId");
 			DatafeedId.FormatCode(writer);
 		}
 
 		if (End is not null)
 		{
-			__init.Property("End");
+			initializer.Property("End");
 			writer.WriteValue(End.Value);
 		}
 
 		if (Start is not null)
 		{
-			__init.Property("Start");
+			initializer.Property("Start");
 			writer.WriteValue(Start.Value);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

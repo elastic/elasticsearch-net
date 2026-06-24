@@ -27,37 +27,37 @@ public partial class MovingPercentilesAggregation : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MovingPercentilesAggregation", false);
+		var initializer = writer.BeginObjectInitializer("MovingPercentilesAggregation", false);
 		if (BucketsPath is not null)
 		{
-			__init.Property("BucketsPath");
+			initializer.Property("BucketsPath");
 			BucketsPath.FormatCode(writer);
 		}
 
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			writer.WriteString(Format);
 		}
 
 		if (GapPolicy is not null)
 		{
-			__init.Property("GapPolicy");
+			initializer.Property("GapPolicy");
 			Elastic.Clients.Elasticsearch.Aggregations.GapPolicyCodeFormatter.FormatCode(GapPolicy.Value, writer);
 		}
 
 		if (Shift is not null)
 		{
-			__init.Property("Shift");
+			initializer.Property("Shift");
 			writer.WriteValue(Shift.Value);
 		}
 
 		if (Window is not null)
 		{
-			__init.Property("Window");
+			initializer.Property("Window");
 			writer.WriteValue(Window.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

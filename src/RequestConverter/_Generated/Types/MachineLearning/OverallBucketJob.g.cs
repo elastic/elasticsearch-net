@@ -27,18 +27,18 @@ public partial class OverallBucketJob : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("OverallBucketJob", false);
+		var initializer = writer.BeginObjectInitializer("OverallBucketJob", false);
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			writer.WriteString(JobId);
 		}
 
 		{
-			__init.Property("MaxAnomalyScore");
+			initializer.Property("MaxAnomalyScore");
 			writer.WriteValue(MaxAnomalyScore);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

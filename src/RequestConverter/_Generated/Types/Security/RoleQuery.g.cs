@@ -27,73 +27,73 @@ public partial class RoleQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RoleQuery", false);
+		var initializer = writer.BeginObjectInitializer("RoleQuery", false);
 		if (Bool is not null)
 		{
-			__init.Property("Bool");
+			initializer.Property("Bool");
 			Bool.FormatCode(writer);
 		}
 
 		if (Exists is not null)
 		{
-			__init.Property("Exists");
+			initializer.Property("Exists");
 			Exists.FormatCode(writer);
 		}
 
 		if (Ids is not null)
 		{
-			__init.Property("Ids");
+			initializer.Property("Ids");
 			Ids.FormatCode(writer);
 		}
 
 		if (Match is not null)
 		{
-			__init.Property("Match");
+			initializer.Property("Match");
 			Match.FormatCode(writer);
 		}
 
 		if (MatchAll is not null)
 		{
-			__init.Property("MatchAll");
+			initializer.Property("MatchAll");
 			MatchAll.FormatCode(writer);
 		}
 
 		if (Prefix is not null)
 		{
-			__init.Property("Prefix");
+			initializer.Property("Prefix");
 			Prefix.FormatCode(writer);
 		}
 
 		if (Range is not null)
 		{
-			__init.Property("Range");
+			initializer.Property("Range");
 			Range.FormatCode(writer);
 		}
 
 		if (SimpleQueryString is not null)
 		{
-			__init.Property("SimpleQueryString");
+			initializer.Property("SimpleQueryString");
 			SimpleQueryString.FormatCode(writer);
 		}
 
 		if (Term is not null)
 		{
-			__init.Property("Term");
+			initializer.Property("Term");
 			Term.FormatCode(writer);
 		}
 
 		if (Terms is not null)
 		{
-			__init.Property("Terms");
+			initializer.Property("Terms");
 			Terms.FormatCode(writer);
 		}
 
 		if (Wildcard is not null)
 		{
-			__init.Property("Wildcard");
+			initializer.Property("Wildcard");
 			Wildcard.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

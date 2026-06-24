@@ -27,56 +27,56 @@ public partial class ForcemergeRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ForcemergeRequest", false);
+		var initializer = writer.BeginObjectInitializer("ForcemergeRequest", false);
 		if (Indices is not null)
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		if (AllowNoIndices is not null)
 		{
-			__init.Property("AllowNoIndices");
+			initializer.Property("AllowNoIndices");
 			writer.WriteValue(AllowNoIndices.Value);
 		}
 
 		if (ExpandWildcards is not null)
 		{
-			__init.Property("ExpandWildcards");
+			initializer.Property("ExpandWildcards");
 			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (Flush is not null)
 		{
-			__init.Property("Flush");
+			initializer.Property("Flush");
 			writer.WriteValue(Flush.Value);
 		}
 
 		if (IgnoreUnavailable is not null)
 		{
-			__init.Property("IgnoreUnavailable");
+			initializer.Property("IgnoreUnavailable");
 			writer.WriteValue(IgnoreUnavailable.Value);
 		}
 
 		if (MaxNumSegments is not null)
 		{
-			__init.Property("MaxNumSegments");
+			initializer.Property("MaxNumSegments");
 			writer.WriteValue(MaxNumSegments.Value);
 			writer.Write("L");
 		}
 
 		if (OnlyExpungeDeletes is not null)
 		{
-			__init.Property("OnlyExpungeDeletes");
+			initializer.Property("OnlyExpungeDeletes");
 			writer.WriteValue(OnlyExpungeDeletes.Value);
 		}
 
 		if (WaitForCompletion is not null)
 		{
-			__init.Property("WaitForCompletion");
+			initializer.Property("WaitForCompletion");
 			writer.WriteValue(WaitForCompletion.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

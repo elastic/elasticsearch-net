@@ -27,27 +27,27 @@ public partial class AggregationRange : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AggregationRange", false);
+		var initializer = writer.BeginObjectInitializer("AggregationRange", false);
 		if (From is not null)
 		{
-			__init.Property("From");
+			initializer.Property("From");
 			writer.WriteValue(From.Value);
 			writer.Write("d");
 		}
 
 		if (Key is not null)
 		{
-			__init.Property("Key");
+			initializer.Property("Key");
 			writer.WriteString(Key);
 		}
 
 		if (To is not null)
 		{
-			__init.Property("To");
+			initializer.Property("To");
 			writer.WriteValue(To.Value);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

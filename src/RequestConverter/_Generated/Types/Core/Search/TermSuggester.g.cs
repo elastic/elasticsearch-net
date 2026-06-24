@@ -27,92 +27,92 @@ public partial class TermSuggester : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TermSuggester", false);
+		var initializer = writer.BeginObjectInitializer("TermSuggester", false);
 		if (Analyzer is not null)
 		{
-			__init.Property("Analyzer");
+			initializer.Property("Analyzer");
 			writer.WriteString(Analyzer);
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (LowercaseTerms is not null)
 		{
-			__init.Property("LowercaseTerms");
+			initializer.Property("LowercaseTerms");
 			writer.WriteValue(LowercaseTerms.Value);
 		}
 
 		if (MaxEdits is not null)
 		{
-			__init.Property("MaxEdits");
+			initializer.Property("MaxEdits");
 			writer.WriteValue(MaxEdits.Value);
 		}
 
 		if (MaxInspections is not null)
 		{
-			__init.Property("MaxInspections");
+			initializer.Property("MaxInspections");
 			writer.WriteValue(MaxInspections.Value);
 		}
 
 		if (MaxTermFreq is not null)
 		{
-			__init.Property("MaxTermFreq");
+			initializer.Property("MaxTermFreq");
 			writer.WriteValue(MaxTermFreq.Value);
 			writer.Write("f");
 		}
 
 		if (MinDocFreq is not null)
 		{
-			__init.Property("MinDocFreq");
+			initializer.Property("MinDocFreq");
 			writer.WriteValue(MinDocFreq.Value);
 			writer.Write("f");
 		}
 
 		if (MinWordLength is not null)
 		{
-			__init.Property("MinWordLength");
+			initializer.Property("MinWordLength");
 			writer.WriteValue(MinWordLength.Value);
 		}
 
 		if (PrefixLength is not null)
 		{
-			__init.Property("PrefixLength");
+			initializer.Property("PrefixLength");
 			writer.WriteValue(PrefixLength.Value);
 		}
 
 		if (ShardSize is not null)
 		{
-			__init.Property("ShardSize");
+			initializer.Property("ShardSize");
 			writer.WriteValue(ShardSize.Value);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
 		if (Sort is not null)
 		{
-			__init.Property("Sort");
+			initializer.Property("Sort");
 			Elastic.Clients.Elasticsearch.Core.Search.SuggestSortCodeFormatter.FormatCode(Sort.Value, writer);
 		}
 
 		if (StringDistance is not null)
 		{
-			__init.Property("StringDistance");
+			initializer.Property("StringDistance");
 			Elastic.Clients.Elasticsearch.Core.Search.StringDistanceCodeFormatter.FormatCode(StringDistance.Value, writer);
 		}
 
 		if (SuggestMode is not null)
 		{
-			__init.Property("SuggestMode");
+			initializer.Property("SuggestMode");
 			Elastic.Clients.Elasticsearch.SuggestModeCodeFormatter.FormatCode(SuggestMode.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

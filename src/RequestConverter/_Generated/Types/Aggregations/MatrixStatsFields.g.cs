@@ -27,9 +27,9 @@ public partial class MatrixStatsFields : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MatrixStatsFields", false);
+		var initializer = writer.BeginObjectInitializer("MatrixStatsFields", false);
 		{
-			__init.Property("Correlation");
+			initializer.Property("Correlation");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -39,13 +39,13 @@ public partial class MatrixStatsFields : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Covariance");
+			initializer.Property("Covariance");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -55,34 +55,34 @@ public partial class MatrixStatsFields : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Kurtosis");
+			initializer.Property("Kurtosis");
 			writer.WriteValue(Kurtosis);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Mean");
+			initializer.Property("Mean");
 			writer.WriteValue(Mean);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("Skewness");
+			initializer.Property("Skewness");
 			writer.WriteValue(Skewness);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Variance");
+			initializer.Property("Variance");
 			writer.WriteValue(Variance);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

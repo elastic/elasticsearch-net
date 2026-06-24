@@ -27,22 +27,22 @@ public partial class IndicesStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndicesStats", false);
+		var initializer = writer.BeginObjectInitializer("IndicesStats", false);
 		if (Health is not null)
 		{
-			__init.Property("Health");
+			initializer.Property("Health");
 			Elastic.Clients.Elasticsearch.HealthStatusCodeFormatter.FormatCode(Health.Value, writer);
 		}
 
 		if (Primaries is not null)
 		{
-			__init.Property("Primaries");
+			initializer.Property("Primaries");
 			Primaries.FormatCode(writer);
 		}
 
 		if (Shards is not null)
 		{
-			__init.Property("Shards");
+			initializer.Property("Shards");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -53,22 +53,22 @@ public partial class IndicesStats : RequestConverter.ICodeFormattable
 
 		if (Status is not null)
 		{
-			__init.Property("Status");
+			initializer.Property("Status");
 			Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataStateCodeFormatter.FormatCode(Status.Value, writer);
 		}
 
 		if (Total is not null)
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			Total.FormatCode(writer);
 		}
 
 		if (Uuid is not null)
 		{
-			__init.Property("Uuid");
+			initializer.Property("Uuid");
 			writer.WriteString(Uuid);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

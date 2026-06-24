@@ -27,17 +27,17 @@ public partial class CreateRoutingRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CreateRoutingRequest", false);
+		var initializer = writer.BeginObjectInitializer("CreateRoutingRequest", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("Expressions");
+			initializer.Property("Expressions");
 			Expressions.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

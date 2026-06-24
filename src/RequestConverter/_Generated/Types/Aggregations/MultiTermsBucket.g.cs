@@ -27,37 +27,37 @@ public partial class MultiTermsBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MultiTermsBucket", false);
+		var initializer = writer.BeginObjectInitializer("MultiTermsBucket", false);
 		if (Aggregations is not null)
 		{
-			__init.Property("Aggregations");
+			initializer.Property("Aggregations");
 			Aggregations.FormatCode(writer);
 		}
 
 		{
-			__init.Property("DocCount");
+			initializer.Property("DocCount");
 			writer.WriteValue(DocCount);
 			writer.Write("L");
 		}
 
 		if (DocCountErrorUpperBound is not null)
 		{
-			__init.Property("DocCountErrorUpperBound");
+			initializer.Property("DocCountErrorUpperBound");
 			writer.WriteValue(DocCountErrorUpperBound.Value);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Key");
+			initializer.Property("Key");
 			writer.WriteInlineList(Key, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (KeyAsString is not null)
 		{
-			__init.Property("KeyAsString");
+			initializer.Property("KeyAsString");
 			writer.WriteString(KeyAsString);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

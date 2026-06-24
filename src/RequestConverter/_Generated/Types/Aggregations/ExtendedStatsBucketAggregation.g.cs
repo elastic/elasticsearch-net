@@ -27,32 +27,32 @@ public partial class ExtendedStatsBucketAggregation : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExtendedStatsBucketAggregation", false);
+		var initializer = writer.BeginObjectInitializer("ExtendedStatsBucketAggregation", false);
 		if (BucketsPath is not null)
 		{
-			__init.Property("BucketsPath");
+			initializer.Property("BucketsPath");
 			BucketsPath.FormatCode(writer);
 		}
 
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			writer.WriteString(Format);
 		}
 
 		if (GapPolicy is not null)
 		{
-			__init.Property("GapPolicy");
+			initializer.Property("GapPolicy");
 			Elastic.Clients.Elasticsearch.Aggregations.GapPolicyCodeFormatter.FormatCode(GapPolicy.Value, writer);
 		}
 
 		if (Sigma is not null)
 		{
-			__init.Property("Sigma");
+			initializer.Property("Sigma");
 			writer.WriteValue(Sigma.Value);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

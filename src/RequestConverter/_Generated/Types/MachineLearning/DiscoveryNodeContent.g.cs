@@ -27,9 +27,9 @@ public partial class DiscoveryNodeContent : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DiscoveryNodeContent", false);
+		var initializer = writer.BeginObjectInitializer("DiscoveryNodeContent", false);
 		{
-			__init.Property("Attributes");
+			initializer.Property("Attributes");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -39,46 +39,46 @@ public partial class DiscoveryNodeContent : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("EphemeralId");
+			initializer.Property("EphemeralId");
 			writer.WriteString(EphemeralId);
 		}
 
 		{
-			__init.Property("ExternalId");
+			initializer.Property("ExternalId");
 			writer.WriteString(ExternalId);
 		}
 
 		{
-			__init.Property("MaxIndexVersion");
+			initializer.Property("MaxIndexVersion");
 			writer.WriteValue(MaxIndexVersion);
 		}
 
 		{
-			__init.Property("MinIndexVersion");
+			initializer.Property("MinIndexVersion");
 			writer.WriteValue(MinIndexVersion);
 		}
 
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("Roles");
+			initializer.Property("Roles");
 			writer.WriteInlineList(Roles, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("TransportAddress");
+			initializer.Property("TransportAddress");
 			writer.WriteString(TransportAddress);
 		}
 
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

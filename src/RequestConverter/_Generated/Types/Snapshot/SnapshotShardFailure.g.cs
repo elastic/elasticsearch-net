@@ -27,38 +27,38 @@ public partial class SnapshotShardFailure : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SnapshotShardFailure", false);
+		var initializer = writer.BeginObjectInitializer("SnapshotShardFailure", false);
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteString(Index);
 		}
 
 		{
-			__init.Property("IndexUuid");
+			initializer.Property("IndexUuid");
 			writer.WriteString(IndexUuid);
 		}
 
 		if (NodeId is not null)
 		{
-			__init.Property("NodeId");
+			initializer.Property("NodeId");
 			writer.WriteString(NodeId);
 		}
 
 		{
-			__init.Property("Reason");
+			initializer.Property("Reason");
 			writer.WriteString(Reason);
 		}
 
 		{
-			__init.Property("ShardId");
+			initializer.Property("ShardId");
 			writer.WriteValue(ShardId);
 		}
 
 		{
-			__init.Property("Status");
+			initializer.Property("Status");
 			writer.WriteString(Status);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

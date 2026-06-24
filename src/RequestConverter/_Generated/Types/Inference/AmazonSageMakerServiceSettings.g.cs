@@ -27,74 +27,74 @@ public partial class AmazonSageMakerServiceSettings : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AmazonSageMakerServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("AmazonSageMakerServiceSettings", false);
 		{
-			__init.Property("AccessKey");
+			initializer.Property("AccessKey");
 			writer.WriteString(AccessKey);
 		}
 
 		{
-			__init.Property("Api");
+			initializer.Property("Api");
 			Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerApiCodeFormatter.FormatCode(Api, writer);
 		}
 
 		if (BatchSize is not null)
 		{
-			__init.Property("BatchSize");
+			initializer.Property("BatchSize");
 			writer.WriteValue(BatchSize.Value);
 		}
 
 		if (Dimensions is not null)
 		{
-			__init.Property("Dimensions");
+			initializer.Property("Dimensions");
 			writer.WriteValue(Dimensions.Value);
 		}
 
 		if (ElementType is not null)
 		{
-			__init.Property("ElementType");
+			initializer.Property("ElementType");
 			Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerElementTypeCodeFormatter.FormatCode(ElementType.Value, writer);
 		}
 
 		{
-			__init.Property("EndpointName");
+			initializer.Property("EndpointName");
 			writer.WriteString(EndpointName);
 		}
 
 		if (InferenceComponentName is not null)
 		{
-			__init.Property("InferenceComponentName");
+			initializer.Property("InferenceComponentName");
 			writer.WriteString(InferenceComponentName);
 		}
 
 		{
-			__init.Property("Region");
+			initializer.Property("Region");
 			writer.WriteString(Region);
 		}
 
 		{
-			__init.Property("SecretKey");
+			initializer.Property("SecretKey");
 			writer.WriteString(SecretKey);
 		}
 
 		if (Similarity is not null)
 		{
-			__init.Property("Similarity");
+			initializer.Property("Similarity");
 			Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerSimilarityCodeFormatter.FormatCode(Similarity.Value, writer);
 		}
 
 		if (TargetContainerHostname is not null)
 		{
-			__init.Property("TargetContainerHostname");
+			initializer.Property("TargetContainerHostname");
 			writer.WriteString(TargetContainerHostname);
 		}
 
 		if (TargetModel is not null)
 		{
-			__init.Property("TargetModel");
+			initializer.Property("TargetModel");
 			writer.WriteString(TargetModel);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

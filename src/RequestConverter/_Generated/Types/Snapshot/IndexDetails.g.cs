@@ -27,30 +27,30 @@ public partial class IndexDetails : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexDetails", false);
+		var initializer = writer.BeginObjectInitializer("IndexDetails", false);
 		{
-			__init.Property("MaxSegmentsPerShard");
+			initializer.Property("MaxSegmentsPerShard");
 			writer.WriteValue(MaxSegmentsPerShard);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("ShardCount");
+			initializer.Property("ShardCount");
 			writer.WriteValue(ShardCount);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			Size.FormatCode(writer);
 		}
 
 		{
-			__init.Property("SizeInBytes");
+			initializer.Property("SizeInBytes");
 			writer.WriteValue(SizeInBytes);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

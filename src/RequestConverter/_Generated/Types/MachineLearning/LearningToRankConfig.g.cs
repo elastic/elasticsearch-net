@@ -27,10 +27,10 @@ public partial class LearningToRankConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("LearningToRankConfig", false);
+		var initializer = writer.BeginObjectInitializer("LearningToRankConfig", false);
 		if (DefaultParams is not null)
 		{
-			__init.Property("DefaultParams");
+			initializer.Property("DefaultParams");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -41,15 +41,15 @@ public partial class LearningToRankConfig : RequestConverter.ICodeFormattable
 
 		if (FeatureExtractors is not null)
 		{
-			__init.Property("FeatureExtractors");
+			initializer.Property("FeatureExtractors");
 			writer.WriteInlineList(FeatureExtractors, (w, item) => { w.Write("new global::System.Collections.Generic.Dictionary<"); w.Write("string"); w.Write(", "); w.Write("Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor"); w.Write(">() "); w.WriteInlineList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", "); });
 		}
 
 		{
-			__init.Property("NumTopFeatureImportanceValues");
+			initializer.Property("NumTopFeatureImportanceValues");
 			writer.WriteValue(NumTopFeatureImportanceValues);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

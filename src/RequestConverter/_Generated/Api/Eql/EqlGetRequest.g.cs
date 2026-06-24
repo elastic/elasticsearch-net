@@ -27,24 +27,24 @@ public partial class EqlGetRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EqlGetRequest", false);
+		var initializer = writer.BeginObjectInitializer("EqlGetRequest", false);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		if (KeepAlive is not null)
 		{
-			__init.Property("KeepAlive");
+			initializer.Property("KeepAlive");
 			KeepAlive.FormatCode(writer);
 		}
 
 		if (WaitForCompletionTimeout is not null)
 		{
-			__init.Property("WaitForCompletionTimeout");
+			initializer.Property("WaitForCompletionTimeout");
 			WaitForCompletionTimeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

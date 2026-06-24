@@ -27,17 +27,17 @@ public partial class WatcherActionTotals : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("WatcherActionTotals", false);
+		var initializer = writer.BeginObjectInitializer("WatcherActionTotals", false);
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			Total.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalTimeInMs");
+			initializer.Property("TotalTimeInMs");
 			writer.WriteValue(TotalTimeInMs);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

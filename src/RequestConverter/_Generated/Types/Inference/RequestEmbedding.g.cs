@@ -27,9 +27,9 @@ public partial class RequestEmbedding : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RequestEmbedding", false);
+		var initializer = writer.BeginObjectInitializer("RequestEmbedding", false);
 		{
-			__init.Property("Input");
+			initializer.Property("Input");
 			if (Input.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				writer.Write("new string[] ");
@@ -44,16 +44,16 @@ public partial class RequestEmbedding : RequestConverter.ICodeFormattable
 
 		if (InputType is not null)
 		{
-			__init.Property("InputType");
+			initializer.Property("InputType");
 			writer.WriteString(InputType);
 		}
 
 		if (TaskSettings is not null)
 		{
-			__init.Property("TaskSettings");
+			initializer.Property("TaskSettings");
 			writer.WriteValue(TaskSettings);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,20 +27,20 @@ public partial class XpackInfoRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("XpackInfoRequest", false);
+		var initializer = writer.BeginObjectInitializer("XpackInfoRequest", false);
 #pragma warning disable CS0618
 		if (AcceptEnterprise is not null)
 		{
-			__init.Property("AcceptEnterprise");
+			initializer.Property("AcceptEnterprise");
 			writer.WriteValue(AcceptEnterprise.Value);
 		}
 #pragma warning restore CS0618
 		if (Categories is not null)
 		{
-			__init.Property("Categories");
+			initializer.Property("Categories");
 			writer.WriteInlineList(Categories, (w, item) => { Elastic.Clients.Elasticsearch.Xpack.XPackCategoryCodeFormatter.FormatCode(item, w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

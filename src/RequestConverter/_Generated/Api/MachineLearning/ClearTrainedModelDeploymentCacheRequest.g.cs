@@ -27,12 +27,12 @@ public partial class ClearTrainedModelDeploymentCacheRequest : RequestConverter.
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClearTrainedModelDeploymentCacheRequest", false);
+		var initializer = writer.BeginObjectInitializer("ClearTrainedModelDeploymentCacheRequest", false);
 		{
-			__init.Property("ModelId");
+			initializer.Property("ModelId");
 			ModelId.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

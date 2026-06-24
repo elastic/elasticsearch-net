@@ -27,24 +27,24 @@ public partial class ExplainDataLifecycleRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExplainDataLifecycleRequest", false);
+		var initializer = writer.BeginObjectInitializer("ExplainDataLifecycleRequest", false);
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		if (IncludeDefaults is not null)
 		{
-			__init.Property("IncludeDefaults");
+			initializer.Property("IncludeDefaults");
 			writer.WriteValue(IncludeDefaults.Value);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

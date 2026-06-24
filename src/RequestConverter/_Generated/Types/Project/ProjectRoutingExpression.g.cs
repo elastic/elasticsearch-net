@@ -27,12 +27,12 @@ public partial class ProjectRoutingExpression : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ProjectRoutingExpression", false);
+		var initializer = writer.BeginObjectInitializer("ProjectRoutingExpression", false);
 		{
-			__init.Property("Expression");
+			initializer.Property("Expression");
 			writer.WriteString(Expression);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

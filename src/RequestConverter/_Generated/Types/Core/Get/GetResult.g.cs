@@ -27,10 +27,10 @@ public partial class GetResult<TDocument> : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetResult<TDocument>", true);
+		var initializer = writer.BeginObjectInitializer("GetResult<TDocument>", true);
 		if (Fields is not null)
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -40,59 +40,59 @@ public partial class GetResult<TDocument> : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Found");
+			initializer.Property("Found");
 			writer.WriteValue(Found);
 		}
 
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		if (Ignored is not null)
 		{
-			__init.Property("Ignored");
+			initializer.Property("Ignored");
 			writer.WriteInlineList(Ignored, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteString(Index);
 		}
 
 		if (PrimaryTerm is not null)
 		{
-			__init.Property("PrimaryTerm");
+			initializer.Property("PrimaryTerm");
 			writer.WriteValue(PrimaryTerm.Value);
 			writer.Write("L");
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			writer.WriteString(Routing);
 		}
 
 		if (SeqNo is not null)
 		{
-			__init.Property("SeqNo");
+			initializer.Property("SeqNo");
 			writer.WriteValue(SeqNo.Value);
 			writer.Write("L");
 		}
 
-		if (RequestConverter.CodeWriter.ShouldFormat(Source))
+		if (Source is not null)
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			writer.WriteValue(Source);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

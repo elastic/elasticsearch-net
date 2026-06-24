@@ -27,29 +27,29 @@ public partial class SamlCompleteLogoutRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SamlCompleteLogoutRequest", false);
+		var initializer = writer.BeginObjectInitializer("SamlCompleteLogoutRequest", false);
 		if (Content is not null)
 		{
-			__init.Property("Content");
+			initializer.Property("Content");
 			writer.WriteString(Content);
 		}
 
 		{
-			__init.Property("Ids");
+			initializer.Property("Ids");
 			Ids.FormatCode(writer);
 		}
 
 		if (QueryString is not null)
 		{
-			__init.Property("QueryString");
+			initializer.Property("QueryString");
 			writer.WriteString(QueryString);
 		}
 
 		{
-			__init.Property("Realm");
+			initializer.Property("Realm");
 			writer.WriteString(Realm);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

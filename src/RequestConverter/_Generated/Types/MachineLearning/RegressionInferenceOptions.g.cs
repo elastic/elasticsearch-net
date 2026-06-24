@@ -27,19 +27,19 @@ public partial class RegressionInferenceOptions : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RegressionInferenceOptions", false);
+		var initializer = writer.BeginObjectInitializer("RegressionInferenceOptions", false);
 		if (NumTopFeatureImportanceValues is not null)
 		{
-			__init.Property("NumTopFeatureImportanceValues");
+			initializer.Property("NumTopFeatureImportanceValues");
 			writer.WriteValue(NumTopFeatureImportanceValues.Value);
 		}
 
 		if (ResultsField is not null)
 		{
-			__init.Property("ResultsField");
+			initializer.Property("ResultsField");
 			ResultsField.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

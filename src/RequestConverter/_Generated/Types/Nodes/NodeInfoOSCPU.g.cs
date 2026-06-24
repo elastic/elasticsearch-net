@@ -27,47 +27,47 @@ public partial class NodeInfoOSCPU : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoOSCPU", false);
+		var initializer = writer.BeginObjectInitializer("NodeInfoOSCPU", false);
 		{
-			__init.Property("CacheSize");
+			initializer.Property("CacheSize");
 			writer.WriteString(CacheSize);
 		}
 
 		{
-			__init.Property("CacheSizeInBytes");
+			initializer.Property("CacheSizeInBytes");
 			writer.WriteValue(CacheSizeInBytes);
 		}
 
 		{
-			__init.Property("CoresPerSocket");
+			initializer.Property("CoresPerSocket");
 			writer.WriteValue(CoresPerSocket);
 		}
 
 		{
-			__init.Property("Mhz");
+			initializer.Property("Mhz");
 			writer.WriteValue(Mhz);
 		}
 
 		{
-			__init.Property("Model");
+			initializer.Property("Model");
 			writer.WriteString(Model);
 		}
 
 		{
-			__init.Property("TotalCores");
+			initializer.Property("TotalCores");
 			writer.WriteValue(TotalCores);
 		}
 
 		{
-			__init.Property("TotalSockets");
+			initializer.Property("TotalSockets");
 			writer.WriteValue(TotalSockets);
 		}
 
 		{
-			__init.Property("Vendor");
+			initializer.Property("Vendor");
 			writer.WriteString(Vendor);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

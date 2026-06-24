@@ -27,25 +27,25 @@ public partial class ListRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ListRequest", false);
+		var initializer = writer.BeginObjectInitializer("ListRequest", false);
 		if (From is not null)
 		{
-			__init.Property("From");
+			initializer.Property("From");
 			writer.WriteValue(From.Value);
 		}
 
 		if (QueryLuceneSyntax is not null)
 		{
-			__init.Property("QueryLuceneSyntax");
+			initializer.Property("QueryLuceneSyntax");
 			writer.WriteString(QueryLuceneSyntax);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

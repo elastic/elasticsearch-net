@@ -27,52 +27,52 @@ public partial class CalendarEvent : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CalendarEvent", false);
+		var initializer = writer.BeginObjectInitializer("CalendarEvent", false);
 		if (CalendarId is not null)
 		{
-			__init.Property("CalendarId");
+			initializer.Property("CalendarId");
 			CalendarId.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		{
-			__init.Property("EndTime");
+			initializer.Property("EndTime");
 			writer.WriteValue(EndTime);
 		}
 
 		if (EventId is not null)
 		{
-			__init.Property("EventId");
+			initializer.Property("EventId");
 			EventId.FormatCode(writer);
 		}
 
 		if (ForceTimeShift is not null)
 		{
-			__init.Property("ForceTimeShift");
+			initializer.Property("ForceTimeShift");
 			writer.WriteValue(ForceTimeShift.Value);
 		}
 
 		if (SkipModelUpdate is not null)
 		{
-			__init.Property("SkipModelUpdate");
+			initializer.Property("SkipModelUpdate");
 			writer.WriteValue(SkipModelUpdate.Value);
 		}
 
 		if (SkipResult is not null)
 		{
-			__init.Property("SkipResult");
+			initializer.Property("SkipResult");
 			writer.WriteValue(SkipResult.Value);
 		}
 
 		{
-			__init.Property("StartTime");
+			initializer.Property("StartTime");
 			writer.WriteValue(StartTime);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

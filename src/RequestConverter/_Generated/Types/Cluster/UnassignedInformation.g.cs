@@ -27,47 +27,47 @@ public partial class UnassignedInformation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UnassignedInformation", false);
+		var initializer = writer.BeginObjectInitializer("UnassignedInformation", false);
 		if (AllocationStatus is not null)
 		{
-			__init.Property("AllocationStatus");
+			initializer.Property("AllocationStatus");
 			writer.WriteString(AllocationStatus);
 		}
 
 		{
-			__init.Property("At");
+			initializer.Property("At");
 			writer.WriteValue(At);
 		}
 
 		if (Delayed is not null)
 		{
-			__init.Property("Delayed");
+			initializer.Property("Delayed");
 			writer.WriteValue(Delayed.Value);
 		}
 
 		if (Details is not null)
 		{
-			__init.Property("Details");
+			initializer.Property("Details");
 			writer.WriteString(Details);
 		}
 
 		if (FailedAllocationAttempts is not null)
 		{
-			__init.Property("FailedAllocationAttempts");
+			initializer.Property("FailedAllocationAttempts");
 			writer.WriteValue(FailedAllocationAttempts.Value);
 		}
 
 		if (LastAllocationStatus is not null)
 		{
-			__init.Property("LastAllocationStatus");
+			initializer.Property("LastAllocationStatus");
 			writer.WriteString(LastAllocationStatus);
 		}
 
 		{
-			__init.Property("Reason");
+			initializer.Property("Reason");
 			Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReasonCodeFormatter.FormatCode(Reason, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

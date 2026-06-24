@@ -27,18 +27,18 @@ public partial class BucketCorrelationAggregation : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BucketCorrelationAggregation", false);
+		var initializer = writer.BeginObjectInitializer("BucketCorrelationAggregation", false);
 		if (BucketsPath is not null)
 		{
-			__init.Property("BucketsPath");
+			initializer.Property("BucketsPath");
 			BucketsPath.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Function");
+			initializer.Property("Function");
 			Function.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

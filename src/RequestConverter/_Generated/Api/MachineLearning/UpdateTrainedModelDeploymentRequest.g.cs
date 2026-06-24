@@ -27,24 +27,24 @@ public partial class UpdateTrainedModelDeploymentRequest : RequestConverter.ICod
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UpdateTrainedModelDeploymentRequest", false);
+		var initializer = writer.BeginObjectInitializer("UpdateTrainedModelDeploymentRequest", false);
 		{
-			__init.Property("ModelId");
+			initializer.Property("ModelId");
 			ModelId.FormatCode(writer);
 		}
 
 		if (AdaptiveAllocations is not null)
 		{
-			__init.Property("AdaptiveAllocations");
+			initializer.Property("AdaptiveAllocations");
 			AdaptiveAllocations.FormatCode(writer);
 		}
 
 		if (NumberOfAllocations is not null)
 		{
-			__init.Property("NumberOfAllocations");
+			initializer.Property("NumberOfAllocations");
 			writer.WriteValue(NumberOfAllocations.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

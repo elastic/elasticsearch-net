@@ -27,18 +27,18 @@ public partial class DataframeEvaluationClass : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeEvaluationClass", false);
+		var initializer = writer.BeginObjectInitializer("DataframeEvaluationClass", false);
 		{
-			__init.Property("ClassName");
+			initializer.Property("ClassName");
 			writer.WriteString(ClassName);
 		}
 
 		{
-			__init.Property("Value");
+			initializer.Property("Value");
 			writer.WriteValue(Value);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

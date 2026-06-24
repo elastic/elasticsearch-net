@@ -27,17 +27,17 @@ public partial class PostCalendarEventsRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PostCalendarEventsRequest", false);
+		var initializer = writer.BeginObjectInitializer("PostCalendarEventsRequest", false);
 		{
-			__init.Property("CalendarId");
+			initializer.Property("CalendarId");
 			CalendarId.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Events");
+			initializer.Property("Events");
 			writer.WriteInlineList(Events, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,18 +27,18 @@ public partial class DataframeClassificationSummaryRecall : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeClassificationSummaryRecall", false);
+		var initializer = writer.BeginObjectInitializer("DataframeClassificationSummaryRecall", false);
 		{
-			__init.Property("AvgRecall");
+			initializer.Property("AvgRecall");
 			writer.WriteValue(AvgRecall);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Classes");
+			initializer.Property("Classes");
 			writer.WriteInlineList(Classes, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,42 +27,42 @@ public partial class ChunkRescorerChunkingSettings : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ChunkRescorerChunkingSettings", false);
+		var initializer = writer.BeginObjectInitializer("ChunkRescorerChunkingSettings", false);
 		{
-			__init.Property("MaxChunkSize");
+			initializer.Property("MaxChunkSize");
 			writer.WriteValue(MaxChunkSize);
 		}
 
 		if (Overlap is not null)
 		{
-			__init.Property("Overlap");
+			initializer.Property("Overlap");
 			writer.WriteValue(Overlap.Value);
 		}
 
 		if (SentenceOverlap is not null)
 		{
-			__init.Property("SentenceOverlap");
+			initializer.Property("SentenceOverlap");
 			writer.WriteValue(SentenceOverlap.Value);
 		}
 
 		if (SeparatorGroup is not null)
 		{
-			__init.Property("SeparatorGroup");
+			initializer.Property("SeparatorGroup");
 			writer.WriteString(SeparatorGroup);
 		}
 
 		if (Separators is not null)
 		{
-			__init.Property("Separators");
+			initializer.Property("Separators");
 			writer.WriteInlineList(Separators, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Strategy is not null)
 		{
-			__init.Property("Strategy");
+			initializer.Property("Strategy");
 			writer.WriteString(Strategy);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

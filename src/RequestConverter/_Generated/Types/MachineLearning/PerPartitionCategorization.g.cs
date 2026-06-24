@@ -27,19 +27,19 @@ public partial class PerPartitionCategorization : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PerPartitionCategorization", false);
+		var initializer = writer.BeginObjectInitializer("PerPartitionCategorization", false);
 		if (Enabled is not null)
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled.Value);
 		}
 
 		if (StopOnWarn is not null)
 		{
-			__init.Property("StopOnWarn");
+			initializer.Property("StopOnWarn");
 			writer.WriteValue(StopOnWarn.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

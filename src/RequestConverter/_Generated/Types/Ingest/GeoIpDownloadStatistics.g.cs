@@ -27,37 +27,37 @@ public partial class GeoIpDownloadStatistics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoIpDownloadStatistics", false);
+		var initializer = writer.BeginObjectInitializer("GeoIpDownloadStatistics", false);
 		{
-			__init.Property("DatabasesCount");
+			initializer.Property("DatabasesCount");
 			writer.WriteValue(DatabasesCount);
 		}
 
 		{
-			__init.Property("ExpiredDatabases");
+			initializer.Property("ExpiredDatabases");
 			writer.WriteValue(ExpiredDatabases);
 		}
 
 		{
-			__init.Property("FailedDownloads");
+			initializer.Property("FailedDownloads");
 			writer.WriteValue(FailedDownloads);
 		}
 
 		{
-			__init.Property("SkippedUpdates");
+			initializer.Property("SkippedUpdates");
 			writer.WriteValue(SkippedUpdates);
 		}
 
 		{
-			__init.Property("SuccessfulDownloads");
+			initializer.Property("SuccessfulDownloads");
 			writer.WriteValue(SuccessfulDownloads);
 		}
 
 		{
-			__init.Property("TotalDownloadTime");
+			initializer.Property("TotalDownloadTime");
 			writer.WriteValue(TotalDownloadTime);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

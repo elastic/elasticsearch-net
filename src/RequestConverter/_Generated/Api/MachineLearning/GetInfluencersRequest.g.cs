@@ -27,67 +27,67 @@ public partial class GetInfluencersRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetInfluencersRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetInfluencersRequest", false);
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			JobId.FormatCode(writer);
 		}
 
 		if (Desc is not null)
 		{
-			__init.Property("Desc");
+			initializer.Property("Desc");
 			writer.WriteValue(Desc.Value);
 		}
 
 		if (End is not null)
 		{
-			__init.Property("End");
+			initializer.Property("End");
 			writer.WriteValue(End.Value);
 		}
 
 		if (ExcludeInterim is not null)
 		{
-			__init.Property("ExcludeInterim");
+			initializer.Property("ExcludeInterim");
 			writer.WriteValue(ExcludeInterim.Value);
 		}
 
 		if (From is not null)
 		{
-			__init.Property("From");
+			initializer.Property("From");
 			writer.WriteValue(From.Value);
 		}
 
 		if (InfluencerScore is not null)
 		{
-			__init.Property("InfluencerScore");
+			initializer.Property("InfluencerScore");
 			writer.WriteValue(InfluencerScore.Value);
 			writer.Write("d");
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
 		if (Sort is not null)
 		{
-			__init.Property("Sort");
+			initializer.Property("Sort");
 			Sort.FormatCode(writer);
 		}
 
 		if (Start is not null)
 		{
-			__init.Property("Start");
+			initializer.Property("Start");
 			writer.WriteValue(Start.Value);
 		}
 
 		if (Page is not null)
 		{
-			__init.Property("Page");
+			initializer.Property("Page");
 			Page.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

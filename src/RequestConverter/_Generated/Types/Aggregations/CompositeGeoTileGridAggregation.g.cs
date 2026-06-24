@@ -27,55 +27,55 @@ public partial class CompositeGeoTileGridAggregation : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CompositeGeoTileGridAggregation", false);
+		var initializer = writer.BeginObjectInitializer("CompositeGeoTileGridAggregation", false);
 		if (Bounds is not null)
 		{
-			__init.Property("Bounds");
+			initializer.Property("Bounds");
 			Bounds.FormatCode(writer);
 		}
 
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (MissingBucket is not null)
 		{
-			__init.Property("MissingBucket");
+			initializer.Property("MissingBucket");
 			writer.WriteValue(MissingBucket.Value);
 		}
 
 		if (MissingOrder is not null)
 		{
-			__init.Property("MissingOrder");
+			initializer.Property("MissingOrder");
 			Elastic.Clients.Elasticsearch.Aggregations.MissingOrderCodeFormatter.FormatCode(MissingOrder.Value, writer);
 		}
 
 		if (Order is not null)
 		{
-			__init.Property("Order");
+			initializer.Property("Order");
 			Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, writer);
 		}
 
 		if (Precision is not null)
 		{
-			__init.Property("Precision");
+			initializer.Property("Precision");
 			writer.WriteValue(Precision.Value);
 		}
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
 		if (ValueType is not null)
 		{
-			__init.Property("ValueType");
+			initializer.Property("ValueType");
 			Elastic.Clients.Elasticsearch.Aggregations.ValueTypeCodeFormatter.FormatCode(ValueType.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,36 +27,36 @@ public partial class IndicesValidationExplanation : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndicesValidationExplanation", false);
+		var initializer = writer.BeginObjectInitializer("IndicesValidationExplanation", false);
 		if (Error is not null)
 		{
-			__init.Property("Error");
+			initializer.Property("Error");
 			writer.WriteString(Error);
 		}
 
 		if (Explanation is not null)
 		{
-			__init.Property("Explanation");
+			initializer.Property("Explanation");
 			writer.WriteString(Explanation);
 		}
 
 		if (Index is not null)
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteString(Index);
 		}
 
 		if (Shard is not null)
 		{
-			__init.Property("Shard");
+			initializer.Property("Shard");
 			writer.WriteValue(Shard.Value);
 		}
 
 		{
-			__init.Property("Valid");
+			initializer.Property("Valid");
 			writer.WriteValue(Valid);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

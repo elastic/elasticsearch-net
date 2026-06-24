@@ -27,56 +27,56 @@ public partial class MultiTermsAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MultiTermsAggregation", false);
+		var initializer = writer.BeginObjectInitializer("MultiTermsAggregation", false);
 		if (CollectMode is not null)
 		{
-			__init.Property("CollectMode");
+			initializer.Property("CollectMode");
 			Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectModeCodeFormatter.FormatCode(CollectMode.Value, writer);
 		}
 
 		if (MinDocCount is not null)
 		{
-			__init.Property("MinDocCount");
+			initializer.Property("MinDocCount");
 			writer.WriteValue(MinDocCount.Value);
 			writer.Write("L");
 		}
 
 		if (Order is not null)
 		{
-			__init.Property("Order");
+			initializer.Property("Order");
 			writer.WriteInlineList(Order, (w, item) => { w.Write("new("); item.Key.FormatCode(w); w.Write(", "); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(item.Value, w); w.Write(")"); });
 		}
 
 		if (ShardMinDocCount is not null)
 		{
-			__init.Property("ShardMinDocCount");
+			initializer.Property("ShardMinDocCount");
 			writer.WriteValue(ShardMinDocCount.Value);
 			writer.Write("L");
 		}
 
 		if (ShardSize is not null)
 		{
-			__init.Property("ShardSize");
+			initializer.Property("ShardSize");
 			writer.WriteValue(ShardSize.Value);
 		}
 
 		if (ShowTermDocCountError is not null)
 		{
-			__init.Property("ShowTermDocCountError");
+			initializer.Property("ShowTermDocCountError");
 			writer.WriteValue(ShowTermDocCountError.Value);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
 		{
-			__init.Property("Terms");
+			initializer.Property("Terms");
 			writer.WriteInlineList(Terms, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

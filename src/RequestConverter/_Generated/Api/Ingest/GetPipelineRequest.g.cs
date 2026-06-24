@@ -27,25 +27,25 @@ public partial class GetPipelineRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetPipelineRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetPipelineRequest", false);
 		if (Id is not null)
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (Summary is not null)
 		{
-			__init.Property("Summary");
+			initializer.Property("Summary");
 			writer.WriteValue(Summary.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,66 +27,66 @@ public partial class CategorizeTextAggregation : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CategorizeTextAggregation", false);
+		var initializer = writer.BeginObjectInitializer("CategorizeTextAggregation", false);
 		if (CategorizationAnalyzer is not null)
 		{
-			__init.Property("CategorizationAnalyzer");
+			initializer.Property("CategorizationAnalyzer");
 			CategorizationAnalyzer.FormatCode(writer);
 		}
 
 		if (CategorizationFilters is not null)
 		{
-			__init.Property("CategorizationFilters");
+			initializer.Property("CategorizationFilters");
 			writer.WriteInlineList(CategorizationFilters, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (MaxMatchedTokens is not null)
 		{
-			__init.Property("MaxMatchedTokens");
+			initializer.Property("MaxMatchedTokens");
 			writer.WriteValue(MaxMatchedTokens.Value);
 		}
 
 		if (MaxUniqueTokens is not null)
 		{
-			__init.Property("MaxUniqueTokens");
+			initializer.Property("MaxUniqueTokens");
 			writer.WriteValue(MaxUniqueTokens.Value);
 		}
 
 		if (MinDocCount is not null)
 		{
-			__init.Property("MinDocCount");
+			initializer.Property("MinDocCount");
 			writer.WriteValue(MinDocCount.Value);
 		}
 
 		if (ShardMinDocCount is not null)
 		{
-			__init.Property("ShardMinDocCount");
+			initializer.Property("ShardMinDocCount");
 			writer.WriteValue(ShardMinDocCount.Value);
 		}
 
 		if (ShardSize is not null)
 		{
-			__init.Property("ShardSize");
+			initializer.Property("ShardSize");
 			writer.WriteValue(ShardSize.Value);
 		}
 
 		if (SimilarityThreshold is not null)
 		{
-			__init.Property("SimilarityThreshold");
+			initializer.Property("SimilarityThreshold");
 			writer.WriteValue(SimilarityThreshold.Value);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

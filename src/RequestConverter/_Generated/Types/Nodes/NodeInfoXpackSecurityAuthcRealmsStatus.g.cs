@@ -27,18 +27,18 @@ public partial class NodeInfoXpackSecurityAuthcRealmsStatus : RequestConverter.I
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoXpackSecurityAuthcRealmsStatus", false);
+		var initializer = writer.BeginObjectInitializer("NodeInfoXpackSecurityAuthcRealmsStatus", false);
 		if (Enabled is not null)
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteString(Enabled);
 		}
 
 		{
-			__init.Property("Order");
+			initializer.Property("Order");
 			writer.WriteString(Order);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

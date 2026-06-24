@@ -27,41 +27,41 @@ public partial class RefreshStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RefreshStats", false);
+		var initializer = writer.BeginObjectInitializer("RefreshStats", false);
 		{
-			__init.Property("ExternalTotal");
+			initializer.Property("ExternalTotal");
 			writer.WriteValue(ExternalTotal);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("ExternalTotalTimeInMillis");
+			initializer.Property("ExternalTotalTimeInMillis");
 			writer.WriteValue(ExternalTotalTimeInMillis);
 		}
 
 		{
-			__init.Property("Listeners");
+			initializer.Property("Listeners");
 			writer.WriteValue(Listeners);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteValue(Total);
 			writer.Write("L");
 		}
 
 		if (TotalTime is not null)
 		{
-			__init.Property("TotalTime");
+			initializer.Property("TotalTime");
 			TotalTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalTimeInMillis");
+			initializer.Property("TotalTimeInMillis");
 			writer.WriteValue(TotalTimeInMillis);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

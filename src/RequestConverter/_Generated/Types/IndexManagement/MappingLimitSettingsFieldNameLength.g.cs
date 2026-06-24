@@ -27,14 +27,14 @@ public partial class MappingLimitSettingsFieldNameLength : RequestConverter.ICod
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MappingLimitSettingsFieldNameLength", false);
+		var initializer = writer.BeginObjectInitializer("MappingLimitSettingsFieldNameLength", false);
 		if (Limit is not null)
 		{
-			__init.Property("Limit");
+			initializer.Property("Limit");
 			writer.WriteValue(Limit.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

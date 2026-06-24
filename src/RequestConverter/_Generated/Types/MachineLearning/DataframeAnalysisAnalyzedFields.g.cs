@@ -27,19 +27,19 @@ public partial class DataframeAnalysisAnalyzedFields : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeAnalysisAnalyzedFields", false);
+		var initializer = writer.BeginObjectInitializer("DataframeAnalysisAnalyzedFields", false);
 		if (Excludes is not null)
 		{
-			__init.Property("Excludes");
+			initializer.Property("Excludes");
 			writer.WriteInlineList(Excludes, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Includes is not null)
 		{
-			__init.Property("Includes");
+			initializer.Property("Includes");
 			writer.WriteInlineList(Includes, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

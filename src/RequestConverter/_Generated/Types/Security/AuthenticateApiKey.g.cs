@@ -27,29 +27,29 @@ public partial class AuthenticateApiKey : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AuthenticateApiKey", false);
+		var initializer = writer.BeginObjectInitializer("AuthenticateApiKey", false);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		if (Internal is not null)
 		{
-			__init.Property("Internal");
+			initializer.Property("Internal");
 			writer.WriteValue(Internal.Value);
 		}
 
 		{
-			__init.Property("ManagedBy");
+			initializer.Property("ManagedBy");
 			Elastic.Clients.Elasticsearch.Security.CredentialManagedByCodeFormatter.FormatCode(ManagedBy, writer);
 		}
 
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

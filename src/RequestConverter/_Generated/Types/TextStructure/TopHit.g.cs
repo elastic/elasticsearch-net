@@ -27,18 +27,18 @@ public partial class TopHit : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TopHit", false);
+		var initializer = writer.BeginObjectInitializer("TopHit", false);
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Value");
+			initializer.Property("Value");
 			writer.WriteValue(Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

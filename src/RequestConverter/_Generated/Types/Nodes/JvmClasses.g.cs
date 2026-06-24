@@ -27,28 +27,28 @@ public partial class JvmClasses : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("JvmClasses", false);
+		var initializer = writer.BeginObjectInitializer("JvmClasses", false);
 		if (CurrentLoadedCount is not null)
 		{
-			__init.Property("CurrentLoadedCount");
+			initializer.Property("CurrentLoadedCount");
 			writer.WriteValue(CurrentLoadedCount.Value);
 			writer.Write("L");
 		}
 
 		if (TotalLoadedCount is not null)
 		{
-			__init.Property("TotalLoadedCount");
+			initializer.Property("TotalLoadedCount");
 			writer.WriteValue(TotalLoadedCount.Value);
 			writer.Write("L");
 		}
 
 		if (TotalUnloadedCount is not null)
 		{
-			__init.Property("TotalUnloadedCount");
+			initializer.Property("TotalUnloadedCount");
 			writer.WriteValue(TotalUnloadedCount.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

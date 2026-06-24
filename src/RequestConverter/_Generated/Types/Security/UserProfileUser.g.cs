@@ -27,40 +27,40 @@ public partial class UserProfileUser : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UserProfileUser", false);
+		var initializer = writer.BeginObjectInitializer("UserProfileUser", false);
 		if (Email is not null)
 		{
-			__init.Property("Email");
+			initializer.Property("Email");
 			writer.WriteString(Email);
 		}
 
 		if (FullName is not null)
 		{
-			__init.Property("FullName");
+			initializer.Property("FullName");
 			writer.WriteString(FullName);
 		}
 
 		if (RealmDomain is not null)
 		{
-			__init.Property("RealmDomain");
+			initializer.Property("RealmDomain");
 			writer.WriteString(RealmDomain);
 		}
 
 		{
-			__init.Property("RealmName");
+			initializer.Property("RealmName");
 			writer.WriteString(RealmName);
 		}
 
 		{
-			__init.Property("Roles");
+			initializer.Property("Roles");
 			writer.WriteInlineList(Roles, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Username");
+			initializer.Property("Username");
 			writer.WriteString(Username);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

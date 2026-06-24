@@ -27,22 +27,22 @@ public partial class StopTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StopTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("StopTokenFilter", true);
 		if (IgnoreCase is not null)
 		{
-			__init.Property("IgnoreCase");
+			initializer.Property("IgnoreCase");
 			writer.WriteValue(IgnoreCase.Value);
 		}
 
 		if (RemoveTrailing is not null)
 		{
-			__init.Property("RemoveTrailing");
+			initializer.Property("RemoveTrailing");
 			writer.WriteValue(RemoveTrailing.Value);
 		}
 
 		if (Stopwords is not null)
 		{
-			__init.Property("Stopwords");
+			initializer.Property("Stopwords");
 			if (Stopwords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(Stopwords.Value1, writer);
@@ -56,16 +56,16 @@ public partial class StopTokenFilter : RequestConverter.ICodeFormattable
 
 		if (StopwordsPath is not null)
 		{
-			__init.Property("StopwordsPath");
+			initializer.Property("StopwordsPath");
 			writer.WriteString(StopwordsPath);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

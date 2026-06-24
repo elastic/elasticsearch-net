@@ -27,19 +27,19 @@ public partial class IndexModifyDataStreamAction : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexModifyDataStreamAction", false);
+		var initializer = writer.BeginObjectInitializer("IndexModifyDataStreamAction", false);
 		if (AddBackingIndex is not null)
 		{
-			__init.Property("AddBackingIndex");
+			initializer.Property("AddBackingIndex");
 			AddBackingIndex.FormatCode(writer);
 		}
 
 		if (RemoveBackingIndex is not null)
 		{
-			__init.Property("RemoveBackingIndex");
+			initializer.Property("RemoveBackingIndex");
 			RemoveBackingIndex.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

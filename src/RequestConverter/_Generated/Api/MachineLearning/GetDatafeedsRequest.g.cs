@@ -27,25 +27,25 @@ public partial class GetDatafeedsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetDatafeedsRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetDatafeedsRequest", false);
 		if (DatafeedId is not null)
 		{
-			__init.Property("DatafeedId");
+			initializer.Property("DatafeedId");
 			DatafeedId.FormatCode(writer);
 		}
 
 		if (AllowNoMatch is not null)
 		{
-			__init.Property("AllowNoMatch");
+			initializer.Property("AllowNoMatch");
 			writer.WriteValue(AllowNoMatch.Value);
 		}
 
 		if (ExcludeGenerated is not null)
 		{
-			__init.Property("ExcludeGenerated");
+			initializer.Property("ExcludeGenerated");
 			writer.WriteValue(ExcludeGenerated.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

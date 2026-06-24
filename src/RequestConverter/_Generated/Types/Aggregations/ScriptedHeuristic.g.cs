@@ -27,12 +27,12 @@ public partial class ScriptedHeuristic : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ScriptedHeuristic", false);
+		var initializer = writer.BeginObjectInitializer("ScriptedHeuristic", false);
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

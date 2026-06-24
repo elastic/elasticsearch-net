@@ -27,10 +27,10 @@ public partial class InferenceAggregate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InferenceAggregate", true);
+		var initializer = writer.BeginObjectInitializer("InferenceAggregate", true);
 		if (Data is not null)
 		{
-			__init.Property("Data");
+			initializer.Property("Data");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -41,13 +41,13 @@ public partial class InferenceAggregate : RequestConverter.ICodeFormattable
 
 		if (FeatureImportance is not null)
 		{
-			__init.Property("FeatureImportance");
+			initializer.Property("FeatureImportance");
 			writer.WriteInlineList(FeatureImportance, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -58,22 +58,22 @@ public partial class InferenceAggregate : RequestConverter.ICodeFormattable
 
 		if (TopClasses is not null)
 		{
-			__init.Property("TopClasses");
+			initializer.Property("TopClasses");
 			writer.WriteInlineList(TopClasses, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Value is not null)
 		{
-			__init.Property("Value");
+			initializer.Property("Value");
 			Value.FormatCode(writer);
 		}
 
 		if (Warning is not null)
 		{
-			__init.Property("Warning");
+			initializer.Property("Warning");
 			writer.WriteString(Warning);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

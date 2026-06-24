@@ -27,79 +27,79 @@ public partial class HealthRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("HealthRequest", false);
+		var initializer = writer.BeginObjectInitializer("HealthRequest", false);
 		if (Indices is not null)
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		if (ExpandWildcards is not null)
 		{
-			__init.Property("ExpandWildcards");
+			initializer.Property("ExpandWildcards");
 			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (Level is not null)
 		{
-			__init.Property("Level");
+			initializer.Property("Level");
 			Elastic.Clients.Elasticsearch.LevelCodeFormatter.FormatCode(Level.Value, writer);
 		}
 
 		if (Local is not null)
 		{
-			__init.Property("Local");
+			initializer.Property("Local");
 			writer.WriteValue(Local.Value);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (WaitForActiveShards is not null)
 		{
-			__init.Property("WaitForActiveShards");
+			initializer.Property("WaitForActiveShards");
 			WaitForActiveShards.FormatCode(writer);
 		}
 
 		if (WaitForEvents is not null)
 		{
-			__init.Property("WaitForEvents");
+			initializer.Property("WaitForEvents");
 			Elastic.Clients.Elasticsearch.WaitForEventsCodeFormatter.FormatCode(WaitForEvents.Value, writer);
 		}
 
 		if (WaitForNodes is not null)
 		{
-			__init.Property("WaitForNodes");
+			initializer.Property("WaitForNodes");
 			WaitForNodes.FormatCode(writer);
 		}
 
 		if (WaitForNoInitializingShards is not null)
 		{
-			__init.Property("WaitForNoInitializingShards");
+			initializer.Property("WaitForNoInitializingShards");
 			writer.WriteValue(WaitForNoInitializingShards.Value);
 		}
 
 		if (WaitForNoRelocatingShards is not null)
 		{
-			__init.Property("WaitForNoRelocatingShards");
+			initializer.Property("WaitForNoRelocatingShards");
 			writer.WriteValue(WaitForNoRelocatingShards.Value);
 		}
 
 		if (WaitForStatus is not null)
 		{
-			__init.Property("WaitForStatus");
+			initializer.Property("WaitForStatus");
 			Elastic.Clients.Elasticsearch.HealthStatusCodeFormatter.FormatCode(WaitForStatus.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

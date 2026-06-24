@@ -27,73 +27,73 @@ public partial class AzureRepositorySettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AzureRepositorySettings", false);
+		var initializer = writer.BeginObjectInitializer("AzureRepositorySettings", false);
 		if (BasePath is not null)
 		{
-			__init.Property("BasePath");
+			initializer.Property("BasePath");
 			writer.WriteString(BasePath);
 		}
 
 		if (ChunkSize is not null)
 		{
-			__init.Property("ChunkSize");
+			initializer.Property("ChunkSize");
 			ChunkSize.FormatCode(writer);
 		}
 
 		if (Client is not null)
 		{
-			__init.Property("Client");
+			initializer.Property("Client");
 			writer.WriteString(Client);
 		}
 
 		if (Compress is not null)
 		{
-			__init.Property("Compress");
+			initializer.Property("Compress");
 			writer.WriteValue(Compress.Value);
 		}
 
 		if (Container is not null)
 		{
-			__init.Property("Container");
+			initializer.Property("Container");
 			writer.WriteString(Container);
 		}
 
 		if (DeleteObjectsMaxSize is not null)
 		{
-			__init.Property("DeleteObjectsMaxSize");
+			initializer.Property("DeleteObjectsMaxSize");
 			writer.WriteValue(DeleteObjectsMaxSize.Value);
 		}
 
 		if (LocationMode is not null)
 		{
-			__init.Property("LocationMode");
+			initializer.Property("LocationMode");
 			writer.WriteString(LocationMode);
 		}
 
 		if (MaxConcurrentBatchDeletes is not null)
 		{
-			__init.Property("MaxConcurrentBatchDeletes");
+			initializer.Property("MaxConcurrentBatchDeletes");
 			writer.WriteValue(MaxConcurrentBatchDeletes.Value);
 		}
 
 		if (MaxRestoreBytesPerSec is not null)
 		{
-			__init.Property("MaxRestoreBytesPerSec");
+			initializer.Property("MaxRestoreBytesPerSec");
 			MaxRestoreBytesPerSec.FormatCode(writer);
 		}
 
 		if (MaxSnapshotBytesPerSec is not null)
 		{
-			__init.Property("MaxSnapshotBytesPerSec");
+			initializer.Property("MaxSnapshotBytesPerSec");
 			MaxSnapshotBytesPerSec.FormatCode(writer);
 		}
 
 		if (Readonly is not null)
 		{
-			__init.Property("Readonly");
+			initializer.Property("Readonly");
 			writer.WriteValue(Readonly.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

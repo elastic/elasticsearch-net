@@ -27,30 +27,30 @@ public partial class TranslateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TranslateRequest", false);
+		var initializer = writer.BeginObjectInitializer("TranslateRequest", false);
 		if (FetchSize is not null)
 		{
-			__init.Property("FetchSize");
+			initializer.Property("FetchSize");
 			writer.WriteValue(FetchSize.Value);
 		}
 
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			Filter.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			writer.WriteString(Query);
 		}
 
 		if (TimeZone is not null)
 		{
-			__init.Property("TimeZone");
+			initializer.Property("TimeZone");
 			writer.WriteString(TimeZone);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

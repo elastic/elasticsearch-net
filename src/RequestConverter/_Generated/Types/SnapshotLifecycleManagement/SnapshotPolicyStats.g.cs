@@ -27,36 +27,36 @@ public partial class SnapshotPolicyStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SnapshotPolicyStats", false);
+		var initializer = writer.BeginObjectInitializer("SnapshotPolicyStats", false);
 		{
-			__init.Property("Policy");
+			initializer.Property("Policy");
 			writer.WriteString(Policy);
 		}
 
 		{
-			__init.Property("SnapshotDeletionFailures");
+			initializer.Property("SnapshotDeletionFailures");
 			writer.WriteValue(SnapshotDeletionFailures);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("SnapshotsDeleted");
+			initializer.Property("SnapshotsDeleted");
 			writer.WriteValue(SnapshotsDeleted);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("SnapshotsFailed");
+			initializer.Property("SnapshotsFailed");
 			writer.WriteValue(SnapshotsFailed);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("SnapshotsTaken");
+			initializer.Property("SnapshotsTaken");
 			writer.WriteValue(SnapshotsTaken);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,18 +27,18 @@ public partial class HitsSequence<TEvent> : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("HitsSequence<TEvent>", false);
+		var initializer = writer.BeginObjectInitializer("HitsSequence<TEvent>", false);
 		{
-			__init.Property("Events");
+			initializer.Property("Events");
 			writer.WriteInlineList(Events, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (JoinKeys is not null)
 		{
-			__init.Property("JoinKeys");
+			initializer.Property("JoinKeys");
 			writer.WriteInlineList(JoinKeys, (w, item) => { w.WriteValue(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

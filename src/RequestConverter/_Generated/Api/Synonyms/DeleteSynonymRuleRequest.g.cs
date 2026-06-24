@@ -27,23 +27,23 @@ public partial class DeleteSynonymRuleRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteSynonymRuleRequest", false);
+		var initializer = writer.BeginObjectInitializer("DeleteSynonymRuleRequest", false);
 		{
-			__init.Property("RuleId");
+			initializer.Property("RuleId");
 			RuleId.FormatCode(writer);
 		}
 
 		{
-			__init.Property("SetId");
+			initializer.Property("SetId");
 			SetId.FormatCode(writer);
 		}
 
 		if (Refresh is not null)
 		{
-			__init.Property("Refresh");
+			initializer.Property("Refresh");
 			writer.WriteValue(Refresh.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

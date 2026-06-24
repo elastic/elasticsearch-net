@@ -27,24 +27,24 @@ public partial class Hop : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Hop", false);
+		var initializer = writer.BeginObjectInitializer("Hop", false);
 		if (Connections is not null)
 		{
-			__init.Property("Connections");
+			initializer.Property("Connections");
 			Connections.FormatCode(writer);
 		}
 
 		if (Query is not null)
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			Query.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Vertices");
+			initializer.Property("Vertices");
 			writer.WriteInlineList(Vertices, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

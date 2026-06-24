@@ -27,70 +27,70 @@ public partial class HistogramAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("HistogramAggregation", false);
+		var initializer = writer.BeginObjectInitializer("HistogramAggregation", false);
 		if (ExtendedBounds is not null)
 		{
-			__init.Property("ExtendedBounds");
+			initializer.Property("ExtendedBounds");
 			ExtendedBounds.FormatCode(writer);
 		}
 
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			writer.WriteString(Format);
 		}
 
 		if (HardBounds is not null)
 		{
-			__init.Property("HardBounds");
+			initializer.Property("HardBounds");
 			HardBounds.FormatCode(writer);
 		}
 
 		if (Interval is not null)
 		{
-			__init.Property("Interval");
+			initializer.Property("Interval");
 			writer.WriteValue(Interval.Value);
 			writer.Write("d");
 		}
 
 		if (MinDocCount is not null)
 		{
-			__init.Property("MinDocCount");
+			initializer.Property("MinDocCount");
 			writer.WriteValue(MinDocCount.Value);
 		}
 
 		if (Missing is not null)
 		{
-			__init.Property("Missing");
+			initializer.Property("Missing");
 			writer.WriteValue(Missing.Value);
 			writer.Write("d");
 		}
 
 		if (Offset is not null)
 		{
-			__init.Property("Offset");
+			initializer.Property("Offset");
 			writer.WriteValue(Offset.Value);
 			writer.Write("d");
 		}
 
 		if (Order is not null)
 		{
-			__init.Property("Order");
+			initializer.Property("Order");
 			writer.WriteInlineList(Order, (w, item) => { w.Write("new("); item.Key.FormatCode(w); w.Write(", "); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(item.Value, w); w.Write(")"); });
 		}
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

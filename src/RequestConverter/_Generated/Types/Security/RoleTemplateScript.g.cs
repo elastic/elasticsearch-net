@@ -27,22 +27,22 @@ public partial class RoleTemplateScript : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RoleTemplateScript", false);
+		var initializer = writer.BeginObjectInitializer("RoleTemplateScript", false);
 		if (Id is not null)
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		if (Lang is not null)
 		{
-			__init.Property("Lang");
+			initializer.Property("Lang");
 			Lang.Value.FormatCode(writer);
 		}
 
 		if (Options is not null)
 		{
-			__init.Property("Options");
+			initializer.Property("Options");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -53,7 +53,7 @@ public partial class RoleTemplateScript : RequestConverter.ICodeFormattable
 
 		if (Params is not null)
 		{
-			__init.Property("Params");
+			initializer.Property("Params");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -64,7 +64,7 @@ public partial class RoleTemplateScript : RequestConverter.ICodeFormattable
 
 		if (Source is not null)
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			if (Source.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				writer.WriteString(Source.Value1);
@@ -75,6 +75,6 @@ public partial class RoleTemplateScript : RequestConverter.ICodeFormattable
 			}
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

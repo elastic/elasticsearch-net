@@ -27,48 +27,48 @@ public partial class DateHistogramGrouping : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DateHistogramGrouping", false);
+		var initializer = writer.BeginObjectInitializer("DateHistogramGrouping", false);
 		if (CalendarInterval is not null)
 		{
-			__init.Property("CalendarInterval");
+			initializer.Property("CalendarInterval");
 			CalendarInterval.FormatCode(writer);
 		}
 
 		if (Delay is not null)
 		{
-			__init.Property("Delay");
+			initializer.Property("Delay");
 			Delay.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (FixedInterval is not null)
 		{
-			__init.Property("FixedInterval");
+			initializer.Property("FixedInterval");
 			FixedInterval.FormatCode(writer);
 		}
 
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			writer.WriteString(Format);
 		}
 
 		if (Interval is not null)
 		{
-			__init.Property("Interval");
+			initializer.Property("Interval");
 			Interval.FormatCode(writer);
 		}
 
 		if (TimeZone is not null)
 		{
-			__init.Property("TimeZone");
+			initializer.Property("TimeZone");
 			writer.WriteString(TimeZone);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,23 +27,23 @@ public partial class DeletePrivilegesRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeletePrivilegesRequest", false);
+		var initializer = writer.BeginObjectInitializer("DeletePrivilegesRequest", false);
 		{
-			__init.Property("Application");
+			initializer.Property("Application");
 			Application.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		if (Refresh is not null)
 		{
-			__init.Property("Refresh");
+			initializer.Property("Refresh");
 			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

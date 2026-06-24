@@ -27,17 +27,17 @@ public partial class DataframeAnalysisFeatureProcessorOneHotEncoding : RequestCo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeAnalysisFeatureProcessorOneHotEncoding", false);
+		var initializer = writer.BeginObjectInitializer("DataframeAnalysisFeatureProcessorOneHotEncoding", false);
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		{
-			__init.Property("HotMap");
+			initializer.Property("HotMap");
 			writer.WriteString(HotMap);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,22 +27,22 @@ public partial class ReloadDetails : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ReloadDetails", false);
+		var initializer = writer.BeginObjectInitializer("ReloadDetails", false);
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteString(Index);
 		}
 
 		{
-			__init.Property("ReloadedAnalyzers");
+			initializer.Property("ReloadedAnalyzers");
 			writer.WriteInlineList(ReloadedAnalyzers, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("ReloadedNodeIds");
+			initializer.Property("ReloadedNodeIds");
 			writer.WriteInlineList(ReloadedNodeIds, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

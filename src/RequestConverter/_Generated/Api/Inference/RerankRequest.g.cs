@@ -27,46 +27,46 @@ public partial class RerankRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RerankRequest", false);
+		var initializer = writer.BeginObjectInitializer("RerankRequest", false);
 		{
-			__init.Property("InferenceId");
+			initializer.Property("InferenceId");
 			InferenceId.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Input");
+			initializer.Property("Input");
 			writer.WriteInlineList(Input, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			writer.WriteString(Query);
 		}
 
 		if (ReturnDocuments is not null)
 		{
-			__init.Property("ReturnDocuments");
+			initializer.Property("ReturnDocuments");
 			writer.WriteValue(ReturnDocuments.Value);
 		}
 
 		if (TaskSettings is not null)
 		{
-			__init.Property("TaskSettings");
+			initializer.Property("TaskSettings");
 			writer.WriteValue(TaskSettings);
 		}
 
 		if (TopN is not null)
 		{
-			__init.Property("TopN");
+			initializer.Property("TopN");
 			writer.WriteValue(TopN.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,116 +27,116 @@ public partial class EqlSearchRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EqlSearchRequest", false);
+		var initializer = writer.BeginObjectInitializer("EqlSearchRequest", false);
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		if (AllowNoIndices is not null)
 		{
-			__init.Property("AllowNoIndices");
+			initializer.Property("AllowNoIndices");
 			writer.WriteValue(AllowNoIndices.Value);
 		}
 
 		if (CcsMinimizeRoundtrips is not null)
 		{
-			__init.Property("CcsMinimizeRoundtrips");
+			initializer.Property("CcsMinimizeRoundtrips");
 			writer.WriteValue(CcsMinimizeRoundtrips.Value);
 		}
 
 		if (ExpandWildcards is not null)
 		{
-			__init.Property("ExpandWildcards");
+			initializer.Property("ExpandWildcards");
 			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (IgnoreUnavailable is not null)
 		{
-			__init.Property("IgnoreUnavailable");
+			initializer.Property("IgnoreUnavailable");
 			writer.WriteValue(IgnoreUnavailable.Value);
 		}
 
 		if (AllowPartialSearchResults is not null)
 		{
-			__init.Property("AllowPartialSearchResults");
+			initializer.Property("AllowPartialSearchResults");
 			writer.WriteValue(AllowPartialSearchResults.Value);
 		}
 
 		if (AllowPartialSequenceResults is not null)
 		{
-			__init.Property("AllowPartialSequenceResults");
+			initializer.Property("AllowPartialSequenceResults");
 			writer.WriteValue(AllowPartialSequenceResults.Value);
 		}
 
 		if (CaseSensitive is not null)
 		{
-			__init.Property("CaseSensitive");
+			initializer.Property("CaseSensitive");
 			writer.WriteValue(CaseSensitive.Value);
 		}
 
 		if (EventCategoryField is not null)
 		{
-			__init.Property("EventCategoryField");
+			initializer.Property("EventCategoryField");
 			EventCategoryField.FormatCode(writer);
 		}
 
 		if (FetchSize is not null)
 		{
-			__init.Property("FetchSize");
+			initializer.Property("FetchSize");
 			writer.WriteValue(FetchSize.Value);
 		}
 
 		if (Fields is not null)
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			writer.WriteInlineList(Fields, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (KeepAlive is not null)
 		{
-			__init.Property("KeepAlive");
+			initializer.Property("KeepAlive");
 			KeepAlive.FormatCode(writer);
 		}
 
 		if (KeepOnCompletion is not null)
 		{
-			__init.Property("KeepOnCompletion");
+			initializer.Property("KeepOnCompletion");
 			writer.WriteValue(KeepOnCompletion.Value);
 		}
 
 		if (MaxSamplesPerKey is not null)
 		{
-			__init.Property("MaxSamplesPerKey");
+			initializer.Property("MaxSamplesPerKey");
 			writer.WriteValue(MaxSamplesPerKey.Value);
 		}
 
 		if (ProjectRouting is not null)
 		{
-			__init.Property("ProjectRouting");
+			initializer.Property("ProjectRouting");
 			writer.WriteString(ProjectRouting);
 		}
 
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			writer.WriteString(Query);
 		}
 
 		if (ResultPosition is not null)
 		{
-			__init.Property("ResultPosition");
+			initializer.Property("ResultPosition");
 			Elastic.Clients.Elasticsearch.Eql.ResultPositionCodeFormatter.FormatCode(ResultPosition.Value, writer);
 		}
 
 		if (RuntimeMappings is not null)
 		{
-			__init.Property("RuntimeMappings");
+			initializer.Property("RuntimeMappings");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("Elastic.Clients.Elasticsearch.Field");
 			writer.Write(", ");
@@ -147,28 +147,28 @@ public partial class EqlSearchRequest : RequestConverter.ICodeFormattable
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
 		if (TiebreakerField is not null)
 		{
-			__init.Property("TiebreakerField");
+			initializer.Property("TiebreakerField");
 			TiebreakerField.FormatCode(writer);
 		}
 
 		if (TimestampField is not null)
 		{
-			__init.Property("TimestampField");
+			initializer.Property("TimestampField");
 			TimestampField.FormatCode(writer);
 		}
 
 		if (WaitForCompletionTimeout is not null)
 		{
-			__init.Property("WaitForCompletionTimeout");
+			initializer.Property("WaitForCompletionTimeout");
 			WaitForCompletionTimeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

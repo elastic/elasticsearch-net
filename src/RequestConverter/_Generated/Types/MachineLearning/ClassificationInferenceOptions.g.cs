@@ -27,37 +27,37 @@ public partial class ClassificationInferenceOptions : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClassificationInferenceOptions", false);
+		var initializer = writer.BeginObjectInitializer("ClassificationInferenceOptions", false);
 		if (NumTopClasses is not null)
 		{
-			__init.Property("NumTopClasses");
+			initializer.Property("NumTopClasses");
 			writer.WriteValue(NumTopClasses.Value);
 		}
 
 		if (NumTopFeatureImportanceValues is not null)
 		{
-			__init.Property("NumTopFeatureImportanceValues");
+			initializer.Property("NumTopFeatureImportanceValues");
 			writer.WriteValue(NumTopFeatureImportanceValues.Value);
 		}
 
 		if (PredictionFieldType is not null)
 		{
-			__init.Property("PredictionFieldType");
+			initializer.Property("PredictionFieldType");
 			writer.WriteString(PredictionFieldType);
 		}
 
 		if (ResultsField is not null)
 		{
-			__init.Property("ResultsField");
+			initializer.Property("ResultsField");
 			writer.WriteString(ResultsField);
 		}
 
 		if (TopClassesResultsField is not null)
 		{
-			__init.Property("TopClassesResultsField");
+			initializer.Property("TopClassesResultsField");
 			writer.WriteString(TopClassesResultsField);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

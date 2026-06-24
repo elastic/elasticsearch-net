@@ -27,70 +27,70 @@ public partial class IndexSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexSettings", false);
+		var initializer = writer.BeginObjectInitializer("IndexSettings", false);
 		if (Analysis is not null)
 		{
-			__init.Property("Analysis");
+			initializer.Property("Analysis");
 			Analysis.FormatCode(writer);
 		}
 
 		if (Analyze is not null)
 		{
-			__init.Property("Analyze");
+			initializer.Property("Analyze");
 			Analyze.FormatCode(writer);
 		}
 
 		if (AutoExpandReplicas is not null)
 		{
-			__init.Property("AutoExpandReplicas");
+			initializer.Property("AutoExpandReplicas");
 			writer.WriteString(AutoExpandReplicas);
 		}
 
 		if (Blocks is not null)
 		{
-			__init.Property("Blocks");
+			initializer.Property("Blocks");
 			Blocks.FormatCode(writer);
 		}
 
 		if (CheckOnStartup is not null)
 		{
-			__init.Property("CheckOnStartup");
+			initializer.Property("CheckOnStartup");
 			Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartupCodeFormatter.FormatCode(CheckOnStartup.Value, writer);
 		}
 
 		if (Codec is not null)
 		{
-			__init.Property("Codec");
+			initializer.Property("Codec");
 			writer.WriteString(Codec);
 		}
 
 		if (CreationDate is not null)
 		{
-			__init.Property("CreationDate");
+			initializer.Property("CreationDate");
 			writer.WriteValue(CreationDate.Value);
 		}
 
 		if (CreationDateString is not null)
 		{
-			__init.Property("CreationDateString");
+			initializer.Property("CreationDateString");
 			writer.WriteValue(CreationDateString.Value);
 		}
 
 		if (DefaultPipeline is not null)
 		{
-			__init.Property("DefaultPipeline");
+			initializer.Property("DefaultPipeline");
 			writer.WriteString(DefaultPipeline);
 		}
 
 		if (FinalPipeline is not null)
 		{
-			__init.Property("FinalPipeline");
+			initializer.Property("FinalPipeline");
 			writer.WriteString(FinalPipeline);
 		}
 
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			if (Format.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				writer.WriteString(Format.Value1);
@@ -103,13 +103,13 @@ public partial class IndexSettings : RequestConverter.ICodeFormattable
 
 		if (GcDeletes is not null)
 		{
-			__init.Property("GcDeletes");
+			initializer.Property("GcDeletes");
 			GcDeletes.FormatCode(writer);
 		}
 
 		if (Hidden is not null)
 		{
-			__init.Property("Hidden");
+			initializer.Property("Hidden");
 			if (Hidden.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				writer.WriteValue(Hidden.Value1);
@@ -122,127 +122,127 @@ public partial class IndexSettings : RequestConverter.ICodeFormattable
 
 		if (Highlight is not null)
 		{
-			__init.Property("Highlight");
+			initializer.Property("Highlight");
 			Highlight.FormatCode(writer);
 		}
 
 		if (Index is not null)
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		if (IndexingPressure is not null)
 		{
-			__init.Property("IndexingPressure");
+			initializer.Property("IndexingPressure");
 			IndexingPressure.FormatCode(writer);
 		}
 
 		if (IndexingSlowlog is not null)
 		{
-			__init.Property("IndexingSlowlog");
+			initializer.Property("IndexingSlowlog");
 			IndexingSlowlog.FormatCode(writer);
 		}
 
 		if (Lifecycle is not null)
 		{
-			__init.Property("Lifecycle");
+			initializer.Property("Lifecycle");
 			Lifecycle.FormatCode(writer);
 		}
 
 		if (LoadFixedBitsetFiltersEagerly is not null)
 		{
-			__init.Property("LoadFixedBitsetFiltersEagerly");
+			initializer.Property("LoadFixedBitsetFiltersEagerly");
 			writer.WriteValue(LoadFixedBitsetFiltersEagerly.Value);
 		}
 
 		if (Mapping is not null)
 		{
-			__init.Property("Mapping");
+			initializer.Property("Mapping");
 			Mapping.FormatCode(writer);
 		}
 
 		if (MaxDocvalueFieldsSearch is not null)
 		{
-			__init.Property("MaxDocvalueFieldsSearch");
+			initializer.Property("MaxDocvalueFieldsSearch");
 			writer.WriteValue(MaxDocvalueFieldsSearch.Value);
 		}
 
 		if (MaxInnerResultWindow is not null)
 		{
-			__init.Property("MaxInnerResultWindow");
+			initializer.Property("MaxInnerResultWindow");
 			writer.WriteValue(MaxInnerResultWindow.Value);
 		}
 
 		if (MaxNgramDiff is not null)
 		{
-			__init.Property("MaxNgramDiff");
+			initializer.Property("MaxNgramDiff");
 			writer.WriteValue(MaxNgramDiff.Value);
 		}
 
 		if (MaxRefreshListeners is not null)
 		{
-			__init.Property("MaxRefreshListeners");
+			initializer.Property("MaxRefreshListeners");
 			writer.WriteValue(MaxRefreshListeners.Value);
 		}
 
 		if (MaxRegexLength is not null)
 		{
-			__init.Property("MaxRegexLength");
+			initializer.Property("MaxRegexLength");
 			writer.WriteValue(MaxRegexLength.Value);
 		}
 
 		if (MaxRescoreWindow is not null)
 		{
-			__init.Property("MaxRescoreWindow");
+			initializer.Property("MaxRescoreWindow");
 			writer.WriteValue(MaxRescoreWindow.Value);
 		}
 
 		if (MaxResultWindow is not null)
 		{
-			__init.Property("MaxResultWindow");
+			initializer.Property("MaxResultWindow");
 			writer.WriteValue(MaxResultWindow.Value);
 		}
 
 		if (MaxScriptFields is not null)
 		{
-			__init.Property("MaxScriptFields");
+			initializer.Property("MaxScriptFields");
 			writer.WriteValue(MaxScriptFields.Value);
 		}
 
 		if (MaxShingleDiff is not null)
 		{
-			__init.Property("MaxShingleDiff");
+			initializer.Property("MaxShingleDiff");
 			writer.WriteValue(MaxShingleDiff.Value);
 		}
 
 		if (MaxSlicesPerScroll is not null)
 		{
-			__init.Property("MaxSlicesPerScroll");
+			initializer.Property("MaxSlicesPerScroll");
 			writer.WriteValue(MaxSlicesPerScroll.Value);
 		}
 
 		if (MaxTermsCount is not null)
 		{
-			__init.Property("MaxTermsCount");
+			initializer.Property("MaxTermsCount");
 			writer.WriteValue(MaxTermsCount.Value);
 		}
 
 		if (Merge is not null)
 		{
-			__init.Property("Merge");
+			initializer.Property("Merge");
 			Merge.FormatCode(writer);
 		}
 
 		if (Mode is not null)
 		{
-			__init.Property("Mode");
+			initializer.Property("Mode");
 			writer.WriteString(Mode);
 		}
 
 		if (NumberOfReplicas is not null)
 		{
-			__init.Property("NumberOfReplicas");
+			initializer.Property("NumberOfReplicas");
 			if (NumberOfReplicas.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				writer.WriteValue(NumberOfReplicas.Value1);
@@ -255,13 +255,13 @@ public partial class IndexSettings : RequestConverter.ICodeFormattable
 
 		if (NumberOfRoutingShards is not null)
 		{
-			__init.Property("NumberOfRoutingShards");
+			initializer.Property("NumberOfRoutingShards");
 			writer.WriteValue(NumberOfRoutingShards.Value);
 		}
 
 		if (NumberOfShards is not null)
 		{
-			__init.Property("NumberOfShards");
+			initializer.Property("NumberOfShards");
 			if (NumberOfShards.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				writer.WriteValue(NumberOfShards.Value1);
@@ -274,7 +274,7 @@ public partial class IndexSettings : RequestConverter.ICodeFormattable
 
 		if (OtherSettings is not null)
 		{
-			__init.Property("OtherSettings");
+			initializer.Property("OtherSettings");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -285,7 +285,7 @@ public partial class IndexSettings : RequestConverter.ICodeFormattable
 
 		if (Priority is not null)
 		{
-			__init.Property("Priority");
+			initializer.Property("Priority");
 			if (Priority.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				writer.WriteValue(Priority.Value1);
@@ -298,109 +298,109 @@ public partial class IndexSettings : RequestConverter.ICodeFormattable
 
 		if (ProvidedName is not null)
 		{
-			__init.Property("ProvidedName");
+			initializer.Property("ProvidedName");
 			ProvidedName.FormatCode(writer);
 		}
 
 		if (Queries is not null)
 		{
-			__init.Property("Queries");
+			initializer.Property("Queries");
 			Queries.FormatCode(writer);
 		}
 
 		if (QueryString is not null)
 		{
-			__init.Property("QueryString");
+			initializer.Property("QueryString");
 			QueryString.FormatCode(writer);
 		}
 
 		if (RefreshInterval is not null)
 		{
-			__init.Property("RefreshInterval");
+			initializer.Property("RefreshInterval");
 			RefreshInterval.FormatCode(writer);
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			Routing.FormatCode(writer);
 		}
 
 		if (RoutingPartitionSize is not null)
 		{
-			__init.Property("RoutingPartitionSize");
+			initializer.Property("RoutingPartitionSize");
 			writer.WriteValue(RoutingPartitionSize.Value);
 		}
 
 		if (RoutingPath is not null)
 		{
-			__init.Property("RoutingPath");
+			initializer.Property("RoutingPath");
 			writer.WriteInlineList(RoutingPath, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Search is not null)
 		{
-			__init.Property("Search");
+			initializer.Property("Search");
 			Search.FormatCode(writer);
 		}
 
 		if (Settings is not null)
 		{
-			__init.Property("Settings");
+			initializer.Property("Settings");
 			Settings.FormatCode(writer);
 		}
 
 		if (Similarity is not null)
 		{
-			__init.Property("Similarity");
+			initializer.Property("Similarity");
 			Similarity.FormatCode(writer);
 		}
 
 		if (SoftDeletes is not null)
 		{
-			__init.Property("SoftDeletes");
+			initializer.Property("SoftDeletes");
 			SoftDeletes.FormatCode(writer);
 		}
 
 		if (Sort is not null)
 		{
-			__init.Property("Sort");
+			initializer.Property("Sort");
 			Sort.FormatCode(writer);
 		}
 
 		if (Store is not null)
 		{
-			__init.Property("Store");
+			initializer.Property("Store");
 			Store.FormatCode(writer);
 		}
 
 		if (TimeSeries is not null)
 		{
-			__init.Property("TimeSeries");
+			initializer.Property("TimeSeries");
 			TimeSeries.FormatCode(writer);
 		}
 
 		if (TopMetricsMaxSize is not null)
 		{
-			__init.Property("TopMetricsMaxSize");
+			initializer.Property("TopMetricsMaxSize");
 			writer.WriteValue(TopMetricsMaxSize.Value);
 		}
 
 		if (Translog is not null)
 		{
-			__init.Property("Translog");
+			initializer.Property("Translog");
 			Translog.FormatCode(writer);
 		}
 
 		if (Uuid is not null)
 		{
-			__init.Property("Uuid");
+			initializer.Property("Uuid");
 			writer.WriteString(Uuid);
 		}
 
 		if (VerifiedBeforeClose is not null)
 		{
-			__init.Property("VerifiedBeforeClose");
+			initializer.Property("VerifiedBeforeClose");
 			if (VerifiedBeforeClose.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				writer.WriteValue(VerifiedBeforeClose.Value1);
@@ -413,10 +413,10 @@ public partial class IndexSettings : RequestConverter.ICodeFormattable
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			Version.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

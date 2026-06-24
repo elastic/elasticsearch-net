@@ -27,28 +27,28 @@ public partial class NodeStatistics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeStatistics", false);
+		var initializer = writer.BeginObjectInitializer("NodeStatistics", false);
 		{
-			__init.Property("Failed");
+			initializer.Property("Failed");
 			writer.WriteValue(Failed);
 		}
 
 		if (Failures is not null)
 		{
-			__init.Property("Failures");
+			initializer.Property("Failures");
 			writer.WriteInlineList(Failures, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Successful");
+			initializer.Property("Successful");
 			writer.WriteValue(Successful);
 		}
 
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteValue(Total);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

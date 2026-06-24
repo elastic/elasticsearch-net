@@ -27,16 +27,16 @@ public partial class RandomScoreFunction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RandomScoreFunction", false);
+		var initializer = writer.BeginObjectInitializer("RandomScoreFunction", false);
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Seed is not null)
 		{
-			__init.Property("Seed");
+			initializer.Property("Seed");
 			if (Seed.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				writer.WriteValue(Seed.Value1);
@@ -48,6 +48,6 @@ public partial class RandomScoreFunction : RequestConverter.ICodeFormattable
 			}
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

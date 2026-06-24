@@ -27,12 +27,12 @@ public partial class FoundStatus : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FoundStatus", false);
+		var initializer = writer.BeginObjectInitializer("FoundStatus", false);
 		{
-			__init.Property("Found");
+			initializer.Property("Found");
 			writer.WriteValue(Found);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

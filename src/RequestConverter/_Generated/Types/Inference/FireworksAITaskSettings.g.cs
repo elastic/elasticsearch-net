@@ -27,10 +27,10 @@ public partial class FireworksAITaskSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FireworksAITaskSettings", false);
+		var initializer = writer.BeginObjectInitializer("FireworksAITaskSettings", false);
 		if (Headers is not null)
 		{
-			__init.Property("Headers");
+			initializer.Property("Headers");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -41,10 +41,10 @@ public partial class FireworksAITaskSettings : RequestConverter.ICodeFormattable
 
 		if (User is not null)
 		{
-			__init.Property("User");
+			initializer.Property("User");
 			writer.WriteString(User);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

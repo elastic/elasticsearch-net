@@ -27,34 +27,34 @@ public partial class ClusterIndicesShards : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterIndicesShards", false);
+		var initializer = writer.BeginObjectInitializer("ClusterIndicesShards", false);
 		if (Index is not null)
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		if (Primaries is not null)
 		{
-			__init.Property("Primaries");
+			initializer.Property("Primaries");
 			writer.WriteValue(Primaries.Value);
 			writer.Write("d");
 		}
 
 		if (Replication is not null)
 		{
-			__init.Property("Replication");
+			initializer.Property("Replication");
 			writer.WriteValue(Replication.Value);
 			writer.Write("d");
 		}
 
 		if (Total is not null)
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteValue(Total.Value);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

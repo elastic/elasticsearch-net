@@ -27,38 +27,38 @@ public partial class WatsonxServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("WatsonxServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("WatsonxServiceSettings", false);
 		{
-			__init.Property("ApiKey");
+			initializer.Property("ApiKey");
 			writer.WriteString(ApiKey);
 		}
 
 		{
-			__init.Property("ApiVersion");
+			initializer.Property("ApiVersion");
 			writer.WriteString(ApiVersion);
 		}
 
 		{
-			__init.Property("ModelId");
+			initializer.Property("ModelId");
 			writer.WriteString(ModelId);
 		}
 
 		{
-			__init.Property("ProjectId");
+			initializer.Property("ProjectId");
 			writer.WriteString(ProjectId);
 		}
 
 		if (RateLimit is not null)
 		{
-			__init.Property("RateLimit");
+			initializer.Property("RateLimit");
 			RateLimit.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Url");
+			initializer.Property("Url");
 			writer.WriteString(Url);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

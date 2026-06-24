@@ -27,42 +27,42 @@ public partial class ClusterJvmVersion : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterJvmVersion", false);
+		var initializer = writer.BeginObjectInitializer("ClusterJvmVersion", false);
 		{
-			__init.Property("BundledJdk");
+			initializer.Property("BundledJdk");
 			writer.WriteValue(BundledJdk);
 		}
 
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 		}
 
 		{
-			__init.Property("UsingBundledJdk");
+			initializer.Property("UsingBundledJdk");
 			writer.WriteValue(UsingBundledJdk);
 		}
 
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
 		{
-			__init.Property("VmName");
+			initializer.Property("VmName");
 			writer.WriteString(VmName);
 		}
 
 		{
-			__init.Property("VmVendor");
+			initializer.Property("VmVendor");
 			writer.WriteString(VmVendor);
 		}
 
 		{
-			__init.Property("VmVersion");
+			initializer.Property("VmVersion");
 			writer.WriteString(VmVersion);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,25 +27,25 @@ public partial class EmbeddingInferenceResult : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EmbeddingInferenceResult", false);
+		var initializer = writer.BeginObjectInitializer("EmbeddingInferenceResult", false);
 		if (Embeddings is not null)
 		{
-			__init.Property("Embeddings");
+			initializer.Property("Embeddings");
 			writer.WriteInlineList(Embeddings, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (EmbeddingsBits is not null)
 		{
-			__init.Property("EmbeddingsBits");
+			initializer.Property("EmbeddingsBits");
 			writer.WriteInlineList(EmbeddingsBits, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (EmbeddingsBytes is not null)
 		{
-			__init.Property("EmbeddingsBytes");
+			initializer.Property("EmbeddingsBytes");
 			writer.WriteInlineList(EmbeddingsBytes, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

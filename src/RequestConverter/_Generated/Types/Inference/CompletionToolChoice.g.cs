@@ -27,17 +27,17 @@ public partial class CompletionToolChoice : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CompletionToolChoice", true);
+		var initializer = writer.BeginObjectInitializer("CompletionToolChoice", true);
 		{
-			__init.Property("Function");
+			initializer.Property("Function");
 			Function.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			writer.WriteString(Type);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

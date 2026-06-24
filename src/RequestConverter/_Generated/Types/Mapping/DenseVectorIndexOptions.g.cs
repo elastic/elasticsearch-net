@@ -27,49 +27,49 @@ public partial class DenseVectorIndexOptions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DenseVectorIndexOptions", false);
+		var initializer = writer.BeginObjectInitializer("DenseVectorIndexOptions", false);
 		if (ConfidenceInterval is not null)
 		{
-			__init.Property("ConfidenceInterval");
+			initializer.Property("ConfidenceInterval");
 			writer.WriteValue(ConfidenceInterval.Value);
 			writer.Write("f");
 		}
 
 		if (EfConstruction is not null)
 		{
-			__init.Property("EfConstruction");
+			initializer.Property("EfConstruction");
 			writer.WriteValue(EfConstruction.Value);
 		}
 
 		if (FlatIndexThreshold is not null)
 		{
-			__init.Property("FlatIndexThreshold");
+			initializer.Property("FlatIndexThreshold");
 			writer.WriteValue(FlatIndexThreshold.Value);
 		}
 
 		if (M is not null)
 		{
-			__init.Property("M");
+			initializer.Property("M");
 			writer.WriteValue(M.Value);
 		}
 
 		if (OnDiskRescore is not null)
 		{
-			__init.Property("OnDiskRescore");
+			initializer.Property("OnDiskRescore");
 			writer.WriteValue(OnDiskRescore.Value);
 		}
 
 		if (RescoreVector is not null)
 		{
-			__init.Property("RescoreVector");
+			initializer.Property("RescoreVector");
 			RescoreVector.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsTypeCodeFormatter.FormatCode(Type, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

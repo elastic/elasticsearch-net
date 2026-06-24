@@ -27,72 +27,72 @@ public partial class Transport : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Transport", false);
+		var initializer = writer.BeginObjectInitializer("Transport", false);
 		if (InboundHandlingTimeHistogram is not null)
 		{
-			__init.Property("InboundHandlingTimeHistogram");
+			initializer.Property("InboundHandlingTimeHistogram");
 			writer.WriteInlineList(InboundHandlingTimeHistogram, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (OutboundHandlingTimeHistogram is not null)
 		{
-			__init.Property("OutboundHandlingTimeHistogram");
+			initializer.Property("OutboundHandlingTimeHistogram");
 			writer.WriteInlineList(OutboundHandlingTimeHistogram, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (RxCount is not null)
 		{
-			__init.Property("RxCount");
+			initializer.Property("RxCount");
 			writer.WriteValue(RxCount.Value);
 			writer.Write("L");
 		}
 
 		if (RxSize is not null)
 		{
-			__init.Property("RxSize");
+			initializer.Property("RxSize");
 			writer.WriteString(RxSize);
 		}
 
 		if (RxSizeInBytes is not null)
 		{
-			__init.Property("RxSizeInBytes");
+			initializer.Property("RxSizeInBytes");
 			writer.WriteValue(RxSizeInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (ServerOpen is not null)
 		{
-			__init.Property("ServerOpen");
+			initializer.Property("ServerOpen");
 			writer.WriteValue(ServerOpen.Value);
 		}
 
 		if (TotalOutboundConnections is not null)
 		{
-			__init.Property("TotalOutboundConnections");
+			initializer.Property("TotalOutboundConnections");
 			writer.WriteValue(TotalOutboundConnections.Value);
 			writer.Write("L");
 		}
 
 		if (TxCount is not null)
 		{
-			__init.Property("TxCount");
+			initializer.Property("TxCount");
 			writer.WriteValue(TxCount.Value);
 			writer.Write("L");
 		}
 
 		if (TxSize is not null)
 		{
-			__init.Property("TxSize");
+			initializer.Property("TxSize");
 			writer.WriteString(TxSize);
 		}
 
 		if (TxSizeInBytes is not null)
 		{
-			__init.Property("TxSizeInBytes");
+			initializer.Property("TxSizeInBytes");
 			writer.WriteValue(TxSizeInBytes.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

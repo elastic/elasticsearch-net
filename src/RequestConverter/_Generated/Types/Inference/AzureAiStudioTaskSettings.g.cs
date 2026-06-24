@@ -27,52 +27,52 @@ public partial class AzureAiStudioTaskSettings : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AzureAiStudioTaskSettings", false);
+		var initializer = writer.BeginObjectInitializer("AzureAiStudioTaskSettings", false);
 		if (DoSample is not null)
 		{
-			__init.Property("DoSample");
+			initializer.Property("DoSample");
 			writer.WriteValue(DoSample.Value);
 			writer.Write("f");
 		}
 
 		if (MaxNewTokens is not null)
 		{
-			__init.Property("MaxNewTokens");
+			initializer.Property("MaxNewTokens");
 			writer.WriteValue(MaxNewTokens.Value);
 		}
 
 		if (ReturnDocuments is not null)
 		{
-			__init.Property("ReturnDocuments");
+			initializer.Property("ReturnDocuments");
 			writer.WriteValue(ReturnDocuments.Value);
 		}
 
 		if (Temperature is not null)
 		{
-			__init.Property("Temperature");
+			initializer.Property("Temperature");
 			writer.WriteValue(Temperature.Value);
 			writer.Write("f");
 		}
 
 		if (TopN is not null)
 		{
-			__init.Property("TopN");
+			initializer.Property("TopN");
 			writer.WriteValue(TopN.Value);
 		}
 
 		if (TopP is not null)
 		{
-			__init.Property("TopP");
+			initializer.Property("TopP");
 			writer.WriteValue(TopP.Value);
 			writer.Write("f");
 		}
 
 		if (User is not null)
 		{
-			__init.Property("User");
+			initializer.Property("User");
 			writer.WriteString(User);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

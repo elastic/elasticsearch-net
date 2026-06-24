@@ -27,18 +27,18 @@ public partial class ChunkingConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ChunkingConfig", false);
+		var initializer = writer.BeginObjectInitializer("ChunkingConfig", false);
 		{
-			__init.Property("Mode");
+			initializer.Property("Mode");
 			Elastic.Clients.Elasticsearch.MachineLearning.ChunkingModeCodeFormatter.FormatCode(Mode, writer);
 		}
 
 		if (TimeSpan is not null)
 		{
-			__init.Property("TimeSpan");
+			initializer.Property("TimeSpan");
 			TimeSpan.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

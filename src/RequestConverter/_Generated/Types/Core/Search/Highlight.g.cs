@@ -27,99 +27,99 @@ public partial class Highlight : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Highlight", false);
+		var initializer = writer.BeginObjectInitializer("Highlight", false);
 		if (BoundaryChars is not null)
 		{
-			__init.Property("BoundaryChars");
+			initializer.Property("BoundaryChars");
 			writer.WriteString(BoundaryChars);
 		}
 
 		if (BoundaryMaxScan is not null)
 		{
-			__init.Property("BoundaryMaxScan");
+			initializer.Property("BoundaryMaxScan");
 			writer.WriteValue(BoundaryMaxScan.Value);
 		}
 
 		if (BoundaryScanner is not null)
 		{
-			__init.Property("BoundaryScanner");
+			initializer.Property("BoundaryScanner");
 			Elastic.Clients.Elasticsearch.Core.Search.BoundaryScannerCodeFormatter.FormatCode(BoundaryScanner.Value, writer);
 		}
 
 		if (BoundaryScannerLocale is not null)
 		{
-			__init.Property("BoundaryScannerLocale");
+			initializer.Property("BoundaryScannerLocale");
 			writer.WriteString(BoundaryScannerLocale);
 		}
 
 		if (Encoder is not null)
 		{
-			__init.Property("Encoder");
+			initializer.Property("Encoder");
 			Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoderCodeFormatter.FormatCode(Encoder.Value, writer);
 		}
 
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			writer.WriteInlineList(Fields, (w, item) => { w.Write("new("); item.Key.FormatCode(w); w.Write(", "); item.Value.FormatCode(w); w.Write(")"); });
 		}
 
 		if (ForceSource is not null)
 		{
-			__init.Property("ForceSource");
+			initializer.Property("ForceSource");
 			writer.WriteValue(ForceSource.Value);
 		}
 
 		if (Fragmenter is not null)
 		{
-			__init.Property("Fragmenter");
+			initializer.Property("Fragmenter");
 			Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenterCodeFormatter.FormatCode(Fragmenter.Value, writer);
 		}
 
 		if (FragmentSize is not null)
 		{
-			__init.Property("FragmentSize");
+			initializer.Property("FragmentSize");
 			writer.WriteValue(FragmentSize.Value);
 		}
 
 		if (HighlightFilter is not null)
 		{
-			__init.Property("HighlightFilter");
+			initializer.Property("HighlightFilter");
 			writer.WriteValue(HighlightFilter.Value);
 		}
 
 		if (HighlightQuery is not null)
 		{
-			__init.Property("HighlightQuery");
+			initializer.Property("HighlightQuery");
 			HighlightQuery.FormatCode(writer);
 		}
 
 		if (MaxAnalyzedOffset is not null)
 		{
-			__init.Property("MaxAnalyzedOffset");
+			initializer.Property("MaxAnalyzedOffset");
 			writer.WriteValue(MaxAnalyzedOffset.Value);
 		}
 
 		if (MaxFragmentLength is not null)
 		{
-			__init.Property("MaxFragmentLength");
+			initializer.Property("MaxFragmentLength");
 			writer.WriteValue(MaxFragmentLength.Value);
 		}
 
 		if (NoMatchSize is not null)
 		{
-			__init.Property("NoMatchSize");
+			initializer.Property("NoMatchSize");
 			writer.WriteValue(NoMatchSize.Value);
 		}
 
 		if (NumberOfFragments is not null)
 		{
-			__init.Property("NumberOfFragments");
+			initializer.Property("NumberOfFragments");
 			writer.WriteValue(NumberOfFragments.Value);
 		}
 
 		if (Options is not null)
 		{
-			__init.Property("Options");
+			initializer.Property("Options");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -130,46 +130,46 @@ public partial class Highlight : RequestConverter.ICodeFormattable
 
 		if (Order is not null)
 		{
-			__init.Property("Order");
+			initializer.Property("Order");
 			Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrderCodeFormatter.FormatCode(Order.Value, writer);
 		}
 
 		if (PhraseLimit is not null)
 		{
-			__init.Property("PhraseLimit");
+			initializer.Property("PhraseLimit");
 			writer.WriteValue(PhraseLimit.Value);
 		}
 
 		if (PostTags is not null)
 		{
-			__init.Property("PostTags");
+			initializer.Property("PostTags");
 			writer.WriteInlineList(PostTags, (w, item) => { w.WriteString(item); });
 		}
 
 		if (PreTags is not null)
 		{
-			__init.Property("PreTags");
+			initializer.Property("PreTags");
 			writer.WriteInlineList(PreTags, (w, item) => { w.WriteString(item); });
 		}
 
 		if (RequireFieldMatch is not null)
 		{
-			__init.Property("RequireFieldMatch");
+			initializer.Property("RequireFieldMatch");
 			writer.WriteValue(RequireFieldMatch.Value);
 		}
 
 		if (TagsSchema is not null)
 		{
-			__init.Property("TagsSchema");
+			initializer.Property("TagsSchema");
 			Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchemaCodeFormatter.FormatCode(TagsSchema.Value, writer);
 		}
 
 		if (Type is not null)
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			Type.Value.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

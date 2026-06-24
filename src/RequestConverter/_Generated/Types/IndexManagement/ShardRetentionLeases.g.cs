@@ -27,24 +27,24 @@ public partial class ShardRetentionLeases : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardRetentionLeases", false);
+		var initializer = writer.BeginObjectInitializer("ShardRetentionLeases", false);
 		{
-			__init.Property("Leases");
+			initializer.Property("Leases");
 			writer.WriteInlineList(Leases, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("PrimaryTerm");
+			initializer.Property("PrimaryTerm");
 			writer.WriteValue(PrimaryTerm);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

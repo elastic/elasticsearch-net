@@ -27,75 +27,75 @@ public partial class KnnQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("KnnQuery", false);
+		var initializer = writer.BeginObjectInitializer("KnnQuery", false);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (K is not null)
 		{
-			__init.Property("K");
+			initializer.Property("K");
 			writer.WriteValue(K.Value);
 		}
 
 		if (NumCandidates is not null)
 		{
-			__init.Property("NumCandidates");
+			initializer.Property("NumCandidates");
 			writer.WriteValue(NumCandidates.Value);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
 		if (QueryVector is not null)
 		{
-			__init.Property("QueryVector");
+			initializer.Property("QueryVector");
 			writer.WriteInlineList(QueryVector, (w, item) => { w.WriteValue(item); w.Write("f"); });
 		}
 
 		if (QueryVectorBuilder is not null)
 		{
-			__init.Property("QueryVectorBuilder");
+			initializer.Property("QueryVectorBuilder");
 			QueryVectorBuilder.FormatCode(writer);
 		}
 
 		if (RescoreVector is not null)
 		{
-			__init.Property("RescoreVector");
+			initializer.Property("RescoreVector");
 			RescoreVector.FormatCode(writer);
 		}
 
 		if (Similarity is not null)
 		{
-			__init.Property("Similarity");
+			initializer.Property("Similarity");
 			writer.WriteValue(Similarity.Value);
 			writer.Write("f");
 		}
 
 		if (VisitPercentage is not null)
 		{
-			__init.Property("VisitPercentage");
+			initializer.Property("VisitPercentage");
 			writer.WriteValue(VisitPercentage.Value);
 			writer.Write("f");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

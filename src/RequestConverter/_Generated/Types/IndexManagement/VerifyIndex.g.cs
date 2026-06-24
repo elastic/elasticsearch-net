@@ -27,29 +27,29 @@ public partial class VerifyIndex : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("VerifyIndex", false);
+		var initializer = writer.BeginObjectInitializer("VerifyIndex", false);
 		if (CheckIndexTime is not null)
 		{
-			__init.Property("CheckIndexTime");
+			initializer.Property("CheckIndexTime");
 			CheckIndexTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("CheckIndexTimeInMillis");
+			initializer.Property("CheckIndexTimeInMillis");
 			writer.WriteValue(CheckIndexTimeInMillis);
 		}
 
 		if (TotalTime is not null)
 		{
-			__init.Property("TotalTime");
+			initializer.Property("TotalTime");
 			TotalTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalTimeInMillis");
+			initializer.Property("TotalTimeInMillis");
 			writer.WriteValue(TotalTimeInMillis);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

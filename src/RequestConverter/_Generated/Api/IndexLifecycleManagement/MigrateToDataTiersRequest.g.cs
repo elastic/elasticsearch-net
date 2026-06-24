@@ -27,31 +27,31 @@ public partial class MigrateToDataTiersRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MigrateToDataTiersRequest", false);
+		var initializer = writer.BeginObjectInitializer("MigrateToDataTiersRequest", false);
 		if (DryRun is not null)
 		{
-			__init.Property("DryRun");
+			initializer.Property("DryRun");
 			writer.WriteValue(DryRun.Value);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (LegacyTemplateToDelete is not null)
 		{
-			__init.Property("LegacyTemplateToDelete");
+			initializer.Property("LegacyTemplateToDelete");
 			writer.WriteString(LegacyTemplateToDelete);
 		}
 
 		if (NodeAttribute is not null)
 		{
-			__init.Property("NodeAttribute");
+			initializer.Property("NodeAttribute");
 			writer.WriteString(NodeAttribute);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

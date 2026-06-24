@@ -27,10 +27,10 @@ public partial class AdjacencyMatrixAggregation : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AdjacencyMatrixAggregation", false);
+		var initializer = writer.BeginObjectInitializer("AdjacencyMatrixAggregation", false);
 		if (Filters is not null)
 		{
-			__init.Property("Filters");
+			initializer.Property("Filters");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -41,10 +41,10 @@ public partial class AdjacencyMatrixAggregation : RequestConverter.ICodeFormatta
 
 		if (Separator is not null)
 		{
-			__init.Property("Separator");
+			initializer.Property("Separator");
 			writer.WriteString(Separator);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

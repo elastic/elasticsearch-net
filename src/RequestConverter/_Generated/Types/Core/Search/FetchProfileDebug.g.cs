@@ -27,19 +27,19 @@ public partial class FetchProfileDebug : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FetchProfileDebug", false);
+		var initializer = writer.BeginObjectInitializer("FetchProfileDebug", false);
 		if (FastPath is not null)
 		{
-			__init.Property("FastPath");
+			initializer.Property("FastPath");
 			writer.WriteValue(FastPath.Value);
 		}
 
 		if (StoredFields is not null)
 		{
-			__init.Property("StoredFields");
+			initializer.Property("StoredFields");
 			writer.WriteInlineList(StoredFields, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

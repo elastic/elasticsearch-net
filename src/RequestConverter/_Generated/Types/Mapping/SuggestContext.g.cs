@@ -27,21 +27,21 @@ public partial class SuggestContext : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SuggestContext", false);
+		var initializer = writer.BeginObjectInitializer("SuggestContext", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		if (Path is not null)
 		{
-			__init.Property("Path");
+			initializer.Property("Path");
 			Path.FormatCode(writer);
 		}
 
 		if (Precision is not null)
 		{
-			__init.Property("Precision");
+			initializer.Property("Precision");
 			if (Precision.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				writer.WriteValue(Precision.Value1);
@@ -53,10 +53,10 @@ public partial class SuggestContext : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			writer.WriteString(Type);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

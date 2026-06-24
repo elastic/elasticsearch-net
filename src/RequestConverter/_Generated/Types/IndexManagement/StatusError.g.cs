@@ -27,17 +27,17 @@ public partial class StatusError : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StatusError", false);
+		var initializer = writer.BeginObjectInitializer("StatusError", false);
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteString(Index);
 		}
 
 		{
-			__init.Property("Message");
+			initializer.Property("Message");
 			writer.WriteString(Message);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

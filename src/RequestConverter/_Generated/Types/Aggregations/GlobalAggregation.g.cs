@@ -27,7 +27,7 @@ public partial class GlobalAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GlobalAggregation", false);
-		__init.Dispose();
+		var initializer = writer.BeginObjectInitializer("GlobalAggregation", false);
+		initializer.Dispose();
 	}
 }

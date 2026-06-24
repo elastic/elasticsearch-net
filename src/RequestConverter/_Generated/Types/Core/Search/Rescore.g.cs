@@ -27,31 +27,31 @@ public partial class Rescore : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Rescore", false);
+		var initializer = writer.BeginObjectInitializer("Rescore", false);
 		if (WindowSize is not null)
 		{
-			__init.Property("WindowSize");
+			initializer.Property("WindowSize");
 			writer.WriteValue(WindowSize.Value);
 		}
 
 		if (LearningToRank is not null)
 		{
-			__init.Property("LearningToRank");
+			initializer.Property("LearningToRank");
 			LearningToRank.FormatCode(writer);
 		}
 
 		if (Query is not null)
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			Query.FormatCode(writer);
 		}
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

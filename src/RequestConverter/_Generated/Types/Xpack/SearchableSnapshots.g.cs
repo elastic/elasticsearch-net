@@ -27,34 +27,34 @@ public partial class SearchableSnapshots : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SearchableSnapshots", false);
+		var initializer = writer.BeginObjectInitializer("SearchableSnapshots", false);
 		{
-			__init.Property("Available");
+			initializer.Property("Available");
 			writer.WriteValue(Available);
 		}
 
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);
 		}
 
 		if (FullCopyIndicesCount is not null)
 		{
-			__init.Property("FullCopyIndicesCount");
+			initializer.Property("FullCopyIndicesCount");
 			writer.WriteValue(FullCopyIndicesCount.Value);
 		}
 
 		{
-			__init.Property("IndicesCount");
+			initializer.Property("IndicesCount");
 			writer.WriteValue(IndicesCount);
 		}
 
 		if (SharedCacheIndicesCount is not null)
 		{
-			__init.Property("SharedCacheIndicesCount");
+			initializer.Property("SharedCacheIndicesCount");
 			writer.WriteValue(SharedCacheIndicesCount.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

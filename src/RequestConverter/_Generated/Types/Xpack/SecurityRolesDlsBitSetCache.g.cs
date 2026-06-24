@@ -27,52 +27,52 @@ public partial class SecurityRolesDlsBitSetCache : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SecurityRolesDlsBitSetCache", false);
+		var initializer = writer.BeginObjectInitializer("SecurityRolesDlsBitSetCache", false);
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 		}
 
 		{
-			__init.Property("Evictions");
+			initializer.Property("Evictions");
 			writer.WriteValue(Evictions);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Hits");
+			initializer.Property("Hits");
 			writer.WriteValue(Hits);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("HitsTimeInMillis");
+			initializer.Property("HitsTimeInMillis");
 			writer.WriteValue(HitsTimeInMillis);
 		}
 
 		if (Memory is not null)
 		{
-			__init.Property("Memory");
+			initializer.Property("Memory");
 			Memory.FormatCode(writer);
 		}
 
 		{
-			__init.Property("MemoryInBytes");
+			initializer.Property("MemoryInBytes");
 			writer.WriteValue(MemoryInBytes);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Misses");
+			initializer.Property("Misses");
 			writer.WriteValue(Misses);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("MissesTimeInMillis");
+			initializer.Property("MissesTimeInMillis");
 			writer.WriteValue(MissesTimeInMillis);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

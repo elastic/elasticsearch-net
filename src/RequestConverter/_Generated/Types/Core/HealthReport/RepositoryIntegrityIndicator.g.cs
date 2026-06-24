@@ -27,35 +27,35 @@ public partial class RepositoryIntegrityIndicator : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RepositoryIntegrityIndicator", false);
+		var initializer = writer.BeginObjectInitializer("RepositoryIntegrityIndicator", false);
 		if (Details is not null)
 		{
-			__init.Property("Details");
+			initializer.Property("Details");
 			Details.FormatCode(writer);
 		}
 
 		if (Diagnosis is not null)
 		{
-			__init.Property("Diagnosis");
+			initializer.Property("Diagnosis");
 			writer.WriteInlineList(Diagnosis, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Impacts is not null)
 		{
-			__init.Property("Impacts");
+			initializer.Property("Impacts");
 			writer.WriteInlineList(Impacts, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Status");
+			initializer.Property("Status");
 			Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatusCodeFormatter.FormatCode(Status, writer);
 		}
 
 		{
-			__init.Property("Symptom");
+			initializer.Property("Symptom");
 			writer.WriteString(Symptom);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

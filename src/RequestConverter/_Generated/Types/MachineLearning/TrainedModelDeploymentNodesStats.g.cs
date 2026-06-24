@@ -27,67 +27,67 @@ public partial class TrainedModelDeploymentNodesStats : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelDeploymentNodesStats", false);
+		var initializer = writer.BeginObjectInitializer("TrainedModelDeploymentNodesStats", false);
 		if (AverageInferenceProcessMemoryRssBytes is not null)
 		{
-			__init.Property("AverageInferenceProcessMemoryRssBytes");
+			initializer.Property("AverageInferenceProcessMemoryRssBytes");
 			AverageInferenceProcessMemoryRssBytes.FormatCode(writer);
 		}
 
 		if (AverageInferenceTimeMs is not null)
 		{
-			__init.Property("AverageInferenceTimeMs");
+			initializer.Property("AverageInferenceTimeMs");
 			writer.WriteValue(AverageInferenceTimeMs.Value);
 		}
 
 		if (AverageInferenceTimeMsExcludingCacheHits is not null)
 		{
-			__init.Property("AverageInferenceTimeMsExcludingCacheHits");
+			initializer.Property("AverageInferenceTimeMsExcludingCacheHits");
 			writer.WriteValue(AverageInferenceTimeMsExcludingCacheHits.Value);
 		}
 
 		if (AverageInferenceTimeMsLastMinute is not null)
 		{
-			__init.Property("AverageInferenceTimeMsLastMinute");
+			initializer.Property("AverageInferenceTimeMsLastMinute");
 			writer.WriteValue(AverageInferenceTimeMsLastMinute.Value);
 		}
 
 		if (ErrorCount is not null)
 		{
-			__init.Property("ErrorCount");
+			initializer.Property("ErrorCount");
 			writer.WriteValue(ErrorCount.Value);
 		}
 
 		if (InferenceCacheHitCount is not null)
 		{
-			__init.Property("InferenceCacheHitCount");
+			initializer.Property("InferenceCacheHitCount");
 			writer.WriteValue(InferenceCacheHitCount.Value);
 			writer.Write("L");
 		}
 
 		if (InferenceCacheHitCountLastMinute is not null)
 		{
-			__init.Property("InferenceCacheHitCountLastMinute");
+			initializer.Property("InferenceCacheHitCountLastMinute");
 			writer.WriteValue(InferenceCacheHitCountLastMinute.Value);
 			writer.Write("L");
 		}
 
 		if (InferenceCount is not null)
 		{
-			__init.Property("InferenceCount");
+			initializer.Property("InferenceCount");
 			writer.WriteValue(InferenceCount.Value);
 			writer.Write("L");
 		}
 
 		if (LastAccess is not null)
 		{
-			__init.Property("LastAccess");
+			initializer.Property("LastAccess");
 			writer.WriteValue(LastAccess.Value);
 		}
 
 		if (Node is not null)
 		{
-			__init.Property("Node");
+			initializer.Property("Node");
 			writer.Write("new(");
 			writer.WriteString(Node.Value.Key);
 			writer.Write(", ");
@@ -97,56 +97,56 @@ public partial class TrainedModelDeploymentNodesStats : RequestConverter.ICodeFo
 
 		if (NumberOfAllocations is not null)
 		{
-			__init.Property("NumberOfAllocations");
+			initializer.Property("NumberOfAllocations");
 			writer.WriteValue(NumberOfAllocations.Value);
 		}
 
 		if (NumberOfPendingRequests is not null)
 		{
-			__init.Property("NumberOfPendingRequests");
+			initializer.Property("NumberOfPendingRequests");
 			writer.WriteValue(NumberOfPendingRequests.Value);
 		}
 
 		{
-			__init.Property("PeakThroughputPerMinute");
+			initializer.Property("PeakThroughputPerMinute");
 			writer.WriteValue(PeakThroughputPerMinute);
 			writer.Write("L");
 		}
 
 		if (RejectedExecutionCount is not null)
 		{
-			__init.Property("RejectedExecutionCount");
+			initializer.Property("RejectedExecutionCount");
 			writer.WriteValue(RejectedExecutionCount.Value);
 		}
 
 		{
-			__init.Property("RoutingState");
+			initializer.Property("RoutingState");
 			RoutingState.FormatCode(writer);
 		}
 
 		if (StartTime is not null)
 		{
-			__init.Property("StartTime");
+			initializer.Property("StartTime");
 			writer.WriteValue(StartTime.Value);
 		}
 
 		if (ThreadsPerAllocation is not null)
 		{
-			__init.Property("ThreadsPerAllocation");
+			initializer.Property("ThreadsPerAllocation");
 			writer.WriteValue(ThreadsPerAllocation.Value);
 		}
 
 		{
-			__init.Property("ThroughputLastMinute");
+			initializer.Property("ThroughputLastMinute");
 			writer.WriteValue(ThroughputLastMinute);
 		}
 
 		if (TimeoutCount is not null)
 		{
-			__init.Property("TimeoutCount");
+			initializer.Property("TimeoutCount");
 			writer.WriteValue(TimeoutCount.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

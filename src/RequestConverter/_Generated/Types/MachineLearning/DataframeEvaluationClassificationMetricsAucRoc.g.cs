@@ -27,19 +27,19 @@ public partial class DataframeEvaluationClassificationMetricsAucRoc : RequestCon
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeEvaluationClassificationMetricsAucRoc", false);
+		var initializer = writer.BeginObjectInitializer("DataframeEvaluationClassificationMetricsAucRoc", false);
 		if (ClassName is not null)
 		{
-			__init.Property("ClassName");
+			initializer.Property("ClassName");
 			ClassName.FormatCode(writer);
 		}
 
 		if (IncludeCurve is not null)
 		{
-			__init.Property("IncludeCurve");
+			initializer.Property("IncludeCurve");
 			writer.WriteValue(IncludeCurve.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,42 +27,42 @@ public partial class NodeReloadResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeReloadResult", false);
+		var initializer = writer.BeginObjectInitializer("NodeReloadResult", false);
 		if (KeystoreDigest is not null)
 		{
-			__init.Property("KeystoreDigest");
+			initializer.Property("KeystoreDigest");
 			writer.WriteString(KeystoreDigest);
 		}
 
 		if (KeystoreLastModifiedTime is not null)
 		{
-			__init.Property("KeystoreLastModifiedTime");
+			initializer.Property("KeystoreLastModifiedTime");
 			writer.WriteValue(KeystoreLastModifiedTime.Value);
 		}
 
 		if (KeystorePath is not null)
 		{
-			__init.Property("KeystorePath");
+			initializer.Property("KeystorePath");
 			writer.WriteString(KeystorePath);
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		if (ReloadException is not null)
 		{
-			__init.Property("ReloadException");
+			initializer.Property("ReloadException");
 			ReloadException.FormatCode(writer);
 		}
 
 		if (SecureSettingNames is not null)
 		{
-			__init.Property("SecureSettingNames");
+			initializer.Property("SecureSettingNames");
 			writer.WriteInlineList(SecureSettingNames, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

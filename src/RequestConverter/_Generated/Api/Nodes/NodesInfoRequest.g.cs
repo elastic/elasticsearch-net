@@ -27,31 +27,31 @@ public partial class NodesInfoRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodesInfoRequest", false);
+		var initializer = writer.BeginObjectInitializer("NodesInfoRequest", false);
 		if (Metric is not null)
 		{
-			__init.Property("Metric");
+			initializer.Property("Metric");
 			writer.WriteInlineList(Metric, (w, item) => { Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetricCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (NodeId is not null)
 		{
-			__init.Property("NodeId");
+			initializer.Property("NodeId");
 			NodeId.FormatCode(writer);
 		}
 
 		if (FlatSettings is not null)
 		{
-			__init.Property("FlatSettings");
+			initializer.Property("FlatSettings");
 			writer.WriteValue(FlatSettings.Value);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

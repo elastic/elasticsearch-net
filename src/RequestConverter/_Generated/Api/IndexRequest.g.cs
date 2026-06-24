@@ -27,104 +27,104 @@ public partial class IndexRequest<TDocument> : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexRequest<TDocument>", false);
+		var initializer = writer.BeginObjectInitializer("IndexRequest<TDocument>", false);
 		if (Id is not null)
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		if (IfPrimaryTerm is not null)
 		{
-			__init.Property("IfPrimaryTerm");
+			initializer.Property("IfPrimaryTerm");
 			writer.WriteValue(IfPrimaryTerm.Value);
 			writer.Write("L");
 		}
 
 		if (IfSeqNo is not null)
 		{
-			__init.Property("IfSeqNo");
+			initializer.Property("IfSeqNo");
 			writer.WriteValue(IfSeqNo.Value);
 			writer.Write("L");
 		}
 
 		if (IncludeSourceOnError is not null)
 		{
-			__init.Property("IncludeSourceOnError");
+			initializer.Property("IncludeSourceOnError");
 			writer.WriteValue(IncludeSourceOnError.Value);
 		}
 
 		if (OpType is not null)
 		{
-			__init.Property("OpType");
+			initializer.Property("OpType");
 			Elastic.Clients.Elasticsearch.OpTypeCodeFormatter.FormatCode(OpType.Value, writer);
 		}
 
 		if (Pipeline is not null)
 		{
-			__init.Property("Pipeline");
+			initializer.Property("Pipeline");
 			writer.WriteString(Pipeline);
 		}
 
 		if (Refresh is not null)
 		{
-			__init.Property("Refresh");
+			initializer.Property("Refresh");
 			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
 		}
 
 		if (RequireAlias is not null)
 		{
-			__init.Property("RequireAlias");
+			initializer.Property("RequireAlias");
 			writer.WriteValue(RequireAlias.Value);
 		}
 
 		if (RequireDataStream is not null)
 		{
-			__init.Property("RequireDataStream");
+			initializer.Property("RequireDataStream");
 			writer.WriteValue(RequireDataStream.Value);
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			Routing.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version.Value);
 			writer.Write("L");
 		}
 
 		if (VersionType is not null)
 		{
-			__init.Property("VersionType");
+			initializer.Property("VersionType");
 			Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, writer);
 		}
 
 		if (WaitForActiveShards is not null)
 		{
-			__init.Property("WaitForActiveShards");
+			initializer.Property("WaitForActiveShards");
 			WaitForActiveShards.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Document");
+			initializer.Property("Document");
 			writer.WriteValue(Document);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

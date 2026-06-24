@@ -27,283 +27,283 @@ public partial class Processor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Processor", false);
+		var initializer = writer.BeginObjectInitializer("Processor", false);
 		if (Append is not null)
 		{
-			__init.Property("Append");
+			initializer.Property("Append");
 			Append.FormatCode(writer);
 		}
 
 		if (Attachment is not null)
 		{
-			__init.Property("Attachment");
+			initializer.Property("Attachment");
 			Attachment.FormatCode(writer);
 		}
 
 		if (Bytes is not null)
 		{
-			__init.Property("Bytes");
+			initializer.Property("Bytes");
 			Bytes.FormatCode(writer);
 		}
 
 		if (Cef is not null)
 		{
-			__init.Property("Cef");
+			initializer.Property("Cef");
 			Cef.FormatCode(writer);
 		}
 
 		if (Circle is not null)
 		{
-			__init.Property("Circle");
+			initializer.Property("Circle");
 			Circle.FormatCode(writer);
 		}
 
 		if (CommunityId is not null)
 		{
-			__init.Property("CommunityId");
+			initializer.Property("CommunityId");
 			CommunityId.FormatCode(writer);
 		}
 
 		if (Convert is not null)
 		{
-			__init.Property("Convert");
+			initializer.Property("Convert");
 			Convert.FormatCode(writer);
 		}
 
 		if (Csv is not null)
 		{
-			__init.Property("Csv");
+			initializer.Property("Csv");
 			Csv.FormatCode(writer);
 		}
 
 		if (Date is not null)
 		{
-			__init.Property("Date");
+			initializer.Property("Date");
 			Date.FormatCode(writer);
 		}
 
 		if (DateIndexName is not null)
 		{
-			__init.Property("DateIndexName");
+			initializer.Property("DateIndexName");
 			DateIndexName.FormatCode(writer);
 		}
 
 		if (Dissect is not null)
 		{
-			__init.Property("Dissect");
+			initializer.Property("Dissect");
 			Dissect.FormatCode(writer);
 		}
 
 		if (DotExpander is not null)
 		{
-			__init.Property("DotExpander");
+			initializer.Property("DotExpander");
 			DotExpander.FormatCode(writer);
 		}
 
 		if (Drop is not null)
 		{
-			__init.Property("Drop");
+			initializer.Property("Drop");
 			Drop.FormatCode(writer);
 		}
 
 		if (Enrich is not null)
 		{
-			__init.Property("Enrich");
+			initializer.Property("Enrich");
 			Enrich.FormatCode(writer);
 		}
 
 		if (Fail is not null)
 		{
-			__init.Property("Fail");
+			initializer.Property("Fail");
 			Fail.FormatCode(writer);
 		}
 
 		if (Fingerprint is not null)
 		{
-			__init.Property("Fingerprint");
+			initializer.Property("Fingerprint");
 			Fingerprint.FormatCode(writer);
 		}
 
 		if (Foreach is not null)
 		{
-			__init.Property("Foreach");
+			initializer.Property("Foreach");
 			Foreach.FormatCode(writer);
 		}
 
 		if (GeoGrid is not null)
 		{
-			__init.Property("GeoGrid");
+			initializer.Property("GeoGrid");
 			GeoGrid.FormatCode(writer);
 		}
 
 		if (Geoip is not null)
 		{
-			__init.Property("Geoip");
+			initializer.Property("Geoip");
 			Geoip.FormatCode(writer);
 		}
 
 		if (Grok is not null)
 		{
-			__init.Property("Grok");
+			initializer.Property("Grok");
 			Grok.FormatCode(writer);
 		}
 
 		if (Gsub is not null)
 		{
-			__init.Property("Gsub");
+			initializer.Property("Gsub");
 			Gsub.FormatCode(writer);
 		}
 
 		if (HtmlStrip is not null)
 		{
-			__init.Property("HtmlStrip");
+			initializer.Property("HtmlStrip");
 			HtmlStrip.FormatCode(writer);
 		}
 
 		if (Inference is not null)
 		{
-			__init.Property("Inference");
+			initializer.Property("Inference");
 			Inference.FormatCode(writer);
 		}
 
 		if (IpLocation is not null)
 		{
-			__init.Property("IpLocation");
+			initializer.Property("IpLocation");
 			IpLocation.FormatCode(writer);
 		}
 
 		if (Join is not null)
 		{
-			__init.Property("Join");
+			initializer.Property("Join");
 			Join.FormatCode(writer);
 		}
 
 		if (Json is not null)
 		{
-			__init.Property("Json");
+			initializer.Property("Json");
 			Json.FormatCode(writer);
 		}
 
 		if (Kv is not null)
 		{
-			__init.Property("Kv");
+			initializer.Property("Kv");
 			Kv.FormatCode(writer);
 		}
 
 		if (Lowercase is not null)
 		{
-			__init.Property("Lowercase");
+			initializer.Property("Lowercase");
 			Lowercase.FormatCode(writer);
 		}
 
 		if (NetworkDirection is not null)
 		{
-			__init.Property("NetworkDirection");
+			initializer.Property("NetworkDirection");
 			NetworkDirection.FormatCode(writer);
 		}
 
 		if (Pipeline is not null)
 		{
-			__init.Property("Pipeline");
+			initializer.Property("Pipeline");
 			Pipeline.FormatCode(writer);
 		}
 
 		if (Redact is not null)
 		{
-			__init.Property("Redact");
+			initializer.Property("Redact");
 			Redact.FormatCode(writer);
 		}
 
 		if (RegisteredDomain is not null)
 		{
-			__init.Property("RegisteredDomain");
+			initializer.Property("RegisteredDomain");
 			RegisteredDomain.FormatCode(writer);
 		}
 
 		if (Remove is not null)
 		{
-			__init.Property("Remove");
+			initializer.Property("Remove");
 			Remove.FormatCode(writer);
 		}
 
 		if (Rename is not null)
 		{
-			__init.Property("Rename");
+			initializer.Property("Rename");
 			Rename.FormatCode(writer);
 		}
 
 		if (Reroute is not null)
 		{
-			__init.Property("Reroute");
+			initializer.Property("Reroute");
 			Reroute.FormatCode(writer);
 		}
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
 		if (Set is not null)
 		{
-			__init.Property("Set");
+			initializer.Property("Set");
 			Set.FormatCode(writer);
 		}
 
 		if (SetSecurityUser is not null)
 		{
-			__init.Property("SetSecurityUser");
+			initializer.Property("SetSecurityUser");
 			SetSecurityUser.FormatCode(writer);
 		}
 
 		if (Sort is not null)
 		{
-			__init.Property("Sort");
+			initializer.Property("Sort");
 			Sort.FormatCode(writer);
 		}
 
 		if (Split is not null)
 		{
-			__init.Property("Split");
+			initializer.Property("Split");
 			Split.FormatCode(writer);
 		}
 
 		if (Terminate is not null)
 		{
-			__init.Property("Terminate");
+			initializer.Property("Terminate");
 			Terminate.FormatCode(writer);
 		}
 
 		if (Trim is not null)
 		{
-			__init.Property("Trim");
+			initializer.Property("Trim");
 			Trim.FormatCode(writer);
 		}
 
 		if (Uppercase is not null)
 		{
-			__init.Property("Uppercase");
+			initializer.Property("Uppercase");
 			Uppercase.FormatCode(writer);
 		}
 
 		if (UriParts is not null)
 		{
-			__init.Property("UriParts");
+			initializer.Property("UriParts");
 			UriParts.FormatCode(writer);
 		}
 
 		if (UrlDecode is not null)
 		{
-			__init.Property("UrlDecode");
+			initializer.Property("UrlDecode");
 			UrlDecode.FormatCode(writer);
 		}
 
 		if (UserAgent is not null)
 		{
-			__init.Property("UserAgent");
+			initializer.Property("UserAgent");
 			UserAgent.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

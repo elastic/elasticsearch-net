@@ -27,17 +27,17 @@ public partial class MigrateReindex : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MigrateReindex", false);
+		var initializer = writer.BeginObjectInitializer("MigrateReindex", false);
 		{
-			__init.Property("Mode");
+			initializer.Property("Mode");
 			Elastic.Clients.Elasticsearch.IndexManagement.ModeEnumCodeFormatter.FormatCode(Mode, writer);
 		}
 
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			Source.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

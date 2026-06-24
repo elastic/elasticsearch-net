@@ -27,36 +27,36 @@ public partial class PatternReplaceTokenFilter : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PatternReplaceTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("PatternReplaceTokenFilter", true);
 		if (All is not null)
 		{
-			__init.Property("All");
+			initializer.Property("All");
 			writer.WriteValue(All.Value);
 		}
 
 		if (Flags is not null)
 		{
-			__init.Property("Flags");
+			initializer.Property("Flags");
 			writer.WriteString(Flags);
 		}
 
 		{
-			__init.Property("Pattern");
+			initializer.Property("Pattern");
 			writer.WriteString(Pattern);
 		}
 
 		if (Replacement is not null)
 		{
-			__init.Property("Replacement");
+			initializer.Property("Replacement");
 			writer.WriteString(Replacement);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

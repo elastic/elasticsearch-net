@@ -27,18 +27,18 @@ public partial class TimeSync : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TimeSync", false);
+		var initializer = writer.BeginObjectInitializer("TimeSync", false);
 		if (Delay is not null)
 		{
-			__init.Property("Delay");
+			initializer.Property("Delay");
 			Delay.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

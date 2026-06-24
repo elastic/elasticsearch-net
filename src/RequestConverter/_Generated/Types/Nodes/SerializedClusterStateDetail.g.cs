@@ -27,40 +27,40 @@ public partial class SerializedClusterStateDetail : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SerializedClusterStateDetail", false);
+		var initializer = writer.BeginObjectInitializer("SerializedClusterStateDetail", false);
 		if (CompressedSize is not null)
 		{
-			__init.Property("CompressedSize");
+			initializer.Property("CompressedSize");
 			writer.WriteString(CompressedSize);
 		}
 
 		if (CompressedSizeInBytes is not null)
 		{
-			__init.Property("CompressedSizeInBytes");
+			initializer.Property("CompressedSizeInBytes");
 			writer.WriteValue(CompressedSizeInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (Count is not null)
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count.Value);
 			writer.Write("L");
 		}
 
 		if (UncompressedSize is not null)
 		{
-			__init.Property("UncompressedSize");
+			initializer.Property("UncompressedSize");
 			writer.WriteString(UncompressedSize);
 		}
 
 		if (UncompressedSizeInBytes is not null)
 		{
-			__init.Property("UncompressedSizeInBytes");
+			initializer.Property("UncompressedSizeInBytes");
 			writer.WriteValue(UncompressedSizeInBytes.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

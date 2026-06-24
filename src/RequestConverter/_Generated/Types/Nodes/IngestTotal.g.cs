@@ -27,30 +27,30 @@ public partial class IngestTotal : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IngestTotal", false);
+		var initializer = writer.BeginObjectInitializer("IngestTotal", false);
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Current");
+			initializer.Property("Current");
 			writer.WriteValue(Current);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Failed");
+			initializer.Property("Failed");
 			writer.WriteValue(Failed);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("TimeInMillis");
+			initializer.Property("TimeInMillis");
 			writer.WriteValue(TimeInMillis);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

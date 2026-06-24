@@ -27,27 +27,27 @@ public partial class SizeHttpHistogram : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SizeHttpHistogram", false);
+		var initializer = writer.BeginObjectInitializer("SizeHttpHistogram", false);
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 			writer.Write("L");
 		}
 
 		if (GeBytes is not null)
 		{
-			__init.Property("GeBytes");
+			initializer.Property("GeBytes");
 			writer.WriteValue(GeBytes.Value);
 			writer.Write("L");
 		}
 
 		if (LtBytes is not null)
 		{
-			__init.Property("LtBytes");
+			initializer.Property("LtBytes");
 			writer.WriteValue(LtBytes.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

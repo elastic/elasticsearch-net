@@ -27,20 +27,20 @@ public partial class PValueHeuristic : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PValueHeuristic", false);
+		var initializer = writer.BeginObjectInitializer("PValueHeuristic", false);
 		if (BackgroundIsSuperset is not null)
 		{
-			__init.Property("BackgroundIsSuperset");
+			initializer.Property("BackgroundIsSuperset");
 			writer.WriteValue(BackgroundIsSuperset.Value);
 		}
 
 		if (NormalizeAbove is not null)
 		{
-			__init.Property("NormalizeAbove");
+			initializer.Property("NormalizeAbove");
 			writer.WriteValue(NormalizeAbove.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

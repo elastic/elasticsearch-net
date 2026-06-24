@@ -27,38 +27,38 @@ public partial class AllocationStore : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AllocationStore", false);
+		var initializer = writer.BeginObjectInitializer("AllocationStore", false);
 		{
-			__init.Property("AllocationId");
+			initializer.Property("AllocationId");
 			writer.WriteString(AllocationId);
 		}
 
 		{
-			__init.Property("Found");
+			initializer.Property("Found");
 			writer.WriteValue(Found);
 		}
 
 		{
-			__init.Property("InSync");
+			initializer.Property("InSync");
 			writer.WriteValue(InSync);
 		}
 
 		{
-			__init.Property("MatchingSizeInBytes");
+			initializer.Property("MatchingSizeInBytes");
 			writer.WriteValue(MatchingSizeInBytes);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("MatchingSyncId");
+			initializer.Property("MatchingSyncId");
 			writer.WriteValue(MatchingSyncId);
 		}
 
 		{
-			__init.Property("StoreException");
+			initializer.Property("StoreException");
 			writer.WriteString(StoreException);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

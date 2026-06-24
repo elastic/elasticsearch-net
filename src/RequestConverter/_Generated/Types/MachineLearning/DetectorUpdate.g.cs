@@ -27,24 +27,24 @@ public partial class DetectorUpdate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DetectorUpdate", false);
+		var initializer = writer.BeginObjectInitializer("DetectorUpdate", false);
 		if (CustomRules is not null)
 		{
-			__init.Property("CustomRules");
+			initializer.Property("CustomRules");
 			writer.WriteInlineList(CustomRules, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		{
-			__init.Property("DetectorIndex");
+			initializer.Property("DetectorIndex");
 			writer.WriteValue(DetectorIndex);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

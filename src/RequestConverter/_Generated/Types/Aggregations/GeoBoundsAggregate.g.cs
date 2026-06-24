@@ -27,16 +27,16 @@ public partial class GeoBoundsAggregate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoBoundsAggregate", true);
+		var initializer = writer.BeginObjectInitializer("GeoBoundsAggregate", true);
 		if (Bounds is not null)
 		{
-			__init.Property("Bounds");
+			initializer.Property("Bounds");
 			Bounds.FormatCode(writer);
 		}
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -45,6 +45,6 @@ public partial class GeoBoundsAggregate : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

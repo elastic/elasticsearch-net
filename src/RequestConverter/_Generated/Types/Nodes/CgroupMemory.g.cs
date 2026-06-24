@@ -27,25 +27,25 @@ public partial class CgroupMemory : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CgroupMemory", false);
+		var initializer = writer.BeginObjectInitializer("CgroupMemory", false);
 		if (ControlGroup is not null)
 		{
-			__init.Property("ControlGroup");
+			initializer.Property("ControlGroup");
 			writer.WriteString(ControlGroup);
 		}
 
 		if (LimitInBytes is not null)
 		{
-			__init.Property("LimitInBytes");
+			initializer.Property("LimitInBytes");
 			writer.WriteString(LimitInBytes);
 		}
 
 		if (UsageInBytes is not null)
 		{
-			__init.Property("UsageInBytes");
+			initializer.Property("UsageInBytes");
 			writer.WriteString(UsageInBytes);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

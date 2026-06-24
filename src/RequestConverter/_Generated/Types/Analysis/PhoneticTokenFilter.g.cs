@@ -27,48 +27,48 @@ public partial class PhoneticTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PhoneticTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("PhoneticTokenFilter", true);
 		{
-			__init.Property("Encoder");
+			initializer.Property("Encoder");
 			Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoderCodeFormatter.FormatCode(Encoder, writer);
 		}
 
 		if (Languageset is not null)
 		{
-			__init.Property("Languageset");
+			initializer.Property("Languageset");
 			writer.WriteInlineList(Languageset, (w, item) => { Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguageCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (MaxCodeLen is not null)
 		{
-			__init.Property("MaxCodeLen");
+			initializer.Property("MaxCodeLen");
 			writer.WriteValue(MaxCodeLen.Value);
 		}
 
 		if (NameType is not null)
 		{
-			__init.Property("NameType");
+			initializer.Property("NameType");
 			Elastic.Clients.Elasticsearch.Analysis.PhoneticNameTypeCodeFormatter.FormatCode(NameType.Value, writer);
 		}
 
 		if (Replace is not null)
 		{
-			__init.Property("Replace");
+			initializer.Property("Replace");
 			writer.WriteValue(Replace.Value);
 		}
 
 		if (RuleType is not null)
 		{
-			__init.Property("RuleType");
+			initializer.Property("RuleType");
 			Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleTypeCodeFormatter.FormatCode(RuleType.Value, writer);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,42 +27,42 @@ public partial class ForgetFollowerRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ForgetFollowerRequest", false);
+		var initializer = writer.BeginObjectInitializer("ForgetFollowerRequest", false);
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (FollowerCluster is not null)
 		{
-			__init.Property("FollowerCluster");
+			initializer.Property("FollowerCluster");
 			writer.WriteString(FollowerCluster);
 		}
 
 		if (FollowerIndex is not null)
 		{
-			__init.Property("FollowerIndex");
+			initializer.Property("FollowerIndex");
 			FollowerIndex.FormatCode(writer);
 		}
 
 		if (FollowerIndexUuid is not null)
 		{
-			__init.Property("FollowerIndexUuid");
+			initializer.Property("FollowerIndexUuid");
 			writer.WriteString(FollowerIndexUuid);
 		}
 
 		if (LeaderRemoteCluster is not null)
 		{
-			__init.Property("LeaderRemoteCluster");
+			initializer.Property("LeaderRemoteCluster");
 			writer.WriteString(LeaderRemoteCluster);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

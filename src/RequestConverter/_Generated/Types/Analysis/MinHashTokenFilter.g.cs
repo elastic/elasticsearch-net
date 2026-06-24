@@ -27,37 +27,37 @@ public partial class MinHashTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MinHashTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("MinHashTokenFilter", true);
 		if (BucketCount is not null)
 		{
-			__init.Property("BucketCount");
+			initializer.Property("BucketCount");
 			writer.WriteValue(BucketCount.Value);
 		}
 
 		if (HashCount is not null)
 		{
-			__init.Property("HashCount");
+			initializer.Property("HashCount");
 			writer.WriteValue(HashCount.Value);
 		}
 
 		if (HashSetSize is not null)
 		{
-			__init.Property("HashSetSize");
+			initializer.Property("HashSetSize");
 			writer.WriteValue(HashSetSize.Value);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
 		if (WithRotation is not null)
 		{
-			__init.Property("WithRotation");
+			initializer.Property("WithRotation");
 			writer.WriteValue(WithRotation.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

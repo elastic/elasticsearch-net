@@ -27,29 +27,29 @@ public partial class UpdateModelSnapshotRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UpdateModelSnapshotRequest", false);
+		var initializer = writer.BeginObjectInitializer("UpdateModelSnapshotRequest", false);
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			JobId.FormatCode(writer);
 		}
 
 		{
-			__init.Property("SnapshotId");
+			initializer.Property("SnapshotId");
 			SnapshotId.FormatCode(writer);
 		}
 
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		if (Retain is not null)
 		{
-			__init.Property("Retain");
+			initializer.Property("Retain");
 			writer.WriteValue(Retain.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,19 +27,19 @@ public partial class UserProfileHitMetadata : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UserProfileHitMetadata", false);
+		var initializer = writer.BeginObjectInitializer("UserProfileHitMetadata", false);
 		{
-			__init.Property("PrimaryTerm");
+			initializer.Property("PrimaryTerm");
 			writer.WriteValue(PrimaryTerm);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("SeqNo");
+			initializer.Property("SeqNo");
 			writer.WriteValue(SeqNo);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

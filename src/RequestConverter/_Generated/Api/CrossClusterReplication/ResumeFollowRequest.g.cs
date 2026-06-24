@@ -27,83 +27,83 @@ public partial class ResumeFollowRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ResumeFollowRequest", false);
+		var initializer = writer.BeginObjectInitializer("ResumeFollowRequest", false);
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (MaxOutstandingReadRequests is not null)
 		{
-			__init.Property("MaxOutstandingReadRequests");
+			initializer.Property("MaxOutstandingReadRequests");
 			writer.WriteValue(MaxOutstandingReadRequests.Value);
 			writer.Write("L");
 		}
 
 		if (MaxOutstandingWriteRequests is not null)
 		{
-			__init.Property("MaxOutstandingWriteRequests");
+			initializer.Property("MaxOutstandingWriteRequests");
 			writer.WriteValue(MaxOutstandingWriteRequests.Value);
 			writer.Write("L");
 		}
 
 		if (MaxReadRequestOperationCount is not null)
 		{
-			__init.Property("MaxReadRequestOperationCount");
+			initializer.Property("MaxReadRequestOperationCount");
 			writer.WriteValue(MaxReadRequestOperationCount.Value);
 			writer.Write("L");
 		}
 
 		if (MaxReadRequestSize is not null)
 		{
-			__init.Property("MaxReadRequestSize");
+			initializer.Property("MaxReadRequestSize");
 			writer.WriteString(MaxReadRequestSize);
 		}
 
 		if (MaxRetryDelay is not null)
 		{
-			__init.Property("MaxRetryDelay");
+			initializer.Property("MaxRetryDelay");
 			MaxRetryDelay.FormatCode(writer);
 		}
 
 		if (MaxWriteBufferCount is not null)
 		{
-			__init.Property("MaxWriteBufferCount");
+			initializer.Property("MaxWriteBufferCount");
 			writer.WriteValue(MaxWriteBufferCount.Value);
 			writer.Write("L");
 		}
 
 		if (MaxWriteBufferSize is not null)
 		{
-			__init.Property("MaxWriteBufferSize");
+			initializer.Property("MaxWriteBufferSize");
 			writer.WriteString(MaxWriteBufferSize);
 		}
 
 		if (MaxWriteRequestOperationCount is not null)
 		{
-			__init.Property("MaxWriteRequestOperationCount");
+			initializer.Property("MaxWriteRequestOperationCount");
 			writer.WriteValue(MaxWriteRequestOperationCount.Value);
 			writer.Write("L");
 		}
 
 		if (MaxWriteRequestSize is not null)
 		{
-			__init.Property("MaxWriteRequestSize");
+			initializer.Property("MaxWriteRequestSize");
 			writer.WriteString(MaxWriteRequestSize);
 		}
 
 		if (ReadPollTimeout is not null)
 		{
-			__init.Property("ReadPollTimeout");
+			initializer.Property("ReadPollTimeout");
 			ReadPollTimeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,13 +27,13 @@ public partial class GoogleNormalizedDistanceHeuristic : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GoogleNormalizedDistanceHeuristic", false);
+		var initializer = writer.BeginObjectInitializer("GoogleNormalizedDistanceHeuristic", false);
 		if (BackgroundIsSuperset is not null)
 		{
-			__init.Property("BackgroundIsSuperset");
+			initializer.Property("BackgroundIsSuperset");
 			writer.WriteValue(BackgroundIsSuperset.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

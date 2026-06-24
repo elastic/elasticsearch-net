@@ -27,49 +27,49 @@ public partial class PercentilesAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PercentilesAggregation", false);
+		var initializer = writer.BeginObjectInitializer("PercentilesAggregation", false);
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			writer.WriteString(Format);
 		}
 
 		if (Hdr is not null)
 		{
-			__init.Property("Hdr");
+			initializer.Property("Hdr");
 			Hdr.FormatCode(writer);
 		}
 
 		if (Missing is not null)
 		{
-			__init.Property("Missing");
+			initializer.Property("Missing");
 			writer.WriteValue(Missing);
 		}
 
 		if (Percents is not null)
 		{
-			__init.Property("Percents");
+			initializer.Property("Percents");
 			writer.WriteInlineList(Percents, (w, item) => { w.WriteValue(item); w.Write("d"); });
 		}
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
 		if (TDigest is not null)
 		{
-			__init.Property("TDigest");
+			initializer.Property("TDigest");
 			TDigest.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

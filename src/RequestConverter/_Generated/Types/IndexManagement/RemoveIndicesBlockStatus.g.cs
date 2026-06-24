@@ -27,24 +27,24 @@ public partial class RemoveIndicesBlockStatus : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RemoveIndicesBlockStatus", false);
+		var initializer = writer.BeginObjectInitializer("RemoveIndicesBlockStatus", false);
 		if (Exception is not null)
 		{
-			__init.Property("Exception");
+			initializer.Property("Exception");
 			Exception.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		if (Unblocked is not null)
 		{
-			__init.Property("Unblocked");
+			initializer.Property("Unblocked");
 			writer.WriteValue(Unblocked.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

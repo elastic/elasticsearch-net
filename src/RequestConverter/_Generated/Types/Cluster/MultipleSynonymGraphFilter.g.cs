@@ -27,19 +27,19 @@ public partial class MultipleSynonymGraphFilter : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MultipleSynonymGraphFilter", false);
+		var initializer = writer.BeginObjectInitializer("MultipleSynonymGraphFilter", false);
 		if (AnalyzerCount is not null)
 		{
-			__init.Property("AnalyzerCount");
+			initializer.Property("AnalyzerCount");
 			writer.WriteValue(AnalyzerCount.Value);
 		}
 
 		if (IndexCount is not null)
 		{
-			__init.Property("IndexCount");
+			initializer.Property("IndexCount");
 			writer.WriteValue(IndexCount.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,13 +27,13 @@ public partial class RankFeatureFunctionLogarithm : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RankFeatureFunctionLogarithm", false);
+		var initializer = writer.BeginObjectInitializer("RankFeatureFunctionLogarithm", false);
 		{
-			__init.Property("ScalingFactor");
+			initializer.Property("ScalingFactor");
 			writer.WriteValue(ScalingFactor);
 			writer.Write("f");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,24 +27,24 @@ public partial class SlmIndicatorDetails : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SlmIndicatorDetails", false);
+		var initializer = writer.BeginObjectInitializer("SlmIndicatorDetails", false);
 		{
-			__init.Property("Policies");
+			initializer.Property("Policies");
 			writer.WriteValue(Policies);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("SlmStatus");
+			initializer.Property("SlmStatus");
 			Elastic.Clients.Elasticsearch.LifecycleOperationModeCodeFormatter.FormatCode(SlmStatus, writer);
 		}
 
 		if (UnhealthyPolicies is not null)
 		{
-			__init.Property("UnhealthyPolicies");
+			initializer.Property("UnhealthyPolicies");
 			UnhealthyPolicies.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,12 +27,12 @@ public partial class EmbeddingContentObject : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EmbeddingContentObject", false);
+		var initializer = writer.BeginObjectInitializer("EmbeddingContentObject", false);
 		{
-			__init.Property("Content");
+			initializer.Property("Content");
 			writer.WriteInlineList(Content, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

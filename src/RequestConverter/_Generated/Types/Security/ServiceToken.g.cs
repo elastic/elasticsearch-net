@@ -27,17 +27,17 @@ public partial class ServiceToken : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ServiceToken", false);
+		var initializer = writer.BeginObjectInitializer("ServiceToken", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("Value");
+			initializer.Property("Value");
 			writer.WriteString(Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

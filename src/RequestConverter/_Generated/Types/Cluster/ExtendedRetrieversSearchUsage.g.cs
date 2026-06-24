@@ -27,13 +27,13 @@ public partial class ExtendedRetrieversSearchUsage : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExtendedRetrieversSearchUsage", false);
+		var initializer = writer.BeginObjectInitializer("ExtendedRetrieversSearchUsage", false);
 		if (TextSimilarityReranker is not null)
 		{
-			__init.Property("TextSimilarityReranker");
+			initializer.Property("TextSimilarityReranker");
 			TextSimilarityReranker.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

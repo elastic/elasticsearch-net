@@ -27,43 +27,43 @@ public partial class IngestDocumentSimulation : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IngestDocumentSimulation", false);
+		var initializer = writer.BeginObjectInitializer("IngestDocumentSimulation", false);
 		if (EffectiveMapping is not null)
 		{
-			__init.Property("EffectiveMapping");
+			initializer.Property("EffectiveMapping");
 			EffectiveMapping.FormatCode(writer);
 		}
 
 		if (Error is not null)
 		{
-			__init.Property("Error");
+			initializer.Property("Error");
 			Error.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ExecutedPipelines");
+			initializer.Property("ExecutedPipelines");
 			writer.WriteInlineList(ExecutedPipelines, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		if (IgnoredFields is not null)
 		{
-			__init.Property("IgnoredFields");
+			initializer.Property("IgnoredFields");
 			writer.WriteInlineList(IgnoredFields, (w, item) => { w.Write("new global::System.Collections.Generic.Dictionary<"); w.Write("string"); w.Write(", "); w.Write("string"); w.Write(">() "); w.WriteInlineList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", "); });
 		}
 
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteString(Index);
 		}
 
 		if (Metadata is not null)
 		{
-			__init.Property("Metadata");
+			initializer.Property("Metadata");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -73,7 +73,7 @@ public partial class IngestDocumentSimulation : RequestConverter.ICodeFormattabl
 		}
 
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -83,11 +83,11 @@ public partial class IngestDocumentSimulation : RequestConverter.ICodeFormattabl
 		}
 
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

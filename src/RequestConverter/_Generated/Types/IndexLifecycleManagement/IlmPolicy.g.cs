@@ -27,10 +27,10 @@ public partial class IlmPolicy : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IlmPolicy", false);
+		var initializer = writer.BeginObjectInitializer("IlmPolicy", false);
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -40,10 +40,10 @@ public partial class IlmPolicy : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Phases");
+			initializer.Property("Phases");
 			Phases.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

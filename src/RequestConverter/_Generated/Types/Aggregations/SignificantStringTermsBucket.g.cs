@@ -27,36 +27,36 @@ public partial class SignificantStringTermsBucket : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SignificantStringTermsBucket", false);
+		var initializer = writer.BeginObjectInitializer("SignificantStringTermsBucket", false);
 		if (Aggregations is not null)
 		{
-			__init.Property("Aggregations");
+			initializer.Property("Aggregations");
 			Aggregations.FormatCode(writer);
 		}
 
 		{
-			__init.Property("BgCount");
+			initializer.Property("BgCount");
 			writer.WriteValue(BgCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("DocCount");
+			initializer.Property("DocCount");
 			writer.WriteValue(DocCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Key");
+			initializer.Property("Key");
 			writer.WriteString(Key);
 		}
 
 		{
-			__init.Property("Score");
+			initializer.Property("Score");
 			writer.WriteValue(Score);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

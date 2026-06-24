@@ -27,10 +27,10 @@ public partial class GarbageCollector : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GarbageCollector", false);
+		var initializer = writer.BeginObjectInitializer("GarbageCollector", false);
 		if (Collectors is not null)
 		{
-			__init.Property("Collectors");
+			initializer.Property("Collectors");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -39,6 +39,6 @@ public partial class GarbageCollector : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(Collectors, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

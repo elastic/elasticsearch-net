@@ -27,40 +27,40 @@ public partial class ExtendedStatsAggregate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExtendedStatsAggregate", true);
+		var initializer = writer.BeginObjectInitializer("ExtendedStatsAggregate", true);
 		{
-			__init.Property("Avg");
+			initializer.Property("Avg");
 			writer.WriteValue(Avg.Value);
 			writer.Write("d");
 		}
 
 		if (AvgAsString is not null)
 		{
-			__init.Property("AvgAsString");
+			initializer.Property("AvgAsString");
 			writer.WriteString(AvgAsString);
 		}
 
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Max");
+			initializer.Property("Max");
 			writer.WriteValue(Max.Value);
 			writer.Write("d");
 		}
 
 		if (MaxAsString is not null)
 		{
-			__init.Property("MaxAsString");
+			initializer.Property("MaxAsString");
 			writer.WriteString(MaxAsString);
 		}
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -70,113 +70,113 @@ public partial class ExtendedStatsAggregate : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Min");
+			initializer.Property("Min");
 			writer.WriteValue(Min.Value);
 			writer.Write("d");
 		}
 
 		if (MinAsString is not null)
 		{
-			__init.Property("MinAsString");
+			initializer.Property("MinAsString");
 			writer.WriteString(MinAsString);
 		}
 
 		{
-			__init.Property("StdDeviation");
+			initializer.Property("StdDeviation");
 			writer.WriteValue(StdDeviation.Value);
 			writer.Write("d");
 		}
 
 		if (StdDeviationAsString is not null)
 		{
-			__init.Property("StdDeviationAsString");
+			initializer.Property("StdDeviationAsString");
 			writer.WriteString(StdDeviationAsString);
 		}
 
 		if (StdDeviationBounds is not null)
 		{
-			__init.Property("StdDeviationBounds");
+			initializer.Property("StdDeviationBounds");
 			StdDeviationBounds.FormatCode(writer);
 		}
 
 		if (StdDeviationBoundsAsString is not null)
 		{
-			__init.Property("StdDeviationBoundsAsString");
+			initializer.Property("StdDeviationBoundsAsString");
 			StdDeviationBoundsAsString.FormatCode(writer);
 		}
 
 		{
-			__init.Property("StdDeviationPopulation");
+			initializer.Property("StdDeviationPopulation");
 			writer.WriteValue(StdDeviationPopulation.Value);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("StdDeviationSampling");
+			initializer.Property("StdDeviationSampling");
 			writer.WriteValue(StdDeviationSampling.Value);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Sum");
+			initializer.Property("Sum");
 			writer.WriteValue(Sum);
 			writer.Write("d");
 		}
 
 		if (SumAsString is not null)
 		{
-			__init.Property("SumAsString");
+			initializer.Property("SumAsString");
 			writer.WriteString(SumAsString);
 		}
 
 		{
-			__init.Property("SumOfSquares");
+			initializer.Property("SumOfSquares");
 			writer.WriteValue(SumOfSquares.Value);
 			writer.Write("d");
 		}
 
 		if (SumOfSquaresAsString is not null)
 		{
-			__init.Property("SumOfSquaresAsString");
+			initializer.Property("SumOfSquaresAsString");
 			writer.WriteString(SumOfSquaresAsString);
 		}
 
 		{
-			__init.Property("Variance");
+			initializer.Property("Variance");
 			writer.WriteValue(Variance.Value);
 			writer.Write("d");
 		}
 
 		if (VarianceAsString is not null)
 		{
-			__init.Property("VarianceAsString");
+			initializer.Property("VarianceAsString");
 			writer.WriteString(VarianceAsString);
 		}
 
 		{
-			__init.Property("VariancePopulation");
+			initializer.Property("VariancePopulation");
 			writer.WriteValue(VariancePopulation.Value);
 			writer.Write("d");
 		}
 
 		if (VariancePopulationAsString is not null)
 		{
-			__init.Property("VariancePopulationAsString");
+			initializer.Property("VariancePopulationAsString");
 			writer.WriteString(VariancePopulationAsString);
 		}
 
 		{
-			__init.Property("VarianceSampling");
+			initializer.Property("VarianceSampling");
 			writer.WriteValue(VarianceSampling.Value);
 			writer.Write("d");
 		}
 
 		if (VarianceSamplingAsString is not null)
 		{
-			__init.Property("VarianceSamplingAsString");
+			initializer.Property("VarianceSamplingAsString");
 			writer.WriteString(VarianceSamplingAsString);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

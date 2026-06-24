@@ -27,40 +27,40 @@ public partial class TransformProgress : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TransformProgress", false);
+		var initializer = writer.BeginObjectInitializer("TransformProgress", false);
 		{
-			__init.Property("DocsIndexed");
+			initializer.Property("DocsIndexed");
 			writer.WriteValue(DocsIndexed);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("DocsProcessed");
+			initializer.Property("DocsProcessed");
 			writer.WriteValue(DocsProcessed);
 			writer.Write("L");
 		}
 
 		if (DocsRemaining is not null)
 		{
-			__init.Property("DocsRemaining");
+			initializer.Property("DocsRemaining");
 			writer.WriteValue(DocsRemaining.Value);
 			writer.Write("L");
 		}
 
 		if (PercentComplete is not null)
 		{
-			__init.Property("PercentComplete");
+			initializer.Property("PercentComplete");
 			writer.WriteValue(PercentComplete.Value);
 			writer.Write("d");
 		}
 
 		if (TotalDocs is not null)
 		{
-			__init.Property("TotalDocs");
+			initializer.Property("TotalDocs");
 			writer.WriteValue(TotalDocs.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

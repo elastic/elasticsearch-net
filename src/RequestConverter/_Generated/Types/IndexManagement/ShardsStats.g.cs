@@ -27,14 +27,14 @@ public partial class ShardsStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardsStats", false);
+		var initializer = writer.BeginObjectInitializer("ShardsStats", false);
 		{
-			__init.Property("AllFields");
+			initializer.Property("AllFields");
 			AllFields.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -43,6 +43,6 @@ public partial class ShardsStats : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

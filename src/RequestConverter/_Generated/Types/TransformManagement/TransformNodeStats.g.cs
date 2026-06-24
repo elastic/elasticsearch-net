@@ -27,12 +27,12 @@ public partial class TransformNodeStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TransformNodeStats", false);
+		var initializer = writer.BeginObjectInitializer("TransformNodeStats", false);
 		{
-			__init.Property("Scheduler");
+			initializer.Property("Scheduler");
 			Scheduler.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

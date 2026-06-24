@@ -27,22 +27,22 @@ public partial class Http : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Http", false);
+		var initializer = writer.BeginObjectInitializer("Http", false);
 		if (Clients is not null)
 		{
-			__init.Property("Clients");
+			initializer.Property("Clients");
 			writer.WriteInlineList(Clients, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (CurrentOpen is not null)
 		{
-			__init.Property("CurrentOpen");
+			initializer.Property("CurrentOpen");
 			writer.WriteValue(CurrentOpen.Value);
 		}
 
 		if (Routes is not null)
 		{
-			__init.Property("Routes");
+			initializer.Property("Routes");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -53,11 +53,11 @@ public partial class Http : RequestConverter.ICodeFormattable
 
 		if (TotalOpened is not null)
 		{
-			__init.Property("TotalOpened");
+			initializer.Property("TotalOpened");
 			writer.WriteValue(TotalOpened.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

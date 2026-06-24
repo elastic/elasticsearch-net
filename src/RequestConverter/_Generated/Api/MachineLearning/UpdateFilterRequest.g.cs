@@ -27,30 +27,30 @@ public partial class UpdateFilterRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UpdateFilterRequest", false);
+		var initializer = writer.BeginObjectInitializer("UpdateFilterRequest", false);
 		{
-			__init.Property("FilterId");
+			initializer.Property("FilterId");
 			FilterId.FormatCode(writer);
 		}
 
 		if (AddItems is not null)
 		{
-			__init.Property("AddItems");
+			initializer.Property("AddItems");
 			writer.WriteInlineList(AddItems, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		if (RemoveItems is not null)
 		{
-			__init.Property("RemoveItems");
+			initializer.Property("RemoveItems");
 			writer.WriteInlineList(RemoveItems, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

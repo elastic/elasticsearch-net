@@ -27,34 +27,34 @@ public partial class KnnCollectorResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("KnnCollectorResult", false);
+		var initializer = writer.BeginObjectInitializer("KnnCollectorResult", false);
 		if (Children is not null)
 		{
-			__init.Property("Children");
+			initializer.Property("Children");
 			writer.WriteInlineList(Children, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("Reason");
+			initializer.Property("Reason");
 			writer.WriteString(Reason);
 		}
 
 		if (Time is not null)
 		{
-			__init.Property("Time");
+			initializer.Property("Time");
 			Time.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TimeInNanos");
+			initializer.Property("TimeInNanos");
 			writer.WriteValue(TimeInNanos);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

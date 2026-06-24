@@ -27,48 +27,48 @@ public partial class SharedFileSystemRepositorySettings : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SharedFileSystemRepositorySettings", false);
+		var initializer = writer.BeginObjectInitializer("SharedFileSystemRepositorySettings", false);
 		if (ChunkSize is not null)
 		{
-			__init.Property("ChunkSize");
+			initializer.Property("ChunkSize");
 			ChunkSize.FormatCode(writer);
 		}
 
 		if (Compress is not null)
 		{
-			__init.Property("Compress");
+			initializer.Property("Compress");
 			writer.WriteValue(Compress.Value);
 		}
 
 		{
-			__init.Property("Location");
+			initializer.Property("Location");
 			writer.WriteString(Location);
 		}
 
 		if (MaxNumberOfSnapshots is not null)
 		{
-			__init.Property("MaxNumberOfSnapshots");
+			initializer.Property("MaxNumberOfSnapshots");
 			writer.WriteValue(MaxNumberOfSnapshots.Value);
 		}
 
 		if (MaxRestoreBytesPerSec is not null)
 		{
-			__init.Property("MaxRestoreBytesPerSec");
+			initializer.Property("MaxRestoreBytesPerSec");
 			MaxRestoreBytesPerSec.FormatCode(writer);
 		}
 
 		if (MaxSnapshotBytesPerSec is not null)
 		{
-			__init.Property("MaxSnapshotBytesPerSec");
+			initializer.Property("MaxSnapshotBytesPerSec");
 			MaxSnapshotBytesPerSec.FormatCode(writer);
 		}
 
 		if (Readonly is not null)
 		{
-			__init.Property("Readonly");
+			initializer.Property("Readonly");
 			writer.WriteValue(Readonly.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

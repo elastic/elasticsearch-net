@@ -27,19 +27,19 @@ public partial class KuromojiAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("KuromojiAnalyzer", true);
+		var initializer = writer.BeginObjectInitializer("KuromojiAnalyzer", true);
 		if (Mode is not null)
 		{
-			__init.Property("Mode");
+			initializer.Property("Mode");
 			Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationModeCodeFormatter.FormatCode(Mode.Value, writer);
 		}
 
 		if (UserDictionary is not null)
 		{
-			__init.Property("UserDictionary");
+			initializer.Property("UserDictionary");
 			writer.WriteString(UserDictionary);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

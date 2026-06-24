@@ -27,13 +27,13 @@ public partial class ThinkingConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ThinkingConfig", false);
+		var initializer = writer.BeginObjectInitializer("ThinkingConfig", false);
 		if (ThinkingBudget is not null)
 		{
-			__init.Property("ThinkingBudget");
+			initializer.Property("ThinkingBudget");
 			writer.WriteValue(ThinkingBudget.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

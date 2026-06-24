@@ -27,14 +27,14 @@ public partial class RankEvalMetricDetail : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RankEvalMetricDetail", false);
+		var initializer = writer.BeginObjectInitializer("RankEvalMetricDetail", false);
 		{
-			__init.Property("Hits");
+			initializer.Property("Hits");
 			writer.WriteInlineList(Hits, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("MetricDetails");
+			initializer.Property("MetricDetails");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -44,16 +44,16 @@ public partial class RankEvalMetricDetail : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("MetricScore");
+			initializer.Property("MetricScore");
 			writer.WriteValue(MetricScore);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("UnratedDocs");
+			initializer.Property("UnratedDocs");
 			writer.WriteInlineList(UnratedDocs, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

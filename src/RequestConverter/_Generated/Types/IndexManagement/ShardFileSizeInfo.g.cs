@@ -27,46 +27,46 @@ public partial class ShardFileSizeInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardFileSizeInfo", false);
+		var initializer = writer.BeginObjectInitializer("ShardFileSizeInfo", false);
 		if (AverageSizeInBytes is not null)
 		{
-			__init.Property("AverageSizeInBytes");
+			initializer.Property("AverageSizeInBytes");
 			writer.WriteValue(AverageSizeInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (Count is not null)
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count.Value);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		if (MaxSizeInBytes is not null)
 		{
-			__init.Property("MaxSizeInBytes");
+			initializer.Property("MaxSizeInBytes");
 			writer.WriteValue(MaxSizeInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (MinSizeInBytes is not null)
 		{
-			__init.Property("MinSizeInBytes");
+			initializer.Property("MinSizeInBytes");
 			writer.WriteValue(MinSizeInBytes.Value);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("SizeInBytes");
+			initializer.Property("SizeInBytes");
 			writer.WriteValue(SizeInBytes);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,66 +27,66 @@ public partial class StartTrainedModelDeploymentRequest : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StartTrainedModelDeploymentRequest", false);
+		var initializer = writer.BeginObjectInitializer("StartTrainedModelDeploymentRequest", false);
 		{
-			__init.Property("ModelId");
+			initializer.Property("ModelId");
 			ModelId.FormatCode(writer);
 		}
 
 		if (CacheSize is not null)
 		{
-			__init.Property("CacheSize");
+			initializer.Property("CacheSize");
 			CacheSize.FormatCode(writer);
 		}
 
 		if (DeploymentId is not null)
 		{
-			__init.Property("DeploymentId");
+			initializer.Property("DeploymentId");
 			writer.WriteString(DeploymentId);
 		}
 
 		if (NumberOfAllocations is not null)
 		{
-			__init.Property("NumberOfAllocations");
+			initializer.Property("NumberOfAllocations");
 			writer.WriteValue(NumberOfAllocations.Value);
 		}
 
 		if (Priority is not null)
 		{
-			__init.Property("Priority");
+			initializer.Property("Priority");
 			Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriorityCodeFormatter.FormatCode(Priority.Value, writer);
 		}
 
 		if (QueueCapacity is not null)
 		{
-			__init.Property("QueueCapacity");
+			initializer.Property("QueueCapacity");
 			writer.WriteValue(QueueCapacity.Value);
 		}
 
 		if (ThreadsPerAllocation is not null)
 		{
-			__init.Property("ThreadsPerAllocation");
+			initializer.Property("ThreadsPerAllocation");
 			writer.WriteValue(ThreadsPerAllocation.Value);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (WaitFor is not null)
 		{
-			__init.Property("WaitFor");
+			initializer.Property("WaitFor");
 			Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationStateCodeFormatter.FormatCode(WaitFor.Value, writer);
 		}
 
 		if (AdaptiveAllocations is not null)
 		{
-			__init.Property("AdaptiveAllocations");
+			initializer.Property("AdaptiveAllocations");
 			AdaptiveAllocations.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

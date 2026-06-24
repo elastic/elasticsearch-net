@@ -27,127 +27,127 @@ public partial class DataCounts : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataCounts", false);
+		var initializer = writer.BeginObjectInitializer("DataCounts", false);
 		{
-			__init.Property("BucketCount");
+			initializer.Property("BucketCount");
 			writer.WriteValue(BucketCount);
 			writer.Write("L");
 		}
 
 		if (EarliestRecordTimestamp is not null)
 		{
-			__init.Property("EarliestRecordTimestamp");
+			initializer.Property("EarliestRecordTimestamp");
 			writer.WriteValue(EarliestRecordTimestamp.Value);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("EmptyBucketCount");
+			initializer.Property("EmptyBucketCount");
 			writer.WriteValue(EmptyBucketCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("InputBytes");
+			initializer.Property("InputBytes");
 			writer.WriteValue(InputBytes);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("InputFieldCount");
+			initializer.Property("InputFieldCount");
 			writer.WriteValue(InputFieldCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("InputRecordCount");
+			initializer.Property("InputRecordCount");
 			writer.WriteValue(InputRecordCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("InvalidDateCount");
+			initializer.Property("InvalidDateCount");
 			writer.WriteValue(InvalidDateCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			writer.WriteString(JobId);
 		}
 
 		if (LastDataTime is not null)
 		{
-			__init.Property("LastDataTime");
+			initializer.Property("LastDataTime");
 			writer.WriteValue(LastDataTime.Value);
 			writer.Write("L");
 		}
 
 		if (LatestBucketTimestamp is not null)
 		{
-			__init.Property("LatestBucketTimestamp");
+			initializer.Property("LatestBucketTimestamp");
 			writer.WriteValue(LatestBucketTimestamp.Value);
 			writer.Write("L");
 		}
 
 		if (LatestEmptyBucketTimestamp is not null)
 		{
-			__init.Property("LatestEmptyBucketTimestamp");
+			initializer.Property("LatestEmptyBucketTimestamp");
 			writer.WriteValue(LatestEmptyBucketTimestamp.Value);
 			writer.Write("L");
 		}
 
 		if (LatestRecordTimestamp is not null)
 		{
-			__init.Property("LatestRecordTimestamp");
+			initializer.Property("LatestRecordTimestamp");
 			writer.WriteValue(LatestRecordTimestamp.Value);
 			writer.Write("L");
 		}
 
 		if (LatestSparseBucketTimestamp is not null)
 		{
-			__init.Property("LatestSparseBucketTimestamp");
+			initializer.Property("LatestSparseBucketTimestamp");
 			writer.WriteValue(LatestSparseBucketTimestamp.Value);
 			writer.Write("L");
 		}
 
 		if (LogTime is not null)
 		{
-			__init.Property("LogTime");
+			initializer.Property("LogTime");
 			writer.WriteValue(LogTime.Value);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("MissingFieldCount");
+			initializer.Property("MissingFieldCount");
 			writer.WriteValue(MissingFieldCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("OutOfOrderTimestampCount");
+			initializer.Property("OutOfOrderTimestampCount");
 			writer.WriteValue(OutOfOrderTimestampCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("ProcessedFieldCount");
+			initializer.Property("ProcessedFieldCount");
 			writer.WriteValue(ProcessedFieldCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("ProcessedRecordCount");
+			initializer.Property("ProcessedRecordCount");
 			writer.WriteValue(ProcessedRecordCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("SparseBucketCount");
+			initializer.Property("SparseBucketCount");
 			writer.WriteValue(SparseBucketCount);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,30 +27,30 @@ public partial class SummaryReasoningDetail : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SummaryReasoningDetail", true);
+		var initializer = writer.BeginObjectInitializer("SummaryReasoningDetail", true);
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			writer.WriteString(Format);
 		}
 
 		if (Id is not null)
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		if (Index is not null)
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteValue(Index.Value);
 		}
 
 		{
-			__init.Property("Summary");
+			initializer.Property("Summary");
 			writer.WriteString(Summary);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

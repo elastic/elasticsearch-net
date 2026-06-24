@@ -27,12 +27,12 @@ public partial class GeoIpNodeDatabaseName : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoIpNodeDatabaseName", false);
+		var initializer = writer.BeginObjectInitializer("GeoIpNodeDatabaseName", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,24 +27,24 @@ public partial class Storage : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Storage", false);
+		var initializer = writer.BeginObjectInitializer("Storage", false);
 		if (AllowMmap is not null)
 		{
-			__init.Property("AllowMmap");
+			initializer.Property("AllowMmap");
 			writer.WriteValue(AllowMmap.Value);
 		}
 
 		if (StatsRefreshInterval is not null)
 		{
-			__init.Property("StatsRefreshInterval");
+			initializer.Property("StatsRefreshInterval");
 			StatsRefreshInterval.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			Type.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

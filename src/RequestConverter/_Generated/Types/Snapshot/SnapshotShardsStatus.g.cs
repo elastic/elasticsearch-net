@@ -27,17 +27,17 @@ public partial class SnapshotShardsStatus : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SnapshotShardsStatus", false);
+		var initializer = writer.BeginObjectInitializer("SnapshotShardsStatus", false);
 		{
-			__init.Property("Stage");
+			initializer.Property("Stage");
 			Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStageCodeFormatter.FormatCode(Stage, writer);
 		}
 
 		{
-			__init.Property("Stats");
+			initializer.Property("Stats");
 			Stats.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

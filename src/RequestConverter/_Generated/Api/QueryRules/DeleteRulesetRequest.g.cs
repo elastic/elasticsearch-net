@@ -27,12 +27,12 @@ public partial class DeleteRulesetRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteRulesetRequest", false);
+		var initializer = writer.BeginObjectInitializer("DeleteRulesetRequest", false);
 		{
-			__init.Property("RulesetId");
+			initializer.Property("RulesetId");
 			RulesetId.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,53 +27,53 @@ public partial class GeoDistanceSort : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoDistanceSort", false);
+		var initializer = writer.BeginObjectInitializer("GeoDistanceSort", false);
 		if (DistanceType is not null)
 		{
-			__init.Property("DistanceType");
+			initializer.Property("DistanceType");
 			Elastic.Clients.Elasticsearch.GeoDistanceTypeCodeFormatter.FormatCode(DistanceType.Value, writer);
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (IgnoreUnmapped is not null)
 		{
-			__init.Property("IgnoreUnmapped");
+			initializer.Property("IgnoreUnmapped");
 			writer.WriteValue(IgnoreUnmapped.Value);
 		}
 
 		{
-			__init.Property("Location");
+			initializer.Property("Location");
 			writer.WriteInlineList(Location, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Mode is not null)
 		{
-			__init.Property("Mode");
+			initializer.Property("Mode");
 			Elastic.Clients.Elasticsearch.SortModeCodeFormatter.FormatCode(Mode.Value, writer);
 		}
 
 		if (Nested is not null)
 		{
-			__init.Property("Nested");
+			initializer.Property("Nested");
 			Nested.FormatCode(writer);
 		}
 
 		if (Order is not null)
 		{
-			__init.Property("Order");
+			initializer.Property("Order");
 			Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, writer);
 		}
 
 		if (Unit is not null)
 		{
-			__init.Property("Unit");
+			initializer.Property("Unit");
 			Elastic.Clients.Elasticsearch.DistanceUnitCodeFormatter.FormatCode(Unit.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

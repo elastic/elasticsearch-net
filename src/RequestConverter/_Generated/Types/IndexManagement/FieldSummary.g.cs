@@ -27,47 +27,47 @@ public partial class FieldSummary : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldSummary", false);
+		var initializer = writer.BeginObjectInitializer("FieldSummary", false);
 		{
-			__init.Property("Any");
+			initializer.Property("Any");
 			writer.WriteValue(Any);
 		}
 
 		{
-			__init.Property("DocValues");
+			initializer.Property("DocValues");
 			writer.WriteValue(DocValues);
 		}
 
 		{
-			__init.Property("InvertedIndex");
+			initializer.Property("InvertedIndex");
 			InvertedIndex.FormatCode(writer);
 		}
 
 		{
-			__init.Property("KnnVectors");
+			initializer.Property("KnnVectors");
 			writer.WriteValue(KnnVectors);
 		}
 
 		{
-			__init.Property("Norms");
+			initializer.Property("Norms");
 			writer.WriteValue(Norms);
 		}
 
 		{
-			__init.Property("Points");
+			initializer.Property("Points");
 			writer.WriteValue(Points);
 		}
 
 		{
-			__init.Property("StoredFields");
+			initializer.Property("StoredFields");
 			writer.WriteValue(StoredFields);
 		}
 
 		{
-			__init.Property("TermVectors");
+			initializer.Property("TermVectors");
 			writer.WriteValue(TermVectors);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

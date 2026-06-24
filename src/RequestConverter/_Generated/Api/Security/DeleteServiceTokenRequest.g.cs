@@ -27,28 +27,28 @@ public partial class DeleteServiceTokenRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteServiceTokenRequest", false);
+		var initializer = writer.BeginObjectInitializer("DeleteServiceTokenRequest", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Namespace");
+			initializer.Property("Namespace");
 			writer.WriteString(Namespace);
 		}
 
 		{
-			__init.Property("Service");
+			initializer.Property("Service");
 			writer.WriteString(Service);
 		}
 
 		if (Refresh is not null)
 		{
-			__init.Property("Refresh");
+			initializer.Property("Refresh");
 			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

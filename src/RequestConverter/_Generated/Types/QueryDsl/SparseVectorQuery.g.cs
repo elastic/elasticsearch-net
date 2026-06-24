@@ -27,52 +27,52 @@ public partial class SparseVectorQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SparseVectorQuery", false);
+		var initializer = writer.BeginObjectInitializer("SparseVectorQuery", false);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Prune is not null)
 		{
-			__init.Property("Prune");
+			initializer.Property("Prune");
 			writer.WriteValue(Prune.Value);
 		}
 
 		if (PruningConfig is not null)
 		{
-			__init.Property("PruningConfig");
+			initializer.Property("PruningConfig");
 			PruningConfig.FormatCode(writer);
 		}
 
 		if (Query is not null)
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			writer.WriteString(Query);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
 		if (InferenceId is not null)
 		{
-			__init.Property("InferenceId");
+			initializer.Property("InferenceId");
 			InferenceId.FormatCode(writer);
 		}
 
 		if (QueryVector is not null)
 		{
-			__init.Property("QueryVector");
+			initializer.Property("QueryVector");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -81,6 +81,6 @@ public partial class SparseVectorQuery : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(QueryVector, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("f"); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,12 +27,12 @@ public partial class FailedNodeException : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FailedNodeException", false);
+		var initializer = writer.BeginObjectInitializer("FailedNodeException", false);
 		{
-			__init.Property("NodeId");
+			initializer.Property("NodeId");
 			writer.WriteString(NodeId);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

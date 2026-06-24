@@ -27,14 +27,14 @@ public partial class ClusterSnapshotStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterSnapshotStats", false);
+		var initializer = writer.BeginObjectInitializer("ClusterSnapshotStats", false);
 		{
-			__init.Property("CurrentCounts");
+			initializer.Property("CurrentCounts");
 			CurrentCounts.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Repositories");
+			initializer.Property("Repositories");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -43,6 +43,6 @@ public partial class ClusterSnapshotStats : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(Repositories, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

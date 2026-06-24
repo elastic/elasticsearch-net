@@ -27,22 +27,22 @@ public partial class MoveToStepRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MoveToStepRequest", false);
+		var initializer = writer.BeginObjectInitializer("MoveToStepRequest", false);
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		{
-			__init.Property("CurrentStep");
+			initializer.Property("CurrentStep");
 			CurrentStep.FormatCode(writer);
 		}
 
 		{
-			__init.Property("NextStep");
+			initializer.Property("NextStep");
 			NextStep.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

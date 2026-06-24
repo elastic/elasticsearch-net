@@ -27,34 +27,34 @@ public partial class ShardStore : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardStore", false);
+		var initializer = writer.BeginObjectInitializer("ShardStore", false);
 		{
-			__init.Property("Allocation");
+			initializer.Property("Allocation");
 			Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocationCodeFormatter.FormatCode(Allocation, writer);
 		}
 
 		if (AllocationId is not null)
 		{
-			__init.Property("AllocationId");
+			initializer.Property("AllocationId");
 			writer.WriteString(AllocationId);
 		}
 
 		{
-			__init.Property("Node");
+			initializer.Property("Node");
 			Node.FormatCode(writer);
 		}
 
 		{
-			__init.Property("NodeId");
+			initializer.Property("NodeId");
 			writer.WriteString(NodeId);
 		}
 
 		if (StoreException is not null)
 		{
-			__init.Property("StoreException");
+			initializer.Property("StoreException");
 			StoreException.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

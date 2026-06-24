@@ -27,22 +27,22 @@ public partial class Flattened : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Flattened", false);
+		var initializer = writer.BeginObjectInitializer("Flattened", false);
 		{
-			__init.Property("Available");
+			initializer.Property("Available");
 			writer.WriteValue(Available);
 		}
 
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);
 		}
 
 		{
-			__init.Property("FieldCount");
+			initializer.Property("FieldCount");
 			writer.WriteValue(FieldCount);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

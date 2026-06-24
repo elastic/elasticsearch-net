@@ -27,25 +27,25 @@ public partial class TextEmbeddingInferenceResult : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TextEmbeddingInferenceResult", false);
+		var initializer = writer.BeginObjectInitializer("TextEmbeddingInferenceResult", false);
 		if (TextEmbedding is not null)
 		{
-			__init.Property("TextEmbedding");
+			initializer.Property("TextEmbedding");
 			writer.WriteInlineList(TextEmbedding, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (TextEmbeddingBits is not null)
 		{
-			__init.Property("TextEmbeddingBits");
+			initializer.Property("TextEmbeddingBits");
 			writer.WriteInlineList(TextEmbeddingBits, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (TextEmbeddingBytes is not null)
 		{
-			__init.Property("TextEmbeddingBytes");
+			initializer.Property("TextEmbeddingBytes");
 			writer.WriteInlineList(TextEmbeddingBytes, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

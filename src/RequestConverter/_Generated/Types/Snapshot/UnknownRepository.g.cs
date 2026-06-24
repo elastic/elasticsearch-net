@@ -27,7 +27,7 @@ public partial class UnknownRepository : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UnknownRepository", false);
-		__init.Dispose();
+		var initializer = writer.BeginObjectInitializer("UnknownRepository", false);
+		initializer.Dispose();
 	}
 }

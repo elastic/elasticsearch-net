@@ -27,41 +27,41 @@ public partial class TranslogStatus : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TranslogStatus", false);
+		var initializer = writer.BeginObjectInitializer("TranslogStatus", false);
 		{
-			__init.Property("Percent");
+			initializer.Property("Percent");
 			Percent.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Recovered");
+			initializer.Property("Recovered");
 			writer.WriteValue(Recovered);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteValue(Total);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("TotalOnStart");
+			initializer.Property("TotalOnStart");
 			writer.WriteValue(TotalOnStart);
 			writer.Write("L");
 		}
 
 		if (TotalTime is not null)
 		{
-			__init.Property("TotalTime");
+			initializer.Property("TotalTime");
 			TotalTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalTimeInMillis");
+			initializer.Property("TotalTimeInMillis");
 			writer.WriteValue(TotalTimeInMillis);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

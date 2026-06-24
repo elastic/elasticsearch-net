@@ -27,12 +27,12 @@ public partial class CustomRequestParams : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CustomRequestParams", false);
+		var initializer = writer.BeginObjectInitializer("CustomRequestParams", false);
 		{
-			__init.Property("Content");
+			initializer.Property("Content");
 			writer.WriteString(Content);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

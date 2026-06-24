@@ -27,27 +27,27 @@ public partial class GarbageCollectorTotal : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GarbageCollectorTotal", false);
+		var initializer = writer.BeginObjectInitializer("GarbageCollectorTotal", false);
 		if (CollectionCount is not null)
 		{
-			__init.Property("CollectionCount");
+			initializer.Property("CollectionCount");
 			writer.WriteValue(CollectionCount.Value);
 			writer.Write("L");
 		}
 
 		if (CollectionTime is not null)
 		{
-			__init.Property("CollectionTime");
+			initializer.Property("CollectionTime");
 			writer.WriteString(CollectionTime);
 		}
 
 		if (CollectionTimeInMillis is not null)
 		{
-			__init.Property("CollectionTimeInMillis");
+			initializer.Property("CollectionTimeInMillis");
 			writer.WriteValue(CollectionTimeInMillis.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

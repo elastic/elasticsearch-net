@@ -27,17 +27,17 @@ public partial class HttpRoute : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("HttpRoute", false);
+		var initializer = writer.BeginObjectInitializer("HttpRoute", false);
 		{
-			__init.Property("Requests");
+			initializer.Property("Requests");
 			Requests.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Responses");
+			initializer.Property("Responses");
 			Responses.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

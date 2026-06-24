@@ -27,93 +27,93 @@ public partial class ShardRecovery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardRecovery", false);
+		var initializer = writer.BeginObjectInitializer("ShardRecovery", false);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteValue(Id);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Primary");
+			initializer.Property("Primary");
 			writer.WriteValue(Primary);
 		}
 
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			Source.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Stage");
+			initializer.Property("Stage");
 			Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStageCodeFormatter.FormatCode(Stage, writer);
 		}
 
 		if (Start is not null)
 		{
-			__init.Property("Start");
+			initializer.Property("Start");
 			Start.FormatCode(writer);
 		}
 
 		if (StartTime is not null)
 		{
-			__init.Property("StartTime");
+			initializer.Property("StartTime");
 			writer.WriteValue(StartTime.Value);
 		}
 
 		{
-			__init.Property("StartTimeInMillis");
+			initializer.Property("StartTimeInMillis");
 			writer.WriteValue(StartTimeInMillis);
 		}
 
 		if (StopTime is not null)
 		{
-			__init.Property("StopTime");
+			initializer.Property("StopTime");
 			writer.WriteValue(StopTime.Value);
 		}
 
 		if (StopTimeInMillis is not null)
 		{
-			__init.Property("StopTimeInMillis");
+			initializer.Property("StopTimeInMillis");
 			writer.WriteValue(StopTimeInMillis.Value);
 		}
 
 		{
-			__init.Property("Target");
+			initializer.Property("Target");
 			Target.FormatCode(writer);
 		}
 
 		if (TotalTime is not null)
 		{
-			__init.Property("TotalTime");
+			initializer.Property("TotalTime");
 			TotalTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalTimeInMillis");
+			initializer.Property("TotalTimeInMillis");
 			writer.WriteValue(TotalTimeInMillis);
 		}
 
 		{
-			__init.Property("Translog");
+			initializer.Property("Translog");
 			Translog.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			Elastic.Clients.Elasticsearch.IndexManagement.RecoveryTypeCodeFormatter.FormatCode(Type, writer);
 		}
 
 		{
-			__init.Property("VerifyIndex");
+			initializer.Property("VerifyIndex");
 			VerifyIndex.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

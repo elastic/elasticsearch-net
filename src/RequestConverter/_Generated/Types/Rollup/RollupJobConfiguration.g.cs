@@ -27,48 +27,48 @@ public partial class RollupJobConfiguration : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RollupJobConfiguration", false);
+		var initializer = writer.BeginObjectInitializer("RollupJobConfiguration", false);
 		{
-			__init.Property("Cron");
+			initializer.Property("Cron");
 			writer.WriteString(Cron);
 		}
 
 		{
-			__init.Property("Groups");
+			initializer.Property("Groups");
 			Groups.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		{
-			__init.Property("IndexPattern");
+			initializer.Property("IndexPattern");
 			writer.WriteString(IndexPattern);
 		}
 
 		{
-			__init.Property("Metrics");
+			initializer.Property("Metrics");
 			writer.WriteInlineList(Metrics, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("PageSize");
+			initializer.Property("PageSize");
 			writer.WriteValue(PageSize);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("RollupIndex");
+			initializer.Property("RollupIndex");
 			writer.WriteString(RollupIndex);
 		}
 
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

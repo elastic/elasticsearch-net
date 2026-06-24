@@ -27,18 +27,18 @@ public partial class IcuTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IcuTokenizer", true);
+		var initializer = writer.BeginObjectInitializer("IcuTokenizer", true);
 		{
-			__init.Property("RuleFiles");
+			initializer.Property("RuleFiles");
 			writer.WriteString(RuleFiles);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,25 +27,25 @@ public partial class PipelineConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PipelineConfig", false);
+		var initializer = writer.BeginObjectInitializer("PipelineConfig", false);
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		{
-			__init.Property("Processors");
+			initializer.Property("Processors");
 			writer.WriteInlineList(Processors, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,31 +27,31 @@ public partial class PatternTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PatternTokenizer", true);
+		var initializer = writer.BeginObjectInitializer("PatternTokenizer", true);
 		if (Flags is not null)
 		{
-			__init.Property("Flags");
+			initializer.Property("Flags");
 			writer.WriteString(Flags);
 		}
 
 		if (Group is not null)
 		{
-			__init.Property("Group");
+			initializer.Property("Group");
 			writer.WriteValue(Group.Value);
 		}
 
 		if (Pattern is not null)
 		{
-			__init.Property("Pattern");
+			initializer.Property("Pattern");
 			writer.WriteString(Pattern);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

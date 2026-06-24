@@ -27,85 +27,85 @@ public partial class MultisearchHeader : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MultisearchHeader", true);
+		var initializer = writer.BeginObjectInitializer("MultisearchHeader", true);
 		if (AllowNoIndices is not null)
 		{
-			__init.Property("AllowNoIndices");
+			initializer.Property("AllowNoIndices");
 			writer.WriteValue(AllowNoIndices.Value);
 		}
 
 		if (AllowPartialSearchResults is not null)
 		{
-			__init.Property("AllowPartialSearchResults");
+			initializer.Property("AllowPartialSearchResults");
 			writer.WriteValue(AllowPartialSearchResults.Value);
 		}
 
 		if (CcsMinimizeRoundtrips is not null)
 		{
-			__init.Property("CcsMinimizeRoundtrips");
+			initializer.Property("CcsMinimizeRoundtrips");
 			writer.WriteValue(CcsMinimizeRoundtrips.Value);
 		}
 
 		if (ExpandWildcards is not null)
 		{
-			__init.Property("ExpandWildcards");
+			initializer.Property("ExpandWildcards");
 			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (IgnoreThrottled is not null)
 		{
-			__init.Property("IgnoreThrottled");
+			initializer.Property("IgnoreThrottled");
 			writer.WriteValue(IgnoreThrottled.Value);
 		}
 
 		if (IgnoreUnavailable is not null)
 		{
-			__init.Property("IgnoreUnavailable");
+			initializer.Property("IgnoreUnavailable");
 			writer.WriteValue(IgnoreUnavailable.Value);
 		}
 
 		if (Indices is not null)
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		if (Preference is not null)
 		{
-			__init.Property("Preference");
+			initializer.Property("Preference");
 			writer.WriteString(Preference);
 		}
 
 		if (ProjectRouting is not null)
 		{
-			__init.Property("ProjectRouting");
+			initializer.Property("ProjectRouting");
 			writer.WriteString(ProjectRouting);
 		}
 
 		if (RequestCache is not null)
 		{
-			__init.Property("RequestCache");
+			initializer.Property("RequestCache");
 			writer.WriteValue(RequestCache.Value);
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			Routing.FormatCode(writer);
 		}
 
 		if (SearchType is not null)
 		{
-			__init.Property("SearchType");
+			initializer.Property("SearchType");
 			Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(SearchType.Value, writer);
 		}
 
 		if (Slice is not null)
 		{
-			__init.Property("Slice");
+			initializer.Property("Slice");
 			writer.WriteString(Slice);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,25 +27,25 @@ public partial class ShardCommit : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardCommit", false);
+		var initializer = writer.BeginObjectInitializer("ShardCommit", false);
 		{
-			__init.Property("Generation");
+			initializer.Property("Generation");
 			writer.WriteValue(Generation);
 		}
 
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		{
-			__init.Property("NumDocs");
+			initializer.Property("NumDocs");
 			writer.WriteValue(NumDocs);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("UserData");
+			initializer.Property("UserData");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -54,6 +54,6 @@ public partial class ShardCommit : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(UserData, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

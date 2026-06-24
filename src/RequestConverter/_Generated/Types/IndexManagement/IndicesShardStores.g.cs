@@ -27,9 +27,9 @@ public partial class IndicesShardStores : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndicesShardStores", false);
+		var initializer = writer.BeginObjectInitializer("IndicesShardStores", false);
 		{
-			__init.Property("Shards");
+			initializer.Property("Shards");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -38,6 +38,6 @@ public partial class IndicesShardStores : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(Shards, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

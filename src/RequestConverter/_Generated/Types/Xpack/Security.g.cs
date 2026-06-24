@@ -27,49 +27,49 @@ public partial class Security : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Security", false);
+		var initializer = writer.BeginObjectInitializer("Security", false);
 		{
-			__init.Property("Anonymous");
+			initializer.Property("Anonymous");
 			Anonymous.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ApiKeyService");
+			initializer.Property("ApiKeyService");
 			ApiKeyService.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Audit");
+			initializer.Property("Audit");
 			Audit.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Available");
+			initializer.Property("Available");
 			writer.WriteValue(Available);
 		}
 
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);
 		}
 
 		{
-			__init.Property("Fips140");
+			initializer.Property("Fips140");
 			Fips140.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Ipfilter");
+			initializer.Property("Ipfilter");
 			Ipfilter.FormatCode(writer);
 		}
 
 		{
-			__init.Property("OperatorPrivileges");
+			initializer.Property("OperatorPrivileges");
 			OperatorPrivileges.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Realms");
+			initializer.Property("Realms");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -79,7 +79,7 @@ public partial class Security : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("RoleMapping");
+			initializer.Property("RoleMapping");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -89,26 +89,26 @@ public partial class Security : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Roles");
+			initializer.Property("Roles");
 			Roles.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Ssl");
+			initializer.Property("Ssl");
 			Ssl.FormatCode(writer);
 		}
 
 		if (SystemKey is not null)
 		{
-			__init.Property("SystemKey");
+			initializer.Property("SystemKey");
 			SystemKey.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TokenService");
+			initializer.Property("TokenService");
 			TokenService.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

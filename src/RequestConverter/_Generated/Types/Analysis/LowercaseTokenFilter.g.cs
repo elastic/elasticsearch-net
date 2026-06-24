@@ -27,19 +27,19 @@ public partial class LowercaseTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("LowercaseTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("LowercaseTokenFilter", true);
 		if (Language is not null)
 		{
-			__init.Property("Language");
+			initializer.Property("Language");
 			Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguagesCodeFormatter.FormatCode(Language.Value, writer);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

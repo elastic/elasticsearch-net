@@ -27,18 +27,18 @@ public partial class ExecuteEnrichPolicyStatus : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExecuteEnrichPolicyStatus", false);
+		var initializer = writer.BeginObjectInitializer("ExecuteEnrichPolicyStatus", false);
 		{
-			__init.Property("Phase");
+			initializer.Property("Phase");
 			Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhaseCodeFormatter.FormatCode(Phase, writer);
 		}
 
 		if (Step is not null)
 		{
-			__init.Property("Step");
+			initializer.Property("Step");
 			writer.WriteString(Step);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

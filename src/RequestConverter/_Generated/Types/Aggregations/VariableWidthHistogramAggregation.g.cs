@@ -27,37 +27,37 @@ public partial class VariableWidthHistogramAggregation : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("VariableWidthHistogramAggregation", false);
+		var initializer = writer.BeginObjectInitializer("VariableWidthHistogramAggregation", false);
 		if (Buckets is not null)
 		{
-			__init.Property("Buckets");
+			initializer.Property("Buckets");
 			writer.WriteValue(Buckets.Value);
 		}
 
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (InitialBuffer is not null)
 		{
-			__init.Property("InitialBuffer");
+			initializer.Property("InitialBuffer");
 			writer.WriteValue(InitialBuffer.Value);
 		}
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
 		if (ShardSize is not null)
 		{
-			__init.Property("ShardSize");
+			initializer.Property("ShardSize");
 			writer.WriteValue(ShardSize.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,19 +27,19 @@ public partial class KeyedProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("KeyedProcessor", false);
+		var initializer = writer.BeginObjectInitializer("KeyedProcessor", false);
 		if (Stats is not null)
 		{
-			__init.Property("Stats");
+			initializer.Property("Stats");
 			Stats.FormatCode(writer);
 		}
 
 		if (Type is not null)
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			writer.WriteString(Type);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

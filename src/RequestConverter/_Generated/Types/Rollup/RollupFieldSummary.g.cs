@@ -27,24 +27,24 @@ public partial class RollupFieldSummary : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RollupFieldSummary", false);
+		var initializer = writer.BeginObjectInitializer("RollupFieldSummary", false);
 		{
-			__init.Property("Agg");
+			initializer.Property("Agg");
 			writer.WriteString(Agg);
 		}
 
 		if (CalendarInterval is not null)
 		{
-			__init.Property("CalendarInterval");
+			initializer.Property("CalendarInterval");
 			CalendarInterval.FormatCode(writer);
 		}
 
 		if (TimeZone is not null)
 		{
-			__init.Property("TimeZone");
+			initializer.Property("TimeZone");
 			writer.WriteString(TimeZone);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

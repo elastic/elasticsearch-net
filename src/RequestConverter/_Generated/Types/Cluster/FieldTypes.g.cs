@@ -27,49 +27,49 @@ public partial class FieldTypes : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldTypes", false);
+		var initializer = writer.BeginObjectInitializer("FieldTypes", false);
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 		}
 
 		{
-			__init.Property("IndexCount");
+			initializer.Property("IndexCount");
 			writer.WriteValue(IndexCount);
 		}
 
 		if (IndexedVectorCount is not null)
 		{
-			__init.Property("IndexedVectorCount");
+			initializer.Property("IndexedVectorCount");
 			writer.WriteValue(IndexedVectorCount.Value);
 		}
 
 		if (IndexedVectorDimMax is not null)
 		{
-			__init.Property("IndexedVectorDimMax");
+			initializer.Property("IndexedVectorDimMax");
 			writer.WriteValue(IndexedVectorDimMax.Value);
 		}
 
 		if (IndexedVectorDimMin is not null)
 		{
-			__init.Property("IndexedVectorDimMin");
+			initializer.Property("IndexedVectorDimMin");
 			writer.WriteValue(IndexedVectorDimMin.Value);
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		if (ScriptCount is not null)
 		{
-			__init.Property("ScriptCount");
+			initializer.Property("ScriptCount");
 			writer.WriteValue(ScriptCount.Value);
 		}
 
 		if (VectorElementTypeCount is not null)
 		{
-			__init.Property("VectorElementTypeCount");
+			initializer.Property("VectorElementTypeCount");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -80,7 +80,7 @@ public partial class FieldTypes : RequestConverter.ICodeFormattable
 
 		if (VectorIndexTypeCount is not null)
 		{
-			__init.Property("VectorIndexTypeCount");
+			initializer.Property("VectorIndexTypeCount");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -91,7 +91,7 @@ public partial class FieldTypes : RequestConverter.ICodeFormattable
 
 		if (VectorSimilarityTypeCount is not null)
 		{
-			__init.Property("VectorSimilarityTypeCount");
+			initializer.Property("VectorSimilarityTypeCount");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -100,6 +100,6 @@ public partial class FieldTypes : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(VectorSimilarityTypeCount, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

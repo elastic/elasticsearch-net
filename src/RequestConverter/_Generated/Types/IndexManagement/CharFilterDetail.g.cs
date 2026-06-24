@@ -27,17 +27,17 @@ public partial class CharFilterDetail : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CharFilterDetail", false);
+		var initializer = writer.BeginObjectInitializer("CharFilterDetail", false);
 		{
-			__init.Property("FilteredText");
+			initializer.Property("FilteredText");
 			writer.WriteInlineList(FilteredText, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

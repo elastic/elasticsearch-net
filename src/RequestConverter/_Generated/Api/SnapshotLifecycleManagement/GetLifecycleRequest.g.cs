@@ -27,25 +27,25 @@ public partial class GetLifecycleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetLifecycleRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetLifecycleRequest", false);
 		if (PolicyId is not null)
 		{
-			__init.Property("PolicyId");
+			initializer.Property("PolicyId");
 			PolicyId.FormatCode(writer);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

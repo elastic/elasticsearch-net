@@ -27,19 +27,19 @@ public partial class FieldTypesMappings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldTypesMappings", false);
+		var initializer = writer.BeginObjectInitializer("FieldTypesMappings", false);
 		{
-			__init.Property("FieldTypes");
+			initializer.Property("FieldTypes");
 			writer.WriteInlineList(FieldTypes, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("RuntimeFieldTypes");
+			initializer.Property("RuntimeFieldTypes");
 			writer.WriteInlineList(RuntimeFieldTypes, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("SourceModes");
+			initializer.Property("SourceModes");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -50,31 +50,31 @@ public partial class FieldTypesMappings : RequestConverter.ICodeFormattable
 
 		if (TotalDeduplicatedFieldCount is not null)
 		{
-			__init.Property("TotalDeduplicatedFieldCount");
+			initializer.Property("TotalDeduplicatedFieldCount");
 			writer.WriteValue(TotalDeduplicatedFieldCount.Value);
 			writer.Write("L");
 		}
 
 		if (TotalDeduplicatedMappingSize is not null)
 		{
-			__init.Property("TotalDeduplicatedMappingSize");
+			initializer.Property("TotalDeduplicatedMappingSize");
 			TotalDeduplicatedMappingSize.FormatCode(writer);
 		}
 
 		if (TotalDeduplicatedMappingSizeInBytes is not null)
 		{
-			__init.Property("TotalDeduplicatedMappingSizeInBytes");
+			initializer.Property("TotalDeduplicatedMappingSizeInBytes");
 			writer.WriteValue(TotalDeduplicatedMappingSizeInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (TotalFieldCount is not null)
 		{
-			__init.Property("TotalFieldCount");
+			initializer.Property("TotalFieldCount");
 			writer.WriteValue(TotalFieldCount.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,60 +27,60 @@ public partial class MlInferenceTrainedModelsCount : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MlInferenceTrainedModelsCount", false);
+		var initializer = writer.BeginObjectInitializer("MlInferenceTrainedModelsCount", false);
 		if (Classification is not null)
 		{
-			__init.Property("Classification");
+			initializer.Property("Classification");
 			writer.WriteValue(Classification.Value);
 			writer.Write("L");
 		}
 
 		if (Ner is not null)
 		{
-			__init.Property("Ner");
+			initializer.Property("Ner");
 			writer.WriteValue(Ner.Value);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Other");
+			initializer.Property("Other");
 			writer.WriteValue(Other);
 			writer.Write("L");
 		}
 
 		if (PassThrough is not null)
 		{
-			__init.Property("PassThrough");
+			initializer.Property("PassThrough");
 			writer.WriteValue(PassThrough.Value);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Prepackaged");
+			initializer.Property("Prepackaged");
 			writer.WriteValue(Prepackaged);
 			writer.Write("L");
 		}
 
 		if (Regression is not null)
 		{
-			__init.Property("Regression");
+			initializer.Property("Regression");
 			writer.WriteValue(Regression.Value);
 			writer.Write("L");
 		}
 
 		if (TextEmbedding is not null)
 		{
-			__init.Property("TextEmbedding");
+			initializer.Property("TextEmbedding");
 			writer.WriteValue(TextEmbedding.Value);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteValue(Total);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

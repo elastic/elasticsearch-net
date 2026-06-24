@@ -27,22 +27,22 @@ public partial class ApplicationPrivileges : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ApplicationPrivileges", false);
+		var initializer = writer.BeginObjectInitializer("ApplicationPrivileges", false);
 		{
-			__init.Property("Application");
+			initializer.Property("Application");
 			writer.WriteString(Application);
 		}
 
 		{
-			__init.Property("Privileges");
+			initializer.Property("Privileges");
 			writer.WriteInlineList(Privileges, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Resources");
+			initializer.Property("Resources");
 			writer.WriteInlineList(Resources, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,375 +27,375 @@ public partial class Query : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Query", true);
+		var initializer = writer.BeginObjectInitializer("Query", true);
 		if (Bool is not null)
 		{
-			__init.Property("Bool");
+			initializer.Property("Bool");
 			Bool.FormatCode(writer);
 		}
 
 		if (Boosting is not null)
 		{
-			__init.Property("Boosting");
+			initializer.Property("Boosting");
 			Boosting.FormatCode(writer);
 		}
 
 		if (CombinedFields is not null)
 		{
-			__init.Property("CombinedFields");
+			initializer.Property("CombinedFields");
 			CombinedFields.FormatCode(writer);
 		}
 #pragma warning disable CS0618
 		if (Common is not null)
 		{
-			__init.Property("Common");
+			initializer.Property("Common");
 			Common.FormatCode(writer);
 		}
 #pragma warning restore CS0618
 		if (ConstantScore is not null)
 		{
-			__init.Property("ConstantScore");
+			initializer.Property("ConstantScore");
 			ConstantScore.FormatCode(writer);
 		}
 
 		if (DisMax is not null)
 		{
-			__init.Property("DisMax");
+			initializer.Property("DisMax");
 			DisMax.FormatCode(writer);
 		}
 
 		if (DistanceFeature is not null)
 		{
-			__init.Property("DistanceFeature");
+			initializer.Property("DistanceFeature");
 			DistanceFeature.FormatCode(writer);
 		}
 
 		if (Exists is not null)
 		{
-			__init.Property("Exists");
+			initializer.Property("Exists");
 			Exists.FormatCode(writer);
 		}
 
 		if (FunctionScore is not null)
 		{
-			__init.Property("FunctionScore");
+			initializer.Property("FunctionScore");
 			FunctionScore.FormatCode(writer);
 		}
 
 		if (Fuzzy is not null)
 		{
-			__init.Property("Fuzzy");
+			initializer.Property("Fuzzy");
 			Fuzzy.FormatCode(writer);
 		}
 
 		if (GeoBoundingBox is not null)
 		{
-			__init.Property("GeoBoundingBox");
+			initializer.Property("GeoBoundingBox");
 			GeoBoundingBox.FormatCode(writer);
 		}
 
 		if (GeoDistance is not null)
 		{
-			__init.Property("GeoDistance");
+			initializer.Property("GeoDistance");
 			GeoDistance.FormatCode(writer);
 		}
 
 		if (GeoGrid is not null)
 		{
-			__init.Property("GeoGrid");
+			initializer.Property("GeoGrid");
 			GeoGrid.FormatCode(writer);
 		}
 #pragma warning disable CS0618
 		if (GeoPolygon is not null)
 		{
-			__init.Property("GeoPolygon");
+			initializer.Property("GeoPolygon");
 			GeoPolygon.FormatCode(writer);
 		}
 #pragma warning restore CS0618
 		if (GeoShape is not null)
 		{
-			__init.Property("GeoShape");
+			initializer.Property("GeoShape");
 			GeoShape.FormatCode(writer);
 		}
 
 		if (HasChild is not null)
 		{
-			__init.Property("HasChild");
+			initializer.Property("HasChild");
 			HasChild.FormatCode(writer);
 		}
 
 		if (HasParent is not null)
 		{
-			__init.Property("HasParent");
+			initializer.Property("HasParent");
 			HasParent.FormatCode(writer);
 		}
 
 		if (Ids is not null)
 		{
-			__init.Property("Ids");
+			initializer.Property("Ids");
 			Ids.FormatCode(writer);
 		}
 
 		if (Intervals is not null)
 		{
-			__init.Property("Intervals");
+			initializer.Property("Intervals");
 			Intervals.FormatCode(writer);
 		}
 
 		if (Knn is not null)
 		{
-			__init.Property("Knn");
+			initializer.Property("Knn");
 			Knn.FormatCode(writer);
 		}
 
 		if (Match is not null)
 		{
-			__init.Property("Match");
+			initializer.Property("Match");
 			Match.FormatCode(writer);
 		}
 
 		if (MatchAll is not null)
 		{
-			__init.Property("MatchAll");
+			initializer.Property("MatchAll");
 			MatchAll.FormatCode(writer);
 		}
 
 		if (MatchBoolPrefix is not null)
 		{
-			__init.Property("MatchBoolPrefix");
+			initializer.Property("MatchBoolPrefix");
 			MatchBoolPrefix.FormatCode(writer);
 		}
 
 		if (MatchNone is not null)
 		{
-			__init.Property("MatchNone");
+			initializer.Property("MatchNone");
 			MatchNone.FormatCode(writer);
 		}
 
 		if (MatchPhrase is not null)
 		{
-			__init.Property("MatchPhrase");
+			initializer.Property("MatchPhrase");
 			MatchPhrase.FormatCode(writer);
 		}
 
 		if (MatchPhrasePrefix is not null)
 		{
-			__init.Property("MatchPhrasePrefix");
+			initializer.Property("MatchPhrasePrefix");
 			MatchPhrasePrefix.FormatCode(writer);
 		}
 
 		if (MoreLikeThis is not null)
 		{
-			__init.Property("MoreLikeThis");
+			initializer.Property("MoreLikeThis");
 			MoreLikeThis.FormatCode(writer);
 		}
 
 		if (MultiMatch is not null)
 		{
-			__init.Property("MultiMatch");
+			initializer.Property("MultiMatch");
 			MultiMatch.FormatCode(writer);
 		}
 
 		if (Nested is not null)
 		{
-			__init.Property("Nested");
+			initializer.Property("Nested");
 			Nested.FormatCode(writer);
 		}
 
 		if (ParentId is not null)
 		{
-			__init.Property("ParentId");
+			initializer.Property("ParentId");
 			ParentId.FormatCode(writer);
 		}
 
 		if (Percolate is not null)
 		{
-			__init.Property("Percolate");
+			initializer.Property("Percolate");
 			Percolate.FormatCode(writer);
 		}
 
 		if (Pinned is not null)
 		{
-			__init.Property("Pinned");
+			initializer.Property("Pinned");
 			Pinned.FormatCode(writer);
 		}
 
 		if (Prefix is not null)
 		{
-			__init.Property("Prefix");
+			initializer.Property("Prefix");
 			Prefix.FormatCode(writer);
 		}
 
 		if (QueryString is not null)
 		{
-			__init.Property("QueryString");
+			initializer.Property("QueryString");
 			QueryString.FormatCode(writer);
 		}
 
 		if (Range is not null)
 		{
-			__init.Property("Range");
+			initializer.Property("Range");
 			Range.FormatCode(writer);
 		}
 
 		if (RankFeature is not null)
 		{
-			__init.Property("RankFeature");
+			initializer.Property("RankFeature");
 			RankFeature.FormatCode(writer);
 		}
 
 		if (Regexp is not null)
 		{
-			__init.Property("Regexp");
+			initializer.Property("Regexp");
 			Regexp.FormatCode(writer);
 		}
 
 		if (Rule is not null)
 		{
-			__init.Property("Rule");
+			initializer.Property("Rule");
 			Rule.FormatCode(writer);
 		}
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
 		if (ScriptScore is not null)
 		{
-			__init.Property("ScriptScore");
+			initializer.Property("ScriptScore");
 			ScriptScore.FormatCode(writer);
 		}
 
 		if (Semantic is not null)
 		{
-			__init.Property("Semantic");
+			initializer.Property("Semantic");
 			Semantic.FormatCode(writer);
 		}
 
 		if (Shape is not null)
 		{
-			__init.Property("Shape");
+			initializer.Property("Shape");
 			Shape.FormatCode(writer);
 		}
 
 		if (SimpleQueryString is not null)
 		{
-			__init.Property("SimpleQueryString");
+			initializer.Property("SimpleQueryString");
 			SimpleQueryString.FormatCode(writer);
 		}
 
 		if (SpanContaining is not null)
 		{
-			__init.Property("SpanContaining");
+			initializer.Property("SpanContaining");
 			SpanContaining.FormatCode(writer);
 		}
 
 		if (SpanFieldMasking is not null)
 		{
-			__init.Property("SpanFieldMasking");
+			initializer.Property("SpanFieldMasking");
 			SpanFieldMasking.FormatCode(writer);
 		}
 
 		if (SpanFirst is not null)
 		{
-			__init.Property("SpanFirst");
+			initializer.Property("SpanFirst");
 			SpanFirst.FormatCode(writer);
 		}
 
 		if (SpanMulti is not null)
 		{
-			__init.Property("SpanMulti");
+			initializer.Property("SpanMulti");
 			SpanMulti.FormatCode(writer);
 		}
 
 		if (SpanNear is not null)
 		{
-			__init.Property("SpanNear");
+			initializer.Property("SpanNear");
 			SpanNear.FormatCode(writer);
 		}
 
 		if (SpanNot is not null)
 		{
-			__init.Property("SpanNot");
+			initializer.Property("SpanNot");
 			SpanNot.FormatCode(writer);
 		}
 
 		if (SpanOr is not null)
 		{
-			__init.Property("SpanOr");
+			initializer.Property("SpanOr");
 			SpanOr.FormatCode(writer);
 		}
 
 		if (SpanTerm is not null)
 		{
-			__init.Property("SpanTerm");
+			initializer.Property("SpanTerm");
 			SpanTerm.FormatCode(writer);
 		}
 
 		if (SpanWithin is not null)
 		{
-			__init.Property("SpanWithin");
+			initializer.Property("SpanWithin");
 			SpanWithin.FormatCode(writer);
 		}
 
 		if (SparseVector is not null)
 		{
-			__init.Property("SparseVector");
+			initializer.Property("SparseVector");
 			SparseVector.FormatCode(writer);
 		}
 
 		if (Term is not null)
 		{
-			__init.Property("Term");
+			initializer.Property("Term");
 			Term.FormatCode(writer);
 		}
 
 		if (Terms is not null)
 		{
-			__init.Property("Terms");
+			initializer.Property("Terms");
 			Terms.FormatCode(writer);
 		}
 
 		if (TermsSet is not null)
 		{
-			__init.Property("TermsSet");
+			initializer.Property("TermsSet");
 			TermsSet.FormatCode(writer);
 		}
 #pragma warning disable CS0618
 		if (TextExpansion is not null)
 		{
-			__init.Property("TextExpansion");
+			initializer.Property("TextExpansion");
 			TextExpansion.FormatCode(writer);
 		}
 #pragma warning restore CS0618
 #pragma warning disable CS0618
 		if (Type is not null)
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			Type.FormatCode(writer);
 		}
 #pragma warning restore CS0618
 #pragma warning disable CS0618
 		if (WeightedTokens is not null)
 		{
-			__init.Property("WeightedTokens");
+			initializer.Property("WeightedTokens");
 			WeightedTokens.FormatCode(writer);
 		}
 #pragma warning restore CS0618
 		if (Wildcard is not null)
 		{
-			__init.Property("Wildcard");
+			initializer.Property("Wildcard");
 			Wildcard.FormatCode(writer);
 		}
 
 		if (Wrapper is not null)
 		{
-			__init.Property("Wrapper");
+			initializer.Property("Wrapper");
 			Wrapper.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

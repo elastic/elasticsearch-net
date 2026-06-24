@@ -27,47 +27,47 @@ public partial class ElasticsearchServiceSettings : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ElasticsearchServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("ElasticsearchServiceSettings", false);
 		if (AdaptiveAllocations is not null)
 		{
-			__init.Property("AdaptiveAllocations");
+			initializer.Property("AdaptiveAllocations");
 			AdaptiveAllocations.FormatCode(writer);
 		}
 
 		if (DeploymentId is not null)
 		{
-			__init.Property("DeploymentId");
+			initializer.Property("DeploymentId");
 			writer.WriteString(DeploymentId);
 		}
 
 		if (LongDocumentStrategy is not null)
 		{
-			__init.Property("LongDocumentStrategy");
+			initializer.Property("LongDocumentStrategy");
 			writer.WriteString(LongDocumentStrategy);
 		}
 
 		if (MaxChunksPerDoc is not null)
 		{
-			__init.Property("MaxChunksPerDoc");
+			initializer.Property("MaxChunksPerDoc");
 			writer.WriteValue(MaxChunksPerDoc.Value);
 		}
 
 		{
-			__init.Property("ModelId");
+			initializer.Property("ModelId");
 			writer.WriteString(ModelId);
 		}
 
 		if (NumAllocations is not null)
 		{
-			__init.Property("NumAllocations");
+			initializer.Property("NumAllocations");
 			writer.WriteValue(NumAllocations.Value);
 		}
 
 		{
-			__init.Property("NumThreads");
+			initializer.Property("NumThreads");
 			writer.WriteValue(NumThreads);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

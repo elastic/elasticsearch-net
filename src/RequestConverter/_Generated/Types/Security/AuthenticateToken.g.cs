@@ -27,25 +27,25 @@ public partial class AuthenticateToken : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AuthenticateToken", false);
+		var initializer = writer.BeginObjectInitializer("AuthenticateToken", false);
 		if (ManagedBy is not null)
 		{
-			__init.Property("ManagedBy");
+			initializer.Property("ManagedBy");
 			Elastic.Clients.Elasticsearch.Security.CredentialManagedByCodeFormatter.FormatCode(ManagedBy.Value, writer);
 		}
 
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		if (Type is not null)
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			writer.WriteString(Type);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

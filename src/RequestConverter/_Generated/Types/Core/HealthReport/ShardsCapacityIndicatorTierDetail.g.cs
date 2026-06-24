@@ -27,18 +27,18 @@ public partial class ShardsCapacityIndicatorTierDetail : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardsCapacityIndicatorTierDetail", false);
+		var initializer = writer.BeginObjectInitializer("ShardsCapacityIndicatorTierDetail", false);
 		if (CurrentUsedShards is not null)
 		{
-			__init.Property("CurrentUsedShards");
+			initializer.Property("CurrentUsedShards");
 			writer.WriteValue(CurrentUsedShards.Value);
 		}
 
 		{
-			__init.Property("MaxShardsInCluster");
+			initializer.Property("MaxShardsInCluster");
 			writer.WriteValue(MaxShardsInCluster);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

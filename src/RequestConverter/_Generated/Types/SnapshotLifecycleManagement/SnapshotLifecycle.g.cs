@@ -27,63 +27,63 @@ public partial class SnapshotLifecycle : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SnapshotLifecycle", false);
+		var initializer = writer.BeginObjectInitializer("SnapshotLifecycle", false);
 		if (InProgress is not null)
 		{
-			__init.Property("InProgress");
+			initializer.Property("InProgress");
 			InProgress.FormatCode(writer);
 		}
 
 		if (LastFailure is not null)
 		{
-			__init.Property("LastFailure");
+			initializer.Property("LastFailure");
 			LastFailure.FormatCode(writer);
 		}
 
 		if (LastSuccess is not null)
 		{
-			__init.Property("LastSuccess");
+			initializer.Property("LastSuccess");
 			LastSuccess.FormatCode(writer);
 		}
 
 		if (ModifiedDate is not null)
 		{
-			__init.Property("ModifiedDate");
+			initializer.Property("ModifiedDate");
 			writer.WriteValue(ModifiedDate.Value);
 		}
 
 		{
-			__init.Property("ModifiedDateMillis");
+			initializer.Property("ModifiedDateMillis");
 			writer.WriteValue(ModifiedDateMillis);
 		}
 
 		if (NextExecution is not null)
 		{
-			__init.Property("NextExecution");
+			initializer.Property("NextExecution");
 			writer.WriteValue(NextExecution.Value);
 		}
 
 		{
-			__init.Property("NextExecutionMillis");
+			initializer.Property("NextExecutionMillis");
 			writer.WriteValue(NextExecutionMillis);
 		}
 
 		{
-			__init.Property("Policy");
+			initializer.Property("Policy");
 			Policy.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Stats");
+			initializer.Property("Stats");
 			Stats.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteValue(Version);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

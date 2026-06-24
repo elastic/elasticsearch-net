@@ -27,27 +27,27 @@ public partial class RepositoryIntegrityIndicatorDetails : RequestConverter.ICod
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RepositoryIntegrityIndicatorDetails", false);
+		var initializer = writer.BeginObjectInitializer("RepositoryIntegrityIndicatorDetails", false);
 		if (Corrupted is not null)
 		{
-			__init.Property("Corrupted");
+			initializer.Property("Corrupted");
 			writer.WriteInlineList(Corrupted, (w, item) => { w.WriteString(item); });
 		}
 
 		if (CorruptedRepositories is not null)
 		{
-			__init.Property("CorruptedRepositories");
+			initializer.Property("CorruptedRepositories");
 			writer.WriteValue(CorruptedRepositories.Value);
 			writer.Write("L");
 		}
 
 		if (TotalRepositories is not null)
 		{
-			__init.Property("TotalRepositories");
+			initializer.Property("TotalRepositories");
 			writer.WriteValue(TotalRepositories.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

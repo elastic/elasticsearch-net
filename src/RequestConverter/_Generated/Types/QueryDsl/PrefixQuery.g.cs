@@ -27,42 +27,42 @@ public partial class PrefixQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PrefixQuery", false);
+		var initializer = writer.BeginObjectInitializer("PrefixQuery", false);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		if (CaseInsensitive is not null)
 		{
-			__init.Property("CaseInsensitive");
+			initializer.Property("CaseInsensitive");
 			writer.WriteValue(CaseInsensitive.Value);
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
 		if (Rewrite is not null)
 		{
-			__init.Property("Rewrite");
+			initializer.Property("Rewrite");
 			writer.WriteString(Rewrite);
 		}
 
 		{
-			__init.Property("Value");
+			initializer.Property("Value");
 			writer.WriteString(Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

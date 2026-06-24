@@ -27,73 +27,73 @@ public partial class PreviewTransformRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PreviewTransformRequest", false);
+		var initializer = writer.BeginObjectInitializer("PreviewTransformRequest", false);
 		if (TransformId is not null)
 		{
-			__init.Property("TransformId");
+			initializer.Property("TransformId");
 			TransformId.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		if (Dest is not null)
 		{
-			__init.Property("Dest");
+			initializer.Property("Dest");
 			Dest.FormatCode(writer);
 		}
 
 		if (Frequency is not null)
 		{
-			__init.Property("Frequency");
+			initializer.Property("Frequency");
 			Frequency.FormatCode(writer);
 		}
 
 		if (Latest is not null)
 		{
-			__init.Property("Latest");
+			initializer.Property("Latest");
 			Latest.FormatCode(writer);
 		}
 
 		if (Pivot is not null)
 		{
-			__init.Property("Pivot");
+			initializer.Property("Pivot");
 			Pivot.FormatCode(writer);
 		}
 
 		if (RetentionPolicy is not null)
 		{
-			__init.Property("RetentionPolicy");
+			initializer.Property("RetentionPolicy");
 			RetentionPolicy.FormatCode(writer);
 		}
 
 		if (Settings is not null)
 		{
-			__init.Property("Settings");
+			initializer.Property("Settings");
 			Settings.FormatCode(writer);
 		}
 
 		if (Source is not null)
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			Source.FormatCode(writer);
 		}
 
 		if (Sync is not null)
 		{
-			__init.Property("Sync");
+			initializer.Property("Sync");
 			Sync.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

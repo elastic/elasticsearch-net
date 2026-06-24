@@ -27,18 +27,18 @@ public partial class BulkDeleteRoleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BulkDeleteRoleRequest", false);
+		var initializer = writer.BeginObjectInitializer("BulkDeleteRoleRequest", false);
 		if (Refresh is not null)
 		{
-			__init.Property("Refresh");
+			initializer.Property("Refresh");
 			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
 		}
 
 		{
-			__init.Property("Names");
+			initializer.Property("Names");
 			writer.WriteInlineList(Names, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

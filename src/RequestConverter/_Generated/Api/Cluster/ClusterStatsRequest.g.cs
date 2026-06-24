@@ -27,25 +27,25 @@ public partial class ClusterStatsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterStatsRequest", false);
+		var initializer = writer.BeginObjectInitializer("ClusterStatsRequest", false);
 		if (NodeId is not null)
 		{
-			__init.Property("NodeId");
+			initializer.Property("NodeId");
 			NodeId.FormatCode(writer);
 		}
 
 		if (IncludeRemotes is not null)
 		{
-			__init.Property("IncludeRemotes");
+			initializer.Property("IncludeRemotes");
 			writer.WriteValue(IncludeRemotes.Value);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

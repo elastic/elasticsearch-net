@@ -27,43 +27,43 @@ public partial class GetTokenRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetTokenRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetTokenRequest", false);
 		if (GrantType is not null)
 		{
-			__init.Property("GrantType");
+			initializer.Property("GrantType");
 			Elastic.Clients.Elasticsearch.Security.AccessTokenGrantTypeCodeFormatter.FormatCode(GrantType.Value, writer);
 		}
 
 		if (KerberosTicket is not null)
 		{
-			__init.Property("KerberosTicket");
+			initializer.Property("KerberosTicket");
 			writer.WriteString(KerberosTicket);
 		}
 
 		if (Password is not null)
 		{
-			__init.Property("Password");
+			initializer.Property("Password");
 			writer.WriteString(Password);
 		}
 
 		if (RefreshToken is not null)
 		{
-			__init.Property("RefreshToken");
+			initializer.Property("RefreshToken");
 			writer.WriteString(RefreshToken);
 		}
 
 		if (Scope is not null)
 		{
-			__init.Property("Scope");
+			initializer.Property("Scope");
 			writer.WriteString(Scope);
 		}
 
 		if (Username is not null)
 		{
-			__init.Property("Username");
+			initializer.Property("Username");
 			Username.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

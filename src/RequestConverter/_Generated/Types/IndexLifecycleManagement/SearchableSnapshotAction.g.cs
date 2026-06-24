@@ -27,18 +27,18 @@ public partial class SearchableSnapshotAction : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SearchableSnapshotAction", false);
+		var initializer = writer.BeginObjectInitializer("SearchableSnapshotAction", false);
 		if (ForceMergeIndex is not null)
 		{
-			__init.Property("ForceMergeIndex");
+			initializer.Property("ForceMergeIndex");
 			writer.WriteValue(ForceMergeIndex.Value);
 		}
 
 		{
-			__init.Property("SnapshotRepository");
+			initializer.Property("SnapshotRepository");
 			writer.WriteString(SnapshotRepository);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

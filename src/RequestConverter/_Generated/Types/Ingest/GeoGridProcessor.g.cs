@@ -27,89 +27,89 @@ public partial class GeoGridProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoGridProcessor", false);
+		var initializer = writer.BeginObjectInitializer("GeoGridProcessor", false);
 		if (ChildrenField is not null)
 		{
-			__init.Property("ChildrenField");
+			initializer.Property("ChildrenField");
 			ChildrenField.FormatCode(writer);
 		}
 
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			writer.WriteString(Field);
 		}
 
 		if (If is not null)
 		{
-			__init.Property("If");
+			initializer.Property("If");
 			If.FormatCode(writer);
 		}
 
 		if (IgnoreFailure is not null)
 		{
-			__init.Property("IgnoreFailure");
+			initializer.Property("IgnoreFailure");
 			writer.WriteValue(IgnoreFailure.Value);
 		}
 
 		if (IgnoreMissing is not null)
 		{
-			__init.Property("IgnoreMissing");
+			initializer.Property("IgnoreMissing");
 			writer.WriteValue(IgnoreMissing.Value);
 		}
 
 		if (NonChildrenField is not null)
 		{
-			__init.Property("NonChildrenField");
+			initializer.Property("NonChildrenField");
 			NonChildrenField.FormatCode(writer);
 		}
 
 		if (OnFailure is not null)
 		{
-			__init.Property("OnFailure");
+			initializer.Property("OnFailure");
 			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (ParentField is not null)
 		{
-			__init.Property("ParentField");
+			initializer.Property("ParentField");
 			ParentField.FormatCode(writer);
 		}
 
 		if (PrecisionField is not null)
 		{
-			__init.Property("PrecisionField");
+			initializer.Property("PrecisionField");
 			PrecisionField.FormatCode(writer);
 		}
 
 		if (Tag is not null)
 		{
-			__init.Property("Tag");
+			initializer.Property("Tag");
 			writer.WriteString(Tag);
 		}
 
 		if (TargetField is not null)
 		{
-			__init.Property("TargetField");
+			initializer.Property("TargetField");
 			TargetField.FormatCode(writer);
 		}
 
 		if (TargetFormat is not null)
 		{
-			__init.Property("TargetFormat");
+			initializer.Property("TargetFormat");
 			Elastic.Clients.Elasticsearch.Ingest.GeoGridTargetFormatCodeFormatter.FormatCode(TargetFormat.Value, writer);
 		}
 
 		{
-			__init.Property("TileType");
+			initializer.Property("TileType");
 			Elastic.Clients.Elasticsearch.Ingest.GeoGridTileTypeCodeFormatter.FormatCode(TileType, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,60 +27,60 @@ public partial class HasChildQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("HasChildQuery", false);
+		var initializer = writer.BeginObjectInitializer("HasChildQuery", false);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		if (IgnoreUnmapped is not null)
 		{
-			__init.Property("IgnoreUnmapped");
+			initializer.Property("IgnoreUnmapped");
 			writer.WriteValue(IgnoreUnmapped.Value);
 		}
 
 		if (InnerHits is not null)
 		{
-			__init.Property("InnerHits");
+			initializer.Property("InnerHits");
 			InnerHits.FormatCode(writer);
 		}
 
 		if (MaxChildren is not null)
 		{
-			__init.Property("MaxChildren");
+			initializer.Property("MaxChildren");
 			writer.WriteValue(MaxChildren.Value);
 		}
 
 		if (MinChildren is not null)
 		{
-			__init.Property("MinChildren");
+			initializer.Property("MinChildren");
 			writer.WriteValue(MinChildren.Value);
 		}
 
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			Query.FormatCode(writer);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
 		if (ScoreMode is not null)
 		{
-			__init.Property("ScoreMode");
+			initializer.Property("ScoreMode");
 			Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreModeCodeFormatter.FormatCode(ScoreMode.Value, writer);
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			writer.WriteString(Type);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

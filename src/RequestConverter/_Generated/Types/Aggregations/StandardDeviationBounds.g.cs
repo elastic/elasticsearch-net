@@ -27,43 +27,43 @@ public partial class StandardDeviationBounds : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StandardDeviationBounds", false);
+		var initializer = writer.BeginObjectInitializer("StandardDeviationBounds", false);
 		{
-			__init.Property("Lower");
+			initializer.Property("Lower");
 			writer.WriteValue(Lower.Value);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("LowerPopulation");
+			initializer.Property("LowerPopulation");
 			writer.WriteValue(LowerPopulation.Value);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("LowerSampling");
+			initializer.Property("LowerSampling");
 			writer.WriteValue(LowerSampling.Value);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Upper");
+			initializer.Property("Upper");
 			writer.WriteValue(Upper.Value);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("UpperPopulation");
+			initializer.Property("UpperPopulation");
 			writer.WriteValue(UpperPopulation.Value);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("UpperSampling");
+			initializer.Property("UpperSampling");
 			writer.WriteValue(UpperSampling.Value);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

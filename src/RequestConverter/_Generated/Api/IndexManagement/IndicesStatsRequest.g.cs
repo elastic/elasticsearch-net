@@ -27,73 +27,73 @@ public partial class IndicesStatsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndicesStatsRequest", false);
+		var initializer = writer.BeginObjectInitializer("IndicesStatsRequest", false);
 		if (Indices is not null)
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		if (Metric is not null)
 		{
-			__init.Property("Metric");
+			initializer.Property("Metric");
 			writer.WriteInlineList(Metric, (w, item) => { Elastic.Clients.Elasticsearch.CommonStatsFlagCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (CompletionFields is not null)
 		{
-			__init.Property("CompletionFields");
+			initializer.Property("CompletionFields");
 			CompletionFields.FormatCode(writer);
 		}
 
 		if (ExpandWildcards is not null)
 		{
-			__init.Property("ExpandWildcards");
+			initializer.Property("ExpandWildcards");
 			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (FielddataFields is not null)
 		{
-			__init.Property("FielddataFields");
+			initializer.Property("FielddataFields");
 			FielddataFields.FormatCode(writer);
 		}
 
 		if (Fields is not null)
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			Fields.FormatCode(writer);
 		}
 
 		if (ForbidClosedIndices is not null)
 		{
-			__init.Property("ForbidClosedIndices");
+			initializer.Property("ForbidClosedIndices");
 			writer.WriteValue(ForbidClosedIndices.Value);
 		}
 
 		if (Groups is not null)
 		{
-			__init.Property("Groups");
+			initializer.Property("Groups");
 			writer.WriteInlineList(Groups, (w, item) => { w.WriteString(item); });
 		}
 
 		if (IncludeSegmentFileSizes is not null)
 		{
-			__init.Property("IncludeSegmentFileSizes");
+			initializer.Property("IncludeSegmentFileSizes");
 			writer.WriteValue(IncludeSegmentFileSizes.Value);
 		}
 
 		if (IncludeUnloadedSegments is not null)
 		{
-			__init.Property("IncludeUnloadedSegments");
+			initializer.Property("IncludeUnloadedSegments");
 			writer.WriteValue(IncludeUnloadedSegments.Value);
 		}
 
 		if (Level is not null)
 		{
-			__init.Property("Level");
+			initializer.Property("Level");
 			Elastic.Clients.Elasticsearch.LevelCodeFormatter.FormatCode(Level.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

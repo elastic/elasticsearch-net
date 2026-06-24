@@ -27,66 +27,66 @@ public partial class GoogleVertexAIServiceSettings : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GoogleVertexAIServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("GoogleVertexAIServiceSettings", false);
 		if (Dimensions is not null)
 		{
-			__init.Property("Dimensions");
+			initializer.Property("Dimensions");
 			writer.WriteValue(Dimensions.Value);
 		}
 
 		if (Location is not null)
 		{
-			__init.Property("Location");
+			initializer.Property("Location");
 			writer.WriteString(Location);
 		}
 
 		if (MaxBatchSize is not null)
 		{
-			__init.Property("MaxBatchSize");
+			initializer.Property("MaxBatchSize");
 			writer.WriteValue(MaxBatchSize.Value);
 		}
 
 		if (ModelId is not null)
 		{
-			__init.Property("ModelId");
+			initializer.Property("ModelId");
 			writer.WriteString(ModelId);
 		}
 
 		if (ProjectId is not null)
 		{
-			__init.Property("ProjectId");
+			initializer.Property("ProjectId");
 			writer.WriteString(ProjectId);
 		}
 
 		if (Provider is not null)
 		{
-			__init.Property("Provider");
+			initializer.Property("Provider");
 			Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProviderCodeFormatter.FormatCode(Provider.Value, writer);
 		}
 
 		if (RateLimit is not null)
 		{
-			__init.Property("RateLimit");
+			initializer.Property("RateLimit");
 			RateLimit.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ServiceAccountJson");
+			initializer.Property("ServiceAccountJson");
 			writer.WriteString(ServiceAccountJson);
 		}
 
 		if (StreamingUrl is not null)
 		{
-			__init.Property("StreamingUrl");
+			initializer.Property("StreamingUrl");
 			writer.WriteString(StreamingUrl);
 		}
 
 		if (Url is not null)
 		{
-			__init.Property("Url");
+			initializer.Property("Url");
 			writer.WriteString(Url);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

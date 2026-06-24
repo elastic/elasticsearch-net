@@ -27,41 +27,41 @@ public partial class NodeThreadPoolInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeThreadPoolInfo", false);
+		var initializer = writer.BeginObjectInitializer("NodeThreadPoolInfo", false);
 		if (Core is not null)
 		{
-			__init.Property("Core");
+			initializer.Property("Core");
 			writer.WriteValue(Core.Value);
 		}
 
 		if (KeepAlive is not null)
 		{
-			__init.Property("KeepAlive");
+			initializer.Property("KeepAlive");
 			KeepAlive.FormatCode(writer);
 		}
 
 		if (Max is not null)
 		{
-			__init.Property("Max");
+			initializer.Property("Max");
 			writer.WriteValue(Max.Value);
 		}
 
 		{
-			__init.Property("QueueSize");
+			initializer.Property("QueueSize");
 			writer.WriteValue(QueueSize);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			writer.WriteString(Type);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

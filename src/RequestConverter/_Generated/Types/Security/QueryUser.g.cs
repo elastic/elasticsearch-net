@@ -27,26 +27,26 @@ public partial class QueryUser : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("QueryUser", false);
+		var initializer = writer.BeginObjectInitializer("QueryUser", false);
 		if (Email is not null)
 		{
-			__init.Property("Email");
+			initializer.Property("Email");
 			writer.WriteString(Email);
 		}
 
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);
 		}
 
 		if (FullName is not null)
 		{
-			__init.Property("FullName");
+			initializer.Property("FullName");
 			writer.WriteString(FullName);
 		}
 
 		{
-			__init.Property("Metadata");
+			initializer.Property("Metadata");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -57,26 +57,26 @@ public partial class QueryUser : RequestConverter.ICodeFormattable
 
 		if (ProfileUid is not null)
 		{
-			__init.Property("ProfileUid");
+			initializer.Property("ProfileUid");
 			writer.WriteString(ProfileUid);
 		}
 
 		{
-			__init.Property("Roles");
+			initializer.Property("Roles");
 			writer.WriteInlineList(Roles, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Sort is not null)
 		{
-			__init.Property("Sort");
+			initializer.Property("Sort");
 			writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Username");
+			initializer.Property("Username");
 			writer.WriteString(Username);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

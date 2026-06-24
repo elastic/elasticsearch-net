@@ -27,31 +27,31 @@ public partial class SlowlogSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SlowlogSettings", false);
+		var initializer = writer.BeginObjectInitializer("SlowlogSettings", false);
 		if (Level is not null)
 		{
-			__init.Property("Level");
+			initializer.Property("Level");
 			writer.WriteString(Level);
 		}
 
 		if (Reformat is not null)
 		{
-			__init.Property("Reformat");
+			initializer.Property("Reformat");
 			writer.WriteValue(Reformat.Value);
 		}
 
 		if (Source is not null)
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			writer.WriteValue(Source.Value);
 		}
 
 		if (Threshold is not null)
 		{
-			__init.Property("Threshold");
+			initializer.Property("Threshold");
 			Threshold.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

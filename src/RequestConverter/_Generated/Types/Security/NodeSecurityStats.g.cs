@@ -27,12 +27,12 @@ public partial class NodeSecurityStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeSecurityStats", false);
+		var initializer = writer.BeginObjectInitializer("NodeSecurityStats", false);
 		{
-			__init.Property("Roles");
+			initializer.Property("Roles");
 			Roles.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,17 +27,17 @@ public partial class TrainedModelSizeStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelSizeStats", false);
+		var initializer = writer.BeginObjectInitializer("TrainedModelSizeStats", false);
 		{
-			__init.Property("ModelSizeBytes");
+			initializer.Property("ModelSizeBytes");
 			ModelSizeBytes.FormatCode(writer);
 		}
 
 		{
-			__init.Property("RequiredNativeMemoryBytes");
+			initializer.Property("RequiredNativeMemoryBytes");
 			RequiredNativeMemoryBytes.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

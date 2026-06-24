@@ -27,28 +27,28 @@ public partial class TaskFailure : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TaskFailure", false);
+		var initializer = writer.BeginObjectInitializer("TaskFailure", false);
 		{
-			__init.Property("NodeId");
+			initializer.Property("NodeId");
 			writer.WriteString(NodeId);
 		}
 
 		{
-			__init.Property("Reason");
+			initializer.Property("Reason");
 			Reason.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Status");
+			initializer.Property("Status");
 			writer.WriteString(Status);
 		}
 
 		{
-			__init.Property("TaskId");
+			initializer.Property("TaskId");
 			writer.WriteValue(TaskId);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

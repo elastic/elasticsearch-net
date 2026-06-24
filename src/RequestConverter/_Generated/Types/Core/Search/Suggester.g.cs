@@ -27,10 +27,10 @@ public partial class Suggester : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Suggester", false);
+		var initializer = writer.BeginObjectInitializer("Suggester", false);
 		if (Suggesters is not null)
 		{
-			__init.Property("Suggesters");
+			initializer.Property("Suggesters");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -41,10 +41,10 @@ public partial class Suggester : RequestConverter.ICodeFormattable
 
 		if (Text is not null)
 		{
-			__init.Property("Text");
+			initializer.Property("Text");
 			writer.WriteString(Text);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

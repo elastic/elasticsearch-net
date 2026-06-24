@@ -27,21 +27,21 @@ public partial class FieldCapability : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldCapability", false);
+		var initializer = writer.BeginObjectInitializer("FieldCapability", false);
 		{
-			__init.Property("Aggregatable");
+			initializer.Property("Aggregatable");
 			writer.WriteValue(Aggregatable);
 		}
 
 		if (Indices is not null)
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			writer.WriteInlineList(Indices, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -52,56 +52,56 @@ public partial class FieldCapability : RequestConverter.ICodeFormattable
 
 		if (MetadataField is not null)
 		{
-			__init.Property("MetadataField");
+			initializer.Property("MetadataField");
 			writer.WriteValue(MetadataField.Value);
 		}
 
 		if (MetricConflictsIndices is not null)
 		{
-			__init.Property("MetricConflictsIndices");
+			initializer.Property("MetricConflictsIndices");
 			writer.WriteInlineList(MetricConflictsIndices, (w, item) => { w.WriteString(item); });
 		}
 
 		if (NonAggregatableIndices is not null)
 		{
-			__init.Property("NonAggregatableIndices");
+			initializer.Property("NonAggregatableIndices");
 			writer.WriteInlineList(NonAggregatableIndices, (w, item) => { w.WriteString(item); });
 		}
 
 		if (NonDimensionIndices is not null)
 		{
-			__init.Property("NonDimensionIndices");
+			initializer.Property("NonDimensionIndices");
 			writer.WriteInlineList(NonDimensionIndices, (w, item) => { w.WriteString(item); });
 		}
 
 		if (NonSearchableIndices is not null)
 		{
-			__init.Property("NonSearchableIndices");
+			initializer.Property("NonSearchableIndices");
 			writer.WriteInlineList(NonSearchableIndices, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Searchable");
+			initializer.Property("Searchable");
 			writer.WriteValue(Searchable);
 		}
 
 		if (TimeSeriesDimension is not null)
 		{
-			__init.Property("TimeSeriesDimension");
+			initializer.Property("TimeSeriesDimension");
 			writer.WriteValue(TimeSeriesDimension.Value);
 		}
 
 		if (TimeSeriesMetric is not null)
 		{
-			__init.Property("TimeSeriesMetric");
+			initializer.Property("TimeSeriesMetric");
 			Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricTypeCodeFormatter.FormatCode(TimeSeriesMetric.Value, writer);
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			writer.WriteString(Type);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

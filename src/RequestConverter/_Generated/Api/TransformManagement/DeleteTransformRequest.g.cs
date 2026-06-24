@@ -27,30 +27,30 @@ public partial class DeleteTransformRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteTransformRequest", false);
+		var initializer = writer.BeginObjectInitializer("DeleteTransformRequest", false);
 		{
-			__init.Property("TransformId");
+			initializer.Property("TransformId");
 			TransformId.FormatCode(writer);
 		}
 
 		if (DeleteDestIndex is not null)
 		{
-			__init.Property("DeleteDestIndex");
+			initializer.Property("DeleteDestIndex");
 			writer.WriteValue(DeleteDestIndex.Value);
 		}
 
 		if (Force is not null)
 		{
-			__init.Property("Force");
+			initializer.Property("Force");
 			writer.WriteValue(Force.Value);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

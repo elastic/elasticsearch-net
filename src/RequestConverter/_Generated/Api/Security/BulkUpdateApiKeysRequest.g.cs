@@ -27,21 +27,21 @@ public partial class BulkUpdateApiKeysRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BulkUpdateApiKeysRequest", false);
+		var initializer = writer.BeginObjectInitializer("BulkUpdateApiKeysRequest", false);
 		if (Expiration is not null)
 		{
-			__init.Property("Expiration");
+			initializer.Property("Expiration");
 			Expiration.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Ids");
+			initializer.Property("Ids");
 			writer.WriteInlineList(Ids, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Metadata is not null)
 		{
-			__init.Property("Metadata");
+			initializer.Property("Metadata");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -52,7 +52,7 @@ public partial class BulkUpdateApiKeysRequest : RequestConverter.ICodeFormattabl
 
 		if (RoleDescriptors is not null)
 		{
-			__init.Property("RoleDescriptors");
+			initializer.Property("RoleDescriptors");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -61,6 +61,6 @@ public partial class BulkUpdateApiKeysRequest : RequestConverter.ICodeFormattabl
 			writer.WriteInlineList(RoleDescriptors, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

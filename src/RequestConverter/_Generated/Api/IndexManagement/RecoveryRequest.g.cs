@@ -27,43 +27,43 @@ public partial class RecoveryRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RecoveryRequest", false);
+		var initializer = writer.BeginObjectInitializer("RecoveryRequest", false);
 		if (Indices is not null)
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		if (ActiveOnly is not null)
 		{
-			__init.Property("ActiveOnly");
+			initializer.Property("ActiveOnly");
 			writer.WriteValue(ActiveOnly.Value);
 		}
 
 		if (AllowNoIndices is not null)
 		{
-			__init.Property("AllowNoIndices");
+			initializer.Property("AllowNoIndices");
 			writer.WriteValue(AllowNoIndices.Value);
 		}
 
 		if (Detailed is not null)
 		{
-			__init.Property("Detailed");
+			initializer.Property("Detailed");
 			writer.WriteValue(Detailed.Value);
 		}
 
 		if (ExpandWildcards is not null)
 		{
-			__init.Property("ExpandWildcards");
+			initializer.Property("ExpandWildcards");
 			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (IgnoreUnavailable is not null)
 		{
-			__init.Property("IgnoreUnavailable");
+			initializer.Property("IgnoreUnavailable");
 			writer.WriteValue(IgnoreUnavailable.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

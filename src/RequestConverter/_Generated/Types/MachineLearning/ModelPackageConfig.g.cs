@@ -27,22 +27,22 @@ public partial class ModelPackageConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ModelPackageConfig", false);
+		var initializer = writer.BeginObjectInitializer("ModelPackageConfig", false);
 		if (CreateTime is not null)
 		{
-			__init.Property("CreateTime");
+			initializer.Property("CreateTime");
 			writer.WriteValue(CreateTime.Value);
 		}
 
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		if (InferenceConfig is not null)
 		{
-			__init.Property("InferenceConfig");
+			initializer.Property("InferenceConfig");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -53,7 +53,7 @@ public partial class ModelPackageConfig : RequestConverter.ICodeFormattable
 
 		if (Metadata is not null)
 		{
-			__init.Property("Metadata");
+			initializer.Property("Metadata");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -64,63 +64,63 @@ public partial class ModelPackageConfig : RequestConverter.ICodeFormattable
 
 		if (MinimumVersion is not null)
 		{
-			__init.Property("MinimumVersion");
+			initializer.Property("MinimumVersion");
 			writer.WriteString(MinimumVersion);
 		}
 
 		if (ModelRepository is not null)
 		{
-			__init.Property("ModelRepository");
+			initializer.Property("ModelRepository");
 			writer.WriteString(ModelRepository);
 		}
 
 		if (ModelType is not null)
 		{
-			__init.Property("ModelType");
+			initializer.Property("ModelType");
 			writer.WriteString(ModelType);
 		}
 
 		{
-			__init.Property("PackagedModelId");
+			initializer.Property("PackagedModelId");
 			writer.WriteString(PackagedModelId);
 		}
 
 		if (PlatformArchitecture is not null)
 		{
-			__init.Property("PlatformArchitecture");
+			initializer.Property("PlatformArchitecture");
 			writer.WriteString(PlatformArchitecture);
 		}
 
 		if (PrefixStrings is not null)
 		{
-			__init.Property("PrefixStrings");
+			initializer.Property("PrefixStrings");
 			PrefixStrings.FormatCode(writer);
 		}
 
 		if (Sha256 is not null)
 		{
-			__init.Property("Sha256");
+			initializer.Property("Sha256");
 			writer.WriteString(Sha256);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			Size.FormatCode(writer);
 		}
 
 		if (Tags is not null)
 		{
-			__init.Property("Tags");
+			initializer.Property("Tags");
 			writer.WriteInlineList(Tags, (w, item) => { w.WriteString(item); });
 		}
 
 		if (VocabularyFile is not null)
 		{
-			__init.Property("VocabularyFile");
+			initializer.Property("VocabularyFile");
 			writer.WriteString(VocabularyFile);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

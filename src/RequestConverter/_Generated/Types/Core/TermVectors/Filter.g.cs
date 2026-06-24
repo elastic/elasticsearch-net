@@ -27,49 +27,49 @@ public partial class Filter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Filter", false);
+		var initializer = writer.BeginObjectInitializer("Filter", false);
 		if (MaxDocFreq is not null)
 		{
-			__init.Property("MaxDocFreq");
+			initializer.Property("MaxDocFreq");
 			writer.WriteValue(MaxDocFreq.Value);
 		}
 
 		if (MaxNumTerms is not null)
 		{
-			__init.Property("MaxNumTerms");
+			initializer.Property("MaxNumTerms");
 			writer.WriteValue(MaxNumTerms.Value);
 		}
 
 		if (MaxTermFreq is not null)
 		{
-			__init.Property("MaxTermFreq");
+			initializer.Property("MaxTermFreq");
 			writer.WriteValue(MaxTermFreq.Value);
 		}
 
 		if (MaxWordLength is not null)
 		{
-			__init.Property("MaxWordLength");
+			initializer.Property("MaxWordLength");
 			writer.WriteValue(MaxWordLength.Value);
 		}
 
 		if (MinDocFreq is not null)
 		{
-			__init.Property("MinDocFreq");
+			initializer.Property("MinDocFreq");
 			writer.WriteValue(MinDocFreq.Value);
 		}
 
 		if (MinTermFreq is not null)
 		{
-			__init.Property("MinTermFreq");
+			initializer.Property("MinTermFreq");
 			writer.WriteValue(MinTermFreq.Value);
 		}
 
 		if (MinWordLength is not null)
 		{
-			__init.Property("MinWordLength");
+			initializer.Property("MinWordLength");
 			writer.WriteValue(MinWordLength.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

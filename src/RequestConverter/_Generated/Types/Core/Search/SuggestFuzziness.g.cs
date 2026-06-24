@@ -27,37 +27,37 @@ public partial class SuggestFuzziness : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SuggestFuzziness", false);
+		var initializer = writer.BeginObjectInitializer("SuggestFuzziness", false);
 		if (Fuzziness is not null)
 		{
-			__init.Property("Fuzziness");
+			initializer.Property("Fuzziness");
 			Fuzziness.FormatCode(writer);
 		}
 
 		if (MinLength is not null)
 		{
-			__init.Property("MinLength");
+			initializer.Property("MinLength");
 			writer.WriteValue(MinLength.Value);
 		}
 
 		if (PrefixLength is not null)
 		{
-			__init.Property("PrefixLength");
+			initializer.Property("PrefixLength");
 			writer.WriteValue(PrefixLength.Value);
 		}
 
 		if (Transpositions is not null)
 		{
-			__init.Property("Transpositions");
+			initializer.Property("Transpositions");
 			writer.WriteValue(Transpositions.Value);
 		}
 
 		if (UnicodeAware is not null)
 		{
-			__init.Property("UnicodeAware");
+			initializer.Property("UnicodeAware");
 			writer.WriteValue(UnicodeAware.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

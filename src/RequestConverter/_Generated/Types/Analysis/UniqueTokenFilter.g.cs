@@ -27,19 +27,19 @@ public partial class UniqueTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UniqueTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("UniqueTokenFilter", true);
 		if (OnlyOnSamePosition is not null)
 		{
-			__init.Property("OnlyOnSamePosition");
+			initializer.Property("OnlyOnSamePosition");
 			writer.WriteValue(OnlyOnSamePosition.Value);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

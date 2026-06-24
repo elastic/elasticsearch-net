@@ -27,26 +27,26 @@ public partial class SegmentsStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SegmentsStats", false);
+		var initializer = writer.BeginObjectInitializer("SegmentsStats", false);
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 		}
 
 		if (DocValuesMemory is not null)
 		{
-			__init.Property("DocValuesMemory");
+			initializer.Property("DocValuesMemory");
 			DocValuesMemory.FormatCode(writer);
 		}
 
 		{
-			__init.Property("DocValuesMemoryInBytes");
+			initializer.Property("DocValuesMemoryInBytes");
 			writer.WriteValue(DocValuesMemoryInBytes);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("FileSizes");
+			initializer.Property("FileSizes");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -57,118 +57,118 @@ public partial class SegmentsStats : RequestConverter.ICodeFormattable
 
 		if (FixedBitSet is not null)
 		{
-			__init.Property("FixedBitSet");
+			initializer.Property("FixedBitSet");
 			FixedBitSet.FormatCode(writer);
 		}
 
 		{
-			__init.Property("FixedBitSetMemoryInBytes");
+			initializer.Property("FixedBitSetMemoryInBytes");
 			writer.WriteValue(FixedBitSetMemoryInBytes);
 			writer.Write("L");
 		}
 
 		if (IndexWriterMemory is not null)
 		{
-			__init.Property("IndexWriterMemory");
+			initializer.Property("IndexWriterMemory");
 			IndexWriterMemory.FormatCode(writer);
 		}
 
 		{
-			__init.Property("IndexWriterMemoryInBytes");
+			initializer.Property("IndexWriterMemoryInBytes");
 			writer.WriteValue(IndexWriterMemoryInBytes);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("MaxUnsafeAutoIdTimestamp");
+			initializer.Property("MaxUnsafeAutoIdTimestamp");
 			writer.WriteValue(MaxUnsafeAutoIdTimestamp);
 			writer.Write("L");
 		}
 
 		if (Memory is not null)
 		{
-			__init.Property("Memory");
+			initializer.Property("Memory");
 			Memory.FormatCode(writer);
 		}
 
 		{
-			__init.Property("MemoryInBytes");
+			initializer.Property("MemoryInBytes");
 			writer.WriteValue(MemoryInBytes);
 			writer.Write("L");
 		}
 
 		if (NormsMemory is not null)
 		{
-			__init.Property("NormsMemory");
+			initializer.Property("NormsMemory");
 			NormsMemory.FormatCode(writer);
 		}
 
 		{
-			__init.Property("NormsMemoryInBytes");
+			initializer.Property("NormsMemoryInBytes");
 			writer.WriteValue(NormsMemoryInBytes);
 			writer.Write("L");
 		}
 
 		if (PointsMemory is not null)
 		{
-			__init.Property("PointsMemory");
+			initializer.Property("PointsMemory");
 			PointsMemory.FormatCode(writer);
 		}
 
 		{
-			__init.Property("PointsMemoryInBytes");
+			initializer.Property("PointsMemoryInBytes");
 			writer.WriteValue(PointsMemoryInBytes);
 			writer.Write("L");
 		}
 
 		if (StoredFieldsMemory is not null)
 		{
-			__init.Property("StoredFieldsMemory");
+			initializer.Property("StoredFieldsMemory");
 			StoredFieldsMemory.FormatCode(writer);
 		}
 
 		{
-			__init.Property("StoredFieldsMemoryInBytes");
+			initializer.Property("StoredFieldsMemoryInBytes");
 			writer.WriteValue(StoredFieldsMemoryInBytes);
 			writer.Write("L");
 		}
 
 		if (TermsMemory is not null)
 		{
-			__init.Property("TermsMemory");
+			initializer.Property("TermsMemory");
 			TermsMemory.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TermsMemoryInBytes");
+			initializer.Property("TermsMemoryInBytes");
 			writer.WriteValue(TermsMemoryInBytes);
 			writer.Write("L");
 		}
 
 		if (TermVectorsMemory is not null)
 		{
-			__init.Property("TermVectorsMemory");
+			initializer.Property("TermVectorsMemory");
 			TermVectorsMemory.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TermVectorsMemoryInBytes");
+			initializer.Property("TermVectorsMemoryInBytes");
 			writer.WriteValue(TermVectorsMemoryInBytes);
 			writer.Write("L");
 		}
 
 		if (VersionMapMemory is not null)
 		{
-			__init.Property("VersionMapMemory");
+			initializer.Property("VersionMapMemory");
 			VersionMapMemory.FormatCode(writer);
 		}
 
 		{
-			__init.Property("VersionMapMemoryInBytes");
+			initializer.Property("VersionMapMemoryInBytes");
 			writer.WriteValue(VersionMapMemoryInBytes);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

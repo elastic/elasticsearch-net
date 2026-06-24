@@ -27,30 +27,30 @@ public partial class NestedSortValue : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NestedSortValue", false);
+		var initializer = writer.BeginObjectInitializer("NestedSortValue", false);
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			Filter.FormatCode(writer);
 		}
 
 		if (MaxChildren is not null)
 		{
-			__init.Property("MaxChildren");
+			initializer.Property("MaxChildren");
 			writer.WriteValue(MaxChildren.Value);
 		}
 
 		if (Nested is not null)
 		{
-			__init.Property("Nested");
+			initializer.Property("Nested");
 			Nested.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Path");
+			initializer.Property("Path");
 			Path.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,32 +27,32 @@ public partial class AnomalyDetectors : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AnomalyDetectors", false);
+		var initializer = writer.BeginObjectInitializer("AnomalyDetectors", false);
 		{
-			__init.Property("CategorizationAnalyzer");
+			initializer.Property("CategorizationAnalyzer");
 			CategorizationAnalyzer.FormatCode(writer);
 		}
 
 		{
-			__init.Property("CategorizationExamplesLimit");
+			initializer.Property("CategorizationExamplesLimit");
 			writer.WriteValue(CategorizationExamplesLimit);
 		}
 
 		{
-			__init.Property("DailyModelSnapshotRetentionAfterDays");
+			initializer.Property("DailyModelSnapshotRetentionAfterDays");
 			writer.WriteValue(DailyModelSnapshotRetentionAfterDays);
 		}
 
 		{
-			__init.Property("ModelMemoryLimit");
+			initializer.Property("ModelMemoryLimit");
 			writer.WriteString(ModelMemoryLimit);
 		}
 
 		{
-			__init.Property("ModelSnapshotRetentionDays");
+			initializer.Property("ModelSnapshotRetentionDays");
 			writer.WriteValue(ModelSnapshotRetentionDays);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

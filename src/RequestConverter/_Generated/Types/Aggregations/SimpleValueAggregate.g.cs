@@ -27,10 +27,10 @@ public partial class SimpleValueAggregate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SimpleValueAggregate", true);
+		var initializer = writer.BeginObjectInitializer("SimpleValueAggregate", true);
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -40,17 +40,17 @@ public partial class SimpleValueAggregate : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Value");
+			initializer.Property("Value");
 			writer.WriteValue(Value.Value);
 			writer.Write("d");
 		}
 
 		if (ValueAsString is not null)
 		{
-			__init.Property("ValueAsString");
+			initializer.Property("ValueAsString");
 			writer.WriteString(ValueAsString);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

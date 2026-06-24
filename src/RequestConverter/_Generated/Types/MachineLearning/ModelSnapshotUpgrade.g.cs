@@ -27,20 +27,20 @@ public partial class ModelSnapshotUpgrade : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ModelSnapshotUpgrade", false);
+		var initializer = writer.BeginObjectInitializer("ModelSnapshotUpgrade", false);
 		{
-			__init.Property("AssignmentExplanation");
+			initializer.Property("AssignmentExplanation");
 			writer.WriteString(AssignmentExplanation);
 		}
 
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			writer.WriteString(JobId);
 		}
 
 		if (Node is not null)
 		{
-			__init.Property("Node");
+			initializer.Property("Node");
 			writer.Write("new(");
 			writer.WriteString(Node.Value.Key);
 			writer.Write(", ");
@@ -49,15 +49,15 @@ public partial class ModelSnapshotUpgrade : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("SnapshotId");
+			initializer.Property("SnapshotId");
 			writer.WriteString(SnapshotId);
 		}
 
 		{
-			__init.Property("State");
+			initializer.Property("State");
 			Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeStateCodeFormatter.FormatCode(State, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

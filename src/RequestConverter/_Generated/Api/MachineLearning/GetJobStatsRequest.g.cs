@@ -27,19 +27,19 @@ public partial class GetJobStatsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetJobStatsRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetJobStatsRequest", false);
 		if (JobId is not null)
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			JobId.FormatCode(writer);
 		}
 
 		if (AllowNoMatch is not null)
 		{
-			__init.Property("AllowNoMatch");
+			initializer.Property("AllowNoMatch");
 			writer.WriteValue(AllowNoMatch.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,36 +27,36 @@ public partial class CustomAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CustomAnalyzer", true);
+		var initializer = writer.BeginObjectInitializer("CustomAnalyzer", true);
 		if (CharFilter is not null)
 		{
-			__init.Property("CharFilter");
+			initializer.Property("CharFilter");
 			writer.WriteInlineList(CharFilter, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			writer.WriteInlineList(Filter, (w, item) => { w.WriteString(item); });
 		}
 
 		if (PositionIncrementGap is not null)
 		{
-			__init.Property("PositionIncrementGap");
+			initializer.Property("PositionIncrementGap");
 			writer.WriteValue(PositionIncrementGap.Value);
 		}
 
 		if (PositionOffsetGap is not null)
 		{
-			__init.Property("PositionOffsetGap");
+			initializer.Property("PositionOffsetGap");
 			writer.WriteValue(PositionOffsetGap.Value);
 		}
 
 		{
-			__init.Property("Tokenizer");
+			initializer.Property("Tokenizer");
 			writer.WriteString(Tokenizer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

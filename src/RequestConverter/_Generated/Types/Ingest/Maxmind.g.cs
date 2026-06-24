@@ -27,12 +27,12 @@ public partial class Maxmind : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Maxmind", false);
+		var initializer = writer.BeginObjectInitializer("Maxmind", false);
 		{
-			__init.Property("AccountId");
+			initializer.Property("AccountId");
 			AccountId.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

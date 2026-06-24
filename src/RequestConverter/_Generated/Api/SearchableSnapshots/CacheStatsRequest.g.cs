@@ -27,13 +27,13 @@ public partial class CacheStatsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CacheStatsRequest", false);
+		var initializer = writer.BeginObjectInitializer("CacheStatsRequest", false);
 		if (NodeId is not null)
 		{
-			__init.Property("NodeId");
+			initializer.Property("NodeId");
 			NodeId.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,38 +27,38 @@ public partial class ClusterOperatingSystem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterOperatingSystem", false);
+		var initializer = writer.BeginObjectInitializer("ClusterOperatingSystem", false);
 		{
-			__init.Property("AllocatedProcessors");
+			initializer.Property("AllocatedProcessors");
 			writer.WriteValue(AllocatedProcessors);
 		}
 
 		if (Architectures is not null)
 		{
-			__init.Property("Architectures");
+			initializer.Property("Architectures");
 			writer.WriteInlineList(Architectures, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("AvailableProcessors");
+			initializer.Property("AvailableProcessors");
 			writer.WriteValue(AvailableProcessors);
 		}
 
 		{
-			__init.Property("Mem");
+			initializer.Property("Mem");
 			Mem.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Names");
+			initializer.Property("Names");
 			writer.WriteInlineList(Names, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("PrettyNames");
+			initializer.Property("PrettyNames");
 			writer.WriteInlineList(PrettyNames, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,29 +27,29 @@ public partial class InferenceEndpoint : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InferenceEndpoint", false);
+		var initializer = writer.BeginObjectInitializer("InferenceEndpoint", false);
 		if (ChunkingSettings is not null)
 		{
-			__init.Property("ChunkingSettings");
+			initializer.Property("ChunkingSettings");
 			ChunkingSettings.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Service");
+			initializer.Property("Service");
 			writer.WriteString(Service);
 		}
 
 		{
-			__init.Property("ServiceSettings");
+			initializer.Property("ServiceSettings");
 			writer.WriteValue(ServiceSettings);
 		}
 
 		if (TaskSettings is not null)
 		{
-			__init.Property("TaskSettings");
+			initializer.Property("TaskSettings");
 			writer.WriteValue(TaskSettings);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

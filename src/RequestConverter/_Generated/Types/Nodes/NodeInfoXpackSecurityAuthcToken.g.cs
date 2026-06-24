@@ -27,12 +27,12 @@ public partial class NodeInfoXpackSecurityAuthcToken : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoXpackSecurityAuthcToken", false);
+		var initializer = writer.BeginObjectInitializer("NodeInfoXpackSecurityAuthcToken", false);
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteString(Enabled);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

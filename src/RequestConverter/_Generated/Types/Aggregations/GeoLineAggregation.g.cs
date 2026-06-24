@@ -27,36 +27,36 @@ public partial class GeoLineAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoLineAggregation", false);
+		var initializer = writer.BeginObjectInitializer("GeoLineAggregation", false);
 		if (IncludeSort is not null)
 		{
-			__init.Property("IncludeSort");
+			initializer.Property("IncludeSort");
 			writer.WriteValue(IncludeSort.Value);
 		}
 
 		{
-			__init.Property("Point");
+			initializer.Property("Point");
 			Point.FormatCode(writer);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
 		if (Sort is not null)
 		{
-			__init.Property("Sort");
+			initializer.Property("Sort");
 			Sort.FormatCode(writer);
 		}
 
 		if (SortOrder is not null)
 		{
-			__init.Property("SortOrder");
+			initializer.Property("SortOrder");
 			Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(SortOrder.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

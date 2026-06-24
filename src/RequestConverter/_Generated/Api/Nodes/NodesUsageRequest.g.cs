@@ -27,25 +27,25 @@ public partial class NodesUsageRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodesUsageRequest", false);
+		var initializer = writer.BeginObjectInitializer("NodesUsageRequest", false);
 		if (Metric is not null)
 		{
-			__init.Property("Metric");
+			initializer.Property("Metric");
 			writer.WriteInlineList(Metric, (w, item) => { Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetricCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (NodeId is not null)
 		{
-			__init.Property("NodeId");
+			initializer.Property("NodeId");
 			NodeId.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

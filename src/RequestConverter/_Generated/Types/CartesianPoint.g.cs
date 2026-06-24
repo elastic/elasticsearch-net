@@ -27,19 +27,19 @@ public partial class CartesianPoint : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CartesianPoint", false);
+		var initializer = writer.BeginObjectInitializer("CartesianPoint", false);
 		{
-			__init.Property("X");
+			initializer.Property("X");
 			writer.WriteValue(X);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Y");
+			initializer.Property("Y");
 			writer.WriteValue(Y);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

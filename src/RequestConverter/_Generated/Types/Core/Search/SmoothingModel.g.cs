@@ -27,25 +27,25 @@ public partial class SmoothingModel : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SmoothingModel", false);
+		var initializer = writer.BeginObjectInitializer("SmoothingModel", false);
 		if (Laplace is not null)
 		{
-			__init.Property("Laplace");
+			initializer.Property("Laplace");
 			Laplace.FormatCode(writer);
 		}
 
 		if (LinearInterpolation is not null)
 		{
-			__init.Property("LinearInterpolation");
+			initializer.Property("LinearInterpolation");
 			LinearInterpolation.FormatCode(writer);
 		}
 
 		if (StupidBackoff is not null)
 		{
-			__init.Property("StupidBackoff");
+			initializer.Property("StupidBackoff");
 			StupidBackoff.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

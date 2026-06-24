@@ -27,50 +27,50 @@ public partial class BoolQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BoolQuery", false);
+		var initializer = writer.BeginObjectInitializer("BoolQuery", false);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (MinimumShouldMatch is not null)
 		{
-			__init.Property("MinimumShouldMatch");
+			initializer.Property("MinimumShouldMatch");
 			MinimumShouldMatch.FormatCode(writer);
 		}
 
 		if (Must is not null)
 		{
-			__init.Property("Must");
+			initializer.Property("Must");
 			writer.WriteInlineList(Must, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (MustNot is not null)
 		{
-			__init.Property("MustNot");
+			initializer.Property("MustNot");
 			writer.WriteInlineList(MustNot, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
 		if (Should is not null)
 		{
-			__init.Property("Should");
+			initializer.Property("Should");
 			writer.WriteInlineList(Should, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

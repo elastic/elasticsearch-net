@@ -27,35 +27,35 @@ public partial class ResolveClusterInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ResolveClusterInfo", false);
+		var initializer = writer.BeginObjectInitializer("ResolveClusterInfo", false);
 		{
-			__init.Property("Connected");
+			initializer.Property("Connected");
 			writer.WriteValue(Connected);
 		}
 
 		if (Error is not null)
 		{
-			__init.Property("Error");
+			initializer.Property("Error");
 			writer.WriteString(Error);
 		}
 
 		if (MatchingIndices is not null)
 		{
-			__init.Property("MatchingIndices");
+			initializer.Property("MatchingIndices");
 			writer.WriteValue(MatchingIndices.Value);
 		}
 
 		{
-			__init.Property("SkipUnavailable");
+			initializer.Property("SkipUnavailable");
 			writer.WriteValue(SkipUnavailable);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			Version.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

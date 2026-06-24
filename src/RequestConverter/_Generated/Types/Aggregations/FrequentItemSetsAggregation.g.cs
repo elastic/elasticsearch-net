@@ -27,37 +27,37 @@ public partial class FrequentItemSetsAggregation : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FrequentItemSetsAggregation", false);
+		var initializer = writer.BeginObjectInitializer("FrequentItemSetsAggregation", false);
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			writer.WriteInlineList(Fields, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			Filter.FormatCode(writer);
 		}
 
 		if (MinimumSetSize is not null)
 		{
-			__init.Property("MinimumSetSize");
+			initializer.Property("MinimumSetSize");
 			writer.WriteValue(MinimumSetSize.Value);
 		}
 
 		if (MinimumSupport is not null)
 		{
-			__init.Property("MinimumSupport");
+			initializer.Property("MinimumSupport");
 			writer.WriteValue(MinimumSupport.Value);
 			writer.Write("d");
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

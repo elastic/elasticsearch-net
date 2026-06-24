@@ -27,49 +27,49 @@ public partial class PinnedRetriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PinnedRetriever", false);
+		var initializer = writer.BeginObjectInitializer("PinnedRetriever", false);
 		if (Docs is not null)
 		{
-			__init.Property("Docs");
+			initializer.Property("Docs");
 			writer.WriteInlineList(Docs, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Ids is not null)
 		{
-			__init.Property("Ids");
+			initializer.Property("Ids");
 			writer.WriteInlineList(Ids, (w, item) => { w.WriteString(item); });
 		}
 
 		if (MinScore is not null)
 		{
-			__init.Property("MinScore");
+			initializer.Property("MinScore");
 			writer.WriteValue(MinScore.Value);
 			writer.Write("f");
 		}
 
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		if (RankWindowSize is not null)
 		{
-			__init.Property("RankWindowSize");
+			initializer.Property("RankWindowSize");
 			writer.WriteValue(RankWindowSize.Value);
 		}
 
 		{
-			__init.Property("Retriever");
+			initializer.Property("Retriever");
 			Retriever.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

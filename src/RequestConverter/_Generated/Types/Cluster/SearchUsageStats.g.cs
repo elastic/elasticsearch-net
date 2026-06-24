@@ -27,14 +27,14 @@ public partial class SearchUsageStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SearchUsageStats", false);
+		var initializer = writer.BeginObjectInitializer("SearchUsageStats", false);
 		{
-			__init.Property("Extended");
+			initializer.Property("Extended");
 			Extended.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Queries");
+			initializer.Property("Queries");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -44,7 +44,7 @@ public partial class SearchUsageStats : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Rescorers");
+			initializer.Property("Rescorers");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -54,7 +54,7 @@ public partial class SearchUsageStats : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Retrievers");
+			initializer.Property("Retrievers");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -64,7 +64,7 @@ public partial class SearchUsageStats : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Sections");
+			initializer.Property("Sections");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -74,11 +74,11 @@ public partial class SearchUsageStats : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteValue(Total);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

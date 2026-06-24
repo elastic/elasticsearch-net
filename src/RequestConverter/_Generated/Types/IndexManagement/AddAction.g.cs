@@ -27,73 +27,73 @@ public partial class AddAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AddAction", false);
+		var initializer = writer.BeginObjectInitializer("AddAction", false);
 		if (Alias is not null)
 		{
-			__init.Property("Alias");
+			initializer.Property("Alias");
 			Alias.FormatCode(writer);
 		}
 
 		if (Aliases is not null)
 		{
-			__init.Property("Aliases");
+			initializer.Property("Aliases");
 			writer.WriteInlineList(Aliases, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			Filter.FormatCode(writer);
 		}
 
 		if (Index is not null)
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		if (IndexRouting is not null)
 		{
-			__init.Property("IndexRouting");
+			initializer.Property("IndexRouting");
 			writer.WriteString(IndexRouting);
 		}
 
 		if (Indices is not null)
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		if (IsHidden is not null)
 		{
-			__init.Property("IsHidden");
+			initializer.Property("IsHidden");
 			writer.WriteValue(IsHidden.Value);
 		}
 
 		if (IsWriteIndex is not null)
 		{
-			__init.Property("IsWriteIndex");
+			initializer.Property("IsWriteIndex");
 			writer.WriteValue(IsWriteIndex.Value);
 		}
 
 		if (MustExist is not null)
 		{
-			__init.Property("MustExist");
+			initializer.Property("MustExist");
 			writer.WriteValue(MustExist.Value);
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			writer.WriteString(Routing);
 		}
 
 		if (SearchRouting is not null)
 		{
-			__init.Property("SearchRouting");
+			initializer.Property("SearchRouting");
 			writer.WriteString(SearchRouting);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

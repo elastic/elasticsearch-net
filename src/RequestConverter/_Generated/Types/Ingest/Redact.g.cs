@@ -27,12 +27,12 @@ public partial class Redact : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Redact", false);
+		var initializer = writer.BeginObjectInitializer("Redact", false);
 		{
-			__init.Property("IsRedacted");
+			initializer.Property("IsRedacted");
 			writer.WriteValue(IsRedacted);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

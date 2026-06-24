@@ -27,12 +27,12 @@ public partial class TrainedModelConfigInput : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelConfigInput", false);
+		var initializer = writer.BeginObjectInitializer("TrainedModelConfigInput", false);
 		{
-			__init.Property("FieldNames");
+			initializer.Property("FieldNames");
 			FieldNames.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

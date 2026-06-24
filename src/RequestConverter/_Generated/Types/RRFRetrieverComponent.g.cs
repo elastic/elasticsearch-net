@@ -27,19 +27,19 @@ public partial class RRFRetrieverComponent : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RRFRetrieverComponent", true);
+		var initializer = writer.BeginObjectInitializer("RRFRetrieverComponent", true);
 		{
-			__init.Property("Retriever");
+			initializer.Property("Retriever");
 			Retriever.FormatCode(writer);
 		}
 
 		if (Weight is not null)
 		{
-			__init.Property("Weight");
+			initializer.Property("Weight");
 			writer.WriteValue(Weight.Value);
 			writer.Write("f");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

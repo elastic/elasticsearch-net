@@ -27,22 +27,22 @@ public partial class ToolCall : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ToolCall", false);
+		var initializer = writer.BeginObjectInitializer("ToolCall", false);
 		{
-			__init.Property("Function");
+			initializer.Property("Function");
 			Function.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			writer.WriteString(Type);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

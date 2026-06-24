@@ -27,23 +27,23 @@ public partial class CreateFromRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CreateFromRequest", false);
+		var initializer = writer.BeginObjectInitializer("CreateFromRequest", false);
 		{
-			__init.Property("Dest");
+			initializer.Property("Dest");
 			Dest.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			Source.FormatCode(writer);
 		}
 
 		if (CreateFrom is not null)
 		{
-			__init.Property("CreateFrom");
+			initializer.Property("CreateFrom");
 			CreateFrom.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

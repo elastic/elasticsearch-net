@@ -27,34 +27,34 @@ public partial class Processor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Processor", false);
+		var initializer = writer.BeginObjectInitializer("Processor", false);
 		if (Count is not null)
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count.Value);
 			writer.Write("L");
 		}
 
 		if (Current is not null)
 		{
-			__init.Property("Current");
+			initializer.Property("Current");
 			writer.WriteValue(Current.Value);
 			writer.Write("L");
 		}
 
 		if (Failed is not null)
 		{
-			__init.Property("Failed");
+			initializer.Property("Failed");
 			writer.WriteValue(Failed.Value);
 			writer.Write("L");
 		}
 
 		if (TimeInMillis is not null)
 		{
-			__init.Property("TimeInMillis");
+			initializer.Property("TimeInMillis");
 			writer.WriteValue(TimeInMillis.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

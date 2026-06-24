@@ -27,30 +27,30 @@ public partial class PhraseSuggestOption : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PhraseSuggestOption", false);
+		var initializer = writer.BeginObjectInitializer("PhraseSuggestOption", false);
 		if (CollateMatch is not null)
 		{
-			__init.Property("CollateMatch");
+			initializer.Property("CollateMatch");
 			writer.WriteValue(CollateMatch.Value);
 		}
 
 		if (Highlighted is not null)
 		{
-			__init.Property("Highlighted");
+			initializer.Property("Highlighted");
 			writer.WriteString(Highlighted);
 		}
 
 		{
-			__init.Property("Score");
+			initializer.Property("Score");
 			writer.WriteValue(Score);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Text");
+			initializer.Property("Text");
 			writer.WriteString(Text);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

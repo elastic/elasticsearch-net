@@ -27,34 +27,34 @@ public partial class ClusterJvm : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterJvm", false);
+		var initializer = writer.BeginObjectInitializer("ClusterJvm", false);
 		if (MaxUptime is not null)
 		{
-			__init.Property("MaxUptime");
+			initializer.Property("MaxUptime");
 			MaxUptime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("MaxUptimeInMillis");
+			initializer.Property("MaxUptimeInMillis");
 			writer.WriteValue(MaxUptimeInMillis);
 		}
 
 		{
-			__init.Property("Mem");
+			initializer.Property("Mem");
 			Mem.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Threads");
+			initializer.Property("Threads");
 			writer.WriteValue(Threads);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Versions");
+			initializer.Property("Versions");
 			writer.WriteInlineList(Versions, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

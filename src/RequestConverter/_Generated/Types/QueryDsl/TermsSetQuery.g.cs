@@ -27,48 +27,48 @@ public partial class TermsSetQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TermsSetQuery", false);
+		var initializer = writer.BeginObjectInitializer("TermsSetQuery", false);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (MinimumShouldMatch is not null)
 		{
-			__init.Property("MinimumShouldMatch");
+			initializer.Property("MinimumShouldMatch");
 			MinimumShouldMatch.FormatCode(writer);
 		}
 
 		if (MinimumShouldMatchField is not null)
 		{
-			__init.Property("MinimumShouldMatchField");
+			initializer.Property("MinimumShouldMatchField");
 			MinimumShouldMatchField.FormatCode(writer);
 		}
 
 		if (MinimumShouldMatchScript is not null)
 		{
-			__init.Property("MinimumShouldMatchScript");
+			initializer.Property("MinimumShouldMatchScript");
 			MinimumShouldMatchScript.FormatCode(writer);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
 		{
-			__init.Property("Terms");
+			initializer.Property("Terms");
 			writer.WriteInlineList(Terms, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,40 +27,40 @@ public partial class RemoteIndicesPrivileges : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RemoteIndicesPrivileges", false);
+		var initializer = writer.BeginObjectInitializer("RemoteIndicesPrivileges", false);
 		if (AllowRestrictedIndices is not null)
 		{
-			__init.Property("AllowRestrictedIndices");
+			initializer.Property("AllowRestrictedIndices");
 			writer.WriteValue(AllowRestrictedIndices.Value);
 		}
 
 		{
-			__init.Property("Clusters");
+			initializer.Property("Clusters");
 			Clusters.FormatCode(writer);
 		}
 
 		if (FieldSecurity is not null)
 		{
-			__init.Property("FieldSecurity");
+			initializer.Property("FieldSecurity");
 			FieldSecurity.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Names");
+			initializer.Property("Names");
 			writer.WriteInlineList(Names, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Privileges");
+			initializer.Property("Privileges");
 			writer.WriteInlineList(Privileges, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Query is not null)
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			writer.WriteValue(Query);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

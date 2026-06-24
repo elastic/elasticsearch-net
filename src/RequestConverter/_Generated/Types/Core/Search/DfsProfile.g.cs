@@ -27,19 +27,19 @@ public partial class DfsProfile : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DfsProfile", false);
+		var initializer = writer.BeginObjectInitializer("DfsProfile", false);
 		if (Knn is not null)
 		{
-			__init.Property("Knn");
+			initializer.Property("Knn");
 			writer.WriteInlineList(Knn, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Statistics is not null)
 		{
-			__init.Property("Statistics");
+			initializer.Property("Statistics");
 			Statistics.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

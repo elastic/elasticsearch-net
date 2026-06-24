@@ -27,91 +27,91 @@ public partial class RepositoryAnalyzeRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RepositoryAnalyzeRequest", false);
+		var initializer = writer.BeginObjectInitializer("RepositoryAnalyzeRequest", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		if (BlobCount is not null)
 		{
-			__init.Property("BlobCount");
+			initializer.Property("BlobCount");
 			writer.WriteValue(BlobCount.Value);
 		}
 
 		if (CheckOverwriteProtection is not null)
 		{
-			__init.Property("CheckOverwriteProtection");
+			initializer.Property("CheckOverwriteProtection");
 			writer.WriteValue(CheckOverwriteProtection.Value);
 		}
 
 		if (Concurrency is not null)
 		{
-			__init.Property("Concurrency");
+			initializer.Property("Concurrency");
 			writer.WriteValue(Concurrency.Value);
 		}
 
 		if (Detailed is not null)
 		{
-			__init.Property("Detailed");
+			initializer.Property("Detailed");
 			writer.WriteValue(Detailed.Value);
 		}
 
 		if (EarlyReadNodeCount is not null)
 		{
-			__init.Property("EarlyReadNodeCount");
+			initializer.Property("EarlyReadNodeCount");
 			writer.WriteValue(EarlyReadNodeCount.Value);
 		}
 
 		if (MaxBlobSize is not null)
 		{
-			__init.Property("MaxBlobSize");
+			initializer.Property("MaxBlobSize");
 			MaxBlobSize.FormatCode(writer);
 		}
 
 		if (MaxTotalDataSize is not null)
 		{
-			__init.Property("MaxTotalDataSize");
+			initializer.Property("MaxTotalDataSize");
 			MaxTotalDataSize.FormatCode(writer);
 		}
 
 		if (RareActionProbability is not null)
 		{
-			__init.Property("RareActionProbability");
+			initializer.Property("RareActionProbability");
 			writer.WriteValue(RareActionProbability.Value);
 			writer.Write("d");
 		}
 
 		if (RarelyAbortWrites is not null)
 		{
-			__init.Property("RarelyAbortWrites");
+			initializer.Property("RarelyAbortWrites");
 			writer.WriteValue(RarelyAbortWrites.Value);
 		}
 
 		if (ReadNodeCount is not null)
 		{
-			__init.Property("ReadNodeCount");
+			initializer.Property("ReadNodeCount");
 			writer.WriteValue(ReadNodeCount.Value);
 		}
 
 		if (RegisterOperationCount is not null)
 		{
-			__init.Property("RegisterOperationCount");
+			initializer.Property("RegisterOperationCount");
 			writer.WriteValue(RegisterOperationCount.Value);
 		}
 
 		if (Seed is not null)
 		{
-			__init.Property("Seed");
+			initializer.Property("Seed");
 			writer.WriteValue(Seed.Value);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

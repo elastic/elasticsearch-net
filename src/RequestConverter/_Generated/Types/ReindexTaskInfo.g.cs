@@ -27,51 +27,51 @@ public partial class ReindexTaskInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ReindexTaskInfo", false);
+		var initializer = writer.BeginObjectInitializer("ReindexTaskInfo", false);
 		{
-			__init.Property("Cancelled");
+			initializer.Property("Cancelled");
 			writer.WriteValue(Cancelled);
 		}
 
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		if (RunningTime is not null)
 		{
-			__init.Property("RunningTime");
+			initializer.Property("RunningTime");
 			RunningTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("RunningTimeInNanos");
+			initializer.Property("RunningTimeInNanos");
 			writer.WriteValue(RunningTimeInNanos);
 		}
 
 		if (StartTime is not null)
 		{
-			__init.Property("StartTime");
+			initializer.Property("StartTime");
 			writer.WriteString(StartTime);
 		}
 
 		{
-			__init.Property("StartTimeInMillis");
+			initializer.Property("StartTimeInMillis");
 			writer.WriteValue(StartTimeInMillis);
 		}
 
 		if (Status is not null)
 		{
-			__init.Property("Status");
+			initializer.Property("Status");
 			Status.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,12 +27,12 @@ public partial class ClearCursorRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClearCursorRequest", false);
+		var initializer = writer.BeginObjectInitializer("ClearCursorRequest", false);
 		{
-			__init.Property("Cursor");
+			initializer.Property("Cursor");
 			writer.WriteString(Cursor);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

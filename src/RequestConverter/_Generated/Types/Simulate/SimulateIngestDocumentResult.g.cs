@@ -27,13 +27,13 @@ public partial class SimulateIngestDocumentResult : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SimulateIngestDocumentResult", false);
+		var initializer = writer.BeginObjectInitializer("SimulateIngestDocumentResult", false);
 		if (Doc is not null)
 		{
-			__init.Property("Doc");
+			initializer.Property("Doc");
 			Doc.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

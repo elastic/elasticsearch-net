@@ -27,10 +27,10 @@ public partial class NodeShard : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeShard", false);
+		var initializer = writer.BeginObjectInitializer("NodeShard", false);
 		if (AllocationId is not null)
 		{
-			__init.Property("AllocationId");
+			initializer.Property("AllocationId");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -40,24 +40,24 @@ public partial class NodeShard : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteString(Index);
 		}
 
 		if (Node is not null)
 		{
-			__init.Property("Node");
+			initializer.Property("Node");
 			writer.WriteString(Node);
 		}
 
 		{
-			__init.Property("Primary");
+			initializer.Property("Primary");
 			writer.WriteValue(Primary);
 		}
 
 		if (RecoverySource is not null)
 		{
-			__init.Property("RecoverySource");
+			initializer.Property("RecoverySource");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -68,32 +68,32 @@ public partial class NodeShard : RequestConverter.ICodeFormattable
 
 		if (RelocatingNode is not null)
 		{
-			__init.Property("RelocatingNode");
+			initializer.Property("RelocatingNode");
 			writer.WriteString(RelocatingNode);
 		}
 
 		if (RelocationFailureInfo is not null)
 		{
-			__init.Property("RelocationFailureInfo");
+			initializer.Property("RelocationFailureInfo");
 			RelocationFailureInfo.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Shard");
+			initializer.Property("Shard");
 			writer.WriteValue(Shard);
 		}
 
 		{
-			__init.Property("State");
+			initializer.Property("State");
 			Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingStateCodeFormatter.FormatCode(State, writer);
 		}
 
 		if (UnassignedInfo is not null)
 		{
-			__init.Property("UnassignedInfo");
+			initializer.Property("UnassignedInfo");
 			UnassignedInfo.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

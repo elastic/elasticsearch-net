@@ -27,25 +27,25 @@ public partial class ReloadSecureSettingsRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ReloadSecureSettingsRequest", false);
+		var initializer = writer.BeginObjectInitializer("ReloadSecureSettingsRequest", false);
 		if (NodeId is not null)
 		{
-			__init.Property("NodeId");
+			initializer.Property("NodeId");
 			NodeId.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (SecureSettingsPassword is not null)
 		{
-			__init.Property("SecureSettingsPassword");
+			initializer.Property("SecureSettingsPassword");
 			writer.WriteString(SecureSettingsPassword);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

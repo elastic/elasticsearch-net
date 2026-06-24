@@ -27,22 +27,22 @@ public partial class ResolveIndexDataStreamsItem : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ResolveIndexDataStreamsItem", false);
+		var initializer = writer.BeginObjectInitializer("ResolveIndexDataStreamsItem", false);
 		{
-			__init.Property("BackingIndices");
+			initializer.Property("BackingIndices");
 			writer.WriteInlineList(BackingIndices, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("TimestampField");
+			initializer.Property("TimestampField");
 			writer.WriteString(TimestampField);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

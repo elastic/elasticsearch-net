@@ -27,25 +27,25 @@ public partial class TrainedModelInferenceFeatureImportance : RequestConverter.I
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelInferenceFeatureImportance", false);
+		var initializer = writer.BeginObjectInitializer("TrainedModelInferenceFeatureImportance", false);
 		if (Classes is not null)
 		{
-			__init.Property("Classes");
+			initializer.Property("Classes");
 			writer.WriteInlineList(Classes, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("FeatureName");
+			initializer.Property("FeatureName");
 			writer.WriteString(FeatureName);
 		}
 
 		if (Importance is not null)
 		{
-			__init.Property("Importance");
+			initializer.Property("Importance");
 			writer.WriteValue(Importance.Value);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

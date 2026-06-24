@@ -27,43 +27,43 @@ public partial class MovingFunctionAggregation : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MovingFunctionAggregation", false);
+		var initializer = writer.BeginObjectInitializer("MovingFunctionAggregation", false);
 		if (BucketsPath is not null)
 		{
-			__init.Property("BucketsPath");
+			initializer.Property("BucketsPath");
 			BucketsPath.FormatCode(writer);
 		}
 
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			writer.WriteString(Format);
 		}
 
 		if (GapPolicy is not null)
 		{
-			__init.Property("GapPolicy");
+			initializer.Property("GapPolicy");
 			Elastic.Clients.Elasticsearch.Aggregations.GapPolicyCodeFormatter.FormatCode(GapPolicy.Value, writer);
 		}
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			writer.WriteString(Script);
 		}
 
 		if (Shift is not null)
 		{
-			__init.Property("Shift");
+			initializer.Property("Shift");
 			writer.WriteValue(Shift.Value);
 		}
 
 		if (Window is not null)
 		{
-			__init.Property("Window");
+			initializer.Property("Window");
 			writer.WriteValue(Window.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

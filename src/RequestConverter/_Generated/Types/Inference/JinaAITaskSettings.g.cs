@@ -27,31 +27,31 @@ public partial class JinaAITaskSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("JinaAITaskSettings", false);
+		var initializer = writer.BeginObjectInitializer("JinaAITaskSettings", false);
 		if (InputType is not null)
 		{
-			__init.Property("InputType");
+			initializer.Property("InputType");
 			Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTaskCodeFormatter.FormatCode(InputType.Value, writer);
 		}
 
 		if (LateChunking is not null)
 		{
-			__init.Property("LateChunking");
+			initializer.Property("LateChunking");
 			writer.WriteValue(LateChunking.Value);
 		}
 
 		if (ReturnDocuments is not null)
 		{
-			__init.Property("ReturnDocuments");
+			initializer.Property("ReturnDocuments");
 			writer.WriteValue(ReturnDocuments.Value);
 		}
 
 		if (TopN is not null)
 		{
-			__init.Property("TopN");
+			initializer.Property("TopN");
 			writer.WriteValue(TopN.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,27 +27,27 @@ public partial class BulkIndexByScrollFailure : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BulkIndexByScrollFailure", false);
+		var initializer = writer.BeginObjectInitializer("BulkIndexByScrollFailure", false);
 		{
-			__init.Property("Cause");
+			initializer.Property("Cause");
 			Cause.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteString(Index);
 		}
 
 		{
-			__init.Property("Status");
+			initializer.Property("Status");
 			writer.WriteValue(Status);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

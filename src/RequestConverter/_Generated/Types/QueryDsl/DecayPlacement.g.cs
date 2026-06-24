@@ -27,32 +27,32 @@ public partial class DecayPlacement<TOrigin, TScale> : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DecayPlacement<TOrigin, TScale>", false);
+		var initializer = writer.BeginObjectInitializer("DecayPlacement<TOrigin, TScale>", false);
 		if (Decay is not null)
 		{
-			__init.Property("Decay");
+			initializer.Property("Decay");
 			writer.WriteValue(Decay.Value);
 			writer.Write("d");
 		}
 
-		if (RequestConverter.CodeWriter.ShouldFormat(Offset))
+		if (Offset is not null)
 		{
-			__init.Property("Offset");
+			initializer.Property("Offset");
 			writer.WriteValue(Offset);
 		}
 
-		if (RequestConverter.CodeWriter.ShouldFormat(Origin))
+		if (Origin is not null)
 		{
-			__init.Property("Origin");
+			initializer.Property("Origin");
 			writer.WriteValue(Origin);
 		}
 
-		if (RequestConverter.CodeWriter.ShouldFormat(Scale))
+		if (Scale is not null)
 		{
-			__init.Property("Scale");
+			initializer.Property("Scale");
 			writer.WriteValue(Scale);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

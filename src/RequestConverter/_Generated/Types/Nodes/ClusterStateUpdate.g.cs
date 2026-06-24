@@ -27,97 +27,97 @@ public partial class ClusterStateUpdate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterStateUpdate", false);
+		var initializer = writer.BeginObjectInitializer("ClusterStateUpdate", false);
 		if (CommitTime is not null)
 		{
-			__init.Property("CommitTime");
+			initializer.Property("CommitTime");
 			CommitTime.FormatCode(writer);
 		}
 
 		if (CommitTimeMillis is not null)
 		{
-			__init.Property("CommitTimeMillis");
+			initializer.Property("CommitTimeMillis");
 			writer.WriteValue(CommitTimeMillis.Value);
 		}
 
 		if (CompletionTime is not null)
 		{
-			__init.Property("CompletionTime");
+			initializer.Property("CompletionTime");
 			CompletionTime.FormatCode(writer);
 		}
 
 		if (CompletionTimeMillis is not null)
 		{
-			__init.Property("CompletionTimeMillis");
+			initializer.Property("CompletionTimeMillis");
 			writer.WriteValue(CompletionTimeMillis.Value);
 		}
 
 		if (ComputationTime is not null)
 		{
-			__init.Property("ComputationTime");
+			initializer.Property("ComputationTime");
 			ComputationTime.FormatCode(writer);
 		}
 
 		if (ComputationTimeMillis is not null)
 		{
-			__init.Property("ComputationTimeMillis");
+			initializer.Property("ComputationTimeMillis");
 			writer.WriteValue(ComputationTimeMillis.Value);
 		}
 
 		if (ContextConstructionTime is not null)
 		{
-			__init.Property("ContextConstructionTime");
+			initializer.Property("ContextConstructionTime");
 			ContextConstructionTime.FormatCode(writer);
 		}
 
 		if (ContextConstructionTimeMillis is not null)
 		{
-			__init.Property("ContextConstructionTimeMillis");
+			initializer.Property("ContextConstructionTimeMillis");
 			writer.WriteValue(ContextConstructionTimeMillis.Value);
 		}
 
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 			writer.Write("L");
 		}
 
 		if (MasterApplyTime is not null)
 		{
-			__init.Property("MasterApplyTime");
+			initializer.Property("MasterApplyTime");
 			MasterApplyTime.FormatCode(writer);
 		}
 
 		if (MasterApplyTimeMillis is not null)
 		{
-			__init.Property("MasterApplyTimeMillis");
+			initializer.Property("MasterApplyTimeMillis");
 			writer.WriteValue(MasterApplyTimeMillis.Value);
 		}
 
 		if (NotificationTime is not null)
 		{
-			__init.Property("NotificationTime");
+			initializer.Property("NotificationTime");
 			NotificationTime.FormatCode(writer);
 		}
 
 		if (NotificationTimeMillis is not null)
 		{
-			__init.Property("NotificationTimeMillis");
+			initializer.Property("NotificationTimeMillis");
 			writer.WriteValue(NotificationTimeMillis.Value);
 		}
 
 		if (PublicationTime is not null)
 		{
-			__init.Property("PublicationTime");
+			initializer.Property("PublicationTime");
 			PublicationTime.FormatCode(writer);
 		}
 
 		if (PublicationTimeMillis is not null)
 		{
-			__init.Property("PublicationTimeMillis");
+			initializer.Property("PublicationTimeMillis");
 			writer.WriteValue(PublicationTimeMillis.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,16 +27,16 @@ public partial class StandardAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("StandardAnalyzer", true);
+		var initializer = writer.BeginObjectInitializer("StandardAnalyzer", true);
 		if (MaxTokenLength is not null)
 		{
-			__init.Property("MaxTokenLength");
+			initializer.Property("MaxTokenLength");
 			writer.WriteValue(MaxTokenLength.Value);
 		}
 
 		if (Stopwords is not null)
 		{
-			__init.Property("Stopwords");
+			initializer.Property("Stopwords");
 			if (Stopwords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(Stopwords.Value1, writer);
@@ -50,10 +50,10 @@ public partial class StandardAnalyzer : RequestConverter.ICodeFormattable
 
 		if (StopwordsPath is not null)
 		{
-			__init.Property("StopwordsPath");
+			initializer.Property("StopwordsPath");
 			writer.WriteString(StopwordsPath);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

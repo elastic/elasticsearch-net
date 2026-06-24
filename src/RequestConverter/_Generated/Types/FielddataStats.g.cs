@@ -27,17 +27,17 @@ public partial class FielddataStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FielddataStats", false);
+		var initializer = writer.BeginObjectInitializer("FielddataStats", false);
 		if (Evictions is not null)
 		{
-			__init.Property("Evictions");
+			initializer.Property("Evictions");
 			writer.WriteValue(Evictions.Value);
 			writer.Write("L");
 		}
 
 		if (Fields is not null)
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -47,22 +47,22 @@ public partial class FielddataStats : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("GlobalOrdinals");
+			initializer.Property("GlobalOrdinals");
 			GlobalOrdinals.FormatCode(writer);
 		}
 
 		if (MemorySize is not null)
 		{
-			__init.Property("MemorySize");
+			initializer.Property("MemorySize");
 			MemorySize.FormatCode(writer);
 		}
 
 		{
-			__init.Property("MemorySizeInBytes");
+			initializer.Property("MemorySizeInBytes");
 			writer.WriteValue(MemorySizeInBytes);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

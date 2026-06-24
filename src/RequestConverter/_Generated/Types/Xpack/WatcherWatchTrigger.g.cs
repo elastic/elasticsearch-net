@@ -27,18 +27,18 @@ public partial class WatcherWatchTrigger : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("WatcherWatchTrigger", false);
+		var initializer = writer.BeginObjectInitializer("WatcherWatchTrigger", false);
 		{
-			__init.Property("All");
+			initializer.Property("All");
 			All.FormatCode(writer);
 		}
 
 		if (Schedule is not null)
 		{
-			__init.Property("Schedule");
+			initializer.Property("Schedule");
 			Schedule.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

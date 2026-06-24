@@ -27,37 +27,37 @@ public partial class DataframeClassificationSummary : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeClassificationSummary", false);
+		var initializer = writer.BeginObjectInitializer("DataframeClassificationSummary", false);
 		if (Accuracy is not null)
 		{
-			__init.Property("Accuracy");
+			initializer.Property("Accuracy");
 			Accuracy.FormatCode(writer);
 		}
 
 		if (AucRoc is not null)
 		{
-			__init.Property("AucRoc");
+			initializer.Property("AucRoc");
 			AucRoc.FormatCode(writer);
 		}
 
 		if (MulticlassConfusionMatrix is not null)
 		{
-			__init.Property("MulticlassConfusionMatrix");
+			initializer.Property("MulticlassConfusionMatrix");
 			MulticlassConfusionMatrix.FormatCode(writer);
 		}
 
 		if (Precision is not null)
 		{
-			__init.Property("Precision");
+			initializer.Property("Precision");
 			Precision.FormatCode(writer);
 		}
 
 		if (Recall is not null)
 		{
-			__init.Property("Recall");
+			initializer.Property("Recall");
 			Recall.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

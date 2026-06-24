@@ -27,32 +27,32 @@ public partial class DocStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DocStats", false);
+		var initializer = writer.BeginObjectInitializer("DocStats", false);
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 			writer.Write("L");
 		}
 
 		if (Deleted is not null)
 		{
-			__init.Property("Deleted");
+			initializer.Property("Deleted");
 			writer.WriteValue(Deleted.Value);
 			writer.Write("L");
 		}
 
 		if (TotalSize is not null)
 		{
-			__init.Property("TotalSize");
+			initializer.Property("TotalSize");
 			TotalSize.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalSizeInBytes");
+			initializer.Property("TotalSizeInBytes");
 			writer.WriteValue(TotalSizeInBytes);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

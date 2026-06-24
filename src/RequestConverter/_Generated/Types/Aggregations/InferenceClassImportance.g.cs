@@ -27,18 +27,18 @@ public partial class InferenceClassImportance : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InferenceClassImportance", false);
+		var initializer = writer.BeginObjectInitializer("InferenceClassImportance", false);
 		{
-			__init.Property("ClassName");
+			initializer.Property("ClassName");
 			writer.WriteString(ClassName);
 		}
 
 		{
-			__init.Property("Importance");
+			initializer.Property("Importance");
 			writer.WriteValue(Importance);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

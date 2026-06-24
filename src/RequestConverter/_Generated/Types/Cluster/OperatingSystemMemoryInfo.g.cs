@@ -27,66 +27,66 @@ public partial class OperatingSystemMemoryInfo : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("OperatingSystemMemoryInfo", false);
+		var initializer = writer.BeginObjectInitializer("OperatingSystemMemoryInfo", false);
 		if (AdjustedTotal is not null)
 		{
-			__init.Property("AdjustedTotal");
+			initializer.Property("AdjustedTotal");
 			AdjustedTotal.FormatCode(writer);
 		}
 
 		if (AdjustedTotalInBytes is not null)
 		{
-			__init.Property("AdjustedTotalInBytes");
+			initializer.Property("AdjustedTotalInBytes");
 			writer.WriteValue(AdjustedTotalInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (Free is not null)
 		{
-			__init.Property("Free");
+			initializer.Property("Free");
 			Free.FormatCode(writer);
 		}
 
 		{
-			__init.Property("FreeInBytes");
+			initializer.Property("FreeInBytes");
 			writer.WriteValue(FreeInBytes);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("FreePercent");
+			initializer.Property("FreePercent");
 			writer.WriteValue(FreePercent);
 		}
 
 		if (Total is not null)
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			Total.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalInBytes");
+			initializer.Property("TotalInBytes");
 			writer.WriteValue(TotalInBytes);
 			writer.Write("L");
 		}
 
 		if (Used is not null)
 		{
-			__init.Property("Used");
+			initializer.Property("Used");
 			Used.FormatCode(writer);
 		}
 
 		{
-			__init.Property("UsedInBytes");
+			initializer.Property("UsedInBytes");
 			writer.WriteValue(UsedInBytes);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("UsedPercent");
+			initializer.Property("UsedPercent");
 			writer.WriteValue(UsedPercent);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

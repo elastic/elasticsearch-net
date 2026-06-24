@@ -27,61 +27,61 @@ public partial class InferenceResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InferenceResult", false);
+		var initializer = writer.BeginObjectInitializer("InferenceResult", false);
 		if (Completion is not null)
 		{
-			__init.Property("Completion");
+			initializer.Property("Completion");
 			writer.WriteInlineList(Completion, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Embeddings is not null)
 		{
-			__init.Property("Embeddings");
+			initializer.Property("Embeddings");
 			writer.WriteInlineList(Embeddings, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (EmbeddingsBits is not null)
 		{
-			__init.Property("EmbeddingsBits");
+			initializer.Property("EmbeddingsBits");
 			writer.WriteInlineList(EmbeddingsBits, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (EmbeddingsBytes is not null)
 		{
-			__init.Property("EmbeddingsBytes");
+			initializer.Property("EmbeddingsBytes");
 			writer.WriteInlineList(EmbeddingsBytes, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Rerank is not null)
 		{
-			__init.Property("Rerank");
+			initializer.Property("Rerank");
 			writer.WriteInlineList(Rerank, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (SparseEmbedding is not null)
 		{
-			__init.Property("SparseEmbedding");
+			initializer.Property("SparseEmbedding");
 			writer.WriteInlineList(SparseEmbedding, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (TextEmbedding is not null)
 		{
-			__init.Property("TextEmbedding");
+			initializer.Property("TextEmbedding");
 			writer.WriteInlineList(TextEmbedding, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (TextEmbeddingBits is not null)
 		{
-			__init.Property("TextEmbeddingBits");
+			initializer.Property("TextEmbeddingBits");
 			writer.WriteInlineList(TextEmbeddingBits, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (TextEmbeddingBytes is not null)
 		{
-			__init.Property("TextEmbeddingBytes");
+			initializer.Property("TextEmbeddingBytes");
 			writer.WriteInlineList(TextEmbeddingBytes, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

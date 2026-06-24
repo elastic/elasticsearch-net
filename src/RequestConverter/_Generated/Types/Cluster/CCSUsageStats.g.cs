@@ -27,9 +27,9 @@ public partial class CCSUsageStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CCSUsageStats", false);
+		var initializer = writer.BeginObjectInitializer("CCSUsageStats", false);
 		{
-			__init.Property("Clients");
+			initializer.Property("Clients");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -39,7 +39,7 @@ public partial class CCSUsageStats : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Clusters");
+			initializer.Property("Clusters");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -49,7 +49,7 @@ public partial class CCSUsageStats : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("FailureReasons");
+			initializer.Property("FailureReasons");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -59,7 +59,7 @@ public partial class CCSUsageStats : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Features");
+			initializer.Property("Features");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -69,48 +69,48 @@ public partial class CCSUsageStats : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("RemotesPerSearchAvg");
+			initializer.Property("RemotesPerSearchAvg");
 			writer.WriteValue(RemotesPerSearchAvg);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("RemotesPerSearchMax");
+			initializer.Property("RemotesPerSearchMax");
 			writer.WriteValue(RemotesPerSearchMax);
 		}
 
 		{
-			__init.Property("Skipped");
+			initializer.Property("Skipped");
 			writer.WriteValue(Skipped);
 		}
 
 		{
-			__init.Property("Success");
+			initializer.Property("Success");
 			writer.WriteValue(Success);
 		}
 
 		{
-			__init.Property("Took");
+			initializer.Property("Took");
 			Took.FormatCode(writer);
 		}
 
 		if (TookMrtFalse is not null)
 		{
-			__init.Property("TookMrtFalse");
+			initializer.Property("TookMrtFalse");
 			TookMrtFalse.FormatCode(writer);
 		}
 
 		if (TookMrtTrue is not null)
 		{
-			__init.Property("TookMrtTrue");
+			initializer.Property("TookMrtTrue");
 			TookMrtTrue.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteValue(Total);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

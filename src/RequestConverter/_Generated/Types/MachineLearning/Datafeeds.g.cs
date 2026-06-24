@@ -27,12 +27,12 @@ public partial class Datafeeds : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Datafeeds", false);
+		var initializer = writer.BeginObjectInitializer("Datafeeds", false);
 		{
-			__init.Property("ScrollSize");
+			initializer.Property("ScrollSize");
 			writer.WriteValue(ScrollSize);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

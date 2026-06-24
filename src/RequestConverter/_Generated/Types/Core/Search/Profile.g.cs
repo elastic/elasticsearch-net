@@ -27,18 +27,18 @@ public partial class Profile : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Profile", false);
+		var initializer = writer.BeginObjectInitializer("Profile", false);
 		if (Request is not null)
 		{
-			__init.Property("Request");
+			initializer.Property("Request");
 			Request.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Shards");
+			initializer.Property("Shards");
 			writer.WriteInlineList(Shards, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

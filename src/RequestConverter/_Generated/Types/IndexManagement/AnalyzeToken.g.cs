@@ -27,42 +27,42 @@ public partial class AnalyzeToken : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AnalyzeToken", false);
+		var initializer = writer.BeginObjectInitializer("AnalyzeToken", false);
 		{
-			__init.Property("EndOffset");
+			initializer.Property("EndOffset");
 			writer.WriteValue(EndOffset);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Position");
+			initializer.Property("Position");
 			writer.WriteValue(Position);
 			writer.Write("L");
 		}
 
 		if (PositionLength is not null)
 		{
-			__init.Property("PositionLength");
+			initializer.Property("PositionLength");
 			writer.WriteValue(PositionLength.Value);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("StartOffset");
+			initializer.Property("StartOffset");
 			writer.WriteValue(StartOffset);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Token");
+			initializer.Property("Token");
 			writer.WriteString(Token);
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			writer.WriteString(Type);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,22 +27,22 @@ public partial class NodePackagingType : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodePackagingType", false);
+		var initializer = writer.BeginObjectInitializer("NodePackagingType", false);
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 		}
 
 		{
-			__init.Property("Flavor");
+			initializer.Property("Flavor");
 			writer.WriteString(Flavor);
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			writer.WriteString(Type);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

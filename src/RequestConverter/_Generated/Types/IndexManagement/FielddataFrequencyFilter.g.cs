@@ -27,24 +27,24 @@ public partial class FielddataFrequencyFilter : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FielddataFrequencyFilter", false);
+		var initializer = writer.BeginObjectInitializer("FielddataFrequencyFilter", false);
 		{
-			__init.Property("Max");
+			initializer.Property("Max");
 			writer.WriteValue(Max);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Min");
+			initializer.Property("Min");
 			writer.WriteValue(Min);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("MinSegmentSize");
+			initializer.Property("MinSegmentSize");
 			writer.WriteValue(MinSegmentSize);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

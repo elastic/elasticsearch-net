@@ -27,7 +27,7 @@ public partial class GetScriptLanguagesRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetScriptLanguagesRequest", false);
-		__init.Dispose();
+		var initializer = writer.BeginObjectInitializer("GetScriptLanguagesRequest", false);
+		initializer.Dispose();
 	}
 }

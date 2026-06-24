@@ -27,37 +27,37 @@ public partial class IpRangeBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IpRangeBucket", false);
+		var initializer = writer.BeginObjectInitializer("IpRangeBucket", false);
 		if (Aggregations is not null)
 		{
-			__init.Property("Aggregations");
+			initializer.Property("Aggregations");
 			Aggregations.FormatCode(writer);
 		}
 
 		{
-			__init.Property("DocCount");
+			initializer.Property("DocCount");
 			writer.WriteValue(DocCount);
 			writer.Write("L");
 		}
 
 		if (From is not null)
 		{
-			__init.Property("From");
+			initializer.Property("From");
 			writer.WriteString(From);
 		}
 
 		if (Key is not null)
 		{
-			__init.Property("Key");
+			initializer.Property("Key");
 			writer.WriteString(Key);
 		}
 
 		if (To is not null)
 		{
-			__init.Property("To");
+			initializer.Property("To");
 			writer.WriteString(To);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

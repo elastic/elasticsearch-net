@@ -27,29 +27,29 @@ public partial class UnmappedSignificantTermsAggregate : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UnmappedSignificantTermsAggregate", true);
+		var initializer = writer.BeginObjectInitializer("UnmappedSignificantTermsAggregate", true);
 		if (BgCount is not null)
 		{
-			__init.Property("BgCount");
+			initializer.Property("BgCount");
 			writer.WriteValue(BgCount.Value);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Buckets");
+			initializer.Property("Buckets");
 			writer.WriteInlineList(Buckets, (w, item) => { w.WriteValue(item); });
 		}
 
 		if (DocCount is not null)
 		{
-			__init.Property("DocCount");
+			initializer.Property("DocCount");
 			writer.WriteValue(DocCount.Value);
 			writer.Write("L");
 		}
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -58,6 +58,6 @@ public partial class UnmappedSignificantTermsAggregate : RequestConverter.ICodeF
 			writer.WriteInlineList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

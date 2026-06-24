@@ -27,13 +27,13 @@ public partial class IndicNormalizationTokenFilter : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndicNormalizationTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("IndicNormalizationTokenFilter", true);
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

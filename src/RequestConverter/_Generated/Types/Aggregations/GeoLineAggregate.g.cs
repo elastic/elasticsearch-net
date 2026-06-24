@@ -27,15 +27,15 @@ public partial class GeoLineAggregate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GeoLineAggregate", true);
+		var initializer = writer.BeginObjectInitializer("GeoLineAggregate", true);
 		{
-			__init.Property("Geometry");
+			initializer.Property("Geometry");
 			Geometry.FormatCode(writer);
 		}
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -45,15 +45,15 @@ public partial class GeoLineAggregate : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Properties");
+			initializer.Property("Properties");
 			writer.WriteValue(Properties);
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			writer.WriteString(Type);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

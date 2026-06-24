@@ -27,48 +27,48 @@ public partial class SpanNotQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SpanNotQuery", false);
+		var initializer = writer.BeginObjectInitializer("SpanNotQuery", false);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		if (Dist is not null)
 		{
-			__init.Property("Dist");
+			initializer.Property("Dist");
 			writer.WriteValue(Dist.Value);
 		}
 
 		{
-			__init.Property("Exclude");
+			initializer.Property("Exclude");
 			Exclude.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Include");
+			initializer.Property("Include");
 			Include.FormatCode(writer);
 		}
 
 		if (Post is not null)
 		{
-			__init.Property("Post");
+			initializer.Property("Post");
 			writer.WriteValue(Post.Value);
 		}
 
 		if (Pre is not null)
 		{
-			__init.Property("Pre");
+			initializer.Property("Pre");
 			writer.WriteValue(Pre.Value);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

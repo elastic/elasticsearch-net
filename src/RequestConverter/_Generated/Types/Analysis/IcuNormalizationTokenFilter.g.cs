@@ -27,18 +27,18 @@ public partial class IcuNormalizationTokenFilter : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IcuNormalizationTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("IcuNormalizationTokenFilter", true);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTypeCodeFormatter.FormatCode(Name, writer);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

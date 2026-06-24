@@ -27,19 +27,19 @@ public partial class DataframeEvaluationSummaryAucRoc : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeEvaluationSummaryAucRoc", false);
+		var initializer = writer.BeginObjectInitializer("DataframeEvaluationSummaryAucRoc", false);
 		if (Curve is not null)
 		{
-			__init.Property("Curve");
+			initializer.Property("Curve");
 			writer.WriteInlineList(Curve, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Value");
+			initializer.Property("Value");
 			writer.WriteValue(Value);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

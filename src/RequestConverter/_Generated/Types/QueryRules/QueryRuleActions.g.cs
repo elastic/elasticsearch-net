@@ -27,19 +27,19 @@ public partial class QueryRuleActions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("QueryRuleActions", false);
+		var initializer = writer.BeginObjectInitializer("QueryRuleActions", false);
 		if (Docs is not null)
 		{
-			__init.Property("Docs");
+			initializer.Property("Docs");
 			writer.WriteInlineList(Docs, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Ids is not null)
 		{
-			__init.Property("Ids");
+			initializer.Property("Ids");
 			writer.WriteInlineList(Ids, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

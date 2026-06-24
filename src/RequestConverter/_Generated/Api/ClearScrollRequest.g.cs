@@ -27,13 +27,13 @@ public partial class ClearScrollRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClearScrollRequest", false);
+		var initializer = writer.BeginObjectInitializer("ClearScrollRequest", false);
 		if (ScrollId is not null)
 		{
-			__init.Property("ScrollId");
+			initializer.Property("ScrollId");
 			ScrollId.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,10 +27,10 @@ public partial class Aggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Aggregation", false);
+		var initializer = writer.BeginObjectInitializer("Aggregation", false);
 		if (Aggregations is not null)
 		{
-			__init.Property("Aggregations");
+			initializer.Property("Aggregations");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -41,7 +41,7 @@ public partial class Aggregation : RequestConverter.ICodeFormattable
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -52,484 +52,484 @@ public partial class Aggregation : RequestConverter.ICodeFormattable
 
 		if (AdjacencyMatrix is not null)
 		{
-			__init.Property("AdjacencyMatrix");
+			initializer.Property("AdjacencyMatrix");
 			AdjacencyMatrix.FormatCode(writer);
 		}
 
 		if (AutoDateHistogram is not null)
 		{
-			__init.Property("AutoDateHistogram");
+			initializer.Property("AutoDateHistogram");
 			AutoDateHistogram.FormatCode(writer);
 		}
 
 		if (Avg is not null)
 		{
-			__init.Property("Avg");
+			initializer.Property("Avg");
 			Avg.FormatCode(writer);
 		}
 
 		if (AvgBucket is not null)
 		{
-			__init.Property("AvgBucket");
+			initializer.Property("AvgBucket");
 			AvgBucket.FormatCode(writer);
 		}
 
 		if (Boxplot is not null)
 		{
-			__init.Property("Boxplot");
+			initializer.Property("Boxplot");
 			Boxplot.FormatCode(writer);
 		}
 
 		if (BucketCorrelation is not null)
 		{
-			__init.Property("BucketCorrelation");
+			initializer.Property("BucketCorrelation");
 			BucketCorrelation.FormatCode(writer);
 		}
 
 		if (BucketCountKsTest is not null)
 		{
-			__init.Property("BucketCountKsTest");
+			initializer.Property("BucketCountKsTest");
 			BucketCountKsTest.FormatCode(writer);
 		}
 
 		if (BucketScript is not null)
 		{
-			__init.Property("BucketScript");
+			initializer.Property("BucketScript");
 			BucketScript.FormatCode(writer);
 		}
 
 		if (BucketSelector is not null)
 		{
-			__init.Property("BucketSelector");
+			initializer.Property("BucketSelector");
 			BucketSelector.FormatCode(writer);
 		}
 
 		if (BucketSort is not null)
 		{
-			__init.Property("BucketSort");
+			initializer.Property("BucketSort");
 			BucketSort.FormatCode(writer);
 		}
 
 		if (Cardinality is not null)
 		{
-			__init.Property("Cardinality");
+			initializer.Property("Cardinality");
 			Cardinality.FormatCode(writer);
 		}
 
 		if (CartesianBounds is not null)
 		{
-			__init.Property("CartesianBounds");
+			initializer.Property("CartesianBounds");
 			CartesianBounds.FormatCode(writer);
 		}
 
 		if (CartesianCentroid is not null)
 		{
-			__init.Property("CartesianCentroid");
+			initializer.Property("CartesianCentroid");
 			CartesianCentroid.FormatCode(writer);
 		}
 
 		if (CategorizeText is not null)
 		{
-			__init.Property("CategorizeText");
+			initializer.Property("CategorizeText");
 			CategorizeText.FormatCode(writer);
 		}
 
 		if (ChangePoint is not null)
 		{
-			__init.Property("ChangePoint");
+			initializer.Property("ChangePoint");
 			ChangePoint.FormatCode(writer);
 		}
 
 		if (Children is not null)
 		{
-			__init.Property("Children");
+			initializer.Property("Children");
 			Children.FormatCode(writer);
 		}
 
 		if (Composite is not null)
 		{
-			__init.Property("Composite");
+			initializer.Property("Composite");
 			Composite.FormatCode(writer);
 		}
 
 		if (CumulativeCardinality is not null)
 		{
-			__init.Property("CumulativeCardinality");
+			initializer.Property("CumulativeCardinality");
 			CumulativeCardinality.FormatCode(writer);
 		}
 
 		if (CumulativeSum is not null)
 		{
-			__init.Property("CumulativeSum");
+			initializer.Property("CumulativeSum");
 			CumulativeSum.FormatCode(writer);
 		}
 
 		if (DateHistogram is not null)
 		{
-			__init.Property("DateHistogram");
+			initializer.Property("DateHistogram");
 			DateHistogram.FormatCode(writer);
 		}
 
 		if (DateRange is not null)
 		{
-			__init.Property("DateRange");
+			initializer.Property("DateRange");
 			DateRange.FormatCode(writer);
 		}
 
 		if (Derivative is not null)
 		{
-			__init.Property("Derivative");
+			initializer.Property("Derivative");
 			Derivative.FormatCode(writer);
 		}
 
 		if (DiversifiedSampler is not null)
 		{
-			__init.Property("DiversifiedSampler");
+			initializer.Property("DiversifiedSampler");
 			DiversifiedSampler.FormatCode(writer);
 		}
 
 		if (ExtendedStats is not null)
 		{
-			__init.Property("ExtendedStats");
+			initializer.Property("ExtendedStats");
 			ExtendedStats.FormatCode(writer);
 		}
 
 		if (ExtendedStatsBucket is not null)
 		{
-			__init.Property("ExtendedStatsBucket");
+			initializer.Property("ExtendedStatsBucket");
 			ExtendedStatsBucket.FormatCode(writer);
 		}
 
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			Filter.FormatCode(writer);
 		}
 
 		if (Filters is not null)
 		{
-			__init.Property("Filters");
+			initializer.Property("Filters");
 			Filters.FormatCode(writer);
 		}
 
 		if (FrequentItemSets is not null)
 		{
-			__init.Property("FrequentItemSets");
+			initializer.Property("FrequentItemSets");
 			FrequentItemSets.FormatCode(writer);
 		}
 
 		if (GeoBounds is not null)
 		{
-			__init.Property("GeoBounds");
+			initializer.Property("GeoBounds");
 			GeoBounds.FormatCode(writer);
 		}
 
 		if (GeoCentroid is not null)
 		{
-			__init.Property("GeoCentroid");
+			initializer.Property("GeoCentroid");
 			GeoCentroid.FormatCode(writer);
 		}
 
 		if (GeoDistance is not null)
 		{
-			__init.Property("GeoDistance");
+			initializer.Property("GeoDistance");
 			GeoDistance.FormatCode(writer);
 		}
 
 		if (GeohashGrid is not null)
 		{
-			__init.Property("GeohashGrid");
+			initializer.Property("GeohashGrid");
 			GeohashGrid.FormatCode(writer);
 		}
 
 		if (GeohexGrid is not null)
 		{
-			__init.Property("GeohexGrid");
+			initializer.Property("GeohexGrid");
 			GeohexGrid.FormatCode(writer);
 		}
 
 		if (GeoLine is not null)
 		{
-			__init.Property("GeoLine");
+			initializer.Property("GeoLine");
 			GeoLine.FormatCode(writer);
 		}
 
 		if (GeotileGrid is not null)
 		{
-			__init.Property("GeotileGrid");
+			initializer.Property("GeotileGrid");
 			GeotileGrid.FormatCode(writer);
 		}
 
 		if (Global is not null)
 		{
-			__init.Property("Global");
+			initializer.Property("Global");
 			Global.FormatCode(writer);
 		}
 
 		if (Histogram is not null)
 		{
-			__init.Property("Histogram");
+			initializer.Property("Histogram");
 			Histogram.FormatCode(writer);
 		}
 
 		if (Inference is not null)
 		{
-			__init.Property("Inference");
+			initializer.Property("Inference");
 			Inference.FormatCode(writer);
 		}
 
 		if (IpPrefix is not null)
 		{
-			__init.Property("IpPrefix");
+			initializer.Property("IpPrefix");
 			IpPrefix.FormatCode(writer);
 		}
 
 		if (IpRange is not null)
 		{
-			__init.Property("IpRange");
+			initializer.Property("IpRange");
 			IpRange.FormatCode(writer);
 		}
 
 		if (Line is not null)
 		{
-			__init.Property("Line");
+			initializer.Property("Line");
 			Line.FormatCode(writer);
 		}
 
 		if (MatrixStats is not null)
 		{
-			__init.Property("MatrixStats");
+			initializer.Property("MatrixStats");
 			MatrixStats.FormatCode(writer);
 		}
 
 		if (Max is not null)
 		{
-			__init.Property("Max");
+			initializer.Property("Max");
 			Max.FormatCode(writer);
 		}
 
 		if (MaxBucket is not null)
 		{
-			__init.Property("MaxBucket");
+			initializer.Property("MaxBucket");
 			MaxBucket.FormatCode(writer);
 		}
 
 		if (MedianAbsoluteDeviation is not null)
 		{
-			__init.Property("MedianAbsoluteDeviation");
+			initializer.Property("MedianAbsoluteDeviation");
 			MedianAbsoluteDeviation.FormatCode(writer);
 		}
 
 		if (Min is not null)
 		{
-			__init.Property("Min");
+			initializer.Property("Min");
 			Min.FormatCode(writer);
 		}
 
 		if (MinBucket is not null)
 		{
-			__init.Property("MinBucket");
+			initializer.Property("MinBucket");
 			MinBucket.FormatCode(writer);
 		}
 
 		if (Missing is not null)
 		{
-			__init.Property("Missing");
+			initializer.Property("Missing");
 			Missing.FormatCode(writer);
 		}
 
 		if (MovingFn is not null)
 		{
-			__init.Property("MovingFn");
+			initializer.Property("MovingFn");
 			MovingFn.FormatCode(writer);
 		}
 
 		if (MovingPercentiles is not null)
 		{
-			__init.Property("MovingPercentiles");
+			initializer.Property("MovingPercentiles");
 			MovingPercentiles.FormatCode(writer);
 		}
 
 		if (MultiTerms is not null)
 		{
-			__init.Property("MultiTerms");
+			initializer.Property("MultiTerms");
 			MultiTerms.FormatCode(writer);
 		}
 
 		if (Nested is not null)
 		{
-			__init.Property("Nested");
+			initializer.Property("Nested");
 			Nested.FormatCode(writer);
 		}
 
 		if (Normalize is not null)
 		{
-			__init.Property("Normalize");
+			initializer.Property("Normalize");
 			Normalize.FormatCode(writer);
 		}
 
 		if (Parent is not null)
 		{
-			__init.Property("Parent");
+			initializer.Property("Parent");
 			Parent.FormatCode(writer);
 		}
 
 		if (PercentileRanks is not null)
 		{
-			__init.Property("PercentileRanks");
+			initializer.Property("PercentileRanks");
 			PercentileRanks.FormatCode(writer);
 		}
 
 		if (Percentiles is not null)
 		{
-			__init.Property("Percentiles");
+			initializer.Property("Percentiles");
 			Percentiles.FormatCode(writer);
 		}
 
 		if (PercentilesBucket is not null)
 		{
-			__init.Property("PercentilesBucket");
+			initializer.Property("PercentilesBucket");
 			PercentilesBucket.FormatCode(writer);
 		}
 
 		if (RandomSampler is not null)
 		{
-			__init.Property("RandomSampler");
+			initializer.Property("RandomSampler");
 			RandomSampler.FormatCode(writer);
 		}
 
 		if (Range is not null)
 		{
-			__init.Property("Range");
+			initializer.Property("Range");
 			Range.FormatCode(writer);
 		}
 
 		if (RareTerms is not null)
 		{
-			__init.Property("RareTerms");
+			initializer.Property("RareTerms");
 			RareTerms.FormatCode(writer);
 		}
 
 		if (Rate is not null)
 		{
-			__init.Property("Rate");
+			initializer.Property("Rate");
 			Rate.FormatCode(writer);
 		}
 
 		if (ReverseNested is not null)
 		{
-			__init.Property("ReverseNested");
+			initializer.Property("ReverseNested");
 			ReverseNested.FormatCode(writer);
 		}
 
 		if (Sampler is not null)
 		{
-			__init.Property("Sampler");
+			initializer.Property("Sampler");
 			Sampler.FormatCode(writer);
 		}
 
 		if (ScriptedMetric is not null)
 		{
-			__init.Property("ScriptedMetric");
+			initializer.Property("ScriptedMetric");
 			ScriptedMetric.FormatCode(writer);
 		}
 
 		if (SerialDiff is not null)
 		{
-			__init.Property("SerialDiff");
+			initializer.Property("SerialDiff");
 			SerialDiff.FormatCode(writer);
 		}
 
 		if (SignificantTerms is not null)
 		{
-			__init.Property("SignificantTerms");
+			initializer.Property("SignificantTerms");
 			SignificantTerms.FormatCode(writer);
 		}
 
 		if (SignificantText is not null)
 		{
-			__init.Property("SignificantText");
+			initializer.Property("SignificantText");
 			SignificantText.FormatCode(writer);
 		}
 
 		if (Stats is not null)
 		{
-			__init.Property("Stats");
+			initializer.Property("Stats");
 			Stats.FormatCode(writer);
 		}
 
 		if (StatsBucket is not null)
 		{
-			__init.Property("StatsBucket");
+			initializer.Property("StatsBucket");
 			StatsBucket.FormatCode(writer);
 		}
 
 		if (StringStats is not null)
 		{
-			__init.Property("StringStats");
+			initializer.Property("StringStats");
 			StringStats.FormatCode(writer);
 		}
 
 		if (Sum is not null)
 		{
-			__init.Property("Sum");
+			initializer.Property("Sum");
 			Sum.FormatCode(writer);
 		}
 
 		if (SumBucket is not null)
 		{
-			__init.Property("SumBucket");
+			initializer.Property("SumBucket");
 			SumBucket.FormatCode(writer);
 		}
 
 		if (Terms is not null)
 		{
-			__init.Property("Terms");
+			initializer.Property("Terms");
 			Terms.FormatCode(writer);
 		}
 
 		if (TimeSeries is not null)
 		{
-			__init.Property("TimeSeries");
+			initializer.Property("TimeSeries");
 			TimeSeries.FormatCode(writer);
 		}
 
 		if (TopHits is not null)
 		{
-			__init.Property("TopHits");
+			initializer.Property("TopHits");
 			TopHits.FormatCode(writer);
 		}
 
 		if (TopMetrics is not null)
 		{
-			__init.Property("TopMetrics");
+			initializer.Property("TopMetrics");
 			TopMetrics.FormatCode(writer);
 		}
 
 		if (TTest is not null)
 		{
-			__init.Property("TTest");
+			initializer.Property("TTest");
 			TTest.FormatCode(writer);
 		}
 
 		if (ValueCount is not null)
 		{
-			__init.Property("ValueCount");
+			initializer.Property("ValueCount");
 			ValueCount.FormatCode(writer);
 		}
 
 		if (VariableWidthHistogram is not null)
 		{
-			__init.Property("VariableWidthHistogram");
+			initializer.Property("VariableWidthHistogram");
 			VariableWidthHistogram.FormatCode(writer);
 		}
 
 		if (WeightedAvg is not null)
 		{
-			__init.Property("WeightedAvg");
+			initializer.Property("WeightedAvg");
 			WeightedAvg.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

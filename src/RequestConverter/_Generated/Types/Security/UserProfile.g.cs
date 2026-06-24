@@ -27,9 +27,9 @@ public partial class UserProfile : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UserProfile", false);
+		var initializer = writer.BeginObjectInitializer("UserProfile", false);
 		{
-			__init.Property("Data");
+			initializer.Property("Data");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -40,12 +40,12 @@ public partial class UserProfile : RequestConverter.ICodeFormattable
 
 		if (Enabled is not null)
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled.Value);
 		}
 
 		{
-			__init.Property("Labels");
+			initializer.Property("Labels");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -55,15 +55,15 @@ public partial class UserProfile : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Uid");
+			initializer.Property("Uid");
 			writer.WriteString(Uid);
 		}
 
 		{
-			__init.Property("User");
+			initializer.Property("User");
 			User.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

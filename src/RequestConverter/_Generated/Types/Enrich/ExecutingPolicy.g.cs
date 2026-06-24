@@ -27,17 +27,17 @@ public partial class ExecutingPolicy : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExecutingPolicy", false);
+		var initializer = writer.BeginObjectInitializer("ExecutingPolicy", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("Task");
+			initializer.Property("Task");
 			Task.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

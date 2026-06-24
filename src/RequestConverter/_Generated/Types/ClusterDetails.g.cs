@@ -27,40 +27,40 @@ public partial class ClusterDetails : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterDetails", false);
+		var initializer = writer.BeginObjectInitializer("ClusterDetails", false);
 		if (Failures is not null)
 		{
-			__init.Property("Failures");
+			initializer.Property("Failures");
 			writer.WriteInlineList(Failures, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			writer.WriteString(Indices);
 		}
 
 		if (Shards is not null)
 		{
-			__init.Property("Shards");
+			initializer.Property("Shards");
 			Shards.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Status");
+			initializer.Property("Status");
 			Elastic.Clients.Elasticsearch.ClusterSearchStatusCodeFormatter.FormatCode(Status, writer);
 		}
 
 		{
-			__init.Property("TimedOut");
+			initializer.Property("TimedOut");
 			writer.WriteValue(TimedOut);
 		}
 
 		if (Took is not null)
 		{
-			__init.Property("Took");
+			initializer.Property("Took");
 			writer.WriteValue(Took.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

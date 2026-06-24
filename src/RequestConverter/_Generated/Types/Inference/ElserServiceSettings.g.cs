@@ -27,23 +27,23 @@ public partial class ElserServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ElserServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("ElserServiceSettings", false);
 		if (AdaptiveAllocations is not null)
 		{
-			__init.Property("AdaptiveAllocations");
+			initializer.Property("AdaptiveAllocations");
 			AdaptiveAllocations.FormatCode(writer);
 		}
 
 		{
-			__init.Property("NumAllocations");
+			initializer.Property("NumAllocations");
 			writer.WriteValue(NumAllocations);
 		}
 
 		{
-			__init.Property("NumThreads");
+			initializer.Property("NumThreads");
 			writer.WriteValue(NumThreads);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

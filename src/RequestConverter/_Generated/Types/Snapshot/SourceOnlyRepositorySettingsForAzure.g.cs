@@ -27,49 +27,49 @@ public partial class SourceOnlyRepositorySettingsForAzure : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SourceOnlyRepositorySettingsForAzure", true);
+		var initializer = writer.BeginObjectInitializer("SourceOnlyRepositorySettingsForAzure", true);
 		if (BasePath is not null)
 		{
-			__init.Property("BasePath");
+			initializer.Property("BasePath");
 			writer.WriteString(BasePath);
 		}
 
 		if (Client is not null)
 		{
-			__init.Property("Client");
+			initializer.Property("Client");
 			writer.WriteString(Client);
 		}
 
 		if (Container is not null)
 		{
-			__init.Property("Container");
+			initializer.Property("Container");
 			writer.WriteString(Container);
 		}
 
 		if (DeleteObjectsMaxSize is not null)
 		{
-			__init.Property("DeleteObjectsMaxSize");
+			initializer.Property("DeleteObjectsMaxSize");
 			writer.WriteValue(DeleteObjectsMaxSize.Value);
 		}
 
 		if (LocationMode is not null)
 		{
-			__init.Property("LocationMode");
+			initializer.Property("LocationMode");
 			writer.WriteString(LocationMode);
 		}
 
 		if (MaxConcurrentBatchDeletes is not null)
 		{
-			__init.Property("MaxConcurrentBatchDeletes");
+			initializer.Property("MaxConcurrentBatchDeletes");
 			writer.WriteValue(MaxConcurrentBatchDeletes.Value);
 		}
 
 		if (Readonly is not null)
 		{
-			__init.Property("Readonly");
+			initializer.Property("Readonly");
 			writer.WriteValue(Readonly.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

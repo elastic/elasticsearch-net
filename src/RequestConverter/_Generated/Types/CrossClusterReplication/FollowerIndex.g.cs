@@ -27,33 +27,33 @@ public partial class FollowerIndex : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FollowerIndex", false);
+		var initializer = writer.BeginObjectInitializer("FollowerIndex", false);
 		{
-			__init.Property("FollowerIndexValue");
+			initializer.Property("FollowerIndexValue");
 			writer.WriteString(FollowerIndexValue);
 		}
 
 		{
-			__init.Property("LeaderIndex");
+			initializer.Property("LeaderIndex");
 			writer.WriteString(LeaderIndex);
 		}
 
 		if (Parameters is not null)
 		{
-			__init.Property("Parameters");
+			initializer.Property("Parameters");
 			Parameters.FormatCode(writer);
 		}
 
 		{
-			__init.Property("RemoteCluster");
+			initializer.Property("RemoteCluster");
 			writer.WriteString(RemoteCluster);
 		}
 
 		{
-			__init.Property("Status");
+			initializer.Property("Status");
 			Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatusCodeFormatter.FormatCode(Status, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

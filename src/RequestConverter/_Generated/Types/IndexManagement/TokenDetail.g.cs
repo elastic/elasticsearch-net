@@ -27,17 +27,17 @@ public partial class TokenDetail : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TokenDetail", false);
+		var initializer = writer.BeginObjectInitializer("TokenDetail", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("Tokens");
+			initializer.Property("Tokens");
 			writer.WriteInlineList(Tokens, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

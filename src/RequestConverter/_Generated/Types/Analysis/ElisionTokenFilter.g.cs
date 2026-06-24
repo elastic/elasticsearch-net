@@ -27,31 +27,31 @@ public partial class ElisionTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ElisionTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("ElisionTokenFilter", true);
 		if (Articles is not null)
 		{
-			__init.Property("Articles");
+			initializer.Property("Articles");
 			writer.WriteInlineList(Articles, (w, item) => { w.WriteString(item); });
 		}
 
 		if (ArticlesCase is not null)
 		{
-			__init.Property("ArticlesCase");
+			initializer.Property("ArticlesCase");
 			writer.WriteValue(ArticlesCase.Value);
 		}
 
 		if (ArticlesPath is not null)
 		{
-			__init.Property("ArticlesPath");
+			initializer.Property("ArticlesPath");
 			writer.WriteString(ArticlesPath);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

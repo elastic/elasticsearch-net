@@ -27,26 +27,26 @@ public partial class TokenPruningConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TokenPruningConfig", false);
+		var initializer = writer.BeginObjectInitializer("TokenPruningConfig", false);
 		if (OnlyScorePrunedTokens is not null)
 		{
-			__init.Property("OnlyScorePrunedTokens");
+			initializer.Property("OnlyScorePrunedTokens");
 			writer.WriteValue(OnlyScorePrunedTokens.Value);
 		}
 
 		if (TokensFreqRatioThreshold is not null)
 		{
-			__init.Property("TokensFreqRatioThreshold");
+			initializer.Property("TokensFreqRatioThreshold");
 			writer.WriteValue(TokensFreqRatioThreshold.Value);
 		}
 
 		if (TokensWeightThreshold is not null)
 		{
-			__init.Property("TokensWeightThreshold");
+			initializer.Property("TokensWeightThreshold");
 			writer.WriteValue(TokensWeightThreshold.Value);
 			writer.Write("f");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

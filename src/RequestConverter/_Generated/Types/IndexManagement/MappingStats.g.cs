@@ -27,25 +27,25 @@ public partial class MappingStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MappingStats", false);
+		var initializer = writer.BeginObjectInitializer("MappingStats", false);
 		{
-			__init.Property("TotalCount");
+			initializer.Property("TotalCount");
 			writer.WriteValue(TotalCount);
 			writer.Write("L");
 		}
 
 		if (TotalEstimatedOverhead is not null)
 		{
-			__init.Property("TotalEstimatedOverhead");
+			initializer.Property("TotalEstimatedOverhead");
 			TotalEstimatedOverhead.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TotalEstimatedOverheadInBytes");
+			initializer.Property("TotalEstimatedOverheadInBytes");
 			writer.WriteValue(TotalEstimatedOverheadInBytes);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,59 +27,59 @@ public partial class PutAliasRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutAliasRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutAliasRequest", false);
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			Filter.FormatCode(writer);
 		}
 
 		if (IndexRouting is not null)
 		{
-			__init.Property("IndexRouting");
+			initializer.Property("IndexRouting");
 			writer.WriteString(IndexRouting);
 		}
 
 		if (IsWriteIndex is not null)
 		{
-			__init.Property("IsWriteIndex");
+			initializer.Property("IsWriteIndex");
 			writer.WriteValue(IsWriteIndex.Value);
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			writer.WriteString(Routing);
 		}
 
 		if (SearchRouting is not null)
 		{
-			__init.Property("SearchRouting");
+			initializer.Property("SearchRouting");
 			writer.WriteString(SearchRouting);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

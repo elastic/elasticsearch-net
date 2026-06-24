@@ -27,37 +27,37 @@ public partial class PostRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PostRequest", false);
+		var initializer = writer.BeginObjectInitializer("PostRequest", false);
 		if (Acknowledge is not null)
 		{
-			__init.Property("Acknowledge");
+			initializer.Property("Acknowledge");
 			writer.WriteValue(Acknowledge.Value);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (License is not null)
 		{
-			__init.Property("License");
+			initializer.Property("License");
 			License.FormatCode(writer);
 		}
 
 		if (Licenses is not null)
 		{
-			__init.Property("Licenses");
+			initializer.Property("Licenses");
 			writer.WriteInlineList(Licenses, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

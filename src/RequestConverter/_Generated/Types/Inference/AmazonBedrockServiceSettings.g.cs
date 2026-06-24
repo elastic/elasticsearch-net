@@ -27,39 +27,39 @@ public partial class AmazonBedrockServiceSettings : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AmazonBedrockServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("AmazonBedrockServiceSettings", false);
 		{
-			__init.Property("AccessKey");
+			initializer.Property("AccessKey");
 			writer.WriteString(AccessKey);
 		}
 
 		{
-			__init.Property("Model");
+			initializer.Property("Model");
 			writer.WriteString(Model);
 		}
 
 		if (Provider is not null)
 		{
-			__init.Property("Provider");
+			initializer.Property("Provider");
 			writer.WriteString(Provider);
 		}
 
 		if (RateLimit is not null)
 		{
-			__init.Property("RateLimit");
+			initializer.Property("RateLimit");
 			RateLimit.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Region");
+			initializer.Property("Region");
 			writer.WriteString(Region);
 		}
 
 		{
-			__init.Property("SecretKey");
+			initializer.Property("SecretKey");
 			writer.WriteString(SecretKey);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

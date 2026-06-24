@@ -27,19 +27,19 @@ public partial class RankEvalHitItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RankEvalHitItem", false);
+		var initializer = writer.BeginObjectInitializer("RankEvalHitItem", false);
 		{
-			__init.Property("Hit");
+			initializer.Property("Hit");
 			Hit.FormatCode(writer);
 		}
 
 		if (Rating is not null)
 		{
-			__init.Property("Rating");
+			initializer.Property("Rating");
 			writer.WriteValue(Rating.Value);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

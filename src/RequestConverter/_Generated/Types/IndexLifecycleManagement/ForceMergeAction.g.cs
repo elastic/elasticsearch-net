@@ -27,18 +27,18 @@ public partial class ForceMergeAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ForceMergeAction", false);
+		var initializer = writer.BeginObjectInitializer("ForceMergeAction", false);
 		if (IndexCodec is not null)
 		{
-			__init.Property("IndexCodec");
+			initializer.Property("IndexCodec");
 			writer.WriteString(IndexCodec);
 		}
 
 		{
-			__init.Property("MaxNumSegments");
+			initializer.Property("MaxNumSegments");
 			writer.WriteValue(MaxNumSegments);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

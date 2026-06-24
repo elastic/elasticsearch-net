@@ -27,22 +27,22 @@ public partial class NodeInfoXpack : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoXpack", false);
+		var initializer = writer.BeginObjectInitializer("NodeInfoXpack", false);
 		if (License is not null)
 		{
-			__init.Property("License");
+			initializer.Property("License");
 			License.FormatCode(writer);
 		}
 
 		if (Ml is not null)
 		{
-			__init.Property("Ml");
+			initializer.Property("Ml");
 			Ml.FormatCode(writer);
 		}
 
 		if (Notification is not null)
 		{
-			__init.Property("Notification");
+			initializer.Property("Notification");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -52,10 +52,10 @@ public partial class NodeInfoXpack : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Security");
+			initializer.Property("Security");
 			Security.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

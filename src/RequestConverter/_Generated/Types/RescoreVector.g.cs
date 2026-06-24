@@ -27,13 +27,13 @@ public partial class RescoreVector : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RescoreVector", false);
+		var initializer = writer.BeginObjectInitializer("RescoreVector", false);
 		{
-			__init.Property("Oversample");
+			initializer.Property("Oversample");
 			writer.WriteValue(Oversample);
 			writer.Write("f");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

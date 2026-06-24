@@ -27,64 +27,64 @@ public partial class GetStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetStats", false);
+		var initializer = writer.BeginObjectInitializer("GetStats", false);
 		{
-			__init.Property("Current");
+			initializer.Property("Current");
 			writer.WriteValue(Current);
 			writer.Write("L");
 		}
 
 		if (ExistsTime is not null)
 		{
-			__init.Property("ExistsTime");
+			initializer.Property("ExistsTime");
 			ExistsTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ExistsTimeInMillis");
+			initializer.Property("ExistsTimeInMillis");
 			writer.WriteValue(ExistsTimeInMillis);
 		}
 
 		{
-			__init.Property("ExistsTotal");
+			initializer.Property("ExistsTotal");
 			writer.WriteValue(ExistsTotal);
 			writer.Write("L");
 		}
 
 		if (MissingTime is not null)
 		{
-			__init.Property("MissingTime");
+			initializer.Property("MissingTime");
 			MissingTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("MissingTimeInMillis");
+			initializer.Property("MissingTimeInMillis");
 			writer.WriteValue(MissingTimeInMillis);
 		}
 
 		{
-			__init.Property("MissingTotal");
+			initializer.Property("MissingTotal");
 			writer.WriteValue(MissingTotal);
 			writer.Write("L");
 		}
 
 		if (Time is not null)
 		{
-			__init.Property("Time");
+			initializer.Property("Time");
 			Time.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TimeInMillis");
+			initializer.Property("TimeInMillis");
 			writer.WriteValue(TimeInMillis);
 		}
 
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteValue(Total);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

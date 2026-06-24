@@ -27,43 +27,43 @@ public partial class NlpRobertaTokenizationConfig : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NlpRobertaTokenizationConfig", false);
+		var initializer = writer.BeginObjectInitializer("NlpRobertaTokenizationConfig", false);
 		if (AddPrefixSpace is not null)
 		{
-			__init.Property("AddPrefixSpace");
+			initializer.Property("AddPrefixSpace");
 			writer.WriteValue(AddPrefixSpace.Value);
 		}
 
 		if (DoLowerCase is not null)
 		{
-			__init.Property("DoLowerCase");
+			initializer.Property("DoLowerCase");
 			writer.WriteValue(DoLowerCase.Value);
 		}
 
 		if (MaxSequenceLength is not null)
 		{
-			__init.Property("MaxSequenceLength");
+			initializer.Property("MaxSequenceLength");
 			writer.WriteValue(MaxSequenceLength.Value);
 		}
 
 		if (Span is not null)
 		{
-			__init.Property("Span");
+			initializer.Property("Span");
 			writer.WriteValue(Span.Value);
 		}
 
 		if (Truncate is not null)
 		{
-			__init.Property("Truncate");
+			initializer.Property("Truncate");
 			Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncateCodeFormatter.FormatCode(Truncate.Value, writer);
 		}
 
 		if (WithSpecialTokens is not null)
 		{
-			__init.Property("WithSpecialTokens");
+			initializer.Property("WithSpecialTokens");
 			writer.WriteValue(WithSpecialTokens.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,17 +27,17 @@ public partial class PutRulesetRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutRulesetRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutRulesetRequest", false);
 		{
-			__init.Property("RulesetId");
+			initializer.Property("RulesetId");
 			RulesetId.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Rules");
+			initializer.Property("Rules");
 			writer.WriteInlineList(Rules, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

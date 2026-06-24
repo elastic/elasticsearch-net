@@ -27,81 +27,81 @@ public partial class ClusterIndices : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterIndices", false);
+		var initializer = writer.BeginObjectInitializer("ClusterIndices", false);
 		if (Analysis is not null)
 		{
-			__init.Property("Analysis");
+			initializer.Property("Analysis");
 			Analysis.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Completion");
+			initializer.Property("Completion");
 			Completion.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("DenseVector");
+			initializer.Property("DenseVector");
 			DenseVector.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Docs");
+			initializer.Property("Docs");
 			Docs.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Fielddata");
+			initializer.Property("Fielddata");
 			Fielddata.FormatCode(writer);
 		}
 
 		if (Mappings is not null)
 		{
-			__init.Property("Mappings");
+			initializer.Property("Mappings");
 			Mappings.FormatCode(writer);
 		}
 
 		{
-			__init.Property("QueryCache");
+			initializer.Property("QueryCache");
 			QueryCache.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Search");
+			initializer.Property("Search");
 			Search.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Segments");
+			initializer.Property("Segments");
 			Segments.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Shards");
+			initializer.Property("Shards");
 			Shards.FormatCode(writer);
 		}
 
 		{
-			__init.Property("SparseVector");
+			initializer.Property("SparseVector");
 			SparseVector.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Store");
+			initializer.Property("Store");
 			Store.FormatCode(writer);
 		}
 
 		if (Versions is not null)
 		{
-			__init.Property("Versions");
+			initializer.Property("Versions");
 			writer.WriteInlineList(Versions, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

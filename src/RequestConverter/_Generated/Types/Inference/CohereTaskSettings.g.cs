@@ -27,30 +27,30 @@ public partial class CohereTaskSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CohereTaskSettings", false);
+		var initializer = writer.BeginObjectInitializer("CohereTaskSettings", false);
 		{
-			__init.Property("InputType");
+			initializer.Property("InputType");
 			Elastic.Clients.Elasticsearch.Inference.CohereInputTypeCodeFormatter.FormatCode(InputType, writer);
 		}
 
 		if (ReturnDocuments is not null)
 		{
-			__init.Property("ReturnDocuments");
+			initializer.Property("ReturnDocuments");
 			writer.WriteValue(ReturnDocuments.Value);
 		}
 
 		if (TopN is not null)
 		{
-			__init.Property("TopN");
+			initializer.Property("TopN");
 			writer.WriteValue(TopN.Value);
 		}
 
 		if (Truncate is not null)
 		{
-			__init.Property("Truncate");
+			initializer.Property("Truncate");
 			Elastic.Clients.Elasticsearch.Inference.CohereTruncateTypeCodeFormatter.FormatCode(Truncate.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

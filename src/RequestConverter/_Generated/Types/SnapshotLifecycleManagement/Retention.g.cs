@@ -27,22 +27,22 @@ public partial class Retention : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Retention", false);
+		var initializer = writer.BeginObjectInitializer("Retention", false);
 		{
-			__init.Property("ExpireAfter");
+			initializer.Property("ExpireAfter");
 			ExpireAfter.FormatCode(writer);
 		}
 
 		{
-			__init.Property("MaxCount");
+			initializer.Property("MaxCount");
 			writer.WriteValue(MaxCount);
 		}
 
 		{
-			__init.Property("MinCount");
+			initializer.Property("MinCount");
 			writer.WriteValue(MinCount);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

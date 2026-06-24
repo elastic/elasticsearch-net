@@ -27,136 +27,136 @@ public partial class ShardStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardStats", false);
+		var initializer = writer.BeginObjectInitializer("ShardStats", false);
 		if (Bulk is not null)
 		{
-			__init.Property("Bulk");
+			initializer.Property("Bulk");
 			Bulk.FormatCode(writer);
 		}
 
 		if (Commit is not null)
 		{
-			__init.Property("Commit");
+			initializer.Property("Commit");
 			Commit.FormatCode(writer);
 		}
 
 		if (Completion is not null)
 		{
-			__init.Property("Completion");
+			initializer.Property("Completion");
 			Completion.FormatCode(writer);
 		}
 
 		if (Docs is not null)
 		{
-			__init.Property("Docs");
+			initializer.Property("Docs");
 			Docs.FormatCode(writer);
 		}
 
 		if (Fielddata is not null)
 		{
-			__init.Property("Fielddata");
+			initializer.Property("Fielddata");
 			Fielddata.FormatCode(writer);
 		}
 
 		if (Flush is not null)
 		{
-			__init.Property("Flush");
+			initializer.Property("Flush");
 			Flush.FormatCode(writer);
 		}
 
 		if (Get is not null)
 		{
-			__init.Property("Get");
+			initializer.Property("Get");
 			Get.FormatCode(writer);
 		}
 
 		if (Indexing is not null)
 		{
-			__init.Property("Indexing");
+			initializer.Property("Indexing");
 			Indexing.FormatCode(writer);
 		}
 
 		if (Indices is not null)
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		if (Mappings is not null)
 		{
-			__init.Property("Mappings");
+			initializer.Property("Mappings");
 			Mappings.FormatCode(writer);
 		}
 
 		if (Merges is not null)
 		{
-			__init.Property("Merges");
+			initializer.Property("Merges");
 			Merges.FormatCode(writer);
 		}
 
 		if (QueryCache is not null)
 		{
-			__init.Property("QueryCache");
+			initializer.Property("QueryCache");
 			QueryCache.FormatCode(writer);
 		}
 
 		if (Recovery is not null)
 		{
-			__init.Property("Recovery");
+			initializer.Property("Recovery");
 			Recovery.FormatCode(writer);
 		}
 
 		if (Refresh is not null)
 		{
-			__init.Property("Refresh");
+			initializer.Property("Refresh");
 			Refresh.FormatCode(writer);
 		}
 
 		if (RequestCache is not null)
 		{
-			__init.Property("RequestCache");
+			initializer.Property("RequestCache");
 			RequestCache.FormatCode(writer);
 		}
 
 		if (RetentionLeases is not null)
 		{
-			__init.Property("RetentionLeases");
+			initializer.Property("RetentionLeases");
 			RetentionLeases.FormatCode(writer);
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			Routing.FormatCode(writer);
 		}
 
 		if (Search is not null)
 		{
-			__init.Property("Search");
+			initializer.Property("Search");
 			Search.FormatCode(writer);
 		}
 
 		if (Segments is not null)
 		{
-			__init.Property("Segments");
+			initializer.Property("Segments");
 			Segments.FormatCode(writer);
 		}
 
 		if (SeqNo is not null)
 		{
-			__init.Property("SeqNo");
+			initializer.Property("SeqNo");
 			SeqNo.FormatCode(writer);
 		}
 
 		if (ShardPath is not null)
 		{
-			__init.Property("ShardPath");
+			initializer.Property("ShardPath");
 			ShardPath.FormatCode(writer);
 		}
 
 		if (Shards is not null)
 		{
-			__init.Property("Shards");
+			initializer.Property("Shards");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -167,28 +167,28 @@ public partial class ShardStats : RequestConverter.ICodeFormattable
 
 		if (ShardStats2 is not null)
 		{
-			__init.Property("ShardStats2");
+			initializer.Property("ShardStats2");
 			ShardStats2.FormatCode(writer);
 		}
 
 		if (Store is not null)
 		{
-			__init.Property("Store");
+			initializer.Property("Store");
 			Store.FormatCode(writer);
 		}
 
 		if (Translog is not null)
 		{
-			__init.Property("Translog");
+			initializer.Property("Translog");
 			Translog.FormatCode(writer);
 		}
 
 		if (Warmer is not null)
 		{
-			__init.Property("Warmer");
+			initializer.Property("Warmer");
 			Warmer.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

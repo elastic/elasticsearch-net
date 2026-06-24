@@ -27,44 +27,44 @@ public partial class OverallBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("OverallBucket", false);
+		var initializer = writer.BeginObjectInitializer("OverallBucket", false);
 		{
-			__init.Property("BucketSpan");
+			initializer.Property("BucketSpan");
 			writer.WriteValue(BucketSpan);
 		}
 
 		{
-			__init.Property("IsInterim");
+			initializer.Property("IsInterim");
 			writer.WriteValue(IsInterim);
 		}
 
 		{
-			__init.Property("Jobs");
+			initializer.Property("Jobs");
 			writer.WriteInlineList(Jobs, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("OverallScore");
+			initializer.Property("OverallScore");
 			writer.WriteValue(OverallScore);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("ResultType");
+			initializer.Property("ResultType");
 			writer.WriteString(ResultType);
 		}
 
 		{
-			__init.Property("Timestamp");
+			initializer.Property("Timestamp");
 			writer.WriteValue(Timestamp);
 		}
 
 		if (TimestampString is not null)
 		{
-			__init.Property("TimestampString");
+			initializer.Property("TimestampString");
 			writer.WriteValue(TimestampString.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

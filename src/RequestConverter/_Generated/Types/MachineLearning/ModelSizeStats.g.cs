@@ -27,128 +27,128 @@ public partial class ModelSizeStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ModelSizeStats", false);
+		var initializer = writer.BeginObjectInitializer("ModelSizeStats", false);
 		if (AssignmentMemoryBasis is not null)
 		{
-			__init.Property("AssignmentMemoryBasis");
+			initializer.Property("AssignmentMemoryBasis");
 			writer.WriteString(AssignmentMemoryBasis);
 		}
 
 		{
-			__init.Property("BucketAllocationFailuresCount");
+			initializer.Property("BucketAllocationFailuresCount");
 			writer.WriteValue(BucketAllocationFailuresCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("CategorizationStatus");
+			initializer.Property("CategorizationStatus");
 			Elastic.Clients.Elasticsearch.MachineLearning.CategorizationStatusCodeFormatter.FormatCode(CategorizationStatus, writer);
 		}
 
 		{
-			__init.Property("CategorizedDocCount");
+			initializer.Property("CategorizedDocCount");
 			writer.WriteValue(CategorizedDocCount);
 		}
 
 		{
-			__init.Property("DeadCategoryCount");
+			initializer.Property("DeadCategoryCount");
 			writer.WriteValue(DeadCategoryCount);
 		}
 
 		{
-			__init.Property("FailedCategoryCount");
+			initializer.Property("FailedCategoryCount");
 			writer.WriteValue(FailedCategoryCount);
 		}
 
 		{
-			__init.Property("FrequentCategoryCount");
+			initializer.Property("FrequentCategoryCount");
 			writer.WriteValue(FrequentCategoryCount);
 		}
 
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			writer.WriteString(JobId);
 		}
 
 		{
-			__init.Property("LogTime");
+			initializer.Property("LogTime");
 			writer.WriteValue(LogTime);
 		}
 
 		{
-			__init.Property("MemoryStatus");
+			initializer.Property("MemoryStatus");
 			Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatusCodeFormatter.FormatCode(MemoryStatus, writer);
 		}
 
 		{
-			__init.Property("ModelBytes");
+			initializer.Property("ModelBytes");
 			ModelBytes.FormatCode(writer);
 		}
 
 		if (ModelBytesExceeded is not null)
 		{
-			__init.Property("ModelBytesExceeded");
+			initializer.Property("ModelBytesExceeded");
 			ModelBytesExceeded.FormatCode(writer);
 		}
 
 		if (ModelBytesMemoryLimit is not null)
 		{
-			__init.Property("ModelBytesMemoryLimit");
+			initializer.Property("ModelBytesMemoryLimit");
 			ModelBytesMemoryLimit.FormatCode(writer);
 		}
 
 		if (OutputMemoryAllocatorBytes is not null)
 		{
-			__init.Property("OutputMemoryAllocatorBytes");
+			initializer.Property("OutputMemoryAllocatorBytes");
 			OutputMemoryAllocatorBytes.FormatCode(writer);
 		}
 
 		if (PeakModelBytes is not null)
 		{
-			__init.Property("PeakModelBytes");
+			initializer.Property("PeakModelBytes");
 			PeakModelBytes.FormatCode(writer);
 		}
 
 		{
-			__init.Property("RareCategoryCount");
+			initializer.Property("RareCategoryCount");
 			writer.WriteValue(RareCategoryCount);
 		}
 
 		{
-			__init.Property("ResultType");
+			initializer.Property("ResultType");
 			writer.WriteString(ResultType);
 		}
 
 		if (Timestamp is not null)
 		{
-			__init.Property("Timestamp");
+			initializer.Property("Timestamp");
 			writer.WriteValue(Timestamp.Value);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("TotalByFieldCount");
+			initializer.Property("TotalByFieldCount");
 			writer.WriteValue(TotalByFieldCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("TotalCategoryCount");
+			initializer.Property("TotalCategoryCount");
 			writer.WriteValue(TotalCategoryCount);
 		}
 
 		{
-			__init.Property("TotalOverFieldCount");
+			initializer.Property("TotalOverFieldCount");
 			writer.WriteValue(TotalOverFieldCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("TotalPartitionFieldCount");
+			initializer.Property("TotalPartitionFieldCount");
 			writer.WriteValue(TotalPartitionFieldCount);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

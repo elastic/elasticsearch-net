@@ -27,65 +27,65 @@ public partial class Realm : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Realm", false);
+		var initializer = writer.BeginObjectInitializer("Realm", false);
 		{
-			__init.Property("Available");
+			initializer.Property("Available");
 			writer.WriteValue(Available);
 		}
 
 		if (Cache is not null)
 		{
-			__init.Property("Cache");
+			initializer.Property("Cache");
 			writer.WriteInlineList(Cache, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);
 		}
 
 		if (HasAuthorizationRealms is not null)
 		{
-			__init.Property("HasAuthorizationRealms");
+			initializer.Property("HasAuthorizationRealms");
 			writer.WriteInlineList(HasAuthorizationRealms, (w, item) => { w.WriteValue(item); });
 		}
 
 		if (HasDefaultUsernamePattern is not null)
 		{
-			__init.Property("HasDefaultUsernamePattern");
+			initializer.Property("HasDefaultUsernamePattern");
 			writer.WriteInlineList(HasDefaultUsernamePattern, (w, item) => { w.WriteValue(item); });
 		}
 
 		if (HasTruststore is not null)
 		{
-			__init.Property("HasTruststore");
+			initializer.Property("HasTruststore");
 			writer.WriteInlineList(HasTruststore, (w, item) => { w.WriteValue(item); });
 		}
 
 		if (IsAuthenticationDelegated is not null)
 		{
-			__init.Property("IsAuthenticationDelegated");
+			initializer.Property("IsAuthenticationDelegated");
 			writer.WriteInlineList(IsAuthenticationDelegated, (w, item) => { w.WriteValue(item); });
 		}
 
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteInlineList(Name, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Order is not null)
 		{
-			__init.Property("Order");
+			initializer.Property("Order");
 			writer.WriteInlineList(Order, (w, item) => { w.WriteValue(item); w.Write("L"); });
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteInlineList(Size, (w, item) => { w.WriteValue(item); w.Write("L"); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

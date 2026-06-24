@@ -27,14 +27,14 @@ public partial class Status : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Status", false);
+		var initializer = writer.BeginObjectInitializer("Status", false);
 		{
-			__init.Property("IncludeGlobalState");
+			initializer.Property("IncludeGlobalState");
 			writer.WriteValue(IncludeGlobalState);
 		}
 
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -44,35 +44,35 @@ public partial class Status : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Repository");
+			initializer.Property("Repository");
 			writer.WriteString(Repository);
 		}
 
 		{
-			__init.Property("ShardsStats");
+			initializer.Property("ShardsStats");
 			ShardsStats.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Snapshot");
+			initializer.Property("Snapshot");
 			writer.WriteString(Snapshot);
 		}
 
 		{
-			__init.Property("State");
+			initializer.Property("State");
 			writer.WriteString(State);
 		}
 
 		{
-			__init.Property("Stats");
+			initializer.Property("Stats");
 			Stats.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Uuid");
+			initializer.Property("Uuid");
 			writer.WriteString(Uuid);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,49 +27,49 @@ public partial class ThreadCount : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ThreadCount", false);
+		var initializer = writer.BeginObjectInitializer("ThreadCount", false);
 		if (Active is not null)
 		{
-			__init.Property("Active");
+			initializer.Property("Active");
 			writer.WriteValue(Active.Value);
 			writer.Write("L");
 		}
 
 		if (Completed is not null)
 		{
-			__init.Property("Completed");
+			initializer.Property("Completed");
 			writer.WriteValue(Completed.Value);
 			writer.Write("L");
 		}
 
 		if (Largest is not null)
 		{
-			__init.Property("Largest");
+			initializer.Property("Largest");
 			writer.WriteValue(Largest.Value);
 			writer.Write("L");
 		}
 
 		if (Queue is not null)
 		{
-			__init.Property("Queue");
+			initializer.Property("Queue");
 			writer.WriteValue(Queue.Value);
 			writer.Write("L");
 		}
 
 		if (Rejected is not null)
 		{
-			__init.Property("Rejected");
+			initializer.Property("Rejected");
 			writer.WriteValue(Rejected.Value);
 			writer.Write("L");
 		}
 
 		if (Threads is not null)
 		{
-			__init.Property("Threads");
+			initializer.Property("Threads");
 			writer.WriteValue(Threads.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

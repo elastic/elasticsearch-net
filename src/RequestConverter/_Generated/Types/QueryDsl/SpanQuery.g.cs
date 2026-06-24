@@ -27,28 +27,28 @@ public partial class SpanQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SpanQuery", false);
+		var initializer = writer.BeginObjectInitializer("SpanQuery", false);
 		if (SpanContaining is not null)
 		{
-			__init.Property("SpanContaining");
+			initializer.Property("SpanContaining");
 			SpanContaining.FormatCode(writer);
 		}
 
 		if (SpanFieldMasking is not null)
 		{
-			__init.Property("SpanFieldMasking");
+			initializer.Property("SpanFieldMasking");
 			SpanFieldMasking.FormatCode(writer);
 		}
 
 		if (SpanFirst is not null)
 		{
-			__init.Property("SpanFirst");
+			initializer.Property("SpanFirst");
 			SpanFirst.FormatCode(writer);
 		}
 
 		if (SpanGap is not null)
 		{
-			__init.Property("SpanGap");
+			initializer.Property("SpanGap");
 			writer.Write("new(");
 			SpanGap.Value.Key.FormatCode(writer);
 			writer.Write(", ");
@@ -58,40 +58,40 @@ public partial class SpanQuery : RequestConverter.ICodeFormattable
 
 		if (SpanMulti is not null)
 		{
-			__init.Property("SpanMulti");
+			initializer.Property("SpanMulti");
 			SpanMulti.FormatCode(writer);
 		}
 
 		if (SpanNear is not null)
 		{
-			__init.Property("SpanNear");
+			initializer.Property("SpanNear");
 			SpanNear.FormatCode(writer);
 		}
 
 		if (SpanNot is not null)
 		{
-			__init.Property("SpanNot");
+			initializer.Property("SpanNot");
 			SpanNot.FormatCode(writer);
 		}
 
 		if (SpanOr is not null)
 		{
-			__init.Property("SpanOr");
+			initializer.Property("SpanOr");
 			SpanOr.FormatCode(writer);
 		}
 
 		if (SpanTerm is not null)
 		{
-			__init.Property("SpanTerm");
+			initializer.Property("SpanTerm");
 			SpanTerm.FormatCode(writer);
 		}
 
 		if (SpanWithin is not null)
 		{
-			__init.Property("SpanWithin");
+			initializer.Property("SpanWithin");
 			SpanWithin.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

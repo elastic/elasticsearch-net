@@ -27,66 +27,66 @@ public partial class OpenPointInTimeRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("OpenPointInTimeRequest", false);
+		var initializer = writer.BeginObjectInitializer("OpenPointInTimeRequest", false);
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		if (AllowPartialSearchResults is not null)
 		{
-			__init.Property("AllowPartialSearchResults");
+			initializer.Property("AllowPartialSearchResults");
 			writer.WriteValue(AllowPartialSearchResults.Value);
 		}
 
 		if (ExpandWildcards is not null)
 		{
-			__init.Property("ExpandWildcards");
+			initializer.Property("ExpandWildcards");
 			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (IgnoreUnavailable is not null)
 		{
-			__init.Property("IgnoreUnavailable");
+			initializer.Property("IgnoreUnavailable");
 			writer.WriteValue(IgnoreUnavailable.Value);
 		}
 
 		if (KeepAlive is not null)
 		{
-			__init.Property("KeepAlive");
+			initializer.Property("KeepAlive");
 			KeepAlive.FormatCode(writer);
 		}
 
 		if (MaxConcurrentShardRequests is not null)
 		{
-			__init.Property("MaxConcurrentShardRequests");
+			initializer.Property("MaxConcurrentShardRequests");
 			writer.WriteValue(MaxConcurrentShardRequests.Value);
 		}
 
 		if (Preference is not null)
 		{
-			__init.Property("Preference");
+			initializer.Property("Preference");
 			writer.WriteString(Preference);
 		}
 
 		if (Routing is not null)
 		{
-			__init.Property("Routing");
+			initializer.Property("Routing");
 			Routing.FormatCode(writer);
 		}
 
 		if (IndexFilter is not null)
 		{
-			__init.Property("IndexFilter");
+			initializer.Property("IndexFilter");
 			IndexFilter.FormatCode(writer);
 		}
 
 		if (ProjectRouting is not null)
 		{
-			__init.Property("ProjectRouting");
+			initializer.Property("ProjectRouting");
 			writer.WriteString(ProjectRouting);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

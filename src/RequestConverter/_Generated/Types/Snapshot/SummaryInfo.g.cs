@@ -27,17 +27,17 @@ public partial class SummaryInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SummaryInfo", false);
+		var initializer = writer.BeginObjectInitializer("SummaryInfo", false);
 		{
-			__init.Property("Read");
+			initializer.Property("Read");
 			Read.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Write");
+			initializer.Property("Write");
 			Write.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

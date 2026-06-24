@@ -27,48 +27,48 @@ public partial class HasParentQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("HasParentQuery", false);
+		var initializer = writer.BeginObjectInitializer("HasParentQuery", false);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		if (IgnoreUnmapped is not null)
 		{
-			__init.Property("IgnoreUnmapped");
+			initializer.Property("IgnoreUnmapped");
 			writer.WriteValue(IgnoreUnmapped.Value);
 		}
 
 		if (InnerHits is not null)
 		{
-			__init.Property("InnerHits");
+			initializer.Property("InnerHits");
 			InnerHits.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ParentType");
+			initializer.Property("ParentType");
 			writer.WriteString(ParentType);
 		}
 
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			Query.FormatCode(writer);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
 		if (Score is not null)
 		{
-			__init.Property("Score");
+			initializer.Property("Score");
 			writer.WriteValue(Score.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

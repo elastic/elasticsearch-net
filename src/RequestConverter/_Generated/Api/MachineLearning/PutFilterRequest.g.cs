@@ -27,24 +27,24 @@ public partial class PutFilterRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutFilterRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutFilterRequest", false);
 		{
-			__init.Property("FilterId");
+			initializer.Property("FilterId");
 			FilterId.FormatCode(writer);
 		}
 
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		if (Items is not null)
 		{
-			__init.Property("Items");
+			initializer.Property("Items");
 			writer.WriteInlineList(Items, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

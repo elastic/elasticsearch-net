@@ -27,63 +27,63 @@ public partial class ModelSnapshot : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ModelSnapshot", false);
+		var initializer = writer.BeginObjectInitializer("ModelSnapshot", false);
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			writer.WriteString(JobId);
 		}
 
 		if (LatestRecordTimeStamp is not null)
 		{
-			__init.Property("LatestRecordTimeStamp");
+			initializer.Property("LatestRecordTimeStamp");
 			writer.WriteValue(LatestRecordTimeStamp.Value);
 		}
 
 		if (LatestResultTimeStamp is not null)
 		{
-			__init.Property("LatestResultTimeStamp");
+			initializer.Property("LatestResultTimeStamp");
 			writer.WriteValue(LatestResultTimeStamp.Value);
 		}
 
 		{
-			__init.Property("MinVersion");
+			initializer.Property("MinVersion");
 			writer.WriteString(MinVersion);
 		}
 
 		if (ModelSizeStats is not null)
 		{
-			__init.Property("ModelSizeStats");
+			initializer.Property("ModelSizeStats");
 			ModelSizeStats.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Retain");
+			initializer.Property("Retain");
 			writer.WriteValue(Retain);
 		}
 
 		{
-			__init.Property("SnapshotDocCount");
+			initializer.Property("SnapshotDocCount");
 			writer.WriteValue(SnapshotDocCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("SnapshotId");
+			initializer.Property("SnapshotId");
 			writer.WriteString(SnapshotId);
 		}
 
 		{
-			__init.Property("Timestamp");
+			initializer.Property("Timestamp");
 			writer.WriteValue(Timestamp);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

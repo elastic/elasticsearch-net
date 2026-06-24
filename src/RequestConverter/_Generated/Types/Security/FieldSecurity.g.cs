@@ -27,19 +27,19 @@ public partial class FieldSecurity : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldSecurity", false);
+		var initializer = writer.BeginObjectInitializer("FieldSecurity", false);
 		if (Except is not null)
 		{
-			__init.Property("Except");
+			initializer.Property("Except");
 			Except.FormatCode(writer);
 		}
 
 		if (Grant is not null)
 		{
-			__init.Property("Grant");
+			initializer.Property("Grant");
 			Grant.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

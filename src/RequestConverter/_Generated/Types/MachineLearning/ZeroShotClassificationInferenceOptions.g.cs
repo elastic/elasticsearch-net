@@ -27,42 +27,42 @@ public partial class ZeroShotClassificationInferenceOptions : RequestConverter.I
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ZeroShotClassificationInferenceOptions", false);
+		var initializer = writer.BeginObjectInitializer("ZeroShotClassificationInferenceOptions", false);
 		{
-			__init.Property("ClassificationLabels");
+			initializer.Property("ClassificationLabels");
 			writer.WriteInlineList(ClassificationLabels, (w, item) => { w.WriteString(item); });
 		}
 
 		if (HypothesisTemplate is not null)
 		{
-			__init.Property("HypothesisTemplate");
+			initializer.Property("HypothesisTemplate");
 			writer.WriteString(HypothesisTemplate);
 		}
 
 		if (Labels is not null)
 		{
-			__init.Property("Labels");
+			initializer.Property("Labels");
 			writer.WriteInlineList(Labels, (w, item) => { w.WriteString(item); });
 		}
 
 		if (MultiLabel is not null)
 		{
-			__init.Property("MultiLabel");
+			initializer.Property("MultiLabel");
 			writer.WriteValue(MultiLabel.Value);
 		}
 
 		if (ResultsField is not null)
 		{
-			__init.Property("ResultsField");
+			initializer.Property("ResultsField");
 			writer.WriteString(ResultsField);
 		}
 
 		if (Tokenization is not null)
 		{
-			__init.Property("Tokenization");
+			initializer.Property("Tokenization");
 			Tokenization.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

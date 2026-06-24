@@ -27,79 +27,79 @@ public partial class NodesStatsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodesStatsRequest", false);
+		var initializer = writer.BeginObjectInitializer("NodesStatsRequest", false);
 		if (IndexMetric is not null)
 		{
-			__init.Property("IndexMetric");
+			initializer.Property("IndexMetric");
 			writer.WriteInlineList(IndexMetric, (w, item) => { Elastic.Clients.Elasticsearch.CommonStatsFlagCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (Metric is not null)
 		{
-			__init.Property("Metric");
+			initializer.Property("Metric");
 			writer.WriteInlineList(Metric, (w, item) => { Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetricCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (NodeId is not null)
 		{
-			__init.Property("NodeId");
+			initializer.Property("NodeId");
 			NodeId.FormatCode(writer);
 		}
 
 		if (CompletionFields is not null)
 		{
-			__init.Property("CompletionFields");
+			initializer.Property("CompletionFields");
 			CompletionFields.FormatCode(writer);
 		}
 
 		if (FielddataFields is not null)
 		{
-			__init.Property("FielddataFields");
+			initializer.Property("FielddataFields");
 			FielddataFields.FormatCode(writer);
 		}
 
 		if (Fields is not null)
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			Fields.FormatCode(writer);
 		}
 
 		if (Groups is not null)
 		{
-			__init.Property("Groups");
+			initializer.Property("Groups");
 			writer.WriteValue(Groups.Value);
 		}
 
 		if (IncludeSegmentFileSizes is not null)
 		{
-			__init.Property("IncludeSegmentFileSizes");
+			initializer.Property("IncludeSegmentFileSizes");
 			writer.WriteValue(IncludeSegmentFileSizes.Value);
 		}
 
 		if (IncludeUnloadedSegments is not null)
 		{
-			__init.Property("IncludeUnloadedSegments");
+			initializer.Property("IncludeUnloadedSegments");
 			writer.WriteValue(IncludeUnloadedSegments.Value);
 		}
 
 		if (Level is not null)
 		{
-			__init.Property("Level");
+			initializer.Property("Level");
 			Elastic.Clients.Elasticsearch.NodeStatsLevelCodeFormatter.FormatCode(Level.Value, writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (Types is not null)
 		{
-			__init.Property("Types");
+			initializer.Property("Types");
 			writer.WriteInlineList(Types, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

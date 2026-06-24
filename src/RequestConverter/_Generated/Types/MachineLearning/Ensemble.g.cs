@@ -27,36 +27,36 @@ public partial class Ensemble : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Ensemble", false);
+		var initializer = writer.BeginObjectInitializer("Ensemble", false);
 		if (AggregateOutput is not null)
 		{
-			__init.Property("AggregateOutput");
+			initializer.Property("AggregateOutput");
 			AggregateOutput.FormatCode(writer);
 		}
 
 		if (ClassificationLabels is not null)
 		{
-			__init.Property("ClassificationLabels");
+			initializer.Property("ClassificationLabels");
 			writer.WriteInlineList(ClassificationLabels, (w, item) => { w.WriteString(item); });
 		}
 
 		if (FeatureNames is not null)
 		{
-			__init.Property("FeatureNames");
+			initializer.Property("FeatureNames");
 			writer.WriteInlineList(FeatureNames, (w, item) => { w.WriteString(item); });
 		}
 
 		if (TargetType is not null)
 		{
-			__init.Property("TargetType");
+			initializer.Property("TargetType");
 			writer.WriteString(TargetType);
 		}
 
 		{
-			__init.Property("TrainedModels");
+			initializer.Property("TrainedModels");
 			writer.WriteInlineList(TrainedModels, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

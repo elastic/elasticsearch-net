@@ -27,19 +27,19 @@ public partial class RankEvalMetricRecall : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RankEvalMetricRecall", false);
+		var initializer = writer.BeginObjectInitializer("RankEvalMetricRecall", false);
 		if (K is not null)
 		{
-			__init.Property("K");
+			initializer.Property("K");
 			writer.WriteValue(K.Value);
 		}
 
 		if (RelevantRatingThreshold is not null)
 		{
-			__init.Property("RelevantRatingThreshold");
+			initializer.Property("RelevantRatingThreshold");
 			writer.WriteValue(RelevantRatingThreshold.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

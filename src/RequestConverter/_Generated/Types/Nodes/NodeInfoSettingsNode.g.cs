@@ -27,9 +27,9 @@ public partial class NodeInfoSettingsNode : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoSettingsNode", false);
+		var initializer = writer.BeginObjectInitializer("NodeInfoSettingsNode", false);
 		{
-			__init.Property("Attr");
+			initializer.Property("Attr");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -40,15 +40,15 @@ public partial class NodeInfoSettingsNode : RequestConverter.ICodeFormattable
 
 		if (MaxLocalStorageNodes is not null)
 		{
-			__init.Property("MaxLocalStorageNodes");
+			initializer.Property("MaxLocalStorageNodes");
 			writer.WriteString(MaxLocalStorageNodes);
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

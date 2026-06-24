@@ -27,37 +27,37 @@ public partial class UpdateSettingsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UpdateSettingsRequest", false);
+		var initializer = writer.BeginObjectInitializer("UpdateSettingsRequest", false);
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (Security is not null)
 		{
-			__init.Property("Security");
+			initializer.Property("Security");
 			Security.FormatCode(writer);
 		}
 
 		if (SecurityProfile is not null)
 		{
-			__init.Property("SecurityProfile");
+			initializer.Property("SecurityProfile");
 			SecurityProfile.FormatCode(writer);
 		}
 
 		if (SecurityTokens is not null)
 		{
-			__init.Property("SecurityTokens");
+			initializer.Property("SecurityTokens");
 			SecurityTokens.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

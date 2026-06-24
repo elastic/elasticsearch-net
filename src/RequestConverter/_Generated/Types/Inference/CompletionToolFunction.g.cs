@@ -27,30 +27,30 @@ public partial class CompletionToolFunction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CompletionToolFunction", false);
+		var initializer = writer.BeginObjectInitializer("CompletionToolFunction", false);
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		if (Parameters is not null)
 		{
-			__init.Property("Parameters");
+			initializer.Property("Parameters");
 			writer.WriteValue(Parameters);
 		}
 
 		if (Strict is not null)
 		{
-			__init.Property("Strict");
+			initializer.Property("Strict");
 			writer.WriteValue(Strict.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

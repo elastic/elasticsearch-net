@@ -27,27 +27,27 @@ public partial class ContentObject : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ContentObject", false);
+		var initializer = writer.BeginObjectInitializer("ContentObject", false);
 		{
-			__init.Property("File");
+			initializer.Property("File");
 			File.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ImageUrl");
+			initializer.Property("ImageUrl");
 			ImageUrl.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Text");
+			initializer.Property("Text");
 			writer.WriteString(Text);
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			Elastic.Clients.Elasticsearch.Inference.ContentTypeCodeFormatter.FormatCode(Type, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

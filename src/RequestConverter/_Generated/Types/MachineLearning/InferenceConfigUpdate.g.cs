@@ -27,67 +27,67 @@ public partial class InferenceConfigUpdate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InferenceConfigUpdate", false);
+		var initializer = writer.BeginObjectInitializer("InferenceConfigUpdate", false);
 		if (Classification is not null)
 		{
-			__init.Property("Classification");
+			initializer.Property("Classification");
 			Classification.FormatCode(writer);
 		}
 
 		if (FillMask is not null)
 		{
-			__init.Property("FillMask");
+			initializer.Property("FillMask");
 			FillMask.FormatCode(writer);
 		}
 
 		if (Ner is not null)
 		{
-			__init.Property("Ner");
+			initializer.Property("Ner");
 			Ner.FormatCode(writer);
 		}
 
 		if (PassThrough is not null)
 		{
-			__init.Property("PassThrough");
+			initializer.Property("PassThrough");
 			PassThrough.FormatCode(writer);
 		}
 
 		if (QuestionAnswering is not null)
 		{
-			__init.Property("QuestionAnswering");
+			initializer.Property("QuestionAnswering");
 			QuestionAnswering.FormatCode(writer);
 		}
 
 		if (Regression is not null)
 		{
-			__init.Property("Regression");
+			initializer.Property("Regression");
 			Regression.FormatCode(writer);
 		}
 
 		if (TextClassification is not null)
 		{
-			__init.Property("TextClassification");
+			initializer.Property("TextClassification");
 			TextClassification.FormatCode(writer);
 		}
 
 		if (TextEmbedding is not null)
 		{
-			__init.Property("TextEmbedding");
+			initializer.Property("TextEmbedding");
 			TextEmbedding.FormatCode(writer);
 		}
 
 		if (TextExpansion is not null)
 		{
-			__init.Property("TextExpansion");
+			initializer.Property("TextExpansion");
 			TextExpansion.FormatCode(writer);
 		}
 
 		if (ZeroShotClassification is not null)
 		{
-			__init.Property("ZeroShotClassification");
+			initializer.Property("ZeroShotClassification");
 			ZeroShotClassification.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,17 +27,17 @@ public partial class RemoteClusterPrivileges : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RemoteClusterPrivileges", false);
+		var initializer = writer.BeginObjectInitializer("RemoteClusterPrivileges", false);
 		{
-			__init.Property("Clusters");
+			initializer.Property("Clusters");
 			Clusters.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Privileges");
+			initializer.Property("Privileges");
 			writer.WriteInlineList(Privileges, (w, item) => { Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegeCodeFormatter.FormatCode(item, w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

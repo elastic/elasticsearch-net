@@ -27,22 +27,22 @@ public partial class SecurityRoles : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SecurityRoles", false);
+		var initializer = writer.BeginObjectInitializer("SecurityRoles", false);
 		{
-			__init.Property("Dls");
+			initializer.Property("Dls");
 			Dls.FormatCode(writer);
 		}
 
 		{
-			__init.Property("File");
+			initializer.Property("File");
 			File.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Native");
+			initializer.Property("Native");
 			Native.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

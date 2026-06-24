@@ -27,24 +27,24 @@ public partial class HttpRouteRequests : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("HttpRouteRequests", false);
+		var initializer = writer.BeginObjectInitializer("HttpRouteRequests", false);
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("SizeHistogram");
+			initializer.Property("SizeHistogram");
 			writer.WriteInlineList(SizeHistogram, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("TotalSizeInBytes");
+			initializer.Property("TotalSizeInBytes");
 			writer.WriteValue(TotalSizeInBytes);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

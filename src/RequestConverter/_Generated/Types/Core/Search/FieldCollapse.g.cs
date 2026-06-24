@@ -27,30 +27,30 @@ public partial class FieldCollapse : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FieldCollapse", false);
+		var initializer = writer.BeginObjectInitializer("FieldCollapse", false);
 		if (Collapse is not null)
 		{
-			__init.Property("Collapse");
+			initializer.Property("Collapse");
 			Collapse.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (InnerHits is not null)
 		{
-			__init.Property("InnerHits");
+			initializer.Property("InnerHits");
 			writer.WriteInlineList(InnerHits, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (MaxConcurrentGroupSearches is not null)
 		{
-			__init.Property("MaxConcurrentGroupSearches");
+			initializer.Property("MaxConcurrentGroupSearches");
 			writer.WriteValue(MaxConcurrentGroupSearches.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

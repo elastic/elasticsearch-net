@@ -27,50 +27,50 @@ public partial class PutTransformRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutTransformRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutTransformRequest", false);
 		{
-			__init.Property("TransformId");
+			initializer.Property("TransformId");
 			TransformId.FormatCode(writer);
 		}
 
 		if (DeferValidation is not null)
 		{
-			__init.Property("DeferValidation");
+			initializer.Property("DeferValidation");
 			writer.WriteValue(DeferValidation.Value);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		{
-			__init.Property("Dest");
+			initializer.Property("Dest");
 			Dest.FormatCode(writer);
 		}
 
 		if (Frequency is not null)
 		{
-			__init.Property("Frequency");
+			initializer.Property("Frequency");
 			Frequency.FormatCode(writer);
 		}
 
 		if (Latest is not null)
 		{
-			__init.Property("Latest");
+			initializer.Property("Latest");
 			Latest.FormatCode(writer);
 		}
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -81,33 +81,33 @@ public partial class PutTransformRequest : RequestConverter.ICodeFormattable
 
 		if (Pivot is not null)
 		{
-			__init.Property("Pivot");
+			initializer.Property("Pivot");
 			Pivot.FormatCode(writer);
 		}
 
 		if (RetentionPolicy is not null)
 		{
-			__init.Property("RetentionPolicy");
+			initializer.Property("RetentionPolicy");
 			RetentionPolicy.FormatCode(writer);
 		}
 
 		if (Settings is not null)
 		{
-			__init.Property("Settings");
+			initializer.Property("Settings");
 			Settings.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			Source.FormatCode(writer);
 		}
 
 		if (Sync is not null)
 		{
-			__init.Property("Sync");
+			initializer.Property("Sync");
 			Sync.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

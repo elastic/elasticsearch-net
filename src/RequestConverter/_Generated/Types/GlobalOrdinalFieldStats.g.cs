@@ -27,25 +27,25 @@ public partial class GlobalOrdinalFieldStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GlobalOrdinalFieldStats", false);
+		var initializer = writer.BeginObjectInitializer("GlobalOrdinalFieldStats", false);
 		if (BuildTime is not null)
 		{
-			__init.Property("BuildTime");
+			initializer.Property("BuildTime");
 			writer.WriteString(BuildTime);
 		}
 
 		{
-			__init.Property("BuildTimeInMillis");
+			initializer.Property("BuildTimeInMillis");
 			writer.WriteValue(BuildTimeInMillis);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("ShardMaxValueCount");
+			initializer.Property("ShardMaxValueCount");
 			writer.WriteValue(ShardMaxValueCount);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

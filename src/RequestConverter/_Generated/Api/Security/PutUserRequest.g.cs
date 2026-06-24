@@ -27,39 +27,39 @@ public partial class PutUserRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutUserRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutUserRequest", false);
 		{
-			__init.Property("Username");
+			initializer.Property("Username");
 			Username.FormatCode(writer);
 		}
 
 		if (Refresh is not null)
 		{
-			__init.Property("Refresh");
+			initializer.Property("Refresh");
 			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
 		}
 
 		if (Email is not null)
 		{
-			__init.Property("Email");
+			initializer.Property("Email");
 			writer.WriteString(Email);
 		}
 
 		if (Enabled is not null)
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled.Value);
 		}
 
 		if (FullName is not null)
 		{
-			__init.Property("FullName");
+			initializer.Property("FullName");
 			writer.WriteString(FullName);
 		}
 
 		if (Metadata is not null)
 		{
-			__init.Property("Metadata");
+			initializer.Property("Metadata");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -70,22 +70,22 @@ public partial class PutUserRequest : RequestConverter.ICodeFormattable
 
 		if (Password is not null)
 		{
-			__init.Property("Password");
+			initializer.Property("Password");
 			writer.WriteString(Password);
 		}
 
 		if (PasswordHash is not null)
 		{
-			__init.Property("PasswordHash");
+			initializer.Property("PasswordHash");
 			writer.WriteString(PasswordHash);
 		}
 
 		if (Roles is not null)
 		{
-			__init.Property("Roles");
+			initializer.Property("Roles");
 			writer.WriteInlineList(Roles, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

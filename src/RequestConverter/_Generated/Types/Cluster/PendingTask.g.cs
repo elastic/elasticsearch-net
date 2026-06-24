@@ -27,38 +27,38 @@ public partial class PendingTask : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PendingTask", false);
+		var initializer = writer.BeginObjectInitializer("PendingTask", false);
 		{
-			__init.Property("Executing");
+			initializer.Property("Executing");
 			writer.WriteValue(Executing);
 		}
 
 		{
-			__init.Property("InsertOrder");
+			initializer.Property("InsertOrder");
 			writer.WriteValue(InsertOrder);
 		}
 
 		{
-			__init.Property("Priority");
+			initializer.Property("Priority");
 			writer.WriteString(Priority);
 		}
 
 		{
-			__init.Property("Source");
+			initializer.Property("Source");
 			writer.WriteString(Source);
 		}
 
 		if (TimeInQueue is not null)
 		{
-			__init.Property("TimeInQueue");
+			initializer.Property("TimeInQueue");
 			TimeInQueue.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TimeInQueueMillis");
+			initializer.Property("TimeInQueueMillis");
 			writer.WriteValue(TimeInQueueMillis);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

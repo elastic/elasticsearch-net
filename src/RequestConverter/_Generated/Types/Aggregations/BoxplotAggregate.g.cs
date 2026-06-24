@@ -27,34 +27,34 @@ public partial class BoxplotAggregate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BoxplotAggregate", true);
+		var initializer = writer.BeginObjectInitializer("BoxplotAggregate", true);
 		{
-			__init.Property("Lower");
+			initializer.Property("Lower");
 			writer.WriteValue(Lower);
 			writer.Write("d");
 		}
 
 		if (LowerAsString is not null)
 		{
-			__init.Property("LowerAsString");
+			initializer.Property("LowerAsString");
 			writer.WriteString(LowerAsString);
 		}
 
 		{
-			__init.Property("Max");
+			initializer.Property("Max");
 			writer.WriteValue(Max);
 			writer.Write("d");
 		}
 
 		if (MaxAsString is not null)
 		{
-			__init.Property("MaxAsString");
+			initializer.Property("MaxAsString");
 			writer.WriteString(MaxAsString);
 		}
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -64,65 +64,65 @@ public partial class BoxplotAggregate : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Min");
+			initializer.Property("Min");
 			writer.WriteValue(Min);
 			writer.Write("d");
 		}
 
 		if (MinAsString is not null)
 		{
-			__init.Property("MinAsString");
+			initializer.Property("MinAsString");
 			writer.WriteString(MinAsString);
 		}
 
 		{
-			__init.Property("Q1");
+			initializer.Property("Q1");
 			writer.WriteValue(Q1);
 			writer.Write("d");
 		}
 
 		if (Q1AsString is not null)
 		{
-			__init.Property("Q1AsString");
+			initializer.Property("Q1AsString");
 			writer.WriteString(Q1AsString);
 		}
 
 		{
-			__init.Property("Q2");
+			initializer.Property("Q2");
 			writer.WriteValue(Q2);
 			writer.Write("d");
 		}
 
 		if (Q2AsString is not null)
 		{
-			__init.Property("Q2AsString");
+			initializer.Property("Q2AsString");
 			writer.WriteString(Q2AsString);
 		}
 
 		{
-			__init.Property("Q3");
+			initializer.Property("Q3");
 			writer.WriteValue(Q3);
 			writer.Write("d");
 		}
 
 		if (Q3AsString is not null)
 		{
-			__init.Property("Q3AsString");
+			initializer.Property("Q3AsString");
 			writer.WriteString(Q3AsString);
 		}
 
 		{
-			__init.Property("Upper");
+			initializer.Property("Upper");
 			writer.WriteValue(Upper);
 			writer.Write("d");
 		}
 
 		if (UpperAsString is not null)
 		{
-			__init.Property("UpperAsString");
+			initializer.Property("UpperAsString");
 			writer.WriteString(UpperAsString);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,14 +27,14 @@ public partial class SettingsSimilarityLmj : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SettingsSimilarityLmj", true);
+		var initializer = writer.BeginObjectInitializer("SettingsSimilarityLmj", true);
 		if (Lambda is not null)
 		{
-			__init.Property("Lambda");
+			initializer.Property("Lambda");
 			writer.WriteValue(Lambda.Value);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,23 +27,23 @@ public partial class RevertModelSnapshotRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RevertModelSnapshotRequest", false);
+		var initializer = writer.BeginObjectInitializer("RevertModelSnapshotRequest", false);
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			JobId.FormatCode(writer);
 		}
 
 		{
-			__init.Property("SnapshotId");
+			initializer.Property("SnapshotId");
 			SnapshotId.FormatCode(writer);
 		}
 
 		if (DeleteInterveningResults is not null)
 		{
-			__init.Property("DeleteInterveningResults");
+			initializer.Property("DeleteInterveningResults");
 			writer.WriteValue(DeleteInterveningResults.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

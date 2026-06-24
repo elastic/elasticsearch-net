@@ -27,13 +27,13 @@ public partial class SamplerAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SamplerAggregation", false);
+		var initializer = writer.BeginObjectInitializer("SamplerAggregation", false);
 		if (ShardSize is not null)
 		{
-			__init.Property("ShardSize");
+			initializer.Property("ShardSize");
 			writer.WriteValue(ShardSize.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

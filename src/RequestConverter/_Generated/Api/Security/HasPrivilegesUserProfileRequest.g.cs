@@ -27,17 +27,17 @@ public partial class HasPrivilegesUserProfileRequest : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("HasPrivilegesUserProfileRequest", false);
+		var initializer = writer.BeginObjectInitializer("HasPrivilegesUserProfileRequest", false);
 		{
-			__init.Property("Privileges");
+			initializer.Property("Privileges");
 			Privileges.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Uids");
+			initializer.Property("Uids");
 			writer.WriteInlineList(Uids, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

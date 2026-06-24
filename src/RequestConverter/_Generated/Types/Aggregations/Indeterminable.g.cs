@@ -27,12 +27,12 @@ public partial class Indeterminable : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Indeterminable", false);
+		var initializer = writer.BeginObjectInitializer("Indeterminable", false);
 		{
-			__init.Property("Reason");
+			initializer.Property("Reason");
 			writer.WriteString(Reason);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

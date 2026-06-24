@@ -27,43 +27,43 @@ public partial class InvalidateApiKeyRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("InvalidateApiKeyRequest", false);
+		var initializer = writer.BeginObjectInitializer("InvalidateApiKeyRequest", false);
 		if (Id is not null)
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		if (Ids is not null)
 		{
-			__init.Property("Ids");
+			initializer.Property("Ids");
 			writer.WriteInlineList(Ids, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		if (Owner is not null)
 		{
-			__init.Property("Owner");
+			initializer.Property("Owner");
 			writer.WriteValue(Owner.Value);
 		}
 
 		if (RealmName is not null)
 		{
-			__init.Property("RealmName");
+			initializer.Property("RealmName");
 			writer.WriteString(RealmName);
 		}
 
 		if (Username is not null)
 		{
-			__init.Property("Username");
+			initializer.Property("Username");
 			Username.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,39 +27,39 @@ public partial class PutRoleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutRoleRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutRoleRequest", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		if (Refresh is not null)
 		{
-			__init.Property("Refresh");
+			initializer.Property("Refresh");
 			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
 		}
 
 		if (Applications is not null)
 		{
-			__init.Property("Applications");
+			initializer.Property("Applications");
 			writer.WriteInlineList(Applications, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Cluster is not null)
 		{
-			__init.Property("Cluster");
+			initializer.Property("Cluster");
 			writer.WriteInlineList(Cluster, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		if (Global is not null)
 		{
-			__init.Property("Global");
+			initializer.Property("Global");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -70,13 +70,13 @@ public partial class PutRoleRequest : RequestConverter.ICodeFormattable
 
 		if (Indices is not null)
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			writer.WriteInlineList(Indices, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Metadata is not null)
 		{
-			__init.Property("Metadata");
+			initializer.Property("Metadata");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -87,25 +87,25 @@ public partial class PutRoleRequest : RequestConverter.ICodeFormattable
 
 		if (RemoteCluster is not null)
 		{
-			__init.Property("RemoteCluster");
+			initializer.Property("RemoteCluster");
 			writer.WriteInlineList(RemoteCluster, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (RemoteIndices is not null)
 		{
-			__init.Property("RemoteIndices");
+			initializer.Property("RemoteIndices");
 			writer.WriteInlineList(RemoteIndices, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (RunAs is not null)
 		{
-			__init.Property("RunAs");
+			initializer.Property("RunAs");
 			writer.WriteInlineList(RunAs, (w, item) => { w.WriteString(item); });
 		}
 
 		if (TransientMetadata is not null)
 		{
-			__init.Property("TransientMetadata");
+			initializer.Property("TransientMetadata");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -114,6 +114,6 @@ public partial class PutRoleRequest : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(TransientMetadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

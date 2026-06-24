@@ -27,54 +27,54 @@ public partial class ShardProfile : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ShardProfile", false);
+		var initializer = writer.BeginObjectInitializer("ShardProfile", false);
 		{
-			__init.Property("Aggregations");
+			initializer.Property("Aggregations");
 			writer.WriteInlineList(Aggregations, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Cluster");
+			initializer.Property("Cluster");
 			writer.WriteString(Cluster);
 		}
 
 		if (Dfs is not null)
 		{
-			__init.Property("Dfs");
+			initializer.Property("Dfs");
 			Dfs.FormatCode(writer);
 		}
 
 		if (Fetch is not null)
 		{
-			__init.Property("Fetch");
+			initializer.Property("Fetch");
 			Fetch.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteString(Index);
 		}
 
 		{
-			__init.Property("NodeId");
+			initializer.Property("NodeId");
 			writer.WriteString(NodeId);
 		}
 
 		{
-			__init.Property("Searches");
+			initializer.Property("Searches");
 			writer.WriteInlineList(Searches, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("ShardId");
+			initializer.Property("ShardId");
 			writer.WriteValue(ShardId);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

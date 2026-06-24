@@ -27,25 +27,25 @@ public partial class CjkBigramTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CjkBigramTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("CjkBigramTokenFilter", true);
 		if (IgnoredScripts is not null)
 		{
-			__init.Property("IgnoredScripts");
+			initializer.Property("IgnoredScripts");
 			writer.WriteInlineList(IgnoredScripts, (w, item) => { Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScriptCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (OutputUnigrams is not null)
 		{
-			__init.Property("OutputUnigrams");
+			initializer.Property("OutputUnigrams");
 			writer.WriteValue(OutputUnigrams.Value);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

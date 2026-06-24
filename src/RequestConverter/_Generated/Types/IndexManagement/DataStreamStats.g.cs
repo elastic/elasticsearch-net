@@ -27,22 +27,22 @@ public partial class DataStreamStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataStreamStats", false);
+		var initializer = writer.BeginObjectInitializer("DataStreamStats", false);
 		{
-			__init.Property("BackingIndicesInError");
+			initializer.Property("BackingIndicesInError");
 			writer.WriteValue(BackingIndicesInError);
 		}
 
 		{
-			__init.Property("BackingIndicesInTotal");
+			initializer.Property("BackingIndicesInTotal");
 			writer.WriteValue(BackingIndicesInTotal);
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

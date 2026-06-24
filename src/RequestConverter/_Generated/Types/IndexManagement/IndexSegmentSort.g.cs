@@ -27,31 +27,31 @@ public partial class IndexSegmentSort : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexSegmentSort", false);
+		var initializer = writer.BeginObjectInitializer("IndexSegmentSort", false);
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Missing is not null)
 		{
-			__init.Property("Missing");
+			initializer.Property("Missing");
 			writer.WriteInlineList(Missing, (w, item) => { Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissingCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (Mode is not null)
 		{
-			__init.Property("Mode");
+			initializer.Property("Mode");
 			writer.WriteInlineList(Mode, (w, item) => { Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortModeCodeFormatter.FormatCode(item, w); });
 		}
 
 		if (Order is not null)
 		{
-			__init.Property("Order");
+			initializer.Property("Order");
 			writer.WriteInlineList(Order, (w, item) => { Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrderCodeFormatter.FormatCode(item, w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

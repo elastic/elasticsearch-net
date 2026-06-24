@@ -27,29 +27,29 @@ public partial class PutSynonymRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PutSynonymRequest", false);
+		var initializer = writer.BeginObjectInitializer("PutSynonymRequest", false);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		if (Append is not null)
 		{
-			__init.Property("Append");
+			initializer.Property("Append");
 			writer.WriteValue(Append.Value);
 		}
 
 		if (Refresh is not null)
 		{
-			__init.Property("Refresh");
+			initializer.Property("Refresh");
 			writer.WriteValue(Refresh.Value);
 		}
 
 		{
-			__init.Property("SynonymsSet");
+			initializer.Property("SynonymsSet");
 			writer.WriteInlineList(SynonymsSet, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

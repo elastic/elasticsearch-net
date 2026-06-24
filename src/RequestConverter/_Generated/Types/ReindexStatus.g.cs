@@ -27,96 +27,96 @@ public partial class ReindexStatus : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ReindexStatus", false);
+		var initializer = writer.BeginObjectInitializer("ReindexStatus", false);
 		{
-			__init.Property("Batches");
+			initializer.Property("Batches");
 			writer.WriteValue(Batches);
 			writer.Write("L");
 		}
 
 		if (Cancelled is not null)
 		{
-			__init.Property("Cancelled");
+			initializer.Property("Cancelled");
 			writer.WriteString(Cancelled);
 		}
 
 		if (Created is not null)
 		{
-			__init.Property("Created");
+			initializer.Property("Created");
 			writer.WriteValue(Created.Value);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Deleted");
+			initializer.Property("Deleted");
 			writer.WriteValue(Deleted);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Noops");
+			initializer.Property("Noops");
 			writer.WriteValue(Noops);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("RequestsPerSecond");
+			initializer.Property("RequestsPerSecond");
 			writer.WriteValue(RequestsPerSecond);
 			writer.Write("f");
 		}
 
 		{
-			__init.Property("Retries");
+			initializer.Property("Retries");
 			Retries.FormatCode(writer);
 		}
 
 		if (SliceId is not null)
 		{
-			__init.Property("SliceId");
+			initializer.Property("SliceId");
 			writer.WriteValue(SliceId.Value);
 		}
 
 		if (Throttled is not null)
 		{
-			__init.Property("Throttled");
+			initializer.Property("Throttled");
 			Throttled.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ThrottledMillis");
+			initializer.Property("ThrottledMillis");
 			writer.WriteValue(ThrottledMillis);
 		}
 
 		if (ThrottledUntil is not null)
 		{
-			__init.Property("ThrottledUntil");
+			initializer.Property("ThrottledUntil");
 			ThrottledUntil.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ThrottledUntilMillis");
+			initializer.Property("ThrottledUntilMillis");
 			writer.WriteValue(ThrottledUntilMillis);
 		}
 
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteValue(Total);
 			writer.Write("L");
 		}
 
 		if (Updated is not null)
 		{
-			__init.Property("Updated");
+			initializer.Property("Updated");
 			writer.WriteValue(Updated.Value);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("VersionConflicts");
+			initializer.Property("VersionConflicts");
 			writer.WriteValue(VersionConflicts);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

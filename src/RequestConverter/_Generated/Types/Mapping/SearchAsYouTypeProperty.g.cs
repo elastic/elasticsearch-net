@@ -27,58 +27,58 @@ public partial class SearchAsYouTypeProperty : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SearchAsYouTypeProperty", true);
+		var initializer = writer.BeginObjectInitializer("SearchAsYouTypeProperty", true);
 		if (Analyzer is not null)
 		{
-			__init.Property("Analyzer");
+			initializer.Property("Analyzer");
 			writer.WriteString(Analyzer);
 		}
 
 		if (CopyTo is not null)
 		{
-			__init.Property("CopyTo");
+			initializer.Property("CopyTo");
 			CopyTo.FormatCode(writer);
 		}
 
 		if (Dynamic is not null)
 		{
-			__init.Property("Dynamic");
+			initializer.Property("Dynamic");
 			Elastic.Clients.Elasticsearch.Mapping.DynamicMappingCodeFormatter.FormatCode(Dynamic.Value, writer);
 		}
 
 		if (Fields is not null)
 		{
-			__init.Property("Fields");
+			initializer.Property("Fields");
 			Fields.FormatCode(writer);
 		}
 
 		if (IgnoreAbove is not null)
 		{
-			__init.Property("IgnoreAbove");
+			initializer.Property("IgnoreAbove");
 			writer.WriteValue(IgnoreAbove.Value);
 		}
 
 		if (Index is not null)
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteValue(Index.Value);
 		}
 
 		if (IndexOptions is not null)
 		{
-			__init.Property("IndexOptions");
+			initializer.Property("IndexOptions");
 			Elastic.Clients.Elasticsearch.Mapping.IndexOptionsCodeFormatter.FormatCode(IndexOptions.Value, writer);
 		}
 
 		if (MaxShingleSize is not null)
 		{
-			__init.Property("MaxShingleSize");
+			initializer.Property("MaxShingleSize");
 			writer.WriteValue(MaxShingleSize.Value);
 		}
 
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -89,52 +89,52 @@ public partial class SearchAsYouTypeProperty : RequestConverter.ICodeFormattable
 
 		if (Norms is not null)
 		{
-			__init.Property("Norms");
+			initializer.Property("Norms");
 			writer.WriteValue(Norms.Value);
 		}
 
 		if (Properties is not null)
 		{
-			__init.Property("Properties");
+			initializer.Property("Properties");
 			Properties.FormatCode(writer);
 		}
 
 		if (SearchAnalyzer is not null)
 		{
-			__init.Property("SearchAnalyzer");
+			initializer.Property("SearchAnalyzer");
 			writer.WriteString(SearchAnalyzer);
 		}
 
 		if (SearchQuoteAnalyzer is not null)
 		{
-			__init.Property("SearchQuoteAnalyzer");
+			initializer.Property("SearchQuoteAnalyzer");
 			writer.WriteString(SearchQuoteAnalyzer);
 		}
 
 		if (Similarity is not null)
 		{
-			__init.Property("Similarity");
+			initializer.Property("Similarity");
 			writer.WriteString(Similarity);
 		}
 
 		if (Store is not null)
 		{
-			__init.Property("Store");
+			initializer.Property("Store");
 			writer.WriteValue(Store.Value);
 		}
 
 		if (SyntheticSourceKeep is not null)
 		{
-			__init.Property("SyntheticSourceKeep");
+			initializer.Property("SyntheticSourceKeep");
 			Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnumCodeFormatter.FormatCode(SyntheticSourceKeep.Value, writer);
 		}
 
 		if (TermVector is not null)
 		{
-			__init.Property("TermVector");
+			initializer.Property("TermVector");
 			Elastic.Clients.Elasticsearch.Mapping.TermVectorOptionCodeFormatter.FormatCode(TermVector.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

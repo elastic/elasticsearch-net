@@ -27,42 +27,42 @@ public partial class RepositoryStatsCurrentCounts : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RepositoryStatsCurrentCounts", false);
+		var initializer = writer.BeginObjectInitializer("RepositoryStatsCurrentCounts", false);
 		{
-			__init.Property("ActiveDeletions");
+			initializer.Property("ActiveDeletions");
 			writer.WriteValue(ActiveDeletions);
 		}
 
 		{
-			__init.Property("Clones");
+			initializer.Property("Clones");
 			writer.WriteValue(Clones);
 		}
 
 		{
-			__init.Property("Deletions");
+			initializer.Property("Deletions");
 			writer.WriteValue(Deletions);
 		}
 
 		{
-			__init.Property("Finalizations");
+			initializer.Property("Finalizations");
 			writer.WriteValue(Finalizations);
 		}
 
 		{
-			__init.Property("Shards");
+			initializer.Property("Shards");
 			Shards.FormatCode(writer);
 		}
 
 		{
-			__init.Property("SnapshotDeletions");
+			initializer.Property("SnapshotDeletions");
 			writer.WriteValue(SnapshotDeletions);
 		}
 
 		{
-			__init.Property("Snapshots");
+			initializer.Property("Snapshots");
 			writer.WriteValue(Snapshots);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

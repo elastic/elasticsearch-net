@@ -27,27 +27,27 @@ public partial class CompletionSuggest<TDocument> : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CompletionSuggest<TDocument>", true);
+		var initializer = writer.BeginObjectInitializer("CompletionSuggest<TDocument>", true);
 		{
-			__init.Property("Length");
+			initializer.Property("Length");
 			writer.WriteValue(Length);
 		}
 
 		{
-			__init.Property("Offset");
+			initializer.Property("Offset");
 			writer.WriteValue(Offset);
 		}
 
 		{
-			__init.Property("Options");
+			initializer.Property("Options");
 			writer.WriteInlineList(Options, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Text");
+			initializer.Property("Text");
 			writer.WriteString(Text);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

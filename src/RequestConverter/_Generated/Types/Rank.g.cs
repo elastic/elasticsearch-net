@@ -27,13 +27,13 @@ public partial class Rank : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Rank", false);
+		var initializer = writer.BeginObjectInitializer("Rank", false);
 		if (Rrf is not null)
 		{
-			__init.Property("Rrf");
+			initializer.Property("Rrf");
 			Rrf.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

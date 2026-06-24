@@ -27,39 +27,39 @@ public partial class DataframeAnalyticsFieldSelection : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeAnalyticsFieldSelection", false);
+		var initializer = writer.BeginObjectInitializer("DataframeAnalyticsFieldSelection", false);
 		if (FeatureType is not null)
 		{
-			__init.Property("FeatureType");
+			initializer.Property("FeatureType");
 			writer.WriteString(FeatureType);
 		}
 
 		{
-			__init.Property("IsIncluded");
+			initializer.Property("IsIncluded");
 			writer.WriteValue(IsIncluded);
 		}
 
 		{
-			__init.Property("IsRequired");
+			initializer.Property("IsRequired");
 			writer.WriteValue(IsRequired);
 		}
 
 		{
-			__init.Property("MappingTypes");
+			initializer.Property("MappingTypes");
 			writer.WriteInlineList(MappingTypes, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		if (Reason is not null)
 		{
-			__init.Property("Reason");
+			initializer.Property("Reason");
 			writer.WriteString(Reason);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,62 +27,62 @@ public partial class AnalyticsStatistics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AnalyticsStatistics", false);
+		var initializer = writer.BeginObjectInitializer("AnalyticsStatistics", false);
 		{
-			__init.Property("BoxplotUsage");
+			initializer.Property("BoxplotUsage");
 			writer.WriteValue(BoxplotUsage);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("CumulativeCardinalityUsage");
+			initializer.Property("CumulativeCardinalityUsage");
 			writer.WriteValue(CumulativeCardinalityUsage);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("MovingPercentilesUsage");
+			initializer.Property("MovingPercentilesUsage");
 			writer.WriteValue(MovingPercentilesUsage);
 			writer.Write("L");
 		}
 
 		if (MultiTermsUsage is not null)
 		{
-			__init.Property("MultiTermsUsage");
+			initializer.Property("MultiTermsUsage");
 			writer.WriteValue(MultiTermsUsage.Value);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("NormalizeUsage");
+			initializer.Property("NormalizeUsage");
 			writer.WriteValue(NormalizeUsage);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("RateUsage");
+			initializer.Property("RateUsage");
 			writer.WriteValue(RateUsage);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("StringStatsUsage");
+			initializer.Property("StringStatsUsage");
 			writer.WriteValue(StringStatsUsage);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("TopMetricsUsage");
+			initializer.Property("TopMetricsUsage");
 			writer.WriteValue(TopMetricsUsage);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("TTestUsage");
+			initializer.Property("TTestUsage");
 			writer.WriteValue(TTestUsage);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

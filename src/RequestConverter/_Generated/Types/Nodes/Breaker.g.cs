@@ -27,47 +27,47 @@ public partial class Breaker : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Breaker", false);
+		var initializer = writer.BeginObjectInitializer("Breaker", false);
 		if (EstimatedSize is not null)
 		{
-			__init.Property("EstimatedSize");
+			initializer.Property("EstimatedSize");
 			writer.WriteString(EstimatedSize);
 		}
 
 		if (EstimatedSizeInBytes is not null)
 		{
-			__init.Property("EstimatedSizeInBytes");
+			initializer.Property("EstimatedSizeInBytes");
 			writer.WriteValue(EstimatedSizeInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (LimitSize is not null)
 		{
-			__init.Property("LimitSize");
+			initializer.Property("LimitSize");
 			writer.WriteString(LimitSize);
 		}
 
 		if (LimitSizeInBytes is not null)
 		{
-			__init.Property("LimitSizeInBytes");
+			initializer.Property("LimitSizeInBytes");
 			writer.WriteValue(LimitSizeInBytes.Value);
 			writer.Write("L");
 		}
 
 		if (Overhead is not null)
 		{
-			__init.Property("Overhead");
+			initializer.Property("Overhead");
 			writer.WriteValue(Overhead.Value);
 			writer.Write("f");
 		}
 
 		if (Tripped is not null)
 		{
-			__init.Property("Tripped");
+			initializer.Property("Tripped");
 			writer.WriteValue(Tripped.Value);
 			writer.Write("f");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

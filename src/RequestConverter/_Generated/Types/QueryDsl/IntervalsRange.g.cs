@@ -27,43 +27,43 @@ public partial class IntervalsRange : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IntervalsRange", false);
+		var initializer = writer.BeginObjectInitializer("IntervalsRange", false);
 		if (Analyzer is not null)
 		{
-			__init.Property("Analyzer");
+			initializer.Property("Analyzer");
 			writer.WriteString(Analyzer);
 		}
 
 		if (Gt is not null)
 		{
-			__init.Property("Gt");
+			initializer.Property("Gt");
 			writer.WriteString(Gt);
 		}
 
 		if (Gte is not null)
 		{
-			__init.Property("Gte");
+			initializer.Property("Gte");
 			writer.WriteString(Gte);
 		}
 
 		if (Lt is not null)
 		{
-			__init.Property("Lt");
+			initializer.Property("Lt");
 			writer.WriteString(Lt);
 		}
 
 		if (Lte is not null)
 		{
-			__init.Property("Lte");
+			initializer.Property("Lte");
 			writer.WriteString(Lte);
 		}
 
 		if (UseField is not null)
 		{
-			__init.Property("UseField");
+			initializer.Property("UseField");
 			UseField.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

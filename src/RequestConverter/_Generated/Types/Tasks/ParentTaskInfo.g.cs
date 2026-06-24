@@ -27,37 +27,37 @@ public partial class ParentTaskInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ParentTaskInfo", false);
+		var initializer = writer.BeginObjectInitializer("ParentTaskInfo", false);
 		{
-			__init.Property("Action");
+			initializer.Property("Action");
 			writer.WriteString(Action);
 		}
 
 		{
-			__init.Property("Cancellable");
+			initializer.Property("Cancellable");
 			writer.WriteValue(Cancellable);
 		}
 
 		if (Cancelled is not null)
 		{
-			__init.Property("Cancelled");
+			initializer.Property("Cancelled");
 			writer.WriteValue(Cancelled.Value);
 		}
 
 		if (Children is not null)
 		{
-			__init.Property("Children");
+			initializer.Property("Children");
 			writer.WriteInlineList(Children, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		{
-			__init.Property("Headers");
+			initializer.Property("Headers");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -67,67 +67,67 @@ public partial class ParentTaskInfo : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteValue(Id);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Node");
+			initializer.Property("Node");
 			writer.WriteString(Node);
 		}
 
 		if (OriginalStartTime is not null)
 		{
-			__init.Property("OriginalStartTime");
+			initializer.Property("OriginalStartTime");
 			writer.WriteString(OriginalStartTime);
 		}
 
 		if (OriginalStartTimeInMillis is not null)
 		{
-			__init.Property("OriginalStartTimeInMillis");
+			initializer.Property("OriginalStartTimeInMillis");
 			writer.WriteValue(OriginalStartTimeInMillis.Value);
 		}
 
 		if (OriginalTaskId is not null)
 		{
-			__init.Property("OriginalTaskId");
+			initializer.Property("OriginalTaskId");
 			OriginalTaskId.FormatCode(writer);
 		}
 
 		if (ParentTaskId is not null)
 		{
-			__init.Property("ParentTaskId");
+			initializer.Property("ParentTaskId");
 			ParentTaskId.FormatCode(writer);
 		}
 
 		if (RunningTime is not null)
 		{
-			__init.Property("RunningTime");
+			initializer.Property("RunningTime");
 			RunningTime.FormatCode(writer);
 		}
 
 		{
-			__init.Property("RunningTimeInNanos");
+			initializer.Property("RunningTimeInNanos");
 			writer.WriteValue(RunningTimeInNanos);
 		}
 
 		{
-			__init.Property("StartTimeInMillis");
+			initializer.Property("StartTimeInMillis");
 			writer.WriteValue(StartTimeInMillis);
 		}
 
 		if (Status is not null)
 		{
-			__init.Property("Status");
+			initializer.Property("Status");
 			writer.WriteValue(Status);
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			writer.WriteString(Type);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,14 +27,14 @@ public partial class MachineLearning : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MachineLearning", false);
+		var initializer = writer.BeginObjectInitializer("MachineLearning", false);
 		{
-			__init.Property("Available");
+			initializer.Property("Available");
 			writer.WriteValue(Available);
 		}
 
 		{
-			__init.Property("Datafeeds");
+			initializer.Property("Datafeeds");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -44,22 +44,22 @@ public partial class MachineLearning : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("DataFrameAnalyticsJobs");
+			initializer.Property("DataFrameAnalyticsJobs");
 			DataFrameAnalyticsJobs.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);
 		}
 
 		{
-			__init.Property("Inference");
+			initializer.Property("Inference");
 			Inference.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Jobs");
+			initializer.Property("Jobs");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -69,10 +69,10 @@ public partial class MachineLearning : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("NodeCount");
+			initializer.Property("NodeCount");
 			writer.WriteValue(NodeCount);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

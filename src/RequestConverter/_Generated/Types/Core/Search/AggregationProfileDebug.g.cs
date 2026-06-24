@@ -27,199 +27,199 @@ public partial class AggregationProfileDebug : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AggregationProfileDebug", false);
+		var initializer = writer.BeginObjectInitializer("AggregationProfileDebug", false);
 		if (BruteForceUsed is not null)
 		{
-			__init.Property("BruteForceUsed");
+			initializer.Property("BruteForceUsed");
 			writer.WriteValue(BruteForceUsed.Value);
 		}
 
 		if (BuiltBuckets is not null)
 		{
-			__init.Property("BuiltBuckets");
+			initializer.Property("BuiltBuckets");
 			writer.WriteValue(BuiltBuckets.Value);
 		}
 
 		if (CharsFetched is not null)
 		{
-			__init.Property("CharsFetched");
+			initializer.Property("CharsFetched");
 			writer.WriteValue(CharsFetched.Value);
 		}
 
 		if (CollectAnalyzedCount is not null)
 		{
-			__init.Property("CollectAnalyzedCount");
+			initializer.Property("CollectAnalyzedCount");
 			writer.WriteValue(CollectAnalyzedCount.Value);
 		}
 
 		if (CollectAnalyzedNs is not null)
 		{
-			__init.Property("CollectAnalyzedNs");
+			initializer.Property("CollectAnalyzedNs");
 			writer.WriteValue(CollectAnalyzedNs.Value);
 		}
 
 		if (CollectionStrategy is not null)
 		{
-			__init.Property("CollectionStrategy");
+			initializer.Property("CollectionStrategy");
 			writer.WriteString(CollectionStrategy);
 		}
 
 		if (DeferredAggregators is not null)
 		{
-			__init.Property("DeferredAggregators");
+			initializer.Property("DeferredAggregators");
 			writer.WriteInlineList(DeferredAggregators, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Delegate is not null)
 		{
-			__init.Property("Delegate");
+			initializer.Property("Delegate");
 			writer.WriteString(Delegate);
 		}
 
 		if (DelegateDebug is not null)
 		{
-			__init.Property("DelegateDebug");
+			initializer.Property("DelegateDebug");
 			DelegateDebug.FormatCode(writer);
 		}
 
 		if (DynamicPruningAttempted is not null)
 		{
-			__init.Property("DynamicPruningAttempted");
+			initializer.Property("DynamicPruningAttempted");
 			writer.WriteValue(DynamicPruningAttempted.Value);
 		}
 
 		if (DynamicPruningUsed is not null)
 		{
-			__init.Property("DynamicPruningUsed");
+			initializer.Property("DynamicPruningUsed");
 			writer.WriteValue(DynamicPruningUsed.Value);
 		}
 
 		if (EmptyCollectorsUsed is not null)
 		{
-			__init.Property("EmptyCollectorsUsed");
+			initializer.Property("EmptyCollectorsUsed");
 			writer.WriteValue(EmptyCollectorsUsed.Value);
 		}
 
 		if (ExtractCount is not null)
 		{
-			__init.Property("ExtractCount");
+			initializer.Property("ExtractCount");
 			writer.WriteValue(ExtractCount.Value);
 		}
 
 		if (ExtractNs is not null)
 		{
-			__init.Property("ExtractNs");
+			initializer.Property("ExtractNs");
 			writer.WriteValue(ExtractNs.Value);
 		}
 
 		if (Filters is not null)
 		{
-			__init.Property("Filters");
+			initializer.Property("Filters");
 			writer.WriteInlineList(Filters, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (HasFilter is not null)
 		{
-			__init.Property("HasFilter");
+			initializer.Property("HasFilter");
 			writer.WriteValue(HasFilter.Value);
 		}
 
 		if (MapReducer is not null)
 		{
-			__init.Property("MapReducer");
+			initializer.Property("MapReducer");
 			writer.WriteString(MapReducer);
 		}
 
 		if (NumericCollectorsUsed is not null)
 		{
-			__init.Property("NumericCollectorsUsed");
+			initializer.Property("NumericCollectorsUsed");
 			writer.WriteValue(NumericCollectorsUsed.Value);
 		}
 
 		if (OrdinalsCollectorsOverheadTooHigh is not null)
 		{
-			__init.Property("OrdinalsCollectorsOverheadTooHigh");
+			initializer.Property("OrdinalsCollectorsOverheadTooHigh");
 			writer.WriteValue(OrdinalsCollectorsOverheadTooHigh.Value);
 		}
 
 		if (OrdinalsCollectorsUsed is not null)
 		{
-			__init.Property("OrdinalsCollectorsUsed");
+			initializer.Property("OrdinalsCollectorsUsed");
 			writer.WriteValue(OrdinalsCollectorsUsed.Value);
 		}
 
 		if (ResultStrategy is not null)
 		{
-			__init.Property("ResultStrategy");
+			initializer.Property("ResultStrategy");
 			writer.WriteString(ResultStrategy);
 		}
 
 		if (SegmentsCollected is not null)
 		{
-			__init.Property("SegmentsCollected");
+			initializer.Property("SegmentsCollected");
 			writer.WriteValue(SegmentsCollected.Value);
 		}
 
 		if (SegmentsCounted is not null)
 		{
-			__init.Property("SegmentsCounted");
+			initializer.Property("SegmentsCounted");
 			writer.WriteValue(SegmentsCounted.Value);
 		}
 
 		if (SegmentsWithDeletedDocs is not null)
 		{
-			__init.Property("SegmentsWithDeletedDocs");
+			initializer.Property("SegmentsWithDeletedDocs");
 			writer.WriteValue(SegmentsWithDeletedDocs.Value);
 		}
 
 		if (SegmentsWithDocCountField is not null)
 		{
-			__init.Property("SegmentsWithDocCountField");
+			initializer.Property("SegmentsWithDocCountField");
 			writer.WriteValue(SegmentsWithDocCountField.Value);
 		}
 
 		if (SegmentsWithMultiValuedOrds is not null)
 		{
-			__init.Property("SegmentsWithMultiValuedOrds");
+			initializer.Property("SegmentsWithMultiValuedOrds");
 			writer.WriteValue(SegmentsWithMultiValuedOrds.Value);
 		}
 
 		if (SegmentsWithSingleValuedOrds is not null)
 		{
-			__init.Property("SegmentsWithSingleValuedOrds");
+			initializer.Property("SegmentsWithSingleValuedOrds");
 			writer.WriteValue(SegmentsWithSingleValuedOrds.Value);
 		}
 
 		if (SkippedDueToNoData is not null)
 		{
-			__init.Property("SkippedDueToNoData");
+			initializer.Property("SkippedDueToNoData");
 			writer.WriteValue(SkippedDueToNoData.Value);
 		}
 
 		if (StringHashingCollectorsUsed is not null)
 		{
-			__init.Property("StringHashingCollectorsUsed");
+			initializer.Property("StringHashingCollectorsUsed");
 			writer.WriteValue(StringHashingCollectorsUsed.Value);
 		}
 
 		if (SurvivingBuckets is not null)
 		{
-			__init.Property("SurvivingBuckets");
+			initializer.Property("SurvivingBuckets");
 			writer.WriteValue(SurvivingBuckets.Value);
 		}
 
 		if (TotalBuckets is not null)
 		{
-			__init.Property("TotalBuckets");
+			initializer.Property("TotalBuckets");
 			writer.WriteValue(TotalBuckets.Value);
 		}
 
 		if (ValuesFetched is not null)
 		{
-			__init.Property("ValuesFetched");
+			initializer.Property("ValuesFetched");
 			writer.WriteValue(ValuesFetched.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

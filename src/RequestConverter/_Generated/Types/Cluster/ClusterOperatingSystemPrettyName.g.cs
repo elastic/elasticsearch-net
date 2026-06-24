@@ -27,17 +27,17 @@ public partial class ClusterOperatingSystemPrettyName : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterOperatingSystemPrettyName", false);
+		var initializer = writer.BeginObjectInitializer("ClusterOperatingSystemPrettyName", false);
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 		}
 
 		{
-			__init.Property("PrettyName");
+			initializer.Property("PrettyName");
 			writer.WriteString(PrettyName);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,38 +27,38 @@ public partial class AutoFollowPatternSummary : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AutoFollowPatternSummary", false);
+		var initializer = writer.BeginObjectInitializer("AutoFollowPatternSummary", false);
 		{
-			__init.Property("Active");
+			initializer.Property("Active");
 			writer.WriteValue(Active);
 		}
 
 		if (FollowIndexPattern is not null)
 		{
-			__init.Property("FollowIndexPattern");
+			initializer.Property("FollowIndexPattern");
 			writer.WriteString(FollowIndexPattern);
 		}
 
 		{
-			__init.Property("LeaderIndexExclusionPatterns");
+			initializer.Property("LeaderIndexExclusionPatterns");
 			writer.WriteInlineList(LeaderIndexExclusionPatterns, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("LeaderIndexPatterns");
+			initializer.Property("LeaderIndexPatterns");
 			writer.WriteInlineList(LeaderIndexPatterns, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("MaxOutstandingReadRequests");
+			initializer.Property("MaxOutstandingReadRequests");
 			writer.WriteValue(MaxOutstandingReadRequests);
 		}
 
 		{
-			__init.Property("RemoteCluster");
+			initializer.Property("RemoteCluster");
 			writer.WriteString(RemoteCluster);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

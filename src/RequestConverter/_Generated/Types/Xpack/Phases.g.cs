@@ -27,37 +27,37 @@ public partial class Phases : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Phases", false);
+		var initializer = writer.BeginObjectInitializer("Phases", false);
 		if (Cold is not null)
 		{
-			__init.Property("Cold");
+			initializer.Property("Cold");
 			Cold.FormatCode(writer);
 		}
 
 		if (Delete is not null)
 		{
-			__init.Property("Delete");
+			initializer.Property("Delete");
 			Delete.FormatCode(writer);
 		}
 
 		if (Frozen is not null)
 		{
-			__init.Property("Frozen");
+			initializer.Property("Frozen");
 			Frozen.FormatCode(writer);
 		}
 
 		if (Hot is not null)
 		{
-			__init.Property("Hot");
+			initializer.Property("Hot");
 			Hot.FormatCode(writer);
 		}
 
 		if (Warm is not null)
 		{
-			__init.Property("Warm");
+			initializer.Property("Warm");
 			Warm.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

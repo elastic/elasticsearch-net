@@ -27,18 +27,18 @@ public partial class TotalUserProfiles : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TotalUserProfiles", false);
+		var initializer = writer.BeginObjectInitializer("TotalUserProfiles", false);
 		{
-			__init.Property("Relation");
+			initializer.Property("Relation");
 			writer.WriteString(Relation);
 		}
 
 		{
-			__init.Property("Value");
+			initializer.Property("Value");
 			writer.WriteValue(Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

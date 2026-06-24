@@ -27,25 +27,25 @@ public partial class DelimitedPayloadTokenFilter : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DelimitedPayloadTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("DelimitedPayloadTokenFilter", true);
 		if (Delimiter is not null)
 		{
-			__init.Property("Delimiter");
+			initializer.Property("Delimiter");
 			writer.WriteString(Delimiter);
 		}
 
 		if (Encoding is not null)
 		{
-			__init.Property("Encoding");
+			initializer.Property("Encoding");
 			Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncodingCodeFormatter.FormatCode(Encoding.Value, writer);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

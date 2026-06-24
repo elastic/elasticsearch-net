@@ -27,46 +27,46 @@ public partial class AutoDateHistogramAggregation : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AutoDateHistogramAggregation", false);
+		var initializer = writer.BeginObjectInitializer("AutoDateHistogramAggregation", false);
 		if (Buckets is not null)
 		{
-			__init.Property("Buckets");
+			initializer.Property("Buckets");
 			writer.WriteValue(Buckets.Value);
 		}
 
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			writer.WriteString(Format);
 		}
 
 		if (MinimumInterval is not null)
 		{
-			__init.Property("MinimumInterval");
+			initializer.Property("MinimumInterval");
 			Elastic.Clients.Elasticsearch.Aggregations.MinimumIntervalCodeFormatter.FormatCode(MinimumInterval.Value, writer);
 		}
 
 		if (Missing is not null)
 		{
-			__init.Property("Missing");
+			initializer.Property("Missing");
 			writer.WriteValue(Missing.Value);
 		}
 
 		if (Offset is not null)
 		{
-			__init.Property("Offset");
+			initializer.Property("Offset");
 			writer.WriteString(Offset);
 		}
 
 		if (Params is not null)
 		{
-			__init.Property("Params");
+			initializer.Property("Params");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -77,16 +77,16 @@ public partial class AutoDateHistogramAggregation : RequestConverter.ICodeFormat
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
 		if (TimeZone is not null)
 		{
-			__init.Property("TimeZone");
+			initializer.Property("TimeZone");
 			writer.WriteString(TimeZone);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

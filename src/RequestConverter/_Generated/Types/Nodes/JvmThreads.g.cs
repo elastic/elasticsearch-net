@@ -27,21 +27,21 @@ public partial class JvmThreads : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("JvmThreads", false);
+		var initializer = writer.BeginObjectInitializer("JvmThreads", false);
 		if (Count is not null)
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count.Value);
 			writer.Write("L");
 		}
 
 		if (PeakCount is not null)
 		{
-			__init.Property("PeakCount");
+			initializer.Property("PeakCount");
 			writer.WriteValue(PeakCount.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

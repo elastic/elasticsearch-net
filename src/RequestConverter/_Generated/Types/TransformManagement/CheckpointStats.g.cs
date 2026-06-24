@@ -27,43 +27,43 @@ public partial class CheckpointStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CheckpointStats", false);
+		var initializer = writer.BeginObjectInitializer("CheckpointStats", false);
 		{
-			__init.Property("Checkpoint");
+			initializer.Property("Checkpoint");
 			writer.WriteValue(Checkpoint);
 			writer.Write("L");
 		}
 
 		if (CheckpointProgress is not null)
 		{
-			__init.Property("CheckpointProgress");
+			initializer.Property("CheckpointProgress");
 			CheckpointProgress.FormatCode(writer);
 		}
 
 		if (Timestamp is not null)
 		{
-			__init.Property("Timestamp");
+			initializer.Property("Timestamp");
 			writer.WriteValue(Timestamp.Value);
 		}
 
 		if (TimestampMillis is not null)
 		{
-			__init.Property("TimestampMillis");
+			initializer.Property("TimestampMillis");
 			writer.WriteValue(TimestampMillis.Value);
 		}
 
 		if (TimeUpperBound is not null)
 		{
-			__init.Property("TimeUpperBound");
+			initializer.Property("TimeUpperBound");
 			writer.WriteValue(TimeUpperBound.Value);
 		}
 
 		if (TimeUpperBoundMillis is not null)
 		{
-			__init.Property("TimeUpperBoundMillis");
+			initializer.Property("TimeUpperBoundMillis");
 			writer.WriteValue(TimeUpperBoundMillis.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

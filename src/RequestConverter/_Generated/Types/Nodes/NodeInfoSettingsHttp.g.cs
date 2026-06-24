@@ -27,10 +27,10 @@ public partial class NodeInfoSettingsHttp : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeInfoSettingsHttp", false);
+		var initializer = writer.BeginObjectInitializer("NodeInfoSettingsHttp", false);
 		if (Compression is not null)
 		{
-			__init.Property("Compression");
+			initializer.Property("Compression");
 			if (Compression.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				writer.WriteValue(Compression.Value1);
@@ -43,7 +43,7 @@ public partial class NodeInfoSettingsHttp : RequestConverter.ICodeFormattable
 
 		if (Port is not null)
 		{
-			__init.Property("Port");
+			initializer.Property("Port");
 			if (Port.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				writer.WriteValue(Port.Value1);
@@ -55,16 +55,16 @@ public partial class NodeInfoSettingsHttp : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Type");
+			initializer.Property("Type");
 			Type.FormatCode(writer);
 		}
 
 		if (TypeDefault is not null)
 		{
-			__init.Property("TypeDefault");
+			initializer.Property("TypeDefault");
 			writer.WriteString(TypeDefault);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

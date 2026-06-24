@@ -27,31 +27,31 @@ public partial class SerialDifferencingAggregation : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SerialDifferencingAggregation", false);
+		var initializer = writer.BeginObjectInitializer("SerialDifferencingAggregation", false);
 		if (BucketsPath is not null)
 		{
-			__init.Property("BucketsPath");
+			initializer.Property("BucketsPath");
 			BucketsPath.FormatCode(writer);
 		}
 
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			writer.WriteString(Format);
 		}
 
 		if (GapPolicy is not null)
 		{
-			__init.Property("GapPolicy");
+			initializer.Property("GapPolicy");
 			Elastic.Clients.Elasticsearch.Aggregations.GapPolicyCodeFormatter.FormatCode(GapPolicy.Value, writer);
 		}
 
 		if (Lag is not null)
 		{
-			__init.Property("Lag");
+			initializer.Property("Lag");
 			writer.WriteValue(Lag.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

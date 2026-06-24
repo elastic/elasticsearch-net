@@ -27,13 +27,13 @@ public partial class IndexingPressureMemory : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexingPressureMemory", false);
+		var initializer = writer.BeginObjectInitializer("IndexingPressureMemory", false);
 		if (Limit is not null)
 		{
-			__init.Property("Limit");
+			initializer.Property("Limit");
 			writer.WriteValue(Limit.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,18 +27,18 @@ public partial class IntervalsAnyOf : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IntervalsAnyOf", false);
+		var initializer = writer.BeginObjectInitializer("IntervalsAnyOf", false);
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			Filter.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Intervals");
+			initializer.Property("Intervals");
 			writer.WriteInlineList(Intervals, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,43 +27,43 @@ public partial class GetCategoriesRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetCategoriesRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetCategoriesRequest", false);
 		if (CategoryId is not null)
 		{
-			__init.Property("CategoryId");
+			initializer.Property("CategoryId");
 			writer.WriteValue(CategoryId.Value);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			JobId.FormatCode(writer);
 		}
 
 		if (From is not null)
 		{
-			__init.Property("From");
+			initializer.Property("From");
 			writer.WriteValue(From.Value);
 		}
 
 		if (PartitionFieldValue is not null)
 		{
-			__init.Property("PartitionFieldValue");
+			initializer.Property("PartitionFieldValue");
 			writer.WriteString(PartitionFieldValue);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
 		if (Page is not null)
 		{
-			__init.Property("Page");
+			initializer.Property("Page");
 			Page.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

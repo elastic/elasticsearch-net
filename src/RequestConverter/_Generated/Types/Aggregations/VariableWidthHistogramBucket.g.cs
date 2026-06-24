@@ -27,55 +27,55 @@ public partial class VariableWidthHistogramBucket : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("VariableWidthHistogramBucket", false);
+		var initializer = writer.BeginObjectInitializer("VariableWidthHistogramBucket", false);
 		if (Aggregations is not null)
 		{
-			__init.Property("Aggregations");
+			initializer.Property("Aggregations");
 			Aggregations.FormatCode(writer);
 		}
 
 		{
-			__init.Property("DocCount");
+			initializer.Property("DocCount");
 			writer.WriteValue(DocCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Key");
+			initializer.Property("Key");
 			writer.WriteValue(Key);
 			writer.Write("d");
 		}
 
 		if (KeyAsString is not null)
 		{
-			__init.Property("KeyAsString");
+			initializer.Property("KeyAsString");
 			writer.WriteString(KeyAsString);
 		}
 
 		{
-			__init.Property("Max");
+			initializer.Property("Max");
 			writer.WriteValue(Max);
 			writer.Write("d");
 		}
 
 		if (MaxAsString is not null)
 		{
-			__init.Property("MaxAsString");
+			initializer.Property("MaxAsString");
 			writer.WriteString(MaxAsString);
 		}
 
 		{
-			__init.Property("Min");
+			initializer.Property("Min");
 			writer.WriteValue(Min);
 			writer.Write("d");
 		}
 
 		if (MinAsString is not null)
 		{
-			__init.Property("MinAsString");
+			initializer.Property("MinAsString");
 			writer.WriteString(MinAsString);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

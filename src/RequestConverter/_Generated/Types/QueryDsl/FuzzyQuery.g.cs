@@ -27,60 +27,60 @@ public partial class FuzzyQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FuzzyQuery", false);
+		var initializer = writer.BeginObjectInitializer("FuzzyQuery", false);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (Fuzziness is not null)
 		{
-			__init.Property("Fuzziness");
+			initializer.Property("Fuzziness");
 			Fuzziness.FormatCode(writer);
 		}
 
 		if (MaxExpansions is not null)
 		{
-			__init.Property("MaxExpansions");
+			initializer.Property("MaxExpansions");
 			writer.WriteValue(MaxExpansions.Value);
 		}
 
 		if (PrefixLength is not null)
 		{
-			__init.Property("PrefixLength");
+			initializer.Property("PrefixLength");
 			writer.WriteValue(PrefixLength.Value);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
 		if (Rewrite is not null)
 		{
-			__init.Property("Rewrite");
+			initializer.Property("Rewrite");
 			writer.WriteString(Rewrite);
 		}
 
 		if (Transpositions is not null)
 		{
-			__init.Property("Transpositions");
+			initializer.Property("Transpositions");
 			writer.WriteValue(Transpositions.Value);
 		}
 
 		{
-			__init.Property("Value");
+			initializer.Property("Value");
 			writer.WriteValue(Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

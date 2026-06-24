@@ -27,45 +27,45 @@ public partial class RedactProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RedactProcessor", false);
+		var initializer = writer.BeginObjectInitializer("RedactProcessor", false);
 		if (Description is not null)
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (If is not null)
 		{
-			__init.Property("If");
+			initializer.Property("If");
 			If.FormatCode(writer);
 		}
 
 		if (IgnoreFailure is not null)
 		{
-			__init.Property("IgnoreFailure");
+			initializer.Property("IgnoreFailure");
 			writer.WriteValue(IgnoreFailure.Value);
 		}
 
 		if (IgnoreMissing is not null)
 		{
-			__init.Property("IgnoreMissing");
+			initializer.Property("IgnoreMissing");
 			writer.WriteValue(IgnoreMissing.Value);
 		}
 
 		if (OnFailure is not null)
 		{
-			__init.Property("OnFailure");
+			initializer.Property("OnFailure");
 			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (PatternDefinitions is not null)
 		{
-			__init.Property("PatternDefinitions");
+			initializer.Property("PatternDefinitions");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -75,40 +75,40 @@ public partial class RedactProcessor : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Patterns");
+			initializer.Property("Patterns");
 			writer.WriteInlineList(Patterns, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Prefix is not null)
 		{
-			__init.Property("Prefix");
+			initializer.Property("Prefix");
 			writer.WriteString(Prefix);
 		}
 
 		if (SkipIfUnlicensed is not null)
 		{
-			__init.Property("SkipIfUnlicensed");
+			initializer.Property("SkipIfUnlicensed");
 			writer.WriteValue(SkipIfUnlicensed.Value);
 		}
 
 		if (Suffix is not null)
 		{
-			__init.Property("Suffix");
+			initializer.Property("Suffix");
 			writer.WriteString(Suffix);
 		}
 
 		if (Tag is not null)
 		{
-			__init.Property("Tag");
+			initializer.Property("Tag");
 			writer.WriteString(Tag);
 		}
 
 		if (TraceRedact is not null)
 		{
-			__init.Property("TraceRedact");
+			initializer.Property("TraceRedact");
 			writer.WriteValue(TraceRedact.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

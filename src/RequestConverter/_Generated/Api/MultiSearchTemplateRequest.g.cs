@@ -27,55 +27,55 @@ public partial class MultiSearchTemplateRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MultiSearchTemplateRequest", false);
+		var initializer = writer.BeginObjectInitializer("MultiSearchTemplateRequest", false);
 		if (Indices is not null)
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			Indices.FormatCode(writer);
 		}
 
 		if (CcsMinimizeRoundtrips is not null)
 		{
-			__init.Property("CcsMinimizeRoundtrips");
+			initializer.Property("CcsMinimizeRoundtrips");
 			writer.WriteValue(CcsMinimizeRoundtrips.Value);
 		}
 
 		if (MaxConcurrentSearches is not null)
 		{
-			__init.Property("MaxConcurrentSearches");
+			initializer.Property("MaxConcurrentSearches");
 			writer.WriteValue(MaxConcurrentSearches.Value);
 			writer.Write("L");
 		}
 
 		if (ProjectRouting is not null)
 		{
-			__init.Property("ProjectRouting");
+			initializer.Property("ProjectRouting");
 			writer.WriteString(ProjectRouting);
 		}
 
 		if (RestTotalHitsAsInt is not null)
 		{
-			__init.Property("RestTotalHitsAsInt");
+			initializer.Property("RestTotalHitsAsInt");
 			writer.WriteValue(RestTotalHitsAsInt.Value);
 		}
 
 		if (SearchType is not null)
 		{
-			__init.Property("SearchType");
+			initializer.Property("SearchType");
 			Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(SearchType.Value, writer);
 		}
 
 		if (TypedKeys is not null)
 		{
-			__init.Property("TypedKeys");
+			initializer.Property("TypedKeys");
 			writer.WriteValue(TypedKeys.Value);
 		}
 
 		{
-			__init.Property("SearchTemplates");
+			initializer.Property("SearchTemplates");
 			writer.WriteInlineList(SearchTemplates, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

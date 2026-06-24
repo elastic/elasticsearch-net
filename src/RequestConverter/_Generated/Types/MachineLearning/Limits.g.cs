@@ -27,36 +27,36 @@ public partial class Limits : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Limits", false);
+		var initializer = writer.BeginObjectInitializer("Limits", false);
 		if (EffectiveMaxModelMemoryLimit is not null)
 		{
-			__init.Property("EffectiveMaxModelMemoryLimit");
+			initializer.Property("EffectiveMaxModelMemoryLimit");
 			EffectiveMaxModelMemoryLimit.FormatCode(writer);
 		}
 
 		if (MaxModelMemoryLimit is not null)
 		{
-			__init.Property("MaxModelMemoryLimit");
+			initializer.Property("MaxModelMemoryLimit");
 			MaxModelMemoryLimit.FormatCode(writer);
 		}
 
 		if (MaxSingleMlNodeProcessors is not null)
 		{
-			__init.Property("MaxSingleMlNodeProcessors");
+			initializer.Property("MaxSingleMlNodeProcessors");
 			writer.WriteValue(MaxSingleMlNodeProcessors.Value);
 		}
 
 		{
-			__init.Property("TotalMlMemory");
+			initializer.Property("TotalMlMemory");
 			TotalMlMemory.FormatCode(writer);
 		}
 
 		if (TotalMlProcessors is not null)
 		{
-			__init.Property("TotalMlProcessors");
+			initializer.Property("TotalMlProcessors");
 			writer.WriteValue(TotalMlProcessors.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

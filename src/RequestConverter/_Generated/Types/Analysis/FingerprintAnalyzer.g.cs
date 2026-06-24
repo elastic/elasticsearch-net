@@ -27,22 +27,22 @@ public partial class FingerprintAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FingerprintAnalyzer", true);
+		var initializer = writer.BeginObjectInitializer("FingerprintAnalyzer", true);
 		if (MaxOutputSize is not null)
 		{
-			__init.Property("MaxOutputSize");
+			initializer.Property("MaxOutputSize");
 			writer.WriteValue(MaxOutputSize.Value);
 		}
 
 		if (Separator is not null)
 		{
-			__init.Property("Separator");
+			initializer.Property("Separator");
 			writer.WriteString(Separator);
 		}
 
 		if (Stopwords is not null)
 		{
-			__init.Property("Stopwords");
+			initializer.Property("Stopwords");
 			if (Stopwords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(Stopwords.Value1, writer);
@@ -56,16 +56,16 @@ public partial class FingerprintAnalyzer : RequestConverter.ICodeFormattable
 
 		if (StopwordsPath is not null)
 		{
-			__init.Property("StopwordsPath");
+			initializer.Property("StopwordsPath");
 			writer.WriteString(StopwordsPath);
 		}
 #pragma warning disable CS0618
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 #pragma warning restore CS0618
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

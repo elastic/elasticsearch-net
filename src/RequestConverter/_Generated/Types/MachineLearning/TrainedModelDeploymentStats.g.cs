@@ -27,110 +27,110 @@ public partial class TrainedModelDeploymentStats : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TrainedModelDeploymentStats", false);
+		var initializer = writer.BeginObjectInitializer("TrainedModelDeploymentStats", false);
 		if (AdaptiveAllocations is not null)
 		{
-			__init.Property("AdaptiveAllocations");
+			initializer.Property("AdaptiveAllocations");
 			AdaptiveAllocations.FormatCode(writer);
 		}
 
 		if (AllocationStatus is not null)
 		{
-			__init.Property("AllocationStatus");
+			initializer.Property("AllocationStatus");
 			AllocationStatus.FormatCode(writer);
 		}
 
 		if (CacheSize is not null)
 		{
-			__init.Property("CacheSize");
+			initializer.Property("CacheSize");
 			CacheSize.FormatCode(writer);
 		}
 
 		{
-			__init.Property("DeploymentId");
+			initializer.Property("DeploymentId");
 			writer.WriteString(DeploymentId);
 		}
 
 		if (ErrorCount is not null)
 		{
-			__init.Property("ErrorCount");
+			initializer.Property("ErrorCount");
 			writer.WriteValue(ErrorCount.Value);
 		}
 
 		if (InferenceCount is not null)
 		{
-			__init.Property("InferenceCount");
+			initializer.Property("InferenceCount");
 			writer.WriteValue(InferenceCount.Value);
 		}
 
 		{
-			__init.Property("ModelId");
+			initializer.Property("ModelId");
 			writer.WriteString(ModelId);
 		}
 
 		{
-			__init.Property("Nodes");
+			initializer.Property("Nodes");
 			writer.WriteInlineList(Nodes, (w, item) => { item.FormatCode(w); });
 		}
 
 		if (NumberOfAllocations is not null)
 		{
-			__init.Property("NumberOfAllocations");
+			initializer.Property("NumberOfAllocations");
 			writer.WriteValue(NumberOfAllocations.Value);
 		}
 
 		{
-			__init.Property("PeakThroughputPerMinute");
+			initializer.Property("PeakThroughputPerMinute");
 			writer.WriteValue(PeakThroughputPerMinute);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Priority");
+			initializer.Property("Priority");
 			Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriorityCodeFormatter.FormatCode(Priority, writer);
 		}
 
 		if (QueueCapacity is not null)
 		{
-			__init.Property("QueueCapacity");
+			initializer.Property("QueueCapacity");
 			writer.WriteValue(QueueCapacity.Value);
 		}
 
 		if (Reason is not null)
 		{
-			__init.Property("Reason");
+			initializer.Property("Reason");
 			writer.WriteString(Reason);
 		}
 
 		if (RejectedExecutionCount is not null)
 		{
-			__init.Property("RejectedExecutionCount");
+			initializer.Property("RejectedExecutionCount");
 			writer.WriteValue(RejectedExecutionCount.Value);
 		}
 
 		{
-			__init.Property("StartTime");
+			initializer.Property("StartTime");
 			writer.WriteValue(StartTime);
 		}
 
 		if (State is not null)
 		{
-			__init.Property("State");
+			initializer.Property("State");
 			Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentStateCodeFormatter.FormatCode(State.Value, writer);
 		}
 
 		if (ThreadsPerAllocation is not null)
 		{
-			__init.Property("ThreadsPerAllocation");
+			initializer.Property("ThreadsPerAllocation");
 			writer.WriteValue(ThreadsPerAllocation.Value);
 		}
 
 		if (TimeoutCount is not null)
 		{
-			__init.Property("TimeoutCount");
+			initializer.Property("TimeoutCount");
 			writer.WriteValue(TimeoutCount.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,23 +27,23 @@ public partial class TotalFeatureImportanceStatistics : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TotalFeatureImportanceStatistics", false);
+		var initializer = writer.BeginObjectInitializer("TotalFeatureImportanceStatistics", false);
 		{
-			__init.Property("Max");
+			initializer.Property("Max");
 			writer.WriteValue(Max);
 		}
 
 		{
-			__init.Property("MeanMagnitude");
+			initializer.Property("MeanMagnitude");
 			writer.WriteValue(MeanMagnitude);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Min");
+			initializer.Property("Min");
 			writer.WriteValue(Min);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

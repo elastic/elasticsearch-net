@@ -27,24 +27,24 @@ public partial class Ingest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Ingest", false);
+		var initializer = writer.BeginObjectInitializer("Ingest", false);
 		if (Pipeline is not null)
 		{
-			__init.Property("Pipeline");
+			initializer.Property("Pipeline");
 			writer.WriteString(Pipeline);
 		}
 
 		if (Redact is not null)
 		{
-			__init.Property("Redact");
+			initializer.Property("Redact");
 			Redact.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Timestamp");
+			initializer.Property("Timestamp");
 			writer.WriteValue(Timestamp);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,18 +27,18 @@ public partial class FileSettingsIndicatorDetails : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("FileSettingsIndicatorDetails", false);
+		var initializer = writer.BeginObjectInitializer("FileSettingsIndicatorDetails", false);
 		{
-			__init.Property("FailureStreak");
+			initializer.Property("FailureStreak");
 			writer.WriteValue(FailureStreak);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("MostRecentFailure");
+			initializer.Property("MostRecentFailure");
 			writer.WriteString(MostRecentFailure);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

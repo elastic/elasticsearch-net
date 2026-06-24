@@ -27,13 +27,13 @@ public partial class RateLimitSetting : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RateLimitSetting", false);
+		var initializer = writer.BeginObjectInitializer("RateLimitSetting", false);
 		if (RequestsPerMinute is not null)
 		{
-			__init.Property("RequestsPerMinute");
+			initializer.Property("RequestsPerMinute");
 			writer.WriteValue(RequestsPerMinute.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

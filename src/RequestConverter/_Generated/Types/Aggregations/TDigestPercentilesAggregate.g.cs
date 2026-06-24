@@ -27,10 +27,10 @@ public partial class TDigestPercentilesAggregate : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TDigestPercentilesAggregate", true);
+		var initializer = writer.BeginObjectInitializer("TDigestPercentilesAggregate", true);
 		if (Meta is not null)
 		{
-			__init.Property("Meta");
+			initializer.Property("Meta");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -40,10 +40,10 @@ public partial class TDigestPercentilesAggregate : RequestConverter.ICodeFormatt
 		}
 
 		{
-			__init.Property("Values");
+			initializer.Property("Values");
 			writer.WriteInlineList(Values, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

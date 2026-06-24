@@ -27,18 +27,18 @@ public partial class DataframeClassificationSummaryAccuracy : RequestConverter.I
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeClassificationSummaryAccuracy", false);
+		var initializer = writer.BeginObjectInitializer("DataframeClassificationSummaryAccuracy", false);
 		{
-			__init.Property("Classes");
+			initializer.Property("Classes");
 			writer.WriteInlineList(Classes, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("OverallAccuracy");
+			initializer.Property("OverallAccuracy");
 			writer.WriteValue(OverallAccuracy);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

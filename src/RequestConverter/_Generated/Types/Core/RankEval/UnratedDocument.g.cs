@@ -27,17 +27,17 @@ public partial class UnratedDocument : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UnratedDocument", false);
+		var initializer = writer.BeginObjectInitializer("UnratedDocument", false);
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			writer.WriteString(Id);
 		}
 
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			writer.WriteString(Index);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

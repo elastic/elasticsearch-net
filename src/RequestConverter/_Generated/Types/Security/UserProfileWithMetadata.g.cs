@@ -27,9 +27,9 @@ public partial class UserProfileWithMetadata : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UserProfileWithMetadata", false);
+		var initializer = writer.BeginObjectInitializer("UserProfileWithMetadata", false);
 		{
-			__init.Property("Data");
+			initializer.Property("Data");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -39,18 +39,18 @@ public partial class UserProfileWithMetadata : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("Doc");
+			initializer.Property("Doc");
 			Doc.FormatCode(writer);
 		}
 
 		if (Enabled is not null)
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled.Value);
 		}
 
 		{
-			__init.Property("Labels");
+			initializer.Property("Labels");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -60,21 +60,21 @@ public partial class UserProfileWithMetadata : RequestConverter.ICodeFormattable
 		}
 
 		{
-			__init.Property("LastSynchronized");
+			initializer.Property("LastSynchronized");
 			writer.WriteValue(LastSynchronized);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Uid");
+			initializer.Property("Uid");
 			writer.WriteString(Uid);
 		}
 
 		{
-			__init.Property("User");
+			initializer.Property("User");
 			User.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

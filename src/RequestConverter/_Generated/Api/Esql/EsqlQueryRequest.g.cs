@@ -27,64 +27,64 @@ public partial class EsqlQueryRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("EsqlQueryRequest", false);
+		var initializer = writer.BeginObjectInitializer("EsqlQueryRequest", false);
 		if (AllowPartialResults is not null)
 		{
-			__init.Property("AllowPartialResults");
+			initializer.Property("AllowPartialResults");
 			writer.WriteValue(AllowPartialResults.Value);
 		}
 
 		if (Delimiter is not null)
 		{
-			__init.Property("Delimiter");
+			initializer.Property("Delimiter");
 			writer.WriteString(Delimiter);
 		}
 
 		if (DropNullColumns is not null)
 		{
-			__init.Property("DropNullColumns");
+			initializer.Property("DropNullColumns");
 			writer.WriteValue(DropNullColumns.Value);
 		}
 
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			Elastic.Clients.Elasticsearch.Esql.EsqlFormatCodeFormatter.FormatCode(Format.Value, writer);
 		}
 
 		if (Columnar is not null)
 		{
-			__init.Property("Columnar");
+			initializer.Property("Columnar");
 			writer.WriteValue(Columnar.Value);
 		}
 
 		if (Filter is not null)
 		{
-			__init.Property("Filter");
+			initializer.Property("Filter");
 			Filter.FormatCode(writer);
 		}
 
 		if (IncludeCcsMetadata is not null)
 		{
-			__init.Property("IncludeCcsMetadata");
+			initializer.Property("IncludeCcsMetadata");
 			writer.WriteValue(IncludeCcsMetadata.Value);
 		}
 
 		if (IncludeExecutionMetadata is not null)
 		{
-			__init.Property("IncludeExecutionMetadata");
+			initializer.Property("IncludeExecutionMetadata");
 			writer.WriteValue(IncludeExecutionMetadata.Value);
 		}
 
 		if (Locale is not null)
 		{
-			__init.Property("Locale");
+			initializer.Property("Locale");
 			writer.WriteString(Locale);
 		}
 
 		if (Params is not null)
 		{
-			__init.Property("Params");
+			initializer.Property("Params");
 			if (Params.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
 				writer.Write("new System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>[] ");
@@ -99,27 +99,27 @@ public partial class EsqlQueryRequest : RequestConverter.ICodeFormattable
 
 		if (Profile is not null)
 		{
-			__init.Property("Profile");
+			initializer.Property("Profile");
 			writer.WriteValue(Profile.Value);
 		}
 
 		if (ProjectRouting is not null)
 		{
-			__init.Property("ProjectRouting");
+			initializer.Property("ProjectRouting");
 			writer.WriteString(ProjectRouting);
 		}
 
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			writer.WriteString(Query);
 		}
 
 		if (TimeZone is not null)
 		{
-			__init.Property("TimeZone");
+			initializer.Property("TimeZone");
 			writer.WriteString(TimeZone);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

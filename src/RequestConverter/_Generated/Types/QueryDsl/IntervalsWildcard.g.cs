@@ -27,24 +27,24 @@ public partial class IntervalsWildcard : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IntervalsWildcard", false);
+		var initializer = writer.BeginObjectInitializer("IntervalsWildcard", false);
 		if (Analyzer is not null)
 		{
-			__init.Property("Analyzer");
+			initializer.Property("Analyzer");
 			writer.WriteString(Analyzer);
 		}
 
 		{
-			__init.Property("Pattern");
+			initializer.Property("Pattern");
 			writer.WriteString(Pattern);
 		}
 
 		if (UseField is not null)
 		{
-			__init.Property("UseField");
+			initializer.Property("UseField");
 			UseField.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

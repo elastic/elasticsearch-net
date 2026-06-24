@@ -27,18 +27,18 @@ public partial class TextEmbedding : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("TextEmbedding", false);
+		var initializer = writer.BeginObjectInitializer("TextEmbedding", false);
 		if (ModelId is not null)
 		{
-			__init.Property("ModelId");
+			initializer.Property("ModelId");
 			writer.WriteString(ModelId);
 		}
 
 		{
-			__init.Property("ModelText");
+			initializer.Property("ModelText");
 			writer.WriteString(ModelText);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

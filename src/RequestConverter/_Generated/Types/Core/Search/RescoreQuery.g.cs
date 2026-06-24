@@ -27,32 +27,32 @@ public partial class RescoreQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RescoreQuery", false);
+		var initializer = writer.BeginObjectInitializer("RescoreQuery", false);
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			Query.FormatCode(writer);
 		}
 
 		if (QueryWeight is not null)
 		{
-			__init.Property("QueryWeight");
+			initializer.Property("QueryWeight");
 			writer.WriteValue(QueryWeight.Value);
 			writer.Write("d");
 		}
 
 		if (RescoreQueryWeight is not null)
 		{
-			__init.Property("RescoreQueryWeight");
+			initializer.Property("RescoreQueryWeight");
 			writer.WriteValue(RescoreQueryWeight.Value);
 			writer.Write("d");
 		}
 
 		if (ScoreMode is not null)
 		{
-			__init.Property("ScoreMode");
+			initializer.Property("ScoreMode");
 			Elastic.Clients.Elasticsearch.Core.Search.ScoreModeCodeFormatter.FormatCode(ScoreMode.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

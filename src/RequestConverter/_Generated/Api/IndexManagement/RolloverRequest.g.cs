@@ -27,51 +27,51 @@ public partial class RolloverRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RolloverRequest", false);
+		var initializer = writer.BeginObjectInitializer("RolloverRequest", false);
 		{
-			__init.Property("Alias");
+			initializer.Property("Alias");
 			Alias.FormatCode(writer);
 		}
 
 		if (NewIndex is not null)
 		{
-			__init.Property("NewIndex");
+			initializer.Property("NewIndex");
 			NewIndex.FormatCode(writer);
 		}
 
 		if (DryRun is not null)
 		{
-			__init.Property("DryRun");
+			initializer.Property("DryRun");
 			writer.WriteValue(DryRun.Value);
 		}
 
 		if (Lazy is not null)
 		{
-			__init.Property("Lazy");
+			initializer.Property("Lazy");
 			writer.WriteValue(Lazy.Value);
 		}
 
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		if (WaitForActiveShards is not null)
 		{
-			__init.Property("WaitForActiveShards");
+			initializer.Property("WaitForActiveShards");
 			WaitForActiveShards.FormatCode(writer);
 		}
 
 		if (Aliases is not null)
 		{
-			__init.Property("Aliases");
+			initializer.Property("Aliases");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("Elastic.Clients.Elasticsearch.IndexName");
 			writer.Write(", ");
@@ -82,19 +82,19 @@ public partial class RolloverRequest : RequestConverter.ICodeFormattable
 
 		if (Conditions is not null)
 		{
-			__init.Property("Conditions");
+			initializer.Property("Conditions");
 			Conditions.FormatCode(writer);
 		}
 
 		if (Mappings is not null)
 		{
-			__init.Property("Mappings");
+			initializer.Property("Mappings");
 			Mappings.FormatCode(writer);
 		}
 
 		if (Settings is not null)
 		{
-			__init.Property("Settings");
+			initializer.Property("Settings");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -103,6 +103,6 @@ public partial class RolloverRequest : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(Settings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

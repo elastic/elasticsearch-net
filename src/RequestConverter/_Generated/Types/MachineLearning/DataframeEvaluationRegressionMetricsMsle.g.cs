@@ -27,14 +27,14 @@ public partial class DataframeEvaluationRegressionMetricsMsle : RequestConverter
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeEvaluationRegressionMetricsMsle", false);
+		var initializer = writer.BeginObjectInitializer("DataframeEvaluationRegressionMetricsMsle", false);
 		if (Offset is not null)
 		{
-			__init.Property("Offset");
+			initializer.Property("Offset");
 			writer.WriteValue(Offset.Value);
 			writer.Write("d");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

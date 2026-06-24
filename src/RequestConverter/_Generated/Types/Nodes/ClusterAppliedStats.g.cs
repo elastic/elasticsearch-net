@@ -27,13 +27,13 @@ public partial class ClusterAppliedStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterAppliedStats", false);
+		var initializer = writer.BeginObjectInitializer("ClusterAppliedStats", false);
 		if (Recordings is not null)
 		{
-			__init.Property("Recordings");
+			initializer.Property("Recordings");
 			writer.WriteInlineList(Recordings, (w, item) => { item.FormatCode(w); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

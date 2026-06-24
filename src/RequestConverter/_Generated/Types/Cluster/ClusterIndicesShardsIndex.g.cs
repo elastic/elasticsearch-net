@@ -27,22 +27,22 @@ public partial class ClusterIndicesShardsIndex : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterIndicesShardsIndex", false);
+		var initializer = writer.BeginObjectInitializer("ClusterIndicesShardsIndex", false);
 		{
-			__init.Property("Primaries");
+			initializer.Property("Primaries");
 			Primaries.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Replication");
+			initializer.Property("Replication");
 			Replication.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Shards");
+			initializer.Property("Shards");
 			Shards.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

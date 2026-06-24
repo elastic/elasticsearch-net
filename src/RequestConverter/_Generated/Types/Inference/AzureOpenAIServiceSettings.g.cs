@@ -27,64 +27,64 @@ public partial class AzureOpenAIServiceSettings : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AzureOpenAIServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("AzureOpenAIServiceSettings", false);
 		if (ApiKey is not null)
 		{
-			__init.Property("ApiKey");
+			initializer.Property("ApiKey");
 			writer.WriteString(ApiKey);
 		}
 
 		{
-			__init.Property("ApiVersion");
+			initializer.Property("ApiVersion");
 			writer.WriteString(ApiVersion);
 		}
 
 		if (ClientId is not null)
 		{
-			__init.Property("ClientId");
+			initializer.Property("ClientId");
 			writer.WriteString(ClientId);
 		}
 
 		if (ClientSecret is not null)
 		{
-			__init.Property("ClientSecret");
+			initializer.Property("ClientSecret");
 			writer.WriteString(ClientSecret);
 		}
 
 		{
-			__init.Property("DeploymentId");
+			initializer.Property("DeploymentId");
 			writer.WriteString(DeploymentId);
 		}
 
 		if (EntraId is not null)
 		{
-			__init.Property("EntraId");
+			initializer.Property("EntraId");
 			writer.WriteString(EntraId);
 		}
 
 		if (RateLimit is not null)
 		{
-			__init.Property("RateLimit");
+			initializer.Property("RateLimit");
 			RateLimit.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ResourceName");
+			initializer.Property("ResourceName");
 			writer.WriteString(ResourceName);
 		}
 
 		if (Scopes is not null)
 		{
-			__init.Property("Scopes");
+			initializer.Property("Scopes");
 			writer.WriteInlineList(Scopes, (w, item) => { w.WriteString(item); });
 		}
 
 		if (TenantId is not null)
 		{
-			__init.Property("TenantId");
+			initializer.Property("TenantId");
 			writer.WriteString(TenantId);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

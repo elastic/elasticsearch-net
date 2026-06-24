@@ -27,19 +27,19 @@ public partial class HuggingFaceTaskSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("HuggingFaceTaskSettings", false);
+		var initializer = writer.BeginObjectInitializer("HuggingFaceTaskSettings", false);
 		if (ReturnDocuments is not null)
 		{
-			__init.Property("ReturnDocuments");
+			initializer.Property("ReturnDocuments");
 			writer.WriteValue(ReturnDocuments.Value);
 		}
 
 		if (TopN is not null)
 		{
-			__init.Property("TopN");
+			initializer.Property("TopN");
 			writer.WriteValue(TopN.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

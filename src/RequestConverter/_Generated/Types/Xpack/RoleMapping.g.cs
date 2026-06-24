@@ -27,17 +27,17 @@ public partial class RoleMapping : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RoleMapping", false);
+		var initializer = writer.BeginObjectInitializer("RoleMapping", false);
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);
 		}
 
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,86 +27,86 @@ public partial class Category : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("Category", false);
+		var initializer = writer.BeginObjectInitializer("Category", false);
 		{
-			__init.Property("CategoryId");
+			initializer.Property("CategoryId");
 			writer.WriteValue(CategoryId);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Examples");
+			initializer.Property("Examples");
 			writer.WriteInlineList(Examples, (w, item) => { w.WriteString(item); });
 		}
 
 		if (GrokPattern is not null)
 		{
-			__init.Property("GrokPattern");
+			initializer.Property("GrokPattern");
 			writer.WriteString(GrokPattern);
 		}
 
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			writer.WriteString(JobId);
 		}
 
 		{
-			__init.Property("MaxMatchingLength");
+			initializer.Property("MaxMatchingLength");
 			writer.WriteValue(MaxMatchingLength);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Mlcategory");
+			initializer.Property("Mlcategory");
 			writer.WriteString(Mlcategory);
 		}
 
 		if (NumMatches is not null)
 		{
-			__init.Property("NumMatches");
+			initializer.Property("NumMatches");
 			writer.WriteValue(NumMatches.Value);
 			writer.Write("L");
 		}
 
 		if (P is not null)
 		{
-			__init.Property("P");
+			initializer.Property("P");
 			writer.WriteString(P);
 		}
 
 		if (PartitionFieldName is not null)
 		{
-			__init.Property("PartitionFieldName");
+			initializer.Property("PartitionFieldName");
 			writer.WriteString(PartitionFieldName);
 		}
 
 		if (PartitionFieldValue is not null)
 		{
-			__init.Property("PartitionFieldValue");
+			initializer.Property("PartitionFieldValue");
 			writer.WriteString(PartitionFieldValue);
 		}
 
 		if (PreferredToCategories is not null)
 		{
-			__init.Property("PreferredToCategories");
+			initializer.Property("PreferredToCategories");
 			writer.WriteInlineList(PreferredToCategories, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Regex");
+			initializer.Property("Regex");
 			writer.WriteString(Regex);
 		}
 
 		{
-			__init.Property("ResultType");
+			initializer.Property("ResultType");
 			writer.WriteString(ResultType);
 		}
 
 		{
-			__init.Property("Terms");
+			initializer.Property("Terms");
 			writer.WriteString(Terms);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

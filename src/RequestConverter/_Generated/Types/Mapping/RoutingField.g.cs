@@ -27,12 +27,12 @@ public partial class RoutingField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("RoutingField", false);
+		var initializer = writer.BeginObjectInitializer("RoutingField", false);
 		{
-			__init.Property("Required");
+			initializer.Property("Required");
 			writer.WriteValue(Required);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

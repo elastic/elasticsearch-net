@@ -27,24 +27,24 @@ public partial class ScrollRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ScrollRequest", false);
+		var initializer = writer.BeginObjectInitializer("ScrollRequest", false);
 		if (RestTotalHitsAsInt is not null)
 		{
-			__init.Property("RestTotalHitsAsInt");
+			initializer.Property("RestTotalHitsAsInt");
 			writer.WriteValue(RestTotalHitsAsInt.Value);
 		}
 
 		if (Scroll is not null)
 		{
-			__init.Property("Scroll");
+			initializer.Property("Scroll");
 			Scroll.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ScrollId");
+			initializer.Property("ScrollId");
 			ScrollId.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

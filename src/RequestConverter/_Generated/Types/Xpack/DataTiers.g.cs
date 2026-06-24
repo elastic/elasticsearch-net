@@ -27,43 +27,43 @@ public partial class DataTiers : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataTiers", false);
+		var initializer = writer.BeginObjectInitializer("DataTiers", false);
 		{
-			__init.Property("Available");
+			initializer.Property("Available");
 			writer.WriteValue(Available);
 		}
 
 		{
-			__init.Property("DataCold");
+			initializer.Property("DataCold");
 			DataCold.FormatCode(writer);
 		}
 
 		{
-			__init.Property("DataContent");
+			initializer.Property("DataContent");
 			DataContent.FormatCode(writer);
 		}
 
 		if (DataFrozen is not null)
 		{
-			__init.Property("DataFrozen");
+			initializer.Property("DataFrozen");
 			DataFrozen.FormatCode(writer);
 		}
 
 		{
-			__init.Property("DataHot");
+			initializer.Property("DataHot");
 			DataHot.FormatCode(writer);
 		}
 
 		{
-			__init.Property("DataWarm");
+			initializer.Property("DataWarm");
 			DataWarm.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Enabled");
+			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

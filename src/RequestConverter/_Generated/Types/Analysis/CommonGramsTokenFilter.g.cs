@@ -27,37 +27,37 @@ public partial class CommonGramsTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("CommonGramsTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("CommonGramsTokenFilter", true);
 		if (CommonWords is not null)
 		{
-			__init.Property("CommonWords");
+			initializer.Property("CommonWords");
 			writer.WriteInlineList(CommonWords, (w, item) => { w.WriteString(item); });
 		}
 
 		if (CommonWordsPath is not null)
 		{
-			__init.Property("CommonWordsPath");
+			initializer.Property("CommonWordsPath");
 			writer.WriteString(CommonWordsPath);
 		}
 
 		if (IgnoreCase is not null)
 		{
-			__init.Property("IgnoreCase");
+			initializer.Property("IgnoreCase");
 			writer.WriteValue(IgnoreCase.Value);
 		}
 
 		if (QueryMode is not null)
 		{
-			__init.Property("QueryMode");
+			initializer.Property("QueryMode");
 			writer.WriteValue(QueryMode.Value);
 		}
 
 		if (Version is not null)
 		{
-			__init.Property("Version");
+			initializer.Property("Version");
 			writer.WriteString(Version);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

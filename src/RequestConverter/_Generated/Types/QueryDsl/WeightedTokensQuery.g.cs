@@ -27,36 +27,36 @@ public partial class WeightedTokensQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("WeightedTokensQuery", false);
+		var initializer = writer.BeginObjectInitializer("WeightedTokensQuery", false);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (PruningConfig is not null)
 		{
-			__init.Property("PruningConfig");
+			initializer.Property("PruningConfig");
 			PruningConfig.FormatCode(writer);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
 		{
-			__init.Property("Tokens");
+			initializer.Property("Tokens");
 			writer.WriteInlineList(Tokens, (w, item) => { w.Write("new global::System.Collections.Generic.Dictionary<"); w.Write("string"); w.Write(", "); w.Write("float"); w.Write(">() "); w.WriteInlineList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("f"); w.Write(" }"); }, "{ ", " }", ", "); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

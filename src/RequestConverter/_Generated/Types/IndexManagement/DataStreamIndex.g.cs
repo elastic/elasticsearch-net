@@ -27,41 +27,41 @@ public partial class DataStreamIndex : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataStreamIndex", false);
+		var initializer = writer.BeginObjectInitializer("DataStreamIndex", false);
 		if (IlmPolicy is not null)
 		{
-			__init.Property("IlmPolicy");
+			initializer.Property("IlmPolicy");
 			writer.WriteString(IlmPolicy);
 		}
 
 		if (IndexMode is not null)
 		{
-			__init.Property("IndexMode");
+			initializer.Property("IndexMode");
 			Elastic.Clients.Elasticsearch.IndexManagement.IndexModeCodeFormatter.FormatCode(IndexMode.Value, writer);
 		}
 
 		{
-			__init.Property("IndexName");
+			initializer.Property("IndexName");
 			writer.WriteString(IndexName);
 		}
 
 		{
-			__init.Property("IndexUuid");
+			initializer.Property("IndexUuid");
 			writer.WriteString(IndexUuid);
 		}
 
 		if (ManagedBy is not null)
 		{
-			__init.Property("ManagedBy");
+			initializer.Property("ManagedBy");
 			Elastic.Clients.Elasticsearch.IndexManagement.ManagedByCodeFormatter.FormatCode(ManagedBy.Value, writer);
 		}
 
 		if (PreferIlm is not null)
 		{
-			__init.Property("PreferIlm");
+			initializer.Property("PreferIlm");
 			writer.WriteValue(PreferIlm.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

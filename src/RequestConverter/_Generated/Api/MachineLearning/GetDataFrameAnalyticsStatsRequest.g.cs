@@ -27,37 +27,37 @@ public partial class GetDataFrameAnalyticsStatsRequest : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetDataFrameAnalyticsStatsRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetDataFrameAnalyticsStatsRequest", false);
 		if (Id is not null)
 		{
-			__init.Property("Id");
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
 
 		if (AllowNoMatch is not null)
 		{
-			__init.Property("AllowNoMatch");
+			initializer.Property("AllowNoMatch");
 			writer.WriteValue(AllowNoMatch.Value);
 		}
 
 		if (From is not null)
 		{
-			__init.Property("From");
+			initializer.Property("From");
 			writer.WriteValue(From.Value);
 		}
 
 		if (Size is not null)
 		{
-			__init.Property("Size");
+			initializer.Property("Size");
 			writer.WriteValue(Size.Value);
 		}
 
 		if (Verbose is not null)
 		{
-			__init.Property("Verbose");
+			initializer.Property("Verbose");
 			writer.WriteValue(Verbose.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

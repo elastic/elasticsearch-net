@@ -27,31 +27,31 @@ public partial class NormalizeAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NormalizeAggregation", false);
+		var initializer = writer.BeginObjectInitializer("NormalizeAggregation", false);
 		if (BucketsPath is not null)
 		{
-			__init.Property("BucketsPath");
+			initializer.Property("BucketsPath");
 			BucketsPath.FormatCode(writer);
 		}
 
 		if (Format is not null)
 		{
-			__init.Property("Format");
+			initializer.Property("Format");
 			writer.WriteString(Format);
 		}
 
 		if (GapPolicy is not null)
 		{
-			__init.Property("GapPolicy");
+			initializer.Property("GapPolicy");
 			Elastic.Clients.Elasticsearch.Aggregations.GapPolicyCodeFormatter.FormatCode(GapPolicy.Value, writer);
 		}
 
 		if (Method is not null)
 		{
-			__init.Property("Method");
+			initializer.Property("Method");
 			Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethodCodeFormatter.FormatCode(Method.Value, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

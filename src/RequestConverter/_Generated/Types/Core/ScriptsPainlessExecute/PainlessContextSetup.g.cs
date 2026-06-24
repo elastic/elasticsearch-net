@@ -27,23 +27,23 @@ public partial class PainlessContextSetup : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("PainlessContextSetup", false);
+		var initializer = writer.BeginObjectInitializer("PainlessContextSetup", false);
 		{
-			__init.Property("Document");
+			initializer.Property("Document");
 			writer.WriteValue(Document);
 		}
 
 		{
-			__init.Property("Index");
+			initializer.Property("Index");
 			Index.FormatCode(writer);
 		}
 
 		if (Query is not null)
 		{
-			__init.Property("Query");
+			initializer.Property("Query");
 			Query.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,25 +27,25 @@ public partial class ScriptsPainlessExecuteRequest : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ScriptsPainlessExecuteRequest", false);
+		var initializer = writer.BeginObjectInitializer("ScriptsPainlessExecuteRequest", false);
 		if (Context is not null)
 		{
-			__init.Property("Context");
+			initializer.Property("Context");
 			Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextCodeFormatter.FormatCode(Context.Value, writer);
 		}
 
 		if (ContextSetup is not null)
 		{
-			__init.Property("ContextSetup");
+			initializer.Property("ContextSetup");
 			ContextSetup.FormatCode(writer);
 		}
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

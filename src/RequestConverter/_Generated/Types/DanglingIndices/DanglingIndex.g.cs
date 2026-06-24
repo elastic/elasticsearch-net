@@ -27,27 +27,27 @@ public partial class DanglingIndex : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DanglingIndex", false);
+		var initializer = writer.BeginObjectInitializer("DanglingIndex", false);
 		{
-			__init.Property("CreationDateMillis");
+			initializer.Property("CreationDateMillis");
 			writer.WriteValue(CreationDateMillis);
 		}
 
 		{
-			__init.Property("IndexName");
+			initializer.Property("IndexName");
 			writer.WriteString(IndexName);
 		}
 
 		{
-			__init.Property("IndexUuid");
+			initializer.Property("IndexUuid");
 			writer.WriteString(IndexUuid);
 		}
 
 		{
-			__init.Property("NodeIds");
+			initializer.Property("NodeIds");
 			writer.WriteInlineList(NodeIds, (w, item) => { w.WriteString(item); });
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

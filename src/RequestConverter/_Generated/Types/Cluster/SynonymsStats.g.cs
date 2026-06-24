@@ -27,17 +27,17 @@ public partial class SynonymsStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SynonymsStats", false);
+		var initializer = writer.BeginObjectInitializer("SynonymsStats", false);
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 		}
 
 		{
-			__init.Property("IndexCount");
+			initializer.Property("IndexCount");
 			writer.WriteValue(IndexCount);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

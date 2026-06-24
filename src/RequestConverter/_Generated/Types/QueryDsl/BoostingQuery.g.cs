@@ -27,36 +27,36 @@ public partial class BoostingQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("BoostingQuery", false);
+		var initializer = writer.BeginObjectInitializer("BoostingQuery", false);
 		if (Boost is not null)
 		{
-			__init.Property("Boost");
+			initializer.Property("Boost");
 			writer.WriteValue(Boost.Value);
 			writer.Write("f");
 		}
 
 		{
-			__init.Property("Negative");
+			initializer.Property("Negative");
 			Negative.FormatCode(writer);
 		}
 
 		{
-			__init.Property("NegativeBoost");
+			initializer.Property("NegativeBoost");
 			writer.WriteValue(NegativeBoost);
 			writer.Write("d");
 		}
 
 		{
-			__init.Property("Positive");
+			initializer.Property("Positive");
 			Positive.FormatCode(writer);
 		}
 
 		if (QueryName is not null)
 		{
-			__init.Property("QueryName");
+			initializer.Property("QueryName");
 			writer.WriteString(QueryName);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

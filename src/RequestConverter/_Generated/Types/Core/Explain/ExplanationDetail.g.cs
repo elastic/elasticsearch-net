@@ -27,24 +27,24 @@ public partial class ExplanationDetail : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ExplanationDetail", false);
+		var initializer = writer.BeginObjectInitializer("ExplanationDetail", false);
 		{
-			__init.Property("Description");
+			initializer.Property("Description");
 			writer.WriteString(Description);
 		}
 
 		if (Details is not null)
 		{
-			__init.Property("Details");
+			initializer.Property("Details");
 			writer.WriteInlineList(Details, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("Value");
+			initializer.Property("Value");
 			writer.WriteValue(Value);
 			writer.Write("f");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

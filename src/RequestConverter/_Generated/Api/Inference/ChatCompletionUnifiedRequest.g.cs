@@ -27,23 +27,23 @@ public partial class ChatCompletionUnifiedRequest : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ChatCompletionUnifiedRequest", false);
+		var initializer = writer.BeginObjectInitializer("ChatCompletionUnifiedRequest", false);
 		{
-			__init.Property("InferenceId");
+			initializer.Property("InferenceId");
 			InferenceId.FormatCode(writer);
 		}
 
 		if (Timeout is not null)
 		{
-			__init.Property("Timeout");
+			initializer.Property("Timeout");
 			Timeout.FormatCode(writer);
 		}
 
 		{
-			__init.Property("ChatCompletionRequest");
+			initializer.Property("ChatCompletionRequest");
 			ChatCompletionRequest.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

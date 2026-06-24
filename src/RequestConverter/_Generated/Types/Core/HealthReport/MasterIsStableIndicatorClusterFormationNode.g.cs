@@ -27,23 +27,23 @@ public partial class MasterIsStableIndicatorClusterFormationNode : RequestConver
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MasterIsStableIndicatorClusterFormationNode", false);
+		var initializer = writer.BeginObjectInitializer("MasterIsStableIndicatorClusterFormationNode", false);
 		{
-			__init.Property("ClusterFormationMessage");
+			initializer.Property("ClusterFormationMessage");
 			writer.WriteString(ClusterFormationMessage);
 		}
 
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		{
-			__init.Property("NodeId");
+			initializer.Property("NodeId");
 			writer.WriteString(NodeId);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,22 +27,22 @@ public partial class SnapshotRestore : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SnapshotRestore", false);
+		var initializer = writer.BeginObjectInitializer("SnapshotRestore", false);
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			writer.WriteInlineList(Indices, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Shards");
+			initializer.Property("Shards");
 			Shards.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Snapshot");
+			initializer.Property("Snapshot");
 			writer.WriteString(Snapshot);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

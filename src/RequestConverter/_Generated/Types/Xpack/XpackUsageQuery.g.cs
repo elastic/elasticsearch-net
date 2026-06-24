@@ -27,31 +27,31 @@ public partial class XpackUsageQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("XpackUsageQuery", false);
+		var initializer = writer.BeginObjectInitializer("XpackUsageQuery", false);
 		if (Count is not null)
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count.Value);
 		}
 
 		if (Failed is not null)
 		{
-			__init.Property("Failed");
+			initializer.Property("Failed");
 			writer.WriteValue(Failed.Value);
 		}
 
 		if (Paging is not null)
 		{
-			__init.Property("Paging");
+			initializer.Property("Paging");
 			writer.WriteValue(Paging.Value);
 		}
 
 		if (Total is not null)
 		{
-			__init.Property("Total");
+			initializer.Property("Total");
 			writer.WriteValue(Total.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

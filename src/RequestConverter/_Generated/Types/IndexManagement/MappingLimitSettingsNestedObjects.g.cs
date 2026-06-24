@@ -27,14 +27,14 @@ public partial class MappingLimitSettingsNestedObjects : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MappingLimitSettingsNestedObjects", false);
+		var initializer = writer.BeginObjectInitializer("MappingLimitSettingsNestedObjects", false);
 		if (Limit is not null)
 		{
-			__init.Property("Limit");
+			initializer.Property("Limit");
 			writer.WriteValue(Limit.Value);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,35 +27,35 @@ public partial class UpdateUserProfileDataRequest : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("UpdateUserProfileDataRequest", false);
+		var initializer = writer.BeginObjectInitializer("UpdateUserProfileDataRequest", false);
 		{
-			__init.Property("Uid");
+			initializer.Property("Uid");
 			writer.WriteString(Uid);
 		}
 
 		if (IfPrimaryTerm is not null)
 		{
-			__init.Property("IfPrimaryTerm");
+			initializer.Property("IfPrimaryTerm");
 			writer.WriteValue(IfPrimaryTerm.Value);
 			writer.Write("L");
 		}
 
 		if (IfSeqNo is not null)
 		{
-			__init.Property("IfSeqNo");
+			initializer.Property("IfSeqNo");
 			writer.WriteValue(IfSeqNo.Value);
 			writer.Write("L");
 		}
 
 		if (Refresh is not null)
 		{
-			__init.Property("Refresh");
+			initializer.Property("Refresh");
 			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
 		}
 
 		if (Data is not null)
 		{
-			__init.Property("Data");
+			initializer.Property("Data");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -66,7 +66,7 @@ public partial class UpdateUserProfileDataRequest : RequestConverter.ICodeFormat
 
 		if (Labels is not null)
 		{
-			__init.Property("Labels");
+			initializer.Property("Labels");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -75,6 +75,6 @@ public partial class UpdateUserProfileDataRequest : RequestConverter.ICodeFormat
 			writer.WriteInlineList(Labels, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

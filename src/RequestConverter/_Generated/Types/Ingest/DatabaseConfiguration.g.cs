@@ -27,24 +27,24 @@ public partial class DatabaseConfiguration : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DatabaseConfiguration", false);
+		var initializer = writer.BeginObjectInitializer("DatabaseConfiguration", false);
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			Name.FormatCode(writer);
 		}
 
 		if (Ipinfo is not null)
 		{
-			__init.Property("Ipinfo");
+			initializer.Property("Ipinfo");
 			Ipinfo.FormatCode(writer);
 		}
 
 		if (Maxmind is not null)
 		{
-			__init.Property("Maxmind");
+			initializer.Property("Maxmind");
 			Maxmind.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

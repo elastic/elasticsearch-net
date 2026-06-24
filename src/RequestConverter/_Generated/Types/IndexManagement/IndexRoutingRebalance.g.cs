@@ -27,12 +27,12 @@ public partial class IndexRoutingRebalance : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexRoutingRebalance", false);
+		var initializer = writer.BeginObjectInitializer("IndexRoutingRebalance", false);
 		{
-			__init.Property("Enable");
+			initializer.Property("Enable");
 			Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptionsCodeFormatter.FormatCode(Enable, writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

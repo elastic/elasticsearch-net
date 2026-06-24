@@ -27,22 +27,22 @@ public partial class MountedSnapshot : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("MountedSnapshot", false);
+		var initializer = writer.BeginObjectInitializer("MountedSnapshot", false);
 		{
-			__init.Property("Indices");
+			initializer.Property("Indices");
 			writer.WriteInlineList(Indices, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Shards");
+			initializer.Property("Shards");
 			Shards.FormatCode(writer);
 		}
 
 		{
-			__init.Property("Snapshot");
+			initializer.Property("Snapshot");
 			writer.WriteString(Snapshot);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

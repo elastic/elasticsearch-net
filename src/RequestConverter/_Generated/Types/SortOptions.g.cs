@@ -27,37 +27,37 @@ public partial class SortOptions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("SortOptions", false);
+		var initializer = writer.BeginObjectInitializer("SortOptions", false);
 		if (Doc is not null)
 		{
-			__init.Property("Doc");
+			initializer.Property("Doc");
 			Doc.FormatCode(writer);
 		}
 
 		if (Field is not null)
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (GeoDistance is not null)
 		{
-			__init.Property("GeoDistance");
+			initializer.Property("GeoDistance");
 			GeoDistance.FormatCode(writer);
 		}
 
 		if (Score is not null)
 		{
-			__init.Property("Score");
+			initializer.Property("Score");
 			Score.FormatCode(writer);
 		}
 
 		if (Script is not null)
 		{
-			__init.Property("Script");
+			initializer.Property("Script");
 			Script.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

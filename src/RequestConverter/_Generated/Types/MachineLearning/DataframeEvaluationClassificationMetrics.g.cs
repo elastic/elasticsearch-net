@@ -27,10 +27,10 @@ public partial class DataframeEvaluationClassificationMetrics : RequestConverter
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataframeEvaluationClassificationMetrics", false);
+		var initializer = writer.BeginObjectInitializer("DataframeEvaluationClassificationMetrics", false);
 		if (Accuracy is not null)
 		{
-			__init.Property("Accuracy");
+			initializer.Property("Accuracy");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -41,13 +41,13 @@ public partial class DataframeEvaluationClassificationMetrics : RequestConverter
 
 		if (AucRoc is not null)
 		{
-			__init.Property("AucRoc");
+			initializer.Property("AucRoc");
 			AucRoc.FormatCode(writer);
 		}
 
 		if (MulticlassConfusionMatrix is not null)
 		{
-			__init.Property("MulticlassConfusionMatrix");
+			initializer.Property("MulticlassConfusionMatrix");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -58,7 +58,7 @@ public partial class DataframeEvaluationClassificationMetrics : RequestConverter
 
 		if (Precision is not null)
 		{
-			__init.Property("Precision");
+			initializer.Property("Precision");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -69,7 +69,7 @@ public partial class DataframeEvaluationClassificationMetrics : RequestConverter
 
 		if (Recall is not null)
 		{
-			__init.Property("Recall");
+			initializer.Property("Recall");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -78,6 +78,6 @@ public partial class DataframeEvaluationClassificationMetrics : RequestConverter
 			writer.WriteInlineList(Recall, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

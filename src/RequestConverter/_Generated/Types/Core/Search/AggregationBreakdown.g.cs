@@ -27,81 +27,81 @@ public partial class AggregationBreakdown : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("AggregationBreakdown", false);
+		var initializer = writer.BeginObjectInitializer("AggregationBreakdown", false);
 		{
-			__init.Property("BuildAggregation");
+			initializer.Property("BuildAggregation");
 			writer.WriteValue(BuildAggregation);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("BuildAggregationCount");
+			initializer.Property("BuildAggregationCount");
 			writer.WriteValue(BuildAggregationCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("BuildLeafCollector");
+			initializer.Property("BuildLeafCollector");
 			writer.WriteValue(BuildLeafCollector);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("BuildLeafCollectorCount");
+			initializer.Property("BuildLeafCollectorCount");
 			writer.WriteValue(BuildLeafCollectorCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Collect");
+			initializer.Property("Collect");
 			writer.WriteValue(Collect);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("CollectCount");
+			initializer.Property("CollectCount");
 			writer.WriteValue(CollectCount);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Initialize");
+			initializer.Property("Initialize");
 			writer.WriteValue(Initialize);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("InitializeCount");
+			initializer.Property("InitializeCount");
 			writer.WriteValue(InitializeCount);
 			writer.Write("L");
 		}
 
 		if (PostCollection is not null)
 		{
-			__init.Property("PostCollection");
+			initializer.Property("PostCollection");
 			writer.WriteValue(PostCollection.Value);
 			writer.Write("L");
 		}
 
 		if (PostCollectionCount is not null)
 		{
-			__init.Property("PostCollectionCount");
+			initializer.Property("PostCollectionCount");
 			writer.WriteValue(PostCollectionCount.Value);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Reduce");
+			initializer.Property("Reduce");
 			writer.WriteValue(Reduce);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("ReduceCount");
+			initializer.Property("ReduceCount");
 			writer.WriteValue(ReduceCount);
 			writer.Write("L");
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

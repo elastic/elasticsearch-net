@@ -27,23 +27,23 @@ public partial class DataStreamLifecycleDetails : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DataStreamLifecycleDetails", false);
+		var initializer = writer.BeginObjectInitializer("DataStreamLifecycleDetails", false);
 		if (StagnatingBackingIndices is not null)
 		{
-			__init.Property("StagnatingBackingIndices");
+			initializer.Property("StagnatingBackingIndices");
 			writer.WriteInlineList(StagnatingBackingIndices, (w, item) => { item.FormatCode(w); });
 		}
 
 		{
-			__init.Property("StagnatingBackingIndicesCount");
+			initializer.Property("StagnatingBackingIndicesCount");
 			writer.WriteValue(StagnatingBackingIndicesCount);
 		}
 
 		{
-			__init.Property("TotalBackingIndicesInError");
+			initializer.Property("TotalBackingIndicesInError");
 			writer.WriteValue(TotalBackingIndicesInError);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,55 +27,55 @@ public partial class GetOverallBucketsRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("GetOverallBucketsRequest", false);
+		var initializer = writer.BeginObjectInitializer("GetOverallBucketsRequest", false);
 		{
-			__init.Property("JobId");
+			initializer.Property("JobId");
 			JobId.FormatCode(writer);
 		}
 
 		if (AllowNoMatch is not null)
 		{
-			__init.Property("AllowNoMatch");
+			initializer.Property("AllowNoMatch");
 			writer.WriteValue(AllowNoMatch.Value);
 		}
 
 		if (BucketSpan is not null)
 		{
-			__init.Property("BucketSpan");
+			initializer.Property("BucketSpan");
 			BucketSpan.FormatCode(writer);
 		}
 
 		if (End is not null)
 		{
-			__init.Property("End");
+			initializer.Property("End");
 			writer.WriteValue(End.Value);
 		}
 
 		if (ExcludeInterim is not null)
 		{
-			__init.Property("ExcludeInterim");
+			initializer.Property("ExcludeInterim");
 			writer.WriteValue(ExcludeInterim.Value);
 		}
 
 		if (OverallScore is not null)
 		{
-			__init.Property("OverallScore");
+			initializer.Property("OverallScore");
 			writer.WriteValue(OverallScore.Value);
 			writer.Write("d");
 		}
 
 		if (Start is not null)
 		{
-			__init.Property("Start");
+			initializer.Property("Start");
 			writer.WriteValue(Start.Value);
 		}
 
 		if (TopN is not null)
 		{
-			__init.Property("TopN");
+			initializer.Property("TopN");
 			writer.WriteValue(TopN.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,10 +27,10 @@ public partial class NodeTasks : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("NodeTasks", false);
+		var initializer = writer.BeginObjectInitializer("NodeTasks", false);
 		if (Attributes is not null)
 		{
-			__init.Property("Attributes");
+			initializer.Property("Attributes");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("string");
 			writer.Write(", ");
@@ -41,30 +41,30 @@ public partial class NodeTasks : RequestConverter.ICodeFormattable
 
 		if (Host is not null)
 		{
-			__init.Property("Host");
+			initializer.Property("Host");
 			writer.WriteString(Host);
 		}
 
 		if (Ip is not null)
 		{
-			__init.Property("Ip");
+			initializer.Property("Ip");
 			writer.WriteString(Ip);
 		}
 
 		if (Name is not null)
 		{
-			__init.Property("Name");
+			initializer.Property("Name");
 			writer.WriteString(Name);
 		}
 
 		if (Roles is not null)
 		{
-			__init.Property("Roles");
+			initializer.Property("Roles");
 			writer.WriteInlineList(Roles, (w, item) => { w.WriteString(item); });
 		}
 
 		{
-			__init.Property("Tasks");
+			initializer.Property("Tasks");
 			writer.Write("new global::System.Collections.Generic.Dictionary<");
 			writer.Write("Elastic.Clients.Elasticsearch.TaskId");
 			writer.Write(", ");
@@ -75,10 +75,10 @@ public partial class NodeTasks : RequestConverter.ICodeFormattable
 
 		if (TransportAddress is not null)
 		{
-			__init.Property("TransportAddress");
+			initializer.Property("TransportAddress");
 			writer.WriteString(TransportAddress);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

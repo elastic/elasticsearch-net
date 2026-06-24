@@ -27,37 +27,37 @@ public partial class IndexSettingsAnalysis : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("IndexSettingsAnalysis", false);
+		var initializer = writer.BeginObjectInitializer("IndexSettingsAnalysis", false);
 		if (Analyzers is not null)
 		{
-			__init.Property("Analyzers");
+			initializer.Property("Analyzers");
 			Analyzers.FormatCode(writer);
 		}
 
 		if (CharFilters is not null)
 		{
-			__init.Property("CharFilters");
+			initializer.Property("CharFilters");
 			CharFilters.FormatCode(writer);
 		}
 
 		if (Normalizers is not null)
 		{
-			__init.Property("Normalizers");
+			initializer.Property("Normalizers");
 			Normalizers.FormatCode(writer);
 		}
 
 		if (TokenFilters is not null)
 		{
-			__init.Property("TokenFilters");
+			initializer.Property("TokenFilters");
 			TokenFilters.FormatCode(writer);
 		}
 
 		if (Tokenizers is not null)
 		{
-			__init.Property("Tokenizers");
+			initializer.Property("Tokenizers");
 			Tokenizers.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

@@ -27,23 +27,23 @@ public partial class DateDecayFunction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DateDecayFunction", true);
+		var initializer = writer.BeginObjectInitializer("DateDecayFunction", true);
 		{
-			__init.Property("Field");
+			initializer.Property("Field");
 			Field.FormatCode(writer);
 		}
 
 		if (MultiValueMode is not null)
 		{
-			__init.Property("MultiValueMode");
+			initializer.Property("MultiValueMode");
 			Elastic.Clients.Elasticsearch.QueryDsl.MultiValueModeCodeFormatter.FormatCode(MultiValueMode.Value, writer);
 		}
 
 		{
-			__init.Property("Placement");
+			initializer.Property("Placement");
 			Placement.FormatCode(writer);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

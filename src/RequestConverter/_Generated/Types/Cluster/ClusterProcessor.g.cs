@@ -27,36 +27,36 @@ public partial class ClusterProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("ClusterProcessor", false);
+		var initializer = writer.BeginObjectInitializer("ClusterProcessor", false);
 		{
-			__init.Property("Count");
+			initializer.Property("Count");
 			writer.WriteValue(Count);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Current");
+			initializer.Property("Current");
 			writer.WriteValue(Current);
 			writer.Write("L");
 		}
 
 		{
-			__init.Property("Failed");
+			initializer.Property("Failed");
 			writer.WriteValue(Failed);
 			writer.Write("L");
 		}
 
 		if (Time is not null)
 		{
-			__init.Property("Time");
+			initializer.Property("Time");
 			Time.FormatCode(writer);
 		}
 
 		{
-			__init.Property("TimeInMillis");
+			initializer.Property("TimeInMillis");
 			writer.WriteValue(TimeInMillis);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }

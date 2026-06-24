@@ -27,19 +27,19 @@ public partial class DeleteVotingConfigExclusionsRequest : RequestConverter.ICod
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var __init = writer.BeginObjectInitializer("DeleteVotingConfigExclusionsRequest", false);
+		var initializer = writer.BeginObjectInitializer("DeleteVotingConfigExclusionsRequest", false);
 		if (MasterTimeout is not null)
 		{
-			__init.Property("MasterTimeout");
+			initializer.Property("MasterTimeout");
 			MasterTimeout.FormatCode(writer);
 		}
 
 		if (WaitForRemoval is not null)
 		{
-			__init.Property("WaitForRemoval");
+			initializer.Property("WaitForRemoval");
 			writer.WriteValue(WaitForRemoval.Value);
 		}
 
-		__init.Dispose();
+		initializer.Dispose();
 	}
 }
