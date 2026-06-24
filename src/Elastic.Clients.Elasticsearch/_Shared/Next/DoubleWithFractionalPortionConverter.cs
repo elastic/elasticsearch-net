@@ -74,9 +74,11 @@ internal sealed class DoubleWithFractionalPortionConverter :
 			return reader.GetDouble();
 		}
 
-		Debug.Assert(!reader.HasValueSequence);
+		// Sequence-safe: double round-trip ~25 bytes; 64 with headroom.
+		Span<byte> tmp = stackalloc byte[64];
+		var bytes = tmp[..reader.GetValueBytes(tmp)];
 
-		return Utf8Parser.TryParse(reader.ValueSpan, out double result, out var consumed) && (consumed == reader.ValueSpan.Length)
+		return Utf8Parser.TryParse(bytes, out double result, out var consumed) && (consumed == bytes.Length)
 			? result
 			: throw new JsonException("Unable to convert JSON string value to 'double'.");
 	}
