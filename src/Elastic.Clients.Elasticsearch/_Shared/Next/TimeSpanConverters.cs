@@ -46,11 +46,13 @@ internal sealed class TimeSpanSecondsConverter :
 {
 	public override TimeSpan Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out long value, out var consumed) &&
-			(consumed == reader.ValueSpan.Length))
+		if (reader.TokenType is JsonTokenType.String)
 		{
-			// Leniency for stringified numbers.
-			return TimeSpan.FromSeconds(value);
+			// Leniency for stringified numbers (sequence-safe). Int64 max is 19 digits + sign = 20; 32 with headroom.
+			Span<byte> tmp = stackalloc byte[32];
+			var bytes = tmp[..reader.GetValueBytes(tmp)];
+			if (Utf8Parser.TryParse(bytes, out long value, out var consumed) && consumed == bytes.Length)
+				return TimeSpan.FromSeconds(value);
 		}
 
 		reader.ValidateToken(JsonTokenType.Number);
@@ -97,11 +99,13 @@ internal sealed class TimeSpanMillisConverter :
 {
 	public override TimeSpan Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out long value, out var consumed) &&
-			(consumed == reader.ValueSpan.Length))
+		if (reader.TokenType is JsonTokenType.String)
 		{
-			// Leniency for stringified numbers.
-			return TimeSpan.FromMilliseconds(value);
+			// Leniency for stringified numbers (sequence-safe). Int64 max is 19 digits + sign = 20; 32 with headroom.
+			Span<byte> tmp = stackalloc byte[32];
+			var bytes = tmp[..reader.GetValueBytes(tmp)];
+			if (Utf8Parser.TryParse(bytes, out long value, out var consumed) && consumed == bytes.Length)
+				return TimeSpan.FromMilliseconds(value);
 		}
 
 		reader.ValidateToken(JsonTokenType.Number);
@@ -148,11 +152,13 @@ internal sealed class TimeSpanNanosConverter :
 {
 	public override TimeSpan Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out long value, out var consumed) &&
-			(consumed == reader.ValueSpan.Length))
+		if (reader.TokenType is JsonTokenType.String)
 		{
-			// Leniency for stringified numbers.
-			return TimeSpanHelper.FromNanoseconds(value);
+			// Leniency for stringified numbers (sequence-safe). Int64 max is 19 digits + sign = 20; 32 with headroom.
+			Span<byte> tmp = stackalloc byte[32];
+			var bytes = tmp[..reader.GetValueBytes(tmp)];
+			if (Utf8Parser.TryParse(bytes, out long value, out var consumed) && consumed == bytes.Length)
+				return TimeSpanHelper.FromNanoseconds(value);
 		}
 
 		reader.ValidateToken(JsonTokenType.Number);
@@ -199,11 +205,13 @@ internal sealed class TimeSpanSecondsFloatConverter :
 {
 	public override TimeSpan Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out double value, out var consumed) &&
-			(consumed == reader.ValueSpan.Length))
+		if (reader.TokenType is JsonTokenType.String)
 		{
-			// Leniency for stringified numbers.
-			return TimeSpan.FromSeconds(value);
+			// Leniency for stringified numbers (sequence-safe). Double round-trip is ~25 bytes; 64 with headroom.
+			Span<byte> tmp = stackalloc byte[64];
+			var bytes = tmp[..reader.GetValueBytes(tmp)];
+			if (Utf8Parser.TryParse(bytes, out double value, out var consumed) && consumed == bytes.Length)
+				return TimeSpan.FromSeconds(value);
 		}
 
 		reader.ValidateToken(JsonTokenType.Number);
@@ -250,11 +258,13 @@ internal sealed class TimeSpanMillisFloatConverter :
 {
 	public override TimeSpan Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out double value, out var consumed) &&
-			(consumed == reader.ValueSpan.Length))
+		if (reader.TokenType is JsonTokenType.String)
 		{
-			// Leniency for stringified numbers.
-			return TimeSpan.FromMilliseconds(value);
+			// Leniency for stringified numbers (sequence-safe). Double round-trip is ~25 bytes; 64 with headroom.
+			Span<byte> tmp = stackalloc byte[64];
+			var bytes = tmp[..reader.GetValueBytes(tmp)];
+			if (Utf8Parser.TryParse(bytes, out double value, out var consumed) && consumed == bytes.Length)
+				return TimeSpan.FromMilliseconds(value);
 		}
 
 		reader.ValidateToken(JsonTokenType.Number);

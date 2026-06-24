@@ -42,11 +42,15 @@ internal sealed class DateTimeConverter :
 {
 	public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out long timestamp, out var consumed) &&
-			(consumed == reader.ValueSpan.Length))
+		if (reader.TokenType is JsonTokenType.String)
 		{
-			// Leniency for stringified numbers.
-			return DateTimeHelper.FromEpochMilliseconds(timestamp);
+			// Leniency for stringified numbers. Sequence-safe: GetValueBytes copies the token value
+			// to a contiguous span when it spans reader segments. Sized for the longest value this
+			// converter sees (ISO 8601 strings, ~40 bytes) with headroom.
+			Span<byte> tmp = stackalloc byte[64];
+			var value = tmp[..reader.GetValueBytes(tmp)];
+			if (Utf8Parser.TryParse(value, out long timestamp, out var consumed) && consumed == value.Length)
+				return DateTimeHelper.FromEpochMilliseconds(timestamp);
 		}
 
 		return reader.TokenType switch
@@ -110,11 +114,13 @@ internal sealed class DateTimeSecondsConverter :
 {
 	public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out long timestamp, out var consumed) &&
-			(consumed == reader.ValueSpan.Length))
+		if (reader.TokenType is JsonTokenType.String)
 		{
-			// Leniency for stringified numbers.
-			return DateTimeHelper.FromEpochSeconds(timestamp);
+			// Leniency for stringified numbers (sequence-safe). Int64 max is 19 digits + sign = 20; 32 with headroom.
+			Span<byte> tmp = stackalloc byte[32];
+			var value = tmp[..reader.GetValueBytes(tmp)];
+			if (Utf8Parser.TryParse(value, out long timestamp, out var consumed) && consumed == value.Length)
+				return DateTimeHelper.FromEpochSeconds(timestamp);
 		}
 
 		reader.ValidateToken(JsonTokenType.Number);
@@ -161,11 +167,13 @@ internal sealed class DateTimeMillisConverter :
 {
 	public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out long timestamp, out var consumed) &&
-			(consumed == reader.ValueSpan.Length))
+		if (reader.TokenType is JsonTokenType.String)
 		{
-			// Leniency for stringified numbers.
-			return DateTimeHelper.FromEpochMilliseconds(timestamp);
+			// Leniency for stringified numbers (sequence-safe). Int64 max is 19 digits + sign = 20; 32 with headroom.
+			Span<byte> tmp = stackalloc byte[32];
+			var value = tmp[..reader.GetValueBytes(tmp)];
+			if (Utf8Parser.TryParse(value, out long timestamp, out var consumed) && consumed == value.Length)
+				return DateTimeHelper.FromEpochMilliseconds(timestamp);
 		}
 
 		reader.ValidateToken(JsonTokenType.Number);
@@ -212,11 +220,13 @@ internal sealed class DateTimeNanosConverter :
 {
 	public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out long timestamp, out var consumed) &&
-			(consumed == reader.ValueSpan.Length))
+		if (reader.TokenType is JsonTokenType.String)
 		{
-			// Leniency for stringified numbers.
-			return DateTimeHelper.FromEpochNanoseconds(timestamp);
+			// Leniency for stringified numbers (sequence-safe). Int64 max is 19 digits + sign = 20; 32 with headroom.
+			Span<byte> tmp = stackalloc byte[32];
+			var value = tmp[..reader.GetValueBytes(tmp)];
+			if (Utf8Parser.TryParse(value, out long timestamp, out var consumed) && consumed == value.Length)
+				return DateTimeHelper.FromEpochNanoseconds(timestamp);
 		}
 
 		reader.ValidateToken(JsonTokenType.Number);
@@ -263,11 +273,13 @@ internal sealed class DateTimeSecondsFloatConverter :
 {
 	public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out double timestamp, out var consumed) &&
-			(consumed == reader.ValueSpan.Length))
+		if (reader.TokenType is JsonTokenType.String)
 		{
-			// Leniency for stringified numbers.
-			return DateTimeHelper.FromEpochSeconds((long)timestamp);
+			// Leniency for stringified numbers (sequence-safe). Double round-trip is ~25 bytes; 64 with headroom.
+			Span<byte> tmp = stackalloc byte[64];
+			var value = tmp[..reader.GetValueBytes(tmp)];
+			if (Utf8Parser.TryParse(value, out double timestamp, out var consumed) && consumed == value.Length)
+				return DateTimeHelper.FromEpochSeconds((long)timestamp);
 		}
 
 		reader.ValidateToken(JsonTokenType.Number);
@@ -314,11 +326,13 @@ internal sealed class DateTimeMillisFloatConverter :
 {
 	public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		if ((reader.TokenType is JsonTokenType.String) && Utf8Parser.TryParse(reader.ValueSpan, out double timestamp, out var consumed) &&
-			(consumed == reader.ValueSpan.Length))
+		if (reader.TokenType is JsonTokenType.String)
 		{
-			// Leniency for stringified numbers.
-			return DateTimeHelper.FromEpochMilliseconds((long)timestamp);
+			// Leniency for stringified numbers (sequence-safe). Double round-trip is ~25 bytes; 64 with headroom.
+			Span<byte> tmp = stackalloc byte[64];
+			var value = tmp[..reader.GetValueBytes(tmp)];
+			if (Utf8Parser.TryParse(value, out double timestamp, out var consumed) && consumed == value.Length)
+				return DateTimeHelper.FromEpochMilliseconds((long)timestamp);
 		}
 
 		reader.ValidateToken(JsonTokenType.Number);
