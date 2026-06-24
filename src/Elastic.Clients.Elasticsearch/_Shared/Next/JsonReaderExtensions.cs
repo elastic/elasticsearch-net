@@ -130,6 +130,44 @@ internal static class JsonReaderExtensions
 		}
 	}
 
+	/// <summary>
+	/// Copies the current token's value into <paramref name="buffer"/> and returns its length, so the caller
+	/// can use <c>buffer[..length]</c> as a contiguous span. For a single-segment reader this copies
+	/// <see cref="Utf8JsonReader.ValueSpan"/>; for a multi-segment reader it copies <see cref="Utf8JsonReader.ValueSequence"/>.
+	/// Throws when the value is larger than <paramref name="buffer"/>, so size it to the longest token value the
+	/// caller expects (with headroom). Use this instead of <see cref="Utf8JsonReader.ValueSpan"/> in converters
+	/// that must support readers constructed over a multi-segment ReadOnlySequence.
+	/// </summary>
+	public static int GetValueBytes(this ref Utf8JsonReader reader, scoped Span<byte> buffer)
+	{
+		if (!reader.HasValueSequence)
+		{
+			var span = reader.ValueSpan;
+			if (span.Length > buffer.Length)
+				ThrowValueLargerThanBuffer(span.Length, buffer.Length);
+			span.CopyTo(buffer);
+			return span.Length;
+		}
+
+		var sequence = reader.ValueSequence;
+		if (sequence.Length > buffer.Length)
+			ThrowValueLargerThanBuffer((int)sequence.Length, buffer.Length);
+
+		var remaining = buffer;
+		foreach (var segment in sequence)
+		{
+			segment.Span.CopyTo(remaining);
+			remaining = remaining[segment.Length..];
+		}
+		return (int)sequence.Length;
+	}
+
+	[DoesNotReturn]
+	private static void ThrowValueLargerThanBuffer(int valueLength, int bufferLength)
+		=> throw new JsonException(
+			$"JSON token value of {valueLength} bytes exceeds the {bufferLength}-byte scratch buffer. " +
+			"Increase the converter's stackalloc size estimate.");
+
 	#endregion General Purpose
 
 	#region Default Generic Read Methods
