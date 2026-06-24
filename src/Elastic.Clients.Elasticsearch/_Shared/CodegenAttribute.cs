@@ -10,4 +10,11 @@ namespace Elastic.Clients.Elasticsearch;
 internal sealed class CodegenAttribute : Attribute
 {
 	public bool ShouldGenerate { get; set; }
+
+	/// <summary>
+	/// When <c>false</c>, suppresses generation of the request-converter <c>FormatCode</c> method for this type
+	/// while still generating the type itself (params, ctors, converters). Use for types whose request-converter
+	/// <c>FormatCode</c> is hand-crafted but which are otherwise generated (e.g. <c>BulkRequest</c>). Defaults to <c>true</c>.
+	/// </summary>
+	public bool GenerateFormatCode { get; set; } = true;
 }

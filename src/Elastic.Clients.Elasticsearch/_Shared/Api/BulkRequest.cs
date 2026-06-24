@@ -16,7 +16,12 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-[JsonConverter(typeof(JsonIncompatibleConverter))]
+// The request-converter FormatCode for BulkRequest is hand-crafted (see RequestConverter/_Shared/Api/BulkRequest.cs):
+// the generator cannot model the NDJSON 'Operations' body, which it erases. GenerateFormatCode = false skips only the
+// generated FormatCode while keeping the generated params. ShouldGenerate = true is required because [Codegen]
+// otherwise defaults to opting the type out of generation entirely; here the type IS generated as usual.
+[Codegen(ShouldGenerate = true, GenerateFormatCode = false)]
+[JsonConverter(typeof(BulkRequestConverter))]
 public partial class BulkRequest : IStreamSerializable
 {
 	private static readonly IRequestConfiguration RequestConfigSingleton = new RequestConfiguration

@@ -6,6 +6,16 @@ public sealed partial class SearchTemplateRequestItem : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		writer.Append(ToString());
+		// SearchTemplateRequestItem has no parameterless constructor (Header/Body are init-only and set via the
+		// ctor), so emit a constructor call rather than an object initializer.
+		writer.Write("new SearchTemplateRequestItem(");
+		if (Header is not null)
+		{
+			Header.FormatCode(writer);
+			writer.Write(", ");
+		}
+
+		Body.FormatCode(writer);
+		writer.Write(")");
 	}
 }

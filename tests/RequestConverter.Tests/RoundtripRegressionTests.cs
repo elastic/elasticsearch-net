@@ -50,9 +50,6 @@ public sealed class RoundtripRegressionTests
 				continue;
 			if (Blacklist.Contains(example.Digest))
 				continue;
-			// NDJSON-bodied APIs aren't supported by the converter (IStreamSerializable).
-			if (example.ParsedSource.Any(s => IsNdjson(s.Api)))
-				continue;
 
 			foreach (var source in example.ParsedSource)
 			{
@@ -168,11 +165,40 @@ public sealed class RoundtripRegressionTests
 				continue;
 			}
 
-			// Compare against the client's own canonical serialization of the input (deserialize then
-			// re-serialize), so client-side normalization (match shorthand -> full form, aggs ->
-			// aggregations, single value -> array, dropped explicit nulls) is applied to both sides and
-			// only genuine converter reconstruction differences remain. Falls back to the raw input if
-			// the input can't be re-serialized.
+			// NDJSON-bodied requests (bulk/msearch/msearch_template) serialize to newline-delimited JSON, not a
+			// single JSON document. Compare the materialized request (A) against the rebuilt request (B), both
+			// serialized by the client. A carries the URL-level index applied during conversion (bulk's index
+			// resolution depends on it; re-deserializing the body alone would resolve operation indices
+			// differently). Symmetric — both go through the client — so client normalization applies to both
+			// sides and only genuine emission differences surface; compare line-by-line.
+			if (IsNdjson(c.Api))
+			{
+				string expectedNdjson;
+				try
+				{
+					using var aStream = new MemoryStream();
+					serializer.Serialize(c.Materialized, aStream, global::Elastic.Transport.SerializationFormatting.None);
+					expectedNdjson = Encoding.UTF8.GetString(aStream.ToArray());
+				}
+				catch (Exception ex)
+				{
+					var inner = ex is TargetInvocationException { InnerException: { } tie } ? tie : ex;
+					roundtripFailures.Add($"{c.Api} [{c.Digest}]: materialized serialize threw {inner.GetType().Name}: {inner.Message}");
+					continue;
+				}
+
+				if (NdjsonEquals(expectedNdjson, outputJson, out var ndjsonDiff))
+					roundtripped++;
+				else
+					roundtripFailures.Add($"{c.Api} [{c.Digest}]: ndjson body mismatch -> {ndjsonDiff}");
+
+				continue;
+			}
+
+			// Non-NDJSON: compare against the client's own canonical serialization of the input (deserialize then
+			// re-serialize), so client-side normalization (match shorthand -> full form, aggs -> aggregations,
+			// single value -> array, dropped explicit nulls) is applied to both sides and only genuine converter
+			// reconstruction differences remain. Falls back to the raw input if the input can't be re-serialized.
 			string expectedJson;
 			try
 			{
@@ -285,6 +311,35 @@ public sealed class RoundtripRegressionTests
 		"{" + string.Join(", ", d.OrderBy(kv => kv.Key, StringComparer.Ordinal).Select(kv => $"{kv.Key}={kv.Value}")) + "}";
 
 	private static bool IsNdjson(string api) => api is "bulk" or "msearch" or "msearch_template";
+
+	/// <summary>Compares two NDJSON payloads line-by-line: equal non-empty line counts and each line semantically equal.</summary>
+	private static bool NdjsonEquals(string expectedNdjson, string actualNdjson, out string diff)
+	{
+		var expectedLines = SplitNdjson(expectedNdjson);
+		var actualLines = SplitNdjson(actualNdjson);
+
+		if (expectedLines.Count != actualLines.Count)
+		{
+			diff = $"line count expected={expectedLines.Count} actual={actualLines.Count} | expected={expectedNdjson} | actual={actualNdjson}";
+			return false;
+		}
+
+		for (var i = 0; i < expectedLines.Count; i++)
+		{
+			using var expectedDoc = JsonDocument.Parse(expectedLines[i]);
+			if (!JsonEquals(expectedDoc.RootElement, actualLines[i], out _))
+			{
+				diff = $"line {i} -> expected={expectedLines[i]} | actual={actualLines[i]}";
+				return false;
+			}
+		}
+
+		diff = string.Empty;
+		return true;
+	}
+
+	private static List<string> SplitNdjson(string ndjson) =>
+		ndjson.Split('\n').Where(line => !string.IsNullOrWhiteSpace(line)).ToList();
 
 	private static string BuildSource(int index, Case c)
 	{
@@ -613,5 +668,11 @@ public sealed class RoundtripRegressionTests
 		"7f2d511cb64743c006225e5933a14bb4",
 		"0d94d76b7f00d0459d1f8c962c144dcd",
 		"1f8a6d2cc57ed8997a52354aca371aac",
+
+		// bulk body recorded as a raw NDJSON string (leading newline, escaped), not a parsed JSON array. The
+		// converter reads array / genuine-NDJSON bodies; a JSON-string-wrapped NDJSON is a recording artifact the
+		// client never receives on the wire.
+		"c9c21191ae15a49955bffde0ac749a49",
+		"ba70b92f745a1765f1eb62e3457a86c3",
 	];
 }
