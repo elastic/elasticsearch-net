@@ -33,9 +33,11 @@ internal sealed class StringifiedBoolConverter :
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	private static bool ParseValue(ref Utf8JsonReader reader)
 	{
-		Debug.Assert(!reader.HasValueSequence);
+		// Sequence-safe: "true"/"false" <= 5 bytes; 16 with headroom.
+		Span<byte> tmp = stackalloc byte[16];
+		var bytes = tmp[..reader.GetValueBytes(tmp)];
 
-		return Utf8Parser.TryParse(reader.ValueSpan, out bool result, out var consumed) && (consumed == reader.ValueSpan.Length)
+		return Utf8Parser.TryParse(bytes, out bool result, out var consumed) && (consumed == bytes.Length)
 			? result
 			: throw new JsonException($"Unable to convert JSON string value '{reader.GetString()!}' to '{nameof(Boolean)}'.");
 	}
@@ -62,9 +64,11 @@ internal sealed class StringifiedIntConverter :
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	private static int ParseValue(ref Utf8JsonReader reader)
 	{
-		Debug.Assert(!reader.HasValueSequence);
+		// Sequence-safe: Int32 max is 10 digits + sign = 11; 16 with headroom.
+		Span<byte> tmp = stackalloc byte[16];
+		var bytes = tmp[..reader.GetValueBytes(tmp)];
 
-		return Utf8Parser.TryParse(reader.ValueSpan, out int result, out var consumed) && (consumed == reader.ValueSpan.Length)
+		return Utf8Parser.TryParse(bytes, out int result, out var consumed) && (consumed == bytes.Length)
 			? result
 			: throw new JsonException($"Unable to convert JSON string value '{reader.GetString()!}' to '{nameof(Int32)}'.");
 	}
@@ -91,9 +95,11 @@ internal sealed class StringifiedLongConverter :
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	private static long ParseValue(ref Utf8JsonReader reader)
 	{
-		Debug.Assert(!reader.HasValueSequence);
+		// Sequence-safe: Int64 max is 19 digits + sign = 20; 32 with headroom.
+		Span<byte> tmp = stackalloc byte[32];
+		var bytes = tmp[..reader.GetValueBytes(tmp)];
 
-		return Utf8Parser.TryParse(reader.ValueSpan, out long result, out var consumed) && (consumed == reader.ValueSpan.Length)
+		return Utf8Parser.TryParse(bytes, out long result, out var consumed) && (consumed == bytes.Length)
 			? result
 			: throw new JsonException($"Unable to convert JSON string value '{reader.GetString()!}' to '{nameof(Int64)}'.");
 	}
@@ -120,9 +126,11 @@ internal sealed class StringifiedSingleConverter :
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	private static float ParseValue(ref Utf8JsonReader reader)
 	{
-		Debug.Assert(!reader.HasValueSequence);
+		// Sequence-safe: single round-trip ~16 bytes; 32 with headroom.
+		Span<byte> tmp = stackalloc byte[32];
+		var bytes = tmp[..reader.GetValueBytes(tmp)];
 
-		return Utf8Parser.TryParse(reader.ValueSpan, out float result, out var consumed) && (consumed == reader.ValueSpan.Length)
+		return Utf8Parser.TryParse(bytes, out float result, out var consumed) && (consumed == bytes.Length)
 			? result
 			: throw new JsonException($"Unable to convert JSON string value '{reader.GetString()!}' to '{nameof(Single)}'.");
 	}
@@ -149,9 +157,11 @@ internal sealed class StringifiedDoubleConverter :
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	private static double ParseValue(ref Utf8JsonReader reader)
 	{
-		Debug.Assert(!reader.HasValueSequence);
+		// Sequence-safe: double round-trip ~25 bytes; 64 with headroom.
+		Span<byte> tmp = stackalloc byte[64];
+		var bytes = tmp[..reader.GetValueBytes(tmp)];
 
-		return Utf8Parser.TryParse(reader.ValueSpan, out double result, out var consumed) && (consumed == reader.ValueSpan.Length)
+		return Utf8Parser.TryParse(bytes, out double result, out var consumed) && (consumed == bytes.Length)
 			? result
 			: throw new JsonException($"Unable to convert JSON string value '{reader.GetString()!}' to '{nameof(Double)}'.");
 	}
