@@ -15,7 +15,7 @@ namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 /// Hand-crafted request-converter formatter for the <see cref="IBulkOperation"/> hierarchy. The bulk operation types
 /// are not schema types (they model the NDJSON action/source pairs in the C# client by hand), so the generator emits
 /// no <c>FormatCode</c> for them. Each operation is rendered as a constructor call (document for index/create, id for
-/// update/delete) plus an object initializer for the metadata it carries — the mirror image of how
+/// update/delete) plus an object initializer for the metadata it carries, the mirror image of how
 /// <see cref="BulkRequestConverter"/> reads them, so a materialized request and the request rebuilt from the emitted
 /// code serialize to identical NDJSON.
 /// </summary>

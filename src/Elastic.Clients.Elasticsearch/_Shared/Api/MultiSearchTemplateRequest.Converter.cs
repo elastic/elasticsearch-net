@@ -14,7 +14,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 
 /// <summary>
-/// Reads the NDJSON body of a multi-search-template request — alternating header/template-body line pairs — back into a
+/// Reads the NDJSON body of a multi-search-template request (alternating header/template-body line pairs) back into a
 /// <see cref="MultiSearchTemplateRequest"/>. See <see cref="MultiSearchRequestConverter"/> for the array-vs-NDJSON
 /// handling; writing flows through <see cref="IStreamSerializable"/>.
 /// </summary>

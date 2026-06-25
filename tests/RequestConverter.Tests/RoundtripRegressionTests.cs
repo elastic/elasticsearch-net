@@ -173,7 +173,7 @@ public sealed class RoundtripRegressionTests
 			// single JSON document. Compare the materialized request (A) against the rebuilt request (B), both
 			// serialized by the client. A carries the URL-level index applied during conversion (bulk's index
 			// resolution depends on it; re-deserializing the body alone would resolve operation indices
-			// differently). Symmetric — both go through the client — so client normalization applies to both
+			// differently). Symmetric: both go through the client, so client normalization applies to both
 			// sides and only genuine emission differences surface; compare line-by-line.
 			if (IsNdjson(c.Api))
 			{
@@ -234,8 +234,8 @@ public sealed class RoundtripRegressionTests
 	}
 
 	/// <summary>
-	/// Resolves a request to its on-the-wire endpoint shape — HTTP method, resolved route values, and
-	/// query-string parameters — using the client's own URL and query-string builder (the same calls the
+	/// Resolves a request to its on-the-wire endpoint shape: HTTP method, resolved route values, and
+	/// query-string parameters, using the client's own URL and query-string builder (the same calls the
 	/// client makes in <c>PrepareRequest</c>). <c>RequestParameters</c> is internal and lives on the
 	/// generic <c>Request&lt;TParameters&gt;</c> base, so it is reached reflectively.
 	/// </summary>

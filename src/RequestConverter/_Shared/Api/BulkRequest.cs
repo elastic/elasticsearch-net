@@ -94,7 +94,7 @@ public partial class BulkRequest : RequestConverter.ICodeFormattable
 		}
 
 		// The bulk body: a 'BulkOperationsCollection' (an IList<IBulkOperation>) rendered as a collection
-		// initializer — 'new BulkOperationsCollection { op0, op1, ... }'. A collection-expression ('[ ... ]')
+		// initializer: 'new BulkOperationsCollection { op0, op1, ... }'. A collection-expression ('[ ... ]')
 		// would not bind to 'BulkOperationsCollection', so an explicit 'new' with a '{ }' block is used.
 		if (Operations is not null)
 		{

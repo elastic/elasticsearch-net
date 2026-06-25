@@ -13,7 +13,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 
 /// <summary>
-/// Reads the NDJSON body of a multi-search request — a sequence of alternating header/body line pairs — back into a
+/// Reads the NDJSON body of a multi-search request (a sequence of alternating header/body line pairs) back into a
 /// <see cref="MultiSearchRequest"/>. Accepts either a JSON array of line values (as recorded by tooling) or genuine
 /// multi-top-level-value NDJSON; the enclosing <see cref="Utf8JsonReader"/> is created with
 /// <c>JsonReaderOptions.AllowMultipleValues</c> so the loop can walk successive top-level values. Writing continues to

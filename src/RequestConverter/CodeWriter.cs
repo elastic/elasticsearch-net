@@ -12,9 +12,8 @@ namespace RequestConverter;
 
 /// <summary>
 /// An indentation-aware writer that <see cref="ICodeFormattable"/> implementations use to
-/// recursively emit C# source code for a materialized request. Replaces the previous bare
-/// <see cref="StringBuilder"/> based approach and centralizes value dispatch, string escaping,
-/// indentation and object-initializer rendering.
+/// recursively emit C# source code for a materialized request. Centralizes value dispatch, string
+/// escaping, indentation and object-initializer rendering.
 /// </summary>
 public sealed class CodeWriter
 {
@@ -180,7 +179,7 @@ public sealed class CodeWriter
 	/// <summary>
 	/// Whether <paramref name="value"/> should be rendered as a property assignment. Filters out
 	/// <c>null</c> and the "Undefined" <see cref="JsonElement"/> (<c>default(JsonElement)</c>), which
-	/// arises for an unset open-generic value-type property — e.g. a generic request's
+	/// arises for an unset open-generic value-type property, e.g. a generic request's
 	/// <c>TDocument</c>/<c>TPartialDocument</c> materialized as <see cref="JsonElement"/>, where the
 	/// nullable annotation is erased so the unset value is a non-null default that would throw on
 	/// <see cref="JsonElement.GetRawText"/>.
