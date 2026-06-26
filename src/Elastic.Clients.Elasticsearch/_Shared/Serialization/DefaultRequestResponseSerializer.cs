@@ -101,29 +101,48 @@ internal sealed class DefaultRequestResponseSerializer :
 	}
 
 	// NDJSON read path. IStreamSerializable request types (bulk/msearch/msearch_template) are written as
-	// newline-delimited JSON (mirror of the Serialize special-case above). We deserialize by handing the type's
-	// JsonConverter a reader that allows multiple top-level values, so the per-line parsing lives in the converters
-	// rather than being hard-coded here.
+	// newline-delimited JSON (mirror of the Serialize special-case above). We stream the body one top-level value at a
+	// time through NdjsonStreamAssembler so the whole serialized body is never held alongside the materialized request;
+	// the per-line parsing is shared with the types' JsonConverters. Any other IStreamSerializable type falls back to
+	// the whole-body read.
 	private object? DeserializeStreamSerializable(Type type, Stream stream)
-	{
-		using var buffer = new MemoryStream();
-		stream.CopyTo(buffer);
-		return DeserializeStreamSerializable(type, buffer);
-	}
-
-	private async ValueTask<object?> DeserializeStreamSerializableAsync(Type type, Stream stream, CancellationToken cancellationToken)
-	{
-		using var buffer = new MemoryStream();
-		await stream.CopyToAsync(buffer, 81920, cancellationToken).ConfigureAwait(false);
-		return DeserializeStreamSerializable(type, buffer);
-	}
-
-	private object? DeserializeStreamSerializable(Type type, MemoryStream buffer)
 	{
 		if (!this.TryGetJsonSerializerOptions(out var options))
 		{
 			throw new InvalidOperationException("Could not resolve the JsonSerializerOptions required for NDJSON deserialization.");
 		}
+
+		if (type == typeof(BulkRequest))
+			return NdjsonStreamAssembler.AssembleBulk(stream, options);
+		if (type == typeof(MultiSearchRequest))
+			return NdjsonStreamAssembler.AssembleMultiSearch(stream, options);
+		if (type == typeof(MultiSearchTemplateRequest))
+			return NdjsonStreamAssembler.AssembleMultiSearchTemplate(stream, options);
+
+		return DeserializeStreamSerializableBuffered(type, stream, options);
+	}
+
+	private async ValueTask<object?> DeserializeStreamSerializableAsync(Type type, Stream stream, CancellationToken cancellationToken)
+	{
+		if (!this.TryGetJsonSerializerOptions(out var options))
+		{
+			throw new InvalidOperationException("Could not resolve the JsonSerializerOptions required for NDJSON deserialization.");
+		}
+
+		if (type == typeof(BulkRequest))
+			return await NdjsonStreamAssembler.AssembleBulkAsync(stream, options, cancellationToken).ConfigureAwait(false);
+		if (type == typeof(MultiSearchRequest))
+			return await NdjsonStreamAssembler.AssembleMultiSearchAsync(stream, options, cancellationToken).ConfigureAwait(false);
+		if (type == typeof(MultiSearchTemplateRequest))
+			return await NdjsonStreamAssembler.AssembleMultiSearchTemplateAsync(stream, options, cancellationToken).ConfigureAwait(false);
+
+		return DeserializeStreamSerializableBuffered(type, stream, options);
+	}
+
+	private static object? DeserializeStreamSerializableBuffered(Type type, Stream stream, JsonSerializerOptions options)
+	{
+		using var buffer = new MemoryStream();
+		stream.CopyTo(buffer);
 
 		var readerOptions = new JsonReaderOptions { AllowMultipleValues = true, MaxDepth = options.MaxDepth };
 		var reader = new Utf8JsonReader(buffer.GetBuffer().AsSpan(0, (int)buffer.Length), readerOptions);
