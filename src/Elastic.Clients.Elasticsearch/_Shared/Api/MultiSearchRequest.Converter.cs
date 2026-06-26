@@ -4,8 +4,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading;
+using System.Threading.Tasks;
 
 using Elastic.Clients.Elasticsearch.Core.MSearch;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -19,7 +22,7 @@ namespace Elastic.Clients.Elasticsearch;
 /// <c>JsonReaderOptions.AllowMultipleValues</c> so the loop can walk successive top-level values. Writing continues to
 /// flow through the <see cref="IStreamSerializable"/> path, so <see cref="Write"/> is not used on the normal request path.
 /// </summary>
-public sealed class MultiSearchRequestConverter : JsonConverter<MultiSearchRequest>
+public sealed class MultiSearchRequestConverter : JsonConverter<MultiSearchRequest>, INdjsonStreamReadable
 {
 	public override MultiSearchRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
@@ -50,4 +53,10 @@ public sealed class MultiSearchRequestConverter : JsonConverter<MultiSearchReque
 
 	public override void Write(Utf8JsonWriter writer, MultiSearchRequest value, JsonSerializerOptions options) =>
 		throw new NotSupportedException("'MultiSearchRequest' is written as NDJSON through 'IStreamSerializable', not via this converter.");
+
+	object INdjsonStreamReadable.Read(Stream stream, JsonSerializerOptions options) =>
+		NdjsonStreamAssembler.AssembleMultiSearch(stream, options);
+
+	ValueTask<object> INdjsonStreamReadable.ReadAsync(Stream stream, JsonSerializerOptions options, CancellationToken cancellationToken) =>
+		NdjsonStreamAssembler.AssembleMultiSearchAsync(stream, options, cancellationToken);
 }

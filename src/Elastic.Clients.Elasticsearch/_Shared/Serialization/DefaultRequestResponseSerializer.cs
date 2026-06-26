@@ -101,10 +101,12 @@ internal sealed class DefaultRequestResponseSerializer :
 	}
 
 	// NDJSON read path. IStreamSerializable request types (bulk/msearch/msearch_template) are written as
-	// newline-delimited JSON (mirror of the Serialize special-case above). We stream the body one top-level value at a
-	// time through NdjsonStreamAssembler so the whole serialized body is never held alongside the materialized request;
-	// the per-line parsing is shared with the types' JsonConverters. Any other IStreamSerializable type falls back to
-	// the whole-body read.
+	// newline-delimited JSON (mirror of the Serialize special-case above). A type whose JsonConverter implements
+	// INdjsonStreamReadable streams the body one top-level value at a time, so the whole serialized body is never held
+	// alongside the materialized request; the capability is discovered through the registered converter rather than a
+	// hard-coded type list. Anything else falls back to the whole-body read.
+	[UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'", Justification = "The NDJSON request types declare concrete converters via [JsonConverter] and the serializer always uses an explicit TypeInfoResolver, so GetConverter resolves without runtime code generation.")]
+	[UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute'", Justification = "The NDJSON request types declare concrete converters via [JsonConverter] and the serializer always uses an explicit TypeInfoResolver, so GetConverter resolves without trimmed reflection.")]
 	private object? DeserializeStreamSerializable(Type type, Stream stream)
 	{
 		if (!this.TryGetJsonSerializerOptions(out var options))
@@ -112,16 +114,14 @@ internal sealed class DefaultRequestResponseSerializer :
 			throw new InvalidOperationException("Could not resolve the JsonSerializerOptions required for NDJSON deserialization.");
 		}
 
-		if (type == typeof(BulkRequest))
-			return NdjsonStreamAssembler.AssembleBulk(stream, options);
-		if (type == typeof(MultiSearchRequest))
-			return NdjsonStreamAssembler.AssembleMultiSearch(stream, options);
-		if (type == typeof(MultiSearchTemplateRequest))
-			return NdjsonStreamAssembler.AssembleMultiSearchTemplate(stream, options);
+		if (options.GetConverter(type) is INdjsonStreamReadable streamable)
+			return streamable.Read(stream, options);
 
 		return DeserializeStreamSerializableBuffered(type, stream, options);
 	}
 
+	[UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'", Justification = "The NDJSON request types declare concrete converters via [JsonConverter] and the serializer always uses an explicit TypeInfoResolver, so GetConverter resolves without runtime code generation.")]
+	[UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute'", Justification = "The NDJSON request types declare concrete converters via [JsonConverter] and the serializer always uses an explicit TypeInfoResolver, so GetConverter resolves without trimmed reflection.")]
 	private async ValueTask<object?> DeserializeStreamSerializableAsync(Type type, Stream stream, CancellationToken cancellationToken)
 	{
 		if (!this.TryGetJsonSerializerOptions(out var options))
@@ -129,12 +129,8 @@ internal sealed class DefaultRequestResponseSerializer :
 			throw new InvalidOperationException("Could not resolve the JsonSerializerOptions required for NDJSON deserialization.");
 		}
 
-		if (type == typeof(BulkRequest))
-			return await NdjsonStreamAssembler.AssembleBulkAsync(stream, options, cancellationToken).ConfigureAwait(false);
-		if (type == typeof(MultiSearchRequest))
-			return await NdjsonStreamAssembler.AssembleMultiSearchAsync(stream, options, cancellationToken).ConfigureAwait(false);
-		if (type == typeof(MultiSearchTemplateRequest))
-			return await NdjsonStreamAssembler.AssembleMultiSearchTemplateAsync(stream, options, cancellationToken).ConfigureAwait(false);
+		if (options.GetConverter(type) is INdjsonStreamReadable streamable)
+			return await streamable.ReadAsync(stream, options, cancellationToken).ConfigureAwait(false);
 
 		return DeserializeStreamSerializableBuffered(type, stream, options);
 	}

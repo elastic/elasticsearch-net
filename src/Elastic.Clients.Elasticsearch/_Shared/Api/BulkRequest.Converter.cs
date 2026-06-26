@@ -4,8 +4,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading;
+using System.Threading.Tasks;
 
 using Elastic.Clients.Elasticsearch.Core.Bulk;
 using Elastic.Clients.Elasticsearch.Core.Search;
@@ -27,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch;
 /// entry points let it build operations one value at a time without buffering the whole body, while this buffered
 /// converter remains the registered <see cref="JsonConverter"/>.
 /// </remarks>
-public sealed class BulkRequestConverter : JsonConverter<BulkRequest>
+public sealed class BulkRequestConverter : JsonConverter<BulkRequest>, INdjsonStreamReadable
 {
 	public override BulkRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
@@ -51,6 +54,12 @@ public sealed class BulkRequestConverter : JsonConverter<BulkRequest>
 
 	public override void Write(Utf8JsonWriter writer, BulkRequest value, JsonSerializerOptions options) =>
 		throw new NotSupportedException("'BulkRequest' is written as NDJSON through 'IStreamSerializable', not via this converter.");
+
+	object INdjsonStreamReadable.Read(Stream stream, JsonSerializerOptions options) =>
+		NdjsonStreamAssembler.AssembleBulk(stream, options);
+
+	ValueTask<object> INdjsonStreamReadable.ReadAsync(Stream stream, JsonSerializerOptions options, CancellationToken cancellationToken) =>
+		NdjsonStreamAssembler.AssembleBulkAsync(stream, options, cancellationToken);
 
 	private static IBulkOperation ReadOperation(ref Utf8JsonReader reader, JsonSerializerOptions options)
 	{

@@ -4,8 +4,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading;
+using System.Threading.Tasks;
 
 using Elastic.Clients.Elasticsearch.Core.MSearch;
 using Elastic.Clients.Elasticsearch.Core.MSearchTemplate;
@@ -18,7 +21,7 @@ namespace Elastic.Clients.Elasticsearch;
 /// <see cref="MultiSearchTemplateRequest"/>. See <see cref="MultiSearchRequestConverter"/> for the array-vs-NDJSON
 /// handling; writing flows through <see cref="IStreamSerializable"/>.
 /// </summary>
-public sealed class MultiSearchTemplateRequestConverter : JsonConverter<MultiSearchTemplateRequest>
+public sealed class MultiSearchTemplateRequestConverter : JsonConverter<MultiSearchTemplateRequest>, INdjsonStreamReadable
 {
 	public override MultiSearchTemplateRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
@@ -46,4 +49,10 @@ public sealed class MultiSearchTemplateRequestConverter : JsonConverter<MultiSea
 
 	public override void Write(Utf8JsonWriter writer, MultiSearchTemplateRequest value, JsonSerializerOptions options) =>
 		throw new NotSupportedException("'MultiSearchTemplateRequest' is written as NDJSON through 'IStreamSerializable', not via this converter.");
+
+	object INdjsonStreamReadable.Read(Stream stream, JsonSerializerOptions options) =>
+		NdjsonStreamAssembler.AssembleMultiSearchTemplate(stream, options);
+
+	ValueTask<object> INdjsonStreamReadable.ReadAsync(Stream stream, JsonSerializerOptions options, CancellationToken cancellationToken) =>
+		NdjsonStreamAssembler.AssembleMultiSearchTemplateAsync(stream, options, cancellationToken);
 }
