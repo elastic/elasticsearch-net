@@ -63,6 +63,38 @@ internal static class NdjsonValueReader
 		CommentHandling = options.ReadCommentHandling
 	};
 
+	/// <summary>
+	/// Deserializes one complete top-level value (as handed to a <see cref="NdjsonValueVisitor"/>) into
+	/// <typeparamref name="T"/>, copying a multi-segment slice to a contiguous buffer first. The inner reader's
+	/// <see cref="JsonReaderOptions.MaxDepth"/> mirrors the serializer, matching the outer drive loop.
+	/// </summary>
+	public static T? DeserializeValue<T>(in ReadOnlySequence<byte> value, JsonSerializerOptions options)
+	{
+		var readerOptions = new JsonReaderOptions { MaxDepth = options.MaxDepth };
+
+		if (value.IsSingleSegment)
+			return DeserializeValue<T>(value.First.Span, options, readerOptions);
+
+		var length = (int)value.Length;
+		var rented = ArrayPool<byte>.Shared.Rent(length);
+		try
+		{
+			value.CopyTo(rented);
+			return DeserializeValue<T>(rented.AsSpan(0, length), options, readerOptions);
+		}
+		finally
+		{
+			ArrayPool<byte>.Shared.Return(rented);
+		}
+	}
+
+	private static T? DeserializeValue<T>(ReadOnlySpan<byte> span, JsonSerializerOptions options, JsonReaderOptions readerOptions)
+	{
+		var reader = new Utf8JsonReader(span, readerOptions);
+		reader.Read();
+		return reader.ReadValue<T>(options);
+	}
+
 	public static void DriveStream(Stream stream, JsonReaderOptions readerOptions, NdjsonValueVisitor visit)
 	{
 		var buffer = new StreamBuffer(stream, DefaultBufferSize);

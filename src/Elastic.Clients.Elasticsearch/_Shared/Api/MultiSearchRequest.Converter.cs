@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
@@ -54,9 +55,46 @@ public sealed class MultiSearchRequestConverter : JsonConverter<MultiSearchReque
 	public override void Write(Utf8JsonWriter writer, MultiSearchRequest value, JsonSerializerOptions options) =>
 		throw new NotSupportedException("'MultiSearchRequest' is written as NDJSON through 'IStreamSerializable', not via this converter.");
 
-	object INdjsonStreamReadable.Read(Stream stream, JsonSerializerOptions options) =>
-		NdjsonStreamAssembler.AssembleMultiSearch(stream, options);
+	object INdjsonStreamReadable.Read(Stream stream, JsonSerializerOptions options)
+	{
+		var assembly = new StreamAssembly(options);
+		NdjsonValueReader.DriveStream(stream, NdjsonValueReader.BuildReaderOptions(options), assembly.Visit);
+		return assembly.Build();
+	}
 
-	ValueTask<object> INdjsonStreamReadable.ReadAsync(Stream stream, JsonSerializerOptions options, CancellationToken cancellationToken) =>
-		NdjsonStreamAssembler.AssembleMultiSearchAsync(stream, options, cancellationToken);
+	async ValueTask<object> INdjsonStreamReadable.ReadAsync(Stream stream, JsonSerializerOptions options, CancellationToken cancellationToken)
+	{
+		var assembly = new StreamAssembly(options);
+		await NdjsonValueReader.DriveStreamAsync(stream, NdjsonValueReader.BuildReaderOptions(options), assembly.Visit, cancellationToken).ConfigureAwait(false);
+		return assembly.Build();
+	}
+
+	// Pairs each streamed header value with the following body value, materializing the header immediately so no byte
+	// slice is held across a buffer refill.
+	private sealed class StreamAssembly(JsonSerializerOptions options)
+	{
+		private readonly List<SearchRequestItem> _searches = new();
+		private MultisearchHeader? _pendingHeader;
+
+		public void Visit(ReadOnlySequence<byte> value, int index)
+		{
+			if (_pendingHeader is null)
+			{
+				_pendingHeader = NdjsonValueReader.DeserializeValue<MultisearchHeader>(value, options);
+				return;
+			}
+
+			var body = NdjsonValueReader.DeserializeValue<MultisearchBody>(value, options);
+			_searches.Add(new SearchRequestItem(_pendingHeader!, body!));
+			_pendingHeader = null;
+		}
+
+		public MultiSearchRequest Build()
+		{
+			if (_pendingHeader is not null)
+				throw new JsonException("Expected a search body line following the header in the multi-search NDJSON body.");
+
+			return new MultiSearchRequest(JsonConstructorSentinel.Instance) { Searches = _searches };
+		}
+	}
 }

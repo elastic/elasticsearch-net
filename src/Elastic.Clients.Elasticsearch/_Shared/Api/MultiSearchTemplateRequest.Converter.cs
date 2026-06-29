@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
@@ -50,9 +51,46 @@ public sealed class MultiSearchTemplateRequestConverter : JsonConverter<MultiSea
 	public override void Write(Utf8JsonWriter writer, MultiSearchTemplateRequest value, JsonSerializerOptions options) =>
 		throw new NotSupportedException("'MultiSearchTemplateRequest' is written as NDJSON through 'IStreamSerializable', not via this converter.");
 
-	object INdjsonStreamReadable.Read(Stream stream, JsonSerializerOptions options) =>
-		NdjsonStreamAssembler.AssembleMultiSearchTemplate(stream, options);
+	object INdjsonStreamReadable.Read(Stream stream, JsonSerializerOptions options)
+	{
+		var assembly = new StreamAssembly(options);
+		NdjsonValueReader.DriveStream(stream, NdjsonValueReader.BuildReaderOptions(options), assembly.Visit);
+		return assembly.Build();
+	}
 
-	ValueTask<object> INdjsonStreamReadable.ReadAsync(Stream stream, JsonSerializerOptions options, CancellationToken cancellationToken) =>
-		NdjsonStreamAssembler.AssembleMultiSearchTemplateAsync(stream, options, cancellationToken);
+	async ValueTask<object> INdjsonStreamReadable.ReadAsync(Stream stream, JsonSerializerOptions options, CancellationToken cancellationToken)
+	{
+		var assembly = new StreamAssembly(options);
+		await NdjsonValueReader.DriveStreamAsync(stream, NdjsonValueReader.BuildReaderOptions(options), assembly.Visit, cancellationToken).ConfigureAwait(false);
+		return assembly.Build();
+	}
+
+	// Pairs each streamed header value with the following template-body value, materializing the header immediately so
+	// no byte slice is held across a buffer refill.
+	private sealed class StreamAssembly(JsonSerializerOptions options)
+	{
+		private readonly List<SearchTemplateRequestItem> _searchTemplates = new();
+		private MultisearchHeader? _pendingHeader;
+
+		public void Visit(ReadOnlySequence<byte> value, int index)
+		{
+			if (_pendingHeader is null)
+			{
+				_pendingHeader = NdjsonValueReader.DeserializeValue<MultisearchHeader>(value, options);
+				return;
+			}
+
+			var body = NdjsonValueReader.DeserializeValue<TemplateConfig>(value, options);
+			_searchTemplates.Add(new SearchTemplateRequestItem(_pendingHeader!, body!));
+			_pendingHeader = null;
+		}
+
+		public MultiSearchTemplateRequest Build()
+		{
+			if (_pendingHeader is not null)
+				throw new JsonException("Expected a template body line following the header in the multi-search-template NDJSON body.");
+
+			return new MultiSearchTemplateRequest(JsonConstructorSentinel.Instance) { SearchTemplates = _searchTemplates };
+		}
+	}
 }

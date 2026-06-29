@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
@@ -25,10 +26,11 @@ namespace Elastic.Clients.Elasticsearch;
 /// <see cref="IStreamSerializable"/> path, so <see cref="Write"/> is not used on the normal request path.
 /// </summary>
 /// <remarks>
-/// The per-operation parsing (<c>ReadActionHeaderObject</c> for the header, <c>CompleteOperation</c> for the
-/// source/body) is shared with the streaming reader: the span-based <c>ReadActionHeader</c> / <c>CompleteOperation</c>
-/// entry points let it build operations one value at a time without buffering the whole body, while this buffered
-/// converter remains the registered <see cref="JsonConverter"/>.
+/// When the body arrives as a <see cref="Stream"/> (the <see cref="INdjsonStreamReadable"/> path), the nested
+/// <c>StreamAssembly</c> drives <see cref="NdjsonValueReader"/> one top-level value at a time, so the whole body is
+/// never buffered. Both paths share the same per-operation parsing (<c>ReadActionHeaderObject</c> for the header,
+/// <c>CompleteOperation</c> for the source/body), with the span-based <c>ReadActionHeader</c> / <c>CompleteOperation</c>
+/// entry points isolating one value for the streaming reader.
 /// </remarks>
 public sealed class BulkRequestConverter : JsonConverter<BulkRequest>, INdjsonStreamReadable
 {
@@ -55,11 +57,91 @@ public sealed class BulkRequestConverter : JsonConverter<BulkRequest>, INdjsonSt
 	public override void Write(Utf8JsonWriter writer, BulkRequest value, JsonSerializerOptions options) =>
 		throw new NotSupportedException("'BulkRequest' is written as NDJSON through 'IStreamSerializable', not via this converter.");
 
-	object INdjsonStreamReadable.Read(Stream stream, JsonSerializerOptions options) =>
-		NdjsonStreamAssembler.AssembleBulk(stream, options);
+	object INdjsonStreamReadable.Read(Stream stream, JsonSerializerOptions options)
+	{
+		var assembly = new StreamAssembly(options);
+		NdjsonValueReader.DriveStream(stream, NdjsonValueReader.BuildReaderOptions(options), assembly.Visit);
+		return assembly.Build();
+	}
 
-	ValueTask<object> INdjsonStreamReadable.ReadAsync(Stream stream, JsonSerializerOptions options, CancellationToken cancellationToken) =>
-		NdjsonStreamAssembler.AssembleBulkAsync(stream, options, cancellationToken);
+	async ValueTask<object> INdjsonStreamReadable.ReadAsync(Stream stream, JsonSerializerOptions options, CancellationToken cancellationToken)
+	{
+		var assembly = new StreamAssembly(options);
+		await NdjsonValueReader.DriveStreamAsync(stream, NdjsonValueReader.BuildReaderOptions(options), assembly.Visit, cancellationToken).ConfigureAwait(false);
+		return assembly.Build();
+	}
+
+	// Builds the request by pairing each streamed value with the next: a 'delete' header completes on its own; every
+	// other action header pends until its source value arrives. The header is materialized the moment it is seen, so no
+	// byte slice is held across a buffer refill.
+	private sealed class StreamAssembly(JsonSerializerOptions options)
+	{
+		private readonly BulkOperationsCollection _operations = new();
+		private BulkActionHeader? _pending;
+
+		public void Visit(ReadOnlySequence<byte> value, int index)
+		{
+			if (_pending is null)
+			{
+				var header = ReadHeader(value, options);
+
+				if (header.OperationType is "delete")
+					_operations.Add(CompleteFrom(in header, default, options));
+				else
+					_pending = header;
+
+				return;
+			}
+
+			var pending = _pending.Value;
+			_operations.Add(CompleteFrom(in pending, value, options));
+			_pending = null;
+		}
+
+		public BulkRequest Build()
+		{
+			if (_pending is not null)
+				throw new JsonException($"Expected a source line following the '{_pending.Value.OperationType}' bulk action header.");
+
+			return new BulkRequest(JsonConstructorSentinel.Instance) { Operations = _operations };
+		}
+
+		private static BulkActionHeader ReadHeader(in ReadOnlySequence<byte> value, JsonSerializerOptions options)
+		{
+			if (value.IsSingleSegment)
+				return ReadActionHeader(value.First.Span, options);
+
+			var length = (int)value.Length;
+			var rented = ArrayPool<byte>.Shared.Rent(length);
+			try
+			{
+				value.CopyTo(rented);
+				return ReadActionHeader(rented.AsSpan(0, length), options);
+			}
+			finally
+			{
+				ArrayPool<byte>.Shared.Return(rented);
+			}
+		}
+
+		private static IBulkOperation CompleteFrom(in BulkActionHeader header, in ReadOnlySequence<byte> source, JsonSerializerOptions options)
+		{
+			if (source.IsSingleSegment)
+				return CompleteOperation(in header, source.First.Span, options);
+
+			var length = (int)source.Length;
+			var rented = ArrayPool<byte>.Shared.Rent(length);
+			try
+			{
+				source.CopyTo(rented);
+				return CompleteOperation(in header, rented.AsSpan(0, length), options);
+			}
+			finally
+			{
+				ArrayPool<byte>.Shared.Return(rented);
+			}
+		}
+	}
 
 	private static IBulkOperation ReadOperation(ref Utf8JsonReader reader, JsonSerializerOptions options)
 	{
@@ -76,7 +158,7 @@ public sealed class BulkRequestConverter : JsonConverter<BulkRequest>, INdjsonSt
 	/// Reads a single bulk action-header value (<c>{ "index": { …meta… } }</c>) into a contiguous span. Used by the
 	/// streaming reader, which isolates one top-level value at a time.
 	/// </summary>
-	internal static BulkActionHeader ReadActionHeader(ReadOnlySpan<byte> headerSpan, JsonSerializerOptions options)
+	private static BulkActionHeader ReadActionHeader(ReadOnlySpan<byte> headerSpan, JsonSerializerOptions options)
 	{
 		var reader = new Utf8JsonReader(headerSpan, new JsonReaderOptions { MaxDepth = options.MaxDepth });
 		reader.Read(); // action-header StartObject
@@ -87,7 +169,7 @@ public sealed class BulkRequestConverter : JsonConverter<BulkRequest>, INdjsonSt
 	/// Builds the operation from a parsed header and its source value held in a contiguous span (empty for delete).
 	/// Used by the streaming reader.
 	/// </summary>
-	internal static IBulkOperation CompleteOperation(in BulkActionHeader header, ReadOnlySpan<byte> sourceSpan, JsonSerializerOptions options)
+	private static IBulkOperation CompleteOperation(in BulkActionHeader header, ReadOnlySpan<byte> sourceSpan, JsonSerializerOptions options)
 	{
 		var sourceReader = new Utf8JsonReader(sourceSpan, new JsonReaderOptions { MaxDepth = options.MaxDepth });
 		if (header.OperationType is not "delete")
