@@ -136,9 +136,7 @@ public sealed class CodeWriter
 				// Arbitrary JSON can't be represented as a C# anonymous object (keys may be C#
 				// keywords or non-identifiers, and the target is a JsonElement). Parse the raw JSON,
 				// which compiles and round-trips exactly.
-				return Write("global::System.Text.Json.JsonSerializer.Deserialize<global::System.Text.Json.JsonElement>(")
-					.WriteString(jsonElement.GetRawText())
-					.Write(")");
+				return WriteJsonElement(jsonElement);
 			case string s:
 				return WriteString(s);
 			case bool b:
@@ -196,6 +194,51 @@ public sealed class CodeWriter
 		return this;
 	}
 
+	private const string JsonElementParsePrefix =
+		"global::System.Text.Json.JsonSerializer.Deserialize<global::System.Text.Json.JsonElement>(";
+
+	// Re-indented from scratch (2-space, rooted at column 0) rather than emitting the source document's own
+	// whitespace, so the raw-string literal reads as cleanly nested JSON regardless of how the example was formatted.
+	private static readonly JsonSerializerOptions IndentedJsonOptions = new() { WriteIndented = true };
+
+	/// <summary>
+	/// Emits a <see cref="JsonElement"/> as a <c>Deserialize&lt;JsonElement&gt;("…")</c> call. Objects and arrays are
+	/// re-serialized with canonical indentation and rendered as a raw string literal (<c>"""</c>) whose content lines and
+	/// closing fence sit at the current indent, so C# strips exactly the wrapper indent and leaves clean 2-space JSON.
+	/// Scalars keep the compact escaped form. Newlines are normalized to <c>\n</c>.
+	/// </summary>
+	private CodeWriter WriteJsonElement(JsonElement value)
+	{
+		var json = JsonSerializer.Serialize(value, IndentedJsonOptions).Replace("\r\n", "\n").Replace('\r', '\n');
+
+		Write(JsonElementParsePrefix);
+
+		if (json.IndexOf('\n') < 0)
+			return WriteString(json).Write(")");
+
+		// The fence must be longer than any run of quotes in the content so it can never be mistaken for a delimiter.
+		var fence = new string('"', Math.Max(3, LongestQuoteRun(json) + 1));
+
+		WriteLine(fence);
+		foreach (var line in json.Split('\n'))
+			WriteLine(line);
+
+		return Write(fence).Write(")");
+	}
+
+	private static int LongestQuoteRun(string text)
+	{
+		int longest = 0, current = 0;
+		foreach (var c in text)
+		{
+			current = c == '"' ? current + 1 : 0;
+			if (current > longest)
+				longest = current;
+		}
+
+		return longest;
+	}
+
 	// ---- object initializers ---------------------------------------------
 
 	/// <summary>
@@ -223,6 +266,14 @@ public sealed class CodeWriter
 		return new ObjectInitializer(this);
 	}
 
+	/// <summary>
+	/// Begins an object-initializer block for a constructor the caller has <em>already</em> written (e.g. a
+	/// <c>new BulkIndexOperation&lt;object&gt;(document)</c> with its argument). The returned
+	/// <see cref="ObjectInitializer"/> appends the multi-line <c>{ … }</c> property block, or nothing when no property
+	/// is added.
+	/// </summary>
+	public ObjectInitializer BeginInitializer() => new(this);
+
 	// ---- collections ------------------------------------------------------
 
 	/// <summary>Writes an inline, delimited list, e.g. <c>[a, b, c]</c>.</summary>
@@ -246,6 +297,41 @@ public sealed class CodeWriter
 		}
 
 		return Write(close);
+	}
+
+	/// <summary>
+	/// Writes a multi-line brace-block list (the collection/dictionary analogue of the object initializer): the opening
+	/// brace, each item on its own indented line with a trailing comma, and the closing brace, e.g.
+	/// <code>
+	/// {
+	///     item0,
+	///     item1
+	/// }
+	/// </code>
+	/// The caller writes the constructor (e.g. <c>new Dictionary&lt;…&gt;()</c>) first; an empty list renders inline as
+	/// <c> { }</c> so the surrounding expression stays valid.
+	/// </summary>
+	public CodeWriter WriteBlockList<T>(IEnumerable<T> items, Action<CodeWriter, T> writeItem)
+	{
+		using var enumerator = items.GetEnumerator();
+		if (!enumerator.MoveNext())
+			return Write(" { }");
+
+		WriteLine();
+		WriteLine("{");
+		using (Indent())
+		{
+			writeItem(this, enumerator.Current);
+			while (enumerator.MoveNext())
+			{
+				WriteLine(",");
+				writeItem(this, enumerator.Current);
+			}
+
+			WriteLine();
+		}
+
+		return Write("}");
 	}
 
 	/// <summary>

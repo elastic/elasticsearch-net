@@ -19,12 +19,10 @@ public sealed partial class BucketsPath : RequestConverter.ICodeFormattable
 				writer.WriteImplicitArray((string[])_value, static (w, item) => w.WriteString(item));
 				break;
 			case Kind.Dictionary:
-				writer.Write("new global::System.Collections.Generic.Dictionary<string, string>() ");
-				writer.WriteInlineList(
+				writer.Write("new global::System.Collections.Generic.Dictionary<string, string>()");
+				writer.WriteBlockList(
 					(Dictionary<string, string>)_value,
-					static (w, kvp) => w.Write("[").WriteString(kvp.Key).Write("] = ").WriteString(kvp.Value),
-					open: "{ ",
-					close: " }");
+					static (w, kvp) => w.Write("[").WriteString(kvp.Key).Write("] = ").WriteString(kvp.Value));
 				break;
 		}
 	}

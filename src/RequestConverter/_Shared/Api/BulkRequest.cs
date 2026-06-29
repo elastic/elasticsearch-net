@@ -99,11 +99,10 @@ public partial class BulkRequest : RequestConverter.ICodeFormattable
 		if (Operations is not null)
 		{
 			initializer.Property("Operations");
-			writer.Write("new global::Elastic.Clients.Elasticsearch.Core.Bulk.BulkOperationsCollection ");
-			writer.WriteInlineList(
+			writer.Write("new global::Elastic.Clients.Elasticsearch.Core.Bulk.BulkOperationsCollection");
+			writer.WriteBlockList(
 				Operations,
-				static (w, operation) => global::Elastic.Clients.Elasticsearch.Core.Bulk.BulkOperationCodeFormatter.FormatCode(operation, w),
-				"{ ", " }", ", ");
+				static (w, operation) => global::Elastic.Clients.Elasticsearch.Core.Bulk.BulkOperationCodeFormatter.FormatCode(operation, w));
 		}
 
 		initializer.Dispose();

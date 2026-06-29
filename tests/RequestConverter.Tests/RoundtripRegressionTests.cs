@@ -349,13 +349,18 @@ public sealed class RoundtripRegressionTests
 	{
 		var typeName = CSharpName(c.RequestType);
 
+		// The converter emits at base indent 0, but the snippet is embedded one method-body level deep here, so its
+		// continuation lines would land a level short. Prefix every line after the first with the template's indent
+		// (one tab); applying it uniformly keeps any multi-line raw-string literal in the snippet valid.
+		var code = c.Code.Replace("\n", "\n\t");
+
 		return
 			$$"""
 			namespace Generated;
 
 			public static class E_{{index}}
 			{
-				public static {{typeName}} Build() => {{c.Code}};
+				public static {{typeName}} Build() => {{code}};
 
 				public static string Serialize(global::Elastic.Transport.Serializer serializer)
 				{

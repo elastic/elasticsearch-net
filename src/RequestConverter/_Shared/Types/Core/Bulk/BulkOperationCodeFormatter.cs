@@ -123,17 +123,11 @@ internal static class BulkOperationCodeFormatter
 		if (properties.Count == 0)
 			return;
 
-		writer.Write(" { ");
-		for (var i = 0; i < properties.Count; i++)
-		{
-			if (i > 0)
-				writer.Write(", ");
-
-			writer.Write(properties[i].Name).Write(" = ");
-			properties[i].Write(writer);
-		}
-
-		writer.Write(" }");
+		// The constructor (and its argument) is already written; attach the metadata as a multi-line object
+		// initializer so it matches the block style used elsewhere.
+		using var initializer = writer.BeginInitializer();
+		foreach (var (name, write) in properties)
+			write(initializer.Property(name));
 	}
 
 	private static void WriteId(Id? id, CodeWriter writer)
@@ -146,11 +140,10 @@ internal static class BulkOperationCodeFormatter
 
 	private static void WriteStringDictionary(IDictionary<string, string> dictionary, CodeWriter writer)
 	{
-		writer.Write("new global::System.Collections.Generic.Dictionary<string, string>() ");
-		writer.WriteInlineList(
+		writer.Write("new global::System.Collections.Generic.Dictionary<string, string>()");
+		writer.WriteBlockList(
 			dictionary,
-			static (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); },
-			"{ ", " }", ", ");
+			static (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
 	}
 
 	private static void WriteSource(Union<bool, SourceFilter> source, CodeWriter writer)
