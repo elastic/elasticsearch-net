@@ -27,7 +27,7 @@ public partial class GlobalOrdinalFieldStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GlobalOrdinalFieldStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.GlobalOrdinalFieldStats", false);
 		if (BuildTime is not null)
 		{
 			initializer.Property("BuildTime");

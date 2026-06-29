@@ -27,7 +27,7 @@ public partial class IntervalsMatch : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IntervalsMatch", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch", false);
 		if (Analyzer is not null)
 		{
 			initializer.Property("Analyzer");

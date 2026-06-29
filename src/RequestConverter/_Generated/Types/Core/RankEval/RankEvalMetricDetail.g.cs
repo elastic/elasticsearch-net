@@ -27,7 +27,7 @@ public partial class RankEvalMetricDetail : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RankEvalMetricDetail", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDetail", false);
 		{
 			initializer.Property("Hits");
 			writer.WriteInlineList(Hits, (w, item) => { item.FormatCode(w); });
@@ -35,12 +35,14 @@ public partial class RankEvalMetricDetail : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("MetricDetails");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("System.Collections.Generic.IReadOnlyDictionary<string,object>");
+			writer.WriteTypeRef("System.Collections.Generic.IReadOnlyDictionary<string,object>");
 			writer.Write(">()");
-			writer.WriteBlockList(MetricDetails, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.Write("new global::System.Collections.Generic.Dictionary<"); w.Write("string"); w.Write(", "); w.Write("object"); w.Write(">()"); w.WriteBlockList(kvp.Value, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }); w.Write(" }"); });
+			writer.WriteBlockList(MetricDetails, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(kvp.Value, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }); w.Write(" }"); });
 		}
 
 		{

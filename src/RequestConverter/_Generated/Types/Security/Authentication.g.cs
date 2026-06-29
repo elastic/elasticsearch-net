@@ -27,14 +27,16 @@ public partial class Authentication : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Authentication", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.Authentication", false);
 		if (ApiKey is not null)
 		{
 			initializer.Property("ApiKey");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("string");
+			writer.WriteTypeRef("string");
 			writer.Write(">()");
 			writer.WriteBlockList(ApiKey, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
 		}
@@ -71,10 +73,12 @@ public partial class Authentication : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("Metadata");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("object");
+			writer.WriteTypeRef("object");
 			writer.Write(">()");
 			writer.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
 		}
@@ -87,10 +91,12 @@ public partial class Authentication : RequestConverter.ICodeFormattable
 		if (Token is not null)
 		{
 			initializer.Property("Token");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("string");
+			writer.WriteTypeRef("string");
 			writer.Write(">()");
 			writer.WriteBlockList(Token, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
 		}

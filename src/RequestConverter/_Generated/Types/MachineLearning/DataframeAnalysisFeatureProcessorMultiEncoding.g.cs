@@ -27,7 +27,7 @@ public partial class DataframeAnalysisFeatureProcessorMultiEncoding : RequestCon
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframeAnalysisFeatureProcessorMultiEncoding", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncoding", false);
 		{
 			initializer.Property("Processors");
 			writer.WriteInlineList(Processors, (w, item) => { w.WriteValue(item); });

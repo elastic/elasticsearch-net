@@ -27,7 +27,7 @@ public partial class JobTimingStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("JobTimingStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.JobTimingStats", false);
 		if (AverageBucketProcessingTimeMs is not null)
 		{
 			initializer.Property("AverageBucketProcessingTimeMs");

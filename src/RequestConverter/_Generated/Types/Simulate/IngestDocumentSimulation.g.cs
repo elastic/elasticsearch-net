@@ -27,7 +27,7 @@ public partial class IngestDocumentSimulation : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IngestDocumentSimulation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Simulate.IngestDocumentSimulation", false);
 		if (EffectiveMapping is not null)
 		{
 			initializer.Property("EffectiveMapping");
@@ -53,7 +53,7 @@ public partial class IngestDocumentSimulation : RequestConverter.ICodeFormattabl
 		if (IgnoredFields is not null)
 		{
 			initializer.Property("IgnoredFields");
-			writer.WriteInlineList(IgnoredFields, (w, item) => { w.Write("new global::System.Collections.Generic.Dictionary<"); w.Write("string"); w.Write(", "); w.Write("string"); w.Write(">()"); w.WriteBlockList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
+			writer.WriteInlineList(IgnoredFields, (w, item) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
 		}
 
 		{
@@ -64,20 +64,24 @@ public partial class IngestDocumentSimulation : RequestConverter.ICodeFormattabl
 		if (Metadata is not null)
 		{
 			initializer.Property("Metadata");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("string");
+			writer.WriteTypeRef("string");
 			writer.Write(">()");
 			writer.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
 		}
 
 		{
 			initializer.Property("Source");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("object");
+			writer.WriteTypeRef("object");
 			writer.Write(">()");
 			writer.WriteBlockList(Source, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
 		}

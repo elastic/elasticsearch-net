@@ -30,10 +30,12 @@ public static class IndexMetadataStateCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState.Close:
-				writer.Write("IndexMetadataState.Close");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState");
+				writer.Write(".Close");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState.Open:
-				writer.Write("IndexMetadataState.Open");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState");
+				writer.Write(".Open");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IndexMetadataState value.");

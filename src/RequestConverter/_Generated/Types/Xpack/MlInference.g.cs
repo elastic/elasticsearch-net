@@ -27,7 +27,7 @@ public partial class MlInference : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MlInference", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.MlInference", false);
 		if (Deployments is not null)
 		{
 			initializer.Property("Deployments");
@@ -36,10 +36,12 @@ public partial class MlInference : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("IngestProcessors");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Xpack.MlInferenceIngestProcessor");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Xpack.MlInferenceIngestProcessor");
 			writer.Write(">()");
 			writer.WriteBlockList(IngestProcessors, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

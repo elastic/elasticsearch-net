@@ -27,7 +27,7 @@ public partial class RemovePolicyRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RemovePolicyRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest", false);
 		{
 			initializer.Property("Index");
 			Index.FormatCode(writer);

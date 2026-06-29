@@ -27,7 +27,7 @@ public partial class GetJobsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetJobsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest", false);
 		if (Id is not null)
 		{
 			initializer.Property("Id");

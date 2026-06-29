@@ -27,7 +27,7 @@ public partial class RankFeatureFunctionLogarithm : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RankFeatureFunctionLogarithm", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm", false);
 		{
 			initializer.Property("ScalingFactor");
 			writer.WriteValue(ScalingFactor);

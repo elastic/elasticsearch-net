@@ -27,7 +27,7 @@ public partial class UserQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("UserQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.UserQuery", false);
 		if (Bool is not null)
 		{
 			initializer.Property("Bool");

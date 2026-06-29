@@ -30,31 +30,40 @@ public static class DistanceUnitCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.DistanceUnit.Centimeters:
-				writer.Write("DistanceUnit.Centimeters");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.DistanceUnit");
+				writer.Write(".Centimeters");
 				break;
 			case Elastic.Clients.Elasticsearch.DistanceUnit.Feet:
-				writer.Write("DistanceUnit.Feet");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.DistanceUnit");
+				writer.Write(".Feet");
 				break;
 			case Elastic.Clients.Elasticsearch.DistanceUnit.Inches:
-				writer.Write("DistanceUnit.Inches");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.DistanceUnit");
+				writer.Write(".Inches");
 				break;
 			case Elastic.Clients.Elasticsearch.DistanceUnit.Kilometers:
-				writer.Write("DistanceUnit.Kilometers");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.DistanceUnit");
+				writer.Write(".Kilometers");
 				break;
 			case Elastic.Clients.Elasticsearch.DistanceUnit.Meters:
-				writer.Write("DistanceUnit.Meters");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.DistanceUnit");
+				writer.Write(".Meters");
 				break;
 			case Elastic.Clients.Elasticsearch.DistanceUnit.Miles:
-				writer.Write("DistanceUnit.Miles");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.DistanceUnit");
+				writer.Write(".Miles");
 				break;
 			case Elastic.Clients.Elasticsearch.DistanceUnit.Millimeters:
-				writer.Write("DistanceUnit.Millimeters");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.DistanceUnit");
+				writer.Write(".Millimeters");
 				break;
 			case Elastic.Clients.Elasticsearch.DistanceUnit.NauticMiles:
-				writer.Write("DistanceUnit.NauticMiles");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.DistanceUnit");
+				writer.Write(".NauticMiles");
 				break;
 			case Elastic.Clients.Elasticsearch.DistanceUnit.Yards:
-				writer.Write("DistanceUnit.Yards");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.DistanceUnit");
+				writer.Write(".Yards");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected DistanceUnit value.");

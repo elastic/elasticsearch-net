@@ -30,7 +30,8 @@ public static class HighlighterTagsSchemaCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema.Styled:
-				writer.Write("HighlighterTagsSchema.Styled");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema");
+				writer.Write(".Styled");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected HighlighterTagsSchema value.");

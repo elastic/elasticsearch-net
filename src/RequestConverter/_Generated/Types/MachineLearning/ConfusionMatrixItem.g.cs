@@ -27,7 +27,7 @@ public partial class ConfusionMatrixItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ConfusionMatrixItem", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ConfusionMatrixItem", false);
 		{
 			initializer.Property("ActualClass");
 			writer.WriteString(ActualClass);

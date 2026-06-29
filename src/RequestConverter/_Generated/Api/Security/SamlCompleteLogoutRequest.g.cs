@@ -27,7 +27,7 @@ public partial class SamlCompleteLogoutRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SamlCompleteLogoutRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest", false);
 		if (Content is not null)
 		{
 			initializer.Property("Content");

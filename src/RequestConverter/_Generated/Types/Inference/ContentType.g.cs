@@ -30,13 +30,16 @@ public static class ContentTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.ContentType.File:
-				writer.Write("ContentType.File");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ContentType");
+				writer.Write(".File");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.ContentType.ImageUrl:
-				writer.Write("ContentType.ImageUrl");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ContentType");
+				writer.Write(".ImageUrl");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.ContentType.Text:
-				writer.Write("ContentType.Text");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ContentType");
+				writer.Write(".Text");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ContentType value.");

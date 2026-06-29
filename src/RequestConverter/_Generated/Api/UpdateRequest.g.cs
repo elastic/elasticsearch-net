@@ -27,7 +27,7 @@ public partial class UpdateRequest<TDocument, TPartialDocument> : RequestConvert
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("UpdateRequest<TDocument, TPartialDocument>", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.UpdateRequest<TDocument,TPartialDocument>", false);
 		{
 			initializer.Property("Id");
 			Id.FormatCode(writer);

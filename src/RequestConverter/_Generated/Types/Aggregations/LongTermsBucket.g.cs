@@ -27,7 +27,7 @@ public partial class LongTermsBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("LongTermsBucket", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.LongTermsBucket", false);
 		if (Aggregations is not null)
 		{
 			initializer.Property("Aggregations");

@@ -30,13 +30,16 @@ public static class ShardStoreAllocationCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation.Primary:
-				writer.Write("ShardStoreAllocation.Primary");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation");
+				writer.Write(".Primary");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation.Replica:
-				writer.Write("ShardStoreAllocation.Replica");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation");
+				writer.Write(".Replica");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation.Unused:
-				writer.Write("ShardStoreAllocation.Unused");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation");
+				writer.Write(".Unused");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ShardStoreAllocation value.");

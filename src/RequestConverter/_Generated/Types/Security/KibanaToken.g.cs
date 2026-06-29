@@ -27,7 +27,7 @@ public partial class KibanaToken : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("KibanaToken", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.KibanaToken", false);
 		{
 			initializer.Property("Name");
 			writer.WriteString(Name);

@@ -27,7 +27,7 @@ public partial class BucketSummary : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("BucketSummary", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.BucketSummary", false);
 		{
 			initializer.Property("AnomalyScore");
 			writer.WriteValue(AnomalyScore);

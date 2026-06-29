@@ -27,7 +27,7 @@ public partial class ClusterJvm : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ClusterJvm", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.ClusterJvm", false);
 		if (MaxUptime is not null)
 		{
 			initializer.Property("MaxUptime");

@@ -27,7 +27,7 @@ public partial class DataframeAnalysisFeatureProcessorNGramEncoding : RequestCon
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframeAnalysisFeatureProcessorNGramEncoding", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding", false);
 		if (Custom is not null)
 		{
 			initializer.Property("Custom");

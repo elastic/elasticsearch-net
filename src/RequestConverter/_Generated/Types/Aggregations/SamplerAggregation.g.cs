@@ -27,7 +27,7 @@ public partial class SamplerAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SamplerAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation", false);
 		if (ShardSize is not null)
 		{
 			initializer.Property("ShardSize");

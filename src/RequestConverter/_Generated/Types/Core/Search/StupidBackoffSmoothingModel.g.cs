@@ -27,7 +27,7 @@ public partial class StupidBackoffSmoothingModel : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("StupidBackoffSmoothingModel", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel", false);
 		{
 			initializer.Property("Discount");
 			writer.WriteValue(Discount);

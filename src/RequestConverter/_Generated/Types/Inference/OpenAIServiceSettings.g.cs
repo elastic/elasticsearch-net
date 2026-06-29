@@ -27,7 +27,7 @@ public partial class OpenAIServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("OpenAIServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.OpenAIServiceSettings", false);
 		{
 			initializer.Property("ApiKey");
 			writer.WriteString(ApiKey);

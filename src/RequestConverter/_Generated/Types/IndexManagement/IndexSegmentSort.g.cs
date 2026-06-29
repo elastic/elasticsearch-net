@@ -27,7 +27,7 @@ public partial class IndexSegmentSort : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndexSegmentSort", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort", false);
 		if (Field is not null)
 		{
 			initializer.Property("Field");

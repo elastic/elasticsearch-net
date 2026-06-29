@@ -27,7 +27,7 @@ public partial class DeleteSnapshotRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteSnapshotRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest", false);
 		{
 			initializer.Property("Repository");
 			Repository.FormatCode(writer);

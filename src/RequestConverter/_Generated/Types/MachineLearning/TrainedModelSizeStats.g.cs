@@ -27,7 +27,7 @@ public partial class TrainedModelSizeStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TrainedModelSizeStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelSizeStats", false);
 		{
 			initializer.Property("ModelSizeBytes");
 			ModelSizeBytes.FormatCode(writer);

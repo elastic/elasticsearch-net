@@ -27,7 +27,7 @@ public partial class PivotGroupBy : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PivotGroupBy", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy", false);
 		if (DateHistogram is not null)
 		{
 			initializer.Property("DateHistogram");

@@ -27,7 +27,7 @@ public partial class EmbeddingInferenceResult : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("EmbeddingInferenceResult", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.EmbeddingInferenceResult", false);
 		if (Embeddings is not null)
 		{
 			initializer.Property("Embeddings");

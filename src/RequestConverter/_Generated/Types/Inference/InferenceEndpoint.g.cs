@@ -27,7 +27,7 @@ public partial class InferenceEndpoint : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("InferenceEndpoint", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint", false);
 		if (ChunkingSettings is not null)
 		{
 			initializer.Property("ChunkingSettings");

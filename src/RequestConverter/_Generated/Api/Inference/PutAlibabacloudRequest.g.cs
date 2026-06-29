@@ -27,7 +27,7 @@ public partial class PutAlibabacloudRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutAlibabacloudRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequest", false);
 		{
 			initializer.Property("AlibabacloudInferenceId");
 			AlibabacloudInferenceId.FormatCode(writer);

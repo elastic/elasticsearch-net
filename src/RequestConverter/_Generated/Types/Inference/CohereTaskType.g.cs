@@ -30,13 +30,16 @@ public static class CohereTaskTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.CohereTaskType.Completion:
-				writer.Write("CohereTaskType.Completion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.CohereTaskType");
+				writer.Write(".Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.CohereTaskType.Rerank:
-				writer.Write("CohereTaskType.Rerank");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.CohereTaskType");
+				writer.Write(".Rerank");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.CohereTaskType.TextEmbedding:
-				writer.Write("CohereTaskType.TextEmbedding");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.CohereTaskType");
+				writer.Write(".TextEmbedding");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected CohereTaskType value.");

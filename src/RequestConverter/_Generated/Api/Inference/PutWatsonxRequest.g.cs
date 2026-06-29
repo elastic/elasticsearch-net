@@ -27,7 +27,7 @@ public partial class PutWatsonxRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutWatsonxRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequest", false);
 		{
 			initializer.Property("TaskType");
 			Elastic.Clients.Elasticsearch.Inference.WatsonxTaskTypeCodeFormatter.FormatCode(TaskType, writer);

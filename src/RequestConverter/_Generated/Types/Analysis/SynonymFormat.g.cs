@@ -30,10 +30,12 @@ public static class SynonymFormatCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.SynonymFormat.Solr:
-				writer.Write("SynonymFormat.Solr");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.SynonymFormat");
+				writer.Write(".Solr");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SynonymFormat.Wordnet:
-				writer.Write("SynonymFormat.Wordnet");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.SynonymFormat");
+				writer.Write(".Wordnet");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SynonymFormat value.");

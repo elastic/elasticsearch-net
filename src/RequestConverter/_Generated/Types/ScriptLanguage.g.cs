@@ -29,29 +29,35 @@ public readonly partial struct ScriptLanguage : RequestConverter.ICodeFormattabl
 	{
 		if (this == Elastic.Clients.Elasticsearch.ScriptLanguage.Expression)
 		{
-			writer.Write("ScriptLanguage.Expression");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ScriptLanguage");
+			writer.Write(".Expression");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.ScriptLanguage.Java)
 		{
-			writer.Write("ScriptLanguage.Java");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ScriptLanguage");
+			writer.Write(".Java");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.ScriptLanguage.Mustache)
 		{
-			writer.Write("ScriptLanguage.Mustache");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ScriptLanguage");
+			writer.Write(".Mustache");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.ScriptLanguage.Painless)
 		{
-			writer.Write("ScriptLanguage.Painless");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ScriptLanguage");
+			writer.Write(".Painless");
 			return;
 		}
 
-		writer.Write("new ScriptLanguage(\"");
+		writer.Write("new ");
+		writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ScriptLanguage");
+		writer.Write("(\"");
 		writer.Write(Value);
 		writer.Write("\")");
 	}

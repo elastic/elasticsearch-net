@@ -27,7 +27,7 @@ public partial class Slm : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Slm", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.Slm", false);
 		{
 			initializer.Property("Available");
 			writer.WriteValue(Available);

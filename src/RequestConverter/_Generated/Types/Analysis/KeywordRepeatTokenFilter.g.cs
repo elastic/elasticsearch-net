@@ -27,7 +27,7 @@ public partial class KeywordRepeatTokenFilter : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("KeywordRepeatTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.KeywordRepeatTokenFilter", true);
 		if (Version is not null)
 		{
 			initializer.Property("Version");

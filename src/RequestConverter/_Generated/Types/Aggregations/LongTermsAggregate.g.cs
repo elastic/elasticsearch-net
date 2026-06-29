@@ -27,7 +27,7 @@ public partial class LongTermsAggregate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("LongTermsAggregate", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.LongTermsAggregate", true);
 		{
 			initializer.Property("Buckets");
 			writer.WriteInlineList(Buckets, (w, item) => { item.FormatCode(w); });
@@ -43,10 +43,12 @@ public partial class LongTermsAggregate : RequestConverter.ICodeFormattable
 		if (Meta is not null)
 		{
 			initializer.Property("Meta");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("object");
+			writer.WriteTypeRef("object");
 			writer.Write(">()");
 			writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
 		}

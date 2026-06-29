@@ -27,7 +27,7 @@ public partial class StandardAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("StandardAnalyzer", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzer", true);
 		if (MaxTokenLength is not null)
 		{
 			initializer.Property("MaxTokenLength");
@@ -43,7 +43,9 @@ public partial class StandardAnalyzer : RequestConverter.ICodeFormattable
 			}
 			else
 			{
-				writer.Write("new string[] ");
+				writer.Write("new ");
+				writer.WriteTypeRef("string");
+				writer.Write("[] ");
 				writer.WriteInlineList(Stopwords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", ");
 			}
 		}

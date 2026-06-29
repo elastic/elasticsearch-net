@@ -27,7 +27,7 @@ public partial class NodesUsageRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodesUsageRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest", false);
 		if (Metric is not null)
 		{
 			initializer.Property("Metric");

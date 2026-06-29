@@ -27,7 +27,7 @@ public partial class TermsLookup : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TermsLookup", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup", true);
 		{
 			initializer.Property("Id");
 			Id.FormatCode(writer);

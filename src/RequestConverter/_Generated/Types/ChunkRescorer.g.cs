@@ -27,7 +27,7 @@ public partial class ChunkRescorer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ChunkRescorer", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ChunkRescorer", false);
 		if (ChunkingSettings is not null)
 		{
 			initializer.Property("ChunkingSettings");

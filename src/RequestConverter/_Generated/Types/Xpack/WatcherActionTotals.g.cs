@@ -27,7 +27,7 @@ public partial class WatcherActionTotals : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("WatcherActionTotals", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.WatcherActionTotals", false);
 		{
 			initializer.Property("Total");
 			Total.FormatCode(writer);

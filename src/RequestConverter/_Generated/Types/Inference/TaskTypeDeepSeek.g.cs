@@ -30,10 +30,12 @@ public static class TaskTypeDeepSeekCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeDeepSeek.ChatCompletion:
-				writer.Write("TaskTypeDeepSeek.ChatCompletion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeDeepSeek");
+				writer.Write(".ChatCompletion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeDeepSeek.Completion:
-				writer.Write("TaskTypeDeepSeek.Completion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeDeepSeek");
+				writer.Write(".Completion");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeDeepSeek value.");

@@ -27,7 +27,7 @@ public partial class PhraseSuggestHighlight : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PhraseSuggestHighlight", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight", false);
 		{
 			initializer.Property("PostTag");
 			writer.WriteString(PostTag);

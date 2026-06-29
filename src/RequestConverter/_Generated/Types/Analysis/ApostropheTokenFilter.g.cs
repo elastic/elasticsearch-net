@@ -27,7 +27,7 @@ public partial class ApostropheTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ApostropheTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.ApostropheTokenFilter", true);
 		if (Version is not null)
 		{
 			initializer.Property("Version");

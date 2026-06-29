@@ -27,7 +27,7 @@ public partial class ModifyDataStreamRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ModifyDataStreamRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequest", false);
 		{
 			initializer.Property("Actions");
 			writer.WriteInlineList(Actions, (w, item) => { item.FormatCode(w); });

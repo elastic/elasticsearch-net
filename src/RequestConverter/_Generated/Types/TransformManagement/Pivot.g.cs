@@ -27,14 +27,16 @@ public partial class Pivot : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Pivot", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.Pivot", false);
 		if (Aggregations is not null)
 		{
 			initializer.Property("Aggregations");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Aggregations.Aggregation");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.Aggregation");
 			writer.Write(">()");
 			writer.WriteBlockList(Aggregations, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
@@ -42,10 +44,12 @@ public partial class Pivot : RequestConverter.ICodeFormattable
 		if (GroupBy is not null)
 		{
 			initializer.Property("GroupBy");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy");
 			writer.Write(">()");
 			writer.WriteBlockList(GroupBy, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

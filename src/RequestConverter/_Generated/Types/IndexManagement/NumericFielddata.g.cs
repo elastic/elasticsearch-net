@@ -27,7 +27,7 @@ public partial class NumericFielddata : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NumericFielddata", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata", false);
 		{
 			initializer.Property("Format");
 			Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormatCodeFormatter.FormatCode(Format, writer);

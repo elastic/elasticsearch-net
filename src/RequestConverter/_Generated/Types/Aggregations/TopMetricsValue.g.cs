@@ -27,7 +27,7 @@ public partial class TopMetricsValue : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TopMetricsValue", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue", false);
 		{
 			initializer.Property("Field");
 			Field.FormatCode(writer);

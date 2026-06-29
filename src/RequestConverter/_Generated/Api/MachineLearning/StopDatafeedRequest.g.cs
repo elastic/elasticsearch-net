@@ -27,7 +27,7 @@ public partial class StopDatafeedRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("StopDatafeedRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest", false);
 		{
 			initializer.Property("DatafeedId");
 			DatafeedId.FormatCode(writer);

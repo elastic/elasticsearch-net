@@ -30,10 +30,12 @@ public static class RuleActionCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.RuleAction.SkipModelUpdate:
-				writer.Write("RuleAction.SkipModelUpdate");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.RuleAction");
+				writer.Write(".SkipModelUpdate");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.RuleAction.SkipResult:
-				writer.Write("RuleAction.SkipResult");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.RuleAction");
+				writer.Write(".SkipResult");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected RuleAction value.");

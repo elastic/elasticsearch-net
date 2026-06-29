@@ -27,7 +27,7 @@ public partial class HttpRouteResponses : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("HttpRouteResponses", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.HttpRouteResponses", false);
 		{
 			initializer.Property("Count");
 			writer.WriteValue(Count);

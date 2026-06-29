@@ -27,7 +27,7 @@ public partial class DictionaryDecompounderTokenFilter : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DictionaryDecompounderTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilter", true);
 		if (MaxSubwordSize is not null)
 		{
 			initializer.Property("MaxSubwordSize");

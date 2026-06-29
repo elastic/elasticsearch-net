@@ -27,7 +27,7 @@ public partial class DiskIndicator : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DiskIndicator", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.HealthReport.DiskIndicator", false);
 		if (Details is not null)
 		{
 			initializer.Property("Details");

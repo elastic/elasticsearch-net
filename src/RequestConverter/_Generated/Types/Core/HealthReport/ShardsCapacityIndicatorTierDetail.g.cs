@@ -27,7 +27,7 @@ public partial class ShardsCapacityIndicatorTierDetail : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ShardsCapacityIndicatorTierDetail", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorTierDetail", false);
 		if (CurrentUsedShards is not null)
 		{
 			initializer.Property("CurrentUsedShards");

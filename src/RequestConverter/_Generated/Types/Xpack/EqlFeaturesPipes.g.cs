@@ -27,7 +27,7 @@ public partial class EqlFeaturesPipes : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("EqlFeaturesPipes", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesPipes", false);
 		{
 			initializer.Property("PipeHead");
 			writer.WriteValue(PipeHead);

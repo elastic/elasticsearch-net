@@ -27,7 +27,7 @@ public partial class GetScriptContextRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetScriptContextRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.GetScriptContextRequest", false);
 		initializer.Dispose();
 	}
 }

@@ -30,10 +30,12 @@ public static class OnScriptErrorCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.OnScriptError.Continue:
-				writer.Write("OnScriptError.Continue");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.OnScriptError");
+				writer.Write(".Continue");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.OnScriptError.Fail:
-				writer.Write("OnScriptError.Fail");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.OnScriptError");
+				writer.Write(".Fail");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected OnScriptError value.");

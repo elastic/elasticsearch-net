@@ -27,7 +27,7 @@ public partial class ApplicationGlobalUserPrivileges : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ApplicationGlobalUserPrivileges", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivileges", false);
 		{
 			initializer.Property("Manage");
 			Manage.FormatCode(writer);

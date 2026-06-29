@@ -27,7 +27,7 @@ public partial class RussianStemTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RussianStemTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.RussianStemTokenFilter", true);
 		if (Version is not null)
 		{
 			initializer.Property("Version");

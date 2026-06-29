@@ -27,7 +27,7 @@ public partial class DateHistogramBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DateHistogramBucket", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.DateHistogramBucket", false);
 		if (Aggregations is not null)
 		{
 			initializer.Property("Aggregations");

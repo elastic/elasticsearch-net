@@ -27,7 +27,7 @@ public partial class ModelPackageConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ModelPackageConfig", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ModelPackageConfig", false);
 		if (CreateTime is not null)
 		{
 			initializer.Property("CreateTime");
@@ -43,10 +43,12 @@ public partial class ModelPackageConfig : RequestConverter.ICodeFormattable
 		if (InferenceConfig is not null)
 		{
 			initializer.Property("InferenceConfig");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("object");
+			writer.WriteTypeRef("object");
 			writer.Write(">()");
 			writer.WriteBlockList(InferenceConfig, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
 		}
@@ -54,10 +56,12 @@ public partial class ModelPackageConfig : RequestConverter.ICodeFormattable
 		if (Metadata is not null)
 		{
 			initializer.Property("Metadata");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("object");
+			writer.WriteTypeRef("object");
 			writer.Write(">()");
 			writer.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
 		}

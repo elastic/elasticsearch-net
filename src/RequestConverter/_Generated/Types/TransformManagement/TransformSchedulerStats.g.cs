@@ -27,7 +27,7 @@ public partial class TransformSchedulerStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TransformSchedulerStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.TransformSchedulerStats", false);
 		if (PeekTransform is not null)
 		{
 			initializer.Property("PeekTransform");

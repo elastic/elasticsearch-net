@@ -27,7 +27,7 @@ public partial class RefreshStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RefreshStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.RefreshStats", false);
 		{
 			initializer.Property("ExternalTotal");
 			writer.WriteValue(ExternalTotal);

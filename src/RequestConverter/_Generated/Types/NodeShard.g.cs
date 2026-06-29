@@ -27,14 +27,16 @@ public partial class NodeShard : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeShard", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.NodeShard", false);
 		if (AllocationId is not null)
 		{
 			initializer.Property("AllocationId");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("string");
+			writer.WriteTypeRef("string");
 			writer.Write(">()");
 			writer.WriteBlockList(AllocationId, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
 		}
@@ -58,10 +60,12 @@ public partial class NodeShard : RequestConverter.ICodeFormattable
 		if (RecoverySource is not null)
 		{
 			initializer.Property("RecoverySource");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("string");
+			writer.WriteTypeRef("string");
 			writer.Write(">()");
 			writer.WriteBlockList(RecoverySource, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
 		}

@@ -27,7 +27,7 @@ public partial class PreviewDataFrameAnalyticsRequest : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PreviewDataFrameAnalyticsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest", false);
 		if (Id is not null)
 		{
 			initializer.Property("Id");

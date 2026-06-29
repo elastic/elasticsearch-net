@@ -30,16 +30,20 @@ public static class DatafeedStateCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState.Started:
-				writer.Write("DatafeedState.Started");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState");
+				writer.Write(".Started");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState.Starting:
-				writer.Write("DatafeedState.Starting");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState");
+				writer.Write(".Starting");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState.Stopped:
-				writer.Write("DatafeedState.Stopped");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState");
+				writer.Write(".Stopped");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState.Stopping:
-				writer.Write("DatafeedState.Stopping");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState");
+				writer.Write(".Stopping");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected DatafeedState value.");

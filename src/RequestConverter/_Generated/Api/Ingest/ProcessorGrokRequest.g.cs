@@ -27,7 +27,7 @@ public partial class ProcessorGrokRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ProcessorGrokRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequest", false);
 		initializer.Dispose();
 	}
 }

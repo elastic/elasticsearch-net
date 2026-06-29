@@ -27,7 +27,7 @@ public partial class StatusError : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("StatusError", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.StatusError", false);
 		{
 			initializer.Property("Index");
 			writer.WriteString(Index);

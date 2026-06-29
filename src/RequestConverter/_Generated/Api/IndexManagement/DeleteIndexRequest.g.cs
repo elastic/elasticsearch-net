@@ -27,7 +27,7 @@ public partial class DeleteIndexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteIndexRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequest", false);
 		{
 			initializer.Property("Indices");
 			Indices.FormatCode(writer);

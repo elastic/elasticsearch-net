@@ -27,7 +27,7 @@ public partial class TruncateTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TruncateTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter", true);
 		if (Length is not null)
 		{
 			initializer.Property("Length");

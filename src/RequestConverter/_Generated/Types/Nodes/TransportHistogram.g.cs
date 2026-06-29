@@ -27,7 +27,7 @@ public partial class TransportHistogram : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TransportHistogram", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.TransportHistogram", false);
 		if (Count is not null)
 		{
 			initializer.Property("Count");

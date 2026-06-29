@@ -27,7 +27,7 @@ public partial class SourceOnlyRepositorySettingsForGcs : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SourceOnlyRepositorySettingsForGcs", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForGcs", true);
 #pragma warning disable CS0618
 		if (ApplicationName is not null)
 		{

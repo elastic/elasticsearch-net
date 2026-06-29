@@ -27,14 +27,16 @@ public partial class TrainedModelConfigMetadata : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TrainedModelConfigMetadata", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelConfigMetadata", false);
 		if (FeatureImportanceBaseline is not null)
 		{
 			initializer.Property("FeatureImportanceBaseline");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("string");
+			writer.WriteTypeRef("string");
 			writer.Write(">()");
 			writer.WriteBlockList(FeatureImportanceBaseline, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
 		}

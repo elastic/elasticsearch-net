@@ -27,7 +27,7 @@ public partial class UntypedRangeQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("UntypedRangeQuery", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery", true);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

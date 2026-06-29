@@ -27,7 +27,7 @@ public partial class GetFeaturesRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetFeaturesRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest", false);
 		if (MasterTimeout is not null)
 		{
 			initializer.Property("MasterTimeout");

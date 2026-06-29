@@ -27,7 +27,7 @@ public partial class RedactProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RedactProcessor", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.RedactProcessor", false);
 		if (Description is not null)
 		{
 			initializer.Property("Description");
@@ -66,10 +66,12 @@ public partial class RedactProcessor : RequestConverter.ICodeFormattable
 		if (PatternDefinitions is not null)
 		{
 			initializer.Property("PatternDefinitions");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("string");
+			writer.WriteTypeRef("string");
 			writer.Write(">()");
 			writer.WriteBlockList(PatternDefinitions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
 		}

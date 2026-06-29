@@ -27,7 +27,7 @@ public partial class WarmerStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("WarmerStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.WarmerStats", false);
 		{
 			initializer.Property("Current");
 			writer.WriteValue(Current);

@@ -27,7 +27,7 @@ public partial class TrainedModelInferenceStats : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TrainedModelInferenceStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelInferenceStats", false);
 		{
 			initializer.Property("CacheMissCount");
 			writer.WriteValue(CacheMissCount);

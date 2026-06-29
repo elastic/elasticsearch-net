@@ -27,7 +27,7 @@ public partial class DeleteIndexTemplateRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteIndexTemplateRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

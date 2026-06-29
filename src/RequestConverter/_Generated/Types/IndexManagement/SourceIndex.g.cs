@@ -27,7 +27,7 @@ public partial class SourceIndex : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SourceIndex", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SourceIndex", false);
 		{
 			initializer.Property("Index");
 			Index.FormatCode(writer);

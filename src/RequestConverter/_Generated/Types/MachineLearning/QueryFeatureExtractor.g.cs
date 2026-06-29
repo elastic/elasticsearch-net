@@ -27,7 +27,7 @@ public partial class QueryFeatureExtractor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("QueryFeatureExtractor", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor", false);
 		if (DefaultScore is not null)
 		{
 			initializer.Property("DefaultScore");

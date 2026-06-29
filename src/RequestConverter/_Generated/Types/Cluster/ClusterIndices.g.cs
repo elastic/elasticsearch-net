@@ -27,7 +27,7 @@ public partial class ClusterIndices : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ClusterIndices", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.ClusterIndices", false);
 		if (Analysis is not null)
 		{
 			initializer.Property("Analysis");

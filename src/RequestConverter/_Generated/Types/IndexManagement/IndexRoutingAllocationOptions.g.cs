@@ -30,16 +30,20 @@ public static class IndexRoutingAllocationOptionsCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.All:
-				writer.Write("IndexRoutingAllocationOptions.All");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions");
+				writer.Write(".All");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.NewPrimaries:
-				writer.Write("IndexRoutingAllocationOptions.NewPrimaries");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions");
+				writer.Write(".NewPrimaries");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.None:
-				writer.Write("IndexRoutingAllocationOptions.None");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions");
+				writer.Write(".None");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.Primaries:
-				writer.Write("IndexRoutingAllocationOptions.Primaries");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions");
+				writer.Write(".Primaries");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IndexRoutingAllocationOptions value.");

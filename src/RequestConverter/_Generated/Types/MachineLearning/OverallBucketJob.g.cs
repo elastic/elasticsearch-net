@@ -27,7 +27,7 @@ public partial class OverallBucketJob : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("OverallBucketJob", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.OverallBucketJob", false);
 		{
 			initializer.Property("JobId");
 			writer.WriteString(JobId);

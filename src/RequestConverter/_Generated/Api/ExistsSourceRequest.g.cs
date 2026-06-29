@@ -27,7 +27,7 @@ public partial class ExistsSourceRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ExistsSourceRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ExistsSourceRequest", false);
 		{
 			initializer.Property("Id");
 			Id.FormatCode(writer);

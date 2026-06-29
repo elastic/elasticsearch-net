@@ -27,7 +27,7 @@ public partial class KnnQueryProfileBreakdown : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("KnnQueryProfileBreakdown", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.KnnQueryProfileBreakdown", false);
 		{
 			initializer.Property("Advance");
 			writer.WriteValue(Advance);

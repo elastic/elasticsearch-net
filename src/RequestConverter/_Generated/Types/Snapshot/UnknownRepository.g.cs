@@ -27,7 +27,7 @@ public partial class UnknownRepository : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("UnknownRepository", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.UnknownRepository", false);
 		initializer.Dispose();
 	}
 }

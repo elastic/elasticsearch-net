@@ -27,7 +27,7 @@ public partial class ClusterIngest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ClusterIngest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.ClusterIngest", false);
 		{
 			initializer.Property("NumberOfPipelines");
 			writer.WriteValue(NumberOfPipelines);
@@ -35,10 +35,12 @@ public partial class ClusterIngest : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("ProcessorStats");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Cluster.ClusterProcessor");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.ClusterProcessor");
 			writer.Write(">()");
 			writer.WriteBlockList(ProcessorStats, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

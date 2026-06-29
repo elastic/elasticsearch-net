@@ -27,7 +27,7 @@ public partial class MutualInformationHeuristic : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MutualInformationHeuristic", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic", false);
 		if (BackgroundIsSuperset is not null)
 		{
 			initializer.Property("BackgroundIsSuperset");

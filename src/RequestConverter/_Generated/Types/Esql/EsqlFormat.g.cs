@@ -30,28 +30,36 @@ public static class EsqlFormatCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Esql.EsqlFormat.Arrow:
-				writer.Write("EsqlFormat.Arrow");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Esql.EsqlFormat");
+				writer.Write(".Arrow");
 				break;
 			case Elastic.Clients.Elasticsearch.Esql.EsqlFormat.Cbor:
-				writer.Write("EsqlFormat.Cbor");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Esql.EsqlFormat");
+				writer.Write(".Cbor");
 				break;
 			case Elastic.Clients.Elasticsearch.Esql.EsqlFormat.Csv:
-				writer.Write("EsqlFormat.Csv");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Esql.EsqlFormat");
+				writer.Write(".Csv");
 				break;
 			case Elastic.Clients.Elasticsearch.Esql.EsqlFormat.Json:
-				writer.Write("EsqlFormat.Json");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Esql.EsqlFormat");
+				writer.Write(".Json");
 				break;
 			case Elastic.Clients.Elasticsearch.Esql.EsqlFormat.Smile:
-				writer.Write("EsqlFormat.Smile");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Esql.EsqlFormat");
+				writer.Write(".Smile");
 				break;
 			case Elastic.Clients.Elasticsearch.Esql.EsqlFormat.Tsv:
-				writer.Write("EsqlFormat.Tsv");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Esql.EsqlFormat");
+				writer.Write(".Tsv");
 				break;
 			case Elastic.Clients.Elasticsearch.Esql.EsqlFormat.Txt:
-				writer.Write("EsqlFormat.Txt");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Esql.EsqlFormat");
+				writer.Write(".Txt");
 				break;
 			case Elastic.Clients.Elasticsearch.Esql.EsqlFormat.Yaml:
-				writer.Write("EsqlFormat.Yaml");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Esql.EsqlFormat");
+				writer.Write(".Yaml");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected EsqlFormat value.");

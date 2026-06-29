@@ -27,7 +27,7 @@ public partial class MatchAllQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MatchAllQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery", false);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

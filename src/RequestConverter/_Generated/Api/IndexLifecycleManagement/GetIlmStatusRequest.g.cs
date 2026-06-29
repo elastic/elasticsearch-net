@@ -27,7 +27,7 @@ public partial class GetIlmStatusRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetIlmStatusRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest", false);
 		initializer.Dispose();
 	}
 }

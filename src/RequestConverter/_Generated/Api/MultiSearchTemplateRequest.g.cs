@@ -27,7 +27,7 @@ public partial class MultiSearchTemplateRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MultiSearchTemplateRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest", false);
 		if (Indices is not null)
 		{
 			initializer.Property("Indices");

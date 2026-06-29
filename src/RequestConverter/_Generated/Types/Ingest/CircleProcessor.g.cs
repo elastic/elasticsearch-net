@@ -27,7 +27,7 @@ public partial class CircleProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CircleProcessor", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.CircleProcessor", false);
 		if (Description is not null)
 		{
 			initializer.Property("Description");

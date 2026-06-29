@@ -30,10 +30,12 @@ public static class CredentialManagedByCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Security.CredentialManagedBy.Cloud:
-				writer.Write("CredentialManagedBy.Cloud");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.CredentialManagedBy");
+				writer.Write(".Cloud");
 				break;
 			case Elastic.Clients.Elasticsearch.Security.CredentialManagedBy.Elasticsearch:
-				writer.Write("CredentialManagedBy.Elasticsearch");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.CredentialManagedBy");
+				writer.Write(".Elasticsearch");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected CredentialManagedBy value.");

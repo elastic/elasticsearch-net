@@ -27,7 +27,7 @@ public partial class InferenceChunkingSettings : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("InferenceChunkingSettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings", false);
 		if (MaxChunkSize is not null)
 		{
 			initializer.Property("MaxChunkSize");

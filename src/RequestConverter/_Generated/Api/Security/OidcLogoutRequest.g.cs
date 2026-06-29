@@ -27,7 +27,7 @@ public partial class OidcLogoutRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("OidcLogoutRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest", false);
 		if (RefreshToken is not null)
 		{
 			initializer.Property("RefreshToken");

@@ -30,10 +30,12 @@ public static class MatchTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.MatchType.Regex:
-				writer.Write("MatchType.Regex");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.MatchType");
+				writer.Write(".Regex");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.MatchType.Simple:
-				writer.Write("MatchType.Simple");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.MatchType");
+				writer.Write(".Simple");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected MatchType value.");

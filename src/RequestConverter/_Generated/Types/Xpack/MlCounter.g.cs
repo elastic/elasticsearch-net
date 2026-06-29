@@ -27,7 +27,7 @@ public partial class MlCounter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MlCounter", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.MlCounter", false);
 		{
 			initializer.Property("Count");
 			writer.WriteValue(Count);

@@ -27,7 +27,7 @@ public partial class GetLicenseRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetLicenseRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest", false);
 #pragma warning disable CS0618
 		if (AcceptEnterprise is not null)
 		{

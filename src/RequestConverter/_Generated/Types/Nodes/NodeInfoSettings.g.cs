@@ -27,7 +27,7 @@ public partial class NodeInfoSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeInfoSettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettings", false);
 		if (Action is not null)
 		{
 			initializer.Property("Action");

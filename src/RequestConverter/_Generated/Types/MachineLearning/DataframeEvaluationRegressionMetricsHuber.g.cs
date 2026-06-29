@@ -27,7 +27,7 @@ public partial class DataframeEvaluationRegressionMetricsHuber : RequestConverte
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframeEvaluationRegressionMetricsHuber", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber", false);
 		if (Delta is not null)
 		{
 			initializer.Property("Delta");

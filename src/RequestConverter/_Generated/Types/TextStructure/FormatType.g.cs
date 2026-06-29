@@ -30,16 +30,20 @@ public static class FormatTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.TextStructure.FormatType.Delimited:
-				writer.Write("FormatType.Delimited");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TextStructure.FormatType");
+				writer.Write(".Delimited");
 				break;
 			case Elastic.Clients.Elasticsearch.TextStructure.FormatType.Ndjson:
-				writer.Write("FormatType.Ndjson");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TextStructure.FormatType");
+				writer.Write(".Ndjson");
 				break;
 			case Elastic.Clients.Elasticsearch.TextStructure.FormatType.SemiStructuredText:
-				writer.Write("FormatType.SemiStructuredText");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TextStructure.FormatType");
+				writer.Write(".SemiStructuredText");
 				break;
 			case Elastic.Clients.Elasticsearch.TextStructure.FormatType.Xml:
-				writer.Write("FormatType.Xml");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TextStructure.FormatType");
+				writer.Write(".Xml");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected FormatType value.");

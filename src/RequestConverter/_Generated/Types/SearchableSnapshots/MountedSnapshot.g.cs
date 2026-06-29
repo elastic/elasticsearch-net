@@ -27,7 +27,7 @@ public partial class MountedSnapshot : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MountedSnapshot", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchableSnapshots.MountedSnapshot", false);
 		{
 			initializer.Property("Indices");
 			writer.WriteInlineList(Indices, (w, item) => { w.WriteString(item); });

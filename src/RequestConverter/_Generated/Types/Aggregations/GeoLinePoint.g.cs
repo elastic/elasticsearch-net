@@ -27,7 +27,7 @@ public partial class GeoLinePoint : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GeoLinePoint", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint", false);
 		{
 			initializer.Property("Field");
 			Field.FormatCode(writer);

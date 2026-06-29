@@ -30,10 +30,12 @@ public static class ApiKeyGrantTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType.AccessToken:
-				writer.Write("ApiKeyGrantType.AccessToken");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType");
+				writer.Write(".AccessToken");
 				break;
 			case Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType.Password:
-				writer.Write("ApiKeyGrantType.Password");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType");
+				writer.Write(".Password");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ApiKeyGrantType value.");

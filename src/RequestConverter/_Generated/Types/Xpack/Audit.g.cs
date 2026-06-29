@@ -27,7 +27,7 @@ public partial class Audit : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Audit", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.Audit", false);
 		{
 			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);

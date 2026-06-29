@@ -27,7 +27,7 @@ public partial class FileContent : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FileContent", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.FileContent", false);
 		{
 			initializer.Property("FileData");
 			writer.WriteString(FileData);

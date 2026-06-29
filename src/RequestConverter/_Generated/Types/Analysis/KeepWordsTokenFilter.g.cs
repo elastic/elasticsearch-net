@@ -27,7 +27,7 @@ public partial class KeepWordsTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("KeepWordsTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter", true);
 		if (KeepWords is not null)
 		{
 			initializer.Property("KeepWords");

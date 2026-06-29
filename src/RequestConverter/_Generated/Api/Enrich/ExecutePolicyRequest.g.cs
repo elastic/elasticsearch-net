@@ -27,7 +27,7 @@ public partial class ExecutePolicyRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ExecutePolicyRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

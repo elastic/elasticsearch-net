@@ -27,7 +27,7 @@ public partial class Vector : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Vector", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.Vector", false);
 		{
 			initializer.Property("Available");
 			writer.WriteValue(Available);

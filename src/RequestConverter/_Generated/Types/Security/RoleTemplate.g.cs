@@ -27,7 +27,7 @@ public partial class RoleTemplate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RoleTemplate", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.RoleTemplate", false);
 		if (Format is not null)
 		{
 			initializer.Property("Format");

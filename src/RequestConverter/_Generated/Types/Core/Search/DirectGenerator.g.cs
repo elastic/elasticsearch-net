@@ -27,7 +27,7 @@ public partial class DirectGenerator : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DirectGenerator", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator", false);
 		{
 			initializer.Property("Field");
 			Field.FormatCode(writer);

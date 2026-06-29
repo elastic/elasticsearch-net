@@ -27,7 +27,7 @@ public partial class ExtendedBounds<T> : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ExtendedBounds<T>", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<T>", false);
 		if (Max is not null)
 		{
 			initializer.Property("Max");

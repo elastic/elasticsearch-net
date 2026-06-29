@@ -27,7 +27,7 @@ public partial class FieldMemoryUsage : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FieldMemoryUsage", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.FieldMemoryUsage", false);
 		if (MemorySize is not null)
 		{
 			initializer.Property("MemorySize");

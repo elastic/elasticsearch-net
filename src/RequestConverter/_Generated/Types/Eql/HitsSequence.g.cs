@@ -27,7 +27,7 @@ public partial class HitsSequence<TEvent> : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("HitsSequence<TEvent>", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Eql.HitsSequence<TEvent>", false);
 		{
 			initializer.Property("Events");
 			writer.WriteInlineList(Events, (w, item) => { item.FormatCode(w); });

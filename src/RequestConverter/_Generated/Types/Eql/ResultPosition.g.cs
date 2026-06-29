@@ -30,10 +30,12 @@ public static class ResultPositionCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Eql.ResultPosition.Head:
-				writer.Write("ResultPosition.Head");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Eql.ResultPosition");
+				writer.Write(".Head");
 				break;
 			case Elastic.Clients.Elasticsearch.Eql.ResultPosition.Tail:
-				writer.Write("ResultPosition.Tail");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Eql.ResultPosition");
+				writer.Write(".Tail");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ResultPosition value.");

@@ -27,7 +27,7 @@ public partial class OpenShiftAiServiceSettings : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("OpenShiftAiServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.OpenShiftAiServiceSettings", false);
 		{
 			initializer.Property("ApiKey");
 			writer.WriteString(ApiKey);

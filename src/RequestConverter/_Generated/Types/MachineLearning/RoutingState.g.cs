@@ -30,19 +30,24 @@ public static class RoutingStateCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.RoutingState.Failed:
-				writer.Write("RoutingState.Failed");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.RoutingState");
+				writer.Write(".Failed");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.RoutingState.Started:
-				writer.Write("RoutingState.Started");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.RoutingState");
+				writer.Write(".Started");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.RoutingState.Starting:
-				writer.Write("RoutingState.Starting");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.RoutingState");
+				writer.Write(".Starting");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.RoutingState.Stopped:
-				writer.Write("RoutingState.Stopped");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.RoutingState");
+				writer.Write(".Stopped");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.RoutingState.Stopping:
-				writer.Write("RoutingState.Stopping");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.RoutingState");
+				writer.Write(".Stopping");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected RoutingState value.");

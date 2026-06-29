@@ -30,13 +30,16 @@ public static class LevelCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Level.Cluster:
-				writer.Write("Level.Cluster");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Level");
+				writer.Write(".Cluster");
 				break;
 			case Elastic.Clients.Elasticsearch.Level.Indices:
-				writer.Write("Level.Indices");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Level");
+				writer.Write(".Indices");
 				break;
 			case Elastic.Clients.Elasticsearch.Level.Shards:
-				writer.Write("Level.Shards");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Level");
+				writer.Write(".Shards");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected Level value.");

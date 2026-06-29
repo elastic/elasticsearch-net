@@ -27,7 +27,7 @@ public partial class UnknownAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("UnknownAnalyzer", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.UnknownAnalyzer", false);
 		initializer.Dispose();
 	}
 }

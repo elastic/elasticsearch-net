@@ -27,7 +27,7 @@ public partial class ShardStoreWrapper : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ShardStoreWrapper", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreWrapper", false);
 		{
 			initializer.Property("Stores");
 			writer.WriteInlineList(Stores, (w, item) => { item.FormatCode(w); });

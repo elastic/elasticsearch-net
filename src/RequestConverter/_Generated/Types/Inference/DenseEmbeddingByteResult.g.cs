@@ -27,7 +27,7 @@ public partial class DenseEmbeddingByteResult : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DenseEmbeddingByteResult", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingByteResult", false);
 		{
 			initializer.Property("Embedding");
 			writer.WriteInlineList(Embedding, (w, item) => { w.WriteValue(item); });

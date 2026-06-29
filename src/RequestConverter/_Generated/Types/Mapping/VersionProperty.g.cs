@@ -27,7 +27,7 @@ public partial class VersionProperty : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("VersionProperty", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.VersionProperty", true);
 		if (CopyTo is not null)
 		{
 			initializer.Property("CopyTo");
@@ -61,10 +61,12 @@ public partial class VersionProperty : RequestConverter.ICodeFormattable
 		if (Meta is not null)
 		{
 			initializer.Property("Meta");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("string");
+			writer.WriteTypeRef("string");
 			writer.Write(">()");
 			writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
 		}

@@ -27,7 +27,7 @@ public partial class DatafeedAuthorization : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DatafeedAuthorization", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DatafeedAuthorization", false);
 		if (ApiKey is not null)
 		{
 			initializer.Property("ApiKey");

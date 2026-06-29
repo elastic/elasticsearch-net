@@ -27,7 +27,7 @@ public partial class SparseEmbeddingRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SparseEmbeddingRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequest", false);
 		{
 			initializer.Property("InferenceId");
 			InferenceId.FormatCode(writer);

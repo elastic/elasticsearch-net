@@ -27,7 +27,7 @@ public partial class FailureStoreLifecycle : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FailureStoreLifecycle", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.FailureStoreLifecycle", false);
 		if (DataRetention is not null)
 		{
 			initializer.Property("DataRetention");

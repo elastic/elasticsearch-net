@@ -30,19 +30,24 @@ public static class RecoveryTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.RecoveryType.EmptyStore:
-				writer.Write("RecoveryType.EmptyStore");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.RecoveryType");
+				writer.Write(".EmptyStore");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.RecoveryType.ExistingStore:
-				writer.Write("RecoveryType.ExistingStore");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.RecoveryType");
+				writer.Write(".ExistingStore");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.RecoveryType.LocalShards:
-				writer.Write("RecoveryType.LocalShards");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.RecoveryType");
+				writer.Write(".LocalShards");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.RecoveryType.Peer:
-				writer.Write("RecoveryType.Peer");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.RecoveryType");
+				writer.Write(".Peer");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.RecoveryType.Snapshot:
-				writer.Write("RecoveryType.Snapshot");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.RecoveryType");
+				writer.Write(".Snapshot");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected RecoveryType value.");

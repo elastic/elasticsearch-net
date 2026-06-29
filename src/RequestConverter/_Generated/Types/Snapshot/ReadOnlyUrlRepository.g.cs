@@ -27,7 +27,7 @@ public partial class ReadOnlyUrlRepository : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ReadOnlyUrlRepository", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepository", true);
 		{
 			initializer.Property("Settings");
 			Settings.FormatCode(writer);

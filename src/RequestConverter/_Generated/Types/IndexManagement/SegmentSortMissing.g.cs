@@ -30,10 +30,12 @@ public static class SegmentSortMissingCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing.First:
-				writer.Write("SegmentSortMissing.First");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing");
+				writer.Write(".First");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing.Last:
-				writer.Write("SegmentSortMissing.Last");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing");
+				writer.Write(".Last");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SegmentSortMissing value.");

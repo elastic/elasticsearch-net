@@ -27,7 +27,7 @@ public partial class DiskUsageRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DiskUsageRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequest", false);
 		{
 			initializer.Property("Indices");
 			Indices.FormatCode(writer);

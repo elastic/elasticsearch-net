@@ -27,7 +27,7 @@ public partial class TaskInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TaskInfo", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Tasks.TaskInfo", false);
 		{
 			initializer.Property("Action");
 			writer.WriteString(Action);
@@ -52,10 +52,12 @@ public partial class TaskInfo : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("Headers");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("string");
+			writer.WriteTypeRef("string");
 			writer.Write(">()");
 			writer.WriteBlockList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
 		}

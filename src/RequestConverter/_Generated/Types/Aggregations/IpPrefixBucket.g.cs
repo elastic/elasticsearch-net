@@ -27,7 +27,7 @@ public partial class IpPrefixBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IpPrefixBucket", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.IpPrefixBucket", false);
 		if (Aggregations is not null)
 		{
 			initializer.Property("Aggregations");

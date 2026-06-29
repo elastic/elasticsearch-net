@@ -27,7 +27,7 @@ public partial class FetchProfileDebug : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FetchProfileDebug", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.FetchProfileDebug", false);
 		if (FastPath is not null)
 		{
 			initializer.Property("FastPath");

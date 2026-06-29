@@ -30,40 +30,52 @@ public static class PhoneticEncoderCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.BeiderMorse:
-				writer.Write("PhoneticEncoder.BeiderMorse");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder");
+				writer.Write(".BeiderMorse");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Caverphone1:
-				writer.Write("PhoneticEncoder.Caverphone1");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder");
+				writer.Write(".Caverphone1");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Caverphone2:
-				writer.Write("PhoneticEncoder.Caverphone2");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder");
+				writer.Write(".Caverphone2");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Cologne:
-				writer.Write("PhoneticEncoder.Cologne");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder");
+				writer.Write(".Cologne");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.DaitchMokotoff:
-				writer.Write("PhoneticEncoder.DaitchMokotoff");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder");
+				writer.Write(".DaitchMokotoff");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.DoubleMetaphone:
-				writer.Write("PhoneticEncoder.DoubleMetaphone");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder");
+				writer.Write(".DoubleMetaphone");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Haasephonetik:
-				writer.Write("PhoneticEncoder.Haasephonetik");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder");
+				writer.Write(".Haasephonetik");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Koelnerphonetik:
-				writer.Write("PhoneticEncoder.Koelnerphonetik");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder");
+				writer.Write(".Koelnerphonetik");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Metaphone:
-				writer.Write("PhoneticEncoder.Metaphone");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder");
+				writer.Write(".Metaphone");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Nysiis:
-				writer.Write("PhoneticEncoder.Nysiis");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder");
+				writer.Write(".Nysiis");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.RefinedSoundex:
-				writer.Write("PhoneticEncoder.RefinedSoundex");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder");
+				writer.Write(".RefinedSoundex");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder.Soundex:
-				writer.Write("PhoneticEncoder.Soundex");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder");
+				writer.Write(".Soundex");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected PhoneticEncoder value.");

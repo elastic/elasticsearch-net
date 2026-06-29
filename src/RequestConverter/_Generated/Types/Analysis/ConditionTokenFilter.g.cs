@@ -27,7 +27,7 @@ public partial class ConditionTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ConditionTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilter", true);
 		{
 			initializer.Property("Filter");
 			writer.WriteInlineList(Filter, (w, item) => { w.WriteString(item); });

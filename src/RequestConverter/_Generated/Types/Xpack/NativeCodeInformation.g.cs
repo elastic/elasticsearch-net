@@ -27,7 +27,7 @@ public partial class NativeCodeInformation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NativeCodeInformation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.NativeCodeInformation", false);
 		{
 			initializer.Property("BuildHash");
 			writer.WriteString(BuildHash);

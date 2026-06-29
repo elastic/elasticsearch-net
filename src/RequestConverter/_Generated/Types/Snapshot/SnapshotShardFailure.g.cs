@@ -27,7 +27,7 @@ public partial class SnapshotShardFailure : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SnapshotShardFailure", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardFailure", false);
 		{
 			initializer.Property("Index");
 			writer.WriteString(Index);

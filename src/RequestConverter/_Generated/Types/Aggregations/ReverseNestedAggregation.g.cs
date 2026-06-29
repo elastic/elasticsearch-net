@@ -27,7 +27,7 @@ public partial class ReverseNestedAggregation : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ReverseNestedAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregation", false);
 		if (Path is not null)
 		{
 			initializer.Property("Path");

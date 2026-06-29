@@ -27,7 +27,7 @@ public partial class GeoIpNodeDatabaseName : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GeoIpNodeDatabaseName", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabaseName", false);
 		{
 			initializer.Property("Name");
 			writer.WriteString(Name);

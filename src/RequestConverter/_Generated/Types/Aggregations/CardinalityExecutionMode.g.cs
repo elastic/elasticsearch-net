@@ -30,19 +30,24 @@ public static class CardinalityExecutionModeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode.Direct:
-				writer.Write("CardinalityExecutionMode.Direct");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode");
+				writer.Write(".Direct");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode.GlobalOrdinals:
-				writer.Write("CardinalityExecutionMode.GlobalOrdinals");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode");
+				writer.Write(".GlobalOrdinals");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode.SaveMemoryHeuristic:
-				writer.Write("CardinalityExecutionMode.SaveMemoryHeuristic");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode");
+				writer.Write(".SaveMemoryHeuristic");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode.SaveTimeHeuristic:
-				writer.Write("CardinalityExecutionMode.SaveTimeHeuristic");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode");
+				writer.Write(".SaveTimeHeuristic");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode.SegmentOrdinals:
-				writer.Write("CardinalityExecutionMode.SegmentOrdinals");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode");
+				writer.Write(".SegmentOrdinals");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected CardinalityExecutionMode value.");

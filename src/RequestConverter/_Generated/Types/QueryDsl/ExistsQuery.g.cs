@@ -27,7 +27,7 @@ public partial class ExistsQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ExistsQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery", false);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

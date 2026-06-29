@@ -27,7 +27,7 @@ public partial class Ingest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Ingest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.Ingest", false);
 		if (Pipeline is not null)
 		{
 			initializer.Property("Pipeline");

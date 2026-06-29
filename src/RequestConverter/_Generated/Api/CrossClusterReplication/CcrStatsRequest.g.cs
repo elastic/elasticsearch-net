@@ -27,7 +27,7 @@ public partial class CcrStatsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CcrStatsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequest", false);
 		if (MasterTimeout is not null)
 		{
 			initializer.Property("MasterTimeout");

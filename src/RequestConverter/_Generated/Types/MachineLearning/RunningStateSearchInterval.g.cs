@@ -27,7 +27,7 @@ public partial class RunningStateSearchInterval : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RunningStateSearchInterval", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.RunningStateSearchInterval", false);
 		if (End is not null)
 		{
 			initializer.Property("End");

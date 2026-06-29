@@ -27,7 +27,7 @@ public partial class ShardProfile : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ShardProfile", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.ShardProfile", false);
 		{
 			initializer.Property("Aggregations");
 			writer.WriteInlineList(Aggregations, (w, item) => { item.FormatCode(w); });

@@ -27,7 +27,7 @@ public partial class Tags : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Tags", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Project.Tags", false);
 		{
 			initializer.Property("Alias");
 			writer.WriteString(Alias);
@@ -51,10 +51,12 @@ public partial class Tags : RequestConverter.ICodeFormattable
 		if (UserDefinedTags is not null)
 		{
 			initializer.Property("UserDefinedTags");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("string");
+			writer.WriteTypeRef("string");
 			writer.Write(">()");
 			writer.WriteBlockList(UserDefinedTags, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
 		}

@@ -30,19 +30,24 @@ public static class RestMethodCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethod.Delete:
-				writer.Write("RestMethod.Delete");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethod");
+				writer.Write(".Delete");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethod.Get:
-				writer.Write("RestMethod.Get");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethod");
+				writer.Write(".Get");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethod.Head:
-				writer.Write("RestMethod.Head");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethod");
+				writer.Write(".Head");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethod.Post:
-				writer.Write("RestMethod.Post");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethod");
+				writer.Write(".Post");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethod.Put:
-				writer.Write("RestMethod.Put");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethod");
+				writer.Write(".Put");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected RestMethod value.");

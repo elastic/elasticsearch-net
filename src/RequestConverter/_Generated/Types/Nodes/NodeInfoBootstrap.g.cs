@@ -27,7 +27,7 @@ public partial class NodeInfoBootstrap : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeInfoBootstrap", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeInfoBootstrap", false);
 		{
 			initializer.Property("MemoryLock");
 			writer.WriteString(MemoryLock);

@@ -27,7 +27,7 @@ public partial class DeleteAsyncSearchRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteAsyncSearchRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest", false);
 		{
 			initializer.Property("Id");
 			Id.FormatCode(writer);

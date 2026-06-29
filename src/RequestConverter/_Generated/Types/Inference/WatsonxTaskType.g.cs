@@ -30,16 +30,20 @@ public static class WatsonxTaskTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType.ChatCompletion:
-				writer.Write("WatsonxTaskType.ChatCompletion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType");
+				writer.Write(".ChatCompletion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType.Completion:
-				writer.Write("WatsonxTaskType.Completion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType");
+				writer.Write(".Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType.Rerank:
-				writer.Write("WatsonxTaskType.Rerank");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType");
+				writer.Write(".Rerank");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType.TextEmbedding:
-				writer.Write("WatsonxTaskType.TextEmbedding");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType");
+				writer.Write(".TextEmbedding");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected WatsonxTaskType value.");

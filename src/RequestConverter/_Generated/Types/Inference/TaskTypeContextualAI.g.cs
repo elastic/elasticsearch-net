@@ -30,7 +30,8 @@ public static class TaskTypeContextualAICodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeContextualAI.Rerank:
-				writer.Write("TaskTypeContextualAI.Rerank");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeContextualAI");
+				writer.Write(".Rerank");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeContextualAI value.");

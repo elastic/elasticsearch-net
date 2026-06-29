@@ -27,7 +27,7 @@ public partial class ClusterAppliedStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ClusterAppliedStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.ClusterAppliedStats", false);
 		if (Recordings is not null)
 		{
 			initializer.Property("Recordings");

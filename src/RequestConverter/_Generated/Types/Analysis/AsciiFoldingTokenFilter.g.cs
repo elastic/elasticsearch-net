@@ -27,7 +27,7 @@ public partial class AsciiFoldingTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AsciiFoldingTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter", true);
 		if (PreserveOriginal is not null)
 		{
 			initializer.Property("PreserveOriginal");

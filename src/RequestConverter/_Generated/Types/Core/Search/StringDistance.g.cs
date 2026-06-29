@@ -30,19 +30,24 @@ public static class StringDistanceCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.Search.StringDistance.DamerauLevenshtein:
-				writer.Write("StringDistance.DamerauLevenshtein");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.StringDistance");
+				writer.Write(".DamerauLevenshtein");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Internal:
-				writer.Write("StringDistance.Internal");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.StringDistance");
+				writer.Write(".Internal");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.StringDistance.JaroWinkler:
-				writer.Write("StringDistance.JaroWinkler");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.StringDistance");
+				writer.Write(".JaroWinkler");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Levenshtein:
-				writer.Write("StringDistance.Levenshtein");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.StringDistance");
+				writer.Write(".Levenshtein");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.StringDistance.Ngram:
-				writer.Write("StringDistance.Ngram");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.StringDistance");
+				writer.Write(".Ngram");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected StringDistance value.");

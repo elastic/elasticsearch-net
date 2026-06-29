@@ -27,7 +27,7 @@ public partial class ChineseAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ChineseAnalyzer", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.ChineseAnalyzer", true);
 		if (Stopwords is not null)
 		{
 			initializer.Property("Stopwords");
@@ -37,7 +37,9 @@ public partial class ChineseAnalyzer : RequestConverter.ICodeFormattable
 			}
 			else
 			{
-				writer.Write("new string[] ");
+				writer.Write("new ");
+				writer.WriteTypeRef("string");
+				writer.Write("[] ");
 				writer.WriteInlineList(Stopwords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", ");
 			}
 		}

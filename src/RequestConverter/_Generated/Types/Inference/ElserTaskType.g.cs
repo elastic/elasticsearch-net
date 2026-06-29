@@ -30,7 +30,8 @@ public static class ElserTaskTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.ElserTaskType.SparseEmbedding:
-				writer.Write("ElserTaskType.SparseEmbedding");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ElserTaskType");
+				writer.Write(".SparseEmbedding");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ElserTaskType value.");

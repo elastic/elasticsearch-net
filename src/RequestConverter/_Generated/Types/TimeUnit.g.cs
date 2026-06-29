@@ -30,25 +30,32 @@ public static class TimeUnitCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.TimeUnit.Days:
-				writer.Write("TimeUnit.Days");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TimeUnit");
+				writer.Write(".Days");
 				break;
 			case Elastic.Clients.Elasticsearch.TimeUnit.Hours:
-				writer.Write("TimeUnit.Hours");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TimeUnit");
+				writer.Write(".Hours");
 				break;
 			case Elastic.Clients.Elasticsearch.TimeUnit.Minutes:
-				writer.Write("TimeUnit.Minutes");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TimeUnit");
+				writer.Write(".Minutes");
 				break;
 			case Elastic.Clients.Elasticsearch.TimeUnit.Microseconds:
-				writer.Write("TimeUnit.Microseconds");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TimeUnit");
+				writer.Write(".Microseconds");
 				break;
 			case Elastic.Clients.Elasticsearch.TimeUnit.Milliseconds:
-				writer.Write("TimeUnit.Milliseconds");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TimeUnit");
+				writer.Write(".Milliseconds");
 				break;
 			case Elastic.Clients.Elasticsearch.TimeUnit.Nanoseconds:
-				writer.Write("TimeUnit.Nanoseconds");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TimeUnit");
+				writer.Write(".Nanoseconds");
 				break;
 			case Elastic.Clients.Elasticsearch.TimeUnit.Seconds:
-				writer.Write("TimeUnit.Seconds");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TimeUnit");
+				writer.Write(".Seconds");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TimeUnit value.");

@@ -27,7 +27,7 @@ public partial class KeywordMarkerTokenFilter : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("KeywordMarkerTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter", true);
 		if (IgnoreCase is not null)
 		{
 			initializer.Property("IgnoreCase");

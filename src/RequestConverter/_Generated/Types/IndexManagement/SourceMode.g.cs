@@ -30,13 +30,16 @@ public static class SourceModeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.SourceMode.Disabled:
-				writer.Write("SourceMode.Disabled");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.SourceMode");
+				writer.Write(".Disabled");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.SourceMode.Stored:
-				writer.Write("SourceMode.Stored");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.SourceMode");
+				writer.Write(".Stored");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.SourceMode.Synthetic:
-				writer.Write("SourceMode.Synthetic");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.SourceMode");
+				writer.Write(".Synthetic");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SourceMode value.");

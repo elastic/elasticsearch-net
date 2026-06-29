@@ -27,7 +27,7 @@ public partial class IndicesOptions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndicesOptions", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndicesOptions", false);
 		if (AllowNoIndices is not null)
 		{
 			initializer.Property("AllowNoIndices");

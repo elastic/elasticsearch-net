@@ -29,11 +29,14 @@ public readonly partial struct RestrictionWorkflow : RequestConverter.ICodeForma
 	{
 		if (this == Elastic.Clients.Elasticsearch.Security.RestrictionWorkflow.SearchApplicationQuery)
 		{
-			writer.Write("RestrictionWorkflow.SearchApplicationQuery");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.RestrictionWorkflow");
+			writer.Write(".SearchApplicationQuery");
 			return;
 		}
 
-		writer.Write("new RestrictionWorkflow(\"");
+		writer.Write("new ");
+		writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.RestrictionWorkflow");
+		writer.Write("(\"");
 		writer.Write(Value);
 		writer.Write("\")");
 	}

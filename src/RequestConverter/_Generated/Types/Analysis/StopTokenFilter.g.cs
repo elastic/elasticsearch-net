@@ -27,7 +27,7 @@ public partial class StopTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("StopTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.StopTokenFilter", true);
 		if (IgnoreCase is not null)
 		{
 			initializer.Property("IgnoreCase");
@@ -49,7 +49,9 @@ public partial class StopTokenFilter : RequestConverter.ICodeFormattable
 			}
 			else
 			{
-				writer.Write("new string[] ");
+				writer.Write("new ");
+				writer.WriteTypeRef("string");
+				writer.Write("[] ");
 				writer.WriteInlineList(Stopwords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", ");
 			}
 		}

@@ -27,7 +27,7 @@ public partial class SlowlogTresholds : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SlowlogTresholds", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholds", false);
 		if (Fetch is not null)
 		{
 			initializer.Property("Fetch");

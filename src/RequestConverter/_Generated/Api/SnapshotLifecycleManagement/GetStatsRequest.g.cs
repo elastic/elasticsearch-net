@@ -27,7 +27,7 @@ public partial class GetStatsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetStatsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequest", false);
 		if (MasterTimeout is not null)
 		{
 			initializer.Property("MasterTimeout");

@@ -30,16 +30,20 @@ public static class IndexOptionsCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.IndexOptions.Docs:
-				writer.Write("IndexOptions.Docs");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.IndexOptions");
+				writer.Write(".Docs");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.IndexOptions.Freqs:
-				writer.Write("IndexOptions.Freqs");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.IndexOptions");
+				writer.Write(".Freqs");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.IndexOptions.Offsets:
-				writer.Write("IndexOptions.Offsets");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.IndexOptions");
+				writer.Write(".Offsets");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.IndexOptions.Positions:
-				writer.Write("IndexOptions.Positions");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.IndexOptions");
+				writer.Write(".Positions");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IndexOptions value.");

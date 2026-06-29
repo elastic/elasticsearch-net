@@ -27,7 +27,7 @@ public partial class InferenceConfigRegression : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("InferenceConfigRegression", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression", false);
 		if (NumTopFeatureImportanceValues is not null)
 		{
 			initializer.Property("NumTopFeatureImportanceValues");

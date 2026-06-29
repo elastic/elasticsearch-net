@@ -27,7 +27,7 @@ public partial class CompactNodeInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CompactNodeInfo", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.CompactNodeInfo", false);
 		{
 			initializer.Property("Name");
 			writer.WriteString(Name);

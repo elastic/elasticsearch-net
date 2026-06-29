@@ -27,7 +27,7 @@ public partial class LinearRetriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("LinearRetriever", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.LinearRetriever", false);
 		if (Fields is not null)
 		{
 			initializer.Property("Fields");

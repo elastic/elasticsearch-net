@@ -27,7 +27,7 @@ public partial class MappingStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MappingStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.MappingStats", false);
 		{
 			initializer.Property("TotalCount");
 			writer.WriteValue(TotalCount);

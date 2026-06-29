@@ -27,7 +27,7 @@ public partial class IndexRoutingAllocationDisk : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndexRoutingAllocationDisk", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDisk", false);
 		if (ThresholdEnabled is not null)
 		{
 			initializer.Property("ThresholdEnabled");

@@ -27,7 +27,7 @@ public partial class HotThreadsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("HotThreadsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequest", false);
 		if (NodeId is not null)
 		{
 			initializer.Property("NodeId");

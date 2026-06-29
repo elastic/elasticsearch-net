@@ -27,7 +27,7 @@ public partial class ClusterFileSystem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ClusterFileSystem", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem", false);
 		if (Available is not null)
 		{
 			initializer.Property("Available");

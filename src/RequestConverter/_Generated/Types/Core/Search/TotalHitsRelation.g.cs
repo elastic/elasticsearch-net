@@ -30,10 +30,12 @@ public static class TotalHitsRelationCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation.Eq:
-				writer.Write("TotalHitsRelation.Eq");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation");
+				writer.Write(".Eq");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation.Gte:
-				writer.Write("TotalHitsRelation.Gte");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation");
+				writer.Write(".Gte");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TotalHitsRelation value.");

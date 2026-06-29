@@ -27,7 +27,7 @@ public partial class Destination : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Destination", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Reindex.Destination", false);
 		{
 			initializer.Property("Index");
 			Index.FormatCode(writer);

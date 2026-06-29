@@ -30,10 +30,12 @@ public static class FollowerIndexStatusCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatus.Active:
-				writer.Write("FollowerIndexStatus.Active");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatus");
+				writer.Write(".Active");
 				break;
 			case Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatus.Paused:
-				writer.Write("FollowerIndexStatus.Paused");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatus");
+				writer.Write(".Paused");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected FollowerIndexStatus value.");

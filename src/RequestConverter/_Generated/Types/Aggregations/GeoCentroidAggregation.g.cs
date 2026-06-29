@@ -27,7 +27,7 @@ public partial class GeoCentroidAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GeoCentroidAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation", false);
 		if (Count is not null)
 		{
 			initializer.Property("Count");

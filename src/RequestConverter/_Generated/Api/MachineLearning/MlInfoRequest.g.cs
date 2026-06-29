@@ -27,7 +27,7 @@ public partial class MlInfoRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MlInfoRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.MlInfoRequest", false);
 		initializer.Dispose();
 	}
 }

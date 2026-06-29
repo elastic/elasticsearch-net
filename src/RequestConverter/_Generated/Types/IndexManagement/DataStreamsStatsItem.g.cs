@@ -27,7 +27,7 @@ public partial class DataStreamsStatsItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataStreamsStatsItem", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsItem", false);
 		{
 			initializer.Property("BackingIndices");
 			writer.WriteValue(BackingIndices);

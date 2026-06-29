@@ -30,19 +30,24 @@ public static class ChildScoreModeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.Avg:
-				writer.Write("ChildScoreMode.Avg");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode");
+				writer.Write(".Avg");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.Max:
-				writer.Write("ChildScoreMode.Max");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode");
+				writer.Write(".Max");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.Min:
-				writer.Write("ChildScoreMode.Min");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode");
+				writer.Write(".Min");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.None:
-				writer.Write("ChildScoreMode.None");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode");
+				writer.Write(".None");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.Sum:
-				writer.Write("ChildScoreMode.Sum");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode");
+				writer.Write(".Sum");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ChildScoreMode value.");

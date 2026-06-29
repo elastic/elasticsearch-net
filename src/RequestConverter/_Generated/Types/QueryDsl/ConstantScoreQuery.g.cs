@@ -27,7 +27,7 @@ public partial class ConstantScoreQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ConstantScoreQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQuery", false);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

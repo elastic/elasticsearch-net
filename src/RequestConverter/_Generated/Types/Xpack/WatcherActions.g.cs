@@ -27,13 +27,15 @@ public partial class WatcherActions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("WatcherActions", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.WatcherActions", false);
 		{
 			initializer.Property("Actions");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Xpack.WatcherActionTotals");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Xpack.WatcherActionTotals");
 			writer.Write(">()");
 			writer.WriteBlockList(Actions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

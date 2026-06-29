@@ -27,7 +27,7 @@ public partial class DisableUserProfileRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DisableUserProfileRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequest", false);
 		{
 			initializer.Property("Uid");
 			writer.WriteString(Uid);

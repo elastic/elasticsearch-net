@@ -27,7 +27,7 @@ public partial class TemplateConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TemplateConfig", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.MSearchTemplate.TemplateConfig", true);
 		if (Explain is not null)
 		{
 			initializer.Property("Explain");
@@ -43,10 +43,12 @@ public partial class TemplateConfig : RequestConverter.ICodeFormattable
 		if (Params is not null)
 		{
 			initializer.Property("Params");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("object");
+			writer.WriteTypeRef("object");
 			writer.Write(">()");
 			writer.WriteBlockList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
 		}

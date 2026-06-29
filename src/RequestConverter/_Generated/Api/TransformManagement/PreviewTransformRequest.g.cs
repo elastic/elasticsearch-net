@@ -27,7 +27,7 @@ public partial class PreviewTransformRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PreviewTransformRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest", false);
 		if (TransformId is not null)
 		{
 			initializer.Property("TransformId");

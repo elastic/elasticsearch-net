@@ -27,7 +27,7 @@ public partial class BulkIndexByScrollFailure : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("BulkIndexByScrollFailure", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure", false);
 		{
 			initializer.Property("Cause");
 			Cause.FormatCode(writer);

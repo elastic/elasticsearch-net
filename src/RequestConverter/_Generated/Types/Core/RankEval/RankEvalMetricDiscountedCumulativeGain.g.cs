@@ -27,7 +27,7 @@ public partial class RankEvalMetricDiscountedCumulativeGain : RequestConverter.I
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RankEvalMetricDiscountedCumulativeGain", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain", false);
 		if (K is not null)
 		{
 			initializer.Property("K");

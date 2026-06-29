@@ -27,7 +27,7 @@ public partial class GetServiceAccountsRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetServiceAccountsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest", false);
 		if (Namespace is not null)
 		{
 			initializer.Property("Namespace");

@@ -27,7 +27,7 @@ public partial class DeprecationIndexing : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeprecationIndexing", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.DeprecationIndexing", false);
 		{
 			initializer.Property("Enabled");
 			if (Enabled.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)

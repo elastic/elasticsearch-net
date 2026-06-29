@@ -27,7 +27,7 @@ public partial class GeoGridProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GeoGridProcessor", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor", false);
 		if (ChildrenField is not null)
 		{
 			initializer.Property("ChildrenField");

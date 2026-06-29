@@ -27,7 +27,7 @@ public partial class MultiGetOperation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MultiGetOperation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation", false);
 		{
 			initializer.Property("Id");
 			Id.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class RetentionLease : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RetentionLease", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease", false);
 		{
 			initializer.Property("Period");
 			Period.FormatCode(writer);

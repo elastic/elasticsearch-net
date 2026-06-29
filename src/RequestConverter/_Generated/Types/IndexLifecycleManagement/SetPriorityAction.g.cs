@@ -27,7 +27,7 @@ public partial class SetPriorityAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SetPriorityAction", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityAction", false);
 		if (Priority is not null)
 		{
 			initializer.Property("Priority");

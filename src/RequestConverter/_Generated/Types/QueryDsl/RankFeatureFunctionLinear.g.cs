@@ -27,7 +27,7 @@ public partial class RankFeatureFunctionLinear : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RankFeatureFunctionLinear", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear", false);
 		initializer.Dispose();
 	}
 }

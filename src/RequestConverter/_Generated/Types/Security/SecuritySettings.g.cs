@@ -27,7 +27,7 @@ public partial class SecuritySettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SecuritySettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.SecuritySettings", false);
 		if (Index is not null)
 		{
 			initializer.Property("Index");

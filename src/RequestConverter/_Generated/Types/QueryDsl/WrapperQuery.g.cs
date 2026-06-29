@@ -27,7 +27,7 @@ public partial class WrapperQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("WrapperQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.WrapperQuery", false);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

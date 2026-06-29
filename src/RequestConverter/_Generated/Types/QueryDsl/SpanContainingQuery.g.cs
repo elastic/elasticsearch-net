@@ -27,7 +27,7 @@ public partial class SpanContainingQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SpanContainingQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery", false);
 		{
 			initializer.Property("Big");
 			Big.FormatCode(writer);

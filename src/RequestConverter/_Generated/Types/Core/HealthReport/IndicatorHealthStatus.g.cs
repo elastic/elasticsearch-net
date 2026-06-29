@@ -30,19 +30,24 @@ public static class IndicatorHealthStatusCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Green:
-				writer.Write("IndicatorHealthStatus.Green");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus");
+				writer.Write(".Green");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Red:
-				writer.Write("IndicatorHealthStatus.Red");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus");
+				writer.Write(".Red");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Unavailable:
-				writer.Write("IndicatorHealthStatus.Unavailable");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus");
+				writer.Write(".Unavailable");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Unknown:
-				writer.Write("IndicatorHealthStatus.Unknown");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus");
+				writer.Write(".Unknown");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Yellow:
-				writer.Write("IndicatorHealthStatus.Yellow");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus");
+				writer.Write(".Yellow");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IndicatorHealthStatus value.");

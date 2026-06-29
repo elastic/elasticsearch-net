@@ -27,7 +27,7 @@ public partial class FileSystem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FileSystem", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.FileSystem", false);
 		if (Data is not null)
 		{
 			initializer.Property("Data");

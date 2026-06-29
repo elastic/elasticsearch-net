@@ -27,7 +27,7 @@ public partial class IndexRoutingAllocationInclude : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndexRoutingAllocationInclude", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude", false);
 		if (Id is not null)
 		{
 			initializer.Property("Id");

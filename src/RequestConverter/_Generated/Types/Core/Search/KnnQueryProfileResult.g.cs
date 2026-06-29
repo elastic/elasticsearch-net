@@ -27,7 +27,7 @@ public partial class KnnQueryProfileResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("KnnQueryProfileResult", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.KnnQueryProfileResult", false);
 		{
 			initializer.Property("Breakdown");
 			Breakdown.FormatCode(writer);
@@ -42,10 +42,12 @@ public partial class KnnQueryProfileResult : RequestConverter.ICodeFormattable
 		if (Debug is not null)
 		{
 			initializer.Property("Debug");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("object");
+			writer.WriteTypeRef("object");
 			writer.Write(">()");
 			writer.WriteBlockList(Debug, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
 		}

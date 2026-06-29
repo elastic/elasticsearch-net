@@ -27,7 +27,7 @@ public partial class UserIndicesPrivileges : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("UserIndicesPrivileges", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.UserIndicesPrivileges", false);
 		{
 			initializer.Property("AllowRestrictedIndices");
 			writer.WriteValue(AllowRestrictedIndices);

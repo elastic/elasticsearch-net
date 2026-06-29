@@ -27,7 +27,7 @@ public partial class SnowballTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SnowballTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilter", true);
 		if (Language is not null)
 		{
 			initializer.Property("Language");

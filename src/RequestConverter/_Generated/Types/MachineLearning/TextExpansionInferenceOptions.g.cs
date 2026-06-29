@@ -27,7 +27,7 @@ public partial class TextExpansionInferenceOptions : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TextExpansionInferenceOptions", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptions", false);
 		if (ResultsField is not null)
 		{
 			initializer.Property("ResultsField");

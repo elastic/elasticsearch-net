@@ -27,7 +27,7 @@ public partial class AzureOpenAIServiceSettings : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AzureOpenAIServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.AzureOpenAIServiceSettings", false);
 		if (ApiKey is not null)
 		{
 			initializer.Property("ApiKey");

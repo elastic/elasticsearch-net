@@ -30,13 +30,16 @@ public static class ImageUrlDetailCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.ImageUrlDetail.Auto:
-				writer.Write("ImageUrlDetail.Auto");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ImageUrlDetail");
+				writer.Write(".Auto");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.ImageUrlDetail.High:
-				writer.Write("ImageUrlDetail.High");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ImageUrlDetail");
+				writer.Write(".High");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.ImageUrlDetail.Low:
-				writer.Write("ImageUrlDetail.Low");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ImageUrlDetail");
+				writer.Write(".Low");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ImageUrlDetail value.");

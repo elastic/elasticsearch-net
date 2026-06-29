@@ -27,7 +27,7 @@ public partial class InputConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("InputConfig", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.InputConfig", false);
 		{
 			initializer.Property("InputField");
 			writer.WriteString(InputField);

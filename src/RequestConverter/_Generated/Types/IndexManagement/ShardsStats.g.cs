@@ -27,7 +27,7 @@ public partial class ShardsStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ShardsStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ShardsStats", false);
 		{
 			initializer.Property("AllFields");
 			AllFields.FormatCode(writer);
@@ -35,10 +35,12 @@ public partial class ShardsStats : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("Fields");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.IndexManagement.FieldSummary");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.FieldSummary");
 			writer.Write(">()");
 			writer.WriteBlockList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

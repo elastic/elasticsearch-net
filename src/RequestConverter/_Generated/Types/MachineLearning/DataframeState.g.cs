@@ -30,19 +30,24 @@ public static class DataframeStateCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Failed:
-				writer.Write("DataframeState.Failed");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.DataframeState");
+				writer.Write(".Failed");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Started:
-				writer.Write("DataframeState.Started");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.DataframeState");
+				writer.Write(".Started");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Starting:
-				writer.Write("DataframeState.Starting");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.DataframeState");
+				writer.Write(".Starting");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Stopped:
-				writer.Write("DataframeState.Stopped");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.DataframeState");
+				writer.Write(".Stopped");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DataframeState.Stopping:
-				writer.Write("DataframeState.Stopping");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.DataframeState");
+				writer.Write(".Stopping");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected DataframeState value.");

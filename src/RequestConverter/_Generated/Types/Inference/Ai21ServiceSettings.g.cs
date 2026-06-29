@@ -27,7 +27,7 @@ public partial class Ai21ServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Ai21ServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.Ai21ServiceSettings", false);
 		if (ApiKey is not null)
 		{
 			initializer.Property("ApiKey");

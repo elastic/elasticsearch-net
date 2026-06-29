@@ -27,7 +27,7 @@ public partial class QueryApiKeysRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("QueryApiKeysRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest", false);
 		if (TypedKeys is not null)
 		{
 			initializer.Property("TypedKeys");
@@ -49,10 +49,12 @@ public partial class QueryApiKeysRequest : RequestConverter.ICodeFormattable
 		if (Aggregations is not null)
 		{
 			initializer.Property("Aggregations");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation");
 			writer.Write(">()");
 			writer.WriteBlockList(Aggregations, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

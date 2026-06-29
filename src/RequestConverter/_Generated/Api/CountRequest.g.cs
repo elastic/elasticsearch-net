@@ -27,7 +27,7 @@ public partial class CountRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CountRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.CountRequest", false);
 		if (Indices is not null)
 		{
 			initializer.Property("Indices");

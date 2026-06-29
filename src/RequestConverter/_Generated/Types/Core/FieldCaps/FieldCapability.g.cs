@@ -27,7 +27,7 @@ public partial class FieldCapability : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FieldCapability", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.FieldCaps.FieldCapability", false);
 		{
 			initializer.Property("Aggregatable");
 			writer.WriteValue(Aggregatable);
@@ -42,10 +42,12 @@ public partial class FieldCapability : RequestConverter.ICodeFormattable
 		if (Meta is not null)
 		{
 			initializer.Property("Meta");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("object");
+			writer.WriteTypeRef("object");
 			writer.Write(">()");
 			writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
 		}

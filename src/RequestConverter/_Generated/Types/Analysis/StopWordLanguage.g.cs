@@ -30,115 +30,152 @@ public static class StopWordLanguageCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Arabic:
-				writer.Write("StopWordLanguage.Arabic");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Arabic");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Armenian:
-				writer.Write("StopWordLanguage.Armenian");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Armenian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Basque:
-				writer.Write("StopWordLanguage.Basque");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Basque");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Bengali:
-				writer.Write("StopWordLanguage.Bengali");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Bengali");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Brazilian:
-				writer.Write("StopWordLanguage.Brazilian");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Brazilian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Bulgarian:
-				writer.Write("StopWordLanguage.Bulgarian");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Bulgarian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Catalan:
-				writer.Write("StopWordLanguage.Catalan");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Catalan");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Cjk:
-				writer.Write("StopWordLanguage.Cjk");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Cjk");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Czech:
-				writer.Write("StopWordLanguage.Czech");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Czech");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Danish:
-				writer.Write("StopWordLanguage.Danish");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Danish");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Dutch:
-				writer.Write("StopWordLanguage.Dutch");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Dutch");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.English:
-				writer.Write("StopWordLanguage.English");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".English");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Estonian:
-				writer.Write("StopWordLanguage.Estonian");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Estonian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Finnish:
-				writer.Write("StopWordLanguage.Finnish");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Finnish");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.French:
-				writer.Write("StopWordLanguage.French");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".French");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Galician:
-				writer.Write("StopWordLanguage.Galician");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Galician");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.German:
-				writer.Write("StopWordLanguage.German");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".German");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Greek:
-				writer.Write("StopWordLanguage.Greek");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Greek");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Hindi:
-				writer.Write("StopWordLanguage.Hindi");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Hindi");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Hungarian:
-				writer.Write("StopWordLanguage.Hungarian");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Hungarian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Indonesian:
-				writer.Write("StopWordLanguage.Indonesian");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Indonesian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Irish:
-				writer.Write("StopWordLanguage.Irish");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Irish");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Italian:
-				writer.Write("StopWordLanguage.Italian");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Italian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Latvian:
-				writer.Write("StopWordLanguage.Latvian");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Latvian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Lithuanian:
-				writer.Write("StopWordLanguage.Lithuanian");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Lithuanian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.None:
-				writer.Write("StopWordLanguage.None");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".None");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Norwegian:
-				writer.Write("StopWordLanguage.Norwegian");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Norwegian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Persian:
-				writer.Write("StopWordLanguage.Persian");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Persian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Portuguese:
-				writer.Write("StopWordLanguage.Portuguese");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Portuguese");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Romanian:
-				writer.Write("StopWordLanguage.Romanian");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Romanian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Russian:
-				writer.Write("StopWordLanguage.Russian");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Russian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Serbian:
-				writer.Write("StopWordLanguage.Serbian");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Serbian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Sorani:
-				writer.Write("StopWordLanguage.Sorani");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Sorani");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Spanish:
-				writer.Write("StopWordLanguage.Spanish");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Spanish");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Swedish:
-				writer.Write("StopWordLanguage.Swedish");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Swedish");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Thai:
-				writer.Write("StopWordLanguage.Thai");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Thai");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Turkish:
-				writer.Write("StopWordLanguage.Turkish");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage");
+				writer.Write(".Turkish");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected StopWordLanguage value.");

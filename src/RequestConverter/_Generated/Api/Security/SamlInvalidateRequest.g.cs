@@ -27,7 +27,7 @@ public partial class SamlInvalidateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SamlInvalidateRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest", false);
 		if (Acs is not null)
 		{
 			initializer.Property("Acs");

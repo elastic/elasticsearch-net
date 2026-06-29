@@ -27,7 +27,7 @@ public partial class Input : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Input", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.Input", false);
 		{
 			initializer.Property("FieldNames");
 			FieldNames.FormatCode(writer);

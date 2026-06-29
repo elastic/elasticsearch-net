@@ -27,7 +27,7 @@ public partial class DatafeedRunningState : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DatafeedRunningState", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DatafeedRunningState", false);
 		{
 			initializer.Property("RealTimeConfigured");
 			writer.WriteValue(RealTimeConfigured);

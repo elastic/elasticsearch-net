@@ -30,13 +30,16 @@ public static class DFRAfterEffectCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.DFRAfterEffect.B:
-				writer.Write("DFRAfterEffect.B");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.DFRAfterEffect");
+				writer.Write(".B");
 				break;
 			case Elastic.Clients.Elasticsearch.DFRAfterEffect.L:
-				writer.Write("DFRAfterEffect.L");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.DFRAfterEffect");
+				writer.Write(".L");
 				break;
 			case Elastic.Clients.Elasticsearch.DFRAfterEffect.No:
-				writer.Write("DFRAfterEffect.No");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.DFRAfterEffect");
+				writer.Write(".No");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected DFRAfterEffect value.");

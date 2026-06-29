@@ -27,7 +27,7 @@ public partial class TrendChange : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TrendChange", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.TrendChange", false);
 		{
 			initializer.Property("ChangePoint");
 			writer.WriteValue(ChangePoint);

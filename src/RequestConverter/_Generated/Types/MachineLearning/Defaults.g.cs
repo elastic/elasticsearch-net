@@ -27,7 +27,7 @@ public partial class Defaults : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Defaults", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.Defaults", false);
 		{
 			initializer.Property("AnomalyDetectors");
 			AnomalyDetectors.FormatCode(writer);

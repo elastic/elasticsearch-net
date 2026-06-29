@@ -30,16 +30,20 @@ public static class DeploymentAssignmentStateCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState.Failed:
-				writer.Write("DeploymentAssignmentState.Failed");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState");
+				writer.Write(".Failed");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState.Started:
-				writer.Write("DeploymentAssignmentState.Started");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState");
+				writer.Write(".Started");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState.Starting:
-				writer.Write("DeploymentAssignmentState.Starting");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState");
+				writer.Write(".Starting");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState.Stopping:
-				writer.Write("DeploymentAssignmentState.Stopping");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState");
+				writer.Write(".Stopping");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected DeploymentAssignmentState value.");

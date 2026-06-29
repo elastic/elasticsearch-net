@@ -27,14 +27,16 @@ public partial class Suggester : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Suggester", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.Suggester", false);
 		if (Suggesters is not null)
 		{
 			initializer.Property("Suggesters");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester");
 			writer.Write(">()");
 			writer.WriteBlockList(Suggesters, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

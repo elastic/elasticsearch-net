@@ -27,7 +27,7 @@ public partial class DataframeRegressionSummary : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframeRegressionSummary", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeRegressionSummary", false);
 		if (Huber is not null)
 		{
 			initializer.Property("Huber");

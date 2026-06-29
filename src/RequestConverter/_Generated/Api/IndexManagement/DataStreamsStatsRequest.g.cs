@@ -27,7 +27,7 @@ public partial class DataStreamsStatsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataStreamsStatsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest", false);
 		if (Name is not null)
 		{
 			initializer.Property("Name");

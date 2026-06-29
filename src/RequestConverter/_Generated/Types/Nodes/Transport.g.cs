@@ -27,7 +27,7 @@ public partial class Transport : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Transport", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.Transport", false);
 		if (InboundHandlingTimeHistogram is not null)
 		{
 			initializer.Property("InboundHandlingTimeHistogram");

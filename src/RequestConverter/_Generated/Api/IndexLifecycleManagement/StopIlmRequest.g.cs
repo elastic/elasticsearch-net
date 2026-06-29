@@ -27,7 +27,7 @@ public partial class StopIlmRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("StopIlmRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest", false);
 		if (MasterTimeout is not null)
 		{
 			initializer.Property("MasterTimeout");

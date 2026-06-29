@@ -27,7 +27,7 @@ public partial class DownsampleAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DownsampleAction", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleAction", false);
 		{
 			initializer.Property("FixedInterval");
 			writer.WriteString(FixedInterval);

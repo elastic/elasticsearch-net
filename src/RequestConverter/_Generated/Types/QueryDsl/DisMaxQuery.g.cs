@@ -27,7 +27,7 @@ public partial class DisMaxQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DisMaxQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery", false);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

@@ -27,7 +27,7 @@ public partial class Category : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Category", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.Category", false);
 		{
 			initializer.Property("CategoryId");
 			writer.WriteValue(CategoryId);

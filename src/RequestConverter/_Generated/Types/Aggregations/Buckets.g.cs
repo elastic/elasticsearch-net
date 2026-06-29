@@ -32,8 +32,10 @@ public partial class Buckets<TBucket> : RequestConverter.ICodeFormattable
 			writer.Write("new ");
 			writer.WriteTypeName(this.GetType());
 			writer.Write("(");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
 			writer.WriteTypeName(typeof(TBucket));
 			writer.Write(">()");

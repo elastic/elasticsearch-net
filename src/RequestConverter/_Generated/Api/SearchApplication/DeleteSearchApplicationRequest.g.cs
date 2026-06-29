@@ -27,7 +27,7 @@ public partial class DeleteSearchApplicationRequest : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteSearchApplicationRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

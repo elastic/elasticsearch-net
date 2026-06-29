@@ -27,7 +27,7 @@ public partial class InferenceTopClassEntry : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("InferenceTopClassEntry", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.InferenceTopClassEntry", false);
 		{
 			initializer.Property("ClassName");
 			ClassName.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class AnalysisMemoryLimit : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AnalysisMemoryLimit", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimit", false);
 		{
 			initializer.Property("ModelMemoryLimit");
 			writer.WriteString(ModelMemoryLimit);

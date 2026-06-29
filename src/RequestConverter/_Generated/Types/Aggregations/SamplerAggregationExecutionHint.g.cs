@@ -30,13 +30,16 @@ public static class SamplerAggregationExecutionHintCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint.BytesHash:
-				writer.Write("SamplerAggregationExecutionHint.BytesHash");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint");
+				writer.Write(".BytesHash");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint.GlobalOrdinals:
-				writer.Write("SamplerAggregationExecutionHint.GlobalOrdinals");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint");
+				writer.Write(".GlobalOrdinals");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint.Map:
-				writer.Write("SamplerAggregationExecutionHint.Map");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint");
+				writer.Write(".Map");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SamplerAggregationExecutionHint value.");

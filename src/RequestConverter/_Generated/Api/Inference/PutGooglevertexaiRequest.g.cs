@@ -27,7 +27,7 @@ public partial class PutGooglevertexaiRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutGooglevertexaiRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiRequest", false);
 		{
 			initializer.Property("GooglevertexaiInferenceId");
 			GooglevertexaiInferenceId.FormatCode(writer);

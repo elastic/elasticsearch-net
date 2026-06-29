@@ -30,13 +30,16 @@ public static class XPackCategoryCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Xpack.XPackCategory.Build:
-				writer.Write("XPackCategory.Build");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Xpack.XPackCategory");
+				writer.Write(".Build");
 				break;
 			case Elastic.Clients.Elasticsearch.Xpack.XPackCategory.Features:
-				writer.Write("XPackCategory.Features");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Xpack.XPackCategory");
+				writer.Write(".Features");
 				break;
 			case Elastic.Clients.Elasticsearch.Xpack.XPackCategory.License:
-				writer.Write("XPackCategory.License");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Xpack.XPackCategory");
+				writer.Write(".License");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected XPackCategory value.");

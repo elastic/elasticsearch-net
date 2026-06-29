@@ -27,7 +27,7 @@ public partial class SoftDeletes : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SoftDeletes", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes", false);
 		if (Enabled is not null)
 		{
 			initializer.Property("Enabled");

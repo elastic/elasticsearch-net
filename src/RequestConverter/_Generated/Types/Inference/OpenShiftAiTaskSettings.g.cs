@@ -27,7 +27,7 @@ public partial class OpenShiftAiTaskSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("OpenShiftAiTaskSettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskSettings", false);
 		if (ReturnDocuments is not null)
 		{
 			initializer.Property("ReturnDocuments");

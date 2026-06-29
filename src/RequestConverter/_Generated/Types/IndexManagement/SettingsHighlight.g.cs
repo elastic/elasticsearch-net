@@ -27,7 +27,7 @@ public partial class SettingsHighlight : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SettingsHighlight", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight", false);
 		if (MaxAnalyzedOffset is not null)
 		{
 			initializer.Property("MaxAnalyzedOffset");

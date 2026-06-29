@@ -29,7 +29,9 @@ public partial class Context : RequestConverter.ICodeFormattable
 	{
 		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 		{
-			writer.Write("new Context(");
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.Context");
+			writer.Write("(");
 			writer.WriteString(Value1);
 			writer.Write(")");
 			return;
@@ -37,7 +39,9 @@ public partial class Context : RequestConverter.ICodeFormattable
 
 		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T2)
 		{
-			writer.Write("new Context(");
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.Context");
+			writer.Write("(");
 			Value2.FormatCode(writer);
 			writer.Write(")");
 			return;

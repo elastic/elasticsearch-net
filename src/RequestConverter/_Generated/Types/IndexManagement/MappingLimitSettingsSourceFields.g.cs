@@ -27,7 +27,7 @@ public partial class MappingLimitSettingsSourceFields : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MappingLimitSettingsSourceFields", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsSourceFields", false);
 		{
 			initializer.Property("Mode");
 			Elastic.Clients.Elasticsearch.IndexManagement.SourceModeCodeFormatter.FormatCode(Mode, writer);

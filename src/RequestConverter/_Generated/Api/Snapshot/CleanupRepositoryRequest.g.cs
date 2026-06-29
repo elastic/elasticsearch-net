@@ -27,7 +27,7 @@ public partial class CleanupRepositoryRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CleanupRepositoryRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

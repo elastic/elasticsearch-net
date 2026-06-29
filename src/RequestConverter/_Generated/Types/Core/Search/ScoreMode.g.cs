@@ -30,19 +30,24 @@ public static class ScoreModeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.Search.ScoreMode.Avg:
-				writer.Write("ScoreMode.Avg");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.ScoreMode");
+				writer.Write(".Avg");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.ScoreMode.Max:
-				writer.Write("ScoreMode.Max");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.ScoreMode");
+				writer.Write(".Max");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.ScoreMode.Min:
-				writer.Write("ScoreMode.Min");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.ScoreMode");
+				writer.Write(".Min");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.ScoreMode.Multiply:
-				writer.Write("ScoreMode.Multiply");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.ScoreMode");
+				writer.Write(".Multiply");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.ScoreMode.Total:
-				writer.Write("ScoreMode.Total");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.ScoreMode");
+				writer.Write(".Total");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ScoreMode value.");

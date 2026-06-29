@@ -30,10 +30,12 @@ public static class SamplingMethodCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod.Aggregate:
-				writer.Write("SamplingMethod.Aggregate");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod");
+				writer.Write(".Aggregate");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod.LastValue:
-				writer.Write("SamplingMethod.LastValue");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod");
+				writer.Write(".LastValue");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SamplingMethod value.");

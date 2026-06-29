@@ -30,10 +30,12 @@ public static class NumericFielddataFormatCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat.Array:
-				writer.Write("NumericFielddataFormat.Array");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat");
+				writer.Write(".Array");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat.Disabled:
-				writer.Write("NumericFielddataFormat.Disabled");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat");
+				writer.Write(".Disabled");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected NumericFielddataFormat value.");

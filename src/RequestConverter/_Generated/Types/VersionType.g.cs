@@ -30,13 +30,16 @@ public static class VersionTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.VersionType.External:
-				writer.Write("VersionType.External");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.VersionType");
+				writer.Write(".External");
 				break;
 			case Elastic.Clients.Elasticsearch.VersionType.ExternalGte:
-				writer.Write("VersionType.ExternalGte");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.VersionType");
+				writer.Write(".ExternalGte");
 				break;
 			case Elastic.Clients.Elasticsearch.VersionType.Internal:
-				writer.Write("VersionType.Internal");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.VersionType");
+				writer.Write(".Internal");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected VersionType value.");

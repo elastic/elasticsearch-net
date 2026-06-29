@@ -27,7 +27,7 @@ public partial class RandomScoreFunction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RandomScoreFunction", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction", false);
 		if (Field is not null)
 		{
 			initializer.Property("Field");

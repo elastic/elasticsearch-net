@@ -27,7 +27,7 @@ public partial class DataframeClassificationSummary : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframeClassificationSummary", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummary", false);
 		if (Accuracy is not null)
 		{
 			initializer.Property("Accuracy");

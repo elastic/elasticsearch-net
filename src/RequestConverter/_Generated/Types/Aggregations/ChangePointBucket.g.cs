@@ -27,7 +27,7 @@ public partial class ChangePointBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ChangePointBucket", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.ChangePointBucket", false);
 		if (Aggregations is not null)
 		{
 			initializer.Property("Aggregations");

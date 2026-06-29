@@ -27,7 +27,7 @@ public partial class GetScriptRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetScriptRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.GetScriptRequest", false);
 		{
 			initializer.Property("Id");
 			Id.FormatCode(writer);

@@ -30,13 +30,16 @@ public static class ManagedByCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.Datastream:
-				writer.Write("ManagedBy.Datastream");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy");
+				writer.Write(".Datastream");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.Ilm:
-				writer.Write("ManagedBy.Ilm");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy");
+				writer.Write(".Ilm");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.Unmanaged:
-				writer.Write("ManagedBy.Unmanaged");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy");
+				writer.Write(".Unmanaged");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ManagedBy value.");

@@ -27,7 +27,7 @@ public partial class CategorizeTextAggregation : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CategorizeTextAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation", false);
 		if (CategorizationAnalyzer is not null)
 		{
 			initializer.Property("CategorizationAnalyzer");

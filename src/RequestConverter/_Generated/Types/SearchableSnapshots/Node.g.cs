@@ -27,7 +27,7 @@ public partial class Node : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Node", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchableSnapshots.Node", false);
 		{
 			initializer.Property("SharedCache");
 			SharedCache.FormatCode(writer);

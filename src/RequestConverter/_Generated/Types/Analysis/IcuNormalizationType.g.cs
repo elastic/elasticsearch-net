@@ -30,13 +30,16 @@ public static class IcuNormalizationTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType.Nfc:
-				writer.Write("IcuNormalizationType.Nfc");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType");
+				writer.Write(".Nfc");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType.Nfkc:
-				writer.Write("IcuNormalizationType.Nfkc");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType");
+				writer.Write(".Nfkc");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType.NfkcCf:
-				writer.Write("IcuNormalizationType.NfkcCf");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType");
+				writer.Write(".NfkcCf");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IcuNormalizationType value.");

@@ -27,7 +27,7 @@ public partial class DeleteRuleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteRuleRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequest", false);
 		{
 			initializer.Property("RuleId");
 			RuleId.FormatCode(writer);

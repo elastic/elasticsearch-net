@@ -27,7 +27,7 @@ public partial class ChiSquareHeuristic : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ChiSquareHeuristic", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic", false);
 		{
 			initializer.Property("BackgroundIsSuperset");
 			writer.WriteValue(BackgroundIsSuperset);

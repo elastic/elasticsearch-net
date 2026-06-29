@@ -27,7 +27,7 @@ public partial class CompletionSuggestOption<TDocument> : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CompletionSuggestOption<TDocument>", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggestOption<TDocument>", false);
 		if (CollateMatch is not null)
 		{
 			initializer.Property("CollateMatch");
@@ -37,10 +37,12 @@ public partial class CompletionSuggestOption<TDocument> : RequestConverter.ICode
 		if (Contexts is not null)
 		{
 			initializer.Property("Contexts");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Context>");
+			writer.WriteTypeRef("System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Context>");
 			writer.Write(">()");
 			writer.WriteBlockList(Contexts, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { item.FormatCode(w); }); w.Write(" }"); });
 		}
@@ -48,10 +50,12 @@ public partial class CompletionSuggestOption<TDocument> : RequestConverter.ICode
 		if (Fields is not null)
 		{
 			initializer.Property("Fields");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("object");
+			writer.WriteTypeRef("object");
 			writer.Write(">()");
 			writer.WriteBlockList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
 		}

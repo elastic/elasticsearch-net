@@ -27,7 +27,7 @@ public partial class SnapshotNodeInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SnapshotNodeInfo", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.SnapshotNodeInfo", false);
 		{
 			initializer.Property("Id");
 			writer.WriteString(Id);

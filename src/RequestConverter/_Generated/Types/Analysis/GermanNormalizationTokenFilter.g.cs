@@ -27,7 +27,7 @@ public partial class GermanNormalizationTokenFilter : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GermanNormalizationTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.GermanNormalizationTokenFilter", true);
 		if (Version is not null)
 		{
 			initializer.Property("Version");

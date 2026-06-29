@@ -27,7 +27,7 @@ public partial class VariableWidthHistogramBucket : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("VariableWidthHistogramBucket", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramBucket", false);
 		if (Aggregations is not null)
 		{
 			initializer.Property("Aggregations");

@@ -27,7 +27,7 @@ public partial class GetRollupIndexCapsRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetRollupIndexCapsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest", false);
 		{
 			initializer.Property("Index");
 			Index.FormatCode(writer);

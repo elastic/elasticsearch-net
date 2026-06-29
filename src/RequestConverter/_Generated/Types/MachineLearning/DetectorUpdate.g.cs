@@ -27,7 +27,7 @@ public partial class DetectorUpdate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DetectorUpdate", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate", false);
 		if (CustomRules is not null)
 		{
 			initializer.Property("CustomRules");

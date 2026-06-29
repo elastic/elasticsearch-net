@@ -29,7 +29,9 @@ public partial class Percentage : RequestConverter.ICodeFormattable
 	{
 		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 		{
-			writer.Write("new Percentage(");
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Percentage");
+			writer.Write("(");
 			writer.WriteString(Value1);
 			writer.Write(")");
 			return;
@@ -37,7 +39,9 @@ public partial class Percentage : RequestConverter.ICodeFormattable
 
 		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T2)
 		{
-			writer.Write("new Percentage(");
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Percentage");
+			writer.Write("(");
 			writer.WriteValue(Value2);
 			writer.Write("f");
 			writer.Write(")");

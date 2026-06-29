@@ -27,7 +27,7 @@ public partial class GeoShapeProperty : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GeoShapeProperty", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty", true);
 		if (Coerce is not null)
 		{
 			initializer.Property("Coerce");
@@ -85,10 +85,12 @@ public partial class GeoShapeProperty : RequestConverter.ICodeFormattable
 		if (Meta is not null)
 		{
 			initializer.Property("Meta");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("string");
+			writer.WriteTypeRef("string");
 			writer.Write(">()");
 			writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
 		}

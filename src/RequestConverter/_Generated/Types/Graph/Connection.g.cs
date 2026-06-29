@@ -27,7 +27,7 @@ public partial class Connection : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Connection", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Graph.Connection", false);
 		{
 			initializer.Property("DocCount");
 			writer.WriteValue(DocCount);

@@ -27,7 +27,7 @@ public partial class RangeAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RangeAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation", false);
 		if (Field is not null)
 		{
 			initializer.Property("Field");

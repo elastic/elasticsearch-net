@@ -27,7 +27,7 @@ public partial class TextEmbeddingInferenceResult : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TextEmbeddingInferenceResult", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.TextEmbeddingInferenceResult", false);
 		if (TextEmbedding is not null)
 		{
 			initializer.Property("TextEmbedding");

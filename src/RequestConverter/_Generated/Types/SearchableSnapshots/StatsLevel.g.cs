@@ -30,13 +30,16 @@ public static class StatsLevelCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel.Cluster:
-				writer.Write("StatsLevel.Cluster");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel");
+				writer.Write(".Cluster");
 				break;
 			case Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel.Indices:
-				writer.Write("StatsLevel.Indices");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel");
+				writer.Write(".Indices");
 				break;
 			case Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel.Shards:
-				writer.Write("StatsLevel.Shards");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel");
+				writer.Write(".Shards");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected StatsLevel value.");

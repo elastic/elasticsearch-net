@@ -27,7 +27,7 @@ public partial class CreateFrom : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CreateFrom", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom", false);
 		if (MappingsOverride is not null)
 		{
 			initializer.Property("MappingsOverride");

@@ -27,7 +27,7 @@ public partial class StagnatingBackingIndices : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("StagnatingBackingIndices", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.HealthReport.StagnatingBackingIndices", false);
 		{
 			initializer.Property("FirstOccurrenceTimestamp");
 			writer.WriteValue(FirstOccurrenceTimestamp);

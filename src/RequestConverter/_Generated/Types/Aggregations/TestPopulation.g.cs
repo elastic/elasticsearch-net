@@ -27,7 +27,7 @@ public partial class TestPopulation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TestPopulation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.TestPopulation", false);
 		{
 			initializer.Property("Field");
 			Field.FormatCode(writer);

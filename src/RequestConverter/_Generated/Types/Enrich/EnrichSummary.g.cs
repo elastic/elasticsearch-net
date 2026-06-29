@@ -27,7 +27,7 @@ public partial class EnrichSummary : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("EnrichSummary", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Enrich.EnrichSummary", false);
 		{
 			initializer.Property("Config");
 			writer.Write("new(");

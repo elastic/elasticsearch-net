@@ -27,7 +27,7 @@ public partial class MultiTermVectorsResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MultiTermVectorsResult", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsResult", false);
 		if (Error is not null)
 		{
 			initializer.Property("Error");
@@ -54,10 +54,12 @@ public partial class MultiTermVectorsResult : RequestConverter.ICodeFormattable
 		if (TermVectors is not null)
 		{
 			initializer.Property("TermVectors");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Core.TermVectors.TermVector");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.TermVectors.TermVector");
 			writer.Write(">()");
 			writer.WriteBlockList(TermVectors, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

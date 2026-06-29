@@ -27,7 +27,7 @@ public partial class ShardStoreIndex : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ShardStoreIndex", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.SearchShards.ShardStoreIndex", false);
 		if (Aliases is not null)
 		{
 			initializer.Property("Aliases");

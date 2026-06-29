@@ -27,7 +27,7 @@ public partial class ReservedSize : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ReservedSize", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.ReservedSize", false);
 		{
 			initializer.Property("NodeId");
 			writer.WriteString(NodeId);

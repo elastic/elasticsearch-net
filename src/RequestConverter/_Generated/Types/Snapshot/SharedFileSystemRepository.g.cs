@@ -27,7 +27,7 @@ public partial class SharedFileSystemRepository : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SharedFileSystemRepository", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepository", true);
 		{
 			initializer.Property("Settings");
 			Settings.FormatCode(writer);

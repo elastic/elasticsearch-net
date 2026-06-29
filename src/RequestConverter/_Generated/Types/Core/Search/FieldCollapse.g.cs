@@ -27,7 +27,7 @@ public partial class FieldCollapse : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FieldCollapse", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse", false);
 		if (Collapse is not null)
 		{
 			initializer.Property("Collapse");

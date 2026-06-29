@@ -27,7 +27,7 @@ public partial class SamlAuthenticateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SamlAuthenticateRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest", false);
 		{
 			initializer.Property("Content");
 			writer.WriteString(Content);

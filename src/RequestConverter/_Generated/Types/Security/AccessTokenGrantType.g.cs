@@ -30,16 +30,20 @@ public static class AccessTokenGrantTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.Kerberos:
-				writer.Write("AccessTokenGrantType.Kerberos");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType");
+				writer.Write(".Kerberos");
 				break;
 			case Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.ClientCredentials:
-				writer.Write("AccessTokenGrantType.ClientCredentials");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType");
+				writer.Write(".ClientCredentials");
 				break;
 			case Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.Password:
-				writer.Write("AccessTokenGrantType.Password");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType");
+				writer.Write(".Password");
 				break;
 			case Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.RefreshToken:
-				writer.Write("AccessTokenGrantType.RefreshToken");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType");
+				writer.Write(".RefreshToken");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected AccessTokenGrantType value.");

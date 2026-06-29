@@ -27,7 +27,7 @@ public partial class PutDataFrameAnalyticsRequest : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutDataFrameAnalyticsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest", false);
 		{
 			initializer.Property("Id");
 			Id.FormatCode(writer);
@@ -64,10 +64,12 @@ public partial class PutDataFrameAnalyticsRequest : RequestConverter.ICodeFormat
 		if (Headers is not null)
 		{
 			initializer.Property("Headers");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("System.Collections.Generic.ICollection<string>");
+			writer.WriteTypeRef("System.Collections.Generic.ICollection<string>");
 			writer.Write(">()");
 			writer.WriteBlockList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteString(item); }); w.Write(" }"); });
 		}
@@ -81,10 +83,12 @@ public partial class PutDataFrameAnalyticsRequest : RequestConverter.ICodeFormat
 		if (Meta is not null)
 		{
 			initializer.Property("Meta");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("object");
+			writer.WriteTypeRef("object");
 			writer.Write(">()");
 			writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
 		}

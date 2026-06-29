@@ -27,7 +27,7 @@ public partial class Embedding : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Embedding", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Embedding", false);
 		if (InferenceId is not null)
 		{
 			initializer.Property("InferenceId");
@@ -42,7 +42,9 @@ public partial class Embedding : RequestConverter.ICodeFormattable
 			}
 			else
 			{
-				writer.Write("new Elastic.Clients.Elasticsearch.InferenceString[] ");
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.InferenceString");
+				writer.Write("[] ");
 				writer.WriteInlineList(Input.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", ");
 			}
 		}

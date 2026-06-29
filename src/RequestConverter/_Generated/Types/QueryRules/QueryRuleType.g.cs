@@ -30,10 +30,12 @@ public static class QueryRuleTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType.Exclude:
-				writer.Write("QueryRuleType.Exclude");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType");
+				writer.Write(".Exclude");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType.Pinned:
-				writer.Write("QueryRuleType.Pinned");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType");
+				writer.Write(".Pinned");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected QueryRuleType value.");

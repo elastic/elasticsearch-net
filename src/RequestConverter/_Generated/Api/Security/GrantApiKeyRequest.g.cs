@@ -27,7 +27,7 @@ public partial class GrantApiKeyRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GrantApiKeyRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest", false);
 		if (Refresh is not null)
 		{
 			initializer.Property("Refresh");

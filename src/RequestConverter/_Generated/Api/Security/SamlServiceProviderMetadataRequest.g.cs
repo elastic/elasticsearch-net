@@ -27,7 +27,7 @@ public partial class SamlServiceProviderMetadataRequest : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SamlServiceProviderMetadataRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest", false);
 		{
 			initializer.Property("RealmName");
 			RealmName.FormatCode(writer);

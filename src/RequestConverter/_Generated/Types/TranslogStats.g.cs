@@ -27,7 +27,7 @@ public partial class TranslogStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TranslogStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TranslogStats", false);
 		{
 			initializer.Property("EarliestLastModifiedAge");
 			writer.WriteValue(EarliestLastModifiedAge);

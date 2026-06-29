@@ -27,7 +27,7 @@ public partial class JvmMemoryStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("JvmMemoryStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.JvmMemoryStats", false);
 		if (HeapCommittedInBytes is not null)
 		{
 			initializer.Property("HeapCommittedInBytes");
@@ -79,10 +79,12 @@ public partial class JvmMemoryStats : RequestConverter.ICodeFormattable
 		if (Pools is not null)
 		{
 			initializer.Property("Pools");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Nodes.Pool");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.Pool");
 			writer.Write(">()");
 			writer.WriteBlockList(Pools, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

@@ -27,7 +27,7 @@ public partial class DanglingIndex : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DanglingIndex", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndex", false);
 		{
 			initializer.Property("CreationDateMillis");
 			writer.WriteValue(CreationDateMillis);

@@ -27,7 +27,7 @@ public partial class ClusterJvmVersion : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ClusterJvmVersion", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.ClusterJvmVersion", false);
 		{
 			initializer.Property("BundledJdk");
 			writer.WriteValue(BundledJdk);

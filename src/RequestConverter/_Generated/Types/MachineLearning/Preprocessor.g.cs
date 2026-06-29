@@ -27,7 +27,7 @@ public partial class Preprocessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Preprocessor", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor", false);
 		if (FrequencyEncoding is not null)
 		{
 			initializer.Property("FrequencyEncoding");

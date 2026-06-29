@@ -27,7 +27,7 @@ public partial class Analytics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Analytics", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.Analytics", false);
 		{
 			initializer.Property("Available");
 			writer.WriteValue(Available);

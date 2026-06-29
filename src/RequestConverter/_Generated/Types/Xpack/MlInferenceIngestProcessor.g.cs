@@ -27,7 +27,7 @@ public partial class MlInferenceIngestProcessor : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MlInferenceIngestProcessor", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.MlInferenceIngestProcessor", false);
 		{
 			initializer.Property("NumDocsProcessed");
 			NumDocsProcessed.FormatCode(writer);

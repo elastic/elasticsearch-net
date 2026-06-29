@@ -27,7 +27,7 @@ public partial class StoredScript : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("StoredScript", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.StoredScript", false);
 		{
 			initializer.Property("Language");
 			Language.FormatCode(writer);
@@ -36,10 +36,12 @@ public partial class StoredScript : RequestConverter.ICodeFormattable
 		if (Options is not null)
 		{
 			initializer.Property("Options");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("string");
+			writer.WriteTypeRef("string");
 			writer.Write(">()");
 			writer.WriteBlockList(Options, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
 		}

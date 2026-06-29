@@ -30,13 +30,16 @@ public static class ReasoningSummaryCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.ReasoningSummary.Auto:
-				writer.Write("ReasoningSummary.Auto");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ReasoningSummary");
+				writer.Write(".Auto");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.ReasoningSummary.Concise:
-				writer.Write("ReasoningSummary.Concise");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ReasoningSummary");
+				writer.Write(".Concise");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.ReasoningSummary.Detailed:
-				writer.Write("ReasoningSummary.Detailed");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ReasoningSummary");
+				writer.Write(".Detailed");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ReasoningSummary value.");

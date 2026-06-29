@@ -29,7 +29,8 @@ public partial class GeoLocation : RequestConverter.ICodeFormattable
 	{
 		if (TryGetLatitudeLongitude(out var v1))
 		{
-			writer.Write("GeoLocation.LatitudeLongitude(");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.GeoLocation");
+			writer.Write(".LatitudeLongitude(");
 			v1.FormatCode(writer);
 			writer.Write(")");
 			return;
@@ -37,7 +38,8 @@ public partial class GeoLocation : RequestConverter.ICodeFormattable
 
 		if (TryGetGeoHash(out var v2))
 		{
-			writer.Write("GeoLocation.GeoHash(");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.GeoLocation");
+			writer.Write(".GeoHash(");
 			v2.FormatCode(writer);
 			writer.Write(")");
 			return;
@@ -45,7 +47,8 @@ public partial class GeoLocation : RequestConverter.ICodeFormattable
 
 		if (TryGetCoordinates(out var v3))
 		{
-			writer.Write("GeoLocation.Coordinates(");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.GeoLocation");
+			writer.Write(".Coordinates(");
 			writer.WriteInlineList(v3, (w, item) => { w.WriteValue(item); w.Write("d"); });
 			writer.Write(")");
 			return;
@@ -53,7 +56,8 @@ public partial class GeoLocation : RequestConverter.ICodeFormattable
 
 		if (TryGetText(out var v4))
 		{
-			writer.Write("GeoLocation.Text(");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.GeoLocation");
+			writer.Write(".Text(");
 			writer.WriteString(v4);
 			writer.Write(")");
 			return;

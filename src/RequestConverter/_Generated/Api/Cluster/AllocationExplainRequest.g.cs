@@ -27,7 +27,7 @@ public partial class AllocationExplainRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AllocationExplainRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest", false);
 		if (IncludeDiskInfo is not null)
 		{
 			initializer.Property("IncludeDiskInfo");

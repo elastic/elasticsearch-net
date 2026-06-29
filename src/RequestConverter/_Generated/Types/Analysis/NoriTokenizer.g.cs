@@ -27,7 +27,7 @@ public partial class NoriTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NoriTokenizer", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer", true);
 		if (DecompoundMode is not null)
 		{
 			initializer.Property("DecompoundMode");

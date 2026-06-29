@@ -27,7 +27,7 @@ public partial class RoleMapping : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RoleMapping", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.RoleMapping", false);
 		{
 			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);

@@ -27,7 +27,7 @@ public partial class FileSettingsIndicatorDetails : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FileSettingsIndicatorDetails", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.HealthReport.FileSettingsIndicatorDetails", false);
 		{
 			initializer.Property("FailureStreak");
 			writer.WriteValue(FailureStreak);

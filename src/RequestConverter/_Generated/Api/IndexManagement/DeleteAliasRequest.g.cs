@@ -27,7 +27,7 @@ public partial class DeleteAliasRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteAliasRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest", false);
 		{
 			initializer.Property("Indices");
 			Indices.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class LinearInterpolationSmoothingModel : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("LinearInterpolationSmoothingModel", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel", false);
 		{
 			initializer.Property("BigramLambda");
 			writer.WriteValue(BigramLambda);

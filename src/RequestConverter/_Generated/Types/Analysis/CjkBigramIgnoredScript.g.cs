@@ -30,16 +30,20 @@ public static class CjkBigramIgnoredScriptCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript.Han:
-				writer.Write("CjkBigramIgnoredScript.Han");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript");
+				writer.Write(".Han");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript.Hangul:
-				writer.Write("CjkBigramIgnoredScript.Hangul");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript");
+				writer.Write(".Hangul");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript.Hiragana:
-				writer.Write("CjkBigramIgnoredScript.Hiragana");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript");
+				writer.Write(".Hiragana");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript.Katakana:
-				writer.Write("CjkBigramIgnoredScript.Katakana");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript");
+				writer.Write(".Katakana");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected CjkBigramIgnoredScript value.");

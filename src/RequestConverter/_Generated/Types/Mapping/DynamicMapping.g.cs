@@ -30,16 +30,20 @@ public static class DynamicMappingCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.False:
-				writer.Write("DynamicMapping.False");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.DynamicMapping");
+				writer.Write(".False");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.Runtime:
-				writer.Write("DynamicMapping.Runtime");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.DynamicMapping");
+				writer.Write(".Runtime");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.Strict:
-				writer.Write("DynamicMapping.Strict");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.DynamicMapping");
+				writer.Write(".Strict");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.True:
-				writer.Write("DynamicMapping.True");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.DynamicMapping");
+				writer.Write(".True");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected DynamicMapping value.");

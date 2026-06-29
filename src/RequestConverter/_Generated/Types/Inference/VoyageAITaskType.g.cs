@@ -30,10 +30,12 @@ public static class VoyageAITaskTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.VoyageAITaskType.Rerank:
-				writer.Write("VoyageAITaskType.Rerank");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.VoyageAITaskType");
+				writer.Write(".Rerank");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.VoyageAITaskType.TextEmbedding:
-				writer.Write("VoyageAITaskType.TextEmbedding");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.VoyageAITaskType");
+				writer.Write(".TextEmbedding");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected VoyageAITaskType value.");

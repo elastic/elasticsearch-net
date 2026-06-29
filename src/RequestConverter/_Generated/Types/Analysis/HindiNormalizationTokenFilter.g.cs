@@ -27,7 +27,7 @@ public partial class HindiNormalizationTokenFilter : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("HindiNormalizationTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.HindiNormalizationTokenFilter", true);
 		if (Version is not null)
 		{
 			initializer.Property("Version");

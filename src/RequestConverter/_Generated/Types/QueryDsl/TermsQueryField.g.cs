@@ -29,7 +29,9 @@ public partial class TermsQueryField : RequestConverter.ICodeFormattable
 	{
 		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 		{
-			writer.Write("new TermsQueryField(");
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField");
+			writer.Write("(");
 			writer.WriteInlineList(Value1, (w, item) => { item.FormatCode(w); });
 			writer.Write(")");
 			return;
@@ -37,7 +39,9 @@ public partial class TermsQueryField : RequestConverter.ICodeFormattable
 
 		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T2)
 		{
-			writer.Write("new TermsQueryField(");
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField");
+			writer.Write("(");
 			Value2.FormatCode(writer);
 			writer.Write(")");
 			return;

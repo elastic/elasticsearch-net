@@ -30,10 +30,12 @@ public static class HighlighterEncoderCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder.Default:
-				writer.Write("HighlighterEncoder.Default");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder");
+				writer.Write(".Default");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder.Html:
-				writer.Write("HighlighterEncoder.Html");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder");
+				writer.Write(".Html");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected HighlighterEncoder value.");

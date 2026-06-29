@@ -27,7 +27,7 @@ public partial class RegressionInferenceOptions : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RegressionInferenceOptions", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions", false);
 		if (NumTopFeatureImportanceValues is not null)
 		{
 			initializer.Property("NumTopFeatureImportanceValues");

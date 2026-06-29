@@ -27,7 +27,7 @@ public partial class SpanFieldMaskingQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SpanFieldMaskingQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery", false);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

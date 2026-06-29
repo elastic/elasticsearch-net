@@ -30,13 +30,16 @@ public static class GeoValidationMethodCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod.Coerce:
-				writer.Write("GeoValidationMethod.Coerce");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod");
+				writer.Write(".Coerce");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod.IgnoreMalformed:
-				writer.Write("GeoValidationMethod.IgnoreMalformed");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod");
+				writer.Write(".IgnoreMalformed");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod.Strict:
-				writer.Write("GeoValidationMethod.Strict");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod");
+				writer.Write(".Strict");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected GeoValidationMethod value.");

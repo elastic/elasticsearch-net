@@ -27,7 +27,7 @@ public partial class EncryptedReasoningDetail : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("EncryptedReasoningDetail", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.EncryptedReasoningDetail", true);
 		{
 			initializer.Property("Data");
 			writer.WriteString(Data);

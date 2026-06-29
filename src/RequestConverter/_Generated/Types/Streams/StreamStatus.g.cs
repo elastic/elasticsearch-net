@@ -27,7 +27,7 @@ public partial class StreamStatus : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("StreamStatus", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Streams.StreamStatus", false);
 		{
 			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);

@@ -27,7 +27,7 @@ public partial class CompositeDateHistogramAggregation : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CompositeDateHistogramAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation", false);
 		if (CalendarInterval is not null)
 		{
 			initializer.Property("CalendarInterval");

@@ -27,7 +27,7 @@ public partial class UpdateByQueryRethrottleRequest : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("UpdateByQueryRethrottleRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequest", false);
 		{
 			initializer.Property("TaskId");
 			TaskId.FormatCode(writer);

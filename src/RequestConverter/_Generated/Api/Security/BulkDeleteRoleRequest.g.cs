@@ -27,7 +27,7 @@ public partial class BulkDeleteRoleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("BulkDeleteRoleRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest", false);
 		if (Refresh is not null)
 		{
 			initializer.Property("Refresh");

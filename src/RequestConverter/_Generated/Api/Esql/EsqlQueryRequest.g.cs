@@ -27,7 +27,7 @@ public partial class EsqlQueryRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("EsqlQueryRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest", false);
 		if (AllowPartialResults is not null)
 		{
 			initializer.Property("AllowPartialResults");
@@ -87,12 +87,16 @@ public partial class EsqlQueryRequest : RequestConverter.ICodeFormattable
 			initializer.Property("Params");
 			if (Params.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
-				writer.Write("new System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>[] ");
-				writer.WriteInlineList(Params.Value1, (w, item) => { w.Write("new Elastic.Clients.Elasticsearch.FieldValue[] "); w.WriteInlineList(item, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", "); }, "{ ", " }", ", ");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>");
+				writer.Write("[] ");
+				writer.WriteInlineList(Params.Value1, (w, item) => { w.Write("new "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.FieldValue"); w.Write("[] "); w.WriteInlineList(item, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", "); }, "{ ", " }", ", ");
 			}
 			else
 			{
-				writer.Write("new System.Collections.Generic.KeyValuePair<string,System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>[] ");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.KeyValuePair<string,System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>");
+				writer.Write("[] ");
 				writer.WriteInlineList(Params.Value2, (w, item) => { w.Write("new("); w.WriteString(item.Key); w.Write(", "); w.WriteInlineList(item.Value, (w, item) => { item.FormatCode(w); }); w.Write(")"); }, "{ ", " }", ", ");
 			}
 		}

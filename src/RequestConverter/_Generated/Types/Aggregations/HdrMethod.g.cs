@@ -27,7 +27,7 @@ public partial class HdrMethod : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("HdrMethod", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.HdrMethod", false);
 		if (NumberOfSignificantValueDigits is not null)
 		{
 			initializer.Property("NumberOfSignificantValueDigits");

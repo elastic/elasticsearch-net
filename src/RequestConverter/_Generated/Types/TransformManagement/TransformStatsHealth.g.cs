@@ -27,7 +27,7 @@ public partial class TransformStatsHealth : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TransformStatsHealth", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.TransformStatsHealth", false);
 		if (Issues is not null)
 		{
 			initializer.Property("Issues");

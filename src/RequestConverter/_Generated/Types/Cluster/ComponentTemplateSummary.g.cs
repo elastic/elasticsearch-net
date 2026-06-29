@@ -27,14 +27,16 @@ public partial class ComponentTemplateSummary : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ComponentTemplateSummary", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummary", false);
 		if (Aliases is not null)
 		{
 			initializer.Property("Aliases");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition");
 			writer.Write(">()");
 			writer.WriteBlockList(Aliases, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
@@ -60,10 +62,12 @@ public partial class ComponentTemplateSummary : RequestConverter.ICodeFormattabl
 		if (Meta is not null)
 		{
 			initializer.Property("Meta");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("object");
+			writer.WriteTypeRef("object");
 			writer.Write(">()");
 			writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
 		}
@@ -71,10 +75,12 @@ public partial class ComponentTemplateSummary : RequestConverter.ICodeFormattabl
 		if (Settings is not null)
 		{
 			initializer.Property("Settings");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("Elastic.Clients.Elasticsearch.IndexName");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexName");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings");
 			writer.Write(">()");
 			writer.WriteBlockList(Settings, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

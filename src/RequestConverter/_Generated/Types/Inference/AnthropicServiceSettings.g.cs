@@ -27,7 +27,7 @@ public partial class AnthropicServiceSettings : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AnthropicServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.AnthropicServiceSettings", false);
 		{
 			initializer.Property("ApiKey");
 			writer.WriteString(ApiKey);

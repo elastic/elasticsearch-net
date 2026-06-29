@@ -27,7 +27,7 @@ public partial class GetDataFrameAnalyticsStatsRequest : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetDataFrameAnalyticsStatsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest", false);
 		if (Id is not null)
 		{
 			initializer.Property("Id");

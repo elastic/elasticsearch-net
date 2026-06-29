@@ -27,7 +27,7 @@ public partial class DatafeedTimingStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DatafeedTimingStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DatafeedTimingStats", false);
 		if (AverageSearchTimePerBucketMs is not null)
 		{
 			initializer.Property("AverageSearchTimePerBucketMs");

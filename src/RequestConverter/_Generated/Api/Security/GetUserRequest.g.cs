@@ -27,7 +27,7 @@ public partial class GetUserRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetUserRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GetUserRequest", false);
 		if (Username is not null)
 		{
 			initializer.Property("Username");

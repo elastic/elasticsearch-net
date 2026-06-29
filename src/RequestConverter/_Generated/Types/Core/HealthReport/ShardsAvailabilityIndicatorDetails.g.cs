@@ -27,7 +27,7 @@ public partial class ShardsAvailabilityIndicatorDetails : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ShardsAvailabilityIndicatorDetails", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsAvailabilityIndicatorDetails", false);
 		{
 			initializer.Property("CreatingPrimaries");
 			writer.WriteValue(CreatingPrimaries);

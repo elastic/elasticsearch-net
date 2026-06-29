@@ -27,7 +27,7 @@ public partial class ThreadCount : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ThreadCount", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.ThreadCount", false);
 		if (Active is not null)
 		{
 			initializer.Property("Active");

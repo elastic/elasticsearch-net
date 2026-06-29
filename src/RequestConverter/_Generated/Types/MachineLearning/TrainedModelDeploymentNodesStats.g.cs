@@ -27,7 +27,7 @@ public partial class TrainedModelDeploymentNodesStats : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TrainedModelDeploymentNodesStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentNodesStats", false);
 		if (AverageInferenceProcessMemoryRssBytes is not null)
 		{
 			initializer.Property("AverageInferenceProcessMemoryRssBytes");

@@ -30,10 +30,12 @@ public static class RateModeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Aggregations.RateMode.Sum:
-				writer.Write("RateMode.Sum");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.RateMode");
+				writer.Write(".Sum");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.RateMode.ValueCount:
-				writer.Write("RateMode.ValueCount");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.RateMode");
+				writer.Write(".ValueCount");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected RateMode value.");

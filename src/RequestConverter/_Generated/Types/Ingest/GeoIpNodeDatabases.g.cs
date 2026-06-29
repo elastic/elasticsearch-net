@@ -27,7 +27,7 @@ public partial class GeoIpNodeDatabases : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GeoIpNodeDatabases", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabases", false);
 		{
 			initializer.Property("Databases");
 			writer.WriteInlineList(Databases, (w, item) => { item.FormatCode(w); });

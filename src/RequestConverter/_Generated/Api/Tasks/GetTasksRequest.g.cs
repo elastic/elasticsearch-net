@@ -27,7 +27,7 @@ public partial class GetTasksRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetTasksRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Tasks.GetTasksRequest", false);
 		{
 			initializer.Property("TaskId");
 			TaskId.FormatCode(writer);

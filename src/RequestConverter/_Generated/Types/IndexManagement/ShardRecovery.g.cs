@@ -27,7 +27,7 @@ public partial class ShardRecovery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ShardRecovery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ShardRecovery", false);
 		{
 			initializer.Property("Id");
 			writer.WriteValue(Id);

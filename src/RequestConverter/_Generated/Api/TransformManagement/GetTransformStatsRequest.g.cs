@@ -27,7 +27,7 @@ public partial class GetTransformStatsRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetTransformStatsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest", false);
 		{
 			initializer.Property("TransformId");
 			TransformId.FormatCode(writer);

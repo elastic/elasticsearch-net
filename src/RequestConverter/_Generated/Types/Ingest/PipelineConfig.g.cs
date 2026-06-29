@@ -27,7 +27,7 @@ public partial class PipelineConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PipelineConfig", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.PipelineConfig", false);
 		if (Description is not null)
 		{
 			initializer.Property("Description");

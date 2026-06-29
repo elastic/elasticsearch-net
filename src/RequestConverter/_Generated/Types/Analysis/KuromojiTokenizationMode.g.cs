@@ -30,13 +30,16 @@ public static class KuromojiTokenizationModeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode.Extended:
-				writer.Write("KuromojiTokenizationMode.Extended");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode");
+				writer.Write(".Extended");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode.Normal:
-				writer.Write("KuromojiTokenizationMode.Normal");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode");
+				writer.Write(".Normal");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode.Search:
-				writer.Write("KuromojiTokenizationMode.Search");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode");
+				writer.Write(".Search");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected KuromojiTokenizationMode value.");

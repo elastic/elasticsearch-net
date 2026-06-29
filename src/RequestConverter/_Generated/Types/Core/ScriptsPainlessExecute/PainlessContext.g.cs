@@ -30,37 +30,48 @@ public static class PainlessContextCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.BooleanField:
-				writer.Write("PainlessContext.BooleanField");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext");
+				writer.Write(".BooleanField");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.CompositeField:
-				writer.Write("PainlessContext.CompositeField");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext");
+				writer.Write(".CompositeField");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.DateField:
-				writer.Write("PainlessContext.DateField");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext");
+				writer.Write(".DateField");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.DoubleField:
-				writer.Write("PainlessContext.DoubleField");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext");
+				writer.Write(".DoubleField");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.Filter:
-				writer.Write("PainlessContext.Filter");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext");
+				writer.Write(".Filter");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.GeoPointField:
-				writer.Write("PainlessContext.GeoPointField");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext");
+				writer.Write(".GeoPointField");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.IpField:
-				writer.Write("PainlessContext.IpField");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext");
+				writer.Write(".IpField");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.KeywordField:
-				writer.Write("PainlessContext.KeywordField");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext");
+				writer.Write(".KeywordField");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.LongField:
-				writer.Write("PainlessContext.LongField");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext");
+				writer.Write(".LongField");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.PainlessTest:
-				writer.Write("PainlessContext.PainlessTest");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext");
+				writer.Write(".PainlessTest");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext.Score:
-				writer.Write("PainlessContext.Score");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext");
+				writer.Write(".Score");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected PainlessContext value.");

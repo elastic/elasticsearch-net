@@ -29,161 +29,189 @@ public readonly partial struct IndexPrivilege : RequestConverter.ICodeFormattabl
 	{
 		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.All)
 		{
-			writer.Write("IndexPrivilege.All");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.IndexPrivilege");
+			writer.Write(".All");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.AutoConfigure)
 		{
-			writer.Write("IndexPrivilege.AutoConfigure");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.IndexPrivilege");
+			writer.Write(".AutoConfigure");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Create)
 		{
-			writer.Write("IndexPrivilege.Create");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.IndexPrivilege");
+			writer.Write(".Create");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.CreateDoc)
 		{
-			writer.Write("IndexPrivilege.CreateDoc");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.IndexPrivilege");
+			writer.Write(".CreateDoc");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.CreateIndex)
 		{
-			writer.Write("IndexPrivilege.CreateIndex");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.IndexPrivilege");
+			writer.Write(".CreateIndex");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.CreateView)
 		{
-			writer.Write("IndexPrivilege.CreateView");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.IndexPrivilege");
+			writer.Write(".CreateView");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.CrossClusterReplication)
 		{
-			writer.Write("IndexPrivilege.CrossClusterReplication");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.IndexPrivilege");
+			writer.Write(".CrossClusterReplication");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.CrossClusterReplicationInternal)
 		{
-			writer.Write("IndexPrivilege.CrossClusterReplicationInternal");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.IndexPrivilege");
+			writer.Write(".CrossClusterReplicationInternal");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Delete)
 		{
-			writer.Write("IndexPrivilege.Delete");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.IndexPrivilege");
+			writer.Write(".Delete");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.DeleteIndex)
 		{
-			writer.Write("IndexPrivilege.DeleteIndex");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.IndexPrivilege");
+			writer.Write(".DeleteIndex");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.DeleteView)
 		{
-			writer.Write("IndexPrivilege.DeleteView");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.IndexPrivilege");
+			writer.Write(".DeleteView");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Index)
 		{
-			writer.Write("IndexPrivilege.Index");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.IndexPrivilege");
+			writer.Write(".Index");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Maintenance)
 		{
-			writer.Write("IndexPrivilege.Maintenance");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.IndexPrivilege");
+			writer.Write(".Maintenance");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Manage)
 		{
-			writer.Write("IndexPrivilege.Manage");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.IndexPrivilege");
+			writer.Write(".Manage");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ManageDataStreamLifecycle)
 		{
-			writer.Write("IndexPrivilege.ManageDataStreamLifecycle");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.IndexPrivilege");
+			writer.Write(".ManageDataStreamLifecycle");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ManageFollowIndex)
 		{
-			writer.Write("IndexPrivilege.ManageFollowIndex");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.IndexPrivilege");
+			writer.Write(".ManageFollowIndex");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ManageIlm)
 		{
-			writer.Write("IndexPrivilege.ManageIlm");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.IndexPrivilege");
+			writer.Write(".ManageIlm");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ManageLeaderIndex)
 		{
-			writer.Write("IndexPrivilege.ManageLeaderIndex");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.IndexPrivilege");
+			writer.Write(".ManageLeaderIndex");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ManageView)
 		{
-			writer.Write("IndexPrivilege.ManageView");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.IndexPrivilege");
+			writer.Write(".ManageView");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Monitor)
 		{
-			writer.Write("IndexPrivilege.Monitor");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.IndexPrivilege");
+			writer.Write(".Monitor");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.None)
 		{
-			writer.Write("IndexPrivilege.None");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.IndexPrivilege");
+			writer.Write(".None");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Read)
 		{
-			writer.Write("IndexPrivilege.Read");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.IndexPrivilege");
+			writer.Write(".Read");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ReadCrossCluster)
 		{
-			writer.Write("IndexPrivilege.ReadCrossCluster");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.IndexPrivilege");
+			writer.Write(".ReadCrossCluster");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ReadViewMetadata)
 		{
-			writer.Write("IndexPrivilege.ReadViewMetadata");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.IndexPrivilege");
+			writer.Write(".ReadViewMetadata");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ViewIndexMetadata)
 		{
-			writer.Write("IndexPrivilege.ViewIndexMetadata");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.IndexPrivilege");
+			writer.Write(".ViewIndexMetadata");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Write)
 		{
-			writer.Write("IndexPrivilege.Write");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.IndexPrivilege");
+			writer.Write(".Write");
 			return;
 		}
 
-		writer.Write("new IndexPrivilege(\"");
+		writer.Write("new ");
+		writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.IndexPrivilege");
+		writer.Write("(\"");
 		writer.Write(Value);
 		writer.Write("\")");
 	}

@@ -27,7 +27,7 @@ public partial class Status : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Status", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.Status", false);
 		{
 			initializer.Property("IncludeGlobalState");
 			writer.WriteValue(IncludeGlobalState);
@@ -35,10 +35,12 @@ public partial class Status : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("Indices");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Snapshot.SnapshotIndexStats");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.SnapshotIndexStats");
 			writer.Write(">()");
 			writer.WriteBlockList(Indices, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

@@ -27,7 +27,7 @@ public partial class VertexDefinition : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("VertexDefinition", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Graph.VertexDefinition", false);
 		if (Exclude is not null)
 		{
 			initializer.Property("Exclude");

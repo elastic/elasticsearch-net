@@ -30,19 +30,24 @@ public static class TaskTypeAmazonSageMakerCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonSageMaker.ChatCompletion:
-				writer.Write("TaskTypeAmazonSageMaker.ChatCompletion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonSageMaker");
+				writer.Write(".ChatCompletion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonSageMaker.Completion:
-				writer.Write("TaskTypeAmazonSageMaker.Completion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonSageMaker");
+				writer.Write(".Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonSageMaker.Rerank:
-				writer.Write("TaskTypeAmazonSageMaker.Rerank");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonSageMaker");
+				writer.Write(".Rerank");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonSageMaker.SparseEmbedding:
-				writer.Write("TaskTypeAmazonSageMaker.SparseEmbedding");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonSageMaker");
+				writer.Write(".SparseEmbedding");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonSageMaker.TextEmbedding:
-				writer.Write("TaskTypeAmazonSageMaker.TextEmbedding");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonSageMaker");
+				writer.Write(".TextEmbedding");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeAmazonSageMaker value.");

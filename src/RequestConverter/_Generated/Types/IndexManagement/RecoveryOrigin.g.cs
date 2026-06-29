@@ -27,7 +27,7 @@ public partial class RecoveryOrigin : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RecoveryOrigin", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin", false);
 		if (BootstrapNewHistoryUuid is not null)
 		{
 			initializer.Property("BootstrapNewHistoryUuid");

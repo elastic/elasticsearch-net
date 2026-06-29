@@ -27,7 +27,7 @@ public partial class MasterIsStableIndicatorExceptionFetchingHistory : RequestCo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MasterIsStableIndicatorExceptionFetchingHistory", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.HealthReport.MasterIsStableIndicatorExceptionFetchingHistory", false);
 		{
 			initializer.Property("Message");
 			writer.WriteString(Message);

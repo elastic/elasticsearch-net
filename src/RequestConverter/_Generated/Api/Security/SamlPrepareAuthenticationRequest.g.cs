@@ -27,7 +27,7 @@ public partial class SamlPrepareAuthenticationRequest : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SamlPrepareAuthenticationRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest", false);
 		if (Acs is not null)
 		{
 			initializer.Property("Acs");

@@ -27,7 +27,7 @@ public partial class NodeInfoMemory : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeInfoMemory", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeInfoMemory", false);
 		{
 			initializer.Property("Total");
 			writer.WriteString(Total);

@@ -27,14 +27,16 @@ public partial class IndexTemplateMapping : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndexTemplateMapping", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping", false);
 		if (Aliases is not null)
 		{
 			initializer.Property("Aliases");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("Elastic.Clients.Elasticsearch.IndexName");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexName");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.IndexManagement.Alias");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.Alias");
 			writer.Write(">()");
 			writer.WriteBlockList(Aliases, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

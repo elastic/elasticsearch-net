@@ -27,7 +27,7 @@ public partial class TokenDetail : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TokenDetail", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.TokenDetail", false);
 		{
 			initializer.Property("Name");
 			writer.WriteString(Name);

@@ -27,7 +27,7 @@ public partial class NodeSecurityStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeSecurityStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.NodeSecurityStats", false);
 		{
 			initializer.Property("Roles");
 			Roles.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class BoxplotAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("BoxplotAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregation", false);
 		if (Compression is not null)
 		{
 			initializer.Property("Compression");

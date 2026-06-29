@@ -27,7 +27,7 @@ public partial class DeleteCalendarJobRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteCalendarJobRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequest", false);
 		{
 			initializer.Property("CalendarId");
 			CalendarId.FormatCode(writer);

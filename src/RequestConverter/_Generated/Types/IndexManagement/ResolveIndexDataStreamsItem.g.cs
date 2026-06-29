@@ -27,7 +27,7 @@ public partial class ResolveIndexDataStreamsItem : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ResolveIndexDataStreamsItem", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexDataStreamsItem", false);
 		{
 			initializer.Property("BackingIndices");
 			writer.WriteInlineList(BackingIndices, (w, item) => { w.WriteString(item); });

@@ -27,7 +27,7 @@ public partial class FieldValueFactorScoreFunction : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FieldValueFactorScoreFunction", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction", false);
 		if (Factor is not null)
 		{
 			initializer.Property("Factor");

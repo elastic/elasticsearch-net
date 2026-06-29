@@ -27,7 +27,7 @@ public partial class GlobalOrdinalsStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GlobalOrdinalsStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.GlobalOrdinalsStats", false);
 		if (BuildTime is not null)
 		{
 			initializer.Property("BuildTime");
@@ -43,10 +43,12 @@ public partial class GlobalOrdinalsStats : RequestConverter.ICodeFormattable
 		if (Fields is not null)
 		{
 			initializer.Property("Fields");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.GlobalOrdinalFieldStats");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.GlobalOrdinalFieldStats");
 			writer.Write(">()");
 			writer.WriteBlockList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

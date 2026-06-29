@@ -27,7 +27,7 @@ public partial class GeoBoundsAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GeoBoundsAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregation", false);
 		if (Field is not null)
 		{
 			initializer.Property("Field");

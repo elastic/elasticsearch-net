@@ -30,10 +30,12 @@ public static class RemoteClusterPrivilegeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege.MonitorEnrich:
-				writer.Write("RemoteClusterPrivilege.MonitorEnrich");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege");
+				writer.Write(".MonitorEnrich");
 				break;
 			case Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege.MonitorStats:
-				writer.Write("RemoteClusterPrivilege.MonitorStats");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege");
+				writer.Write(".MonitorStats");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected RemoteClusterPrivilege value.");

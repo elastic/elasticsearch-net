@@ -30,13 +30,16 @@ public static class DFIIndependenceMeasureCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.DFIIndependenceMeasure.Chisquared:
-				writer.Write("DFIIndependenceMeasure.Chisquared");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.DFIIndependenceMeasure");
+				writer.Write(".Chisquared");
 				break;
 			case Elastic.Clients.Elasticsearch.DFIIndependenceMeasure.Saturated:
-				writer.Write("DFIIndependenceMeasure.Saturated");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.DFIIndependenceMeasure");
+				writer.Write(".Saturated");
 				break;
 			case Elastic.Clients.Elasticsearch.DFIIndependenceMeasure.Standardized:
-				writer.Write("DFIIndependenceMeasure.Standardized");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.DFIIndependenceMeasure");
+				writer.Write(".Standardized");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected DFIIndependenceMeasure value.");

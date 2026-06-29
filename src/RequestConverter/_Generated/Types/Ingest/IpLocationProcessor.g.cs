@@ -27,7 +27,7 @@ public partial class IpLocationProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IpLocationProcessor", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor", false);
 		if (DatabaseFile is not null)
 		{
 			initializer.Property("DatabaseFile");

@@ -27,7 +27,7 @@ public partial class SearchProfile : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SearchProfile", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.SearchProfile", false);
 		{
 			initializer.Property("Collector");
 			writer.WriteInlineList(Collector, (w, item) => { item.FormatCode(w); });

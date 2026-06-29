@@ -30,13 +30,16 @@ public static class DeploymentAllocationStateCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState.FullyAllocated:
-				writer.Write("DeploymentAllocationState.FullyAllocated");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState");
+				writer.Write(".FullyAllocated");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState.Started:
-				writer.Write("DeploymentAllocationState.Started");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState");
+				writer.Write(".Started");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState.Starting:
-				writer.Write("DeploymentAllocationState.Starting");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState");
+				writer.Write(".Starting");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected DeploymentAllocationState value.");

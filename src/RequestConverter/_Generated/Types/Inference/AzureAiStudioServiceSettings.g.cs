@@ -27,7 +27,7 @@ public partial class AzureAiStudioServiceSettings : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AzureAiStudioServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceSettings", false);
 		{
 			initializer.Property("ApiKey");
 			writer.WriteString(ApiKey);

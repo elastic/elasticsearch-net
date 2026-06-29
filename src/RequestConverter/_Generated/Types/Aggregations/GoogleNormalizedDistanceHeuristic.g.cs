@@ -27,7 +27,7 @@ public partial class GoogleNormalizedDistanceHeuristic : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GoogleNormalizedDistanceHeuristic", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic", false);
 		if (BackgroundIsSuperset is not null)
 		{
 			initializer.Property("BackgroundIsSuperset");

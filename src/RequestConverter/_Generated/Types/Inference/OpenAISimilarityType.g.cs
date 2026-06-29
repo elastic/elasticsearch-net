@@ -30,13 +30,16 @@ public static class OpenAISimilarityTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType.Cosine:
-				writer.Write("OpenAISimilarityType.Cosine");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType");
+				writer.Write(".Cosine");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType.DotProduct:
-				writer.Write("OpenAISimilarityType.DotProduct");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType");
+				writer.Write(".DotProduct");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType.L2Norm:
-				writer.Write("OpenAISimilarityType.L2Norm");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType");
+				writer.Write(".L2Norm");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected OpenAISimilarityType value.");

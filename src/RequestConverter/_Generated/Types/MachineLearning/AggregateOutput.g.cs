@@ -27,7 +27,7 @@ public partial class AggregateOutput : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AggregateOutput", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutput", false);
 		if (Exponent is not null)
 		{
 			initializer.Property("Exponent");

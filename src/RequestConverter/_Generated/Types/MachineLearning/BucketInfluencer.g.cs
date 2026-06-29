@@ -27,7 +27,7 @@ public partial class BucketInfluencer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("BucketInfluencer", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.BucketInfluencer", false);
 		{
 			initializer.Property("AnomalyScore");
 			writer.WriteValue(AnomalyScore);

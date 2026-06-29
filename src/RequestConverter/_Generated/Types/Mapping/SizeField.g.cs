@@ -27,7 +27,7 @@ public partial class SizeField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SizeField", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.SizeField", false);
 		{
 			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);

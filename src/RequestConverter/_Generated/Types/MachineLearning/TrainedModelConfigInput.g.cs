@@ -27,7 +27,7 @@ public partial class TrainedModelConfigInput : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TrainedModelConfigInput", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelConfigInput", false);
 		{
 			initializer.Property("FieldNames");
 			FieldNames.FormatCode(writer);

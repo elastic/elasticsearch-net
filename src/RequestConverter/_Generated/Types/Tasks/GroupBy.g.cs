@@ -30,13 +30,16 @@ public static class GroupByCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Tasks.GroupBy.Nodes:
-				writer.Write("GroupBy.Nodes");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Tasks.GroupBy");
+				writer.Write(".Nodes");
 				break;
 			case Elastic.Clients.Elasticsearch.Tasks.GroupBy.None:
-				writer.Write("GroupBy.None");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Tasks.GroupBy");
+				writer.Write(".None");
 				break;
 			case Elastic.Clients.Elasticsearch.Tasks.GroupBy.Parents:
-				writer.Write("GroupBy.Parents");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Tasks.GroupBy");
+				writer.Write(".Parents");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected GroupBy value.");

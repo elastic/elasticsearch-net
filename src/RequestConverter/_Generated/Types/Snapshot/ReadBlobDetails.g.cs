@@ -27,7 +27,7 @@ public partial class ReadBlobDetails : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ReadBlobDetails", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.ReadBlobDetails", false);
 		if (BeforeWriteComplete is not null)
 		{
 			initializer.Property("BeforeWriteComplete");

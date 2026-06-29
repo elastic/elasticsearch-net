@@ -30,13 +30,16 @@ public static class JinaAISimilarityTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType.Cosine:
-				writer.Write("JinaAISimilarityType.Cosine");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType");
+				writer.Write(".Cosine");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType.DotProduct:
-				writer.Write("JinaAISimilarityType.DotProduct");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType");
+				writer.Write(".DotProduct");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType.L2Norm:
-				writer.Write("JinaAISimilarityType.L2Norm");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType");
+				writer.Write(".L2Norm");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected JinaAISimilarityType value.");

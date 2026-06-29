@@ -27,7 +27,7 @@ public partial class FieldLookup : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FieldLookup", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup", false);
 		{
 			initializer.Property("Id");
 			Id.FormatCode(writer);

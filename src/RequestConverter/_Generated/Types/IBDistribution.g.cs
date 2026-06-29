@@ -30,10 +30,12 @@ public static class IBDistributionCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IBDistribution.Ll:
-				writer.Write("IBDistribution.Ll");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IBDistribution");
+				writer.Write(".Ll");
 				break;
 			case Elastic.Clients.Elasticsearch.IBDistribution.Spl:
-				writer.Write("IBDistribution.Spl");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IBDistribution");
+				writer.Write(".Spl");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IBDistribution value.");

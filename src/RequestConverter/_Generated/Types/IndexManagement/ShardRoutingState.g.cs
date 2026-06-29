@@ -30,16 +30,20 @@ public static class ShardRoutingStateCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Initializing:
-				writer.Write("ShardRoutingState.Initializing");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState");
+				writer.Write(".Initializing");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Relocating:
-				writer.Write("ShardRoutingState.Relocating");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState");
+				writer.Write(".Relocating");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Started:
-				writer.Write("ShardRoutingState.Started");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState");
+				writer.Write(".Started");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Unassigned:
-				writer.Write("ShardRoutingState.Unassigned");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState");
+				writer.Write(".Unassigned");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ShardRoutingState value.");

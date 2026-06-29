@@ -27,7 +27,7 @@ public partial class NodeInfoRepositoriesUrl : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeInfoRepositoriesUrl", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeInfoRepositoriesUrl", false);
 		{
 			initializer.Property("AllowedUrls");
 			writer.WriteString(AllowedUrls);

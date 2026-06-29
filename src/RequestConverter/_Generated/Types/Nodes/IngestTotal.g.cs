@@ -27,7 +27,7 @@ public partial class IngestTotal : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IngestTotal", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.IngestTotal", false);
 		{
 			initializer.Property("Count");
 			writer.WriteValue(Count);

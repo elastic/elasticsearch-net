@@ -27,7 +27,7 @@ public partial class DiskUsage : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DiskUsage", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.DiskUsage", false);
 		{
 			initializer.Property("FreeBytes");
 			writer.WriteValue(FreeBytes);

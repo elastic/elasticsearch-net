@@ -27,7 +27,7 @@ public partial class NodeInfoAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeInfoAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeInfoAggregation", false);
 		{
 			initializer.Property("Types");
 			writer.WriteInlineList(Types, (w, item) => { w.WriteString(item); });

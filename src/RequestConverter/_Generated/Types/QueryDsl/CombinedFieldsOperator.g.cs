@@ -30,10 +30,12 @@ public static class CombinedFieldsOperatorCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator.And:
-				writer.Write("CombinedFieldsOperator.And");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator");
+				writer.Write(".And");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator.Or:
-				writer.Write("CombinedFieldsOperator.Or");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator");
+				writer.Write(".Or");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected CombinedFieldsOperator value.");

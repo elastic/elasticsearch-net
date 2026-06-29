@@ -27,7 +27,7 @@ public partial class SnapshotLifecycle : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SnapshotLifecycle", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycle", false);
 		if (InProgress is not null)
 		{
 			initializer.Property("InProgress");

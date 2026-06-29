@@ -30,16 +30,20 @@ public static class IndicesBlockOptionsCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions.Metadata:
-				writer.Write("IndicesBlockOptions.Metadata");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions");
+				writer.Write(".Metadata");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions.Read:
-				writer.Write("IndicesBlockOptions.Read");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions");
+				writer.Write(".Read");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions.ReadOnly:
-				writer.Write("IndicesBlockOptions.ReadOnly");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions");
+				writer.Write(".ReadOnly");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions.Write:
-				writer.Write("IndicesBlockOptions.Write");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions");
+				writer.Write(".Write");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IndicesBlockOptions value.");

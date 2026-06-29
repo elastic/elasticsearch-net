@@ -27,7 +27,7 @@ public partial class CjkBigramTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CjkBigramTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.CjkBigramTokenFilter", true);
 		if (IgnoredScripts is not null)
 		{
 			initializer.Property("IgnoredScripts");

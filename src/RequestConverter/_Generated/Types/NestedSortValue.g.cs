@@ -27,7 +27,7 @@ public partial class NestedSortValue : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NestedSortValue", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.NestedSortValue", false);
 		if (Filter is not null)
 		{
 			initializer.Property("Filter");

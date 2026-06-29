@@ -27,7 +27,7 @@ public partial class CreateRepositoryRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CreateRepositoryRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

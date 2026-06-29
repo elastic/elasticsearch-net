@@ -30,16 +30,20 @@ public static class LicenseStatusCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus.Active:
-				writer.Write("LicenseStatus.Active");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus");
+				writer.Write(".Active");
 				break;
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus.Expired:
-				writer.Write("LicenseStatus.Expired");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus");
+				writer.Write(".Expired");
 				break;
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus.Invalid:
-				writer.Write("LicenseStatus.Invalid");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus");
+				writer.Write(".Invalid");
 				break;
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus.Valid:
-				writer.Write("LicenseStatus.Valid");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus");
+				writer.Write(".Valid");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected LicenseStatus value.");

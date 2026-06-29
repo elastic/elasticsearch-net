@@ -30,16 +30,20 @@ public static class AppliesToCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo.Actual:
-				writer.Write("AppliesTo.Actual");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo");
+				writer.Write(".Actual");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo.DiffFromTypical:
-				writer.Write("AppliesTo.DiffFromTypical");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo");
+				writer.Write(".DiffFromTypical");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo.Time:
-				writer.Write("AppliesTo.Time");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo");
+				writer.Write(".Time");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo.Typical:
-				writer.Write("AppliesTo.Typical");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo");
+				writer.Write(".Typical");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected AppliesTo value.");

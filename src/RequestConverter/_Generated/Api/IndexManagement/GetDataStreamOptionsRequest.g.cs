@@ -27,7 +27,7 @@ public partial class GetDataStreamOptionsRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetDataStreamOptionsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class CompletionSuggest<TDocument> : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CompletionSuggest<TDocument>", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggest<TDocument>", true);
 		{
 			initializer.Property("Length");
 			writer.WriteValue(Length);

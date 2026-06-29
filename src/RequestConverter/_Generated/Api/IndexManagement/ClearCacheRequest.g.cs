@@ -27,7 +27,7 @@ public partial class ClearCacheRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ClearCacheRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest", false);
 		if (Indices is not null)
 		{
 			initializer.Property("Indices");

@@ -27,7 +27,7 @@ public partial class Realm : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Realm", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.Realm", false);
 		{
 			initializer.Property("Available");
 			writer.WriteValue(Available);

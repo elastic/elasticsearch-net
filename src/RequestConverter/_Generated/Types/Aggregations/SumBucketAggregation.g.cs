@@ -27,7 +27,7 @@ public partial class SumBucketAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SumBucketAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregation", false);
 		if (BucketsPath is not null)
 		{
 			initializer.Property("BucketsPath");

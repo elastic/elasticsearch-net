@@ -27,7 +27,7 @@ public partial class AuthenticateToken : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AuthenticateToken", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.AuthenticateToken", false);
 		if (ManagedBy is not null)
 		{
 			initializer.Property("ManagedBy");

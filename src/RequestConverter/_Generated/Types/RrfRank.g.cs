@@ -27,7 +27,7 @@ public partial class RrfRank : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RrfRank", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.RrfRank", false);
 		if (RankConstant is not null)
 		{
 			initializer.Property("RankConstant");

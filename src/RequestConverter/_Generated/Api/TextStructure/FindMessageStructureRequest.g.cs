@@ -27,7 +27,7 @@ public partial class FindMessageStructureRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FindMessageStructureRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest", false);
 		if (ColumnNames is not null)
 		{
 			initializer.Property("ColumnNames");

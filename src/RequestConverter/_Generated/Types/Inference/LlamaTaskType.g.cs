@@ -30,13 +30,16 @@ public static class LlamaTaskTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.LlamaTaskType.ChatCompletion:
-				writer.Write("LlamaTaskType.ChatCompletion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.LlamaTaskType");
+				writer.Write(".ChatCompletion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.LlamaTaskType.Completion:
-				writer.Write("LlamaTaskType.Completion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.LlamaTaskType");
+				writer.Write(".Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.LlamaTaskType.TextEmbedding:
-				writer.Write("LlamaTaskType.TextEmbedding");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.LlamaTaskType");
+				writer.Write(".TextEmbedding");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected LlamaTaskType value.");

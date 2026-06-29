@@ -27,7 +27,7 @@ public partial class GcsRepository : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GcsRepository", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.GcsRepository", true);
 		{
 			initializer.Property("Settings");
 			Settings.FormatCode(writer);

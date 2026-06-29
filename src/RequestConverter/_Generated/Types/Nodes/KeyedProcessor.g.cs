@@ -27,7 +27,7 @@ public partial class KeyedProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("KeyedProcessor", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.KeyedProcessor", false);
 		if (Stats is not null)
 		{
 			initializer.Property("Stats");

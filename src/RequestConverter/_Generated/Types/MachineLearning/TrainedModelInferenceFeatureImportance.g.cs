@@ -27,7 +27,7 @@ public partial class TrainedModelInferenceFeatureImportance : RequestConverter.I
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TrainedModelInferenceFeatureImportance", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelInferenceFeatureImportance", false);
 		if (Classes is not null)
 		{
 			initializer.Property("Classes");

@@ -30,13 +30,16 @@ public static class SyntheticSourceKeepEnumCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum.All:
-				writer.Write("SyntheticSourceKeepEnum.All");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum");
+				writer.Write(".All");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum.Arrays:
-				writer.Write("SyntheticSourceKeepEnum.Arrays");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum");
+				writer.Write(".Arrays");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum.None:
-				writer.Write("SyntheticSourceKeepEnum.None");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum");
+				writer.Write(".None");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SyntheticSourceKeepEnum value.");

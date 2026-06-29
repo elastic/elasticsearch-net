@@ -27,7 +27,7 @@ public partial class SearchableSnapshotAction : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SearchableSnapshotAction", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction", false);
 		if (ForceMergeIndex is not null)
 		{
 			initializer.Property("ForceMergeIndex");

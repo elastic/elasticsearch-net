@@ -27,7 +27,7 @@ public partial class PutRuleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutRuleRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequest", false);
 		{
 			initializer.Property("RuleId");
 			RuleId.FormatCode(writer);

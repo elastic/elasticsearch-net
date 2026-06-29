@@ -27,7 +27,7 @@ public partial class JobStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("JobStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.JobStats", false);
 		if (AssignmentExplanation is not null)
 		{
 			initializer.Property("AssignmentExplanation");

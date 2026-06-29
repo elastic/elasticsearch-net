@@ -29,7 +29,8 @@ public partial class GeoBounds : RequestConverter.ICodeFormattable
 	{
 		if (TryGetCoordinates(out var v1))
 		{
-			writer.Write("GeoBounds.Coordinates(");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.GeoBounds");
+			writer.Write(".Coordinates(");
 			v1.FormatCode(writer);
 			writer.Write(")");
 			return;
@@ -37,7 +38,8 @@ public partial class GeoBounds : RequestConverter.ICodeFormattable
 
 		if (TryGetTopLeftBottomRight(out var v2))
 		{
-			writer.Write("GeoBounds.TopLeftBottomRight(");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.GeoBounds");
+			writer.Write(".TopLeftBottomRight(");
 			v2.FormatCode(writer);
 			writer.Write(")");
 			return;
@@ -45,7 +47,8 @@ public partial class GeoBounds : RequestConverter.ICodeFormattable
 
 		if (TryGetTopRightBottomLeft(out var v3))
 		{
-			writer.Write("GeoBounds.TopRightBottomLeft(");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.GeoBounds");
+			writer.Write(".TopRightBottomLeft(");
 			v3.FormatCode(writer);
 			writer.Write(")");
 			return;
@@ -53,7 +56,8 @@ public partial class GeoBounds : RequestConverter.ICodeFormattable
 
 		if (TryGetWkt(out var v4))
 		{
-			writer.Write("GeoBounds.Wkt(");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.GeoBounds");
+			writer.Write(".Wkt(");
 			v4.FormatCode(writer);
 			writer.Write(")");
 			return;

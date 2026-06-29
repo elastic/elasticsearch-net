@@ -27,7 +27,7 @@ public partial class TermSuggestOption : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TermSuggestOption", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.TermSuggestOption", false);
 		if (CollateMatch is not null)
 		{
 			initializer.Property("CollateMatch");

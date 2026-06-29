@@ -27,7 +27,7 @@ public partial class Breaker : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Breaker", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.Breaker", false);
 		if (EstimatedSize is not null)
 		{
 			initializer.Property("EstimatedSize");

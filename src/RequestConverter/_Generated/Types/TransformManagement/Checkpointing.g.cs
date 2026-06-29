@@ -27,7 +27,7 @@ public partial class Checkpointing : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Checkpointing", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.Checkpointing", false);
 		if (ChangesLastDetectedAt is not null)
 		{
 			initializer.Property("ChangesLastDetectedAt");

@@ -27,7 +27,7 @@ public partial class SettingsSearch : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SettingsSearch", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch", false);
 		if (Idle is not null)
 		{
 			initializer.Property("Idle");

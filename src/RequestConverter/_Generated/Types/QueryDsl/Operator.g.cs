@@ -30,10 +30,12 @@ public static class OperatorCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.Operator.And:
-				writer.Write("Operator.And");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.Operator");
+				writer.Write(".And");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.Operator.Or:
-				writer.Write("Operator.Or");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.Operator");
+				writer.Write(".Or");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected Operator value.");

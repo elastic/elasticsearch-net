@@ -30,16 +30,20 @@ public static class GoogleVertexAITaskTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType.ChatCompletion:
-				writer.Write("GoogleVertexAITaskType.ChatCompletion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType");
+				writer.Write(".ChatCompletion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType.Completion:
-				writer.Write("GoogleVertexAITaskType.Completion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType");
+				writer.Write(".Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType.Rerank:
-				writer.Write("GoogleVertexAITaskType.Rerank");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType");
+				writer.Write(".Rerank");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType.TextEmbedding:
-				writer.Write("GoogleVertexAITaskType.TextEmbedding");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType");
+				writer.Write(".TextEmbedding");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected GoogleVertexAITaskType value.");

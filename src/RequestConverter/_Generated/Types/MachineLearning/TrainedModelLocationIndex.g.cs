@@ -27,7 +27,7 @@ public partial class TrainedModelLocationIndex : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TrainedModelLocationIndex", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelLocationIndex", false);
 		{
 			initializer.Property("Name");
 			writer.WriteString(Name);

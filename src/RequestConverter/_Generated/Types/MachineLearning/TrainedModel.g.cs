@@ -27,7 +27,7 @@ public partial class TrainedModel : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TrainedModel", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel", false);
 		if (Ensemble is not null)
 		{
 			initializer.Property("Ensemble");

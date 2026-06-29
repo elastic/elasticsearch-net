@@ -27,7 +27,7 @@ public partial class SimulateIngestDocumentResult : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SimulateIngestDocumentResult", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Simulate.SimulateIngestDocumentResult", false);
 		if (Doc is not null)
 		{
 			initializer.Property("Doc");

@@ -30,19 +30,24 @@ public static class SortModeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.SortMode.Avg:
-				writer.Write("SortMode.Avg");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SortMode");
+				writer.Write(".Avg");
 				break;
 			case Elastic.Clients.Elasticsearch.SortMode.Max:
-				writer.Write("SortMode.Max");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SortMode");
+				writer.Write(".Max");
 				break;
 			case Elastic.Clients.Elasticsearch.SortMode.Median:
-				writer.Write("SortMode.Median");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SortMode");
+				writer.Write(".Median");
 				break;
 			case Elastic.Clients.Elasticsearch.SortMode.Min:
-				writer.Write("SortMode.Min");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SortMode");
+				writer.Write(".Min");
 				break;
 			case Elastic.Clients.Elasticsearch.SortMode.Sum:
-				writer.Write("SortMode.Sum");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SortMode");
+				writer.Write(".Sum");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SortMode value.");

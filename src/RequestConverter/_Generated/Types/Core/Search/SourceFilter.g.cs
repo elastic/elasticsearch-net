@@ -27,7 +27,7 @@ public partial class SourceFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SourceFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.SourceFilter", true);
 		if (Excludes is not null)
 		{
 			initializer.Property("Excludes");

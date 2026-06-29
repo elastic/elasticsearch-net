@@ -27,7 +27,7 @@ public partial class AddAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AddAction", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.AddAction", false);
 		if (Alias is not null)
 		{
 			initializer.Property("Alias");

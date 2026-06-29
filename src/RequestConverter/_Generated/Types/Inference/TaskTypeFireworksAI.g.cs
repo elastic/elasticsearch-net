@@ -30,13 +30,16 @@ public static class TaskTypeFireworksAICodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeFireworksAI.ChatCompletion:
-				writer.Write("TaskTypeFireworksAI.ChatCompletion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeFireworksAI");
+				writer.Write(".ChatCompletion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeFireworksAI.Completion:
-				writer.Write("TaskTypeFireworksAI.Completion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeFireworksAI");
+				writer.Write(".Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeFireworksAI.TextEmbedding:
-				writer.Write("TaskTypeFireworksAI.TextEmbedding");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeFireworksAI");
+				writer.Write(".TextEmbedding");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeFireworksAI value.");

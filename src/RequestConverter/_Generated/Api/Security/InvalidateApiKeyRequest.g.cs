@@ -27,7 +27,7 @@ public partial class InvalidateApiKeyRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("InvalidateApiKeyRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest", false);
 		if (Id is not null)
 		{
 			initializer.Property("Id");

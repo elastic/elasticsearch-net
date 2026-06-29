@@ -27,7 +27,7 @@ public partial class GermanAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GermanAnalyzer", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.GermanAnalyzer", true);
 		if (StemExclusion is not null)
 		{
 			initializer.Property("StemExclusion");
@@ -43,7 +43,9 @@ public partial class GermanAnalyzer : RequestConverter.ICodeFormattable
 			}
 			else
 			{
-				writer.Write("new string[] ");
+				writer.Write("new ");
+				writer.WriteTypeRef("string");
+				writer.Write("[] ");
 				writer.WriteInlineList(Stopwords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", ");
 			}
 		}

@@ -27,7 +27,7 @@ public partial class StandardTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("StandardTokenizer", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.StandardTokenizer", true);
 		if (MaxTokenLength is not null)
 		{
 			initializer.Property("MaxTokenLength");

@@ -30,19 +30,24 @@ public static class ResultCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Result.Created:
-				writer.Write("Result.Created");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Result");
+				writer.Write(".Created");
 				break;
 			case Elastic.Clients.Elasticsearch.Result.Deleted:
-				writer.Write("Result.Deleted");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Result");
+				writer.Write(".Deleted");
 				break;
 			case Elastic.Clients.Elasticsearch.Result.NoOp:
-				writer.Write("Result.NoOp");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Result");
+				writer.Write(".NoOp");
 				break;
 			case Elastic.Clients.Elasticsearch.Result.NotFound:
-				writer.Write("Result.NotFound");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Result");
+				writer.Write(".NotFound");
 				break;
 			case Elastic.Clients.Elasticsearch.Result.Updated:
-				writer.Write("Result.Updated");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Result");
+				writer.Write(".Updated");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected Result value.");

@@ -27,7 +27,7 @@ public partial class GeoIpDownloadStatistics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GeoIpDownloadStatistics", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.GeoIpDownloadStatistics", false);
 		{
 			initializer.Property("DatabasesCount");
 			writer.WriteValue(DatabasesCount);

@@ -27,7 +27,7 @@ public partial class TranslogRetention : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TranslogRetention", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetention", false);
 		if (Age is not null)
 		{
 			initializer.Property("Age");

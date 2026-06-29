@@ -27,7 +27,7 @@ public partial class Translog : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Translog", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.Translog", false);
 		if (Durability is not null)
 		{
 			initializer.Property("Durability");

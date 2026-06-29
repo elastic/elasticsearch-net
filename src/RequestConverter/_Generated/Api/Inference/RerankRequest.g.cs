@@ -27,7 +27,7 @@ public partial class RerankRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RerankRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.RerankRequest", false);
 		{
 			initializer.Property("InferenceId");
 			InferenceId.FormatCode(writer);

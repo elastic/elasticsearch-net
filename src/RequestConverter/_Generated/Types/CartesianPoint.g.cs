@@ -27,7 +27,7 @@ public partial class CartesianPoint : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CartesianPoint", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.CartesianPoint", false);
 		{
 			initializer.Property("X");
 			writer.WriteValue(X);

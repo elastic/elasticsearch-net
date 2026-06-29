@@ -27,7 +27,7 @@ public partial class FunctionScore : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FunctionScore", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore", false);
 		if (Filter is not null)
 		{
 			initializer.Property("Filter");

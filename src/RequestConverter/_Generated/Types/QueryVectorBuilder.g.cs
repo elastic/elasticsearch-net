@@ -27,7 +27,7 @@ public partial class QueryVectorBuilder : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("QueryVectorBuilder", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryVectorBuilder", false);
 		if (Embedding is not null)
 		{
 			initializer.Property("Embedding");

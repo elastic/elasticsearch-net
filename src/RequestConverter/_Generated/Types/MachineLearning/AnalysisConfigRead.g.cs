@@ -27,7 +27,7 @@ public partial class AnalysisConfigRead : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AnalysisConfigRead", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigRead", false);
 		{
 			initializer.Property("BucketSpan");
 			BucketSpan.FormatCode(writer);

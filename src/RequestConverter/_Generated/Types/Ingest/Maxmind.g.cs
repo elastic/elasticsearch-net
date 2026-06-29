@@ -27,7 +27,7 @@ public partial class Maxmind : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Maxmind", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.Maxmind", false);
 		{
 			initializer.Property("AccountId");
 			AccountId.FormatCode(writer);

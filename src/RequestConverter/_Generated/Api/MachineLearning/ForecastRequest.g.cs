@@ -27,7 +27,7 @@ public partial class ForecastRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ForecastRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequest", false);
 		{
 			initializer.Property("JobId");
 			JobId.FormatCode(writer);

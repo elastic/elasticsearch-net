@@ -27,7 +27,7 @@ public partial class UnknownTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("UnknownTokenizer", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.UnknownTokenizer", false);
 		initializer.Dispose();
 	}
 }

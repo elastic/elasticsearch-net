@@ -27,7 +27,7 @@ public partial class IlmIndicator : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IlmIndicator", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.HealthReport.IlmIndicator", false);
 		if (Details is not null)
 		{
 			initializer.Property("Details");

@@ -30,19 +30,24 @@ public static class NormalizationCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Normalization.H1:
-				writer.Write("Normalization.H1");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Normalization");
+				writer.Write(".H1");
 				break;
 			case Elastic.Clients.Elasticsearch.Normalization.H2:
-				writer.Write("Normalization.H2");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Normalization");
+				writer.Write(".H2");
 				break;
 			case Elastic.Clients.Elasticsearch.Normalization.H3:
-				writer.Write("Normalization.H3");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Normalization");
+				writer.Write(".H3");
 				break;
 			case Elastic.Clients.Elasticsearch.Normalization.No:
-				writer.Write("Normalization.No");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Normalization");
+				writer.Write(".No");
 				break;
 			case Elastic.Clients.Elasticsearch.Normalization.Z:
-				writer.Write("Normalization.Z");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Normalization");
+				writer.Write(".Z");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected Normalization value.");

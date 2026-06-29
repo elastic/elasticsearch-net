@@ -27,7 +27,7 @@ public partial class ResumeAutoFollowPatternRequest : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ResumeAutoFollowPatternRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

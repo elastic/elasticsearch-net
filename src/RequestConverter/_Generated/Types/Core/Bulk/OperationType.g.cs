@@ -30,16 +30,20 @@ public static class OperationTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Create:
-				writer.Write("OperationType.Create");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Bulk.OperationType");
+				writer.Write(".Create");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Delete:
-				writer.Write("OperationType.Delete");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Bulk.OperationType");
+				writer.Write(".Delete");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Index:
-				writer.Write("OperationType.Index");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Bulk.OperationType");
+				writer.Write(".Index");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Bulk.OperationType.Update:
-				writer.Write("OperationType.Update");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Bulk.OperationType");
+				writer.Write(".Update");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected OperationType value.");

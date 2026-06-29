@@ -27,7 +27,7 @@ public partial class DataframeClassificationSummaryMulticlassConfusionMatrix : R
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframeClassificationSummaryMulticlassConfusionMatrix", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryMulticlassConfusionMatrix", false);
 		{
 			initializer.Property("ConfusionMatrix");
 			writer.WriteInlineList(ConfusionMatrix, (w, item) => { item.FormatCode(w); });

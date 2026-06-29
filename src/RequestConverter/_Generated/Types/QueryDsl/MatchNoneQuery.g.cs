@@ -27,7 +27,7 @@ public partial class MatchNoneQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MatchNoneQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQuery", false);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

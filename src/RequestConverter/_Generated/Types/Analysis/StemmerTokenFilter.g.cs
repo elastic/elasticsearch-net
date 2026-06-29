@@ -27,7 +27,7 @@ public partial class StemmerTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("StemmerTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilter", true);
 		if (Language is not null)
 		{
 			initializer.Property("Language");

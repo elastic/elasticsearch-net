@@ -27,7 +27,7 @@ public partial class IntervalsFuzzy : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IntervalsFuzzy", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy", false);
 		if (Analyzer is not null)
 		{
 			initializer.Property("Analyzer");

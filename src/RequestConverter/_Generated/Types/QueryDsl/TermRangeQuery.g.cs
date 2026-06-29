@@ -27,7 +27,7 @@ public partial class TermRangeQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TermRangeQuery", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery", true);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

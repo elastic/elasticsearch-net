@@ -27,7 +27,7 @@ public partial class MemStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MemStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.MemStats", false);
 		if (AdjustedTotal is not null)
 		{
 			initializer.Property("AdjustedTotal");

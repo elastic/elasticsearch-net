@@ -27,7 +27,7 @@ public partial class CloneSnapshotRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CloneSnapshotRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequest", false);
 		{
 			initializer.Property("Repository");
 			Repository.FormatCode(writer);

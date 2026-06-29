@@ -27,7 +27,7 @@ public partial class PrivilegesCheck : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PrivilegesCheck", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.PrivilegesCheck", false);
 		if (Application is not null)
 		{
 			initializer.Property("Application");

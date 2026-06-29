@@ -30,7 +30,8 @@ public static class SlicesCalculationCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.SlicesCalculation.Auto:
-				writer.Write("SlicesCalculation.Auto");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SlicesCalculation");
+				writer.Write(".Auto");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SlicesCalculation value.");

@@ -27,7 +27,7 @@ public partial class TrainedModelAssignmentRoutingStateAndReason : RequestConver
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TrainedModelAssignmentRoutingStateAndReason", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingStateAndReason", false);
 		if (Reason is not null)
 		{
 			initializer.Property("Reason");

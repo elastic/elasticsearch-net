@@ -27,7 +27,7 @@ public partial class RoleDescriptorWrapper : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RoleDescriptorWrapper", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapper", false);
 		{
 			initializer.Property("RoleDescriptor");
 			RoleDescriptor.FormatCode(writer);

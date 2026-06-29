@@ -27,7 +27,7 @@ public partial class StatusInProgress : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("StatusInProgress", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.StatusInProgress", false);
 		{
 			initializer.Property("Index");
 			writer.WriteString(Index);

@@ -27,7 +27,7 @@ public partial class Redact : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Redact", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.Redact", false);
 		{
 			initializer.Property("IsRedacted");
 			writer.WriteValue(IsRedacted);

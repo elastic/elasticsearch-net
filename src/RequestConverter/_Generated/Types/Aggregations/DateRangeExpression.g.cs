@@ -27,7 +27,7 @@ public partial class DateRangeExpression : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DateRangeExpression", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression", false);
 		if (From is not null)
 		{
 			initializer.Property("From");

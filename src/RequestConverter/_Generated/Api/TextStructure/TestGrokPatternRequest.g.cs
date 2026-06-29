@@ -27,7 +27,7 @@ public partial class TestGrokPatternRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TestGrokPatternRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequest", false);
 		if (EcsCompatibility is not null)
 		{
 			initializer.Property("EcsCompatibility");

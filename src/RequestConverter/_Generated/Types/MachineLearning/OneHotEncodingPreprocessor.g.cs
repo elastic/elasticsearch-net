@@ -27,7 +27,7 @@ public partial class OneHotEncodingPreprocessor : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("OneHotEncodingPreprocessor", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.OneHotEncodingPreprocessor", false);
 		{
 			initializer.Property("Field");
 			writer.WriteString(Field);
@@ -35,10 +35,12 @@ public partial class OneHotEncodingPreprocessor : RequestConverter.ICodeFormatta
 
 		{
 			initializer.Property("HotMap");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("string");
+			writer.WriteTypeRef("string");
 			writer.Write(">()");
 			writer.WriteBlockList(HotMap, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
 		}

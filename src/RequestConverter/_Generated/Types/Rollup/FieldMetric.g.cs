@@ -27,7 +27,7 @@ public partial class FieldMetric : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FieldMetric", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Rollup.FieldMetric", false);
 		{
 			initializer.Property("Field");
 			Field.FormatCode(writer);

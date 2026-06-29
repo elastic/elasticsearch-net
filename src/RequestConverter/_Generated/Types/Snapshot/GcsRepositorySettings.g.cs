@@ -27,7 +27,7 @@ public partial class GcsRepositorySettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GcsRepositorySettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.GcsRepositorySettings", false);
 #pragma warning disable CS0618
 		if (ApplicationName is not null)
 		{

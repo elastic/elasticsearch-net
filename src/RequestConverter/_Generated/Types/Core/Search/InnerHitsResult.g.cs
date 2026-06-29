@@ -27,7 +27,7 @@ public partial class InnerHitsResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("InnerHitsResult", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.InnerHitsResult", false);
 		{
 			initializer.Property("Hits");
 			Hits.FormatCode(writer);

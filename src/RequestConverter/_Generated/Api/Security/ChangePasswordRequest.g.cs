@@ -27,7 +27,7 @@ public partial class ChangePasswordRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ChangePasswordRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest", false);
 		if (Username is not null)
 		{
 			initializer.Property("Username");

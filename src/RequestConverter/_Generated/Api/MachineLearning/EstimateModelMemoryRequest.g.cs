@@ -27,7 +27,7 @@ public partial class EstimateModelMemoryRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("EstimateModelMemoryRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest", false);
 		if (AnalysisConfig is not null)
 		{
 			initializer.Property("AnalysisConfig");
@@ -37,10 +37,12 @@ public partial class EstimateModelMemoryRequest : RequestConverter.ICodeFormatta
 		if (MaxBucketCardinality is not null)
 		{
 			initializer.Property("MaxBucketCardinality");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("Elastic.Clients.Elasticsearch.Field");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Field");
 			writer.Write(", ");
-			writer.Write("long");
+			writer.WriteTypeRef("long");
 			writer.Write(">()");
 			writer.WriteBlockList(MaxBucketCardinality, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); });
 		}
@@ -48,10 +50,12 @@ public partial class EstimateModelMemoryRequest : RequestConverter.ICodeFormatta
 		if (OverallCardinality is not null)
 		{
 			initializer.Property("OverallCardinality");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("Elastic.Clients.Elasticsearch.Field");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Field");
 			writer.Write(", ");
-			writer.Write("long");
+			writer.WriteTypeRef("long");
 			writer.Write(">()");
 			writer.WriteBlockList(OverallCardinality, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); });
 		}

@@ -30,13 +30,16 @@ public static class AmazonSageMakerElementTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerElementType.Bit:
-				writer.Write("AmazonSageMakerElementType.Bit");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerElementType");
+				writer.Write(".Bit");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerElementType.Byte:
-				writer.Write("AmazonSageMakerElementType.Byte");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerElementType");
+				writer.Write(".Byte");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerElementType.Float:
-				writer.Write("AmazonSageMakerElementType.Float");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerElementType");
+				writer.Write(".Float");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected AmazonSageMakerElementType value.");

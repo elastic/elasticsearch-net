@@ -27,7 +27,7 @@ public partial class MergeScheduler : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MergeScheduler", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler", false);
 		if (MaxMergeCount is not null)
 		{
 			initializer.Property("MaxMergeCount");

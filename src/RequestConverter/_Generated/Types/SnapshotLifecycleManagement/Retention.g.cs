@@ -27,7 +27,7 @@ public partial class Retention : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Retention", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention", false);
 		{
 			initializer.Property("ExpireAfter");
 			ExpireAfter.FormatCode(writer);

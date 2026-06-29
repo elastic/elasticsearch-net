@@ -30,25 +30,32 @@ public static class SnapshotSortCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.Duration:
-				writer.Write("SnapshotSort.Duration");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort");
+				writer.Write(".Duration");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.FailedShardCount:
-				writer.Write("SnapshotSort.FailedShardCount");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort");
+				writer.Write(".FailedShardCount");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.IndexCount:
-				writer.Write("SnapshotSort.IndexCount");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort");
+				writer.Write(".IndexCount");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.Name:
-				writer.Write("SnapshotSort.Name");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort");
+				writer.Write(".Name");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.Repository:
-				writer.Write("SnapshotSort.Repository");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort");
+				writer.Write(".Repository");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.ShardCount:
-				writer.Write("SnapshotSort.ShardCount");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort");
+				writer.Write(".ShardCount");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.StartTime:
-				writer.Write("SnapshotSort.StartTime");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort");
+				writer.Write(".StartTime");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SnapshotSort value.");

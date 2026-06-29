@@ -27,7 +27,7 @@ public partial class OpenJobRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("OpenJobRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequest", false);
 		{
 			initializer.Property("JobId");
 			JobId.FormatCode(writer);

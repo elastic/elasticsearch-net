@@ -27,7 +27,7 @@ public partial class PutMistralRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutMistralRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutMistralRequest", false);
 		{
 			initializer.Property("MistralInferenceId");
 			MistralInferenceId.FormatCode(writer);

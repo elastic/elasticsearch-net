@@ -27,7 +27,7 @@ public partial class QueryRoleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("QueryRoleRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.QueryRoleRequest", false);
 		if (From is not null)
 		{
 			initializer.Property("From");

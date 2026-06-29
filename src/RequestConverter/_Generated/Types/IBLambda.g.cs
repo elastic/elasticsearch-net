@@ -30,10 +30,12 @@ public static class IBLambdaCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IBLambda.Df:
-				writer.Write("IBLambda.Df");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IBLambda");
+				writer.Write(".Df");
 				break;
 			case Elastic.Clients.Elasticsearch.IBLambda.Ttf:
-				writer.Write("IBLambda.Ttf");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IBLambda");
+				writer.Write(".Ttf");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IBLambda value.");

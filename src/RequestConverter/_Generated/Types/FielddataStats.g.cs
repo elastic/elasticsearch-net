@@ -27,7 +27,7 @@ public partial class FielddataStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FielddataStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.FielddataStats", false);
 		if (Evictions is not null)
 		{
 			initializer.Property("Evictions");
@@ -38,10 +38,12 @@ public partial class FielddataStats : RequestConverter.ICodeFormattable
 		if (Fields is not null)
 		{
 			initializer.Property("Fields");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.FieldMemoryUsage");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.FieldMemoryUsage");
 			writer.Write(">()");
 			writer.WriteBlockList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

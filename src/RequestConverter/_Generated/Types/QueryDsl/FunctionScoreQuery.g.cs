@@ -27,7 +27,7 @@ public partial class FunctionScoreQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FunctionScoreQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQuery", false);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

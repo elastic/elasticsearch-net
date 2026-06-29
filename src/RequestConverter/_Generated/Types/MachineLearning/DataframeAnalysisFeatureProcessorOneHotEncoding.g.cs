@@ -27,7 +27,7 @@ public partial class DataframeAnalysisFeatureProcessorOneHotEncoding : RequestCo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframeAnalysisFeatureProcessorOneHotEncoding", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding", false);
 		{
 			initializer.Property("Field");
 			Field.FormatCode(writer);

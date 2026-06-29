@@ -27,7 +27,7 @@ public partial class RandomSamplerAggregation : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RandomSamplerAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation", false);
 		{
 			initializer.Property("Probability");
 			writer.WriteValue(Probability);

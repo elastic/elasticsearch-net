@@ -27,7 +27,7 @@ public partial class ResumeFollowRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ResumeFollowRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest", false);
 		{
 			initializer.Property("Index");
 			Index.FormatCode(writer);

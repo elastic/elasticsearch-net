@@ -27,7 +27,7 @@ public partial class Job : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Job", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.Job", false);
 		{
 			initializer.Property("AllowLazyOpen");
 			writer.WriteValue(AllowLazyOpen);

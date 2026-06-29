@@ -27,7 +27,7 @@ public partial class NodeInfoIngestDownloader : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeInfoIngestDownloader", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestDownloader", false);
 		{
 			initializer.Property("Enabled");
 			writer.WriteString(Enabled);

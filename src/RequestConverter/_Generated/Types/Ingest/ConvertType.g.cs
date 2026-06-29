@@ -30,28 +30,36 @@ public static class ConvertTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.Auto:
-				writer.Write("ConvertType.Auto");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.ConvertType");
+				writer.Write(".Auto");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.Boolean:
-				writer.Write("ConvertType.Boolean");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.ConvertType");
+				writer.Write(".Boolean");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.Double:
-				writer.Write("ConvertType.Double");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.ConvertType");
+				writer.Write(".Double");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.Float:
-				writer.Write("ConvertType.Float");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.ConvertType");
+				writer.Write(".Float");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.Integer:
-				writer.Write("ConvertType.Integer");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.ConvertType");
+				writer.Write(".Integer");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.Ip:
-				writer.Write("ConvertType.Ip");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.ConvertType");
+				writer.Write(".Ip");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.Long:
-				writer.Write("ConvertType.Long");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.ConvertType");
+				writer.Write(".Long");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.ConvertType.String:
-				writer.Write("ConvertType.String");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.ConvertType");
+				writer.Write(".String");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ConvertType value.");

@@ -27,7 +27,7 @@ public partial class TextSimilarityReranker : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TextSimilarityReranker", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TextSimilarityReranker", false);
 		if (ChunkRescorer is not null)
 		{
 			initializer.Property("ChunkRescorer");

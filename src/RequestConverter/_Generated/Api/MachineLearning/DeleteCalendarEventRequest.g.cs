@@ -27,7 +27,7 @@ public partial class DeleteCalendarEventRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteCalendarEventRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequest", false);
 		{
 			initializer.Property("CalendarId");
 			CalendarId.FormatCode(writer);

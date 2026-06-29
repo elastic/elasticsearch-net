@@ -27,7 +27,7 @@ public partial class InferenceAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("InferenceAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation", false);
 		if (BucketsPath is not null)
 		{
 			initializer.Property("BucketsPath");

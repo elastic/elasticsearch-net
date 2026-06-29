@@ -27,7 +27,7 @@ public partial class PathHierarchyTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PathHierarchyTokenizer", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer", true);
 		if (BufferSize is not null)
 		{
 			initializer.Property("BufferSize");

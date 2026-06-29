@@ -30,10 +30,12 @@ public static class SegmentSortOrderCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder.Asc:
-				writer.Write("SegmentSortOrder.Asc");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder");
+				writer.Write(".Asc");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder.Desc:
-				writer.Write("SegmentSortOrder.Desc");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder");
+				writer.Write(".Desc");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SegmentSortOrder value.");

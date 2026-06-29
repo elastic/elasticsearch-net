@@ -27,7 +27,7 @@ public partial class Http : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Http", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.Http", false);
 		if (Clients is not null)
 		{
 			initializer.Property("Clients");
@@ -43,10 +43,12 @@ public partial class Http : RequestConverter.ICodeFormattable
 		if (Routes is not null)
 		{
 			initializer.Property("Routes");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Nodes.HttpRoute");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.HttpRoute");
 			writer.Write(">()");
 			writer.WriteBlockList(Routes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

@@ -27,7 +27,7 @@ public partial class NlpBertTokenizationConfig : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NlpBertTokenizationConfig", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig", false);
 		if (DoLowerCase is not null)
 		{
 			initializer.Property("DoLowerCase");

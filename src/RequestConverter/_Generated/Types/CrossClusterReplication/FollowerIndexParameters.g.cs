@@ -27,7 +27,7 @@ public partial class FollowerIndexParameters : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FollowerIndexParameters", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexParameters", false);
 		if (MaxOutstandingReadRequests is not null)
 		{
 			initializer.Property("MaxOutstandingReadRequests");

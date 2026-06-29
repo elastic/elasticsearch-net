@@ -27,7 +27,7 @@ public partial class StandardRetriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("StandardRetriever", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.StandardRetriever", false);
 		if (Collapse is not null)
 		{
 			initializer.Property("Collapse");

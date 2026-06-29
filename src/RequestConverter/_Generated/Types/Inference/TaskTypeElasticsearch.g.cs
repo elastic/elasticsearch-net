@@ -30,13 +30,16 @@ public static class TaskTypeElasticsearchCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeElasticsearch.Rerank:
-				writer.Write("TaskTypeElasticsearch.Rerank");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeElasticsearch");
+				writer.Write(".Rerank");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeElasticsearch.SparseEmbedding:
-				writer.Write("TaskTypeElasticsearch.SparseEmbedding");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeElasticsearch");
+				writer.Write(".SparseEmbedding");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeElasticsearch.TextEmbedding:
-				writer.Write("TaskTypeElasticsearch.TextEmbedding");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeElasticsearch");
+				writer.Write(".TextEmbedding");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeElasticsearch value.");

@@ -30,10 +30,12 @@ public static class GridAggregationTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType.Geohex:
-				writer.Write("GridAggregationType.Geohex");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType");
+				writer.Write(".Geohex");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType.Geotile:
-				writer.Write("GridAggregationType.Geotile");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType");
+				writer.Write(".Geotile");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected GridAggregationType value.");

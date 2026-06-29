@@ -30,19 +30,24 @@ public static class CohereEmbeddingTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Binary:
-				writer.Write("CohereEmbeddingType.Binary");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType");
+				writer.Write(".Binary");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Bit:
-				writer.Write("CohereEmbeddingType.Bit");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType");
+				writer.Write(".Bit");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Byte:
-				writer.Write("CohereEmbeddingType.Byte");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType");
+				writer.Write(".Byte");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Float:
-				writer.Write("CohereEmbeddingType.Float");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType");
+				writer.Write(".Float");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Int8:
-				writer.Write("CohereEmbeddingType.Int8");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType");
+				writer.Write(".Int8");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected CohereEmbeddingType value.");

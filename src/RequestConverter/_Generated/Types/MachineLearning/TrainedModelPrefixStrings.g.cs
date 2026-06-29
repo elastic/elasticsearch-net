@@ -27,7 +27,7 @@ public partial class TrainedModelPrefixStrings : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TrainedModelPrefixStrings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings", false);
 		if (Ingest is not null)
 		{
 			initializer.Property("Ingest");

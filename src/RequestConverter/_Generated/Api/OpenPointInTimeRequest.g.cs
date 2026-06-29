@@ -27,7 +27,7 @@ public partial class OpenPointInTimeRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("OpenPointInTimeRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.OpenPointInTimeRequest", false);
 		{
 			initializer.Property("Indices");
 			Indices.FormatCode(writer);

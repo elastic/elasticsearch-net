@@ -27,7 +27,7 @@ public partial class ListQueriesRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ListQueriesRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Esql.ListQueriesRequest", false);
 		initializer.Dispose();
 	}
 }

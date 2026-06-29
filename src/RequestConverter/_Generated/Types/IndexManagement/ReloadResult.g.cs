@@ -27,7 +27,7 @@ public partial class ReloadResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ReloadResult", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ReloadResult", false);
 		{
 			initializer.Property("ReloadDetails");
 			writer.WriteInlineList(ReloadDetails, (w, item) => { item.FormatCode(w); });

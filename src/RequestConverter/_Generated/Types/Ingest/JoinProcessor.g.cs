@@ -27,7 +27,7 @@ public partial class JoinProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("JoinProcessor", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.JoinProcessor", false);
 		if (Description is not null)
 		{
 			initializer.Property("Description");

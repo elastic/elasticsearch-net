@@ -30,70 +30,92 @@ public static class CommonStatsFlagCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.All:
-				writer.Write("CommonStatsFlag.All");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CommonStatsFlag");
+				writer.Write(".All");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Bulk:
-				writer.Write("CommonStatsFlag.Bulk");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CommonStatsFlag");
+				writer.Write(".Bulk");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Completion:
-				writer.Write("CommonStatsFlag.Completion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CommonStatsFlag");
+				writer.Write(".Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.DenseVector:
-				writer.Write("CommonStatsFlag.DenseVector");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CommonStatsFlag");
+				writer.Write(".DenseVector");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Docs:
-				writer.Write("CommonStatsFlag.Docs");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CommonStatsFlag");
+				writer.Write(".Docs");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Fielddata:
-				writer.Write("CommonStatsFlag.Fielddata");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CommonStatsFlag");
+				writer.Write(".Fielddata");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Flush:
-				writer.Write("CommonStatsFlag.Flush");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CommonStatsFlag");
+				writer.Write(".Flush");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Get:
-				writer.Write("CommonStatsFlag.Get");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CommonStatsFlag");
+				writer.Write(".Get");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Indexing:
-				writer.Write("CommonStatsFlag.Indexing");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CommonStatsFlag");
+				writer.Write(".Indexing");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Mappings:
-				writer.Write("CommonStatsFlag.Mappings");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CommonStatsFlag");
+				writer.Write(".Mappings");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Merge:
-				writer.Write("CommonStatsFlag.Merge");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CommonStatsFlag");
+				writer.Write(".Merge");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.QueryCache:
-				writer.Write("CommonStatsFlag.QueryCache");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CommonStatsFlag");
+				writer.Write(".QueryCache");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Recovery:
-				writer.Write("CommonStatsFlag.Recovery");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CommonStatsFlag");
+				writer.Write(".Recovery");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Refresh:
-				writer.Write("CommonStatsFlag.Refresh");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CommonStatsFlag");
+				writer.Write(".Refresh");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.RequestCache:
-				writer.Write("CommonStatsFlag.RequestCache");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CommonStatsFlag");
+				writer.Write(".RequestCache");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Search:
-				writer.Write("CommonStatsFlag.Search");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CommonStatsFlag");
+				writer.Write(".Search");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Segments:
-				writer.Write("CommonStatsFlag.Segments");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CommonStatsFlag");
+				writer.Write(".Segments");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.ShardStats:
-				writer.Write("CommonStatsFlag.ShardStats");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CommonStatsFlag");
+				writer.Write(".ShardStats");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.SparseVector:
-				writer.Write("CommonStatsFlag.SparseVector");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CommonStatsFlag");
+				writer.Write(".SparseVector");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Store:
-				writer.Write("CommonStatsFlag.Store");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CommonStatsFlag");
+				writer.Write(".Store");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Translog:
-				writer.Write("CommonStatsFlag.Translog");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CommonStatsFlag");
+				writer.Write(".Translog");
 				break;
 			case Elastic.Clients.Elasticsearch.CommonStatsFlag.Warmer:
-				writer.Write("CommonStatsFlag.Warmer");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CommonStatsFlag");
+				writer.Write(".Warmer");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected CommonStatsFlag value.");

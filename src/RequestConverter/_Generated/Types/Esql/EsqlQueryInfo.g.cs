@@ -27,7 +27,7 @@ public partial class EsqlQueryInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("EsqlQueryInfo", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Esql.EsqlQueryInfo", false);
 		{
 			initializer.Property("Id");
 			writer.WriteValue(Id);

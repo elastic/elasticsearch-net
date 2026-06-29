@@ -30,34 +30,44 @@ public static class FieldValueFactorModifierCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Ln:
-				writer.Write("FieldValueFactorModifier.Ln");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier");
+				writer.Write(".Ln");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Ln1p:
-				writer.Write("FieldValueFactorModifier.Ln1p");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier");
+				writer.Write(".Ln1p");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Ln2p:
-				writer.Write("FieldValueFactorModifier.Ln2p");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier");
+				writer.Write(".Ln2p");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Log:
-				writer.Write("FieldValueFactorModifier.Log");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier");
+				writer.Write(".Log");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Log1p:
-				writer.Write("FieldValueFactorModifier.Log1p");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier");
+				writer.Write(".Log1p");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Log2p:
-				writer.Write("FieldValueFactorModifier.Log2p");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier");
+				writer.Write(".Log2p");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.None:
-				writer.Write("FieldValueFactorModifier.None");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier");
+				writer.Write(".None");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Reciprocal:
-				writer.Write("FieldValueFactorModifier.Reciprocal");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier");
+				writer.Write(".Reciprocal");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Sqrt:
-				writer.Write("FieldValueFactorModifier.Sqrt");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier");
+				writer.Write(".Sqrt");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.Square:
-				writer.Write("FieldValueFactorModifier.Square");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier");
+				writer.Write(".Square");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected FieldValueFactorModifier value.");

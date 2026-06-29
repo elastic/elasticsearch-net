@@ -27,7 +27,7 @@ public partial class PromoteDataStreamRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PromoteDataStreamRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

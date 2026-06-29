@@ -27,7 +27,7 @@ public partial class MappingCharFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MappingCharFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.MappingCharFilter", true);
 		if (Mappings is not null)
 		{
 			initializer.Property("Mappings");

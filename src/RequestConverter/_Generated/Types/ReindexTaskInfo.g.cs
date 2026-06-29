@@ -27,7 +27,7 @@ public partial class ReindexTaskInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ReindexTaskInfo", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ReindexTaskInfo", false);
 		{
 			initializer.Property("Cancelled");
 			writer.WriteValue(Cancelled);

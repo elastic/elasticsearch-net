@@ -27,7 +27,7 @@ public partial class ListRulesetsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ListRulesetsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest", false);
 		if (From is not null)
 		{
 			initializer.Property("From");

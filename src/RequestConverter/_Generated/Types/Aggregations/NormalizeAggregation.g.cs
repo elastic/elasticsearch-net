@@ -27,7 +27,7 @@ public partial class NormalizeAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NormalizeAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregation", false);
 		if (BucketsPath is not null)
 		{
 			initializer.Property("BucketsPath");

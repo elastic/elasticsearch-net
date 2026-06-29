@@ -27,7 +27,7 @@ public partial class CacheQueries : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CacheQueries", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries", false);
 		{
 			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);

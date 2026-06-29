@@ -27,7 +27,7 @@ public partial class VerifyIndex : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("VerifyIndex", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.VerifyIndex", false);
 		if (CheckIndexTime is not null)
 		{
 			initializer.Property("CheckIndexTime");

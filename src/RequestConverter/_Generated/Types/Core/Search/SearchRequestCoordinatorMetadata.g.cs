@@ -27,7 +27,7 @@ public partial class SearchRequestCoordinatorMetadata : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SearchRequestCoordinatorMetadata", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.SearchRequestCoordinatorMetadata", false);
 		if (Indices is not null)
 		{
 			initializer.Property("Indices");

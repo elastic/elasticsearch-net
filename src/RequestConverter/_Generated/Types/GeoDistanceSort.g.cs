@@ -27,7 +27,7 @@ public partial class GeoDistanceSort : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GeoDistanceSort", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.GeoDistanceSort", false);
 		if (DistanceType is not null)
 		{
 			initializer.Property("DistanceType");

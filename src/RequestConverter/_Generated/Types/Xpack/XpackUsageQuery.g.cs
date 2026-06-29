@@ -27,7 +27,7 @@ public partial class XpackUsageQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("XpackUsageQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.XpackUsageQuery", false);
 		if (Count is not null)
 		{
 			initializer.Property("Count");

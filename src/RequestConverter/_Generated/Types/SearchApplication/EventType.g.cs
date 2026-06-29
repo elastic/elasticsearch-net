@@ -30,13 +30,16 @@ public static class EventTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.SearchApplication.EventType.PageView:
-				writer.Write("EventType.PageView");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SearchApplication.EventType");
+				writer.Write(".PageView");
 				break;
 			case Elastic.Clients.Elasticsearch.SearchApplication.EventType.Search:
-				writer.Write("EventType.Search");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SearchApplication.EventType");
+				writer.Write(".Search");
 				break;
 			case Elastic.Clients.Elasticsearch.SearchApplication.EventType.SearchClick:
-				writer.Write("EventType.SearchClick");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SearchApplication.EventType");
+				writer.Write(".SearchClick");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected EventType value.");

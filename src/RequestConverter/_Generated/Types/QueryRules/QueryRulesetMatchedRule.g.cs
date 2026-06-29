@@ -27,7 +27,7 @@ public partial class QueryRulesetMatchedRule : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("QueryRulesetMatchedRule", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryRules.QueryRulesetMatchedRule", false);
 		{
 			initializer.Property("RuleId");
 			writer.WriteString(RuleId);

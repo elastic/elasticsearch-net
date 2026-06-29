@@ -27,7 +27,7 @@ public partial class IndexRoutingAllocationInitialRecovery : RequestConverter.IC
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndexRoutingAllocationInitialRecovery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery", false);
 		if (Id is not null)
 		{
 			initializer.Property("Id");

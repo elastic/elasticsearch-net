@@ -27,7 +27,7 @@ public partial class MlInferenceDeploymentsTimeMs : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MlInferenceDeploymentsTimeMs", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.MlInferenceDeploymentsTimeMs", false);
 		{
 			initializer.Property("Avg");
 			writer.WriteValue(Avg);

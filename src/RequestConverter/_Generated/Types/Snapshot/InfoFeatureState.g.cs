@@ -27,7 +27,7 @@ public partial class InfoFeatureState : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("InfoFeatureState", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.InfoFeatureState", false);
 		{
 			initializer.Property("FeatureName");
 			writer.WriteString(FeatureName);

@@ -27,7 +27,7 @@ public partial class MappingLimitSettingsDimensionFields : RequestConverter.ICod
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MappingLimitSettingsDimensionFields", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFields", false);
 		if (Limit is not null)
 		{
 			initializer.Property("Limit");

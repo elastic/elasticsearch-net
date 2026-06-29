@@ -27,7 +27,7 @@ public partial class CombinedFieldsQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CombinedFieldsQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery", false);
 		if (AutoGenerateSynonymsPhraseQuery is not null)
 		{
 			initializer.Property("AutoGenerateSynonymsPhraseQuery");

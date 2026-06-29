@@ -27,7 +27,7 @@ public partial class RelocationFailureInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RelocationFailureInfo", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.RelocationFailureInfo", false);
 		{
 			initializer.Property("FailedAttempts");
 			writer.WriteValue(FailedAttempts);

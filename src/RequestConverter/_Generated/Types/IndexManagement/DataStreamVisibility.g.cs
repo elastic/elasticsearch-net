@@ -27,7 +27,7 @@ public partial class DataStreamVisibility : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataStreamVisibility", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility", false);
 		if (AllowCustomRouting is not null)
 		{
 			initializer.Property("AllowCustomRouting");

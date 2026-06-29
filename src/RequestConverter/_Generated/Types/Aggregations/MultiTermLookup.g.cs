@@ -27,7 +27,7 @@ public partial class MultiTermLookup : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MultiTermLookup", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup", false);
 		if (Missing is not null)
 		{
 			initializer.Property("Missing");

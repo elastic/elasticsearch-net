@@ -27,7 +27,7 @@ public partial class PauseFollowRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PauseFollowRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest", false);
 		{
 			initializer.Property("Index");
 			Index.FormatCode(writer);

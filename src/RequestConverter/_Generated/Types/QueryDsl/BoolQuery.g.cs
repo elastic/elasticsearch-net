@@ -27,7 +27,7 @@ public partial class BoolQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("BoolQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery", false);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

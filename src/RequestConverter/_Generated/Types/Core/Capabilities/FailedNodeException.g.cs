@@ -27,7 +27,7 @@ public partial class FailedNodeException : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FailedNodeException", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Capabilities.FailedNodeException", false);
 		{
 			initializer.Property("NodeId");
 			writer.WriteString(NodeId);

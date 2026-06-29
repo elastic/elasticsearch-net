@@ -30,13 +30,16 @@ public static class TokenizationTruncateCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate.First:
-				writer.Write("TokenizationTruncate.First");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate");
+				writer.Write(".First");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate.None:
-				writer.Write("TokenizationTruncate.None");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate");
+				writer.Write(".None");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate.Second:
-				writer.Write("TokenizationTruncate.Second");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate");
+				writer.Write(".Second");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TokenizationTruncate value.");

@@ -27,7 +27,7 @@ public partial class PhraseSuggestCollateQuery : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PhraseSuggestCollateQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery", false);
 		if (Id is not null)
 		{
 			initializer.Property("Id");

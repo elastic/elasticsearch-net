@@ -27,7 +27,7 @@ public partial class CgroupCpuStat : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CgroupCpuStat", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.CgroupCpuStat", false);
 		if (NumberOfElapsedPeriods is not null)
 		{
 			initializer.Property("NumberOfElapsedPeriods");

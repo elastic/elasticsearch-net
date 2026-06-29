@@ -27,7 +27,7 @@ public partial class NodeInfoSettingsTransportFeatures : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeInfoSettingsTransportFeatures", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransportFeatures", false);
 		{
 			initializer.Property("XPack");
 			writer.WriteString(XPack);

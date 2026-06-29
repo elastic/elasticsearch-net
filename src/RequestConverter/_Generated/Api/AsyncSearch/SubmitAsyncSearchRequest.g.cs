@@ -27,7 +27,7 @@ public partial class SubmitAsyncSearchRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SubmitAsyncSearchRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest", false);
 		if (Indices is not null)
 		{
 			initializer.Property("Indices");
@@ -213,10 +213,12 @@ public partial class SubmitAsyncSearchRequest : RequestConverter.ICodeFormattabl
 		if (Aggregations is not null)
 		{
 			initializer.Property("Aggregations");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Aggregations.Aggregation");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.Aggregation");
 			writer.Write(">()");
 			writer.WriteBlockList(Aggregations, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
@@ -242,10 +244,12 @@ public partial class SubmitAsyncSearchRequest : RequestConverter.ICodeFormattabl
 		if (Ext is not null)
 		{
 			initializer.Property("Ext");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("object");
+			writer.WriteTypeRef("object");
 			writer.Write(">()");
 			writer.WriteBlockList(Ext, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
 		}
@@ -326,10 +330,12 @@ public partial class SubmitAsyncSearchRequest : RequestConverter.ICodeFormattabl
 		if (RuntimeMappings is not null)
 		{
 			initializer.Property("RuntimeMappings");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("Elastic.Clients.Elasticsearch.Field");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Field");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Mapping.RuntimeField");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.RuntimeField");
 			writer.Write(">()");
 			writer.WriteBlockList(RuntimeMappings, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
@@ -337,10 +343,12 @@ public partial class SubmitAsyncSearchRequest : RequestConverter.ICodeFormattabl
 		if (ScriptFields is not null)
 		{
 			initializer.Property("ScriptFields");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.ScriptField");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ScriptField");
 			writer.Write(">()");
 			writer.WriteBlockList(ScriptFields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

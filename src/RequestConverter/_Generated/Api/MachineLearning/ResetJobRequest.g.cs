@@ -27,7 +27,7 @@ public partial class ResetJobRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ResetJobRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequest", false);
 		{
 			initializer.Property("JobId");
 			JobId.FormatCode(writer);

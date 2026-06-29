@@ -27,7 +27,7 @@ public partial class PauseAutoFollowPatternRequest : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PauseAutoFollowPatternRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

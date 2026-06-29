@@ -27,7 +27,7 @@ public partial class TermVector : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TermVector", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.TermVectors.TermVector", false);
 		if (FieldStatistics is not null)
 		{
 			initializer.Property("FieldStatistics");
@@ -36,10 +36,12 @@ public partial class TermVector : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("Terms");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Core.TermVectors.Term");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.TermVectors.Term");
 			writer.Write(">()");
 			writer.WriteBlockList(Terms, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

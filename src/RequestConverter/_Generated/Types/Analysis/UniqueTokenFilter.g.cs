@@ -27,7 +27,7 @@ public partial class UniqueTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("UniqueTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter", true);
 		if (OnlyOnSamePosition is not null)
 		{
 			initializer.Property("OnlyOnSamePosition");

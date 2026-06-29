@@ -27,7 +27,7 @@ public partial class Influence : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Influence", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.Influence", false);
 		{
 			initializer.Property("InfluencerFieldName");
 			writer.WriteString(InfluencerFieldName);

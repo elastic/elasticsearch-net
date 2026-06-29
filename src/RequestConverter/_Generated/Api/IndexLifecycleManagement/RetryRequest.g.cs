@@ -27,7 +27,7 @@ public partial class RetryRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RetryRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest", false);
 		{
 			initializer.Property("Index");
 			Index.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class PatternReplaceCharFilter : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PatternReplaceCharFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter", true);
 		if (Flags is not null)
 		{
 			initializer.Property("Flags");

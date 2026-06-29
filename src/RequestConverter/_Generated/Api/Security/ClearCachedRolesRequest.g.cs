@@ -27,7 +27,7 @@ public partial class ClearCachedRolesRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ClearCachedRolesRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

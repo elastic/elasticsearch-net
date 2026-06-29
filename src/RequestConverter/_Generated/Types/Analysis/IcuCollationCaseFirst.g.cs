@@ -30,10 +30,12 @@ public static class IcuCollationCaseFirstCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst.Lower:
-				writer.Write("IcuCollationCaseFirst.Lower");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst");
+				writer.Write(".Lower");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst.Upper:
-				writer.Write("IcuCollationCaseFirst.Upper");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst");
+				writer.Write(".Upper");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IcuCollationCaseFirst value.");

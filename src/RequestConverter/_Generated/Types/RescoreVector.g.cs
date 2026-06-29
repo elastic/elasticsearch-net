@@ -27,7 +27,7 @@ public partial class RescoreVector : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RescoreVector", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.RescoreVector", false);
 		{
 			initializer.Property("Oversample");
 			writer.WriteValue(Oversample);

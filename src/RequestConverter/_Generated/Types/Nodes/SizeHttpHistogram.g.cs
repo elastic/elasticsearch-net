@@ -27,7 +27,7 @@ public partial class SizeHttpHistogram : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SizeHttpHistogram", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.SizeHttpHistogram", false);
 		{
 			initializer.Property("Count");
 			writer.WriteValue(Count);

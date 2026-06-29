@@ -27,7 +27,7 @@ public partial class IndexVersioning : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndexVersioning", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning", false);
 		if (Created is not null)
 		{
 			initializer.Property("Created");

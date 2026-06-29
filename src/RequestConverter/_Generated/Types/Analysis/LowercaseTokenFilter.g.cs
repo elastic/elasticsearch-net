@@ -27,7 +27,7 @@ public partial class LowercaseTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("LowercaseTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilter", true);
 		if (Language is not null)
 		{
 			initializer.Property("Language");

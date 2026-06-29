@@ -30,13 +30,16 @@ public static class JinaAIElementTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.JinaAIElementType.Binary:
-				writer.Write("JinaAIElementType.Binary");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.JinaAIElementType");
+				writer.Write(".Binary");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.JinaAIElementType.Bit:
-				writer.Write("JinaAIElementType.Bit");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.JinaAIElementType");
+				writer.Write(".Bit");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.JinaAIElementType.Float:
-				writer.Write("JinaAIElementType.Float");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.JinaAIElementType");
+				writer.Write(".Float");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected JinaAIElementType value.");

@@ -27,7 +27,7 @@ public partial class DataStreamMappings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataStreamMappings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DataStreamMappings", false);
 		{
 			initializer.Property("EffectiveMappings");
 			EffectiveMappings.FormatCode(writer);

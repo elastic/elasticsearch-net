@@ -27,7 +27,7 @@ public partial class ExtendedStatsBucketAggregation : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ExtendedStatsBucketAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregation", false);
 		if (BucketsPath is not null)
 		{
 			initializer.Property("BucketsPath");

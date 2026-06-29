@@ -27,7 +27,7 @@ public partial class NodeInfoSettingsTransportType : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeInfoSettingsTransportType", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransportType", false);
 		{
 			initializer.Property("Default");
 			writer.WriteString(Default);

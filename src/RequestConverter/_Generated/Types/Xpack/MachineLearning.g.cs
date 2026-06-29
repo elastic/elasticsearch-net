@@ -27,7 +27,7 @@ public partial class MachineLearning : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MachineLearning", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.MachineLearning", false);
 		{
 			initializer.Property("Available");
 			writer.WriteValue(Available);
@@ -35,10 +35,12 @@ public partial class MachineLearning : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("Datafeeds");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Xpack.Datafeed");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Xpack.Datafeed");
 			writer.Write(">()");
 			writer.WriteBlockList(Datafeeds, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
@@ -60,10 +62,12 @@ public partial class MachineLearning : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("Jobs");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Xpack.JobUsage");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Xpack.JobUsage");
 			writer.Write(">()");
 			writer.WriteBlockList(Jobs, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

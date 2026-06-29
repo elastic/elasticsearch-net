@@ -30,28 +30,36 @@ public static class DecisionCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Cluster.Decision.AllocationDelayed:
-				writer.Write("Decision.AllocationDelayed");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.Decision");
+				writer.Write(".AllocationDelayed");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.Decision.AwaitingInfo:
-				writer.Write("Decision.AwaitingInfo");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.Decision");
+				writer.Write(".AwaitingInfo");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.Decision.No:
-				writer.Write("Decision.No");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.Decision");
+				writer.Write(".No");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.Decision.NoAttempt:
-				writer.Write("Decision.NoAttempt");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.Decision");
+				writer.Write(".NoAttempt");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.Decision.NoValidShardCopy:
-				writer.Write("Decision.NoValidShardCopy");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.Decision");
+				writer.Write(".NoValidShardCopy");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.Decision.Throttled:
-				writer.Write("Decision.Throttled");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.Decision");
+				writer.Write(".Throttled");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.Decision.WorseBalance:
-				writer.Write("Decision.WorseBalance");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.Decision");
+				writer.Write(".WorseBalance");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.Decision.Yes:
-				writer.Write("Decision.Yes");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.Decision");
+				writer.Write(".Yes");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected Decision value.");

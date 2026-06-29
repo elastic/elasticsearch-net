@@ -30,13 +30,16 @@ public static class OpenShiftAiSimilarityTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.OpenShiftAiSimilarityType.Cosine:
-				writer.Write("OpenShiftAiSimilarityType.Cosine");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.OpenShiftAiSimilarityType");
+				writer.Write(".Cosine");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.OpenShiftAiSimilarityType.DotProduct:
-				writer.Write("OpenShiftAiSimilarityType.DotProduct");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.OpenShiftAiSimilarityType");
+				writer.Write(".DotProduct");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.OpenShiftAiSimilarityType.L2Norm:
-				writer.Write("OpenShiftAiSimilarityType.L2Norm");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.OpenShiftAiSimilarityType");
+				writer.Write(".L2Norm");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected OpenShiftAiSimilarityType value.");

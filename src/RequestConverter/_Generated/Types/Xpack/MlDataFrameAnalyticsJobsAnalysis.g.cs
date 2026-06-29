@@ -27,7 +27,7 @@ public partial class MlDataFrameAnalyticsJobsAnalysis : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MlDataFrameAnalyticsJobsAnalysis", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsAnalysis", false);
 		if (Classification is not null)
 		{
 			initializer.Property("Classification");

@@ -27,7 +27,7 @@ public partial class IcuTransformTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IcuTransformTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter", true);
 		if (Dir is not null)
 		{
 			initializer.Property("Dir");

@@ -27,7 +27,7 @@ public partial class ResolveIndexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ResolveIndexRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class NodeInfoXpackLicense : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeInfoXpackLicense", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackLicense", false);
 		{
 			initializer.Property("SelfGenerated");
 			SelfGenerated.FormatCode(writer);

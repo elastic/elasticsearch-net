@@ -27,7 +27,7 @@ public partial class RerouteProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RerouteProcessor", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor", false);
 		if (Dataset is not null)
 		{
 			initializer.Property("Dataset");

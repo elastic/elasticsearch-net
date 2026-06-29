@@ -27,7 +27,7 @@ public partial class BucketScriptAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("BucketScriptAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregation", false);
 		if (BucketsPath is not null)
 		{
 			initializer.Property("BucketsPath");

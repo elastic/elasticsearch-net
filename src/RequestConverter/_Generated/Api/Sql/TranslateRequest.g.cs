@@ -27,7 +27,7 @@ public partial class TranslateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TranslateRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Sql.TranslateRequest", false);
 		if (FetchSize is not null)
 		{
 			initializer.Property("FetchSize");

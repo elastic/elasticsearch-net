@@ -27,7 +27,7 @@ public partial class BulkError : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("BulkError", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.BulkError", false);
 		{
 			initializer.Property("Count");
 			writer.WriteValue(Count);
@@ -35,10 +35,12 @@ public partial class BulkError : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("Details");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.ErrorCause");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ErrorCause");
 			writer.Write(">()");
 			writer.WriteBlockList(Details, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

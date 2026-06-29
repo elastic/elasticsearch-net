@@ -27,7 +27,7 @@ public partial class PerPartitionCategorization : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PerPartitionCategorization", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization", false);
 		if (Enabled is not null)
 		{
 			initializer.Property("Enabled");

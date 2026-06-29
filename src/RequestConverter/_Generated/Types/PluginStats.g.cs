@@ -27,7 +27,7 @@ public partial class PluginStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PluginStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.PluginStats", false);
 		{
 			initializer.Property("Classname");
 			writer.WriteString(Classname);

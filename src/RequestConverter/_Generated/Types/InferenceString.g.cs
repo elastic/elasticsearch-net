@@ -27,7 +27,7 @@ public partial class InferenceString : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("InferenceString", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.InferenceString", false);
 		if (Format is not null)
 		{
 			initializer.Property("Format");

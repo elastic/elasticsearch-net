@@ -27,7 +27,7 @@ public partial class RollupJobStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RollupJobStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Rollup.RollupJobStats", false);
 		{
 			initializer.Property("DocumentsProcessed");
 			writer.WriteValue(DocumentsProcessed);

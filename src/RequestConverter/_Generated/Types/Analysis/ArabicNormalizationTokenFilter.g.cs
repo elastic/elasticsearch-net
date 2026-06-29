@@ -27,7 +27,7 @@ public partial class ArabicNormalizationTokenFilter : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ArabicNormalizationTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.ArabicNormalizationTokenFilter", true);
 		if (Version is not null)
 		{
 			initializer.Property("Version");

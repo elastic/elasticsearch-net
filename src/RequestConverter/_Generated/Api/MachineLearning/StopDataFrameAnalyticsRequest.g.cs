@@ -27,7 +27,7 @@ public partial class StopDataFrameAnalyticsRequest : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("StopDataFrameAnalyticsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequest", false);
 		{
 			initializer.Property("Id");
 			Id.FormatCode(writer);

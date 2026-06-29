@@ -27,7 +27,7 @@ public partial class DeleteDatafeedRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteDatafeedRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequest", false);
 		{
 			initializer.Property("DatafeedId");
 			DatafeedId.FormatCode(writer);

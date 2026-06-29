@@ -27,7 +27,7 @@ public partial class MlInferenceDeployments : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MlInferenceDeployments", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.MlInferenceDeployments", false);
 		{
 			initializer.Property("Count");
 			writer.WriteValue(Count);

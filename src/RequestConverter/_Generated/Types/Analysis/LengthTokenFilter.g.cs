@@ -27,7 +27,7 @@ public partial class LengthTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("LengthTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter", true);
 		if (Max is not null)
 		{
 			initializer.Property("Max");

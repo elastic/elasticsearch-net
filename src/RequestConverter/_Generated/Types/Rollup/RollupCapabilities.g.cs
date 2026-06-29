@@ -27,7 +27,7 @@ public partial class RollupCapabilities : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RollupCapabilities", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Rollup.RollupCapabilities", false);
 		{
 			initializer.Property("RollupJobs");
 			writer.WriteInlineList(RollupJobs, (w, item) => { item.FormatCode(w); });

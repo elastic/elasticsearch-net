@@ -27,7 +27,7 @@ public partial class TermQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TermQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.TermQuery", false);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

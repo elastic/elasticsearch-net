@@ -27,7 +27,7 @@ public partial class RuntimeFieldTypes : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RuntimeFieldTypes", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.RuntimeFieldTypes", false);
 		{
 			initializer.Property("Available");
 			writer.WriteValue(Available);

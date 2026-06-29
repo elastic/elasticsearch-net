@@ -27,7 +27,7 @@ public partial class DataStreamLifecycleExplain : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataStreamLifecycleExplain", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleExplain", false);
 		if (Error is not null)
 		{
 			initializer.Property("Error");

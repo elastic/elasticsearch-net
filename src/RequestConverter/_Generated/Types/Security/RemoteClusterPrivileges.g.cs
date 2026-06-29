@@ -27,7 +27,7 @@ public partial class RemoteClusterPrivileges : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RemoteClusterPrivileges", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges", false);
 		{
 			initializer.Property("Clusters");
 			Clusters.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class SparseVectorQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SparseVectorQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery", false);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");
@@ -73,10 +73,12 @@ public partial class SparseVectorQuery : RequestConverter.ICodeFormattable
 		if (QueryVector is not null)
 		{
 			initializer.Property("QueryVector");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("float");
+			writer.WriteTypeRef("float");
 			writer.Write(">()");
 			writer.WriteBlockList(QueryVector, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("f"); w.Write(" }"); });
 		}

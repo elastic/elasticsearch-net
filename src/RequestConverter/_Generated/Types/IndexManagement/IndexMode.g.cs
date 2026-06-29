@@ -30,16 +30,20 @@ public static class IndexModeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexMode.Logsdb:
-				writer.Write("IndexMode.Logsdb");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.IndexMode");
+				writer.Write(".Logsdb");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexMode.Lookup:
-				writer.Write("IndexMode.Lookup");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.IndexMode");
+				writer.Write(".Lookup");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexMode.Standard:
-				writer.Write("IndexMode.Standard");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.IndexMode");
+				writer.Write(".Standard");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexMode.TimeSeries:
-				writer.Write("IndexMode.TimeSeries");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.IndexMode");
+				writer.Write(".TimeSeries");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IndexMode value.");

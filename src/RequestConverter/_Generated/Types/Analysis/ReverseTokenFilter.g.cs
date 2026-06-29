@@ -27,7 +27,7 @@ public partial class ReverseTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ReverseTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilter", true);
 		if (Version is not null)
 		{
 			initializer.Property("Version");

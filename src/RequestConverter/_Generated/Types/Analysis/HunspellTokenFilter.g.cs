@@ -27,7 +27,7 @@ public partial class HunspellTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("HunspellTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter", true);
 		if (Dedup is not null)
 		{
 			initializer.Property("Dedup");

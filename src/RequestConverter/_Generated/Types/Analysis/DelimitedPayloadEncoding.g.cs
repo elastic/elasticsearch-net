@@ -30,13 +30,16 @@ public static class DelimitedPayloadEncodingCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding.Float:
-				writer.Write("DelimitedPayloadEncoding.Float");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding");
+				writer.Write(".Float");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding.Identity:
-				writer.Write("DelimitedPayloadEncoding.Identity");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding");
+				writer.Write(".Identity");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding.Integer:
-				writer.Write("DelimitedPayloadEncoding.Integer");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding");
+				writer.Write(".Integer");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected DelimitedPayloadEncoding value.");

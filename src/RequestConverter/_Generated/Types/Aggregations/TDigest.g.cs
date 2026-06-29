@@ -27,7 +27,7 @@ public partial class TDigest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TDigest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.TDigest", false);
 		if (Compression is not null)
 		{
 			initializer.Property("Compression");

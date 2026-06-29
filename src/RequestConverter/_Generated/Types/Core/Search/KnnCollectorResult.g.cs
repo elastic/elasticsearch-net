@@ -27,7 +27,7 @@ public partial class KnnCollectorResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("KnnCollectorResult", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.KnnCollectorResult", false);
 		if (Children is not null)
 		{
 			initializer.Property("Children");

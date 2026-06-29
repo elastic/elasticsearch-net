@@ -27,7 +27,7 @@ public partial class ExtendedStatsAggregation : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ExtendedStatsAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation", false);
 		if (Field is not null)
 		{
 			initializer.Property("Field");

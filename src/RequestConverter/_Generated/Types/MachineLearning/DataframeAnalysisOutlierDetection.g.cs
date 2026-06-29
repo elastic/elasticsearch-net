@@ -27,7 +27,7 @@ public partial class DataframeAnalysisOutlierDetection : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframeAnalysisOutlierDetection", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection", false);
 		if (ComputeFeatureInfluence is not null)
 		{
 			initializer.Property("ComputeFeatureInfluence");

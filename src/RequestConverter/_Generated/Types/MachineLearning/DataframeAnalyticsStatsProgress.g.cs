@@ -27,7 +27,7 @@ public partial class DataframeAnalyticsStatsProgress : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframeAnalyticsStatsProgress", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsProgress", false);
 		{
 			initializer.Property("Phase");
 			writer.WriteString(Phase);

@@ -27,7 +27,7 @@ public partial class GetCalendarsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetCalendarsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest", false);
 		if (CalendarId is not null)
 		{
 			initializer.Property("CalendarId");

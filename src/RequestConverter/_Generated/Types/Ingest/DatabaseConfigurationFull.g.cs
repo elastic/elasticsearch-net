@@ -27,7 +27,7 @@ public partial class DatabaseConfigurationFull : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DatabaseConfigurationFull", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationFull", false);
 		{
 			initializer.Property("Name");
 			writer.WriteString(Name);

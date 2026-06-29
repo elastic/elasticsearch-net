@@ -27,7 +27,7 @@ public partial class CustomServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CustomServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.CustomServiceSettings", false);
 		if (BatchSize is not null)
 		{
 			initializer.Property("BatchSize");
@@ -37,10 +37,12 @@ public partial class CustomServiceSettings : RequestConverter.ICodeFormattable
 		if (Headers is not null)
 		{
 			initializer.Property("Headers");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("string");
+			writer.WriteTypeRef("string");
 			writer.Write(">()");
 			writer.WriteBlockList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
 		}
@@ -48,10 +50,12 @@ public partial class CustomServiceSettings : RequestConverter.ICodeFormattable
 		if (InputType is not null)
 		{
 			initializer.Property("InputType");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("Elastic.Clients.Elasticsearch.Inference.CustomServiceInputType");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.CustomServiceInputType");
 			writer.Write(", ");
-			writer.Write("string");
+			writer.WriteTypeRef("string");
 			writer.Write(">()");
 			writer.WriteBlockList(InputType, (w, kvp) => { w.Write("{ "); Elastic.Clients.Elasticsearch.Inference.CustomServiceInputTypeCodeFormatter.FormatCode(kvp.Key, w); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
 		}
@@ -74,10 +78,12 @@ public partial class CustomServiceSettings : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("SecretParameters");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("string");
+			writer.WriteTypeRef("string");
 			writer.Write(">()");
 			writer.WriteBlockList(SecretParameters, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
 		}

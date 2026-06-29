@@ -27,7 +27,7 @@ public partial class BucketCorrelationAggregation : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("BucketCorrelationAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation", false);
 		if (BucketsPath is not null)
 		{
 			initializer.Property("BucketsPath");

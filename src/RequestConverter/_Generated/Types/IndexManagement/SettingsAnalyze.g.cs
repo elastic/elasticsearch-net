@@ -27,7 +27,7 @@ public partial class SettingsAnalyze : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SettingsAnalyze", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze", false);
 		if (MaxTokenCount is not null)
 		{
 			initializer.Property("MaxTokenCount");

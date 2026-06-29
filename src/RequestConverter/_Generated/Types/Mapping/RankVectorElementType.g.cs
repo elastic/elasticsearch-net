@@ -30,13 +30,16 @@ public static class RankVectorElementTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.RankVectorElementType.Bit:
-				writer.Write("RankVectorElementType.Bit");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.RankVectorElementType");
+				writer.Write(".Bit");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.RankVectorElementType.Byte:
-				writer.Write("RankVectorElementType.Byte");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.RankVectorElementType");
+				writer.Write(".Byte");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.RankVectorElementType.Float:
-				writer.Write("RankVectorElementType.Float");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.RankVectorElementType");
+				writer.Write(".Float");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected RankVectorElementType value.");

@@ -27,7 +27,7 @@ public partial class TransformProgress : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TransformProgress", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.TransformProgress", false);
 		{
 			initializer.Property("DocsIndexed");
 			writer.WriteValue(DocsIndexed);

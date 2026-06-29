@@ -27,7 +27,7 @@ public partial class RecoveryRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RecoveryRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest", false);
 		if (Indices is not null)
 		{
 			initializer.Property("Indices");

@@ -30,10 +30,12 @@ public static class ZeroTermsQueryCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery.All:
-				writer.Write("ZeroTermsQuery.All");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery");
+				writer.Write(".All");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery.None:
-				writer.Write("ZeroTermsQuery.None");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery");
+				writer.Write(".None");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ZeroTermsQuery value.");

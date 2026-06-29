@@ -27,7 +27,7 @@ public partial class CCSUsageTimeValue : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CCSUsageTimeValue", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.CCSUsageTimeValue", false);
 		{
 			initializer.Property("Avg");
 			writer.WriteValue(Avg);

@@ -30,13 +30,16 @@ public static class TTestTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Aggregations.TTestType.Heteroscedastic:
-				writer.Write("TTestType.Heteroscedastic");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.TTestType");
+				writer.Write(".Heteroscedastic");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.TTestType.Homoscedastic:
-				writer.Write("TTestType.Homoscedastic");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.TTestType");
+				writer.Write(".Homoscedastic");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.TTestType.Paired:
-				writer.Write("TTestType.Paired");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.TTestType");
+				writer.Write(".Paired");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TTestType value.");

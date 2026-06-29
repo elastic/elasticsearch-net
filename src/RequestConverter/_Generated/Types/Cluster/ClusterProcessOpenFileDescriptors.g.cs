@@ -27,7 +27,7 @@ public partial class ClusterProcessOpenFileDescriptors : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ClusterProcessOpenFileDescriptors", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.ClusterProcessOpenFileDescriptors", false);
 		{
 			initializer.Property("Avg");
 			writer.WriteValue(Avg);

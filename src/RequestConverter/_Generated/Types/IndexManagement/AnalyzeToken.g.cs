@@ -27,7 +27,7 @@ public partial class AnalyzeToken : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AnalyzeToken", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeToken", false);
 		{
 			initializer.Property("EndOffset");
 			writer.WriteValue(EndOffset);

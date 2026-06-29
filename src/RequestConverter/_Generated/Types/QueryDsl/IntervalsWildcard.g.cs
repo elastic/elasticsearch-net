@@ -27,7 +27,7 @@ public partial class IntervalsWildcard : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IntervalsWildcard", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard", false);
 		if (Analyzer is not null)
 		{
 			initializer.Property("Analyzer");

@@ -27,7 +27,7 @@ public partial class CompositeBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CompositeBucket", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.CompositeBucket", false);
 		if (Aggregations is not null)
 		{
 			initializer.Property("Aggregations");
@@ -42,10 +42,12 @@ public partial class CompositeBucket : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("Key");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.FieldValue");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.FieldValue");
 			writer.Write(">()");
 			writer.WriteBlockList(Key, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

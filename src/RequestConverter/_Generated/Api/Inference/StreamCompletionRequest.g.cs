@@ -27,7 +27,7 @@ public partial class StreamCompletionRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("StreamCompletionRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest", false);
 		{
 			initializer.Property("InferenceId");
 			InferenceId.FormatCode(writer);

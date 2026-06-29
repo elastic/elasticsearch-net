@@ -27,7 +27,7 @@ public partial class ExistsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ExistsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequest", false);
 		{
 			initializer.Property("Indices");
 			Indices.FormatCode(writer);

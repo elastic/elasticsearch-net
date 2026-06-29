@@ -30,46 +30,60 @@ public static class NodeRoleCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.NodeRole.Client:
-				writer.Write("NodeRole.Client");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.NodeRole");
+				writer.Write(".Client");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeRole.CoordinatingOnly:
-				writer.Write("NodeRole.CoordinatingOnly");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.NodeRole");
+				writer.Write(".CoordinatingOnly");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeRole.Data:
-				writer.Write("NodeRole.Data");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.NodeRole");
+				writer.Write(".Data");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeRole.DataCold:
-				writer.Write("NodeRole.DataCold");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.NodeRole");
+				writer.Write(".DataCold");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeRole.DataContent:
-				writer.Write("NodeRole.DataContent");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.NodeRole");
+				writer.Write(".DataContent");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeRole.DataFrozen:
-				writer.Write("NodeRole.DataFrozen");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.NodeRole");
+				writer.Write(".DataFrozen");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeRole.DataHot:
-				writer.Write("NodeRole.DataHot");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.NodeRole");
+				writer.Write(".DataHot");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeRole.DataWarm:
-				writer.Write("NodeRole.DataWarm");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.NodeRole");
+				writer.Write(".DataWarm");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeRole.Ingest:
-				writer.Write("NodeRole.Ingest");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.NodeRole");
+				writer.Write(".Ingest");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeRole.Master:
-				writer.Write("NodeRole.Master");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.NodeRole");
+				writer.Write(".Master");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeRole.Ml:
-				writer.Write("NodeRole.Ml");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.NodeRole");
+				writer.Write(".Ml");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeRole.RemoteClusterClient:
-				writer.Write("NodeRole.RemoteClusterClient");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.NodeRole");
+				writer.Write(".RemoteClusterClient");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeRole.Transform:
-				writer.Write("NodeRole.Transform");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.NodeRole");
+				writer.Write(".Transform");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeRole.VotingOnly:
-				writer.Write("NodeRole.VotingOnly");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.NodeRole");
+				writer.Write(".VotingOnly");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected NodeRole value.");

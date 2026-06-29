@@ -27,7 +27,7 @@ public partial class GlobalRetention : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GlobalRetention", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.GlobalRetention", false);
 		if (DefaultRetention is not null)
 		{
 			initializer.Property("DefaultRetention");

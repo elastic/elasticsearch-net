@@ -27,7 +27,7 @@ public partial class DoubleTermsBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DoubleTermsBucket", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.DoubleTermsBucket", false);
 		if (Aggregations is not null)
 		{
 			initializer.Property("Aggregations");

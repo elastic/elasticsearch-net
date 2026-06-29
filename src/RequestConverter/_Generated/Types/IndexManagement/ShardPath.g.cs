@@ -27,7 +27,7 @@ public partial class ShardPath : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ShardPath", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ShardPath", false);
 		{
 			initializer.Property("DataPath");
 			writer.WriteString(DataPath);

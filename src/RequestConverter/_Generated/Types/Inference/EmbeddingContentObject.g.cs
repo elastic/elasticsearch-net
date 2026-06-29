@@ -27,7 +27,7 @@ public partial class EmbeddingContentObject : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("EmbeddingContentObject", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObject", false);
 		{
 			initializer.Property("Content");
 			writer.WriteInlineList(Content, (w, item) => { item.FormatCode(w); });

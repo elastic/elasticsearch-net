@@ -27,7 +27,7 @@ public partial class RankEvalMetricPrecision : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RankEvalMetricPrecision", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecision", false);
 		if (IgnoreUnlabeled is not null)
 		{
 			initializer.Property("IgnoreUnlabeled");

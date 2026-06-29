@@ -27,7 +27,7 @@ public partial class CardinalityAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CardinalityAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation", false);
 		if (ExecutionHint is not null)
 		{
 			initializer.Property("ExecutionHint");

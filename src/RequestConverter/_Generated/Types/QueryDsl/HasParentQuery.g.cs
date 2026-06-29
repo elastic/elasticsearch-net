@@ -27,7 +27,7 @@ public partial class HasParentQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("HasParentQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery", false);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

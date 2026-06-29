@@ -27,7 +27,7 @@ public partial class SynonymsStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SynonymsStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.SynonymsStats", false);
 		{
 			initializer.Property("Count");
 			writer.WriteValue(Count);

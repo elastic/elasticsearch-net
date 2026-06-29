@@ -27,7 +27,7 @@ public partial class PutContextualaiRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutContextualaiRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequest", false);
 		{
 			initializer.Property("ContextualaiInferenceId");
 			ContextualaiInferenceId.FormatCode(writer);

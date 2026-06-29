@@ -27,7 +27,7 @@ public partial class JobUsage : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("JobUsage", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.JobUsage", false);
 		{
 			initializer.Property("Count");
 			writer.WriteValue(Count);
@@ -35,10 +35,12 @@ public partial class JobUsage : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("CreatedBy");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("long");
+			writer.WriteTypeRef("long");
 			writer.Write(">()");
 			writer.WriteBlockList(CreatedBy, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); });
 		}

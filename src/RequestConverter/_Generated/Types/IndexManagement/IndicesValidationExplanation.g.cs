@@ -27,7 +27,7 @@ public partial class IndicesValidationExplanation : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndicesValidationExplanation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndicesValidationExplanation", false);
 		if (Error is not null)
 		{
 			initializer.Property("Error");

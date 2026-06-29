@@ -27,7 +27,7 @@ public partial class AsyncSearchStatusRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AsyncSearchStatusRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequest", false);
 		{
 			initializer.Property("Id");
 			Id.FormatCode(writer);

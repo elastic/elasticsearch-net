@@ -27,7 +27,7 @@ public partial class DeleteModelSnapshotRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteModelSnapshotRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest", false);
 		{
 			initializer.Property("JobId");
 			JobId.FormatCode(writer);

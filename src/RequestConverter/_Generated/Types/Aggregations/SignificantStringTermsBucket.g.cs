@@ -27,7 +27,7 @@ public partial class SignificantStringTermsBucket : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SignificantStringTermsBucket", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.SignificantStringTermsBucket", false);
 		if (Aggregations is not null)
 		{
 			initializer.Property("Aggregations");

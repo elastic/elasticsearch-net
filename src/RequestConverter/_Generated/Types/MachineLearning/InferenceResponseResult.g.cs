@@ -27,7 +27,7 @@ public partial class InferenceResponseResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("InferenceResponseResult", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.InferenceResponseResult", false);
 		if (Entities is not null)
 		{
 			initializer.Property("Entities");

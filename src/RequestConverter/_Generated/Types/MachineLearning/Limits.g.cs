@@ -27,7 +27,7 @@ public partial class Limits : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Limits", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.Limits", false);
 		if (EffectiveMaxModelMemoryLimit is not null)
 		{
 			initializer.Property("EffectiveMaxModelMemoryLimit");

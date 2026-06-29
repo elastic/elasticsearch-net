@@ -27,7 +27,7 @@ public partial class BlobDetails : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("BlobDetails", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.BlobDetails", false);
 		{
 			initializer.Property("Name");
 			writer.WriteString(Name);

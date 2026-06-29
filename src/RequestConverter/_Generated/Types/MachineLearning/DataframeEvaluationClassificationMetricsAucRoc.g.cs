@@ -27,7 +27,7 @@ public partial class DataframeEvaluationClassificationMetricsAucRoc : RequestCon
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframeEvaluationClassificationMetricsAucRoc", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc", false);
 		if (ClassName is not null)
 		{
 			initializer.Property("ClassName");

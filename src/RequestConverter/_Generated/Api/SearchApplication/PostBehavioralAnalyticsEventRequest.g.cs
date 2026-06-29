@@ -27,7 +27,7 @@ public partial class PostBehavioralAnalyticsEventRequest : RequestConverter.ICod
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PostBehavioralAnalyticsEventRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest", false);
 		{
 			initializer.Property("CollectionName");
 			CollectionName.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class DataframeAnalysisAnalyzedFields : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframeAnalysisAnalyzedFields", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields", false);
 		if (Excludes is not null)
 		{
 			initializer.Property("Excludes");

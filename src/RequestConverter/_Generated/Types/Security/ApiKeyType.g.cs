@@ -30,10 +30,12 @@ public static class ApiKeyTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Security.ApiKeyType.CrossCluster:
-				writer.Write("ApiKeyType.CrossCluster");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.ApiKeyType");
+				writer.Write(".CrossCluster");
 				break;
 			case Elastic.Clients.Elasticsearch.Security.ApiKeyType.Rest:
-				writer.Write("ApiKeyType.Rest");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.ApiKeyType");
+				writer.Write(".Rest");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ApiKeyType value.");

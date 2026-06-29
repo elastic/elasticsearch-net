@@ -27,7 +27,7 @@ public partial class ContextMethod : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ContextMethod", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.GetScriptContext.ContextMethod", false);
 		{
 			initializer.Property("Name");
 			writer.WriteString(Name);

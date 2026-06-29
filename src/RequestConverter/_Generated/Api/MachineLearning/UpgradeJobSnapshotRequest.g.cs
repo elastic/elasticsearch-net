@@ -27,7 +27,7 @@ public partial class UpgradeJobSnapshotRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("UpgradeJobSnapshotRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequest", false);
 		{
 			initializer.Property("JobId");
 			JobId.FormatCode(writer);

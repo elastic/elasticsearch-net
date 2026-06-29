@@ -30,10 +30,12 @@ public static class KeepTypesModeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode.Exclude:
-				writer.Write("KeepTypesMode.Exclude");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode");
+				writer.Write(".Exclude");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode.Include:
-				writer.Write("KeepTypesMode.Include");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode");
+				writer.Write(".Include");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected KeepTypesMode value.");

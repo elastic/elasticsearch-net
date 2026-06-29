@@ -27,7 +27,7 @@ public partial class PendingTask : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PendingTask", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.PendingTask", false);
 		{
 			initializer.Property("Executing");
 			writer.WriteValue(Executing);

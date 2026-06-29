@@ -27,7 +27,7 @@ public partial class PutTrainedModelAliasRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutTrainedModelAliasRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequest", false);
 		{
 			initializer.Property("ModelAlias");
 			ModelAlias.FormatCode(writer);

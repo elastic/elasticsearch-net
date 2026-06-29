@@ -27,7 +27,7 @@ public partial class AggregationProfileDelegateDebugFilter : RequestConverter.IC
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AggregationProfileDelegateDebugFilter", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDelegateDebugFilter", false);
 		if (Query is not null)
 		{
 			initializer.Property("Query");

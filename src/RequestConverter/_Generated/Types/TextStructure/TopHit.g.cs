@@ -27,7 +27,7 @@ public partial class TopHit : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TopHit", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TextStructure.TopHit", false);
 		{
 			initializer.Property("Count");
 			writer.WriteValue(Count);

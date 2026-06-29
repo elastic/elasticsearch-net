@@ -30,19 +30,24 @@ public static class IcuCollationStrengthCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Identical:
-				writer.Write("IcuCollationStrength.Identical");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength");
+				writer.Write(".Identical");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Primary:
-				writer.Write("IcuCollationStrength.Primary");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength");
+				writer.Write(".Primary");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Quaternary:
-				writer.Write("IcuCollationStrength.Quaternary");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength");
+				writer.Write(".Quaternary");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Secondary:
-				writer.Write("IcuCollationStrength.Secondary");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength");
+				writer.Write(".Secondary");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength.Tertiary:
-				writer.Write("IcuCollationStrength.Tertiary");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength");
+				writer.Write(".Tertiary");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IcuCollationStrength value.");

@@ -27,7 +27,7 @@ public partial class ValidateDetectorRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ValidateDetectorRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest", false);
 		{
 			initializer.Property("Detector");
 			Detector.FormatCode(writer);

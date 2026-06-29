@@ -27,7 +27,7 @@ public partial class DeleteDataStreamOptionsRequest : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteDataStreamOptionsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

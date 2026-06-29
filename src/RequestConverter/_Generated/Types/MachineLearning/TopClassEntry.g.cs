@@ -27,7 +27,7 @@ public partial class TopClassEntry : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TopClassEntry", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TopClassEntry", false);
 		{
 			initializer.Property("ClassName");
 			writer.WriteString(ClassName);

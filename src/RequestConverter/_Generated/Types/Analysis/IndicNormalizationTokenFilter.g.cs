@@ -27,7 +27,7 @@ public partial class IndicNormalizationTokenFilter : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndicNormalizationTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.IndicNormalizationTokenFilter", true);
 		if (Version is not null)
 		{
 			initializer.Property("Version");

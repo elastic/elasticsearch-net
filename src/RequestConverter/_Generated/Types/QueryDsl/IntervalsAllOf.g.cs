@@ -27,7 +27,7 @@ public partial class IntervalsAllOf : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IntervalsAllOf", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf", false);
 		if (Filter is not null)
 		{
 			initializer.Property("Filter");

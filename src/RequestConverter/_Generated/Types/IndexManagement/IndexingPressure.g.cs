@@ -27,7 +27,7 @@ public partial class IndexingPressure : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndexingPressure", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure", false);
 		{
 			initializer.Property("Memory");
 			Memory.FormatCode(writer);

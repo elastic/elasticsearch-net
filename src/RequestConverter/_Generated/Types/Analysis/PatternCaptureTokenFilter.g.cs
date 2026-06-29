@@ -27,7 +27,7 @@ public partial class PatternCaptureTokenFilter : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PatternCaptureTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter", true);
 		{
 			initializer.Property("Patterns");
 			writer.WriteInlineList(Patterns, (w, item) => { w.WriteString(item); });

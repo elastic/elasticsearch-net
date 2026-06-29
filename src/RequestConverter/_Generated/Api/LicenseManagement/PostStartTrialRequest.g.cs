@@ -27,7 +27,7 @@ public partial class PostStartTrialRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PostStartTrialRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest", false);
 		if (Acknowledge is not null)
 		{
 			initializer.Property("Acknowledge");

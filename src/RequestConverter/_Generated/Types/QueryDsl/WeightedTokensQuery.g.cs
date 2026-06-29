@@ -27,7 +27,7 @@ public partial class WeightedTokensQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("WeightedTokensQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQuery", false);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");
@@ -54,7 +54,7 @@ public partial class WeightedTokensQuery : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("Tokens");
-			writer.WriteInlineList(Tokens, (w, item) => { w.Write("new global::System.Collections.Generic.Dictionary<"); w.Write("string"); w.Write(", "); w.Write("float"); w.Write(">()"); w.WriteBlockList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("f"); w.Write(" }"); }); });
+			writer.WriteInlineList(Tokens, (w, item) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("float"); w.Write(">()"); w.WriteBlockList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("f"); w.Write(" }"); }); });
 		}
 
 		initializer.Dispose();

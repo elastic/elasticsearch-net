@@ -27,7 +27,7 @@ public partial class ClearTrainedModelDeploymentCacheRequest : RequestConverter.
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ClearTrainedModelDeploymentCacheRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequest", false);
 		{
 			initializer.Property("ModelId");
 			ModelId.FormatCode(writer);

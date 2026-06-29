@@ -27,7 +27,7 @@ public partial class Column : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Column", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Sql.Column", false);
 		{
 			initializer.Property("Name");
 			writer.WriteString(Name);

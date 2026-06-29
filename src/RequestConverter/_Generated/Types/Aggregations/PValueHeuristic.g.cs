@@ -27,7 +27,7 @@ public partial class PValueHeuristic : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PValueHeuristic", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.PValueHeuristic", false);
 		if (BackgroundIsSuperset is not null)
 		{
 			initializer.Property("BackgroundIsSuperset");

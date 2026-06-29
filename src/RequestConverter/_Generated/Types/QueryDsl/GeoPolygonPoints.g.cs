@@ -27,7 +27,7 @@ public partial class GeoPolygonPoints : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GeoPolygonPoints", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonPoints", false);
 		{
 			initializer.Property("Points");
 			writer.WriteInlineList(Points, (w, item) => { item.FormatCode(w); });

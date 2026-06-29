@@ -30,16 +30,20 @@ public static class DenseVectorElementTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType.Bfloat16:
-				writer.Write("DenseVectorElementType.Bfloat16");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType");
+				writer.Write(".Bfloat16");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType.Bit:
-				writer.Write("DenseVectorElementType.Bit");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType");
+				writer.Write(".Bit");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType.Byte:
-				writer.Write("DenseVectorElementType.Byte");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType");
+				writer.Write(".Byte");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType.Float:
-				writer.Write("DenseVectorElementType.Float");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType");
+				writer.Write(".Float");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected DenseVectorElementType value.");

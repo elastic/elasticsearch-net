@@ -27,7 +27,7 @@ public partial class MigrateReindexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MigrateReindexRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexRequest", false);
 		{
 			initializer.Property("Reindex");
 			Reindex.FormatCode(writer);

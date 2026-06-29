@@ -27,7 +27,7 @@ public partial class Invocations : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Invocations", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.Invocations", false);
 		{
 			initializer.Property("Total");
 			writer.WriteValue(Total);

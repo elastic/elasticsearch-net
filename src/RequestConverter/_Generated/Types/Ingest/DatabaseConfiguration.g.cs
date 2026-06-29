@@ -27,7 +27,7 @@ public partial class DatabaseConfiguration : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DatabaseConfiguration", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

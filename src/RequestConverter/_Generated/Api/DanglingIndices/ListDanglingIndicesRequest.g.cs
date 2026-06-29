@@ -27,7 +27,7 @@ public partial class ListDanglingIndicesRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ListDanglingIndicesRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest", false);
 		initializer.Dispose();
 	}
 }

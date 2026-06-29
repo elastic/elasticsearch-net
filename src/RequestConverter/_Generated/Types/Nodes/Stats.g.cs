@@ -27,14 +27,16 @@ public partial class Stats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Stats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.Stats", false);
 		if (AdaptiveSelection is not null)
 		{
 			initializer.Property("AdaptiveSelection");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection");
 			writer.Write(">()");
 			writer.WriteBlockList(AdaptiveSelection, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
@@ -42,10 +44,12 @@ public partial class Stats : RequestConverter.ICodeFormattable
 		if (Attributes is not null)
 		{
 			initializer.Property("Attributes");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("string");
+			writer.WriteTypeRef("string");
 			writer.Write(">()");
 			writer.WriteBlockList(Attributes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
 		}
@@ -53,10 +57,12 @@ public partial class Stats : RequestConverter.ICodeFormattable
 		if (Breakers is not null)
 		{
 			initializer.Property("Breakers");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Nodes.Breaker");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.Breaker");
 			writer.Write(">()");
 			writer.WriteBlockList(Breakers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
@@ -148,10 +154,12 @@ public partial class Stats : RequestConverter.ICodeFormattable
 		if (ScriptCache is not null)
 		{
 			initializer.Property("ScriptCache");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>");
+			writer.WriteTypeRef("System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>");
 			writer.Write(">()");
 			writer.WriteBlockList(ScriptCache, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { item.FormatCode(w); }); w.Write(" }"); });
 		}
@@ -159,10 +167,12 @@ public partial class Stats : RequestConverter.ICodeFormattable
 		if (ThreadPool is not null)
 		{
 			initializer.Property("ThreadPool");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Nodes.ThreadCount");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.ThreadCount");
 			writer.Write(">()");
 			writer.WriteBlockList(ThreadPool, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

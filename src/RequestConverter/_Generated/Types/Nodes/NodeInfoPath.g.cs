@@ -27,7 +27,7 @@ public partial class NodeInfoPath : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeInfoPath", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeInfoPath", false);
 		if (Data is not null)
 		{
 			initializer.Property("Data");

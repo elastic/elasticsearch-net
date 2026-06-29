@@ -27,7 +27,7 @@ public partial class SnapshotStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SnapshotStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.SnapshotStats", false);
 		{
 			initializer.Property("Incremental");
 			Incremental.FormatCode(writer);

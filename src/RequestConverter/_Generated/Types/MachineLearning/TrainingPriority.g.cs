@@ -30,10 +30,12 @@ public static class TrainingPriorityCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority.Low:
-				writer.Write("TrainingPriority.Low");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority");
+				writer.Write(".Low");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority.Normal:
-				writer.Write("TrainingPriority.Normal");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority");
+				writer.Write(".Normal");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TrainingPriority value.");

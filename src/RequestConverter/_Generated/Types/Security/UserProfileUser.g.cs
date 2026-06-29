@@ -27,7 +27,7 @@ public partial class UserProfileUser : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("UserProfileUser", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.UserProfileUser", false);
 		if (Email is not null)
 		{
 			initializer.Property("Email");

@@ -30,13 +30,16 @@ public static class AmazonSageMakerSimilarityCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerSimilarity.Cosine:
-				writer.Write("AmazonSageMakerSimilarity.Cosine");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerSimilarity");
+				writer.Write(".Cosine");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerSimilarity.DotProduct:
-				writer.Write("AmazonSageMakerSimilarity.DotProduct");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerSimilarity");
+				writer.Write(".DotProduct");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerSimilarity.L2Norm:
-				writer.Write("AmazonSageMakerSimilarity.L2Norm");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerSimilarity");
+				writer.Write(".L2Norm");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected AmazonSageMakerSimilarity value.");

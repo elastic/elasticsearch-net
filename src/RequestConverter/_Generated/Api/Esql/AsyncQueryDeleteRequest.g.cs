@@ -27,7 +27,7 @@ public partial class AsyncQueryDeleteRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AsyncQueryDeleteRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteRequest", false);
 		{
 			initializer.Property("Id");
 			Id.FormatCode(writer);

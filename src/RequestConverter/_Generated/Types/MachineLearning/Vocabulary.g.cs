@@ -27,7 +27,7 @@ public partial class Vocabulary : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Vocabulary", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary", false);
 		{
 			initializer.Property("Index");
 			Index.FormatCode(writer);

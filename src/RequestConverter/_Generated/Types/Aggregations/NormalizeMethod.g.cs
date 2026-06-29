@@ -30,22 +30,28 @@ public static class NormalizeMethodCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.Mean:
-				writer.Write("NormalizeMethod.Mean");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod");
+				writer.Write(".Mean");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.PercentOfSum:
-				writer.Write("NormalizeMethod.PercentOfSum");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod");
+				writer.Write(".PercentOfSum");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.Rescale01:
-				writer.Write("NormalizeMethod.Rescale01");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod");
+				writer.Write(".Rescale01");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.Rescale0100:
-				writer.Write("NormalizeMethod.Rescale0100");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod");
+				writer.Write(".Rescale0100");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.Softmax:
-				writer.Write("NormalizeMethod.Softmax");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod");
+				writer.Write(".Softmax");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod.ZScore:
-				writer.Write("NormalizeMethod.ZScore");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod");
+				writer.Write(".ZScore");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected NormalizeMethod value.");

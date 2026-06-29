@@ -27,7 +27,7 @@ public partial class Ssl : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Ssl", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.Ssl", false);
 		{
 			initializer.Property("Http");
 			Http.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class FieldSuggester : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FieldSuggester", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester", false);
 		if (Prefix is not null)
 		{
 			initializer.Property("Prefix");

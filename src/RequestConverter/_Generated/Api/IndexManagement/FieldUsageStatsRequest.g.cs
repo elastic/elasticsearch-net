@@ -27,7 +27,7 @@ public partial class FieldUsageStatsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FieldUsageStatsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest", false);
 		{
 			initializer.Property("Indices");
 			Indices.FormatCode(writer);

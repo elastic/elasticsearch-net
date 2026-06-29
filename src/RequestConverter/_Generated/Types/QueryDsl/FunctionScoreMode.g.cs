@@ -30,22 +30,28 @@ public static class FunctionScoreModeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.Avg:
-				writer.Write("FunctionScoreMode.Avg");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode");
+				writer.Write(".Avg");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.First:
-				writer.Write("FunctionScoreMode.First");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode");
+				writer.Write(".First");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.Max:
-				writer.Write("FunctionScoreMode.Max");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode");
+				writer.Write(".Max");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.Min:
-				writer.Write("FunctionScoreMode.Min");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode");
+				writer.Write(".Min");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.Multiply:
-				writer.Write("FunctionScoreMode.Multiply");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode");
+				writer.Write(".Multiply");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.Sum:
-				writer.Write("FunctionScoreMode.Sum");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode");
+				writer.Write(".Sum");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected FunctionScoreMode value.");

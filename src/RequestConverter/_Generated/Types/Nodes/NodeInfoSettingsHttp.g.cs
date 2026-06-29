@@ -27,7 +27,7 @@ public partial class NodeInfoSettingsHttp : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeInfoSettingsHttp", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsHttp", false);
 		if (Compression is not null)
 		{
 			initializer.Property("Compression");

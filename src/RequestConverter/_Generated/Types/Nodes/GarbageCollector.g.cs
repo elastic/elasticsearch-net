@@ -27,14 +27,16 @@ public partial class GarbageCollector : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GarbageCollector", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.GarbageCollector", false);
 		if (Collectors is not null)
 		{
 			initializer.Property("Collectors");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Nodes.GarbageCollectorTotal");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.GarbageCollectorTotal");
 			writer.Write(">()");
 			writer.WriteBlockList(Collectors, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

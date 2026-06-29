@@ -30,16 +30,20 @@ public static class ConditionOperatorCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator.Gt:
-				writer.Write("ConditionOperator.Gt");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator");
+				writer.Write(".Gt");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator.Gte:
-				writer.Write("ConditionOperator.Gte");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator");
+				writer.Write(".Gte");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator.Lt:
-				writer.Write("ConditionOperator.Lt");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator");
+				writer.Write(".Lt");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator.Lte:
-				writer.Write("ConditionOperator.Lte");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator");
+				writer.Write(".Lte");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ConditionOperator value.");

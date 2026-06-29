@@ -30,13 +30,16 @@ public static class NoriDecompoundModeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode.Discard:
-				writer.Write("NoriDecompoundMode.Discard");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode");
+				writer.Write(".Discard");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode.Mixed:
-				writer.Write("NoriDecompoundMode.Mixed");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode");
+				writer.Write(".Mixed");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode.None:
-				writer.Write("NoriDecompoundMode.None");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode");
+				writer.Write(".None");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected NoriDecompoundMode value.");

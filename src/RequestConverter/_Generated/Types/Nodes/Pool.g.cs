@@ -27,7 +27,7 @@ public partial class Pool : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Pool", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.Pool", false);
 		if (MaxInBytes is not null)
 		{
 			initializer.Property("MaxInBytes");

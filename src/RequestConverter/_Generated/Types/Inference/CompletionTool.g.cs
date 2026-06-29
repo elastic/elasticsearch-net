@@ -27,7 +27,7 @@ public partial class CompletionTool : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CompletionTool", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.CompletionTool", false);
 		{
 			initializer.Property("Function");
 			Function.FormatCode(writer);

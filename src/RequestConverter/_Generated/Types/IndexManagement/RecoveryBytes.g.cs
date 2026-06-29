@@ -27,7 +27,7 @@ public partial class RecoveryBytes : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RecoveryBytes", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.RecoveryBytes", false);
 		{
 			initializer.Property("Percent");
 			Percent.FormatCode(writer);

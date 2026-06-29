@@ -30,7 +30,8 @@ public static class GroqTaskTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.GroqTaskType.ChatCompletion:
-				writer.Write("GroqTaskType.ChatCompletion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.GroqTaskType");
+				writer.Write(".ChatCompletion");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected GroqTaskType value.");

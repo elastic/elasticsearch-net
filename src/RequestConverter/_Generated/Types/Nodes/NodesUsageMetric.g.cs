@@ -30,13 +30,16 @@ public static class NodesUsageMetricCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric.All:
-				writer.Write("NodesUsageMetric.All");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric");
+				writer.Write(".All");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric.Aggregations:
-				writer.Write("NodesUsageMetric.Aggregations");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric");
+				writer.Write(".Aggregations");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric.RestActions:
-				writer.Write("NodesUsageMetric.RestActions");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric");
+				writer.Write(".RestActions");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected NodesUsageMetric value.");

@@ -27,7 +27,7 @@ public partial class PressureMemory : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PressureMemory", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.PressureMemory", false);
 		if (All is not null)
 		{
 			initializer.Property("All");

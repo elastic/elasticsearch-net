@@ -27,7 +27,7 @@ public partial class CreatedStatus : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CreatedStatus", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.CreatedStatus", false);
 		{
 			initializer.Property("Created");
 			writer.WriteValue(Created);

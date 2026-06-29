@@ -27,7 +27,7 @@ public partial class PassThroughInferenceUpdateOptions : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PassThroughInferenceUpdateOptions", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceUpdateOptions", false);
 		if (ResultsField is not null)
 		{
 			initializer.Property("ResultsField");

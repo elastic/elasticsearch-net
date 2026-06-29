@@ -27,7 +27,7 @@ public partial class Cgroup : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Cgroup", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.Cgroup", false);
 		if (Cpu is not null)
 		{
 			initializer.Property("Cpu");

@@ -27,7 +27,7 @@ public partial class FetchProfileBreakdown : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FetchProfileBreakdown", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.FetchProfileBreakdown", false);
 		if (LoadSource is not null)
 		{
 			initializer.Property("LoadSource");

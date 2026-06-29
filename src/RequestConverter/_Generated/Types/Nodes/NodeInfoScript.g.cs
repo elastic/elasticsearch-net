@@ -27,7 +27,7 @@ public partial class NodeInfoScript : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeInfoScript", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeInfoScript", false);
 		{
 			initializer.Property("AllowedTypes");
 			writer.WriteString(AllowedTypes);

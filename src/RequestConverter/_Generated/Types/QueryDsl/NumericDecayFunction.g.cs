@@ -27,7 +27,7 @@ public partial class NumericDecayFunction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NumericDecayFunction", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction", true);
 		{
 			initializer.Property("Field");
 			Field.FormatCode(writer);

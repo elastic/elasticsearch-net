@@ -30,19 +30,24 @@ public static class SortTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Cluster.SortType.Doc:
-				writer.Write("SortType.Doc");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.SortType");
+				writer.Write(".Doc");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.SortType.GeoDistance:
-				writer.Write("SortType.GeoDistance");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.SortType");
+				writer.Write(".GeoDistance");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.SortType.Score:
-				writer.Write("SortType.Score");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.SortType");
+				writer.Write(".Score");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.SortType.Script:
-				writer.Write("SortType.Script");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.SortType");
+				writer.Write(".Script");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.SortType.FieldSort:
-				writer.Write("SortType.FieldSort");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.SortType");
+				writer.Write(".FieldSort");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SortType value.");

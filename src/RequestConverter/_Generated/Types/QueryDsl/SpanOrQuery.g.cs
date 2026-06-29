@@ -27,7 +27,7 @@ public partial class SpanOrQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SpanOrQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery", false);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

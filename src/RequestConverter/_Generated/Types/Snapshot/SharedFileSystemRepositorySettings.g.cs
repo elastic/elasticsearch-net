@@ -27,7 +27,7 @@ public partial class SharedFileSystemRepositorySettings : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SharedFileSystemRepositorySettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepositorySettings", false);
 		if (ChunkSize is not null)
 		{
 			initializer.Property("ChunkSize");

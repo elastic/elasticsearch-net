@@ -27,7 +27,7 @@ public partial class RankedDocument : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RankedDocument", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.RankedDocument", false);
 		{
 			initializer.Property("Index");
 			writer.WriteValue(Index);

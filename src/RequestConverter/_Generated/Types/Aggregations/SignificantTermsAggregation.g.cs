@@ -27,7 +27,7 @@ public partial class SignificantTermsAggregation : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SignificantTermsAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregation", false);
 		if (BackgroundFilter is not null)
 		{
 			initializer.Property("BackgroundFilter");

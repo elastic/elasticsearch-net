@@ -38,7 +38,8 @@ public static class SimpleQueryStringFlagsCodeFormatter
 			if (!first)
 				writer.Write(" | ");
 			first = false;
-			writer.Write("SimpleQueryStringFlags.");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags");
+			writer.Write(".");
 			writer.Write(value.ToString());
 		}
 	}

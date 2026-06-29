@@ -30,10 +30,12 @@ public static class NvidiaInputTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.NvidiaInputType.Ingest:
-				writer.Write("NvidiaInputType.Ingest");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.NvidiaInputType");
+				writer.Write(".Ingest");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.NvidiaInputType.Search:
-				writer.Write("NvidiaInputType.Search");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.NvidiaInputType");
+				writer.Write(".Search");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected NvidiaInputType value.");

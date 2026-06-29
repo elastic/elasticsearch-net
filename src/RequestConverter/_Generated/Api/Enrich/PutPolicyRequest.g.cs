@@ -27,7 +27,7 @@ public partial class PutPolicyRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutPolicyRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

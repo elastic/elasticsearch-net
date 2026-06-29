@@ -27,7 +27,7 @@ public partial class ShardRouting : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ShardRouting", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ShardRouting", false);
 		{
 			initializer.Property("Node");
 			writer.WriteString(Node);

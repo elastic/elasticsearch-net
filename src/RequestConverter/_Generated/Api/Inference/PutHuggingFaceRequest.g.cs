@@ -27,7 +27,7 @@ public partial class PutHuggingFaceRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutHuggingFaceRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequest", false);
 		{
 			initializer.Property("HuggingfaceInferenceId");
 			HuggingfaceInferenceId.FormatCode(writer);

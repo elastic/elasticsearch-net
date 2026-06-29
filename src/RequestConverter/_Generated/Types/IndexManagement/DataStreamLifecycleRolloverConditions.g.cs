@@ -27,7 +27,7 @@ public partial class DataStreamLifecycleRolloverConditions : RequestConverter.IC
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataStreamLifecycleRolloverConditions", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleRolloverConditions", false);
 		if (MaxAge is not null)
 		{
 			initializer.Property("MaxAge");

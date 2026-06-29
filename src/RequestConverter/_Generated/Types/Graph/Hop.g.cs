@@ -27,7 +27,7 @@ public partial class Hop : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Hop", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Graph.Hop", false);
 		if (Connections is not null)
 		{
 			initializer.Property("Connections");

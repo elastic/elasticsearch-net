@@ -27,7 +27,7 @@ public partial class FileCountSnapshotStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FileCountSnapshotStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.FileCountSnapshotStats", false);
 		{
 			initializer.Property("FileCount");
 			writer.WriteValue(FileCount);

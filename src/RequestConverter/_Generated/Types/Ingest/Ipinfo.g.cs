@@ -27,7 +27,7 @@ public partial class Ipinfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Ipinfo", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.Ipinfo", false);
 		initializer.Dispose();
 	}
 }

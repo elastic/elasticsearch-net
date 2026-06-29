@@ -27,7 +27,7 @@ public partial class DetectorRead : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DetectorRead", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DetectorRead", false);
 		if (ByFieldName is not null)
 		{
 			initializer.Property("ByFieldName");

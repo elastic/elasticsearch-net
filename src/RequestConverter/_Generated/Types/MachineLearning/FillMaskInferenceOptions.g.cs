@@ -27,7 +27,7 @@ public partial class FillMaskInferenceOptions : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FillMaskInferenceOptions", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions", false);
 		if (MaskToken is not null)
 		{
 			initializer.Property("MaskToken");

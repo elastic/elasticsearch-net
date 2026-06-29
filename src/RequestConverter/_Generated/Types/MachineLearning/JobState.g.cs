@@ -30,19 +30,24 @@ public static class JobStateCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.JobState.Closed:
-				writer.Write("JobState.Closed");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.JobState");
+				writer.Write(".Closed");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.JobState.Closing:
-				writer.Write("JobState.Closing");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.JobState");
+				writer.Write(".Closing");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.JobState.Failed:
-				writer.Write("JobState.Failed");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.JobState");
+				writer.Write(".Failed");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.JobState.Opened:
-				writer.Write("JobState.Opened");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.JobState");
+				writer.Write(".Opened");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.JobState.Opening:
-				writer.Write("JobState.Opening");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.JobState");
+				writer.Write(".Opening");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected JobState value.");

@@ -27,14 +27,16 @@ public partial class WatcherWatch : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("WatcherWatch", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.WatcherWatch", false);
 		if (Action is not null)
 		{
 			initializer.Property("Action");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Xpack.Counter");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Xpack.Counter");
 			writer.Write(">()");
 			writer.WriteBlockList(Action, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
@@ -42,20 +44,24 @@ public partial class WatcherWatch : RequestConverter.ICodeFormattable
 		if (Condition is not null)
 		{
 			initializer.Property("Condition");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Xpack.Counter");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Xpack.Counter");
 			writer.Write(">()");
 			writer.WriteBlockList(Condition, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
 
 		{
 			initializer.Property("Input");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Xpack.Counter");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Xpack.Counter");
 			writer.Write(">()");
 			writer.WriteBlockList(Input, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

@@ -27,7 +27,7 @@ public partial class RollupFieldSummary : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RollupFieldSummary", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Rollup.RollupFieldSummary", false);
 		{
 			initializer.Property("Agg");
 			writer.WriteString(Agg);

@@ -27,7 +27,7 @@ public partial class NlpRobertaTokenizationConfig : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NlpRobertaTokenizationConfig", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig", false);
 		if (AddPrefixSpace is not null)
 		{
 			initializer.Property("AddPrefixSpace");

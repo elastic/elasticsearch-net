@@ -27,7 +27,7 @@ public partial class NodeInfoOSCPU : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeInfoOSCPU", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeInfoOSCPU", false);
 		{
 			initializer.Property("CacheSize");
 			writer.WriteString(CacheSize);

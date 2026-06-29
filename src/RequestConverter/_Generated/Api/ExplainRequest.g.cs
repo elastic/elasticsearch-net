@@ -27,7 +27,7 @@ public partial class ExplainRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ExplainRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ExplainRequest", false);
 		{
 			initializer.Property("Id");
 			Id.FormatCode(writer);

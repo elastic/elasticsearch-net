@@ -27,7 +27,7 @@ public partial class PutGeoipDatabaseRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutGeoipDatabaseRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest", false);
 		{
 			initializer.Property("Id");
 			Id.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class CheckpointStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CheckpointStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.CheckpointStats", false);
 		{
 			initializer.Property("Checkpoint");
 			writer.WriteValue(Checkpoint);

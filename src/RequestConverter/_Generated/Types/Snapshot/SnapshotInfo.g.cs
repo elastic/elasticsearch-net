@@ -27,7 +27,7 @@ public partial class SnapshotInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SnapshotInfo", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo", false);
 		{
 			initializer.Property("DataStreams");
 			writer.WriteInlineList(DataStreams, (w, item) => { w.WriteString(item); });
@@ -78,10 +78,12 @@ public partial class SnapshotInfo : RequestConverter.ICodeFormattable
 		if (IndexDetails is not null)
 		{
 			initializer.Property("IndexDetails");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Snapshot.IndexDetails");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.IndexDetails");
 			writer.Write(">()");
 			writer.WriteBlockList(IndexDetails, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
@@ -95,10 +97,12 @@ public partial class SnapshotInfo : RequestConverter.ICodeFormattable
 		if (Metadata is not null)
 		{
 			initializer.Property("Metadata");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("object");
+			writer.WriteTypeRef("object");
 			writer.Write(">()");
 			writer.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
 		}

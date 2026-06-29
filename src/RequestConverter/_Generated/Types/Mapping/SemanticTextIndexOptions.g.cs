@@ -27,7 +27,7 @@ public partial class SemanticTextIndexOptions : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SemanticTextIndexOptions", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptions", false);
 		if (DenseVector is not null)
 		{
 			initializer.Property("DenseVector");

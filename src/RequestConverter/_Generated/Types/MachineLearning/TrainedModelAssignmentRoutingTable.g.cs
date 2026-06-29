@@ -27,7 +27,7 @@ public partial class TrainedModelAssignmentRoutingTable : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TrainedModelAssignmentRoutingTable", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable", false);
 		{
 			initializer.Property("CurrentAllocations");
 			writer.WriteValue(CurrentAllocations);

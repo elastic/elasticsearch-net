@@ -27,7 +27,7 @@ public partial class MultipleSynonymGraphFilter : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MultipleSynonymGraphFilter", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.MultipleSynonymGraphFilter", false);
 		if (AnalyzerCount is not null)
 		{
 			initializer.Property("AnalyzerCount");

@@ -27,7 +27,7 @@ public partial class CancelReindexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CancelReindexRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.CancelReindexRequest", false);
 		{
 			initializer.Property("TaskId");
 			TaskId.FormatCode(writer);

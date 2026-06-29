@@ -27,7 +27,7 @@ public partial class MasterIsStableIndicatorClusterFormationNode : RequestConver
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MasterIsStableIndicatorClusterFormationNode", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.HealthReport.MasterIsStableIndicatorClusterFormationNode", false);
 		{
 			initializer.Property("ClusterFormationMessage");
 			writer.WriteString(ClusterFormationMessage);

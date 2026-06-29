@@ -27,7 +27,7 @@ public partial class CgroupMemory : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CgroupMemory", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.CgroupMemory", false);
 		if (ControlGroup is not null)
 		{
 			initializer.Property("ControlGroup");

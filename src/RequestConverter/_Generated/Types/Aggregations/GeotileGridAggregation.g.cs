@@ -27,7 +27,7 @@ public partial class GeotileGridAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GeotileGridAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation", false);
 		if (Bounds is not null)
 		{
 			initializer.Property("Bounds");

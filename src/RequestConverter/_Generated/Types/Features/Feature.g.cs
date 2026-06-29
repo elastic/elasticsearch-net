@@ -27,7 +27,7 @@ public partial class Feature : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Feature", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Features.Feature", false);
 		{
 			initializer.Property("Description");
 			writer.WriteString(Description);

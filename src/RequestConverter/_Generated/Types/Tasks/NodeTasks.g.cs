@@ -27,14 +27,16 @@ public partial class NodeTasks : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeTasks", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Tasks.NodeTasks", false);
 		if (Attributes is not null)
 		{
 			initializer.Property("Attributes");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("string");
+			writer.WriteTypeRef("string");
 			writer.Write(">()");
 			writer.WriteBlockList(Attributes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
 		}
@@ -65,10 +67,12 @@ public partial class NodeTasks : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("Tasks");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("Elastic.Clients.Elasticsearch.TaskId");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TaskId");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Tasks.TaskInfo");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Tasks.TaskInfo");
 			writer.Write(">()");
 			writer.WriteBlockList(Tasks, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

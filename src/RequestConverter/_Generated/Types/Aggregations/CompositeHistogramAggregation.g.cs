@@ -27,7 +27,7 @@ public partial class CompositeHistogramAggregation : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CompositeHistogramAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregation", false);
 		if (Field is not null)
 		{
 			initializer.Property("Field");

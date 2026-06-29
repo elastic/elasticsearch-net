@@ -30,19 +30,24 @@ public static class EnrichPolicyPhaseCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Cancelled:
-				writer.Write("EnrichPolicyPhase.Cancelled");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase");
+				writer.Write(".Cancelled");
 				break;
 			case Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Complete:
-				writer.Write("EnrichPolicyPhase.Complete");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase");
+				writer.Write(".Complete");
 				break;
 			case Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Failed:
-				writer.Write("EnrichPolicyPhase.Failed");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase");
+				writer.Write(".Failed");
 				break;
 			case Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Running:
-				writer.Write("EnrichPolicyPhase.Running");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase");
+				writer.Write(".Running");
 				break;
 			case Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase.Scheduled:
-				writer.Write("EnrichPolicyPhase.Scheduled");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase");
+				writer.Write(".Scheduled");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected EnrichPolicyPhase value.");

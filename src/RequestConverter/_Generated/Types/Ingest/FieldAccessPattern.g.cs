@@ -30,10 +30,12 @@ public static class FieldAccessPatternCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Ingest.FieldAccessPattern.Classic:
-				writer.Write("FieldAccessPattern.Classic");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.FieldAccessPattern");
+				writer.Write(".Classic");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.FieldAccessPattern.Flexible:
-				writer.Write("FieldAccessPattern.Flexible");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.FieldAccessPattern");
+				writer.Write(".Flexible");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected FieldAccessPattern value.");

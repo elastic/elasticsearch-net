@@ -27,7 +27,7 @@ public partial class InferenceRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("InferenceRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.InferenceRequest", false);
 		{
 			initializer.Property("InferenceId");
 			InferenceId.FormatCode(writer);

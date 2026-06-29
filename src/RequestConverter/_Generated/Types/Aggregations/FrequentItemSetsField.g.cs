@@ -27,7 +27,7 @@ public partial class FrequentItemSetsField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FrequentItemSetsField", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField", false);
 		if (Exclude is not null)
 		{
 			initializer.Property("Exclude");

@@ -27,7 +27,7 @@ public partial class DataTierPhaseStatistics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataTierPhaseStatistics", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics", false);
 		{
 			initializer.Property("DocCount");
 			writer.WriteValue(DocCount);

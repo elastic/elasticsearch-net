@@ -27,7 +27,7 @@ public partial class TermsAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TermsAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation", false);
 		if (CollectMode is not null)
 		{
 			initializer.Property("CollectMode");

@@ -27,7 +27,7 @@ public partial class BengaliNormalizationTokenFilter : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("BengaliNormalizationTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.BengaliNormalizationTokenFilter", true);
 		if (Version is not null)
 		{
 			initializer.Property("Version");

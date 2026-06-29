@@ -27,7 +27,7 @@ public partial class GetMemoryStatsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetMemoryStatsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest", false);
 		if (NodeId is not null)
 		{
 			initializer.Property("NodeId");

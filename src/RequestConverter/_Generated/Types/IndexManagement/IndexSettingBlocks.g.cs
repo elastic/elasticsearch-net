@@ -27,7 +27,7 @@ public partial class IndexSettingBlocks : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndexSettingBlocks", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks", false);
 		if (Metadata is not null)
 		{
 			initializer.Property("Metadata");

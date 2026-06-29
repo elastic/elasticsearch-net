@@ -27,7 +27,7 @@ public partial class ClearCachedRealmsRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ClearCachedRealmsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest", false);
 		{
 			initializer.Property("Realms");
 			Realms.FormatCode(writer);

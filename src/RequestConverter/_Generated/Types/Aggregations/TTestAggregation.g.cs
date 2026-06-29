@@ -27,7 +27,7 @@ public partial class TTestAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TTestAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation", false);
 		if (A is not null)
 		{
 			initializer.Property("A");

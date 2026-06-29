@@ -27,7 +27,7 @@ public partial class TokenPruningConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TokenPruningConfig", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TokenPruningConfig", false);
 		if (OnlyScorePrunedTokens is not null)
 		{
 			initializer.Property("OnlyScorePrunedTokens");

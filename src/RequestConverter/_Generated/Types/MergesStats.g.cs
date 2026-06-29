@@ -27,7 +27,7 @@ public partial class MergesStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MergesStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MergesStats", false);
 		{
 			initializer.Property("Current");
 			writer.WriteValue(Current);

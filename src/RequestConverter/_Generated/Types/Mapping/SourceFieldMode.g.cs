@@ -30,13 +30,16 @@ public static class SourceFieldModeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode.Disabled:
-				writer.Write("SourceFieldMode.Disabled");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode");
+				writer.Write(".Disabled");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode.Stored:
-				writer.Write("SourceFieldMode.Stored");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode");
+				writer.Write(".Stored");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode.Synthetic:
-				writer.Write("SourceFieldMode.Synthetic");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode");
+				writer.Write(".Synthetic");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SourceFieldMode value.");

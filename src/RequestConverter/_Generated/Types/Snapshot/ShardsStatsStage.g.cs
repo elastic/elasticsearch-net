@@ -30,19 +30,24 @@ public static class ShardsStatsStageCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage.Done:
-				writer.Write("ShardsStatsStage.Done");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage");
+				writer.Write(".Done");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage.Failure:
-				writer.Write("ShardsStatsStage.Failure");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage");
+				writer.Write(".Failure");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage.Finalize:
-				writer.Write("ShardsStatsStage.Finalize");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage");
+				writer.Write(".Finalize");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage.Init:
-				writer.Write("ShardsStatsStage.Init");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage");
+				writer.Write(".Init");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage.Started:
-				writer.Write("ShardsStatsStage.Started");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage");
+				writer.Write(".Started");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ShardsStatsStage value.");

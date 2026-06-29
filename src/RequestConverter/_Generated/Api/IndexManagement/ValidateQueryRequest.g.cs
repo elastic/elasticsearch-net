@@ -27,7 +27,7 @@ public partial class ValidateQueryRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ValidateQueryRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest", false);
 		if (Indices is not null)
 		{
 			initializer.Property("Indices");

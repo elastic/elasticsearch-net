@@ -27,7 +27,7 @@ public partial class RequestCounts : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RequestCounts", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.RequestCounts", false);
 		if (GetBlob is not null)
 		{
 			initializer.Property("GetBlob");

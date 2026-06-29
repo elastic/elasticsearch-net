@@ -27,7 +27,7 @@ public partial class XlmRobertaTokenizationConfig : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("XlmRobertaTokenizationConfig", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfig", false);
 		if (DoLowerCase is not null)
 		{
 			initializer.Property("DoLowerCase");

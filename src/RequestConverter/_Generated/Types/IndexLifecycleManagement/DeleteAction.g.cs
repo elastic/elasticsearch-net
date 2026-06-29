@@ -27,7 +27,7 @@ public partial class DeleteAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteAction", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction", false);
 		if (DeleteSearchableSnapshot is not null)
 		{
 			initializer.Property("DeleteSearchableSnapshot");

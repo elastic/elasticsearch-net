@@ -27,7 +27,7 @@ public partial class MultisearchHeader : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MultisearchHeader", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader", true);
 		if (AllowNoIndices is not null)
 		{
 			initializer.Property("AllowNoIndices");

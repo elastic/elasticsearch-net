@@ -27,7 +27,7 @@ public partial class SearchableSnapshotsStatsRequest : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SearchableSnapshotsStatsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest", false);
 		if (Indices is not null)
 		{
 			initializer.Property("Indices");

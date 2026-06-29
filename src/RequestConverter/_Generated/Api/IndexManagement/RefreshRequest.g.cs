@@ -27,7 +27,7 @@ public partial class RefreshRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RefreshRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest", false);
 		if (Indices is not null)
 		{
 			initializer.Property("Indices");

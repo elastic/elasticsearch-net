@@ -27,7 +27,7 @@ public partial class AutoFollowPattern : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AutoFollowPattern", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowPattern", false);
 		{
 			initializer.Property("Name");
 			writer.WriteString(Name);

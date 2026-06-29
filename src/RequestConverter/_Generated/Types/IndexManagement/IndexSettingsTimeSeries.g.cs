@@ -27,7 +27,7 @@ public partial class IndexSettingsTimeSeries : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndexSettingsTimeSeries", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries", false);
 		if (EndTime is not null)
 		{
 			initializer.Property("EndTime");

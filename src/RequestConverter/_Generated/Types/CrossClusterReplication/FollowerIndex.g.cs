@@ -27,7 +27,7 @@ public partial class FollowerIndex : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FollowerIndex", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndex", false);
 		{
 			initializer.Property("FollowerIndexValue");
 			writer.WriteString(FollowerIndexValue);

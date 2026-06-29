@@ -27,7 +27,7 @@ public partial class EmbeddingContentObjectItem : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("EmbeddingContentObjectItem", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObjectItem", false);
 		if (Format is not null)
 		{
 			initializer.Property("Format");

@@ -27,7 +27,7 @@ public partial class SettingsQueryString : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SettingsQueryString", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SettingsQueryString", false);
 		{
 			initializer.Property("Lenient");
 			writer.WriteValue(Lenient);

@@ -27,7 +27,7 @@ public partial class DeleteByQueryRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteByQueryRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.DeleteByQueryRequest", false);
 		{
 			initializer.Property("Indices");
 			Indices.FormatCode(writer);

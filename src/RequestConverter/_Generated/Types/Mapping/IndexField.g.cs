@@ -27,7 +27,7 @@ public partial class IndexField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndexField", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.IndexField", false);
 		{
 			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);

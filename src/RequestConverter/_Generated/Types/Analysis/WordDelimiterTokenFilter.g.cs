@@ -27,7 +27,7 @@ public partial class WordDelimiterTokenFilter : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("WordDelimiterTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter", true);
 		if (CatenateAll is not null)
 		{
 			initializer.Property("CatenateAll");

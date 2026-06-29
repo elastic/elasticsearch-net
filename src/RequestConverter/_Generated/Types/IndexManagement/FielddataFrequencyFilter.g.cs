@@ -27,7 +27,7 @@ public partial class FielddataFrequencyFilter : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FielddataFrequencyFilter", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter", false);
 		{
 			initializer.Property("Max");
 			writer.WriteValue(Max);

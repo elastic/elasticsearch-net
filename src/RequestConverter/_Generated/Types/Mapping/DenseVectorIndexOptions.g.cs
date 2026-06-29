@@ -27,7 +27,7 @@ public partial class DenseVectorIndexOptions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DenseVectorIndexOptions", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions", false);
 		if (ConfidenceInterval is not null)
 		{
 			initializer.Property("ConfidenceInterval");

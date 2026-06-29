@@ -27,7 +27,7 @@ public partial class CompletionResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CompletionResult", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.CompletionResult", false);
 		{
 			initializer.Property("Result");
 			writer.WriteString(Result);

@@ -27,7 +27,7 @@ public partial class CartesianCentroidAggregation : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CartesianCentroidAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregation", false);
 		if (Field is not null)
 		{
 			initializer.Property("Field");

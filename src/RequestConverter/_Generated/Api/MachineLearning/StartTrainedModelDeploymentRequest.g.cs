@@ -27,7 +27,7 @@ public partial class StartTrainedModelDeploymentRequest : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("StartTrainedModelDeploymentRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequest", false);
 		{
 			initializer.Property("ModelId");
 			ModelId.FormatCode(writer);

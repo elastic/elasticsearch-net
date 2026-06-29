@@ -27,7 +27,7 @@ public partial class MasterIsStableIndicator : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MasterIsStableIndicator", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.HealthReport.MasterIsStableIndicator", false);
 		if (Details is not null)
 		{
 			initializer.Property("Details");

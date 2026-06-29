@@ -27,7 +27,7 @@ public partial class ScriptCache : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ScriptCache", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.ScriptCache", false);
 		if (CacheEvictions is not null)
 		{
 			initializer.Property("CacheEvictions");

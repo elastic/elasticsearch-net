@@ -27,7 +27,7 @@ public partial class GeoHashLocation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GeoHashLocation", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.GeoHashLocation", true);
 		{
 			initializer.Property("Geohash");
 			writer.WriteString(Geohash);

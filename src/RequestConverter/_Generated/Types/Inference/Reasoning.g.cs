@@ -27,7 +27,7 @@ public partial class Reasoning : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Reasoning", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.Reasoning", false);
 		if (Effort is not null)
 		{
 			initializer.Property("Effort");

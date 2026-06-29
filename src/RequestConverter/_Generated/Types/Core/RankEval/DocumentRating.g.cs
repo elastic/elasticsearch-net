@@ -27,7 +27,7 @@ public partial class DocumentRating : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DocumentRating", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating", false);
 		{
 			initializer.Property("Id");
 			Id.FormatCode(writer);

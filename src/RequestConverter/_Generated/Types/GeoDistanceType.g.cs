@@ -30,10 +30,12 @@ public static class GeoDistanceTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.GeoDistanceType.Arc:
-				writer.Write("GeoDistanceType.Arc");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.GeoDistanceType");
+				writer.Write(".Arc");
 				break;
 			case Elastic.Clients.Elasticsearch.GeoDistanceType.Plane:
-				writer.Write("GeoDistanceType.Plane");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.GeoDistanceType");
+				writer.Write(".Plane");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected GeoDistanceType value.");

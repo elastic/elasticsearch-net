@@ -27,7 +27,7 @@ public partial class SourceOnlyRepository : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SourceOnlyRepository", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository", true);
 		{
 			initializer.Property("Settings");
 			Settings.FormatCode(writer);

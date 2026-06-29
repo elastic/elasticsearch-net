@@ -27,7 +27,7 @@ public partial class TermsGrouping : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TermsGrouping", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Rollup.TermsGrouping", false);
 		{
 			initializer.Property("Fields");
 			Fields.FormatCode(writer);

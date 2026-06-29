@@ -27,7 +27,7 @@ public partial class ReindexTaskResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ReindexTaskResult", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ReindexTaskResult", false);
 		if (Batches is not null)
 		{
 			initializer.Property("Batches");

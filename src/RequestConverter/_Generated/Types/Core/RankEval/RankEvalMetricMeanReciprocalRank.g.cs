@@ -27,7 +27,7 @@ public partial class RankEvalMetricMeanReciprocalRank : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RankEvalMetricMeanReciprocalRank", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRank", false);
 		if (K is not null)
 		{
 			initializer.Property("K");

@@ -27,7 +27,7 @@ public partial class AverageBucketAggregation : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AverageBucketAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregation", false);
 		if (BucketsPath is not null)
 		{
 			initializer.Property("BucketsPath");

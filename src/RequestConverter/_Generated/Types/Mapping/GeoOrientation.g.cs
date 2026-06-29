@@ -30,10 +30,12 @@ public static class GeoOrientationCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.GeoOrientation.Left:
-				writer.Write("GeoOrientation.Left");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.GeoOrientation");
+				writer.Write(".Left");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.GeoOrientation.Right:
-				writer.Write("GeoOrientation.Right");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.GeoOrientation");
+				writer.Write(".Right");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected GeoOrientation value.");

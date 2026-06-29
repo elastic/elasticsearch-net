@@ -27,7 +27,7 @@ public partial class DownsampleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DownsampleRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest", false);
 		{
 			initializer.Property("Index");
 			Index.FormatCode(writer);

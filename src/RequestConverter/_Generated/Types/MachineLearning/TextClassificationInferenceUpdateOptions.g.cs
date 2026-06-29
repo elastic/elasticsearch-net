@@ -27,7 +27,7 @@ public partial class TextClassificationInferenceUpdateOptions : RequestConverter
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TextClassificationInferenceUpdateOptions", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceUpdateOptions", false);
 		if (ClassificationLabels is not null)
 		{
 			initializer.Property("ClassificationLabels");

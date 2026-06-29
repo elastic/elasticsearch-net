@@ -27,7 +27,7 @@ public partial class PinnedRetriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PinnedRetriever", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.PinnedRetriever", false);
 		if (Docs is not null)
 		{
 			initializer.Property("Docs");

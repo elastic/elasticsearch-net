@@ -27,7 +27,7 @@ public partial class KuromojiIterationMarkCharFilter : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("KuromojiIterationMarkCharFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter", true);
 		{
 			initializer.Property("NormalizeKana");
 			writer.WriteValue(NormalizeKana);

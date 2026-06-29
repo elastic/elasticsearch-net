@@ -27,7 +27,7 @@ public partial class TaskFailure : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TaskFailure", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TaskFailure", false);
 		{
 			initializer.Property("NodeId");
 			writer.WriteString(NodeId);

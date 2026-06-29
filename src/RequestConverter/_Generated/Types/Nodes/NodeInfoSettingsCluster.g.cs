@@ -27,7 +27,7 @@ public partial class NodeInfoSettingsCluster : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeInfoSettingsCluster", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsCluster", false);
 		if (DeprecationIndexing is not null)
 		{
 			initializer.Property("DeprecationIndexing");

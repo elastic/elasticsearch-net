@@ -27,7 +27,7 @@ public partial class DeleteDataFrameAnalyticsRequest : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteDataFrameAnalyticsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequest", false);
 		{
 			initializer.Property("Id");
 			Id.FormatCode(writer);

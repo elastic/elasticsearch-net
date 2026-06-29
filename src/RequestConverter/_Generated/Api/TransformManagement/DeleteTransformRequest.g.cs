@@ -27,7 +27,7 @@ public partial class DeleteTransformRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteTransformRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest", false);
 		{
 			initializer.Property("TransformId");
 			TransformId.FormatCode(writer);

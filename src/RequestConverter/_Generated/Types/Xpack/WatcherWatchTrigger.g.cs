@@ -27,7 +27,7 @@ public partial class WatcherWatchTrigger : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("WatcherWatchTrigger", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.WatcherWatchTrigger", false);
 		{
 			initializer.Property("All");
 			All.FormatCode(writer);

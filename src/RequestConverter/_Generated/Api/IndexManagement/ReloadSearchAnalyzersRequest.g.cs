@@ -27,7 +27,7 @@ public partial class ReloadSearchAnalyzersRequest : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ReloadSearchAnalyzersRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest", false);
 		{
 			initializer.Property("Indices");
 			Indices.FormatCode(writer);

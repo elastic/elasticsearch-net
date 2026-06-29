@@ -27,7 +27,7 @@ public partial class GpuVectorIndexing : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GpuVectorIndexing", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.GpuVectorIndexing", false);
 		{
 			initializer.Property("Available");
 			writer.WriteValue(Available);

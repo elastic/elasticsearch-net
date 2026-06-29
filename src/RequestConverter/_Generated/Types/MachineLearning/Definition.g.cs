@@ -27,7 +27,7 @@ public partial class Definition : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Definition", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.Definition", false);
 		if (Preprocessors is not null)
 		{
 			initializer.Property("Preprocessors");

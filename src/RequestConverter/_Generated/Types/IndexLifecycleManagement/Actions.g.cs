@@ -27,7 +27,7 @@ public partial class Actions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Actions", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions", false);
 		if (Allocate is not null)
 		{
 			initializer.Property("Allocate");

@@ -29,29 +29,35 @@ public readonly partial struct StorageType : RequestConverter.ICodeFormattable
 	{
 		if (this == Elastic.Clients.Elasticsearch.IndexManagement.StorageType.Fs)
 		{
-			writer.Write("StorageType.Fs");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.StorageType");
+			writer.Write(".Fs");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.IndexManagement.StorageType.Hybridfs)
 		{
-			writer.Write("StorageType.Hybridfs");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.StorageType");
+			writer.Write(".Hybridfs");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.IndexManagement.StorageType.Mmapfs)
 		{
-			writer.Write("StorageType.Mmapfs");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.StorageType");
+			writer.Write(".Mmapfs");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.IndexManagement.StorageType.Niofs)
 		{
-			writer.Write("StorageType.Niofs");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.StorageType");
+			writer.Write(".Niofs");
 			return;
 		}
 
-		writer.Write("new StorageType(\"");
+		writer.Write("new ");
+		writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.StorageType");
+		writer.Write("(\"");
 		writer.Write(Value);
 		writer.Write("\")");
 	}

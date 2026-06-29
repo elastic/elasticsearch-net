@@ -27,7 +27,7 @@ public partial class NodeOperatingSystemInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeOperatingSystemInfo", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeOperatingSystemInfo", false);
 		if (AllocatedProcessors is not null)
 		{
 			initializer.Property("AllocatedProcessors");

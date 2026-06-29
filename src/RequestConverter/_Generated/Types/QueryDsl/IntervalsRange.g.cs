@@ -27,7 +27,7 @@ public partial class IntervalsRange : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IntervalsRange", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRange", false);
 		if (Analyzer is not null)
 		{
 			initializer.Property("Analyzer");

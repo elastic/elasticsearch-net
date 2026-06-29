@@ -27,7 +27,7 @@ public partial class DeleteServiceTokenRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteServiceTokenRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

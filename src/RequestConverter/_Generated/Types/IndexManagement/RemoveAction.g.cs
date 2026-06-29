@@ -27,7 +27,7 @@ public partial class RemoveAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RemoveAction", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction", false);
 		if (Alias is not null)
 		{
 			initializer.Property("Alias");

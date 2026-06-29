@@ -27,7 +27,7 @@ public partial class SettingsSimilarityDfr : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SettingsSimilarityDfr", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfr", true);
 		{
 			initializer.Property("AfterEffect");
 			Elastic.Clients.Elasticsearch.DFRAfterEffectCodeFormatter.FormatCode(AfterEffect, writer);

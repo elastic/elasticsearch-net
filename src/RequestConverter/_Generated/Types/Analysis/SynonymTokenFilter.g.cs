@@ -27,7 +27,7 @@ public partial class SynonymTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SynonymTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter", true);
 		if (Expand is not null)
 		{
 			initializer.Property("Expand");

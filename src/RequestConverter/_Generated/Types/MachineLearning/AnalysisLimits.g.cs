@@ -27,7 +27,7 @@ public partial class AnalysisLimits : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AnalysisLimits", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits", false);
 		if (CategorizationExamplesLimit is not null)
 		{
 			initializer.Property("CategorizationExamplesLimit");

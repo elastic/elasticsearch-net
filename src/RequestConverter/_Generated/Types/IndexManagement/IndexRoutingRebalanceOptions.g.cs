@@ -30,16 +30,20 @@ public static class IndexRoutingRebalanceOptionsCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.All:
-				writer.Write("IndexRoutingRebalanceOptions.All");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions");
+				writer.Write(".All");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.None:
-				writer.Write("IndexRoutingRebalanceOptions.None");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions");
+				writer.Write(".None");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.Primaries:
-				writer.Write("IndexRoutingRebalanceOptions.Primaries");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions");
+				writer.Write(".Primaries");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.Replicas:
-				writer.Write("IndexRoutingRebalanceOptions.Replicas");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions");
+				writer.Write(".Replicas");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IndexRoutingRebalanceOptions value.");

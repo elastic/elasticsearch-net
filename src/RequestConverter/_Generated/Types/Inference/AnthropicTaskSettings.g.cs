@@ -27,7 +27,7 @@ public partial class AnthropicTaskSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AnthropicTaskSettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.AnthropicTaskSettings", false);
 		{
 			initializer.Property("MaxTokens");
 			writer.WriteValue(MaxTokens);

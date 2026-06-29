@@ -27,7 +27,7 @@ public partial class QueryCacheStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("QueryCacheStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryCacheStats", false);
 		{
 			initializer.Property("CacheCount");
 			writer.WriteValue(CacheCount);

@@ -27,7 +27,7 @@ public partial class IcuTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IcuTokenizer", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer", true);
 		{
 			initializer.Property("RuleFiles");
 			writer.WriteString(RuleFiles);

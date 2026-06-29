@@ -27,7 +27,7 @@ public partial class TransformStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TransformStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.TransformStats", false);
 		{
 			initializer.Property("Checkpointing");
 			Checkpointing.FormatCode(writer);

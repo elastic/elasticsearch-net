@@ -27,7 +27,7 @@ public partial class NestedIdentity : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NestedIdentity", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.NestedIdentity", false);
 		{
 			initializer.Property("Field");
 			writer.WriteString(Field);

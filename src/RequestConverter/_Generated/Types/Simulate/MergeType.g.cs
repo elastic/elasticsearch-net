@@ -30,10 +30,12 @@ public static class MergeTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Simulate.MergeType.Index:
-				writer.Write("MergeType.Index");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Simulate.MergeType");
+				writer.Write(".Index");
 				break;
 			case Elastic.Clients.Elasticsearch.Simulate.MergeType.Template:
-				writer.Write("MergeType.Template");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Simulate.MergeType");
+				writer.Write(".Template");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected MergeType value.");

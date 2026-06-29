@@ -27,7 +27,7 @@ public partial class ScrollRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ScrollRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ScrollRequest", false);
 		if (RestTotalHitsAsInt is not null)
 		{
 			initializer.Property("RestTotalHitsAsInt");

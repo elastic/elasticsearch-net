@@ -27,7 +27,7 @@ public partial class GeohexGridAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GeohexGridAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation", false);
 		if (Bounds is not null)
 		{
 			initializer.Property("Bounds");

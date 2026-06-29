@@ -27,7 +27,7 @@ public partial class PutTrainedModelVocabularyRequest : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutTrainedModelVocabularyRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest", false);
 		{
 			initializer.Property("ModelId");
 			ModelId.FormatCode(writer);

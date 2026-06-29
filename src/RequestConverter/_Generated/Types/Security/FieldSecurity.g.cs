@@ -27,7 +27,7 @@ public partial class FieldSecurity : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FieldSecurity", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.FieldSecurity", false);
 		if (Except is not null)
 		{
 			initializer.Property("Except");

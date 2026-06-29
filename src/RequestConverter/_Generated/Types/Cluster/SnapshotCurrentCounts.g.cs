@@ -27,7 +27,7 @@ public partial class SnapshotCurrentCounts : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SnapshotCurrentCounts", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.SnapshotCurrentCounts", false);
 		{
 			initializer.Property("Cleanups");
 			writer.WriteValue(Cleanups);

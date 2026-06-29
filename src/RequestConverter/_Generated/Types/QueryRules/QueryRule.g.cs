@@ -27,7 +27,7 @@ public partial class QueryRule : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("QueryRule", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryRules.QueryRule", false);
 		{
 			initializer.Property("Actions");
 			Actions.FormatCode(writer);

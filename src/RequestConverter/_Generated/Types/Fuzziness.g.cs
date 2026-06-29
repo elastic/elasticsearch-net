@@ -29,7 +29,9 @@ public partial class Fuzziness : RequestConverter.ICodeFormattable
 	{
 		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 		{
-			writer.Write("new Fuzziness(");
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Fuzziness");
+			writer.Write("(");
 			writer.WriteString(Value1);
 			writer.Write(")");
 			return;
@@ -37,7 +39,9 @@ public partial class Fuzziness : RequestConverter.ICodeFormattable
 
 		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T2)
 		{
-			writer.Write("new Fuzziness(");
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Fuzziness");
+			writer.Write("(");
 			writer.WriteValue(Value2);
 			writer.Write(")");
 			return;

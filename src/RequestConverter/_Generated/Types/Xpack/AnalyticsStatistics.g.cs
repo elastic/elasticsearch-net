@@ -27,7 +27,7 @@ public partial class AnalyticsStatistics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AnalyticsStatistics", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.AnalyticsStatistics", false);
 		{
 			initializer.Property("BoxplotUsage");
 			writer.WriteValue(BoxplotUsage);

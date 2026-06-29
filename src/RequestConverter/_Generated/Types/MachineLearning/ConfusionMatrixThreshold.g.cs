@@ -27,7 +27,7 @@ public partial class ConfusionMatrixThreshold : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ConfusionMatrixThreshold", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ConfusionMatrixThreshold", false);
 		{
 			initializer.Property("FalseNegative");
 			writer.WriteValue(FalseNegative);

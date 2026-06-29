@@ -27,7 +27,7 @@ public partial class SecurityRolesFile : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SecurityRolesFile", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.SecurityRolesFile", false);
 		{
 			initializer.Property("Dls");
 			writer.WriteValue(Dls);

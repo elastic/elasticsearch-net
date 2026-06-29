@@ -27,7 +27,7 @@ public partial class DataframeClassificationSummaryRecall : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframeClassificationSummaryRecall", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryRecall", false);
 		{
 			initializer.Property("AvgRecall");
 			writer.WriteValue(AvgRecall);

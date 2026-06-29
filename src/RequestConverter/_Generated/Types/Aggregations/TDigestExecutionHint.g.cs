@@ -30,10 +30,12 @@ public static class TDigestExecutionHintCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint.Default:
-				writer.Write("TDigestExecutionHint.Default");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint");
+				writer.Write(".Default");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint.HighAccuracy:
-				writer.Write("TDigestExecutionHint.HighAccuracy");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint");
+				writer.Write(".HighAccuracy");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TDigestExecutionHint value.");

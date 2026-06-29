@@ -30,16 +30,20 @@ public static class GeoShapeRelationCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.GeoShapeRelation.Contains:
-				writer.Write("GeoShapeRelation.Contains");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.GeoShapeRelation");
+				writer.Write(".Contains");
 				break;
 			case Elastic.Clients.Elasticsearch.GeoShapeRelation.Disjoint:
-				writer.Write("GeoShapeRelation.Disjoint");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.GeoShapeRelation");
+				writer.Write(".Disjoint");
 				break;
 			case Elastic.Clients.Elasticsearch.GeoShapeRelation.Intersects:
-				writer.Write("GeoShapeRelation.Intersects");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.GeoShapeRelation");
+				writer.Write(".Intersects");
 				break;
 			case Elastic.Clients.Elasticsearch.GeoShapeRelation.Within:
-				writer.Write("GeoShapeRelation.Within");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.GeoShapeRelation");
+				writer.Write(".Within");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected GeoShapeRelation value.");

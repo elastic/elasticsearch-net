@@ -30,7 +30,8 @@ public static class TaskTypeGroqCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeGroq.ChatCompletion:
-				writer.Write("TaskTypeGroq.ChatCompletion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeGroq");
+				writer.Write(".ChatCompletion");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeGroq value.");

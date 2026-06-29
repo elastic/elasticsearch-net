@@ -27,7 +27,7 @@ public partial class SourceOnlyRepositorySettingsForS3 : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SourceOnlyRepositorySettingsForS3", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3", true);
 		if (BasePath is not null)
 		{
 			initializer.Property("BasePath");

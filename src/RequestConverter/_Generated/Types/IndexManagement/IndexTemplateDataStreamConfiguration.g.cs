@@ -27,7 +27,7 @@ public partial class IndexTemplateDataStreamConfiguration : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndexTemplateDataStreamConfiguration", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration", false);
 		if (AllowCustomRouting is not null)
 		{
 			initializer.Property("AllowCustomRouting");

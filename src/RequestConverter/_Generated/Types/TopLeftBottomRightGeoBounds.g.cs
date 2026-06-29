@@ -27,7 +27,7 @@ public partial class TopLeftBottomRightGeoBounds : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TopLeftBottomRightGeoBounds", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TopLeftBottomRightGeoBounds", true);
 		{
 			initializer.Property("BottomRight");
 			BottomRight.FormatCode(writer);

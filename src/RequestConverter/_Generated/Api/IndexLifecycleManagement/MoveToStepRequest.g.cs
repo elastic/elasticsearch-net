@@ -27,7 +27,7 @@ public partial class MoveToStepRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MoveToStepRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest", false);
 		{
 			initializer.Property("Index");
 			Index.FormatCode(writer);

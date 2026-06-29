@@ -27,7 +27,7 @@ public partial class GetRepositoriesMeteringInfoRequest : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetRepositoriesMeteringInfoRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequest", false);
 		{
 			initializer.Property("NodeId");
 			NodeId.FormatCode(writer);

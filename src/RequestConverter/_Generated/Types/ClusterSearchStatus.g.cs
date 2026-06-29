@@ -30,19 +30,24 @@ public static class ClusterSearchStatusCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.ClusterSearchStatus.Failed:
-				writer.Write("ClusterSearchStatus.Failed");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ClusterSearchStatus");
+				writer.Write(".Failed");
 				break;
 			case Elastic.Clients.Elasticsearch.ClusterSearchStatus.Partial:
-				writer.Write("ClusterSearchStatus.Partial");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ClusterSearchStatus");
+				writer.Write(".Partial");
 				break;
 			case Elastic.Clients.Elasticsearch.ClusterSearchStatus.Running:
-				writer.Write("ClusterSearchStatus.Running");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ClusterSearchStatus");
+				writer.Write(".Running");
 				break;
 			case Elastic.Clients.Elasticsearch.ClusterSearchStatus.Skipped:
-				writer.Write("ClusterSearchStatus.Skipped");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ClusterSearchStatus");
+				writer.Write(".Skipped");
 				break;
 			case Elastic.Clients.Elasticsearch.ClusterSearchStatus.Successful:
-				writer.Write("ClusterSearchStatus.Successful");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ClusterSearchStatus");
+				writer.Write(".Successful");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ClusterSearchStatus value.");

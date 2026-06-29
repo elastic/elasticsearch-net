@@ -30,25 +30,32 @@ public static class TermVectorOptionCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.No:
-				writer.Write("TermVectorOption.No");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.TermVectorOption");
+				writer.Write(".No");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.WithOffsets:
-				writer.Write("TermVectorOption.WithOffsets");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.TermVectorOption");
+				writer.Write(".WithOffsets");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.WithPositions:
-				writer.Write("TermVectorOption.WithPositions");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.TermVectorOption");
+				writer.Write(".WithPositions");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.WithPositionsOffsets:
-				writer.Write("TermVectorOption.WithPositionsOffsets");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.TermVectorOption");
+				writer.Write(".WithPositionsOffsets");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.WithPositionsOffsetsPayloads:
-				writer.Write("TermVectorOption.WithPositionsOffsetsPayloads");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.TermVectorOption");
+				writer.Write(".WithPositionsOffsetsPayloads");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.WithPositionsPayloads:
-				writer.Write("TermVectorOption.WithPositionsPayloads");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.TermVectorOption");
+				writer.Write(".WithPositionsPayloads");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.Yes:
-				writer.Write("TermVectorOption.Yes");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.TermVectorOption");
+				writer.Write(".Yes");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TermVectorOption value.");

@@ -27,7 +27,7 @@ public partial class PutAi21Request : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutAi21Request", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutAi21Request", false);
 		{
 			initializer.Property("Ai21InferenceId");
 			Ai21InferenceId.FormatCode(writer);

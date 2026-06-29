@@ -27,7 +27,7 @@ public partial class TrainedModelTreeNode : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TrainedModelTreeNode", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode", false);
 		if (DecisionType is not null)
 		{
 			initializer.Property("DecisionType");

@@ -27,7 +27,7 @@ public partial class CumulativeSumAggregation : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CumulativeSumAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregation", false);
 		if (BucketsPath is not null)
 		{
 			initializer.Property("BucketsPath");

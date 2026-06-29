@@ -27,7 +27,7 @@ public partial class Recording : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Recording", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.Recording", false);
 		if (CumulativeExecutionCount is not null)
 		{
 			initializer.Property("CumulativeExecutionCount");

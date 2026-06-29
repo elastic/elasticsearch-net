@@ -27,7 +27,7 @@ public partial class SourceOnlyRepositorySettingsForSharedFileSystem : RequestCo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SourceOnlyRepositorySettingsForSharedFileSystem", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForSharedFileSystem", true);
 		{
 			initializer.Property("Location");
 			writer.WriteString(Location);

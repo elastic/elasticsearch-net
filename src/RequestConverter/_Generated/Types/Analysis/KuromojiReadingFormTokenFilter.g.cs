@@ -27,7 +27,7 @@ public partial class KuromojiReadingFormTokenFilter : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("KuromojiReadingFormTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter", true);
 		{
 			initializer.Property("UseRomaji");
 			writer.WriteValue(UseRomaji);

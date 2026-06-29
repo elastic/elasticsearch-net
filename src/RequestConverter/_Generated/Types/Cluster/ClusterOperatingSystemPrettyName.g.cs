@@ -27,7 +27,7 @@ public partial class ClusterOperatingSystemPrettyName : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ClusterOperatingSystemPrettyName", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.ClusterOperatingSystemPrettyName", false);
 		{
 			initializer.Property("Count");
 			writer.WriteValue(Count);

@@ -27,7 +27,7 @@ public partial class ForceMergeAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ForceMergeAction", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction", false);
 		if (IndexCodec is not null)
 		{
 			initializer.Property("IndexCodec");

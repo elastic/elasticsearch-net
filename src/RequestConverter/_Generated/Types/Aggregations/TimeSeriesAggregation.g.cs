@@ -27,7 +27,7 @@ public partial class TimeSeriesAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TimeSeriesAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation", false);
 		if (Keyed is not null)
 		{
 			initializer.Property("Keyed");

@@ -27,7 +27,7 @@ public partial class HuggingFaceTaskSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("HuggingFaceTaskSettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskSettings", false);
 		if (ReturnDocuments is not null)
 		{
 			initializer.Property("ReturnDocuments");

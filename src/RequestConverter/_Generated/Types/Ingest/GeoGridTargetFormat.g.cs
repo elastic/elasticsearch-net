@@ -30,10 +30,12 @@ public static class GeoGridTargetFormatCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Ingest.GeoGridTargetFormat.Geojson:
-				writer.Write("GeoGridTargetFormat.Geojson");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.GeoGridTargetFormat");
+				writer.Write(".Geojson");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.GeoGridTargetFormat.Wkt:
-				writer.Write("GeoGridTargetFormat.Wkt");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.GeoGridTargetFormat");
+				writer.Write(".Wkt");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected GeoGridTargetFormat value.");

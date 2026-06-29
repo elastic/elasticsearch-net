@@ -27,7 +27,7 @@ public partial class ListRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ListRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Tasks.ListRequest", false);
 		if (Actions is not null)
 		{
 			initializer.Property("Actions");

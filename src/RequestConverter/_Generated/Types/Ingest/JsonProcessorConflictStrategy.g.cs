@@ -30,10 +30,12 @@ public static class JsonProcessorConflictStrategyCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy.Merge:
-				writer.Write("JsonProcessorConflictStrategy.Merge");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy");
+				writer.Write(".Merge");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy.Replace:
-				writer.Write("JsonProcessorConflictStrategy.Replace");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy");
+				writer.Write(".Replace");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected JsonProcessorConflictStrategy value.");

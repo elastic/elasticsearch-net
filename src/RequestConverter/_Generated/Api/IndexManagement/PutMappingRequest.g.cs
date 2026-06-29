@@ -27,7 +27,7 @@ public partial class PutMappingRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutMappingRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest", false);
 		{
 			initializer.Property("Indices");
 			Indices.FormatCode(writer);
@@ -102,10 +102,12 @@ public partial class PutMappingRequest : RequestConverter.ICodeFormattable
 		if (Meta is not null)
 		{
 			initializer.Property("Meta");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("object");
+			writer.WriteTypeRef("object");
 			writer.Write(">()");
 			writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
 		}
@@ -131,10 +133,12 @@ public partial class PutMappingRequest : RequestConverter.ICodeFormattable
 		if (Runtime is not null)
 		{
 			initializer.Property("Runtime");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("Elastic.Clients.Elasticsearch.Field");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Field");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Mapping.RuntimeField");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.RuntimeField");
 			writer.Write(">()");
 			writer.WriteBlockList(Runtime, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

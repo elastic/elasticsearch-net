@@ -27,7 +27,7 @@ public partial class PutBehavioralAnalyticsRequest : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutBehavioralAnalyticsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

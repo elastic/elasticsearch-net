@@ -27,7 +27,7 @@ public partial class PredicateTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PredicateTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter", true);
 		{
 			initializer.Property("Script");
 			Script.FormatCode(writer);

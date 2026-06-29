@@ -27,7 +27,7 @@ public partial class EdgeNGramTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("EdgeNGramTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilter", true);
 		if (MaxGram is not null)
 		{
 			initializer.Property("MaxGram");

@@ -27,7 +27,7 @@ public partial class InvalidateTokenRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("InvalidateTokenRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest", false);
 		if (RealmName is not null)
 		{
 			initializer.Property("RealmName");

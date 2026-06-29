@@ -27,7 +27,7 @@ public partial class NodePackagingType : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodePackagingType", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.NodePackagingType", false);
 		{
 			initializer.Property("Count");
 			writer.WriteValue(Count);

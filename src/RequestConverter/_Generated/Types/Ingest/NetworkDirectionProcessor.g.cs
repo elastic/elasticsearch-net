@@ -27,7 +27,7 @@ public partial class NetworkDirectionProcessor : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NetworkDirectionProcessor", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor", false);
 		if (Description is not null)
 		{
 			initializer.Property("Description");

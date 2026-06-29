@@ -27,7 +27,7 @@ public partial class EdgeNGramTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("EdgeNGramTokenizer", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer", true);
 		if (CustomTokenChars is not null)
 		{
 			initializer.Property("CustomTokenChars");

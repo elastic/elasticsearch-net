@@ -27,7 +27,7 @@ public partial class RegexpQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RegexpQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery", false);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

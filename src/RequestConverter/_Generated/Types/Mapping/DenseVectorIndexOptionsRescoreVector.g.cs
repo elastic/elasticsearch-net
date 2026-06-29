@@ -27,7 +27,7 @@ public partial class DenseVectorIndexOptionsRescoreVector : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DenseVectorIndexOptionsRescoreVector", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsRescoreVector", false);
 		{
 			initializer.Property("Oversample");
 			writer.WriteValue(Oversample);

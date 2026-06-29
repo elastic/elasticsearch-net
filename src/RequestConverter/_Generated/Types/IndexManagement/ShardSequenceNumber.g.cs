@@ -27,7 +27,7 @@ public partial class ShardSequenceNumber : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ShardSequenceNumber", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ShardSequenceNumber", false);
 		{
 			initializer.Property("GlobalCheckpoint");
 			writer.WriteValue(GlobalCheckpoint);

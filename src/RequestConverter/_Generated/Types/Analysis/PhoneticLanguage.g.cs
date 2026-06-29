@@ -30,40 +30,52 @@ public static class PhoneticLanguageCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Any:
-				writer.Write("PhoneticLanguage.Any");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage");
+				writer.Write(".Any");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Common:
-				writer.Write("PhoneticLanguage.Common");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage");
+				writer.Write(".Common");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Cyrillic:
-				writer.Write("PhoneticLanguage.Cyrillic");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage");
+				writer.Write(".Cyrillic");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.English:
-				writer.Write("PhoneticLanguage.English");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage");
+				writer.Write(".English");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.French:
-				writer.Write("PhoneticLanguage.French");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage");
+				writer.Write(".French");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.German:
-				writer.Write("PhoneticLanguage.German");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage");
+				writer.Write(".German");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Hebrew:
-				writer.Write("PhoneticLanguage.Hebrew");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage");
+				writer.Write(".Hebrew");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Hungarian:
-				writer.Write("PhoneticLanguage.Hungarian");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage");
+				writer.Write(".Hungarian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Polish:
-				writer.Write("PhoneticLanguage.Polish");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage");
+				writer.Write(".Polish");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Romanian:
-				writer.Write("PhoneticLanguage.Romanian");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage");
+				writer.Write(".Romanian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Russian:
-				writer.Write("PhoneticLanguage.Russian");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage");
+				writer.Write(".Russian");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage.Spanish:
-				writer.Write("PhoneticLanguage.Spanish");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage");
+				writer.Write(".Spanish");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected PhoneticLanguage value.");

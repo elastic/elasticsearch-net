@@ -27,7 +27,7 @@ public partial class AnalyzeDetail : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AnalyzeDetail", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeDetail", false);
 		if (Analyzer is not null)
 		{
 			initializer.Property("Analyzer");

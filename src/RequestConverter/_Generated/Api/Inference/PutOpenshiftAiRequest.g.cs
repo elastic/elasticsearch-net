@@ -27,7 +27,7 @@ public partial class PutOpenshiftAiRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutOpenshiftAiRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequest", false);
 		{
 			initializer.Property("OpenshiftaiInferenceId");
 			OpenshiftaiInferenceId.FormatCode(writer);

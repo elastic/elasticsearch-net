@@ -27,7 +27,7 @@ public partial class EqlHits<TEvent> : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("EqlHits<TEvent>", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Eql.EqlHits<TEvent>", false);
 		if (Events is not null)
 		{
 			initializer.Property("Events");

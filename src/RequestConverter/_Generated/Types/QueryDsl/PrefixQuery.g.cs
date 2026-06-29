@@ -27,7 +27,7 @@ public partial class PrefixQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PrefixQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery", false);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

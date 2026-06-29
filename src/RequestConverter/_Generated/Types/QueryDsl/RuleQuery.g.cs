@@ -27,7 +27,7 @@ public partial class RuleQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RuleQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.RuleQuery", false);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

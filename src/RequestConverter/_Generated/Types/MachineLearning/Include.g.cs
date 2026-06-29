@@ -30,19 +30,24 @@ public static class IncludeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.Include.Definition:
-				writer.Write("Include.Definition");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.Include");
+				writer.Write(".Definition");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.Include.DefinitionStatus:
-				writer.Write("Include.DefinitionStatus");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.Include");
+				writer.Write(".DefinitionStatus");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.Include.FeatureImportanceBaseline:
-				writer.Write("Include.FeatureImportanceBaseline");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.Include");
+				writer.Write(".FeatureImportanceBaseline");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.Include.Hyperparameters:
-				writer.Write("Include.Hyperparameters");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.Include");
+				writer.Write(".Hyperparameters");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.Include.TotalFeatureImportance:
-				writer.Write("Include.TotalFeatureImportance");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.Include");
+				writer.Write(".TotalFeatureImportance");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected Include value.");

@@ -27,7 +27,7 @@ public partial class Weights : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Weights", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.Weights", false);
 		{
 			initializer.Property("WeightsValue");
 			writer.WriteValue(WeightsValue);

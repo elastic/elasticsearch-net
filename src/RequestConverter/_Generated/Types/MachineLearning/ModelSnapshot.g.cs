@@ -27,7 +27,7 @@ public partial class ModelSnapshot : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ModelSnapshot", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshot", false);
 		if (Description is not null)
 		{
 			initializer.Property("Description");

@@ -29,7 +29,9 @@ public partial class ByteSize : RequestConverter.ICodeFormattable
 	{
 		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 		{
-			writer.Write("new ByteSize(");
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ByteSize");
+			writer.Write("(");
 			writer.WriteValue(Value1);
 			writer.Write("L");
 			writer.Write(")");
@@ -38,7 +40,9 @@ public partial class ByteSize : RequestConverter.ICodeFormattable
 
 		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T2)
 		{
-			writer.Write("new ByteSize(");
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ByteSize");
+			writer.Write("(");
 			writer.WriteString(Value2);
 			writer.Write(")");
 			return;

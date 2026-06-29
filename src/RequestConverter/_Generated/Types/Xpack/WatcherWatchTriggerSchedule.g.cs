@@ -27,7 +27,7 @@ public partial class WatcherWatchTriggerSchedule : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("WatcherWatchTriggerSchedule", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.WatcherWatchTriggerSchedule", false);
 		{
 			initializer.Property("Active");
 			writer.WriteValue(Active);

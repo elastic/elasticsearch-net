@@ -30,13 +30,16 @@ public static class TaskTypeAzureAIStudioCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAzureAIStudio.Completion:
-				writer.Write("TaskTypeAzureAIStudio.Completion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeAzureAIStudio");
+				writer.Write(".Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAzureAIStudio.Rerank:
-				writer.Write("TaskTypeAzureAIStudio.Rerank");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeAzureAIStudio");
+				writer.Write(".Rerank");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAzureAIStudio.TextEmbedding:
-				writer.Write("TaskTypeAzureAIStudio.TextEmbedding");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeAzureAIStudio");
+				writer.Write(".TextEmbedding");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeAzureAIStudio value.");

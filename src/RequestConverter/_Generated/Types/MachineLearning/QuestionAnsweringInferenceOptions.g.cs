@@ -27,7 +27,7 @@ public partial class QuestionAnsweringInferenceOptions : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("QuestionAnsweringInferenceOptions", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptions", false);
 		if (MaxAnswerLength is not null)
 		{
 			initializer.Property("MaxAnswerLength");

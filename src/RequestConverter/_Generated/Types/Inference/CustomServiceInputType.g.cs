@@ -30,16 +30,20 @@ public static class CustomServiceInputTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.CustomServiceInputType.Classification:
-				writer.Write("CustomServiceInputType.Classification");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.CustomServiceInputType");
+				writer.Write(".Classification");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.CustomServiceInputType.Clustering:
-				writer.Write("CustomServiceInputType.Clustering");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.CustomServiceInputType");
+				writer.Write(".Clustering");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.CustomServiceInputType.Ingest:
-				writer.Write("CustomServiceInputType.Ingest");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.CustomServiceInputType");
+				writer.Write(".Ingest");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.CustomServiceInputType.Search:
-				writer.Write("CustomServiceInputType.Search");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.CustomServiceInputType");
+				writer.Write(".Search");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected CustomServiceInputType value.");

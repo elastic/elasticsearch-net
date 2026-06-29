@@ -27,7 +27,7 @@ public partial class ToolCallFunction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ToolCallFunction", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.ToolCallFunction", false);
 		{
 			initializer.Property("Arguments");
 			writer.WriteString(Arguments);

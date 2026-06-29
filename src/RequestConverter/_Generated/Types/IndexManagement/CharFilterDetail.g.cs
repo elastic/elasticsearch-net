@@ -27,7 +27,7 @@ public partial class CharFilterDetail : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CharFilterDetail", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.CharFilterDetail", false);
 		{
 			initializer.Property("FilteredText");
 			writer.WriteInlineList(FilteredText, (w, item) => { w.WriteString(item); });

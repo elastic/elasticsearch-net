@@ -27,7 +27,7 @@ public partial class Processor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Processor", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.Processor", false);
 		if (Count is not null)
 		{
 			initializer.Property("Count");

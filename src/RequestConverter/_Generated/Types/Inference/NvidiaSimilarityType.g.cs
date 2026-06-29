@@ -30,13 +30,16 @@ public static class NvidiaSimilarityTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.NvidiaSimilarityType.Cosine:
-				writer.Write("NvidiaSimilarityType.Cosine");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.NvidiaSimilarityType");
+				writer.Write(".Cosine");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.NvidiaSimilarityType.DotProduct:
-				writer.Write("NvidiaSimilarityType.DotProduct");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.NvidiaSimilarityType");
+				writer.Write(".DotProduct");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.NvidiaSimilarityType.L2Norm:
-				writer.Write("NvidiaSimilarityType.L2Norm");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.NvidiaSimilarityType");
+				writer.Write(".L2Norm");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected NvidiaSimilarityType value.");

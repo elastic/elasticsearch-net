@@ -30,10 +30,12 @@ public static class EcsCompatibilityTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType.Disabled:
-				writer.Write("EcsCompatibilityType.Disabled");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType");
+				writer.Write(".Disabled");
 				break;
 			case Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType.V1:
-				writer.Write("EcsCompatibilityType.V1");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType");
+				writer.Write(".V1");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected EcsCompatibilityType value.");

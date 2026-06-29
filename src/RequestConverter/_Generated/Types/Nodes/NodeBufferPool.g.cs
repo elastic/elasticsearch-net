@@ -27,7 +27,7 @@ public partial class NodeBufferPool : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeBufferPool", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeBufferPool", false);
 		if (Count is not null)
 		{
 			initializer.Property("Count");

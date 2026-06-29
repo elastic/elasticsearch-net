@@ -27,7 +27,7 @@ public partial class GetSnapshotRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetSnapshotRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest", false);
 		{
 			initializer.Property("Repository");
 			Repository.FormatCode(writer);

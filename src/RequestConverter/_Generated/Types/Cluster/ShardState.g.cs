@@ -30,28 +30,36 @@ public static class ShardStateCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Cluster.ShardState.Aborted:
-				writer.Write("ShardState.Aborted");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.ShardState");
+				writer.Write(".Aborted");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.ShardState.Failed:
-				writer.Write("ShardState.Failed");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.ShardState");
+				writer.Write(".Failed");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.ShardState.Init:
-				writer.Write("ShardState.Init");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.ShardState");
+				writer.Write(".Init");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.ShardState.Missing:
-				writer.Write("ShardState.Missing");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.ShardState");
+				writer.Write(".Missing");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.ShardState.PausedForNodeRemoval:
-				writer.Write("ShardState.PausedForNodeRemoval");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.ShardState");
+				writer.Write(".PausedForNodeRemoval");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.ShardState.Queued:
-				writer.Write("ShardState.Queued");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.ShardState");
+				writer.Write(".Queued");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.ShardState.Success:
-				writer.Write("ShardState.Success");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.ShardState");
+				writer.Write(".Success");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.ShardState.Waiting:
-				writer.Write("ShardState.Waiting");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.ShardState");
+				writer.Write(".Waiting");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ShardState value.");

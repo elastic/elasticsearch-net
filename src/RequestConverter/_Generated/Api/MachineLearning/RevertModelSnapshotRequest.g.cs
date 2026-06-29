@@ -27,7 +27,7 @@ public partial class RevertModelSnapshotRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RevertModelSnapshotRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest", false);
 		{
 			initializer.Property("JobId");
 			JobId.FormatCode(writer);

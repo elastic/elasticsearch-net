@@ -27,7 +27,7 @@ public partial class NodeStatistics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeStatistics", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.NodeStatistics", false);
 		{
 			initializer.Property("Failed");
 			writer.WriteValue(Failed);

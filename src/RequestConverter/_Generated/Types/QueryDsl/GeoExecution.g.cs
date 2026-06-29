@@ -30,10 +30,12 @@ public static class GeoExecutionCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution.Indexed:
-				writer.Write("GeoExecution.Indexed");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution");
+				writer.Write(".Indexed");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution.Memory:
-				writer.Write("GeoExecution.Memory");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution");
+				writer.Write(".Memory");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected GeoExecution value.");

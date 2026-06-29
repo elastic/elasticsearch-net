@@ -27,7 +27,7 @@ public partial class WildcardQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("WildcardQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery", false);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

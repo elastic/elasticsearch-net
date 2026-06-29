@@ -27,7 +27,7 @@ public partial class SettingsSimilarityBm25 : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SettingsSimilarityBm25", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25", true);
 		if (B is not null)
 		{
 			initializer.Property("B");

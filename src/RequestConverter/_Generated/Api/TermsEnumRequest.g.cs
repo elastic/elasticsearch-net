@@ -27,7 +27,7 @@ public partial class TermsEnumRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TermsEnumRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TermsEnumRequest", false);
 		{
 			initializer.Property("Indices");
 			Indices.FormatCode(writer);

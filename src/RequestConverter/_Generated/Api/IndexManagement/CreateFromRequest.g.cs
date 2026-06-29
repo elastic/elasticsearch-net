@@ -27,7 +27,7 @@ public partial class CreateFromRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CreateFromRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest", false);
 		{
 			initializer.Property("Dest");
 			Dest.FormatCode(writer);

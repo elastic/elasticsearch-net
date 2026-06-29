@@ -27,7 +27,7 @@ public partial class IndexingSlowlogSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndexingSlowlogSettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettings", false);
 		if (Level is not null)
 		{
 			initializer.Property("Level");

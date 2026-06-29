@@ -27,7 +27,7 @@ public partial class NodeJvmInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeJvmInfo", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeJvmInfo", false);
 		{
 			initializer.Property("GcCollectors");
 			writer.WriteInlineList(GcCollectors, (w, item) => { w.WriteString(item); });

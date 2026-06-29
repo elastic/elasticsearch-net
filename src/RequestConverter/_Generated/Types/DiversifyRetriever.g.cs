@@ -27,7 +27,7 @@ public partial class DiversifyRetriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DiversifyRetriever", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.DiversifyRetriever", false);
 		{
 			initializer.Property("Field");
 			writer.WriteString(Field);

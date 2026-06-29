@@ -27,7 +27,7 @@ public partial class ScheduleNowTransformRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ScheduleNowTransformRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest", false);
 		{
 			initializer.Property("TransformId");
 			TransformId.FormatCode(writer);

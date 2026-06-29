@@ -27,7 +27,7 @@ public partial class ShardsStatsSummary : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ShardsStatsSummary", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsSummary", false);
 		{
 			initializer.Property("Incremental");
 			Incremental.FormatCode(writer);

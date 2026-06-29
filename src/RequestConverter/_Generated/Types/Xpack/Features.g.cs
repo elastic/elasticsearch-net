@@ -27,7 +27,7 @@ public partial class Features : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Features", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.Features", false);
 		{
 			initializer.Property("AggregateMetric");
 			AggregateMetric.FormatCode(writer);

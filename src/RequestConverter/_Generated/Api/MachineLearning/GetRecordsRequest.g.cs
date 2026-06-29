@@ -27,7 +27,7 @@ public partial class GetRecordsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetRecordsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest", false);
 		{
 			initializer.Property("JobId");
 			JobId.FormatCode(writer);

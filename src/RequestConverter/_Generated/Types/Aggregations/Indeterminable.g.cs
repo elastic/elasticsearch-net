@@ -27,7 +27,7 @@ public partial class Indeterminable : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Indeterminable", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.Indeterminable", false);
 		{
 			initializer.Property("Reason");
 			writer.WriteString(Reason);

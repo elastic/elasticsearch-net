@@ -30,13 +30,16 @@ public static class LifecycleOperationModeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.LifecycleOperationMode.Running:
-				writer.Write("LifecycleOperationMode.Running");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.LifecycleOperationMode");
+				writer.Write(".Running");
 				break;
 			case Elastic.Clients.Elasticsearch.LifecycleOperationMode.Stopped:
-				writer.Write("LifecycleOperationMode.Stopped");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.LifecycleOperationMode");
+				writer.Write(".Stopped");
 				break;
 			case Elastic.Clients.Elasticsearch.LifecycleOperationMode.Stopping:
-				writer.Write("LifecycleOperationMode.Stopping");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.LifecycleOperationMode");
+				writer.Write(".Stopping");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected LifecycleOperationMode value.");

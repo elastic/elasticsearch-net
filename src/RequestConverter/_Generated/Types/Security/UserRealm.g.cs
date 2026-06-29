@@ -27,7 +27,7 @@ public partial class UserRealm : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("UserRealm", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.UserRealm", false);
 		{
 			initializer.Property("Name");
 			writer.WriteString(Name);

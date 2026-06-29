@@ -27,7 +27,7 @@ public partial class DataframeEvaluationClass : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframeEvaluationClass", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClass", false);
 		{
 			initializer.Property("ClassName");
 			writer.WriteString(ClassName);

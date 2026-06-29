@@ -27,7 +27,7 @@ public partial class DataframeEvaluationClassification : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframeEvaluationClassification", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification", false);
 		{
 			initializer.Property("ActualField");
 			ActualField.FormatCode(writer);

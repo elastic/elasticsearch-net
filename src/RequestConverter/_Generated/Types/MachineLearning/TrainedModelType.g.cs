@@ -30,13 +30,16 @@ public static class TrainedModelTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType.LangIdent:
-				writer.Write("TrainedModelType.LangIdent");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType");
+				writer.Write(".LangIdent");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType.Pytorch:
-				writer.Write("TrainedModelType.Pytorch");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType");
+				writer.Write(".Pytorch");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType.TreeEnsemble:
-				writer.Write("TrainedModelType.TreeEnsemble");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType");
+				writer.Write(".TreeEnsemble");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TrainedModelType value.");

@@ -27,7 +27,7 @@ public partial class IpDatabaseConfigurationMetadata : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IpDatabaseConfigurationMetadata", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.IpDatabaseConfigurationMetadata", false);
 		{
 			initializer.Property("Database");
 			Database.FormatCode(writer);

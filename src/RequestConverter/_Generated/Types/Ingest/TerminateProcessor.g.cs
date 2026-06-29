@@ -27,7 +27,7 @@ public partial class TerminateProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TerminateProcessor", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.TerminateProcessor", false);
 		if (Description is not null)
 		{
 			initializer.Property("Description");

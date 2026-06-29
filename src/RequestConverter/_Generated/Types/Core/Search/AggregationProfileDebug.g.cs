@@ -27,7 +27,7 @@ public partial class AggregationProfileDebug : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AggregationProfileDebug", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDebug", false);
 		if (BruteForceUsed is not null)
 		{
 			initializer.Property("BruteForceUsed");

@@ -27,7 +27,7 @@ public partial class DateDecayFunction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DateDecayFunction", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunction", true);
 		{
 			initializer.Property("Field");
 			Field.FormatCode(writer);

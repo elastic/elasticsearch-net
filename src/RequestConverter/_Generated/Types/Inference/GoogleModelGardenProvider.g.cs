@@ -30,22 +30,28 @@ public static class GoogleModelGardenProviderCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.Ai21:
-				writer.Write("GoogleModelGardenProvider.Ai21");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider");
+				writer.Write(".Ai21");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.Anthropic:
-				writer.Write("GoogleModelGardenProvider.Anthropic");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider");
+				writer.Write(".Anthropic");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.Google:
-				writer.Write("GoogleModelGardenProvider.Google");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider");
+				writer.Write(".Google");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.HuggingFace:
-				writer.Write("GoogleModelGardenProvider.HuggingFace");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider");
+				writer.Write(".HuggingFace");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.Meta:
-				writer.Write("GoogleModelGardenProvider.Meta");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider");
+				writer.Write(".Meta");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.Mistral:
-				writer.Write("GoogleModelGardenProvider.Mistral");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider");
+				writer.Write(".Mistral");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected GoogleModelGardenProvider value.");

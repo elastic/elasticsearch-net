@@ -27,7 +27,7 @@ public partial class NodeInfoXpackSecurityAuthcRealmsStatus : RequestConverter.I
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeInfoXpackSecurityAuthcRealmsStatus", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus", false);
 		if (Enabled is not null)
 		{
 			initializer.Property("Enabled");

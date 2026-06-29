@@ -30,19 +30,24 @@ public static class EmbeddingContentTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType.Audio:
-				writer.Write("EmbeddingContentType.Audio");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType");
+				writer.Write(".Audio");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType.Image:
-				writer.Write("EmbeddingContentType.Image");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType");
+				writer.Write(".Image");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType.Pdf:
-				writer.Write("EmbeddingContentType.Pdf");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType");
+				writer.Write(".Pdf");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType.Text:
-				writer.Write("EmbeddingContentType.Text");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType");
+				writer.Write(".Text");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType.Video:
-				writer.Write("EmbeddingContentType.Video");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType");
+				writer.Write(".Video");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected EmbeddingContentType value.");

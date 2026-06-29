@@ -30,10 +30,12 @@ public static class CategorizationStatusCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.CategorizationStatus.Ok:
-				writer.Write("CategorizationStatus.Ok");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.CategorizationStatus");
+				writer.Write(".Ok");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.CategorizationStatus.Warn:
-				writer.Write("CategorizationStatus.Warn");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.CategorizationStatus");
+				writer.Write(".Warn");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected CategorizationStatus value.");

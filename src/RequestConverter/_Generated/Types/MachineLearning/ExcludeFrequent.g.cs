@@ -30,16 +30,20 @@ public static class ExcludeFrequentCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent.All:
-				writer.Write("ExcludeFrequent.All");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent");
+				writer.Write(".All");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent.By:
-				writer.Write("ExcludeFrequent.By");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent");
+				writer.Write(".By");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent.None:
-				writer.Write("ExcludeFrequent.None");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent");
+				writer.Write(".None");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent.Over:
-				writer.Write("ExcludeFrequent.Over");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent");
+				writer.Write(".Over");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ExcludeFrequent value.");

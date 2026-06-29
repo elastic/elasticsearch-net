@@ -27,7 +27,7 @@ public partial class SegmentsStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SegmentsStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SegmentsStats", false);
 		{
 			initializer.Property("Count");
 			writer.WriteValue(Count);
@@ -47,10 +47,12 @@ public partial class SegmentsStats : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("FileSizes");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo");
 			writer.Write(">()");
 			writer.WriteBlockList(FileSizes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

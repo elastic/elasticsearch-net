@@ -27,7 +27,7 @@ public partial class ScriptField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ScriptField", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ScriptField", false);
 		if (IgnoreFailure is not null)
 		{
 			initializer.Property("IgnoreFailure");

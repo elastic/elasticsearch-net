@@ -27,7 +27,7 @@ public partial class MatchPhrasePrefixQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MatchPhrasePrefixQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery", false);
 		if (Analyzer is not null)
 		{
 			initializer.Property("Analyzer");

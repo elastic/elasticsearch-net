@@ -27,7 +27,7 @@ public partial class ChangeType : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ChangeType", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.ChangeType", false);
 		if (Dip is not null)
 		{
 			initializer.Property("Dip");

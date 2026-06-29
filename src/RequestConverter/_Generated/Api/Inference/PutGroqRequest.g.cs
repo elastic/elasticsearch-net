@@ -27,7 +27,7 @@ public partial class PutGroqRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutGroqRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutGroqRequest", false);
 		{
 			initializer.Property("GroqInferenceId");
 			GroqInferenceId.FormatCode(writer);

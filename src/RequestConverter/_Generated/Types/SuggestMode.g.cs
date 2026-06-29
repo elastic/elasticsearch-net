@@ -30,13 +30,16 @@ public static class SuggestModeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.SuggestMode.Always:
-				writer.Write("SuggestMode.Always");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SuggestMode");
+				writer.Write(".Always");
 				break;
 			case Elastic.Clients.Elasticsearch.SuggestMode.Missing:
-				writer.Write("SuggestMode.Missing");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SuggestMode");
+				writer.Write(".Missing");
 				break;
 			case Elastic.Clients.Elasticsearch.SuggestMode.Popular:
-				writer.Write("SuggestMode.Popular");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SuggestMode");
+				writer.Write(".Popular");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SuggestMode value.");

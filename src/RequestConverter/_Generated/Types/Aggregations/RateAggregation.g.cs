@@ -27,7 +27,7 @@ public partial class RateAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RateAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.RateAggregation", false);
 		if (Field is not null)
 		{
 			initializer.Property("Field");

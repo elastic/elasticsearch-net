@@ -27,7 +27,7 @@ public partial class ModelSizeStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ModelSizeStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ModelSizeStats", false);
 		if (AssignmentMemoryBasis is not null)
 		{
 			initializer.Property("AssignmentMemoryBasis");

@@ -27,7 +27,7 @@ public partial class DataStreamWithLifecycle : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataStreamWithLifecycle", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DataStreamWithLifecycle", false);
 		if (Lifecycle is not null)
 		{
 			initializer.Property("Lifecycle");

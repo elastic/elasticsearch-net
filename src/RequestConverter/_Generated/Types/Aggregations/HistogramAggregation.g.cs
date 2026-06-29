@@ -27,7 +27,7 @@ public partial class HistogramAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("HistogramAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation", false);
 		if (ExtendedBounds is not null)
 		{
 			initializer.Property("ExtendedBounds");

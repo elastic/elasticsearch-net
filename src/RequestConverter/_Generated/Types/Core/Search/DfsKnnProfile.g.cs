@@ -27,7 +27,7 @@ public partial class DfsKnnProfile : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DfsKnnProfile", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.DfsKnnProfile", false);
 		{
 			initializer.Property("Collector");
 			writer.WriteInlineList(Collector, (w, item) => { item.FormatCode(w); });

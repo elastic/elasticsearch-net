@@ -27,7 +27,7 @@ public partial class CancelMigrateReindexRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CancelMigrateReindexRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest", false);
 		{
 			initializer.Property("Indices");
 			Indices.FormatCode(writer);

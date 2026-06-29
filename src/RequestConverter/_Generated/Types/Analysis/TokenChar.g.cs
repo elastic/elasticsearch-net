@@ -30,22 +30,28 @@ public static class TokenCharCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.TokenChar.Custom:
-				writer.Write("TokenChar.Custom");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.TokenChar");
+				writer.Write(".Custom");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.TokenChar.Digit:
-				writer.Write("TokenChar.Digit");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.TokenChar");
+				writer.Write(".Digit");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.TokenChar.Letter:
-				writer.Write("TokenChar.Letter");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.TokenChar");
+				writer.Write(".Letter");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.TokenChar.Punctuation:
-				writer.Write("TokenChar.Punctuation");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.TokenChar");
+				writer.Write(".Punctuation");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.TokenChar.Symbol:
-				writer.Write("TokenChar.Symbol");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.TokenChar");
+				writer.Write(".Symbol");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.TokenChar.Whitespace:
-				writer.Write("TokenChar.Whitespace");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.TokenChar");
+				writer.Write(".Whitespace");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TokenChar value.");

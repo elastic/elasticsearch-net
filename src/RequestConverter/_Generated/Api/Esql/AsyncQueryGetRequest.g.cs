@@ -27,7 +27,7 @@ public partial class AsyncQueryGetRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AsyncQueryGetRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequest", false);
 		{
 			initializer.Property("Id");
 			Id.FormatCode(writer);

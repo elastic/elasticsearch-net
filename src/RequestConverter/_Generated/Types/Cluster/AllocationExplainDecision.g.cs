@@ -30,16 +30,20 @@ public static class AllocationExplainDecisionCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision.Always:
-				writer.Write("AllocationExplainDecision.Always");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision");
+				writer.Write(".Always");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision.No:
-				writer.Write("AllocationExplainDecision.No");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision");
+				writer.Write(".No");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision.Throttle:
-				writer.Write("AllocationExplainDecision.Throttle");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision");
+				writer.Write(".Throttle");
 				break;
 			case Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision.Yes:
-				writer.Write("AllocationExplainDecision.Yes");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision");
+				writer.Write(".Yes");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected AllocationExplainDecision value.");

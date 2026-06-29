@@ -27,7 +27,7 @@ public partial class ScandinavianFoldingTokenFilter : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ScandinavianFoldingTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.ScandinavianFoldingTokenFilter", true);
 		if (Version is not null)
 		{
 			initializer.Property("Version");

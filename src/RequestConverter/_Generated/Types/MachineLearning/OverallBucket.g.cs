@@ -27,7 +27,7 @@ public partial class OverallBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("OverallBucket", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.OverallBucket", false);
 		{
 			initializer.Property("BucketSpan");
 			writer.WriteValue(BucketSpan);

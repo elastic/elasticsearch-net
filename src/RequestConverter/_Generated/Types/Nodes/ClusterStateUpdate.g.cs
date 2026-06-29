@@ -27,7 +27,7 @@ public partial class ClusterStateUpdate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ClusterStateUpdate", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.ClusterStateUpdate", false);
 		if (CommitTime is not null)
 		{
 			initializer.Property("CommitTime");

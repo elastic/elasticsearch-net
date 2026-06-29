@@ -29,7 +29,9 @@ public partial class TrackHits : RequestConverter.ICodeFormattable
 	{
 		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 		{
-			writer.Write("new TrackHits(");
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.TrackHits");
+			writer.Write("(");
 			writer.WriteValue(Value1);
 			writer.Write(")");
 			return;
@@ -37,7 +39,9 @@ public partial class TrackHits : RequestConverter.ICodeFormattable
 
 		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T2)
 		{
-			writer.Write("new TrackHits(");
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.TrackHits");
+			writer.Write("(");
 			writer.WriteValue(Value2);
 			writer.Write(")");
 			return;

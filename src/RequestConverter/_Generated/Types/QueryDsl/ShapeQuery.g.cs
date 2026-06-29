@@ -27,7 +27,7 @@ public partial class ShapeQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ShapeQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery", false);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

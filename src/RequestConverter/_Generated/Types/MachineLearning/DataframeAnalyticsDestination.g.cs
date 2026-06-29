@@ -27,7 +27,7 @@ public partial class DataframeAnalyticsDestination : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframeAnalyticsDestination", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination", false);
 		{
 			initializer.Property("Index");
 			Index.FormatCode(writer);

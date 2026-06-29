@@ -27,7 +27,7 @@ public partial class ParentReindexStatus : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ParentReindexStatus", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ParentReindexStatus", false);
 		{
 			initializer.Property("Batches");
 			writer.WriteValue(Batches);

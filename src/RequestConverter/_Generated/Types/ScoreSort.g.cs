@@ -27,7 +27,7 @@ public partial class ScoreSort : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ScoreSort", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ScoreSort", false);
 		if (Order is not null)
 		{
 			initializer.Property("Order");

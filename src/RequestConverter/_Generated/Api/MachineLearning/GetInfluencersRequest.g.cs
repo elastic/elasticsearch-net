@@ -27,7 +27,7 @@ public partial class GetInfluencersRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetInfluencersRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest", false);
 		{
 			initializer.Property("JobId");
 			JobId.FormatCode(writer);

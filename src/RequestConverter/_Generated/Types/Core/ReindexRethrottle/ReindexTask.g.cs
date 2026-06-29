@@ -27,7 +27,7 @@ public partial class ReindexTask : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ReindexTask", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexTask", false);
 		{
 			initializer.Property("Action");
 			writer.WriteString(Action);
@@ -50,10 +50,12 @@ public partial class ReindexTask : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("Headers");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("System.Collections.Generic.ICollection<string>");
+			writer.WriteTypeRef("System.Collections.Generic.ICollection<string>");
 			writer.Write(">()");
 			writer.WriteBlockList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteString(item); }); w.Write(" }"); });
 		}

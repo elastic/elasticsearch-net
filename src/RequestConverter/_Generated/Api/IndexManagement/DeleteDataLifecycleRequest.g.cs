@@ -27,7 +27,7 @@ public partial class DeleteDataLifecycleRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteDataLifecycleRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

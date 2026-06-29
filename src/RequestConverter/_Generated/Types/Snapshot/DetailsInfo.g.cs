@@ -27,7 +27,7 @@ public partial class DetailsInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DetailsInfo", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.DetailsInfo", false);
 		{
 			initializer.Property("Blob");
 			Blob.FormatCode(writer);

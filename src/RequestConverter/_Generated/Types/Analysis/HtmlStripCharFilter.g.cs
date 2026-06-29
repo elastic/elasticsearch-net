@@ -27,7 +27,7 @@ public partial class HtmlStripCharFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("HtmlStripCharFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter", true);
 		if (EscapedTags is not null)
 		{
 			initializer.Property("EscapedTags");

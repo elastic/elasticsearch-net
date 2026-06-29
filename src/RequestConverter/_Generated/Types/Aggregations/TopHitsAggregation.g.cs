@@ -27,7 +27,7 @@ public partial class TopHitsAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TopHitsAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation", false);
 		if (DocvalueFields is not null)
 		{
 			initializer.Property("DocvalueFields");
@@ -79,10 +79,12 @@ public partial class TopHitsAggregation : RequestConverter.ICodeFormattable
 		if (ScriptFields is not null)
 		{
 			initializer.Property("ScriptFields");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.ScriptField");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ScriptField");
 			writer.Write(">()");
 			writer.WriteBlockList(ScriptFields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

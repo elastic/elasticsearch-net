@@ -27,7 +27,7 @@ public partial class GeoDistanceAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GeoDistanceAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation", false);
 		if (DistanceType is not null)
 		{
 			initializer.Property("DistanceType");

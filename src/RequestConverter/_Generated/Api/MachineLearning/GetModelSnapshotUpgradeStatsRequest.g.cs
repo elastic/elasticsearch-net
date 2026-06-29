@@ -27,7 +27,7 @@ public partial class GetModelSnapshotUpgradeStatsRequest : RequestConverter.ICod
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetModelSnapshotUpgradeStatsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequest", false);
 		{
 			initializer.Property("JobId");
 			JobId.FormatCode(writer);

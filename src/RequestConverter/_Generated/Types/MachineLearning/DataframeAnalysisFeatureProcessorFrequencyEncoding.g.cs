@@ -27,7 +27,7 @@ public partial class DataframeAnalysisFeatureProcessorFrequencyEncoding : Reques
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframeAnalysisFeatureProcessorFrequencyEncoding", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding", false);
 		{
 			initializer.Property("FeatureName");
 			FeatureName.FormatCode(writer);
@@ -40,10 +40,12 @@ public partial class DataframeAnalysisFeatureProcessorFrequencyEncoding : Reques
 
 		{
 			initializer.Property("FrequencyMap");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("double");
+			writer.WriteTypeRef("double");
 			writer.Write(">()");
 			writer.WriteBlockList(FrequencyMap, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); });
 		}

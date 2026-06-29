@@ -27,7 +27,7 @@ public partial class GetMappingRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetMappingRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest", false);
 		if (Indices is not null)
 		{
 			initializer.Property("Indices");

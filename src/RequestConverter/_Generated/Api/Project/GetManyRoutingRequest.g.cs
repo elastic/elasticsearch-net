@@ -27,7 +27,7 @@ public partial class GetManyRoutingRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetManyRoutingRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequest", false);
 		initializer.Dispose();
 	}
 }

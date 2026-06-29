@@ -27,7 +27,7 @@ public partial class PointInTimeReference : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PointInTimeReference", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference", false);
 		{
 			initializer.Property("Id");
 			writer.WriteString(Id);

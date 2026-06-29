@@ -27,7 +27,7 @@ public partial class StatsBucketAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("StatsBucketAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregation", false);
 		if (BucketsPath is not null)
 		{
 			initializer.Property("BucketsPath");

@@ -27,7 +27,7 @@ public partial class AdaptiveSelection : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AdaptiveSelection", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection", false);
 		if (AvgQueueSize is not null)
 		{
 			initializer.Property("AvgQueueSize");

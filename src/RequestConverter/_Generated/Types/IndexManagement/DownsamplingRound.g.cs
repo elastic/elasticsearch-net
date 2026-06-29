@@ -27,7 +27,7 @@ public partial class DownsamplingRound : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DownsamplingRound", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound", false);
 		{
 			initializer.Property("After");
 			After.FormatCode(writer);

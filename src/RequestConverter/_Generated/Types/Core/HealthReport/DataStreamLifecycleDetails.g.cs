@@ -27,7 +27,7 @@ public partial class DataStreamLifecycleDetails : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataStreamLifecycleDetails", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.HealthReport.DataStreamLifecycleDetails", false);
 		if (StagnatingBackingIndices is not null)
 		{
 			initializer.Property("StagnatingBackingIndices");

@@ -27,7 +27,7 @@ public partial class DataframeOutlierDetectionSummary : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframeOutlierDetectionSummary", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeOutlierDetectionSummary", false);
 		if (AucRoc is not null)
 		{
 			initializer.Property("AucRoc");
@@ -37,10 +37,12 @@ public partial class DataframeOutlierDetectionSummary : RequestConverter.ICodeFo
 		if (ConfusionMatrix is not null)
 		{
 			initializer.Property("ConfusionMatrix");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.MachineLearning.ConfusionMatrixThreshold");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.ConfusionMatrixThreshold");
 			writer.Write(">()");
 			writer.WriteBlockList(ConfusionMatrix, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
@@ -48,10 +50,12 @@ public partial class DataframeOutlierDetectionSummary : RequestConverter.ICodeFo
 		if (Precision is not null)
 		{
 			initializer.Property("Precision");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("double");
+			writer.WriteTypeRef("double");
 			writer.Write(">()");
 			writer.WriteBlockList(Precision, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); });
 		}
@@ -59,10 +63,12 @@ public partial class DataframeOutlierDetectionSummary : RequestConverter.ICodeFo
 		if (Recall is not null)
 		{
 			initializer.Property("Recall");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("double");
+			writer.WriteTypeRef("double");
 			writer.Write(">()");
 			writer.WriteBlockList(Recall, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); });
 		}

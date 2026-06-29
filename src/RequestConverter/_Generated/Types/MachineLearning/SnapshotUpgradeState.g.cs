@@ -30,16 +30,20 @@ public static class SnapshotUpgradeStateCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState.Failed:
-				writer.Write("SnapshotUpgradeState.Failed");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState");
+				writer.Write(".Failed");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState.LoadingOldState:
-				writer.Write("SnapshotUpgradeState.LoadingOldState");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState");
+				writer.Write(".LoadingOldState");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState.SavingNewState:
-				writer.Write("SnapshotUpgradeState.SavingNewState");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState");
+				writer.Write(".SavingNewState");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState.Stopped:
-				writer.Write("SnapshotUpgradeState.Stopped");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState");
+				writer.Write(".Stopped");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SnapshotUpgradeState value.");

@@ -27,7 +27,7 @@ public partial class Context : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Context", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.GetScriptContext.Context", false);
 		{
 			initializer.Property("Methods");
 			writer.WriteInlineList(Methods, (w, item) => { item.FormatCode(w); });

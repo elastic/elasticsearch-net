@@ -27,7 +27,7 @@ public partial class QueryUserRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("QueryUserRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.QueryUserRequest", false);
 		if (WithProfileUid is not null)
 		{
 			initializer.Property("WithProfileUid");

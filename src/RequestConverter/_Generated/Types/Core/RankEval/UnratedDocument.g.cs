@@ -27,7 +27,7 @@ public partial class UnratedDocument : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("UnratedDocument", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.RankEval.UnratedDocument", false);
 		{
 			initializer.Property("Id");
 			writer.WriteString(Id);

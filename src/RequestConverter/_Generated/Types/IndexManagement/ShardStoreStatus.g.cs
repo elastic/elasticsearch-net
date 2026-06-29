@@ -30,16 +30,20 @@ public static class ShardStoreStatusCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.All:
-				writer.Write("ShardStoreStatus.All");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus");
+				writer.Write(".All");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.Green:
-				writer.Write("ShardStoreStatus.Green");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus");
+				writer.Write(".Green");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.Red:
-				writer.Write("ShardStoreStatus.Red");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus");
+				writer.Write(".Red");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.Yellow:
-				writer.Write("ShardStoreStatus.Yellow");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus");
+				writer.Write(".Yellow");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ShardStoreStatus value.");

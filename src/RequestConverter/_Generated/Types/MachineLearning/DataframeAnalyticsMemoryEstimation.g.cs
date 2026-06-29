@@ -27,7 +27,7 @@ public partial class DataframeAnalyticsMemoryEstimation : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframeAnalyticsMemoryEstimation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsMemoryEstimation", false);
 		{
 			initializer.Property("ExpectedMemoryWithDisk");
 			writer.WriteString(ExpectedMemoryWithDisk);

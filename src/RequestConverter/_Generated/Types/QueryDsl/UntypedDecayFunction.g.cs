@@ -27,7 +27,7 @@ public partial class UntypedDecayFunction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("UntypedDecayFunction", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction", true);
 		{
 			initializer.Property("Field");
 			Field.FormatCode(writer);

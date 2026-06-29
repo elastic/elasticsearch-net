@@ -27,7 +27,7 @@ public partial class RateLimitSetting : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RateLimitSetting", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.RateLimitSetting", false);
 		if (RequestsPerMinute is not null)
 		{
 			initializer.Property("RequestsPerMinute");

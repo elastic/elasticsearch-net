@@ -27,7 +27,7 @@ public partial class GeoDecayFunction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GeoDecayFunction", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction", true);
 		{
 			initializer.Property("Field");
 			Field.FormatCode(writer);

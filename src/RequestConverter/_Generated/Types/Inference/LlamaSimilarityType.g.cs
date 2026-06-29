@@ -30,13 +30,16 @@ public static class LlamaSimilarityTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType.Cosine:
-				writer.Write("LlamaSimilarityType.Cosine");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType");
+				writer.Write(".Cosine");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType.DotProduct:
-				writer.Write("LlamaSimilarityType.DotProduct");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType");
+				writer.Write(".DotProduct");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType.L2Norm:
-				writer.Write("LlamaSimilarityType.L2Norm");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType");
+				writer.Write(".L2Norm");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected LlamaSimilarityType value.");

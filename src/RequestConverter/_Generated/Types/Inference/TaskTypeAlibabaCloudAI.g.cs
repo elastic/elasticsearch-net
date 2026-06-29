@@ -30,16 +30,20 @@ public static class TaskTypeAlibabaCloudAICodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI.Completion:
-				writer.Write("TaskTypeAlibabaCloudAI.Completion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI");
+				writer.Write(".Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI.Rerank:
-				writer.Write("TaskTypeAlibabaCloudAI.Rerank");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI");
+				writer.Write(".Rerank");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI.SparseEmbedding:
-				writer.Write("TaskTypeAlibabaCloudAI.SparseEmbedding");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI");
+				writer.Write(".SparseEmbedding");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI.TextEmbedding:
-				writer.Write("TaskTypeAlibabaCloudAI.TextEmbedding");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI");
+				writer.Write(".TextEmbedding");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeAlibabaCloudAI value.");

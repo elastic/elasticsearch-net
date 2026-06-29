@@ -27,7 +27,7 @@ public partial class PhraseSuggester : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PhraseSuggester", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester", false);
 		if (Analyzer is not null)
 		{
 			initializer.Property("Analyzer");

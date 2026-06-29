@@ -27,7 +27,7 @@ public partial class IndexDetails : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndexDetails", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.IndexDetails", false);
 		{
 			initializer.Property("MaxSegmentsPerShard");
 			writer.WriteValue(MaxSegmentsPerShard);

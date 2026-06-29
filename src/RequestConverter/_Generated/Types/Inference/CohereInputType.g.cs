@@ -30,16 +30,20 @@ public static class CohereInputTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.CohereInputType.Classification:
-				writer.Write("CohereInputType.Classification");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.CohereInputType");
+				writer.Write(".Classification");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.CohereInputType.Clustering:
-				writer.Write("CohereInputType.Clustering");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.CohereInputType");
+				writer.Write(".Clustering");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.CohereInputType.Ingest:
-				writer.Write("CohereInputType.Ingest");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.CohereInputType");
+				writer.Write(".Ingest");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.CohereInputType.Search:
-				writer.Write("CohereInputType.Search");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.CohereInputType");
+				writer.Write(".Search");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected CohereInputType value.");

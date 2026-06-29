@@ -27,7 +27,7 @@ public partial class DataStreamLifecycleIndicator : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataStreamLifecycleIndicator", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.HealthReport.DataStreamLifecycleIndicator", false);
 		if (Details is not null)
 		{
 			initializer.Property("Details");

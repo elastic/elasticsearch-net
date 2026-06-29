@@ -27,7 +27,7 @@ public partial class JobBlocked : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("JobBlocked", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.JobBlocked", false);
 		{
 			initializer.Property("Reason");
 			Elastic.Clients.Elasticsearch.MachineLearning.JobBlockedReasonCodeFormatter.FormatCode(Reason, writer);

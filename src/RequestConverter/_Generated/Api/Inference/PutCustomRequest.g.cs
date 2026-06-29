@@ -27,7 +27,7 @@ public partial class PutCustomRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutCustomRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutCustomRequest", false);
 		{
 			initializer.Property("CustomInferenceId");
 			CustomInferenceId.FormatCode(writer);

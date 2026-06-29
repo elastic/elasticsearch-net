@@ -27,7 +27,7 @@ public partial class Message : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Message", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.Message", false);
 		if (Content is not null)
 		{
 			initializer.Property("Content");
@@ -37,7 +37,9 @@ public partial class Message : RequestConverter.ICodeFormattable
 			}
 			else
 			{
-				writer.Write("new Elastic.Clients.Elasticsearch.Inference.ContentObject[] ");
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ContentObject");
+				writer.Write("[] ");
 				writer.WriteInlineList(Content.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", ");
 			}
 		}

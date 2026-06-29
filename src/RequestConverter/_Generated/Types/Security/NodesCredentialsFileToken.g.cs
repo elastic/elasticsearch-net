@@ -27,7 +27,7 @@ public partial class NodesCredentialsFileToken : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodesCredentialsFileToken", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.NodesCredentialsFileToken", false);
 		{
 			initializer.Property("Nodes");
 			writer.WriteInlineList(Nodes, (w, item) => { w.WriteString(item); });

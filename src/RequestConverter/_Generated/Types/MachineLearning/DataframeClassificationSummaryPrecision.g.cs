@@ -27,7 +27,7 @@ public partial class DataframeClassificationSummaryPrecision : RequestConverter.
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframeClassificationSummaryPrecision", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryPrecision", false);
 		{
 			initializer.Property("AvgPrecision");
 			writer.WriteValue(AvgPrecision);

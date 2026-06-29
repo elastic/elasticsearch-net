@@ -27,7 +27,7 @@ public partial class IndexSettingsLifecycle : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndexSettingsLifecycle", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle", false);
 		if (IndexingComplete is not null)
 		{
 			initializer.Property("IndexingComplete");

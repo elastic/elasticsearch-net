@@ -27,7 +27,7 @@ public partial class IndexingStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndexingStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexingStats", false);
 		{
 			initializer.Property("DeleteCurrent");
 			writer.WriteValue(DeleteCurrent);
@@ -119,10 +119,12 @@ public partial class IndexingStats : RequestConverter.ICodeFormattable
 		if (Types is not null)
 		{
 			initializer.Property("Types");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.IndexingStats");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexingStats");
 			writer.Write(">()");
 			writer.WriteBlockList(Types, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

@@ -27,7 +27,7 @@ public partial class DiversifiedSamplerAggregation : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DiversifiedSamplerAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation", false);
 		if (ExecutionHint is not null)
 		{
 			initializer.Property("ExecutionHint");

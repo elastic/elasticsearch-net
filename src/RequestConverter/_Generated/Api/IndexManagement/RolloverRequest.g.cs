@@ -27,7 +27,7 @@ public partial class RolloverRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RolloverRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest", false);
 		{
 			initializer.Property("Alias");
 			Alias.FormatCode(writer);
@@ -72,10 +72,12 @@ public partial class RolloverRequest : RequestConverter.ICodeFormattable
 		if (Aliases is not null)
 		{
 			initializer.Property("Aliases");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("Elastic.Clients.Elasticsearch.IndexName");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexName");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.IndexManagement.Alias");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.Alias");
 			writer.Write(">()");
 			writer.WriteBlockList(Aliases, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
@@ -95,10 +97,12 @@ public partial class RolloverRequest : RequestConverter.ICodeFormattable
 		if (Settings is not null)
 		{
 			initializer.Property("Settings");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("object");
+			writer.WriteTypeRef("object");
 			writer.Write(">()");
 			writer.WriteBlockList(Settings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
 		}

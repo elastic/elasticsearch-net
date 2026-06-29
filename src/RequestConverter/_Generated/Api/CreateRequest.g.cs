@@ -27,7 +27,7 @@ public partial class CreateRequest<TDocument> : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CreateRequest<TDocument>", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.CreateRequest<TDocument>", false);
 		{
 			initializer.Property("Id");
 			Id.FormatCode(writer);

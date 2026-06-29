@@ -27,7 +27,7 @@ public partial class FiltersBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FiltersBucket", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.FiltersBucket", false);
 		if (Aggregations is not null)
 		{
 			initializer.Property("Aggregations");

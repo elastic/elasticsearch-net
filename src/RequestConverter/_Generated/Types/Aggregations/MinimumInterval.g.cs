@@ -30,22 +30,28 @@ public static class MinimumIntervalCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Day:
-				writer.Write("MinimumInterval.Day");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval");
+				writer.Write(".Day");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Hour:
-				writer.Write("MinimumInterval.Hour");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval");
+				writer.Write(".Hour");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Minute:
-				writer.Write("MinimumInterval.Minute");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval");
+				writer.Write(".Minute");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Month:
-				writer.Write("MinimumInterval.Month");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval");
+				writer.Write(".Month");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Second:
-				writer.Write("MinimumInterval.Second");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval");
+				writer.Write(".Second");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval.Year:
-				writer.Write("MinimumInterval.Year");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval");
+				writer.Write(".Year");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected MinimumInterval value.");

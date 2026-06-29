@@ -27,7 +27,7 @@ public partial class LookupQueryVectorBuilder : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("LookupQueryVectorBuilder", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.LookupQueryVectorBuilder", false);
 		{
 			initializer.Property("Id");
 			writer.WriteString(Id);

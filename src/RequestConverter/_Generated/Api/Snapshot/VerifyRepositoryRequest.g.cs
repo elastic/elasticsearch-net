@@ -27,7 +27,7 @@ public partial class VerifyRepositoryRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("VerifyRepositoryRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

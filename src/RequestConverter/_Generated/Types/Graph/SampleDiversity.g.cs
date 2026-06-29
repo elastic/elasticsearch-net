@@ -27,7 +27,7 @@ public partial class SampleDiversity : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SampleDiversity", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Graph.SampleDiversity", false);
 		{
 			initializer.Property("Field");
 			Field.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class AllField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AllField", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.AllField", false);
 		{
 			initializer.Property("Analyzer");
 			writer.WriteString(Analyzer);

@@ -27,7 +27,7 @@ public partial class Acknowledgement : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Acknowledgement", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.LicenseManagement.Acknowledgement", false);
 		{
 			initializer.Property("License");
 			writer.WriteInlineList(License, (w, item) => { w.WriteString(item); });

@@ -27,7 +27,7 @@ public partial class CharFilterTypes : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CharFilterTypes", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.CharFilterTypes", false);
 		{
 			initializer.Property("AnalyzerTypes");
 			writer.WriteInlineList(AnalyzerTypes, (w, item) => { item.FormatCode(w); });
@@ -71,10 +71,12 @@ public partial class CharFilterTypes : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("Synonyms");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Cluster.SynonymsStats");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.SynonymsStats");
 			writer.Write(">()");
 			writer.WriteBlockList(Synonyms, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

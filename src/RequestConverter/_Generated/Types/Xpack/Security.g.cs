@@ -27,7 +27,7 @@ public partial class Security : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Security", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.Security", false);
 		{
 			initializer.Property("Anonymous");
 			Anonymous.FormatCode(writer);
@@ -70,20 +70,24 @@ public partial class Security : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("Realms");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Xpack.Realm");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Xpack.Realm");
 			writer.Write(">()");
 			writer.WriteBlockList(Realms, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
 
 		{
 			initializer.Property("RoleMapping");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Xpack.RoleMapping");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Xpack.RoleMapping");
 			writer.Write(">()");
 			writer.WriteBlockList(RoleMapping, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

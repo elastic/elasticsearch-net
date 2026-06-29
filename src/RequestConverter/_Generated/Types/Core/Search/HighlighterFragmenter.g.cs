@@ -30,10 +30,12 @@ public static class HighlighterFragmenterCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter.Simple:
-				writer.Write("HighlighterFragmenter.Simple");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter");
+				writer.Write(".Simple");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter.Span:
-				writer.Write("HighlighterFragmenter.Span");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter");
+				writer.Write(".Span");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected HighlighterFragmenter value.");

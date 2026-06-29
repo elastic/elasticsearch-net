@@ -27,7 +27,7 @@ public partial class RepositoryVerifyIntegrityRequest : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RepositoryVerifyIntegrityRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

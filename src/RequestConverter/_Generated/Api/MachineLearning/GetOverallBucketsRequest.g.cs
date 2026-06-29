@@ -27,7 +27,7 @@ public partial class GetOverallBucketsRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetOverallBucketsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequest", false);
 		{
 			initializer.Property("JobId");
 			JobId.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class DeleteRoleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteRoleRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.DeleteRoleRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

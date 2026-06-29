@@ -27,7 +27,7 @@ public partial class ChunkRescorerChunkingSettings : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ChunkRescorerChunkingSettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.ChunkRescorerChunkingSettings", false);
 		{
 			initializer.Property("MaxChunkSize");
 			writer.WriteValue(MaxChunkSize);

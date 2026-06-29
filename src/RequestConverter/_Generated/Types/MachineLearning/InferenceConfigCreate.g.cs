@@ -27,7 +27,7 @@ public partial class InferenceConfigCreate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("InferenceConfigCreate", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate", false);
 		if (Classification is not null)
 		{
 			initializer.Property("Classification");

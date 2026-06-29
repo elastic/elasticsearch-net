@@ -30,13 +30,16 @@ public static class GridTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType.Centroid:
-				writer.Write("GridType.Centroid");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType");
+				writer.Write(".Centroid");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType.Grid:
-				writer.Write("GridType.Grid");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType");
+				writer.Write(".Grid");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType.Point:
-				writer.Write("GridType.Point");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType");
+				writer.Write(".Point");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected GridType value.");

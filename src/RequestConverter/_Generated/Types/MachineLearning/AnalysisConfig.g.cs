@@ -27,7 +27,7 @@ public partial class AnalysisConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AnalysisConfig", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig", false);
 		if (BucketSpan is not null)
 		{
 			initializer.Property("BucketSpan");

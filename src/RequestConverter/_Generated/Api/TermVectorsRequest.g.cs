@@ -27,7 +27,7 @@ public partial class TermVectorsRequest<TDocument> : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TermVectorsRequest<TDocument>", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TermVectorsRequest<TDocument>", false);
 		if (Id is not null)
 		{
 			initializer.Property("Id");
@@ -90,10 +90,12 @@ public partial class TermVectorsRequest<TDocument> : RequestConverter.ICodeForma
 		if (PerFieldAnalyzer is not null)
 		{
 			initializer.Property("PerFieldAnalyzer");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("Elastic.Clients.Elasticsearch.Field");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Field");
 			writer.Write(", ");
-			writer.Write("string");
+			writer.WriteTypeRef("string");
 			writer.Write(">()");
 			writer.WriteBlockList(PerFieldAnalyzer, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
 		}

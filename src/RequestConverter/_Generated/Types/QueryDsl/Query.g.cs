@@ -27,7 +27,7 @@ public partial class Query : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Query", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.Query", true);
 		if (Bool is not null)
 		{
 			initializer.Property("Bool");

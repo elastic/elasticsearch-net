@@ -27,7 +27,7 @@ public partial class SuggestFuzziness : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SuggestFuzziness", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness", false);
 		if (Fuzziness is not null)
 		{
 			initializer.Property("Fuzziness");

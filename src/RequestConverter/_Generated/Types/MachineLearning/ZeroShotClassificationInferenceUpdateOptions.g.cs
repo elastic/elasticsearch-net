@@ -27,7 +27,7 @@ public partial class ZeroShotClassificationInferenceUpdateOptions : RequestConve
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ZeroShotClassificationInferenceUpdateOptions", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceUpdateOptions", false);
 		{
 			initializer.Property("Labels");
 			writer.WriteInlineList(Labels, (w, item) => { w.WriteString(item); });

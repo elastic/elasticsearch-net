@@ -27,7 +27,7 @@ public partial class UserProfileHitMetadata : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("UserProfileHitMetadata", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.UserProfileHitMetadata", false);
 		{
 			initializer.Property("PrimaryTerm");
 			writer.WriteValue(PrimaryTerm);

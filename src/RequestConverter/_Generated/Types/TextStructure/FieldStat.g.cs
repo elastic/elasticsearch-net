@@ -27,7 +27,7 @@ public partial class FieldStat : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FieldStat", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TextStructure.FieldStat", false);
 		{
 			initializer.Property("Cardinality");
 			writer.WriteValue(Cardinality);

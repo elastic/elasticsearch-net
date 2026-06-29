@@ -27,7 +27,7 @@ public partial class DeletePipelineRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeletePipelineRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequest", false);
 		{
 			initializer.Property("Id");
 			Id.FormatCode(writer);

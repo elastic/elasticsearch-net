@@ -27,7 +27,7 @@ public partial class SetUpgradeModeRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SetUpgradeModeRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.SetUpgradeModeRequest", false);
 		if (Enabled is not null)
 		{
 			initializer.Property("Enabled");

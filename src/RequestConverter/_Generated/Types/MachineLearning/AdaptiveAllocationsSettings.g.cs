@@ -27,7 +27,7 @@ public partial class AdaptiveAllocationsSettings : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AdaptiveAllocationsSettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettings", false);
 		{
 			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);

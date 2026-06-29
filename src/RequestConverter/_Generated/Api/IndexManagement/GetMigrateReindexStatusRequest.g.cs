@@ -27,7 +27,7 @@ public partial class GetMigrateReindexStatusRequest : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetMigrateReindexStatusRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest", false);
 		{
 			initializer.Property("Indices");
 			Indices.FormatCode(writer);

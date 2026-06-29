@@ -27,7 +27,7 @@ public partial class FieldTypesMappings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FieldTypesMappings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.FieldTypesMappings", false);
 		{
 			initializer.Property("FieldTypes");
 			writer.WriteInlineList(FieldTypes, (w, item) => { item.FormatCode(w); });
@@ -40,10 +40,12 @@ public partial class FieldTypesMappings : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("SourceModes");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("int");
+			writer.WriteTypeRef("int");
 			writer.Write(">()");
 			writer.WriteBlockList(SourceModes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
 		}

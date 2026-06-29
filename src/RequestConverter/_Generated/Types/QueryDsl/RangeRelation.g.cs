@@ -30,13 +30,16 @@ public static class RangeRelationCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation.Contains:
-				writer.Write("RangeRelation.Contains");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation");
+				writer.Write(".Contains");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation.Intersects:
-				writer.Write("RangeRelation.Intersects");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation");
+				writer.Write(".Intersects");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation.Within:
-				writer.Write("RangeRelation.Within");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation");
+				writer.Write(".Within");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected RangeRelation value.");

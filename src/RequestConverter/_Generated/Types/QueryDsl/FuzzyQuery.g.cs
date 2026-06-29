@@ -27,7 +27,7 @@ public partial class FuzzyQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FuzzyQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery", false);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

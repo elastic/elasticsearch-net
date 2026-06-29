@@ -30,10 +30,12 @@ public static class ConflictsCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Conflicts.Abort:
-				writer.Write("Conflicts.Abort");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Conflicts");
+				writer.Write(".Abort");
 				break;
 			case Elastic.Clients.Elasticsearch.Conflicts.Proceed:
-				writer.Write("Conflicts.Proceed");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Conflicts");
+				writer.Write(".Proceed");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected Conflicts value.");

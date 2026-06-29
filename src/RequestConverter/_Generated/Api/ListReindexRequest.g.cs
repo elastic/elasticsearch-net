@@ -27,7 +27,7 @@ public partial class ListReindexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ListReindexRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ListReindexRequest", false);
 		if (Detailed is not null)
 		{
 			initializer.Property("Detailed");

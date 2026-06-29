@@ -27,7 +27,7 @@ public partial class ExecuteLifecycleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ExecuteLifecycleRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequest", false);
 		{
 			initializer.Property("PolicyId");
 			PolicyId.FormatCode(writer);

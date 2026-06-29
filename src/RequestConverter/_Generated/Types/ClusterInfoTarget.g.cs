@@ -30,19 +30,24 @@ public static class ClusterInfoTargetCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.ClusterInfoTarget.All:
-				writer.Write("ClusterInfoTarget.All");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ClusterInfoTarget");
+				writer.Write(".All");
 				break;
 			case Elastic.Clients.Elasticsearch.ClusterInfoTarget.Http:
-				writer.Write("ClusterInfoTarget.Http");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ClusterInfoTarget");
+				writer.Write(".Http");
 				break;
 			case Elastic.Clients.Elasticsearch.ClusterInfoTarget.Ingest:
-				writer.Write("ClusterInfoTarget.Ingest");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ClusterInfoTarget");
+				writer.Write(".Ingest");
 				break;
 			case Elastic.Clients.Elasticsearch.ClusterInfoTarget.Script:
-				writer.Write("ClusterInfoTarget.Script");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ClusterInfoTarget");
+				writer.Write(".Script");
 				break;
 			case Elastic.Clients.Elasticsearch.ClusterInfoTarget.ThreadPool:
-				writer.Write("ClusterInfoTarget.ThreadPool");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ClusterInfoTarget");
+				writer.Write(".ThreadPool");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ClusterInfoTarget value.");

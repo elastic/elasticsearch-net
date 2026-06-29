@@ -27,7 +27,7 @@ public partial class TotalUserProfiles : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TotalUserProfiles", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.TotalUserProfiles", false);
 		{
 			initializer.Property("Relation");
 			writer.WriteString(Relation);

@@ -27,7 +27,7 @@ public partial class ClusterNodes : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ClusterNodes", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.ClusterNodes", false);
 		{
 			initializer.Property("Count");
 			Count.FormatCode(writer);
@@ -35,10 +35,12 @@ public partial class ClusterNodes : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("DiscoveryTypes");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("int");
+			writer.WriteTypeRef("int");
 			writer.Write(">()");
 			writer.WriteBlockList(DiscoveryTypes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
 		}

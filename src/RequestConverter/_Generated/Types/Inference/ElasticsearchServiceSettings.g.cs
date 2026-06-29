@@ -27,7 +27,7 @@ public partial class ElasticsearchServiceSettings : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ElasticsearchServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.ElasticsearchServiceSettings", false);
 		if (AdaptiveAllocations is not null)
 		{
 			initializer.Property("AdaptiveAllocations");

@@ -27,7 +27,7 @@ public partial class MedianAbsoluteDeviationAggregation : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MedianAbsoluteDeviationAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation", false);
 		if (Compression is not null)
 		{
 			initializer.Property("Compression");

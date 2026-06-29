@@ -27,7 +27,7 @@ public partial class KeywordTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("KeywordTokenizer", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer", true);
 		if (BufferSize is not null)
 		{
 			initializer.Property("BufferSize");

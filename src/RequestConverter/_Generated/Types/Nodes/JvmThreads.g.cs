@@ -27,7 +27,7 @@ public partial class JvmThreads : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("JvmThreads", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.JvmThreads", false);
 		if (Count is not null)
 		{
 			initializer.Property("Count");

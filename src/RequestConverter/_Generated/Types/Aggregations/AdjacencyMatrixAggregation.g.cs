@@ -27,14 +27,16 @@ public partial class AdjacencyMatrixAggregation : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AdjacencyMatrixAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation", false);
 		if (Filters is not null)
 		{
 			initializer.Property("Filters");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.QueryDsl.Query");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.Query");
 			writer.Write(">()");
 			writer.WriteBlockList(Filters, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

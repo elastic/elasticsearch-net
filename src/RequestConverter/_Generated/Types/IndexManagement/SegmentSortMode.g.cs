@@ -30,10 +30,12 @@ public static class SegmentSortModeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode.Max:
-				writer.Write("SegmentSortMode.Max");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode");
+				writer.Write(".Max");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode.Min:
-				writer.Write("SegmentSortMode.Min");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode");
+				writer.Write(".Min");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SegmentSortMode value.");

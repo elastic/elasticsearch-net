@@ -27,7 +27,7 @@ public partial class IdsQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IdsQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery", false);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

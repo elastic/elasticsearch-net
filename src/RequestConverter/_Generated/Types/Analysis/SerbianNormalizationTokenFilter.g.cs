@@ -27,7 +27,7 @@ public partial class SerbianNormalizationTokenFilter : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SerbianNormalizationTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.SerbianNormalizationTokenFilter", true);
 		if (Version is not null)
 		{
 			initializer.Property("Version");

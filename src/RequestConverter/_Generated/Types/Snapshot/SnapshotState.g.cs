@@ -30,19 +30,24 @@ public static class SnapshotStateCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotState.Failed:
-				writer.Write("SnapshotState.Failed");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.SnapshotState");
+				writer.Write(".Failed");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotState.InProgress:
-				writer.Write("SnapshotState.InProgress");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.SnapshotState");
+				writer.Write(".InProgress");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotState.Incompatible:
-				writer.Write("SnapshotState.Incompatible");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.SnapshotState");
+				writer.Write(".Incompatible");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotState.Partial:
-				writer.Write("SnapshotState.Partial");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.SnapshotState");
+				writer.Write(".Partial");
 				break;
 			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotState.Success:
-				writer.Write("SnapshotState.Success");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.SnapshotState");
+				writer.Write(".Success");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SnapshotState value.");

@@ -30,10 +30,12 @@ public static class PhoneticRuleTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType.Approx:
-				writer.Write("PhoneticRuleType.Approx");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType");
+				writer.Write(".Approx");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType.Exact:
-				writer.Write("PhoneticRuleType.Exact");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType");
+				writer.Write(".Exact");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected PhoneticRuleType value.");

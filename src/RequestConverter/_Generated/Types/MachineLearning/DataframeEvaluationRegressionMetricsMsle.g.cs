@@ -27,7 +27,7 @@ public partial class DataframeEvaluationRegressionMetricsMsle : RequestConverter
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframeEvaluationRegressionMetricsMsle", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsle", false);
 		if (Offset is not null)
 		{
 			initializer.Property("Offset");

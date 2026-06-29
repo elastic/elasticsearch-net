@@ -27,7 +27,7 @@ public partial class RareTermsAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RareTermsAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation", false);
 		if (Exclude is not null)
 		{
 			initializer.Property("Exclude");

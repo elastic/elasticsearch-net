@@ -27,7 +27,7 @@ public partial class Archive : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Archive", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.Archive", false);
 		{
 			initializer.Property("Available");
 			writer.WriteValue(Available);

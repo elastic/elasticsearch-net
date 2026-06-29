@@ -27,7 +27,7 @@ public partial class TermsSetQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TermsSetQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery", false);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

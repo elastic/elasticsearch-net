@@ -30,28 +30,36 @@ public static class CalendarIntervalCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Day:
-				writer.Write("CalendarInterval.Day");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval");
+				writer.Write(".Day");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Hour:
-				writer.Write("CalendarInterval.Hour");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval");
+				writer.Write(".Hour");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Minute:
-				writer.Write("CalendarInterval.Minute");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval");
+				writer.Write(".Minute");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Month:
-				writer.Write("CalendarInterval.Month");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval");
+				writer.Write(".Month");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Quarter:
-				writer.Write("CalendarInterval.Quarter");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval");
+				writer.Write(".Quarter");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Second:
-				writer.Write("CalendarInterval.Second");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval");
+				writer.Write(".Second");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Week:
-				writer.Write("CalendarInterval.Week");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval");
+				writer.Write(".Week");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval.Year:
-				writer.Write("CalendarInterval.Year");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval");
+				writer.Write(".Year");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected CalendarInterval value.");

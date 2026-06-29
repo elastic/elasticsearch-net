@@ -27,7 +27,7 @@ public partial class CompletionToolChoiceFunction : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CompletionToolChoiceFunction", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.CompletionToolChoiceFunction", false);
 		{
 			initializer.Property("Name");
 			writer.WriteString(Name);

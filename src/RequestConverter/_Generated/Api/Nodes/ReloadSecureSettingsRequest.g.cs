@@ -27,7 +27,7 @@ public partial class ReloadSecureSettingsRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ReloadSecureSettingsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequest", false);
 		if (NodeId is not null)
 		{
 			initializer.Property("NodeId");

@@ -27,7 +27,7 @@ public partial class AuthenticateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AuthenticateRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.AuthenticateRequest", false);
 		initializer.Dispose();
 	}
 }

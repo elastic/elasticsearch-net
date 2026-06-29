@@ -27,7 +27,7 @@ public partial class EqlFeatures : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("EqlFeatures", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.EqlFeatures", false);
 		{
 			initializer.Property("Event");
 			writer.WriteValue(Event);

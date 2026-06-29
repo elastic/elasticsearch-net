@@ -27,7 +27,7 @@ public partial class CoordinatorStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CoordinatorStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Enrich.CoordinatorStats", false);
 		{
 			initializer.Property("ExecutedSearchesTotal");
 			writer.WriteValue(ExecutedSearchesTotal);

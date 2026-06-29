@@ -27,7 +27,7 @@ public partial class PainlessContextSetup : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PainlessContextSetup", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup", false);
 		{
 			initializer.Property("Document");
 			writer.WriteValue(Document);

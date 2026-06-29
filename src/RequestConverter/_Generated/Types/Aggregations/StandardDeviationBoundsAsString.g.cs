@@ -27,7 +27,7 @@ public partial class StandardDeviationBoundsAsString : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("StandardDeviationBoundsAsString", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBoundsAsString", false);
 		{
 			initializer.Property("Lower");
 			writer.WriteString(Lower);

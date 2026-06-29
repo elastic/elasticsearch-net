@@ -27,7 +27,7 @@ public partial class ClusterIndicesShards : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ClusterIndicesShards", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.ClusterIndicesShards", false);
 		if (Index is not null)
 		{
 			initializer.Property("Index");

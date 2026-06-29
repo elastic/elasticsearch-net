@@ -27,7 +27,7 @@ public partial class RecoveryIndexStatus : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RecoveryIndexStatus", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.RecoveryIndexStatus", false);
 		if (Bytes is not null)
 		{
 			initializer.Property("Bytes");

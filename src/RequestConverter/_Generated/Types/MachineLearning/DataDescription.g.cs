@@ -27,7 +27,7 @@ public partial class DataDescription : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataDescription", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataDescription", false);
 		if (FieldDelimiter is not null)
 		{
 			initializer.Property("FieldDelimiter");

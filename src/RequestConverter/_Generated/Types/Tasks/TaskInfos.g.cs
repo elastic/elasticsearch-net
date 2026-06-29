@@ -29,7 +29,9 @@ public partial class TaskInfos : RequestConverter.ICodeFormattable
 	{
 		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 		{
-			writer.Write("new TaskInfos(");
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Tasks.TaskInfos");
+			writer.Write("(");
 			writer.WriteInlineList(Value1, (w, item) => { item.FormatCode(w); });
 			writer.Write(")");
 			return;
@@ -37,11 +39,15 @@ public partial class TaskInfos : RequestConverter.ICodeFormattable
 
 		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T2)
 		{
-			writer.Write("new TaskInfos(");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Tasks.TaskInfos");
+			writer.Write("(");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo");
 			writer.Write(">()");
 			writer.WriteBlockList(Value2, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 			writer.Write(")");

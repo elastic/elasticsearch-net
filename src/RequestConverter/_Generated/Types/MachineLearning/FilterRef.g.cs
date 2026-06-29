@@ -27,7 +27,7 @@ public partial class FilterRef : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FilterRef", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.FilterRef", false);
 		{
 			initializer.Property("FilterId");
 			FilterId.FormatCode(writer);

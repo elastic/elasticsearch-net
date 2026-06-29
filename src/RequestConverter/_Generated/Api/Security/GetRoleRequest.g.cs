@@ -27,7 +27,7 @@ public partial class GetRoleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetRoleRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GetRoleRequest", false);
 		if (Name is not null)
 		{
 			initializer.Property("Name");

@@ -27,7 +27,7 @@ public partial class GetApiKeyRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetApiKeyRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GetApiKeyRequest", false);
 		if (ActiveOnly is not null)
 		{
 			initializer.Property("ActiveOnly");

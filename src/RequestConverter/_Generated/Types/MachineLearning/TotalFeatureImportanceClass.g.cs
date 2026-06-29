@@ -27,7 +27,7 @@ public partial class TotalFeatureImportanceClass : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TotalFeatureImportanceClass", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceClass", false);
 		{
 			initializer.Property("ClassName");
 			writer.WriteString(ClassName);

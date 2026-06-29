@@ -27,7 +27,7 @@ public partial class MultiSearchItem<TDocument> : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MultiSearchItem<TDocument>", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchItem<TDocument>", true);
 		if (Aggregations is not null)
 		{
 			initializer.Property("Aggregations");
@@ -43,10 +43,12 @@ public partial class MultiSearchItem<TDocument> : RequestConverter.ICodeFormatta
 		if (Fields is not null)
 		{
 			initializer.Property("Fields");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("object");
+			writer.WriteTypeRef("object");
 			writer.Write(">()");
 			writer.WriteBlockList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
 		}

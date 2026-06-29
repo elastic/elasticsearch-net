@@ -27,7 +27,7 @@ public partial class NerInferenceUpdateOptions : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NerInferenceUpdateOptions", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceUpdateOptions", false);
 		if (ResultsField is not null)
 		{
 			initializer.Property("ResultsField");

@@ -27,7 +27,7 @@ public partial class TrainedModelDeploymentAllocationStatus : RequestConverter.I
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TrainedModelDeploymentAllocationStatus", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentAllocationStatus", false);
 		{
 			initializer.Property("AllocationCount");
 			writer.WriteValue(AllocationCount);

@@ -27,7 +27,7 @@ public partial class PutOpenaiRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutOpenaiRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequest", false);
 		{
 			initializer.Property("OpenaiInferenceId");
 			OpenaiInferenceId.FormatCode(writer);

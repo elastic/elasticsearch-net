@@ -27,7 +27,7 @@ public partial class Datafeed : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Datafeed", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.Datafeed", false);
 		{
 			initializer.Property("Count");
 			writer.WriteValue(Count);

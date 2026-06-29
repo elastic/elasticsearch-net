@@ -27,7 +27,7 @@ public partial class FindFieldStructureRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FindFieldStructureRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest", false);
 		if (ColumnNames is not null)
 		{
 			initializer.Property("ColumnNames");

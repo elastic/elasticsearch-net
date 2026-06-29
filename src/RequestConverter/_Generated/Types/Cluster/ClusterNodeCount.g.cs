@@ -27,7 +27,7 @@ public partial class ClusterNodeCount : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ClusterNodeCount", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.ClusterNodeCount", false);
 		if (CoordinatingOnly is not null)
 		{
 			initializer.Property("CoordinatingOnly");

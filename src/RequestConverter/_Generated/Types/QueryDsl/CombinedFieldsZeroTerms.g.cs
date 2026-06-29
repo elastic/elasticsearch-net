@@ -30,10 +30,12 @@ public static class CombinedFieldsZeroTermsCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms.All:
-				writer.Write("CombinedFieldsZeroTerms.All");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms");
+				writer.Write(".All");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms.None:
-				writer.Write("CombinedFieldsZeroTerms.None");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms");
+				writer.Write(".None");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected CombinedFieldsZeroTerms value.");

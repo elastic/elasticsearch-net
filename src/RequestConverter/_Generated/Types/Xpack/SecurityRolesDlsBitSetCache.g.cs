@@ -27,7 +27,7 @@ public partial class SecurityRolesDlsBitSetCache : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SecurityRolesDlsBitSetCache", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.SecurityRolesDlsBitSetCache", false);
 		{
 			initializer.Property("Count");
 			writer.WriteValue(Count);

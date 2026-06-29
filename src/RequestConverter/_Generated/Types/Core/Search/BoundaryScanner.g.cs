@@ -30,13 +30,16 @@ public static class BoundaryScannerCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner.Chars:
-				writer.Write("BoundaryScanner.Chars");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner");
+				writer.Write(".Chars");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner.Sentence:
-				writer.Write("BoundaryScanner.Sentence");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner");
+				writer.Write(".Sentence");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner.Word:
-				writer.Write("BoundaryScanner.Word");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner");
+				writer.Write(".Word");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected BoundaryScanner value.");

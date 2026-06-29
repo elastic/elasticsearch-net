@@ -27,7 +27,7 @@ public partial class PutCalendarJobRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutCalendarJobRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequest", false);
 		{
 			initializer.Property("CalendarId");
 			CalendarId.FormatCode(writer);

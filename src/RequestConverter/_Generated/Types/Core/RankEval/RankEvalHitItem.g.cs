@@ -27,7 +27,7 @@ public partial class RankEvalHitItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RankEvalHitItem", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHitItem", false);
 		{
 			initializer.Property("Hit");
 			Hit.FormatCode(writer);

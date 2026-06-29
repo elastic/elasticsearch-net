@@ -27,7 +27,7 @@ public partial class PutDataStreamSettingsRequest : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutDataStreamSettingsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

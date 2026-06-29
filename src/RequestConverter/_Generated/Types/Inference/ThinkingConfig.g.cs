@@ -27,7 +27,7 @@ public partial class ThinkingConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ThinkingConfig", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.ThinkingConfig", false);
 		if (ThinkingBudget is not null)
 		{
 			initializer.Property("ThinkingBudget");

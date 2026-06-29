@@ -30,13 +30,16 @@ public static class MissingOrderCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Aggregations.MissingOrder.Default:
-				writer.Write("MissingOrder.Default");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.MissingOrder");
+				writer.Write(".Default");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.MissingOrder.First:
-				writer.Write("MissingOrder.First");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.MissingOrder");
+				writer.Write(".First");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.MissingOrder.Last:
-				writer.Write("MissingOrder.Last");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.MissingOrder");
+				writer.Write(".Last");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected MissingOrder value.");

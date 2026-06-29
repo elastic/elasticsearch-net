@@ -27,7 +27,7 @@ public partial class NodeInfoIngest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeInfoIngest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngest", false);
 		{
 			initializer.Property("Processors");
 			writer.WriteInlineList(Processors, (w, item) => { item.FormatCode(w); });

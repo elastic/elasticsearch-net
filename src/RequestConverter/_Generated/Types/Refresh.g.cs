@@ -30,13 +30,16 @@ public static class RefreshCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Refresh.False:
-				writer.Write("Refresh.False");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Refresh");
+				writer.Write(".False");
 				break;
 			case Elastic.Clients.Elasticsearch.Refresh.True:
-				writer.Write("Refresh.True");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Refresh");
+				writer.Write(".True");
 				break;
 			case Elastic.Clients.Elasticsearch.Refresh.WaitFor:
-				writer.Write("Refresh.WaitFor");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Refresh");
+				writer.Write(".WaitFor");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected Refresh value.");

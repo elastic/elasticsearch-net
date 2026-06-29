@@ -27,7 +27,7 @@ public partial class GetServiceCredentialsRequest : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetServiceCredentialsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest", false);
 		{
 			initializer.Property("Namespace");
 			writer.WriteString(Namespace);

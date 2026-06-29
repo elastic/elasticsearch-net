@@ -27,7 +27,7 @@ public partial class TextEmbedding : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TextEmbedding", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TextEmbedding", false);
 		if (ModelId is not null)
 		{
 			initializer.Property("ModelId");

@@ -27,7 +27,7 @@ public partial class IndexRoutingAllocation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndexRoutingAllocation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation", false);
 		if (Disk is not null)
 		{
 			initializer.Property("Disk");

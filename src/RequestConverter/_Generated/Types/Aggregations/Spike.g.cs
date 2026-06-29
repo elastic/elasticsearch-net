@@ -27,7 +27,7 @@ public partial class Spike : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Spike", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.Spike", false);
 		{
 			initializer.Property("ChangePoint");
 			writer.WriteValue(ChangePoint);

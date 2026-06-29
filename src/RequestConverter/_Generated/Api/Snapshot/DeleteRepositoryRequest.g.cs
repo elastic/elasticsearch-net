@@ -27,7 +27,7 @@ public partial class DeleteRepositoryRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteRepositoryRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

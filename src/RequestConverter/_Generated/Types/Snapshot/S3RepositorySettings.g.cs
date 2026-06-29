@@ -27,7 +27,7 @@ public partial class S3RepositorySettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("S3RepositorySettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings", false);
 		if (BasePath is not null)
 		{
 			initializer.Property("BasePath");

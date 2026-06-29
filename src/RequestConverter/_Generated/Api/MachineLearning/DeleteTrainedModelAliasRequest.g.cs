@@ -27,7 +27,7 @@ public partial class DeleteTrainedModelAliasRequest : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteTrainedModelAliasRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequest", false);
 		{
 			initializer.Property("ModelAlias");
 			ModelAlias.FormatCode(writer);

@@ -30,13 +30,16 @@ public static class SubobjectsCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.Subobjects.Auto:
-				writer.Write("Subobjects.Auto");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.Subobjects");
+				writer.Write(".Auto");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.Subobjects.False:
-				writer.Write("Subobjects.False");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.Subobjects");
+				writer.Write(".False");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.Subobjects.True:
-				writer.Write("Subobjects.True");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.Subobjects");
+				writer.Write(".True");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected Subobjects value.");

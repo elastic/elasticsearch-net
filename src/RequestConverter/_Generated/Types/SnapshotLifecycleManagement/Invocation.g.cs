@@ -27,7 +27,7 @@ public partial class Invocation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Invocation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Invocation", false);
 		{
 			initializer.Property("SnapshotName");
 			writer.WriteString(SnapshotName);

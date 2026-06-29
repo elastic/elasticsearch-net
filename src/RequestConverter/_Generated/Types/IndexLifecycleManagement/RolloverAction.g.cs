@@ -27,7 +27,7 @@ public partial class RolloverAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RolloverAction", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverAction", false);
 		if (MaxAge is not null)
 		{
 			initializer.Property("MaxAge");

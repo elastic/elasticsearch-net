@@ -27,7 +27,7 @@ public partial class HasPrivilegesRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("HasPrivilegesRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest", false);
 		if (User is not null)
 		{
 			initializer.Property("User");

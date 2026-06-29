@@ -29,23 +29,28 @@ public readonly partial struct HighlighterType : RequestConverter.ICodeFormattab
 	{
 		if (this == Elastic.Clients.Elasticsearch.Core.Search.HighlighterType.FastVector)
 		{
-			writer.Write("HighlighterType.FastVector");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.HighlighterType");
+			writer.Write(".FastVector");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.Core.Search.HighlighterType.Plain)
 		{
-			writer.Write("HighlighterType.Plain");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.HighlighterType");
+			writer.Write(".Plain");
 			return;
 		}
 
 		if (this == Elastic.Clients.Elasticsearch.Core.Search.HighlighterType.Unified)
 		{
-			writer.Write("HighlighterType.Unified");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.HighlighterType");
+			writer.Write(".Unified");
 			return;
 		}
 
-		writer.Write("new HighlighterType(\"");
+		writer.Write("new ");
+		writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.HighlighterType");
+		writer.Write("(\"");
 		writer.Write(Value);
 		writer.Write("\")");
 	}

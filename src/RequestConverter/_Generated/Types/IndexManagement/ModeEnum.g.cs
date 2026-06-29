@@ -30,7 +30,8 @@ public static class ModeEnumCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.ModeEnum.Upgrade:
-				writer.Write("ModeEnum.Upgrade");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ModeEnum");
+				writer.Write(".Upgrade");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ModeEnum value.");

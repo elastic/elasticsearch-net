@@ -27,7 +27,7 @@ public partial class DataframeAnalysisFeatureProcessor : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframeAnalysisFeatureProcessor", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor", false);
 		if (FrequencyEncoding is not null)
 		{
 			initializer.Property("FrequencyEncoding");

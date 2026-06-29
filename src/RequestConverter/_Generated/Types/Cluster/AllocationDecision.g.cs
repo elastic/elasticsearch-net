@@ -27,7 +27,7 @@ public partial class AllocationDecision : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AllocationDecision", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.AllocationDecision", false);
 		{
 			initializer.Property("Decider");
 			writer.WriteString(Decider);

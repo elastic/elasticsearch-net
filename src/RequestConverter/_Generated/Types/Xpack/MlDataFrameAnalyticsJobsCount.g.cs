@@ -27,7 +27,7 @@ public partial class MlDataFrameAnalyticsJobsCount : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MlDataFrameAnalyticsJobsCount", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsCount", false);
 		{
 			initializer.Property("Count");
 			writer.WriteValue(Count);

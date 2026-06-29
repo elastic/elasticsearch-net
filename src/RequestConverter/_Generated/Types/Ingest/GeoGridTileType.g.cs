@@ -30,13 +30,16 @@ public static class GeoGridTileTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType.Geohash:
-				writer.Write("GeoGridTileType.Geohash");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType");
+				writer.Write(".Geohash");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType.Geohex:
-				writer.Write("GeoGridTileType.Geohex");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType");
+				writer.Write(".Geohex");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType.Geotile:
-				writer.Write("GeoGridTileType.Geotile");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType");
+				writer.Write(".Geotile");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected GeoGridTileType value.");

@@ -30,10 +30,12 @@ public static class GrantTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Security.GrantType.AccessToken:
-				writer.Write("GrantType.AccessToken");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.GrantType");
+				writer.Write(".AccessToken");
 				break;
 			case Elastic.Clients.Elasticsearch.Security.GrantType.Password:
-				writer.Write("GrantType.Password");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.GrantType");
+				writer.Write(".Password");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected GrantType value.");

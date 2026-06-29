@@ -27,7 +27,7 @@ public partial class GetDataLifecycleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetDataLifecycleRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

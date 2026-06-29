@@ -27,7 +27,7 @@ public partial class SerializedClusterStateDetail : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SerializedClusterStateDetail", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.SerializedClusterStateDetail", false);
 		if (CompressedSize is not null)
 		{
 			initializer.Property("CompressedSize");

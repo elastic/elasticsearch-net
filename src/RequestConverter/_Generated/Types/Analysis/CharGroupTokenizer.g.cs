@@ -27,7 +27,7 @@ public partial class CharGroupTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CharGroupTokenizer", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizer", true);
 		if (MaxTokenLength is not null)
 		{
 			initializer.Property("MaxTokenLength");

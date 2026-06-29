@@ -27,7 +27,7 @@ public partial class MinimalLicenseInformation : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MinimalLicenseInformation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.MinimalLicenseInformation", false);
 		{
 			initializer.Property("ExpiryDateInMillis");
 			writer.WriteValue(ExpiryDateInMillis);

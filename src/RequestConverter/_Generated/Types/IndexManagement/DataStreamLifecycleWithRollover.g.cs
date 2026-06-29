@@ -27,7 +27,7 @@ public partial class DataStreamLifecycleWithRollover : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataStreamLifecycleWithRollover", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover", false);
 		if (DataRetention is not null)
 		{
 			initializer.Property("DataRetention");

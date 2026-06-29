@@ -27,7 +27,7 @@ public partial class MigrateToDataStreamRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MigrateToDataStreamRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class GeoDistanceFeatureQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GeoDistanceFeatureQuery", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQuery", true);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

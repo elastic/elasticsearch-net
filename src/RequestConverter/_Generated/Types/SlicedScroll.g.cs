@@ -27,7 +27,7 @@ public partial class SlicedScroll : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SlicedScroll", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SlicedScroll", false);
 		if (Field is not null)
 		{
 			initializer.Property("Field");

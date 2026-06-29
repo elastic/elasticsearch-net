@@ -27,7 +27,7 @@ public partial class GeoLine : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GeoLine", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.GeoLine", false);
 		{
 			initializer.Property("Coordinates");
 			writer.WriteInlineList(Coordinates, (w, item) => { w.WriteInlineList(item, (w, item) => { w.WriteValue(item); w.Write("d"); }); });

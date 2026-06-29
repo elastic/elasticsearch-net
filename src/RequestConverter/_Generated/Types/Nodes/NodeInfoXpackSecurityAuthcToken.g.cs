@@ -27,7 +27,7 @@ public partial class NodeInfoXpackSecurityAuthcToken : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeInfoXpackSecurityAuthcToken", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcToken", false);
 		{
 			initializer.Property("Enabled");
 			writer.WriteString(Enabled);

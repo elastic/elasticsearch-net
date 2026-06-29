@@ -27,7 +27,7 @@ public partial class NonStationary : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NonStationary", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.NonStationary", false);
 		{
 			initializer.Property("PValue");
 			writer.WriteValue(PValue);

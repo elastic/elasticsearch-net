@@ -27,7 +27,7 @@ public partial class PutSearchApplicationRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutSearchApplicationRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

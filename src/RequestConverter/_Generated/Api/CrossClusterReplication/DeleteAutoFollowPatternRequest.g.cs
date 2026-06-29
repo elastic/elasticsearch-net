@@ -27,7 +27,7 @@ public partial class DeleteAutoFollowPatternRequest : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteAutoFollowPatternRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

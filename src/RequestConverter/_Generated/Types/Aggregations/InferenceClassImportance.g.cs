@@ -27,7 +27,7 @@ public partial class InferenceClassImportance : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("InferenceClassImportance", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.InferenceClassImportance", false);
 		{
 			initializer.Property("ClassName");
 			writer.WriteString(ClassName);

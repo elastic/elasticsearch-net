@@ -27,7 +27,7 @@ public partial class IcuNormalizationCharFilter : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IcuNormalizationCharFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilter", true);
 		if (Mode is not null)
 		{
 			initializer.Property("Mode");

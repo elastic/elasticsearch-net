@@ -27,7 +27,7 @@ public partial class SpanNearQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SpanNearQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery", false);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

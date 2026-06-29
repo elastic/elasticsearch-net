@@ -30,22 +30,28 @@ public static class WaitForEventsCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.WaitForEvents.High:
-				writer.Write("WaitForEvents.High");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.WaitForEvents");
+				writer.Write(".High");
 				break;
 			case Elastic.Clients.Elasticsearch.WaitForEvents.Immediate:
-				writer.Write("WaitForEvents.Immediate");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.WaitForEvents");
+				writer.Write(".Immediate");
 				break;
 			case Elastic.Clients.Elasticsearch.WaitForEvents.Languid:
-				writer.Write("WaitForEvents.Languid");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.WaitForEvents");
+				writer.Write(".Languid");
 				break;
 			case Elastic.Clients.Elasticsearch.WaitForEvents.Low:
-				writer.Write("WaitForEvents.Low");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.WaitForEvents");
+				writer.Write(".Low");
 				break;
 			case Elastic.Clients.Elasticsearch.WaitForEvents.Normal:
-				writer.Write("WaitForEvents.Normal");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.WaitForEvents");
+				writer.Write(".Normal");
 				break;
 			case Elastic.Clients.Elasticsearch.WaitForEvents.Urgent:
-				writer.Write("WaitForEvents.Urgent");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.WaitForEvents");
+				writer.Write(".Urgent");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected WaitForEvents value.");

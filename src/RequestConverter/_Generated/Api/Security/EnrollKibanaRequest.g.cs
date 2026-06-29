@@ -27,7 +27,7 @@ public partial class EnrollKibanaRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("EnrollKibanaRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequest", false);
 		initializer.Dispose();
 	}
 }

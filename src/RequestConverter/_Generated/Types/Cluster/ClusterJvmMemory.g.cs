@@ -27,7 +27,7 @@ public partial class ClusterJvmMemory : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ClusterJvmMemory", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.ClusterJvmMemory", false);
 		if (HeapMax is not null)
 		{
 			initializer.Property("HeapMax");

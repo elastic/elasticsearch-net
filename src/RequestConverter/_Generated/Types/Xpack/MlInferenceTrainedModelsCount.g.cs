@@ -27,7 +27,7 @@ public partial class MlInferenceTrainedModelsCount : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MlInferenceTrainedModelsCount", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.MlInferenceTrainedModelsCount", false);
 		if (Classification is not null)
 		{
 			initializer.Property("Classification");

@@ -27,7 +27,7 @@ public partial class AuthenticationRealm : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AuthenticationRealm", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.AuthenticationRealm", false);
 		if (Domain is not null)
 		{
 			initializer.Property("Domain");

@@ -27,7 +27,7 @@ public partial class PutNvidiaRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutNvidiaRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequest", false);
 		{
 			initializer.Property("NvidiaInferenceId");
 			NvidiaInferenceId.FormatCode(writer);

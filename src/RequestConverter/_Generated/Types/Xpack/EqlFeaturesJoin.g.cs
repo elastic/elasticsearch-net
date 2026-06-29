@@ -27,7 +27,7 @@ public partial class EqlFeaturesJoin : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("EqlFeaturesJoin", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesJoin", false);
 		{
 			initializer.Property("JoinQueriesFiveOrMore");
 			writer.WriteValue(JoinQueriesFiveOrMore);

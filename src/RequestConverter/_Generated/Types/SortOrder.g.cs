@@ -30,10 +30,12 @@ public static class SortOrderCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.SortOrder.Asc:
-				writer.Write("SortOrder.Asc");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SortOrder");
+				writer.Write(".Asc");
 				break;
 			case Elastic.Clients.Elasticsearch.SortOrder.Desc:
-				writer.Write("SortOrder.Desc");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SortOrder");
+				writer.Write(".Desc");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SortOrder value.");

@@ -27,7 +27,7 @@ public partial class DeleteIpLocationDatabaseRequest : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteIpLocationDatabaseRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest", false);
 		{
 			initializer.Property("Id");
 			Id.FormatCode(writer);

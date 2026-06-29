@@ -27,7 +27,7 @@ public partial class MlInferenceTrainedModels : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MlInferenceTrainedModels", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.MlInferenceTrainedModels", false);
 		{
 			initializer.Property("All");
 			All.FormatCode(writer);

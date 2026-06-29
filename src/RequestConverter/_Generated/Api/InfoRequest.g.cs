@@ -27,7 +27,7 @@ public partial class InfoRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("InfoRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.InfoRequest", false);
 		initializer.Dispose();
 	}
 }

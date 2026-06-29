@@ -27,7 +27,7 @@ public partial class Merge : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Merge", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.Merge", false);
 		if (Scheduler is not null)
 		{
 			initializer.Property("Scheduler");

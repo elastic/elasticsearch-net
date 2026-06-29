@@ -27,7 +27,7 @@ public partial class GetComponentTemplateRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetComponentTemplateRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest", false);
 		if (Name is not null)
 		{
 			initializer.Property("Name");

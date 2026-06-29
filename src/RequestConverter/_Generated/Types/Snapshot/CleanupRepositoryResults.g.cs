@@ -27,7 +27,7 @@ public partial class CleanupRepositoryResults : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CleanupRepositoryResults", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryResults", false);
 		{
 			initializer.Property("DeletedBlobs");
 			writer.WriteValue(DeletedBlobs);

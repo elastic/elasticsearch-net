@@ -30,13 +30,16 @@ public static class GapPolicyCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Aggregations.GapPolicy.InsertZeros:
-				writer.Write("GapPolicy.InsertZeros");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.GapPolicy");
+				writer.Write(".InsertZeros");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.GapPolicy.KeepValues:
-				writer.Write("GapPolicy.KeepValues");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.GapPolicy");
+				writer.Write(".KeepValues");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.GapPolicy.Skip:
-				writer.Write("GapPolicy.Skip");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.GapPolicy");
+				writer.Write(".Skip");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected GapPolicy value.");

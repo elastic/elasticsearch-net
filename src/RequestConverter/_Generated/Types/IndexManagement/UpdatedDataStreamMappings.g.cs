@@ -27,7 +27,7 @@ public partial class UpdatedDataStreamMappings : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("UpdatedDataStreamMappings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.UpdatedDataStreamMappings", false);
 		{
 			initializer.Property("AppliedToDataStream");
 			writer.WriteValue(AppliedToDataStream);

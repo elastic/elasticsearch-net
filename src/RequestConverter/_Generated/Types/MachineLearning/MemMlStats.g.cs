@@ -27,7 +27,7 @@ public partial class MemMlStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MemMlStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.MemMlStats", false);
 		if (AnomalyDetectors is not null)
 		{
 			initializer.Property("AnomalyDetectors");

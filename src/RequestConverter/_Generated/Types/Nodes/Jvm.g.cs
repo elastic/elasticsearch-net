@@ -27,14 +27,16 @@ public partial class Jvm : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Jvm", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.Jvm", false);
 		if (BufferPools is not null)
 		{
 			initializer.Property("BufferPools");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Nodes.NodeBufferPool");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.NodeBufferPool");
 			writer.Write(">()");
 			writer.WriteBlockList(BufferPools, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

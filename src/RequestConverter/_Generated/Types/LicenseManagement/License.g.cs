@@ -27,7 +27,7 @@ public partial class License : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("License", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.LicenseManagement.License", false);
 		{
 			initializer.Property("ExpiryDateInMillis");
 			writer.WriteValue(ExpiryDateInMillis);

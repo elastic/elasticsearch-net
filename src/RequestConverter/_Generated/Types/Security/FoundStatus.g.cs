@@ -27,7 +27,7 @@ public partial class FoundStatus : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FoundStatus", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.FoundStatus", false);
 		{
 			initializer.Property("Found");
 			writer.WriteValue(Found);

@@ -27,7 +27,7 @@ public partial class GetFiltersRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetFiltersRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequest", false);
 		if (FilterId is not null)
 		{
 			initializer.Property("FilterId");

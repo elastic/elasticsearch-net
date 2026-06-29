@@ -27,7 +27,7 @@ public partial class Monitoring : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Monitoring", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.Monitoring", false);
 		{
 			initializer.Property("Available");
 			writer.WriteValue(Available);
@@ -45,10 +45,12 @@ public partial class Monitoring : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("EnabledExporters");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("long");
+			writer.WriteTypeRef("long");
 			writer.Write(">()");
 			writer.WriteBlockList(EnabledExporters, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); });
 		}

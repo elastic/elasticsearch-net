@@ -27,7 +27,7 @@ public partial class NlpTokenizationUpdateOptions : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NlpTokenizationUpdateOptions", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions", false);
 		if (Span is not null)
 		{
 			initializer.Property("Span");

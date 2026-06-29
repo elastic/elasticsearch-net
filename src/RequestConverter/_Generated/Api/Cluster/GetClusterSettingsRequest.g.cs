@@ -27,7 +27,7 @@ public partial class GetClusterSettingsRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetClusterSettingsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequest", false);
 		if (FlatSettings is not null)
 		{
 			initializer.Property("FlatSettings");

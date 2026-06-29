@@ -30,19 +30,24 @@ public static class ExpandWildcardCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.ExpandWildcard.All:
-				writer.Write("ExpandWildcard.All");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ExpandWildcard");
+				writer.Write(".All");
 				break;
 			case Elastic.Clients.Elasticsearch.ExpandWildcard.Closed:
-				writer.Write("ExpandWildcard.Closed");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ExpandWildcard");
+				writer.Write(".Closed");
 				break;
 			case Elastic.Clients.Elasticsearch.ExpandWildcard.Hidden:
-				writer.Write("ExpandWildcard.Hidden");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ExpandWildcard");
+				writer.Write(".Hidden");
 				break;
 			case Elastic.Clients.Elasticsearch.ExpandWildcard.None:
-				writer.Write("ExpandWildcard.None");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ExpandWildcard");
+				writer.Write(".None");
 				break;
 			case Elastic.Clients.Elasticsearch.ExpandWildcard.Open:
-				writer.Write("ExpandWildcard.Open");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ExpandWildcard");
+				writer.Write(".Open");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ExpandWildcard value.");

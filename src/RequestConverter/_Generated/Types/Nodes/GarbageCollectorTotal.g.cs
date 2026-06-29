@@ -27,7 +27,7 @@ public partial class GarbageCollectorTotal : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GarbageCollectorTotal", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.GarbageCollectorTotal", false);
 		if (CollectionCount is not null)
 		{
 			initializer.Property("CollectionCount");

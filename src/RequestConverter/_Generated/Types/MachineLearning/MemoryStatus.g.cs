@@ -30,13 +30,16 @@ public static class MemoryStatusCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus.HardLimit:
-				writer.Write("MemoryStatus.HardLimit");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus");
+				writer.Write(".HardLimit");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus.Ok:
-				writer.Write("MemoryStatus.Ok");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus");
+				writer.Write(".Ok");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus.SoftLimit:
-				writer.Write("MemoryStatus.SoftLimit");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus");
+				writer.Write(".SoftLimit");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected MemoryStatus value.");

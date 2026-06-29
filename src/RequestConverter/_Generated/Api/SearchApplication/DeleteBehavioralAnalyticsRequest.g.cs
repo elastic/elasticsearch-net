@@ -27,7 +27,7 @@ public partial class DeleteBehavioralAnalyticsRequest : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteBehavioralAnalyticsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

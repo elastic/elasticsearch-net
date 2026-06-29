@@ -27,7 +27,7 @@ public partial class CapabilitiesRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CapabilitiesRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.CapabilitiesRequest", false);
 		if (Capabilities is not null)
 		{
 			initializer.Property("Capabilities");

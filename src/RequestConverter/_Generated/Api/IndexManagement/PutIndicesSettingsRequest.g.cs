@@ -27,7 +27,7 @@ public partial class PutIndicesSettingsRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutIndicesSettingsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest", false);
 		if (Indices is not null)
 		{
 			initializer.Property("Indices");

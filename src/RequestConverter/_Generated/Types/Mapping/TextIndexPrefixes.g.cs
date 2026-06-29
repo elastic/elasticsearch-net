@@ -27,7 +27,7 @@ public partial class TextIndexPrefixes : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TextIndexPrefixes", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes", false);
 		{
 			initializer.Property("MaxChars");
 			writer.WriteValue(MaxChars);

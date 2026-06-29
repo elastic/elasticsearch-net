@@ -27,7 +27,7 @@ public partial class GlobalAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GlobalAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregation", false);
 		initializer.Dispose();
 	}
 }

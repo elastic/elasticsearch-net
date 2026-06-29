@@ -27,7 +27,7 @@ public partial class StepKey : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("StepKey", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey", false);
 		if (Action is not null)
 		{
 			initializer.Property("Action");

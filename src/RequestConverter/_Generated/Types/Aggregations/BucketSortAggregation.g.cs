@@ -27,7 +27,7 @@ public partial class BucketSortAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("BucketSortAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation", false);
 		if (From is not null)
 		{
 			initializer.Property("From");

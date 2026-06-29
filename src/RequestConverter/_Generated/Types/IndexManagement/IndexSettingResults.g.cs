@@ -27,7 +27,7 @@ public partial class IndexSettingResults : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndexSettingResults", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingResults", false);
 		{
 			initializer.Property("AppliedToDataStreamAndBackingIndices");
 			writer.WriteInlineList(AppliedToDataStreamAndBackingIndices, (w, item) => { w.WriteString(item); });

@@ -27,7 +27,7 @@ public partial class GetRollupCapsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetRollupCapsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest", false);
 		if (Id is not null)
 		{
 			initializer.Property("Id");

@@ -27,7 +27,7 @@ public partial class FieldSort : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FieldSort", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.FieldSort", false);
 		{
 			initializer.Property("Field");
 			Field.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class OidcPrepareAuthenticationRequest : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("OidcPrepareAuthenticationRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequest", false);
 		if (Iss is not null)
 		{
 			initializer.Property("Iss");

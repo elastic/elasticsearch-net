@@ -27,7 +27,7 @@ public partial class GetTrialStatusRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetTrialStatusRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest", false);
 		initializer.Dispose();
 	}
 }

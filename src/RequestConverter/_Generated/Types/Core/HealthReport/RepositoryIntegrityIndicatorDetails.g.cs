@@ -27,7 +27,7 @@ public partial class RepositoryIntegrityIndicatorDetails : RequestConverter.ICod
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RepositoryIntegrityIndicatorDetails", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.HealthReport.RepositoryIntegrityIndicatorDetails", false);
 		if (Corrupted is not null)
 		{
 			initializer.Property("Corrupted");

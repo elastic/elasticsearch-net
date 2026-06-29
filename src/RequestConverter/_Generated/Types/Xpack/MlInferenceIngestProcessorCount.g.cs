@@ -27,7 +27,7 @@ public partial class MlInferenceIngestProcessorCount : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MlInferenceIngestProcessorCount", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.MlInferenceIngestProcessorCount", false);
 		{
 			initializer.Property("Max");
 			writer.WriteValue(Max);

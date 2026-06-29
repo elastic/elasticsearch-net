@@ -27,7 +27,7 @@ public partial class ResponseItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ResponseItem", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem", false);
 		if (Error is not null)
 		{
 			initializer.Property("Error");

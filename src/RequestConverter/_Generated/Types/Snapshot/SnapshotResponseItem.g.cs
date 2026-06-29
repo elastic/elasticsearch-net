@@ -27,7 +27,7 @@ public partial class SnapshotResponseItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SnapshotResponseItem", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.SnapshotResponseItem", false);
 		if (Error is not null)
 		{
 			initializer.Property("Error");

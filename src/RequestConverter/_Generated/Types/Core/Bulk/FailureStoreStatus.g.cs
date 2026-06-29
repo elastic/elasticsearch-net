@@ -30,16 +30,20 @@ public static class FailureStoreStatusCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.Failed:
-				writer.Write("FailureStoreStatus.Failed");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus");
+				writer.Write(".Failed");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.NotApplicableOrUnknown:
-				writer.Write("FailureStoreStatus.NotApplicableOrUnknown");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus");
+				writer.Write(".NotApplicableOrUnknown");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.NotEnabled:
-				writer.Write("FailureStoreStatus.NotEnabled");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus");
+				writer.Write(".NotEnabled");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus.Used:
-				writer.Write("FailureStoreStatus.Used");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus");
+				writer.Write(".Used");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected FailureStoreStatus value.");

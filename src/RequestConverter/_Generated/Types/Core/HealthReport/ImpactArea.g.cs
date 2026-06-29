@@ -30,16 +30,20 @@ public static class ImpactAreaCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Backup:
-				writer.Write("ImpactArea.Backup");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea");
+				writer.Write(".Backup");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.DeploymentManagement:
-				writer.Write("ImpactArea.DeploymentManagement");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea");
+				writer.Write(".DeploymentManagement");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Ingest:
-				writer.Write("ImpactArea.Ingest");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea");
+				writer.Write(".Ingest");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea.Search:
-				writer.Write("ImpactArea.Search");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea");
+				writer.Write(".Search");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ImpactArea value.");

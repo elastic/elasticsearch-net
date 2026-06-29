@@ -30,19 +30,24 @@ public static class ThreadTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.ThreadType.Block:
-				writer.Write("ThreadType.Block");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ThreadType");
+				writer.Write(".Block");
 				break;
 			case Elastic.Clients.Elasticsearch.ThreadType.Cpu:
-				writer.Write("ThreadType.Cpu");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ThreadType");
+				writer.Write(".Cpu");
 				break;
 			case Elastic.Clients.Elasticsearch.ThreadType.Gpu:
-				writer.Write("ThreadType.Gpu");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ThreadType");
+				writer.Write(".Gpu");
 				break;
 			case Elastic.Clients.Elasticsearch.ThreadType.Mem:
-				writer.Write("ThreadType.Mem");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ThreadType");
+				writer.Write(".Mem");
 				break;
 			case Elastic.Clients.Elasticsearch.ThreadType.Wait:
-				writer.Write("ThreadType.Wait");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ThreadType");
+				writer.Write(".Wait");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ThreadType value.");

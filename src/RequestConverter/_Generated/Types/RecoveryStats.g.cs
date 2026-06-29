@@ -27,7 +27,7 @@ public partial class RecoveryStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RecoveryStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.RecoveryStats", false);
 		{
 			initializer.Property("CurrentAsSource");
 			writer.WriteValue(CurrentAsSource);

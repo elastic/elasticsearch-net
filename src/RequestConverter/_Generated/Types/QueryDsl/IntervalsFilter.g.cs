@@ -27,7 +27,7 @@ public partial class IntervalsFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IntervalsFilter", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter", false);
 		if (After is not null)
 		{
 			initializer.Property("After");

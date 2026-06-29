@@ -27,7 +27,7 @@ public partial class HealthRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("HealthRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.HealthRequest", false);
 		if (Indices is not null)
 		{
 			initializer.Property("Indices");

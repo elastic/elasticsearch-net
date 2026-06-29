@@ -27,7 +27,7 @@ public partial class FieldStatistics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FieldStatistics", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.TermVectors.FieldStatistics", false);
 		{
 			initializer.Property("DocCount");
 			writer.WriteValue(DocCount);

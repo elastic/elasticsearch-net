@@ -27,7 +27,7 @@ public partial class ResolveClusterRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ResolveClusterRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest", false);
 		if (Name is not null)
 		{
 			initializer.Property("Name");

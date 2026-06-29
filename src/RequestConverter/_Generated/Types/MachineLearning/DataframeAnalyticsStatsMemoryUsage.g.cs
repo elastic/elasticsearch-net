@@ -27,7 +27,7 @@ public partial class DataframeAnalyticsStatsMemoryUsage : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframeAnalyticsStatsMemoryUsage", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsMemoryUsage", false);
 		if (MemoryReestimateBytes is not null)
 		{
 			initializer.Property("MemoryReestimateBytes");

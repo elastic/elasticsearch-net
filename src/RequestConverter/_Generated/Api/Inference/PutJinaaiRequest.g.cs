@@ -27,7 +27,7 @@ public partial class PutJinaaiRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutJinaaiRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequest", false);
 		{
 			initializer.Property("JinaaiInferenceId");
 			JinaaiInferenceId.FormatCode(writer);

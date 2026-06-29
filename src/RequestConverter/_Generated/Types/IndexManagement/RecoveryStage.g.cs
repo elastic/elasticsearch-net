@@ -30,22 +30,28 @@ public static class RecoveryStageCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage.Done:
-				writer.Write("RecoveryStage.Done");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage");
+				writer.Write(".Done");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage.Finalize:
-				writer.Write("RecoveryStage.Finalize");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage");
+				writer.Write(".Finalize");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage.Index:
-				writer.Write("RecoveryStage.Index");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage");
+				writer.Write(".Index");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage.Init:
-				writer.Write("RecoveryStage.Init");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage");
+				writer.Write(".Init");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage.Translog:
-				writer.Write("RecoveryStage.Translog");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage");
+				writer.Write(".Translog");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage.VerifyIndex:
-				writer.Write("RecoveryStage.VerifyIndex");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage");
+				writer.Write(".VerifyIndex");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected RecoveryStage value.");

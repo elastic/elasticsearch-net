@@ -30,13 +30,16 @@ public static class PhoneticNameTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType.Ashkenazi:
-				writer.Write("PhoneticNameType.Ashkenazi");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType");
+				writer.Write(".Ashkenazi");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType.Generic:
-				writer.Write("PhoneticNameType.Generic");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType");
+				writer.Write(".Generic");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType.Sephardic:
-				writer.Write("PhoneticNameType.Sephardic");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType");
+				writer.Write(".Sephardic");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected PhoneticNameType value.");

@@ -27,7 +27,7 @@ public partial class ResolveIndexItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ResolveIndexItem", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexItem", false);
 		if (Aliases is not null)
 		{
 			initializer.Property("Aliases");

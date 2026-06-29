@@ -27,7 +27,7 @@ public partial class DeleteFilterRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteFilterRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequest", false);
 		{
 			initializer.Property("FilterId");
 			FilterId.FormatCode(writer);

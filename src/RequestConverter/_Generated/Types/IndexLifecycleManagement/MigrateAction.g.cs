@@ -27,7 +27,7 @@ public partial class MigrateAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MigrateAction", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateAction", false);
 		if (Enabled is not null)
 		{
 			initializer.Property("Enabled");

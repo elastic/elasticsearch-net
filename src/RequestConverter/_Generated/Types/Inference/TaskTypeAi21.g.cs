@@ -30,10 +30,12 @@ public static class TaskTypeAi21CodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAi21.ChatCompletion:
-				writer.Write("TaskTypeAi21.ChatCompletion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeAi21");
+				writer.Write(".ChatCompletion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAi21.Completion:
-				writer.Write("TaskTypeAi21.Completion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeAi21");
+				writer.Write(".Completion");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeAi21 value.");

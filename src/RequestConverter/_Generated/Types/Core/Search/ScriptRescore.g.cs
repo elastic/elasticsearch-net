@@ -27,7 +27,7 @@ public partial class ScriptRescore : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ScriptRescore", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.ScriptRescore", false);
 		{
 			initializer.Property("Script");
 			Script.FormatCode(writer);

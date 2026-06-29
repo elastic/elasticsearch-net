@@ -27,17 +27,21 @@ public partial class RequestEmbedding : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RequestEmbedding", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.RequestEmbedding", false);
 		{
 			initializer.Property("Input");
 			if (Input.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
-				writer.Write("new string[] ");
+				writer.Write("new ");
+				writer.WriteTypeRef("string");
+				writer.Write("[] ");
 				writer.WriteInlineList(Input.Value1, (w, item) => { w.WriteString(item); }, "{ ", " }", ", ");
 			}
 			else
 			{
-				writer.Write("new Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObject[] ");
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObject");
+				writer.Write("[] ");
 				writer.WriteInlineList(Input.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", ");
 			}
 		}

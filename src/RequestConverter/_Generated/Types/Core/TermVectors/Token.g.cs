@@ -27,7 +27,7 @@ public partial class Token : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Token", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.TermVectors.Token", false);
 		if (EndOffset is not null)
 		{
 			initializer.Property("EndOffset");

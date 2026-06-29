@@ -27,7 +27,7 @@ public partial class WeightedAverageValue : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("WeightedAverageValue", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue", false);
 		if (Field is not null)
 		{
 			initializer.Property("Field");

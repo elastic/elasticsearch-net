@@ -27,7 +27,7 @@ public partial class ExistsIndexTemplateRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ExistsIndexTemplateRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class ValidateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ValidateRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequest", false);
 		if (AnalysisConfig is not null)
 		{
 			initializer.Property("AnalysisConfig");

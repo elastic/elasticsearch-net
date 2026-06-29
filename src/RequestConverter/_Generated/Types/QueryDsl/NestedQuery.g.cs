@@ -27,7 +27,7 @@ public partial class NestedQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NestedQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery", false);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

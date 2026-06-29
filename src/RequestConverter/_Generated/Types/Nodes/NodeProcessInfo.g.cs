@@ -27,7 +27,7 @@ public partial class NodeProcessInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeProcessInfo", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeProcessInfo", false);
 		{
 			initializer.Property("Id");
 			writer.WriteValue(Id);

@@ -27,7 +27,7 @@ public partial class SerializedClusterState : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SerializedClusterState", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.SerializedClusterState", false);
 		if (Diffs is not null)
 		{
 			initializer.Property("Diffs");

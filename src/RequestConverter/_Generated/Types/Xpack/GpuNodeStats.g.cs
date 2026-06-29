@@ -27,7 +27,7 @@ public partial class GpuNodeStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GpuNodeStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.GpuNodeStats", false);
 		{
 			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);

@@ -27,7 +27,7 @@ public partial class KuromojiTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("KuromojiTokenizer", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer", true);
 		if (DiscardCompoundToken is not null)
 		{
 			initializer.Property("DiscardCompoundToken");

@@ -27,7 +27,7 @@ public partial class GeoResults : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GeoResults", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GeoResults", false);
 		if (ActualPoint is not null)
 		{
 			initializer.Property("ActualPoint");

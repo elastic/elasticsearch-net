@@ -30,13 +30,16 @@ public static class JobBlockedReasonCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.JobBlockedReason.Delete:
-				writer.Write("JobBlockedReason.Delete");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.JobBlockedReason");
+				writer.Write(".Delete");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.JobBlockedReason.Reset:
-				writer.Write("JobBlockedReason.Reset");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.JobBlockedReason");
+				writer.Write(".Reset");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.JobBlockedReason.Revert:
-				writer.Write("JobBlockedReason.Revert");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.JobBlockedReason");
+				writer.Write(".Revert");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected JobBlockedReason value.");

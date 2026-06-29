@@ -27,7 +27,7 @@ public partial class DeleteGeoipDatabaseRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteGeoipDatabaseRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequest", false);
 		{
 			initializer.Property("Id");
 			Id.FormatCode(writer);

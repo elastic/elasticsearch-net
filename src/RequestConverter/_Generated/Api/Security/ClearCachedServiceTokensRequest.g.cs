@@ -27,7 +27,7 @@ public partial class ClearCachedServiceTokensRequest : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ClearCachedServiceTokensRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

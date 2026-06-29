@@ -27,7 +27,7 @@ public partial class HealthReportRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("HealthReportRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.HealthReportRequest", false);
 		if (Feature is not null)
 		{
 			initializer.Property("Feature");

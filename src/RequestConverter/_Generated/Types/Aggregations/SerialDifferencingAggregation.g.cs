@@ -27,7 +27,7 @@ public partial class SerialDifferencingAggregation : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SerialDifferencingAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.SerialDifferencingAggregation", false);
 		if (BucketsPath is not null)
 		{
 			initializer.Property("BucketsPath");

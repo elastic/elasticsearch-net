@@ -27,7 +27,7 @@ public partial class MoreLikeThisQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MoreLikeThisQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQuery", false);
 		if (Analyzer is not null)
 		{
 			initializer.Property("Analyzer");
@@ -134,7 +134,9 @@ public partial class MoreLikeThisQuery : RequestConverter.ICodeFormattable
 			}
 			else
 			{
-				writer.Write("new string[] ");
+				writer.Write("new ");
+				writer.WriteTypeRef("string");
+				writer.Write("[] ");
 				writer.WriteInlineList(StopWords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", ");
 			}
 		}

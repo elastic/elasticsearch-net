@@ -27,7 +27,7 @@ public partial class UnfollowRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("UnfollowRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequest", false);
 		{
 			initializer.Property("Index");
 			Index.FormatCode(writer);

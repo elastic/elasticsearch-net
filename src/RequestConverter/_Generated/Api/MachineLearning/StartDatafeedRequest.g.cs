@@ -27,7 +27,7 @@ public partial class StartDatafeedRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("StartDatafeedRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequest", false);
 		{
 			initializer.Property("DatafeedId");
 			DatafeedId.FormatCode(writer);

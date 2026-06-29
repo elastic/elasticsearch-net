@@ -27,7 +27,7 @@ public partial class GetNodeStatsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetNodeStatsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequest", false);
 		initializer.Dispose();
 	}
 }

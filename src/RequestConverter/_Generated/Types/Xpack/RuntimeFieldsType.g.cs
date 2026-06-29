@@ -27,7 +27,7 @@ public partial class RuntimeFieldsType : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RuntimeFieldsType", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.RuntimeFieldsType", false);
 		{
 			initializer.Property("CharsMax");
 			writer.WriteValue(CharsMax);

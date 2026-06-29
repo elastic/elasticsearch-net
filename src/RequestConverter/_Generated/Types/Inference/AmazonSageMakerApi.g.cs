@@ -30,10 +30,12 @@ public static class AmazonSageMakerApiCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerApi.Elastic:
-				writer.Write("AmazonSageMakerApi.Elastic");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerApi");
+				writer.Write(".Elastic");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerApi.Openai:
-				writer.Write("AmazonSageMakerApi.Openai");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerApi");
+				writer.Write(".Openai");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected AmazonSageMakerApi value.");

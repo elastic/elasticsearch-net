@@ -27,7 +27,7 @@ public partial class RoleTemplateQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RoleTemplateQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.RoleTemplateQuery", false);
 		if (Template is not null)
 		{
 			initializer.Property("Template");

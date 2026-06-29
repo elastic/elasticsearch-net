@@ -27,7 +27,7 @@ public partial class SnapshotPolicyStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SnapshotPolicyStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotPolicyStats", false);
 		{
 			initializer.Property("Policy");
 			writer.WriteString(Policy);

@@ -27,7 +27,7 @@ public partial class StopTransformRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("StopTransformRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest", false);
 		{
 			initializer.Property("TransformId");
 			TransformId.FormatCode(writer);

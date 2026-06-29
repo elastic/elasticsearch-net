@@ -27,7 +27,7 @@ public partial class ScriptedHeuristic : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ScriptedHeuristic", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristic", false);
 		{
 			initializer.Property("Script");
 			Script.FormatCode(writer);

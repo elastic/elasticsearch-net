@@ -27,7 +27,7 @@ public partial class NodeReloadResult : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeReloadResult", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeReloadResult", false);
 		if (KeystoreDigest is not null)
 		{
 			initializer.Property("KeystoreDigest");

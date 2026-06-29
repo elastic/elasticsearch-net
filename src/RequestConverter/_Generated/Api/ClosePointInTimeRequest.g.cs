@@ -27,7 +27,7 @@ public partial class ClosePointInTimeRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ClosePointInTimeRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ClosePointInTimeRequest", false);
 		{
 			initializer.Property("Id");
 			Id.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class ThaiTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ThaiTokenizer", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizer", true);
 		if (Version is not null)
 		{
 			initializer.Property("Version");

@@ -27,7 +27,7 @@ public partial class ElserServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ElserServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.ElserServiceSettings", false);
 		if (AdaptiveAllocations is not null)
 		{
 			initializer.Property("AdaptiveAllocations");

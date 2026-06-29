@@ -27,7 +27,7 @@ public partial class DeleteSynonymRuleRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteSynonymRuleRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequest", false);
 		{
 			initializer.Property("RuleId");
 			RuleId.FormatCode(writer);

@@ -30,19 +30,24 @@ public static class UserAgentPropertyCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Device:
-				writer.Write("UserAgentProperty.Device");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty");
+				writer.Write(".Device");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Name:
-				writer.Write("UserAgentProperty.Name");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty");
+				writer.Write(".Name");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Original:
-				writer.Write("UserAgentProperty.Original");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty");
+				writer.Write(".Original");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Os:
-				writer.Write("UserAgentProperty.Os");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty");
+				writer.Write(".Os");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty.Version:
-				writer.Write("UserAgentProperty.Version");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty");
+				writer.Write(".Version");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected UserAgentProperty value.");

@@ -27,7 +27,7 @@ public partial class NativeCode : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NativeCode", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.NativeCode", false);
 		{
 			initializer.Property("BuildHash");
 			writer.WriteString(BuildHash);

@@ -30,10 +30,12 @@ public static class IcuCollationAlternateCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate.NonIgnorable:
-				writer.Write("IcuCollationAlternate.NonIgnorable");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate");
+				writer.Write(".NonIgnorable");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate.Shifted:
-				writer.Write("IcuCollationAlternate.Shifted");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate");
+				writer.Write(".Shifted");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IcuCollationAlternate value.");

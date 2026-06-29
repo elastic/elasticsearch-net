@@ -27,7 +27,7 @@ public partial class GetEsqlQueryRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetEsqlQueryRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Esql.GetEsqlQueryRequest", false);
 		{
 			initializer.Property("Id");
 			Id.FormatCode(writer);

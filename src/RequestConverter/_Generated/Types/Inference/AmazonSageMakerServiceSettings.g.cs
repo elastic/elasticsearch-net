@@ -27,7 +27,7 @@ public partial class AmazonSageMakerServiceSettings : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AmazonSageMakerServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerServiceSettings", false);
 		{
 			initializer.Property("AccessKey");
 			writer.WriteString(AccessKey);

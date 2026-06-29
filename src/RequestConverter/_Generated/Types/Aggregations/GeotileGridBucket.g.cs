@@ -27,7 +27,7 @@ public partial class GeotileGridBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GeotileGridBucket", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.GeotileGridBucket", false);
 		if (Aggregations is not null)
 		{
 			initializer.Property("Aggregations");

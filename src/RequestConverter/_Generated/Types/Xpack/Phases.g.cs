@@ -27,7 +27,7 @@ public partial class Phases : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Phases", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.Phases", false);
 		if (Cold is not null)
 		{
 			initializer.Property("Cold");

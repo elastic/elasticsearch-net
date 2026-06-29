@@ -30,13 +30,16 @@ public static class StreamTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Streams.StreamType.Logs:
-				writer.Write("StreamType.Logs");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Streams.StreamType");
+				writer.Write(".Logs");
 				break;
 			case Elastic.Clients.Elasticsearch.Streams.StreamType.LogsEcs:
-				writer.Write("StreamType.LogsEcs");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Streams.StreamType");
+				writer.Write(".LogsEcs");
 				break;
 			case Elastic.Clients.Elasticsearch.Streams.StreamType.LogsOtel:
-				writer.Write("StreamType.LogsOtel");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Streams.StreamType");
+				writer.Write(".LogsOtel");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected StreamType value.");

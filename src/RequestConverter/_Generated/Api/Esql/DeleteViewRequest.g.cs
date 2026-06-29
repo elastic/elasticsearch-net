@@ -27,7 +27,7 @@ public partial class DeleteViewRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteViewRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Esql.DeleteViewRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

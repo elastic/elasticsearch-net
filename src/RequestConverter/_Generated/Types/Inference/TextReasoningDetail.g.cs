@@ -27,7 +27,7 @@ public partial class TextReasoningDetail : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TextReasoningDetail", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.TextReasoningDetail", true);
 		if (Format is not null)
 		{
 			initializer.Property("Format");

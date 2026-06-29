@@ -30,19 +30,24 @@ public static class MetricCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Rollup.Metric.Avg:
-				writer.Write("Metric.Avg");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Rollup.Metric");
+				writer.Write(".Avg");
 				break;
 			case Elastic.Clients.Elasticsearch.Rollup.Metric.Max:
-				writer.Write("Metric.Max");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Rollup.Metric");
+				writer.Write(".Max");
 				break;
 			case Elastic.Clients.Elasticsearch.Rollup.Metric.Min:
-				writer.Write("Metric.Min");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Rollup.Metric");
+				writer.Write(".Min");
 				break;
 			case Elastic.Clients.Elasticsearch.Rollup.Metric.Sum:
-				writer.Write("Metric.Sum");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Rollup.Metric");
+				writer.Write(".Sum");
 				break;
 			case Elastic.Clients.Elasticsearch.Rollup.Metric.ValueCount:
-				writer.Write("Metric.ValueCount");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Rollup.Metric");
+				writer.Write(".ValueCount");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected Metric value.");

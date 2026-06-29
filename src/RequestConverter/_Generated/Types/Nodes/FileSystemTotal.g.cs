@@ -27,7 +27,7 @@ public partial class FileSystemTotal : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FileSystemTotal", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.FileSystemTotal", false);
 		if (Available is not null)
 		{
 			initializer.Property("Available");

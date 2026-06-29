@@ -27,7 +27,7 @@ public partial class WriteSummaryInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("WriteSummaryInfo", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.WriteSummaryInfo", false);
 		{
 			initializer.Property("Count");
 			writer.WriteValue(Count);

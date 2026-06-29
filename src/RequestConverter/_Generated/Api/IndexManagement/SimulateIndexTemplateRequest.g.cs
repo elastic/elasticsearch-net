@@ -27,7 +27,7 @@ public partial class SimulateIndexTemplateRequest : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SimulateIndexTemplateRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class FollowInfoRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FollowInfoRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequest", false);
 		{
 			initializer.Property("Indices");
 			Indices.FormatCode(writer);

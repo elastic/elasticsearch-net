@@ -27,7 +27,7 @@ public partial class SimplePatternSplitTokenizer : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SimplePatternSplitTokenizer", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.SimplePatternSplitTokenizer", true);
 		if (Pattern is not null)
 		{
 			initializer.Property("Pattern");

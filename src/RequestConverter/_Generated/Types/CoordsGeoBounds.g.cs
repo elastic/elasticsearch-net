@@ -27,7 +27,7 @@ public partial class CoordsGeoBounds : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CoordsGeoBounds", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.CoordsGeoBounds", true);
 		{
 			initializer.Property("Bottom");
 			writer.WriteValue(Bottom);

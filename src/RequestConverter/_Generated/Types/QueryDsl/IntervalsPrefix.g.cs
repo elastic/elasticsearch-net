@@ -27,7 +27,7 @@ public partial class IntervalsPrefix : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IntervalsPrefix", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix", false);
 		if (Analyzer is not null)
 		{
 			initializer.Property("Analyzer");

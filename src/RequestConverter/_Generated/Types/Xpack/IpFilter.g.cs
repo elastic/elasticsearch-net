@@ -27,7 +27,7 @@ public partial class IpFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IpFilter", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.IpFilter", false);
 		{
 			initializer.Property("Http");
 			writer.WriteValue(Http);

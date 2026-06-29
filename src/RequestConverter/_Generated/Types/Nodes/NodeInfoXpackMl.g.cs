@@ -27,7 +27,7 @@ public partial class NodeInfoXpackMl : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeInfoXpackMl", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackMl", false);
 		if (UseAutoMachineMemoryPercent is not null)
 		{
 			initializer.Property("UseAutoMachineMemoryPercent");

@@ -27,7 +27,7 @@ public partial class TermsPartition : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TermsPartition", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.TermsPartition", false);
 		{
 			initializer.Property("NumPartitions");
 			writer.WriteValue(NumPartitions);

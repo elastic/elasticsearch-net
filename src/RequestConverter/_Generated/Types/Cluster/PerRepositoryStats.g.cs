@@ -27,7 +27,7 @@ public partial class PerRepositoryStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PerRepositoryStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.PerRepositoryStats", false);
 		{
 			initializer.Property("CurrentCounts");
 			CurrentCounts.FormatCode(writer);

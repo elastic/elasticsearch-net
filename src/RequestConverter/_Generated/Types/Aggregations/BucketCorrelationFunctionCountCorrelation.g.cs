@@ -27,7 +27,7 @@ public partial class BucketCorrelationFunctionCountCorrelation : RequestConverte
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("BucketCorrelationFunctionCountCorrelation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation", false);
 		{
 			initializer.Property("Indicator");
 			Indicator.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class LatLonGeoLocation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("LatLonGeoLocation", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.LatLonGeoLocation", true);
 		{
 			initializer.Property("Lat");
 			writer.WriteValue(Lat);

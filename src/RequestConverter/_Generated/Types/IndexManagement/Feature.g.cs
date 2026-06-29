@@ -30,13 +30,16 @@ public static class FeatureCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.Feature.Aliases:
-				writer.Write("Feature.Aliases");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.Feature");
+				writer.Write(".Aliases");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.Feature.Mappings:
-				writer.Write("Feature.Mappings");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.Feature");
+				writer.Write(".Mappings");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.Feature.Settings:
-				writer.Write("Feature.Settings");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.Feature");
+				writer.Write(".Settings");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected Feature value.");

@@ -27,7 +27,7 @@ public partial class PutLlamaRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutLlamaRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutLlamaRequest", false);
 		{
 			initializer.Property("LlamaInferenceId");
 			LlamaInferenceId.FormatCode(writer);

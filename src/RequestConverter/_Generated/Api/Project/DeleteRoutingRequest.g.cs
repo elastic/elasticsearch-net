@@ -27,7 +27,7 @@ public partial class DeleteRoutingRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteRoutingRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequest", false);
 		{
 			initializer.Property("Name");
 			writer.WriteString(Name);

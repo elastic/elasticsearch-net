@@ -27,7 +27,7 @@ public partial class RescoreQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RescoreQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery", false);
 		{
 			initializer.Property("Query");
 			Query.FormatCode(writer);

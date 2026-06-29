@@ -27,7 +27,7 @@ public partial class PutAmazonsagemakerRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutAmazonsagemakerRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutAmazonsagemakerRequest", false);
 		{
 			initializer.Property("AmazonsagemakerInferenceId");
 			AmazonsagemakerInferenceId.FormatCode(writer);

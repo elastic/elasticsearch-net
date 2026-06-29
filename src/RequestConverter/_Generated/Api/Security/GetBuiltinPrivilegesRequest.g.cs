@@ -27,7 +27,7 @@ public partial class GetBuiltinPrivilegesRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetBuiltinPrivilegesRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequest", false);
 		initializer.Dispose();
 	}
 }

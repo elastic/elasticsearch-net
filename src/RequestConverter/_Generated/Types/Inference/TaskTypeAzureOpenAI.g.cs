@@ -30,13 +30,16 @@ public static class TaskTypeAzureOpenAICodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAzureOpenAI.ChatCompletion:
-				writer.Write("TaskTypeAzureOpenAI.ChatCompletion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeAzureOpenAI");
+				writer.Write(".ChatCompletion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAzureOpenAI.Completion:
-				writer.Write("TaskTypeAzureOpenAI.Completion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeAzureOpenAI");
+				writer.Write(".Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAzureOpenAI.TextEmbedding:
-				writer.Write("TaskTypeAzureOpenAI.TextEmbedding");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeAzureOpenAI");
+				writer.Write(".TextEmbedding");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeAzureOpenAI value.");

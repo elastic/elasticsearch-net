@@ -27,7 +27,7 @@ public partial class DataframeAnalyticsFieldSelection : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframeAnalyticsFieldSelection", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsFieldSelection", false);
 		if (FeatureType is not null)
 		{
 			initializer.Property("FeatureType");

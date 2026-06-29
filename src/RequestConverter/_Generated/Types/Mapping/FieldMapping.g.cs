@@ -27,7 +27,7 @@ public partial class FieldMapping : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FieldMapping", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.FieldMapping", false);
 		{
 			initializer.Property("FullName");
 			writer.WriteString(FullName);

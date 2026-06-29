@@ -27,7 +27,7 @@ public partial class Vertex : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Vertex", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Graph.Vertex", false);
 		{
 			initializer.Property("Depth");
 			writer.WriteValue(Depth);

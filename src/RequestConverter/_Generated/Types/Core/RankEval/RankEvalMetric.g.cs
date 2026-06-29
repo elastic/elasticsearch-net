@@ -27,7 +27,7 @@ public partial class RankEvalMetric : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RankEvalMetric", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric", false);
 		if (Dcg is not null)
 		{
 			initializer.Property("Dcg");

@@ -27,7 +27,7 @@ public partial class DataframeAnalyticsAuthorization : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframeAnalyticsAuthorization", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsAuthorization", false);
 		if (ApiKey is not null)
 		{
 			initializer.Property("ApiKey");

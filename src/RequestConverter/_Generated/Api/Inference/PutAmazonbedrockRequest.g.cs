@@ -27,7 +27,7 @@ public partial class PutAmazonbedrockRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutAmazonbedrockRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequest", false);
 		{
 			initializer.Property("AmazonbedrockInferenceId");
 			AmazonbedrockInferenceId.FormatCode(writer);

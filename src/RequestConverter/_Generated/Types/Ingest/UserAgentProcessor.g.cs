@@ -27,7 +27,7 @@ public partial class UserAgentProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("UserAgentProcessor", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor", false);
 		if (Description is not null)
 		{
 			initializer.Property("Description");

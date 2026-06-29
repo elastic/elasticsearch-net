@@ -27,7 +27,7 @@ public partial class ShardStatistics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ShardStatistics", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ShardStatistics", false);
 		{
 			initializer.Property("Failed");
 			writer.WriteValue(Failed);

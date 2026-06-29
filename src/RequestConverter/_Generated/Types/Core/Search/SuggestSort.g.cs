@@ -30,10 +30,12 @@ public static class SuggestSortCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.Search.SuggestSort.Frequency:
-				writer.Write("SuggestSort.Frequency");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.SuggestSort");
+				writer.Write(".Frequency");
 				break;
 			case Elastic.Clients.Elasticsearch.Core.Search.SuggestSort.Score:
-				writer.Write("SuggestSort.Score");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.SuggestSort");
+				writer.Write(".Score");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SuggestSort value.");

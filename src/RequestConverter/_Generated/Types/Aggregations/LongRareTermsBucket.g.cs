@@ -27,7 +27,7 @@ public partial class LongRareTermsBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("LongRareTermsBucket", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.LongRareTermsBucket", false);
 		if (Aggregations is not null)
 		{
 			initializer.Property("Aggregations");

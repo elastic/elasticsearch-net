@@ -27,7 +27,7 @@ public partial class TranslogStatus : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TranslogStatus", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.TranslogStatus", false);
 		{
 			initializer.Property("Percent");
 			Percent.FormatCode(writer);

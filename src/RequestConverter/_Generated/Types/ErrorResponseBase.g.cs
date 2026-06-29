@@ -27,7 +27,7 @@ public partial class ErrorResponseBase : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ErrorResponseBase", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ErrorResponseBase", true);
 		{
 			initializer.Property("Error");
 			Error.FormatCode(writer);

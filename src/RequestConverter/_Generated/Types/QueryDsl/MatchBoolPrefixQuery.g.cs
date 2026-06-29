@@ -27,7 +27,7 @@ public partial class MatchBoolPrefixQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MatchBoolPrefixQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery", false);
 		if (Analyzer is not null)
 		{
 			initializer.Property("Analyzer");

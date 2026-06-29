@@ -27,7 +27,7 @@ public partial class CustomCategorizeTextAnalyzer : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CustomCategorizeTextAnalyzer", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzer", true);
 		if (CharFilter is not null)
 		{
 			initializer.Property("CharFilter");

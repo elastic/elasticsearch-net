@@ -30,10 +30,12 @@ public static class IcuNormalizationModeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode.Compose:
-				writer.Write("IcuNormalizationMode.Compose");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode");
+				writer.Write(".Compose");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode.Decompose:
-				writer.Write("IcuNormalizationMode.Decompose");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode");
+				writer.Write(".Decompose");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IcuNormalizationMode value.");

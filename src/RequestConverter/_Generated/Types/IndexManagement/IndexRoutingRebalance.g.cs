@@ -27,7 +27,7 @@ public partial class IndexRoutingRebalance : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndexRoutingRebalance", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalance", false);
 		{
 			initializer.Property("Enable");
 			Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptionsCodeFormatter.FormatCode(Enable, writer);

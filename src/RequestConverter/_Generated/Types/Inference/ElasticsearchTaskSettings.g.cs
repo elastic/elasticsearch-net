@@ -27,7 +27,7 @@ public partial class ElasticsearchTaskSettings : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ElasticsearchTaskSettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskSettings", false);
 		if (ReturnDocuments is not null)
 		{
 			initializer.Property("ReturnDocuments");

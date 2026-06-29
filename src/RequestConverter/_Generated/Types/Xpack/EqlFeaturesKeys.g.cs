@@ -27,7 +27,7 @@ public partial class EqlFeaturesKeys : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("EqlFeaturesKeys", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesKeys", false);
 		{
 			initializer.Property("JoinKeysFiveOrMore");
 			writer.WriteValue(JoinKeysFiveOrMore);

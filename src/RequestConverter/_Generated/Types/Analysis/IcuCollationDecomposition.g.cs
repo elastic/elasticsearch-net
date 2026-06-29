@@ -30,10 +30,12 @@ public static class IcuCollationDecompositionCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition.Identical:
-				writer.Write("IcuCollationDecomposition.Identical");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition");
+				writer.Write(".Identical");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition.No:
-				writer.Write("IcuCollationDecomposition.No");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition");
+				writer.Write(".No");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IcuCollationDecomposition value.");

@@ -30,22 +30,28 @@ public static class TextQueryTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.BestFields:
-				writer.Write("TextQueryType.BestFields");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType");
+				writer.Write(".BestFields");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.BoolPrefix:
-				writer.Write("TextQueryType.BoolPrefix");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType");
+				writer.Write(".BoolPrefix");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.CrossFields:
-				writer.Write("TextQueryType.CrossFields");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType");
+				writer.Write(".CrossFields");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.MostFields:
-				writer.Write("TextQueryType.MostFields");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType");
+				writer.Write(".MostFields");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.Phrase:
-				writer.Write("TextQueryType.Phrase");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType");
+				writer.Write(".Phrase");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.PhrasePrefix:
-				writer.Write("TextQueryType.PhrasePrefix");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType");
+				writer.Write(".PhrasePrefix");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TextQueryType value.");

@@ -27,7 +27,7 @@ public partial class GetSynonymsSetsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetSynonymsSetsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequest", false);
 		if (From is not null)
 		{
 			initializer.Property("From");

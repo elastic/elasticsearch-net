@@ -27,7 +27,7 @@ public partial class ClearScrollRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ClearScrollRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ClearScrollRequest", false);
 		if (ScrollId is not null)
 		{
 			initializer.Property("ScrollId");

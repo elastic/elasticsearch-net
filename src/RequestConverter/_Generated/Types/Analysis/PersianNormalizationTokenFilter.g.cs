@@ -27,7 +27,7 @@ public partial class PersianNormalizationTokenFilter : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PersianNormalizationTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.PersianNormalizationTokenFilter", true);
 		if (Version is not null)
 		{
 			initializer.Property("Version");

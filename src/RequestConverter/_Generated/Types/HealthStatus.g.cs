@@ -30,19 +30,24 @@ public static class HealthStatusCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.HealthStatus.Green:
-				writer.Write("HealthStatus.Green");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.HealthStatus");
+				writer.Write(".Green");
 				break;
 			case Elastic.Clients.Elasticsearch.HealthStatus.Red:
-				writer.Write("HealthStatus.Red");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.HealthStatus");
+				writer.Write(".Red");
 				break;
 			case Elastic.Clients.Elasticsearch.HealthStatus.Unavailable:
-				writer.Write("HealthStatus.Unavailable");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.HealthStatus");
+				writer.Write(".Unavailable");
 				break;
 			case Elastic.Clients.Elasticsearch.HealthStatus.Unknown:
-				writer.Write("HealthStatus.Unknown");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.HealthStatus");
+				writer.Write(".Unknown");
 				break;
 			case Elastic.Clients.Elasticsearch.HealthStatus.Yellow:
-				writer.Write("HealthStatus.Yellow");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.HealthStatus");
+				writer.Write(".Yellow");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected HealthStatus value.");

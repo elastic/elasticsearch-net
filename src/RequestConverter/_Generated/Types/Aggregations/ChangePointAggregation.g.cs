@@ -27,7 +27,7 @@ public partial class ChangePointAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ChangePointAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregation", false);
 		if (BucketsPath is not null)
 		{
 			initializer.Property("BucketsPath");

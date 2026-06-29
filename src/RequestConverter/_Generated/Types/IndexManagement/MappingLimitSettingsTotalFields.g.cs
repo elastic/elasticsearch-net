@@ -27,7 +27,7 @@ public partial class MappingLimitSettingsTotalFields : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MappingLimitSettingsTotalFields", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields", false);
 		if (IgnoreDynamicBeyondLimit is not null)
 		{
 			initializer.Property("IgnoreDynamicBeyondLimit");

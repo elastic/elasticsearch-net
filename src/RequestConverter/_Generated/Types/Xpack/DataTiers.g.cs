@@ -27,7 +27,7 @@ public partial class DataTiers : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataTiers", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.DataTiers", false);
 		{
 			initializer.Property("Available");
 			writer.WriteValue(Available);

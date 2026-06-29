@@ -27,7 +27,7 @@ public partial class RankEvalMetricRecall : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RankEvalMetricRecall", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecall", false);
 		if (K is not null)
 		{
 			initializer.Property("K");

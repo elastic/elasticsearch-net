@@ -27,7 +27,7 @@ public partial class SettingsSimilarityBoolean : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SettingsSimilarityBoolean", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean", true);
 		initializer.Dispose();
 	}
 }

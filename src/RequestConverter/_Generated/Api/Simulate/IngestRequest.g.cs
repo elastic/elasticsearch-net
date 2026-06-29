@@ -27,7 +27,7 @@ public partial class IngestRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IngestRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Simulate.IngestRequest", false);
 		if (Index is not null)
 		{
 			initializer.Property("Index");
@@ -49,10 +49,12 @@ public partial class IngestRequest : RequestConverter.ICodeFormattable
 		if (ComponentTemplateSubstitutions is not null)
 		{
 			initializer.Property("ComponentTemplateSubstitutions");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode");
 			writer.Write(">()");
 			writer.WriteBlockList(ComponentTemplateSubstitutions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
@@ -65,10 +67,12 @@ public partial class IngestRequest : RequestConverter.ICodeFormattable
 		if (IndexTemplateSubstitutions is not null)
 		{
 			initializer.Property("IndexTemplateSubstitutions");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate");
 			writer.Write(">()");
 			writer.WriteBlockList(IndexTemplateSubstitutions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
@@ -82,10 +86,12 @@ public partial class IngestRequest : RequestConverter.ICodeFormattable
 		if (PipelineSubstitutions is not null)
 		{
 			initializer.Property("PipelineSubstitutions");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Ingest.Pipeline");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.Pipeline");
 			writer.Write(">()");
 			writer.WriteBlockList(PipelineSubstitutions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

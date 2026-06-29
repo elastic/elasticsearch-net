@@ -27,7 +27,7 @@ public partial class NodeInfoJvmMemory : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeInfoJvmMemory", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeInfoJvmMemory", false);
 		if (DirectMax is not null)
 		{
 			initializer.Property("DirectMax");

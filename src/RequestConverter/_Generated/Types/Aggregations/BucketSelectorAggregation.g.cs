@@ -27,7 +27,7 @@ public partial class BucketSelectorAggregation : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("BucketSelectorAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.BucketSelectorAggregation", false);
 		if (BucketsPath is not null)
 		{
 			initializer.Property("BucketsPath");

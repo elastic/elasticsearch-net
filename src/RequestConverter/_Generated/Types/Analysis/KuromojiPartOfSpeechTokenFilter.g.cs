@@ -27,7 +27,7 @@ public partial class KuromojiPartOfSpeechTokenFilter : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("KuromojiPartOfSpeechTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilter", true);
 		{
 			initializer.Property("Stoptags");
 			writer.WriteInlineList(Stoptags, (w, item) => { w.WriteString(item); });

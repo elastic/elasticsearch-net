@@ -27,7 +27,7 @@ public partial class PutTrainedModelDefinitionPartRequest : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutTrainedModelDefinitionPartRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest", false);
 		{
 			initializer.Property("ModelId");
 			ModelId.FormatCode(writer);

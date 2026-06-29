@@ -27,7 +27,7 @@ public partial class EnrichPolicy : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("EnrichPolicy", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy", false);
 		if (ElasticsearchVersion is not null)
 		{
 			initializer.Property("ElasticsearchVersion");

@@ -27,7 +27,7 @@ public partial class DataframeAnalysisFeatureProcessorTargetMeanEncoding : Reque
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframeAnalysisFeatureProcessorTargetMeanEncoding", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncoding", false);
 		{
 			initializer.Property("DefaultValue");
 			writer.WriteValue(DefaultValue);
@@ -45,10 +45,12 @@ public partial class DataframeAnalysisFeatureProcessorTargetMeanEncoding : Reque
 
 		{
 			initializer.Property("TargetMap");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("object");
+			writer.WriteTypeRef("object");
 			writer.Write(">()");
 			writer.WriteBlockList(TargetMap, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
 		}

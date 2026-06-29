@@ -27,7 +27,7 @@ public partial class ApiKeyFiltersAggregation : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ApiKeyFiltersAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation", false);
 		if (Filters is not null)
 		{
 			initializer.Property("Filters");

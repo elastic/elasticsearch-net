@@ -27,7 +27,7 @@ public partial class DataStreamTimestampField : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataStreamTimestampField", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DataStreamTimestampField", false);
 		{
 			initializer.Property("Name");
 			writer.WriteString(Name);

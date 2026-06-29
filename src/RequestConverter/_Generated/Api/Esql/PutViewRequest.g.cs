@@ -27,7 +27,7 @@ public partial class PutViewRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutViewRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Esql.PutViewRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

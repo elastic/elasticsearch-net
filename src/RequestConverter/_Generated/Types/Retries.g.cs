@@ -27,7 +27,7 @@ public partial class Retries : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Retries", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Retries", false);
 		{
 			initializer.Property("Bulk");
 			writer.WriteValue(Bulk);

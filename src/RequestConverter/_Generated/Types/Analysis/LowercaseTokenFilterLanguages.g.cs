@@ -30,13 +30,16 @@ public static class LowercaseTokenFilterLanguagesCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages.Greek:
-				writer.Write("LowercaseTokenFilterLanguages.Greek");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages");
+				writer.Write(".Greek");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages.Irish:
-				writer.Write("LowercaseTokenFilterLanguages.Irish");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages");
+				writer.Write(".Irish");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages.Turkish:
-				writer.Write("LowercaseTokenFilterLanguages.Turkish");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages");
+				writer.Write(".Turkish");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected LowercaseTokenFilterLanguages value.");

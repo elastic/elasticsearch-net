@@ -27,7 +27,7 @@ public partial class VoyageAIServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("VoyageAIServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.VoyageAIServiceSettings", false);
 		if (Dimensions is not null)
 		{
 			initializer.Property("Dimensions");

@@ -27,7 +27,7 @@ public partial class ModelSnapshotUpgrade : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ModelSnapshotUpgrade", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshotUpgrade", false);
 		{
 			initializer.Property("AssignmentExplanation");
 			writer.WriteString(AssignmentExplanation);

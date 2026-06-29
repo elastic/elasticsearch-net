@@ -30,10 +30,12 @@ public static class SearchTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.SearchType.DfsQueryThenFetch:
-				writer.Write("SearchType.DfsQueryThenFetch");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SearchType");
+				writer.Write(".DfsQueryThenFetch");
 				break;
 			case Elastic.Clients.Elasticsearch.SearchType.QueryThenFetch:
-				writer.Write("SearchType.QueryThenFetch");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SearchType");
+				writer.Write(".QueryThenFetch");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected SearchType value.");

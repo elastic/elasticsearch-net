@@ -30,31 +30,40 @@ public static class DenseVectorIndexOptionsTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.BbqDisk:
-				writer.Write("DenseVectorIndexOptionsType.BbqDisk");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType");
+				writer.Write(".BbqDisk");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.BbqFlat:
-				writer.Write("DenseVectorIndexOptionsType.BbqFlat");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType");
+				writer.Write(".BbqFlat");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.BbqHnsw:
-				writer.Write("DenseVectorIndexOptionsType.BbqHnsw");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType");
+				writer.Write(".BbqHnsw");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.Flat:
-				writer.Write("DenseVectorIndexOptionsType.Flat");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType");
+				writer.Write(".Flat");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.Hnsw:
-				writer.Write("DenseVectorIndexOptionsType.Hnsw");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType");
+				writer.Write(".Hnsw");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.Int4Flat:
-				writer.Write("DenseVectorIndexOptionsType.Int4Flat");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType");
+				writer.Write(".Int4Flat");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.Int4Hnsw:
-				writer.Write("DenseVectorIndexOptionsType.Int4Hnsw");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType");
+				writer.Write(".Int4Hnsw");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.Int8Flat:
-				writer.Write("DenseVectorIndexOptionsType.Int8Flat");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType");
+				writer.Write(".Int8Flat");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.Int8Hnsw:
-				writer.Write("DenseVectorIndexOptionsType.Int8Hnsw");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType");
+				writer.Write(".Int8Hnsw");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected DenseVectorIndexOptionsType value.");

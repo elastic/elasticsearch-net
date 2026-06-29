@@ -27,7 +27,7 @@ public partial class ParentAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ParentAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.ParentAggregation", false);
 		if (Type is not null)
 		{
 			initializer.Property("Type");

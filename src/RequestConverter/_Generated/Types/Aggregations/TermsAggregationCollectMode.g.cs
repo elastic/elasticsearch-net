@@ -30,10 +30,12 @@ public static class TermsAggregationCollectModeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode.BreadthFirst:
-				writer.Write("TermsAggregationCollectMode.BreadthFirst");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode");
+				writer.Write(".BreadthFirst");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode.DepthFirst:
-				writer.Write("TermsAggregationCollectMode.DepthFirst");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode");
+				writer.Write(".DepthFirst");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TermsAggregationCollectMode value.");

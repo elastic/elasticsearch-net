@@ -27,7 +27,7 @@ public partial class RoutingField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RoutingField", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.RoutingField", false);
 		{
 			initializer.Property("Required");
 			writer.WriteValue(Required);

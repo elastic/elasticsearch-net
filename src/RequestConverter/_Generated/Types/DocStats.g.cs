@@ -27,7 +27,7 @@ public partial class DocStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DocStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.DocStats", false);
 		{
 			initializer.Property("Count");
 			writer.WriteValue(Count);

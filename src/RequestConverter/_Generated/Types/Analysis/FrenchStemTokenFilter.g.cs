@@ -27,7 +27,7 @@ public partial class FrenchStemTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FrenchStemTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.FrenchStemTokenFilter", true);
 		if (Version is not null)
 		{
 			initializer.Property("Version");

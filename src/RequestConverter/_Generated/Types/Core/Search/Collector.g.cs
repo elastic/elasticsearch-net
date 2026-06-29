@@ -27,7 +27,7 @@ public partial class Collector : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Collector", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.Collector", false);
 		if (Children is not null)
 		{
 			initializer.Property("Children");

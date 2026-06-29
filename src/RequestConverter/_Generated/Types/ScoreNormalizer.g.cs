@@ -30,13 +30,16 @@ public static class ScoreNormalizerCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.ScoreNormalizer.L2Norm:
-				writer.Write("ScoreNormalizer.L2Norm");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ScoreNormalizer");
+				writer.Write(".L2Norm");
 				break;
 			case Elastic.Clients.Elasticsearch.ScoreNormalizer.Minmax:
-				writer.Write("ScoreNormalizer.Minmax");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ScoreNormalizer");
+				writer.Write(".Minmax");
 				break;
 			case Elastic.Clients.Elasticsearch.ScoreNormalizer.None:
-				writer.Write("ScoreNormalizer.None");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ScoreNormalizer");
+				writer.Write(".None");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ScoreNormalizer value.");

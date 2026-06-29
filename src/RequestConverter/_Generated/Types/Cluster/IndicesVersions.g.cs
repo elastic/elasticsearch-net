@@ -27,7 +27,7 @@ public partial class IndicesVersions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndicesVersions", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.IndicesVersions", false);
 		{
 			initializer.Property("IndexCount");
 			writer.WriteValue(IndexCount);

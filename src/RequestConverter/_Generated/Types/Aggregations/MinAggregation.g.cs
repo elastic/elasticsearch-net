@@ -27,7 +27,7 @@ public partial class MinAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MinAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.MinAggregation", false);
 		if (Field is not null)
 		{
 			initializer.Property("Field");

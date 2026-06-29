@@ -30,13 +30,16 @@ public static class TaskTypeAmazonBedrockCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonBedrock.ChatCompletion:
-				writer.Write("TaskTypeAmazonBedrock.ChatCompletion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonBedrock");
+				writer.Write(".ChatCompletion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonBedrock.Completion:
-				writer.Write("TaskTypeAmazonBedrock.Completion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonBedrock");
+				writer.Write(".Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonBedrock.TextEmbedding:
-				writer.Write("TaskTypeAmazonBedrock.TextEmbedding");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonBedrock");
+				writer.Write(".TextEmbedding");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeAmazonBedrock value.");

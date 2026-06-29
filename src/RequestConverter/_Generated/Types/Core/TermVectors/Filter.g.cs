@@ -27,7 +27,7 @@ public partial class Filter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Filter", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.TermVectors.Filter", false);
 		if (MaxDocFreq is not null)
 		{
 			initializer.Property("MaxDocFreq");

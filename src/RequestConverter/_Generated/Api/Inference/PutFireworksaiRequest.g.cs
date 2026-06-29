@@ -27,7 +27,7 @@ public partial class PutFireworksaiRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutFireworksaiRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutFireworksaiRequest", false);
 		{
 			initializer.Property("FireworksaiInferenceId");
 			FireworksaiInferenceId.FormatCode(writer);

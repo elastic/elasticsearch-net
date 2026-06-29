@@ -30,10 +30,12 @@ public static class TemplateFormatCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Security.TemplateFormat.Json:
-				writer.Write("TemplateFormat.Json");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.TemplateFormat");
+				writer.Write(".Json");
 				break;
 			case Elastic.Clients.Elasticsearch.Security.TemplateFormat.String:
-				writer.Write("TemplateFormat.String");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.TemplateFormat");
+				writer.Write(".String");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TemplateFormat value.");

@@ -27,7 +27,7 @@ public partial class IndexModifyDataStreamAction : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndexModifyDataStreamAction", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction", false);
 		if (AddBackingIndex is not null)
 		{
 			initializer.Property("AddBackingIndex");

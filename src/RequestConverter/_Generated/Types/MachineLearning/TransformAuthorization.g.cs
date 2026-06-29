@@ -27,7 +27,7 @@ public partial class TransformAuthorization : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TransformAuthorization", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TransformAuthorization", false);
 		if (ApiKey is not null)
 		{
 			initializer.Property("ApiKey");

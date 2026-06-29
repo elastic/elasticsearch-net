@@ -27,7 +27,7 @@ public partial class IndexAndDataStreamAction : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndexAndDataStreamAction", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction", false);
 		{
 			initializer.Property("DataStream");
 			DataStream.FormatCode(writer);

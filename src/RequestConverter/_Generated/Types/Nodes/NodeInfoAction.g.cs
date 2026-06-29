@@ -27,7 +27,7 @@ public partial class NodeInfoAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeInfoAction", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeInfoAction", false);
 		{
 			initializer.Property("DestructiveRequiresName");
 			writer.WriteString(DestructiveRequiresName);

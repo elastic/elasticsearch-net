@@ -27,7 +27,7 @@ public partial class RuleRetriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RuleRetriever", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.RuleRetriever", false);
 		if (Filter is not null)
 		{
 			initializer.Property("Filter");

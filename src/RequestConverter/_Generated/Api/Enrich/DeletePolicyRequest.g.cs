@@ -27,7 +27,7 @@ public partial class DeletePolicyRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeletePolicyRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

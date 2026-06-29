@@ -27,7 +27,7 @@ public partial class AzureRepository : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AzureRepository", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.AzureRepository", true);
 		if (Settings is not null)
 		{
 			initializer.Property("Settings");

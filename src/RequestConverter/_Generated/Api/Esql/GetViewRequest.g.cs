@@ -27,7 +27,7 @@ public partial class GetViewRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetViewRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Esql.GetViewRequest", false);
 		if (Name is not null)
 		{
 			initializer.Property("Name");

@@ -27,7 +27,7 @@ public partial class AllocationStore : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AllocationStore", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.AllocationStore", false);
 		{
 			initializer.Property("AllocationId");
 			writer.WriteString(AllocationId);

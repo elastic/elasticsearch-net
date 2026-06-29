@@ -27,7 +27,7 @@ public partial class Ilm : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Ilm", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.Ilm", false);
 		{
 			initializer.Property("PolicyCount");
 			writer.WriteValue(PolicyCount);

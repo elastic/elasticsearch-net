@@ -30,10 +30,12 @@ public static class GeoStrategyCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.GeoStrategy.Recursive:
-				writer.Write("GeoStrategy.Recursive");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.GeoStrategy");
+				writer.Write(".Recursive");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.GeoStrategy.Term:
-				writer.Write("GeoStrategy.Term");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.GeoStrategy");
+				writer.Write(".Term");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected GeoStrategy value.");

@@ -27,7 +27,7 @@ public partial class PutAzureaistudioRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutAzureaistudioRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequest", false);
 		{
 			initializer.Property("AzureaistudioInferenceId");
 			AzureaistudioInferenceId.FormatCode(writer);

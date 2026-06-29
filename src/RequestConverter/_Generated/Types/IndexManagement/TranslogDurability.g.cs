@@ -30,10 +30,12 @@ public static class TranslogDurabilityCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability.Async:
-				writer.Write("TranslogDurability.Async");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability");
+				writer.Write(".Async");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability.Request:
-				writer.Write("TranslogDurability.Request");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability");
+				writer.Write(".Request");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TranslogDurability value.");

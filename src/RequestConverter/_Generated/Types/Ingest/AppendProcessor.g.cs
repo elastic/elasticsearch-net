@@ -27,7 +27,7 @@ public partial class AppendProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AppendProcessor", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.AppendProcessor", false);
 		if (AllowDuplicates is not null)
 		{
 			initializer.Property("AllowDuplicates");

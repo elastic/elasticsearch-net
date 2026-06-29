@@ -27,7 +27,7 @@ public partial class PutSynonymRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutSynonymRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest", false);
 		{
 			initializer.Property("Id");
 			Id.FormatCode(writer);

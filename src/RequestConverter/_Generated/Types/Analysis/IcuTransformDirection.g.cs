@@ -30,10 +30,12 @@ public static class IcuTransformDirectionCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection.Forward:
-				writer.Write("IcuTransformDirection.Forward");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection");
+				writer.Write(".Forward");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection.Reverse:
-				writer.Write("IcuTransformDirection.Reverse");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection");
+				writer.Write(".Reverse");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IcuTransformDirection value.");

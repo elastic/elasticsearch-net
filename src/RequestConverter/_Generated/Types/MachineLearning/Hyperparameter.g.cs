@@ -27,7 +27,7 @@ public partial class Hyperparameter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Hyperparameter", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.Hyperparameter", false);
 		if (AbsoluteImportance is not null)
 		{
 			initializer.Property("AbsoluteImportance");

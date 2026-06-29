@@ -27,7 +27,7 @@ public partial class DateHistogramGrouping : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DateHistogramGrouping", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping", false);
 		if (CalendarInterval is not null)
 		{
 			initializer.Property("CalendarInterval");

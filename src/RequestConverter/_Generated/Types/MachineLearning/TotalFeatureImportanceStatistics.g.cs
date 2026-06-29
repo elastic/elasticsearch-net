@@ -27,7 +27,7 @@ public partial class TotalFeatureImportanceStatistics : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TotalFeatureImportanceStatistics", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceStatistics", false);
 		{
 			initializer.Property("Max");
 			writer.WriteValue(Max);

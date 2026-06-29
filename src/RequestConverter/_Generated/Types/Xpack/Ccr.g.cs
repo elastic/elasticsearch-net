@@ -27,7 +27,7 @@ public partial class Ccr : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Ccr", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.Ccr", false);
 		{
 			initializer.Property("AutoFollowPatternsCount");
 			writer.WriteValue(AutoFollowPatternsCount);

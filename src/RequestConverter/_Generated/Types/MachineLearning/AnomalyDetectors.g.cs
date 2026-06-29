@@ -27,7 +27,7 @@ public partial class AnomalyDetectors : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AnomalyDetectors", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.AnomalyDetectors", false);
 		{
 			initializer.Property("CategorizationAnalyzer");
 			CategorizationAnalyzer.FormatCode(writer);

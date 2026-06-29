@@ -30,10 +30,12 @@ public static class EmbeddingContentFormatCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.EmbeddingContentFormat.Base64:
-				writer.Write("EmbeddingContentFormat.Base64");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.EmbeddingContentFormat");
+				writer.Write(".Base64");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.EmbeddingContentFormat.Text:
-				writer.Write("EmbeddingContentFormat.Text");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.EmbeddingContentFormat");
+				writer.Write(".Text");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected EmbeddingContentFormat value.");

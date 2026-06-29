@@ -27,7 +27,7 @@ public partial class GetTokenRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetTokenRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GetTokenRequest", false);
 		if (GrantType is not null)
 		{
 			initializer.Property("GrantType");

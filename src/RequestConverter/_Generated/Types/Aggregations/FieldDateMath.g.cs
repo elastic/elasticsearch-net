@@ -29,7 +29,9 @@ public partial class FieldDateMath : RequestConverter.ICodeFormattable
 	{
 		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 		{
-			writer.Write("new FieldDateMath(");
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath");
+			writer.Write("(");
 			Value1.FormatCode(writer);
 			writer.Write(")");
 			return;
@@ -37,7 +39,9 @@ public partial class FieldDateMath : RequestConverter.ICodeFormattable
 
 		if (Tag == Elastic.Clients.Elasticsearch.UnionTag.T2)
 		{
-			writer.Write("new FieldDateMath(");
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath");
+			writer.Write("(");
 			writer.WriteValue(Value2);
 			writer.Write("L");
 			writer.Write(")");

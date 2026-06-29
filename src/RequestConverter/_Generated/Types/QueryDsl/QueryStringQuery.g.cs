@@ -27,7 +27,7 @@ public partial class QueryStringQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("QueryStringQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery", false);
 		if (AllowLeadingWildcard is not null)
 		{
 			initializer.Property("AllowLeadingWildcard");

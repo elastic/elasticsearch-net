@@ -27,7 +27,7 @@ public partial class Shared : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Shared", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchableSnapshots.Shared", false);
 		{
 			initializer.Property("BytesReadInBytes");
 			BytesReadInBytes.FormatCode(writer);

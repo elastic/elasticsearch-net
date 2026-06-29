@@ -27,7 +27,7 @@ public partial class ClusterStatsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ClusterStatsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest", false);
 		if (NodeId is not null)
 		{
 			initializer.Property("NodeId");

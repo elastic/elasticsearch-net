@@ -27,7 +27,7 @@ public partial class Sync : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Sync", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.Sync", false);
 		if (Time is not null)
 		{
 			initializer.Property("Time");

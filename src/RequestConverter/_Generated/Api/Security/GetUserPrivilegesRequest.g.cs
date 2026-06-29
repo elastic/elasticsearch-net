@@ -27,7 +27,7 @@ public partial class GetUserPrivilegesRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetUserPrivilegesRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequest", false);
 		initializer.Dispose();
 	}
 }

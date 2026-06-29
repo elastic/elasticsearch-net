@@ -27,7 +27,7 @@ public partial class CustomNormalizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CustomNormalizer", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer", true);
 		if (CharFilter is not null)
 		{
 			initializer.Property("CharFilter");

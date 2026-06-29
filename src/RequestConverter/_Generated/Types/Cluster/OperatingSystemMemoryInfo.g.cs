@@ -27,7 +27,7 @@ public partial class OperatingSystemMemoryInfo : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("OperatingSystemMemoryInfo", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.OperatingSystemMemoryInfo", false);
 		if (AdjustedTotal is not null)
 		{
 			initializer.Property("AdjustedTotal");

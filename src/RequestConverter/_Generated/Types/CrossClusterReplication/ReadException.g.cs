@@ -27,7 +27,7 @@ public partial class ReadException : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ReadException", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.CrossClusterReplication.ReadException", false);
 		{
 			initializer.Property("Exception");
 			Exception.FormatCode(writer);

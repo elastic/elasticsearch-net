@@ -27,7 +27,7 @@ public partial class Page : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Page", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.Page", false);
 		if (From is not null)
 		{
 			initializer.Property("From");

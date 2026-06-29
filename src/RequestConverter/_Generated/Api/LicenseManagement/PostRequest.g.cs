@@ -27,7 +27,7 @@ public partial class PostRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PostRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest", false);
 		if (Acknowledge is not null)
 		{
 			initializer.Property("Acknowledge");

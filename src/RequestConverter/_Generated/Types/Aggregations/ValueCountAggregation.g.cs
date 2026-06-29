@@ -27,7 +27,7 @@ public partial class ValueCountAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ValueCountAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation", false);
 		if (Field is not null)
 		{
 			initializer.Property("Field");

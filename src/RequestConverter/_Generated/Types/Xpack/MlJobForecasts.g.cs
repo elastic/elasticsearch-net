@@ -27,7 +27,7 @@ public partial class MlJobForecasts : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MlJobForecasts", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.MlJobForecasts", false);
 		{
 			initializer.Property("ForecastedJobs");
 			writer.WriteValue(ForecastedJobs);

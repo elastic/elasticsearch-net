@@ -27,7 +27,7 @@ public partial class RankEvalQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RankEvalQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery", false);
 		{
 			initializer.Property("Query");
 			Query.FormatCode(writer);

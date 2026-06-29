@@ -27,7 +27,7 @@ public partial class MinHashTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MinHashTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.MinHashTokenFilter", true);
 		if (BucketCount is not null)
 		{
 			initializer.Property("BucketCount");

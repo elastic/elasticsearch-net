@@ -30,13 +30,16 @@ public static class TaskTypeJinaAiCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi.Embedding:
-				writer.Write("TaskTypeJinaAi.Embedding");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi");
+				writer.Write(".Embedding");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi.Rerank:
-				writer.Write("TaskTypeJinaAi.Rerank");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi");
+				writer.Write(".Rerank");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi.TextEmbedding:
-				writer.Write("TaskTypeJinaAi.TextEmbedding");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi");
+				writer.Write(".TextEmbedding");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskTypeJinaAi value.");

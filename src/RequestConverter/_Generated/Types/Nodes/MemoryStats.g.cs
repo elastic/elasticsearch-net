@@ -27,7 +27,7 @@ public partial class MemoryStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MemoryStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.MemoryStats", false);
 		if (AdjustedTotalInBytes is not null)
 		{
 			initializer.Property("AdjustedTotalInBytes");

@@ -27,7 +27,7 @@ public partial class MultiplexerTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MultiplexerTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilter", true);
 		{
 			initializer.Property("Filters");
 			writer.WriteInlineList(Filters, (w, item) => { w.WriteString(item); });

@@ -27,7 +27,7 @@ public partial class ModelPlotConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ModelPlotConfig", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig", false);
 		if (AnnotationsEnabled is not null)
 		{
 			initializer.Property("AnnotationsEnabled");

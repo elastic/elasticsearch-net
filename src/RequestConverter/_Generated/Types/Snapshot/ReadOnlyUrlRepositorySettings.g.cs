@@ -27,7 +27,7 @@ public partial class ReadOnlyUrlRepositorySettings : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ReadOnlyUrlRepositorySettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettings", false);
 		if (ChunkSize is not null)
 		{
 			initializer.Property("ChunkSize");

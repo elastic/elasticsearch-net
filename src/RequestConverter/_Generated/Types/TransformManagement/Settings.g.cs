@@ -27,7 +27,7 @@ public partial class Settings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Settings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.Settings", false);
 		if (AlignCheckpoints is not null)
 		{
 			initializer.Property("AlignCheckpoints");

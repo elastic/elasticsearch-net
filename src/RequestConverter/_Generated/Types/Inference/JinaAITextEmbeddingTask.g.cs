@@ -30,16 +30,20 @@ public static class JinaAITextEmbeddingTaskCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask.Classification:
-				writer.Write("JinaAITextEmbeddingTask.Classification");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask");
+				writer.Write(".Classification");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask.Clustering:
-				writer.Write("JinaAITextEmbeddingTask.Clustering");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask");
+				writer.Write(".Clustering");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask.Ingest:
-				writer.Write("JinaAITextEmbeddingTask.Ingest");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask");
+				writer.Write(".Ingest");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask.Search:
-				writer.Write("JinaAITextEmbeddingTask.Search");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask");
+				writer.Write(".Search");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected JinaAITextEmbeddingTask value.");

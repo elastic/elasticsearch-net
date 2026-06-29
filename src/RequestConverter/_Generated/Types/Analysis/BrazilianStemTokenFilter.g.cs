@@ -27,7 +27,7 @@ public partial class BrazilianStemTokenFilter : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("BrazilianStemTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.BrazilianStemTokenFilter", true);
 		if (Version is not null)
 		{
 			initializer.Property("Version");

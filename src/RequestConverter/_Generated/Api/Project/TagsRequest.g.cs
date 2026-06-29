@@ -27,7 +27,7 @@ public partial class TagsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TagsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Project.TagsRequest", false);
 		if (ProjectRouting is not null)
 		{
 			initializer.Property("ProjectRouting");

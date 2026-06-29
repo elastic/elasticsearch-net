@@ -27,7 +27,7 @@ public partial class HttpRoute : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("HttpRoute", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.HttpRoute", false);
 		{
 			initializer.Property("Requests");
 			Requests.FormatCode(writer);

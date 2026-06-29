@@ -27,7 +27,7 @@ public partial class SearchApplicationTemplate : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SearchApplicationTemplate", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplate", false);
 		{
 			initializer.Property("Script");
 			Script.FormatCode(writer);

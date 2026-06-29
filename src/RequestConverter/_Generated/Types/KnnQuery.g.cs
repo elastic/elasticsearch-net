@@ -27,7 +27,7 @@ public partial class KnnQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("KnnQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.KnnQuery", false);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

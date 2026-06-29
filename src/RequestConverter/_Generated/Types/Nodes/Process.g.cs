@@ -27,7 +27,7 @@ public partial class Process : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Process", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.Process", false);
 		if (Cpu is not null)
 		{
 			initializer.Property("Cpu");

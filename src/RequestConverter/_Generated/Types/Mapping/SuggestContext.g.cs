@@ -27,7 +27,7 @@ public partial class SuggestContext : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SuggestContext", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.SuggestContext", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

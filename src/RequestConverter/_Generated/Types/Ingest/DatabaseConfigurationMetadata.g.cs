@@ -27,7 +27,7 @@ public partial class DatabaseConfigurationMetadata : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DatabaseConfigurationMetadata", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationMetadata", false);
 		{
 			initializer.Property("Database");
 			Database.FormatCode(writer);

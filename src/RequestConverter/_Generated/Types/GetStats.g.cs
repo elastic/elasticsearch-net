@@ -27,7 +27,7 @@ public partial class GetStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.GetStats", false);
 		{
 			initializer.Property("Current");
 			writer.WriteValue(Current);

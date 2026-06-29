@@ -27,7 +27,7 @@ public partial class AuthenticateApiKey : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AuthenticateApiKey", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.AuthenticateApiKey", false);
 		{
 			initializer.Property("Id");
 			writer.WriteString(Id);

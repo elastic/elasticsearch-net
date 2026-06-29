@@ -27,7 +27,7 @@ public partial class UpgradeTransformsRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("UpgradeTransformsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest", false);
 		if (DryRun is not null)
 		{
 			initializer.Property("DryRun");

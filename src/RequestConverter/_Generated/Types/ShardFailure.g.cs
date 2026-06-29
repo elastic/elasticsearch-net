@@ -27,7 +27,7 @@ public partial class ShardFailure : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ShardFailure", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ShardFailure", false);
 		if (Index is not null)
 		{
 			initializer.Property("Index");

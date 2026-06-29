@@ -27,7 +27,7 @@ public partial class ExploreControls : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ExploreControls", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Graph.ExploreControls", false);
 		if (SampleDiversity is not null)
 		{
 			initializer.Property("SampleDiversity");

@@ -27,7 +27,7 @@ public partial class EventDataStream : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("EventDataStream", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchApplication.EventDataStream", false);
 		{
 			initializer.Property("Name");
 			writer.WriteString(Name);

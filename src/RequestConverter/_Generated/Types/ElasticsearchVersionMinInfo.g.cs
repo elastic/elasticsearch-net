@@ -27,7 +27,7 @@ public partial class ElasticsearchVersionMinInfo : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ElasticsearchVersionMinInfo", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ElasticsearchVersionMinInfo", false);
 		{
 			initializer.Property("BuildFlavor");
 			writer.WriteString(BuildFlavor);

@@ -27,7 +27,7 @@ public partial class MatchedField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MatchedField", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TextStructure.MatchedField", false);
 		{
 			initializer.Property("Length");
 			writer.WriteValue(Length);

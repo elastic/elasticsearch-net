@@ -27,7 +27,7 @@ public partial class DateRangeQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DateRangeQuery", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery", true);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

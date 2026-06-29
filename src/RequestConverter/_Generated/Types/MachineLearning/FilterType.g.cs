@@ -30,10 +30,12 @@ public static class FilterTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.FilterType.Exclude:
-				writer.Write("FilterType.Exclude");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.FilterType");
+				writer.Write(".Exclude");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.FilterType.Include:
-				writer.Write("FilterType.Include");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.FilterType");
+				writer.Write(".Include");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected FilterType value.");

@@ -27,7 +27,7 @@ public partial class DelimitedPayloadTokenFilter : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DelimitedPayloadTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter", true);
 		if (Delimiter is not null)
 		{
 			initializer.Property("Delimiter");

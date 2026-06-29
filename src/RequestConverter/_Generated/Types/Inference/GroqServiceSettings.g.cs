@@ -27,7 +27,7 @@ public partial class GroqServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GroqServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.GroqServiceSettings", false);
 		if (ApiKey is not null)
 		{
 			initializer.Property("ApiKey");

@@ -30,19 +30,24 @@ public static class IndexingJobStateCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Aborting:
-				writer.Write("IndexingJobState.Aborting");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Rollup.IndexingJobState");
+				writer.Write(".Aborting");
 				break;
 			case Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Indexing:
-				writer.Write("IndexingJobState.Indexing");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Rollup.IndexingJobState");
+				writer.Write(".Indexing");
 				break;
 			case Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Started:
-				writer.Write("IndexingJobState.Started");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Rollup.IndexingJobState");
+				writer.Write(".Started");
 				break;
 			case Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Stopped:
-				writer.Write("IndexingJobState.Stopped");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Rollup.IndexingJobState");
+				writer.Write(".Stopped");
 				break;
 			case Elastic.Clients.Elasticsearch.Rollup.IndexingJobState.Stopping:
-				writer.Write("IndexingJobState.Stopping");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Rollup.IndexingJobState");
+				writer.Write(".Stopping");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IndexingJobState value.");

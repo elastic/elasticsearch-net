@@ -27,7 +27,7 @@ public partial class MappingLimitSettingsFieldNameLength : RequestConverter.ICod
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MappingLimitSettingsFieldNameLength", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength", false);
 		if (Limit is not null)
 		{
 			initializer.Property("Limit");

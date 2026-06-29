@@ -30,13 +30,16 @@ public static class NodeStatsLevelCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.NodeStatsLevel.Indices:
-				writer.Write("NodeStatsLevel.Indices");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.NodeStatsLevel");
+				writer.Write(".Indices");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeStatsLevel.Node:
-				writer.Write("NodeStatsLevel.Node");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.NodeStatsLevel");
+				writer.Write(".Node");
 				break;
 			case Elastic.Clients.Elasticsearch.NodeStatsLevel.Shards:
-				writer.Write("NodeStatsLevel.Shards");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.NodeStatsLevel");
+				writer.Write(".Shards");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected NodeStatsLevel value.");

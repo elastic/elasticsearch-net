@@ -30,13 +30,16 @@ public static class GeoPointMetricTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType.Counter:
-				writer.Write("GeoPointMetricType.Counter");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType");
+				writer.Write(".Counter");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType.Gauge:
-				writer.Write("GeoPointMetricType.Gauge");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType");
+				writer.Write(".Gauge");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType.Position:
-				writer.Write("GeoPointMetricType.Position");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType");
+				writer.Write(".Position");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected GeoPointMetricType value.");

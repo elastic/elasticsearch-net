@@ -27,7 +27,7 @@ public partial class RankFeatureFunctionSigmoid : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RankFeatureFunctionSigmoid", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid", false);
 		{
 			initializer.Property("Exponent");
 			writer.WriteValue(Exponent);

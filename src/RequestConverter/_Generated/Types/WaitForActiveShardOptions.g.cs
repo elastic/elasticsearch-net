@@ -30,10 +30,12 @@ public static class WaitForActiveShardOptionsCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.WaitForActiveShardOptions.All:
-				writer.Write("WaitForActiveShardOptions.All");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.WaitForActiveShardOptions");
+				writer.Write(".All");
 				break;
 			case Elastic.Clients.Elasticsearch.WaitForActiveShardOptions.IndexSetting:
-				writer.Write("WaitForActiveShardOptions.IndexSetting");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.WaitForActiveShardOptions");
+				writer.Write(".IndexSetting");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected WaitForActiveShardOptions value.");

@@ -27,7 +27,7 @@ public partial class IoStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IoStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.IoStats", false);
 		if (Devices is not null)
 		{
 			initializer.Property("Devices");

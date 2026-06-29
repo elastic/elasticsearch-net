@@ -27,7 +27,7 @@ public partial class Statistics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Statistics", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Statistics", false);
 		if (Policy is not null)
 		{
 			initializer.Property("Policy");

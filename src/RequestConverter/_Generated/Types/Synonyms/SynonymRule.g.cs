@@ -27,7 +27,7 @@ public partial class SynonymRule : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SynonymRule", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Synonyms.SynonymRule", false);
 		if (Id is not null)
 		{
 			initializer.Property("Id");

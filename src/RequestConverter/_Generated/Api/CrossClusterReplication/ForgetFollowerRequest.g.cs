@@ -27,7 +27,7 @@ public partial class ForgetFollowerRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ForgetFollowerRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest", false);
 		{
 			initializer.Property("Index");
 			Index.FormatCode(writer);

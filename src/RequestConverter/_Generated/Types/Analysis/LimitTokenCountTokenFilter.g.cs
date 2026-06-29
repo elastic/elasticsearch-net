@@ -27,7 +27,7 @@ public partial class LimitTokenCountTokenFilter : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("LimitTokenCountTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilter", true);
 		if (ConsumeAllTokens is not null)
 		{
 			initializer.Property("ConsumeAllTokens");

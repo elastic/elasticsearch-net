@@ -27,7 +27,7 @@ public partial class CumulativeCardinalityAggregation : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CumulativeCardinalityAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregation", false);
 		if (BucketsPath is not null)
 		{
 			initializer.Property("BucketsPath");

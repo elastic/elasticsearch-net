@@ -27,7 +27,7 @@ public partial class FiltersAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FiltersAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation", false);
 		if (Filters is not null)
 		{
 			initializer.Property("Filters");

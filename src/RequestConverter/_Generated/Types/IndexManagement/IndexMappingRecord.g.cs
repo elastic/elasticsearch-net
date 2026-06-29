@@ -27,7 +27,7 @@ public partial class IndexMappingRecord : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndexMappingRecord", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexMappingRecord", false);
 		if (Item is not null)
 		{
 			initializer.Property("Item");

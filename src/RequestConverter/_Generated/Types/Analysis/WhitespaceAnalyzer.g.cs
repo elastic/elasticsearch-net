@@ -27,7 +27,7 @@ public partial class WhitespaceAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("WhitespaceAnalyzer", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.WhitespaceAnalyzer", true);
 #pragma warning disable CS0618
 		if (Version is not null)
 		{

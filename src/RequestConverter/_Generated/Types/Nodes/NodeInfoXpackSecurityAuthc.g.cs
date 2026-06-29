@@ -27,7 +27,7 @@ public partial class NodeInfoXpackSecurityAuthc : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeInfoXpackSecurityAuthc", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthc", false);
 		if (Realms is not null)
 		{
 			initializer.Property("Realms");

@@ -30,13 +30,16 @@ public static class ChunkingModeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.MachineLearning.ChunkingMode.Auto:
-				writer.Write("ChunkingMode.Auto");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.ChunkingMode");
+				writer.Write(".Auto");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.ChunkingMode.Manual:
-				writer.Write("ChunkingMode.Manual");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.ChunkingMode");
+				writer.Write(".Manual");
 				break;
 			case Elastic.Clients.Elasticsearch.MachineLearning.ChunkingMode.Off:
-				writer.Write("ChunkingMode.Off");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.ChunkingMode");
+				writer.Write(".Off");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ChunkingMode value.");

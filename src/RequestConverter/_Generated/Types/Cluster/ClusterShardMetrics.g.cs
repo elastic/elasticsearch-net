@@ -27,7 +27,7 @@ public partial class ClusterShardMetrics : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ClusterShardMetrics", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.ClusterShardMetrics", false);
 		{
 			initializer.Property("Avg");
 			writer.WriteValue(Avg);

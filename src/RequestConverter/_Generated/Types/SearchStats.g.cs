@@ -27,7 +27,7 @@ public partial class SearchStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SearchStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchStats", false);
 		{
 			initializer.Property("FetchCurrent");
 			writer.WriteValue(FetchCurrent);
@@ -54,10 +54,12 @@ public partial class SearchStats : RequestConverter.ICodeFormattable
 		if (Groups is not null)
 		{
 			initializer.Property("Groups");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.SearchStats");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SearchStats");
 			writer.Write(">()");
 			writer.WriteBlockList(Groups, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

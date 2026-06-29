@@ -27,7 +27,7 @@ public partial class PercentilesBucketAggregation : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PercentilesBucketAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation", false);
 		if (BucketsPath is not null)
 		{
 			initializer.Property("BucketsPath");

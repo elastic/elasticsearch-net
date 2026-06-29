@@ -27,7 +27,7 @@ public partial class EnrichProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("EnrichProcessor", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor", false);
 		if (Description is not null)
 		{
 			initializer.Property("Description");

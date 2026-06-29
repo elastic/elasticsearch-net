@@ -27,7 +27,7 @@ public partial class SourceOnlyRepositorySettingsForReadOnlyUrl : RequestConvert
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SourceOnlyRepositorySettingsForReadOnlyUrl", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForReadOnlyUrl", true);
 		if (HttpMaxRetries is not null)
 		{
 			initializer.Property("HttpMaxRetries");

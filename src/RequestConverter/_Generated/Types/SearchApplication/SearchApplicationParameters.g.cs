@@ -27,7 +27,7 @@ public partial class SearchApplicationParameters : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SearchApplicationParameters", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters", false);
 		if (AnalyticsCollectionName is not null)
 		{
 			initializer.Property("AnalyticsCollectionName");

@@ -30,22 +30,28 @@ public static class ReasoningEffortCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.ReasoningEffort.High:
-				writer.Write("ReasoningEffort.High");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ReasoningEffort");
+				writer.Write(".High");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.ReasoningEffort.Low:
-				writer.Write("ReasoningEffort.Low");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ReasoningEffort");
+				writer.Write(".Low");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.ReasoningEffort.Medium:
-				writer.Write("ReasoningEffort.Medium");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ReasoningEffort");
+				writer.Write(".Medium");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.ReasoningEffort.Minimal:
-				writer.Write("ReasoningEffort.Minimal");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ReasoningEffort");
+				writer.Write(".Minimal");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.ReasoningEffort.None:
-				writer.Write("ReasoningEffort.None");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ReasoningEffort");
+				writer.Write(".None");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.ReasoningEffort.Xhigh:
-				writer.Write("ReasoningEffort.Xhigh");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ReasoningEffort");
+				writer.Write(".Xhigh");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ReasoningEffort value.");

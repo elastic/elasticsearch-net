@@ -27,7 +27,7 @@ public partial class SortOptions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SortOptions", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SortOptions", false);
 		if (Doc is not null)
 		{
 			initializer.Property("Doc");

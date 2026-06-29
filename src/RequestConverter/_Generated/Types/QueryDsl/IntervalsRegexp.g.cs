@@ -27,7 +27,7 @@ public partial class IntervalsRegexp : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IntervalsRegexp", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexp", false);
 		if (Analyzer is not null)
 		{
 			initializer.Property("Analyzer");

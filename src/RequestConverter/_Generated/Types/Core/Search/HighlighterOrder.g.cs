@@ -30,7 +30,8 @@ public static class HighlighterOrderCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder.Score:
-				writer.Write("HighlighterOrder.Score");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder");
+				writer.Write(".Score");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected HighlighterOrder value.");

@@ -30,16 +30,20 @@ public static class TermsAggregationExecutionHintCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint.GlobalOrdinals:
-				writer.Write("TermsAggregationExecutionHint.GlobalOrdinals");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint");
+				writer.Write(".GlobalOrdinals");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint.GlobalOrdinalsHash:
-				writer.Write("TermsAggregationExecutionHint.GlobalOrdinalsHash");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint");
+				writer.Write(".GlobalOrdinalsHash");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint.GlobalOrdinalsLowCardinality:
-				writer.Write("TermsAggregationExecutionHint.GlobalOrdinalsLowCardinality");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint");
+				writer.Write(".GlobalOrdinalsLowCardinality");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint.Map:
-				writer.Write("TermsAggregationExecutionHint.Map");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint");
+				writer.Write(".Map");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TermsAggregationExecutionHint value.");

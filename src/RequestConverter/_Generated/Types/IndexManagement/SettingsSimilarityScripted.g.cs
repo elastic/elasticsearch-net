@@ -27,7 +27,7 @@ public partial class SettingsSimilarityScripted : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SettingsSimilarityScripted", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted", true);
 		{
 			initializer.Property("Script");
 			Script.FormatCode(writer);

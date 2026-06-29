@@ -27,7 +27,7 @@ public partial class MigrateToDataTiersRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MigrateToDataTiersRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest", false);
 		if (DryRun is not null)
 		{
 			initializer.Property("DryRun");

@@ -27,7 +27,7 @@ public partial class RRFRetriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RRFRetriever", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.RRFRetriever", false);
 		if (Fields is not null)
 		{
 			initializer.Property("Fields");

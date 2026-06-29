@@ -27,7 +27,7 @@ public partial class KnnRetriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("KnnRetriever", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.KnnRetriever", false);
 		{
 			initializer.Property("Field");
 			writer.WriteString(Field);

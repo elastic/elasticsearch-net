@@ -27,7 +27,7 @@ public partial class NodeInfoSettingsClusterElection : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeInfoSettingsClusterElection", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsClusterElection", false);
 		{
 			initializer.Property("Strategy");
 			writer.WriteString(Strategy);

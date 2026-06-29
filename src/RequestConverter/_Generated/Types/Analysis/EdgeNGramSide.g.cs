@@ -30,10 +30,12 @@ public static class EdgeNGramSideCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide.Back:
-				writer.Write("EdgeNGramSide.Back");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide");
+				writer.Write(".Back");
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide.Front:
-				writer.Write("EdgeNGramSide.Front");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide");
+				writer.Write(".Front");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected EdgeNGramSide value.");

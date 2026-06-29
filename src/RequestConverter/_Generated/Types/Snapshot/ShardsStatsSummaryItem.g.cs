@@ -27,7 +27,7 @@ public partial class ShardsStatsSummaryItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ShardsStatsSummaryItem", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsSummaryItem", false);
 		{
 			initializer.Property("FileCount");
 			writer.WriteValue(FileCount);

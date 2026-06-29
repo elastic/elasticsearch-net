@@ -30,19 +30,24 @@ public static class TimeSeriesMetricTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Counter:
-				writer.Write("TimeSeriesMetricType.Counter");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType");
+				writer.Write(".Counter");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Gauge:
-				writer.Write("TimeSeriesMetricType.Gauge");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType");
+				writer.Write(".Gauge");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Histogram:
-				writer.Write("TimeSeriesMetricType.Histogram");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType");
+				writer.Write(".Histogram");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Position:
-				writer.Write("TimeSeriesMetricType.Position");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType");
+				writer.Write(".Position");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.Summary:
-				writer.Write("TimeSeriesMetricType.Summary");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType");
+				writer.Write(".Summary");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TimeSeriesMetricType value.");

@@ -27,7 +27,7 @@ public partial class IndexUpdateAliasesAction : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndexUpdateAliasesAction", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction", false);
 		if (Add is not null)
 		{
 			initializer.Property("Add");

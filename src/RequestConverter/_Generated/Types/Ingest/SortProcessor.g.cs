@@ -27,7 +27,7 @@ public partial class SortProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SortProcessor", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.SortProcessor", false);
 		if (Description is not null)
 		{
 			initializer.Property("Description");

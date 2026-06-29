@@ -27,7 +27,7 @@ public partial class TimeRetentionPolicy : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TimeRetentionPolicy", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy", false);
 		{
 			initializer.Property("Field");
 			Field.FormatCode(writer);

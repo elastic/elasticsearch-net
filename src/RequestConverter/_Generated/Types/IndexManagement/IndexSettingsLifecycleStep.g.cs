@@ -27,7 +27,7 @@ public partial class IndexSettingsLifecycleStep : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndexSettingsLifecycleStep", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep", false);
 		if (WaitTimeThreshold is not null)
 		{
 			initializer.Property("WaitTimeThreshold");

@@ -27,7 +27,7 @@ public partial class MultiTermsBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MultiTermsBucket", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.MultiTermsBucket", false);
 		if (Aggregations is not null)
 		{
 			initializer.Property("Aggregations");

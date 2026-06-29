@@ -27,7 +27,7 @@ public partial class DenseVectorStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DenseVectorStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.DenseVectorStats", false);
 		if (OffHeap is not null)
 		{
 			initializer.Property("OffHeap");

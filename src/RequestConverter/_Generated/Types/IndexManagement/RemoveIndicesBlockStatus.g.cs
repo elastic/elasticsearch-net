@@ -27,7 +27,7 @@ public partial class RemoveIndicesBlockStatus : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RemoveIndicesBlockStatus", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndicesBlockStatus", false);
 		if (Exception is not null)
 		{
 			initializer.Property("Exception");

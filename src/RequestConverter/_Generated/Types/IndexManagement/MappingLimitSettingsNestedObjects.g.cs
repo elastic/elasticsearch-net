@@ -27,7 +27,7 @@ public partial class MappingLimitSettingsNestedObjects : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MappingLimitSettingsNestedObjects", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjects", false);
 		if (Limit is not null)
 		{
 			initializer.Property("Limit");

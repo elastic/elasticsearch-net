@@ -27,7 +27,7 @@ public partial class LanguageContext : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("LanguageContext", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.GetScriptLanguages.LanguageContext", false);
 		{
 			initializer.Property("Contexts");
 			writer.WriteInlineList(Contexts, (w, item) => { w.WriteString(item); });

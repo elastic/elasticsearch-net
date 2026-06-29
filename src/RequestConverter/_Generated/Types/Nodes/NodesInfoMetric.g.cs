@@ -30,46 +30,60 @@ public static class NodesInfoMetricCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.All:
-				writer.Write("NodesInfoMetric.All");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric");
+				writer.Write(".All");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.None:
-				writer.Write("NodesInfoMetric.None");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric");
+				writer.Write(".None");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.Aggregations:
-				writer.Write("NodesInfoMetric.Aggregations");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric");
+				writer.Write(".Aggregations");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.Http:
-				writer.Write("NodesInfoMetric.Http");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric");
+				writer.Write(".Http");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.Indices:
-				writer.Write("NodesInfoMetric.Indices");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric");
+				writer.Write(".Indices");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.Ingest:
-				writer.Write("NodesInfoMetric.Ingest");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric");
+				writer.Write(".Ingest");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.Jvm:
-				writer.Write("NodesInfoMetric.Jvm");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric");
+				writer.Write(".Jvm");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.Os:
-				writer.Write("NodesInfoMetric.Os");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric");
+				writer.Write(".Os");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.Plugins:
-				writer.Write("NodesInfoMetric.Plugins");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric");
+				writer.Write(".Plugins");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.Process:
-				writer.Write("NodesInfoMetric.Process");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric");
+				writer.Write(".Process");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.RemoteClusterServer:
-				writer.Write("NodesInfoMetric.RemoteClusterServer");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric");
+				writer.Write(".RemoteClusterServer");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.Settings:
-				writer.Write("NodesInfoMetric.Settings");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric");
+				writer.Write(".Settings");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.ThreadPool:
-				writer.Write("NodesInfoMetric.ThreadPool");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric");
+				writer.Write(".ThreadPool");
 				break;
 			case Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric.Transport:
-				writer.Write("NodesInfoMetric.Transport");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric");
+				writer.Write(".Transport");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected NodesInfoMetric value.");

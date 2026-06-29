@@ -27,7 +27,7 @@ public partial class DeleteComponentTemplateRequest : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteComponentTemplateRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

@@ -27,7 +27,7 @@ public partial class Ensemble : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Ensemble", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.Ensemble", false);
 		if (AggregateOutput is not null)
 		{
 			initializer.Property("AggregateOutput");

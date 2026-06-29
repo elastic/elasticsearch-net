@@ -27,7 +27,7 @@ public partial class CpuAcct : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CpuAcct", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.CpuAcct", false);
 		if (ControlGroup is not null)
 		{
 			initializer.Property("ControlGroup");

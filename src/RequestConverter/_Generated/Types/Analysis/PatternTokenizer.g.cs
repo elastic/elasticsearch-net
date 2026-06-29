@@ -27,7 +27,7 @@ public partial class PatternTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PatternTokenizer", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.PatternTokenizer", true);
 		if (Flags is not null)
 		{
 			initializer.Property("Flags");

@@ -27,7 +27,7 @@ public partial class NodeThreadPoolInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeThreadPoolInfo", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeThreadPoolInfo", false);
 		if (Core is not null)
 		{
 			initializer.Property("Core");

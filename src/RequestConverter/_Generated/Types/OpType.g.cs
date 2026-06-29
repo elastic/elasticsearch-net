@@ -30,10 +30,12 @@ public static class OpTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.OpType.Create:
-				writer.Write("OpType.Create");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.OpType");
+				writer.Write(".Create");
 				break;
 			case Elastic.Clients.Elasticsearch.OpType.Index:
-				writer.Write("OpType.Index");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.OpType");
+				writer.Write(".Index");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected OpType value.");

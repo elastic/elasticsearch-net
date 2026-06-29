@@ -27,7 +27,7 @@ public partial class KeywordAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("KeywordAnalyzer", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer", true);
 #pragma warning disable CS0618
 		if (Version is not null)
 		{

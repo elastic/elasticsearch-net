@@ -27,7 +27,7 @@ public partial class InProgress : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("InProgress", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.InProgress", false);
 		{
 			initializer.Property("Name");
 			writer.WriteString(Name);

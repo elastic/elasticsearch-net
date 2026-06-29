@@ -27,7 +27,7 @@ public partial class NodeInfoSearchRemote : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeInfoSearchRemote", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeInfoSearchRemote", false);
 		{
 			initializer.Property("Connect");
 			writer.WriteString(Connect);

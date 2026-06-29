@@ -27,7 +27,7 @@ public partial class ProjectRoutingExpression : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ProjectRoutingExpression", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Project.ProjectRoutingExpression", false);
 		{
 			initializer.Property("Expression");
 			writer.WriteString(Expression);

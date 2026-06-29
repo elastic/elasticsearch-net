@@ -27,7 +27,7 @@ public partial class Rescore : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Rescore", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.Rescore", false);
 		if (WindowSize is not null)
 		{
 			initializer.Property("WindowSize");

@@ -27,7 +27,7 @@ public partial class JvmClasses : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("JvmClasses", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.JvmClasses", false);
 		if (CurrentLoadedCount is not null)
 		{
 			initializer.Property("CurrentLoadedCount");

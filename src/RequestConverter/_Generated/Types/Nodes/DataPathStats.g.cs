@@ -27,7 +27,7 @@ public partial class DataPathStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataPathStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.DataPathStats", false);
 		if (Available is not null)
 		{
 			initializer.Property("Available");

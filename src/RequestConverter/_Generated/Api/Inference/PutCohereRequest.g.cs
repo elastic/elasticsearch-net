@@ -27,7 +27,7 @@ public partial class PutCohereRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutCohereRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutCohereRequest", false);
 		{
 			initializer.Property("CohereInferenceId");
 			CohereInferenceId.FormatCode(writer);

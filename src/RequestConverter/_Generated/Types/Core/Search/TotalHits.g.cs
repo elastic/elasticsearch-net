@@ -27,7 +27,7 @@ public partial class TotalHits : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TotalHits", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.TotalHits", true);
 		{
 			initializer.Property("Relation");
 			Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelationCodeFormatter.FormatCode(Relation, writer);

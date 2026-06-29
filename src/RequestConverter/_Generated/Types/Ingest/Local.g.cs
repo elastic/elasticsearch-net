@@ -27,7 +27,7 @@ public partial class Local : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Local", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.Local", false);
 		{
 			initializer.Property("Type");
 			writer.WriteString(Type);

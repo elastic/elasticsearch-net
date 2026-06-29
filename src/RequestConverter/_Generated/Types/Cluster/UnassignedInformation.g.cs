@@ -27,7 +27,7 @@ public partial class UnassignedInformation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("UnassignedInformation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.UnassignedInformation", false);
 		if (AllocationStatus is not null)
 		{
 			initializer.Property("AllocationStatus");

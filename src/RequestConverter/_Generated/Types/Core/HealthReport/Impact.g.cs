@@ -27,7 +27,7 @@ public partial class Impact : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Impact", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.HealthReport.Impact", false);
 		{
 			initializer.Property("Description");
 			writer.WriteString(Description);

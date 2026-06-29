@@ -30,22 +30,28 @@ public static class FunctionBoostModeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Avg:
-				writer.Write("FunctionBoostMode.Avg");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode");
+				writer.Write(".Avg");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Max:
-				writer.Write("FunctionBoostMode.Max");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode");
+				writer.Write(".Max");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Min:
-				writer.Write("FunctionBoostMode.Min");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode");
+				writer.Write(".Min");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Multiply:
-				writer.Write("FunctionBoostMode.Multiply");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode");
+				writer.Write(".Multiply");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Replace:
-				writer.Write("FunctionBoostMode.Replace");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode");
+				writer.Write(".Replace");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.Sum:
-				writer.Write("FunctionBoostMode.Sum");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode");
+				writer.Write(".Sum");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected FunctionBoostMode value.");

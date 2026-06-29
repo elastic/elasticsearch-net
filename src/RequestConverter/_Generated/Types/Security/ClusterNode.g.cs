@@ -27,7 +27,7 @@ public partial class ClusterNode : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ClusterNode", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.ClusterNode", false);
 		{
 			initializer.Property("Name");
 			writer.WriteString(Name);

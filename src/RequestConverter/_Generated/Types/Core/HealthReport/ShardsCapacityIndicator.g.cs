@@ -27,7 +27,7 @@ public partial class ShardsCapacityIndicator : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ShardsCapacityIndicator", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicator", false);
 		if (Details is not null)
 		{
 			initializer.Property("Details");

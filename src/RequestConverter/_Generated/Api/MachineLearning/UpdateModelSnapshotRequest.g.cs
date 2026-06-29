@@ -27,7 +27,7 @@ public partial class UpdateModelSnapshotRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("UpdateModelSnapshotRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequest", false);
 		{
 			initializer.Property("JobId");
 			JobId.FormatCode(writer);

@@ -30,16 +30,20 @@ public static class FieldSortNumericTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.FieldSortNumericType.Date:
-				writer.Write("FieldSortNumericType.Date");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.FieldSortNumericType");
+				writer.Write(".Date");
 				break;
 			case Elastic.Clients.Elasticsearch.FieldSortNumericType.DateNanos:
-				writer.Write("FieldSortNumericType.DateNanos");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.FieldSortNumericType");
+				writer.Write(".DateNanos");
 				break;
 			case Elastic.Clients.Elasticsearch.FieldSortNumericType.Double:
-				writer.Write("FieldSortNumericType.Double");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.FieldSortNumericType");
+				writer.Write(".Double");
 				break;
 			case Elastic.Clients.Elasticsearch.FieldSortNumericType.Long:
-				writer.Write("FieldSortNumericType.Long");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.FieldSortNumericType");
+				writer.Write(".Long");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected FieldSortNumericType value.");

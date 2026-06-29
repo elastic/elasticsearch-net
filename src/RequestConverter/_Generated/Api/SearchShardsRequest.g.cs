@@ -27,7 +27,7 @@ public partial class SearchShardsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SearchShardsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchShardsRequest", false);
 		if (Indices is not null)
 		{
 			initializer.Property("Indices");

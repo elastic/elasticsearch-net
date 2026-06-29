@@ -27,7 +27,7 @@ public partial class BucketKsAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("BucketKsAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregation", false);
 		if (Alternative is not null)
 		{
 			initializer.Property("Alternative");

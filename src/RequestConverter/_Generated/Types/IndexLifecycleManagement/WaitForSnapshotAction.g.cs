@@ -27,7 +27,7 @@ public partial class WaitForSnapshotAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("WaitForSnapshotAction", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotAction", false);
 		{
 			initializer.Property("Policy");
 			writer.WriteString(Policy);

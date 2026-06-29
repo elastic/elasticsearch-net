@@ -27,7 +27,7 @@ public partial class NumberRangeQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NumberRangeQuery", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery", true);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

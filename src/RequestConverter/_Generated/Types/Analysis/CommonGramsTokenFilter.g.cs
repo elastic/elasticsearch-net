@@ -27,7 +27,7 @@ public partial class CommonGramsTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CommonGramsTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilter", true);
 		if (CommonWords is not null)
 		{
 			initializer.Property("CommonWords");

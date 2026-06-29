@@ -30,16 +30,20 @@ public static class MultiValueModeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode.Avg:
-				writer.Write("MultiValueMode.Avg");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode");
+				writer.Write(".Avg");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode.Max:
-				writer.Write("MultiValueMode.Max");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode");
+				writer.Write(".Max");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode.Min:
-				writer.Write("MultiValueMode.Min");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode");
+				writer.Write(".Min");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode.Sum:
-				writer.Write("MultiValueMode.Sum");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode");
+				writer.Write(".Sum");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected MultiValueMode value.");

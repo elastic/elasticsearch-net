@@ -30,10 +30,12 @@ public static class StorageOptionCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.SearchableSnapshots.StorageOption.FullCopy:
-				writer.Write("StorageOption.FullCopy");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SearchableSnapshots.StorageOption");
+				writer.Write(".FullCopy");
 				break;
 			case Elastic.Clients.Elasticsearch.SearchableSnapshots.StorageOption.SharedCache:
-				writer.Write("StorageOption.SharedCache");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SearchableSnapshots.StorageOption");
+				writer.Write(".SharedCache");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected StorageOption value.");

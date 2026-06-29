@@ -27,7 +27,7 @@ public partial class Datafeeds : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Datafeeds", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.Datafeeds", false);
 		{
 			initializer.Property("ScrollSize");
 			writer.WriteValue(ScrollSize);

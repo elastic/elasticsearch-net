@@ -27,7 +27,7 @@ public partial class ImageUrl : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ImageUrl", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.ImageUrl", false);
 		if (Detail is not null)
 		{
 			initializer.Property("Detail");

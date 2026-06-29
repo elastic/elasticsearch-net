@@ -27,7 +27,7 @@ public partial class RegexOptions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RegexOptions", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.RegexOptions", false);
 		if (Flags is not null)
 		{
 			initializer.Property("Flags");

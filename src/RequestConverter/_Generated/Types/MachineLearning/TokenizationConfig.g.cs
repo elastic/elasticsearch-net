@@ -27,7 +27,7 @@ public partial class TokenizationConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TokenizationConfig", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig", false);
 		if (Bert is not null)
 		{
 			initializer.Property("Bert");

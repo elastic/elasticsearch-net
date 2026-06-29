@@ -27,14 +27,16 @@ public partial class ExtendedSectionSearchUsage : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ExtendedSectionSearchUsage", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.ExtendedSectionSearchUsage", false);
 		if (Sort is not null)
 		{
 			initializer.Property("Sort");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("Elastic.Clients.Elasticsearch.Cluster.SortType");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.SortType");
 			writer.Write(", ");
-			writer.Write("long");
+			writer.WriteTypeRef("long");
 			writer.Write(">()");
 			writer.WriteBlockList(Sort, (w, kvp) => { w.Write("{ "); Elastic.Clients.Elasticsearch.Cluster.SortTypeCodeFormatter.FormatCode(kvp.Key, w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); });
 		}

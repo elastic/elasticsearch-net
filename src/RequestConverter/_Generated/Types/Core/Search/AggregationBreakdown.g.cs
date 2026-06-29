@@ -27,7 +27,7 @@ public partial class AggregationBreakdown : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AggregationBreakdown", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.AggregationBreakdown", false);
 		{
 			initializer.Property("BuildAggregation");
 			writer.WriteValue(BuildAggregation);

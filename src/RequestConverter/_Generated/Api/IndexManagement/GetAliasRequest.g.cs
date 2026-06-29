@@ -27,7 +27,7 @@ public partial class GetAliasRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetAliasRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest", false);
 		if (Indices is not null)
 		{
 			initializer.Property("Indices");

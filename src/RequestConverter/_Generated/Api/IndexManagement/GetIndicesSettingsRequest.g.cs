@@ -27,7 +27,7 @@ public partial class GetIndicesSettingsRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetIndicesSettingsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest", false);
 		if (Indices is not null)
 		{
 			initializer.Property("Indices");

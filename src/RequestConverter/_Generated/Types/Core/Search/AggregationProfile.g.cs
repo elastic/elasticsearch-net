@@ -27,7 +27,7 @@ public partial class AggregationProfile : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AggregationProfile", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.AggregationProfile", false);
 		{
 			initializer.Property("Breakdown");
 			Breakdown.FormatCode(writer);

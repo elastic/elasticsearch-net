@@ -27,7 +27,7 @@ public partial class SuggestUserProfilesRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SuggestUserProfilesRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest", false);
 		if (Data is not null)
 		{
 			initializer.Property("Data");

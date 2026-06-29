@@ -27,7 +27,7 @@ public partial class NodeInfoClient : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("NodeInfoClient", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodeInfoClient", false);
 		{
 			initializer.Property("Type");
 			writer.WriteString(Type);

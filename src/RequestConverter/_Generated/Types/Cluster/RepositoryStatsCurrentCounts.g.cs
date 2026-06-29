@@ -27,7 +27,7 @@ public partial class RepositoryStatsCurrentCounts : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RepositoryStatsCurrentCounts", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.RepositoryStatsCurrentCounts", false);
 		{
 			initializer.Property("ActiveDeletions");
 			writer.WriteValue(ActiveDeletions);

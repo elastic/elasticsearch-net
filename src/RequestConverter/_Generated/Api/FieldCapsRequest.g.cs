@@ -27,7 +27,7 @@ public partial class FieldCapsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FieldCapsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.FieldCapsRequest", false);
 		if (Indices is not null)
 		{
 			initializer.Property("Indices");
@@ -97,10 +97,12 @@ public partial class FieldCapsRequest : RequestConverter.ICodeFormattable
 		if (RuntimeMappings is not null)
 		{
 			initializer.Property("RuntimeMappings");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("Elastic.Clients.Elasticsearch.Field");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Field");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Mapping.RuntimeField");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.RuntimeField");
 			writer.Write(">()");
 			writer.WriteBlockList(RuntimeMappings, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

@@ -27,7 +27,7 @@ public partial class ClusterOperatingSystem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ClusterOperatingSystem", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.ClusterOperatingSystem", false);
 		{
 			initializer.Property("AllocatedProcessors");
 			writer.WriteValue(AllocatedProcessors);

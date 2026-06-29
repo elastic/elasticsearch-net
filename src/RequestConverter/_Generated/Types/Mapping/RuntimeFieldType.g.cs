@@ -30,34 +30,44 @@ public static class RuntimeFieldTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType.Boolean:
-				writer.Write("RuntimeFieldType.Boolean");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType");
+				writer.Write(".Boolean");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType.Composite:
-				writer.Write("RuntimeFieldType.Composite");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType");
+				writer.Write(".Composite");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType.Date:
-				writer.Write("RuntimeFieldType.Date");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType");
+				writer.Write(".Date");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType.Double:
-				writer.Write("RuntimeFieldType.Double");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType");
+				writer.Write(".Double");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType.GeoPoint:
-				writer.Write("RuntimeFieldType.GeoPoint");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType");
+				writer.Write(".GeoPoint");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType.GeoShape:
-				writer.Write("RuntimeFieldType.GeoShape");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType");
+				writer.Write(".GeoShape");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType.Ip:
-				writer.Write("RuntimeFieldType.Ip");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType");
+				writer.Write(".Ip");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType.Keyword:
-				writer.Write("RuntimeFieldType.Keyword");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType");
+				writer.Write(".Keyword");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType.Long:
-				writer.Write("RuntimeFieldType.Long");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType");
+				writer.Write(".Long");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType.Lookup:
-				writer.Write("RuntimeFieldType.Lookup");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType");
+				writer.Write(".Lookup");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected RuntimeFieldType value.");

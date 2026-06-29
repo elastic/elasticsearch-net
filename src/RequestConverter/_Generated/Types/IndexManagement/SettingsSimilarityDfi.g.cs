@@ -27,7 +27,7 @@ public partial class SettingsSimilarityDfi : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SettingsSimilarityDfi", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi", true);
 		{
 			initializer.Property("IndependenceMeasure");
 			Elastic.Clients.Elasticsearch.DFIIndependenceMeasureCodeFormatter.FormatCode(IndependenceMeasure, writer);

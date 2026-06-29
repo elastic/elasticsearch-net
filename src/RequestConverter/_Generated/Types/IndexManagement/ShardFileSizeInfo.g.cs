@@ -27,7 +27,7 @@ public partial class ShardFileSizeInfo : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ShardFileSizeInfo", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo", false);
 		if (AverageSizeInBytes is not null)
 		{
 			initializer.Property("AverageSizeInBytes");

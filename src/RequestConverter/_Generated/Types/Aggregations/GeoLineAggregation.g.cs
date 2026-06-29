@@ -27,7 +27,7 @@ public partial class GeoLineAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GeoLineAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation", false);
 		if (IncludeSort is not null)
 		{
 			initializer.Property("IncludeSort");

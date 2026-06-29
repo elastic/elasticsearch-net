@@ -27,7 +27,7 @@ public partial class JvmStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("JvmStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.JvmStats", false);
 		if (HeapMax is not null)
 		{
 			initializer.Property("HeapMax");

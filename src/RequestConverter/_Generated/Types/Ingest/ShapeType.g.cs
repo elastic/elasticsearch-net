@@ -30,10 +30,12 @@ public static class ShapeTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Ingest.ShapeType.GeoShape:
-				writer.Write("ShapeType.GeoShape");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.ShapeType");
+				writer.Write(".GeoShape");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.ShapeType.Shape:
-				writer.Write("ShapeType.Shape");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.ShapeType");
+				writer.Write(".Shape");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ShapeType value.");

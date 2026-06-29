@@ -27,7 +27,7 @@ public partial class AnomalyCause : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("AnomalyCause", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.AnomalyCause", false);
 		if (Actual is not null)
 		{
 			initializer.Property("Actual");

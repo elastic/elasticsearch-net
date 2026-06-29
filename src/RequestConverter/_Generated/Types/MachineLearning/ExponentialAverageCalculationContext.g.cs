@@ -27,7 +27,7 @@ public partial class ExponentialAverageCalculationContext : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ExponentialAverageCalculationContext", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ExponentialAverageCalculationContext", false);
 		{
 			initializer.Property("IncrementalMetricValueMs");
 			writer.WriteValue(IncrementalMetricValueMs);

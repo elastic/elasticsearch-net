@@ -30,37 +30,48 @@ public static class QueryRuleCriteriaTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Always:
-				writer.Write("QueryRuleCriteriaType.Always");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType");
+				writer.Write(".Always");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Contains:
-				writer.Write("QueryRuleCriteriaType.Contains");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType");
+				writer.Write(".Contains");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Exact:
-				writer.Write("QueryRuleCriteriaType.Exact");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType");
+				writer.Write(".Exact");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Fuzzy:
-				writer.Write("QueryRuleCriteriaType.Fuzzy");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType");
+				writer.Write(".Fuzzy");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Global:
-				writer.Write("QueryRuleCriteriaType.Global");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType");
+				writer.Write(".Global");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Gt:
-				writer.Write("QueryRuleCriteriaType.Gt");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType");
+				writer.Write(".Gt");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Gte:
-				writer.Write("QueryRuleCriteriaType.Gte");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType");
+				writer.Write(".Gte");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Lt:
-				writer.Write("QueryRuleCriteriaType.Lt");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType");
+				writer.Write(".Lt");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Lte:
-				writer.Write("QueryRuleCriteriaType.Lte");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType");
+				writer.Write(".Lte");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Prefix:
-				writer.Write("QueryRuleCriteriaType.Prefix");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType");
+				writer.Write(".Prefix");
 				break;
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Suffix:
-				writer.Write("QueryRuleCriteriaType.Suffix");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType");
+				writer.Write(".Suffix");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected QueryRuleCriteriaType value.");

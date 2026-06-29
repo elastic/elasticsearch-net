@@ -27,7 +27,7 @@ public partial class IndexSettingsAnalysis : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndexSettingsAnalysis", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis", false);
 		if (Analyzers is not null)
 		{
 			initializer.Property("Analyzers");

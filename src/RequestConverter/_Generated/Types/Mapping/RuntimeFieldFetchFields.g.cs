@@ -27,7 +27,7 @@ public partial class RuntimeFieldFetchFields : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RuntimeFieldFetchFields", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields", false);
 		{
 			initializer.Property("Field");
 			Field.FormatCode(writer);

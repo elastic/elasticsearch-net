@@ -27,7 +27,7 @@ public partial class HyphenationDecompounderTokenFilter : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("HyphenationDecompounderTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilter", true);
 		{
 			initializer.Property("HyphenationPatternsPath");
 			writer.WriteString(HyphenationPatternsPath);

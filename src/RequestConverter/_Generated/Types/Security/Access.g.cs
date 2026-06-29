@@ -27,7 +27,7 @@ public partial class Access : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Access", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.Access", false);
 		if (Replication is not null)
 		{
 			initializer.Property("Replication");

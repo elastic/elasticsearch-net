@@ -27,7 +27,7 @@ public partial class PutAnthropicRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutAnthropicRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequest", false);
 		{
 			initializer.Property("AnthropicInferenceId");
 			AnthropicInferenceId.FormatCode(writer);

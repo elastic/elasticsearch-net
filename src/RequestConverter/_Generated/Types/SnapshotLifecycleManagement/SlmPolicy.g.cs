@@ -27,7 +27,7 @@ public partial class SlmPolicy : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SlmPolicy", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmPolicy", false);
 		if (Config is not null)
 		{
 			initializer.Property("Config");

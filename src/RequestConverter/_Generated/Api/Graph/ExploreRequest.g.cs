@@ -27,7 +27,7 @@ public partial class ExploreRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ExploreRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Graph.ExploreRequest", false);
 		{
 			initializer.Property("Indices");
 			Indices.FormatCode(writer);

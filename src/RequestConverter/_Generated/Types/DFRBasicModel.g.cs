@@ -30,25 +30,32 @@ public static class DFRBasicModelCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.DFRBasicModel.Be:
-				writer.Write("DFRBasicModel.Be");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.DFRBasicModel");
+				writer.Write(".Be");
 				break;
 			case Elastic.Clients.Elasticsearch.DFRBasicModel.D:
-				writer.Write("DFRBasicModel.D");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.DFRBasicModel");
+				writer.Write(".D");
 				break;
 			case Elastic.Clients.Elasticsearch.DFRBasicModel.G:
-				writer.Write("DFRBasicModel.G");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.DFRBasicModel");
+				writer.Write(".G");
 				break;
 			case Elastic.Clients.Elasticsearch.DFRBasicModel.If:
-				writer.Write("DFRBasicModel.If");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.DFRBasicModel");
+				writer.Write(".If");
 				break;
 			case Elastic.Clients.Elasticsearch.DFRBasicModel.In:
-				writer.Write("DFRBasicModel.In");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.DFRBasicModel");
+				writer.Write(".In");
 				break;
 			case Elastic.Clients.Elasticsearch.DFRBasicModel.Ine:
-				writer.Write("DFRBasicModel.Ine");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.DFRBasicModel");
+				writer.Write(".Ine");
 				break;
 			case Elastic.Clients.Elasticsearch.DFRBasicModel.P:
-				writer.Write("DFRBasicModel.P");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.DFRBasicModel");
+				writer.Write(".P");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected DFRBasicModel value.");

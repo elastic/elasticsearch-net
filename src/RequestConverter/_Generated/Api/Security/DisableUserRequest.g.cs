@@ -27,7 +27,7 @@ public partial class DisableUserRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DisableUserRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.DisableUserRequest", false);
 		{
 			initializer.Property("Username");
 			Username.FormatCode(writer);

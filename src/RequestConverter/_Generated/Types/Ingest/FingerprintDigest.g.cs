@@ -30,19 +30,24 @@ public static class FingerprintDigestCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest.Md5:
-				writer.Write("FingerprintDigest.Md5");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest");
+				writer.Write(".Md5");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest.MurmurHash3:
-				writer.Write("FingerprintDigest.MurmurHash3");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest");
+				writer.Write(".MurmurHash3");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest.Sha1:
-				writer.Write("FingerprintDigest.Sha1");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest");
+				writer.Write(".Sha1");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest.Sha256:
-				writer.Write("FingerprintDigest.Sha256");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest");
+				writer.Write(".Sha256");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest.Sha512:
-				writer.Write("FingerprintDigest.Sha512");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest");
+				writer.Write(".Sha512");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected FingerprintDigest value.");

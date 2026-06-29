@@ -27,7 +27,7 @@ public partial class WktGeoBounds : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("WktGeoBounds", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.WktGeoBounds", true);
 		{
 			initializer.Property("Wkt");
 			writer.WriteString(Wkt);

@@ -30,13 +30,16 @@ public static class ScriptSortTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.ScriptSortType.Number:
-				writer.Write("ScriptSortType.Number");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ScriptSortType");
+				writer.Write(".Number");
 				break;
 			case Elastic.Clients.Elasticsearch.ScriptSortType.String:
-				writer.Write("ScriptSortType.String");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ScriptSortType");
+				writer.Write(".String");
 				break;
 			case Elastic.Clients.Elasticsearch.ScriptSortType.Version:
-				writer.Write("ScriptSortType.Version");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ScriptSortType");
+				writer.Write(".Version");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ScriptSortType value.");

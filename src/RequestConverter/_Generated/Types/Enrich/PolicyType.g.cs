@@ -30,13 +30,16 @@ public static class PolicyTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Enrich.PolicyType.GeoMatch:
-				writer.Write("PolicyType.GeoMatch");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Enrich.PolicyType");
+				writer.Write(".GeoMatch");
 				break;
 			case Elastic.Clients.Elasticsearch.Enrich.PolicyType.Match:
-				writer.Write("PolicyType.Match");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Enrich.PolicyType");
+				writer.Write(".Match");
 				break;
 			case Elastic.Clients.Elasticsearch.Enrich.PolicyType.Range:
-				writer.Write("PolicyType.Range");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Enrich.PolicyType");
+				writer.Write(".Range");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected PolicyType value.");

@@ -30,16 +30,20 @@ public static class RetentionSourceCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.RetentionSource.DataStreamConfiguration:
-				writer.Write("RetentionSource.DataStreamConfiguration");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.RetentionSource");
+				writer.Write(".DataStreamConfiguration");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.RetentionSource.DefaultFailuresRetention:
-				writer.Write("RetentionSource.DefaultFailuresRetention");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.RetentionSource");
+				writer.Write(".DefaultFailuresRetention");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.RetentionSource.DefaultGlobalRetention:
-				writer.Write("RetentionSource.DefaultGlobalRetention");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.RetentionSource");
+				writer.Write(".DefaultGlobalRetention");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.RetentionSource.MaxGlobalRetention:
-				writer.Write("RetentionSource.MaxGlobalRetention");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.RetentionSource");
+				writer.Write(".MaxGlobalRetention");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected RetentionSource value.");

@@ -27,7 +27,7 @@ public partial class ExtendedSearchUsage : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ExtendedSearchUsage", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.ExtendedSearchUsage", false);
 		if (Retrievers is not null)
 		{
 			initializer.Property("Retrievers");

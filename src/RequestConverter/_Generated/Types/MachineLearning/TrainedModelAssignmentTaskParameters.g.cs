@@ -27,7 +27,7 @@ public partial class TrainedModelAssignmentTaskParameters : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TrainedModelAssignmentTaskParameters", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentTaskParameters", false);
 		if (CacheSize is not null)
 		{
 			initializer.Property("CacheSize");

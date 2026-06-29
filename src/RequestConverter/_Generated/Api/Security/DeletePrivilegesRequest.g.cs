@@ -27,7 +27,7 @@ public partial class DeletePrivilegesRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeletePrivilegesRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequest", false);
 		{
 			initializer.Property("Application");
 			Application.FormatCode(writer);

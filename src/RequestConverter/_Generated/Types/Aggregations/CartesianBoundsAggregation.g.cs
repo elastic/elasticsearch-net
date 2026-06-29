@@ -27,7 +27,7 @@ public partial class CartesianBoundsAggregation : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CartesianBoundsAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregation", false);
 		if (Field is not null)
 		{
 			initializer.Property("Field");

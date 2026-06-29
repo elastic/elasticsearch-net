@@ -27,7 +27,7 @@ public partial class RealmCache : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RealmCache", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.RealmCache", false);
 		{
 			initializer.Property("Size");
 			writer.WriteValue(Size);

@@ -27,7 +27,7 @@ public partial class EqlFeaturesSequences : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("EqlFeaturesSequences", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesSequences", false);
 		{
 			initializer.Property("SequenceMaxspan");
 			writer.WriteValue(SequenceMaxspan);

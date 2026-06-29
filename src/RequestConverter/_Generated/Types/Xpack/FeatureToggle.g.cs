@@ -27,7 +27,7 @@ public partial class FeatureToggle : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FeatureToggle", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.FeatureToggle", false);
 		{
 			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);

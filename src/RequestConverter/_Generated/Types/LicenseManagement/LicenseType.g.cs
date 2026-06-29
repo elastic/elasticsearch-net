@@ -30,31 +30,40 @@ public static class LicenseTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Basic:
-				writer.Write("LicenseType.Basic");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType");
+				writer.Write(".Basic");
 				break;
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Dev:
-				writer.Write("LicenseType.Dev");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType");
+				writer.Write(".Dev");
 				break;
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Enterprise:
-				writer.Write("LicenseType.Enterprise");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType");
+				writer.Write(".Enterprise");
 				break;
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Gold:
-				writer.Write("LicenseType.Gold");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType");
+				writer.Write(".Gold");
 				break;
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Missing:
-				writer.Write("LicenseType.Missing");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType");
+				writer.Write(".Missing");
 				break;
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Platinum:
-				writer.Write("LicenseType.Platinum");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType");
+				writer.Write(".Platinum");
 				break;
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Silver:
-				writer.Write("LicenseType.Silver");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType");
+				writer.Write(".Silver");
 				break;
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Standard:
-				writer.Write("LicenseType.Standard");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType");
+				writer.Write(".Standard");
 				break;
 			case Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType.Trial:
-				writer.Write("LicenseType.Trial");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType");
+				writer.Write(".Trial");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected LicenseType value.");

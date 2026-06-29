@@ -30,22 +30,28 @@ public static class TaskTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.TaskType.ChatCompletion:
-				writer.Write("TaskType.ChatCompletion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskType");
+				writer.Write(".ChatCompletion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskType.Completion:
-				writer.Write("TaskType.Completion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskType");
+				writer.Write(".Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskType.Embedding:
-				writer.Write("TaskType.Embedding");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskType");
+				writer.Write(".Embedding");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskType.Rerank:
-				writer.Write("TaskType.Rerank");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskType");
+				writer.Write(".Rerank");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskType.SparseEmbedding:
-				writer.Write("TaskType.SparseEmbedding");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskType");
+				writer.Write(".SparseEmbedding");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskType.TextEmbedding:
-				writer.Write("TaskType.TextEmbedding");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskType");
+				writer.Write(".TextEmbedding");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected TaskType value.");

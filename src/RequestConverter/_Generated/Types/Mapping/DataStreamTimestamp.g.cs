@@ -27,7 +27,7 @@ public partial class DataStreamTimestamp : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataStreamTimestamp", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestamp", false);
 		{
 			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);

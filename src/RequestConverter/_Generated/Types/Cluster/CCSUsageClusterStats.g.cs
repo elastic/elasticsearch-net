@@ -27,7 +27,7 @@ public partial class CCSUsageClusterStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CCSUsageClusterStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.CCSUsageClusterStats", false);
 		{
 			initializer.Property("Skipped");
 			writer.WriteValue(Skipped);

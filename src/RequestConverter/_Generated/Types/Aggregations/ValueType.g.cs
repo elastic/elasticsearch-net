@@ -30,34 +30,44 @@ public static class ValueTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.Boolean:
-				writer.Write("ValueType.Boolean");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.ValueType");
+				writer.Write(".Boolean");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.Date:
-				writer.Write("ValueType.Date");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.ValueType");
+				writer.Write(".Date");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.DateNanos:
-				writer.Write("ValueType.DateNanos");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.ValueType");
+				writer.Write(".DateNanos");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.Double:
-				writer.Write("ValueType.Double");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.ValueType");
+				writer.Write(".Double");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.GeoPoint:
-				writer.Write("ValueType.GeoPoint");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.ValueType");
+				writer.Write(".GeoPoint");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.Ip:
-				writer.Write("ValueType.Ip");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.ValueType");
+				writer.Write(".Ip");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.Long:
-				writer.Write("ValueType.Long");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.ValueType");
+				writer.Write(".Long");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.Number:
-				writer.Write("ValueType.Number");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.ValueType");
+				writer.Write(".Number");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.Numeric:
-				writer.Write("ValueType.Numeric");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.ValueType");
+				writer.Write(".Numeric");
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.ValueType.String:
-				writer.Write("ValueType.String");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.ValueType");
+				writer.Write(".String");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ValueType value.");

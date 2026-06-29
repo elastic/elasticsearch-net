@@ -27,7 +27,7 @@ public partial class DataframeEvaluationOutlierDetection : RequestConverter.ICod
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframeEvaluationOutlierDetection", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection", false);
 		{
 			initializer.Property("ActualField");
 			ActualField.FormatCode(writer);

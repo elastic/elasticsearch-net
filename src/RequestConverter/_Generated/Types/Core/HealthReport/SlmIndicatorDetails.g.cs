@@ -27,7 +27,7 @@ public partial class SlmIndicatorDetails : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SlmIndicatorDetails", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.HealthReport.SlmIndicatorDetails", false);
 		{
 			initializer.Property("Policies");
 			writer.WriteValue(Policies);

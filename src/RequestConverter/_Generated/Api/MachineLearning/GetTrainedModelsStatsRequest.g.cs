@@ -27,7 +27,7 @@ public partial class GetTrainedModelsStatsRequest : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetTrainedModelsStatsRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequest", false);
 		if (ModelId is not null)
 		{
 			initializer.Property("ModelId");

@@ -27,7 +27,7 @@ public partial class EqlSearchRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("EqlSearchRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest", false);
 		{
 			initializer.Property("Indices");
 			Indices.FormatCode(writer);
@@ -137,10 +137,12 @@ public partial class EqlSearchRequest : RequestConverter.ICodeFormattable
 		if (RuntimeMappings is not null)
 		{
 			initializer.Property("RuntimeMappings");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("Elastic.Clients.Elasticsearch.Field");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Field");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Mapping.RuntimeField");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.RuntimeField");
 			writer.Write(">()");
 			writer.WriteBlockList(RuntimeMappings, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

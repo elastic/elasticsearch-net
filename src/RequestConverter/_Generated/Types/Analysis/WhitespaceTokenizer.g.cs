@@ -27,7 +27,7 @@ public partial class WhitespaceTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("WhitespaceTokenizer", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.WhitespaceTokenizer", true);
 		if (MaxTokenLength is not null)
 		{
 			initializer.Property("MaxTokenLength");

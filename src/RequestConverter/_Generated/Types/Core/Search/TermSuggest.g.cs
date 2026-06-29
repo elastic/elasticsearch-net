@@ -27,7 +27,7 @@ public partial class TermSuggest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TermSuggest", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.TermSuggest", true);
 		{
 			initializer.Property("Length");
 			writer.WriteValue(Length);

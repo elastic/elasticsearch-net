@@ -27,7 +27,7 @@ public partial class RankFeatureFunctionSaturation : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RankFeatureFunctionSaturation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation", false);
 		if (Pivot is not null)
 		{
 			initializer.Property("Pivot");

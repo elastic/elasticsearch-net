@@ -30,16 +30,20 @@ public static class HuggingFaceTaskTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType.ChatCompletion:
-				writer.Write("HuggingFaceTaskType.ChatCompletion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType");
+				writer.Write(".ChatCompletion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType.Completion:
-				writer.Write("HuggingFaceTaskType.Completion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType");
+				writer.Write(".Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType.Rerank:
-				writer.Write("HuggingFaceTaskType.Rerank");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType");
+				writer.Write(".Rerank");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType.TextEmbedding:
-				writer.Write("HuggingFaceTaskType.TextEmbedding");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType");
+				writer.Write(".TextEmbedding");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected HuggingFaceTaskType value.");

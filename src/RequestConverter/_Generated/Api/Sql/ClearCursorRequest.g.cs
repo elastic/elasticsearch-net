@@ -27,7 +27,7 @@ public partial class ClearCursorRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ClearCursorRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest", false);
 		{
 			initializer.Property("Cursor");
 			writer.WriteString(Cursor);

@@ -27,7 +27,7 @@ public partial class FlushStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FlushStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.FlushStats", false);
 		{
 			initializer.Property("Periodic");
 			writer.WriteValue(Periodic);

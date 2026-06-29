@@ -27,7 +27,7 @@ public partial class ClusterProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ClusterProcessor", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.ClusterProcessor", false);
 		{
 			initializer.Property("Count");
 			writer.WriteValue(Count);

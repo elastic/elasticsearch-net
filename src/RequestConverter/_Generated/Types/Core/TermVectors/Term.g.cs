@@ -27,7 +27,7 @@ public partial class Term : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Term", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.TermVectors.Term", false);
 		if (DocFreq is not null)
 		{
 			initializer.Property("DocFreq");

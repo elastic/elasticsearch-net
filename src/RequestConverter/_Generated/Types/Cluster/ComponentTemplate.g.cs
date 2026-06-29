@@ -27,7 +27,7 @@ public partial class ComponentTemplate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ComponentTemplate", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.ComponentTemplate", false);
 		{
 			initializer.Property("ComponentTemplateNode");
 			ComponentTemplateNode.FormatCode(writer);

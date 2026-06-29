@@ -27,7 +27,7 @@ public partial class FlushRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FlushRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest", false);
 		if (Indices is not null)
 		{
 			initializer.Property("Indices");

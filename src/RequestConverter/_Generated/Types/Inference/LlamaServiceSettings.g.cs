@@ -27,7 +27,7 @@ public partial class LlamaServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("LlamaServiceSettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.LlamaServiceSettings", false);
 		if (MaxInputTokens is not null)
 		{
 			initializer.Property("MaxInputTokens");

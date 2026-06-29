@@ -27,7 +27,7 @@ public partial class DataframePreviewConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframePreviewConfig", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig", false);
 		{
 			initializer.Property("Analysis");
 			Analysis.FormatCode(writer);

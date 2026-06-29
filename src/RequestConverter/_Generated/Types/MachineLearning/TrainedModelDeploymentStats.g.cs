@@ -27,7 +27,7 @@ public partial class TrainedModelDeploymentStats : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TrainedModelDeploymentStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats", false);
 		if (AdaptiveAllocations is not null)
 		{
 			initializer.Property("AdaptiveAllocations");

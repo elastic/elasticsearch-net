@@ -27,7 +27,7 @@ public partial class MaxAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MaxAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.MaxAggregation", false);
 		if (Field is not null)
 		{
 			initializer.Property("Field");

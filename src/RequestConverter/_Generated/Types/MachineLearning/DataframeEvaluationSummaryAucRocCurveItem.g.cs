@@ -27,7 +27,7 @@ public partial class DataframeEvaluationSummaryAucRocCurveItem : RequestConverte
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DataframeEvaluationSummaryAucRocCurveItem", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationSummaryAucRocCurveItem", false);
 		{
 			initializer.Property("Fpr");
 			writer.WriteValue(Fpr);

@@ -27,7 +27,7 @@ public partial class RepositoryMeteringInformation : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RepositoryMeteringInformation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.RepositoryMeteringInformation", false);
 		{
 			initializer.Property("Archived");
 			writer.WriteValue(Archived);

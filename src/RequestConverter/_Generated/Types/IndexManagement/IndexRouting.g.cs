@@ -27,7 +27,7 @@ public partial class IndexRouting : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndexRouting", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting", false);
 		if (Allocation is not null)
 		{
 			initializer.Property("Allocation");

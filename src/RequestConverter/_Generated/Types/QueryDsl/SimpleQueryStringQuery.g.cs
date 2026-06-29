@@ -27,7 +27,7 @@ public partial class SimpleQueryStringQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SimpleQueryStringQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery", false);
 		if (Analyzer is not null)
 		{
 			initializer.Property("Analyzer");

@@ -27,7 +27,7 @@ public partial class PercentilesItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PercentilesItem", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.PercentilesItem", false);
 		{
 			initializer.Property("Key");
 			writer.WriteValue(Key);

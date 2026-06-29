@@ -30,10 +30,12 @@ public static class AnthropicTaskTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType.ChatCompletion:
-				writer.Write("AnthropicTaskType.ChatCompletion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType");
+				writer.Write(".ChatCompletion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType.Completion:
-				writer.Write("AnthropicTaskType.Completion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType");
+				writer.Write(".Completion");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected AnthropicTaskType value.");

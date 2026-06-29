@@ -27,7 +27,7 @@ public partial class SynonymsSetItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SynonymsSetItem", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Synonyms.SynonymsSetItem", false);
 		{
 			initializer.Property("Count");
 			writer.WriteValue(Count);

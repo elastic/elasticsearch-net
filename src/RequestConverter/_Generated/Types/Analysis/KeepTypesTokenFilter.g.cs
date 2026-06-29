@@ -27,7 +27,7 @@ public partial class KeepTypesTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("KeepTypesTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter", true);
 		if (Mode is not null)
 		{
 			initializer.Property("Mode");

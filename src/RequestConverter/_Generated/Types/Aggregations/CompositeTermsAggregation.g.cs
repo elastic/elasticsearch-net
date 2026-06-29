@@ -27,7 +27,7 @@ public partial class CompositeTermsAggregation : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CompositeTermsAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregation", false);
 		if (Field is not null)
 		{
 			initializer.Property("Field");

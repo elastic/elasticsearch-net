@@ -27,7 +27,7 @@ public partial class GetUserProfileRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetUserProfileRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GetUserProfileRequest", false);
 		{
 			initializer.Property("Uid");
 			writer.WriteInlineList(Uid, (w, item) => { w.WriteString(item); });

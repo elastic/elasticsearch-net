@@ -27,7 +27,7 @@ public partial class CompositeGeoTileGridAggregation : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CompositeGeoTileGridAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation", false);
 		if (Bounds is not null)
 		{
 			initializer.Property("Bounds");

@@ -27,7 +27,7 @@ public partial class DiagnosisAffectedResources : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DiagnosisAffectedResources", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.HealthReport.DiagnosisAffectedResources", false);
 		if (FeatureStates is not null)
 		{
 			initializer.Property("FeatureStates");

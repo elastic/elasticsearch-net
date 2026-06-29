@@ -27,7 +27,7 @@ public partial class SimpleAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SimpleAnalyzer", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzer", true);
 #pragma warning disable CS0618
 		if (Version is not null)
 		{

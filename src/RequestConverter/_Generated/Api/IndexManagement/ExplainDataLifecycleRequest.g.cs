@@ -27,7 +27,7 @@ public partial class ExplainDataLifecycleRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ExplainDataLifecycleRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest", false);
 		{
 			initializer.Property("Indices");
 			Indices.FormatCode(writer);

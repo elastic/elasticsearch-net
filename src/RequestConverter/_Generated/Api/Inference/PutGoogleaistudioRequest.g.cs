@@ -27,7 +27,7 @@ public partial class PutGoogleaistudioRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("PutGoogleaistudioRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequest", false);
 		{
 			initializer.Property("GoogleaistudioInferenceId");
 			GoogleaistudioInferenceId.FormatCode(writer);

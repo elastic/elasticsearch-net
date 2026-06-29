@@ -27,7 +27,7 @@ public partial class MultiGetError : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MultiGetError", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.MGet.MultiGetError", true);
 		{
 			initializer.Property("Error");
 			Error.FormatCode(writer);

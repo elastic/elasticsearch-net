@@ -27,7 +27,7 @@ public partial class WeightedAverageAggregation : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("WeightedAverageAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation", false);
 		if (Format is not null)
 		{
 			initializer.Property("Format");

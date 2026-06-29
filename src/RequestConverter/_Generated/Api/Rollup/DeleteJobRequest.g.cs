@@ -27,7 +27,7 @@ public partial class DeleteJobRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteJobRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest", false);
 		{
 			initializer.Property("Id");
 			Id.FormatCode(writer);

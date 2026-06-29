@@ -27,7 +27,7 @@ public partial class TransformIndexerStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("TransformIndexerStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.TransformIndexerStats", false);
 		if (DeleteTimeInMs is not null)
 		{
 			initializer.Property("DeleteTimeInMs");

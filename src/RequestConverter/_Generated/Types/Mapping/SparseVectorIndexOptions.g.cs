@@ -27,7 +27,7 @@ public partial class SparseVectorIndexOptions : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SparseVectorIndexOptions", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptions", false);
 		if (Prune is not null)
 		{
 			initializer.Property("Prune");

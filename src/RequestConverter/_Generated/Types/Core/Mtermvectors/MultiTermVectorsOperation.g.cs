@@ -27,7 +27,7 @@ public partial class MultiTermVectorsOperation : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MultiTermVectorsOperation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation", false);
 		if (Doc is not null)
 		{
 			initializer.Property("Doc");

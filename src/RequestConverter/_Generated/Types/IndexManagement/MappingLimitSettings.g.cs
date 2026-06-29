@@ -27,7 +27,7 @@ public partial class MappingLimitSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MappingLimitSettings", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings", false);
 		if (Coerce is not null)
 		{
 			initializer.Property("Coerce");

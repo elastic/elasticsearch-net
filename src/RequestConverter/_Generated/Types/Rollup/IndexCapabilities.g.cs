@@ -27,7 +27,7 @@ public partial class IndexCapabilities : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndexCapabilities", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Rollup.IndexCapabilities", false);
 		{
 			initializer.Property("RollupJobs");
 			writer.WriteInlineList(RollupJobs, (w, item) => { item.FormatCode(w); });

@@ -30,13 +30,16 @@ public static class CohereTruncateTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.CohereTruncateType.End:
-				writer.Write("CohereTruncateType.End");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.CohereTruncateType");
+				writer.Write(".End");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.CohereTruncateType.None:
-				writer.Write("CohereTruncateType.None");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.CohereTruncateType");
+				writer.Write(".None");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.CohereTruncateType.Start:
-				writer.Write("CohereTruncateType.Start");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.CohereTruncateType");
+				writer.Write(".Start");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected CohereTruncateType value.");

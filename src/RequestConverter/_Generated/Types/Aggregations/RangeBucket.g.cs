@@ -27,7 +27,7 @@ public partial class RangeBucket : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RangeBucket", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.RangeBucket", false);
 		if (Aggregations is not null)
 		{
 			initializer.Property("Aggregations");

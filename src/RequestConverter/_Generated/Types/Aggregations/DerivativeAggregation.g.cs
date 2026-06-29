@@ -27,7 +27,7 @@ public partial class DerivativeAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DerivativeAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregation", false);
 		if (BucketsPath is not null)
 		{
 			initializer.Property("BucketsPath");

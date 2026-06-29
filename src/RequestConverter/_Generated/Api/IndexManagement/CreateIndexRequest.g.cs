@@ -27,7 +27,7 @@ public partial class CreateIndexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CreateIndexRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest", false);
 		{
 			initializer.Property("Index");
 			Index.FormatCode(writer);
@@ -54,10 +54,12 @@ public partial class CreateIndexRequest : RequestConverter.ICodeFormattable
 		if (Aliases is not null)
 		{
 			initializer.Property("Aliases");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("Elastic.Clients.Elasticsearch.Name");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Name");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.IndexManagement.Alias");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.Alias");
 			writer.Write(">()");
 			writer.WriteBlockList(Aliases, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

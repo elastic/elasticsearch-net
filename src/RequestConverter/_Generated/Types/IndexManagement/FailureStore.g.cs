@@ -27,7 +27,7 @@ public partial class FailureStore : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("FailureStore", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.FailureStore", false);
 		{
 			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);

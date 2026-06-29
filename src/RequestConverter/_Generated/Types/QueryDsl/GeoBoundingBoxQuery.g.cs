@@ -27,7 +27,7 @@ public partial class GeoBoundingBoxQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GeoBoundingBoxQuery", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery", false);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

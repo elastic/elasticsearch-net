@@ -27,7 +27,7 @@ public partial class CustomRequestParams : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CustomRequestParams", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.CustomRequestParams", false);
 		{
 			initializer.Property("Content");
 			writer.WriteString(Content);

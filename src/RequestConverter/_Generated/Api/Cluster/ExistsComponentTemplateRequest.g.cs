@@ -27,7 +27,7 @@ public partial class ExistsComponentTemplateRequest : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ExistsComponentTemplateRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequest", false);
 		{
 			initializer.Property("Name");
 			Name.FormatCode(writer);

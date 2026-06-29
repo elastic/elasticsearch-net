@@ -27,7 +27,7 @@ public partial class DropProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DropProcessor", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.DropProcessor", false);
 		if (Description is not null)
 		{
 			initializer.Property("Description");

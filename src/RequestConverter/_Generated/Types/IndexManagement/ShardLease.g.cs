@@ -27,7 +27,7 @@ public partial class ShardLease : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ShardLease", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ShardLease", false);
 		{
 			initializer.Property("Id");
 			writer.WriteString(Id);

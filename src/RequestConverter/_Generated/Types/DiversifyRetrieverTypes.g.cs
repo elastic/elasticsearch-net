@@ -30,7 +30,8 @@ public static class DiversifyRetrieverTypesCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.DiversifyRetrieverTypes.Mmr:
-				writer.Write("DiversifyRetrieverTypes.Mmr");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.DiversifyRetrieverTypes");
+				writer.Write(".Mmr");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected DiversifyRetrieverTypes value.");

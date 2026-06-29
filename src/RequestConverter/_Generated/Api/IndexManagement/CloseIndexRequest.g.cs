@@ -27,7 +27,7 @@ public partial class CloseIndexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("CloseIndexRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequest", false);
 		{
 			initializer.Property("Indices");
 			Indices.FormatCode(writer);

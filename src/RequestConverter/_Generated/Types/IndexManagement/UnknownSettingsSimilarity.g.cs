@@ -27,7 +27,7 @@ public partial class UnknownSettingsSimilarity : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("UnknownSettingsSimilarity", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.UnknownSettingsSimilarity", false);
 		initializer.Dispose();
 	}
 }

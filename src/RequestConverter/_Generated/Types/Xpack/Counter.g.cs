@@ -27,7 +27,7 @@ public partial class Counter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Counter", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.Counter", false);
 		{
 			initializer.Property("Active");
 			writer.WriteValue(Active);

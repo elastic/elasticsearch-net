@@ -27,7 +27,7 @@ public partial class HistogramGrouping : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("HistogramGrouping", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping", false);
 		{
 			initializer.Property("Fields");
 			Fields.FormatCode(writer);

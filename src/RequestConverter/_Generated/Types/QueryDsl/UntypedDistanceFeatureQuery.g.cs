@@ -27,7 +27,7 @@ public partial class UntypedDistanceFeatureQuery : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("UntypedDistanceFeatureQuery", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery", true);
 		if (Boost is not null)
 		{
 			initializer.Property("Boost");

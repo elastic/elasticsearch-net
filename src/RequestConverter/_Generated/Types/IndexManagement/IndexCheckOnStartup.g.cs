@@ -30,13 +30,16 @@ public static class IndexCheckOnStartupCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.Checksum:
-				writer.Write("IndexCheckOnStartup.Checksum");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup");
+				writer.Write(".Checksum");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.False:
-				writer.Write("IndexCheckOnStartup.False");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup");
+				writer.Write(".False");
 				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.True:
-				writer.Write("IndexCheckOnStartup.True");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup");
+				writer.Write(".True");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected IndexCheckOnStartup value.");

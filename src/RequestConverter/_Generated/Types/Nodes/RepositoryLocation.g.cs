@@ -27,7 +27,7 @@ public partial class RepositoryLocation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RepositoryLocation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.RepositoryLocation", false);
 		{
 			initializer.Property("BasePath");
 			writer.WriteString(BasePath);

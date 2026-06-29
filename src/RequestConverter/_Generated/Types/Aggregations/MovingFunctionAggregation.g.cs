@@ -27,7 +27,7 @@ public partial class MovingFunctionAggregation : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("MovingFunctionAggregation", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregation", false);
 		if (BucketsPath is not null)
 		{
 			initializer.Property("BucketsPath");

@@ -27,7 +27,7 @@ public partial class ScriptsPainlessExecuteRequest : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ScriptsPainlessExecuteRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest", false);
 		if (Context is not null)
 		{
 			initializer.Property("Context");

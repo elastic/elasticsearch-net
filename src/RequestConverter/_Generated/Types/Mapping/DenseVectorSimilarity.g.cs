@@ -30,16 +30,20 @@ public static class DenseVectorSimilarityCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity.Cosine:
-				writer.Write("DenseVectorSimilarity.Cosine");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity");
+				writer.Write(".Cosine");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity.DotProduct:
-				writer.Write("DenseVectorSimilarity.DotProduct");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity");
+				writer.Write(".DotProduct");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity.L2Norm:
-				writer.Write("DenseVectorSimilarity.L2Norm");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity");
+				writer.Write(".L2Norm");
 				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity.MaxInnerProduct:
-				writer.Write("DenseVectorSimilarity.MaxInnerProduct");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity");
+				writer.Write(".MaxInnerProduct");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected DenseVectorSimilarity value.");

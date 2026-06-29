@@ -27,7 +27,7 @@ public partial class SoraniNormalizationTokenFilter : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("SoraniNormalizationTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.SoraniNormalizationTokenFilter", true);
 		if (Version is not null)
 		{
 			initializer.Property("Version");

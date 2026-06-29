@@ -30,10 +30,12 @@ public static class GoogleAiStudioTaskTypeCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType.Completion:
-				writer.Write("GoogleAiStudioTaskType.Completion");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType");
+				writer.Write(".Completion");
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType.TextEmbedding:
-				writer.Write("GoogleAiStudioTaskType.TextEmbedding");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType");
+				writer.Write(".TextEmbedding");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected GoogleAiStudioTaskType value.");

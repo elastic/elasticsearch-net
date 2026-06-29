@@ -27,7 +27,7 @@ public partial class ClearApiKeyCacheRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("ClearApiKeyCacheRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequest", false);
 		{
 			initializer.Property("Ids");
 			Ids.FormatCode(writer);

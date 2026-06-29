@@ -27,7 +27,7 @@ public partial class IndexHealthStats : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("IndexHealthStats", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.IndexHealthStats", false);
 		{
 			initializer.Property("ActivePrimaryShards");
 			writer.WriteValue(ActivePrimaryShards);
@@ -61,10 +61,12 @@ public partial class IndexHealthStats : RequestConverter.ICodeFormattable
 		if (Shards is not null)
 		{
 			initializer.Property("Shards");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Cluster.ShardHealthStats");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.ShardHealthStats");
 			writer.Write(">()");
 			writer.WriteBlockList(Shards, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}

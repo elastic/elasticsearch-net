@@ -27,7 +27,7 @@ public partial class RequestChatCompletion : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("RequestChatCompletion", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.RequestChatCompletion", false);
 		if (MaxCompletionTokens is not null)
 		{
 			initializer.Property("MaxCompletionTokens");

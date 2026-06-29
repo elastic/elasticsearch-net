@@ -27,7 +27,7 @@ public partial class Hit<TDocument> : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Hit<TDocument>", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.Hit<TDocument>", false);
 		if (Explanation is not null)
 		{
 			initializer.Property("Explanation");
@@ -37,10 +37,12 @@ public partial class Hit<TDocument> : RequestConverter.ICodeFormattable
 		if (Fields is not null)
 		{
 			initializer.Property("Fields");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("object");
+			writer.WriteTypeRef("object");
 			writer.Write(">()");
 			writer.WriteBlockList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
 		}
@@ -48,10 +50,12 @@ public partial class Hit<TDocument> : RequestConverter.ICodeFormattable
 		if (Highlight is not null)
 		{
 			initializer.Property("Highlight");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("System.Collections.Generic.IReadOnlyCollection<string>");
+			writer.WriteTypeRef("System.Collections.Generic.IReadOnlyCollection<string>");
 			writer.Write(">()");
 			writer.WriteBlockList(Highlight, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteString(item); }); w.Write(" }"); });
 		}
@@ -70,10 +74,12 @@ public partial class Hit<TDocument> : RequestConverter.ICodeFormattable
 		if (IgnoredFieldValues is not null)
 		{
 			initializer.Property("IgnoredFieldValues");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("System.Collections.Generic.IReadOnlyCollection<object>");
+			writer.WriteTypeRef("System.Collections.Generic.IReadOnlyCollection<object>");
 			writer.Write(">()");
 			writer.WriteBlockList(IgnoredFieldValues, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteValue(item); }); w.Write(" }"); });
 		}
@@ -86,10 +92,12 @@ public partial class Hit<TDocument> : RequestConverter.ICodeFormattable
 		if (InnerHits is not null)
 		{
 			initializer.Property("InnerHits");
-			writer.Write("new global::System.Collections.Generic.Dictionary<");
-			writer.Write("string");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.Write("Elastic.Clients.Elasticsearch.Core.Search.InnerHitsResult");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.InnerHitsResult");
 			writer.Write(">()");
 			writer.WriteBlockList(InnerHits, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
@@ -99,15 +107,19 @@ public partial class Hit<TDocument> : RequestConverter.ICodeFormattable
 			initializer.Property("MatchedQueries");
 			if (MatchedQueries.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
-				writer.Write("new string[] ");
+				writer.Write("new ");
+				writer.WriteTypeRef("string");
+				writer.Write("[] ");
 				writer.WriteInlineList(MatchedQueries.Value1, (w, item) => { w.WriteString(item); }, "{ ", " }", ", ");
 			}
 			else
 			{
-				writer.Write("new global::System.Collections.Generic.Dictionary<");
-				writer.Write("string");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
 				writer.Write(", ");
-				writer.Write("double");
+				writer.WriteTypeRef("double");
 				writer.Write(">()");
 				writer.WriteBlockList(MatchedQueries.Value2, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); });
 			}

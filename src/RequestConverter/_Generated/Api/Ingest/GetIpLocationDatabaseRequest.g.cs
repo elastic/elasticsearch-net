@@ -27,7 +27,7 @@ public partial class GetIpLocationDatabaseRequest : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("GetIpLocationDatabaseRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequest", false);
 		if (Id is not null)
 		{
 			initializer.Property("Id");

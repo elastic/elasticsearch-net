@@ -27,7 +27,7 @@ public partial class Client : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Client", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.Client", false);
 		if (Agent is not null)
 		{
 			initializer.Property("Agent");

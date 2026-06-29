@@ -27,7 +27,7 @@ public partial class StemmerOverrideTokenFilter : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("StemmerOverrideTokenFilter", true);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter", true);
 		if (Rules is not null)
 		{
 			initializer.Property("Rules");

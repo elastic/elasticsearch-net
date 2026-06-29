@@ -30,19 +30,24 @@ public static class PipelineSimulationStatusOptionsCodeFormatter
 		switch (instance)
 		{
 			case Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions.Dropped:
-				writer.Write("PipelineSimulationStatusOptions.Dropped");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions");
+				writer.Write(".Dropped");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions.Error:
-				writer.Write("PipelineSimulationStatusOptions.Error");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions");
+				writer.Write(".Error");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions.ErrorIgnored:
-				writer.Write("PipelineSimulationStatusOptions.ErrorIgnored");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions");
+				writer.Write(".ErrorIgnored");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions.Skipped:
-				writer.Write("PipelineSimulationStatusOptions.Skipped");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions");
+				writer.Write(".Skipped");
 				break;
 			case Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions.Success:
-				writer.Write("PipelineSimulationStatusOptions.Success");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions");
+				writer.Write(".Success");
 				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected PipelineSimulationStatusOptions value.");

@@ -27,7 +27,7 @@ public partial class DeleteRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("DeleteRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.DeleteRequest", false);
 		{
 			initializer.Property("Id");
 			Id.FormatCode(writer);
