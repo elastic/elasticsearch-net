@@ -65,8 +65,8 @@ public partial class QueryRole : RequestConverter.ICodeFormattable
 			writer.Write("string");
 			writer.Write(", ");
 			writer.Write("object");
-			writer.Write(">() ");
-			writer.WriteInlineList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
 		}
 
 		{
@@ -111,8 +111,8 @@ public partial class QueryRole : RequestConverter.ICodeFormattable
 			writer.Write("string");
 			writer.Write(", ");
 			writer.Write("object");
-			writer.Write(">() ");
-			writer.WriteInlineList(TransientMetadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(TransientMetadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
 		}
 
 		initializer.Dispose();

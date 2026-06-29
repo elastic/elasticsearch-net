@@ -44,8 +44,8 @@ public partial class FieldTypesMappings : RequestConverter.ICodeFormattable
 			writer.Write("string");
 			writer.Write(", ");
 			writer.Write("int");
-			writer.Write(">() ");
-			writer.WriteInlineList(SourceModes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(SourceModes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
 		}
 
 		if (TotalDeduplicatedFieldCount is not null)

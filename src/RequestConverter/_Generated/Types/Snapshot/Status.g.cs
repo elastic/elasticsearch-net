@@ -39,8 +39,8 @@ public partial class Status : RequestConverter.ICodeFormattable
 			writer.Write("string");
 			writer.Write(", ");
 			writer.Write("Elastic.Clients.Elasticsearch.Snapshot.SnapshotIndexStats");
-			writer.Write(">() ");
-			writer.WriteInlineList(Indices, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(Indices, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
 
 		{

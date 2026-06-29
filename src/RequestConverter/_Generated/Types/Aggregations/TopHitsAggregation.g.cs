@@ -83,8 +83,8 @@ public partial class TopHitsAggregation : RequestConverter.ICodeFormattable
 			writer.Write("string");
 			writer.Write(", ");
 			writer.Write("Elastic.Clients.Elasticsearch.ScriptField");
-			writer.Write(">() ");
-			writer.WriteInlineList(ScriptFields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(ScriptFields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
 
 		if (SeqNoPrimaryTerm is not null)

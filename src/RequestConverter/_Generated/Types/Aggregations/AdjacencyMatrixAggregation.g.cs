@@ -35,8 +35,8 @@ public partial class AdjacencyMatrixAggregation : RequestConverter.ICodeFormatta
 			writer.Write("string");
 			writer.Write(", ");
 			writer.Write("Elastic.Clients.Elasticsearch.QueryDsl.Query");
-			writer.Write(">() ");
-			writer.WriteInlineList(Filters, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(Filters, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
 
 		if (Separator is not null)

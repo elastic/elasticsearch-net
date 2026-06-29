@@ -34,8 +34,8 @@ public partial class ReindexNode : RequestConverter.ICodeFormattable
 			writer.Write("string");
 			writer.Write(", ");
 			writer.Write("string");
-			writer.Write(">() ");
-			writer.WriteInlineList(Attributes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(Attributes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
 		}
 
 		{
@@ -65,8 +65,8 @@ public partial class ReindexNode : RequestConverter.ICodeFormattable
 			writer.Write("Elastic.Clients.Elasticsearch.TaskId");
 			writer.Write(", ");
 			writer.Write("Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexTask");
-			writer.Write(">() ");
-			writer.WriteInlineList(Tasks, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(Tasks, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
 
 		{

@@ -47,8 +47,8 @@ public partial class DetectionRule : RequestConverter.ICodeFormattable
 			writer.Write("Elastic.Clients.Elasticsearch.Field");
 			writer.Write(", ");
 			writer.Write("Elastic.Clients.Elasticsearch.MachineLearning.FilterRef");
-			writer.Write(">() ");
-			writer.WriteInlineList(Scope, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(Scope, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
 
 		initializer.Dispose();

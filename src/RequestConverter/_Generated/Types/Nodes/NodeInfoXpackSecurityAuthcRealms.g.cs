@@ -35,8 +35,8 @@ public partial class NodeInfoXpackSecurityAuthcRealms : RequestConverter.ICodeFo
 			writer.Write("string");
 			writer.Write(", ");
 			writer.Write("Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus");
-			writer.Write(">() ");
-			writer.WriteInlineList(File, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(File, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
 
 		if (Native is not null)
@@ -46,8 +46,8 @@ public partial class NodeInfoXpackSecurityAuthcRealms : RequestConverter.ICodeFo
 			writer.Write("string");
 			writer.Write(", ");
 			writer.Write("Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus");
-			writer.Write(">() ");
-			writer.WriteInlineList(Native, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(Native, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
 
 		if (Pki is not null)
@@ -57,8 +57,8 @@ public partial class NodeInfoXpackSecurityAuthcRealms : RequestConverter.ICodeFo
 			writer.Write("string");
 			writer.Write(", ");
 			writer.Write("Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealmsStatus");
-			writer.Write(">() ");
-			writer.WriteInlineList(Pki, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(Pki, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
 
 		initializer.Dispose();

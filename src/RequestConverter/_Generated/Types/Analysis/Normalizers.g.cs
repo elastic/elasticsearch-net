@@ -28,19 +28,6 @@ public partial class Normalizers : RequestConverter.ICodeFormattable
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
 		writer.Write("new()");
-		var hasProps = false;
-		foreach (var kvp in this)
-		{
-			writer.Write(hasProps ? ", " : " { ");
-			hasProps = true;
-			writer.Write("{ ");
-			writer.WriteString(kvp.Key);
-			writer.Write(", ");
-			kvp.Value.FormatCode(writer);
-			writer.Write(" }");
-		}
-
-		if (hasProps)
-			writer.Write(" }");
+		writer.WriteBlockList(this, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 	}
 }

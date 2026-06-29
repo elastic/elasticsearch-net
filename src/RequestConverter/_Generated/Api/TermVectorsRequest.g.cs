@@ -94,8 +94,8 @@ public partial class TermVectorsRequest<TDocument> : RequestConverter.ICodeForma
 			writer.Write("Elastic.Clients.Elasticsearch.Field");
 			writer.Write(", ");
 			writer.Write("string");
-			writer.Write(">() ");
-			writer.WriteInlineList(PerFieldAnalyzer, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(PerFieldAnalyzer, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
 		}
 
 		if (Positions is not null)

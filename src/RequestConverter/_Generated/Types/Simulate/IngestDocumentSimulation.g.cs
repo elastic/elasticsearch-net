@@ -53,7 +53,7 @@ public partial class IngestDocumentSimulation : RequestConverter.ICodeFormattabl
 		if (IgnoredFields is not null)
 		{
 			initializer.Property("IgnoredFields");
-			writer.WriteInlineList(IgnoredFields, (w, item) => { w.Write("new global::System.Collections.Generic.Dictionary<"); w.Write("string"); w.Write(", "); w.Write("string"); w.Write(">() "); w.WriteInlineList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", "); });
+			writer.WriteInlineList(IgnoredFields, (w, item) => { w.Write("new global::System.Collections.Generic.Dictionary<"); w.Write("string"); w.Write(", "); w.Write("string"); w.Write(">()"); w.WriteBlockList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
 		}
 
 		{
@@ -68,8 +68,8 @@ public partial class IngestDocumentSimulation : RequestConverter.ICodeFormattabl
 			writer.Write("string");
 			writer.Write(", ");
 			writer.Write("string");
-			writer.Write(">() ");
-			writer.WriteInlineList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
 		}
 
 		{
@@ -78,8 +78,8 @@ public partial class IngestDocumentSimulation : RequestConverter.ICodeFormattabl
 			writer.Write("string");
 			writer.Write(", ");
 			writer.Write("object");
-			writer.Write(">() ");
-			writer.WriteInlineList(Source, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(Source, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
 		}
 
 		{

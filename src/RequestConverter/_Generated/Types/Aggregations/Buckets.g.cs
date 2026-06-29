@@ -36,8 +36,8 @@ public partial class Buckets<TBucket> : RequestConverter.ICodeFormattable
 			writer.Write("string");
 			writer.Write(", ");
 			writer.WriteTypeName(typeof(TBucket));
-			writer.Write(">() ");
-			writer.WriteInlineList(Value1, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(Value1, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
 			writer.Write(")");
 			return;
 		}

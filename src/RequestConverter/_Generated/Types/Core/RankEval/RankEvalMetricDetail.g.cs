@@ -39,8 +39,8 @@ public partial class RankEvalMetricDetail : RequestConverter.ICodeFormattable
 			writer.Write("string");
 			writer.Write(", ");
 			writer.Write("System.Collections.Generic.IReadOnlyDictionary<string,object>");
-			writer.Write(">() ");
-			writer.WriteInlineList(MetricDetails, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.Write("new global::System.Collections.Generic.Dictionary<"); w.Write("string"); w.Write(", "); w.Write("object"); w.Write(">() "); w.WriteInlineList(kvp.Value, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", "); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(MetricDetails, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.Write("new global::System.Collections.Generic.Dictionary<"); w.Write("string"); w.Write(", "); w.Write("object"); w.Write(">()"); w.WriteBlockList(kvp.Value, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }); w.Write(" }"); });
 		}
 
 		{

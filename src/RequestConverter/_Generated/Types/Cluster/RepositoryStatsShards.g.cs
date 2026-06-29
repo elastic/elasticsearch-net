@@ -44,8 +44,8 @@ public partial class RepositoryStatsShards : RequestConverter.ICodeFormattable
 			writer.Write("Elastic.Clients.Elasticsearch.Cluster.ShardState");
 			writer.Write(", ");
 			writer.Write("int");
-			writer.Write(">() ");
-			writer.WriteInlineList(States, (w, kvp) => { w.Write("{ "); Elastic.Clients.Elasticsearch.Cluster.ShardStateCodeFormatter.FormatCode(kvp.Key, w); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(States, (w, kvp) => { w.Write("{ "); Elastic.Clients.Elasticsearch.Cluster.ShardStateCodeFormatter.FormatCode(kvp.Key, w); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
 		}
 
 		{

@@ -54,7 +54,7 @@ public partial class IngestStats : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("Processors");
-			writer.WriteInlineList(Processors, (w, item) => { w.Write("new global::System.Collections.Generic.Dictionary<"); w.Write("string"); w.Write(", "); w.Write("Elastic.Clients.Elasticsearch.Nodes.KeyedProcessor"); w.Write(">() "); w.WriteInlineList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", "); });
+			writer.WriteInlineList(Processors, (w, item) => { w.Write("new global::System.Collections.Generic.Dictionary<"); w.Write("string"); w.Write(", "); w.Write("Elastic.Clients.Elasticsearch.Nodes.KeyedProcessor"); w.Write(">()"); w.WriteBlockList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }); });
 		}
 
 		{

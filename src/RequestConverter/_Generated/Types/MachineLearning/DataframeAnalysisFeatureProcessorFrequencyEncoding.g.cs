@@ -44,8 +44,8 @@ public partial class DataframeAnalysisFeatureProcessorFrequencyEncoding : Reques
 			writer.Write("string");
 			writer.Write(", ");
 			writer.Write("double");
-			writer.Write(">() ");
-			writer.WriteInlineList(FrequencyMap, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(FrequencyMap, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); });
 		}
 
 		initializer.Dispose();

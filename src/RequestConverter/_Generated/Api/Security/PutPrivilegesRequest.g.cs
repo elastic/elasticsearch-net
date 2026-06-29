@@ -40,8 +40,8 @@ public partial class PutPrivilegesRequest : RequestConverter.ICodeFormattable
 			writer.Write("string");
 			writer.Write(", ");
 			writer.Write("System.Collections.Generic.IDictionary<string,Elastic.Clients.Elasticsearch.Security.PrivilegeActions>");
-			writer.Write(">() ");
-			writer.WriteInlineList(Privileges, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.Write("new global::System.Collections.Generic.Dictionary<"); w.Write("string"); w.Write(", "); w.Write("Elastic.Clients.Elasticsearch.Security.PrivilegeActions"); w.Write(">() "); w.WriteInlineList(kvp.Value, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", "); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(Privileges, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.Write("new global::System.Collections.Generic.Dictionary<"); w.Write("string"); w.Write(", "); w.Write("Elastic.Clients.Elasticsearch.Security.PrivilegeActions"); w.Write(">()"); w.WriteBlockList(kvp.Value, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }); w.Write(" }"); });
 		}
 
 		initializer.Dispose();

@@ -41,8 +41,8 @@ public partial class DataframeOutlierDetectionSummary : RequestConverter.ICodeFo
 			writer.Write("string");
 			writer.Write(", ");
 			writer.Write("Elastic.Clients.Elasticsearch.MachineLearning.ConfusionMatrixThreshold");
-			writer.Write(">() ");
-			writer.WriteInlineList(ConfusionMatrix, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(ConfusionMatrix, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
 
 		if (Precision is not null)
@@ -52,8 +52,8 @@ public partial class DataframeOutlierDetectionSummary : RequestConverter.ICodeFo
 			writer.Write("string");
 			writer.Write(", ");
 			writer.Write("double");
-			writer.Write(">() ");
-			writer.WriteInlineList(Precision, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(Precision, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); });
 		}
 
 		if (Recall is not null)
@@ -63,8 +63,8 @@ public partial class DataframeOutlierDetectionSummary : RequestConverter.ICodeFo
 			writer.Write("string");
 			writer.Write(", ");
 			writer.Write("double");
-			writer.Write(">() ");
-			writer.WriteInlineList(Recall, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(Recall, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); });
 		}
 
 		initializer.Dispose();

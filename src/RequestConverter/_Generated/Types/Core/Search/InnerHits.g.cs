@@ -89,8 +89,8 @@ public partial class InnerHits : RequestConverter.ICodeFormattable
 			writer.Write("Elastic.Clients.Elasticsearch.Field");
 			writer.Write(", ");
 			writer.Write("Elastic.Clients.Elasticsearch.ScriptField");
-			writer.Write(">() ");
-			writer.WriteInlineList(ScriptFields, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(ScriptFields, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
 
 		if (SeqNoPrimaryTerm is not null)

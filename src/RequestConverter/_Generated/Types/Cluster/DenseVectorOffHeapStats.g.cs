@@ -35,8 +35,8 @@ public partial class DenseVectorOffHeapStats : RequestConverter.ICodeFormattable
 			writer.Write("string");
 			writer.Write(", ");
 			writer.Write("System.Collections.Generic.IReadOnlyDictionary<string,long>");
-			writer.Write(">() ");
-			writer.WriteInlineList(Fielddata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.Write("new global::System.Collections.Generic.Dictionary<"); w.Write("string"); w.Write(", "); w.Write("long"); w.Write(">() "); w.WriteInlineList(kvp.Value, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }, "{ ", " }", ", "); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(Fielddata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.Write("new global::System.Collections.Generic.Dictionary<"); w.Write("string"); w.Write(", "); w.Write("long"); w.Write(">()"); w.WriteBlockList(kvp.Value, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }); w.Write(" }"); });
 		}
 
 		if (TotalCenifSize is not null)

@@ -41,8 +41,8 @@ public partial class EstimateModelMemoryRequest : RequestConverter.ICodeFormatta
 			writer.Write("Elastic.Clients.Elasticsearch.Field");
 			writer.Write(", ");
 			writer.Write("long");
-			writer.Write(">() ");
-			writer.WriteInlineList(MaxBucketCardinality, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(MaxBucketCardinality, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); });
 		}
 
 		if (OverallCardinality is not null)
@@ -52,8 +52,8 @@ public partial class EstimateModelMemoryRequest : RequestConverter.ICodeFormatta
 			writer.Write("Elastic.Clients.Elasticsearch.Field");
 			writer.Write(", ");
 			writer.Write("long");
-			writer.Write(">() ");
-			writer.WriteInlineList(OverallCardinality, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(OverallCardinality, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); });
 		}
 
 		initializer.Dispose();

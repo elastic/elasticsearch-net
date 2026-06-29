@@ -41,7 +41,7 @@ public partial class InferTrainedModelRequest : RequestConverter.ICodeFormattabl
 
 		{
 			initializer.Property("Docs");
-			writer.WriteInlineList(Docs, (w, item) => { w.Write("new global::System.Collections.Generic.Dictionary<"); w.Write("string"); w.Write(", "); w.Write("object"); w.Write(">() "); w.WriteInlineList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }, "{ ", " }", ", "); });
+			writer.WriteInlineList(Docs, (w, item) => { w.Write("new global::System.Collections.Generic.Dictionary<"); w.Write("string"); w.Write(", "); w.Write("object"); w.Write(">()"); w.WriteBlockList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }); });
 		}
 
 		if (InferenceConfig is not null)

@@ -28,19 +28,6 @@ public partial class SuggestDictionary<TDocument> : RequestConverter.ICodeFormat
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
 		writer.Write("new()");
-		var hasProps = false;
-		foreach (var kvp in this)
-		{
-			writer.Write(hasProps ? ", " : " { ");
-			hasProps = true;
-			writer.Write("{ ");
-			writer.WriteString(kvp.Key);
-			writer.Write(", ");
-			writer.WriteInlineList(kvp.Value, (w, item) => { item.FormatCode(w); });
-			writer.Write(" }");
-		}
-
-		if (hasProps)
-			writer.Write(" }");
+		writer.WriteBlockList(this, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { item.FormatCode(w); }); w.Write(" }"); });
 	}
 }

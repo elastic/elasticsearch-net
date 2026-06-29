@@ -28,19 +28,6 @@ public partial class Properties : RequestConverter.ICodeFormattable
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
 		writer.Write("new()");
-		var hasProps = false;
-		foreach (var kvp in this)
-		{
-			writer.Write(hasProps ? ", " : " { ");
-			hasProps = true;
-			writer.Write("{ ");
-			kvp.Key.FormatCode(writer);
-			writer.Write(", ");
-			kvp.Value.FormatCode(writer);
-			writer.Write(" }");
-		}
-
-		if (hasProps)
-			writer.Write(" }");
+		writer.WriteBlockList(this, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 	}
 }

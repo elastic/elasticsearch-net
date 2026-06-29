@@ -35,8 +35,8 @@ public partial class IndexTemplateMapping : RequestConverter.ICodeFormattable
 			writer.Write("Elastic.Clients.Elasticsearch.IndexName");
 			writer.Write(", ");
 			writer.Write("Elastic.Clients.Elasticsearch.IndexManagement.Alias");
-			writer.Write(">() ");
-			writer.WriteInlineList(Aliases, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(Aliases, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
 
 		if (DataStreamOptions is not null)

@@ -41,8 +41,8 @@ public partial class CustomServiceSettings : RequestConverter.ICodeFormattable
 			writer.Write("string");
 			writer.Write(", ");
 			writer.Write("string");
-			writer.Write(">() ");
-			writer.WriteInlineList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
 		}
 
 		if (InputType is not null)
@@ -52,8 +52,8 @@ public partial class CustomServiceSettings : RequestConverter.ICodeFormattable
 			writer.Write("Elastic.Clients.Elasticsearch.Inference.CustomServiceInputType");
 			writer.Write(", ");
 			writer.Write("string");
-			writer.Write(">() ");
-			writer.WriteInlineList(InputType, (w, kvp) => { w.Write("{ "); Elastic.Clients.Elasticsearch.Inference.CustomServiceInputTypeCodeFormatter.FormatCode(kvp.Key, w); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(InputType, (w, kvp) => { w.Write("{ "); Elastic.Clients.Elasticsearch.Inference.CustomServiceInputTypeCodeFormatter.FormatCode(kvp.Key, w); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
 		}
 
 		if (QueryParameters is not null)
@@ -78,8 +78,8 @@ public partial class CustomServiceSettings : RequestConverter.ICodeFormattable
 			writer.Write("string");
 			writer.Write(", ");
 			writer.Write("string");
-			writer.Write(">() ");
-			writer.WriteInlineList(SecretParameters, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(SecretParameters, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
 		}
 
 		if (Url is not null)

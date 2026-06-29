@@ -35,8 +35,8 @@ public partial class ExtendedSectionSearchUsage : RequestConverter.ICodeFormatta
 			writer.Write("Elastic.Clients.Elasticsearch.Cluster.SortType");
 			writer.Write(", ");
 			writer.Write("long");
-			writer.Write(">() ");
-			writer.WriteInlineList(Sort, (w, kvp) => { w.Write("{ "); Elastic.Clients.Elasticsearch.Cluster.SortTypeCodeFormatter.FormatCode(kvp.Key, w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }, "{ ", " }", ", ");
+			writer.Write(">()");
+			writer.WriteBlockList(Sort, (w, kvp) => { w.Write("{ "); Elastic.Clients.Elasticsearch.Cluster.SortTypeCodeFormatter.FormatCode(kvp.Key, w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); });
 		}
 
 		initializer.Dispose();
