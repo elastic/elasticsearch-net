@@ -11,26 +11,47 @@ using Elastic.Transport;
 
 namespace RequestConverter;
 
+/// <summary>
+/// The result of converting an Elasticsearch request to C# source code.
+/// </summary>
+/// <param name="Code">The generated C# source that reconstructs the request.</param>
+/// <param name="RequestType">The CLR type of the target request the code builds.</param>
+/// <param name="Namespaces">
+/// The namespaces the generated code references. When <see cref="FormattingOptions.TypeNameStyle"/> is
+/// <see cref="TypeNameStyle.Simplified"/>, add these as <c>using</c> directives so the short type names resolve.
+/// </param>
+public sealed record ConversionResult(
+	string Code,
+	Type RequestType,
+	IReadOnlyCollection<string> Namespaces);
+
 public sealed class RequestConverter
 {
 	public static readonly Serializer DefaultSerializer = new DefaultRequestResponseSerializer(new ElasticsearchClientSettings());
 
-	public static string Convert(
+	/// <summary>
+	/// Materializes the request for endpoint <paramref name="id"/> and converts it to C# source, returning the code,
+	/// the target request type, and the namespaces the code references.
+	/// </summary>
+	public static ConversionResult Convert(
 		Serializer requestResponseSerializer,
 		string id,
 		IReadOnlyDictionary<string, string>? pathParameters,
 		IReadOnlyDictionary<string, string>? queryParameters,
 		string? body,
 		FormattingOptions? options = null)
-		=> ConvertWithType(requestResponseSerializer, id, pathParameters, queryParameters, body, options).Code;
+	{
+		var (request, result) = ConvertCore(requestResponseSerializer, id, pathParameters, queryParameters, body, options);
+		_ = request;
+		return result;
+	}
 
 	/// <summary>
-	/// Materializes the request and returns the request instance alongside the generated code.
+	/// Materializes the request and returns the request instance alongside the conversion result.
 	/// Test-only: the round-trip test needs the materialized request to validate path/query parameter
-	/// reconstruction (by resolving its URL + query string through the client) and its concrete type to
-	/// compile the target-typed (<c>new() { ... }</c>) snippet it produces.
+	/// reconstruction (by resolving its URL + query string through the client).
 	/// </summary>
-	internal static (Elastic.Clients.Elasticsearch.Requests.Request Request, string Code) ConvertWithRequest(
+	internal static (Elastic.Clients.Elasticsearch.Requests.Request Request, ConversionResult Result) ConvertCore(
 		Serializer requestResponseSerializer,
 		string id,
 		IReadOnlyDictionary<string, string>? pathParameters,
@@ -51,23 +72,6 @@ public sealed class RequestConverter
 
 		var writer = new CodeWriter(options);
 		formattable.FormatCode(writer);
-		return (request, writer.ToString());
-	}
-
-	/// <summary>
-	/// Materializes the request and returns its runtime CLR type alongside the generated code.
-	/// Test-only: the round-trip test needs the concrete request type to compile the target-typed
-	/// (<c>new() { ... }</c>) snippet it produces.
-	/// </summary>
-	internal static (Type RequestType, string Code) ConvertWithType(
-		Serializer requestResponseSerializer,
-		string id,
-		IReadOnlyDictionary<string, string>? pathParameters,
-		IReadOnlyDictionary<string, string>? queryParameters,
-		string? body,
-		FormattingOptions? options = null)
-	{
-		var (request, code) = ConvertWithRequest(requestResponseSerializer, id, pathParameters, queryParameters, body, options);
-		return (request.GetType(), code);
+		return (request, new ConversionResult(writer.ToString(), request.GetType(), writer.Namespaces));
 	}
 }

@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 
@@ -26,9 +27,34 @@ public sealed class CodeWriter
 	// (object/interface) context, where a target-typed new() cannot bind to the concrete type.
 	private bool _forceExplicitConstructor;
 
+	// Every type reference is written as a placeholder rather than its final spelling, so the concrete
+	// form (short identifier, FQN, or global::-FQN) can be decided in ToString once the full set of
+	// references is known - shortening requires global knowledge to detect ambiguous simple names.
+	private readonly List<TypeRef> _typeRefs = new();
+
+	// Private-use sentinels delimiting a placeholder slot index in the builder. Real C# source never
+	// contains these, and the only free-form text we emit verbatim (JSON in raw-string literals) does
+	// not carry private-use code points in practice.
+	private const char RefOpen = '\uE000';
+	private const char RefClose = '\uE001';
+
 	public CodeWriter(FormattingOptions? options = null) => Options = options ?? FormattingOptions.Default;
 
 	public FormattingOptions Options { get; }
+
+	/// <summary>
+	/// The distinct namespaces of every type referenced by the emitted code. A caller rendering with
+	/// <see cref="TypeNameStyle.Simplified"/> adds these as <c>using</c> directives so the short identifiers resolve.
+	/// </summary>
+	public IReadOnlyCollection<string> Namespaces =>
+		_typeRefs
+			.Select(r => r.Namespace)
+			.Where(ns => ns.Length > 0)
+			.Distinct(StringComparer.Ordinal)
+			.OrderBy(ns => ns, StringComparer.Ordinal)
+			.ToArray();
+
+	private readonly record struct TypeRef(string Namespace, string SimpleName, string FullName);
 
 	// ---- raw output -------------------------------------------------------
 
@@ -142,18 +168,19 @@ public sealed class CodeWriter
 			case bool b:
 				return Write(b ? "true" : "false");
 			case DateTimeOffset dateTimeOffset:
-				return Write("global::System.DateTimeOffset.Parse(")
+				return WriteTypeRef("System.DateTimeOffset").Write(".Parse(")
 					.WriteString(dateTimeOffset.ToString("O", CultureInfo.InvariantCulture))
-					.Write(", global::System.Globalization.CultureInfo.InvariantCulture, global::System.Globalization.DateTimeStyles.RoundtripKind)");
+					.Write(", ").WriteTypeRef("System.Globalization.CultureInfo").Write(".InvariantCulture, ")
+					.WriteTypeRef("System.Globalization.DateTimeStyles").Write(".RoundtripKind)");
 			case DateTime dateTime:
-				return Write("global::System.DateTime.Parse(")
+				return WriteTypeRef("System.DateTime").Write(".Parse(")
 					.WriteString(dateTime.ToString("O", CultureInfo.InvariantCulture))
-					.Write(", global::System.Globalization.CultureInfo.InvariantCulture, global::System.Globalization.DateTimeStyles.RoundtripKind)");
+					.Write(", ").WriteTypeRef("System.Globalization.CultureInfo").Write(".InvariantCulture, ")
+					.WriteTypeRef("System.Globalization.DateTimeStyles").Write(".RoundtripKind)");
 			case Enum enumValue:
 				// Reached only via runtime dispatch (e.g. a union arm); statically-typed enum properties
 				// use a generated static formatter. Render fully-qualified member access (valid C#).
-				return Write("global::")
-					.Write((enumValue.GetType().FullName ?? enumValue.GetType().Name).Replace('+', '.'))
+				return WriteTypeRef((enumValue.GetType().FullName ?? enumValue.GetType().Name).Replace('+', '.'))
 					.Write(".")
 					.Write(enumValue.ToString());
 			case System.Collections.IEnumerable enumerable:
@@ -194,9 +221,6 @@ public sealed class CodeWriter
 		return this;
 	}
 
-	private const string JsonElementParsePrefix =
-		"global::System.Text.Json.JsonSerializer.Deserialize<global::System.Text.Json.JsonElement>(";
-
 	// Re-indented from scratch (2-space, rooted at column 0) rather than emitting the source document's own
 	// whitespace, so the raw-string literal reads as cleanly nested JSON regardless of how the example was formatted.
 	private static readonly JsonSerializerOptions IndentedJsonOptions = new() { WriteIndented = true };
@@ -211,7 +235,8 @@ public sealed class CodeWriter
 	{
 		var json = JsonSerializer.Serialize(value, IndentedJsonOptions).Replace("\r\n", "\n").Replace('\r', '\n');
 
-		Write(JsonElementParsePrefix);
+		WriteTypeRef("System.Text.Json.JsonSerializer").Write(".Deserialize<")
+			.WriteTypeRef("System.Text.Json.JsonElement").Write(">(");
 
 		if (json.IndexOf('\n') < 0)
 			return WriteString(json).Write(")");
@@ -256,7 +281,7 @@ public sealed class CodeWriter
 		_forceExplicitConstructor = false; // consume: applies to this initializer only, not nested ones
 		if (explicitConstructor && !string.IsNullOrEmpty(typeName))
 		{
-			Write("new ").Write(typeName).Write("()");
+			Write("new ").WriteTypeRef(typeName!).Write("()");
 		}
 		else
 		{
@@ -345,7 +370,7 @@ public sealed class CodeWriter
 	{
 		using var enumerator = items.GetEnumerator();
 		if (!enumerator.MoveNext())
-			return Write("global::System.Array.Empty<string>()");
+			return WriteTypeRef("System.Array").Write(".Empty<string>()");
 
 		Write("new[] { ");
 		writeItem(this, enumerator.Current);
@@ -358,20 +383,58 @@ public sealed class CodeWriter
 		return Write(" }");
 	}
 
+	// ---- type references --------------------------------------------------
+
 	/// <summary>
-	/// Writes a fully-qualified (<c>global::</c>) C# type name for a runtime <see cref="Type"/>,
-	/// recursing into generic arguments. Used to render the concrete type argument of an open generic
-	/// (e.g. <c>Buckets&lt;TBucket&gt;</c> whose <c>TBucket</c> is only known at runtime). AOT-safe:
-	/// uses only <see cref="Type.FullName"/> / <see cref="Type.GetGenericArguments"/>.
+	/// Writes a C# type expression - a possibly-generic, possibly-nullable, possibly-array type, with every named type
+	/// fully qualified (no <c>global::</c>), e.g. <c>System.Collections.Generic.IReadOnlyCollection&lt;Elastic.Clients.Elasticsearch.IndexName&gt;</c>.
+	/// Each qualified name is recorded (so its namespace is reported and its final spelling deferred to
+	/// <see cref="ToString"/>); structural tokens (<c>&lt; &gt; , [ ] ?</c>) and keywords/primitives (<c>string</c>,
+	/// <c>object</c>, open type parameters) pass through verbatim.
 	/// </summary>
-	public CodeWriter WriteTypeName(Type type)
+	public CodeWriter WriteTypeRef(string typeExpression)
 	{
 		WriteIndentIfNeeded();
-		AppendTypeName(type);
+
+		var i = 0;
+		while (i < typeExpression.Length)
+		{
+			var c = typeExpression[i];
+			if (char.IsLetter(c) || c == '_')
+			{
+				var start = i;
+				while (i < typeExpression.Length && (char.IsLetterOrDigit(typeExpression[i]) || typeExpression[i] is '_' or '.'))
+					i++;
+
+				var token = typeExpression.Substring(start, i - start);
+				if (token.IndexOf('.') >= 0)
+					AppendTypeRefPlaceholder(token);
+				else
+					_builder.Append(token); // keyword / primitive / open type parameter
+			}
+			else
+			{
+				_builder.Append(c);
+				i++;
+			}
+		}
+
 		return this;
 	}
 
-	private void AppendTypeName(Type type)
+	/// <summary>
+	/// Writes a C# type name for a runtime <see cref="Type"/>, recursing into generic arguments. Used to render the
+	/// concrete type argument of an open generic (e.g. <c>Buckets&lt;TBucket&gt;</c> whose <c>TBucket</c> is only known
+	/// at runtime). AOT-safe: uses only <see cref="Type.FullName"/> / <see cref="Type.GetGenericArguments"/>.
+	/// </summary>
+	public CodeWriter WriteTypeName(Type type)
+	{
+		var expression = new StringBuilder();
+		AppendTypeExpression(expression, type);
+		return WriteTypeRef(expression.ToString());
+	}
+
+	private static void AppendTypeExpression(StringBuilder builder, Type type)
 	{
 		if (type.IsGenericType)
 		{
@@ -381,25 +444,152 @@ public sealed class CodeWriter
 			if (tick >= 0)
 				raw = raw[..tick];
 
-			_builder.Append("global::").Append(raw.Replace('+', '.')).Append('<');
+			builder.Append(raw.Replace('+', '.')).Append('<');
 			var args = type.GetGenericArguments();
 			for (var i = 0; i < args.Length; i++)
 			{
 				if (i > 0)
-					_builder.Append(", ");
+					builder.Append(", ");
 
-				AppendTypeName(args[i]);
+				AppendTypeExpression(builder, args[i]);
 			}
 
-			_builder.Append('>');
+			builder.Append('>');
 		}
 		else
 		{
-			_builder.Append("global::").Append((type.FullName ?? type.Name).Replace('+', '.'));
+			builder.Append((type.FullName ?? type.Name).Replace('+', '.'));
 		}
 	}
 
-	public override string ToString() => _builder.ToString();
+	private void AppendTypeRefPlaceholder(string fullName)
+	{
+		var lastDot = fullName.LastIndexOf('.');
+		var ns = lastDot >= 0 ? fullName[..lastDot] : string.Empty;
+		var simpleName = lastDot >= 0 ? fullName[(lastDot + 1)..] : fullName;
+
+		_builder.Append(RefOpen).Append(_typeRefs.Count).Append(RefClose);
+		_typeRefs.Add(new TypeRef(ns, simpleName, fullName));
+	}
+
+	/// <summary>
+	/// Produces the final source, resolving every recorded type reference to its concrete spelling per
+	/// <see cref="FormattingOptions.TypeNameStyle"/>. Pure: it does not mutate the builder, so it can be called more
+	/// than once.
+	/// </summary>
+	public override string ToString()
+	{
+		if (_typeRefs.Count == 0)
+			return _builder.ToString();
+
+		var style = Options.TypeNameStyle;
+		var shortenable = style == TypeNameStyle.Simplified ? ComputeShortenableNames() : null;
+
+		var result = new StringBuilder(_builder.Length);
+		for (var i = 0; i < _builder.Length; i++)
+		{
+			var c = _builder[i];
+			if (c != RefOpen)
+			{
+				result.Append(c);
+				continue;
+			}
+
+			var end = i + 1;
+			while (_builder[end] != RefClose)
+				end++;
+
+			var index = int.Parse(_builder.ToString(i + 1, end - i - 1), CultureInfo.InvariantCulture);
+			result.Append(RenderTypeRef(_typeRefs[index], style, shortenable));
+			i = end;
+		}
+
+		return result.ToString();
+	}
+
+	private static string RenderTypeRef(TypeRef typeRef, TypeNameStyle style, HashSet<string>? shortenable) => style switch
+	{
+		// Shorten only when the simple name is unambiguous across the imported namespaces; otherwise fall back to the
+		// global::-qualified name, which always resolves regardless of the using directives in scope.
+		TypeNameStyle.Simplified => shortenable!.Contains(typeRef.SimpleName) ? typeRef.SimpleName : "global::" + typeRef.FullName,
+		TypeNameStyle.Fqn => typeRef.FullName,
+		TypeNameStyle.GlobalFqn => "global::" + typeRef.FullName,
+		_ => "global::" + typeRef.FullName
+	};
+
+	// The simple names that resolve unambiguously when every referenced namespace is imported: exactly one visible type
+	// (across those namespaces) carries the name. Counting all types in the imported namespaces - not just the ones the
+	// snippet references - is what makes the shortened output guaranteed to compile under those usings.
+	private HashSet<string> ComputeShortenableNames()
+	{
+		var importedNamespaces = _typeRefs
+			.Select(r => r.Namespace)
+			.Where(ns => ns.Length > 0)
+			.Distinct(StringComparer.Ordinal);
+
+		var counts = new Dictionary<string, int>(StringComparer.Ordinal);
+		foreach (var ns in importedNamespaces)
+		{
+			if (!NamespaceTypeNames.Value.TryGetValue(ns, out var names))
+				continue;
+
+			foreach (var name in names)
+				counts[name] = counts.TryGetValue(name, out var n) ? n + 1 : 1;
+		}
+
+		var shortenable = new HashSet<string>(StringComparer.Ordinal);
+		foreach (var entry in counts)
+		{
+			if (entry.Value == 1)
+				shortenable.Add(entry.Key);
+		}
+
+		return shortenable;
+	}
+
+	// namespace -> simple type names declared in it (generic arity suffix stripped), across all loaded assemblies.
+	// Built once: the set of types visible per namespace does not change during a run.
+	private static readonly Lazy<Dictionary<string, HashSet<string>>> NamespaceTypeNames = new(BuildNamespaceTypeNames);
+
+	private static Dictionary<string, HashSet<string>> BuildNamespaceTypeNames()
+	{
+		var map = new Dictionary<string, HashSet<string>>(StringComparer.Ordinal);
+
+		foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+		{
+			Type[] types;
+			try
+			{
+				types = assembly.GetExportedTypes();
+			}
+			catch (System.Reflection.ReflectionTypeLoadException ex)
+			{
+				types = ex.Types.Where(t => t is not null).ToArray()!;
+			}
+			catch
+			{
+				continue;
+			}
+
+			foreach (var type in types)
+			{
+				if (type.Namespace is not { Length: > 0 } ns)
+					continue;
+
+				var simpleName = type.Name;
+				var tick = simpleName.IndexOf('`');
+				if (tick >= 0)
+					simpleName = simpleName[..tick];
+
+				if (!map.TryGetValue(ns, out var names))
+					map[ns] = names = new HashSet<string>(StringComparer.Ordinal);
+
+				names.Add(simpleName);
+			}
+		}
+
+		return map;
+	}
 
 	private void AppendEscaped(string value)
 	{

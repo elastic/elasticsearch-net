@@ -31,7 +31,7 @@ public sealed class RoundtripRegressionTests
 
 	public RoundtripRegressionTests(ITestOutputHelper output) => _output = output;
 
-	private sealed record Case(string Digest, string Api, Type RequestType, string Code, JsonElement? Body, Elastic.Clients.Elasticsearch.Requests.Request Materialized);
+	private sealed record Case(string Digest, string Api, Type RequestType, string Code, IReadOnlyCollection<string> Namespaces, JsonElement? Body, Elastic.Clients.Elasticsearch.Requests.Request Materialized);
 
 	[Fact]
 	public void Converted_requests_compile_and_roundtrip()
@@ -60,9 +60,9 @@ public sealed class RoundtripRegressionTests
 				var body = source.Body?.GetRawText();
 				try
 				{
-					var (request, code) = global::RequestConverter.RequestConverter.ConvertWithRequest(
+					var (request, result) = global::RequestConverter.RequestConverter.ConvertCore(
 						serializer, source.Api, source.PathParameters, source.QueryParameters, body);
-					cases.Add(new Case(example.Digest, source.Api, request.GetType(), code, source.Body, request));
+					cases.Add(new Case(example.Digest, source.Api, result.RequestType, result.Code, result.Namespaces, source.Body, request));
 				}
 				catch (NotSupportedException)
 				{
@@ -76,13 +76,15 @@ public sealed class RoundtripRegressionTests
 			}
 		}
 
-		// 2) Emit one .cs per case (saved to a temp dir for inspection) + a global-usings file.
+		// 2) Emit one .cs per case (saved to a temp dir for inspection). Each snippet carries its own using
+		// directives built from the namespaces the converter reported, mirroring how a real caller consumes the
+		// Simplified output - and exercising the short-identifier rendering plus its collision fallback.
 		var outputDir = Path.Combine(Path.GetTempPath(), "RequestConverter.Tests", "generated");
 		Directory.CreateDirectory(outputDir);
 		foreach (var stale in Directory.GetFiles(outputDir, "*.cs"))
 			File.Delete(stale);
 
-		var trees = new List<SyntaxTree>(cases.Count + 1);
+		var trees = new List<SyntaxTree>(cases.Count);
 		for (var i = 0; i < cases.Count; i++)
 		{
 			var source = BuildSource(i, cases[i]);
@@ -90,11 +92,6 @@ public sealed class RoundtripRegressionTests
 			File.WriteAllText(file, source);
 			trees.Add(CSharpSyntaxTree.ParseText(source, path: file));
 		}
-
-		var usingsSource = BuildGlobalUsings();
-		var usingsFile = Path.Combine(outputDir, "GlobalUsings.cs");
-		File.WriteAllText(usingsFile, usingsSource);
-		trees.Add(CSharpSyntaxTree.ParseText(usingsSource, path: usingsFile));
 
 		// 3) Single Roslyn compilation of all snippets.
 		var compilation = CSharpCompilation.Create(
@@ -349,6 +346,11 @@ public sealed class RoundtripRegressionTests
 	{
 		var typeName = CSharpName(c.RequestType);
 
+		// The using directives the converter reported, so the snippet's Simplified short identifiers resolve (the
+		// converter falls back to a global::-qualified name for any type whose simple name would be ambiguous across
+		// these namespaces, so importing all of them never produces a CS0104).
+		var usings = string.Concat(c.Namespaces.Select(ns => $"using {ns};\n"));
+
 		// The converter emits at base indent 0, but the snippet is embedded one method-body level deep here, so its
 		// continuation lines would land a level short. Prefix every line after the first with the template's indent
 		// (one tab); applying it uniformly keeps any multi-line raw-string literal in the snippet valid.
@@ -356,7 +358,7 @@ public sealed class RoundtripRegressionTests
 
 		return
 			$$"""
-			namespace Generated;
+			{{usings}}namespace Generated;
 
 			public static class E_{{index}}
 			{
@@ -371,37 +373,6 @@ public sealed class RoundtripRegressionTests
 				}
 			}
 			""";
-	}
-
-	/// <summary>
-	/// Global <c>using</c>s for every namespace in the client assembly, so the converter's short type
-	/// names and target-typed <c>new()</c> resolve. An ambiguity here is a real converter finding.
-	/// </summary>
-	private static string BuildGlobalUsings()
-	{
-		var assembly = typeof(Elastic.Clients.Elasticsearch.SearchRequest).Assembly;
-
-		IEnumerable<Type> types;
-		try
-		{
-			types = assembly.GetExportedTypes();
-		}
-		catch (ReflectionTypeLoadException ex)
-		{
-			types = ex.Types.Where(t => t is not null)!;
-		}
-
-		var namespaces = types
-			.Select(t => t.Namespace)
-			.Where(ns => !string.IsNullOrEmpty(ns))
-			.Distinct()
-			.OrderBy(ns => ns, StringComparer.Ordinal);
-
-		var builder = new StringBuilder();
-		foreach (var ns in namespaces)
-			builder.Append("global using ").Append(ns).Append(';').Append('\n');
-
-		return builder.ToString();
 	}
 
 	private static List<MetadataReference> ReferenceAssemblies()

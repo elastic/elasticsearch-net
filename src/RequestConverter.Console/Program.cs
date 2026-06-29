@@ -284,7 +284,7 @@ internal class Program
 
 				try
 				{
-					var code = RequestConverter.Convert(
+					var result = RequestConverter.Convert(
 						RequestConverter.DefaultSerializer,
 						source.Api,
 						source.PathParameters,
@@ -292,7 +292,7 @@ internal class Program
 						body
 					);
 
-					Console.WriteLine(code);
+					Console.WriteLine(result.Code);
 				}
 				catch (NotSupportedException)
 				{

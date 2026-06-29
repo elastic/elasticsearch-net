@@ -23,6 +23,30 @@ public sealed record FormattingOptions
 
 	/// <summary>How object initializers name their constructor. Defaults to target-typed <c>new()</c>.</summary>
 	public ConstructorStyle ConstructorStyle { get; init; } = ConstructorStyle.TargetTyped;
+
+	/// <summary>How type names are rendered. Defaults to <see cref="TypeNameStyle.Simplified"/> (short identifiers,
+	/// relying on the using directives the caller adds from the returned namespaces).</summary>
+	public TypeNameStyle TypeNameStyle { get; init; } = TypeNameStyle.Simplified;
+}
+
+/// <summary>
+/// Controls how <see cref="CodeWriter"/> spells type names. The accompanying set of referenced namespaces is reported
+/// regardless of the style, so a caller using <see cref="Simplified"/> can add the matching <c>using</c> directives.
+/// </summary>
+public enum TypeNameStyle
+{
+	/// <summary>
+	/// Short identifiers (e.g. <c>Dictionary&lt;string, Aggregation&gt;</c>), assuming the referenced namespaces are
+	/// imported. A name that is ambiguous against the imported set falls back to its <see cref="GlobalFqn"/> form so the
+	/// output always compiles.
+	/// </summary>
+	Simplified = 0,
+
+	/// <summary>Fully-qualified names without the <c>global::</c> prefix (e.g. <c>System.Collections.Generic.Dictionary&lt;...&gt;</c>).</summary>
+	Fqn = 1,
+
+	/// <summary>Fully-qualified names with the <c>global::</c> prefix (e.g. <c>global::System.Collections.Generic.Dictionary&lt;...&gt;</c>).</summary>
+	GlobalFqn = 2
 }
 
 /// <summary>

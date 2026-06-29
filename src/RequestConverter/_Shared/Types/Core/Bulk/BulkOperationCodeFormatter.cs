@@ -45,7 +45,7 @@ internal static class BulkOperationCodeFormatter
 
 	private static void FormatIndexOrCreate(string typeName, BulkOperation op, object? document, string? pipeline, IDictionary<string, string>? dynamicTemplates, CodeWriter writer)
 	{
-		writer.Write("new global::Elastic.Clients.Elasticsearch.Core.Bulk.").Write(typeName).Write("<object>(");
+		writer.Write("new ").WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Bulk." + typeName + "<object>").Write("(");
 		writer.WriteValue(document);
 		writer.Write(")");
 
@@ -61,7 +61,7 @@ internal static class BulkOperationCodeFormatter
 
 	private static void FormatUpdate(BulkUpdateOperation<object, object> op, CodeWriter writer)
 	{
-		writer.Write("new global::Elastic.Clients.Elasticsearch.Core.Bulk.BulkUpdateOperation<object, object>(");
+		writer.Write("new ").WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Bulk.BulkUpdateOperation<object, object>").Write("(");
 		WriteId(op.Id, writer);
 		writer.Write(")");
 
@@ -87,7 +87,7 @@ internal static class BulkOperationCodeFormatter
 
 	private static void FormatDelete(BulkDeleteOperation op, CodeWriter writer)
 	{
-		writer.Write("new global::Elastic.Clients.Elasticsearch.Core.Bulk.BulkDeleteOperation(");
+		writer.Write("new ").WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Bulk.BulkDeleteOperation").Write("(");
 		WriteId(op.Id, writer);
 		writer.Write(")");
 
@@ -140,7 +140,7 @@ internal static class BulkOperationCodeFormatter
 
 	private static void WriteStringDictionary(IDictionary<string, string> dictionary, CodeWriter writer)
 	{
-		writer.Write("new global::System.Collections.Generic.Dictionary<string, string>()");
+		writer.Write("new ").WriteTypeRef("System.Collections.Generic.Dictionary<string, string>").Write("()");
 		writer.WriteBlockList(
 			dictionary,
 			static (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
@@ -148,7 +148,7 @@ internal static class BulkOperationCodeFormatter
 
 	private static void WriteSource(Union<bool, SourceFilter> source, CodeWriter writer)
 	{
-		writer.Write("new global::Elastic.Clients.Elasticsearch.Union<bool, global::Elastic.Clients.Elasticsearch.Core.Search.SourceFilter>(");
+		writer.Write("new ").WriteTypeRef("Elastic.Clients.Elasticsearch.Union<bool, Elastic.Clients.Elasticsearch.Core.Search.SourceFilter>").Write("(");
 		if (source.Tag == UnionTag.T2)
 			writer.WriteValue(source.Value2);
 		else
